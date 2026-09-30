@@ -18569,7 +18569,7 @@ Examples: [UI Layout](https://playcanvas.github.io/web-components/examples/ui-la
 URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-camera/
 Markdown: https://developer.playcanvas.com/user-manual/web-components/tags/pc-camera.md
 
-The `<pc-camera>` tag is used to define a camera component.
+The `<pc-camera>` tag adds a camera to an entity: the viewpoint the scene is rendered from, looking down the entity's negative Z axis.
 
 :::note[Usage]
 
@@ -18595,7 +18595,7 @@ The `<pc-camera>` tag is used to define a camera component.
 | `gamma` | Enum | `"srgb"` | Color space: `"linear"` \| `"srgb"` |
 | `horizontal-fov` | Boolean | `"false"` | Whether to use horizontal field of view instead of vertical |
 | `near-clip` | Number | `"0.1"` | The near clipping plane distance |
-| `ortho-height` | Number | `"10"` | Height of the orthographic projection. Only used when `projection` is `"orthographic"` |
+| `ortho-height` | Number | `"10"` | Half the height of the orthographic view, so the view spans twice this value vertically. Only used when `projection` is `"orthographic"` |
 | `priority` | Number | `"0"` | Rendering priority of the camera |
 | `projection` | Enum | `"perspective"` | Projection of the camera: `"perspective"` \| `"orthographic"`. Use `ortho-height` to size an orthographic projection |
 | `projection-offset` | Vector2 | `"0 0"` | Shifts the projection window off the view direction, like a shift lens, as "X Y" values in half-frustum units: `"0 1"` moves it up by half the frustum height. Keeping the camera level and shifting the window frames a tall subject with its verticals parallel. Applies to both projections and is ignored in XR |
@@ -18638,6 +18638,8 @@ You can programmatically create and manipulate `<pc-camera>` elements using the 
 
 The `component` property is the engine [CameraComponent](https://api.playcanvas.com/engine/classes/CameraComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.
 
+The element also has a small API for WebXR: `startXr(type, space)` and `endXr()` start and end a session, and `arAvailable` and `vrAvailable` report whether this device can enter each mode. See [The Camera Element API](https://developer.playcanvas.com/user-manual/web-components/xr.md#the-camera-element-api).
+
 ## See Also
 
 * [`<pc-scene>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scene.md) — exposure and fog, which the camera's tone mapping works with
@@ -18645,7 +18647,7 @@ The `component` property is the engine [CameraComponent](https://api.playcanvas.
 * [`<pc-script>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-script.md) — camera controls are engine scripts attached beside the camera
 * [XR Support](https://developer.playcanvas.com/user-manual/web-components/xr.md) — entering VR and AR from the camera element
 
-Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html) and [First Person Controller](https://playcanvas.github.io/web-components/examples/first-person-controller.html).
+Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/#basic-shapes.html) and [First Person Controller](https://playcanvas.github.io/web-components/examples/#first-person-controller.html).
 
 --------------------------------------------------------------------------------
 
@@ -18988,7 +18990,7 @@ Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/#b
 URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-gsplat/
 Markdown: https://developer.playcanvas.com/user-manual/web-components/tags/pc-gsplat.md
 
-The `<pc-gsplat>` tag is used to define a gsplat component for rendering 3D Gaussian Splats.
+The `<pc-gsplat>` tag adds a gsplat component that renders a 3D Gaussian Splat: a scene captured as millions of small, soft, colored blobs.
 
 When rendering splat-based scenes, it is recommended to set `antialias` to `false` and `max-pixel-ratio` to `1` on your [`<pc-app>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-app.md) tag for best performance.
 
@@ -19006,12 +19008,12 @@ When rendering splat-based scenes, it is recommended to set `antialias` to `fals
 | `cast-shadows` | Boolean | `"false"` | Whether the gsplat component casts shadows |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
 | `lod-falloff` | Number | `"1"` | How quickly this splat's detail falls off away from the camera, as an exponent from 0 to 8. Higher values concentrate more of the scene-wide splat budget near the camera; lower values spread it more evenly. Only affects assets that contain LOD levels. |
-| `lod-range-max` | Number | `"99"` | Maximum allowed LOD index (inclusive). The LOD selected by distance is clamped so it never goes coarser (higher index) than this value. The default of `99` effectively means "no cap". Only affects assets that contain LOD levels. |
-| `lod-range-min` | Number | `"0"` | Minimum allowed LOD index (inclusive). The LOD selected by distance is clamped so it never goes finer (lower index) than this value. Raising it avoids downloading the highest-quality (largest) LOD files. Only affects assets that contain LOD levels. |
+| `lod-range-max` | Number | `"99"` | Maximum allowed LOD index (inclusive). The LOD the budget selects is clamped so it never goes coarser (higher index) than this value. The default of `99` effectively means "no cap". Only affects assets that contain LOD levels. |
+| `lod-range-min` | Number | `"0"` | Minimum allowed LOD index (inclusive). The LOD the budget selects is clamped so it never goes finer (lower index) than this value. Raising it avoids downloading the highest-quality (largest) LOD files. Only affects assets that contain LOD levels. |
 
 ## Level of Detail
 
-A streamed splat asset is one exported with LOD levels: its [`<pc-asset>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset.md) `src` points at the export's `lod-meta.json`, which is downloaded up front while the splat data itself streams in on demand. Such an asset is not rendered at full detail everywhere. The engine works to a **scene-wide splat budget**: a target number of splats on screen across every `<pc-gsplat>` in the scene, spent where it buys the most. The budget and how it is spent are properties of the scene, so they live on [`<pc-scene>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scene.md); how each splat competes for its share lives here:
+A streamed splat asset is one exported with LOD levels: its [`<pc-asset>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset.md) `src` points at the export's `lod-meta.json`, which is downloaded up front while the splat data itself streams in on demand. Declare it with `type="gsplat"`, since a `.json` file would otherwise be loaded as plain JSON. Such an asset is not rendered at full detail everywhere. The engine works to a **scene-wide splat budget**: a target number of splats on screen across every `<pc-gsplat>` in the scene, spent where it buys the most. The budget and how it is spent are properties of the scene, so they live on [`<pc-scene>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scene.md); how each splat competes for its share lives here:
 
 | Attribute | On | What it controls |
 | --- | --- | --- |
@@ -19021,6 +19023,8 @@ A streamed splat asset is one exported with LOD levels: its [`<pc-asset>`](https
 | `lod-range-min`, `lod-range-max` | `<pc-gsplat>` | Hard clamps on the LOD index this splat may use, whatever the budget decides — raise the minimum to avoid ever downloading the largest files |
 
 ```html
+<pc-asset id="capture" src="capture/lod-meta.json" type="gsplat"></pc-asset>
+<!-- ... -->
 <pc-scene gsplat-splat-budget="1500000" gsplat-lod-mode="error">
     <pc-entity name="capture">
         <pc-gsplat asset="capture" lod-falloff="1.5" lod-range-min="1"></pc-gsplat>
@@ -19028,9 +19032,9 @@ A streamed splat asset is one exported with LOD levels: its [`<pc-asset>`](https
 </pc-scene>
 ```
 
-There is no way to switch budgeted selection off: a budget of zero or less would pin every node to its coarsest level rather than lift the cap, so the engine warns and keeps the default instead. To see everything at full detail, set a budget larger than the capture. None of this affects a plain `.ply`, `.sog` or `.splat` asset with no LOD levels, which always renders in full.
+There is no way to switch budgeted selection off: a budget of zero or less would pin every node to its coarsest level rather than lift the cap, so the engine uses the default instead. To see everything at full detail, set a budget larger than the capture. A plain `.ply` or `.sog` asset with no LOD levels always renders in full, but its splats count against the budget, leaving that much less for the streamed ones.
 
-The [Splat Streaming example](https://playcanvas.github.io/web-components/examples/splat-streaming.html) streams a large LOD capture and exposes the budget, so the trade-off can be watched rather than imagined.
+The [Splat Streaming example](https://playcanvas.github.io/web-components/examples/#splat-streaming.html) streams a large LOD capture. It pins `lod-range-min` to the coarsest level so the whole scene arrives quickly, then removes the pin and lets finer levels stream in, which shows the budget at work.
 
 ## Example
 
@@ -19066,7 +19070,7 @@ The `component` property is the engine [GSplatComponent](https://api.playcanvas.
 * [`<pc-app>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-app.md) — the device settings recommended for splats
 * [Using Web Components](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/your-first-app/web-components.md) — a first splat app, step by step
 
-Examples: [Basic Splat](https://playcanvas.github.io/web-components/examples/basic-splat.html), [Splat Annotations](https://playcanvas.github.io/web-components/examples/splat-annotations.html), [Splat Flipbook](https://playcanvas.github.io/web-components/examples/splat-flipbook.html) and [Splat Streaming](https://playcanvas.github.io/web-components/examples/splat-streaming.html).
+Examples: [Basic Splat](https://playcanvas.github.io/web-components/examples/#basic-splat.html), [Splat Annotations](https://playcanvas.github.io/web-components/examples/#splat-annotations.html), [Splat Flipbook](https://playcanvas.github.io/web-components/examples/#splat-flipbook.html) and [Splat Streaming](https://playcanvas.github.io/web-components/examples/#splat-streaming.html).
 
 --------------------------------------------------------------------------------
 
@@ -19424,7 +19428,7 @@ Examples: [UI Layout](https://playcanvas.github.io/web-components/examples/ui-la
 URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-light/
 Markdown: https://developer.playcanvas.com/user-manual/web-components/tags/pc-light.md
 
-The `<pc-light>` tag is used to define a light component.
+The `<pc-light>` tag adds a light to an entity: a directional light such as the sun, or an omni or spot light with a position and a range.
 
 :::note[Usage]
 
@@ -19441,11 +19445,11 @@ The `<pc-light>` tag is used to define a light component.
 | `cast-shadows` | Boolean | `"false"` | Whether the light casts shadows |
 | `color` | Color | `"1 1 1"` | Light color as space-separated RGB values, hex code, or [named color](https://github.com/playcanvas/web-components/blob/main/src/colors.ts) |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
-| `inner-cone-angle` | Number | `"40"` | Inner cone angle in degrees (for spot lights) |
+| `inner-cone-angle` | Number | `"40"` | Inner cone angle in degrees (for spot lights), inside which the light is at full strength. Keep it below `outer-cone-angle`: narrowing a spot below the default 40 degrees means lowering both |
 | `intensity` | Number | `"1"` | Light intensity multiplier |
 | `normal-offset-bias` | Number | `"0"` | Normal offset bias for shadow rendering |
 | `num-cascades` | Number | `"1"` | Number of shadow cascades, an integer from 1 (no cascades) to 4. Used by `directional` lights |
-| `outer-cone-angle` | Number | `"45"` | Outer cone angle in degrees (for spot lights) |
+| `outer-cone-angle` | Number | `"45"` | Outer cone angle in degrees (for spot lights), at which the light has faded to nothing |
 | `penumbra-falloff` | Number | `"1"` | PCSS shadow penumbra falloff rate |
 | `penumbra-size` | Number | `"1"` | PCSS shadow penumbra size |
 | `range` | Number | `"10"` | Light range distance |
@@ -19483,13 +19487,13 @@ The three attributes do distinct jobs, and only `num-cascades` above 1 brings th
 
 | Attribute | What it controls |
 | --- | --- |
-| `num-cascades` | How many slices, 1 to 4. More slices means more detail per slice, at the cost of a shadow render pass each |
+| `num-cascades` | How many slices, 1 to 4. The slices share one shadow map, and from 2 up each gets a quarter of it, so the gain is detail near the camera rather than overall. Each slice also costs a shadow render pass |
 | `cascade-distribution` | Where the splits fall between 0 (evenly spaced) and 1 (packed towards the camera). Raise it when near shadows need the detail; lower it when the far slice looks starved |
 | `cascade-blend` | How much of each slice cross-fades into the next, 0 to 1. A small value hides the seams where slices meet; too much wastes resolution on the overlap |
 
-`shadow-distance` still bounds the whole thing — it is the range the cascades divide up, so raising the cascade count without raising the distance just subdivides the same near-field. `shadow-resolution` is per cascade, not a shared budget.
+`shadow-distance` still bounds the whole thing — it is the range the cascades divide up, so raising the cascade count without raising the distance just subdivides the same near-field. `shadow-resolution` sizes the one map the cascades share, so with 2 to 4 cascades each renders at half that resolution along each side. Cascades need a perspective camera: they do not work with an orthographic one.
 
-The [Shadow Cascades example](https://playcanvas.github.io/web-components/examples/shadow-cascades.html) drives all three over a desert causeway long enough to need them, and plots the split distances the renderer derives — worth a look, because the engine has no cascade debug view and the distribution slider otherwise appears to do nothing.
+The [Shadow Cascades example](https://playcanvas.github.io/web-components/examples/#shadow-cascades.html) drives all three over a desert causeway long enough to need them, and plots the split distances the renderer derives — worth a look, because the engine has no cascade debug view and the distribution slider otherwise appears to do nothing.
 
 ## Area Lights
 
@@ -19509,11 +19513,11 @@ Area lights need lookup tables the engine does not ship — the linearly transfo
 </pc-app>
 ```
 
-One attribute drives both halves of the feature. Loading a valid table applies it and enables area lights; clearing the attribute switches them off again (tables already handed to the engine stay in place). An id that resolves to no asset switches them off with a warning, and a file that is not a lookup table is refused with a warning — because without real tables the engine's placeholder makes `disk` lights emit nothing and strips specular from every shape. Unlike the other [`<pc-app>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-app.md) attributes this one applies immediately, and set before boot it loads along with the other assets. A device that cannot render area lights ignores the switch, and its `omni` and `spot` area lights stay punctual.
+One attribute drives both halves of the feature. Loading a valid table applies it and enables area lights; clearing the attribute switches them off again (tables already handed to the engine stay in place). An id that resolves to no asset switches them off with a warning, and a file that is not a lookup table is refused with a warning — because without real tables the engine's placeholder makes `disk` lights emit nothing and strips specular from every shape. Unlike [`<pc-app>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-app.md)'s frame-buffer attributes, this one applies immediately, and set before boot it loads along with the other assets. A device that cannot render area lights ignores the switch, and its `omni` and `spot` area lights stay punctual.
 
 The tables come from the engine repository's `examples/assets/json/area-light-luts.json` (MIT licensed). The Web Components example gallery serves a copy at the URL above — about 300 KB, fine for trying things out, but host your own for production.
 
-The [Area Lights example](https://playcanvas.github.io/web-components/examples/area-lights.html) builds ceiling panels from `rect` spots and lantern bulbs from `sphere` omnis, which is the quickest way to see how `intensity` and `range` interact with a shape's size.
+The [Area Lights example](https://playcanvas.github.io/web-components/examples/#area-lights.html) builds ceiling panels from `rect` spots and lantern bulbs from `sphere` omnis, which is the quickest way to see how `intensity` and `range` interact with a shape's size.
 
 ## Example
 
@@ -19527,7 +19531,7 @@ Try editing the light `color`, `intensity` or `type` values and watch the scene 
         </pc-entity>
         <!-- A warm spot light shining down (spot lights point down the negative Y axis) -->
         <pc-entity name="spot-light" position="-2 4 0">
-            <pc-light type="spot" color="#ffb47a" intensity="5" outer-cone-angle="35" cast-shadows normal-offset-bias="0.05" shadow-bias="0.2"></pc-light>
+            <pc-light type="spot" color="#ffb47a" intensity="5" inner-cone-angle="25" outer-cone-angle="35" cast-shadows normal-offset-bias="0.05" shadow-bias="0.2"></pc-light>
         </pc-entity>
         <!-- A cool omni light between the shapes -->
         <pc-entity name="omni-light" position="2 2 1">
@@ -19559,7 +19563,7 @@ The `component` property is the engine [LightComponent](https://api.playcanvas.c
 * [`<pc-sky>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sky.md) — image-based lighting to fill in what direct lights miss
 * [`<pc-render>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-render.md) — `cast-shadows` and `receive-shadows` on what the light hits
 
-Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html), [Shadow Cascades](https://playcanvas.github.io/web-components/examples/shadow-cascades.html), [Area Lights](https://playcanvas.github.io/web-components/examples/area-lights.html) and [Clock Tower](https://playcanvas.github.io/web-components/examples/clock-tower.html).
+Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/#basic-shapes.html), [Shadow Cascades](https://playcanvas.github.io/web-components/examples/#shadow-cascades.html), [Area Lights](https://playcanvas.github.io/web-components/examples/#area-lights.html) and [Clock Tower](https://playcanvas.github.io/web-components/examples/#clock-tower.html).
 
 --------------------------------------------------------------------------------
 
@@ -20101,7 +20105,7 @@ Examples: [Product Viewer](https://playcanvas.github.io/web-components/examples/
 URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-particle-system/
 Markdown: https://developer.playcanvas.com/user-manual/web-components/tags/pc-particle-system.md
 
-The `<pc-particle-system>` tag is used to define a particle system.
+The `<pc-particle-system>` tag adds a particle system to an entity: an emitter for effects such as snow, sparks or smoke, configured by a JSON asset.
 
 :::note[Usage]
 
@@ -20115,6 +20119,14 @@ The `<pc-particle-system>` tag is used to define a particle system.
 | --- | --- | --- | --- |
 | `asset` | [Asset ID](https://developer.playcanvas.com/user-manual/web-components/attributes.md#asset-and-material-ids) | - | JSON asset ID defining the particle system configuration |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
+
+## The Configuration
+
+The JSON asset holds the settings of the engine's [ParticleSystemComponent](https://api.playcanvas.com/engine/classes/ParticleSystemComponent.html), under the same property names. Vectors are arrays of numbers, and the graphs that vary a value over a particle's life are curves, written as an object whose `keys` alternate times and values (`[time, value, time, value, ...]`). A graph of a vector takes one such array per axis.
+
+`colorMapAsset` names a [`<pc-asset>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset.md) by its `id`, which the element resolves to the texture. It is the only asset setting that can: `normalMapAsset`, `meshAsset` and `renderAsset` given the same way do not resolve.
+
+Declare the configuration's `<pc-asset>` without `lazy`, and set `asset` in the markup. A configuration that arrives after the component exists, as a lazy one does, is not converted to the engine's types, and fails to apply.
 
 ## Example
 
@@ -20179,14 +20191,14 @@ Then add the particle system to your scene in HTML. This runs the `snow.json` ab
 
 You can programmatically create and manipulate `<pc-particle-system>` elements using the [ParticleSystemComponentElement API](https://api.playcanvas.com/web-components/classes/ParticleSystemComponentElement.html).
 
-The `component` property is the engine [ParticleSystemComponent](https://api.playcanvas.com/engine/classes/ParticleSystemComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.
+The `component` property is the engine [ParticleSystemComponent](https://api.playcanvas.com/engine/classes/ParticleSystemComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it. The element itself has `play()`, `pause()`, `reset()` and `stop()` methods to control the emitter.
 
 ## See Also
 
 * [`<pc-asset>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset.md) — the JSON configuration and the textures it names
 * [`<pc-entity>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md) — positions and orients the emitter
 
-Examples: [Basic Particles](https://playcanvas.github.io/web-components/examples/basic-particles.html) and [Clock Tower](https://playcanvas.github.io/web-components/examples/clock-tower.html).
+Examples: [Basic Particles](https://playcanvas.github.io/web-components/examples/#basic-particles.html) and [Clock Tower](https://playcanvas.github.io/web-components/examples/#clock-tower.html).
 
 --------------------------------------------------------------------------------
 
@@ -20195,7 +20207,7 @@ Examples: [Basic Particles](https://playcanvas.github.io/web-components/examples
 URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-render/
 Markdown: https://developer.playcanvas.com/user-manual/web-components/tags/pc-render.md
 
-The `<pc-render>` tag is used to define a render component that renders a 3D primitive.
+The `<pc-render>` tag adds a render component that draws a primitive shape — a box, sphere, capsule, cone, cylinder, plane or torus — with a material.
 
 :::note[Usage]
 
@@ -20271,7 +20283,7 @@ The `component` property is the engine [RenderComponent](https://api.playcanvas.
 * [`<pc-light>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-light.md) — lights and shadows the primitive
 * [`<pc-collision>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-collision.md) — a matching physics shape
 
-Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html), [Falling Blocks](https://playcanvas.github.io/web-components/examples/falling-blocks.html) and [Physics Joints](https://playcanvas.github.io/web-components/examples/physics-joints.html).
+Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/#basic-shapes.html), [Falling Blocks](https://playcanvas.github.io/web-components/examples/#falling-blocks.html) and [Physics Joints](https://playcanvas.github.io/web-components/examples/#physics-joints.html).
 
 --------------------------------------------------------------------------------
 
@@ -20886,7 +20898,7 @@ Examples: [Scroll View](https://playcanvas.github.io/web-components/examples/scr
 URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-sky/
 Markdown: https://developer.playcanvas.com/user-manual/web-components/tags/pc-sky.md
 
-The `<pc-sky>` tag is used to define a sky component.
+The `<pc-sky>` tag gives a scene its sky from an image: a background drawn behind everything else and, with `lighting`, the environment that lights and reflects in the scene's materials.
 
 :::note[Usage]
 
@@ -20899,17 +20911,17 @@ The `<pc-sky>` tag is used to define a sky component.
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
 | `asset` | [Asset ID](https://developer.playcanvas.com/user-manual/web-components/attributes.md#asset-and-material-ids) | - | Texture asset ID (must reference a `texture` type asset) |
-| `center` | Vector3 | `"0 0.01 0"` | Sky center as "X Y Z" values (0-1 range) |
-| `intensity` | Number | `"1"` | Sky brightness intensity |
-| `lighting` | Boolean | `"false"` | Whether the skybox is used as a light source |
-| `mip-level` | Number | `"0"` | Mip level of the skybox, where 0 is the sharpest. Raising it selects a blurrier mip, which is how a skybox is softened without blurring the texture itself |
-| `rotation` | Vector3 | `"0 0 0"` | Sky rotation as "X Y Z" Euler angles |
-| `scale` | Vector3 | `"100 100 100"` | Sky scale as "X Y Z" values |
-| `type` | Enum | `"infinite"` | Sky type: `"box"` \| `"dome"` \| `"infinite"` \| `"none"` |
+| `center` | Vector3 | `"0 0.01 0"` | Sky center as "X Y Z" values (0-1 range). Used by the `box` and `dome` types |
+| `intensity` | Number | `"1"` | Brightness of the sky, and of the lighting it provides |
+| `lighting` | Boolean | `"false"` | Whether the sky's image also lights the scene, including the reflections in its materials. Read when the image loads |
+| `mip-level` | Number | `"0"` | Mip level of the skybox, where 0 is the sharpest. Raising it selects a blurrier mip, which is how a skybox is softened without blurring the texture itself. Needs `lighting`, which is what creates the blurred mips |
+| `rotation` | Vector3 | `"0 0 0"` | Sky rotation as "X Y Z" Euler angles in degrees |
+| `scale` | Vector3 | `"100 100 100"` | Sky scale as "X Y Z" values. Used by the `box` and `dome` types |
+| `type` | Enum | `"infinite"` | Sky type: `"box"` \| `"dome"` \| `"infinite"` \| `"none"`. `"none"` draws no background, while `lighting` still lights the scene |
 
 ## Example
 
-An equirectangular texture as a dome-projected sky that also lights the scene (note `lighting`). Drag to look around, and try `type="infinite"`, a `rotation` of `"0 90 0"` or a higher `mip-level` to soften it:
+An equirectangular texture as a dome-projected sky that also lights the scene (note `lighting`). Drag to look around, and try `type="infinite"`, `type="none"` to keep only the lighting, or a higher `mip-level` to soften it:
 
 ```html live-example
 <pc-app>
@@ -20942,7 +20954,7 @@ The attributes are mirrored as properties. The sky itself is engine scene state 
 * [`<pc-scene>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scene.md) — exposure, and where the sky lives in the engine
 * [`<pc-light>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-light.md) — direct lights alongside the sky's image-based lighting
 
-Examples: [GLB Loader](https://playcanvas.github.io/web-components/examples/glb-loader.html), [Product Viewer](https://playcanvas.github.io/web-components/examples/product-viewer.html) and [Shadow Cascades](https://playcanvas.github.io/web-components/examples/shadow-cascades.html).
+Examples: [GLB Loader](https://playcanvas.github.io/web-components/examples/#glb-loader.html), [Product Viewer](https://playcanvas.github.io/web-components/examples/#product-viewer.html) and [Shadow Cascades](https://playcanvas.github.io/web-components/examples/#shadow-cascades.html).
 
 --------------------------------------------------------------------------------
 

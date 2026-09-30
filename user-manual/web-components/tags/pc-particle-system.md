@@ -1,6 +1,6 @@
 # <pc-particle-system>
 
-The `<pc-particle-system>` tag is used to define a particle system.
+The `<pc-particle-system>` tag adds a particle system to an entity: an emitter for effects such as snow, sparks or smoke, configured by a JSON asset.
 
 :::note[Usage]
 
@@ -14,6 +14,14 @@ The `<pc-particle-system>` tag is used to define a particle system.
 | --- | --- | --- | --- |
 | `asset` | [Asset ID](https://developer.playcanvas.com/user-manual/web-components/attributes.md#asset-and-material-ids) | - | JSON asset ID defining the particle system configuration |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
+
+## The Configuration
+
+The JSON asset holds the settings of the engine's [ParticleSystemComponent](https://api.playcanvas.com/engine/classes/ParticleSystemComponent.html), under the same property names. Vectors are arrays of numbers, and the graphs that vary a value over a particle's life are curves, written as an object whose `keys` alternate times and values (`[time, value, time, value, ...]`). A graph of a vector takes one such array per axis.
+
+`colorMapAsset` names a [`<pc-asset>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset.md) by its `id`, which the element resolves to the texture. It is the only asset setting that can: `normalMapAsset`, `meshAsset` and `renderAsset` given the same way do not resolve.
+
+Declare the configuration's `<pc-asset>` without `lazy`, and set `asset` in the markup. A configuration that arrives after the component exists, as a lazy one does, is not converted to the engine's types, and fails to apply.
 
 ## Example
 
@@ -78,11 +86,11 @@ Then add the particle system to your scene in HTML. This runs the `snow.json` ab
 
 You can programmatically create and manipulate `<pc-particle-system>` elements using the [ParticleSystemComponentElement API](https://api.playcanvas.com/web-components/classes/ParticleSystemComponentElement.html).
 
-The `component` property is the engine [ParticleSystemComponent](https://api.playcanvas.com/engine/classes/ParticleSystemComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.
+The `component` property is the engine [ParticleSystemComponent](https://api.playcanvas.com/engine/classes/ParticleSystemComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it. The element itself has `play()`, `pause()`, `reset()` and `stop()` methods to control the emitter.
 
 ## See Also
 
 * [`<pc-asset>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset.md) — the JSON configuration and the textures it names
 * [`<pc-entity>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md) — positions and orients the emitter
 
-Examples: [Basic Particles](https://playcanvas.github.io/web-components/examples/basic-particles.html) and [Clock Tower](https://playcanvas.github.io/web-components/examples/clock-tower.html).
+Examples: [Basic Particles](https://playcanvas.github.io/web-components/examples/#basic-particles.html) and [Clock Tower](https://playcanvas.github.io/web-components/examples/#clock-tower.html).

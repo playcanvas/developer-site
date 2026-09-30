@@ -1,6 +1,6 @@
 # <pc-camera>
 
-The `<pc-camera>` tag is used to define a camera component.
+The `<pc-camera>` tag adds a camera to an entity: the viewpoint the scene is rendered from, looking down the entity's negative Z axis.
 
 :::note[Usage]
 
@@ -26,7 +26,7 @@ The `<pc-camera>` tag is used to define a camera component.
 | `gamma` | Enum | `"srgb"` | Color space: `"linear"` \| `"srgb"` |
 | `horizontal-fov` | Boolean | `"false"` | Whether to use horizontal field of view instead of vertical |
 | `near-clip` | Number | `"0.1"` | The near clipping plane distance |
-| `ortho-height` | Number | `"10"` | Height of the orthographic projection. Only used when `projection` is `"orthographic"` |
+| `ortho-height` | Number | `"10"` | Half the height of the orthographic view, so the view spans twice this value vertically. Only used when `projection` is `"orthographic"` |
 | `priority` | Number | `"0"` | Rendering priority of the camera |
 | `projection` | Enum | `"perspective"` | Projection of the camera: `"perspective"` \| `"orthographic"`. Use `ortho-height` to size an orthographic projection |
 | `projection-offset` | Vector2 | `"0 0"` | Shifts the projection window off the view direction, like a shift lens, as "X Y" values in half-frustum units: `"0 1"` moves it up by half the frustum height. Keeping the camera level and shifting the window frames a tall subject with its verticals parallel. Applies to both projections and is ignored in XR |
@@ -69,6 +69,8 @@ You can programmatically create and manipulate `<pc-camera>` elements using the 
 
 The `component` property is the engine [CameraComponent](https://api.playcanvas.com/engine/classes/CameraComponent.html) the element adds — `null` until the element is ready — and everything the attributes do not expose is available on it.
 
+The element also has a small API for WebXR: `startXr(type, space)` and `endXr()` start and end a session, and `arAvailable` and `vrAvailable` report whether this device can enter each mode. See [The Camera Element API](https://developer.playcanvas.com/user-manual/web-components/xr.md#the-camera-element-api).
+
 ## See Also
 
 * [`<pc-scene>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scene.md) — exposure and fog, which the camera's tone mapping works with
@@ -76,4 +78,4 @@ The `component` property is the engine [CameraComponent](https://api.playcanvas.
 * [`<pc-script>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-script.md) — camera controls are engine scripts attached beside the camera
 * [XR Support](https://developer.playcanvas.com/user-manual/web-components/xr.md) — entering VR and AR from the camera element
 
-Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html) and [First Person Controller](https://playcanvas.github.io/web-components/examples/first-person-controller.html).
+Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/#basic-shapes.html) and [First Person Controller](https://playcanvas.github.io/web-components/examples/#first-person-controller.html).

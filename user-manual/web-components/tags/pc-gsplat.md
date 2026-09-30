@@ -1,6 +1,6 @@
 # <pc-gsplat>
 
-The `<pc-gsplat>` tag is used to define a gsplat component for rendering 3D Gaussian Splats.
+The `<pc-gsplat>` tag adds a gsplat component that renders a 3D Gaussian Splat: a scene captured as millions of small, soft, colored blobs.
 
 When rendering splat-based scenes, it is recommended to set `antialias` to `false` and `max-pixel-ratio` to `1` on your [`<pc-app>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-app.md) tag for best performance.
 
@@ -18,12 +18,12 @@ When rendering splat-based scenes, it is recommended to set `antialias` to `fals
 | `cast-shadows` | Boolean | `"false"` | Whether the gsplat component casts shadows |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
 | `lod-falloff` | Number | `"1"` | How quickly this splat's detail falls off away from the camera, as an exponent from 0 to 8. Higher values concentrate more of the scene-wide splat budget near the camera; lower values spread it more evenly. Only affects assets that contain LOD levels. |
-| `lod-range-max` | Number | `"99"` | Maximum allowed LOD index (inclusive). The LOD selected by distance is clamped so it never goes coarser (higher index) than this value. The default of `99` effectively means "no cap". Only affects assets that contain LOD levels. |
-| `lod-range-min` | Number | `"0"` | Minimum allowed LOD index (inclusive). The LOD selected by distance is clamped so it never goes finer (lower index) than this value. Raising it avoids downloading the highest-quality (largest) LOD files. Only affects assets that contain LOD levels. |
+| `lod-range-max` | Number | `"99"` | Maximum allowed LOD index (inclusive). The LOD the budget selects is clamped so it never goes coarser (higher index) than this value. The default of `99` effectively means "no cap". Only affects assets that contain LOD levels. |
+| `lod-range-min` | Number | `"0"` | Minimum allowed LOD index (inclusive). The LOD the budget selects is clamped so it never goes finer (lower index) than this value. Raising it avoids downloading the highest-quality (largest) LOD files. Only affects assets that contain LOD levels. |
 
 ## Level of Detail
 
-A streamed splat asset is one exported with LOD levels: its [`<pc-asset>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset.md) `src` points at the export's `lod-meta.json`, which is downloaded up front while the splat data itself streams in on demand. Such an asset is not rendered at full detail everywhere. The engine works to a **scene-wide splat budget**: a target number of splats on screen across every `<pc-gsplat>` in the scene, spent where it buys the most. The budget and how it is spent are properties of the scene, so they live on [`<pc-scene>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scene.md); how each splat competes for its share lives here:
+A streamed splat asset is one exported with LOD levels: its [`<pc-asset>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset.md) `src` points at the export's `lod-meta.json`, which is downloaded up front while the splat data itself streams in on demand. Declare it with `type="gsplat"`, since a `.json` file would otherwise be loaded as plain JSON. Such an asset is not rendered at full detail everywhere. The engine works to a **scene-wide splat budget**: a target number of splats on screen across every `<pc-gsplat>` in the scene, spent where it buys the most. The budget and how it is spent are properties of the scene, so they live on [`<pc-scene>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scene.md); how each splat competes for its share lives here:
 
 | Attribute | On | What it controls |
 | --- | --- | --- |
@@ -33,6 +33,8 @@ A streamed splat asset is one exported with LOD levels: its [`<pc-asset>`](https
 | `lod-range-min`, `lod-range-max` | `<pc-gsplat>` | Hard clamps on the LOD index this splat may use, whatever the budget decides — raise the minimum to avoid ever downloading the largest files |
 
 ```html
+<pc-asset id="capture" src="capture/lod-meta.json" type="gsplat"></pc-asset>
+<!-- ... -->
 <pc-scene gsplat-splat-budget="1500000" gsplat-lod-mode="error">
     <pc-entity name="capture">
         <pc-gsplat asset="capture" lod-falloff="1.5" lod-range-min="1"></pc-gsplat>
@@ -40,9 +42,9 @@ A streamed splat asset is one exported with LOD levels: its [`<pc-asset>`](https
 </pc-scene>
 ```
 
-There is no way to switch budgeted selection off: a budget of zero or less would pin every node to its coarsest level rather than lift the cap, so the engine warns and keeps the default instead. To see everything at full detail, set a budget larger than the capture. None of this affects a plain `.ply`, `.sog` or `.splat` asset with no LOD levels, which always renders in full.
+There is no way to switch budgeted selection off: a budget of zero or less would pin every node to its coarsest level rather than lift the cap, so the engine uses the default instead. To see everything at full detail, set a budget larger than the capture. A plain `.ply` or `.sog` asset with no LOD levels always renders in full, but its splats count against the budget, leaving that much less for the streamed ones.
 
-The [Splat Streaming example](https://playcanvas.github.io/web-components/examples/splat-streaming.html) streams a large LOD capture and exposes the budget, so the trade-off can be watched rather than imagined.
+The [Splat Streaming example](https://playcanvas.github.io/web-components/examples/#splat-streaming.html) streams a large LOD capture. It pins `lod-range-min` to the coarsest level so the whole scene arrives quickly, then removes the pin and lets finer levels stream in, which shows the budget at work.
 
 ## Example
 
@@ -78,4 +80,4 @@ The `component` property is the engine [GSplatComponent](https://api.playcanvas.
 * [`<pc-app>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-app.md) — the device settings recommended for splats
 * [Using Web Components](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/your-first-app/web-components.md) — a first splat app, step by step
 
-Examples: [Basic Splat](https://playcanvas.github.io/web-components/examples/basic-splat.html), [Splat Annotations](https://playcanvas.github.io/web-components/examples/splat-annotations.html), [Splat Flipbook](https://playcanvas.github.io/web-components/examples/splat-flipbook.html) and [Splat Streaming](https://playcanvas.github.io/web-components/examples/splat-streaming.html).
+Examples: [Basic Splat](https://playcanvas.github.io/web-components/examples/#basic-splat.html), [Splat Annotations](https://playcanvas.github.io/web-components/examples/#splat-annotations.html), [Splat Flipbook](https://playcanvas.github.io/web-components/examples/#splat-flipbook.html) and [Splat Streaming](https://playcanvas.github.io/web-components/examples/#splat-streaming.html).
