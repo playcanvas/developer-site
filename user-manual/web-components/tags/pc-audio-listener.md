@@ -1,6 +1,8 @@
 # <pc-audio-listener>
 
-The `<pc-audio-listener>` tag is used to define a listener component.
+The `<pc-audio-listener>` tag makes its entity the point from which positional sounds are heard — usually the entity holding the [`<pc-camera>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-camera.md), so that sounds pan and fade as the view moves.
+
+Only one listener is in use at a time: the one most recently enabled. Disabling it doesn't hand over to another, and sounds are heard from where it last was until a listener is enabled again. Without any listener, positional sounds are heard from the world origin, facing down the negative Z axis.
 
 :::note[Usage]
 
@@ -16,7 +18,7 @@ The `<pc-audio-listener>` tag is used to define a listener component.
 
 ## Example
 
-The listener sits on the camera, and a sphere emitting positional footsteps circles in front of it — put headphones on and the sound pans left and right as the sphere crosses. Browsers gate audio behind a user gesture, so click Play to start:
+The listener sits on the camera, and a sphere emitting positional footsteps circles in front of it. Put headphones on: the sound pans left and right as the sphere crosses, and with `distance-model="inverse"` it grows louder as the sphere comes near. Browsers gate audio behind a user gesture, so click Play to start. Then try deleting the `<pc-audio-listener>`: the sound is heard from the world origin, in the middle of the orbit, and circles around you at a steady volume:
 
 ```html live-example
 <pc-app>
@@ -40,7 +42,7 @@ The listener sits on the camera, and a sphere emitting positional footsteps circ
             </pc-script>
             <pc-entity name="emitter" position="3 1 0" scale="0.4 0.4 0.4">
                 <pc-render type="sphere"></pc-render>
-                <pc-sound positional="true" ref-distance="2" roll-off-factor="1">
+                <pc-sound positional="true" distance-model="inverse" ref-distance="2" roll-off-factor="1">
                     <pc-sound-slot name="footsteps" asset="footsteps" loop="true"></pc-sound-slot>
                 </pc-sound>
             </pc-entity>
@@ -79,4 +81,4 @@ The `component` property is the engine [AudioListenerComponent](https://api.play
 * [`<pc-sound-slot>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sound-slot.md) — the clips those sources play
 * [`<pc-camera>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-camera.md) — the listener usually rides on the camera entity
 
-Examples: [Positional Sound](https://playcanvas.github.io/web-components/examples/positional-sound.html) and [Clock Tower](https://playcanvas.github.io/web-components/examples/clock-tower.html).
+Examples: [Positional Sound](https://playcanvas.github.io/web-components/examples/#positional-sound.html) and [Clock Tower](https://playcanvas.github.io/web-components/examples/#clock-tower.html).

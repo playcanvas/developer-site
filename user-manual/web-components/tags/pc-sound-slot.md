@@ -1,10 +1,11 @@
 # <pc-sound-slot>
 
-The `<pc-sound-slot>` tag is used to define a sound.
+The `<pc-sound-slot>` tag declares one named sound of its parent [`<pc-sound>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sound.md): the audio asset it plays, with its volume, pitch, looping and auto-play.
 
 :::note[Usage]
 
 * It must be a direct child of a [`<pc-sound>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sound.md) component.
+* Its `name` must be unique within that `<pc-sound>`: a slot whose name is already taken is not added.
 
 :::
 
@@ -13,14 +14,14 @@ The `<pc-sound-slot>` tag is used to define a sound.
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
 | `asset` | [Asset ID](https://developer.playcanvas.com/user-manual/web-components/attributes.md#asset-and-material-ids) | - | Audio asset ID (must reference an `audio` type asset) |
-| `auto-play` | Boolean | `"false"` | Whether the sound plays automatically |
+| `auto-play` | Boolean | `"false"` | Whether the sound plays as soon as the slot is created. Browsers keep audio off until the user interacts with the page, so an auto-played sound starts at the first click, tap or mouse press |
 | `duration` | Number | - | Duration of the sound in seconds (omit to play the full clip) |
 | `loop` | Boolean | `"false"` | Whether the sound loops |
-| `name` | String | - | Name identifier for the sound slot |
-| `overlap` | Boolean | `"false"` | Whether sounds can overlap when triggered multiple times |
-| `pitch` | Number | `"1"` | Pitch multiplier (1 = normal pitch) |
+| `name` | String | - | The slot's name, which `component.slot(name)` finds it by |
+| `overlap` | Boolean | `"false"` | Whether playing the slot while it is already playing starts another copy alongside it. Otherwise, playing it again restarts it |
+| `pitch` | Number | `"1"` | Pitch multiplier (1 = normal pitch), multiplied by the `<pc-sound>`'s `pitch` |
 | `start-time` | Number | `"0"` | Start time offset in seconds |
-| `volume` | Number | `"1"` | Volume level (0-1) |
+| `volume` | Number | `"1"` | Volume, from 0 to 1, multiplied by the `<pc-sound>`'s `volume` |
 
 ## Example
 
@@ -67,12 +68,12 @@ Two slots playing the same clip — the second at half `pitch`. Browsers only al
 
 You can programmatically create and manipulate `<pc-sound-slot>` elements using the [SoundSlotElement API](https://api.playcanvas.com/web-components/classes/SoundSlotElement.html).
 
-The attributes are mirrored as properties. The engine [SoundSlot](https://api.playcanvas.com/engine/classes/SoundSlot.html) itself belongs to the parent component: `soundElement.component.slot(name)` returns it.
+The attributes are mirrored as properties. The engine [SoundSlot](https://api.playcanvas.com/engine/classes/SoundSlot.html) itself belongs to the parent component: `soundElement.component.slot(name)` returns it, and so does the element's `soundSlot` property, which is `null` until the element is ready.
 
 ## See Also
 
 * [`<pc-sound>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sound.md) — the component a slot belongs to
 * [`<pc-asset>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset.md) — the audio asset a slot plays
-* [`<pc-audio-listener>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-audio-listener.md) — positional playback needs a listener
+* [`<pc-audio-listener>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-audio-listener.md) — where positional sounds are heard from
 
-Examples: [Basic Sound](https://playcanvas.github.io/web-components/examples/basic-sound.html), [Positional Sound](https://playcanvas.github.io/web-components/examples/positional-sound.html), [Falling Blocks](https://playcanvas.github.io/web-components/examples/falling-blocks.html) and [Clock Tower](https://playcanvas.github.io/web-components/examples/clock-tower.html).
+Examples: [Basic Sound](https://playcanvas.github.io/web-components/examples/#basic-sound.html), [Positional Sound](https://playcanvas.github.io/web-components/examples/#positional-sound.html), [Falling Blocks](https://playcanvas.github.io/web-components/examples/#falling-blocks.html) and [Clock Tower](https://playcanvas.github.io/web-components/examples/#clock-tower.html).
