@@ -1,13 +1,14 @@
 ---
 title: <pc-sound-slot>
-description: "pc-sound-slot要素のリファレンス: 位置オーディオまたは非位置のオーディオクリップ、音量、ピッチ、自動再生のルール、Asset参照です。"
+description: "pc-sound-slot要素のリファレンス: pc-soundの名前付きのサウンド1つと、そのオーディオアセット、音量、ピッチ、ループ、開始時間、自動再生です。"
 ---
 
-`<pc-sound-slot>`タグは、サウンドを定義するために使用されます。
+`<pc-sound-slot>`タグは、親の[`<pc-sound>`](../pc-sound)の名前付きのサウンドを1つ宣言します。再生するオーディオアセットと、その音量、ピッチ、ループ、自動再生を指定します。
 
 :::note[使用法]
 
 * [`<pc-sound>`](../pc-sound)コンポーネントの直接の子である必要があります。
+* `name`はその`<pc-sound>`の中で一意である必要があります。すでに使われている名前のスロットは追加されません。
 
 :::
 
@@ -18,14 +19,14 @@ description: "pc-sound-slot要素のリファレンス: 位置オーディオま
 | 属性 | タイプ | デフォルト | 説明 |
 | --- | --- | --- | --- |
 | `asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | オーディオアセットID（`audio`型アセットを参照する必要があります） |
-| `auto-play` | Boolean | `"false"` | サウンドが自動的に再生されるかどうか |
+| `auto-play` | Boolean | `"false"` | スロットが作成されたらすぐにサウンドを再生するかどうか。ブラウザはユーザーがページを操作するまでオーディオを止めておくため、自動再生のサウンドは最初のクリック、タップ、またはマウスボタンの押下で始まります |
 | `duration` | Number | - | サウンドの再生時間（秒単位）（省略するとクリップ全体を再生します） |
 | `loop` | Boolean | `"false"` | サウンドがループするかどうか |
-| `name` | String | - | サウンドスロットの名前識別子 |
-| `overlap` | Boolean | `"false"` | 複数回トリガーされたときにサウンドが重なることができるかどうか |
-| `pitch` | Number | `"1"` | ピッチ乗数（1 = 通常ピッチ） |
+| `name` | String | - | スロットの名前。`component.slot(name)`はこの名前でスロットを見つけます |
+| `overlap` | Boolean | `"false"` | 再生中のスロットをもう一度再生したときに、別のコピーを並行して再生するかどうか。そうでない場合は、最初から再生し直します |
+| `pitch` | Number | `"1"` | ピッチ乗数（1 = 通常ピッチ）。`<pc-sound>`の`pitch`が乗算されます |
 | `start-time` | Number | `"0"` | 開始時間のオフセット（秒単位） |
-| `volume` | Number | `"1"` | 音量レベル（0-1） |
+| `volume` | Number | `"1"` | 音量（0〜1）。`<pc-sound>`の`volume`が乗算されます |
 
 </div>
 
@@ -74,12 +75,12 @@ description: "pc-sound-slot要素のリファレンス: 位置オーディオま
 
 [SoundSlotElement API](https://api.playcanvas.com/web-components/classes/SoundSlotElement.html)を使用して、`<pc-sound-slot>`要素をプログラムで作成および操作できます。
 
-属性はプロパティとしても利用できます。エンジンの[SoundSlot](https://api.playcanvas.com/engine/classes/SoundSlot.html)そのものは親コンポーネントに属しており、`soundElement.component.slot(name)`で取得できます。
+属性はプロパティとしても利用できます。エンジンの[SoundSlot](https://api.playcanvas.com/engine/classes/SoundSlot.html)そのものは親コンポーネントに属しており、`soundElement.component.slot(name)`で取得できます。要素の`soundSlot`プロパティでも取得でき、これは要素の準備が完了するまでは`null`です。
 
 ## 関連項目 {#see-also}
 
 * [`<pc-sound>`](../pc-sound) — スロットが属するコンポーネント
 * [`<pc-asset>`](../pc-asset) — スロットが再生するオーディオアセット
-* [`<pc-audio-listener>`](../pc-audio-listener) — 位置再生にはリスナーが必要です
+* [`<pc-audio-listener>`](../pc-audio-listener) — 位置サウンドを聴く地点
 
-サンプル: [Basic Sound](https://playcanvas.github.io/web-components/examples/basic-sound.html)、[Positional Sound](https://playcanvas.github.io/web-components/examples/positional-sound.html)、[Falling Blocks](https://playcanvas.github.io/web-components/examples/falling-blocks.html)、[Clock Tower](https://playcanvas.github.io/web-components/examples/clock-tower.html)
+サンプル: [Basic Sound](https://playcanvas.github.io/web-components/examples/#basic-sound.html)、[Positional Sound](https://playcanvas.github.io/web-components/examples/#positional-sound.html)、[Falling Blocks](https://playcanvas.github.io/web-components/examples/#falling-blocks.html)、[Clock Tower](https://playcanvas.github.io/web-components/examples/#clock-tower.html)

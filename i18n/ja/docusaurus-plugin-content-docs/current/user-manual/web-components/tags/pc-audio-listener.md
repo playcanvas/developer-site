@@ -3,7 +3,9 @@ title: <pc-audio-listener>
 description: "pc-audio-listener要素のリファレンス: 位置サウンドをどの地点から聴くかを定義するオーディオリスナーComponentです。"
 ---
 
-`<pc-audio-listener>`タグは、リスナーコンポーネントを定義するために使用されます。
+`<pc-audio-listener>`タグは、エンティティを位置サウンドを聴く地点にします。通常は[`<pc-camera>`](../pc-camera)を持つエンティティに置き、ビューの動きに合わせてサウンドがパンし、減衰するようにします。
+
+同時に使われるリスナーは1つだけで、最後に有効になったものです。それを無効にしても別のリスナーには切り替わらず、リスナーが再び有効になるまで、サウンドは無効にしたリスナーが最後にあった位置で聴こえます。リスナーがまったくない場合、位置サウンドはワールドの原点で、負のZ軸方向を向いて聴こえます。
 
 :::note[使用法]
 
@@ -23,7 +25,7 @@ description: "pc-audio-listener要素のリファレンス: 位置サウンド�
 
 ## 例 {#example}
 
-リスナーはカメラ上にあり、位置音源の足音を発する球体がその前を旋回します。ヘッドフォンを着けると、球体が横切るたびに音が左右にパンします。ブラウザはユーザー操作があるまでオーディオをブロックするため、Playをクリックして開始してください:
+リスナーはカメラ上にあり、位置音源の足音を発する球体がその前を旋回します。ヘッドフォンを着けると、球体が横切るたびに音が左右にパンし、`distance-model="inverse"` によって球体が近づくと大きくなります。ブラウザはユーザー操作があるまでオーディオをブロックするため、Playをクリックして開始してください。次に `<pc-audio-listener>` を削除してみましょう。サウンドは旋回の中心にあるワールドの原点で聴こえるようになり、一定の音量で周りを回ります:
 
 ```html live-example
 <pc-app>
@@ -47,7 +49,7 @@ description: "pc-audio-listener要素のリファレンス: 位置サウンド�
             </pc-script>
             <pc-entity name="emitter" position="3 1 0" scale="0.4 0.4 0.4">
                 <pc-render type="sphere"></pc-render>
-                <pc-sound positional="true" ref-distance="2" roll-off-factor="1">
+                <pc-sound positional="true" distance-model="inverse" ref-distance="2" roll-off-factor="1">
                     <pc-sound-slot name="footsteps" asset="footsteps" loop="true"></pc-sound-slot>
                 </pc-sound>
             </pc-entity>
@@ -86,4 +88,4 @@ description: "pc-audio-listener要素のリファレンス: 位置サウンド�
 * [`<pc-sound-slot>`](../pc-sound-slot) — それらの音源が再生するクリップ
 * [`<pc-camera>`](../pc-camera) — リスナーは通常カメラのエンティティに載せます
 
-サンプル: [Positional Sound](https://playcanvas.github.io/web-components/examples/positional-sound.html)、[Clock Tower](https://playcanvas.github.io/web-components/examples/clock-tower.html)
+サンプル: [Positional Sound](https://playcanvas.github.io/web-components/examples/#positional-sound.html)、[Clock Tower](https://playcanvas.github.io/web-components/examples/#clock-tower.html)
