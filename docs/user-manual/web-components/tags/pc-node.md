@@ -14,7 +14,7 @@ For worked examples of the common adjustments — hiding, re-posing, reskinning,
 * It must be a descendant of a [`<pc-model>`](../pc-model), either directly or nested inside another `<pc-node>`.
 * It can have 0..n nested [`<pc-node>`](../pc-node) children, which resolve their own `name` within the bound node's subtree.
 * It can have 0..n [`<pc-entity>`](../pc-entity) children, which are created and parented under the bound node — attachment points for new content.
-* It can have the same component tags as a [`<pc-entity>`](../pc-entity) — [`<pc-collision>`](../pc-collision), [`<pc-light>`](../pc-light), [`<pc-script>`](../pc-script) and the rest — which add that component to the bound node.
+* It can have the same component tags as a [`<pc-entity>`](../pc-entity) — [`<pc-collision>`](../pc-collision), [`<pc-light>`](../pc-light), [`<pc-script>`](../pc-script) and the rest — which add that component to the bound node. A component the node already has, such as the `render` of a mesh node, is not added a second time: the tag warns and does nothing.
 
 :::
 
@@ -31,7 +31,7 @@ For worked examples of the common adjustments — hiding, re-posing, reskinning,
 | `position` | Vector3 | *authored* | Overrides the node's local position as "X Y Z" values |
 | `rotation` | Vector3 | *authored* | Overrides the node's local rotation as "X Y Z" Euler angles in degrees |
 | `scale` | Vector3 | *authored* | Overrides the node's local scale as "X Y Z" values |
-| `tags` | String | *authored* | Overrides the node's tags, separated by spaces or commas |
+| `tags` | String | *authored* | Overrides the node's tags, as a comma-separated list |
 
 </div>
 
@@ -45,7 +45,7 @@ An override replaces the authored value; it does not compose with it. `position=
 
 ## Finding the Node
 
-`name` matches on the node names in the loaded hierarchy, taking the first match in depth-first order. Nesting one `<pc-node>` inside another scopes the inner search to the outer node's subtree, which is the simplest way to reach a node whose name is only unique locally.
+`name` matches on the node names in the loaded hierarchy, and has to match exactly one node in the search scope. Nesting one `<pc-node>` inside another scopes the inner search to the outer node's subtree, which is the simplest way to reach a node whose name is only unique locally.
 
 When a name is not unique within the search scope, the element binds nothing and warns with the paths of every candidate, so you can pick one with `index`:
 
@@ -55,7 +55,7 @@ pc-node 'Wheel' is ambiguous in model 'car' - specify index: [0] Body/Wheel_FL/W
 
 Binding nothing is deliberate: guessing would silently decorate the wrong node, and a re-export that introduced a duplicate name would break a document that used to work.
 
-The other resolution failures warn in the same way — a name that matches nothing (with the closest name it did find, as a typo hint), an `index` beyond the number of matches, and a node that another `<pc-node>` has already bound. In each case the element binds nothing and never becomes ready.
+The other resolution failures warn in the same way — a name that matches nothing (with a node name within two edits of it as a typo hint, when there is one), an `index` beyond the number of matches, and a node that another `<pc-node>` has already bound. In each case the element binds nothing and never becomes ready.
 
 An element only becomes ready once it is bound, and its descendants wait with it. If the model reloads, or the element retargets because you changed `name`, it re-resolves and re-applies its overrides, components and attached content against the new node.
 
@@ -78,7 +78,7 @@ Both selectors address the mesh instances of the bound node's render component:
 
 The mapping is sparse: an assignment that no rule matches keeps the material the model was authored with. Where rules of both kinds cover the same mesh instance, `index:` wins — so you can replace a material everywhere it appears by name, then pin the one exception by index.
 
-Use [`<pc-model>`'s `hierarchy()`](../pc-model#inspecting-the-hierarchy) to discover the names and indices a node offers. Material names are runtime labels rather than unique identifiers — glTF allows duplicates, leaves unnamed materials called `Untitled`, and gives a primitive authored without a material the engine's shared `defaultGlbMaterial` — so reach for `index:` whenever a name is not distinct.
+Use [`<pc-model>`'s `hierarchy()`](../pc-model#inspecting-the-hierarchy) to discover the names and indices a node offers. Material names are runtime labels rather than unique identifiers — glTF allows duplicates, the engine calls an unnamed material `Untitled`, gives a primitive authored without a material its shared `defaultGlbMaterial`, and adds `-flatShaded` to the name of a copy it makes for a primitive without normals — so reach for `index:` whenever a name is not distinct.
 
 Names are matched against the assignments captured when the mapping first applied. A rule therefore never matches a material that another rule put there, and renaming a material afterwards cannot change what it selects. Removing the attribute puts every captured assignment back, as does assigning `null` to the `materialOverrides` property or setting an empty `{}`.
 
@@ -110,7 +110,7 @@ The inline `onclick` and `onpointer*` attributes work here exactly as they do on
 
 ## Example
 
-This GLB instantiates two nodes — `play` (the orange shell, its logo cut out of each face) and `canvas` (the dark inner box you see through the cutouts). [`hierarchy()`](../pc-model#inspecting-the-hierarchy) is how you discover that. The `<pc-node>` binds `play` and swaps its authored orange for blue via `material-overrides`. Try binding `canvas` instead, or add `enabled="false"` to hide the shell entirely. Drag to orbit:
+This GLB instantiates two mesh nodes — `play` (the orange shell, its logo cut out of each face) and `canvas` (the dark inner box you see through the cutouts) — alongside an empty `Light` and `Camera` left over from its export. [`hierarchy()`](../pc-model#inspecting-the-hierarchy) is how you discover that. The `<pc-node>` binds `play` and swaps its authored orange for blue via `material-overrides`. Try binding `canvas` instead, or add `enabled="false"` to hide the shell entirely. Drag to orbit:
 
 ```html live-example
 <pc-app>
@@ -165,4 +165,4 @@ The element stores a frozen copy of what you assign, so mutating your object aft
 * [`<pc-entity>`](../pc-entity) — attaches new content under a node
 * [Loading Models](../loading-models.md) — finding the nodes inside a loaded model
 
-Examples: [Product Viewer](https://playcanvas.github.io/web-components/examples/product-viewer.html), [Ragdoll](https://playcanvas.github.io/web-components/examples/ragdoll.html) and [Vehicle Physics](https://playcanvas.github.io/web-components/examples/vehicle-physics.html).
+Examples: [Product Viewer](https://playcanvas.github.io/web-components/examples/#product-viewer.html), [Ragdoll](https://playcanvas.github.io/web-components/examples/#ragdoll.html) and [Vehicle Physics](https://playcanvas.github.io/web-components/examples/#vehicle-physics.html).

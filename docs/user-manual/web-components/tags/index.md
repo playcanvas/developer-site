@@ -15,7 +15,7 @@ Every document has the same shape. [`<pc-app>`](pc-app) holds the resources and 
     <pc-asset id="sky" src="sky.webp"></pc-asset>
     <pc-asset id="robot" src="robot.glb"></pc-asset>
     <pc-material id="gold" diffuse="#d4af37" metalness="1"></pc-material>
-    <pc-wasm name="Ammo" glue="ammo.js" wasm="ammo.wasm"></pc-wasm>
+    <pc-wasm name="Ammo" glue="ammo.wasm.js" wasm="ammo.wasm.wasm"></pc-wasm>
     <pc-scene>
         <pc-sky asset="sky"></pc-sky>
         <!-- An entity takes one of each component tag, and nests entities and models -->
@@ -42,7 +42,7 @@ Every document has the same shape. [`<pc-app>`](pc-app) holds the resources and 
 
 Three tags front an engine entity, and a component tag can sit inside any of them: [`<pc-entity>`](pc-entity), [`<pc-model>`](pc-model) and [`<pc-node>`](pc-node). A component placed inside a model attaches to that model's host entity, and one placed inside a node attaches to the bound node — both take the same component children an entity does.
 
-Each tag's page states the parent it requires. A misplaced element logs a console warning naming the parents it would accept, so keep the console open while authoring.
+Each tag's page states the parent it requires. Most misplaced elements log a console warning saying where they belong, so keep the console open while authoring.
 
 ## Tags by Role
 
@@ -131,13 +131,13 @@ The attributes of every tag share the same value conventions: an absent (or remo
 
 :::note[A component tag spells the engine component it adds]
 
-Drop the `pc-` prefix, drop the hyphens, and you have the engine's component id: `<pc-layout-group>` adds `entity.layoutgroup`, `<pc-rigid-body>` adds `entity.rigidbody`, `<pc-audio-listener>` adds `entity.audiolistener`. The rule holds in both directions for every component tag on this page, so neither spelling has to be memorized. The engine's ids run their words together only because they are JavaScript property names, which cannot carry a hyphen — an HTML tag can.
+Drop the `pc-` prefix, drop the hyphens, and you have the engine's component id: `<pc-layout-group>` adds `entity.layoutgroup`, `<pc-rigid-body>` adds `entity.rigidbody`, `<pc-audio-listener>` adds `entity.audiolistener`. The rule holds for every component tag on this page. Going the other way means putting the word breaks back, and not every id has one: `scrollview` is `<pc-scroll-view>`, but `scrollbar` is `<pc-scrollbar>`. The engine's ids run their words together because they are used as JavaScript properties (`entity.rigidbody`), where a hyphen would need bracket notation — an HTML tag can carry one.
 
 :::
 
 A repeatable child takes its parent's tag as a prefix: [`<pc-anim-clip>`](pc-anim-clip) inside [`<pc-anim>`](pc-anim), [`<pc-sound-slot>`](pc-sound-slot) inside [`<pc-sound>`](pc-sound), [`<pc-script-instance>`](pc-script-instance) inside [`<pc-script>`](pc-script).
 
-Every tag except [`<pc-material>`](pc-material) initializes asynchronously and fires a `ready` event once it has — see [The `ready` Event](../programmatic-access.md#the-ready-event) for the timing, and for the `whenReady()` helper that wraps it. The Events section on a tag's page lists only the events specific to that tag.
+Every tag except [`<pc-material>`](pc-material) initializes asynchronously and fires a `ready` event once it has, which is also when `whenReady()` resolves for it — see [The `ready` Event](../programmatic-access.md#the-ready-event) for the timing. The Events section on a tag's page lists only the events specific to that tag.
 
 ## All Tags A–Z {#all-tags-a-z}
 

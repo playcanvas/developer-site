@@ -3,7 +3,7 @@ title: <pc-scene>
 description: "pc-scene要素のリファレンス: pc-app内のシーンコンテナで、保持するエンティティに適用されるフォグ、露出、重力の設定を持ちます。"
 ---
 
-`<pc-scene>`タグは、シーンを定義するために使用されます。
+`<pc-scene>`タグは、アプリケーションが描画するシーンを定義します。エンティティ階層のルートであり、その中のすべてに適用されるフォグ、露出、物理の設定を持ちます。
 
 :::note[使用法]
 
@@ -17,18 +17,18 @@ description: "pc-scene要素のリファレンス: pc-app内のシーンコン�
 
 | 属性 | タイプ | デフォルト | 説明 |
 | --- | --- | --- | --- |
-| `exposure` | Number | `"1"` | レンダリングされる画像全体の明るさの倍率。シーンが物理単位を使用している間は無視されます |
+| `exposure` | Number | `"1"` | レンダリングされる画像全体の明るさの倍率。シーンが物理単位を使用している間は無視されます。物理単位はJavaScriptからエンジンのシーンの`physicalUnits`で有効にします |
 | `fog` | Enum | `"none"` | フォグの種類：`"none"` \| `"linear"` \| `"exp"` \| `"exp2"` |
 | `fog-color` | Color | `"0 0 0"` | スペース区切りのRGB値、16進数コード、または[名前付きカラー](https://github.com/playcanvas/web-components/blob/main/src/colors.ts)としてのフォグの色 |
 | `fog-density` | Number | `"0"` | 指数フォグタイプの場合のフォグの密度 |
 | `fog-end` | Number | `"1000"` | 線形フォグの終了距離 |
 | `fog-start` | Number | `"1"` | 線形フォグの開始距離 |
 | `gsplat-lod-mode` | Enum | `"distance"` | ストリーミングされるGaussian splatのLODレベルを、スプラット予算の範囲内でどう選ぶか：`"error"` \| `"distance"`。[レベルオブディテール](../pc-gsplat#level-of-detail)を参照 |
-| `gsplat-splat-budget` | Number | `"1000000"` | シーン内のすべてのGaussian splatを合わせて描画するスプラット数の目標値。ストリーミングされるスプラットアセット間で配分されます。0以下の値は警告を出し、デフォルトが維持されます |
+| `gsplat-splat-budget` | Number | `"1000000"` | シーン内のすべてのGaussian splatを合わせて描画するスプラット数の目標値。ストリーミングされるスプラットアセット間で配分されます。0以下の値はデフォルトとして扱われます |
 | `gsplat-use-fog` | Boolean | `"true"` | シーンのフォグをGaussian splatに適用するかどうか |
 | `gsplat-use-tonemap` | Boolean | `"true"` | カメラのトーンマッピングとシーンの`exposure`をGaussian splatに適用するかどうか。`"false"`にすると、スプラットは保存されている色のままレンダリングされます。これはすでに表示用に仕上がっているキャプチャに適しています。フォグは引き続き適用されます |
 | `gravity` | Vector3 | `"0 -9.81 0"` | 「X Y Z」値としてリジッドボディに適用される重力 |
-| `lighting-max-lights` | Number | `"255"` | クラスターライティングが1フレームで使用するライトの最大数。1から65535まで。上限を超えたライトは警告とともに無視され、255を超える値はライトグリッドのメモリを2倍にします |
+| `lighting-max-lights` | Number | `"255"` | クラスターライティングが1フレームで使用するライトの最大数。エンジンはこの値を1からデバイスがサポートする最大値（最大65535）までの範囲に収め、上限を超えたライトはそのフレームから除外されます。255を超える値はライトグリッドのメモリを2倍にします |
 | `physics-time-scale` | Number | `"1"` | 物理シミュレーションが毎フレーム進める時間に掛かる倍率。1未満はスローモーション、1を超えると高速になり、`"0"`はアプリケーションの他の部分を動かしたまま物理を一時停止します。アプリケーション自体のタイムスケールに重ねて適用されます |
 
 </div>
@@ -90,4 +90,4 @@ document.querySelector('pc-scene').addEventListener('click', (event) => {
 * [`<pc-camera>`](../pc-camera) — シーンの露出のあとに適用されるトーンマッピング
 * [`<pc-rigid-body>`](../pc-rigid-body) — 重力が働くボディ
 
-サンプル: [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html)、[Spinning Cube](https://playcanvas.github.io/web-components/examples/spinning-cube.html)
+サンプル: [Basic Shapes](https://playcanvas.github.io/web-components/examples/#basic-shapes.html)、[Spinning Cube](https://playcanvas.github.io/web-components/examples/#spinning-cube.html)
