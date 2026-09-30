@@ -18471,7 +18471,7 @@ Examples: [Positional Sound](https://playcanvas.github.io/web-components/example
 URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-button/
 Markdown: https://developer.playcanvas.com/user-manual/web-components/tags/pc-button.md
 
-The `<pc-button>` tag is used to define a button component, which makes an element respond to pointer input with visual transitions.
+The `<pc-button>` tag adds a button component, which makes an image element respond to input. It fires a `click` event, and shows its hover, pressed and inactive states by tinting the image or by swapping its sprite.
 
 :::note[Usage]
 
@@ -18484,25 +18484,31 @@ The `<pc-button>` tag is used to define a button component, which makes an eleme
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
-| `active` | Boolean | `"true"` | Whether the button responds to input |
+| `active` | Boolean | `"true"` | Whether the button responds to input. While it is `"false"`, the button shows its inactive state and fires no `click` or other button events, but its element still receives input, and so blocks the elements behind it. See [Disabling a Button](https://developer.playcanvas.com/user-manual/user-interface/buttons.md#disabling-a-button) |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
 | `fade-duration` | Number | `"0"` | Duration in milliseconds over which tint transitions are applied |
-| `hit-padding` | Vector4 | `"0 0 0 0"` | Expands the button's hit area as `left bottom right top` |
+| `hit-padding` | Vector4 | `"0 0 0 0"` | Grows the area that receives input by a distance in screen units on each side, as `left bottom right top`, without changing how the button looks |
 | `hover-sprite-asset` | [Asset ID](https://developer.playcanvas.com/user-manual/web-components/attributes.md#asset-and-material-ids) | - | Sprite [`<pc-asset>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset.md) id shown on hover (sprite transition mode) |
 | `hover-sprite-frame` | Number | `"0"` | Frame of the hover sprite |
-| `hover-tint` | Color | `"0.75 0.75 0.75 1"` | Tint applied to the image entity on hover (tint transition mode) |
-| `image` | [Entity Reference](https://developer.playcanvas.com/user-manual/web-components/attributes.md#entity-references) | - | The [`<pc-entity>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md) whose image element shows transitions. Defaults to the button's own entity — inside a [`<pc-model>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-model.md) that is the model's host, so name a UI entity explicitly there |
+| `hover-tint` | Color | `"0.75 0.75 0.75 1"` | Color of the image while the button is hovered, in tint mode |
+| `image` | [Entity Reference](https://developer.playcanvas.com/user-manual/web-components/attributes.md#entity-references) | - | The entity whose image element shows the transitions. Defaults to the button's own entity. It only changes where the transitions show: the button still takes its input from its own entity's element. See [The Image](https://developer.playcanvas.com/user-manual/user-interface/buttons.md#the-image) |
 | `inactive-sprite-asset` | [Asset ID](https://developer.playcanvas.com/user-manual/web-components/attributes.md#asset-and-material-ids) | - | Sprite [`<pc-asset>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset.md) id shown when inactive (sprite transition mode) |
 | `inactive-sprite-frame` | Number | `"0"` | Frame of the inactive sprite |
-| `inactive-tint` | Color | `"0.25 0.25 0.25 1"` | Tint applied to the image entity when inactive (tint transition mode) |
+| `inactive-tint` | Color | `"0.25 0.25 0.25 1"` | Color of the image while the button is inactive, in tint mode |
 | `pressed-sprite-asset` | [Asset ID](https://developer.playcanvas.com/user-manual/web-components/attributes.md#asset-and-material-ids) | - | Sprite [`<pc-asset>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset.md) id shown when pressed (sprite transition mode) |
 | `pressed-sprite-frame` | Number | `"0"` | Frame of the pressed sprite |
-| `pressed-tint` | Color | `"0.5 0.5 0.5 1"` | Tint applied to the image entity when pressed (tint transition mode) |
-| `transition-mode` | Enum | `"tint"` | How the button reacts to hover/press: `"tint"` \| `"sprite"` |
+| `pressed-tint` | Color | `"0.5 0.5 0.5 1"` | Color of the image while the button is pressed, in tint mode |
+| `transition-mode` | Enum | `"tint"` | How the image shows the button's state: `"tint"` \| `"sprite"`. `"tint"` sets its color to the state's tint, and `"sprite"` shows the state's sprite. In sprite mode, a state without a sprite shows none, so give every state one |
+
+:::note[Tints replace the image's color]
+
+A tint replaces the color of the image rather than multiplying it, and its alpha becomes the image's opacity. So the default grey tints turn a colored button grey, and a semi-transparent one opaque, when it is hovered. Choose tints that are lighter and darker versions of the button's color, with the alpha the button should have. See [Tint](https://developer.playcanvas.com/user-manual/user-interface/buttons.md#tint).
+
+:::
 
 ## Example
 
-A clickable button with tint transitions — hover and press it, then try the `hover-tint`/`pressed-tint` colors or a longer `fade-duration`. The script below wires up the `click` event using the pattern described next:
+A clickable button with tint transitions, whose tints are a lighter and a darker orange. Hover and press it, then try other `hover-tint` and `pressed-tint` colors, or a longer `fade-duration`. The script below wires up the `click` event using the pattern described next:
 
 ```html live-example
 <pc-app>
@@ -18517,8 +18523,8 @@ A clickable button with tint transitions — hover and press it, then try the `h
                 <!-- The image element provides the button's visuals and receives input -->
                 <pc-element type="image" anchor="0.5 0.5 0.5 0.5" pivot="0.5 0.5"
                             width="220" height="56" color="#ff8a3c" use-input></pc-element>
-                <pc-button transition-mode="tint" hover-tint="0.85 0.85 0.85 1"
-                           pressed-tint="0.6 0.6 0.6 1" fade-duration="100"></pc-button>
+                <pc-button transition-mode="tint" hover-tint="#ffa76d"
+                           pressed-tint="#cc6e30" fade-duration="100"></pc-button>
                 <pc-entity name="label">
                     <pc-element type="text" anchor="0.5 0.5 0.5 0.5" pivot="0.5 0.5"
                                 font-asset="arial" font-size="24" color="#1d1f2b" text="Click me"></pc-element>
@@ -18560,9 +18566,10 @@ The `component` property is the engine [ButtonComponent](https://api.playcanvas.
 
 * [`<pc-element>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-element.md) — the image element a button needs for input and transitions
 * [`<pc-screen>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-screen.md) — the screen the button's element hierarchy lives on
-* [`<pc-entity>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md) — click and pointer events on 3D objects, without a screen
+* [`<pc-entity>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md) — `onclick` and the other pointer events, which reach image and text elements too, but without button states or hit padding
+* [Buttons](https://developer.playcanvas.com/user-manual/user-interface/buttons.md) — states, tints, sprites and events, in the User Interface section
 
-Examples: [UI Layout](https://playcanvas.github.io/web-components/examples/ui-layout.html) and [Scroll View](https://playcanvas.github.io/web-components/examples/scroll-view.html).
+Examples: [UI Layout](https://playcanvas.github.io/web-components/examples/#ui-layout.html) and [Scroll View](https://playcanvas.github.io/web-components/examples/#scroll-view.html).
 
 --------------------------------------------------------------------------------
 
@@ -18761,9 +18768,11 @@ Examples: [Basic Physics](https://playcanvas.github.io/web-components/examples/#
 URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-element/
 Markdown: https://developer.playcanvas.com/user-manual/web-components/tags/pc-element.md
 
-The `<pc-element>` tag is used to define an element component. Element components are the building blocks of user interfaces and come in three types — `group`, `image`, and `text` — selected with the `type` attribute. Which attributes apply depends on the type.
+The `<pc-element>` tag adds an element component, the building block of user interfaces. It comes in three types, selected with the `type` attribute — `group`, `image` and `text` — and which attributes apply depends on the type.
 
-Despite the name, this is not a base class or a generic wrapper. `<pc-element>` is the engine's 2D UI component, and like every component tag it spells the component it adds (`entity.element`): it gives its host entity a rectangle inside a [`<pc-screen>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-screen.md) hierarchy that draws an image, a line of text, or nothing at all.
+Despite the name, this is not a base class or a generic wrapper. `<pc-element>` is the engine's 2D UI component, and like every component tag it spells the component it adds (`entity.element`): it gives its host entity a rectangle that draws an image, text, or nothing at all.
+
+The rectangle is usually laid out on a [`<pc-screen>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-screen.md), but an element doesn't need one: the scrolling crawl of the [Text](https://playcanvas.github.io/web-components/examples/#text.html) example has no screen. Without a screen above it, an element is placed by its entity's transform and sized in world units, so a 32 × 32 element is 32 meters across. See [Elements Without a Screen](https://developer.playcanvas.com/user-manual/user-interface/elements.md#elements-without-a-screen).
 
 :::note[Usage]
 
@@ -18773,7 +18782,7 @@ Despite the name, this is not a base class or a generic wrapper. `<pc-element>` 
 
 :::note
 
-Image elements can render a sprite (including 9-sliced sprites, via a `sliced` [`<pc-asset>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset.md)) or a texture, and can act as a `mask` to clip their descendants. Only text elements require a `font-asset`.
+Image elements draw a texture or a sprite — including a 9-sliced or tiled sprite, from a sprite [`<pc-asset>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset.md) with `render-mode="sliced"` or `"tiled"` — and can act as a `mask` that clips their descendants. Only text elements need a `font-asset`.
 
 :::
 
@@ -18782,41 +18791,41 @@ Image elements can render a sprite (including 9-sliced sprites, via a `sliced` [
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
 | `alignment` | Vector2 | `"0.5 0.5"` | Horizontal and vertical alignment of the text within the element, each from 0 to 1: `"0.5 0.5"` centers it and `"0 1"` aligns it to the top left. Text elements only |
-| `anchor` | Vector4 | `"0 0 0 0"` | Sets the element's anchor as `left bottom right top` relative to its parent. Each value ranges from 0 to 1. `[0,0,0,0]` anchors to the bottom-left; `[1,1,1,1]` anchors to the top-right. If left≠right or bottom≠top (a split anchor), the element resizes to cover that area, e.g. `[0,0,1,1]` fills the parent. |
-| `auto-fit-height` | Boolean | `"false"` | Reduce the font size (down to `min-font-size`) so text fits the element's height. Requires `auto-height="false"`. Text elements only |
-| `auto-fit-width` | Boolean | `"false"` | Reduce the font size (down to `min-font-size`) so text fits the element's width. Requires `auto-width="false"`. Text elements only |
+| `anchor` | Vector4 | `"0 0 0 0"` | The points of the parent that the element's edges attach to, as `left bottom right top`, each from 0 to 1: `"0 0 0 0"` is the parent's bottom-left corner and `"1 1 1 1"` its top-right. Where the two values for an axis differ, the anchor is split: the element stretches with its parent on that axis, inset by its `margin`, and its `width` or `height` is ignored. `anchor="0 0 1 1" margin="0 0 0 0"` fills the parent. See [Anchor](https://developer.playcanvas.com/user-manual/user-interface/elements.md#anchor) |
+| `auto-fit-height` | Boolean | `"false"` | Shrink the font, from `max-font-size` down to `min-font-size`, so that the text fits the element's height. `font-size` is ignored while it is on. Requires `auto-height="false"`. Text elements only |
+| `auto-fit-width` | Boolean | `"false"` | Shrink the font, from `max-font-size` down to `min-font-size`, so that the text fits the element's width. `font-size` is ignored while it is on. Requires `auto-width="false"`. Text elements only |
 | `auto-height` | Boolean | `"true"` | Whether to automatically adjust height to fit text content. Text elements only |
 | `auto-width` | Boolean | `"true"` | Whether to automatically adjust width to fit text content. Text elements only |
-| `color` | Color | `"1 1 1 1"` | Color as space-separated RGBA values, hex code, or [named color](https://github.com/playcanvas/web-components/blob/main/src/colors.ts) |
-| `enable-markup` | Boolean | `"false"` | Enables markup processing for styled text. Supports tags like `[color="#ff0000"]text[/color]` for colored text. |
+| `color` | Color | `"1 1 1 1"` | Color of the image or text. It multiplies the colors of a texture, so a white texture can be drawn in any color. Its alpha is ignored, so use `opacity` for transparency |
+| `enable-markup` | Boolean | `"false"` | Whether tags in the text, such as `[color="#ff0000"]red[/color]`, style runs of it. See [Markup](https://developer.playcanvas.com/user-manual/user-interface/text-elements.md#markup). Text elements only |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
-| `fit-mode` | Enum | `"stretch"` | How the texture or sprite fits the element's rectangle: `"stretch"` \| `"contain"` \| `"cover"`. `stretch` fills the rectangle exactly, ignoring the source's aspect ratio; `contain` fits the whole source inside the rectangle and `cover` fills the rectangle with it, both preserving the aspect ratio. Image elements only |
+| `fit-mode` | Enum | `"stretch"` | How the texture or sprite fits the element's rectangle: `"stretch"` \| `"contain"` \| `"cover"`. `stretch` fills the rectangle exactly, ignoring the source's aspect ratio; `contain` fits the whole source inside the rectangle and `cover` fills the rectangle with it, both preserving the aspect ratio. A covering image overflows the rectangle, so crop it with a `mask` on a parent. Image elements only |
 | `font-asset` | [Asset ID](https://developer.playcanvas.com/user-manual/web-components/attributes.md#asset-and-material-ids) | - | Font [`<pc-asset>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset.md) ID (must reference a `font` type asset). Required for text elements only |
-| `font-size` | Number | `"32"` | Font size in pixels |
-| `height` | Number | `"32"` | Height in pixels (0 for auto-sizing) |
+| `font-size` | Number | `"32"` | Size of the text, in screen units. Text elements only |
+| `height` | Number | `"32"` | Height of the element, in screen units. Ignored where the anchor is split vertically, and on a text element while `auto-height` fits it to its text |
 | `justify` | Boolean | `"false"` | Whether wrapped lines are stretched flush with both edges of the element by widening the gaps between their words. Needs `wrap-lines` and a fixed width. The last line, and any line ended by an explicit line break, follows `alignment` instead. Text elements only |
-| `line-height` | Number | `"32"` | Line height in pixels |
-| `margin` | Vector4 | - | Insets the element from a split (stretched) anchor as `left bottom right top`. For point anchors, `width`/`height` govern size instead |
-| `mask` | Boolean | `"false"` | Whether the element clips its descendants to its bounds. Image elements only |
-| `max-font-size` | Number | `"32"` | Largest font size used when auto-fitting |
+| `line-height` | Number | `"32"` | Distance between the baselines of neighboring lines, in screen units. It doesn't follow `font-size`, so set it with a larger font, or wrapped lines overlap. Text elements only |
+| `margin` | Vector4 | - | Distance of each edge from its anchor, as `left bottom right top`, on the axes where the anchor is split. Positive values move the edges inwards. Without it, a split axis keeps the engine's default margins of `0 0 -32 -32`, and the element overhangs its right and top anchors by 32 units, so set it whenever you split an anchor. See [Margins](https://developer.playcanvas.com/user-manual/user-interface/elements.md#margin) |
+| `mask` | Boolean | `"false"` | Whether the element clips its descendants to its rectangle, or to the opaque parts of its texture or sprite. The mask itself isn't drawn, so its `color` has no effect. See [Masks](https://developer.playcanvas.com/user-manual/user-interface/masks.md). Image elements only |
+| `max-font-size` | Number | `"32"` | Largest font size used when auto-fitting, and the size that fitting starts from. Text elements only |
 | `max-lines` | Number | - | Maximum number of lines `wrap-lines` wraps the text onto; any leftover text is appended to the last line. No limit when omitted. Text elements only |
-| `min-font-size` | Number | `"8"` | Smallest font size used when auto-fitting |
-| `opacity` | Number | `"1"` | Opacity, from 0 (transparent) to 1 (opaque) |
+| `min-font-size` | Number | `"8"` | Smallest font size used when auto-fitting. Text elements only |
+| `opacity` | Number | `"1"` | Opacity, from 0 (transparent) to 1 (opaque). It doesn't affect the element's children |
 | `outline-color` | Color | `"0 0 0 1"` | Color of the text outline, drawn only when `outline-thickness` is above 0. Text elements only |
 | `outline-thickness` | Number | `"0"` | Thickness of the text outline, from 0 (no outline) to 1. Text elements only |
-| `pivot` | Vector2 | `"0 0"` | Pivot point as "X Y" values |
-| `pixels-per-unit` | Number | - | Pixels per unit used when rendering a sprite. Image elements only |
+| `pivot` | Vector2 | `"0 0"` | The point of the element that is placed at its position, and that it rotates and scales about, as fractions of its size: `"0 0"` is its bottom-left corner and `"0.5 0.5"` its center |
+| `pixels-per-unit` | Number | - | Overrides the sprite's pixels per unit, which sets the width of the borders of a sliced or tiled sprite: a border of `b` pixels is `b / pixels-per-unit` screen units wide. A simple sprite is stretched to the element, so it has no effect there. Image elements only |
 | `shadow-color` | Color | `"0 0 0 1"` | Color of the text shadow, drawn only when `shadow-offset` is not `"0 0"`. Text elements only |
 | `shadow-offset` | Vector2 | `"0 0"` | Offset of the text shadow as "X Y" values, each from -1 to 1 in proportion to the font size. Positive values shift the shadow right and up, and `"0 0"` draws no shadow. Text elements only |
 | `spacing` | Number | `"1"` | Spacing between the letters of the text, as a multiple of their normal spacing. Text elements only |
 | `sprite-asset` | [Asset ID](https://developer.playcanvas.com/user-manual/web-components/attributes.md#asset-and-material-ids) | - | Sprite [`<pc-asset>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset.md) ID to render. Image elements only |
 | `sprite-frame` | Number | `"0"` | Frame index of the sprite to render. Image elements only |
-| `text` | String | - | Text content to display |
+| `text` | String | - | The text to display. Text elements only |
 | `texture-asset` | [Asset ID](https://developer.playcanvas.com/user-manual/web-components/attributes.md#asset-and-material-ids) | - | Texture [`<pc-asset>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset.md) ID to render. Image elements only |
 | `type` | Enum | `"group"` | Element type: `"group"` \| `"image"` \| `"text"` |
-| `use-input` | Boolean | `"false"` | Whether the element receives pointer input. Required for [`<pc-button>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-button.md) and scroll-view interaction |
-| `width` | Number | `"32"` | Width in pixels (0 for auto-sizing) |
-| `wrap-lines` | Boolean | `"false"` | Whether to wrap text lines |
+| `use-input` | Boolean | `"false"` | Whether the element receives mouse, touch and XR input, and fires input events. Required by [`<pc-button>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-button.md), by the content of a [`<pc-scroll-view>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scroll-view.md) to be dragged, and by a scrollbar's handle. See [Enabling UI Input](https://developer.playcanvas.com/user-manual/user-interface/input.md#enabling-ui-input) |
+| `width` | Number | `"32"` | Width of the element, in screen units. Ignored where the anchor is split horizontally, and on a text element while `auto-width` fits it to its text |
+| `wrap-lines` | Boolean | `"false"` | Whether the text wraps onto new lines at the element's width. It needs a width to wrap at: `auto-width="false"`, or an anchor split horizontally. Text elements only |
 
 ## Example
 
@@ -18857,12 +18866,13 @@ The `component` property is the engine [ElementComponent](https://api.playcanvas
 
 ## See Also
 
-* [`<pc-screen>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-screen.md) — every element sits under a screen
+* [`<pc-screen>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-screen.md) — the screen an interface is laid out and drawn on
 * [`<pc-button>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-button.md) — makes an image element interactive
-* [`<pc-layout-group>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-layout-group.md) — arranges sibling elements automatically
+* [`<pc-layout-group>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-layout-group.md) — arranges the elements of its entity's children automatically
 * [`<pc-scroll-view>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scroll-view.md) — scrolls a content element inside a viewport
+* [Elements](https://developer.playcanvas.com/user-manual/user-interface/elements.md), [Text Elements](https://developer.playcanvas.com/user-manual/user-interface/text-elements.md) and [Image Elements](https://developer.playcanvas.com/user-manual/user-interface/image-elements.md) — anchors, sizes, text and images, in the User Interface section
 
-Examples: [2D Screen](https://playcanvas.github.io/web-components/examples/2d-screen.html), [Text](https://playcanvas.github.io/web-components/examples/text.html), [3D Text](https://playcanvas.github.io/web-components/examples/3d-text.html) and [UI Layout](https://playcanvas.github.io/web-components/examples/ui-layout.html).
+Examples: [2D Screen](https://playcanvas.github.io/web-components/examples/#2d-screen.html), [Text](https://playcanvas.github.io/web-components/examples/#text.html) and [UI Layout](https://playcanvas.github.io/web-components/examples/#ui-layout.html).
 
 --------------------------------------------------------------------------------
 
@@ -19283,7 +19293,7 @@ Examples: [Physics Joints](https://playcanvas.github.io/web-components/examples/
 URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-layout-child/
 Markdown: https://developer.playcanvas.com/user-manual/web-components/tags/pc-layout-child.md
 
-The `<pc-layout-child>` tag is used to define a layout child component, which controls how an element is sized by its parent [`<pc-layout-group>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-layout-group.md).
+The `<pc-layout-child>` tag adds a layout child component, which changes how the [`<pc-layout-group>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-layout-group.md) of its entity's parent sizes the entity's element, or leaves it out of the layout.
 
 :::note[Usage]
 
@@ -19297,17 +19307,23 @@ The `<pc-layout-child>` tag is used to define a layout child component, which co
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
-| `exclude-from-layout` | Boolean | `"false"` | Exclude this element from the layout so it takes up no space |
-| `fit-height-proportion` | Number | `"0"` | Proportion of the group's spare height this element takes when `height-fitting` stretches or shrinks |
-| `fit-width-proportion` | Number | `"0"` | Proportion of the group's spare width this element takes when `width-fitting` stretches or shrinks |
+| `exclude-from-layout` | Boolean | `"false"` | Whether to leave the element out of the layout, so that it takes up no space and keeps its own anchor and position |
+| `fit-height-proportion` | Number | `"0"` | The element's share of the height that `height-fitting` adds or removes in a vertical layout. See the note below |
+| `fit-width-proportion` | Number | `"0"` | The element's share of the width that `width-fitting` adds or removes in a horizontal layout. See the note below |
 | `max-height` | Number | - | Maximum height the element is laid out with (omit for no limit) |
 | `max-width` | Number | - | Maximum width the element is laid out with (omit for no limit) |
 | `min-height` | Number | `"0"` | Minimum height the element is laid out with |
 | `min-width` | Number | `"0"` | Minimum width the element is laid out with |
 
+:::note[Proportions]
+
+When a layout group stretches its children along the layout, they share the extra space by their proportions: a child with 2 gets twice as much as a child with 1, and a child with 0 gets none — unless every child has 0, and they share it equally. Shrinking inverts the proportions, taking less from a larger one: two 100-unit children with 2 and 1, shrunk into 140 units, become 80 and 60. Across the layout, each child is fitted on its own. See [Layout Children](https://developer.playcanvas.com/user-manual/user-interface/layout-groups.md#layout-children).
+
+:::
+
 ## Example
 
-Three items in a horizontal group with `width-fitting="stretch"`. The middle item's `fit-width-proportion="1"` means it alone absorbs the group's spare width. Try giving the first item a proportion of `1` too — they will share it — or set a `max-width` on the middle one:
+Three items in a horizontal group with `width-fitting="stretch"`. The middle item's `fit-width-proportion="1"` means it alone takes the group's spare width. Try giving the first item a proportion of `1` too, and the two share it, or `2`, and the first takes twice as much. Delete the middle item's proportion, and all three share it equally:
 
 ```html live-example
 <pc-app>
@@ -19350,8 +19366,9 @@ The `component` property is the engine [LayoutChildComponent](https://api.playca
 
 * [`<pc-layout-group>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-layout-group.md) — the group whose layout the child adjusts
 * [`<pc-element>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-element.md) — the element the child sizes
+* [Layout Children](https://developer.playcanvas.com/user-manual/user-interface/layout-groups.md#layout-children) — sizes, proportions and exclusion, in the User Interface section
 
-Examples: [UI Layout](https://playcanvas.github.io/web-components/examples/ui-layout.html) and [Scroll View](https://playcanvas.github.io/web-components/examples/scroll-view.html).
+Examples: [UI Layout](https://playcanvas.github.io/web-components/examples/#ui-layout.html) and [Scroll View](https://playcanvas.github.io/web-components/examples/#scroll-view.html).
 
 --------------------------------------------------------------------------------
 
@@ -19360,12 +19377,13 @@ Examples: [UI Layout](https://playcanvas.github.io/web-components/examples/ui-la
 URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-layout-group/
 Markdown: https://developer.playcanvas.com/user-manual/web-components/tags/pc-layout-group.md
 
-The `<pc-layout-group>` tag is used to define a layout group component, which automatically arranges its child element entities in a row or column.
+The `<pc-layout-group>` tag adds a layout group component, which arranges the elements of its entity's children in a row, a column or a grid, and can stretch or shrink them to fit.
 
 :::note[Usage]
 
 * It must be a direct child of a [`<pc-entity>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md), a [`<pc-model>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-model.md) or a [`<pc-node>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-node.md) that also has a [`<pc-element>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-element.md).
-* Child entities are laid out automatically. Add a [`<pc-layout-child>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-layout-child.md) to a child to control how it is sized within the group.
+* It lays out the entity's direct children that are enabled and have an enabled element, in their order in the document. It sets their anchors to `"0 0 0 0"` and their positions, replacing any you give them. See [How Children Are Placed](https://developer.playcanvas.com/user-manual/user-interface/layout-groups.md#how-children-are-placed).
+* Add a [`<pc-layout-child>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-layout-child.md) to a child to control how it is sized, or to leave it out of the layout.
 
 :::
 
@@ -19373,20 +19391,26 @@ The `<pc-layout-group>` tag is used to define a layout group component, which au
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
-| `alignment` | Vector2 | `"0 1"` | Horizontal and vertical alignment of the child elements (each component 0 to 1) |
+| `alignment` | Vector2 | `"0 1"` | Where the children sit inside the group when they don't fill it, from `"0 0"`, its bottom-left corner, to `"1 1"`, its top-right. The default puts them at the top left |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
-| `height-fitting` | Enum | `"none"` | Fitting along the vertical axis: `"none"` \| `"stretch"` \| `"shrink"` \| `"both"` |
-| `orientation` | Enum | `"horizontal"` | Orientation of the layout: `"horizontal"` \| `"vertical"` |
-| `padding` | Vector4 | `"0 0 0 0"` | Padding around the group as `left bottom right top` |
-| `reverse-x` | Boolean | `"false"` | Reverse the order of children along the horizontal axis |
-| `reverse-y` | Boolean | `"true"` | Reverse the order of children along the vertical axis |
-| `spacing` | Vector2 | `"0 0"` | Spacing between children as `x y` |
-| `width-fitting` | Enum | `"none"` | Fitting along the horizontal axis: `"none"` \| `"stretch"` \| `"shrink"` \| `"both"` |
-| `wrap` | Boolean | `"false"` | Whether children wrap onto a new line or column when they overflow the group |
+| `height-fitting` | Enum | `"none"` | Whether the heights of the children change to fit the group: `"none"` \| `"stretch"` \| `"shrink"` \| `"both"`. See the note below |
+| `orientation` | Enum | `"horizontal"` | `"horizontal"` places the children in a row, and `"vertical"` in a column: `"horizontal"` \| `"vertical"` |
+| `padding` | Vector4 | `"0 0 0 0"` | Space kept clear inside the edges of the group, as `left bottom right top` |
+| `reverse-x` | Boolean | `"false"` | Whether to place the children from right to left |
+| `reverse-y` | Boolean | `"true"` | Whether to place the children from the top down. The y axis points up, so it is this default that makes a column, and the rows of a grid, run from the top down. Set it to `"false"` to build upwards from the bottom |
+| `spacing` | Vector2 | `"0 0"` | Gap between neighboring children as `x y`: `x` between the children in a row, and `y` between the children in a column and between the rows of a grid |
+| `width-fitting` | Enum | `"none"` | Whether the widths of the children change to fit the group: `"none"` \| `"stretch"` \| `"shrink"` \| `"both"`. See the note below |
+| `wrap` | Boolean | `"false"` | Whether a child that would overflow a row starts a new one, which makes a grid. In a vertical layout, it starts a new column |
+
+:::note[Fitting]
+
+`"none"` leaves the children at their own size, `"stretch"` grows them to fill the group, up to any maximum size, `"shrink"` shrinks them to fit inside it, down to any minimum size, and `"both"` does whichever is needed. Along the layout, such as the width of a row, the space is shared between the children by their [`<pc-layout-child>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-layout-child.md) proportions. Across it, each child is fitted to its row or column on its own. With `wrap`, a new row starts before one would overflow, so `"both"` acts as `"stretch"`. See [Fitting](https://developer.playcanvas.com/user-manual/user-interface/layout-groups.md#fitting).
+
+:::
 
 ## Example
 
-A vertical list that lays out its rows automatically, first row at the top. Try `orientation="horizontal"`, a bigger `spacing`, or `reverse-y="false"` to stack them upwards instead — or add another row and watch it slot in:
+A vertical list that lays out its rows automatically, first row at the top. Try a bigger `spacing`, `reverse-y="false"` to stack the rows upwards instead, or add another row and watch it slot in. `orientation="horizontal"` places the rows side by side, overflowing the group, until `width-fitting="both"` shrinks them to share its width:
 
 ```html live-example
 <pc-app>
@@ -19427,8 +19451,9 @@ The `component` property is the engine [LayoutGroupComponent](https://api.playca
 * [`<pc-layout-child>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-layout-child.md) — per-child sizing rules
 * [`<pc-element>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-element.md) — the elements being arranged
 * [`<pc-screen>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-screen.md) — the screen the layout lives on
+* [Layout Groups](https://developer.playcanvas.com/user-manual/user-interface/layout-groups.md) — how children are placed, fitted and wrapped, in the User Interface section
 
-Examples: [UI Layout](https://playcanvas.github.io/web-components/examples/ui-layout.html) and [Scroll View](https://playcanvas.github.io/web-components/examples/scroll-view.html).
+Examples: [UI Layout](https://playcanvas.github.io/web-components/examples/#ui-layout.html) and [Scroll View](https://playcanvas.github.io/web-components/examples/#scroll-view.html).
 
 --------------------------------------------------------------------------------
 
@@ -20478,7 +20503,9 @@ Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/#b
 URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-screen/
 Markdown: https://developer.playcanvas.com/user-manual/web-components/tags/pc-screen.md
 
-The `<pc-screen>` tag is used to define a screen component.
+The `<pc-screen>` tag adds a screen component, the root of a 2D user interface. The [`<pc-element>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-element.md) entities below it are laid out in its units, and drawn either over the camera's view or on a panel in the scene.
+
+A `<pc-screen>` without attributes is a world-space screen: a 640 × 320 panel in its entity's local units, so at the entity's default scale it is 640 meters wide, and a 32 × 32 element on it is 32 meters across. For a HUD or a menu, set `screen-space`, as the example below does. For a panel in the world, scale the entity down — see [Size and Scale](https://developer.playcanvas.com/user-manual/user-interface/world-space-ui.md#size-and-scale).
 
 :::note[Usage]
 
@@ -20496,7 +20523,7 @@ The `<pc-screen>` tag is used to define a screen component.
 | `resolution` | Vector2 | `"640 320"` | Size of a world-space screen in its entity's local units, as "Width Height" values. A screen-space screen takes its resolution from the canvas, so this has no effect on one |
 | `scale-blend` | Number | `"0.5"` | With `scale-mode="blend"`, how the width and the height of the canvas are weighted in the scale, from 0 (width only) to 1 (height only). 0.5 weights them equally. Ignored when `scale-mode` is `"none"` |
 | `scale-mode` | Enum | `"none"` | How the screen scales its contents: `"none"` \| `"blend"`. `"none"` doesn't scale them: on a screen-space screen, one unit is one pixel of the canvas's drawing buffer. `"blend"` scales them by the size of the canvas relative to `reference-resolution`, weighted by `scale-blend`, which is what keeps a UI laid out at one resolution usable at another. Requires `screen-space` |
-| `screen-space` | Boolean | `"false"` | Whether to render in screen space |
+| `screen-space` | Boolean | `"false"` | Whether the screen is drawn over the camera's view, at the size of the canvas. Otherwise it is a world-space screen, placed in the scene by its entity's transform and sized by `resolution` |
 
 :::note[Scaling only applies to screen-space screens]
 
@@ -20543,8 +20570,9 @@ The `component` property is the engine [ScreenComponent](https://api.playcanvas.
 * [`<pc-scroll-view>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scroll-view.md) — scrolling content on a screen
 * [`<pc-button>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-button.md) — interactive elements
 * [Screens](https://developer.playcanvas.com/user-manual/user-interface/screens.md) — screen space and world space, resolution and scaling, in the User Interface section
+* [World-Space UI](https://developer.playcanvas.com/user-manual/user-interface/world-space-ui.md) — screens placed in the scene, and sizing them in meters
 
-Examples: [2D Screen](https://playcanvas.github.io/web-components/examples/2d-screen.html), [UI Layout](https://playcanvas.github.io/web-components/examples/ui-layout.html) and [Scroll View](https://playcanvas.github.io/web-components/examples/scroll-view.html).
+Examples: [2D Screen](https://playcanvas.github.io/web-components/examples/#2d-screen.html), [UI Layout](https://playcanvas.github.io/web-components/examples/#ui-layout.html) and [Scroll View](https://playcanvas.github.io/web-components/examples/#scroll-view.html).
 
 --------------------------------------------------------------------------------
 
@@ -20732,13 +20760,13 @@ Examples: [Tweening](https://playcanvas.github.io/web-components/examples/#tween
 URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-scrollbar/
 Markdown: https://developer.playcanvas.com/user-manual/web-components/tags/pc-scrollbar.md
 
-The `<pc-scrollbar>` tag is used to define a scrollbar component, which provides a draggable handle that reports a position in the range 0 to 1.
+The `<pc-scrollbar>` tag adds a scrollbar component: a track with a handle that the user drags along it. The position of the handle is the scrollbar's `value`, from 0 to 1. It shows and sets the scroll position of a [`<pc-scroll-view>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scroll-view.md), and works on its own as a slider.
 
 :::note[Usage]
 
 * It must be a direct child of a [`<pc-entity>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md), a [`<pc-model>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-model.md) or a [`<pc-node>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-node.md) that also has a [`<pc-element>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-element.md).
-* It is referenced by a [`<pc-scroll-view>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scroll-view.md) via its `horizontal-scrollbar` or `vertical-scrollbar` attribute.
-* Its `handle` attribute references the [`<pc-entity>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md) used as the draggable handle, whose image element should have `use-input` set.
+* To drive a [`<pc-scroll-view>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scroll-view.md), reference it from the view's `horizontal-scrollbar` or `vertical-scrollbar` attribute. The view then sets its `handle-size` and `value`, replacing any you give it.
+* Its `handle` attribute references the entity used as the handle: a child of the track, with an image element that has `use-input` set, anchored across the track at its start. On a vertical scrollbar, that is `anchor="0 1 1 1" pivot="0.5 1"`, as in the example below.
 
 :::
 
@@ -20748,13 +20776,13 @@ The `<pc-scrollbar>` tag is used to define a scrollbar component, which provides
 | --- | --- | --- | --- |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
 | `handle` | [Entity Reference](https://developer.playcanvas.com/user-manual/web-components/attributes.md#entity-references) | - | The [`<pc-entity>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md) used as the draggable handle |
-| `handle-size` | Number | `"0"` | Size of the handle relative to the size of the track (0 to 1) |
+| `handle-size` | Number | `"0"` | Length of the handle as a fraction of the track's, from 0 to 1. The default of 0 gives the handle no length, so set it on a scrollbar of your own. A scroll view sets it to the fraction of its content that is visible |
 | `orientation` | Enum | `"horizontal"` | Orientation of the scrollbar: `"horizontal"` \| `"vertical"` |
-| `value` | Number | `"0"` | Current position of the scrollbar (0 to 1) |
+| `value` | Number | `"0"` | Position of the handle, from 0 to 1: 0 is the top of a vertical scrollbar, and the left of a horizontal one. A scroll view sets it to its scroll position |
 
 ## Example
 
-A standalone vertical scrollbar — drag the orange handle. Try a different `handle-size` (as a fraction of the track) or starting `value`:
+A standalone vertical scrollbar, working as a slider — drag the orange handle. Try a different `handle-size`, a fraction of the track's length, or a starting `value`, such as `1` for the bottom:
 
 ```html live-example
 <pc-app>
@@ -20772,7 +20800,7 @@ A standalone vertical scrollbar — drag the orange handle. Try a different `han
                 <!-- Draggable handle -->
                 <pc-entity name="handle" id="handle">
                     <pc-element type="image" anchor="0 1 1 1" pivot="0.5 1" margin="0 0 0 0" color="#ff8a3c" use-input></pc-element>
-                    <pc-button hover-tint="0.85 0.85 0.85 1" pressed-tint="0.7 0.7 0.7 1"></pc-button>
+                    <pc-button hover-tint="#ffa76d" pressed-tint="#cc6e30"></pc-button>
                 </pc-entity>
             </pc-entity>
         </pc-entity>
@@ -20791,8 +20819,9 @@ The `component` property is the engine [ScrollbarComponent](https://api.playcanv
 * [`<pc-scroll-view>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scroll-view.md) — the view a scrollbar drives
 * [`<pc-element>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-element.md) — the track and handle are image elements
 * [`<pc-screen>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-screen.md) — the screen the scrollbar renders on
+* [Scrollbars](https://developer.playcanvas.com/user-manual/user-interface/scroll-views.md#scrollbars) and [Sliders](https://developer.playcanvas.com/user-manual/user-interface/common-widgets.md#sliders) — scrollbars in a scroll view and on their own, in the User Interface section
 
-Examples: [Scroll View](https://playcanvas.github.io/web-components/examples/scroll-view.html).
+Examples: [Scroll View](https://playcanvas.github.io/web-components/examples/#scroll-view.html).
 
 --------------------------------------------------------------------------------
 
@@ -20801,13 +20830,15 @@ Examples: [Scroll View](https://playcanvas.github.io/web-components/examples/scr
 URL: https://developer.playcanvas.com/user-manual/web-components/tags/pc-scroll-view/
 Markdown: https://developer.playcanvas.com/user-manual/web-components/tags/pc-scroll-view.md
 
-The `<pc-scroll-view>` tag is used to define a scroll view component, which lets the user scroll a larger content area within a clipped viewport.
+The `<pc-scroll-view>` tag adds a scroll view component, which shows part of a larger content element through a viewport, and lets the user bring the rest into view by dragging it, with the mouse wheel or with scrollbars.
 
 :::note[Usage]
 
 * It must be a direct child of a [`<pc-entity>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md), a [`<pc-model>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-model.md) or a [`<pc-node>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-node.md) that also has a [`<pc-element>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-element.md).
 * It references its viewport, content, and scrollbar entities by entity `name` or document-wide `#` selector — see [Entity References](https://developer.playcanvas.com/user-manual/web-components/attributes.md#entity-references).
-* The viewport element should have its `mask` attribute set so the content is clipped to the scroll view's bounds.
+* The viewport should be an image element with `mask` set, so that the content is only drawn inside it. A mask isn't drawn itself, so its `color` has no effect.
+* The content must be a child of the viewport, anchored to its top-left corner with a top-left pivot, `anchor="0 1 0 1" pivot="0 1"`, and sized to fit what it holds, since the scroll view never resizes it. It needs `use-input` to be dragged. See [Sizing the Content](https://developer.playcanvas.com/user-manual/user-interface/scroll-views.md#sizing-the-content).
+* The mouse wheel scrolls the view while the pointer is over an input-enabled element in it, such as the content.
 
 :::
 
@@ -20815,24 +20846,24 @@ The `<pc-scroll-view>` tag is used to define a scroll view component, which lets
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
-| `bounce-amount` | Number | `"0.1"` | How far content bounces past its bounds when `scroll-mode="bounce"` (0 to 1) |
+| `bounce-amount` | Number | `"0.1"` | How slowly the content springs back after it is scrolled past its edges, with `scroll-mode="bounce"`. 0 snaps it back at once, 0.1 feels like scrolling on a phone, and larger values are slower |
 | `content` | [Entity Reference](https://developer.playcanvas.com/user-manual/web-components/attributes.md#entity-references) | - | Reference to the content [`<pc-entity>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md) that is moved as the view is scrolled |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
-| `friction` | Number | `"0.05"` | How freely the content moves once thrown (0 = none, 1 = high) |
+| `friction` | Number | `"0.05"` | How quickly the content slows down after it is flung, from 0 to 1: at 0 it never slows down, and at 1 it stops at once |
 | `horizontal` | Boolean | `"true"` | Whether scrolling along the horizontal axis is enabled |
 | `horizontal-scrollbar` | [Entity Reference](https://developer.playcanvas.com/user-manual/web-components/attributes.md#entity-references) | - | Reference to the [`<pc-entity>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md) holding the horizontal [`<pc-scrollbar>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scrollbar.md) |
 | `horizontal-scrollbar-visibility` | Enum | `"always"` | When the horizontal scrollbar is shown: `"always"` \| `"when-required"` |
 | `mouse-wheel-sensitivity` | Vector2 | `"1 1"` | Mouse wheel sensitivity as `x y` (0 on an axis disables wheel scrolling for it) |
-| `scroll-mode` | Enum | `"bounce"` | Behavior when scrolled past bounds: `"clamp"` \| `"bounce"` \| `"infinite"` |
+| `scroll-mode` | Enum | `"bounce"` | What happens at the edges of the content: `"clamp"` \| `"bounce"` \| `"infinite"`. `"clamp"` stops the content there, `"bounce"` lets it go past them and springs it back, and `"infinite"` lets it scroll on forever. The mouse wheel never bounces |
 | `use-mouse-wheel` | Boolean | `"true"` | Whether the scroll view responds to the mouse wheel |
 | `vertical` | Boolean | `"true"` | Whether scrolling along the vertical axis is enabled |
 | `vertical-scrollbar` | [Entity Reference](https://developer.playcanvas.com/user-manual/web-components/attributes.md#entity-references) | - | Reference to the [`<pc-entity>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md) holding the vertical [`<pc-scrollbar>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scrollbar.md) |
 | `vertical-scrollbar-visibility` | Enum | `"always"` | When the vertical scrollbar is shown: `"always"` \| `"when-required"` |
-| `viewport` | [Entity Reference](https://developer.playcanvas.com/user-manual/web-components/attributes.md#entity-references) | - | Reference to the [`<pc-entity>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md) used as the viewport, which clips the content to the scroll view's bounds |
+| `viewport` | [Entity Reference](https://developer.playcanvas.com/user-manual/web-components/attributes.md#entity-references) | - | Reference to the [`<pc-entity>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md) used as the viewport: the masked image element that the content is clipped to |
 
 ## Example
 
-Scroll the striped content with the mouse wheel, by dragging it, or with the scrollbar. The viewport's `mask` clips the content. Try `scroll-mode="clamp"` (no bounce), or a taller content `height`:
+Scroll the rows with the mouse wheel, by dragging them, or with the scrollbar. The viewport's `mask` clips them. Try `scroll-mode="clamp"` to stop at the edges without a bounce, a `friction` of `0.5` to stop a fling sooner, or a taller content `height`:
 
 ```html live-example
 <pc-app>
@@ -20853,7 +20884,7 @@ Scroll the striped content with the mouse wheel, by dragging it, or with the scr
 
                 <!-- Viewport clips the content to the scroll view's bounds -->
                 <pc-entity name="viewport" id="viewport">
-                    <pc-element type="image" anchor="0 0 1 1" margin="0 0 20 0" color="#2a2d36" mask></pc-element>
+                    <pc-element type="image" anchor="0 0 1 1" margin="0 0 20 0" mask></pc-element>
 
                     <!-- Content is moved as the view is scrolled. Its height is the laid-out
                          size of the rows: 8 x 60, plus 7 x 8 spacing, plus 10 padding top and bottom -->
@@ -20871,13 +20902,13 @@ Scroll the striped content with the mouse wheel, by dragging it, or with the scr
                     </pc-entity>
                 </pc-entity>
 
-                <!-- Vertical scrollbar: a 20px strip hugging the inside of the right edge -->
+                <!-- Vertical scrollbar: a 20-unit strip hugging the inside of the right edge -->
                 <pc-entity name="v-scrollbar" id="v-scrollbar">
                     <pc-element type="image" anchor="1 0 1 1" pivot="1 0.5" width="20" margin="0 0 0 0" color="#2a2d36"></pc-element>
                     <pc-scrollbar orientation="vertical" handle="#v-handle"></pc-scrollbar>
                     <pc-entity name="handle" id="v-handle">
                         <pc-element type="image" anchor="0 1 1 1" pivot="0.5 1" margin="0 0 0 0" color="#ff8a3c" use-input></pc-element>
-                        <pc-button></pc-button>
+                        <pc-button hover-tint="#ffa76d" pressed-tint="#cc6e30"></pc-button>
                     </pc-entity>
                 </pc-entity>
             </pc-entity>
@@ -20897,8 +20928,9 @@ The `component` property is the engine [ScrollViewComponent](https://api.playcan
 * [`<pc-scrollbar>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scrollbar.md) — drives the view and reflects its position
 * [`<pc-element>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-element.md) — the viewport and content are elements; `mask` clips the content
 * [`<pc-layout-group>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-layout-group.md) — lays out the content's children
+* [Scroll Views](https://developer.playcanvas.com/user-manual/user-interface/scroll-views.md) — building one, sizing its content and scrolling from code, in the User Interface section
 
-Examples: [Scroll View](https://playcanvas.github.io/web-components/examples/scroll-view.html).
+Examples: [Scroll View](https://playcanvas.github.io/web-components/examples/#scroll-view.html).
 
 --------------------------------------------------------------------------------
 

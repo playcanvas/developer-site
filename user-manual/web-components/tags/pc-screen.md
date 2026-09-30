@@ -1,6 +1,8 @@
 # <pc-screen>
 
-The `<pc-screen>` tag is used to define a screen component.
+The `<pc-screen>` tag adds a screen component, the root of a 2D user interface. The [`<pc-element>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-element.md) entities below it are laid out in its units, and drawn either over the camera's view or on a panel in the scene.
+
+A `<pc-screen>` without attributes is a world-space screen: a 640 × 320 panel in its entity's local units, so at the entity's default scale it is 640 meters wide, and a 32 × 32 element on it is 32 meters across. For a HUD or a menu, set `screen-space`, as the example below does. For a panel in the world, scale the entity down — see [Size and Scale](https://developer.playcanvas.com/user-manual/user-interface/world-space-ui.md#size-and-scale).
 
 :::note[Usage]
 
@@ -18,7 +20,7 @@ The `<pc-screen>` tag is used to define a screen component.
 | `resolution` | Vector2 | `"640 320"` | Size of a world-space screen in its entity's local units, as "Width Height" values. A screen-space screen takes its resolution from the canvas, so this has no effect on one |
 | `scale-blend` | Number | `"0.5"` | With `scale-mode="blend"`, how the width and the height of the canvas are weighted in the scale, from 0 (width only) to 1 (height only). 0.5 weights them equally. Ignored when `scale-mode` is `"none"` |
 | `scale-mode` | Enum | `"none"` | How the screen scales its contents: `"none"` \| `"blend"`. `"none"` doesn't scale them: on a screen-space screen, one unit is one pixel of the canvas's drawing buffer. `"blend"` scales them by the size of the canvas relative to `reference-resolution`, weighted by `scale-blend`, which is what keeps a UI laid out at one resolution usable at another. Requires `screen-space` |
-| `screen-space` | Boolean | `"false"` | Whether to render in screen space |
+| `screen-space` | Boolean | `"false"` | Whether the screen is drawn over the camera's view, at the size of the canvas. Otherwise it is a world-space screen, placed in the scene by its entity's transform and sized by `resolution` |
 
 :::note[Scaling only applies to screen-space screens]
 
@@ -65,5 +67,6 @@ The `component` property is the engine [ScreenComponent](https://api.playcanvas.
 * [`<pc-scroll-view>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scroll-view.md) — scrolling content on a screen
 * [`<pc-button>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-button.md) — interactive elements
 * [Screens](https://developer.playcanvas.com/user-manual/user-interface/screens.md) — screen space and world space, resolution and scaling, in the User Interface section
+* [World-Space UI](https://developer.playcanvas.com/user-manual/user-interface/world-space-ui.md) — screens placed in the scene, and sizing them in meters
 
-Examples: [2D Screen](https://playcanvas.github.io/web-components/examples/2d-screen.html), [UI Layout](https://playcanvas.github.io/web-components/examples/ui-layout.html) and [Scroll View](https://playcanvas.github.io/web-components/examples/scroll-view.html).
+Examples: [2D Screen](https://playcanvas.github.io/web-components/examples/#2d-screen.html), [UI Layout](https://playcanvas.github.io/web-components/examples/#ui-layout.html) and [Scroll View](https://playcanvas.github.io/web-components/examples/#scroll-view.html).
