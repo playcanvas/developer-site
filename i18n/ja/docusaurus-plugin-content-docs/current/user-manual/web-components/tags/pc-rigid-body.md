@@ -3,12 +3,12 @@ title: <pc-rigid-body>
 description: "pc-rigid-body要素のリファレンス: rigid bodyの種類、質量、摩擦、反発、コリジョンComponentとの連携です。"
 ---
 
-`<pc-rigid-body>`タグは、リジッドボディコンポーネントを定義するために使用されます。
+`<pc-rigid-body>`タグは、エンティティを物理シミュレーションのリジッドボディにします。決して動かない`static`、重力と衝突で動く`dynamic`、または自分で動かす`kinematic`のいずれかです。
 
 :::note[使用法]
 
 * [`<pc-entity>`](../pc-entity)、[`<pc-model>`](../pc-model)、または[`<pc-node>`](../pc-node)の直接の子要素である必要があります。
-* [`<pc-collision>`](../pc-collision)コンポーネントの兄弟要素である必要があります。
+* エンティティには、ボディに形状を与える[`<pc-collision>`](../pc-collision)も必要です。
 * ammo.js WebAssemblyモジュールは、[`<pc-wasm>`](../pc-wasm)タグを介してロードされている必要があります。
 
 :::
@@ -26,7 +26,7 @@ description: "pc-rigid-body要素のリファレンス: rigid bodyの種類、�
 | `linear-damping` | Number | `"0"` | 線速度の減衰係数 |
 | `linear-factor` | Vector3 | `"1 1 1"` | 線形運動の制約を「X Y Z」値で指定 |
 | `mass` | Number | `"1"` | リジッドボディの質量（キログラム単位） |
-| `restitution` | Number | `"0"` | 反発/弾性係数 (0-1) |
+| `restitution` | Number | `"0"` | 反発/弾性係数 (0-1)。衝突の反発は両方のボディのrestitutionの積なので、ボディは同じく反発を持つ相手でしか跳ね返りません |
 | `rolling-friction` | Number | `"0"` | 転がり抵抗係数 |
 | `type` | Enum | `"static"` | 物理ボディタイプ: `"static"` \| `"kinematic"` \| `"dynamic"` |
 
@@ -34,7 +34,7 @@ description: "pc-rigid-body要素のリファレンス: rigid bodyの種類、�
 
 ## 例 {#example}
 
-静的な地面に落下する動的ボディです。球体には `restitution="0.9"` が設定されているため跳ね返ります。ボックスにも反発を与えたり、`mass` を変更したりしてみましょう:
+静的な地面に落下する動的ボディです。衝突の反発は2つのボディの `restitution` の積なので、地面には `restitution="1"` があり、`"0.9"` を持つ球体は速度のほとんどを保ちます。ボックスにも反発を与えたり、地面の `restitution` を0にしてすべての跳ね返りを止めたりしてみましょう:
 
 ```html live-example
 <pc-app>
@@ -64,7 +64,7 @@ description: "pc-rigid-body要素のリファレンス: rigid bodyの種類、�
         <pc-entity name="ground" position="0 -0.5 0" scale="12 1 12">
             <pc-render type="box"></pc-render>
             <pc-collision half-extents="6 0.5 6"></pc-collision>
-            <pc-rigid-body type="static"></pc-rigid-body>
+            <pc-rigid-body type="static" restitution="1"></pc-rigid-body>
         </pc-entity>
     </pc-scene>
 </pc-app>
@@ -83,4 +83,4 @@ description: "pc-rigid-body要素のリファレンス: rigid bodyの種類、�
 * [`<pc-wasm>`](../pc-wasm) — 物理に必要なAmmoモジュールをロードします
 * [`<pc-scene>`](../pc-scene) — 重力
 
-サンプル: [Basic Physics](https://playcanvas.github.io/web-components/examples/basic-physics.html)、[Physics Cluster](https://playcanvas.github.io/web-components/examples/physics-cluster.html)、[Ragdoll](https://playcanvas.github.io/web-components/examples/ragdoll.html)、[Vehicle Physics](https://playcanvas.github.io/web-components/examples/vehicle-physics.html)
+サンプル: [Basic Physics](https://playcanvas.github.io/web-components/examples/#basic-physics.html)、[Physics Cluster](https://playcanvas.github.io/web-components/examples/#physics-cluster.html)、[Ragdoll](https://playcanvas.github.io/web-components/examples/#ragdoll.html)、[Vehicle Physics](https://playcanvas.github.io/web-components/examples/#vehicle-physics.html)
