@@ -3,7 +3,7 @@ title: <pc-script>
 description: "pc-script要素のリファレンス: pc-script-instance子要素をホストし、それらをまとめて有効化・無効化するスクリプトコンポーネントです。"
 ---
 
-`<pc-script>`タグは、スクリプトコンポーネントを定義するために使用されます。
+`<pc-script>`タグは、エンティティにスクリプトコンポーネントを追加します。エンティティに振る舞いを与えるスクリプトの入れ物で、スクリプト1つにつき1つの[`<pc-script-instance>`](../pc-script-instance)を持ちます。
 
 :::note[使用法]
 
@@ -24,7 +24,7 @@ description: "pc-script要素のリファレンス: pc-script-instance子要素�
 
 ## 例 {#example}
 
-2つのスクリプトを保持する1つのスクリプトコンポーネントです — `rotate` がキューブを回転させ、`pulse` がスケールを脈動させます。どちらかの `<pc-script-instance>` タグを削除したり、`<pc-script>` コンポーネントに `enabled="false"` を設定して両方を無効にしたりしてみましょう:
+2つのスクリプトを保持する1つのスクリプトコンポーネントです — `rotate` がキューブを回転させ、`pulse` がスケールを脈動させます。どちらかの `<pc-script-instance>` タグを削除したり、一方に `enabled="false"` を加えてそのスクリプトだけを無効にしたりしてみましょう:
 
 ```html live-example
 <pc-app>
@@ -83,4 +83,4 @@ description: "pc-script要素のリファレンス: pc-script-instance子要素�
 * [`<pc-asset>`](../pc-asset) — スクリプトモジュールの読み込み方法
 * [スクリプトで動作を追加する](../scripting.md) — スクリプトの書き方と属性の宣言
 
-サンプル: [Tweening](https://playcanvas.github.io/web-components/examples/tweening.html)、[First Person Controller](https://playcanvas.github.io/web-components/examples/first-person-controller.html)、[Solar System](https://playcanvas.github.io/web-components/examples/solar-system.html)
+サンプル: [Tweening](https://playcanvas.github.io/web-components/examples/#tweening.html)、[First Person Controller](https://playcanvas.github.io/web-components/examples/#first-person-controller.html)、[Solar System](https://playcanvas.github.io/web-components/examples/#solar-system.html)
