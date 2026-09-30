@@ -34,13 +34,14 @@ The `<pc-app>` tag is the root element for your PlayCanvas application. It is us
 
 :::note[When these are read]
 
-Every attribute above except `max-pixel-ratio`, `loading-bar`, `area-light-luts`, `picking`, `time-scale`, `physics-time-scale` and `with-credentials` is read once, when the element is
-inserted into the document and creates its graphics device. Changing one afterwards updates the
-element's property but has no effect on the running application, and logs a warning saying so — to
-apply a new value, remove the element and re-insert it.
+`alpha`, `antialias`, `backend`, `depth-buffer` and `stencil-buffer` configure the graphics device,
+so they are read once, when the element is inserted into the document and creates it. Changing one
+afterwards updates the element's property but has no effect on the running application, and logs a
+warning saying so — to apply a new value, remove the element and re-insert it.
 
-The two time scales are in place before any script's `initialize()` runs, and a change to either
-applies to the running application at once.
+Every other attribute is live, applying to the running application as soon as it changes, except
+that `loading-bar` can only remove the bar (see [Loading bar](#loading-bar)). The two time scales
+are in place before any script's `initialize()` runs.
 
 :::
 
