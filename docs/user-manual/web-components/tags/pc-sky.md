@@ -30,7 +30,7 @@ The `<pc-sky>` tag gives a scene its sky from an image: a background drawn behin
 
 ## Example
 
-An equirectangular texture as a dome-projected sky that also lights the scene (note `lighting`). Drag to look around, and try `type="infinite"`, `type="none"` to keep only the lighting, or a higher `mip-level` to soften it:
+An equirectangular texture as a dome-projected sky that also lights the scene (note `lighting`). Drag to look around, and try `type="infinite"`, a `rotation` of `"0 90 0"`, `type="none"` to keep only the lighting, or a higher `mip-level` to soften it:
 
 ```html live-example
 <pc-app>

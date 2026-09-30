@@ -3,7 +3,7 @@ title: <pc-scene>
 description: "Reference for the pc-scene element: the scene container inside pc-app, with fog, exposure and gravity settings for the entities it holds."
 ---
 
-The `<pc-scene>` tag defines the scene an application renders: the root of its entity hierarchy, and the fog, exposure and physics settings that apply to everything in it.
+The `<pc-scene>` tag defines the scene an application renders: the root of its entity hierarchy, and the fog, exposure, Gaussian splat, lighting and gravity settings that apply to everything in it.
 
 :::note[Usage]
 
@@ -29,9 +29,10 @@ The `<pc-scene>` tag defines the scene an application renders: the root of its e
 | `gsplat-use-tonemap` | Boolean | `"true"` | Whether the camera's tone mapping and the scene's `exposure` apply to Gaussian splats. Set `"false"` to render splats with their stored colors, which suits captures that are already display-ready. Fog still applies |
 | `gravity` | Vector3 | `"0 -9.81 0"` | Gravity applied to rigid bodies as "X Y Z" values |
 | `lighting-max-lights` | Number | `"255"` | Maximum number of lights clustered lighting uses in a frame. The engine clamps the value to between 1 and the most the device supports (up to 65535), and lights over the limit are left out of the frame. Values above 255 double the memory of the light grid |
-| `physics-time-scale` | Number | `"1"` | Scale on the time the physics simulation advances by each frame: below 1 is slow motion, above 1 speeds it up, and `"0"` pauses physics while the rest of the application keeps running. Applied on top of the application's own time scale |
 
 </div>
+
+The scene applies these settings before any script's `initialize()` runs, both when the application boots and when a `<pc-scene>` is inserted into a running one, so scripts see the element's values from the start. The time scales that slow down or pause the application and its physics are attributes of [`<pc-app>`](../pc-app).
 
 ## Events
 
@@ -81,11 +82,11 @@ Boxes fading into linear fog. Try a different `fog-color` (match the camera's `c
 
 You can programmatically create and manipulate `<pc-scene>` elements using the [SceneElement API](https://api.playcanvas.com/web-components/classes/SceneElement.html).
 
-The `scene` property is the engine [Scene](https://api.playcanvas.com/engine/classes/Scene.html) — `null` until the element is ready — where fog, exposure and the sky are configured.
+The `scene` property is the engine [Scene](https://api.playcanvas.com/engine/classes/Scene.html), where fog, exposure and the sky are configured. It is `null` until the containing application has been created, so await the element's readiness before reading it from page code.
 
 ## See Also
 
-* [`<pc-app>`](../pc-app) — the application that holds the scene
+* [`<pc-app>`](../pc-app) — the application that holds the scene, and its time scales
 * [`<pc-sky>`](../pc-sky) — the scene's skybox and image-based lighting
 * [`<pc-camera>`](../pc-camera) — tone mapping, applied after the scene's exposure
 * [`<pc-rigid-body>`](../pc-rigid-body) — the bodies gravity acts on
