@@ -1272,9 +1272,9 @@ PlayCanvas Web Components let you build rich 3D scenes with nothing but HTML. So
 
 ## Element Readiness
 
-Elements like `<pc-app>` initialize asynchronously. Behind the scenes, the app has to create a graphics device, preload assets and build the entity hierarchy before its underlying engine objects exist. If your script queries an element as soon as the page loads, the engine object you are after (such as the app's [`AppBase`](https://api.playcanvas.com/engine/classes/AppBase.html)) may not have been created yet.
+Elements like `<pc-app>` initialize asynchronously. Behind the scenes, the app has to load its WebAssembly modules, create a graphics device and the engine application, build the entity hierarchy and preload its assets before it can run. If your script queries an element as soon as the page loads, the engine object you are after (such as the app's [`AppBase`](https://api.playcanvas.com/engine/classes/AppBase.html)) may not exist yet, or may not be ready to use.
 
-The `whenReady` function is the easiest way to wait for the right moment. First, extend your import map so the browser can resolve the package by name:
+The `whenReady` function is the easiest way to wait for the right moment. Your code imports it from `@playcanvas/web-components` by name, which the import map from [Getting Started](https://developer.playcanvas.com/user-manual/web-components/getting-started.md) already resolves:
 
 ```html {5}
 <script type="importmap">
@@ -1287,7 +1287,7 @@ The `whenReady` function is the easiest way to wait for the right moment. First,
 </script>
 ```
 
-Then import it and await the element you need:
+Keep that entry's URL identical to the library's `<script>` tag, or the page loads a second copy of the library the moment your code imports it. With a bundler, import the package as you would any other. Then import `whenReady` and await the element you need:
 
 ```html
 <script type="module">
@@ -1298,15 +1298,15 @@ Then import it and await the element you need:
 </script>
 ```
 
-`whenReady` resolves with the element once its engine object has been created. If the element is already initialized by the time you call it, it resolves immediately. There is no need to wait for `DOMContentLoaded` or listen for events.
+`whenReady` resolves with the element once it has finished initializing. For most elements that is the moment their engine object exists, but a few wait for more: `<pc-app>` for its assets to preload and the application to start, [`<pc-model>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-model.md) for its content, and [`<pc-asset>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset.md) for its asset to settle. [`<pc-sky>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sky.md) goes the other way: it is ready as soon as it is in the document, before its skybox exists. If the element is already initialized by the time you call it, `whenReady` resolves immediately. There is no need to wait for `DOMContentLoaded` or listen for events.
 
-`whenReady` rejects rather than waiting in three cases: the string is not a valid CSS selector, no element in the document matches it, or the matched element does not initialize asynchronously (`<pc-material>` is the only such element). A selector is evaluated once — after the document finishes parsing, if called while it is still loading — so it finds elements present in the markup, not elements added later. To wait on a dynamically created element, pass the element reference itself (see [below](https://developer.playcanvas.com/user-manual/web-components/programmatic-access.md#waiting-on-an-element-you-already-hold)).
+`whenReady` rejects rather than waiting in three cases: the string is not a valid CSS selector, no element in the document matches it, or the element does not initialize asynchronously. That covers `<pc-material>`, the only tag that initializes synchronously, any element that is not a `pc-*` tag, and a clone of `<template>` content that has not been appended to the document yet. A selector is evaluated once — after the document finishes parsing, if called while it is still loading — so it finds elements present in the markup, not elements added later. To wait on a dynamically created element, pass the element reference itself (see [below](https://developer.playcanvas.com/user-manual/web-components/programmatic-access.md#waiting-on-an-element-you-already-hold)).
 
 :::note[Elements That Never Become Ready]
 
-The promise never settles if the element cannot finish initializing — for example, a `<pc-script-instance>` that is not a direct child of `<pc-script>`, a [`<pc-node>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-node.md) that cannot resolve its `name`, a [`<pc-wasm>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-wasm.md) without a `name`, or an [`<pc-app>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-app.md) that could not create a graphics device, where a fallback UI should hang off the element's [`error` event](https://developer.playcanvas.com/user-manual/web-components/tags/pc-app.md#events) instead. A component element with no `<pc-entity>`, `<pc-model>` or `<pc-node>` above it is the exception: it still becomes ready, but its `component` is `null`. In every case, the element reports what went wrong in the console.
+The promise never settles if the element cannot finish initializing — for example, a `<pc-script-instance>` that is not a direct child of `<pc-script>`, a [`<pc-node>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-node.md) that cannot resolve its `name`, a [`<pc-model>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-model.md) whose `asset` names no declared asset, a [`<pc-wasm>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-wasm.md) without a `name` or whose module fails to load, or a [`<pc-app>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-app.md) that could not create a graphics device (see its [`error` event](https://developer.playcanvas.com/user-manual/web-components/tags/pc-app.md#events)). A component element with no `<pc-entity>`, `<pc-model>` or `<pc-node>` above it is the exception: it still becomes ready, but its `component` is `null`. In each of these cases, the console says what went wrong.
 
-An element *removed* from the document before it finished initializing never becomes ready either — nothing is wrong, so nothing is reported, but an await on its `ready()` will not complete. When teardown can race initialization (common with [cloned templates](https://developer.playcanvas.com/user-manual/web-components/templates.md)), race the await against your own teardown signal — see [Removing an Instance](https://developer.playcanvas.com/user-manual/web-components/templates.md#removing-an-instance).
+An element *removed* from the document before it finished initializing does not become ready either — nothing is wrong, so nothing is reported, but an await on its `ready()` will not complete unless the element is put back, which carries the wait over to its next initialization. When teardown can race initialization (common with [cloned templates](https://developer.playcanvas.com/user-manual/web-components/templates.md)), race the await against your own teardown signal — see [Removing an Instance](https://developer.playcanvas.com/user-manual/web-components/templates.md#removing-an-instance).
 
 :::
 
@@ -1336,7 +1336,7 @@ Each element exposes its engine counterpart through a property:
 | [`<pc-sound-slot>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sound-slot.md) | `soundSlot` | [`SoundSlot`](https://api.playcanvas.com/engine/classes/SoundSlot.html) |
 | Component tags (`<pc-camera>`, `<pc-light>`, ...) | `component` | The corresponding [`Component`](https://api.playcanvas.com/engine/classes/Component.html) |
 
-These accessors are typed nullable: they return `null` before the element is ready and after it is torn down. Awaiting readiness first is what guarantees a non-null result. [`<pc-model>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-model.md)'s `contentEntity` is the exception that stays nullable: readiness there means the `asset` selection settled, which includes a failed load and no asset at all, so check `contentEntity` (or listen for the element's `error` event) if the file might not arrive. Its host `entity` is non-null from boot either way.
+These accessors are typed nullable: they can return `null` until the element is ready, and do after it is torn down. Awaiting readiness first is what guarantees a non-null result, with two exceptions. A component element whose entity already has a component of its type logs a warning and never gets one, so its `component` stays `null`. And [`<pc-model>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-model.md)'s `contentEntity` stays nullable too: readiness there means the `asset` selection settled, which includes a failed load and no asset at all, so check `contentEntity` (or listen for the element's `error` event) if the file might not arrive. Its host `entity` is non-null from boot either way.
 
 Every asynchronously initializing element also exposes `closestApp` and `closestEntity` getters, returning its nearest `<pc-app>` *ancestor* element, or its nearest entity-fronting ancestor — a `<pc-entity>`, a `<pc-model>` or a `<pc-node>` — or `null` if there is none. Handy when you hold a component element and need its owning entity or app.
 
@@ -1368,7 +1368,7 @@ This is the pattern for instances cloned from a `<template>`, too: hold the clon
 
 ## The `ready` Event
 
-Alongside the promise API, every asynchronously initializing element dispatches a `ready` event at the moment its engine object is created. The event bubbles and is composed, so a single listener on `document` observes every element as it comes up:
+Alongside the promise API, every asynchronously initializing element dispatches a `ready` event at the moment it becomes ready. The event bubbles and is composed, so a single listener on `document` observes every element as it comes up:
 
 ```javascript
 document.addEventListener('ready', (event) => {
@@ -1380,18 +1380,20 @@ Use whichever fits the job: `whenReady` *awaits a specific element* and resolves
 
 ## Assets, Materials and Modules
 
-Resources declared in markup have their own JavaScript routes. [`<pc-asset>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset.md) and [`<pc-material>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-material.md) expose static lookups that resolve an `id` to the engine object:
+Resources declared in markup have their own JavaScript routes. [`<pc-asset>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset.md) and [`<pc-material>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-material.md) expose static lookups that resolve an `id` to the engine object. Both objects are created as the application boots, so wait for `<pc-app>` first:
 
 ```javascript
-import { AssetElement, MaterialElement } from '@playcanvas/web-components';
+import { AssetElement, MaterialElement, whenReady } from '@playcanvas/web-components';
+
+await whenReady('pc-app');
 
 const asset = AssetElement.get('car');        // the engine Asset declared by <pc-asset id="car">
 const material = MaterialElement.get('gold'); // the material declared by <pc-material id="gold">
 ```
 
-`AssetElement.get` returns the registered [`Asset`](https://api.playcanvas.com/engine/classes/Asset.html), which may not have finished loading yet — check `asset.loaded`, or subscribe to its `load` event, before using `asset.resource`.
+`AssetElement.get` returns the registered [`Asset`](https://api.playcanvas.com/engine/classes/Asset.html), which may not have finished loading yet — check `asset.loaded`, or subscribe to its `load` event, before using `asset.resource`. A failed load also sets `loaded`, with no `resource`. Looking a `lazy` asset up this way does not start its load, so call `app.assets.load(asset)` if nothing else will.
 
-[`<pc-wasm>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-wasm.md) initializes asynchronously like the elements above — it becomes ready once its module has loaded, so `whenReady('pc-wasm')` awaits the load. You will rarely need it: `<pc-app>` waits for every `<pc-wasm>` declared beneath it before it creates its graphics device, so an app that is ready is an app whose modules have loaded. Awaiting the app is how you wait for Ammo:
+[`<pc-wasm>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-wasm.md) initializes asynchronously like the elements above — it becomes ready once its module has loaded, so `whenReady('pc-wasm')` awaits the load. (`Basis` is the exception: it is ready as soon as its transcoder starts loading.) You will rarely need it: `<pc-app>` waits for every `<pc-wasm>` among its children before it creates its graphics device, so an app that is ready is an app whose modules have loaded. Awaiting the app is how you wait for Ammo:
 
 ```javascript
 const { app } = await whenReady('pc-app'); // every <pc-wasm> has loaded by now
@@ -1401,7 +1403,7 @@ One caveat sets `<pc-wasm>` apart: its readiness is sticky. WebAssembly modules 
 
 ## TypeScript
 
-The package registers all of its tags with TypeScript's `HTMLElementTagNameMap`, so element queries are fully typed: `document.querySelector('pc-app')` is an `AppElement | null`, and `whenReady('pc-camera')` resolves a `CameraComponentElement`. Passing the tag of an element that does not initialize asynchronously (`pc-material` is the only one) is a compile-time error.
+The package registers all of its tags with TypeScript's `HTMLElementTagNameMap`, so element queries are fully typed: `document.querySelector('pc-app')` is an `AppElement | null`, and `whenReady('pc-camera')` resolves a `CameraComponentElement`. Passing `whenReady` the tag of an element that does not initialize asynchronously (`pc-material` is the only one) is a compile-time error.
 
 ## When to Use Scripts Instead
 
