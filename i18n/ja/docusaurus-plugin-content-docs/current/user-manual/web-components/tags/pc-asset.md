@@ -3,7 +3,7 @@ title: <pc-asset>
 description: "pc-asset要素のリファレンス: URLで読み込むアセットの宣言、拡張子からのタイプ推論、遅延ロード、他のタグからidで参照する方法です。"
 ---
 
-`<pc-asset>`タグは、アセットを定義するために使用されます。
+`<pc-asset>`タグは、アプリケーションが読み込むアセット — モデル、テクスチャ、フォント、サウンド、スクリプト、JSONファイル — を、他のタグが参照する`id`で宣言します。
 
 :::note[使用法]
 
@@ -22,10 +22,10 @@ description: "pc-asset要素のリファレンス: URLで読み込むアセッ�
 | `anisotropy` | Number | `"1"` | `texture` および `textureatlas` アセットの場合: 異方性フィルタリングの最大レベル。浅い視野角での品質が向上します |
 | `atlas` | [Asset ID](../attributes.md#asset-and-material-ids) | - | `sprite` アセットの場合: このスプライトが読み込む `textureatlas` `<pc-asset>` の `id`。アトラスはスプライトより前に宣言する必要があります |
 | `data` | String | - | インラインのJSONアセットデータ。テクスチャアトラス（フレーム定義）やスプライトで使用されます |
-| `flip-y` | Boolean | `"false"` | `texture` および `textureatlas` アセットの場合: アップロード時に画像データを垂直方向に反転するかどうか |
+| `flip-y` | Boolean | `"false"` | `texture` および `textureatlas` アセットの場合: アップロード時に画像データを垂直方向に反転するかどうか。エンジンが画像を`ImageBitmap`にデコードする環境では効果がありません。`ImageBitmap`は反転されずにアップロードされるためで、WebGPUでは常に、WebGL 2ではSafari以外のすべてのブラウザが該当します |
 | `frame-keys` | String | - | `sprite` アセットの場合: スプライトを構成するアトラスのフレームキーを、スペースまたはカンマ区切りで指定したリスト |
 | `id` | String | - | 他のタグがこのアセットを参照するために使用する一意の識別子 |
-| `lazy` | Boolean | `"false"` | プリロードをスキップするかどうか。lazyなアセットは[`<pc-model>`](../pc-model)、[`<pc-particle-system>`](../pc-particle-system)、[`<pc-sky>`](../pc-sky)、[`<pc-material>`](../pc-material)のテクスチャマップによってオンデマンドでロードされます — その他の要素はロードをトリガーしません |
+| `lazy` | Boolean | `"false"` | プリロードをスキップするかどうか。lazyなアセットは、いずれかのタグが初めて`id`で参照したとき（または`lazy`が削除されたとき）に読み込まれるため、何かが使うまでダウンロードされません |
 | `mag-filter` | Enum | `"linear"` | `texture` および `textureatlas` アセットの場合: テクスチャが元のサイズより大きく表示されるときに使用されるフィルター — `"nearest"` \| `"linear"` |
 | `min-filter` | Enum | `"linear-mip-linear"` | `texture` および `textureatlas` アセットの場合: テクスチャが元のサイズより小さく表示されるときに使用されるフィルター — `"nearest"` \| `"linear"` \| `"nearest-mip-nearest"` \| `"linear-mip-nearest"` \| `"nearest-mip-linear"` \| `"linear-mip-linear"` |
 | `mipmaps` | Boolean | `"true"` | `texture` および `textureatlas` アセットの場合: テクスチャがミップマップを生成して使用するかどうか |
@@ -33,7 +33,7 @@ description: "pc-asset要素のリファレンス: URLで読み込むアセッ�
 | `render-mode` | Enum | `"simple"` | `sprite` アセットの場合: `"simple"` \| `"sliced"` \| `"tiled"`。9スライスパネルには `"sliced"` を使用します |
 | `src` | String | - | アセットファイルへのパス |
 | `srgb` | Boolean | `"false"` | `texture` および `textureatlas` アセットの場合: テクスチャがsRGB（ガンマエンコードされた）カラーデータを保持するかどうか。ハードウェアによるガンマデコードが有効になります |
-| `type` | Enum | *inferred* | アセットタイプ：`"audio"` \| `"binary"` \| `"css"` \| `"container"` \| `"font"` \| `"gsplat"` \| `"html"` \| `"json"` \| `"script"` \| `"shader"` \| `"sprite"` \| `"text"` \| `"texture"` \| `"textureatlas"` |
+| `type` | Enum | *inferred* | アセットタイプ：`"animation"` \| `"animclip"` \| `"audio"` \| `"binary"` \| `"css"` \| `"container"` \| `"font"` \| `"gsplat"` \| `"html"` \| `"json"` \| `"script"` \| `"shader"` \| `"sprite"` \| `"text"` \| `"texture"` \| `"textureatlas"`。`animation`と`animclip`は[`<pc-anim-clip>`](../pc-anim-clip)用のアニメーショントラックを保持します |
 
 </div>
 
@@ -49,7 +49,7 @@ description: "pc-asset要素のリファレンス: URLで読み込むアセッ�
 
 テクスチャオプションはテクスチャが作成されるときに適用され、それぞれが`data` JSONの対応するキーをオーバーライドします。設定しなかったオプションは何も書き込まないため、エンジンのフォーマットごとのデフォルト値 — HDRファイルの`rgbe`エンコードや、KTX2ファイルが選択したトランスコード先フォーマットなど — がそのまま有効になります。したがって、実際に必要なオプションだけを設定する価値があります。
 
-これらのオプションはすでに読み込まれたテクスチャにも適用されるため、開発者ツールから試すのに便利です。ただし2つは他より高コストです。読み込み済みのテクスチャで`srgb`または`mipmaps`を変更すると、背後にあるGPUリソースが再作成されるため、これらはマークアップ側で最初から宣言することをおすすめします。
+これらのオプションはすでに読み込まれたテクスチャにも適用されるため、開発者ツールから試すのに便利です。ただし2つは他より高コストです。読み込み済みのテクスチャで`srgb`または`mipmaps`を変更すると、背後にあるGPUリソースが再作成されるため、これらはマークアップ側で最初から宣言することをおすすめします。設定したオプションを削除すると表に示したデフォルトが書き込まれますが、それはファイルが読み込まれたときの状態とは限りません。`.hdr`テクスチャは`nearest`フィルタリングで読み込まれ、そこから`mag-filter`を削除すると`linear`のままになります。
 
 ```html
 <!-- くっきりしたピクセルアートのテクスチャ: フィルタリングとミップマップなし、端をクランプ -->
@@ -79,7 +79,7 @@ description: "pc-asset要素のリファレンス: URLで読み込むアセッ�
 | `text` | `.txt` |
 | `texture` | `.hdr`, `.jpg`, `.ktx2`, `.png`, `.webp` |
 
-それ以外の拡張子、または`font`、`sprite`、`textureatlas`など推論の対象外のタイプでは、明示的な`type`属性が必要です。
+それ以外の拡張子、または`font`、`sprite`、`textureatlas`など推論の対象外のタイプでは、明示的な`type`属性が必要です。`src`が上記の拡張子で文字どおり終わっていない場合も同様です。クエリ文字列（`model.glb?v=2`）、フラグメント、大文字の拡張子（`.JPG`）、別の綴り（`.jpeg`）などです。`type`がないと、そのようなアセットは`Unsupported asset type`という警告を出し、作成されません。
 
 ## イベント {#events}
 
@@ -90,11 +90,13 @@ description: "pc-asset要素のリファレンス: URLで読み込むアセッ�
 | `load` | アセットの読み込みが完了するたびに発生します。後から読み込まれる`lazy`アセットや、その後の再読み込みも含みます。 |
 | `error` | アセットの読み込みが失敗したときに発生する[`ErrorEvent`](https://developer.mozilla.org/en-US/docs/Web/API/ErrorEvent)で、エンジンのエラーが`message`に入ります。 |
 
-どちらのイベントもバブリングしないため、要素自身でリッスンしてください。あるいは、`<pc-app>`が保持するすべてのアセットを監視するには、`<pc-app>`でキャプチャフェーズのリスナーを使用します。
+どちらのイベントもバブリングしないため、要素自身でリッスンしてください。あるいは、`<pc-app>`が保持するすべてのアセットを監視するには、`<pc-app>`でキャプチャフェーズのリスナーを使用します。同じリスナーは[`<pc-model>`](../pc-model)やアプリ自身のものなど、他の要素の`error`イベントも受け取るため、ターゲットを確認してください。
 
 ```javascript
 document.querySelector('pc-app').addEventListener('error', (event) => {
-    console.warn(`${event.target.id} failed to load: ${event.message}`);
+    if (event.target.localName === 'pc-asset') {
+        console.warn(`${event.target.id} failed to load: ${event.message}`);
+    }
 }, true);
 ```
 
@@ -150,4 +152,4 @@ document.querySelector('pc-app').addEventListener('error', (event) => {
 * [`<pc-sound-slot>`](../pc-sound-slot) — オーディオアセットを再生します
 * [`<pc-script-instance>`](../pc-script-instance) — アセットとして読み込んだスクリプトを実行します
 
-サンプル: [GLB Loader](https://playcanvas.github.io/web-components/examples/glb-loader.html)、[Video Texture](https://playcanvas.github.io/web-components/examples/video-texture.html)、[Basic Sound](https://playcanvas.github.io/web-components/examples/basic-sound.html)
+サンプル: [GLB Loader](https://playcanvas.github.io/web-components/examples/#glb-loader.html)、[Video Texture](https://playcanvas.github.io/web-components/examples/#video-texture.html)、[Basic Sound](https://playcanvas.github.io/web-components/examples/#basic-sound.html)
