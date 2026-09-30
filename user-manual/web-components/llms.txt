@@ -11,7 +11,7 @@ Use this index for pages built from `<pc-*>` elements. The engine features the t
 - **Component tags go directly inside the entity they add a component to**: a `<pc-entity>`, `<pc-model>` or `<pc-node>`, with at most one tag of each kind per host. A tag names its engine component without the `pc-` prefix and hyphens: `<pc-rigid-body>` adds `entity.rigidbody`.
 - **Attribute values follow HTML conventions**: kebab-case names, space-separated vectors (`position="0 1 -3"`), colors as a CSS color name, a hex code or 3 or 4 numbers from 0 to 1, and bare booleans (`cast-shadows`). An absent attribute applies the engine default, and an invalid value logs a console warning and applies the default. Remove an attribute to reset it rather than setting it to an empty string.
 - **Look attributes up in the tag reference** instead of inferring their names from examples.
-- **Load models** by declaring the GLB as a `<pc-asset>` and instancing it with `<pc-model asset="id">`, and reach inside a model with `<pc-node>`.
+- **Load models** by declaring the GLB as a `<pc-asset>` and instancing it with `<pc-model asset="id">`, and reach inside a model with `<pc-node>`. A Draco-compressed GLB also needs `<pc-wasm name="DracoDecoderModule" glue="..." wasm="...">`, and metallic materials render close to black unless a `<pc-sky asset="id" lighting>` gives them an environment to reflect.
 - **Add behavior with engine `Script` classes**: load the module with `<pc-asset src="rotate.mjs">`, then attach it with `<pc-script><pc-script-instance name="rotate"></pc-script-instance></pc-script>`, where `name` matches the class's `static scriptName`. Write update loops and per-entity behavior as scripts, not page scripts.
 - **Physics needs ammo.js**, declared as `<pc-wasm name="Ammo" glue="..." wasm="..." fallback="...">` inside `<pc-app>`, which waits for it before starting.
 - **From JavaScript**, `import { whenReady } from '@playcanvas/web-components'` and `await whenReady('pc-app')` (or any element) before reading `.app`, `.entity` or `.component`, which are `null` until the element is ready.
@@ -21,7 +21,7 @@ Use this index for pages built from `<pc-*>` elements. The engine features the t
 - [PlayCanvas Web Components](https://developer.playcanvas.com/user-manual/web-components.md): The concepts, an overview of the tags, and a map of these docs.
 - [Getting Started](https://developer.playcanvas.com/user-manual/web-components/getting-started.md): Loading the components from a CDN or npm, the import map, and a first scene.
 - [Building a Scene](https://developer.playcanvas.com/user-manual/web-components/building-a-scene.md): A lit scene step by step: `pc-app`, `pc-scene`, a camera, a mesh and a light, and how the elements nest.
-- [Loading Models](https://developer.playcanvas.com/user-manual/web-components/loading-models.md): Loading a GLB with `pc-asset` and `pc-model`, listing its hierarchy with `hierarchy()`, and changing its nodes with `pc-node`.
+- [Loading Models](https://developer.playcanvas.com/user-manual/web-components/loading-models.md): Loading a GLB with `pc-asset` and `pc-model`, decoding Draco meshes, lighting it with `pc-sky`, listing its hierarchy with `hierarchy()`, and changing its nodes with `pc-node`.
 - [Attributes](https://developer.playcanvas.com/user-manual/web-components/attributes.md): How attribute values are parsed: defaults, booleans, numbers, enums, vectors, colors, and asset and material ids.
 - [Adding Behavior with Scripts](https://developer.playcanvas.com/user-manual/web-components/scripting.md): Attaching engine `Script` classes with `pc-script` and `pc-script-instance`, and setting their attributes.
 - [Programmatic Access](https://developer.playcanvas.com/user-manual/web-components/programmatic-access.md): Driving the engine from JavaScript: `whenReady`, the engine objects behind the elements, and pages with several apps.
@@ -70,4 +70,4 @@ Use this index for pages built from `<pc-*>` elements. The engine features the t
 
 ## Optional
 
-- [All pages of this index in one file](https://developer.playcanvas.com/user-manual/web-components/llms-full.txt): 41 pages (355 KB), for downloading and searching rather than reading into context.
+- [All pages of this index in one file](https://developer.playcanvas.com/user-manual/web-components/llms-full.txt): 41 pages (362 KB), for downloading and searching rather than reading into context.
