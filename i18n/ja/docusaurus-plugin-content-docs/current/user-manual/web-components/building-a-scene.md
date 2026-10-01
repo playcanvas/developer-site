@@ -1,6 +1,6 @@
 ---
 title: シーンを構築する
-description: pc-appとpc-sceneでライトの当たったシーンを実際に作り、カメラ、メッシュ、ライトを追加し、要素の階層を理解するハンズオンチュートリアルです。
+description: "ハンズオンチュートリアル：pc-appとpc-sceneで、ライトと影のあるシーンをカメラ、メッシュ、ライト、マテリアル、地面の順に一歩ずつ構築し、要素の階層を学びます。"
 ---
 
 PlayCanvas Web Components を使用して、シンプルな3Dシーンをステップバイステップで構築しましょう。最後まで進めると、青空の下、地面の上に置かれた色付きの球体がシェーディング付きで表示され、各行が何をしているのかも理解できるようになります。
@@ -22,7 +22,7 @@ PlayCanvas Web Components を使用して、シンプルな3Dシーンをステ�
 
 :::note
 
-すべての `pc-` 要素は適切に閉じられる必要があります。自己終了タグ（例：`<pc-camera />`）はサポートされていません。
+`<pc-camera></pc-camera>` のように、必ず終了タグを書いてください。HTMLには自己終了するカスタム要素はありません。ブラウザは `<pc-camera />` を開始タグとして読むため、その後に続く要素はすべてカメラの中にネストされてしまいます。
 
 :::
 
@@ -118,7 +118,7 @@ PlayCanvas Web Components を使用して、シンプルな3Dシーンをステ�
 
 ## シーンに地面を追加する {#grounding-the-scene}
 
-何もない空間にオブジェクトを浮かべるだけでは、できることに限りがあります。球体が載る場所を用意しましょう。`plane` プリミティブを拡大して地面にし、2つ目のマテリアルを適用します。球体プリミティブの直径は1ユニットなので、`position="0 0.5 0"` に持ち上げると平面のちょうど真上に載ります。また、シーン全体がフレームに収まるようにカメラを持ち上げて傾け、`cast-shadows` 属性でライトが影を落とすようにします。これは、存在するだけで有効になるBoolean属性です（[属性](attributes.md)を参照）。
+何もない空間にオブジェクトを浮かべるだけでは、できることに限りがあります。球体が載る場所を用意しましょう。`plane` プリミティブを拡大して地面にし、2つ目のマテリアルを適用します。球体プリミティブの直径は1ユニットなので、`position="0 0.5 0"` に持ち上げると平面のちょうど真上に載ります。また、シーン全体がフレームに収まるようにカメラを持ち上げて傾け、`cast-shadows` 属性でライトが影を落とすようにします。これは、存在するだけで有効になるBoolean属性です（[属性](attributes.md)を参照）。ライトの2つのバイアス属性は、各サーフェスが自分自身に影を落とすのを防ぎます。これがないと球体と地面が縞模様に崩れます。これはシャドウアクネと呼ばれるアーティファクトです（[シャドウアーティファクトの解消](../graphics/lighting/shadows.md#fixing-shadow-artifacts)を参照）。
 
 ```html {3,5,9,11,14-16}
 <pc-app>
@@ -129,7 +129,7 @@ PlayCanvas Web Components を使用して、シンプルな3Dシーンをステ�
             <pc-camera clear-color="lightskyblue"></pc-camera>
         </pc-entity>
         <pc-entity name="light" rotation="45 45 0">
-            <pc-light type="directional" cast-shadows></pc-light>
+            <pc-light type="directional" cast-shadows normal-offset-bias="0.05" shadow-bias="0.2"></pc-light>
         </pc-entity>
         <pc-entity name="sphere" position="0 0.5 0">
             <pc-render type="sphere" material="crimson"></pc-render>
@@ -141,7 +141,34 @@ PlayCanvas Web Components を使用して、シンプルな3Dシーンをステ�
 </pc-app>
 ```
 
-![青空の下、明るい灰色の平面の上に置かれ、影を落とす真紅の球体](/img/user-manual/web-components/building-a-scene/final-scene.jpg)
+完成したシーンが実際に動いているのが以下です。マークアップは同じで、編集することもできます。入力するとプレビューが再実行されます。
+
+```html live-example
+<pc-app>
+    <pc-material id="crimson" diffuse="crimson"></pc-material>
+    <pc-material id="gray" diffuse="lightgray"></pc-material>
+    <pc-scene>
+        <pc-entity name="camera" position="0 1.5 6" rotation="-10 0 0">
+            <pc-camera clear-color="lightskyblue"></pc-camera>
+        </pc-entity>
+        <pc-entity name="light" rotation="45 45 0">
+            <pc-light type="directional" cast-shadows normal-offset-bias="0.05" shadow-bias="0.2"></pc-light>
+        </pc-entity>
+        <pc-entity name="sphere" position="0 0.5 0">
+            <pc-render type="sphere" material="crimson"></pc-render>
+        </pc-entity>
+        <pc-entity name="ground" scale="8 1 8">
+            <pc-render type="plane" material="gray"></pc-render>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
+```
+
+次のような変更を試してみてください。
+
+- 太陽を低くする。ライトのエンティティを `rotation="70 45 0"` にすると、影が長く伸びます。
+- `normal-offset-bias` と `shadow-bias` を削除して、これらが防いでいるシャドウアクネを確認する。
+- 球体の `type` を `"box"` に変える。ボックスのプリミティブも1ユニット四方なので、地面の上にぴったり載ったままです。
 
 これで1つのシーンの完成です。カメラ、ライト、ジオメトリ、マテリアルのすべてを、HTMLだけで構成しました。
 
@@ -161,7 +188,7 @@ pc-app ................... アプリケーション
 - [`<pc-scene>`](tags/pc-scene.md)、[`<pc-material>`](tags/pc-material.md)、[`<pc-asset>`](tags/pc-asset.md) は [`<pc-app>`](tags/pc-app.md) の直下に置きます。
 - [`<pc-entity>`](tags/pc-entity.md) は `<pc-scene>` または別のエンティティの直下に置きます。エンティティをネストしてトランスフォーム階層を構築します。エンティティの `position`、`rotation`、`scale` は親に対するローカル値です。
 - [`<pc-camera>`](tags/pc-camera.md)、[`<pc-light>`](tags/pc-light.md)、[`<pc-render>`](tags/pc-render.md) などのコンポーネント要素はエンティティの直下に置き、それぞれがそのエンティティに機能を与えます。
-- 誤った場所に置かれた要素は、必要な親要素の名前を含むコンソール警告をログに出力します。記述の際はコンソールを開いておきましょう。各タグの配置ルールは[リファレンスページ](tags/index.md)に記載されています。
+- 誤った場所に置かれた要素は、どこに置くべきかを示すコンソール警告をログに出力します。記述の際はコンソールを開いておきましょう。各タグの配置ルールは[リファレンスページ](tags/index.md)に記載されています。
 
 ## 次のステップ {#next-steps}
 
@@ -169,4 +196,4 @@ pc-app ................... アプリケーション
 - [属性](attributes.md) — いま使った値の規約（Boolean、カラー、ベクトルなど）です。
 - [スクリプトで動作を追加する](scripting.md) — オブジェクトを動かしましょう。エンジンには `cameraControls` のような既製のスクリプトも同梱されており、マウスでシーンを周回できます。
 - [タグリファレンス](tags/index.md) — 宣言できる残りすべての要素です。
-- [サンプル](https://playcanvas.github.io/web-components/examples/) — [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html) は、いま構築したシーンの拡大版です。
+- [サンプル](https://playcanvas.github.io/web-components/examples/) — [Basic Shapes](https://playcanvas.github.io/web-components/examples/#basic-shapes.html) は、いま構築したシーンの拡大版です。

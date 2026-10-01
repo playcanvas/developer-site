@@ -19,12 +19,19 @@ The `roughness` and `roughness-map` attributes are aliases for `gloss` and `glos
 
 :::
 
+:::note[Maps multiply their values]
+
+A scalar map is multiplied by the attribute it goes with, so pair each map with a value that lets it through. `metalness-map` alone changes nothing, because `metalness` starts at `0`: pair it with `metalness="1"`. Likewise `roughness-map` goes with `roughness="1"`, and `gloss-map` with `gloss="1"`.
+
+:::
+
 ## Attributes
 
 <div className="attribute-table">
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
+| `alpha-dither` | Number | - | Alpha used by `opacity-dither`, from 0 to 1, which lets a material be blended by `opacity` and dithered by this value at the same time. When omitted, dithering follows `opacity`. Needs an `opacity-dither` other than `"none"` |
 | `alpha-test` | Number | `"0"` | Alpha test reference value. Fragments with an opacity below this value are discarded |
 | `alpha-to-coverage` | Boolean | `"false"` | Whether to use alpha-to-coverage, which resolves transparency using multisampling |
 | `ao-intensity` | Number | `"1"` | Strength of the ambient occlusion map, from 0 to 1 |
@@ -41,11 +48,13 @@ The `roughness` and `roughness-map` attributes are aliases for `gloss` and `glos
 | `emissive-intensity` | Number | `"1"` | Multiplier applied to the emissive color and map |
 | `emissive-map` | [Asset ID](../attributes.md#asset-and-material-ids) | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the emissive map |
 | `enable-ggx-specular` | Boolean | `"false"` | Whether to use the GGX specular model, which supports anisotropy |
+| `flat-shading` | Boolean | `"false"` | Whether the material is shaded with the geometric normal of each triangle rather than normals interpolated from its vertices, giving the surface a faceted look |
 | `fresnel-model` | Enum | `"schlick"` | Fresnel model used for specular reflections at grazing angles: `"none"` \| `"schlick"` |
 | `gloss` | Number | `"0.25"` | Glossiness of the material, from 0 (rough) to 1 (shiny). See `roughness` |
 | `gloss-invert` | Boolean | `"false"` | Whether the gloss value and map are inverted, making the material treat them as roughness. Setting `roughness` or `roughness-map` enables this automatically |
 | `gloss-map` | [Asset ID](../attributes.md#asset-and-material-ids) | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the gloss map |
 | `height-map` | [Asset ID](../attributes.md#asset-and-material-ids) | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the height map |
+| `height-map-base` | Number | `"0.5"` | Height map value that sits at the level of the geometry, from 0 to 1: relief above it stands out of the surface and relief below it sinks in. `"1"` treats the map as pure depth and `"0"` as pure elevation |
 | `height-map-factor` | Number | `"1"` | Strength of the parallax effect driven by the height map |
 | `id` | String | - | Unique identifier used by other tags to reference this material |
 | `metalness` | Number | `"0"` | How metallic the surface is, from 0 (dielectric) to 1 (metal) |
@@ -54,10 +63,13 @@ The `roughness` and `roughness-map` attributes are aliases for `gloss` and `glos
 | `normal-map` | [Asset ID](../attributes.md#asset-and-material-ids) | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the normal map |
 | `occlude-direct` | Boolean | `"false"` | Whether ambient occlusion also attenuates direct lighting |
 | `occlude-specular` | Enum | `"ao"` | How specular reflections are occluded: `"none"` \| `"ao"` \| `"gloss-dependent"` |
-| `opacity` | Number | `"1"` | Opacity of the material, from 0 (transparent) to 1 (opaque). Requires a `blend-type` other than `"none"` to have a visible effect |
-| `opacity-dither` | Enum | `"none"` | Dithering used to render opacity, which approximates transparency without blending: `"none"` \| `"bayer8"` \| `"bluenoise"` \| `"ignnoise"` |
+| `opacity` | Number | `"1"` | Opacity of the material, from 0 (transparent) to 1 (opaque). Has a visible effect only with a `blend-type` other than `"none"`, or with `alpha-test`, `alpha-to-coverage` or `opacity-dither` |
+| `opacity-dither` | Enum | `"none"` | Dithering used to render opacity, which approximates transparency without blending: `"none"` \| `"bayer2"` \| `"bayer4"` \| `"bayer8"` \| `"bayer16"` \| `"bluenoise"` \| `"ignnoise"`. See also `alpha-dither` |
 | `opacity-fades-specular` | Boolean | `"true"` | Whether specular highlights fade out as the material becomes transparent |
 | `opacity-map` | [Asset ID](../attributes.md#asset-and-material-ids) | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the opacity map |
+| `parallax-mode` | Enum | `"offset"` | How the height map offsets the UVs of the other maps: `"offset"` \| `"occlusion"`. `offset` takes a single tap of the height map; `occlusion` marches the view ray through the height field for deeper relief without smearing, at the cost of several taps per pixel. Neither changes the mesh's silhouette |
+| `parallax-samples` | Number | `"16"` | Maximum number of height map taps along the view ray. Used when `parallax-mode` is `"occlusion"` |
+| `parallax-shadow-samples` | Number | `"0"` | Maximum number of height map taps towards each directional light, which lets the relief soft-shadow itself; 0 turns self-shadowing off. Used when `parallax-mode` is `"occlusion"` |
 | `roughness` | Number | - | Roughness of the material, from 0 (shiny) to 1 (rough). An alias for `gloss` that also sets `gloss-invert`, so do not combine it with the `gloss` attributes |
 | `roughness-map` | [Asset ID](../attributes.md#asset-and-material-ids) | - | `id` of a texture [`<pc-asset>`](../pc-asset) used as the roughness map. An alias for `gloss-map` that also sets `gloss-invert`, so do not combine it with the `gloss` attributes |
 | `slope-depth-bias` | Number | `"0"` | Depth offset applied in proportion to a surface's slope, used to resolve z-fighting |
@@ -65,7 +77,7 @@ The `roughness` and `roughness-map` attributes are aliases for `gloss` and `glos
 | `specularity-factor` | Number | `"1"` | Strength of specular reflections at direct angles, from 0 to 1. Applies only when `use-metalness-specular-color` is enabled |
 | `two-sided-lighting` | Boolean | `"false"` | Whether back faces are lit as though their normals were flipped |
 | `use-fog` | Boolean | `"true"` | Whether the material is affected by scene fog |
-| `use-lighting` | Boolean | `"true"` | Whether the material is affected by scene lights. When disabled, the material renders unlit using the diffuse color and map alone |
+| `use-lighting` | Boolean | `"true"` | Whether the material is affected by scene lights. When disabled, direct lights are ignored but the diffuse color is still lit by the scene's ambient and environment light, so with neither it renders black. For a flat, self-lit look, use `emissive` or `emissive-map` instead |
 | `use-metalness` | Boolean | `"true"` | Whether to use the metalness workflow rather than the older specular workflow |
 | `use-metalness-specular-color` | Boolean | `"false"` | Whether the specular color tints reflections while the metalness workflow is in use |
 | `use-skybox` | Boolean | `"true"` | Whether the material is lit by the scene's skybox |
@@ -134,13 +146,13 @@ Four materials: a plain color, a metal, a transparent "glass" and a tiled textur
 
 A `<pc-material>` inserted at runtime (after the application has started) creates its material on insertion, so materials can be added dynamically from JavaScript. Attribute changes made at runtime also take effect immediately — a burst of changes is coalesced into a single material update — and removing a `*-map` attribute clears that texture slot.
 
-The `name` attribute is worth setting on any material you expect to identify later. It reaches the engine material, so it is the label that shows up wherever materials surface by name: profilers, GPU captures, and the assignments [`<pc-model>`'s `hierarchy()`](../pc-model#inspecting-the-hierarchy) reports — including on a material swapped in by [`<pc-node>`'s `material-overrides`](../pc-node#overriding-materials), which otherwise reads as `Untitled` there. It has no bearing on how the material is referenced, which is always by `id`.
+The `name` attribute is worth setting on any material you expect to identify later. It reaches the engine material, so it is the label that shows up wherever materials surface by name: profilers, GPU captures made with the engine's debug build, and the assignments [`<pc-model>`'s `hierarchy()`](../pc-model#inspecting-the-hierarchy) reports — including on a material swapped in by [`<pc-node>`'s `material-overrides`](../pc-node#overriding-materials), which otherwise reads as `Untitled` there. It has no bearing on how the material is referenced, which is always by `id`.
 
 ## JavaScript Interface
 
 You can programmatically create and manipulate `<pc-material>` elements using the [MaterialElement API](https://api.playcanvas.com/web-components/classes/MaterialElement.html).
 
-The `material` property is the engine [StandardMaterial](https://api.playcanvas.com/engine/classes/StandardMaterial.html) the element builds, and `MaterialElement.get(id)` looks one up by `id`. The element is synchronous, so neither waits on readiness.
+The `material` property is the engine [StandardMaterial](https://api.playcanvas.com/engine/classes/StandardMaterial.html) the element builds, and `MaterialElement.get(id)` looks one up by `id`. The element has no readiness of its own, but its material is only created once the application boots, so await `whenReady('pc-app')` before reading either.
 
 ## See Also
 
@@ -148,4 +160,4 @@ The `material` property is the engine [StandardMaterial](https://api.playcanvas.
 * [`<pc-node>`](../pc-node) — overrides materials inside a loaded model
 * [`<pc-asset>`](../pc-asset) — the texture assets a material's maps reference
 
-Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html), [Falling Blocks](https://playcanvas.github.io/web-components/examples/falling-blocks.html) and [Car Configurator](https://playcanvas.github.io/web-components/examples/car-configurator.html).
+Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/#basic-shapes.html), [Falling Blocks](https://playcanvas.github.io/web-components/examples/#falling-blocks.html) and [Car Configurator](https://playcanvas.github.io/web-components/examples/#car-configurator.html).

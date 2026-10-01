@@ -21,5 +21,5 @@ description: PlayCanvas アプリケーションでロード時間、フレー�
 | 🧠 メモリ使用量の最小化 | ブラウザはアプリケーションに割り当てるメモリプールを制限しています。このプールが枯渇すると、タブがクラッシュして再ロードされます。ユーザーは不満に感じるでしょう！ |
 
 :::ai
-AIアシスタントに目標、再現手順、ベースラインを伝えると、**[Profiler](/user-manual/optimization/profiler/)**やブラウザーの結果からボトルネックを絞り、測定可能な変更を1つずつ提案できます。Editorでは**[Editor MCP Server](/user-manual/editor/mcp-server/)**、スタンドアロンでは**[AIを活用した開発](/user-manual/engine/developing-with-ai/)**を使用します。
+AIアシスタントに目標、再現手順、ベースラインを伝えると、[**Profiler**](/user-manual/optimization/profiler/)やブラウザーの結果からボトルネックを絞り、測定可能な変更を1つずつ提案できます。Editorでは[**Editor MCP Server**](/user-manual/editor/mcp-server/)、スタンドアロンでは[**AIを活用した開発**](/user-manual/engine/developing-with-ai/)を使用します。
 :::

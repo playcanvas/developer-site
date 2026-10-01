@@ -104,4 +104,4 @@ For the complete API, refer to the [MiniStats API reference](https://api.playcan
 
 The demo below shows MiniStats outside the Editor, including customization options. Click the overlay to cycle through display sizes and view detailed CPU and GPU timing breakdowns.
 
-<EngineExample id="misc/mini-stats" title="MiniStats example" />
+<EngineExample id="debug/mini-stats" title="MiniStats example" />

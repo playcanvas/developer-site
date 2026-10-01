@@ -6,7 +6,7 @@ sidebar_label: SPZ
 
 **SPZ**は、[Niantic](https://github.com/nianticlabs/spz)によるオープンソースの3D Gaussian Splatデータ圧縮形式です。量子化されたスプラット属性をZSTD圧縮ストリームに格納し、視覚品質の知覚的な損失をほとんど伴わずに、PLYと比べてファイルサイズを約10分の1にします。Scaniverseなどのアプリのネイティブ形式です。
 
-これらのファイルは**[SplatTransform](/user-manual/splat-transform/)**で作成でき、パーサースクリプトを使用してPlayCanvasエンジンで読み込むことができます。
+これらのファイルは[**SplatTransform**](/user-manual/splat-transform/)で作成でき、パーサースクリプトを使用してPlayCanvasエンジンで読み込むことができます。
 
 ## SPZファイルの作成
 

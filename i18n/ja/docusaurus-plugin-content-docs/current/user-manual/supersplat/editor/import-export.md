@@ -23,7 +23,7 @@ SuperSplatは、複数のGaussian Splatシーン形式に加えて、タイム�
 | `images.txt` | ✅ | ❌ | [COLMAP再構築](https://colmap.github.io/format.html#images-txt)のカメラポーズ。このファイルをインポートすると[タイムラインキーフレーム](timeline.md#importing-camera-poses-as-keyframes)が作成されますが、スプラットシーンは読み込まれません |
 | カメラポーズ`.json` | ✅ | ❌ | INRIA JSON形式のカメラポーズ。このファイルをインポートすると[タイムラインキーフレーム](timeline.md#importing-camera-poses-as-keyframes)が作成されますが、スプラットシーンは読み込まれません |
 | `.html` | ❌ | ✅ | 圧縮スプラットデータを1つのHTMLファイルに埋め込んだ自己完結型ビューアアプリ |
-| `.zip` | ❌ | ✅ | HTMLアプリと独立した`.compressed.ply`ファイルを含むビューアパッケージ |
+| `.zip` | ❌ | ✅ | HTMLアプリと独立したバンドルSOGファイル（`index.sog`）を含むビューアパッケージ |
 
 :::warning
 
@@ -37,9 +37,9 @@ SuperSplatは、`.ply`、`.compressed.ply`、`.splat`、`.ksplat`、`.spz`、`.l
 
 Gaussian Splat ファイルを読み込む方法は4つあります。
 
-1. **ドラッグアンドドロップ** - ファイルシステムから SuperSplat のクライアントエリアに1つ以上のスプラットファイルをドラッグアンドドロップします。複数ファイル形式（`.lcc`、`.lcc2`、アンバンドルSOG、Streamed SOGなど）の場合は、それらのファイルを含む親フォルダーをドラッグします。
-2. **ファイルメニュー** - `File` > `Import` を選択し、ファイルシステムから1つ以上のスプラットファイルを選択します。
-3. **直接ファイルを開く** - SuperSplat を PWA としてインストールしている場合、File Explorer (Windows) または Finder (macOS) でスプラットファイルをダブルクリックできます。
+1. **ドラッグアンドドロップ** - ファイルシステムから SuperSplat のウィンドウに1つ以上のスプラットファイル、またはフォルダー全体をドラッグアンドドロップします。複数ファイル形式（`.lcc`、`.lcc2`、アンバンドルSOG、Streamed SOGなど）の場合は、それらのファイルを含む親フォルダーをドラッグします。
+2. **ファイルメニュー** - `File` > `Import` を選択し、ファイルシステムから1つ以上のスプラットファイルを選択します。`File` > `Import Recent` には以前にインポートしたファイルとフォルダーが一覧表示されるため、再度探すことなく読み込み直せます。一覧の最下部にある `Clear Recent` で一覧を空にできます。
+3. **直接ファイルを開く** - ブラウザのアドレスバーから SuperSplat をアプリとしてインストールしている場合、File Explorer (Windows) または Finder (macOS) で `.ply`、`.splat`、`.sog`、`.spz`、`.ksplat`、`.ssproj` ファイルをダブルクリックすると Editor で開けます。
 4. **URL読み込み** - 次のような形式で `load` クエリパラメータを使用します: `https://superspl.at/editor?load=<SPLAT_URL>`。例：
 
     https://superspl.at/editor?load=https://raw.githubusercontent.com/willeastcott/assets/main/biker.ply
@@ -85,14 +85,16 @@ PLYシーケンスは、各フレームが完全なスプラットシーンを�
 
 ## スプラットのエクスポート
 
-現在読み込まれているシーンをエクスポートするには、`File` > `Export` サブメニューを開き、希望する形式を選択します。上記の [対応ファイル形式](#supported-file-formats) テーブルに記載されている、エクスポート対応のすべての形式が利用可能です。
+現在読み込まれているシーンをエクスポートするには、`File` > `Export` サブメニューを開き、**PLY**、**SOG**、**SPZ**、**Splat**、**Viewer App** のいずれかを選択します。エクスポートには表示中のスプラットだけが含まれます。すべてのエクスポートで同じダイアログを使用します。
 
-ほとんどの形式では、エクスポートダイアログでエクスポートに含める球面調和関数のバンド数を選択できます。SPZへのエクスポートでは、形式のバージョンも選択できます。**SPZ 4**（仕様の最新バージョン）がデフォルトで、古いサードパーティ製SPZリーダーとの互換性のために**SPZ 3**（レガシーgzipコンテナ）も利用可能です。
+![LocationとFilename行のあるエクスポートダイアログ](/img/user-manual/supersplat/editor/export-dialog.png)
 
-:::note
+- **Location** - 出力フォルダー。Editorは前回エクスポートしたフォルダーを記憶しています。別のフォルダーを選ぶには**Choose output folder…**（または**Change…**）をクリックします。File System Access APIに対応していないブラウザではこの行は表示されず、ファイルはダウンロードとして提供されます。
+- **Filename** - 出力ファイルの名前。名前が無効な場合やフォルダー内に同名のファイルがある場合は警告が表示され（ボタンは**Overwrite**に変わります）、現在のシーンが読み込み中のファイルの上書きは拒否されます。
+- 形式ごとのオプション：
+  - **PLY**：**Compress PLY**を有効にすると、フルサイズのPLYではなく`.compressed.ply`を書き出します。**SH Bands**で含める球面調和関数のバンド数を選択します。
+  - **SOG**：**SH Bands**と、球面調和関数データの圧縮に使用するクラスタリングの反復回数である**Iterations**（1～20、デフォルト10）。反復回数を増やすと、エクスポート時間は延びますが品質がわずかに向上します。
+  - **SPZ**：**SH Bands**と**Version**。**SPZ 4**（仕様の最新バージョン）がデフォルトで、古いサードパーティ製SPZリーダーとの互換性のために**SPZ 3**（レガシーgzipコンテナ）も利用できます。
+  - **Viewer App**：スタンドアロンHTMLビューアのオプションは[ビューアのセルフホスティング](/user-manual/supersplat/viewer/self-hosting)で説明しています。
 
-SOG（`.sog`）へのエクスポートとスタンドアロンビューア（`.html` / `.zip`）のエクスポートには、**WebGPU**をサポートするブラウザが必要です。SOG圧縮がGPU上で実行されるためです。WebGPUのないブラウザでは、これらのエクスポートは「This export requires WebGPU, which is not available in this browser. Please try a recent version of Chrome, Edge or Safari.」というエラーで失敗します。その他のエクスポート形式は、WebGL 2.0対応のあらゆるブラウザで動作します。
-
-:::
-
-スプラット用のHTMLビューアのエクスポートとホスティングについては、[ビューアのセルフホスティング](/user-manual/supersplat/viewer/self-hosting)を参照してください。
+`File` > `Re-export`（`Ctrl + Shift + E`）を選ぶと、前回のエクスポートを同じオプションで同じファイルに繰り返します。確認なしに以前の出力を上書きするため、クリーンアップを繰り返しながら試す際に便利です。

@@ -613,6 +613,16 @@ There are a number of requirements to use Interface Attributes.
 Interface attributes can be used as arrays, just like plain attributes. This means that your `GameLogic` script can use an array of enemies, each with their own controllable power and speed properties.
 
 ```javascript
+/** @interface */
+class Enemy {
+    /**
+     * @range [0, 11]
+     */
+    power = 10;
+
+    speed = 3;
+}
+
 class GameLogic extends Script {
     static scriptName = 'gameLogic';
 
@@ -624,11 +634,13 @@ class GameLogic extends Script {
 
     update(dt) {
         this.enemies.forEach(({ power, speed }) => {
-            this.updateEnemy(power, speed);
-        })
+            console.log('This is an enemy', power, speed);
+        });
     }
 }
 ```
+
+The `Enemy` Interface must be declared in the same file as the Script, or imported into it. If the type in the `@type` tag cannot be resolved, the attribute is ignored and will not appear in the Editor.
 
 This creates an array of Enemy controls in the Editor, each with its own numerical controls for the sub-attributes.
 

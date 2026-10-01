@@ -24,7 +24,7 @@ npm create playcanvas@latest my-app -- -f web-components
 - **CDN（インストール不要）** — ダウンロードもツールも不要です。最も早く始められる方法で、バージョンを固定すれば本番環境でも問題なく使えます。
 - **npm** — プロジェクトにすでに `package.json` や開発サーバー、バンドラーがある場合に適した選択肢です。エンジンとコンポーネントのバージョンを他の依存関係と一緒に管理でき、すべて自前のインフラから配信されます。
 
-どちらの方法を選ぶ場合でも、HTMLファイルには[インポートマップ](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script/type/importmap)が必要になります。これは、Web ComponentsがPlayCanvas Engine（外部依存関係）を見つけられるようにするためです。インポートマップには `@playcanvas/web-components` 自体も記載しています。タグを使うだけならこのエントリは不要ですが、これがあると、後で自分で書くJavaScriptからライブラリのAPI（[プログラムによるアクセス](programmatic-access.md)で紹介します）をインポートできるようになります。
+バンドラーでページをビルドする場合（npmタブを参照）を除き、HTMLファイルには[インポートマップ](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script/type/importmap)が必要になります。これは、Web ComponentsがPlayCanvas Engine（外部依存関係）を見つけられるようにするためです。インポートマップには `@playcanvas/web-components` 自体も記載しています。タグを使うだけならこのエントリは不要ですが、これがあると、後で自分で書くJavaScriptからライブラリのAPI（[プログラムによるアクセス](programmatic-access.md)で紹介します）をインポートできるようになります。
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -32,7 +32,7 @@ import TabItem from '@theme/TabItem';
 <Tabs defaultValue="cdn">
 <TabItem value="cdn" label="CDN（インストール不要）">
 
-エンジンとコンポーネントの両方を、jsDelivrなどのCDNから読み込みます。`pwc.min.mjs`（`pwc.mjs` の半分以下のサイズのミニファイ版ビルド）を使用します。
+エンジンとコンポーネントの両方を、jsDelivrなどのCDNから読み込みます。`pwc.min.mjs`（`pwc.mjs` の3分の1以下のサイズのミニファイ版ビルド）を使用します。
 
 ```html
 <script type="importmap">
@@ -53,7 +53,11 @@ import TabItem from '@theme/TabItem';
 
 :::note[バージョニング]
 
-上記のスニペットでは利便性のために `@latest` を使用しています。本番環境では確定的なビルドのために特定のバージョンに固定することを推奨します（例: `playcanvas@2.x.y`、`@playcanvas/web-components@x.y.z`）。最新の安定版はリリースノートを参照してください: [PlayCanvas Engine リリース](https://github.com/playcanvas/engine/releases) と [Web Components リリース](https://github.com/playcanvas/web-components/releases)。
+上記のスニペットでは利便性のために `@latest` を使用しています。本番環境では確定的なビルドのために特定のバージョンに固定することを推奨します（例: `playcanvas@2.x.y`、`@playcanvas/web-components@x.y.z`）。組み合わせて動作するバージョンを選んでください。`@playcanvas/web-components` の各リリースは対応するエンジンのバージョン範囲を持ち、`package.json` の `playcanvas` のピア依存関係として宣言しています。
+
+ライブラリのURLはインポートマップと `<script>` タグの2か所に現れるため、両方を同じバージョンに固定してください。2つのURLが異なると、ブラウザはそれらを別々のモジュールとして扱います。自分のコードがインポートマップ経由でライブラリをインポートした時点で2つ目のコピーが読み込まれ、1つ目のコピーがすでに定義したタグを登録しようとして失敗します。
+
+最新の安定版はリリースノートを参照してください: [PlayCanvas Engine リリース](https://github.com/playcanvas/engine/releases) と [Web Components リリース](https://github.com/playcanvas/web-components/releases)。
 
 :::
 
@@ -66,7 +70,15 @@ import TabItem from '@theme/TabItem';
 npm install playcanvas @playcanvas/web-components
 ```
 
-インポートマップをインストール済みのパッケージに向けます。
+その後の読み込み方法は、バンドラーでページをビルドするかどうかによって異なります。
+
+**バンドラーを使う場合**（Vite、webpack、Rollupなど）は、JavaScriptのエントリーポイントからパッケージを一度インポートします。`playcanvas` はバンドラーが解決するため、インポートマップも追加の `<script>` タグも不要です。
+
+```js title="main.js"
+import '@playcanvas/web-components';
+```
+
+**バンドラーを使わない場合**、つまりファイルをそのまま配信する場合は、インポートマップをインストール済みのパッケージに向け、同じパスからライブラリを読み込みます。
 
 ```html
 <script type="importmap">
@@ -77,15 +89,10 @@ npm install playcanvas @playcanvas/web-components
         }
     }
 </script>
-```
-
-その後、Web Componentsを次のようにインポートできます。
-
-```html
 <script type="module" src="/node_modules/@playcanvas/web-components/dist/pwc.mjs"></script>
 ```
 
-これらのパスは、サイトがプロジェクトルートから配信されていて `/node_modules/...` が解決できることを前提としています。開発サーバーやバンドラーの構成に合わせて調整してください。
+これらのパスは、サイトがプロジェクトルートから配信されていて `/node_modules/...` が解決できることを前提としています。
 
 </TabItem>
 </Tabs>
@@ -99,7 +106,7 @@ npm install playcanvas @playcanvas/web-components
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>My PlayCanvas Web Components App</title>
         <script type="importmap">
             {
@@ -142,17 +149,7 @@ npm install playcanvas @playcanvas/web-components
 
 `<style>`ブロックの中で1つ触れておきたいルールがあります。`<pc-app>`は`<video>`要素と同じようにサイズが決まる、ページのCSSが制御するブロックレベルのボックスで、デフォルトではわずか300×150ピクセルです。上記の`pc-app`ルールはこれをビューポート全体に引き伸ばしています。通常のページレイアウトにシーンを埋め込みたい場合は、好きなサイズを指定してください。詳細は[サイズ指定](tags/pc-app.md#sizing)を参照してください。
 
-これを `index.html` として保存し、ブラウザで開いてください。次のように表示されるはずです。
-
-![指向性ライトに照らされた白い球体](/img/user-manual/web-components/hello-sphere.jpg)
-
-:::note
-
-npmインストールを使用する場合は、インポートマップとscriptタグを、上のnpmタブに示した `/node_modules/...` のものに置き換えてください。
-
-:::
-
-このシーンはこの場で試すこともできます。マークアップを編集すると、プレビューが再実行されます:
+これを `index.html` として保存し、ブラウザで開いてください。すべてCDNから読み込まれるため、Webサーバーなしでファイルをディスクから直接開けます。下のライブプレビューと同じ、ライトが当たった球体が表示されるはずです。プレビューは同じシーンを実行していて、マークアップを編集すると再実行されます。
 
 ```html live-example
 <pc-app>
@@ -170,9 +167,15 @@ npmインストールを使用する場合は、インポートマップとscrip
 </pc-app>
 ```
 
+:::note
+
+npmからインストールした場合は、インポートマップと `<script>` タグを上のnpmタブにある `/node_modules/...` のものに置き換えてください。バンドラーを使う場合は両方を削除し、エントリースクリプトからパッケージをインポートします。
+
+:::
+
 ## エディタサポート {#editor-support}
 
-このパッケージは[Custom Elements Manifest](https://github.com/webcomponents/custom-elements-manifest)を同梱しており、エディタはこれを使ってHTMLの記述時にタグと属性の補完、有効な属性値、ホバードキュメントを提供します。
+このパッケージは[Custom Elements Manifest](https://github.com/webcomponents/custom-elements-manifest)を同梱しており、エディタはこれを使ってHTMLの記述時にタグと属性の補完、有効な属性値、ホバードキュメントを提供します。エディタはこれらのファイルを `node_modules` から読み込むため、ページがCDNからライブラリを読み込む場合でも、npmパッケージをインストールしておいてください。
 
 **VS Code** — ワークスペースの `.vscode/settings.json` に以下を追加します。
 

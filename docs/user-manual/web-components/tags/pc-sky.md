@@ -3,7 +3,7 @@ title: <pc-sky>
 description: "Reference for the pc-sky element: skybox from a texture asset with box, dome, or infinite projection, optional scene lighting, and rotation."
 ---
 
-The `<pc-sky>` tag is used to define a sky component.
+The `<pc-sky>` tag gives a scene its sky from an image: a background drawn behind everything else and, with `lighting`, the environment that lights and reflects in the scene's materials.
 
 :::note[Usage]
 
@@ -18,23 +18,23 @@ The `<pc-sky>` tag is used to define a sky component.
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
 | `asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | Texture asset ID (must reference a `texture` type asset) |
-| `center` | Vector3 | `"0 0.01 0"` | Sky center as "X Y Z" values (0-1 range) |
-| `intensity` | Number | `"1"` | Sky brightness intensity |
-| `lighting` | Boolean | `"false"` | Whether the skybox is used as a light source |
-| `mip-level` | Number | `"0"` | Mip level of the skybox, where 0 is the sharpest. Raising it selects a blurrier mip, which is how a skybox is softened without blurring the texture itself |
-| `rotation` | Vector3 | `"0 0 0"` | Sky rotation as "X Y Z" Euler angles |
-| `scale` | Vector3 | `"100 100 100"` | Sky scale as "X Y Z" values |
-| `type` | Enum | `"infinite"` | Sky type: `"box"` \| `"dome"` \| `"infinite"` \| `"none"` |
+| `center` | Vector3 | `"0 0.01 0"` | Sky center as "X Y Z" values (0-1 range). Used by the `box` and `dome` types |
+| `intensity` | Number | `"1"` | Brightness of the sky, and of the lighting it provides |
+| `lighting` | Boolean | `"false"` | Whether the sky's image also lights the scene, including the reflections in its materials. Read when the image loads |
+| `mip-level` | Number | `"0"` | Mip level of the skybox, where 0 is the sharpest. Raising it selects a blurrier mip, which is how a skybox is softened without blurring the texture itself. Needs `lighting`, which is what creates the blurred mips |
+| `rotation` | Vector3 | `"0 0 0"` | Sky rotation as "X Y Z" Euler angles in degrees |
+| `scale` | Vector3 | `"100 100 100"` | Sky scale as "X Y Z" values. Used by the `box` and `dome` types |
+| `type` | Enum | `"infinite"` | Sky type: `"box"` \| `"dome"` \| `"infinite"` \| `"none"`. `"none"` draws no background, while `lighting` still lights the scene |
 
 </div>
 
 ## Example
 
-An equirectangular texture as a dome-projected sky that also lights the scene (note `lighting`). Drag to look around, and try `type="infinite"`, a `rotation` of `"0 90 0"` or a higher `mip-level` to soften it:
+An equirectangular texture as a dome-projected sky that also lights the scene (note `lighting`). Drag to look around, and try `type="infinite"`, a `rotation` of `"0 90 0"`, `type="none"` to keep only the lighting, or a higher `mip-level` to soften it:
 
 ```html live-example
 <pc-app>
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.1/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.6/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset id="skybox" src="https://developer.playcanvas.com/assets/sepulchral-chapel-rotunda-4k.webp"></pc-asset>
     <pc-scene>
         <pc-sky asset="skybox" type="dome" center="0 0.05 0" scale="20 20 20" lighting></pc-sky>
@@ -63,4 +63,4 @@ The attributes are mirrored as properties. The sky itself is engine scene state 
 * [`<pc-scene>`](../pc-scene) — exposure, and where the sky lives in the engine
 * [`<pc-light>`](../pc-light) — direct lights alongside the sky's image-based lighting
 
-Examples: [GLB Loader](https://playcanvas.github.io/web-components/examples/glb-loader.html), [Product Viewer](https://playcanvas.github.io/web-components/examples/product-viewer.html) and [Shadow Cascades](https://playcanvas.github.io/web-components/examples/shadow-cascades.html).
+Examples: [GLB Loader](https://playcanvas.github.io/web-components/examples/#glb-loader.html), [Product Viewer](https://playcanvas.github.io/web-components/examples/#product-viewer.html) and [Shadow Cascades](https://playcanvas.github.io/web-components/examples/#shadow-cascades.html).

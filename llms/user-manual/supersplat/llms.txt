@@ -1,0 +1,75 @@
+---
+covers: [supersplat]
+---
+# SuperSplat
+
+> SuperSplat turns a raw 3D Gaussian splat capture into a shareable scene: clean it in the browser-based SuperSplat Editor, publish it to superspl.at, curate the viewing experience in Studio, and embed it anywhere with the open-source SuperSplat Viewer.
+
+Use this index to edit, publish, present or embed splats. To render splats in your own app, see Gaussian Splatting in the [Engine](/user-manual/engine/llms.txt) index; to convert or process splat files from a script, see [SplatTransform](/user-manual/splat-transform/llms.txt).
+
+## Rules
+
+- **Pick the part of SuperSplat for the task**:
+    - The [SuperSplat Editor](https://superspl.at/editor) cleans up, crops, colors, animates and exports splats in the browser.
+    - [superspl.at](https://superspl.at) hosts published splats, each on a public scene page, and lists yours on the Manage page.
+    - Studio curates a published splat: its starting camera, annotations, post effects, skybox and walkable collision.
+    - The SuperSplat Viewer shows scenes on superspl.at, and can be embedded in your own site or self-hosted.
+    - [Convert](https://superspl.at/convert) runs SplatTransform in the browser.
+    - The SuperSplat API publishes splats from capture tools and pipelines.
+- **Publish from code with the SuperSplat API**, authenticated with a PlayCanvas access token (`Authorization: Bearer <token>`). Its endpoints are in the [OpenAPI specification](https://playcanvas.com/api/supersplat/openapi.json).
+- **Embed the Viewer** from the `@playcanvas/supersplat-viewer` npm package, or export a self-contained HTML viewer from the Editor to host yourself.
+- **Published splats are compressed to SOG**, and large scenes stream as Streamed SOG within a runtime Gaussian budget.
+- **Studio settings are Experience Settings v2 JSON**, the contract between Studio, which writes it, and the Viewer, which reads it.
+
+## Getting started
+
+- [SuperSplat](/user-manual/supersplat/): What SuperSplat does, and the path from a splat file to a published scene.
+- [Getting Started](/user-manual/supersplat/getting-started/): Publishing a first splat in about ten minutes: load, clean up, publish, curate and share.
+
+## SuperSplat Editor
+
+- [SuperSplat Editor](/user-manual/supersplat/editor/): The open-source browser-based editor for cleaning, optimizing and animating splats.
+- [Interface Overview](/user-manual/supersplat/editor/interface/): The menus, scene manager, viewport, toolbars and panels.
+- [Import and Export](/user-manual/supersplat/editor/import-export/): The formats it reads and writes, such as PLY, SOG, SPLAT, KSPLAT, SPZ and LCC, camera poses, and standalone viewers.
+- [Selection and Cleanup](/user-manual/supersplat/editor/editing-splats/): Selecting, deleting, restoring and separating Gaussians to remove floaters and crop splats.
+- [Transform, Measure and Align](/user-manual/supersplat/editor/transform-measure-align/): Moving, rotating, scaling, measuring, aligning and merging splats.
+- [Managing Splats](/user-manual/supersplat/editor/scene-management/): Working with several splats in one scene.
+- [Color and Appearance](/user-manual/supersplat/editor/color-and-appearance/): Grading colors, and how Gaussians and selections are drawn.
+- [Data Panel](/user-manual/supersplat/editor/data-panel/): Inspecting splat attributes, filtering by value and finding outliers.
+- [Timeline](/user-manual/supersplat/editor/timeline/): Camera keyframes, COLMAP pose import, and animated camera paths.
+- [Rendering Media](/user-manual/supersplat/editor/rendering/): Rendering images and videos, including 360° output.
+- [Managing Projects](/user-manual/supersplat/editor/managing-projects/): Saving edits as `.ssproj` project files.
+- [Publishing](/user-manual/supersplat/editor/publishing/): Publishing a splat from the Editor to superspl.at.
+- [Troubleshooting](/user-manual/supersplat/editor/troubleshooting/): Fixing common problems with imports, selection, exports, performance and publishing.
+
+## Publishing and Studio
+
+- [Direct Upload](/user-manual/supersplat/upload/): Uploading a finished splat file to superspl.at without the Editor.
+- [Manage](/user-manual/supersplat/manage/): Listing, editing, sharing and deleting your published splats.
+- [Streaming & Performance](/user-manual/supersplat/streaming/): How published splats are compressed and streamed, and the Gaussian budget.
+- [SuperSplat Studio](/user-manual/supersplat/studio/): Curating a published splat's viewing experience.
+- [Cameras](/user-manual/supersplat/studio/cameras/): The starting camera and field of view.
+- [Annotations](/user-manual/supersplat/studio/annotations/): Clickable 3D hotspots that guide visitors through a scene.
+- [Post Effects](/user-manual/supersplat/studio/post-effects/): Sharpness, bloom, color grading, vignette and tone mapping.
+- [Skybox & Background](/user-manual/supersplat/studio/skybox/): A background color or an equirectangular skybox.
+- [Collision](/user-manual/supersplat/studio/collision/): Voxel collision so visitors can walk through a scene.
+- [Experience Settings](/user-manual/supersplat/studio/experience-settings/): The JSON schema of Studio's settings, as the Viewer reads them.
+- [Scene Page](/user-manual/supersplat/scene-page/): The public page of a published splat: viewer, sharing, embedding, downloads and comments.
+
+## Viewer and API
+
+- [SuperSplat Viewer](/user-manual/supersplat/viewer/): The open-source viewer behind scene pages.
+- [Embedding the Viewer](/user-manual/supersplat/viewer/embedding/): Embedding it in your own app from npm, with URL parameters or templating.
+- [Self-Hosting the Viewer](/user-manual/supersplat/viewer/self-hosting/): Exporting a splat as a self-contained HTML viewer to host anywhere.
+- [API & Integrations](/user-manual/supersplat/api-integrations/): Publishing splats and listing a user's scenes from capture tools, training pipelines and apps.
+- [SuperSplat API specification](https://playcanvas.com/api/supersplat/openapi.json): The OpenAPI definition of every endpoint.
+- [Convert](/user-manual/supersplat/convert/): Converting and transforming splats in the browser at superspl.at/convert.
+
+## Source
+
+- [SuperSplat Editor on GitHub](https://github.com/playcanvas/supersplat): The source of the Editor.
+- [SuperSplat Viewer on GitHub](https://github.com/playcanvas/supersplat-viewer): The source of the Viewer.
+
+## Optional
+
+{{OTHER_PAGES}}

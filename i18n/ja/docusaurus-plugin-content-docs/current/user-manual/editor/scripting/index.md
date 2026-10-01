@@ -26,5 +26,5 @@ PlayCanvasでのスクリプト作成が初めての場合は、ここで説明�
 - [読み込み順序](./loading-order.md) — スクリプトが読み込まれる順序を制御します。
 
 :::ai
-Editor設定も必要なスクリプト変更では、AIコーディングアシスタントに**[Pull/Pushモード](/user-manual/editor/scripting/vscode-extension/)**でソースを編集させ、**[Editor MCP Server](/user-manual/editor/mcp-server/)**で割り当て、アトリビュート、インスタンス、Launcher動作を確認させます。ソースとEditorの両方の変更を確認します。
+Editor設定も必要なスクリプト変更では、AIコーディングアシスタントに[**Pull/Pushモード**](/user-manual/editor/scripting/vscode-extension/)でソースを編集させ、[**Editor MCP Server**](/user-manual/editor/mcp-server/)で割り当て、アトリビュート、インスタンス、Launcher動作を確認させます。ソースとEditorの両方の変更を確認します。
 :::

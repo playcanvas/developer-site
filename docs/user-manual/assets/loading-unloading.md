@@ -169,7 +169,7 @@ Set this **before** preloading or loading any assets, so the requests pick it up
 
 :::note
 
-This is a process-global setting (it applies to the shared HTTP layer), so with multiple applications on a page the last value set wins. It applies to all `XMLHttpRequest`-based loads, which covers the large majority of assets.
+This is a process-global setting (it applies to the shared HTTP layer), so with multiple applications on a page the last value set wins. It applies to every asset load, including the Gaussian splat and asset bundle loaders that fetch their data directly rather than through the HTTP layer.
 
 :::
 

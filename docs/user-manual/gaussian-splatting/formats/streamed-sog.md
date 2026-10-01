@@ -101,7 +101,7 @@ A chunk file's contents are exactly the concatenation of the leaf runs that refe
 
 When the top-level `lodErrors` flag is `true`, every leaf carries an `errors` array measuring how much each of its LOD levels deviates from the highest-detail representation, indexed by LOD level. Errors are finite, non-negative and non-decreasing with level; level `0` is typically `0`. Only relative magnitudes are meaningful — a viewer uses them to decide which regions benefit most from finer levels (the PlayCanvas engine spends its splat budget by error removed per splat). Entries for levels a leaf does not hold are ignored.
 
-Writers producing these values include [SplatTransform](/user-manual/splat-transform) 3.3 and newer. Readers **should** treat a manifest without `lodErrors: true` as carrying no error data and fall back to their own heuristic (for example, deriving errors from the per-level splat counts).
+[SplatTransform](/user-manual/splat-transform) 3.3 through 3.7 wrote these values; 3.8 and newer omit them. Readers **should** treat a manifest without `lodErrors: true` as carrying no error data and fall back to their own heuristic (for example, deriving errors from the per-level splat counts).
 
 ---
 

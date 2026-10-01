@@ -26,3 +26,29 @@ The Editor's main toolbar can be found on the left, vertical edge of the Editor.
 | ![How Do I](/img/user-manual/editor/interface/toolbar/how-do-i.png) | **How Do I...?** | Toggle the 'How Do I...?' help widget in the [Viewport](../viewport). |
 | ![Controls](/img/user-manual/editor/interface/toolbar/controls.png) | **Controls** | Show the list of [controls and keyboard shortcuts](../keyboard-shortcuts) supported by the Editor. |
 | ![Settings](/img/user-manual/editor/interface/toolbar/settings.png) | **Settings** | Load Editor and Scene Settings into the [Inspector](../inspector). |
+
+## Customizing the toolbar
+
+Since Editor 2.30.3 you can hide buttons you never use and reorder the rest.
+
+<video autoPlay muted loop controls src='/video/editor-toolbar-customization.mp4' style={{width: '100%', height: 'auto'}} />
+
+Right-click anywhere on the toolbar to open its context menu:
+
+| Command | Description |
+| ------- | ----------- |
+| **Edit Toolbar** | Enter edit mode. |
+| **Done Editing** | Leave edit mode. Shown in place of Edit Toolbar while editing. |
+| **Reset Toolbar** | Restore the default buttons and order. Only shown once you have hidden or moved something. |
+
+In edit mode:
+
+- Each button gains an **eye** badge. Click it to hide or show that button. Hidden buttons stay visible, dimmed, while you are editing so you can bring them back.
+- Buttons can be dragged to reorder them. The toolbar has two groups — the commands at the top and the utility buttons at the bottom — and a button can only be moved within its own group.
+- The **Menu** button at the top of the toolbar becomes a **Done editing toolbar** button. Click it, or pick **Done Editing** from the context menu, to finish.
+
+:::note
+
+Your layout is saved in your browser rather than in the project, so it applies to every project you open in that browser and is not shared with your collaborators.
+
+:::

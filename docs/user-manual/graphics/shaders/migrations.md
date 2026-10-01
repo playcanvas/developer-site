@@ -86,6 +86,14 @@ var {LIT_ENV_ATLAS}Sampler: sampler;
 let raw: vec4f = textureSample({LIT_ENV_ATLAS}, {LIT_ENV_ATLAS}Sampler, uv);
 ```
 
+#### `uScreenSize` → `screen_size`
+
+Use `screen_size` in forward shaders. Change the GLSL declaration from `uniform vec4 uScreenSize;` to `uniform vec4 screen_size;`, or the WGSL declaration from `uniform uScreenSize: vec4f;` to `uniform screen_size: vec4f;`, and update every reference. The value remains the canvas drawing-buffer width, height, inverse width, and inverse height.
+
+Existing shaders that explicitly declare `uScreenSize` continue to work, but debug builds emit a deprecation warning once. Changing `material.shaderChunksVersion` does not silence this warning; rename the uniform instead.
+
+See [Built-in Shader Uniforms](/user-manual/graphics/shaders/built-in-uniforms) for details.
+
 ---
 
 ### *Engine v2.20*

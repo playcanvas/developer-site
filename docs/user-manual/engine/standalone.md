@@ -1,6 +1,6 @@
 ---
 title: Using the Engine Standalone
-description: Build PlayCanvas applications without the Editor using npm, a CDN, or a direct script include.
+description: Build PlayCanvas applications without the Editor, using npm and a build tool, or an import map and a CDN.
 ---
 
 import Tabs from '@theme/Tabs';
@@ -49,7 +49,8 @@ First, select whether you prefer to develop in JavaScript or TypeScript:
 2. Install `playcanvas` and `vite`:
 
     ```sh
-    npm install playcanvas vite --save-dev
+    npm install playcanvas
+    npm install vite --save-dev
     ```
 
 3. Create an `index.html` and paste this:
@@ -75,12 +76,33 @@ First, select whether you prefer to develop in JavaScript or TypeScript:
     ```javascript title="main.js"
     import * as pc from 'playcanvas';
 
-    // create an application
+    // create a graphics device, preferring WebGPU over WebGL 2.0
     const canvas = document.getElementById('application');
-    const app = new pc.Application(canvas);
+    const device = await pc.createGraphicsDevice(canvas, {
+        deviceTypes: [pc.DEVICETYPE_WEBGPU]
+    });
+
+    // create an application with the systems and handlers it uses
+    const options = new pc.AppOptions();
+    options.graphicsDevice = device;
+    options.componentSystems = [
+        pc.RenderComponentSystem,
+        pc.CameraComponentSystem,
+        pc.LightComponentSystem
+    ];
+    options.resourceHandlers = [
+        pc.TextureHandler,
+        pc.ContainerHandler
+    ];
+
+    const app = new pc.AppBase(canvas);
+    app.init(options);
     app.setCanvasResolution(pc.RESOLUTION_AUTO);
     app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
     app.start();
+
+    // resize the canvas when the window is resized
+    window.addEventListener('resize', () => app.resizeCanvas());
 
     // create a camera
     const camera = new pc.Entity();
@@ -98,7 +120,7 @@ First, select whether you prefer to develop in JavaScript or TypeScript:
 
     // create a box
     const box = new pc.Entity();
-    box.addComponent('model', {
+    box.addComponent('render', {
         type: 'box'
     });
     app.root.addChild(box);
@@ -130,7 +152,8 @@ First, select whether you prefer to develop in JavaScript or TypeScript:
 2. Install `playcanvas` and `vite`:
 
     ```sh
-    npm install playcanvas vite --save-dev
+    npm install playcanvas
+    npm install vite --save-dev
     ```
 
 3. Create an `index.html` and paste this:
@@ -156,12 +179,33 @@ First, select whether you prefer to develop in JavaScript or TypeScript:
     ```typescript title="main.ts"
     import * as pc from 'playcanvas';
 
-    // create an application
+    // create a graphics device, preferring WebGPU over WebGL 2.0
     const canvas = document.getElementById('application') as HTMLCanvasElement;
-    const app = new pc.Application(canvas);
+    const device = await pc.createGraphicsDevice(canvas, {
+        deviceTypes: [pc.DEVICETYPE_WEBGPU]
+    });
+
+    // create an application with the systems and handlers it uses
+    const options = new pc.AppOptions();
+    options.graphicsDevice = device;
+    options.componentSystems = [
+        pc.RenderComponentSystem,
+        pc.CameraComponentSystem,
+        pc.LightComponentSystem
+    ];
+    options.resourceHandlers = [
+        pc.TextureHandler,
+        pc.ContainerHandler
+    ];
+
+    const app = new pc.AppBase(canvas);
+    app.init(options);
     app.setCanvasResolution(pc.RESOLUTION_AUTO);
     app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
     app.start();
+
+    // resize the canvas when the window is resized
+    window.addEventListener('resize', () => app.resizeCanvas());
 
     // create a camera
     const camera = new pc.Entity();
@@ -179,7 +223,7 @@ First, select whether you prefer to develop in JavaScript or TypeScript:
 
     // create a box
     const box = new pc.Entity();
-    box.addComponent('model', {
+    box.addComponent('render', {
         type: 'box'
     });
     app.root.addChild(box);
@@ -253,12 +297,33 @@ First, select whether you prefer to develop in JavaScript or TypeScript:
     ```javascript title="main.js"
     import * as pc from 'playcanvas';
 
-    // create an application
+    // create a graphics device, preferring WebGPU over WebGL 2.0
     const canvas = document.getElementById('application');
-    const app = new pc.Application(canvas);
+    const device = await pc.createGraphicsDevice(canvas, {
+        deviceTypes: [pc.DEVICETYPE_WEBGPU]
+    });
+
+    // create an application with the systems and handlers it uses
+    const options = new pc.AppOptions();
+    options.graphicsDevice = device;
+    options.componentSystems = [
+        pc.RenderComponentSystem,
+        pc.CameraComponentSystem,
+        pc.LightComponentSystem
+    ];
+    options.resourceHandlers = [
+        pc.TextureHandler,
+        pc.ContainerHandler
+    ];
+
+    const app = new pc.AppBase(canvas);
+    app.init(options);
     app.setCanvasResolution(pc.RESOLUTION_AUTO);
     app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
     app.start();
+
+    // resize the canvas when the window is resized
+    window.addEventListener('resize', () => app.resizeCanvas());
 
     // create a camera
     const camera = new pc.Entity();
@@ -276,7 +341,7 @@ First, select whether you prefer to develop in JavaScript or TypeScript:
 
     // create a box
     const box = new pc.Entity();
-    box.addComponent('model', {
+    box.addComponent('render', {
         type: 'box'
     });
     app.root.addChild(box);
@@ -326,15 +391,36 @@ First, select whether you prefer to develop in JavaScript or TypeScript:
 
 3. Create a `main.ts` and paste this:
 
-    ```javascript title="main.ts"
+    ```typescript title="main.ts"
     import * as pc from 'playcanvas';
 
-    // create an application
+    // create a graphics device, preferring WebGPU over WebGL 2.0
     const canvas = document.getElementById('application') as HTMLCanvasElement;
-    const app = new pc.Application(canvas);
+    const device = await pc.createGraphicsDevice(canvas, {
+        deviceTypes: [pc.DEVICETYPE_WEBGPU]
+    });
+
+    // create an application with the systems and handlers it uses
+    const options = new pc.AppOptions();
+    options.graphicsDevice = device;
+    options.componentSystems = [
+        pc.RenderComponentSystem,
+        pc.CameraComponentSystem,
+        pc.LightComponentSystem
+    ];
+    options.resourceHandlers = [
+        pc.TextureHandler,
+        pc.ContainerHandler
+    ];
+
+    const app = new pc.AppBase(canvas);
+    app.init(options);
     app.setCanvasResolution(pc.RESOLUTION_AUTO);
     app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
     app.start();
+
+    // resize the canvas when the window is resized
+    window.addEventListener('resize', () => app.resizeCanvas());
 
     // create a camera
     const camera = new pc.Entity();
@@ -352,7 +438,7 @@ First, select whether you prefer to develop in JavaScript or TypeScript:
 
     // create a box
     const box = new pc.Entity();
-    box.addComponent('model', {
+    box.addComponent('render', {
         type: 'box'
     });
     app.root.addChild(box);
@@ -370,7 +456,7 @@ First, select whether you prefer to develop in JavaScript or TypeScript:
 5. Compile `main.ts` to `main.js`:
 
     ```sh
-    npx tsc main.ts --lib esnext,dom --module esnext --moduleResolution node
+    npx tsc main.ts --target es2022 --lib esnext,dom --module esnext --moduleResolution bundler --types webxr
     ```
 
 6. Run `serve`:
@@ -385,3 +471,22 @@ First, select whether you prefer to develop in JavaScript or TypeScript:
 
   </TabItem>
 </Tabs>
+
+## Configuring the Application
+
+The samples create the application in two steps:
+
+1. [`createGraphicsDevice`](https://api.playcanvas.com/engine/functions/createGraphicsDevice.html) creates the graphics device. Listing `DEVICETYPE_WEBGPU` in `deviceTypes` requests WebGPU, and the Engine falls back to WebGL 2.0 when WebGPU isn't available.
+2. [`AppBase`](https://api.playcanvas.com/engine/classes/AppBase.html) is initialized with an [`AppOptions`](https://api.playcanvas.com/engine/classes/AppOptions.html) object that lists the component systems and resource handlers the application uses. Because nothing else is registered, a build tool can leave the rest out of your bundle.
+
+As your application grows, register what it needs:
+
+* **Components**: Each component type needs its component system. For example, add `pc.ScriptComponentSystem` to use the `script` component. The [`Application` constructor](https://api.playcanvas.com/engine/classes/Application.html#constructor) lists every component type with its system. If a system is missing, `addComponent` returns `null`, and the debug build of the Engine logs an error.
+* **Assets**: Each asset type needs its resource handler. The samples register `pc.TextureHandler` for textures and `pc.ContainerHandler` for GLB models.
+* **Other features**: Sound, batching, lightmapping and XR are enabled with further `AppOptions` properties. For example, the `sound` component also needs `options.soundManager = new pc.SoundManager()`.
+
+:::note
+
+The [`Application`](https://api.playcanvas.com/engine/classes/Application.html) class sets all of this up for you. However, its constructor can't create a WebGPU device, it adds every component system and resource handler to your bundle, and it is expected to be deprecated in a future release.
+
+:::

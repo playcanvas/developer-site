@@ -5,7 +5,7 @@ description: PlayCanvas の Scrollbar Component は、関連する Scroll View C
 
 Scrollbarコンポーネントは、[Scroll View](scrollview.md)コンポーネント用のスクロールコントロールを定義します。
 
-詳細については、[ユーザーインターフェース](/user-manual/user-interface)セクションを参照してください。
+スクロールビューでの使い方は[スクロールバー](/user-manual/user-interface/scroll-views/#scrollbars)を、単独でスライダーとして使う方法は[スライダー](/user-manual/user-interface/common-widgets/#sliders)を参照してください。
 
 ![Scrollbar Component](/img/user-manual/editor/scenes/components/component-scrollbar.png)
 
@@ -22,7 +22,9 @@ Scrollbarコンポーネントは、[Scroll View](scrollview.md)コンポーネ�
 
 - [Scroll Viewコンポーネント](scrollview.md) - このスクロールバーを使用するスクロール可能エリア
 - [Elementコンポーネント](element.md) - スクロールバーハンドルに必要
-- [ユーザーインターフェース](/user-manual/user-interface) - ユーザーインターフェースの構築について詳しく学ぶ
+- [スクロールビュー](/user-manual/user-interface/scroll-views/) - スクロールビューとそのスクロールバー
+- [スライダー](/user-manual/user-interface/common-widgets/#sliders) - スライダーとして使うスクロールバー
+- [ユーザーインターフェース](/user-manual/user-interface/) - ユーザーインターフェースの構築について詳しく学ぶ
 
 ## スクリプトインターフェース
 

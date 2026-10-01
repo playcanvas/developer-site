@@ -40,7 +40,7 @@ Organizationの**名前**と、**OrganizationのID**(半角英数字とダッシ
 
 ![Convert Popup](/img/user-manual/account-management/organizations/creating/convert-popup.png)
 
-Organizationとして直接ログインすることはできないため、アカウントを変換すると、そのアカウントではログインできなくなります。そのため、別のユーザーを新しい**オーナー (Owner)**として指定する必要があります。
+Organizationとして直接ログインすることはできないため、アカウントを変換すると、そのアカウントではログインできなくなります。そのため、別のユーザーを新しい **オーナー (Owner)** として指定する必要があります。
 
 :::warning
 
