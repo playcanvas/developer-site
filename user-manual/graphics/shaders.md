@@ -45,6 +45,8 @@ If you write a GLSL shader, it is directly supported by the WebGL2 platform. How
 
 :::
 
+See [Built-in Shader Uniforms](https://developer.playcanvas.com/user-manual/graphics/shaders/built-in-uniforms.md) for the camera matrices, screen and viewport dimensions, and other values supplied by the engine during forward rendering, and [Shader Parameters](https://developer.playcanvas.com/user-manual/graphics/shaders/shader-parameters.md) for setting the values of uniforms on a material, on a mesh instance, or globally.
+
 ## Preprocessor
 
 Before the shader is used, a preprocessing step is applied, allowing you to manage shader variations effectively.

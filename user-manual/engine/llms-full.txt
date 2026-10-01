@@ -3,8 +3,8 @@
 > The PlayCanvas Engine is an open-source JavaScript 3D engine that renders with WebGL2 or WebGPU. It is published as `playcanvas` on npm, with TypeScript declarations, and runs every PlayCanvas product. This index describes Engine 2.22.2.
 
 Index: https://developer.playcanvas.com/user-manual/engine/llms.txt
-Total Documents: 213
-Generated: 2026-09-30
+Total Documents: 215
+Generated: 2026-10-01
 
 ================================================================================
 
@@ -5465,6 +5465,8 @@ If you write a GLSL shader, it is directly supported by the WebGL2 platform. How
 
 :::
 
+See [Built-in Shader Uniforms](https://developer.playcanvas.com/user-manual/graphics/shaders/built-in-uniforms.md) for the camera matrices, screen and viewport dimensions, and other values supplied by the engine during forward rendering, and [Shader Parameters](https://developer.playcanvas.com/user-manual/graphics/shaders/shader-parameters.md) for setting the values of uniforms on a material, on a mesh instance, or globally.
+
 ## Preprocessor
 
 Before the shader is used, a preprocessing step is applied, allowing you to manage shader variations effectively.
@@ -5880,7 +5882,7 @@ Uniforms are used to pass resources from the engine to the shader. They are decl
 uniform vec3 view_position;
 ```
 
-The engine automatically sets appropriate uniform values when rendering.
+The engine supplies the values of [built-in shader uniforms](https://developer.playcanvas.com/user-manual/graphics/shaders/built-in-uniforms.md) during forward rendering. Set your own uniform values from application code, for example with `material.setParameter()`.
 
 :::note
 
@@ -6849,6 +6851,16 @@ By doing this you will no longer see warning messages in the console.
 ## Chunk changes
 
 The following tables break down the chunk changes by Engine release.
+
+### *Engine v2.23*
+
+#### `uScreenSize` → `screen_size`
+
+Use `screen_size` in forward shaders. Change the GLSL declaration from `uniform vec4 uScreenSize;` to `uniform vec4 screen_size;`, or the WGSL declaration from `uniform uScreenSize: vec4f;` to `uniform screen_size: vec4f;`, and update every reference. The value remains the canvas drawing-buffer width, height, inverse width, and inverse height.
+
+Existing shaders that explicitly declare `uScreenSize` continue to work, but debug builds emit a deprecation warning once. Changing `material.shaderChunksVersion` does not silence this warning; rename the uniform instead.
+
+See [Built-in Shader Uniforms](https://developer.playcanvas.com/user-manual/graphics/shaders/built-in-uniforms.md) for details.
 
 ### *Engine v2.20*
 
@@ -18576,7 +18588,7 @@ var color = uniform.tints[2];
 var weight = uniform.weights[3].element;
 ```
 
-The engine automatically sets appropriate uniform values when rendering.
+The engine supplies the values of [built-in shader uniforms](https://developer.playcanvas.com/user-manual/graphics/shaders/built-in-uniforms.md) during forward rendering. Set your own uniform values from application code, for example with `material.setParameter()`.
 
 :::note
 
@@ -19046,6 +19058,172 @@ Dual-source blending requires exactly one color attachment. See [Dual-Source Ble
 Support for rendering to integer textures (output format other than `vec4f`) is not available yet, and will be added in the future.
 
 :::
+
+--------------------------------------------------------------------------------
+
+## Built-in Shader Uniforms
+
+URL: https://developer.playcanvas.com/user-manual/graphics/shaders/built-in-uniforms/
+Markdown: https://developer.playcanvas.com/user-manual/graphics/shaders/built-in-uniforms.md
+
+PlayCanvas supplies the following numerical uniforms when rendering meshes in forward passes. Use them in `ShaderMaterial` shaders and custom material chunks without calling `Material.setParameter()` for these names. To set the values of uniforms yourself, see [Shader Parameters](https://developer.playcanvas.com/user-manual/graphics/shaders/shader-parameters.md).
+
+Camera values follow the camera or XR view being rendered. The list describes forward rendering; do not assume the same inputs are populated in shadow, picking, compute, or standalone post-processing passes.
+
+## Available Uniforms
+
+The uniforms can be read in vertex and fragment shaders. Declare the names you use, with the types shown below. In WGSL, access them through the `uniform.` prefix.
+
+| Uniform | GLSL type | WGSL type | Value |
+| --- | --- | --- | --- |
+| `matrix_view` | `mat4` | `mat4x4f` | Transforms world-space positions to view space. |
+| `matrix_viewInverse` | `mat4` | `mat4x4f` | Inverse of `matrix_view`; transforms view-space positions to world space. |
+| `matrix_view3` | `mat3` | `mat3x3f` | Upper-left 3×3 part of `matrix_view`. Transforms directions without translation. |
+| `matrix_projection` | `mat4` | `mat4x4f` | Transforms view-space positions to clip space. Includes the renderer's projection adjustments, such as jitter, render-target Y flip, and the graphics backend's depth convention. |
+| `matrix_viewProjection` | `mat4` | `mat4x4f` | `matrix_projection * matrix_view`; transforms world-space positions to clip space. |
+| `view_position` | `vec3` | `vec3f` | Camera position in world space; the current eye's position in XR. |
+| `camera_params` | `vec4` | `vec4f` | Camera clip planes and projection type: `1 / farClip`, `farClip`, `nearClip`, and `1` for an orthographic camera or `0` for a perspective one. Use it to linearize depth values. |
+| `screen_size` | `vec4` | `vec4f` | Canvas drawing-buffer width, height, inverse width, and inverse height. These are pixel dimensions, not CSS dimensions. |
+| `viewport_size` | `vec4` | `vec4f` | Camera viewport width, height, inverse width, and inverse height in pixels. Accounts for the render target, `camera.rect`, and the XR eye viewport. Contains no viewport origin. |
+| `view_index` | `uint` | `u32` | Zero-based index of the XR view currently being rendered. Use it to select per-view data such as a depth texture array layer. |
+
+The projection matrices are the versions used for rendering. They can differ from a projection matrix calculated in application code before jitter or backend adjustments. Prefer `matrix_viewProjection` when projecting a world-space position in a shader.
+
+`matrix_model` and `matrix_normal` are per-mesh inputs, separate from these camera and scene values. For transformations that also support skinning, morphing, and instancing, use the [vertex shader chunks](https://developer.playcanvas.com/user-manual/graphics/shaders.md#vertex-shader).
+
+The scene depth and color textures, `uSceneDepthMap` and `uSceneColorMap`, are described in [Depth Layer](https://developer.playcanvas.com/user-manual/graphics/cameras/depth-layer.md).
+
+## Declaring and Reading Uniforms
+
+For example, convert a world-space direction to view space:
+
+**GLSL**
+
+```glsl
+uniform mat3 matrix_view3;
+
+vec3 directionToView(vec3 worldDirection) {
+    return matrix_view3 * worldDirection;
+}
+```
+
+**WGSL**
+
+```wgsl
+uniform matrix_view3: mat3x3f;
+
+fn directionToView(worldDirection: vec3f) -> vec3f {
+    return uniform.matrix_view3 * worldDirection;
+}
+```
+
+For the full declaration rules, see [GLSL Specifics](https://developer.playcanvas.com/user-manual/graphics/shaders/glsl-specifics.md#uniforms) and [WGSL Reflection](https://developer.playcanvas.com/user-manual/graphics/shaders/wgsl-reflection.md#uniforms).
+
+## Screen Size and Viewport Size
+
+Both size uniforms use the layout `[width, height, 1 / width, 1 / height]`, but describe different areas:
+
+- `screen_size` always describes the canvas drawing buffer. Rendering to a smaller offscreen target does not change it.
+- `viewport_size` describes the camera's viewport within its current target. It changes for offscreen targets, partial camera rectangles, and XR eye viewports.
+
+For a 1920×1080 canvas with a camera rendering into a 960×540 target, `screen_size.xy` is `(1920, 1080)` and `viewport_size.xy` is `(960, 540)` when the camera fills the target. If the camera occupies half the target's width, `viewport_size.xy` is `(480, 540)`.
+
+Do not use `screen_size` as a general texture-size uniform. To normalize framebuffer coordinates for a partial viewport, also account for the viewport origin; neither size uniform supplies that origin.
+
+--------------------------------------------------------------------------------
+
+## Shader Parameters
+
+URL: https://developer.playcanvas.com/user-manual/graphics/shaders/shader-parameters/
+Markdown: https://developer.playcanvas.com/user-manual/graphics/shaders/shader-parameters.md
+
+Shaders read their inputs from uniforms. The engine sets many of them itself, such as the camera matrices described in [Built-in Shader Uniforms](https://developer.playcanvas.com/user-manual/graphics/shaders/built-in-uniforms.md), and a `StandardMaterial` sets the uniforms of its own properties. The application can set the values of uniforms too, in three places:
+
+- On a **material**, for all mesh instances that render with it.
+- On a **mesh instance**, for the draws of that mesh instance only.
+- **Globally**, on the scope of the graphics device, for every draw that does not set its own value.
+
+For each draw, a value set on the mesh instance takes precedence over one set on its material, which takes precedence over a global value.
+
+The values can be numbers, arrays of numbers for vectors and matrices, and textures. To change the contents of an array, set the array again: a change made to an array in place is not guaranteed to be picked up.
+
+## Declaring the Uniforms
+
+Declare the uniforms in the shader as usual. For example, a fragment shader reading a `tint` color:
+
+**GLSL**
+
+```glsl
+uniform vec3 tint;
+
+void main(void) {
+    gl_FragColor = vec4(tint, 1.0);
+}
+```
+
+**WGSL**
+
+```wgsl
+uniform tint: vec3f;
+
+@fragment
+fn fragmentMain(input: FragmentInput) -> FragmentOutput {
+    var output: FragmentOutput;
+    output.color = vec4f(uniform.tint, 1.0);
+    return output;
+}
+```
+
+## Material Parameters
+
+`Material.setParameter()` sets a value for all mesh instances that render with the material, and `Material.deleteParameter()` removes it. This is how the uniforms of a `ShaderMaterial`, or of custom shader chunks, are supplied:
+
+```javascript
+material.setParameter('tint', [1, 0.5, 0]);
+```
+
+`StandardMaterial` supplies the uniforms of its own properties, such as `diffuse`, `emissive` or `gloss`. Set these properties and call `update()` instead. Calling `setParameter()` with the names of their uniforms, such as `material_diffuse`, has no effect, and debug builds warn about it.
+
+Material parameters are not reset after the draws of the material. A later draw whose material does not have a parameter of the same name reads the value the last material set.
+
+## Mesh Instance Parameters
+
+`MeshInstance.setParameter()` overrides a value for the draws of one mesh instance, and `MeshInstance.deleteParameter()` removes the override. Other mesh instances using the same material are not affected:
+
+```javascript
+const meshInstance = entity.render.meshInstances[0];
+meshInstance.setParameter('tint', [0, 1, 0]);
+```
+
+A mesh instance can also override the values of `StandardMaterial` properties, and its textures, using the names of their uniforms. The value is the one the shader receives, so a color is set in linear space, while the `diffuse` property itself takes an sRGB color:
+
+```javascript
+meshInstance.setParameter('material_diffuse', new Float32Array([0.8, 0.1, 0.1]));
+```
+
+:::warning
+
+Overriding the values or textures of a material per mesh instance is not a cheap solution. The mesh instance gets its own copy of the material's uniform data, which takes additional GPU memory, is uploaded again whenever the material or the override changes, and is bound for each of its draws. When many mesh instances differ in these values, prefer separate materials, or [hardware instancing](https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/hardware-instancing.md) with per-instance data.
+
+:::
+
+## Global Parameters
+
+A value can also be set globally, on the scope of the graphics device. Every draw where neither the material nor the mesh instance sets its own value uses it:
+
+```javascript
+app.graphicsDevice.scope.resolve('tint').setValue([1, 0, 0]);
+```
+
+A mesh instance overriding a global value uses its own value for its draws only, and the draws that follow read the global value again.
+
+As material parameters are not reset after the draws of the material, a name used as a global default should not be set as a parameter of only some of the materials. The draws of the other materials would read the value the last of those materials set, instead of the global one.
+
+## Values Set by the Renderer
+
+The renderer sets some uniforms itself, once for each render pass: the camera values listed in [Built-in Shader Uniforms](https://developer.playcanvas.com/user-manual/graphics/shaders/built-in-uniforms.md), and the values of the lights and of the fog. Values set for these names on a material, on a mesh instance or globally have no effect.
+
+On WebGPU, the same applies to the textures the renderer supplies for each pass to `StandardMaterial`, such as the environment atlas, the scene color and depth maps, and the shadow and cookie atlases of clustered lighting. They cannot be replaced per material or per mesh instance, and debug builds warn about it.
 
 --------------------------------------------------------------------------------
 
@@ -23814,7 +23992,7 @@ It is called in the forward pass after the gaussian falloff and opacity dither h
 Inside the chunk you can also use:
 
 - `gl_FragCoord` (GLSL) / `pcPosition` (WGSL) — the fragment's framebuffer position in pixels
-- `uScreenSize` — engine-provided `vec4` uniform: `xy` = render target size, `zw` = inverse size
+- `screen_size` — engine-provided `vec4` / `vec4f` uniform: `xy` = canvas drawing-buffer size in pixels, `zw` = inverse size. See [Built-in Shader Uniforms](https://developer.playcanvas.com/user-manual/graphics/shaders/built-in-uniforms.md) for the distinction from `viewport_size`.
 - Your own uniforms and textures, declared in the chunk and driven via material parameters
 
 ## Example
@@ -23994,20 +24172,22 @@ fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
 
 **2. Read it in the fragment stage chunk** and early-out before the expensive per-pixel work:
 
+This example assumes rendering fills the canvas drawing buffer. The built-in [`screen_size`](https://developer.playcanvas.com/user-manual/graphics/shaders/built-in-uniforms.md) supplies its dimensions; adapt the coordinate normalization for other render targets or partial viewports.
+
 **GLSL**
 
 ```glsl
 uniform vec3 uClipCenter;
 uniform vec3 uClipHalf;
 uniform mat4 uInvViewProj;
-uniform vec4 uScreenSize;
+uniform vec4 screen_size;
 
 void modifySplatColor(vec2 gaussianUV, inout vec4 color) {
     // splats fully inside or outside the box were already resolved per splat in the vertex stage
     if (getClipState() == 1u) return;
 
     // reconstruct the world position of this fragment (on the splat's depth plane)
-    vec3 ndc = vec3(gl_FragCoord.xy * uScreenSize.zw, gl_FragCoord.z) * 2.0 - 1.0;
+    vec3 ndc = vec3(gl_FragCoord.xy * screen_size.zw, gl_FragCoord.z) * 2.0 - 1.0;
     vec4 world = uInvViewProj * vec4(ndc, 1.0);
     vec3 worldPos = world.xyz / world.w;
 
@@ -24025,7 +24205,7 @@ void modifySplatColor(vec2 gaussianUV, inout vec4 color) {
 uniform uClipCenter: vec3f;
 uniform uClipHalf: vec3f;
 uniform uInvViewProj: mat4x4f;
-uniform uScreenSize: vec4f;
+uniform screen_size: vec4f;
 
 fn modifySplatColor(gaussianUV: vec2f, color: ptr<function, vec4f>) {
     // splats fully inside or outside the box were already resolved per splat in the vertex stage
@@ -24034,7 +24214,7 @@ fn modifySplatColor(gaussianUV: vec2f, color: ptr<function, vec4f>) {
     }
 
     // reconstruct the world position of this fragment (on the splat's depth plane)
-    let uv = pcPosition.xy * uniform.uScreenSize.zw;
+    let uv = pcPosition.xy * uniform.screen_size.zw;
     let ndc = vec3f(uv.x * 2.0 - 1.0, (1.0 - uv.y) * 2.0 - 1.0, pcPosition.z * 2.0 - 1.0);
     let world = uniform.uInvViewProj * vec4f(ndc, 1.0);
     let worldPos = world.xyz / world.w;
@@ -25363,12 +25543,14 @@ scopeDepthUvMatrix.setValue(view.depthUvMatrix.data);
 
 With all the preparation we can cover mono/stereo scenarios and different texture formats in a single shader:
 
+`screen_size` and `view_index` are [built-in uniforms](https://developer.playcanvas.com/user-manual/graphics/shaders/built-in-uniforms.md) supplied by the forward renderer. `view_index` is an unsigned integer (`uint`).
+
 ```glsl
-uniform vec4 uScreenSize; // provided by the engine
+uniform vec4 screen_size; // provided by the engine
 uniform mat4 matrix_depth_uv;
 
 #ifdef XRDEPTH_ARRAY
-    uniform int view_index; // provided by the engine
+    uniform uint view_index; // provided by the engine
     uniform highp sampler2DArray depthMap;
 #else
     uniform sampler2D depthMap;
@@ -25376,16 +25558,16 @@ uniform mat4 matrix_depth_uv;
 
 void main (void) {
     // construct UV for screen-space
-    vec2 uvScreen = gl_FragCoord.xy * uScreenSize.zw;
+    vec2 uvScreen = gl_FragCoord.xy * screen_size.zw;
 
     #ifdef XRDEPTH_ARRAY
         // stereo
         // modify screen-space based on view_index (left/right eye)
-        uvScreen = uvScreen * vec2(2.0, 1.0) - vec2(view_index, 0.0);
+        uvScreen = uvScreen * vec2(2.0, 1.0) - vec2(float(view_index), 0.0);
         // normalize UV using provided matrix
         vec2 uvNormalized = (matrix_depth_uv * vec4(uvScreen.xy, 0.0, 1.0)).xy;
         // use view_index for array-texture index
-        vec3 uv = vec3(uvNormalized, view_index);
+        vec3 uv = vec3(uvNormalized, float(view_index));
     #else
         // mono
         // flip it vertically and normalize

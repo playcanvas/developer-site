@@ -66,7 +66,7 @@ var color = uniform.tints[2];
 var weight = uniform.weights[3].element;
 ```
 
-The engine automatically sets appropriate uniform values when rendering.
+The engine supplies the values of [built-in shader uniforms](https://developer.playcanvas.com/user-manual/graphics/shaders/built-in-uniforms.md) during forward rendering. Set your own uniform values from application code, for example with `material.setParameter()`.
 
 :::note
 
