@@ -26502,7 +26502,7 @@ Set this **before** preloading or loading any assets, so the requests pick it up
 
 :::note
 
-This is a process-global setting (it applies to the shared HTTP layer), so with multiple applications on a page the last value set wins. It applies to all `XMLHttpRequest`-based loads, which covers the large majority of assets.
+This is a process-global setting (it applies to the shared HTTP layer), so with multiple applications on a page the last value set wins. It applies to every asset load, including the Gaussian splat and asset bundle loaders that fetch their data directly rather than through the HTTP layer.
 
 :::
 
@@ -34832,7 +34832,7 @@ PlayCanvas offers modern post-processing workflows that provide visually advance
 
 The `CameraFrame` enables advanced rendering techniques including:
 
-- **Bloom** - HDR physically based bloom effect that simulates the natural glow of bright light sources
+- **Bloom** - HDR physically based bloom effect that simulates the natural glow of bright light sources, with an optional brightness threshold to restrict the glow to the brightest parts of the scene
 - **[Volumetric Fog](https://developer.playcanvas.com/user-manual/graphics/posteffects/cameraframe/volumetric-fog.md)** - Height fog and light shafts lit by directional, omni, and spot lights
 - **SSAO (Screen Space Ambient Occlusion)** - Enhances depth perception by simulating ambient light occlusion
 - **Depth of Field (DoF)** - Mimics camera focus effects, blurring objects outside the focal plane
@@ -37124,7 +37124,7 @@ Markdown: https://developer.playcanvas.com/user-manual/graphics/advanced-renderi
 
 Indirect drawing is a GPU-driven rendering technique where draw call parameters (such as vertex count, instance count, etc.) are stored in GPU buffer memory rather than being specified directly by the CPU. This allows compute shaders to dynamically generate or modify rendering parameters, enabling more efficient GPU-driven rendering workflows.
 
-This feature is currently **only supported on WebGPU** (you can check WebGPU availability using [`GraphicsDevice.isWebGPU`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#iswebgpu)) and is ignored on other platforms.
+This feature is currently **only supported on WebGPU** (you can check support using [`GraphicsDevice.supportsIndirectDraw`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#supportsindirectdraw)) and is ignored on other platforms, where the mesh instance renders as a normal draw call.
 
 ## How Indirect Drawing Works
 
@@ -37192,6 +37192,7 @@ device.computeDispatch([compute], 'GenerateIndirectDraw');
 For detailed API documentation, refer to these PlayCanvas engine classes and methods:
 
 - [`MeshInstance.setIndirect()`](https://api.playcanvas.com/engine/classes/MeshInstance.html#setindirect) - Configure a mesh instance for indirect rendering
+- [`GraphicsDevice.supportsIndirectDraw`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#supportsindirectdraw) - Check whether the device supports indirect drawing
 - [`GraphicsDevice.getIndirectDrawSlot()`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#getindirectdrawslot) - Allocate a slot in the indirect draw buffer
 - [`GraphicsDevice.indirectDrawBuffer`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#indirectdrawbuffer) - Access the indirect draw buffer
 - [`GraphicsDevice.maxIndirectDrawCount`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#maxindirectdrawcount) - Control maximum indirect draw calls per frame
