@@ -48,6 +48,8 @@ This can be done using two methods:
 1. Use CubeMap as Skybox in Scene Settings.
 2. Use CubeMap as environment map on the Material directly.
 
+See [Environment Lighting](/user-manual/graphics/physical-rendering/environment-lighting/) for what each method feeds into a material, which one is used when both are set, and the settings that control the result.
+
 ## Box Projection Mapping
 
 This technique changes the projection of environment map which allows to specify box within the space so CubeMap corresponds to its bounds. The most common use is to simulate reflections on surfaces within room scale environment.
