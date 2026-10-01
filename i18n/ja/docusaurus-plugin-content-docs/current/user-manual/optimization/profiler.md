@@ -3,7 +3,7 @@ title: プロファイラー
 description: 組み込みの Profiler オーバーレイでフレーム統計、update と render のタイミング、アプリ起動のタイムラインを確認します。
 ---
 
-PlayCanvasには、パフォーマンスの問題を診断するためのリアルタイムプロファイラが用意されています。
+エディターのLaunchページには、パフォーマンスの問題を診断するためのリアルタイムプロファイラーが用意されています。軽量な[MiniStats](/user-manual/optimization/mini-stats/)オーバーレイとは別のツールです。アプリケーションのコードから直接統計を収集するには、[AppStatsによるプロファイリング](/user-manual/optimization/app-stats/)を参照してください。
 
 ![Profiler](/img/user-manual/optimization/profiler/profiler.png)
 
