@@ -220,7 +220,7 @@ Use this index to write code against the engine directly. React, Web Components 
 
 ## Optional
 
-- [All pages of this index in one file](https://developer.playcanvas.com/user-manual/engine/llms-full.txt): 218 pages (1251 KB), for downloading and searching rather than reading into context.
+- [All pages of this index in one file](https://developer.playcanvas.com/user-manual/engine/llms-full.txt): 219 pages (1283 KB), for downloading and searching rather than reading into context.
 - [PlayCanvas Engine](https://developer.playcanvas.com/user-manual/engine.md)
 - [Assets](https://developer.playcanvas.com/user-manual/assets.md)
 - [Preloading](https://developer.playcanvas.com/user-manual/assets/preloading.md)
@@ -321,6 +321,7 @@ Use this index to write code against the engine directly. React, Web Components 
 - [VR](https://developer.playcanvas.com/user-manual/xr/vr.md)
 - [Types of VR experiences](https://developer.playcanvas.com/user-manual/xr/vr/types-of-vr.md)
 - [Optimization](https://developer.playcanvas.com/user-manual/optimization.md)
+- [Profiling with AppStats](https://developer.playcanvas.com/user-manual/optimization/app-stats.md)
 - [Profiler](https://developer.playcanvas.com/user-manual/optimization/profiler.md)
 - [Optimize Scene Format](https://developer.playcanvas.com/user-manual/optimization/optimizing-scene-format.md)
 - [Troubleshooting Performance](https://developer.playcanvas.com/user-manual/optimization/troubleshooting-performance.md)

@@ -187,3 +187,4 @@ The following example renders a scene into a texture from a second camera and di
 - [Layers](https://developer.playcanvas.com/user-manual/graphics/layers.md) - controlling which objects each camera renders.
 - [Post Effects](https://developer.playcanvas.com/user-manual/graphics/posteffects.md) - built-in and custom post-processing built on render targets.
 - [Device Loss and Recovery](https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/device-loss.md) - restoring GPU-generated contents after context or device loss.
+- [TextureRenderer](https://developer.playcanvas.com/user-manual/graphics/debug-drawing.md#texturerenderer) - inspect render-target color and individual channels on screen.
