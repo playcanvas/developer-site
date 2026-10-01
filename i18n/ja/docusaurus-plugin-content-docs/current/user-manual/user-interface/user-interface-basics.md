@@ -78,7 +78,7 @@ window.addEventListener('resize', () => app.resizeCanvas());
 
 ## 最初のインターフェース {#your-first-interface}
 
-上の画像のインターフェースは、パネルを1つ載せたスクリーンです。パネルはラベルとボタンを保持し、ボタンは自身のテキストを保持します。テキストには[フォントアセット](/user-manual/user-interface/fonts/)が必要です。例では`arial.json`というフォントアセットを読み込みます。これは任意のフォントファイルから生成できます。
+上の画像のインターフェースは、パネルを1つ載せたスクリーンです。パネルはラベルとボタンを保持し、ボタンは自身のテキストを保持します。テキストには[フォントアセット](/user-manual/user-interface/fonts/)が必要です。このページのコードでは`arial.json`というフォントアセットを読み込みます。これは任意のフォントファイルから生成できます。
 
 <Tabs groupId="workflow" defaultValue="engine">
 <TabItem value="engine" label="Engine">
@@ -329,7 +329,7 @@ export function FirstInterface() {
 </TabItem>
 </Tabs>
 
-<EngineExample id="user-interface/button-basic" title="Basic Button" />
+<EngineExample id="user-interface/buttons" title="Buttons" />
 
 ## 全体の仕組み {#how-it-fits-together}
 

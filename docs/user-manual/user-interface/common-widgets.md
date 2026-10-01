@@ -8,6 +8,8 @@ import TabItem from '@theme/TabItem';
 
 The UI components are building blocks. This page puts them together into the widgets that most interfaces need. Each recipe shows the hierarchy to build, in the Editor or in code, and the code that makes it work.
 
+<EngineExample id="user-interface/common-widgets" title="Common Widgets" />
+
 ## Progress and Health Bars {#progress-bars}
 
 ```none
@@ -267,6 +269,8 @@ drag.on('drag:end', () => {
 ```
 
 Pass `'x'` or `'y'` as a second argument to drag along one axis only. `drag:start` and `drag:move` fire as the drag begins and continues.
+
+<EngineExample id="user-interface/drag-and-drop" title="Drag and Drop" />
 
 ## Text Fields {#text-fields}
 

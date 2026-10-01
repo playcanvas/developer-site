@@ -8,6 +8,8 @@ import TabItem from '@theme/TabItem';
 
 UIコンポーネントは、UIを組み立てるための部品です。このページでは、それらを組み合わせて、ほとんどのインターフェースに必要なウィジェットを作ります。各レシピでは、エディターまたはコードで構築するヒエラルキーと、それを動作させるコードを示します。
 
+<EngineExample id="user-interface/common-widgets" title="Common Widgets" />
+
 ## プログレスバーとヘルスバー {#progress-bars}
 
 ```none
@@ -267,6 +269,8 @@ drag.on('drag:end', () => {
 ```
 
 1つの軸に沿ってだけドラッグさせるには、2番目の引数に`'x'`または`'y'`を渡します。`drag:start`と`drag:move`は、ドラッグの開始時と継続中に発火します。
+
+<EngineExample id="user-interface/drag-and-drop" title="Drag and Drop" />
 
 ## テキストフィールド {#text-fields}
 

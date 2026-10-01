@@ -78,7 +78,7 @@ There is nothing to set up. `<pc-app>` creates the `ElementInput`, together with
 
 ## Your First Interface {#your-first-interface}
 
-The interface in the image above is a screen with a panel on it. The panel holds a label and a button, and the button holds its own text. Text needs a [font asset](/user-manual/user-interface/fonts/); the examples load one called `arial.json`, which you can generate from any font file.
+The interface in the image above is a screen with a panel on it. The panel holds a label and a button, and the button holds its own text. Text needs a [font asset](/user-manual/user-interface/fonts/); the code on this page loads one called `arial.json`, which you can generate from any font file.
 
 <Tabs groupId="workflow" defaultValue="engine">
 <TabItem value="engine" label="Engine">
@@ -329,7 +329,7 @@ export function FirstInterface() {
 </TabItem>
 </Tabs>
 
-<EngineExample id="user-interface/button-basic" title="Basic Button" />
+<EngineExample id="user-interface/buttons" title="Buttons" />
 
 ## How It Fits Together {#how-it-fits-together}
 

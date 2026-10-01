@@ -177,6 +177,8 @@ fitReference();
 app.graphicsDevice.on('resizecanvas', fitReference);
 ```
 
+<EngineExample id="user-interface/screen-scaling" title="Screen Scaling" />
+
 ## ピクセル比 {#pixel-ratio}
 
 高密度ディスプレイでは、キャンバスの描画バッファのピクセル数が、ページ上のキャンバスのCSSピクセル数より多くなることがあります。これによりレンダリングは鮮明になりますが、描画のコストは高くなります。グラフィックスデバイスの`maxPixelRatio`がこの2つの比率の上限を決め、その設定は環境によって異なります。
