@@ -190,3 +190,4 @@ The following example renders a scene into a texture from a second camera and di
 - [Layers](../layers/index.md) - controlling which objects each camera renders.
 - [Post Effects](../posteffects/index.md) - built-in and custom post-processing built on render targets.
 - [Device Loss and Recovery](./device-loss.md) - restoring GPU-generated contents after context or device loss.
+- [TextureRenderer](../debug-drawing.md#texturerenderer) - inspect render-target color and individual channels on screen.

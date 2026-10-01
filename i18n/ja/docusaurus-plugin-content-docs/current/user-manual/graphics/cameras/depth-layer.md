@@ -12,6 +12,8 @@ description: カメラレイヤーでSceneのカラーと深度バッファを�
 - [```requestSceneColorMap```](https://api.playcanvas.com/engine/classes/CameraComponent.html#requestscenecolormap) Colorマップをリクエストする
 - [```requestSceneDepthMap```](https://api.playcanvas.com/engine/classes/CameraComponent.html#requestscenedepthmap) Depthマップをリクエストする
 
+キャプチャした深度を画面で確認するには、[TextureRenderer.sceneDepth](../debug-drawing.md#scene-depth) を使用してください。
+
 ## バッファのアクセス
 
 シェーダー内でテクスチャーとしてこれらのバッファにアクセスするには、次のユニフォーム名を使用します:

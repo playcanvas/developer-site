@@ -147,16 +147,19 @@ app.touch.on(pc.EVENT_TOUCHSTART, (event) => {
 
 ## デバッグ
 
-ピッカーは内部バッファを公開しており、デバッグに役立ちます：
+[TextureRenderer](../../graphics/debug-drawing.md#texturerenderer) を使うと、ピッカーのバッファを毎フレーム表示して確認できます。
 
 ```javascript
-// カラーバッファを表示（オブジェクトID）
-if (picker.colorBuffer) {
-    app.drawTexture(0.55, -0.77, 0.2, 0.2, picker.colorBuffer);
-}
+import { TextureRenderer } from 'playcanvas';
 
-// 深度バッファを表示
-if (picker.depthBuffer) {
-    app.drawTexture(0.77, -0.77, 0.2, 0.2, picker.depthBuffer);
-}
+const textures = new TextureRenderer(app);
+
+app.on('update', () => {
+    if (picker.colorBuffer) {
+        textures.draw(picker.colorBuffer, 0.725, 0.835, 0.1, 0.1);
+    }
+    if (picker.depthBuffer) {
+        textures.draw(picker.depthBuffer, 0.835, 0.835, 0.1, 0.1);
+    }
+});
 ```
