@@ -52,7 +52,7 @@ description: "pc-model要素のリファレンス: GLBコンテナアセット�
 | イベント | 説明 |
 | --- | --- |
 | `load` | コンテナアセットのインスタンス化が完了するたびに発生します。`asset`の変更後の再インスタンス化も含みます。 |
-| `error` | コンテナアセットの読み込みが失敗したときに発生する[`ErrorEvent`](https://developer.mozilla.org/en-US/docs/Web/API/ErrorEvent)で、エンジンのエラーが`message`に入ります。 |
+| `error` | コンテナアセットの読み込みが失敗したときに発生する[`ErrorEvent`](https://developer.mozilla.org/en-US/docs/Web/API/ErrorEvent)。プリロードされたアセットのように、モデルがアセットを探した時点ですでに失敗していた場合、`message`はそのことだけを伝えます。エンジン自身のエラーは[`<pc-asset>`](../pc-asset#events)の`error`イベントにあります。 |
 
 どちらのイベントもバブリングしないため、要素自身でリッスンしてください。あるいは、ページ上のすべてのモデルを監視するには、祖先要素でキャプチャフェーズのリスナーを使用します。
 
@@ -64,7 +64,7 @@ description: "pc-model要素のリファレンス: GLBコンテナアセット�
 
 モデルのどこがヒットしても、ターゲットは`<pc-model>`自体です。ただし、ヒットした部分を`<pc-node>`が担っている場合は、そのノードがターゲットになります。どちらの場合もイベントはそこから要素ツリーをバブリングしていくため、祖先に置いたリスナーは、モデル自身がリッスンしているかどうかに関係なくモデルのイベントを受け取ります。
 
-readyは現在の`asset`の選択が決着したことを意味し、次の3つの結果を含みます。コンテンツが読み込まれてホストの下に置かれた場合、読み込みが失敗した場合、そして`asset`がまったく割り当てられていない場合です。ホストの`entity`は失敗後も含めて常に非nullなので、成功と失敗の判別には使えません。`error`イベントを使うか、`contentEntity`を確認してください。
+readyは現在の`asset`の選択が決着したことを意味し、次の3つの結果を含みます。コンテンツが読み込まれてホストの下に置かれた場合、読み込みが失敗した場合、そして`asset`がまったく割り当てられていない場合です。宣言されたどのアセットも指していない`asset`はこれに含まれません。モデルはアセットが見つからないと警告し、ready状態になることはありません。ホストの`entity`は失敗後も含めて常に非nullなので、成功と失敗の判別には使えません。`error`イベントを使うか、`contentEntity`を確認してください。
 
 ```javascript
 const model = await whenReady('pc-model');
@@ -75,7 +75,7 @@ if (!model.contentEntity) {
 
 ## アニメーション {#animation}
 
-コンテナのアニメーションは、モデルの内側に[`<pc-anim>`](../pc-anim)をネストすると再生されます。ファイルに入っていたものを得るには空のタグ1つで十分です。コンテナ内のすべてのアニメーションが、それぞれのトラック名を名前としてクリップになり、最初のものが再生を始めます。
+コンテナのアニメーションは、モデルの直下に[`<pc-anim>`](../pc-anim)を置くと再生されます。ファイルに入っていたものを得るには空のタグ1つで十分です。コンテナ内のすべてのアニメーションが、それぞれのトラック名を名前としてクリップになり、最初のものが再生を始めます。
 
 ```html
 <pc-model asset="robot">
@@ -94,7 +94,7 @@ const anim = await whenReady('pc-anim');
 console.log(anim.clips); // ['Walk', 'Idle']
 ```
 
-パッケージ名でインポートするには、ページのimport mapに`@playcanvas/web-components`が必要です。[プログラムによるアクセス](../programmatic-access.md)を参照してください。アニメーションを含まないコンテナはモデル名を含む警告をログに出力するため、コードを書かずにコンソールで同じことを確認できます。
+パッケージ名でインポートするには、ページのimport mapに`@playcanvas/web-components`が必要です。[プログラムによるアクセス](../programmatic-access.md)を参照してください。アニメーションを含まないコンテナはモデル名を含む警告をログに出力し、名前に`.`を含むトラックはそれ自身の警告とともにスキップされるため、コードを書かずにコンソールで同じことを確認できます。
 
 ## 例 {#example}
 
@@ -102,7 +102,7 @@ console.log(anim.clips); // ['Walk', 'Idle']
 
 ```html live-example
 <pc-app>
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.4/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.6/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset src="https://developer.playcanvas.com/assets/t-rex.glb" id="t-rex"></pc-asset>
     <pc-material id="floor" diffuse="#3a3f4b"></pc-material>
     <pc-scene>
@@ -138,7 +138,7 @@ console.log(anim.clips); // ['Walk', 'Idle']
 
 [ModelElement API](https://api.playcanvas.com/web-components/classes/ModelElement.html)を使用して、`<pc-model>`要素をプログラムで作成および操作できます。
 
-`<pc-model>` は、クローン可能な `<template>` プレハブのルートとしても自然な選択です — [AR Wiener Storm](https://playcanvas.github.io/web-components/examples/ar-wiener-storm.html) のサンプルは、この方法で弾をスポーンしています。[テンプレートによる再利用可能なシーン](../templates.md)を参照してください。
+`<pc-model>` は、クローン可能な `<template>` プレハブのルートとしても自然な選択です — [AR Wiener Storm](https://playcanvas.github.io/web-components/examples/#ar-wiener-storm.html) のサンプルは、この方法で弾をスポーンしています。[テンプレートによる再利用可能なシーン](../templates.md)を参照してください。
 
 ### 2つのエンティティ {#the-two-entities}
 
@@ -188,14 +188,14 @@ Car
 | プロパティ | タイプ | 説明 |
 | --- | --- | --- |
 | `name` | String | インスタンス化された時点でのノード名で、`<pc-node>`が検索する名前です。ソースアセット内の名前と異なる場合があります。エンジンは名前のないノードに`node_<index>`という名前を合成し、同名の兄弟をリネームして区別するためです |
-| `path` | String | モデルルート以下のノードの`/`区切りのパスで、そのノードにバインドした`<pc-node>`が報告する`path`です。ルートのパスはそれ自身の名前です |
-| `index` | Number | 同じ名前を共有するノードの中でのこのノードの位置。モデル全体を深さ優先順で数えたもので、`<pc-node>`の`index`が選択する一致項目そのものです |
+| `path` | String | モデルルート以下のノードの`/`区切りのパスで、`<pc-model>`の直下にあってそのノードにバインドした`<pc-node>`が報告する`path`です。ルートのパスはそれ自身の名前です |
+| `index` | Number | 同じ名前を共有するノードの中でのこのノードの位置。モデル全体を深さ優先順で数えたもので、`<pc-model>`の直下にある`<pc-node>`の`index`が選択する一致項目そのものです。別の`<pc-node>`の内側にネストされた`<pc-node>`は、外側のノードのサブツリー内で検索し、数え、`path`を報告します |
 | `components` | String[] | ノードにアタッチされているコンポーネントのタイプ（`render`など）。ソート済みです |
 | `materials` | Object[] | ノードのrenderコンポーネントのメッシュインスタンス1つごとに`{ index, name }`エントリが1つ、コンポーネント順に並びます。renderコンポーネントを持たないノードでは空です |
 | `children` | Object[] | ノードの子ノード |
 | `toString()` | Function | このノードをルートとするサブツリーを上記の印字可能なツリーとして描画します。`String(node)`でどの枝でも出力できます |
 
-マテリアルの`name`値はそのまま読み取られる実行時のラベルであり、便利な手掛かりではあるものの一意ではありません。名前のないglTFマテリアルは`Untitled`と呼ばれ、マテリアルなしでオーサリングされたプリミティブはエンジンが共有する`defaultGlbMaterial`を持ち、重複はそのまま重複し、スクリプトが割り当てを解除した場合は名前は`null`になります。一意なのは`index`です。どちらも[`<pc-node>`の`material-overrides`](../pc-node#overriding-materials)が選択に用いるもので、差し替えた[`<pc-material>`](../pc-material)は`name`属性の内容をそのまま報告します。ここで識別したいマテリアルには設定しておく価値があります。
+マテリアルの`name`値はそのまま読み取られる実行時のラベルであり、便利な手掛かりではあるものの一意ではありません。名前のないglTFマテリアルは`Untitled`と呼ばれ、マテリアルなしでオーサリングされたプリミティブはエンジンが共有する`defaultGlbMaterial`を持ち、法線なしでエクスポートされたプリミティブには名前に`-flatShaded`を付けたマテリアルのコピーが与えられ、重複はそのまま重複し、スクリプトが割り当てを解除した場合は名前は`null`になります。一意なのは`index`です。どちらも[`<pc-node>`の`material-overrides`](../pc-node#overriding-materials)が選択に用いるもので、差し替えた[`<pc-material>`](../pc-material)は`name`属性の内容をそのまま報告します。ここで識別したいマテリアルには設定しておく価値があります。
 
 このツリーはスナップショットであり、呼び出しごとに新しく計算されます。その後の階層の変更を追跡することはなく、変更を加えても何も起こりません。プレーンなデータであるため`JSON.stringify`を通過でき、ログ出力・差分比較・テストでの検証が容易です。
 
@@ -206,4 +206,4 @@ Car
 * [`<pc-anim>`](../pc-anim) — GLBが持つアニメーションを再生します
 * [モデルの読み込み](../loading-models.md) — モデルを読み込み、マークアップから調整する方法
 
-サンプル: [GLB Loader](https://playcanvas.github.io/web-components/examples/glb-loader.html)、[GLB Animation](https://playcanvas.github.io/web-components/examples/glb-animation.html)、[Product Viewer](https://playcanvas.github.io/web-components/examples/product-viewer.html)
+サンプル: [GLB Loader](https://playcanvas.github.io/web-components/examples/#glb-loader.html)、[GLB Animation](https://playcanvas.github.io/web-components/examples/#glb-animation.html)、[Product Viewer](https://playcanvas.github.io/web-components/examples/#product-viewer.html)

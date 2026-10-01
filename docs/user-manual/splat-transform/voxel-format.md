@@ -166,4 +166,4 @@ A 32 × 14 × 32-block grid at 5 cm resolution (block size 0.2):
 ## See also
 
 - [Collision Mesh](/user-manual/splat-transform/collision) — generating voxel and collision data with splat-transform.
-- [splat-transform CLI reference](/user-manual/splat-transform/) — full option reference including Voxel Output Options.
+- [CLI Reference](/user-manual/splat-transform/cli-reference#voxel-output-options) — full option reference including Voxel Output Options.

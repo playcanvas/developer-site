@@ -3,7 +3,7 @@ title: <pc-particle-system>
 description: "pc-particle-system要素のリファレンス: エミッター、テクスチャ、ブレンディング、シミュレーションのパラメータを定義するJSONアセットからパーティクルを放出します。"
 ---
 
-`<pc-particle-system>`タグは、パーティクルシステムを定義するために使用されます。
+`<pc-particle-system>`タグはエンティティにパーティクルシステムを追加します。雪、火花、煙のようなエフェクトのエミッターで、JSONアセットで設定します。
 
 :::note[使用法]
 
@@ -21,6 +21,14 @@ description: "pc-particle-system要素のリファレンス: エミッター、�
 | `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |
 
 </div>
+
+## 設定 {#the-configuration}
+
+JSONアセットはエンジンの[ParticleSystemComponent](https://api.playcanvas.com/engine/classes/ParticleSystemComponent.html)の設定を、同じプロパティ名で保持します。ベクトルは数値の配列で、パーティクルの寿命にわたって値を変化させるグラフはカーブです。カーブは、`keys`に時間と値を交互に並べたオブジェクト（`[time, value, time, value, ...]`）として書きます。ベクトルのグラフは、軸ごとにそうした配列を1つずつ取ります。
+
+`colorMapAsset`は[`<pc-asset>`](../pc-asset)を`id`で指定し、要素がそれをテクスチャに解決します。これができるアセット設定はこれだけで、`normalMapAsset`、`meshAsset`、`renderAsset`を同じように指定しても解決されません。
+
+設定の`<pc-asset>`は`lazy`にでき、実行時に`asset`を変更すると別の設定に差し替わります。設定がいつ届いても、要素はエンジンと同じようにベクトルとカーブを構築し、すべての設定をコンポーネントに適用します。設定内の`enabled`キーは無視されます。システムを動かすかどうかは要素の`enabled`属性が決めます。
 
 ## 例 {#example}
 
@@ -85,11 +93,11 @@ description: "pc-particle-system要素のリファレンス: エミッター、�
 
 [ParticleSystemComponentElement API](https://api.playcanvas.com/web-components/classes/ParticleSystemComponentElement.html)を使用して、`<pc-particle-system>`要素をプログラムで作成および操作できます。
 
-`component`プロパティは、この要素が追加するエンジンの[ParticleSystemComponent](https://api.playcanvas.com/engine/classes/ParticleSystemComponent.html)です。要素の準備が完了するまでは`null`で、属性が公開していないものはすべてここから利用できます。
+`component`プロパティは、この要素が追加するエンジンの[ParticleSystemComponent](https://api.playcanvas.com/engine/classes/ParticleSystemComponent.html)です。要素の準備が完了するまでは`null`で、属性が公開していないものはすべてここから利用できます。要素自体にも、エミッターを制御する`play()`、`pause()`、`reset()`、`stop()`メソッドがあります。
 
 ## 関連項目 {#see-also}
 
 * [`<pc-asset>`](../pc-asset) — JSON設定と、それが参照するテクスチャ
 * [`<pc-entity>`](../pc-entity) — エミッターの位置と向きを決めます
 
-サンプル: [Basic Particles](https://playcanvas.github.io/web-components/examples/basic-particles.html)
+サンプル: [Basic Particles](https://playcanvas.github.io/web-components/examples/#basic-particles.html)、[Clock Tower](https://playcanvas.github.io/web-components/examples/#clock-tower.html)

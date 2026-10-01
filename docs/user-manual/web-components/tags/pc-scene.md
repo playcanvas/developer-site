@@ -3,7 +3,7 @@ title: <pc-scene>
 description: "Reference for the pc-scene element: the scene container inside pc-app, with fog, exposure and gravity settings for the entities it holds."
 ---
 
-The `<pc-scene>` tag is used to define the scene.
+The `<pc-scene>` tag defines the scene an application renders: the root of its entity hierarchy, and the fog, exposure, Gaussian splat, lighting and gravity settings that apply to everything in it.
 
 :::note[Usage]
 
@@ -17,21 +17,22 @@ The `<pc-scene>` tag is used to define the scene.
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
-| `exposure` | Number | `"1"` | Overall brightness multiplier applied to the rendered image. Ignored while the scene uses physical light units |
+| `exposure` | Number | `"1"` | Overall brightness multiplier applied to the rendered image. Ignored while the scene uses physical light units, which are switched on from JavaScript with the engine scene's `physicalUnits` |
 | `fog` | Enum | `"none"` | Fog type: `"none"` \| `"linear"` \| `"exp"` \| `"exp2"` |
-| `fog-color` | Color | `"1 1 1"` | Fog color as space-separated RGB values, hex code, or [named color](https://github.com/playcanvas/web-components/blob/main/src/colors.ts) |
+| `fog-color` | Color | `"0 0 0"` | Fog color as space-separated RGB values, hex code, or [named color](https://github.com/playcanvas/web-components/blob/main/src/colors.ts) |
 | `fog-density` | Number | `"0"` | Fog density for exponential fog types |
 | `fog-end` | Number | `"1000"` | End distance for linear fog |
-| `fog-start` | Number | `"0"` | Start distance for linear fog |
-| `gsplat-lod-mode` | Enum | `"error"` | How LOD levels are chosen for streamed Gaussian splats, within the splat budget: `"error"` \| `"distance"`. See [Level of Detail](../pc-gsplat#level-of-detail) |
-| `gsplat-splat-budget` | Number | `"1000000"` | Target number of splats rendered across every Gaussian splat in the scene. Distributed between streamed splat assets; a value of 0 or less warns and keeps the default |
+| `fog-start` | Number | `"1"` | Start distance for linear fog |
+| `gsplat-lod-mode` | Enum | `"distance"` | How LOD levels are chosen for streamed Gaussian splats, within the splat budget: `"error"` \| `"distance"`. See [Level of Detail](../pc-gsplat#level-of-detail) |
+| `gsplat-splat-budget` | Number | `"1000000"` | Target number of splats rendered across every Gaussian splat in the scene. Distributed between streamed splat assets; a value of 0 or less is treated as the default |
 | `gsplat-use-fog` | Boolean | `"true"` | Whether the scene's fog applies to Gaussian splats |
 | `gsplat-use-tonemap` | Boolean | `"true"` | Whether the camera's tone mapping and the scene's `exposure` apply to Gaussian splats. Set `"false"` to render splats with their stored colors, which suits captures that are already display-ready. Fog still applies |
 | `gravity` | Vector3 | `"0 -9.81 0"` | Gravity applied to rigid bodies as "X Y Z" values |
-| `lighting-max-lights` | Number | `"255"` | Maximum number of lights clustered lighting uses in a frame, from 1 to 65535. Lights over the limit are ignored with a warning, and values above 255 double the memory of the light grid |
-| `physics-time-scale` | Number | `"1"` | Scale on the time the physics simulation advances by each frame: below 1 is slow motion, above 1 speeds it up, and `"0"` pauses physics while the rest of the application keeps running. Applied on top of the application's own time scale |
+| `lighting-max-lights` | Number | `"255"` | Maximum number of lights clustered lighting uses in a frame. The engine clamps the value to between 1 and the most the device supports (up to 65535), and lights over the limit are left out of the frame. Values above 255 double the memory of the light grid |
 
 </div>
+
+The scene applies these settings before any script's `initialize()` runs, both when the application boots and when a `<pc-scene>` is inserted into a running one, so scripts see the element's values from the start. The time scales that slow down or pause the application and its physics are attributes of [`<pc-app>`](../pc-app).
 
 ## Events
 
@@ -81,13 +82,13 @@ Boxes fading into linear fog. Try a different `fog-color` (match the camera's `c
 
 You can programmatically create and manipulate `<pc-scene>` elements using the [SceneElement API](https://api.playcanvas.com/web-components/classes/SceneElement.html).
 
-The `scene` property is the engine [Scene](https://api.playcanvas.com/engine/classes/Scene.html) — `null` until the element is ready — where fog, exposure and the sky are configured.
+The `scene` property is the engine [Scene](https://api.playcanvas.com/engine/classes/Scene.html), where fog, exposure and the sky are configured. It is `null` until the containing application has been created, so await the element's readiness before reading it from page code.
 
 ## See Also
 
-* [`<pc-app>`](../pc-app) — the application that holds the scene
+* [`<pc-app>`](../pc-app) — the application that holds the scene, and its time scales
 * [`<pc-sky>`](../pc-sky) — the scene's skybox and image-based lighting
 * [`<pc-camera>`](../pc-camera) — tone mapping, applied after the scene's exposure
 * [`<pc-rigid-body>`](../pc-rigid-body) — the bodies gravity acts on
 
-Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html) and [Spinning Cube](https://playcanvas.github.io/web-components/examples/spinning-cube.html).
+Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/#basic-shapes.html) and [Spinning Cube](https://playcanvas.github.io/web-components/examples/#spinning-cube.html).

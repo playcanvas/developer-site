@@ -1,6 +1,6 @@
 ---
 title: <pc-app>
-description: "Reference for the pc-app element: initializes the PlayCanvas Application, graphics options, and root container for scenes and entities."
+description: "Reference for the pc-app element: initializes the PlayCanvas Application, its graphics options and time scales, and the root container for scenes and entities."
 ---
 
 The `<pc-app>` tag is the root element for your PlayCanvas application. It is used to initialize the PlayCanvas application and provide a container for your scene.
@@ -23,19 +23,25 @@ The `<pc-app>` tag is the root element for your PlayCanvas application. It is us
 | `backend` | Enum | `"webgpu"` | Graphics engine backend: `"webgpu"` \| `"webgl2"` \| `"null"`. WebGPU falls back to WebGL 2 in browsers where it is unavailable — set `"webgl2"` to force WebGL 2. `"null"` selects a renderer that draws nothing, and exists for headless testing |
 | `depth-buffer` | Boolean | `"true"` | Whether the application allocates a depth buffer |
 | `loading-bar` | Boolean | `"true"` | Whether the application shows its built-in loading bar while it boots and preloads its assets |
-| `max-pixel-ratio` | Number | uncapped | The highest pixel ratio the application renders at. The canvas is sized by the smaller of this value and the display's own device pixel ratio, so `"1"` renders at CSS resolution and `"2"` keeps a dense display sharp without paying for every one of its pixels |
+| `max-pixel-ratio` | Number | uncapped | The highest pixel ratio the application renders at, above 0. The canvas is sized by the smaller of this value and the display's own device pixel ratio, so `"1"` renders at CSS resolution and `"2"` keeps a dense display sharp without paying for every one of its pixels |
+| `physics-time-scale` | Number | `"1"` | Scale on the time the physics simulation advances by each frame, applied on top of `time-scale`: below 1 is slow motion, above 1 speeds it up, and `"0"` pauses physics while the rest of the application keeps running — for a pause menu, say, that must stay interactive while the world stands still |
 | `picking` | Enum | `"auto"` | When the application picks the scene under the pointer to dispatch [pointer events](../pc-entity#events) on entity elements: `"auto"` \| `"always"` \| `"none"`. `auto` picks for an event type only while a listener for it is registered on an entity element or on [`<pc-scene>`](../pc-scene); `always` picks for every pointer event, which listeners the application cannot see need, such as one on the document or a framework's delegated handler like React's `onPointerMove`; `none` never picks, so entities receive no pointer events. Picking renders the scene again, which is why `auto` is the default. See [When Events Are Dispatched](../pc-entity#when-events-are-dispatched) |
 | `stencil-buffer` | Boolean | `"true"` | Whether the application allocates a stencil buffer |
-| `with-credentials` | Boolean | `"false"` | Whether asset requests send credentials (cookies and HTTP authentication) to other origins, which the asset server must allow through CORS. The engine keeps this setting in an HTTP client shared by the whole page, so it applies to every `<pc-app>` on the page, and once one switches it on, all of them send credentials |
+| `time-scale` | Number | `"1"` | Scale on the time the application advances by each frame. Scripts, animation and physics all advance by the scaled time, so below 1 is slow motion, above 1 speeds it up, and `"0"` pauses all three together while the scene keeps rendering. To slow down or pause physics alone, use `physics-time-scale` |
+| `with-credentials` | Boolean | `"false"` | Whether asset requests send credentials (cookies and HTTP authentication) to other origins, which the asset server must allow through CORS. The engine keeps this setting in an HTTP client shared by the whole page, so it applies to every `<pc-app>` on the page: an app that boots with it switches it on for all of them, and a later change on any app sets it for all of them |
 
 </div>
 
 :::note[When these are read]
 
-Every attribute above except `max-pixel-ratio`, `loading-bar`, `area-light-luts`, `picking` and `with-credentials` is read once, when the element is
-inserted into the document and creates its graphics device. Changing one afterwards updates the
-element's property but has no effect on the running application, and logs a warning saying so — to
-apply a new value, remove the element and re-insert it.
+`alpha`, `antialias`, `backend`, `depth-buffer` and `stencil-buffer` configure the graphics device,
+so they are read once, when the element is inserted into the document and creates it. Changing one
+afterwards updates the element's property but has no effect on the running application, and logs a
+warning saying so — to apply a new value, remove the element and re-insert it.
+
+Every other attribute is live, applying to the running application as soon as it changes, except
+that `loading-bar` can only remove the bar (see [Loading bar](#loading-bar)). The two time scales
+are in place before any script's `initialize()` runs.
 
 :::
 
@@ -70,13 +76,24 @@ page rule — however plain — overrides them.)
 
 :::
 
+The buffer follows the display as well as the element. Moving the window to a screen of another
+pixel density, or zooming the page, changes the device pixel ratio without necessarily resizing the
+element, so the application re-evaluates its pixel ratio and resizes the buffer to match. The ratio
+in effect — the smaller of `max-pixel-ratio` and the display's own — is what
+`app.graphicsDevice.maxPixelRatio` holds, while the element's `maxPixelRatio` property reports the
+cap. Code that manages render quality can assign `app.graphicsDevice.maxPixelRatio` itself: a
+display change then keeps that ratio and only resizes the buffer, until `max-pixel-ratio` is set
+again and takes the device back.
+
 The one time the element's size does not drive the drawing buffer is while an XR session is
 presenting — the session owns the buffer for its duration.
 
 ## Loading bar
 
 While the application boots and preloads its assets, `<pc-app>` shows a loading bar along the top of
-the element. Set `loading-bar="false"` to suppress it, or theme it with these CSS custom properties:
+the element. Set `loading-bar="false"` to suppress it (set after boot, it removes the bar at once;
+setting it back to `"true"` has no effect until the element is re-inserted), or theme it with these
+CSS custom properties:
 
 | Property | Description |
 | --- | --- |
@@ -94,25 +111,32 @@ Listen to these events using [`addEventListener()`](https://developer.mozilla.or
 | Event | Description |
 | --- | --- |
 | `progress` | A [`ProgressEvent`](https://developer.mozilla.org/en-US/docs/Web/API/ProgressEvent) fired while the application preloads its assets. `loaded` and `total` are asset counts rather than bytes, and an asset that fails to load still counts as loaded. It fires at least once per boot, and the final event always has `loaded` equal to `total`. |
-| `error` | An [`ErrorEvent`](https://developer.mozilla.org/en-US/docs/Web/API/ErrorEvent) fired when the application cannot boot because no graphics device could be created — WebGL disabled, say, or a blocklisted GPU. `message` names the backends that were requested and `error` carries the underlying failure. |
+| `error` | An [`ErrorEvent`](https://developer.mozilla.org/en-US/docs/Web/API/ErrorEvent) fired when the application cannot boot because no graphics device could be created — WebGL disabled, say, or a blocklisted GPU. `message` names the backends that were requested and `error` carries the underlying failure. See [below](#handling-a-failed-boot) for how to catch it. |
 
 Neither event bubbles, so listen on the element itself.
+
+### Handling a Failed Boot
 
 An element that fired `error` never becomes ready and its `app` property stays `null` — in
 particular, `whenReady('pc-app')` never settles (see
 [Programmatic Access](../programmatic-access.md)). A page that wants a fallback UI should listen
-for the event rather than await readiness:
+for the event rather than await readiness. Set the handler as an inline attribute: a failure can be
+reported as soon as the library starts, before a module script of your own gets to run, so a
+listener added from one can miss it. An attribute is in place from the moment the element is
+parsed:
 
-```javascript
-document.querySelector('pc-app').addEventListener('error', (event) => {
-    // Neither WebGPU nor WebGL 2 is available — show static content instead
-    document.getElementById('fallback').hidden = false;
-});
+```html
+<pc-app onerror="document.getElementById('fallback').hidden = false">
 ```
+
+The event covers a device that cannot be created at all. With the default `backend`, a browser
+that offers WebGPU tries it first and falls back to WebGL 2, and if both fail that way, the engine
+currently leaves the element waiting without firing `error`. A fallback that must always appear
+can also time out: show it if the element has not become ready after a few seconds.
 
 Removing the element and re-inserting it retries the boot with its current attributes.
 
-The [pointer events](../pc-entity#events) dispatched on entities bubble up through `<pc-app>` too, alongside the canvas's own native pointer events, and `event.target` tells the two apart. Whether entity events are dispatched at all is up to `picking` — see [When Events Are Dispatched](../pc-entity#when-events-are-dispatched).
+The [pointer events](../pc-entity#events) dispatched on entities bubble up through `<pc-app>` too, alongside the canvas's own native pointer events. `event.isTrusted` tells the two apart: it is `true` for the browser's native events and `false` for dispatched ones. Whether entity events are dispatched at all is up to `picking` — see [When Events Are Dispatched](../pc-entity#when-events-are-dispatched).
 
 ## Example
 
@@ -147,4 +171,4 @@ The `app` property is the running engine [AppBase](https://api.playcanvas.com/en
 * [`<pc-wasm>`](../pc-wasm) — modules such as physics that the app loads before it boots
 * [Programmatic Access](../programmatic-access.md) — waiting for `ready` and reaching `app` from JavaScript
 
-Examples: [Spinning Cube](https://playcanvas.github.io/web-components/examples/spinning-cube.html) and [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html).
+Examples: [Spinning Cube](https://playcanvas.github.io/web-components/examples/#spinning-cube.html) and [Basic Shapes](https://playcanvas.github.io/web-components/examples/#basic-shapes.html).

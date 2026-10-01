@@ -38,9 +38,14 @@ Chunk-source pipeline (the primary API):
 | `createChunkDataPool` | Pooled read buffers shared across a pipeline |
 | `processSource`, `processSourceBridged` | Apply a sequence of processing actions to a source |
 | `selectLod`, `stackLods`, `concatSource`, `bakeTransform` | Structural combinators (lazy views) |
-| `decimateSource` | Chunk-native, memory-bounded decimation to an exact target count |
+| `decimateSource` | Chunk-native, memory-bounded decimation to an exact target count, removing at a uniform rate everywhere (the CLI's `--decimate`) |
+| `decimateSourceAdaptive` | The same, allocating removal by local error (the CLI's `--decimate-adaptive`) |
+| `sortMortonInterleaved`, `sortMortonColumns` | Sort an index array into Morton (Z-order) from interleaved or columnar positions |
+| `isSplatModel`, `resolveSplatModel` | Validate and combine the antialiased / 2DGS scene tag carried on `ChunkSourceMetadata.model` |
 | `writeSource` | Stream a source to any single-scene output format |
 | `writeLodSource` | Write streamed SOG (`lod-meta.json` + chunked units) from a multi-LOD source |
+| `writeImage` | Render a source to a lossless WebP image, or a frame sequence along a camera track (requires GPU) |
+| `loadCameraTrack` | Build a `writeImage` camera track from a SuperSplat editor `document.json`, a viewer `settings.json` or a frame list |
 | `computeStats` | Streaming per-LOD, per-column statistics for a source or table |
 
 DataTable compat (secondary; every entry materializes the whole scene in memory):
@@ -51,9 +56,11 @@ DataTable compat (secondary; every entry materializes the whole scene in memory)
 | `combine` | Merge multiple DataTables into one |
 | `processDataTable` | Apply processing actions to a DataTable |
 | `dataTableToChunkSource`, `materializeToDataTable` | Bridges between the DataTable and chunk-source worlds |
-| `writeFile` | Write a DataTable to any output format |
 | `writeVoxel` | Write sparse voxel octree files |
-| `writeImage` | Render a camera view to a lossless WebP image (requires GPU) |
+
+To write a `DataTable` to any other format, bridge it with `dataTableToChunkSource` and pass the result to `writeSource`.
+
+The `@playcanvas/splat-transform/viewer-settings` subpath re-exports the settings API of the SuperSplat Viewer embedded in HTML output — types, shared defaults and validation — so you can author viewer settings against the exact viewer version without a viewer dependency of your own.
 
 ## File System Abstractions
 
@@ -143,7 +150,7 @@ type ProcessAction =
 
 :::note
 
-`filterFloaters` and `filterCluster` require a GPU device — pass `createDevice` via the `ProcessOptions` argument. `processSource` streams and throws on actions that need the DataTable bridge (`decimate`, `mortonOrder`, the GPU voxel filters); `processSourceBridged` handles every action, materializing only those runs.
+`filterFloaters` and `filterCluster` require a GPU device — pass `createDevice` via the `ProcessOptions` argument. `processSource` streams and throws on actions that need the DataTable bridge (`decimate` and the GPU voxel filters); `processSourceBridged` handles every action, materializing only those runs. The `decimate` action removes at a uniform rate; for adaptive decimation, call `decimateSourceAdaptive` directly.
 
 :::
 

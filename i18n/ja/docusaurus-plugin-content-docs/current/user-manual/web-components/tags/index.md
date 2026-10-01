@@ -15,7 +15,7 @@ PlayCanvas Web Components のすべてのタグを、役割別にまとめて掲
     <pc-asset id="sky" src="sky.webp"></pc-asset>
     <pc-asset id="robot" src="robot.glb"></pc-asset>
     <pc-material id="gold" diffuse="#d4af37" metalness="1"></pc-material>
-    <pc-wasm name="Ammo" glue="ammo.js" wasm="ammo.wasm"></pc-wasm>
+    <pc-wasm name="Ammo" glue="ammo.wasm.js" wasm="ammo.wasm.wasm"></pc-wasm>
     <pc-scene>
         <pc-sky asset="sky"></pc-sky>
         <!-- エンティティは各コンポーネントタグを1つずつ取り、エンティティやモデルをネストできます -->
@@ -42,7 +42,7 @@ PlayCanvas Web Components のすべてのタグを、役割別にまとめて掲
 
 エンジンのエンティティを表すタグは3つあり、コンポーネントタグはそのいずれの内側にも置けます。[`<pc-entity>`](pc-entity)、[`<pc-model>`](pc-model)、[`<pc-node>`](pc-node)です。モデルの内側に置いたコンポーネントはそのモデルのホストエンティティに取り付けられ、ノードの内側に置いたコンポーネントはバインドされたノードに取り付けられます。どちらもエンティティと同じコンポーネントの子を取ります。
 
-各タグのページに必要な親要素が記載されています。誤った場所に配置された要素は、受け付ける親要素の名前を含むコンソール警告をログに出力するため、オーサリング中はコンソールを開いておいてください。
+各タグのページに必要な親要素が記載されています。誤った場所に配置された要素のほとんどは、置くべき場所を示すコンソール警告をログに出力するため、オーサリング中はコンソールを開いておいてください。
 
 ## 役割別のタグ {#tags-by-role}
 
@@ -131,13 +131,13 @@ PlayCanvas Web Components のすべてのタグを、役割別にまとめて掲
 
 :::note[コンポーネントタグは、それが追加するエンジンのコンポーネントを名前で表します]
 
-`pc-`プレフィックスを外し、ハイフンを取り除くと、エンジンのコンポーネントIDになります。`<pc-layout-group>`は`entity.layoutgroup`を、`<pc-rigid-body>`は`entity.rigidbody`を、`<pc-audio-listener>`は`entity.audiolistener`を追加します。このルールはこのページのすべてのコンポーネントタグで双方向に成り立つため、どちらの綴りも暗記する必要はありません。エンジンのIDが単語を続けて書くのは、それがハイフンを含められないJavaScriptのプロパティ名だからにすぎません。HTMLのタグにはその制約がありません。
+`pc-`プレフィックスを外し、ハイフンを取り除くと、エンジンのコンポーネントIDになります。`<pc-layout-group>`は`entity.layoutgroup`を、`<pc-rigid-body>`は`entity.rigidbody`を、`<pc-audio-listener>`は`entity.audiolistener`を追加します。このルールはこのページのすべてのコンポーネントタグで成り立ちます。逆方向に変換するには単語の区切りを戻す必要があり、すべてのIDに区切りがあるわけではありません。`scrollview`は`<pc-scroll-view>`ですが、`scrollbar`は`<pc-scrollbar>`です。エンジンのIDが単語を続けて書くのは、JavaScriptのプロパティ（`entity.rigidbody`）として使われ、ハイフンを含めるとブラケット記法が必要になるからです。HTMLのタグはハイフンを含められます。
 
 :::
 
 繰り返し可能な子要素は、親のタグをプレフィックスとして取ります。[`<pc-anim>`](pc-anim)の中の[`<pc-anim-clip>`](pc-anim-clip)、[`<pc-sound>`](pc-sound)の中の[`<pc-sound-slot>`](pc-sound-slot)、[`<pc-script>`](pc-script)の中の[`<pc-script-instance>`](pc-script-instance)です。
 
-[`<pc-material>`](pc-material)を除くすべてのタグは非同期に初期化され、初期化が完了すると`ready`イベントを発火します。そのタイミングと、これをラップする`whenReady()`ヘルパーについては[`ready`イベント](../programmatic-access.md#the-ready-event)を参照してください。各タグのページのイベントセクションには、そのタグに固有のイベントのみを記載しています。
+[`<pc-material>`](pc-material)を除くすべてのタグは非同期に初期化され、初期化が完了すると`ready`イベントを発火します。`whenReady()`が解決するのもこの時点です。タイミングについては[`ready`イベント](../programmatic-access.md#the-ready-event)を参照してください。各タグのページのイベントセクションには、そのタグに固有のイベントのみを記載しています。
 
 ## すべてのタグ（A–Z） {#all-tags-a-z}
 

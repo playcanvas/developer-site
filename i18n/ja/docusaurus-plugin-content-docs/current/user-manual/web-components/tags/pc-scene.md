@@ -3,7 +3,7 @@ title: <pc-scene>
 description: "pc-scene要素のリファレンス: pc-app内のシーンコンテナで、保持するエンティティに適用されるフォグ、露出、重力の設定を持ちます。"
 ---
 
-`<pc-scene>`タグは、シーンを定義するために使用されます。
+`<pc-scene>`タグは、アプリケーションが描画するシーンを定義します。エンティティ階層のルートであり、その中のすべてに適用されるフォグ、露出、Gaussian splat、ライティング、重力の設定を持ちます。
 
 :::note[使用法]
 
@@ -17,21 +17,22 @@ description: "pc-scene要素のリファレンス: pc-app内のシーンコン�
 
 | 属性 | タイプ | デフォルト | 説明 |
 | --- | --- | --- | --- |
-| `exposure` | Number | `"1"` | レンダリングされる画像全体の明るさの倍率。シーンが物理単位を使用している間は無視されます |
+| `exposure` | Number | `"1"` | レンダリングされる画像全体の明るさの倍率。シーンが物理単位を使用している間は無視されます。物理単位はJavaScriptからエンジンのシーンの`physicalUnits`で有効にします |
 | `fog` | Enum | `"none"` | フォグの種類：`"none"` \| `"linear"` \| `"exp"` \| `"exp2"` |
-| `fog-color` | Color | `"1 1 1"` | スペース区切りのRGB値、16進数コード、または[名前付きカラー](https://github.com/playcanvas/web-components/blob/main/src/colors.ts)としてのフォグの色 |
+| `fog-color` | Color | `"0 0 0"` | スペース区切りのRGB値、16進数コード、または[名前付きカラー](https://github.com/playcanvas/web-components/blob/main/src/colors.ts)としてのフォグの色 |
 | `fog-density` | Number | `"0"` | 指数フォグタイプの場合のフォグの密度 |
 | `fog-end` | Number | `"1000"` | 線形フォグの終了距離 |
-| `fog-start` | Number | `"0"` | 線形フォグの開始距離 |
-| `gsplat-lod-mode` | Enum | `"error"` | ストリーミングされるGaussian splatのLODレベルを、スプラット予算の範囲内でどう選ぶか：`"error"` \| `"distance"`。[レベルオブディテール](../pc-gsplat#level-of-detail)を参照 |
-| `gsplat-splat-budget` | Number | `"1000000"` | シーン内のすべてのGaussian splatを合わせて描画するスプラット数の目標値。ストリーミングされるスプラットアセット間で配分されます。0以下の値は警告を出し、デフォルトが維持されます |
+| `fog-start` | Number | `"1"` | 線形フォグの開始距離 |
+| `gsplat-lod-mode` | Enum | `"distance"` | ストリーミングされるGaussian splatのLODレベルを、スプラット予算の範囲内でどう選ぶか：`"error"` \| `"distance"`。[レベルオブディテール](../pc-gsplat#level-of-detail)を参照 |
+| `gsplat-splat-budget` | Number | `"1000000"` | シーン内のすべてのGaussian splatを合わせて描画するスプラット数の目標値。ストリーミングされるスプラットアセット間で配分されます。0以下の値はデフォルトとして扱われます |
 | `gsplat-use-fog` | Boolean | `"true"` | シーンのフォグをGaussian splatに適用するかどうか |
 | `gsplat-use-tonemap` | Boolean | `"true"` | カメラのトーンマッピングとシーンの`exposure`をGaussian splatに適用するかどうか。`"false"`にすると、スプラットは保存されている色のままレンダリングされます。これはすでに表示用に仕上がっているキャプチャに適しています。フォグは引き続き適用されます |
 | `gravity` | Vector3 | `"0 -9.81 0"` | 「X Y Z」値としてリジッドボディに適用される重力 |
-| `lighting-max-lights` | Number | `"255"` | クラスターライティングが1フレームで使用するライトの最大数。1から65535まで。上限を超えたライトは警告とともに無視され、255を超える値はライトグリッドのメモリを2倍にします |
-| `physics-time-scale` | Number | `"1"` | 物理シミュレーションが毎フレーム進める時間に掛かる倍率。1未満はスローモーション、1を超えると高速になり、`"0"`はアプリケーションの他の部分を動かしたまま物理を一時停止します。アプリケーション自体のタイムスケールに重ねて適用されます |
+| `lighting-max-lights` | Number | `"255"` | クラスターライティングが1フレームで使用するライトの最大数。エンジンはこの値を1からデバイスがサポートする最大値（最大65535）までの範囲に収め、上限を超えたライトはそのフレームから除外されます。255を超える値はライトグリッドのメモリを2倍にします |
 
 </div>
+
+シーンはこれらの設定を、どのスクリプトの`initialize()`よりも前に適用します。アプリケーションの起動時も、実行中のアプリケーションに`<pc-scene>`を挿入したときも同様なので、スクリプトは最初から要素の値を参照できます。アプリケーションとその物理を遅くしたり一時停止したりするタイムスケールは、[`<pc-app>`](../pc-app)の属性です。
 
 ## イベント {#events}
 
@@ -81,13 +82,13 @@ document.querySelector('pc-scene').addEventListener('click', (event) => {
 
 [SceneElement API](https://api.playcanvas.com/web-components/classes/SceneElement.html)を使用して、`<pc-scene>`要素をプログラムで作成および操作できます。
 
-`scene`プロパティは、エンジンの[Scene](https://api.playcanvas.com/engine/classes/Scene.html)です。要素の準備が完了するまでは`null`で、フォグ、露出、スカイはここで設定されます。
+`scene`プロパティは、フォグ、露出、スカイを設定するエンジンの[Scene](https://api.playcanvas.com/engine/classes/Scene.html)です。含まれているアプリケーションが作成されるまでは`null`なので、ページのコードから読み取る前に要素の準備完了を待ってください。
 
 ## 関連項目 {#see-also}
 
-* [`<pc-app>`](../pc-app) — シーンを保持するアプリケーション
+* [`<pc-app>`](../pc-app) — シーンを保持するアプリケーションと、そのタイムスケール
 * [`<pc-sky>`](../pc-sky) — シーンのスカイボックスと画像ベースのライティング
 * [`<pc-camera>`](../pc-camera) — シーンの露出のあとに適用されるトーンマッピング
 * [`<pc-rigid-body>`](../pc-rigid-body) — 重力が働くボディ
 
-サンプル: [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html)、[Spinning Cube](https://playcanvas.github.io/web-components/examples/spinning-cube.html)
+サンプル: [Basic Shapes](https://playcanvas.github.io/web-components/examples/#basic-shapes.html)、[Spinning Cube](https://playcanvas.github.io/web-components/examples/#spinning-cube.html)

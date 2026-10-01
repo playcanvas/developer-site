@@ -9,16 +9,7 @@ description: "AWS GPU インスタンスや CPU 専用バリアントを含む�
 
 `splat-transform` は Node.js CLI で、公開された npm パッケージは Node 22+ が動作するところであればどこでも動作します — Docker は厳密には必要ありません。
 
-いくつかの機能は **GPU 専用**で、WebGPU なしでは動作しません：
-
-- `--filter-cluster` と `--filter-floaters`。
-- `.voxel.json` 出力と `--collision-mesh`（[コリジョンメッシュ](/user-manual/splat-transform/collision)ガイドを参照）。
-
-いくつかは **GPU 加速されているがオプション**です：
-
-- SOG / `meta.json` / `lod-meta.json` / `.html` ビューア出力（[SOG 圧縮オプション](/user-manual/splat-transform/#sog-compression-options)を参照）。このライター内で GPU を使用する唯一のステップは球面調和係数の k-means クラスタリングなので：
-  - SH バンドを**持たない**入力（例：`.splat`、SH を取り除いた PLY、または `-H 0` / `--filter-harmonics 0` を経由したもの）は SOG を完全に CPU で書き込みます。
-  - SH バンドを**持つ**入力も `-g cpu` で CPU で動作しますが、SH クラスタリングは GPU なしではおおよそ 5-10 倍遅くなります。
+いくつかの機能は **GPU 専用**で、WebGPU なしでは動作しません：`--filter-cluster`、`--filter-floaters`、`.voxel.json` 出力と `--collision-mesh`（[コリジョンメッシュ](/user-manual/splat-transform/collision)ガイドを参照）、そして `.webp` 画像出力（[画像のレンダリング](/user-manual/splat-transform/image-rendering)を参照）です。デシメーションと SOG 出力はデフォルトで GPU を使用しますが、CPU でも動作します。ただし球面調和を含む SOG 出力は、CPU ではおおよそ 5-10 倍遅くなります。詳しい内訳は [GPU が必要な機能](/user-manual/splat-transform/cli-reference#which-features-need-a-gpu)を参照してください。
 
 すべての GPU パスは WebGPU を経由し、Linux 上では Vulkan で実装されています。これが下記のホストおよびコンテナの要件を定めています。
 
@@ -141,7 +132,7 @@ docker run --rm --gpus all --user "$(id -u):$(id -g)" \
 
 残りの例は簡潔さのために `--user` を省略しています — ホストディレクトリをマウントする呼び出しには追加してください。
 
-通常の `splat-transform` 呼び出しはすべて機能します — 完全な CLI サーフェスについては [CLI リファレンス](/user-manual/splat-transform/) を参照してください。例えば：
+通常の `splat-transform` 呼び出しはすべて機能します — 完全な CLI サーフェスについては [CLIリファレンス](/user-manual/splat-transform/cli-reference) を参照してください。例えば：
 
 ```bash
 # GPU SOG 圧縮
@@ -177,7 +168,7 @@ docker run --rm --gpus all --entrypoint vulkaninfo splat-transform --summary
 
 ## CPU 専用バリアント {#cpu-only-variant}
 
-GPU 専用機能（`--filter-cluster`、`--filter-floaters`、`.voxel.json`、`--collision-mesh`）が必要なければ、GPU のセットアップを完全にスキップして、はるかに小さいベースイメージを使用できます。SOG / `meta.json` / `lod-meta.json` / `.html` 出力もこのイメージで動作します — SH 圧縮ステップは CPU にフォールバックします：
+GPU 専用機能（`--filter-cluster`、`--filter-floaters`、`.voxel.json`、`--collision-mesh`、`.webp`）が必要なければ、GPU のセットアップを完全にスキップして、はるかに小さいベースイメージを使用できます。SOG / `meta.json` / `lod-meta.json` / `.html` 出力もこのイメージで動作します — SH 圧縮ステップは CPU にフォールバックします：
 
 ```dockerfile
 FROM node:22-slim
@@ -200,7 +191,7 @@ GPU イメージを維持しつつ、単一の実行で CPU モードを強制�
 docker run --rm -v "$PWD":/work splat-transform -g cpu input.ply output.sog
 ```
 
-`-g cpu` は GPU 専用機能（`--filter-cluster`、`--filter-floaters`、`.voxel.json`、`--collision-mesh`）と互換性がないことに注意してください。CPU 側の SH 圧縮も GPU よりおおよそ 5-10 倍遅くなります。
+`-g cpu` は GPU 専用機能（`--filter-cluster`、`--filter-floaters`、`.voxel.json`、`--collision-mesh`、`.webp`）と互換性がないことに注意してください。CPU 側の SH 圧縮も GPU よりおおよそ 5-10 倍遅くなります。
 
 ## トラブルシューティング
 

@@ -3,7 +3,7 @@ title: <pc-entity>
 description: "pc-entity要素のリファレンス: 名前、変換、階層のルール、Entity下で有効な子のComponentタグです。"
 ---
 
-`<pc-entity>`タグはエンティティを定義するために使用されます。
+`<pc-entity>`タグはエンティティを定義します。シーン内の名前付きの点で、位置・回転・スケールを持ち、その中のコンポーネントタグが描画・ライティング・物理などの能力を与えます。
 
 :::note[使用法]
 
@@ -20,7 +20,7 @@ description: "pc-entity要素のリファレンス: 名前、変換、階層の�
 | 属性 | タイプ | デフォルト | 説明 |
 | --- | --- | --- | --- |
 | `enabled` | Boolean | `"true"` | エンティティの有効状態 |
-| `name` | String | - | エンティティの名前識別子 |
+| `name` | String | - | エンティティの名前識別子。名前のないエンティティは`Untitled`という名前になります |
 | `position` | Vector3 | `"0 0 0"` | 「X Y Z」値としてのローカル空間位置 |
 | `rotation` | Vector3 | `"0 0 0"` | 度単位の「X Y Z」オイラー角としてのローカル空間回転 |
 | `scale` | Vector3 | `"1 1 1"` | 「X Y Z」値としてのローカル空間スケール |
@@ -35,7 +35,7 @@ description: "pc-entity要素のリファレンス: 名前、変換、階層の�
 | イベント | 説明 |
 | --- | --- |
 | `click` | エンティティ上でプライマリボタンが押され、そして離されたときに発生します。[クリック](#clicks)を参照してください。 |
-| `pointercancel` | ブラウザが押下を取り消したときに、その押下が始まったエンティティで発生します。たとえばタッチがスクロールになった場合です。その後に`click`は発生しません。 |
+| `pointercancel` | ブラウザが押下を取り消したときに、その押下が始まったエンティティで発生します。たとえばオペレーティングシステムがタッチを引き継いだ場合です。その後に`click`は発生しません。 |
 | `pointerdown` | エンティティ上でポインターのボタンが押されたときに発生します。 |
 | `pointerenter` | ポインターが、エンティティとその下のエンティティのどれの上にもない状態から、それらのいずれかの上に移動したときに発生します。バブリングしません。 |
 | `pointerleave` | ポインターが、エンティティとその下のすべてのエンティティの上から離れたときに発生します。バブリングしません。 |
@@ -54,9 +54,9 @@ description: "pc-entity要素のリファレンス: 名前、変換、階層の�
 
 ```html
 <pc-entity name="cube"
-           onpointerenter="this.entity.script.tweener.play(0)"
-           onpointerleave="this.entity.script.tweener.play(1)"
-           onclick="this.entity.script.tweener.play(2)">
+           onpointerenter="this.setAttribute('scale', '1.2 1.2 1.2')"
+           onpointerleave="this.removeAttribute('scale')"
+           onclick="this.setAttribute('rotation', '0 45 0')">
     <pc-render type="box"></pc-render>
 </pc-entity>
 ```
@@ -70,7 +70,7 @@ description: "pc-entity要素のリファレンス: 名前、変換、階層の�
 * 押下と解放が別のジオメトリ上で起きた場合、クリックは両者の**最も近い共通の祖先**で発生します。あるオブジェクトから兄弟オブジェクトへドラッグすると共通の親（トップレベルの2つのエンティティなら`<pc-scene>`）でクリックが発生し、背景へドラッグして離すとどこでもクリックは発生しません。これは、ネストしたHTML上のネイティブなクリックにブラウザが適用するのと同じルールです。
 * `detail`にはネイティブなクリックと同様にクリック回数が入ります。同じ要素を0.5秒以内に再度クリックすると`detail`が`2`の`click`として届くため、ダブルクリックは別のイベントではなく`detail`から読み取ります。
 
-ブラウザが取り消した押下 — たとえばスクロールと解釈し直されたタッチ — はクリックとして成立せず、代わりに押下が始まったエンティティで`pointercancel`が発生します。
+ブラウザが取り消した押下 — たとえばオペレーティングシステムが引き継いだタッチ — はクリックとして成立せず、代わりに押下が始まったエンティティで`pointercancel`が発生します（キャンバスには`touch-action: none`のスタイルが設定されているため、キャンバス上のタッチがスクロールになることはありません）。
 
 ### イベントがディスパッチされるタイミング {#when-events-are-dispatched}
 
@@ -81,28 +81,54 @@ description: "pc-entity要素のリファレンス: 名前、変換、階層の�
 * **ページ上の他の場所にあるリスナー。** ドキュメントや`<pc-app>`自体に置いたリスナー、Reactの`onPointerMove`のようなフレームワークの委譲ハンドラーなどです。これらは、`<pc-app>`が認識するリスナーがエンティティの経路上にある場合にだけイベントを受け取り、自分からイベントのディスパッチを引き起こすことはありません。すべてのポインターイベントでピッキングするには`<pc-app>`に`picking="always"`を、イベントを無効にするには`picking="none"`を設定します。Reactの`onClick`は例外です。Reactは`onClick`を持つ要素の`onclick`プロパティも設定するため、エンティティ要素や`<pc-scene>`に置いた`onClick`は認識され、`auto`のままでクリックが動作します。そのために`always`に切り替えても、ポインターが動くたびにピッキングが1回増えるだけです。
 * **ライブラリが要素を定義する前に`addEventListener()`で追加されたリスナー。** ライブラリのモジュールより先に実行されるクラシックな`<script>`や、[テンプレートのクローン](../templates.md#creating-an-instance)を追加する前に設定するコードがこれに当たります。このようなリスナーはライブラリをインポートするモジュールから追加し、クローンのリスナーはクローンを追加した後で登録してください。インライン属性とハンドラープロパティは、いつ設定したものでも認識されます。
 
-キャンバスはその間もずっと自身のネイティブなポインターイベントを受け取り続けるため、`<pc-app>`やそれより上に置いたリスナーは両方の種類を受け取ります。両者は`event.target`で区別できます。ネイティブなイベントでは`<canvas>`、ディスパッチされたイベントではエンティティ要素です。ディスパッチされたイベントは、ピッキングの結果がGPUから読み戻されてから届くため、それを引き起こしたネイティブなイベントより少し遅れて到着します。
+キャンバスはその間もずっと自身のネイティブなポインターイベントを受け取り続けるため、`<pc-app>`やそれより上に置いたリスナーは両方の種類を受け取ります。両者は`event.isTrusted`で区別できます。ブラウザのネイティブなイベントでは`true`、ディスパッチされたイベントでは`false`で、後者の`target`はエンティティ要素、`<pc-scene>`、あるいは`picking="always"`での一部の境界イベントでは`<pc-app>`自身です。ディスパッチされたイベントは、ピッキングの結果がGPUから読み戻されてから届くため、それを引き起こしたネイティブなイベントより少し遅れて到着します。
 
 ## 例 {#example}
 
-エンティティのトランスフォームは階層を通じて合成されます。小さいキューブは大きいキューブの*子*なので、大きいキューブにポインタを乗せると両方が一緒に動きます。どちらのキューブをクリックしても2つとも回転します。子にはハンドラがないため、そのクリックが親までバブリングするからです。親の `rotation` や `scale`、インラインのハンドラを編集してみましょう:
+入れ子のエンティティで組み立てたデスクランプです。関節である `arm`、`forearm`、`head` はそれぞれ親を基準に配置・回転されているため、1つを回すと、その先にあるものがライトも含めてすべて一緒に動きます。ハンドラーはすべてルートの `lamp` にあります。ポインターがパーツの間をどう移動しても、`pointerenter` と `pointerleave` はランプ全体に対して1回ずつ発生します。また、どのパーツのクリックも `lamp` までバブリングし、電球の `enabled` 属性を切り替えます。エンティティを無効にするとそのコンポーネントと子もまとめて無効になるため、ライトと発光が一緒に消えます。関節の `rotation` の値を変えてランプにポーズを付けたり、ルートに `scale` を付けて大きさを変えたりしてみましょう:
 
 ```html live-example
 <pc-app>
+    <pc-material id="paint" diffuse="#e8702a" gloss="0.7"></pc-material>
+    <pc-material id="steel" diffuse="#b7bec7" gloss="0.8"></pc-material>
+    <pc-material id="glow" emissive="#fff0d0"></pc-material>
+    <pc-material id="desk" diffuse="#3d4250"></pc-material>
     <pc-scene>
-        <pc-entity name="camera" position="0 1 4">
+        <pc-entity name="camera" position="0.45 1.55 2.3" rotation="-27 0 0">
             <pc-camera clear-color="#1d1f2b"></pc-camera>
         </pc-entity>
-        <pc-entity name="light" rotation="45 30 0">
-            <pc-light></pc-light>
+        <pc-entity name="room-light" rotation="40 50 0">
+            <pc-light intensity="0.8" cast-shadows normal-offset-bias="0.05" shadow-bias="0.2"></pc-light>
         </pc-entity>
-        <pc-entity name="parent" rotation="0 30 0" tags="interactive"
-                   onpointerenter="this.entity.setLocalPosition(0, 0.25, 0)"
-                   onpointerleave="this.entity.setLocalPosition(0, 0, 0)"
-                   onclick="this.entity.rotate(0, 45, 0)">
-            <pc-render type="box"></pc-render>
-            <pc-entity name="child" position="0.75 0.75 0" scale="0.5 0.5 0.5">
-                <pc-render type="box"></pc-render>
+        <pc-entity name="desk" scale="100 1 100">
+            <pc-render type="plane" material="desk"></pc-render>
+        </pc-entity>
+        <pc-entity name="lamp" rotation="0 -25 0"
+                   onpointerenter="document.body.style.cursor = 'pointer'"
+                   onpointerleave="document.body.style.cursor = ''"
+                   onclick="const bulb = this.querySelector('[name=bulb]'); bulb.setAttribute('enabled', !bulb.enabled)">
+            <pc-entity name="base" position="0 0.025 0" scale="0.45 0.05 0.45">
+                <pc-render type="cylinder" material="paint"></pc-render>
+            </pc-entity>
+            <pc-entity name="arm" position="0 0.05 0" rotation="0 0 25">
+                <!-- スケールは arm ではなくロッドに付けているので、その先の関節は引き伸ばされません -->
+                <pc-entity name="arm-rod" position="0 0.35 0" scale="0.04 0.7 0.04">
+                    <pc-render type="cylinder" material="steel"></pc-render>
+                </pc-entity>
+                <pc-entity name="forearm" position="0 0.7 0" rotation="0 0 -80">
+                    <pc-entity name="forearm-rod" position="0 0.35 0" scale="0.04 0.7 0.04">
+                        <pc-render type="cylinder" material="steel"></pc-render>
+                    </pc-entity>
+                    <pc-entity name="head" position="0 0.7 0" rotation="0 0 70">
+                        <pc-entity name="shade" position="0 -0.12 0" scale="0.3 0.24 0.3">
+                            <pc-render type="cone" material="paint"></pc-render>
+                        </pc-entity>
+                        <pc-entity name="bulb" position="0 -0.24 0" scale="0.1 0.1 0.1">
+                            <pc-render type="sphere" material="glow"></pc-render>
+                            <pc-light type="spot" color="#ffc978" intensity="4" inner-cone-angle="25" outer-cone-angle="35"></pc-light>
+                        </pc-entity>
+                    </pc-entity>
+                </pc-entity>
             </pc-entity>
         </pc-entity>
     </pc-scene>
@@ -124,4 +150,4 @@ description: "pc-entity要素のリファレンス: 名前、変換、階層の�
 * [`<pc-script>`](../pc-script) — エンティティに付ける振る舞い
 * [テンプレートによる再利用可能なシーン](../templates.md) — `<template>`からエンティティのサブツリーをクローンする方法
 
-サンプル: [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html)、[Falling Blocks](https://playcanvas.github.io/web-components/examples/falling-blocks.html)
+サンプル: [Basic Shapes](https://playcanvas.github.io/web-components/examples/#basic-shapes.html)、[Falling Blocks](https://playcanvas.github.io/web-components/examples/#falling-blocks.html)

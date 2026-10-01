@@ -3,7 +3,7 @@ title: <pc-entity>
 description: "Reference for the pc-entity element: names, transforms, hierarchy rules, and which child component tags are valid under an entity."
 ---
 
-The `<pc-entity>` tag is used to define an entity.
+The `<pc-entity>` tag defines an entity: a named point in the scene with a position, rotation and scale, which the component tags inside it give abilities such as rendering, lighting or physics.
 
 :::note[Usage]
 
@@ -20,7 +20,7 @@ The `<pc-entity>` tag is used to define an entity.
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
 | `enabled` | Boolean | `"true"` | Enabled state of the entity |
-| `name` | String | - | Name identifier for the entity |
+| `name` | String | - | Name identifier for the entity. An entity without one is named `Untitled` |
 | `position` | Vector3 | `"0 0 0"` | Local-space position as "X Y Z" values |
 | `rotation` | Vector3 | `"0 0 0"` | Local-space rotation as "X Y Z" Euler angles in degrees |
 | `scale` | Vector3 | `"1 1 1"` | Local-space scale as "X Y Z" values |
@@ -35,7 +35,7 @@ Listen to these events using [`addEventListener()`](https://developer.mozilla.or
 | Event | Description |
 | --- | --- |
 | `click` | Fired when a primary pointer button is pressed and then released over the entity. See [Clicks](#clicks). |
-| `pointercancel` | Fired on the entity a press began over when the browser cancels the press, for example because a touch became a scroll. No `click` follows. |
+| `pointercancel` | Fired on the entity a press began over when the browser cancels the press, for example because the operating system took over the touch. No `click` follows. |
 | `pointerdown` | Fired when a pointer button is pressed over the entity. |
 | `pointerenter` | Fired when the pointer moves onto the entity or an entity below it, having been over none of them. Does not bubble. |
 | `pointerleave` | Fired when the pointer moves off the entity and every entity below it. Does not bubble. |
@@ -54,9 +54,9 @@ You can also handle these events declaratively with inline `onclick` and `onpoin
 
 ```html
 <pc-entity name="cube"
-           onpointerenter="this.entity.script.tweener.play(0)"
-           onpointerleave="this.entity.script.tweener.play(1)"
-           onclick="this.entity.script.tweener.play(2)">
+           onpointerenter="this.setAttribute('scale', '1.2 1.2 1.2')"
+           onpointerleave="this.removeAttribute('scale')"
+           onclick="this.setAttribute('rotation', '0 45 0')">
     <pc-render type="box"></pc-render>
 </pc-entity>
 ```
@@ -70,7 +70,7 @@ You can also handle these events declaratively with inline `onclick` and `onpoin
 * If the press and the release landed on different geometry, the click fires at their **nearest common ancestor** — dragging from one object onto its sibling clicks their shared parent (`<pc-scene>`, for two top-level entities), and dragging off onto the background clicks nothing at all. This is the same rule the browser applies to native clicks on nested HTML.
 * `detail` carries the click count, as it does for a native click: a second click on the same element within half a second arrives as a `click` whose `detail` is `2`, so a double click is read from `detail` rather than from a separate event.
 
-A press the browser takes back — a touch it reinterprets as a scroll, say — fires `pointercancel` on the entity it began over instead of concluding as a click.
+A press the browser takes back — because the operating system took over the touch, say — fires `pointercancel` on the entity it began over instead of concluding as a click. (The canvas is styled `touch-action: none`, so a touch on it never turns into a scroll.)
 
 ### When Events Are Dispatched
 
@@ -81,28 +81,54 @@ Two kinds of listener go unseen:
 * **Listeners elsewhere on the page**, such as one on the document, one on `<pc-app>` itself, or a framework's delegated handler like React's `onPointerMove`. They receive an event only when a listener that `<pc-app>` does see is on the entity's path, and never cause one to be dispatched themselves. Set `picking="always"` on `<pc-app>` to pick for every pointer event, or `picking="none"` to switch the events off. React's `onClick` is an exception. React also sets the `onclick` property of the element that has it, so an `onClick` on an entity element or on `<pc-scene>` is seen, and clicks work under `auto`. Switching to `always` for it would only add a pick on every pointer move.
 * **Listeners added with `addEventListener()` before the library has defined the element.** A classic `<script>` that runs ahead of the library's module does this, and so does code that configures a [template clone](../templates.md#creating-an-instance) before appending it. Add such listeners from a module that imports the library, and add a clone's only after appending it. An inline attribute or handler property is seen whenever it was set.
 
-The canvas keeps receiving its own native pointer events throughout, so a listener on `<pc-app>` or above receives both kinds. `event.target` tells them apart: it is the `<canvas>` for a native event, and an entity element for a dispatched one. A dispatched event arrives shortly after the native event that caused it, once its pick has been read back from the GPU.
+The canvas keeps receiving its own native pointer events throughout, so a listener on `<pc-app>` or above receives both kinds. `event.isTrusted` tells them apart: it is `true` for the browser's native events and `false` for dispatched ones, whose `target` is an entity element, `<pc-scene>` or, for some boundary events under `picking="always"`, the `<pc-app>` itself. A dispatched event arrives shortly after the native event that caused it, once its pick has been read back from the GPU.
 
 ## Example
 
-Entity transforms compose down the hierarchy: the small cube is a *child* of the large one, so hover over the large cube and both move together. Clicking either cube turns the pair — the child has no handler of its own, so its clicks bubble to the parent. Try editing the parent's `rotation` or `scale`, or the inline handlers:
+A desk lamp built from nested entities. Each joint — `arm`, `forearm` and `head` — is positioned and rotated relative to its parent, so turning one swings everything beyond it, light included. The handlers all sit on the `lamp` root: `pointerenter` and `pointerleave` fire there once for the whole lamp, however the pointer moves between its parts, and a click on any part bubbles up to it and toggles the bulb's `enabled` attribute. Disabling an entity takes its components and children with it, so the light and the glow go off together. Try posing the lamp through the joints' `rotation` values, or resizing it with a `scale` on the root:
 
 ```html live-example
 <pc-app>
+    <pc-material id="paint" diffuse="#e8702a" gloss="0.7"></pc-material>
+    <pc-material id="steel" diffuse="#b7bec7" gloss="0.8"></pc-material>
+    <pc-material id="glow" emissive="#fff0d0"></pc-material>
+    <pc-material id="desk" diffuse="#3d4250"></pc-material>
     <pc-scene>
-        <pc-entity name="camera" position="0 1 4">
+        <pc-entity name="camera" position="0.45 1.55 2.3" rotation="-27 0 0">
             <pc-camera clear-color="#1d1f2b"></pc-camera>
         </pc-entity>
-        <pc-entity name="light" rotation="45 30 0">
-            <pc-light></pc-light>
+        <pc-entity name="room-light" rotation="40 50 0">
+            <pc-light intensity="0.8" cast-shadows normal-offset-bias="0.05" shadow-bias="0.2"></pc-light>
         </pc-entity>
-        <pc-entity name="parent" rotation="0 30 0" tags="interactive"
-                   onpointerenter="this.entity.setLocalPosition(0, 0.25, 0)"
-                   onpointerleave="this.entity.setLocalPosition(0, 0, 0)"
-                   onclick="this.entity.rotate(0, 45, 0)">
-            <pc-render type="box"></pc-render>
-            <pc-entity name="child" position="0.75 0.75 0" scale="0.5 0.5 0.5">
-                <pc-render type="box"></pc-render>
+        <pc-entity name="desk" scale="100 1 100">
+            <pc-render type="plane" material="desk"></pc-render>
+        </pc-entity>
+        <pc-entity name="lamp" rotation="0 -25 0"
+                   onpointerenter="document.body.style.cursor = 'pointer'"
+                   onpointerleave="document.body.style.cursor = ''"
+                   onclick="const bulb = this.querySelector('[name=bulb]'); bulb.setAttribute('enabled', !bulb.enabled)">
+            <pc-entity name="base" position="0 0.025 0" scale="0.45 0.05 0.45">
+                <pc-render type="cylinder" material="paint"></pc-render>
+            </pc-entity>
+            <pc-entity name="arm" position="0 0.05 0" rotation="0 0 25">
+                <!-- The scale is on the rod, not the arm, so it doesn't stretch the joints beyond -->
+                <pc-entity name="arm-rod" position="0 0.35 0" scale="0.04 0.7 0.04">
+                    <pc-render type="cylinder" material="steel"></pc-render>
+                </pc-entity>
+                <pc-entity name="forearm" position="0 0.7 0" rotation="0 0 -80">
+                    <pc-entity name="forearm-rod" position="0 0.35 0" scale="0.04 0.7 0.04">
+                        <pc-render type="cylinder" material="steel"></pc-render>
+                    </pc-entity>
+                    <pc-entity name="head" position="0 0.7 0" rotation="0 0 70">
+                        <pc-entity name="shade" position="0 -0.12 0" scale="0.3 0.24 0.3">
+                            <pc-render type="cone" material="paint"></pc-render>
+                        </pc-entity>
+                        <pc-entity name="bulb" position="0 -0.24 0" scale="0.1 0.1 0.1">
+                            <pc-render type="sphere" material="glow"></pc-render>
+                            <pc-light type="spot" color="#ffc978" intensity="4" inner-cone-angle="25" outer-cone-angle="35"></pc-light>
+                        </pc-entity>
+                    </pc-entity>
+                </pc-entity>
             </pc-entity>
         </pc-entity>
     </pc-scene>
@@ -124,4 +150,4 @@ To stamp out many copies of an entity subtree, declare it once inside a native `
 * [`<pc-script>`](../pc-script) — behavior attached to an entity
 * [Reusable Scenes with Templates](../templates.md) — cloning entity subtrees from a `<template>`
 
-Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html) and [Falling Blocks](https://playcanvas.github.io/web-components/examples/falling-blocks.html).
+Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/#basic-shapes.html) and [Falling Blocks](https://playcanvas.github.io/web-components/examples/#falling-blocks.html).

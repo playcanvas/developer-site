@@ -19,6 +19,12 @@ description: "pc-material要素のリファレンス: カラー、メタルネ�
 
 :::
 
+:::note[マップは値に乗算されます]
+
+スカラーのマップは対応する属性の値に乗算されるため、各マップにはそれを通す値を組み合わせてください。`metalness`は`0`から始まるため、`metalness-map`だけでは何も変わりません。`metalness="1"`と組み合わせてください。同様に、`roughness-map`には`roughness="1"`を、`gloss-map`には`gloss="1"`を組み合わせます。
+
+:::
+
 ## 属性 {#attributes}
 
 <div className="attribute-table">
@@ -57,7 +63,7 @@ description: "pc-material要素のリファレンス: カラー、メタルネ�
 | `normal-map` | [Asset ID](../attributes.md#asset-and-material-ids) | - | ノーマルマップとして使用するテクスチャ [`<pc-asset>`](../pc-asset) の `id` |
 | `occlude-direct` | Boolean | `"false"` | アンビエントオクルージョンが直接光も減衰させるかどうか |
 | `occlude-specular` | Enum | `"ao"` | スペキュラ反射をオクルージョンする方法: `"none"` \| `"ao"` \| `"gloss-dependent"` |
-| `opacity` | Number | `"1"` | マテリアルの不透明度。0（透明）から1（不透明）まで。視覚的な効果を得るには`"none"`以外の`blend-type`が必要です |
+| `opacity` | Number | `"1"` | マテリアルの不透明度。0（透明）から1（不透明）まで。視覚的な効果があるのは、`"none"`以外の`blend-type`を使う場合か、`alpha-test`、`alpha-to-coverage`、`opacity-dither`を使う場合だけです |
 | `opacity-dither` | Enum | `"none"` | ブレンドなしで透明度を近似する不透明度のディザリング: `"none"` \| `"bayer2"` \| `"bayer4"` \| `"bayer8"` \| `"bayer16"` \| `"bluenoise"` \| `"ignnoise"`。`alpha-dither`も参照してください |
 | `opacity-fades-specular` | Boolean | `"true"` | マテリアルが透明になるにつれてスペキュラハイライトをフェードアウトさせるかどうか |
 | `opacity-map` | [Asset ID](../attributes.md#asset-and-material-ids) | - | オパシティマップとして使用するテクスチャ [`<pc-asset>`](../pc-asset) の `id` |
@@ -71,7 +77,7 @@ description: "pc-material要素のリファレンス: カラー、メタルネ�
 | `specularity-factor` | Number | `"1"` | 正面の角度でのスペキュラ反射の強さ（0〜1）。`use-metalness-specular-color`が有効な場合にのみ適用されます |
 | `two-sided-lighting` | Boolean | `"false"` | 裏面を法線が反転しているかのようにライティングするかどうか |
 | `use-fog` | Boolean | `"true"` | マテリアルがシーンのフォグの影響を受けるかどうか |
-| `use-lighting` | Boolean | `"true"` | マテリアルがシーンのライトの影響を受けるかどうか。無効にすると、ディフューズカラーとマップのみを使用してアンリットでレンダリングされます |
+| `use-lighting` | Boolean | `"true"` | マテリアルがシーンのライトの影響を受けるかどうか。無効にすると直接光は無視されますが、ディフューズカラーは引き続きシーンの環境光と環境ライティングで照らされるため、どちらもなければ黒く描画されます。フラットで自己発光した見た目には、代わりに`emissive`または`emissive-map`を使用してください |
 | `use-metalness` | Boolean | `"true"` | 旧来のスペキュラワークフローではなくメタルネスワークフローを使用するかどうか |
 | `use-metalness-specular-color` | Boolean | `"false"` | メタルネスワークフローの使用中にスペキュラカラーで反射に色付けするかどうか |
 | `use-skybox` | Boolean | `"true"` | マテリアルがシーンのスカイボックスによってライティングされるかどうか |
@@ -140,13 +146,13 @@ description: "pc-material要素のリファレンス: カラー、メタルネ�
 
 実行時（アプリケーションの起動後）に挿入された`<pc-material>`は、挿入時にマテリアルを作成するため、JavaScriptから動的にマテリアルを追加できます。実行時の属性変更も即座に反映され（連続した変更は1回のマテリアル更新にまとめられます）、`*-map`属性を削除するとそのテクスチャスロットはクリアされます。
 
-`name`属性は、後から識別したいマテリアルには設定しておく価値があります。この値はエンジンのマテリアルに渡されるため、マテリアルが名前で現れるあらゆる場所 — プロファイラー、GPUキャプチャ、そして[`<pc-model>`の`hierarchy()`](../pc-model#inspecting-the-hierarchy)が報告する割り当て — で表示されるラベルになります。[`<pc-node>`の`material-overrides`](../pc-node#overriding-materials)が差し込んだマテリアルも含まれ、設定しない場合はそこで`Untitled`と表示されます。マテリアルの参照方法には影響しません。参照は常に`id`によって行われます。
+`name`属性は、後から識別したいマテリアルには設定しておく価値があります。この値はエンジンのマテリアルに渡されるため、マテリアルが名前で現れるあらゆる場所 — プロファイラー、エンジンのデバッグビルドで取得したGPUキャプチャ、そして[`<pc-model>`の`hierarchy()`](../pc-model#inspecting-the-hierarchy)が報告する割り当て — で表示されるラベルになります。[`<pc-node>`の`material-overrides`](../pc-node#overriding-materials)が差し込んだマテリアルも含まれ、設定しない場合はそこで`Untitled`と表示されます。マテリアルの参照方法には影響しません。参照は常に`id`によって行われます。
 
 ## JavaScriptインターフェース {#javascript-interface}
 
 [MaterialElement API](https://api.playcanvas.com/web-components/classes/MaterialElement.html)を使用して、`<pc-material>`要素をプログラムで作成および操作できます。
 
-`material`プロパティは、この要素が構築するエンジンの[StandardMaterial](https://api.playcanvas.com/engine/classes/StandardMaterial.html)です。`MaterialElement.get(id)`を使えば`id`でマテリアルを取得できます。この要素は同期的に初期化されるため、どちらも準備完了を待つ必要はありません。
+`material`プロパティは、この要素が構築するエンジンの[StandardMaterial](https://api.playcanvas.com/engine/classes/StandardMaterial.html)です。`MaterialElement.get(id)`を使えば`id`でマテリアルを取得できます。この要素自体に準備完了の状態はありませんが、マテリアルはアプリケーションの起動時に初めて作成されるため、どちらかを読み取る前に`whenReady('pc-app')`を待ってください。
 
 ## 関連項目 {#see-also}
 
@@ -154,4 +160,4 @@ description: "pc-material要素のリファレンス: カラー、メタルネ�
 * [`<pc-node>`](../pc-node) — 読み込まれたモデル内のマテリアルをオーバーライドします
 * [`<pc-asset>`](../pc-asset) — マテリアルのマップが参照するテクスチャアセット
 
-サンプル: [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html)、[Falling Blocks](https://playcanvas.github.io/web-components/examples/falling-blocks.html)、[Car Configurator](https://playcanvas.github.io/web-components/examples/car-configurator.html)
+サンプル: [Basic Shapes](https://playcanvas.github.io/web-components/examples/#basic-shapes.html)、[Falling Blocks](https://playcanvas.github.io/web-components/examples/#falling-blocks.html)、[Car Configurator](https://playcanvas.github.io/web-components/examples/#car-configurator.html)

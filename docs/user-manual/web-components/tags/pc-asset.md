@@ -3,7 +3,7 @@ title: <pc-asset>
 description: "Reference for the pc-asset element: declare assets to load by URL, type inference from file extensions, lazy loading, and how other tags reference them by id."
 ---
 
-The `<pc-asset>` tag is used to define an asset.
+The `<pc-asset>` tag declares an asset for the application to load — a model, texture, font, sound, script or JSON file — under an `id` that other tags reference.
 
 :::note[Usage]
 
@@ -22,10 +22,10 @@ The `<pc-asset>` tag is used to define an asset.
 | `anisotropy` | Number | `"1"` | For `texture` and `textureatlas` assets: maximum anisotropic filtering level, which improves quality at oblique viewing angles |
 | `atlas` | [Asset ID](../attributes.md#asset-and-material-ids) | - | For `sprite` assets: the `id` of the `textureatlas` `<pc-asset>` this sprite reads from. The atlas must be declared before the sprite |
 | `data` | String | - | Inline JSON asset data. Used by texture atlases (frame definitions) and sprites |
-| `flip-y` | Boolean | `"false"` | For `texture` and `textureatlas` assets: whether the image data is flipped vertically at upload |
+| `flip-y` | Boolean | `"false"` | For `texture` and `textureatlas` assets: whether the image data is flipped vertically at upload. Has no effect wherever the engine decodes images to an `ImageBitmap`, which it uploads unflipped: that is always on WebGPU, and on WebGL 2 in every browser except Safari |
 | `frame-keys` | String | - | For `sprite` assets: space- or comma-separated list of atlas frame keys that make up the sprite |
 | `id` | String | - | Unique identifier used by other tags to reference this asset |
-| `lazy` | Boolean | `"false"` | Whether to skip preloading. A lazy asset is loaded on demand by [`<pc-model>`](../pc-model), [`<pc-particle-system>`](../pc-particle-system), [`<pc-sky>`](../pc-sky) and [`<pc-material>`](../pc-material) texture maps — other elements do not trigger loading |
+| `lazy` | Boolean | `"false"` | Whether to skip preloading. A lazy asset loads the first time a tag references it by `id` (or when `lazy` is removed), so it downloads only once something uses it |
 | `mag-filter` | Enum | `"linear"` | For `texture` and `textureatlas` assets: the filter used when the texture is displayed larger than its source size — `"nearest"` \| `"linear"` |
 | `min-filter` | Enum | `"linear-mip-linear"` | For `texture` and `textureatlas` assets: the filter used when the texture is displayed smaller than its source size — `"nearest"` \| `"linear"` \| `"nearest-mip-nearest"` \| `"linear-mip-nearest"` \| `"nearest-mip-linear"` \| `"linear-mip-linear"` |
 | `mipmaps` | Boolean | `"true"` | For `texture` and `textureatlas` assets: whether the texture generates and uses mipmaps |
@@ -33,7 +33,7 @@ The `<pc-asset>` tag is used to define an asset.
 | `render-mode` | Enum | `"simple"` | For `sprite` assets: `"simple"` \| `"sliced"` \| `"tiled"`. Use `"sliced"` for 9-slice panels |
 | `src` | String | - | Path to the asset file |
 | `srgb` | Boolean | `"false"` | For `texture` and `textureatlas` assets: whether the texture holds sRGB (gamma-encoded) color data, enabling hardware gamma decode |
-| `type` | Enum | *inferred* | Asset type: `"audio"` \| `"binary"` \| `"css"` \| `"container"` \| `"font"` \| `"gsplat"` \| `"html"` \| `"json"` \| `"script"` \| `"shader"` \| `"sprite"` \| `"text"` \| `"texture"` \| `"textureatlas"` |
+| `type` | Enum | *inferred* | Asset type: `"animation"` \| `"animclip"` \| `"audio"` \| `"binary"` \| `"css"` \| `"container"` \| `"font"` \| `"gsplat"` \| `"html"` \| `"json"` \| `"script"` \| `"shader"` \| `"sprite"` \| `"text"` \| `"texture"` \| `"textureatlas"`. `animation` and `animclip` hold animation tracks for [`<pc-anim-clip>`](../pc-anim-clip) |
 
 </div>
 
@@ -49,7 +49,7 @@ Setting an attribute that does not apply to the asset's type — a texture optio
 
 The texture options apply when the texture is created, and each one overrides the matching key in the `data` JSON. Options you leave unset write nothing at all, which keeps the engine's per-format defaults in force — an HDR file's `rgbe` encoding, or the transcoded format a KTX2 file chose — so it is worth setting only the options you actually need.
 
-They also apply to a texture that has already loaded, which makes them convenient to experiment with from dev tools. Two are more expensive than the rest: changing `srgb` or `mipmaps` on a loaded texture recreates the underlying GPU resource, so prefer declaring those in the markup up front.
+They also apply to a texture that has already loaded, which makes them convenient to experiment with from dev tools. Two are more expensive than the rest: changing `srgb` or `mipmaps` on a loaded texture recreates the underlying GPU resource, so prefer declaring those in the markup up front. Removing an option you set writes the default shown in the table, which is not always what the file loaded with: an `.hdr` texture loads with `nearest` filtering, and removing `mag-filter` from one leaves it `linear`.
 
 ```html
 <!-- Crisp pixel-art texture: no filtering, no mipmaps, clamped at the edges -->
@@ -79,7 +79,7 @@ When `type` is omitted, it is inferred from the file extension of `src`:
 | `text` | `.txt` |
 | `texture` | `.hdr`, `.jpg`, `.ktx2`, `.png`, `.webp` |
 
-Any other extension — or a type not covered by inference, such as `font`, `sprite` or `textureatlas` — requires an explicit `type` attribute.
+Any other extension — or a type not covered by inference, such as `font`, `sprite` or `textureatlas` — requires an explicit `type` attribute. So does any `src` that does not end in one of the extensions above, exactly as written: a query string (`model.glb?v=2`), a fragment, an uppercase extension (`.JPG`) or another spelling (`.jpeg`). Without a `type`, such an asset logs an `Unsupported asset type` warning and is never created.
 
 ## Events
 
@@ -90,11 +90,13 @@ Listen to these events using [`addEventListener()`](https://developer.mozilla.or
 | `load` | Fired each time the asset finishes loading, including a `lazy` asset loaded later and any subsequent reloads. |
 | `error` | An [`ErrorEvent`](https://developer.mozilla.org/en-US/docs/Web/API/ErrorEvent) fired when the asset fails to load, with the engine's error in `message`. |
 
-Neither event bubbles, so listen on the element itself — or use a capture-phase listener on `<pc-app>` to observe every asset it holds:
+Neither event bubbles, so listen on the element itself — or use a capture-phase listener on `<pc-app>` to observe every asset it holds. The same listener also sees other elements' `error` events, such as [`<pc-model>`](../pc-model)'s and the app's own, so check the target:
 
 ```javascript
 document.querySelector('pc-app').addEventListener('error', (event) => {
-    console.warn(`${event.target.id} failed to load: ${event.message}`);
+    if (event.target.localName === 'pc-asset') {
+        console.warn(`${event.target.id} failed to load: ${event.message}`);
+    }
 }, true);
 ```
 
@@ -107,7 +109,7 @@ Two assets: a script (an engine helper loaded straight from a CDN) and a GLB mod
 ```html live-example
 <pc-app>
     <!-- Script asset: type inferred from the .mjs extension -->
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.4/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.6/scripts/esm/camera-controls.mjs"></pc-asset>
     <!-- Container asset: type inferred from the .glb extension -->
     <pc-asset src="https://developer.playcanvas.com/assets/playcanvas-cube.glb" id="cube"></pc-asset>
     <pc-scene>
@@ -150,4 +152,4 @@ The `asset` property is the engine [Asset](https://api.playcanvas.com/engine/cla
 * [`<pc-sound-slot>`](../pc-sound-slot) — plays an audio asset
 * [`<pc-script-instance>`](../pc-script-instance) — runs a script loaded as an asset
 
-Examples: [GLB Loader](https://playcanvas.github.io/web-components/examples/glb-loader.html), [Video Texture](https://playcanvas.github.io/web-components/examples/video-texture.html) and [Basic Sound](https://playcanvas.github.io/web-components/examples/basic-sound.html).
+Examples: [GLB Loader](https://playcanvas.github.io/web-components/examples/#glb-loader.html), [Video Texture](https://playcanvas.github.io/web-components/examples/#video-texture.html) and [Basic Sound](https://playcanvas.github.io/web-components/examples/#basic-sound.html).

@@ -417,41 +417,284 @@
     "message": "This page is unlisted. Search engines will not index it, and only users having a direct link can access it.",
     "description": "The unlisted content banner message"
   },
-  "homepage.title": {
+  "homepage.hero.search": {
+    "message": "ドキュメントを検索",
+    "description": "Label of the search button in the homepage hero"
+  },
+  "homepage.hero.eyebrow": {
     "message": "PlayCanvas 開発者サイト",
-    "description": "The title of the website"
+    "description": "Small label above the homepage title"
   },
-  "homepage.tagline": {
-    "message": "今日からPlayCanvasを学び始めましょう！",
-    "description": "The tagline of the website"
+  "homepage.hero.title": {
+    "message": "ウェブで動くインタラクティブな3Dを作ろう",
+    "description": "The homepage title"
   },
-  "homepage.getStarted": {
-    "message": "最初のアプリを作成 - 5分 ⏱️",
-    "description": "Button text for creating the first app"
+  "homepage.hero.subtitle": {
+    "message": "PlayCanvas Engine、Editor、React、Web Components、SuperSplat、SplatTransformのガイド、チュートリアル、サンプル、APIリファレンスをまとめています。",
+    "description": "The homepage subtitle"
   },
-  "userManual.title": {
-    "message": "ユーザーマニュアル",
-    "description": "Title for the User Manual section"
+  "homepage.hero.githubStars": {
+    "message": "GitHubでPlayCanvas Engineにスターを付ける",
+    "description": "Title of the GitHub star button in the homepage hero"
   },
-  "userManual.description": {
-    "message": "PlayCanvasの各側面を基本から高度な内容まで学びます。",
-    "description": "Description for the User Manual section"
+  "homepage.start.duration": {
+    "message": "{minutes}分",
+    "description": "Estimated time to finish a quick start, shown on its button"
   },
-  "tutorials.title": {
-    "message": "チュートリアル",
-    "description": "Title for the Tutorials section"
+  "homepage.start.title": {
+    "message": "作り始めよう",
+    "description": "Heading above the three quick starts on the homepage"
   },
-  "tutorials.description": {
-    "message": "実践的なPlayCanvasの使用例を学び、楽しく簡単に学べます。",
-    "description": "Description for the Tutorials section"
+  "homepage.start.editor.imageAlt": {
+    "message": "ビューポートにチェスのシーンを開いたPlayCanvas Editor"
   },
-  "apiReference.title": {
-    "message": "APIリファレンス",
-    "description": "Title for the API Reference section"
+  "homepage.start.editor.title": {
+    "message": "ビジュアルに作る"
   },
-  "apiReference.description": {
-    "message": "PlayCanvas APIを学び、独自のインタラクティブなウェブアプリを構築しましょう。",
-    "description": "Description for the API Reference section"
+  "homepage.start.editor.description": {
+    "message": "ブラウザで動く共同編集エディターで、シーンの組み立てからスクリプトの追加、公開までを行えます。インストールは不要です。"
+  },
+  "homepage.start.editor.action": {
+    "message": "最初のアプリを作成"
+  },
+  "homepage.start.editor.secondary": {
+    "message": "エディターのチュートリアル"
+  },
+  "homepage.start.code.title": {
+    "message": "コードで作る"
+  },
+  "homepage.start.code.description": {
+    "message": "12個の実行可能なスターターから選んで、Engine、React、Web Components用のViteとTypeScriptのプロジェクトを作成できます。"
+  },
+  "homepage.start.code.action": {
+    "message": "最初のプロジェクトを作成"
+  },
+  "homepage.start.code.manual": {
+    "message": "手動でセットアップ：",
+    "description": "Followed by links to the Engine, React and Web Components getting started guides"
+  },
+  "homepage.start.splats.imageAlt": {
+    "message": "superspl.atで公開されたミツバチのガウシアンスプラット"
+  },
+  "homepage.start.splats.title": {
+    "message": "ガウシアンスプラットを公開する"
+  },
+  "homepage.start.splats.description": {
+    "message": "撮影したスプラットをブラウザでクリーンアップしてsuperspl.atに公開し、あらゆるデバイスで誰とでも共有できます。"
+  },
+  "homepage.start.splats.action": {
+    "message": "最初のスプラットを公開"
+  },
+  "homepage.start.splats.secondary": {
+    "message": "自分のアプリでスプラットを使う"
+  },
+  "homepage.products.link.getStarted": {
+    "message": "はじめに"
+  },
+  "homepage.products.link.examples": {
+    "message": "例"
+  },
+  "homepage.products.link.api": {
+    "message": "APIリファレンス"
+  },
+  "homepage.products.link.tutorials": {
+    "message": "チュートリアル"
+  },
+  "homepage.products.link.tags": {
+    "message": "タグリファレンス"
+  },
+  "homepage.products.link.cli": {
+    "message": "CLIリファレンス"
+  },
+  "homepage.products.engine.description": {
+    "message": "ほかのすべての製品の土台となるオープンソースのエンジンです。WebGL2またはWebGPUで描画し、npmやCDNから利用できます。"
+  },
+  "homepage.products.editor.description": {
+    "message": "シーンの構築、アセットの管理、アプリの公開を行える、ブラウザベースの共同編集エディターです。"
+  },
+  "homepage.products.react.description": {
+    "message": "@playcanvas/reactのReactコンポーネントとフックで、シーンを宣言的に構築できます。"
+  },
+  "homepage.products.webComponents.description": {
+    "message": "<pc-*>カスタム要素を使い、プレーンなHTMLでシーンを構築できます。ビルドの手順は不要です。"
+  },
+  "homepage.products.supersplat.description": {
+    "message": "3Dガウシアンスプラットをクリーンアップ、公開、共有し、Studioで仕上げて、どこにでも埋め込めます。"
+  },
+  "homepage.products.splatTransform.description": {
+    "message": "スプラットファイルの変換、フィルタリング、結合と、ストリーミング用LODの生成を行うCLIとライブラリです。"
+  },
+  "homepage.products.title": {
+    "message": "プラットフォームを探索する"
+  },
+  "homepage.products.subtitle": {
+    "message": "中核となるエンジンから、その上に構築されたツールまで、製品ごとにガイドを用意しています。"
+  },
+  "homepage.topics.ecs.title": {
+    "message": "エンティティ・コンポーネント・システム"
+  },
+  "homepage.topics.ecs.description": {
+    "message": "エンティティ、コンポーネント、シーン階層。"
+  },
+  "homepage.topics.scripting.title": {
+    "message": "スクリプティング"
+  },
+  "homepage.topics.scripting.description": {
+    "message": "ESMスクリプトと属性で動作を追加します。"
+  },
+  "homepage.topics.assets.title": {
+    "message": "アセット"
+  },
+  "homepage.topics.assets.description": {
+    "message": "モデルやテクスチャなどの読み込み、プリロード、アンロード。"
+  },
+  "homepage.topics.graphics.title": {
+    "message": "グラフィック"
+  },
+  "homepage.topics.graphics.description": {
+    "message": "カメラ、ライティング、マテリアル、シェーダー、ポストエフェクト。"
+  },
+  "homepage.topics.gaussianSplatting.title": {
+    "message": "ガウシアン・スプラッティング"
+  },
+  "homepage.topics.gaussianSplatting.description": {
+    "message": "3Dガウシアンスプラットの撮影、レンダリング、アプリ開発。"
+  },
+  "homepage.topics.animation.title": {
+    "message": "アニメーション"
+  },
+  "homepage.topics.animation.description": {
+    "message": "ステートグラフ、ブレンド、レイヤーマスク、イベント。"
+  },
+  "homepage.topics.physics.title": {
+    "message": "物理演算"
+  },
+  "homepage.topics.physics.description": {
+    "message": "剛体、衝突、トリガー、ジョイント、レイキャスト。"
+  },
+  "homepage.topics.userInterface.title": {
+    "message": "ユーザーインターフェース"
+  },
+  "homepage.topics.userInterface.description": {
+    "message": "スクリーン、エレメント、テキスト、ボタン、スクロールビュー。"
+  },
+  "homepage.topics.twoD.description": {
+    "message": "スプライト、9スライス、テクスチャパッキング。"
+  },
+  "homepage.topics.xr.description": {
+    "message": "WebXRによる没入型のVRとAR体験。"
+  },
+  "homepage.topics.optimization.title": {
+    "message": "最適化"
+  },
+  "homepage.topics.optimization.description": {
+    "message": "プロファイリングで読み込みと描画を高速化します。"
+  },
+  "homepage.topics.title": {
+    "message": "基本コンセプト"
+  },
+  "homepage.topics.subtitle": {
+    "message": "Editorで開発する場合も、Engine、React、Web Componentsを使う場合も共通のトピックです。"
+  },
+  "homepage.topics.all": {
+    "message": "ユーザーマニュアルを見る"
+  },
+  "homepage.examples.engine.imageAlt": {
+    "message": "Clustered Area Lightsのサンプルをソースコードと並べて表示しているエンジンの例のブラウザ"
+  },
+  "homepage.examples.engine.title": {
+    "message": "エンジンの例"
+  },
+  "homepage.examples.engine.description": {
+    "message": "レンダリングや物理演算からスプラット、XRまで、ソースコード付きのライブサンプルが数百種類あります。"
+  },
+  "homepage.examples.tutorials.imageAlt": {
+    "message": "エディターのチュートリアルのサムネイル一覧"
+  },
+  "homepage.examples.tutorials.title": {
+    "message": "エディターのチュートリアル"
+  },
+  "homepage.examples.tutorials.description": {
+    "message": "Editorでゲームやインタラクティブなアプリを作るためのステップバイステップのガイド。"
+  },
+  "homepage.examples.react.imageAlt": {
+    "message": "物理シミュレーションで転がるオレンジと白の球とカプセル"
+  },
+  "homepage.examples.react.title": {
+    "message": "React の例"
+  },
+  "homepage.examples.react.description": {
+    "message": "@playcanvas/reactで作られたモデルビューア、物理演算、モーション、テキストのサンプル。"
+  },
+  "homepage.examples.webComponents.imageAlt": {
+    "message": "カラースウォッチの上に浮かぶ銀色のスポーツカー"
+  },
+  "homepage.examples.webComponents.title": {
+    "message": "Web Components の例"
+  },
+  "homepage.examples.webComponents.description": {
+    "message": "最初のシーンから本格的なショーケースまで、実際に動かして探索できるHTMLページ。"
+  },
+  "homepage.examples.title": {
+    "message": "サンプルで学ぶ"
+  },
+  "homepage.examples.subtitle": {
+    "message": "ライブサンプルを動かし、ソースコードを読んで、自分のプロジェクトに応用しましょう。"
+  },
+  "homepage.api.title": {
+    "message": "APIリファレンス"
+  },
+  "homepage.ai.skills.description": {
+    "message": "Engine、React、Web Componentsのアプリを構築、検証するためのワークフロー。"
+  },
+  "homepage.ai.mcp.title": {
+    "message": "Editor MCP Server"
+  },
+  "homepage.ai.mcp.description": {
+    "message": "エージェントをEditorに接続して、プロジェクトを変更、検証します。"
+  },
+  "homepage.ai.guide.title": {
+    "message": "AI を活用した開発"
+  },
+  "homepage.ai.guide.description": {
+    "message": "Engineプロジェクトにコーディングエージェントを導入し、その変更を確認します。"
+  },
+  "homepage.ai.llms.description": {
+    "message": "各ページのMarkdown版へエージェントを案内するインデックス。"
+  },
+  "homepage.ai.title": {
+    "message": "AIで開発する"
+  },
+  "homepage.ai.description": {
+    "message": "コーディングエージェントにPlayCanvasの知識を。Skills、Editor MCP Server、エージェント向けのドキュメントが、Claude Code、Codex、Cursorなどのエージェントによるアプリの構築と検証を支援します。"
+  },
+  "homepage.community.discord.description": {
+    "message": "PlayCanvasチームやコミュニティとチャットできます。"
+  },
+  "homepage.community.forum.title": {
+    "message": "フォーラム"
+  },
+  "homepage.community.forum.description": {
+    "message": "過去の回答を検索したり、詳しい質問をしたりできます。"
+  },
+  "homepage.community.github.description": {
+    "message": "リポジトリへのスター、Issueの報告、コントリビュートができます。"
+  },
+  "homepage.community.blog.title": {
+    "message": "ブログ"
+  },
+  "homepage.community.blog.description": {
+    "message": "リリースノート、チュートリアル、ニュース。"
+  },
+  "homepage.community.title": {
+    "message": "コミュニティに参加しよう"
+  },
+  "homepage.community.subtitle": {
+    "message": "質問したり、作品を共有したり、最新情報を入手したりしましょう。"
+  },
+  "homepage.metaDescription": {
+    "message": "ウェブ向けのオープンソース3DエンジンであるPlayCanvasと、Editor、React、Web Components、SuperSplat、SplatTransformのガイド、チュートリアル、サンプル、APIリファレンス。",
+    "description": "Meta description of the homepage"
   },
   "theme.colorToggle.ariaLabel.mode.system": {
     "message": "システムモード",

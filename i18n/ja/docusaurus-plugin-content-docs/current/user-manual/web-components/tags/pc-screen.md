@@ -3,7 +3,9 @@ title: <pc-screen>
 description: "pc-screen要素のリファレンス: UI要素向けの2Dスクリーン空間、解像度、スケールモード、子のpc-element階層です。"
 ---
 
-`<pc-screen>`タグは、スクリーンコンポーネントを定義するために使用されます。
+`<pc-screen>`タグは、2Dユーザーインターフェースのルートとなるスクリーンコンポーネントを追加します。その下にある[`<pc-element>`](../pc-element)のエンティティはスクリーンの単位でレイアウトされ、カメラのビューの上か、シーン内のパネルとして描画されます。
+
+属性を持たない`<pc-screen>`はワールド空間のスクリーンです。エンティティのローカル単位で640 × 320のパネルなので、エンティティのデフォルトのスケールでは幅が640メートルになり、その上の32 × 32の要素は32メートル四方になります。HUDやメニューには、下の例のように`screen-space`を設定してください。ワールド内のパネルにするには、エンティティのスケールを小さくします。[サイズとスケール](/user-manual/user-interface/world-space-ui/#size-and-scale)を参照してください。
 
 :::note[使用法]
 
@@ -23,7 +25,7 @@ description: "pc-screen要素のリファレンス: UI要素向けの2Dスクリ
 | `resolution` | Vector2 | `"640 320"` | ワールド空間のスクリーンのサイズ。エンティティのローカル単位での「幅 高さ」の値です。スクリーン空間のスクリーンは解像度をキャンバスから取るため、この属性は効果がありません |
 | `scale-blend` | Number | `"0.5"` | `scale-mode="blend"`のとき、スケールの計算でキャンバスの幅と高さをどう重み付けするか。0（幅のみ）から1（高さのみ）までで、0.5では均等に扱います。`scale-mode`が`"none"`のときは無視されます |
 | `scale-mode` | Enum | `"none"` | スクリーンがコンテンツをスケーリングする方法: `"none"` \| `"blend"`。`"none"`はスケーリングせず、スクリーン空間のスクリーンでは1単位がキャンバスの描画バッファの1ピクセルになります。`"blend"`は`reference-resolution`に対するキャンバスのサイズで、`scale-blend`で重み付けしてスケーリングし、ある解像度でレイアウトしたUIを別の解像度でも使えるようにします。`screen-space`が必要です |
-| `screen-space` | Boolean | `"false"` | スクリーン空間でレンダリングするかどうか |
+| `screen-space` | Boolean | `"false"` | スクリーンをカメラのビューの上に、キャンバスのサイズで描画するかどうか。そうでない場合はワールド空間のスクリーンになり、エンティティのトランスフォームでシーン内に配置され、`resolution`でサイズが決まります |
 
 </div>
 
@@ -71,5 +73,6 @@ description: "pc-screen要素のリファレンス: UI要素向けの2Dスクリ
 * [`<pc-scroll-view>`](../pc-scroll-view) — スクリーン上でコンテンツをスクロールする
 * [`<pc-button>`](../pc-button) — インタラクティブな要素
 * [スクリーン](/user-manual/user-interface/screens/) — ユーザーインターフェースのセクションにある、スクリーン空間とワールド空間、解像度とスケーリングの解説
+* [ワールド空間UI](/user-manual/user-interface/world-space-ui/) — シーン内に配置するスクリーンと、そのメートル単位のサイズの決め方
 
-サンプル: [2D Screen](https://playcanvas.github.io/web-components/examples/2d-screen.html)、[UI Layout](https://playcanvas.github.io/web-components/examples/ui-layout.html)、[Scroll View](https://playcanvas.github.io/web-components/examples/scroll-view.html)
+サンプル: [2D Screen](https://playcanvas.github.io/web-components/examples/#2d-screen.html)、[UI Layout](https://playcanvas.github.io/web-components/examples/#ui-layout.html)、[Scroll View](https://playcanvas.github.io/web-components/examples/#scroll-view.html)

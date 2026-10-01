@@ -84,30 +84,32 @@ anim.pause();               // freeze, keeping the playhead
 anim.play();                // resume from where it stopped
 ```
 
-A name that matches no clip leaves the current selection playing, so a mistyped clip never stops the scene dead — watch the console for the warning.
+A name that matches no clip leaves the current selection playing, so a mistyped clip never stops the scene dead. Only `clip` warns about it in the console; `play()` and `transition()` ignore an unknown name without a word.
 
 ## How Tracks Bind
 
-Clips bind to scene nodes **by name**, over the whole hierarchy below the component's entity. A model's skeleton is the common case, but nothing about it is special: any hierarchy whose node names match a clip's curves animates, which is how the [Robot Arm example](https://playcanvas.github.io/web-components/examples/robot-arm.html) drives ten rigid parts with no skinning at all.
+Clips bind to scene nodes **by name**, over the whole hierarchy below the component's entity. A model's skeleton is the common case, but nothing about it is special: any hierarchy whose node names match a clip's curves animates, which is how the [Robot Arm example](https://playcanvas.github.io/web-components/examples/#robot-arm.html) drives ten rigid parts with no skinning at all.
 
 The engine resolves each curve once and does not retry, so a model that finishes loading *after* its clips were assigned would otherwise stay silently unbound. The element handles this: it rebinds when a model below its host announces readiness, and refreshes the whole clip set when the model it takes its clips from is re-instantiated. Changing a [`<pc-model>`'s `asset`](../pc-model#attributes) at runtime therefore does the right thing without any help.
 
 The element also manages the component's `rootBone` for you, pointing it at the enclosing model's host so that curves targeting the asset's own root node bind where the engine expects. It re-derives that on every cycle and clears it when no single model is in scope — but a `rootBone` you assign yourself through the engine API is recognized as yours and never overwritten.
 
-There is one thing to know about the end of a clip: **the engine reports no completion**. A clip with `loop="false"` holds its last pose and says nothing — there is no `end` event to listen for. To act when one finishes, compare the playhead against the track's duration on the underlying component:
+There is one thing to know about the end of a clip: **the engine reports no completion**. A clip with `loop="false"` holds its last pose and says nothing — there is no `end` event to listen for. To act when one finishes, compare the time the layer has spent in its current state against the track's duration on the underlying component:
 
 ```javascript
 const { baseLayer } = anim.component;
 const done = baseLayer.activeStateCurrentTime >= baseLayer.activeStateDuration;
 ```
 
+That check suits a clip playing forwards. A clip with a negative `speed` counts its time down from zero instead, so it never reaches the duration.
+
 ## Example
 
-A GLB with a single walk cycle, declared twice: `walk` at its authored speed and `stalk` at a third of it. Switch between them to watch the cross-fade, which `transition-time="0.4"` sets. Try a different per-clip `speed`, set `activate="false"` to start paused, or drop the clip children entirely — the model's own animation is then assigned automatically:
+A GLB with a single walk cycle, declared twice: `walk` at its authored speed and `stalk` at a third of it. Switch between them to watch the cross-fade, which `transition-time="0.4"` sets. Try a different per-clip `speed`, set `activate="false"` to start paused, or drop the clip children and `clip="walk"` — the model's own animation is then assigned and plays automatically:
 
 ```html live-example
 <pc-app>
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.4/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.6/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset src="https://developer.playcanvas.com/assets/t-rex.glb" id="t-rex"></pc-asset>
     <pc-material id="floor" diffuse="#3a3f4b"></pc-material>
     <pc-scene>
@@ -165,7 +167,7 @@ A GLB with a single walk cycle, declared twice: `walk` at its authored speed and
 </script>
 ```
 
-The [Robot Arm example](https://playcanvas.github.io/web-components/examples/robot-arm.html) goes further, with a six-clip library, a scrubbable playhead and a blend toggle.
+The [Robot Arm example](https://playcanvas.github.io/web-components/examples/#robot-arm.html) goes further, with a six-clip library, a scrubbable playhead and a blend toggle.
 
 ## JavaScript Interface
 
@@ -192,7 +194,7 @@ await Promise.all([...anim.querySelectorAll('pc-anim-clip')].map(clip => clip.re
 console.log(anim.clips); // ['walk', 'stalk']
 ```
 
-Anything this element does not expose is available on `component` — the engine's [AnimComponent](https://api.playcanvas.com/engine/classes/AnimComponent.html) — including the playhead (`baseLayer.activeStateCurrentTime`), the active clip's duration, and state graphs and blend trees for animation beyond a flat set of clips.
+Anything this element does not expose is available on `component` — the engine's [AnimComponent](https://api.playcanvas.com/engine/classes/AnimComponent.html) — including the time spent in the current state (`baseLayer.activeStateCurrentTime`, which keeps counting as a looping clip repeats), the active clip's duration, and state graphs and blend trees for animation beyond a flat set of clips.
 
 ## See Also
 
@@ -200,4 +202,4 @@ Anything this element does not expose is available on `component` — the engine
 * [`<pc-model>`](../pc-model) — the usual host, whose GLB supplies the animation tracks
 * [`<pc-asset>`](../pc-asset) — supplies clips from a separate GLB or animclip JSON
 
-Examples: [GLB Animation](https://playcanvas.github.io/web-components/examples/glb-animation.html), [Robot Arm](https://playcanvas.github.io/web-components/examples/robot-arm.html) and [Third Person Controller](https://playcanvas.github.io/web-components/examples/third-person-controller.html).
+Examples: [GLB Animation](https://playcanvas.github.io/web-components/examples/#glb-animation.html), [Robot Arm](https://playcanvas.github.io/web-components/examples/#robot-arm.html) and [Third Person Controller](https://playcanvas.github.io/web-components/examples/#third-person-controller.html).

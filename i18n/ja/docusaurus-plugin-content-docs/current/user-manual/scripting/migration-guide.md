@@ -28,7 +28,7 @@ npx codemod playcanvas-esm-scripts
 ```
 
 :::ai
-Editorプロジェクトでは、コーディングアシスタントでcodemodとEditorメタデータの変更を連携させます。各**[Pull/Pushモード](/user-manual/editor/scripting/vscode-extension/)**の差分を確認し、**[Editor MCP Server](/user-manual/editor/mcp-server/)**で再解析、接続確認、Launcherテストを行います。
+Editorプロジェクトでは、コーディングアシスタントでcodemodとEditorメタデータの変更を連携させます。各[**Pull/Pushモード**](/user-manual/editor/scripting/vscode-extension/)の差分を確認し、[**Editor MCP Server**](/user-manual/editor/mcp-server/)で再解析、接続確認、Launcherテストを行います。
 :::
 
 ## 既知の違い

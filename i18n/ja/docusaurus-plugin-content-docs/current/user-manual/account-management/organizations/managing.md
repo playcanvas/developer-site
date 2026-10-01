@@ -9,7 +9,7 @@ Organizationは、そのアカウントページから管理します。この�
 
 ![permissions](/img/user-manual/account-management/organizations/managing/permissions.png)
 
-アカウントページには、Organizationの**オーナー (Owner)**と**管理者 (Admin)**が表示されます。ここから、オーナーは他のユーザーに所有権を移譲したり、管理者を追加・削除したりできます。
+アカウントページには、Organizationの **オーナー (Owner)** と **管理者 (Admin)** が表示されます。ここから、オーナーは他のユーザーに所有権を移譲したり、管理者を追加・削除したりできます。
 
 管理者は、プロジェクトの作成や削除を含め、オーナーができることをすべて行えますが、Organization自体を削除することだけはできません。これはオーナーのみが行えます。
 
