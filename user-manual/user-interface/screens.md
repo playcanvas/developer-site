@@ -157,6 +157,8 @@ fitReference();
 app.graphicsDevice.on('resizecanvas', fitReference);
 ```
 
+[Live example: Screen Scaling](https://playcanvas.com/examples/#/user-interface/screen-scaling) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/screen-scaling.example.mjs))
+
 ## Pixel Ratio
 
 On a high-density display, the canvas's drawing buffer can have more pixels than the canvas has CSS pixels on the page. That makes rendering sharper, and costs more to draw. The graphics device's `maxPixelRatio` caps the ratio between the two, and each surface sets it differently:

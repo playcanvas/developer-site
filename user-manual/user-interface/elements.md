@@ -149,6 +149,8 @@ background.element.left = 40;
 background.element.margin = new pc.Vec4(10, 10, 10, 10);
 ```
 
+[Live example: Anchors](https://playcanvas.com/examples/#/user-interface/anchors) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/anchors.example.mjs))
+
 ## Width and Height
 
 An element has two sizes:

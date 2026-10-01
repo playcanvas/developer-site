@@ -65,7 +65,7 @@ There is nothing to set up. `<pc-app>` creates the `ElementInput`, together with
 
 ## Your First Interface
 
-The interface in the image above is a screen with a panel on it. The panel holds a label and a button, and the button holds its own text. Text needs a [font asset](https://developer.playcanvas.com/user-manual/user-interface/fonts.md); the examples load one called `arial.json`, which you can generate from any font file.
+The interface in the image above is a screen with a panel on it. The panel holds a label and a button, and the button holds its own text. Text needs a [font asset](https://developer.playcanvas.com/user-manual/user-interface/fonts.md); the code on this page loads one called `arial.json`, which you can generate from any font file.
 
 **Engine**
 
@@ -309,7 +309,7 @@ export function FirstInterface() {
 </script>
 ```
 
-[Live example: Basic Button](https://playcanvas.com/examples/#/user-interface/button-basic) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/button-basic.example.mjs))
+[Live example: Buttons](https://playcanvas.com/examples/#/user-interface/buttons) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/buttons.example.mjs))
 
 ## How It Fits Together
 

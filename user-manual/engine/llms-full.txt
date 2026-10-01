@@ -3,7 +3,7 @@
 > The PlayCanvas Engine is an open-source JavaScript 3D engine that renders with WebGL2 or WebGPU. It is published as `playcanvas` on npm, with TypeScript declarations, and runs every PlayCanvas product. This index describes Engine 2.22.2.
 
 Index: https://developer.playcanvas.com/user-manual/engine/llms.txt
-Total Documents: 218
+Total Documents: 219
 Generated: 2026-10-01
 
 ================================================================================
@@ -11942,7 +11942,7 @@ There is nothing to set up. `<pc-app>` creates the `ElementInput`, together with
 
 ## Your First Interface
 
-The interface in the image above is a screen with a panel on it. The panel holds a label and a button, and the button holds its own text. Text needs a [font asset](https://developer.playcanvas.com/user-manual/user-interface/fonts.md); the examples load one called `arial.json`, which you can generate from any font file.
+The interface in the image above is a screen with a panel on it. The panel holds a label and a button, and the button holds its own text. Text needs a [font asset](https://developer.playcanvas.com/user-manual/user-interface/fonts.md); the code on this page loads one called `arial.json`, which you can generate from any font file.
 
 **Engine**
 
@@ -12186,7 +12186,7 @@ export function FirstInterface() {
 </script>
 ```
 
-[Live example: Basic Button](https://playcanvas.com/examples/#/user-interface/button-basic) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/button-basic.example.mjs))
+[Live example: Buttons](https://playcanvas.com/examples/#/user-interface/buttons) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/buttons.example.mjs))
 
 ## How It Fits Together
 
@@ -12405,6 +12405,8 @@ fitReference();
 app.graphicsDevice.on('resizecanvas', fitReference);
 ```
 
+[Live example: Screen Scaling](https://playcanvas.com/examples/#/user-interface/screen-scaling) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/screen-scaling.example.mjs))
+
 ## Pixel Ratio
 
 On a high-density display, the canvas's drawing buffer can have more pixels than the canvas has CSS pixels on the page. That makes rendering sharper, and costs more to draw. The graphics device's `maxPixelRatio` caps the ratio between the two, and each surface sets it differently:
@@ -12620,6 +12622,8 @@ The `left`, `bottom`, `right` and `top` properties read and write the four margi
 background.element.left = 40;
 background.element.margin = new pc.Vec4(10, 10, 10, 10);
 ```
+
+[Live example: Anchors](https://playcanvas.com/examples/#/user-interface/anchors) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/anchors.example.mjs))
 
 ## Width and Height
 
@@ -13294,6 +13298,8 @@ icon.element.rect = new pc.Vec4(0, 0.5, 0.5, 0.5);
 
 For many images packed into one texture, a texture atlas and sprites are easier to manage.
 
+[Live example: Image Fit](https://playcanvas.com/examples/#/user-interface/image-fit) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/image-fit.example.mjs))
+
 ## Sprites
 
 A sprite is a set of frames from a [texture atlas](https://developer.playcanvas.com/user-manual/2D/sprite-editor.md), a texture with named rectangles on it. Assign a sprite asset to an image element to draw its first frame, and set `spriteFrame` to pick another. Sprites also add render modes that keep the borders of a frame crisp at any size.
@@ -13446,6 +13452,8 @@ portrait.element.texture = previewTexture;
 ```
 
 The camera's `priority` of -1 renders it before the main camera, which has a priority of 0, so the texture is ready when the interface is drawn. The transparent clear color leaves the background of the image transparent. Keep the texture's sRGB format, `pc.PIXELFORMAT_SRGBA8`: with `pc.PIXELFORMAT_RGBA8`, the image comes out too light. An `origin` of `pc.RENDERTARGET_ORIGIN_TOP` stores the image top row first, as image textures are, so that it is the right way up on both WebGL2 and WebGPU. Without it, the image is upside down on WebGL2. The `origin` option is available from engine 2.22.
+
+[Live example: Render to Image](https://playcanvas.com/examples/#/user-interface/render-to-image) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/render-to-image.example.mjs))
 
 ## Custom Materials
 
@@ -14403,6 +14411,8 @@ Leave input off on the HUD's own group element. Bubbling delivers its children's
 
 The Editor, React and Web Components create the `ElementInput` first. In an Engine application, create it before the mouse and touch devices, as [Setting Up](https://developer.playcanvas.com/user-manual/user-interface/user-interface-basics.md#setting-up) does.
 
+[Live example: Input Events](https://playcanvas.com/examples/#/user-interface/input-events) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/input-events.example.mjs))
+
 ## Which Element Gets the Event
 
 When elements overlap, only one receives an event. The `ElementInput` tests elements in this order and stops at the first hit:
@@ -14462,6 +14472,8 @@ Markdown: https://developer.playcanvas.com/user-manual/user-interface/buttons.md
 A button component turns an element into a button. It reacts to input on its entity's element, changes the look of an image as the button is hovered and pressed, and fires events such as `click`. Its element needs [input](https://developer.playcanvas.com/user-manual/user-interface/input.md) enabled.
 
 [Image: One orange button in each of its four states: default, hovered, pressed and inactive. The button turns lighter when hovered, darker when pressed, and dark grey when inactive]
+
+[Live example: Buttons](https://playcanvas.com/examples/#/user-interface/buttons) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/buttons.example.mjs))
 
 ## Creating a Button
 
@@ -14922,6 +14934,8 @@ Markdown: https://developer.playcanvas.com/user-manual/user-interface/common-wid
 
 The UI components are building blocks. This page puts them together into the widgets that most interfaces need. Each recipe shows the hierarchy to build, in the Editor or in code, and the code that makes it work.
 
+[Live example: Common Widgets](https://playcanvas.com/examples/#/user-interface/common-widgets) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/common-widgets.example.mjs))
+
 ## Progress and Health Bars
 
 ```none
@@ -15174,6 +15188,8 @@ drag.on('drag:end', () => {
 ```
 
 Pass `'x'` or `'y'` as a second argument to drag along one axis only. `drag:start` and `drag:move` fire as the drag begins and continues.
+
+[Live example: Drag and Drop](https://playcanvas.com/examples/#/user-interface/drag-and-drop) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/drag-and-drop.example.mjs))
 
 ## Text Fields
 
@@ -16839,108 +16855,232 @@ If you have a project that is already using the Legacy Texture Compression forma
 URL: https://developer.playcanvas.com/user-manual/optimization/mini-stats/
 Markdown: https://developer.playcanvas.com/user-manual/optimization/mini-stats.md
 
-MiniStats is a lightweight graphical overlay that displays real-time performance metrics for your PlayCanvas application. It provides essential statistics including draw call count, frame time, CPU load, and GPU load, helping you identify performance bottlenecks during development.
+MiniStats is a lightweight performance overlay for PlayCanvas applications. Use it to watch frame time, draw calls, CPU and GPU timings, and estimated GPU resource memory while interacting with your scene. To collect measurements from code without an overlay, use [AppStats](https://developer.playcanvas.com/user-manual/optimization/app-stats.md).
+
+This page describes the MiniStats interface in Engine 2.23 and later.
 
 ## Enabling MiniStats
 
-Editor users can enable the MiniStats panel via the Launch button menu:
+Editor users can enable MiniStats from the Launch button menu:
 
-[Image: Launch Menu]
+[Image: MiniStats option in the Editor Launch menu]
+
+In a standalone application, create the overlay after initializing the application:
+
+```javascript
+import { MiniStats } from 'playcanvas';
+
+const miniStats = new MiniStats(app);
+```
+
+When using a script-tag build, use `new pc.MiniStats(app)` instead. MiniStats enables GPU profiling when its GPU counter is enabled, subject to [device support](https://developer.playcanvas.com/user-manual/optimization/mini-stats.md#gpu-timing-requirements).
 
 ## Display Sizes
 
-Clicking on the MiniStats overlay cycles through three display sizes: small (compact numeric values), medium, and large. The medium and large sizes add graphical timelines and detailed sub-timing breakdowns for both CPU and GPU.
+Click or tap outside the section headings to cycle through three default views. You can also focus the overlay and press Enter or Space.
 
-[Image: Mini Stats]
+| View | Contents |
+| ---- | -------- |
+| **Compact** | Core counters with averaged numeric values. |
+| **Medium** | Collapsible Engine, User, CPU, GPU and VRAM sections with averaged values. No graphs or peak column. |
+| **Large** | The same groups with graph history behind the text, plus averages and peaks. |
+
+Sections appear in the order Engine, User, CPU, GPU and VRAM. If the list is taller than the screen, scroll with the mouse wheel or drag on a touch screen. All sections scroll beneath the fixed column labels, including Draw calls and Frame.
+
+The large view with sections expanded and collapsed:
+
+<table>
+<thead><tr><th>Expanded</th><th>Collapsed</th></tr></thead>
+<tbody><tr>
+<td style={{ verticalAlign: 'top' }}>[Image: MiniStats with Engine, User, CPU, GPU and VRAM sections expanded]</td>
+<td style={{ verticalAlign: 'top' }}>[Image: MiniStats with all sections collapsed and CPU, GPU and VRAM totals still visible]</td>
+</tr></tbody>
+</table>
+
+## Collapsing Sections
+
+In the medium and large views, click or tap a section heading to hide or show its counters. Sections start expanded. The heading stays visible when collapsed; CPU, GPU and VRAM also keep their total values. Engine and User have no total because their counters can use different units.
+
+| Section | Contents |
+| ------- | -------- |
+| **Engine** | Built-in counters configured in `options.stats`, starting with Draw calls and Frame. Additional engine counters such as Update, FPS, primitive counts and splat counts also belong here. |
+| **User** | Counters whose configured paths all start with `user.`, reading from `app.stats.user`. In the example, only Wave belongs here. |
+| **CPU**, **GPU**, **VRAM** | Their totals and available timing or memory breakdowns. |
+
+Engine and User are omitted when they have no configured counters. Collapsing a section keeps sampling and graph history running. Its state survives size changes, but compact mode shows individual counters without section headings and ignores collapsed state.
+
+Control the same state from code with these read/write boolean properties:
+
+```javascript
+miniStats.engineCollapsed = true;
+miniStats.userCollapsed = true;
+miniStats.cpuCollapsed = true;
+miniStats.gpuCollapsed = true;
+miniStats.vramCollapsed = true;
+
+// Expand GPU details again.
+miniStats.gpuCollapsed = false;
+```
+
+All five properties default to `false` and stay synchronized with heading clicks. They can also be set while the overlay is compact, before detailed counters are shown. Unlike `miniStats.enabled = false`, collapsing a section does not stop its measurements.
+
+## Averages, Peaks and History
+
+By default, the numeric values refresh approximately twice per second. **Avg (0.5s)** is the arithmetic mean of the frame samples collected since the previous refresh. **Peak** is the largest sample in that same interval, not an all-time maximum. Compact values use the same averaging window even though the column heading is hidden.
+
+After each refresh, a new collection window starts. This is not a continuously sliding average. `textRefreshRate` controls the window in milliseconds; changing it also changes the heading. A window completes on a frame boundary, so it can be slightly longer than the configured interval.
+
+In the large view, graph history samples every application frame, independently of the text refresh. The visible history therefore covers a different amount of time at different frame rates. GPU samples use the latest asynchronously resolved result and can repeat while waiting for a newer result.
 
 ## Basic Statistics
 
-The following metrics are always displayed:
+The default configuration includes these counters:
 
-| Metric | Description |
-|--------|-------------|
-| **DrawCalls** | The number of draw calls dispatched each frame. Each draw call has overhead on both CPU and GPU, so minimizing this number improves performance. |
-| **Frame** | Total time in milliseconds for the browser to process each frame. Target 16.67ms for 60 FPS or 33.33ms for 30 FPS. |
-| **GPU** | Time in milliseconds for the GPU to render each frame. See [GPU Timing Requirements](https://developer.playcanvas.com/user-manual/optimization/mini-stats.md#gpu-timing-requirements) below. |
-| **CPU** | Time in milliseconds for CPU-side frame processing, split into update (red) and render (green) portions. |
+| Metric | Meaning |
+| ------ | ------- |
+| **Draw calls** | Draw commands submitted per frame, including additional passes such as shadows and post-processing. This is not an object count. |
+| **Frame** | Interval between application ticks in milliseconds, including browser scheduling and waiting outside the engine. It is not just time spent executing engine code. A steady 60 FPS corresponds to about 16.67 ms; 30 FPS to 33.33 ms. |
+| **CPU** | CPU duration measured across the engine's frame update and render events. This measures elapsed time, not CPU utilization as a percentage. |
+| **GPU** | Overall elapsed GPU frame duration in milliseconds, when supported. This is not GPU utilization or a sum of all pass durations. |
+| **VRAM** | Estimated memory occupied by tracked textures and GPU buffers. The overlay labels this MB and uses 1,048,576 bytes per unit (MiB). |
+
+CPU and GPU work can overlap. Adding CPU and GPU durations does not give the Frame value. MiniStats' overall CPU timer also has different boundaries from the `AppStats.cpuUpdateTime` and `cpuRenderTime` measurements; their sum need not match the overlay's CPU row.
 
 ## Detailed Timing Mode
 
-When using medium or large display sizes, MiniStats shows additional timing breakdowns for both CPU and GPU that help identify specific performance bottlenecks.
+When expanded, the CPU, GPU and VRAM sections in medium and large views include their totals and available sub-counters.
 
 ### CPU Sub-Timings
 
-In detailed mode, the CPU graph expands to show individual timing components:
+| Row | Meaning |
+| --- | ------- |
+| **Render** | CPU time preparing and submitting rendering, including prerender/postrender listeners, hierarchy synchronization and batching. It does not measure GPU execution. |
+| **Script update** | The component systems update phase, including script `update` callbacks, physics and other subscribed systems. It is not limited to user scripts. |
+| **Script post-update** | The component systems post-update phase, including script `postUpdate` callbacks. |
+| **Animation** | The dedicated animation-update phase used by `AnimComponentSystem`. Legacy animation components run in the system update phase. |
+| **Physics** | The most recent physics step, including synchronization and contact handling. Normally included in Script update. |
+| **Splat sort** | Gaussian splat sorting time reported by a worker. This is separate from main-thread CPU time. |
 
-| Stat | Description |
-|------|-------------|
-| **scriptUpdate** | Time spent executing script `update` methods |
-| **scriptPostUpdate** | Time spent executing script `postUpdate` methods |
-| **render** | CPU time spent preparing rendering commands and managing GPU resources |
-| **physics** | Time spent in physics simulation |
-| **anim** | Time spent updating the animation system |
-| **gsplatSort** | Time spent sorting Gaussian splats for rendering. This runs in a Web Worker thread and is non-blocking, so it does not impact main thread performance. |
-
-:::note
-Some CPU stats only appear once they have non-zero values. For example, `physics` only appears if your scene uses physics simulation.
-:::
+Do not add all the rows together: phases can overlap or contain other phases, and worker measurements describe work on another thread. Animation, Physics and Splat sort rows appear once they have a positive value.
 
 ### GPU Pass Timings
 
-In detailed mode, individual GPU render pass and compute pass timings are displayed, showing how long each stage takes. Passes with the same name are aggregated into a single timing value. Common passes include:
+On **WebGPU**, detailed views show individual render and compute pass durations when timestamp queries are supported. Passes with the same name are aggregated into one row. Typical rows include Forward, Downsample, Upsample and Compose, depending on the scene and rendering configuration.
 
-- **Forward** - Main scene rendering
-- **Downsample** - Post-processing downsampling stages
-- **Upsample** - Post-processing upsampling stages
-- **Compose** - Final frame composition
-- **Compute** passes - GPU compute shader dispatches
+On **WebGL 2**, PlayCanvas provides an overall frame timing rather than a per-pass breakdown. This is a limitation of PlayCanvas' WebGL profiling implementation, not a restriction that timer queries can only measure entire frames.
 
-:::important[WebGPU Only]
-Detailed GPU pass timing is only available when using the **WebGPU** graphics backend.
+GPU results arrive asynchronously and may be several frames old. Pass intervals can overlap on the GPU, so their sum need not equal the overall GPU frame duration.
 
-**WebGL2 does not support detailed GPU profiling** - only the overall GPU frame time is shown. This limitation exists because WebGL's timer query extension only supports measuring elapsed time for the entire frame. Browser security restrictions (Spectre mitigations) prevent the fine-grained timestamp queries needed for per-pass measurements.
-:::
+### VRAM Breakdown
+
+| Row | Tracked resources |
+| --- | ----------------- |
+| **Textures** | GPU textures. |
+| **Geometry** | Vertex and index buffers. |
+| **Buffers** | Uniform and storage buffers; this row is shown on WebGPU. |
+
+These are resource estimates for the graphics device, which may be shared by applications. They exclude JavaScript heap memory, untracked driver overhead and total physical GPU memory capacity. Use the [AppStats memory getters](https://developer.playcanvas.com/user-manual/optimization/app-stats.md#gpu-resource-memory) for individual buffer categories in bytes.
 
 ## GPU Timing Requirements
 
-GPU timing requires specific browser/API support:
-
 | Backend | Requirement |
-|---------|-------------|
-| **WebGL 2** | The [`EXT_disjoint_timer_query_webgl2`](https://web3dsurvey.com/webgl2/extensions/EXT_disjoint_timer_query_webgl2) extension must be supported. Check [WebGL Report](https://webglreport.com/?v=2) to verify browser support. |
-| **WebGPU** | The [`timestamp-query`](https://web3dsurvey.com/webgpu/features/timestamp-query) adapter feature must be available. This is enabled automatically when supported. |
+| ------- | ----------- |
+| **WebGL 2** | The [`EXT_disjoint_timer_query_webgl2`](https://web3dsurvey.com/webgl2/extensions/EXT_disjoint_timer_query_webgl2) extension. |
+| **WebGPU** | The [`timestamp-query`](https://web3dsurvey.com/webgpu/features/timestamp-query) adapter feature, which the engine requests automatically when available. |
 
-## Using MiniStats Outside of the Editor
+Enabling the overlay cannot add missing device support. An unavailable GPU measurement can appear as zero in MiniStats; do not interpret that as free GPU rendering. [`app.stats.gpuFrameTime`](https://developer.playcanvas.com/user-manual/optimization/app-stats.md#enabling-gpu-timing) returns `undefined` when no valid measurement is available.
 
-While the MiniStats panel is incorporated into the Editor's Launch page, you can also use it independently. To add MiniStats to your application:
+The default CPU timings, draw call count and memory estimates work in all engine builds, including release and minified builds. Some additional counters require a debug or profiler build; see the [availability table](https://developer.playcanvas.com/user-manual/optimization/app-stats.md#metrics-and-build-availability).
+
+## Customizing the Overlay
+
+Start with the default options and modify them before constructing MiniStats. Passing an incomplete options object does not merge it with the defaults.
 
 ```javascript
-const miniStats = new pc.MiniStats(app);
+import { MiniStats } from 'playcanvas';
+
+const options = MiniStats.getDefaultOptions();
+options.startSizeIndex = 2;       // Large view
+options.textRefreshRate = 500;   // Averaging window in milliseconds
+options.sizes[1].width = 190;     // Medium panel width in CSS pixels
+options.sizes[2].width = 260;     // Large panel width in CSS pixels
+options.cpu.watermark = 1000 / 60;
+options.gpu.watermark = 1000 / 60;
+
+const miniStats = new MiniStats(app, options);
 ```
 
-You can customize the display with options:
+Each size has independent width, row height, spacing, graph visibility, detail and peak settings. A `watermark` sets the graph's reference budget and vertical scale. The two values above mark a 60 FPS budget; they do not limit execution time.
+
+### Additional Counters
+
+Each entry in `options.stats` resolves numeric property paths relative to `app.stats`. Use public [AppStats getters](https://developer.playcanvas.com/user-manual/optimization/app-stats.md) where available. Multiple paths in one entry are added together. `decimalPlaces` controls formatting, `multiplier` scales the sampled value, and `unitsName` supplies its label.
+
+For example, add these entries to the options before creating the overlay:
 
 ```javascript
-const miniStats = new pc.MiniStats(app, {
-    startSizeIndex: 1,  // Start with medium size
-    cpu: {
-        enabled: true,
-        watermark: 33   // Show 33ms budget line
-    },
-    gpu: {
-        enabled: true,
-        watermark: 33
-    }
+options.stats.push({
+    name: 'Update',
+    stats: ['cpuUpdateTime'],
+    decimalPlaces: 1,
+    unitsName: 'ms',
+    watermark: 1000 / 60
+});
+
+// Primitive counts are available only in debug and profiler builds.
+if (app.stats.primitiveCount !== undefined) {
+    options.stats.push({
+        name: 'Primitives',
+        stats: ['primitiveCount'],
+        decimalPlaces: 1,
+        multiplier: 1 / 1000,
+        unitsName: 'k',
+        watermark: 500
+    });
+}
+```
+
+Set `miniStats.enabled = false` to hide the overlay and stop its counter sampling, or call `miniStats.destroy()` to release it. GPU profiling is a device setting: hiding or destroying the overlay does not turn it off. If nothing else needs GPU timings, disable it separately with `app.graphicsDevice.gpuProfiler.enabled = false` when that profiler exists.
+
+MiniStats batches the overlay into a mesh and reuses its text atlas. History is collected only for views with graphs. It is designed to keep overhead low, but rendering and GPU queries still have a cost. Keep the same instrumentation enabled for before/after comparisons.
+
+For all options and lifecycle methods, see the [MiniStats API reference](https://api.playcanvas.com/engine/classes/MiniStats.html).
+
+## User Counters
+
+Starting with Engine 2.23, [`app.stats.user`](https://api.playcanvas.com/engine/classes/AppStats.html#user) provides a `Map<string, number>` for application-defined counters, such as queue lengths or manually measured CPU timings. The getter always returns the same map, and you can use `set`, `get`, `delete`, and `clear` to manage its entries. User counters are available in all engine builds.
+
+Add a graph to the options before creating MiniStats. A path such as `user.wave` reads the map entry named `wave`; avoid dots in counter names because dots separate path segments. This example displays a value that oscillates between 0 and 20:
+
+```javascript
+import { MiniStats } from 'playcanvas';
+
+app.stats.user.set('wave', 10);
+
+const options = MiniStats.getDefaultOptions();
+options.startSizeIndex = 2; // Start with graph history visible
+options.stats.push({
+    name: 'Wave',
+    stats: ['user.wave'],
+    decimalPlaces: 1,
+    watermark: 20
+});
+const miniStats = new MiniStats(app, options);
+
+let time = 0;
+app.on('update', (dt) => {
+    time += dt;
+    app.stats.user.set('wave', 10 + 10 * Math.sin(time));
 });
 ```
 
-For the complete API, refer to the [MiniStats API reference](https://api.playcanvas.com/engine/classes/MiniStats.html).
+The engine does not reset user counters. For a per-frame total, initialize the entry and reset it on `frameupdate` before accumulating values. To measure synchronous code, use the difference between two `performance.now()` calls and configure the graph with `unitsName: 'ms'`. Units are application-defined; MiniStats does not infer them or automatically add graphs for new map entries.
 
-### Example
+## Example
 
-The demo below shows MiniStats outside the Editor, including customization options. Click the overlay to cycle through display sizes and view detailed CPU and GPU timing breakdowns.
+The resource allocation example repeatedly creates and releases entities, materials, vertex buffers and textures. Watch their effect on the counters, click section headings to collapse or expand them, and click elsewhere in the overlay to compare all three views.
 
-[Live example: MiniStats example](https://playcanvas.com/examples/#/debug/mini-stats) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/debug/mini-stats.example.mjs))
+[Live example: MiniStats resource allocation example](https://playcanvas.com/examples/#/debug/mini-stats) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/debug/mini-stats.example.mjs))
 
 --------------------------------------------------------------------------------
 
@@ -16950,6 +17090,8 @@ URL: https://developer.playcanvas.com/user-manual/optimization/gpu-profiling/
 Markdown: https://developer.playcanvas.com/user-manual/optimization/gpu-profiling.md
 
 This section explains how to use native GPU profilers to capture and analyze WebGL or WebGPU frames, enabling debugging and performance profiling of GPU operations.
+
+For an initial measurement inside the application, use [MiniStats](https://developer.playcanvas.com/user-manual/optimization/mini-stats.md) or enable GPU timing through [AppStats](https://developer.playcanvas.com/user-manual/optimization/app-stats.md#enabling-gpu-timing). Native profilers help investigate the rendering work behind those measurements.
 
 This is particularly challenging on the Web platform, as web applications typically run within a sandboxed environment, which inherently limits compatibility and integration with native GPU profilers. This page outlines tested options available on certain platforms.
 
@@ -26779,8 +26921,217 @@ Let's begin by establishing the key goals for optimization and highlight why eac
 | 🔋 Minimize CPU and GPU load | Just because your app maintains 60 frames per second does not mean your work is done. Reducing processor load preserves battery power and keeps devices running cool. |
 | 🧠 Minimize memory utilization | Browsers allocate a limited pool of memory to applications. Once this pool is exhausted, the tab will crash and reload. Your users will be upset! |
 
+## Measure Before Optimizing
+
+Choose a repeatable scene or interaction, record a baseline on the target device, then measure each change under the same conditions.
+
+| Tool | Use it for |
+| ---- | ---------- |
+| [MiniStats](https://developer.playcanvas.com/user-manual/optimization/mini-stats.md) | Watching frame time, CPU/GPU costs and GPU resource memory while interacting with the application. |
+| [Profiling with AppStats](https://developer.playcanvas.com/user-manual/optimization/app-stats.md) | Reading public statistics from code and collecting reports for dashboards, agents and automated comparisons. |
+| [Editor Profiler](https://developer.playcanvas.com/user-manual/optimization/profiler.md) | Inspecting the Editor Launch profiler, including asset loading and shader compilation timelines. |
+| [GPU Profiling](https://developer.playcanvas.com/user-manual/optimization/gpu-profiling.md) | Capturing frames with native GPU tools for detailed rendering investigations. |
+
 :::ai
-Give an AI assistant a performance goal, repeatable scenario, and baseline. It can rank bottlenecks from **[Profiler](https://developer.playcanvas.com/user-manual/optimization/profiler.md)** or browser evidence and propose one measurable change at a time. Use the **[Editor MCP Server](https://developer.playcanvas.com/user-manual/editor/mcp-server.md)** to replay Editor input or follow **[Developing with AI](https://developer.playcanvas.com/user-manual/engine/developing-with-ai.md)** for standalone projects.
+Give an AI assistant a performance goal, repeatable scenario and baseline reports from **[AppStats](https://developer.playcanvas.com/user-manual/optimization/app-stats.md#collecting-periodic-reports)**. It can combine these with MiniStats or browser evidence and propose one measurable change at a time. Use the **[Editor MCP Server](https://developer.playcanvas.com/user-manual/editor/mcp-server.md)** to replay Editor input or follow **[Developing with AI](https://developer.playcanvas.com/user-manual/engine/developing-with-ai.md)** for standalone projects.
+:::
+
+--------------------------------------------------------------------------------
+
+## Profiling with AppStats
+
+URL: https://developer.playcanvas.com/user-manual/optimization/app-stats/
+Markdown: https://developer.playcanvas.com/user-manual/optimization/app-stats.md
+
+[`AppStats`](https://api.playcanvas.com/engine/classes/AppStats.html) exposes read-only engine measurements and writable user counters through [`app.stats`](https://api.playcanvas.com/engine/classes/AppBase.html#stats). Use it for profiling scripts, custom dashboards and automated comparisons without rendering an overlay. [MiniStats](https://developer.playcanvas.com/user-manual/optimization/mini-stats.md) provides a visual view of application statistics alongside its own CPU timer.
+
+The public getters described here require **Engine 2.23 or later**. They are available on both `Application` and `AppBase`. The application creates the stats instance and returns the same object on every access; you do not construct or replace it.
+
+## Reading Statistics
+
+Read the getters when you need a measurement:
+
+```javascript
+const stats = app.stats;
+const updateMs = stats.cpuUpdateTime;
+const renderMs = stats.cpuRenderTime;
+const textureMiB = stats.vramTextureBytes / (1024 * 1024);
+```
+
+Durations are in **milliseconds** and memory sizes are in **bytes**. These getters return the latest available values, not MiniStats' half-second averages. `fps` is the exception: it reports the frame count from the latest approximately one-second reporting interval.
+
+Reading stats does not enable GPU profiling, allocate a snapshot object or render anything. CPU timings and counters start at zero; GPU timing starts as `undefined`.
+
+## User Counters
+
+[`app.stats.user`](https://api.playcanvas.com/engine/classes/AppStats.html#user) returns a `Map<string, number>` owned by the application. Use it to publish custom values alongside the engine measurements:
+
+```javascript
+app.stats.user.set('activeEnemies', 12);
+const activeEnemies = app.stats.user.get('activeEnemies');
+app.stats.user.delete('activeEnemies');
+// Clear all user counters when they are no longer needed.
+app.stats.user.clear();
+```
+
+The map reference is read-only, but its entries are writable. Each application has its own map, available in all builds. The engine never resets its values; initialize entries before accumulation and reset per-frame totals on `frameupdate`. Units are application-defined. To display these values in an overlay, configure MiniStats with paths such as `user.activeEnemies`; see [User Counters](https://developer.playcanvas.com/user-manual/optimization/mini-stats.md#user-counters).
+
+## Metrics and Build Availability
+
+| Measurement | Getters | Builds |
+| ----------- | ------- | ------ |
+| Frame cadence | `frameTime`, `fps` | All |
+| Draw calls | `drawCallCount` | All |
+| CPU update and render | `cpuUpdateTime`, `cpuRenderTime` | All |
+| CPU system phases | `cpuSystemUpdateTime`, `cpuSystemPostUpdateTime` | All |
+| Animation and physics | `cpuAnimationTime`, `cpuPhysicsTime` | All |
+| GPU frame | `gpuFrameTime` | All, when supported and enabled |
+| GPU resource memory | [GPU memory getters](https://developer.playcanvas.com/user-manual/optimization/app-stats.md#gpu-resource-memory) | All |
+| Primitives | `primitiveCount` | Debug and profiler only; `undefined` in release and minified builds |
+
+For npm applications, use `playcanvas/debug` or `playcanvas/profiler` when you need primitive counting. Import the application and other engine classes consistently from the chosen build. CPU timings, draw calls, memory and supported GPU timings do not require switching away from a release build.
+
+`drawCallCount` counts draw commands submitted in the previous frame. `primitiveCount` counts submitted triangles, lines and points across all passes. Primitive counting includes instances and CPU-authored multi-draw commands, before GPU clipping and culling. It is an estimate from draw parameters: GPU-generated indirect draws are excluded, and primitive-restart indices in indexed strips are not inspected. It does not perform GPU readback. Use the API reference for each getter's exact scope.
+
+## Understanding the Timings
+
+`frameTime` is the interval between application ticks, including browser scheduling and time spent outside the engine. It is unaffected by time scaling or delta-time clamping. It is not the sum of CPU and GPU durations, and a value near 16.67 ms can simply reflect a 60 Hz display cadence.
+
+The CPU measurements have different scopes:
+
+- `cpuUpdateTime` includes component systems, application update listeners and input updates. It excludes graphics device updates.
+- `cpuRenderTime` includes prerender/postrender listeners, hierarchy synchronization, batching and render command submission. It excludes graphics device `frameStart`/`frameEnd` work and GPU execution. It retains its latest value when rendering is skipped.
+- `cpuSystemUpdateTime` includes script `update` callbacks, physics and other systems subscribed to that phase. `cpuSystemPostUpdateTime` includes script `postUpdate` callbacks. Both are part of `cpuUpdateTime`.
+- `cpuAnimationTime` measures the dedicated `AnimComponentSystem` phase within the application update. Legacy `AnimationComponentSystem` work is part of the system update phase.
+- `cpuPhysicsTime` measures the most recent physics step, normally within the system update. It includes synchronization and contact handling. Multiple manually requested steps are not accumulated; the value is zero before any step or when physics is paused through its `timeScale`.
+
+These phases overlap or contain one another. Do not add every CPU getter to obtain a total. MiniStats' overall CPU timer uses broader frame-event boundaries and need not equal `cpuUpdateTime + cpuRenderTime`.
+
+Frame counters are published at the start of the next application tick. CPU timings update as their phases finish. Reading in a `frameend` listener gives completed CPU phase measurements, but the published draw count belongs to the previous frame. GPU results arrive later still. The stats object is a live collection of the latest measurements, not an atomic snapshot of one frame.
+
+## Enabling GPU Timing
+
+GPU profiling is disabled by default. Enable it before collecting GPU samples:
+
+```javascript
+const profiler = app.graphicsDevice.gpuProfiler;
+if (profiler) {
+    profiler.enabled = true;
+}
+
+// Later, once frames have rendered and query results have arrived:
+const gpuMs = app.stats.gpuFrameTime;
+if (gpuMs !== undefined) {
+    // Use gpuMs as the most recently resolved GPU duration.
+}
+```
+
+| Backend | Support needed | Measurement |
+| ------- | -------------- | ----------- |
+| WebGL 2 | `EXT_disjoint_timer_query_webgl2` | Elapsed time from a whole-frame timer query. |
+| WebGPU | `timestamp-query` | Span from the first profiled pass beginning to the last pass ending, including gaps between passes. |
+
+The engine requests the WebGPU feature automatically when the adapter exposes it. A profiler object can exist even when timing is unsupported; enabling it is not proof that results will be available.
+
+`gpuFrameTime` returns `undefined` when profiling is disabled or unsupported, before a valid result arrives, and after timing invalidation such as context loss. Do not substitute zero when interpreting an unavailable result. Valid results may be several frames old and can repeat across CPU frames until a newer query resolves.
+
+This is elapsed GPU time, not GPU utilization. Pass intervals can overlap, so adding per-pass durations can overestimate the overall frame duration. Use MiniStats on WebGPU for a pass breakdown, or [native GPU profilers](https://developer.playcanvas.com/user-manual/optimization/gpu-profiling.md) for a deeper investigation.
+
+MiniStats also enables profiling when it creates its GPU timer. If no tool needs GPU timing anymore, set `profiler.enabled = false`. Reading stats, hiding MiniStats or destroying its overlay does not disable the device's GPU profiler.
+
+## GPU Resource Memory
+
+`vramTotalBytes` is the sum of the following estimates:
+
+| Getter | Resources |
+| ------ | --------- |
+| `vramTextureBytes` | Textures |
+| `vramVertexBufferBytes` | Vertex buffers |
+| `vramIndexBufferBytes` | Index buffers |
+| `vramUniformBufferBytes` | Uniform buffers |
+| `vramStorageBufferBytes` | Storage buffers |
+
+Uniform or storage buffer values can be zero when no tracked buffers have been allocated. Storage buffer memory is zero on backends without storage buffers.
+
+The estimates belong to the application's graphics device, which can be shared by applications. They do not describe total physical GPU memory usage or capacity, and exclude untracked driver overhead and JavaScript memory. Divide by `1024 * 1024` to report MiB.
+
+## Collecting Periodic Reports
+
+For a useful baseline, accumulate frame samples and publish a report at a lower frequency. This example averages frame cadence, CPU timings and draw calls over approximately 500 ms and records the peak frame interval. GPU duration, primitives and memory remain explicitly labeled as the latest available values.
+
+```javascript
+const stats = app.stats;
+const report = {
+    windowMs: 0,
+    samples: 0,
+    frameAvgMs: 0,
+    framePeakMs: 0,
+    cpuUpdateAvgMs: 0,
+    cpuRenderAvgMs: 0,
+    drawCallsAvg: 0,
+    gpuLatestMs: null,
+    primitivesLatest: null,
+    vramLatestMiB: 0
+};
+let elapsed = 0;
+let samples = 0;
+let framePeak = 0;
+let updateTotal = 0;
+let renderTotal = 0;
+let drawCallsTotal = 0;
+
+function sampleStats() {
+    elapsed += stats.frameTime;
+    samples++;
+    framePeak = Math.max(framePeak, stats.frameTime);
+    updateTotal += stats.cpuUpdateTime;
+    renderTotal += stats.cpuRenderTime;
+    drawCallsTotal += stats.drawCallCount;
+
+    if (elapsed < 500) return;
+
+    report.windowMs = elapsed;
+    report.samples = samples;
+    report.frameAvgMs = elapsed / samples;
+    report.framePeakMs = framePeak;
+    report.cpuUpdateAvgMs = updateTotal / samples;
+    report.cpuRenderAvgMs = renderTotal / samples;
+    report.drawCallsAvg = drawCallsTotal / samples;
+    report.gpuLatestMs = stats.gpuFrameTime ?? null;
+    report.primitivesLatest = stats.primitiveCount ?? null;
+    report.vramLatestMiB = stats.vramTotalBytes / (1024 * 1024);
+
+    // Serialize only when publishing; console output is optional instrumentation.
+    console.log(JSON.stringify(report));
+
+    elapsed = 0;
+    samples = 0;
+    framePeak = 0;
+    updateTotal = 0;
+    renderTotal = 0;
+    drawCallsTotal = 0;
+}
+
+app.on('frameend', sampleStats);
+
+// When profiling is finished:
+// app.off('frameend', sampleStats);
+```
+
+The sampling path reuses its state without creating arrays or objects each frame. Serialization happens only when publishing. An unavailable GPU or primitive measurement is reported as `null`. The GPU value is not averaged here because repeated reads can refer to the same resolved GPU frame.
+
+For a dashboard or agent integration, replace the console output with your own report consumer. If it retains reports, copy or serialize at publication time because the report object is reused. Keep instrumentation identical across runs; logging, rendering overlays and GPU queries can affect the measurements.
+
+## Comparing Changes
+
+1. Choose a repeatable camera path or interaction and a target frame budget. Use the same device, backend, resolution, quality settings and engine build for both runs.
+2. Let assets load and shaders compile before collecting steady-state samples. Measure startup separately with the [Editor Profiler](https://developer.playcanvas.com/user-manual/optimization/profiler.md) or browser performance tools.
+3. Keep the application visible and repeat the same scenario for a fixed period. Background throttling changes the frame intervals.
+4. Save the baseline reports, make one change and repeat. Compare averages, peaks and memory trends rather than a single frame or FPS alone.
+5. Investigate high CPU phase times with browser performance tools, GPU costs with MiniStats pass timings or native profilers, and persistent memory growth by checking resource lifetimes.
+
+:::ai
+Give an agent the scenario, environment, measurement interval and baseline reports. Ask it to identify the likely bottleneck, propose one change, rerun the same capture and report the difference. Use the public getters rather than internal stats fields, and preserve unavailable values instead of treating them as zero. See [Developing with AI](https://developer.playcanvas.com/user-manual/engine/developing-with-ai.md) for project setup and browser verification.
 :::
 
 --------------------------------------------------------------------------------
@@ -26790,7 +27141,7 @@ Give an AI assistant a performance goal, repeatable scenario, and baseline. It c
 URL: https://developer.playcanvas.com/user-manual/optimization/profiler/
 Markdown: https://developer.playcanvas.com/user-manual/optimization/profiler.md
 
-PlayCanvas provides a real-time profiler to assist in diagnosing performance problems.
+The Editor Launch page provides a real-time profiler to assist in diagnosing performance problems. This is a separate tool from the lightweight [MiniStats](https://developer.playcanvas.com/user-manual/optimization/mini-stats.md) overlay. To collect statistics directly from application code, see [Profiling with AppStats](https://developer.playcanvas.com/user-manual/optimization/app-stats.md).
 
 [Image: Profiler]
 

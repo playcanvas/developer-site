@@ -100,6 +100,8 @@ icon.element.rect = new pc.Vec4(0, 0.5, 0.5, 0.5);
 
 For many images packed into one texture, a texture atlas and sprites are easier to manage.
 
+[Live example: Image Fit](https://playcanvas.com/examples/#/user-interface/image-fit) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/image-fit.example.mjs))
+
 ## Sprites
 
 A sprite is a set of frames from a [texture atlas](https://developer.playcanvas.com/user-manual/2D/sprite-editor.md), a texture with named rectangles on it. Assign a sprite asset to an image element to draw its first frame, and set `spriteFrame` to pick another. Sprites also add render modes that keep the borders of a frame crisp at any size.
@@ -252,6 +254,8 @@ portrait.element.texture = previewTexture;
 ```
 
 The camera's `priority` of -1 renders it before the main camera, which has a priority of 0, so the texture is ready when the interface is drawn. The transparent clear color leaves the background of the image transparent. Keep the texture's sRGB format, `pc.PIXELFORMAT_SRGBA8`: with `pc.PIXELFORMAT_RGBA8`, the image comes out too light. An `origin` of `pc.RENDERTARGET_ORIGIN_TOP` stores the image top row first, as image textures are, so that it is the right way up on both WebGL2 and WebGPU. Without it, the image is upside down on WebGL2. The `origin` option is available from engine 2.22.
+
+[Live example: Render to Image](https://playcanvas.com/examples/#/user-interface/render-to-image) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/render-to-image.example.mjs))
 
 ## Custom Materials
 
