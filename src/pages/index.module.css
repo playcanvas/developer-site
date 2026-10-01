@@ -1,42 +1,1102 @@
 /**
- * CSS files with the .module.css suffix will be treated as CSS modules
- * and scoped locally.
+ * Homepage styles. CSS modules scope these class names to the homepage.
  */
 
-.heroBanner {
-  padding: 8rem 0;
-  text-align: center;
+.page {
+  --home-surface: #fff;
+  --home-border: rgb(15 23 42 / 10%);
+  --home-border-strong: rgb(15 23 42 / 18%);
+  --home-text-muted: #525a61;
+  --home-accent-text: #c2410c;
+  --home-icon-background: rgb(255 138 60 / 14%);
+  --home-icon-color: #d9480f;
+  --home-shadow: 0 1px 2px rgb(15 23 42 / 5%), 0 8px 24px -14px rgb(15 23 42 / 22%);
+  --home-shadow-hover: 0 2px 4px rgb(15 23 42 / 6%), 0 18px 32px -14px rgb(15 23 42 / 32%);
+  --home-hero-background: #20292b;
+  --home-terminal-background: #161c1e;
+  --home-radius: 14px;
+}
+
+[data-theme='dark'] .page {
+  --home-surface: #212527;
+  --home-border: rgb(255 255 255 / 9%);
+  --home-border-strong: rgb(255 255 255 / 18%);
+  --home-text-muted: #b1b9bd;
+  --home-accent-text: var(--ifm-color-primary);
+  --home-icon-background: rgb(255 180 122 / 12%);
+  --home-icon-color: var(--ifm-color-primary);
+  --home-shadow: 0 1px 2px rgb(0 0 0 / 30%), 0 8px 24px -14px rgb(0 0 0 / 60%);
+  --home-shadow-hover: 0 2px 4px rgb(0 0 0 / 35%), 0 18px 32px -14px rgb(0 0 0 / 75%);
+}
+
+.wrap {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.arrow {
+  display: inline-block;
+  margin-left: 0.35em;
+  transition: transform 0.15s ease-in-out;
+}
+
+a:hover > .arrow,
+a:hover .arrow {
+  transform: translateX(3px);
+}
+
+/* Hero */
+
+.hero {
   position: relative;
+  isolation: isolate;
   overflow: hidden;
-  background-image: url('./playcanvas-background.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  /* overflow-wrap: normal; */
-  word-break: normal;
-  min-width: min-content;
+  padding: 4.75rem 0 15rem;
+  color: #fff;
+  text-align: center;
+  background:
+    radial-gradient(46rem 11rem at 50% calc(100% - 17.5rem), rgb(255 138 60 / 26%), transparent 70%),
+    radial-gradient(56rem 24rem at 50% -6rem, rgb(255 138 60 / 12%), transparent 70%),
+    var(--home-hero-background);
+}
+
+.heroGrid {
+  position: absolute;
+  z-index: -1;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 17.5rem;
+  color: rgb(255 255 255 / 13%);
+  mask-image: linear-gradient(to bottom, transparent, #000 75%);
+}
+
+.heroInner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.eyebrow {
+  margin: 0 0 1.1rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #ff9f5a;
 }
 
 .heroTitle {
-  font-size: 5rem;
+  max-width: 15em;
+  margin: 0;
+  font-size: clamp(2.4rem, 5.6vw, 4.4rem);
+  font-weight: 800;
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  color: #fff;
+  text-wrap: balance;
 }
 
-.heroTitle iframe {
-  padding-left: 1rem;
+.heroSubtitle {
+  max-width: 46rem;
+  margin: 1.3rem 0 0;
+  font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+  line-height: 1.6;
+  color: rgb(255 255 255 / 78%);
+  text-wrap: pretty;
 }
 
-@media screen and (max-width: 996px) {
-  .heroBanner {
-    padding: 5rem 1rem;
+/* Break Japanese headings between phrases rather than mid-word */
+.heroTitle:lang(ja),
+.heroSubtitle:lang(ja),
+.lanesTitle:lang(ja),
+.laneTitle:lang(ja),
+.sectionTitle:lang(ja),
+.sectionSubtitle:lang(ja) {
+  word-break: auto-phrase;
+}
+
+.heroActions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.4rem;
+  width: 100%;
+  margin-top: 2.25rem;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: min(100%, 34rem);
+  padding: 0.8rem 0.85rem 0.8rem 1.15rem;
+  font: inherit;
+  font-size: 1rem;
+  color: rgb(255 255 255 / 72%);
+  text-align: left;
+  cursor: pointer;
+  background: rgb(255 255 255 / 7%);
+  border: 1px solid rgb(255 255 255 / 16%);
+  border-radius: 999px;
+  backdrop-filter: blur(6px);
+  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, color 0.15s ease-in-out;
+}
+
+.search:hover {
+  color: #fff;
+  background: rgb(255 255 255 / 10%);
+  border-color: rgb(255 138 60 / 75%);
+}
+
+.search:focus-visible {
+  outline: 2px solid #ff9f5a;
+  outline-offset: 3px;
+}
+
+.searchIcon {
+  flex: none;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.searchLabel {
+  flex: 1;
+}
+
+.searchKeys {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.searchKeys kbd {
+  min-width: 1.7rem;
+  padding: 0.1rem 0.45rem;
+  font-family: inherit;
+  font-size: 0.75rem;
+  text-align: center;
+  color: rgb(255 255 255 / 80%);
+  background: rgb(255 255 255 / 8%);
+  border: 1px solid rgb(255 255 255 / 18%);
+  border-radius: 6px;
+  box-shadow: none;
+}
+
+.githubStars {
+  display: block;
+  border: 0;
+}
+
+/* Start building */
+
+.lanes {
+  position: relative;
+  z-index: 1;
+  margin-top: -11.5rem;
+}
+
+.lanesTitle {
+  margin: 0 0 1.25rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-align: center;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 72%);
+}
+
+.laneGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0 1.5rem;
+}
+
+/* Each card spans three rows of the grid (media, text, actions) and shares them through a
+   subgrid, so the buttons line up across the cards whatever the length of each text */
+.laneCard {
+  display: grid;
+  grid-row: span 3;
+  grid-template-rows: subgrid;
+  row-gap: 0;
+  overflow: hidden;
+  background: var(--home-surface);
+  border: 1px solid var(--home-border);
+  border-radius: var(--home-radius);
+  box-shadow: 0 28px 50px -28px rgb(0 0 0 / 50%), 0 2px 6px rgb(0 0 0 / 8%);
+}
+
+.laneMedia {
+  position: relative;
+  container-type: inline-size;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--home-terminal-background);
+  border-bottom: 1px solid var(--home-border);
+}
+
+.laneMedia img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.laneText {
+  padding: 1.35rem 1.5rem 0;
+}
+
+.laneKicker {
+  margin: 0 0 0.3rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--home-accent-text);
+}
+
+.laneTitle {
+  margin: 0 0 0.5rem;
+  font-size: 1.4rem;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+.laneDescription {
+  margin: 0;
+  line-height: 1.55;
+  color: var(--home-text-muted);
+}
+
+.laneActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+  align-content: flex-start;
+  align-items: center;
+  padding: 1.35rem 1.5rem 1.5rem;
+}
+
+.primaryButton {
+  display: inline-flex;
+  gap: 0.6rem;
+  align-items: center;
+  padding: 0.6rem 1rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: #1d2225;
+  background: var(--ifm-color-primary);
+  border-radius: 10px;
+  transition: background-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.primaryButton:hover {
+  color: #1d2225;
+  text-decoration: none;
+  background: var(--ifm-color-primary-light);
+  box-shadow: 0 6px 16px -6px rgb(255 138 60 / 70%);
+}
+
+.primaryButton:focus-visible,
+.textLink:focus-visible,
+.laneAlt a:focus-visible {
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: 3px;
+}
+
+.duration {
+  display: inline-flex;
+  gap: 0.25rem;
+  align-items: center;
+  padding: 0.12rem 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  white-space: nowrap;
+  background: rgb(29 34 37 / 14%);
+  border-radius: 999px;
+}
+
+.duration svg {
+  width: 0.9rem;
+  height: 0.9rem;
+}
+
+.textLink {
+  font-weight: 600;
+  color: var(--home-accent-text);
+}
+
+.textLink:hover {
+  color: var(--home-accent-text);
+}
+
+.laneAlt {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--home-text-muted);
+}
+
+.laneAlt a {
+  font-weight: 600;
+  color: var(--home-accent-text);
+  white-space: nowrap;
+}
+
+/* Terminal in the code quick start */
+
+.terminal {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.82rem;
+  color: #d7dde0;
+  background: var(--home-terminal-background);
+}
+
+.terminalBar {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+  padding: 0.65rem 0.9rem;
+  background: #1f272a;
+  border-bottom: 1px solid rgb(255 255 255 / 6%);
+}
+
+.terminalDot {
+  width: 0.65rem;
+  height: 0.65rem;
+  background: #ff5f57;
+  border-radius: 50%;
+}
+
+.terminalDot:nth-child(2) {
+  background: #febc2e;
+}
+
+.terminalDot:nth-child(3) {
+  background: #28c840;
+}
+
+.terminalBody {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  min-height: 0;
+  padding: 0.75rem 1.1rem 0.9rem;
+}
+
+.terminalCommand {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.terminalCommand code,
+.aiCommand code {
+  min-width: 0;
+  padding: 0;
+  overflow-x: auto;
+  font-size: inherit;
+  color: #fff;
+  white-space: nowrap;
+  background: none;
+  border: 0;
+  scrollbar-width: none;
+}
+
+.terminalPrompt {
+  color: #ff9f5a;
+}
+
+.terminalOutput {
+  font-size: 0.78rem;
+  line-height: 1.6;
+  color: #c9d1d4;
+}
+
+.terminalOutput > div {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: pre;
+}
+
+.ansiCyan {
+  color: #39c5cf;
+}
+
+.ansiGreen {
+  color: #3fb950;
+}
+
+.ansiYellow {
+  color: #e3b341;
+}
+
+.ansiMagenta {
+  color: #d2a8ff;
+}
+
+.ansiDim {
+  opacity: 0.55;
+}
+
+.copyButton {
+  display: inline-flex;
+  flex: none;
+  gap: 0.35rem;
+  align-items: center;
+  padding: 0.3rem 0.6rem;
+  font-family: var(--ifm-font-family-base);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgb(255 255 255 / 80%);
+  cursor: pointer;
+  background: rgb(255 255 255 / 6%);
+  border: 1px solid rgb(255 255 255 / 14%);
+  border-radius: 6px;
+  transition: color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+}
+
+.copyButton:hover {
+  color: #fff;
+  border-color: rgb(255 255 255 / 32%);
+}
+
+.copyButton:focus-visible {
+  outline: 2px solid #ff9f5a;
+  outline-offset: 2px;
+}
+
+.copyButton svg {
+  width: 0.9rem;
+  height: 0.9rem;
+}
+
+/* Keep the command and its copy button on one line in narrow cards */
+@container (max-width: 340px) {
+  .terminal {
+    font-size: 0.75rem;
+  }
+
+  .terminalBody {
+    padding-right: 0.8rem;
+    padding-left: 0.8rem;
+  }
+
+  .terminalCommand .copyButton > span {
+    display: none;
+  }
+}
+
+/* Sections */
+
+.section {
+  padding-top: 5.5rem;
+}
+
+.lastSection {
+  padding-bottom: 6rem;
+}
+
+.sectionHeader {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 1.75rem;
+}
+
+.sectionTitle {
+  margin: 0;
+  font-size: clamp(1.65rem, 2.6vw, 2.15rem);
+  letter-spacing: -0.02em;
+}
+
+.sectionSubtitle {
+  max-width: 46rem;
+  margin: 0.45rem 0 0;
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: var(--home-text-muted);
+}
+
+/* Platform */
+
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.productCard,
+.topicCard,
+.exampleCard,
+.communityCard,
+.aiLink {
+  background: var(--home-surface);
+  border: 1px solid var(--home-border);
+  transition: transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out, border-color 0.15s ease-in-out;
+}
+
+.productCard:hover,
+.topicCard:hover,
+.exampleCard:hover,
+.communityCard:hover,
+.aiLink:hover {
+  border-color: var(--ifm-color-primary);
+  box-shadow: var(--home-shadow-hover);
+  transform: translateY(-2px);
+}
+
+.productCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  border-radius: var(--home-radius);
+  box-shadow: var(--home-shadow);
+}
+
+.productIcon {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin-bottom: 1rem;
+  color: var(--home-icon-color);
+  background: var(--home-icon-background);
+  border-radius: 10px;
+}
+
+.productIcon svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.productTitle {
+  margin: 0 0 0.4rem;
+  font-size: 1.2rem;
+}
+
+.stretchedLink,
+.stretchedLink:hover {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Makes the whole card clickable while the links below it stay separate targets */
+.stretchedLink::after {
+  position: absolute;
+  inset: 0;
+  content: '';
+  border-radius: var(--home-radius);
+}
+
+.stretchedLink:focus-visible {
+  outline: none;
+}
+
+.stretchedLink:focus-visible::after {
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+}
+
+.productCard:hover .stretchedLink {
+  color: var(--home-accent-text);
+}
+
+.productDescription {
+  flex: 1;
+  margin: 0 0 1.1rem;
+  line-height: 1.55;
+  color: var(--home-text-muted);
+}
+
+.productLinks {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.1rem;
+  padding: 0;
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  list-style: none;
+}
+
+.productLinks a {
+  color: var(--home-accent-text);
+}
+
+/* Core concepts */
+
+.topicGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.topicCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 1.1rem 1.25rem;
+  color: inherit;
+  border-radius: 12px;
+}
+
+.topicCard:hover {
+  color: inherit;
+  text-decoration: none;
+}
+
+.topicTitle {
+  font-weight: 700;
+}
+
+.topicCard:hover .topicTitle {
+  color: var(--home-accent-text);
+}
+
+.topicDescription {
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: var(--home-text-muted);
+}
+
+.topicCardAll {
+  justify-content: center;
+  background: transparent;
+  border-style: dashed;
+  border-color: var(--home-border-strong);
+}
+
+.topicCardAll .topicTitle {
+  color: var(--home-accent-text);
+}
+
+/* Learn by example */
+
+.exampleGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.exampleCard {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  color: inherit;
+  border-radius: var(--home-radius);
+  box-shadow: var(--home-shadow);
+}
+
+.exampleCard:hover {
+  color: inherit;
+  text-decoration: none;
+}
+
+.exampleCard img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-bottom: 1px solid var(--home-border);
+}
+
+.exampleBody {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 1rem 1.15rem 1.2rem;
+}
+
+.exampleTitle {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.exampleCard:hover .exampleTitle {
+  color: var(--home-accent-text);
+}
+
+.exampleDescription {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--home-text-muted);
+}
+
+.apiRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+  align-items: center;
+  padding: 1.1rem 1.25rem;
+  margin-top: 1.25rem;
+  background: var(--home-surface);
+  border: 1px solid var(--home-border);
+  border-radius: var(--home-radius);
+}
+
+.apiTitle {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.apiList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.apiChip {
+  display: inline-block;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: inherit;
+  border: 1px solid var(--home-border-strong);
+  border-radius: 999px;
+  transition: color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+}
+
+.apiChip:hover {
+  color: var(--home-accent-text);
+  text-decoration: none;
+  border-color: var(--ifm-color-primary);
+}
+
+/* Build with AI, in the colors of the site's AI admonition */
+
+.aiPanel {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: 2rem 3rem;
+  align-items: center;
+  padding: 2.5rem;
+  background:
+    linear-gradient(120deg, rgb(124 58 237 / 10%), rgb(6 182 212 / 12%), rgb(236 72 153 / 10%)),
+    var(--home-surface);
+  border: 1px solid rgb(139 92 246 / 40%);
+  border-radius: 18px;
+  box-shadow: 0 0 2.5rem rgb(139 92 246 / 12%);
+}
+
+.aiCommand {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 30rem;
+  padding: 0.7rem 0.75rem 0.7rem 1rem;
+  margin-top: 1.5rem;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.875rem;
+  background: var(--home-terminal-background);
+  border-radius: 10px;
+}
+
+.aiLinks {
+  display: grid;
+  gap: 0.75rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.aiLink {
+  display: flex;
+  gap: 0.9rem;
+  align-items: flex-start;
+  padding: 0.9rem 1.1rem;
+  color: inherit;
+  border-radius: 12px;
+}
+
+.aiLink:hover {
+  color: inherit;
+  text-decoration: none;
+  border-color: rgb(139 92 246 / 70%);
+}
+
+.aiLinkIcon {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  color: #7c3aed;
+  background: rgb(139 92 246 / 12%);
+  border-radius: 9px;
+}
+
+[data-theme='dark'] .aiLinkIcon {
+  color: #c4b5fd;
+  background: rgb(139 92 246 / 20%);
+}
+
+.aiLinkIcon svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.aiLinkTitle,
+.communityTitle {
+  display: block;
+  font-weight: 700;
+}
+
+.aiLinkDescription,
+.communityDescription {
+  display: block;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: var(--home-text-muted);
+}
+
+/* Community */
+
+.communityGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.communityCard {
+  display: flex;
+  gap: 0.9rem;
+  align-items: flex-start;
+  padding: 1.1rem 1.2rem;
+  color: inherit;
+  border-radius: 12px;
+}
+
+.communityCard:hover {
+  color: inherit;
+  text-decoration: none;
+}
+
+.communityIcon {
+  flex: none;
+  width: 1.6rem;
+  height: 1.6rem;
+  margin-top: 0.1rem;
+}
+
+.discordIcon {
+  color: #5865f2;
+}
+
+@media (max-width: 1100px) {
+  .topicGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 996px) {
+  .hero {
+    padding: 3.75rem 0 13.5rem;
+  }
+
+  .lanes {
+    margin-top: -10.5rem;
+  }
+
+  .laneGrid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.25rem;
+  }
+
+  /* One card per row, with the media beside the text */
+  .laneCard {
+    grid-row: auto;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    grid-template-rows: auto 1fr;
+  }
+
+  .laneMedia {
+    grid-row: 1 / 3;
+    aspect-ratio: auto;
+    min-height: 13rem;
+    border-right: 1px solid var(--home-border);
+    border-bottom: 0;
+  }
+
+  .laneText,
+  .laneActions {
+    grid-column: 2;
+  }
+
+  .productGrid,
+  .exampleGrid,
+  .communityGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .aiPanel {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .wrap {
+    padding: 0 1rem;
+  }
+
+  .hero {
+    padding: 3rem 0 12.5rem;
   }
 
   .heroTitle {
-    font-size: 3rem;
+    font-size: 2.35rem;
+  }
+
+  /* No keyboard shortcut to advertise on a phone */
+  .searchKeys {
+    display: none;
+  }
+
+  .laneCard {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .laneMedia {
+    aspect-ratio: 16 / 9;
+    min-height: 0;
+    border-right: 0;
+    border-bottom: 1px solid var(--home-border);
+  }
+
+  .section {
+    padding-top: 4rem;
+  }
+
+  .lastSection {
+    padding-bottom: 4.5rem;
+  }
+
+  .productGrid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+  }
+
+  /* Icon beside the title, to keep six cards from filling several screens */
+  .productCard {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    column-gap: 0.9rem;
+    align-items: center;
+    padding: 1.25rem;
+  }
+
+  .productIcon {
+    width: 2.4rem;
+    height: 2.4rem;
+    margin: 0;
+  }
+
+  .productTitle {
+    margin: 0;
+  }
+
+  .productDescription,
+  .productLinks {
+    grid-column: 1 / -1;
+  }
+
+  .productDescription {
+    margin: 0.7rem 0 0.9rem;
+  }
+
+  /* Two columns of titles; the descriptions are left to wider screens */
+  .topicGrid,
+  .exampleGrid,
+  .communityGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+
+  .topicCard {
+    justify-content: center;
+    padding: 0.9rem 1rem;
+  }
+
+  .topicDescription,
+  .exampleDescription,
+  .communityDescription {
+    display: none;
+  }
+
+  .exampleBody {
+    padding: 0.7rem 0.85rem 0.8rem;
+  }
+
+  .exampleTitle {
+    font-size: 0.95rem;
+    line-height: 1.3;
+  }
+
+  .communityCard {
+    align-items: center;
+    padding: 0.9rem 1rem;
+  }
+
+  .communityIcon {
+    margin-top: 0;
+  }
+
+  .apiRow {
+    padding: 1rem;
+  }
+
+  .aiPanel {
+    padding: 1.25rem;
+  }
+
+  .aiCommand {
+    padding: 0.6rem 0.6rem 0.6rem 0.8rem;
+    font-size: 0.78rem;
+  }
+
+  .aiCommand .copyButton > span {
+    display: none;
   }
 }
 
-.buttons {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+@media (prefers-reduced-motion: reduce) {
+  .arrow,
+  .search,
+  .primaryButton,
+  .copyButton,
+  .apiChip,
+  .productCard,
+  .topicCard,
+  .exampleCard,
+  .communityCard,
+  .aiLink {
+    transition: none;
+  }
+
+  a:hover .arrow,
+  .productCard:hover,
+  .topicCard:hover,
+  .exampleCard:hover,
+  .communityCard:hover,
+  .aiLink:hover {
+    transform: none;
+  }
 }

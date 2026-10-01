@@ -1,6 +1,6 @@
 ---
 title: <pc-app>
-description: "pc-app要素のリファレンス: PlayCanvasのApplicationを初期化し、グラフィックスオプション、およびSceneとEntityのルートコンテナです。"
+description: "pc-app要素のリファレンス: PlayCanvasのApplicationを初期化し、グラフィックスオプションとタイムスケールを設定する、SceneとEntityのルートコンテナです。"
 ---
 
 `<pc-app>`タグは、PlayCanvas アプリケーションのルート要素です。PlayCanvas アプリケーションを初期化し、シーンのコンテナを提供するために使用されます。
@@ -19,17 +19,24 @@ description: "pc-app要素のリファレンス: PlayCanvasのApplicationを初�
 | --- | --- | --- | --- |
 | `alpha` | Boolean | `"true"` | アプリケーションがフレームバッファにアルファチャネルを割り当てるかどうか。これにより、シーンが描画されていない部分でページが透けて見えます |
 | `antialias` | Boolean | `"true"` | アプリケーションがアンチエイリアシングを使用するかどうか |
+| `area-light-luts` | [Asset ID](../attributes.md#asset-and-material-ids) | - | エリアライトのルックアップテーブルをJSONとして保持する[`<pc-asset>`](../pc-asset)のID。これを読み込むとアプリケーション全体でエリアライトが有効になり、`rect`・`disk`・`sphere`の`shape`を持つ[`<pc-light>`](../pc-light)要素が意図どおりに描画されます。外すと再び無効になります。即座に適用されます。[エリアライト](../pc-light#area-lights)を参照 |
 | `backend` | Enum | `"webgpu"` | グラフィックスエンジンのバックエンド: `"webgpu"` \| `"webgl2"` \| `"null"`。WebGPUが利用できないブラウザではWebGL 2にフォールバックします。WebGL 2を強制するには`"webgl2"`を設定してください。`"null"`は何も描画しないレンダラーを選択し、ヘッドレステスト用に存在します |
 | `depth-buffer` | Boolean | `"true"` | アプリケーションがデプスバッファを割り当てるかどうか |
 | `loading-bar` | Boolean | `"true"` | 起動時およびアセットのプリロード中に、アプリケーションが組み込みのローディングバーを表示するかどうか |
-| `max-pixel-ratio` | Number | 上限なし | アプリケーションがレンダリングするピクセル比の上限。キャンバスはこの値とディスプレイ自身のデバイスピクセル比のうち小さい方でサイズが決まります。したがって`"1"`はCSS解像度でレンダリングし、`"2"`は高密度ディスプレイのすべてのピクセルを描画することなく鮮明さを保ちます |
+| `max-pixel-ratio` | Number | 上限なし | アプリケーションがレンダリングするピクセル比の上限（0より大きい値）。キャンバスはこの値とディスプレイ自身のデバイスピクセル比のうち小さい方でサイズが決まります。したがって`"1"`はCSS解像度でレンダリングし、`"2"`は高密度ディスプレイのすべてのピクセルを描画することなく鮮明さを保ちます |
+| `physics-time-scale` | Number | `"1"` | 物理シミュレーションが毎フレーム進める時間に掛かる倍率で、`time-scale`に重ねて適用されます。1未満はスローモーション、1を超えると高速になり、`"0"`はアプリケーションの他の部分を動かしたまま物理を一時停止します。たとえば、ゲームの世界を止めたまま操作できる状態を保つ必要があるポーズメニューに使えます |
+| `picking` | Enum | `"auto"` | エンティティ要素で[ポインターイベント](../pc-entity#events)をディスパッチするために、アプリケーションがポインターの下のシーンをいつピッキングするか: `"auto"` \| `"always"` \| `"none"`。`auto`は、あるイベントの種類のリスナーがエンティティ要素または[`<pc-scene>`](../pc-scene)に登録されている間だけ、その種類についてピッキングします。`always`はすべてのポインターイベントでピッキングします。ドキュメント上のリスナーや、Reactの`onPointerMove`のようなフレームワークの委譲ハンドラーなど、アプリケーションが認識できないリスナーにはこれが必要です。`none`はピッキングを一切行わないため、エンティティはポインターイベントを受け取りません。ピッキングではシーンをもう一度レンダリングするため、`auto`がデフォルトになっています。[イベントがディスパッチされるタイミング](../pc-entity#when-events-are-dispatched)を参照 |
 | `stencil-buffer` | Boolean | `"true"` | アプリケーションがステンシルバッファを割り当てるかどうか |
+| `time-scale` | Number | `"1"` | アプリケーションが毎フレーム進める時間に掛かる倍率。スクリプト、アニメーション、物理はすべてこの倍率を掛けた時間で進むため、1未満はスローモーション、1を超えると高速になり、`"0"`はシーンの描画を続けたまま3つすべてをまとめて一時停止します。物理だけを遅くしたり一時停止したりするには`physics-time-scale`を使用してください |
+| `with-credentials` | Boolean | `"false"` | アセットのリクエストが他のオリジンに資格情報（CookieとHTTP認証）を送信するかどうか。アセットサーバー側でCORSにより許可されている必要があります。エンジンはこの設定をページ全体で共有されるHTTPクライアントに保持するため、ページ上のすべての`<pc-app>`に適用されます。この属性を付けて起動したアプリはすべてのアプリケーションで有効にし、その後いずれかのアプリで変更すると、すべてのアプリケーションに対して設定されます |
 
 </div>
 
 :::note[属性が読み取られるタイミング]
 
-上記の属性のうち`max-pixel-ratio`と`loading-bar`以外は、要素がドキュメントに挿入されてグラフィックスデバイスを作成する際に一度だけ読み取られます。その後に変更しても、要素のプロパティは更新されますが実行中のアプリケーションには影響せず、その旨の警告がログに出力されます。新しい値を適用するには、要素を削除して再挿入してください。
+`alpha`・`antialias`・`backend`・`depth-buffer`・`stencil-buffer`はグラフィックスデバイスを設定する属性なので、要素がドキュメントに挿入されてグラフィックスデバイスを作成する際に一度だけ読み取られます。その後に変更しても、要素のプロパティは更新されますが実行中のアプリケーションには影響せず、その旨の警告がログに出力されます。新しい値を適用するには、要素を削除して再挿入してください。
+
+それ以外の属性はすべてライブで、変更すると実行中のアプリケーションにすぐ適用されます。ただし、`loading-bar`はバーを取り除くことしかできません（[ローディングバー](#loading-bar)を参照）。2つのタイムスケールは、どのスクリプトの`initialize()`よりも前に設定されます。
 
 :::
 
@@ -55,11 +62,13 @@ pc-app {
 
 :::
 
+描画バッファは要素だけでなくディスプレイにも追従します。ウィンドウを画素密度の異なる画面に移動したり、ページをズームしたりすると、要素のサイズが変わらなくてもデバイスピクセル比が変わるため、アプリケーションはピクセル比を評価し直し、それに合わせてバッファのサイズを変更します。実際に使われる比率、つまり`max-pixel-ratio`とディスプレイ自身の比率の小さい方は`app.graphicsDevice.maxPixelRatio`に入り、要素の`maxPixelRatio`プロパティは上限値を返します。描画品質を管理するコードは、`app.graphicsDevice.maxPixelRatio`に直接代入することもできます。その場合、ディスプレイが変わってもその比率は保たれ、バッファのサイズだけが追従します。`max-pixel-ratio`を再び設定すると、比率の管理は要素に戻ります。
+
 要素のサイズが描画バッファを制御しない唯一の例外はXRセッションの表示中で、その間はセッションがバッファを所有します。
 
 ## ローディングバー {#loading-bar}
 
-アプリケーションの起動中およびアセットのプリロード中、`<pc-app>`は要素の上端にローディングバーを表示します。表示を抑制するには`loading-bar="false"`を設定するか、次のCSSカスタムプロパティでテーマを設定します。
+アプリケーションの起動中およびアセットのプリロード中、`<pc-app>`は要素の上端にローディングバーを表示します。表示を抑制するには`loading-bar="false"`を設定するか（起動後に設定するとバーは直ちに消えますが、`"true"`に戻しても要素を再挿入するまで効果はありません）、次のCSSカスタムプロパティでテーマを設定します。
 
 | プロパティ | 説明 |
 | --- | --- |
@@ -76,20 +85,23 @@ pc-app {
 | イベント | 説明 |
 | --- | --- |
 | `progress` | アプリケーションがアセットをプリロードしている間に発生する[`ProgressEvent`](https://developer.mozilla.org/en-US/docs/Web/API/ProgressEvent)。`loaded`と`total`はバイト数ではなくアセット数で、読み込みに失敗したアセットも読み込み済みとして数えられます。起動ごとに少なくとも1回発生し、最後のイベントでは必ず`loaded`が`total`と等しくなります。 |
-| `error` | グラフィックスデバイスを作成できず、アプリケーションが起動できないとき（WebGLが無効化されている、GPUがブロックリストに載っているなど）に発生する[`ErrorEvent`](https://developer.mozilla.org/en-US/docs/Web/API/ErrorEvent)。`message`には要求されたバックエンドの名前が入り、`error`には元の失敗が入ります。 |
+| `error` | グラフィックスデバイスを作成できず、アプリケーションが起動できないとき（WebGLが無効化されている、GPUがブロックリストに載っているなど）に発生する[`ErrorEvent`](https://developer.mozilla.org/en-US/docs/Web/API/ErrorEvent)。`message`には要求されたバックエンドの名前が入り、`error`には元の失敗が入ります。捕捉する方法は[下記](#handling-a-failed-boot)を参照してください。 |
 
 どちらのイベントもバブリングしないため、要素自身でリッスンしてください。
 
-`error`を発生させた要素は決してready状態にならず、`app`プロパティは`null`のままです。特に、`whenReady('pc-app')`は永遠に解決しません（[プログラムによるアクセス](../programmatic-access.md)を参照）。フォールバックUIを表示したいページは、準備完了を待つのではなく、このイベントをリッスンしてください。
+### 起動の失敗を処理する {#handling-a-failed-boot}
 
-```javascript
-document.querySelector('pc-app').addEventListener('error', (event) => {
-    // WebGPUもWebGL 2も利用できない — 代わりに静的コンテンツを表示する
-    document.getElementById('fallback').hidden = false;
-});
+`error`を発生させた要素は決してready状態にならず、`app`プロパティは`null`のままです。特に、`whenReady('pc-app')`は永遠に解決しません（[プログラムによるアクセス](../programmatic-access.md)を参照）。フォールバックUIを表示したいページは、準備完了を待つのではなく、このイベントをリッスンしてください。ハンドラーはインライン属性として設定します。失敗はライブラリが起動した直後、自分のモジュールスクリプトが実行される前に報告されることがあるため、モジュールスクリプトから追加したリスナーでは取りこぼす可能性があります。属性であれば、要素が解析された時点から有効です。
+
+```html
+<pc-app onerror="document.getElementById('fallback').hidden = false">
 ```
 
+このイベントは、デバイスをまったく作成できない場合を対象としています。デフォルトの`backend`では、WebGPUを提供するブラウザはまずWebGPUを試してからWebGL 2にフォールバックしますが、その経路で両方が失敗すると、現在のエンジンは`error`を発生させずに要素を待機状態のままにします。必ず表示すべきフォールバックには、タイムアウトも設けてください。数秒経っても要素がready状態にならなければ表示します。
+
 要素を削除して再挿入すると、その時点の属性で起動を再試行します。
+
+エンティティでディスパッチされた[ポインターイベント](../pc-entity#events)も、キャンバス自身のネイティブなポインターイベントと並んで`<pc-app>`までバブリングします。両者は`event.isTrusted`で区別できます。ブラウザのネイティブなイベントでは`true`、ディスパッチされたイベントでは`false`です。エンティティのイベントがそもそもディスパッチされるかどうかは`picking`によって決まります。[イベントがディスパッチされるタイミング](../pc-entity#when-events-are-dispatched)を参照してください。
 
 ## 例 {#example}
 
@@ -124,4 +136,4 @@ document.querySelector('pc-app').addEventListener('error', (event) => {
 * [`<pc-wasm>`](../pc-wasm) — 物理などアプリが起動前にロードするモジュール
 * [プログラムによるアクセス](../programmatic-access.md) — JavaScriptから`ready`を待ち、`app`にアクセスする方法
 
-サンプル: [Spinning Cube](https://playcanvas.github.io/web-components/examples/spinning-cube.html)、[Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html)
+サンプル: [Spinning Cube](https://playcanvas.github.io/web-components/examples/#spinning-cube.html)、[Basic Shapes](https://playcanvas.github.io/web-components/examples/#basic-shapes.html)

@@ -45,18 +45,20 @@ Streamed SOGの動作を確認するには、以下のライブサンプルを�
 
 ### LODの選択方法
 
-エンジンは、合計スプラット数がグローバルな[スプラット予算](/user-manual/gaussian-splatting/building/performance#global-splat-budget)に収まるように、シーンの各領域に1つのLODレベルを選択し、画質への貢献が最も大きい場所に詳細を割り当てます。その際、各領域の画面上での投影サイズと、各LODレベルが残す視覚的誤差の指標を組み合わせて判断します。誤差の指標は、`lod-meta.json`に含まれている場合はそこから読み取られ（[SplatTransform](/user-manual/splat-transform) 3.3以降が書き出します）、含まれていない場合はスプラット数から自動的に導出されるため、どちらの場合も設定は不要です。LOD選択はカメラの視野角（FOV）も自動的に補正します。
+エンジンは、合計スプラット数がグローバルな[スプラット予算](/user-manual/gaussian-splatting/building/performance#global-splat-budget)に収まるように、シーンの各領域に1つのLODレベルを選択します。デフォルトでは、詳細はカメラからの距離に基づいて順序付けられ、各領域はカメラを中心とした同心円状のバンドで段階的に低下し、バンドの境界は予算に応じて調整されます。`GSPLAT_LODMODE_ERROR`（後述）では、代わりに各領域の画面上での投影サイズと、各LODレベルが残す視覚的誤差の指標を組み合わせて判断します。誤差の指標は、`lod-meta.json`に含まれている場合はそこから読み取られ（[SplatTransform](/user-manual/splat-transform) 3.3以降が書き出します）、含まれていない場合はスプラット数から自動的に導出されるため、どちらの場合も設定は不要です。LOD選択はカメラの視野角（FOV）も自動的に補正します。
 
 ### LODモード
 
 `app.scene.gsplat`の[`lodMode`](https://api.playcanvas.com/engine/classes/GSplatParams.html#lodMode)で、2つの戦略を切り替えられます：
 
 ```javascript
-app.scene.gsplat.lodMode = pc.GSPLAT_LODMODE_DISTANCE;
+app.scene.gsplat.lodMode = pc.GSPLAT_LODMODE_ERROR;
 ```
 
-- `GSPLAT_LODMODE_ERROR`（デフォルト）：スプラット1つあたりの視覚的誤差の削減量が最も大きい場所に予算を割り当てます。
-- `GSPLAT_LODMODE_DISTANCE`：誤差メタデータを無視し、カメラからの距離のみに基づいて詳細を順序付けます。詳細はカメラを中心とした同心円状のバンドで段階的に低下し、バンドの境界は予算に応じて調整されます。キャプチャの誤差データが視覚的な重要度と一致しない場合に便利です。
+- `GSPLAT_LODMODE_DISTANCE`（デフォルト）：誤差メタデータを無視し、カメラからの距離のみに基づいて詳細を順序付けます。詳細はカメラを中心とした同心円状のバンドで段階的に低下し、バンドの境界は予算に応じて調整されます。2つのモードのうちメモリ使用量が最も少ないため、メモリに制約のあるデバイスではこちらを推奨します。
+- `GSPLAT_LODMODE_ERROR`：スプラット1つあたりの視覚的誤差の削減量が最も大きい場所に予算を割り当てます。距離だけでは粗いままになる空や遠景などの疎で低品質な領域の品質を引き上げますが、より多くのソースデータをメモリに保持するため、メモリ使用量は著しく増加します。
+
+距離モードはエンジン2.23でデフォルトになりました。2.22ではエラーモードがデフォルトです。
 
 ### LODフォールオフ
 

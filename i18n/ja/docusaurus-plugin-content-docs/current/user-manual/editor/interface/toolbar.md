@@ -26,3 +26,29 @@ Editorのメインツールバーは、Editorの左側、垂直な端にあり�
 | ![How Do I](/img/user-manual/editor/interface/toolbar/how-do-i.png) | **使い方...？** | Viewportで「使い方...？」ヘルプウィジェットを切り替えます。 |
 | ![Controls](/img/user-manual/editor/interface/toolbar/controls.png) | **操作方法** | Editorがサポートする[操作方法とキーボードショートカット](../keyboard-shortcuts)のリストを表示します。 |
 | ![Settings](/img/user-manual/editor/interface/toolbar/settings.png) | **設定** | Editorとシーンの設定を[Inspector](../inspector)に読み込みます。 |
+
+## ツールバーのカスタマイズ {#customizing-the-toolbar}
+
+Editor 2.30.3以降、使わないボタンを非表示にしたり、残りのボタンを並べ替えたりできます。
+
+<video autoPlay muted loop controls src='/video/editor-toolbar-customization.mp4' style={{width: '100%', height: 'auto'}} />
+
+ツールバー上の任意の場所を右クリックすると、コンテキストメニューが開きます。
+
+| コマンド | 説明 |
+| ------- | ----------- |
+| **Edit Toolbar** | 編集モードに入ります。 |
+| **Done Editing** | 編集モードを終了します。編集中はEdit Toolbarの代わりに表示されます。 |
+| **Reset Toolbar** | デフォルトのボタンと並び順に戻します。何かを非表示にしたり移動したりした後にのみ表示されます。 |
+
+編集モードでは、次のようになります。
+
+- 各ボタンに**目**のバッジが付きます。クリックすると、そのボタンの表示と非表示が切り替わります。非表示にしたボタンは、元に戻せるように、編集中は淡色で表示されたまま残ります。
+- ボタンはドラッグして並べ替えできます。ツールバーには上部のコマンドと下部のユーティリティボタンという2つのグループがあり、ボタンは自分のグループ内でのみ移動できます。
+- ツールバー上部の**メニュー**ボタンが**Done editing toolbar**ボタンに変わります。これをクリックするか、コンテキストメニューから **Done Editing** を選ぶと編集を終了します。
+
+:::note
+
+レイアウトはプロジェクトではなくブラウザに保存されます。そのため、そのブラウザで開くすべてのプロジェクトに適用され、共同作業者と共有されることはありません。
+
+:::

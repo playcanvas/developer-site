@@ -5,7 +5,7 @@ description: PlayCanvas Scrollbar component provides a draggable handle Element 
 
 The Scrollbar Component defines a scrolling control for a [Scroll View](scrollview.md) Component.
 
-See the [User Interface](/user-manual/user-interface) section for more details.
+See [Scrollbars](/user-manual/user-interface/scroll-views/#scrollbars) for using one with a scroll view, and [Sliders](/user-manual/user-interface/common-widgets/#sliders) for using one on its own as a slider.
 
 ![Scrollbar Component](/img/user-manual/editor/scenes/components/component-scrollbar.png)
 
@@ -22,7 +22,9 @@ See the [User Interface](/user-manual/user-interface) section for more details.
 
 - [Scroll View Component](scrollview.md) - The scrollable area that uses this scrollbar
 - [Element Component](element.md) - Required for the scrollbar handle
-- [User Interface](/user-manual/user-interface) - Learn more about building user interfaces
+- [Scroll Views](/user-manual/user-interface/scroll-views/) - Scroll views and their scrollbars
+- [Sliders](/user-manual/user-interface/common-widgets/#sliders) - A scrollbar used as a slider
+- [User Interface](/user-manual/user-interface/) - Learn more about building user interfaces
 
 ## Scripting Interface
 

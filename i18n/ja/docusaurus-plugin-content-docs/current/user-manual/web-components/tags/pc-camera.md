@@ -3,7 +3,7 @@ title: <pc-camera>
 description: "pc-camera要素のリファレンス: エンジンのカメラComponentに対応する、投影、視野角、クリッピングプレーン、クリアオプション、トーンマッピングです。"
 ---
 
-`<pc-camera>`タグはカメラコンポーネントを定義するために使用されます。
+`<pc-camera>`タグはエンティティにカメラを追加します。シーンを描画する視点で、エンティティの負のZ軸方向を向きます。
 
 :::note[使用法]
 
@@ -31,12 +31,13 @@ description: "pc-camera要素のリファレンス: エンジンのカメラComp
 | `gamma` | Enum | `"srgb"` | カラースペース: `"linear"` \| `"srgb"` |
 | `horizontal-fov` | Boolean | `"false"` | 垂直視野角の代わりに水平視野角を使用するかどうか |
 | `near-clip` | Number | `"0.1"` | ニアクリッピングプレーンの距離 |
-| `ortho-height` | Number | `"10"` | 正射影の高さ。`projection`が`"orthographic"`のときにのみ使用されます |
+| `ortho-height` | Number | `"10"` | 正射影のビューの高さの半分。ビューは縦にこの値の2倍の範囲を映します。`projection`が`"orthographic"`のときにのみ使用されます |
 | `priority` | Number | `"0"` | カメラのレンダリング優先度 |
 | `projection` | Enum | `"perspective"` | カメラの投影方式: `"perspective"` \| `"orthographic"`。正射影のサイズは`ortho-height`で指定します |
+| `projection-offset` | Vector2 | `"0 0"` | シフトレンズのように、投影ウィンドウを視線方向からずらします。"X Y"値で、単位は視錐台の半分です。`"0 1"`はウィンドウを視錐台の高さの半分だけ上に移動します。カメラを水平に保ったままウィンドウをずらすと、背の高い被写体を垂直線が平行なままフレームに収められます。両方の投影方式に適用され、XRでは無視されます |
 | `rect` | Vector4 | `"0 0 1 1"` | "X Y Width Height"値としてのビューポート矩形 |
 | `scissor-rect` | Vector4 | `"0 0 1 1"` | "X Y Width Height"値としてのシザー矩形 |
-| `tonemap` | Enum | `"none"` | トーンマッピング: `"none"` \| `"aces"` \| `"aces2"` \| `"filmic"` \| `"hejl"` \| `"linear"` \| `"neutral"` |
+| `tonemap` | Enum | `"linear"` | トーンマッピング: `"none"` \| `"aces"` \| `"aces2"` \| `"filmic"` \| `"hejl"` \| `"linear"` \| `"neutral"` |
 
 </div>
 
@@ -75,6 +76,8 @@ description: "pc-camera要素のリファレンス: エンジンのカメラComp
 
 `component`プロパティは、この要素が追加するエンジンの[CameraComponent](https://api.playcanvas.com/engine/classes/CameraComponent.html)です。要素の準備が完了するまでは`null`で、属性が公開していないものはすべてここから利用できます。
 
+この要素にはWebXR用の小さなAPIもあります。`startXr(type, space)`と`endXr()`はセッションを開始・終了し、`arAvailable`と`vrAvailable`はこのデバイスが各モードに入れるかどうかを報告します。[カメラ要素のAPI](../xr.md#the-camera-element-api)を参照してください。
+
 ## 関連項目 {#see-also}
 
 * [`<pc-scene>`](../pc-scene) — カメラのトーンマッピングと組み合わせて働く露出とフォグ
@@ -82,4 +85,4 @@ description: "pc-camera要素のリファレンス: エンジンのカメラComp
 * [`<pc-script>`](../pc-script) — カメラ操作はカメラの隣に付けるエンジンスクリプト
 * [XR のサポート](../xr.md) — カメラ要素からVRやARを開始する方法
 
-サンプル: [Basic Shapes](https://playcanvas.github.io/web-components/examples/basic-shapes.html)、[First Person Controller](https://playcanvas.github.io/web-components/examples/first-person-controller.html)
+サンプル: [Basic Shapes](https://playcanvas.github.io/web-components/examples/#basic-shapes.html)、[First Person Controller](https://playcanvas.github.io/web-components/examples/#first-person-controller.html)

@@ -3,13 +3,13 @@ title: <pc-scrollbar>
 description: "pc-scrollbar要素のリファレンス: 向き、ハンドルサイズ、値を持ち、スクロールビューを駆動するドラッグ可能なスクロールバーです。"
 ---
 
-`<pc-scrollbar>`タグは、0〜1の範囲で位置を報告するドラッグ可能なハンドルを提供するスクロールバーコンポーネントを定義するために使用されます。
+`<pc-scrollbar>`タグは、スクロールバーコンポーネントを追加します。ユーザーがトラックに沿ってハンドルをドラッグし、その位置が0〜1の `value` になります。[`<pc-scroll-view>`](../pc-scroll-view) のスクロール位置を表示して設定し、単体ではスライダーとして働きます。
 
 :::note[使用法]
 
 * [`<pc-element>`](../pc-element) も持つ [`<pc-entity>`](../pc-entity)、[`<pc-model>`](../pc-model)、または[`<pc-node>`](../pc-node) の直接の子である必要があります。
-* [`<pc-scroll-view>`](../pc-scroll-view) の `horizontal-scrollbar` または `vertical-scrollbar` 属性から参照されます。
-* `handle` 属性は、ドラッグ可能なハンドルとして使用する [`<pc-entity>`](../pc-entity) を参照します。そのイメージ要素には `use-input` を設定してください。
+* [`<pc-scroll-view>`](../pc-scroll-view) を操作するには、ビューの `horizontal-scrollbar` または `vertical-scrollbar` 属性から参照します。その場合、ビューが `handle-size` と `value` を設定し、指定した値は置き換えられます。
+* `handle` 属性は、ハンドルとして使用するエンティティを参照します。ハンドルはトラックの子で、`use-input` を設定したイメージ要素を持ち、トラックの始端でトラックの幅いっぱいにアンカーします。垂直スクロールバーでは、下の例のように `anchor="0 1 1 1" pivot="0.5 1"` です。
 
 :::
 
@@ -21,18 +21,18 @@ description: "pc-scrollbar要素のリファレンス: 向き、ハンドルサ�
 | --- | --- | --- | --- |
 | `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |
 | `handle` | [Entity Reference](../attributes.md#entity-references) | - | ドラッグ可能なハンドルとして使用する [`<pc-entity>`](../pc-entity) |
-| `handle-size` | Number | `"0.5"` | トラックのサイズに対するハンドルのサイズ（0〜1） |
+| `handle-size` | Number | `"0"` | トラックの長さに対するハンドルの長さの割合（0〜1）。デフォルトの0ではハンドルの長さがなくなるため、自分で使うスクロールバーでは設定してください。スクロールビューは、コンテンツのうち見えている割合をこの値に設定します |
 | `orientation` | Enum | `"horizontal"` | スクロールバーの向き: `"horizontal"` \| `"vertical"` |
-| `value` | Number | `"0"` | スクロールバーの現在位置（0〜1） |
+| `value` | Number | `"0"` | ハンドルの位置（0〜1）。0は垂直スクロールバーでは上端、水平スクロールバーでは左端です。スクロールビューは、自身のスクロール位置をこの値に設定します |
 
 </div>
 
 ## 例 {#example}
 
-単体の垂直スクロールバーです — オレンジ色のハンドルをドラッグしてみましょう。`handle-size` (トラックに対する割合) や初期の `value` を変えることもできます:
+スライダーとして働く単体の垂直スクロールバーです — オレンジ色のハンドルをドラッグしてみましょう。トラックの長さに対する割合である `handle-size` や、下端にする `1` などの初期の `value` を変えることもできます:
 
 ```html live-example
-<pc-app max-pixel-ratio="1">
+<pc-app>
     <pc-scene>
         <pc-entity name="camera">
             <pc-camera clear-color="#1d1f2b"></pc-camera>
@@ -47,7 +47,7 @@ description: "pc-scrollbar要素のリファレンス: 向き、ハンドルサ�
                 <!-- ドラッグ可能なハンドル -->
                 <pc-entity name="handle" id="handle">
                     <pc-element type="image" anchor="0 1 1 1" pivot="0.5 1" margin="0 0 0 0" color="#ff8a3c" use-input></pc-element>
-                    <pc-button hover-tint="0.85 0.85 0.85 1" pressed-tint="0.7 0.7 0.7 1"></pc-button>
+                    <pc-button hover-tint="#ffa76d" pressed-tint="#cc6e30"></pc-button>
                 </pc-entity>
             </pc-entity>
         </pc-entity>
@@ -66,5 +66,6 @@ description: "pc-scrollbar要素のリファレンス: 向き、ハンドルサ�
 * [`<pc-scroll-view>`](../pc-scroll-view) — スクロールバーが操作するビュー
 * [`<pc-element>`](../pc-element) — トラックとハンドルはイメージ要素です
 * [`<pc-screen>`](../pc-screen) — スクロールバーがレンダリングされるスクリーン
+* [スクロールバー](/user-manual/user-interface/scroll-views/#scrollbars)と[スライダー](/user-manual/user-interface/common-widgets/#sliders) — ユーザーインターフェースのセクションにある、スクロールビューの中と単体でのスクロールバーの解説
 
-サンプル: [Scroll View](https://playcanvas.github.io/web-components/examples/scroll-view.html)
+サンプル: [Scroll View](https://playcanvas.github.io/web-components/examples/#scroll-view.html)

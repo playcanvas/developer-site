@@ -1,0 +1,79 @@
+---
+covers: [react]
+---
+# PlayCanvas React
+
+> `@playcanvas/react` builds PlayCanvas Engine scenes declaratively from React components and hooks, with the full engine underneath. Its component and hook pages below are its API reference.
+
+Use this index for React projects, where the scene is JSX. The engine features the components wrap, such as materials, lighting, physics, Gaussian splats and XR, work the same way underneath, and the [Engine](/user-manual/engine/llms.txt) index covers them.
+
+## Rules
+
+- **Install it with the engine it wraps**: `npm install @playcanvas/react playcanvas`, or start a project with `npm create playcanvas@latest my-app -- -f react`.
+- **Import from three entry points**: `Application`, `Entity` and `Gltf` from `@playcanvas/react`; components such as `Camera`, `Light`, `Render`, `Script`, `Rigidbody` and `Collision` from `@playcanvas/react/components`; hooks such as `useModel`, `useSplat`, `useTexture`, `useEnvAtlas`, `useMaterial` and `useApp` from `@playcanvas/react/hooks`.
+- **A scene is an `<Application>` of `<Entity>` elements, and components attach to the entity that contains them**: `<Entity name="camera" position={[0, 0, 5]}><Camera /></Entity>`. `position`, `rotation` and `scale` are arrays, with rotations as Euler angles in degrees.
+- **Load assets with the hooks, and render them once they are ready**: `const { asset, loading, error } = useModel('model.glb');`, then `<Gltf asset={asset} key={asset.id} />` when `asset` is set. `useSplat`, `useTexture`, `useEnvAtlas` and `useFont` work the same way.
+- **Add behavior with engine `Script` classes**: `<Script script={CameraControls} />` attaches a class to its entity, and its other props are passed to the script (`<Script script={Spin} speed={2} />`). Give each class a `static scriptName`, and reuse the production scripts in `playcanvas/scripts/esm/` before writing your own.
+- **Physics** needs `npm install sync-ammo` and `<Application usePhysics>`, which loads ammo.js; then add `<Rigidbody>` and `<Collision>` to entities.
+- **Pointer events are props of `Entity`**: `onClick`, `onPointerDown`, `onPointerUp`, `onPointerOver` and `onPointerOut`.
+- **Reach the engine directly** when no component covers a feature: `useApp()` returns the application, and `useParent()` the entity a component is in.
+- **The library is pre-1.0**, so check a component's page for its current props rather than relying on memory.
+
+## Getting started
+
+- [PlayCanvas React](/user-manual/react/): What `@playcanvas/react` is, how it maps to the engine's entity component system, and a map of these docs.
+- [Installation](/user-manual/react/getting-started/installation/): Creating a project with create-playcanvas, the TypeScript template, and setting up the packages and Vite by hand.
+- [Building a Scene](/user-manual/react/building-a-scene/): A step-by-step scene: the application, a camera, lights, input, a model and staging.
+- [Concepts](/user-manual/react/guide/): How `Application`, `Entity`, components, assets and scripts fit together, and how they map to the engine.
+
+## Guides
+
+- [Loading Assets](/user-manual/react/guide/loading-assets/): Loading models, textures, splats, fonts and environments with the asset hooks, with loading states and caching.
+- [Modifying GLB Models](/user-manual/react/guide/modifying-glb-models/): Changing a loaded GLB with `Gltf` and the `Modify` helpers: finding its entities, removing lights, tuning materials and adding physics.
+- [Interactivity](/user-manual/react/guide/interactivity/): Pointer events on entities, scripts and application events.
+- [Materials](/user-manual/react/guide/materials/): Creating `StandardMaterial`s with `useMaterial` and applying them to `Render`.
+- [Physics](/user-manual/react/guide/physics/): Installing sync-ammo, `usePhysics`, rigid bodies and collision shapes, and how ammo.js is loaded.
+- [XR](/user-manual/react/guide/xr/): WebXR sessions from React: XR scripts on cameras, controller visuals, session buttons and HTTPS.
+
+## Components
+
+- [API](/user-manual/react/api/): The index of components and hooks.
+- [Application](/user-manual/react/api/application/): The root component: creates the canvas and the engine application, with fill mode, resolution, device and physics options.
+- [Entity](/user-manual/react/api/entity/): The building block of scenes: name, transform, pointer events and children.
+- [Gltf](/user-manual/react/api/gltf/): Renders a loaded GLB as a hierarchy you can modify.
+- [Modify](/user-manual/react/api/modify/): Helpers that change the entities and components inside a `Gltf`.
+- [Camera](/user-manual/react/api/camera/): The camera component and its props.
+- [Light](/user-manual/react/api/light/): Directional, omni and spot lights and their props.
+- [Render](/user-manual/react/api/render/): Primitive shapes and meshes, with materials and shadows.
+- [GSplat](/user-manual/react/api/gsplat/): Renders a Gaussian splat asset.
+- [Environment](/user-manual/react/api/environment/): The skybox and image-based lighting of the scene.
+- [Script](/user-manual/react/api/script/): Attaches an engine `Script` class to an entity and passes it props.
+- [Rigidbody](/user-manual/react/api/rigidbody/): The physics body of an entity.
+- [Collision](/user-manual/react/api/collision/): The collision shape of an entity.
+- [Anim](/user-manual/react/api/anim/): Plays the animation clips of animation assets and controls their playback.
+- [Screen](/user-manual/react/api/screen/): The root of a screen-space or world-space user interface.
+- [Element](/user-manual/react/api/element/): Text, image and group elements of a user interface.
+- [Align](/user-manual/react/api/align/): Positions its content relative to its parent, for example to sit an offset model on the ground.
+
+## Hooks
+
+- [Hooks](/user-manual/react/api/hooks/): The index of hooks.
+- [Asset Hooks](/user-manual/react/api/hooks/use-asset/): `useModel`, `useSplat`, `useTexture`, `useEnvAtlas`, `useFont` and `useAsset`, their options and return values.
+- [useMaterial](/user-manual/react/api/hooks/use-material/): Creates a `StandardMaterial` from props.
+- [useApp](/user-manual/react/api/hooks/use-app/): The engine application, for features without a component.
+- [useAppEvent](/user-manual/react/api/hooks/use-app-event/): Subscribes to application events such as `update`.
+- [useParent](/user-manual/react/api/hooks/use-parent/): The entity a component is in.
+- [usePhysics](/user-manual/react/api/hooks/use-physics/): Whether physics is enabled and loaded, and any physics error.
+
+## Examples
+
+- [Examples](/user-manual/react/examples/): Live, editable examples.
+- [Model Viewer](/user-manual/react/examples/model-viewer/): A GLB viewer with environment lighting, shadows and orbit controls.
+- [Physics](/user-manual/react/examples/physics/): Rigid bodies disturbed by the pointer in zero gravity.
+- [Motion](/user-manual/react/examples/motion/): Animating entities and lights with springs from the Motion library.
+- [Text](/user-manual/react/examples/text/): Screen-space text with an MSDF font.
+- [React on GitHub](https://github.com/playcanvas/react): The source of `@playcanvas/react`.
+
+## Optional
+
+{{OTHER_PAGES}}

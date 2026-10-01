@@ -3,12 +3,13 @@ title: <pc-layout-group>
 description: "pc-layout-group要素のリファレンス: 子要素を水平または垂直のレイアウトに配置し、間隔、パディング、整列、フィッティングを制御します。"
 ---
 
-`<pc-layout-group>`タグは、子の要素エンティティを行または列に自動的に配置するレイアウトグループコンポーネントを定義するために使用されます。
+`<pc-layout-group>`タグは、エンティティの子の要素を行、列、またはグリッドに並べ、それらを伸縮して収めることもできるレイアウトグループコンポーネントを追加します。
 
 :::note[使用法]
 
 * [`<pc-element>`](../pc-element) も持つ [`<pc-entity>`](../pc-entity)、[`<pc-model>`](../pc-model)、または[`<pc-node>`](../pc-node) の直接の子である必要があります。
-* 子エンティティは自動的に配置されます。グループ内での子のサイズ調整方法を制御するには、子に [`<pc-layout-child>`](../pc-layout-child) を追加します。
+* エンティティの直接の子のうち、有効で、有効な要素を持つものを、ドキュメント内の順序で配置します。子のアンカーを `"0 0 0 0"` にし、位置も設定するため、指定したアンカーや位置は置き換えられます。[子の配置の仕組み](/user-manual/user-interface/layout-groups/#how-children-are-placed)を参照してください。
+* 子のサイズの決め方を制御したり、子をレイアウトから外したりするには、子に [`<pc-layout-child>`](../pc-layout-child) を追加します。
 
 :::
 
@@ -18,22 +19,28 @@ description: "pc-layout-group要素のリファレンス: 子要素を水平ま�
 
 | 属性 | タイプ | デフォルト | 説明 |
 | --- | --- | --- | --- |
-| `alignment` | Vector2 | `"0 1"` | 子要素の水平・垂直方向の整列（各成分0〜1） |
+| `alignment` | Vector2 | `"0 1"` | 子がグループを埋めないときの、グループ内での子の位置。左下隅の `"0 0"` から右上の `"1 1"` までの値で指定します。デフォルトでは左上に置かれます |
 | `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |
-| `height-fitting` | Enum | `"none"` | 垂直軸方向のフィッティング: `"none"` \| `"stretch"` \| `"shrink"` \| `"both"` |
-| `orientation` | Enum | `"horizontal"` | レイアウトの向き: `"horizontal"` \| `"vertical"` |
-| `padding` | Vector4 | `"0 0 0 0"` | グループ周囲のパディングを `left bottom right top` で指定 |
-| `reverse-x` | Boolean | `"false"` | 水平軸に沿って子の順序を反転します |
-| `reverse-y` | Boolean | `"false"` | 垂直軸に沿って子の順序を反転します |
-| `spacing` | Vector2 | `"0 0"` | 子同士の間隔を `x y` で指定 |
-| `width-fitting` | Enum | `"none"` | 水平軸方向のフィッティング: `"none"` \| `"stretch"` \| `"shrink"` \| `"both"` |
-| `wrap` | Boolean | `"false"` | 子がグループからあふれたときに、新しい行または列に折り返すかどうか |
+| `height-fitting` | Enum | `"none"` | 子の高さをグループに合わせて変えるかどうか: `"none"` \| `"stretch"` \| `"shrink"` \| `"both"`。下の注記を参照してください |
+| `orientation` | Enum | `"horizontal"` | `"horizontal"` は子を横一列に、`"vertical"` は縦一列に並べます: `"horizontal"` \| `"vertical"` |
+| `padding` | Vector4 | `"0 0 0 0"` | グループの辺の内側に空けておくスペースを `left bottom right top` で指定 |
+| `reverse-x` | Boolean | `"false"` | 子を右から左へ並べるかどうか |
+| `reverse-y` | Boolean | `"true"` | 子を上から下へ並べるかどうか。y軸は上向きなので、列やグリッドの行が上から下へ並ぶのは、このデフォルトによるものです。下から上へ積み上げるには `"false"` にします |
+| `spacing` | Vector2 | `"0 0"` | 隣り合う子の間隔を `x y` で指定します。`x` は行の中の子の間隔、`y` は列の中の子の間隔とグリッドの行の間隔です |
+| `width-fitting` | Enum | `"none"` | 子の幅をグループに合わせて変えるかどうか: `"none"` \| `"stretch"` \| `"shrink"` \| `"both"`。下の注記を参照してください |
+| `wrap` | Boolean | `"false"` | 行からあふれる子で新しい行を始めるかどうか。これでグリッドになります。縦のレイアウトでは新しい列を始めます |
 
 </div>
 
+:::note[フィッティング]
+
+`"none"` は子を自身のサイズのままにし、`"stretch"` はグループを埋めるように最大サイズまで拡大し、`"shrink"` はグループに収まるように最小サイズまで縮小し、`"both"` は必要な方を行います。行の幅など、レイアウトの方向では、スペースは子の [`<pc-layout-child>`](../pc-layout-child) の比率で分け合われます。レイアウトと交差する方向では、各子はそれぞれ単独で、自分の行または列に合わせられます。`wrap` を使うと、行はあふれる前に新しい行を始めるため、`"both"` は `"stretch"` として働きます。[フィッティング](/user-manual/user-interface/layout-groups/#fitting)を参照してください。
+
+:::
+
 ## 例 {#example}
 
-行を自動的に配置する縦のリストです。`orientation="horizontal"` にしたり、`spacing` を大きくしたり、`reverse-y` を付けたり — 行を追加して自動的に収まる様子を見たりしてみましょう:
+行を自動的に配置する縦のリストで、最初の行が一番上に来ます。`spacing` を大きくしたり、`reverse-y="false"` で下から上へ積み上げる向きにしたり、行を追加して自動的に収まる様子を見たりしてみましょう。`orientation="horizontal"` にすると行は横に並んでグループからあふれますが、`width-fitting="both"` にすると縮小されてグループの幅を分け合います:
 
 ```html live-example
 <pc-app>
@@ -74,5 +81,6 @@ description: "pc-layout-group要素のリファレンス: 子要素を水平ま�
 * [`<pc-layout-child>`](../pc-layout-child) — 子ごとのサイズ規則
 * [`<pc-element>`](../pc-element) — 配置される要素
 * [`<pc-screen>`](../pc-screen) — レイアウトが載るスクリーン
+* [レイアウトグループ](/user-manual/user-interface/layout-groups/) — ユーザーインターフェースのセクションにある、子の配置、フィッティング、折り返しの解説
 
-サンプル: [UI Layout](https://playcanvas.github.io/web-components/examples/ui-layout.html)、[Scroll View](https://playcanvas.github.io/web-components/examples/scroll-view.html)
+サンプル: [UI Layout](https://playcanvas.github.io/web-components/examples/#ui-layout.html)、[Scroll View](https://playcanvas.github.io/web-components/examples/#scroll-view.html)

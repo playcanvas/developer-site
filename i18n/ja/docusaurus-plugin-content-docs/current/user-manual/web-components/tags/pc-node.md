@@ -14,7 +14,7 @@ description: "pc-node要素のリファレンス: 読み込まれたモデルの
 * [`<pc-model>`](../pc-model)の子孫である必要があります。直接の子か、別の`<pc-node>`の内側にネストされている必要があります。
 * 0からn個のネストされた[`<pc-node>`](../pc-node)の子を持つことができます。それらは自身の`name`を、バインドされたノードのサブツリー内で解決します。
 * 0からn個の[`<pc-entity>`](../pc-entity)の子を持つことができます。それらは作成され、バインドされたノードの下に親子付けされます — 新しいコンテンツのアタッチポイントです。
-* [`<pc-entity>`](../pc-entity)と同じコンポーネントタグ — [`<pc-collision>`](../pc-collision)、[`<pc-light>`](../pc-light)、[`<pc-script>`](../pc-script)など — を持つことができます。それらはバインドされたノードにそのコンポーネントを追加します。
+* [`<pc-entity>`](../pc-entity)と同じコンポーネントタグ — [`<pc-collision>`](../pc-collision)、[`<pc-light>`](../pc-light)、[`<pc-script>`](../pc-script)など — を持つことができます。それらはバインドされたノードにそのコンポーネントを追加します。メッシュノードの`render`のように、ノードがすでに持っているコンポーネントは二重に追加されません。そのタグは警告を出し、何もしません。
 
 :::
 
@@ -31,7 +31,7 @@ description: "pc-node要素のリファレンス: 読み込まれたモデルの
 | `position` | Vector3 | *オーサリング値* | ノードのローカル位置を「X Y Z」値でオーバーライドします |
 | `rotation` | Vector3 | *オーサリング値* | ノードのローカル回転を度単位の「X Y Z」オイラー角でオーバーライドします |
 | `scale` | Vector3 | *オーサリング値* | ノードのローカルスケールを「X Y Z」値でオーバーライドします |
-| `tags` | String | *オーサリング値* | ノードのタグをオーバーライドします。スペースまたはカンマで区切ります |
+| `tags` | String | *オーサリング値* | ノードのタグをオーバーライドします。カンマ区切りのリストで指定します |
 
 </div>
 
@@ -45,7 +45,7 @@ description: "pc-node要素のリファレンス: 読み込まれたモデルの
 
 ## ノードの検索 {#finding-the-node}
 
-`name`は読み込まれた階層内のノード名に対して照合し、深さ優先順で最初に一致したものを採用します。`<pc-node>`を別の`<pc-node>`の内側にネストすると、内側の検索は外側のノードのサブツリーに限定されます。名前がローカルにしか一意でないノードに到達する、最も簡単な方法です。
+`name`は読み込まれた階層内のノード名に対して照合し、検索範囲内のちょうど1つのノードに一致する必要があります。`<pc-node>`を別の`<pc-node>`の内側にネストすると、内側の検索は外側のノードのサブツリーに限定されます。名前がローカルにしか一意でないノードに到達する、最も簡単な方法です。
 
 検索範囲内で名前が一意でない場合、要素は何もバインドせず、すべての候補のパスを示す警告を出力します。これにより`index`で1つを選択できます。
 
@@ -55,7 +55,7 @@ pc-node 'Wheel' is ambiguous in model 'car' - specify index: [0] Body/Wheel_FL/W
 
 何もバインドしないのは意図的な設計です。推測すれば誤ったノードを黙って装飾してしまい、再エクスポートによって名前の重複が生じた際に、これまで動作していたドキュメントが壊れてしまいます。
 
-その他の解決失敗も同じように警告します。何にも一致しない名前（タイプミスのヒントとして、見つかった中で最も近い名前を添えます）、一致数を超える`index`、そして別の`<pc-node>`がすでにバインドしているノードです。いずれの場合も要素は何もバインドせず、readyになることはありません。
+その他の解決失敗も同じように警告します。何にも一致しない名前（違いが2文字以内のノード名があれば、タイプミスのヒントとして添えます）、一致数を超える`index`、そして別の`<pc-node>`がすでにバインドしているノードです。いずれの場合も要素は何もバインドせず、readyになることはありません。
 
 要素はバインドされて初めてreadyになり、その子孫も一緒に待機します。モデルが再読み込みされた場合、または`name`を変更して要素のターゲットが変わった場合、要素は再解決し、オーバーライド・コンポーネント・アタッチされたコンテンツを新しいノードに対して再適用します。
 
@@ -78,7 +78,7 @@ pc-node 'Wheel' is ambiguous in model 'car' - specify index: [0] Body/Wheel_FL/W
 
 このマッピングは疎です。どのルールにも一致しなかった割り当ては、モデルがオーサリングされたときのマテリアルをそのまま保持します。同じメッシュインスタンスを両方の種類のルールが対象とする場合は`index:`が優先されます。そのため、あるマテリアルを名前で出現箇所すべてまとめて差し替えたうえで、1つだけの例外をindexで指定するという書き方ができます。
 
-ノードが提供する名前とindexを調べるには、[`<pc-model>`の`hierarchy()`](../pc-model#inspecting-the-hierarchy)を使用します。マテリアル名は一意な識別子ではなく実行時のラベルです。glTFは重複を許容し、名前のないマテリアルは`Untitled`と呼ばれ、マテリアルなしでオーサリングされたプリミティブにはエンジンが共有する`defaultGlbMaterial`が与えられます。したがって、名前が一意でない場合は`index:`を使用してください。
+ノードが提供する名前とindexを調べるには、[`<pc-model>`の`hierarchy()`](../pc-model#inspecting-the-hierarchy)を使用します。マテリアル名は一意な識別子ではなく実行時のラベルです。glTFは重複を許容し、エンジンは名前のないマテリアルを`Untitled`と呼び、マテリアルなしでオーサリングされたプリミティブには共有の`defaultGlbMaterial`を与え、法線のないプリミティブのために作ったコピーの名前には`-flatShaded`を付けます。したがって、名前が一意でない場合は`index:`を使用してください。
 
 名前は、マッピングが最初に適用された時点で取り込まれた割り当てに対して照合されます。そのため、別のルールが差し込んだマテリアルにルールが一致することはなく、後からマテリアルをリネームしても選択対象は変わりません。属性を削除すると、取り込まれたすべての割り当てが元に戻ります。`materialOverrides`プロパティに`null`を代入した場合や、空の`{}`を設定した場合も同様です。
 
@@ -90,26 +90,31 @@ pc-node 'Wheel' is ambiguous in model 'car' - specify index: [0] Body/Wheel_FL/W
 
 ## イベント {#events}
 
-`<pc-node>`は[`<pc-entity>`](../pc-entity)と同じポインターイベントをディスパッチします。ポインターがバインドされたノードのジオメトリと交差したときに発生します。ノードをバインドすることがそれをピック対象にするため、`<pc-node>`はモデルの一部をインタラクティブにする手段でもあります。
+`<pc-node>`は[`<pc-entity>`](../pc-entity)と同じ[ポインターイベント](../pc-entity#events)をディスパッチします。ポインターがバインドされたノードのジオメトリの上にあるときに発生します。ノードをバインドすることがそれをピック対象にするため、`<pc-node>`はモデルの一部をインタラクティブにする手段でもあります。どの`<pc-node>`も担っていない部分がヒットした場合は、代わりに[`<pc-model>`](../pc-model)がターゲットになります。
 
 | イベント | 説明 |
 | --- | --- |
 | `click` | ノード上でプライマリボタンが押され、そして離されたときに発生します。 |
-| `pointerdown` | ポインターがノード上で押下されたときに発生します。 |
-| `pointerenter` | ポインターがノードに入ったときに発生します。 |
-| `pointerleave` | ポインターがノードを離れたときに発生します。 |
+| `pointercancel` | ブラウザが押下を取り消したときに、その押下が始まったノードで発生します。たとえばタッチがスクロールになった場合です。その後に`click`は発生しません。 |
+| `pointerdown` | ノード上でポインターのボタンが押されたときに発生します。 |
+| `pointerenter` | ポインターが、ノードとその下のエンティティのどれの上にもない状態から、それらのいずれかの上に移動したときに発生します。バブリングしません。 |
+| `pointerleave` | ポインターが、ノードとその下のすべてのエンティティの上から離れたときに発生します。バブリングしません。 |
 | `pointermove` | ポインターがノード上で移動したときに発生します。 |
-| `pointerup` | ポインターがノードから解放されたときに発生します。 |
+| `pointerout` | ポインターがノードの上から離れたときに発生します。`relatedTarget`は移動先の要素です。 |
+| `pointerover` | ポインターがノードの上に移動したときに発生します。`relatedTarget`は移動元の要素です。 |
+| `pointerup` | ノード上でポインターのボタンが離されたときに発生します。 |
+
+すべてのDOMイベントと同じく、これらはモデルのノード階層ではなく要素ツリーを伝わります。バインドされたノードより下のジオメトリがヒットした場合、より近い`<pc-node>`がそこを担っていなければ、ターゲットはこの`<pc-node>`です。より近い`<pc-node>`が担っている場合、イベントがこの`<pc-node>`に届くのは、マークアップ上でその`<pc-node>`がこの`<pc-node>`の中にネストされているときだけです。2つが兄弟であれば、イベントは`<pc-model>`へ直接バブリングします。
 
 インラインの`onclick`・`onpointer*`属性は、[`<pc-entity>`](../pc-entity)とまったく同じように動作します。押下と解放が別のジオメトリ上で起きた場合に[クリックがどう解決されるか](../pc-entity#clicks)も同じです。
 
 ## 例 {#example}
 
-このGLBは2つのノードをインスタンス化します — `play` (オレンジ色のシェルで、各面からロゴがくり抜かれています) と `canvas` (くり抜きから見える内側の暗いボックス) です。これを発見する方法が [`hierarchy()`](../pc-model#inspecting-the-hierarchy) です。`<pc-node>` は `play` にバインドし、`material-overrides` でオーサリングされたオレンジを青に差し替えます。代わりに `canvas` にバインドしたり、`enabled="false"` を追加してシェルごと非表示にしたりしてみましょう。ドラッグで軌道回転できます:
+このGLBは2つのメッシュノードをインスタンス化します — `play` (オレンジ色のシェルで、各面からロゴがくり抜かれています) と `canvas` (くり抜きから見える内側の暗いボックス) で、エクスポート時に残った空の `Light` と `Camera` も並びます。これを発見する方法が [`hierarchy()`](../pc-model#inspecting-the-hierarchy) です。`<pc-node>` は `play` にバインドし、`material-overrides` でオーサリングされたオレンジを青に差し替えます。代わりに `canvas` にバインドしたり、`enabled="false"` を追加してシェルごと非表示にしたりしてみましょう。ドラッグで軌道回転できます:
 
 ```html live-example
 <pc-app>
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.0/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.6/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset src="https://developer.playcanvas.com/assets/playcanvas-cube.glb" id="cube"></pc-asset>
     <pc-material id="repaint" name="Repaint" diffuse="#4a9eff"></pc-material>
     <pc-scene>
@@ -160,4 +165,4 @@ body.materialOverrides = null; // オーサリングされたマテリアルに�
 * [`<pc-entity>`](../pc-entity) — ノードの下に新しいコンテンツを取り付けます
 * [モデルの読み込み](../loading-models.md) — 読み込まれたモデル内のノードを見つける方法
 
-サンプル: [Product Viewer](https://playcanvas.github.io/web-components/examples/product-viewer.html)、[Ragdoll](https://playcanvas.github.io/web-components/examples/ragdoll.html)、[Vehicle Physics](https://playcanvas.github.io/web-components/examples/vehicle-physics.html)
+サンプル: [Product Viewer](https://playcanvas.github.io/web-components/examples/#product-viewer.html)、[Ragdoll](https://playcanvas.github.io/web-components/examples/#ragdoll.html)、[Vehicle Physics](https://playcanvas.github.io/web-components/examples/#vehicle-physics.html)

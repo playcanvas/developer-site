@@ -19,24 +19,29 @@ On macOS, shortcuts shown with `Ctrl` use `Cmd` for application commands such as
 | Delete selected Gaussians | `Delete` or `Backspace` | `Delete` or `Backspace` |
 | Lock selection | `H` | `H` |
 | Unlock all | `Shift + H` | `Shift + H` |
+| Toggle Selection Depth | `N` | `N` |
+| Toggle Selection Footprint | `M` | `M` |
 
-For Picker, Lasso, Polygon, Brush, and Flood selections, hold `Shift` to add, `Ctrl` to remove, or `Shift + Ctrl` to intersect with the current selection.
+For Rectangle, Lasso, Polygon, Brush, Sphere Brush, Flood, and Eyedropper selections, hold `Shift` to add, `Ctrl` to remove, or `Shift + Ctrl` to intersect with the current selection. [Selection Depth and Footprint](editing-splats.md#selection-depth-and-footprint) explains what `N` and `M` change.
 
 ## Tools and View
 
 | Action | Shortcut |
 |---|---|
-| Move / Rotate / Scale | `1` / `2` / `3` (while Box or Sphere Select is active, these switch the selection volume's gizmo instead) |
-| Picker / Lasso / Polygon | `R` / `L` / `P` |
-| Brush / Flood | `B` / `O` |
-| Eyedropper | `Ctrl + E` (`Cmd + E` on macOS) |
-| Decrease / increase brush size | `[` / `]` |
+| Move / Rotate / Scale | `1` / `2` / `3` (while Box or Sphere Selection is active, these switch the selection volume's gizmo instead) |
+| Rectangle / Lasso / Polygon Selection | `R` / `L` / `P` |
+| Brush / Sphere Brush Selection | `B` / `Shift + B` |
+| Flood Selection | `O` |
+| Eyedropper Selection | `Ctrl + E` (`Cmd + E` on macOS) |
+| Decrease / increase brush size | `[` / `]`, or `Alt + Wheel` |
+| Close the polygon | `Enter` |
+| Remove the last polygon point | `Backspace` |
+| Remove the active Measure or Orient point | `Delete` or `Backspace` |
 | Deactivate current tool | `Escape` |
 | Toggle world/local coordinates | `Shift + C` |
-| Toggle centers/rings mode | `M` |
-| Toggle edit overlay | `Tab` |
+| Toggle display overlays | `Tab` |
 | Toggle grid | `G` |
-| Toggle camera information | `I` |
+| Toggle camera info | `I` |
 | Toggle Splat Data panel | `Ctrl + D` (`Cmd + D` on macOS) |
 | Toggle Timeline panel | `Ctrl + T` (`Cmd + T` on macOS) |
 
@@ -44,7 +49,7 @@ For Picker, Lasso, Polygon, Brush, and Flood selections, hold `Shift` to add, `C
 
 | Action | Shortcut |
 |---|---|
-| Focus on selection or active splat | `F` |
+| Frame the selection or active splat | `F` (frames the active Box, Sphere, Measure, or Orient tool instead while one is active) |
 | Reset camera | `Shift + F` |
 | Toggle orbit/fly controls | `V` |
 | Fly forward/back/left/right | `W` / `S` / `A` / `D` |
@@ -59,8 +64,16 @@ See [Camera Controls](camera-controls.md) for mouse, touch, fly, and view-cube c
 |---|---|
 | Play or pause | `Space` |
 | Previous / next frame | `,` / `.` |
-| Previous / next keyframe | `<` / `>` |
+| Previous / next keyframe | `<` / `>` (`Shift + ,` / `Shift + .`) |
 | Add keyframe | `Enter` |
 | Remove keyframe | `Shift + Enter` |
+| Overwrite a keyframe with the current camera pose | `Ctrl + Click` the keyframe |
+| Copy a keyframe | `Shift + Drag` the keyframe |
 
-Shortcuts are ignored while focus is in a text or numeric input. Some keys also have tool-specific behavior: for example, `Delete` removes a placed point while Measure or Orient is active, and removes the last unclosed Polygon point while drawing a polygon. While Measure or Orient is active, `F` frames the placed points instead of the selection.
+## File
+
+| Action | Windows/Linux | macOS |
+|---|---|---|
+| Re-export (repeat the last export) | `Ctrl + Shift + E` | `Cmd + Shift + E` |
+
+Shortcuts are ignored while focus is in a text or numeric input. The brush size shortcuts act on whichever brush is active; Brush and Sphere Brush share one size.

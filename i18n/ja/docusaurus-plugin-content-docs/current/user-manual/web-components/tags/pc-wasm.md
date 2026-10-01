@@ -3,7 +3,7 @@ title: <pc-wasm>
 description: "pc-wasm要素のリファレンス: glue・wasm・fallbackのパスから、Ammo、Basis、DracoDecoderModuleなどのWebAssemblyモジュールを読み込みます。"
 ---
 
-`<pc-wasm>`タグはWebAssemblyモジュールをロードするために使用されます。
+`<pc-wasm>`タグは、アプリケーションの起動前にエンジンが必要とするWebAssemblyモジュール — 物理用の`Ammo`、圧縮アセット用の`Basis`や`DracoDecoderModule` — をロードします。
 
 :::note[使用法]
 
@@ -17,7 +17,7 @@ description: "pc-wasm要素のリファレンス: glue・wasm・fallbackのパ�
 
 | 属性 | タイプ | デフォルト | 説明 |
 | --- | --- | --- | --- |
-| `fallback` | String | - | WebAssemblyがサポートされていない場合のフォールバック（asm.js）コードへのパス |
+| `fallback` | String | - | WebAssemblyがサポートされていない場合のフォールバック（asm.js）コードへのパス。Dracoデコーダーはこれを使用しません |
 | `glue` | String | - | モジュール用のJavaScriptグルーコードへのパス |
 | `name` | String | - | スクリプトで参照するために使用されるモジュール名 |
 | `wasm` | String | - | WebAssembly (.wasm) ファイルへのパス |
@@ -34,11 +34,13 @@ description: "pc-wasm要素のリファレンス: glue・wasm・fallbackのパ�
 
 ## 準備完了 {#readiness}
 
-この要素は非同期に初期化され、モジュールの読み込みが完了するとready状態になります。標準の`ready`イベントを発生させ、`whenReady('pc-wasm')`で待機できます（[プログラムによるアクセス](../programmatic-access.md)を参照）。ただし、直接待機する必要はほとんどありません。包含する`<pc-app>`は、グラフィックスデバイスを作成する前に、配下に宣言されたすべての`<pc-wasm>`を待機するため、準備完了したアプリとは、モジュールの読み込みが完了したアプリだからです。
+この要素は非同期に初期化され、モジュールの読み込みが完了するとready状態になります。標準の`ready`イベントを発生させ、`whenReady('pc-wasm')`で待機できます（[プログラムによるアクセス](../programmatic-access.md)を参照）。（例外は`Basis`で、トランスコーダーの読み込みが始まった時点でready状態になります。）ただし、直接待機する必要はほとんどありません。`<pc-app>`は、グラフィックスデバイスを作成する前に、子要素であるすべての`<pc-wasm>`を待機するため、準備完了したアプリとは、モジュールの読み込みが完了したアプリだからです。それより深くネストされた`<pc-wasm>`も読み込まれますが、アプリはそれを待ちません。
 
 準備完了状態は意図的に固定されています。WebAssemblyモジュールは決してアンロードされないエンジングローバルな状態を構成するため、要素を削除してもpending状態には戻らず、再挿入してもモジュールが再読み込みされることはありません。
 
-`name`のない`<pc-wasm>`は警告をログに出力し、決してready状態になりません — ただし、包含する`<pc-app>`の起動は妨げません。
+`name`のない`<pc-wasm>`は警告をログに出力し、決してready状態になりません — ただし、包含する`<pc-app>`の起動は妨げません。URLの誤りやサーバーの拒否によってモジュールの読み込みに失敗した場合はさらに深刻です。要素は決してready状態にならず、その`<pc-app>`も起動せず、コンソールに`failed to initialize module=...`というエラーが出るだけです。
+
+`Ammo`は後から追加するのではなく、マークアップで宣言してください。エンジンが物理モジュールを探すのはアプリケーションの起動時の一度だけなので、それなしで起動したアプリは物理なしで動作します。
 
 ## 例 {#example}
 
@@ -73,7 +75,7 @@ description: "pc-wasm要素のリファレンス: glue・wasm・fallbackのパ�
 
 [WasmElement API](https://api.playcanvas.com/web-components/classes/WasmElement.html)を使用して、`<pc-wasm>`要素をプログラムで作成および操作できます。
 
-この要素はエンジンオブジェクトを公開しません。準備が完了した時点で、モジュールは`name`の下でエンジンの`WasmModule`を通じてインスタンス化されており（`Basis`だけはエンジンのBasis初期化処理を通ります）、モジュールが定義する`Ammo`などのグローバルをスクリプトから利用できます。
+この要素はエンジンオブジェクトを公開しません。準備が完了した時点で、モジュールは`name`の下でエンジンの`WasmModule`を通じてインスタンス化されています（`Basis`だけはエンジンのBasis初期化処理を通ります）。Ammoのglueスクリプトはグローバルの`Ammo`を定義するため、スクリプトから直接利用できます。その他のモジュールには`WasmModule.getInstance(name, callback)`でアクセスしてください。
 
 ## 関連項目 {#see-also}
 
@@ -81,4 +83,4 @@ description: "pc-wasm要素のリファレンス: glue・wasm・fallbackのパ�
 * [`<pc-collision>`](../pc-collision) — 物理用の衝突形状
 * [`<pc-app>`](../pc-app) — すべてのモジュールを待ってから起動します
 
-サンプル: [Basic Physics](https://playcanvas.github.io/web-components/examples/basic-physics.html)、[Vehicle Physics](https://playcanvas.github.io/web-components/examples/vehicle-physics.html)、[Video Texture](https://playcanvas.github.io/web-components/examples/video-texture.html)
+サンプル: [Basic Physics](https://playcanvas.github.io/web-components/examples/#basic-physics.html)、[Vehicle Physics](https://playcanvas.github.io/web-components/examples/#vehicle-physics.html)、[Video Texture](https://playcanvas.github.io/web-components/examples/#video-texture.html)

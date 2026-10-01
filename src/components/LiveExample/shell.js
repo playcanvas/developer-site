@@ -4,8 +4,8 @@
 // The versions below pin every live example on the site. Bump them together
 // when the docs are updated to track a new @playcanvas/web-components release
 // (the engine version should match the library's dev-pinned engine).
-export const ENGINE_VERSION = '2.22.0';
-export const PWC_VERSION = '0.22.0';
+export const ENGINE_VERSION = '2.22.6';
+export const PWC_VERSION = '0.27.0';
 
 const CDN = 'https://cdn.jsdelivr.net/npm';
 
@@ -71,7 +71,7 @@ export function buildDocument(fragment, { title = 'PlayCanvas Web Components Exa
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>${escapeHtml(title)}</title>
         ${errorRelayNonce ? buildErrorRelay(errorRelayNonce) : ''}<script type="importmap">
             {

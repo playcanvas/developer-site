@@ -73,8 +73,6 @@ const config = {
         { from: ['/user-manual/getting-started/workflow/'], to: '/user-manual/editor/getting-started/workflow/' },
         { from: ['/user-manual/getting-started/your-first-app/'], to: '/user-manual/editor/getting-started/your-first-app/' },
         { from: ['/user-manual/graphics/gaussian-splatting/'], to: '/user-manual/gaussian-splatting/' },
-        // WGSL Specifics renamed/split: shared resource reflection now lives on its own page
-        { from: ['/user-manual/graphics/shaders/wgsl-specifics/'], to: '/user-manual/graphics/shaders/wgsl-reflection/' },
         // Gaussian splatting: unified-rendering merged into the rendering-architecture page (now its own section)
         { from: ['/user-manual/gaussian-splatting/building/unified-rendering/'], to: '/user-manual/gaussian-splatting/rendering-architecture/' },
         { from: ['/user-manual/gaussian-splatting/building/rendering-architecture/'], to: '/user-manual/gaussian-splatting/rendering-architecture/' },
@@ -96,6 +94,8 @@ const config = {
         { from: ['/user-manual/physics/physics-migration/'], to: '/user-manual/physics/physics-basics/' },
         // Physics: Compound Shapes became a section of the Collision Shapes page
         { from: ['/user-manual/physics/compound-shapes/'], to: '/user-manual/physics/collision-shapes/' },
+        // User Interface: Group Elements became a section of the Elements page
+        { from: ['/user-manual/user-interface/group-elements/'], to: '/user-manual/user-interface/elements/' },
         { from: ['/user-manual/organizations/'], to: '/user-manual/account-management/organizations/' },
         { from: ['/user-manual/organizations/creating-organizations/'], to: '/user-manual/account-management/organizations/creating/' },
         { from: ['/user-manual/organizations/managing-organizations/'], to: '/user-manual/account-management/organizations/managing/' },
@@ -257,7 +257,8 @@ const config = {
       }
     }],
     'docusaurus-plugin-sass',
-    pluginLlms,
+    // Fail CI builds on docs the LLM files cannot represent faithfully
+    [pluginLlms, { failOnError: process.env.CI === 'true' }],
     'docusaurus-plugin-copy-page-button'
   ],
 

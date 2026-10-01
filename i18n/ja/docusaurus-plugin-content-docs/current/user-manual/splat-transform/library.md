@@ -38,9 +38,14 @@ import {
 | `createChunkDataPool` | パイプライン全体で共有されるプールされた読み取りバッファ |
 | `processSource`, `processSourceBridged` | 一連の処理アクションをソースに適用 |
 | `selectLod`, `stackLods`, `concatSource`, `bakeTransform` | 構造コンビネータ（遅延ビュー） |
-| `decimateSource` | 正確なターゲット数へのチャンクネイティブでメモリ制限付きのデシメーション |
+| `decimateSource` | 正確なターゲット数へのチャンクネイティブでメモリ制限付きのデシメーション。あらゆる場所で均一な割合で削減（CLIの `--decimate`） |
+| `decimateSourceAdaptive` | 同様のデシメーションを、局所的な誤差に応じて削減量を配分して実行（CLIの `--decimate-adaptive`） |
+| `sortMortonInterleaved`, `sortMortonColumns` | インターリーブまたはカラム形式の位置から、インデックス配列をMorton（Z順序）順にソート |
+| `isSplatModel`, `resolveSplatModel` | `ChunkSourceMetadata.model` に保持されるアンチエイリアス / 2DGSのシーンタグを検証・統合 |
 | `writeSource` | ソースを任意の単一シーン出力フォーマットにストリーミング書き込み |
 | `writeLodSource` | マルチLODソースからStreamed SOG（`lod-meta.json` + チャンク化ユニット）を書き込み |
+| `writeImage` | ソースをロスレスWebP画像、またはカメラトラックに沿ったフレームシーケンスにレンダリング（GPUが必要） |
+| `loadCameraTrack` | SuperSplatエディターの `document.json`、ビューアの `settings.json`、またはフレームリストから `writeImage` 用のカメラトラックを構築 |
 | `computeStats` | ソースまたはテーブルのLODごと・カラムごとのストリーミング統計 |
 
 DataTable 互換（セカンダリ；各エントリはシーン全体をメモリに実体化します）：
@@ -51,9 +56,11 @@ DataTable 互換（セカンダリ；各エントリはシーン全体をメモ�
 | `combine` | 複数のDataTableを1つにマージ |
 | `processDataTable` | DataTableに処理アクションを適用 |
 | `dataTableToChunkSource`, `materializeToDataTable` | DataTableとチャンクソースの世界を橋渡し |
-| `writeFile` | DataTableを任意の出力フォーマットに書き込み |
 | `writeVoxel` | スパースボクセルオクツリーファイルを書き込み |
-| `writeImage` | カメラビューをロスレスWebP画像にレンダリング（GPUが必要） |
+
+`DataTable` をその他のフォーマットに書き込むには、`dataTableToChunkSource` でブリッジし、その結果を `writeSource` に渡します。
+
+`@playcanvas/splat-transform/viewer-settings` サブパスは、HTML出力に埋め込まれるSuperSplat Viewerの設定API（型、共有デフォルト、検証）を再エクスポートします。これにより、独自にビューアへの依存関係を追加しなくても、正確なビューアのバージョンに合わせてビューア設定を作成できます。
 
 ## ファイルシステム抽象化
 
@@ -143,7 +150,7 @@ type ProcessAction =
 
 :::note
 
-`filterFloaters` と `filterCluster` は GPU デバイスが必要です — `ProcessOptions` 引数を介して `createDevice` を渡してください。`processSource` はストリーミング処理し、DataTableブリッジを必要とするアクション（`decimate`、`mortonOrder`、GPUボクセルフィルタ）ではスローします；`processSourceBridged` はすべてのアクションを処理し、必要な実行のみを実体化します。
+`filterFloaters` と `filterCluster` は GPU デバイスが必要です — `ProcessOptions` 引数を介して `createDevice` を渡してください。`processSource` はストリーミング処理し、DataTableブリッジを必要とするアクション（`decimate` とGPUボクセルフィルタ）ではスローします；`processSourceBridged` はすべてのアクションを処理し、必要な実行のみを実体化します。`decimate` アクションは均一な割合で削減します。適応型のデシメーションには `decimateSourceAdaptive` を直接呼び出してください。
 
 :::
 

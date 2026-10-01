@@ -225,6 +225,6 @@ splat-transform input.ply \
 ## See also
 
 - [Voxel Format](/user-manual/splat-transform/voxel-format) — the on-disk format of `.voxel.json` / `.voxel.bin` output.
-- [splat-transform CLI reference](/user-manual/splat-transform/) — full option reference including Voxel Output Options.
+- [CLI Reference](/user-manual/splat-transform/cli-reference#voxel-output-options) — full option reference including Voxel Output Options.
 - [Docker Backend](/user-manual/splat-transform/docker) — running the GPU-only voxel/collision features in a container.
 - [Studio → Collision](/user-manual/supersplat/studio/collision) — uploading or generating voxel collision through the SuperSplat web UI.

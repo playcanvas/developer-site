@@ -45,7 +45,7 @@ When you select `Image` from the Render menu, a dialog will appear with settings
   - `WebP` - Lossless WebP output with transparency support
 - **Quality:** Only shown for `JPEG`. Set the JPEG quality from 1 to 100 (default 90).
 - **Transparent Background:** If checked, the rendered image will have a transparent background instead of the scene's background color. This is useful for creating images that can be composited over other content or used as overlays. This option is unavailable for JPEG, which does not support transparency.
-- **Show Debug Overlays:** If checked, whatever splat visualization mode (centers or rings) is active in the Editor will be rendered to the image. Only available for `Standard` projection.
+- **Show Debug Overlays:** If checked, the viewport's overlays — the grid, and the Gaussian centers or rings when the display overlays are turned on — are rendered into the image. Only available for `Standard` projection.
 - **Level Horizon:** Only shown for `360° Equirectangular` projection. If checked (the default), the image stays level and follows only the camera's heading. If unchecked, the camera's full orientation (including pitch) is baked into the image.
 
 ### Rendering the Image
@@ -98,7 +98,7 @@ When you select `Video` from the Render menu, a dialog will appear with several 
 - **Frame Range:** Specify the start and end frames from the Timeline to include in your video. By default, the entire Timeline is rendered.
 - **Portrait Mode:** If checked, the resolution will be flipped to be vertical. This is useful if you intend your video to be viewed in portrait on mobile. Only available for `Standard` projection.
 - **Level Horizon:** Only shown for `360° Equirectangular` projection. If checked (the default), the video stays level and follows only the camera's heading, which is generally the most comfortable to watch. If unchecked, the camera's full orientation (including pitch) is baked into the video.
-- **Show Debug Overlays:** If checked, whatever splat visualization mode (centers or rings) is active in the Editor will be rendered to the video. Only available for `Standard` projection.
+- **Show Debug Overlays:** If checked, the viewport's overlays — the grid, and the Gaussian centers or rings when the display overlays are turned on — are rendered into the video. Only available for `Standard` projection.
 
 :::note Resolution availability
 
@@ -116,7 +116,7 @@ Once you've configured your settings:
 
 :::tip Browser Recommendation for Video Rendering
 
-We recommend using a Chromium-based browser (Chrome, Edge, Opera, etc.) for rendering videos. Browsers that support the [FileSystem API](https://caniuse.com/native-filesystem-api) will ask you to pick a destination filename and will then stream out the file during the encoding process instead of having to do it in memory. This allows for the recording of much larger videos without running into memory limitations.
+Chromium-based browsers (Chrome and Edge) give the best results for video. They support the [File System Access API](https://caniuse.com/native-filesystem-api), so the video is streamed to disk while it encodes instead of being held in memory, which allows much longer and larger renders. Browsers without it must buffer the whole video in memory and deliver it as a download when encoding completes.
 
 :::
 
@@ -144,6 +144,6 @@ You can render 360° still images in the same way: set the `Projection` option i
 - **For Videos:** Before rendering, ensure your Timeline animations are smooth and camera movements are polished.
 - **For 360° Videos:** The camera animation drives the viewer's position through the scene. Slow, smooth camera movement is much more comfortable to watch in a VR headset than rapid motion.
 - **For Social Media:** Portrait-mode renders often yield better engagement on mobile platforms.
-- **Debug Overlays:** Use the debug overlay option when you need to show splat data for educational or technical presentations.
+- **Debug Overlays:** Enable **Show Debug Overlays** when you need to show the Gaussian structure for educational or technical presentations. Press `Tab` in the Editor first so the centers or rings are visible, and configure them in [Appearance](color-and-appearance.md#appearance).
 
 Happy Rendering! 🎬📸

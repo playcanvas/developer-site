@@ -60,6 +60,10 @@ The PlayCanvas Engine offers a comprehensive rendering setup through the `Camera
 - **Temporal Anti-Aliasing (TAA)**: Reduces visual artifacts by smoothing jagged edges over time.
 - **Vignette**: Darkens the image's corners to draw attention to the center.
 - **Color Grading**: Adjusts the color balance for stylistic effects.
+- **Color Enhance**: Selectively adjusts shadows, highlights, midtones, vibrance, and dehaze.
+- **[Volumetric Fog](/user-manual/graphics/posteffects/cameraframe/volumetric-fog/)**: Renders height fog and light shafts from directional, omni, and spot lights.
+
+See [Modern Post Processing](/user-manual/graphics/posteffects/cameraframe/) for the full feature list, configuration tips, and examples.
 
 ### Configuring CameraFrame on a Camera
 
@@ -67,10 +71,11 @@ The PlayCanvas Engine offers a comprehensive rendering setup through the `Camera
 const cameraFrame = new pc.CameraFrame(app, cameraEntity.camera);
 cameraFrame.rendering.toneMapping = pc.TONEMAP_NEUTRAL;
 cameraFrame.rendering.samples = 4;
-cameraFrame.bloom.enabled = true;
 cameraFrame.bloom.intensity = 0.01;
 cameraFrame.update();
 ```
+
+On the engine `CameraFrame`, a positive `bloom.intensity` enables bloom; set it to 0 to disable it. There is no `bloom.enabled` flag on this API. The Editor script wrapper has a separate **Bloom > Enabled** setting.
 
 For HDR bloom to be effective, the scene should include bright light sources. This is typically achieved using emissive materials with high intensity. For example:
 
@@ -140,12 +145,12 @@ The second texture must satisfy the same size and filtering requirements as the 
 
 ## CameraFrame in the Editor
 
-There is a `CameraScript` [available here](https://github.com/playcanvas/engine/blob/main/scripts/esm/camera-frame.mjs) for the PlayCanvas Editor project. This script integrates `CameraFrame` functionality directly into the Editor's Inspector, making it easy to set up and configure cameras with advanced rendering features.
+The [`camera-frame.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/camera-frame.mjs) script exposes the engine's `CameraFrame` settings in the Editor's Inspector. Its class is named `CameraFrame` and it is registered as `cameraFrame`.
 
 ### Instructions on Use
 
-1. Add the `CameraScript` into your project and parse it.
-2. Add it to an entity that has the `CameraComponent`.
+1. Add `camera-frame.mjs` to your project and parse it.
+2. Add the `cameraFrame` script to an entity that has a Camera component.
 3. Use the Inspector to configure the rendering settings for the camera, such as tone mapping, bloom, SSAO, and other effects.
 
 This integration streamlines the process of setting up complex camera effects and enhances the overall workflow within the PlayCanvas Editor.

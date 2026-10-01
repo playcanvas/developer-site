@@ -68,6 +68,12 @@ Step 2 is the one that trips people up. `template.content` is a [`DocumentFragme
 
 Configuring in step 3 — position, rotation, script attributes, anything — happens while the clone is disconnected, so the attributes are simply the initial state the instance boots with. No half-configured instance ever exists in the scene, and no engine object is created only to be immediately reconfigured.
 
+Configure the clone with attributes, not properties. Until it is appended, a clone of template content is a plain HTML element, so assigning a property such as `crate.position` gives that element an ordinary property of its own. Once the element upgrades, that property hides the one the library defines, and the value never reaches the entity. Properties work from step 4 on.
+
+[Pointer event](tags/pc-entity.md#events) listeners are the exception. A clone of template content becomes a live `pc-*` element only once it is appended. A listener added with `addEventListener()` before then is invisible to `<pc-app>`, which therefore never [dispatches events](tags/pc-entity.md#when-events-are-dispatched) for it. Add those listeners after step 4, as the [example](#example) below does. An inline handler attribute such as `onclick` is fine in step 3, like any other attribute.
+
+Both limits come from cloning with `cloneNode()`. If you would rather set properties and add listeners before appending, create the instance with `document.importNode(template.content, true)` in step 1 instead: it returns elements that are already live, and you capture and append them the same way.
+
 ## Names Are Clone-Local
 
 Wire references *inside* a template with bare names:
@@ -134,7 +140,7 @@ if (!crate.isConnected) return; // removed while initializing - nothing to do
 
 ## Example
 
-Every crate is a clone of the one `<template>` after the app — spawned, configured while disconnected, appended, awaited, and hurled with an impulse the moment its rigid body exists. Click a settled crate to remove it. Try raising the impulse, or giving the crate `restitution="0.8"` so it bounces:
+Every crate is a clone of the one `<template>` after the app — spawned, configured while disconnected, appended, awaited, and hurled with an impulse the moment its rigid body exists. Click a settled crate to remove it. Try raising the impulse, or giving both the crate and the ground `restitution="0.8"` so the crates bounce (a collision's bounce is the product of the two bodies' restitution, so one alone is not enough):
 
 ```html live-example
 <pc-app>
@@ -219,7 +225,7 @@ Every crate is a clone of the one `<template>` after the app — spawned, config
 
 Several of the library's examples are built on this pattern, in increasing order of ambition:
 
-* [Physics Cluster](https://playcanvas.github.io/web-components/examples/physics-cluster.html) — the minimal case: forty spheres cloned from one template into a gravity well.
-* [UI Layout](https://playcanvas.github.io/web-components/examples/ui-layout.html) — tiles cloned into a [`<pc-layout-group>`](tags/pc-layout-group.md), which lays out each new arrival automatically.
-* [Scroll View](https://playcanvas.github.io/web-components/examples/scroll-view.html) — list entries cloned into scrollable content and removed by their own buttons.
-* [AR Wiener Storm](https://playcanvas.github.io/web-components/examples/ar-wiener-storm.html) — the full treatment: a jointed, physics-driven [`<pc-model>`](tags/pc-model.md) prefab whose bare-name references wire each clone internally, with readiness raced against teardown.
+* [Physics Cluster](https://playcanvas.github.io/web-components/examples/#physics-cluster.html) — the minimal case: forty spheres cloned from one template into a gravity well, using `importNode()`.
+* [UI Layout](https://playcanvas.github.io/web-components/examples/#ui-layout.html) — tiles cloned into a [`<pc-layout-group>`](tags/pc-layout-group.md), which lays out each new arrival automatically.
+* [Scroll View](https://playcanvas.github.io/web-components/examples/#scroll-view.html) — list entries cloned into scrollable content and removed by their own buttons.
+* [AR Wiener Storm](https://playcanvas.github.io/web-components/examples/#ar-wiener-storm.html) — the full treatment: a jointed, physics-driven [`<pc-model>`](tags/pc-model.md) prefab whose bare-name references wire each clone internally, with readiness raced against teardown.

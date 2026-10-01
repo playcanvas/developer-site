@@ -48,10 +48,10 @@ app.scene.gsplat.splatBudget = 4000000; // 最大400万スプラット
 
 ### LODモードとフォールオフ
 
-バジェットの範囲内では、デフォルトで測定された視覚的誤差に基づいてLODレベルが選択されます。これを微調整する2つのプロパティがあります。`app.scene.gsplat`の[`lodMode`](https://api.playcanvas.com/engine/classes/GSplatParams.html#lodMode)はシーン全体を明確な同心円状の距離バンドによる選択に切り替えられ、各gsplatコンポーネントの[`lodFalloff`](https://api.playcanvas.com/engine/classes/GSplatComponent.html#lodFalloff)はそのスプラットの詳細を近景と遠景の間で傾けられます：
+バジェットの範囲内では、デフォルトでカメラからの距離に基づいてLODレベルが選択され、カメラを中心とした同心円状のバンドで段階的に低下します。これを微調整する2つのプロパティがあります。`app.scene.gsplat`の[`lodMode`](https://api.playcanvas.com/engine/classes/GSplatParams.html#lodMode)はシーン全体を測定された視覚的誤差に基づく予算配分に切り替えられ（疎な背景領域の品質が向上しますが、メモリ使用量は著しく増加します）、各gsplatコンポーネントの[`lodFalloff`](https://api.playcanvas.com/engine/classes/GSplatComponent.html#lodFalloff)はそのスプラットの詳細を近景と遠景の間で傾けられます：
 
 ```javascript
-app.scene.gsplat.lodMode = pc.GSPLAT_LODMODE_DISTANCE;
+app.scene.gsplat.lodMode = pc.GSPLAT_LODMODE_ERROR;
 entity.gsplat.lodFalloff = 2; // カメラ付近の詳細を増やし、遠方の詳細を減らす
 ```
 

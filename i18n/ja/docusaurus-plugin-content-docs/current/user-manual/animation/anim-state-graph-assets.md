@@ -16,7 +16,7 @@ Animstategraphアセットは、さまざまなアニメーション状態を整
 このビューで、アニメーションステートグラフを編集できます。以下のセクションでは、Animstategraphアセットの異なる要素が特定のアニメーション動作を定義するためにどのように使用できるかを強調します。
 
 :::ai
-複雑なグラフでは、AIアシスタントに**[Editor MCP Server](/user-manual/editor/mcp-server/)**で問題のトランジションを条件、パラメーター、スクリプト、Animマッピングまで追跡させ、Launcherで再現します。
+複雑なグラフでは、AIアシスタントに[**Editor MCP Server**](/user-manual/editor/mcp-server/)で問題のトランジションを条件、パラメーター、スクリプト、Animマッピングまで追跡させ、Launcherで再現します。
 :::
 
 ## States {#states}

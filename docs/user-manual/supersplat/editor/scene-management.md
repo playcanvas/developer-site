@@ -10,14 +10,18 @@ The **Scene Manager** lists the splats in the current project. Each splat file y
 Click a row to make that splat active. The active splat is the target for:
 
 - Gaussian selection and editing
-- The **Transform**, **Color**, and **Splat Data** panels
+- The **Transform** and **Colors** sections of the Scene Manager, and the **Splat Data** panel
 - Camera focus and measurement tools
 
 Only one splat can be active at a time. Selecting a row does not change its visibility.
 
+## Transform and Colors
+
+Below the splat list, the **Transform** section shows the active splat's **Position**, **Rotation**, and **Scale** for precise numeric edits (see [Transform, Measure and Align](transform-measure-align.md)). The collapsible **Colors** section below it grades the color of the active splat, or of the selected Gaussians, and bakes the result with **Apply** (see [Color and Appearance](color-and-appearance.md#colors)).
+
 ## Add Splats
 
-Use **File > Import**, the import button in the Scene Manager header, or drag supported files into the viewport. Importing adds splats to the current project; it does not replace splats that are already loaded.
+Use **File > Import** (or **File > Import Recent** for a file you have loaded before), the import button in the Scene Manager header, or drag supported files into the viewport. Importing adds splats to the current project; it does not replace splats that are already loaded.
 
 **File > New** is different: it starts a new, empty project after asking for confirmation if the current project contains data.
 

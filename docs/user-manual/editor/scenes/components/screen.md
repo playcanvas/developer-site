@@ -5,7 +5,7 @@ description: PlayCanvas Screen component defines screen-space or world-space UI 
 
 The Screen Component defines the area and rendering of a user interface. Children added to a Screen Component should all have an Element Component.
 
-See the [User Interface](/user-manual/user-interface) section for more details.
+See [Screens](/user-manual/user-interface/screens/) for how screens work, and the [User Interface](/user-manual/user-interface/) section for building interfaces with them.
 
 ![Screen Component](/img/user-manual/editor/scenes/components/component-screen.png)
 
@@ -24,7 +24,8 @@ See the [User Interface](/user-manual/user-interface) section for more details.
 
 - [Element Component](element.md) - UI elements that are children of the screen
 - [Button Component](button.md) - Interactive button elements
-- [User Interface](/user-manual/user-interface) - Learn more about building user interfaces
+- [Screens](/user-manual/user-interface/screens/) - Screen space and world space, resolution and scaling
+- [User Interface](/user-manual/user-interface/) - Learn more about building user interfaces
 
 ## Scripting Interface
 
