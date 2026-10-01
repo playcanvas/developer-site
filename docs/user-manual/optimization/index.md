@@ -30,6 +30,7 @@ Choose a repeatable scene or interaction, record a baseline on the target device
 | [Profiling with AppStats](/user-manual/optimization/app-stats/) | Reading public statistics from code and collecting reports for dashboards, agents and automated comparisons. |
 | [Editor Profiler](/user-manual/optimization/profiler/) | Inspecting the Editor Launch profiler, including asset loading and shader compilation timelines. |
 | [GPU Profiling](/user-manual/optimization/gpu-profiling/) | Capturing frames with native GPU tools for detailed rendering investigations. |
+| [Inspector](/user-manual/scripting/debugging/inspector/) | Finding where video memory goes, which passes and draws a frame makes, and what each mesh and material uses, in the running application. |
 
 :::ai
 Give an AI assistant a performance goal, repeatable scenario and baseline reports from **[AppStats](/user-manual/optimization/app-stats/#collecting-periodic-reports)**. It can combine these with MiniStats or browser evidence and propose one measurable change at a time. Use the **[Editor MCP Server](/user-manual/editor/mcp-server/)** to replay Editor input or follow **[Developing with AI](/user-manual/engine/developing-with-ai/)** for standalone projects.

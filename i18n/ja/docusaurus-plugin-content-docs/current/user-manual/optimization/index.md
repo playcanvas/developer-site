@@ -30,6 +30,7 @@ description: PlayCanvas アプリケーションでロード時間、フレー�
 | [AppStatsによるプロファイリング](/user-manual/optimization/app-stats/) | コードから公開統計を読み取り、ダッシュボード、エージェント、自動比較向けのレポートを収集します。 |
 | [Editor Profiler](/user-manual/optimization/profiler/) | アセットの読み込みやシェーダーのコンパイルのタイムラインなど、エディターのLaunchプロファイラーを確認します。 |
 | [GPUプロファイリング](/user-manual/optimization/gpu-profiling/) | ネイティブGPUツールでフレームをキャプチャし、レンダリングを詳しく調査します。 |
+| [Inspector](/user-manual/scripting/debugging/inspector/) | 実行中のアプリケーションで、ビデオメモリの使われ方、フレームのパスと描画、各メッシュとマテリアルが使うものを調べます。 |
 
 :::ai
 AIアシスタントに目標、再現手順、[**AppStats**](/user-manual/optimization/app-stats/#collecting-periodic-reports)のベースラインレポートを渡すと、MiniStatsやブラウザーの結果と組み合わせ、測定可能な変更を1つずつ提案できます。Editorでは[**Editor MCP Server**](/user-manual/editor/mcp-server/)、スタンドアロンでは[**AIを活用した開発**](/user-manual/engine/developing-with-ai/)を使用します。

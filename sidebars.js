@@ -745,7 +745,8 @@ const sidebars = {
           },
           items: [
             'user-manual/scripting/debugging/console-logging',
-            'user-manual/scripting/debugging/browser-dev-tools'
+            'user-manual/scripting/debugging/browser-dev-tools',
+            'user-manual/scripting/debugging/inspector'
           ],
         },
         'user-manual/scripting/migration-guide'

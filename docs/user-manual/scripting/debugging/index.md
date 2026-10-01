@@ -18,3 +18,9 @@ The quickest way to understand what your code is doing. Add `console.log()` stat
 Use breakpoints, step-through debugging, and performance profiling to deeply inspect your running code.
 
 **[Learn Browser Dev Tools →](./browser-dev-tools.md)**
+
+### Inspector
+
+Look inside the running application: its entities and components, cameras, assets and GPU resources, the passes of each frame, and the draws of a pass one at a time.
+
+**[Learn the Inspector →](./inspector.md)**
