@@ -3,7 +3,7 @@ title: <pc-sky>
 description: "pc-sky要素のリファレンス: テクスチャアセットによるスカイボックス。ボックス・ドーム・無限の投影、シーンライティングのオプション、回転を備えます。"
 ---
 
-`<pc-sky>`タグは、スカイコンポーネントを定義するために使用されます。
+`<pc-sky>`タグは、画像からシーンの空を作ります。すべての背後に描画される背景であり、`lighting`を付ければシーンのマテリアルを照らし、そこに映り込む環境にもなります。
 
 :::note[使用法]
 
@@ -18,23 +18,23 @@ description: "pc-sky要素のリファレンス: テクスチャアセットに�
 | 属性 | タイプ | デフォルト | 説明 |
 | --- | --- | --- | --- |
 | `asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | テクスチャアセットID (`texture`型のアセットを参照する必要があります) |
-| `center` | Vector3 | `"0 0.01 0"` | "X Y Z"値としてのスカイの中心 (0-1の範囲) |
-| `intensity` | Number | `"1"` | スカイの明るさの強度 |
-| `lighting` | Boolean | `"false"` | スカイボックスを光源として使用するかどうか |
-| `mip-level` | Number | `"0"` | スカイボックスのミップレベル。0が最も鮮明です。値を上げるとぼやけたミップが選択され、テクスチャ自体をぼかすことなくスカイボックスを柔らかくできます |
-| `rotation` | Vector3 | `"0 0 0"` | "X Y Z"オイラー角としてのスカイの回転 |
-| `scale` | Vector3 | `"100 100 100"` | "X Y Z"値としてのスカイのスケール |
-| `type` | Enum | `"infinite"` | スカイの種類: `"box"` \| `"dome"` \| `"infinite"` \| `"none"` |
+| `center` | Vector3 | `"0 0.01 0"` | "X Y Z"値としてのスカイの中心 (0-1の範囲)。`box`と`dome`の種類で使用されます |
+| `intensity` | Number | `"1"` | スカイの明るさと、それが与えるライティングの明るさ |
+| `lighting` | Boolean | `"false"` | スカイの画像でシーンも照らすかどうか。マテリアルへの映り込みも含みます。画像の読み込み時に読み取られます |
+| `mip-level` | Number | `"0"` | スカイボックスのミップレベル。0が最も鮮明です。値を上げるとぼやけたミップが選択され、テクスチャ自体をぼかすことなくスカイボックスを柔らかくできます。ぼやけたミップを作るのは`lighting`なので、`lighting`が必要です |
+| `rotation` | Vector3 | `"0 0 0"` | "X Y Z"オイラー角（度単位）としてのスカイの回転 |
+| `scale` | Vector3 | `"100 100 100"` | "X Y Z"値としてのスカイのスケール。`box`と`dome`の種類で使用されます |
+| `type` | Enum | `"infinite"` | スカイの種類: `"box"` \| `"dome"` \| `"infinite"` \| `"none"`。`"none"`は背景を描画しませんが、`lighting`があればシーンを照らします |
 
 </div>
 
 ## 例 {#example}
 
-正距円筒図法のテクスチャをドーム投影のスカイとして使い、シーンの照明にも利用しています (`lighting` に注目)。ドラッグで見回せます。`type="infinite"` や `rotation="0 90 0"`、より高い `mip-level` (ソフトになります) も試してみましょう:
+正距円筒図法のテクスチャをドーム投影のスカイとして使い、シーンの照明にも利用しています (`lighting` に注目)。ドラッグで見回せます。`type="infinite"` や `"0 90 0"` の `rotation`、ライティングだけを残す `type="none"`、より高い `mip-level` (ソフトになります) も試してみましょう:
 
 ```html live-example
 <pc-app>
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.1/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.6/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset id="skybox" src="https://developer.playcanvas.com/assets/sepulchral-chapel-rotunda-4k.webp"></pc-asset>
     <pc-scene>
         <pc-sky asset="skybox" type="dome" center="0 0.05 0" scale="20 20 20" lighting></pc-sky>
@@ -63,4 +63,4 @@ description: "pc-sky要素のリファレンス: テクスチャアセットに�
 * [`<pc-scene>`](../pc-scene) — 露出と、エンジン上でスカイが置かれる場所
 * [`<pc-light>`](../pc-light) — スカイの画像ベースライティングと組み合わせる直接光
 
-サンプル: [GLB Loader](https://playcanvas.github.io/web-components/examples/glb-loader.html)、[Product Viewer](https://playcanvas.github.io/web-components/examples/product-viewer.html)、[Shadow Cascades](https://playcanvas.github.io/web-components/examples/shadow-cascades.html)
+サンプル: [GLB Loader](https://playcanvas.github.io/web-components/examples/#glb-loader.html)、[Product Viewer](https://playcanvas.github.io/web-components/examples/#product-viewer.html)、[Shadow Cascades](https://playcanvas.github.io/web-components/examples/#shadow-cascades.html)

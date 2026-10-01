@@ -5,7 +5,7 @@ description: PlayCanvas の Scroll View Component は、UI コンテンツ用に
 
 Scroll Viewコンポーネントは、ユーザーインターフェース内のスクロール可能な領域を定義します。Scroll Viewは[Scrollbar](scrollbar.md)コンポーネントを介してスクロールできます。
 
-詳細については、[ユーザーインターフェース](/user-manual/user-interface)セクションを参照してください。
+スクロールビューを構成するエンティティの関係と設定方法は、[スクロールビュー](/user-manual/user-interface/scroll-views/)を参照してください。
 
 ![Scroll View Component](/img/user-manual/editor/scenes/components/component-scrollview.png)
 
@@ -31,7 +31,8 @@ Scroll Viewコンポーネントは、ユーザーインターフェース内の
 
 - [Scrollbarコンポーネント](scrollbar.md) - ビューをスクロールするためのコントロール
 - [Elementコンポーネント](element.md) - ビューポートとコンテンツに必要
-- [ユーザーインターフェース](/user-manual/user-interface) - ユーザーインターフェースの構築について詳しく学ぶ
+- [スクロールビュー](/user-manual/user-interface/scroll-views/) - スクロールビューの設定、スクロールの動作、コンテンツのサイズ
+- [ユーザーインターフェース](/user-manual/user-interface/) - ユーザーインターフェースの構築について詳しく学ぶ
 
 ## スクリプトインターフェース
 

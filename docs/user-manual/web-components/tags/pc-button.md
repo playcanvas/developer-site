@@ -3,7 +3,7 @@ title: <pc-button>
 description: "Reference for the pc-button element: interactive button component with tint and sprite transitions for hover, pressed, and inactive states."
 ---
 
-The `<pc-button>` tag is used to define a button component, which makes an element respond to pointer input with visual transitions.
+The `<pc-button>` tag adds a button component, which makes an image element respond to input. It fires a `click` event, and shows its hover, pressed and inactive states by tinting the image or by swapping its sprite.
 
 :::note[Usage]
 
@@ -18,27 +18,33 @@ The `<pc-button>` tag is used to define a button component, which makes an eleme
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
-| `active` | Boolean | `"true"` | Whether the button responds to input |
+| `active` | Boolean | `"true"` | Whether the button responds to input. While it is `"false"`, the button shows its inactive state and fires no `click` or other button events, but its element still receives input, and so blocks the elements behind it. See [Disabling a Button](/user-manual/user-interface/buttons/#disabling-a-button) |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
 | `fade-duration` | Number | `"0"` | Duration in milliseconds over which tint transitions are applied |
-| `hit-padding` | Vector4 | `"0 0 0 0"` | Expands the button's hit area as `left bottom right top` |
+| `hit-padding` | Vector4 | `"0 0 0 0"` | Grows the area that receives input by a distance in screen units on each side, as `left bottom right top`, without changing how the button looks |
 | `hover-sprite-asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | Sprite [`<pc-asset>`](../pc-asset) id shown on hover (sprite transition mode) |
 | `hover-sprite-frame` | Number | `"0"` | Frame of the hover sprite |
-| `hover-tint` | Color | `"0.75 0.75 0.75 1"` | Tint applied to the image entity on hover (tint transition mode) |
-| `image` | [Entity Reference](../attributes.md#entity-references) | - | The [`<pc-entity>`](../pc-entity) whose image element shows transitions. Defaults to the button's own entity — inside a [`<pc-model>`](../pc-model) that is the model's host, so name a UI entity explicitly there |
+| `hover-tint` | Color | `"0.75 0.75 0.75 1"` | Color of the image while the button is hovered, in tint mode |
+| `image` | [Entity Reference](../attributes.md#entity-references) | - | The entity whose image element shows the transitions. Defaults to the button's own entity. It only changes where the transitions show: the button still takes its input from its own entity's element. See [The Image](/user-manual/user-interface/buttons/#the-image) |
 | `inactive-sprite-asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | Sprite [`<pc-asset>`](../pc-asset) id shown when inactive (sprite transition mode) |
 | `inactive-sprite-frame` | Number | `"0"` | Frame of the inactive sprite |
-| `inactive-tint` | Color | `"0.25 0.25 0.25 1"` | Tint applied to the image entity when inactive (tint transition mode) |
+| `inactive-tint` | Color | `"0.25 0.25 0.25 1"` | Color of the image while the button is inactive, in tint mode |
 | `pressed-sprite-asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | Sprite [`<pc-asset>`](../pc-asset) id shown when pressed (sprite transition mode) |
 | `pressed-sprite-frame` | Number | `"0"` | Frame of the pressed sprite |
-| `pressed-tint` | Color | `"0.5 0.5 0.5 1"` | Tint applied to the image entity when pressed (tint transition mode) |
-| `transition-mode` | Enum | `"tint"` | How the button reacts to hover/press: `"tint"` \| `"sprite"` |
+| `pressed-tint` | Color | `"0.5 0.5 0.5 1"` | Color of the image while the button is pressed, in tint mode |
+| `transition-mode` | Enum | `"tint"` | How the image shows the button's state: `"tint"` \| `"sprite"`. `"tint"` sets its color to the state's tint, and `"sprite"` shows the state's sprite. In sprite mode, a state without a sprite shows none, so give every state one |
 
 </div>
 
+:::note[Tints replace the image's color]
+
+A tint replaces the color of the image rather than multiplying it, and its alpha becomes the image's opacity. So the default grey tints turn a colored button grey, and a semi-transparent one opaque, when it is hovered. Choose tints that are lighter and darker versions of the button's color, with the alpha the button should have. See [Tint](/user-manual/user-interface/buttons/#tint).
+
+:::
+
 ## Example
 
-A clickable button with tint transitions — hover and press it, then try the `hover-tint`/`pressed-tint` colors or a longer `fade-duration`. The script below wires up the `click` event using the pattern described next:
+A clickable button with tint transitions, whose tints are a lighter and a darker orange. Hover and press it, then try other `hover-tint` and `pressed-tint` colors, or a longer `fade-duration`. The script below wires up the `click` event using the pattern described next:
 
 ```html live-example
 <pc-app>
@@ -53,8 +59,8 @@ A clickable button with tint transitions — hover and press it, then try the `h
                 <!-- The image element provides the button's visuals and receives input -->
                 <pc-element type="image" anchor="0.5 0.5 0.5 0.5" pivot="0.5 0.5"
                             width="220" height="56" color="#ff8a3c" use-input></pc-element>
-                <pc-button transition-mode="tint" hover-tint="0.85 0.85 0.85 1"
-                           pressed-tint="0.6 0.6 0.6 1" fade-duration="100"></pc-button>
+                <pc-button transition-mode="tint" hover-tint="#ffa76d"
+                           pressed-tint="#cc6e30" fade-duration="100"></pc-button>
                 <pc-entity name="label">
                     <pc-element type="text" anchor="0.5 0.5 0.5 0.5" pivot="0.5 0.5"
                                 font-asset="arial" font-size="24" color="#1d1f2b" text="Click me"></pc-element>
@@ -96,6 +102,7 @@ The `component` property is the engine [ButtonComponent](https://api.playcanvas.
 
 * [`<pc-element>`](../pc-element) — the image element a button needs for input and transitions
 * [`<pc-screen>`](../pc-screen) — the screen the button's element hierarchy lives on
-* [`<pc-entity>`](../pc-entity) — click and pointer events on 3D objects, without a screen
+* [`<pc-entity>`](../pc-entity) — `onclick` and the other pointer events, which reach image and text elements too, but without button states or hit padding
+* [Buttons](/user-manual/user-interface/buttons/) — states, tints, sprites and events, in the User Interface section
 
-Examples: [UI Layout](https://playcanvas.github.io/web-components/examples/ui-layout.html) and [Scroll View](https://playcanvas.github.io/web-components/examples/scroll-view.html).
+Examples: [UI Layout](https://playcanvas.github.io/web-components/examples/#ui-layout.html) and [Scroll View](https://playcanvas.github.io/web-components/examples/#scroll-view.html).

@@ -3,7 +3,7 @@ title: <pc-collision>
 description: "Reference for the pc-collision element: box, sphere, capsule, cone, cylinder, and mesh collision shapes to pair with rigid bodies."
 ---
 
-The `<pc-collision>` tag is used to define a collision component.
+The `<pc-collision>` tag gives an entity a collision shape. Paired with a [`<pc-rigid-body>`](../pc-rigid-body), the shape takes part in the physics simulation; on its own, it is a trigger volume that reports what enters it.
 
 :::note[Usage]
 
@@ -18,32 +18,37 @@ The `<pc-collision>` tag is used to define a collision component.
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
 | `angular-offset` | Vector3 | `"0 0 0"` | Rotation of the collision shape relative to the entity, as "X Y Z" Euler angles in degrees |
-| `axis` | Number | `"1"` | Axis for cylinder/capsule shapes (0=X, 1=Y, 2=Z) |
+| `axis` | Number | `"1"` | Axis for cylinder, capsule and cone shapes (0=X, 1=Y, 2=Z) |
 | `convex-hull` | Boolean | `"false"` | Whether to use a convex hull for mesh collision |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
 | `half-extents` | Vector3 | `"0.5 0.5 0.5"` | Half-extents for box collision as "X Y Z" values |
-| `height` | Number | `"2"` | Height for cylinder/capsule collision shapes |
+| `height` | Number | `"2"` | Height for cylinder, capsule and cone collision shapes |
 | `linear-offset` | Vector3 | `"0 0 0"` | Position of the collision shape relative to the entity as "X Y Z" values |
-| `radius` | Number | `"0.5"` | Radius for sphere/cylinder/capsule collision shapes |
-| `type` | Enum | `"box"` | Collision shape: `"box"` \| `"capsule"` \| `"compound"` \| `"cone"` \| `"cylinder"` \| `"mesh"` \| `"sphere"` |
+| `radius` | Number | `"0.5"` | Radius for sphere, cylinder, capsule and cone collision shapes |
+| `type` | Enum | `"box"` | Collision shape: `"box"` \| `"capsule"` \| `"compound"` \| `"cone"` \| `"cylinder"` \| `"mesh"` \| `"sphere"`. A `compound` shape combines the collision shapes of the entity's descendants into one |
 
 </div>
 
+The primitive shapes — every type but `mesh` — ignore the entity's scale, so size them with `half-extents`, `radius` and `height` rather than `scale`. The primitives do not line up with the defaults everywhere, either: a `<pc-render>` cylinder or cone is 1 unit tall, while a collision cylinder or cone defaults to a `height` of 2.
+
 ## Mesh Colliders
 
-A mesh collider needs geometry, and there is no attribute to supply it — so `type="mesh"` takes it from the entity's own [`<pc-render>`](../pc-render) component, giving you a collider that matches the visible mesh. That is what a mesh collider on a model node usually means, and it is what makes `type="mesh"` useful on a [`<pc-node>`](../pc-node) bound inside a loaded GLB:
+A mesh collider needs geometry, and there is no attribute to supply it — so `type="mesh"` takes it from the render component the entity was loaded with, giving you a collider that matches the visible mesh. That makes it a tool for a [`<pc-node>`](../pc-node) bound inside a loaded GLB:
 
 ```html
 <pc-model asset="car">
     <pc-node name="Body">
         <pc-collision type="mesh"></pc-collision>
+        <pc-rigid-body type="static"></pc-rigid-body>
     </pc-node>
 </pc-model>
 ```
 
+An exact triangle mesh only works on a `static` body. For a body that moves, set `convex-hull` to collide against the mesh's convex hull instead.
+
 The geometry is resolved each time the component applies, so a `<pc-node>` that retargets or rebinds picks up the new node's mesh.
 
-The render component has to be backed by a render asset, which the primitive types are not: a `<pc-render type="box">` has no asset to collide against. An entity without a suitable render component logs a console warning and its collider has no shape.
+The render component has to be backed by a render asset, which a [`<pc-render>`](../pc-render) primitive is not: a `<pc-render type="box">` has no asset to collide against, so give a primitive the matching primitive shape instead. An entity without a suitable render component logs a console warning and its collider has no shape.
 
 ## Example
 
@@ -96,4 +101,4 @@ The `component` property is the engine [CollisionComponent](https://api.playcanv
 * [`<pc-joint>`](../pc-joint) — constrains two bodies that have collision shapes
 * [`<pc-wasm>`](../pc-wasm) — loads the Ammo module physics needs
 
-Examples: [Basic Physics](https://playcanvas.github.io/web-components/examples/basic-physics.html), [Physics Cluster](https://playcanvas.github.io/web-components/examples/physics-cluster.html) and [Ragdoll](https://playcanvas.github.io/web-components/examples/ragdoll.html).
+Examples: [Basic Physics](https://playcanvas.github.io/web-components/examples/#basic-physics.html), [Physics Cluster](https://playcanvas.github.io/web-components/examples/#physics-cluster.html) and [Ragdoll](https://playcanvas.github.io/web-components/examples/#ragdoll.html).

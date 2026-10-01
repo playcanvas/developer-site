@@ -38,4 +38,4 @@ const miniStats = new pc.MiniStats(app);
 
 以下のデモでは、エディター外で MiniStats を使用した例（カスタマイズオプションを含む）を確認できます。オーバーレイをクリックすると表示サイズを切り替え、CPU および GPU の詳細なタイミング内訳を表示できます。
 
-<EngineExample id="misc/mini-stats" title="MiniStats example" />
+<EngineExample id="debug/mini-stats" title="MiniStats example" />

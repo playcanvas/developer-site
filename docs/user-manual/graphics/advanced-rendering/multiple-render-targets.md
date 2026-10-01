@@ -10,8 +10,8 @@ MRT is supported on every device PlayCanvas runs on (WebGL2 and WebGPU). To dete
 Multiple render targets have the following restrictions:
 
 - All color attachments of a multiple render target must have the same width and height.
-- All color attachments are cleared to the same value, specified using [`CameraComponent.clearColor`](https://api.playcanvas.com/engine/classes/CameraComponent.html#clearcolor).
-- All color attachments use the same write mask and alpha blend mode, as specified using [`BlendState`](https://api.playcanvas.com/engine/classes/BlendState.html).
+- Color attachments are cleared to [`CameraComponent.clearColor`](https://api.playcanvas.com/engine/classes/CameraComponent.html#clearcolor), unless given their own clear color using [`CameraComponent.setClearColor`](https://api.playcanvas.com/engine/classes/CameraComponent.html#setclearcolor), described in [Clear Colors](#clear-colors) below.
+- All color attachments use the same write mask and alpha blend mode, as specified using [`BlendState`](https://api.playcanvas.com/engine/classes/BlendState.html), unless the device reports [`GraphicsDevice.supportsIndependentBlending`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#supportsindependentblending), in which case [`BlendState.setAttachment`](https://api.playcanvas.com/engine/classes/BlendState.html#setattachment) gives an attachment its own.
 - [Dual-source blending](/user-manual/graphics/advanced-rendering/dual-source-blending) cannot be used with MRT because it requires exactly one color attachment.
 
 ## How to use MRT
@@ -62,6 +62,21 @@ app.root.addChild(entity);
 entity.camera.setShaderPass('MyMRT');
 ```
 
+### Clear Colors
+
+At the start of the camera's rendering, every color attachment is cleared to the camera's [`clearColor`](https://api.playcanvas.com/engine/classes/CameraComponent.html#clearcolor). When the attachments hold different kinds of data, give each its own clear color using [`CameraComponent.setClearColor`](https://api.playcanvas.com/engine/classes/CameraComponent.html#setclearcolor), passing the index of the color attachment. For an integer format attachment, the color components are the integer values to clear to.
+
+```javascript
+// attachment 0 keeps clearing to entity.camera.clearColor
+// clear the normals attachment to a neutral normal, and the gloss attachment to black
+entity.camera.setClearColor(1, new pc.Color(0.5, 0.5, 1, 1));
+entity.camera.setClearColor(2, new pc.Color(0, 0, 0, 1));
+```
+
+Pass `null` to remove the clear color of an attachment, so that it clears to `clearColor` again, and use [`CameraComponent.getClearColor`](https://api.playcanvas.com/engine/classes/CameraComponent.html#getclearcolor) to read the color an attachment clears to.
+
+The per-attachment clear colors apply to the clear at the start of the camera's rendering. Clears performed during rendering - by a [`Layer`](https://api.playcanvas.com/engine/classes/Layer.html) with `clearColorBuffer` enabled, or by a camera whose `rect` does not cover the whole render target - do not support per-attachment colors, and are best avoided with multiple render targets.
+
 ### Standard Materials
 
 When rendering using [`StandardMaterial`](https://api.playcanvas.com/engine/classes/StandardMaterial.html) into Multiple Render Targets (MRT), override the `outputPS` shader chunk to direct values to the additional color buffers. Supply the chunk for each shader language your project targets — GLSL for WebGL2, WGSL for WebGPU. Apply both to every material in your target entity's render components, using [`Material.getShaderChunks`](https://api.playcanvas.com/engine/classes/Material.html#getshaderchunks):
@@ -111,6 +126,6 @@ To restrict the modification to a specific camera, gate it behind the shader pas
 
 ## Example
 
-A full working sample is available in the engine examples: Multiple Render Targets renders a chess board through a custom shader pass that writes its world normal and gloss into additional color targets, displayed on screen as separate textures.
+A full working sample is available in the engine examples: Multiple Render Targets renders a chess board through a custom shader pass that writes its world normal and gloss into additional color targets, each with its own clear color, displayed on screen as separate textures.
 
 <EngineExample id="graphics/multi-render-targets" title="Multiple Render Targets" />

@@ -45,7 +45,7 @@ The Orient tool levels a mis-rotated splat — a Z-up import, a tilted capture, 
 
 The side of the plane facing the camera becomes up. If the result is upside down, orbit underneath the plane and press **Align to Grid** again. When the picked plane is within 3 degrees of one of the splat's own axes, the rotation snaps to that axis, so conventional Z-up imports produce exact quarter turns.
 
-Alignment applies to the whole active splat regardless of any Gaussian selection and is recorded as a single undoable operation. The grid is displayed while the tool is active, even if hidden. The target plane follows the **Grid Plane** setting in **Settings** (XZ by default, or XY/YZ).
+Alignment applies to the whole active splat regardless of any Gaussian selection and is recorded as a single undoable operation. The grid is displayed while the tool is active, even if hidden. The target is the first grid plane enabled under **Planes** in the [Overlays](interface.md#overlays) popup: XZ by default, or XY or YZ if you have turned XZ off.
 
 With three points placed, the pivot button in the bottom toolbar changes to **Set Pivot**. Instead of moving the splat, it stores the picked plane as the splat's pivot and local frame: local-space gizmos and the **Transform** panel then work in that frame. This is useful for transforming along a surface's own axes without rotating the splat itself.
 
@@ -59,7 +59,7 @@ To align independently captured splats:
 4. Use Move, Rotate, and Scale, checking the result from more than one camera angle.
 5. Toggle visibility or use Solo mode to compare the splats.
 
-The grid uses meters, with major divisions at 1 m and minor divisions at 0.1 m. Enable **Show Bounding Box** and **Show Dimensions** in **Settings** when a numeric size check is useful.
+The grid uses meters, with major divisions at 1 m and minor divisions at 0.1 m. Enable **Bounding Box** and **Dimensions** in the [Overlays](interface.md#overlays) popup when a numeric size check is useful.
 
 ## Measure and Rescale a Splat
 
@@ -68,7 +68,7 @@ The Measure tool reports the distance between two surface points and can rescale
 1. Activate **Measure** in the bottom toolbar.
 2. Click a surface to place the first marker, then click again to place the second.
 3. Click either marker and use its move gizmo to refine the position.
-4. Read the measured length in the toolbar above the bottom controls. With **Show Dimensions** enabled in **Settings**, the length is also labeled along the line in the viewport.
+4. Read the measured length in the toolbar above the bottom controls. With **Dimensions** enabled in the Overlays popup, the length is also labeled along the line in the viewport.
 5. To calibrate the splat, enter the real distance in that field. SuperSplat uniformly rescales the whole active splat around the midpoint of the two markers.
 
 `Delete` or `Backspace` removes the active marker while Measure is active, and `F` frames the placed markers. Press `Escape` to leave the tool. Changing the length is undoable.

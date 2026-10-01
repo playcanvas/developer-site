@@ -7,6 +7,8 @@ Renderコンポーネントは、エンティティがプリミティブ形状�
 
 ![Render Component](/img/user-manual/editor/scenes/components/component-render.png)
 
+<video autoPlay muted loop controls src='/video/editor-shadow-cascade-mask.mp4' style={{width: '100%', height: 'auto'}} />
+
 ## プロパティ
 
 | プロパティ名 | 説明 |
@@ -15,6 +17,7 @@ Renderコンポーネントは、エンティティがプリミティブ形状�
 | Asset                    | Assetタイプのみ。このRenderコンポーネントでレンダリングされるレンダーアセット。Renderコンポーネントには単一のレンダーアセットのみ割り当て可能。 |
 | Root Bone                | Assetタイプのみ（スキンメッシュ）。このコンポーネントでレンダリングされるスキンメッシュのルートボーンとして使用されるエンティティ。 |
 | Cast Shadows             | 有効にすると、このコンポーネントでレンダリングされるメッシュインスタンスがシーン内の他のメッシュインスタンスに影を投影します。 |
+| Shadow Cascades          | このRenderコンポーネントを受け取るディレクショナルライトのシャドウカスケードを選択します。余分なカスケードは無視されます。Cast Shadowsが有効な場合のみ表示されます。 |
 | Cast Lightmap Shadows    | 有効にすると、このコンポーネントでレンダリングされるメッシュインスタンスがライトマップに影を投影します。 |
 | Receive Shadows          | 有効にすると、このコンポーネントでレンダリングされるメッシュインスタンスがシーン内の他のメッシュインスタンスからの影を受け取ります。 |
 | Static                   | このRenderコンポーネントを参照するエンティティが決して移動しない場合、エンジンが特定の最適化を行うためのヒントとしてこのボックスをチェックします。 |
@@ -27,9 +30,14 @@ Renderコンポーネントは、エンティティがプリミティブ形状�
 | Layers                   | このコンポーネントのメッシュインスタンスをレンダリングするレイヤー。 |
 | Materials                | このコンポーネントのメッシュインスタンスをレンダリングするために使用されるマテリアルアセット。各マテリアルはそれぞれのメッシュインスタンスに対応します。 |
 
+Shadow Cascadesのマスクは、カスケードごとに1つ、計4つのボックスが並んだものです。ディレクショナル[Lightコンポーネント](light.md)の **Cascades** と **Cascade Distribution** 設定と対応しており、これらがカスケードの数と、カメラのビュー内での分布を決定します。
+
+<video autoPlay muted loop controls src='/video/editor-shadow-cascades-launch.mp4' style={{width: '100%', height: 'auto'}} />
+
 ## 関連項目
 
 - [レンダーアセット](/user-manual/editor/assets/inspectors/render) - レンダーアセットについて学ぶ
+- [Lightコンポーネント](light.md) - マスクが選択対象とするディレクショナルライトのカスケードを設定します
 
 ## スクリプトインターフェース
 

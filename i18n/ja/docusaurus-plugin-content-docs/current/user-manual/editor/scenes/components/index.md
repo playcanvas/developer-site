@@ -34,6 +34,7 @@ PlayCanvasエンジンには多くの異なるコンポーネントが定義さ�
 | [Collision](collision)            | エンティティに衝突ボリュームを割り当てます。                                     |
 | [Element](element)                | ユーザーインターフェースのテキストまたは画像要素を定義します。                               |
 | [GSplat](gsplat)                  | Renders a 3D Gaussian Splat at the location of the entity.                    |
+| [Joint](joint)                    | 2つのリジッドボディ、または1つのリジッドボディとワールド空間上の点を拘束します。 |
 | [Layout Child](layoutchild)       | 1つの要素について、デフォルトのレイアウトグループプロパティを上書きします。                    |
 | [Layout Group](layoutgroup)       | 子ユーザーインターフェース要素の位置とスケールを自動的に設定します。       |
 | [Light](light)                    | エンティティに動的な光源をアタッチします。                                |

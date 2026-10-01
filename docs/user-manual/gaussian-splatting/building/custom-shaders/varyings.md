@@ -119,6 +119,8 @@ fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
 
 **2. Read it in the fragment stage chunk** and early-out before the expensive per-pixel work:
 
+This example assumes rendering fills the canvas drawing buffer. The built-in [`screen_size`](/user-manual/graphics/shaders/built-in-uniforms) supplies its dimensions; adapt the coordinate normalization for other render targets or partial viewports.
+
 <Tabs groupId="shader-language" queryString="lang">
 <TabItem value="glsl" label="GLSL">
 
@@ -126,14 +128,14 @@ fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
 uniform vec3 uClipCenter;
 uniform vec3 uClipHalf;
 uniform mat4 uInvViewProj;
-uniform vec4 uScreenSize;
+uniform vec4 screen_size;
 
 void modifySplatColor(vec2 gaussianUV, inout vec4 color) {
     // splats fully inside or outside the box were already resolved per splat in the vertex stage
     if (getClipState() == 1u) return;
 
     // reconstruct the world position of this fragment (on the splat's depth plane)
-    vec3 ndc = vec3(gl_FragCoord.xy * uScreenSize.zw, gl_FragCoord.z) * 2.0 - 1.0;
+    vec3 ndc = vec3(gl_FragCoord.xy * screen_size.zw, gl_FragCoord.z) * 2.0 - 1.0;
     vec4 world = uInvViewProj * vec4(ndc, 1.0);
     vec3 worldPos = world.xyz / world.w;
 
@@ -152,7 +154,7 @@ void modifySplatColor(vec2 gaussianUV, inout vec4 color) {
 uniform uClipCenter: vec3f;
 uniform uClipHalf: vec3f;
 uniform uInvViewProj: mat4x4f;
-uniform uScreenSize: vec4f;
+uniform screen_size: vec4f;
 
 fn modifySplatColor(gaussianUV: vec2f, color: ptr<function, vec4f>) {
     // splats fully inside or outside the box were already resolved per splat in the vertex stage
@@ -161,7 +163,7 @@ fn modifySplatColor(gaussianUV: vec2f, color: ptr<function, vec4f>) {
     }
 
     // reconstruct the world position of this fragment (on the splat's depth plane)
-    let uv = pcPosition.xy * uniform.uScreenSize.zw;
+    let uv = pcPosition.xy * uniform.screen_size.zw;
     let ndc = vec3f(uv.x * 2.0 - 1.0, (1.0 - uv.y) * 2.0 - 1.0, pcPosition.z * 2.0 - 1.0);
     let world = uniform.uInvViewProj * vec4f(ndc, 1.0);
     let worldPos = world.xyz / world.w;

@@ -3,7 +3,7 @@ title: <pc-wasm>
 description: "Reference for the pc-wasm element: load WebAssembly modules such as Ammo, Basis, and DracoDecoderModule from glue, wasm, and fallback paths."
 ---
 
-The `<pc-wasm>` tag is used to load a WebAssembly module.
+The `<pc-wasm>` tag loads a WebAssembly module the engine needs before the application starts — `Ammo` for physics, `Basis` or `DracoDecoderModule` for compressed assets.
 
 :::note[Usage]
 
@@ -17,7 +17,7 @@ The `<pc-wasm>` tag is used to load a WebAssembly module.
 
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
-| `fallback` | String | - | Path to fallback (asm.js) code when WebAssembly is not supported |
+| `fallback` | String | - | Path to fallback (asm.js) code when WebAssembly is not supported. The Draco decoder ignores it |
 | `glue` | String | - | Path to the JavaScript glue code for the module |
 | `name` | String | - | Module name used to reference it in scripts |
 | `wasm` | String | - | Path to the WebAssembly (.wasm) file |
@@ -39,16 +39,23 @@ attributes before appending the element to the document.
 
 The element initializes asynchronously and becomes ready once its module has loaded: it fires the
 standard `ready` event and can be awaited with `whenReady('pc-wasm')` — see
-[Programmatic Access](../programmatic-access.md). You will rarely need to, though: a containing
-`<pc-app>` waits for every `<pc-wasm>` declared beneath it before creating its graphics device,
-so an app that is ready is an app whose modules have loaded.
+[Programmatic Access](../programmatic-access.md). (`Basis` is the exception: it is ready as soon
+as its transcoder starts loading.) You will rarely need to, though: a `<pc-app>` waits for every
+`<pc-wasm>` among its children before creating its graphics device, so an app that is ready is an
+app whose modules have loaded. A `<pc-wasm>` nested any deeper still loads, but the app does not
+wait for it.
 
 Readiness is deliberately sticky. A WebAssembly module configures engine-global state that never
 unloads, so removing the element does not return it to a pending state, and re-inserting it does
 not load the module again.
 
 A `<pc-wasm>` without a `name` logs a warning and never becomes ready — but it does not block
-the containing `<pc-app>` from booting.
+the containing `<pc-app>` from booting. A module that fails to load, from a mistyped URL or a
+server that refuses it, is worse: the element never becomes ready and its `<pc-app>` never starts,
+with only a `failed to initialize module=...` error in the console to show for it.
+
+Declare `Ammo` in the markup rather than adding it later. The engine looks for the physics module
+once, as the application starts, so an app that booted without it runs without physics.
 
 ## Example
 
@@ -83,7 +90,7 @@ Loading the `Ammo` physics module. The box only falls because the module is decl
 
 You can programmatically create and manipulate `<pc-wasm>` elements using the [WasmElement API](https://api.playcanvas.com/web-components/classes/WasmElement.html).
 
-The element exposes no engine object of its own. Once it is ready the module has been instantiated through the engine's `WasmModule` under its `name` (`Basis` goes through the engine's Basis initializer instead), and the global the module defines, such as `Ammo`, is available to scripts.
+The element exposes no engine object of its own. Once it is ready the module has been instantiated through the engine's `WasmModule` under its `name` (`Basis` goes through the engine's Basis initializer instead). Ammo's glue script defines the global `Ammo`, so scripts can use it directly; reach other modules through `WasmModule.getInstance(name, callback)`.
 
 ## See Also
 
@@ -91,4 +98,4 @@ The element exposes no engine object of its own. Once it is ready the module has
 * [`<pc-collision>`](../pc-collision) — collision shapes for physics
 * [`<pc-app>`](../pc-app) — waits for every module before it boots
 
-Examples: [Basic Physics](https://playcanvas.github.io/web-components/examples/basic-physics.html), [Vehicle Physics](https://playcanvas.github.io/web-components/examples/vehicle-physics.html) and [Video Texture](https://playcanvas.github.io/web-components/examples/video-texture.html).
+Examples: [Basic Physics](https://playcanvas.github.io/web-components/examples/#basic-physics.html), [Vehicle Physics](https://playcanvas.github.io/web-components/examples/#vehicle-physics.html) and [Video Texture](https://playcanvas.github.io/web-components/examples/#video-texture.html).

@@ -11,7 +11,7 @@ You can skip the Editor entirely. Hit the orange **Upload Splat** button on the 
 
 :::
 
-![SuperSplat Interface](/img/user-manual/supersplat/editor/supersplat-interface.png)
+![SuperSplat Interface](/img/user-manual/supersplat/editor/editor-hero.webp)
 
 ## Video Tutorials
 
@@ -36,16 +36,14 @@ For a more comprehensive guide to using the SuperSplat Editor, check out this in
 ### Accessing the Editor
 
 1. **Open your browser** — Navigate to [superspl.at/editor](https://superspl.at/editor)
-2. **Load your PLY file** — Drag and drop or use the File menu
+2. **Load your splat file** — Drag and drop it into the window, or use **File > Import**
 3. **Begin editing** — Use the interface controls to navigate and edit
 
 ### System Requirements
 
-- **Modern web browser** — Chrome, Firefox, Safari, or Edge
-- **WebGL 2.0 support** — Available in all modern browsers
-- **WebGPU support** — Only needed for SOG and standalone viewer exports (available in recent Chrome, Edge, and Safari)
-- **GPU acceleration** — Recommended for large splat files
-- **No installation** — Everything runs in the browser
+- **A WebGPU-capable browser** — Current Chrome or Edge, Safari 26 or later, or Firefox with WebGPU enabled. If WebGPU is unavailable, the Editor shows a message at startup instead of loading.
+- **GPU acceleration** — Keep hardware acceleration enabled in your browser. A dedicated GPU helps with very large splats.
+- **Nothing to install** — Everything runs in the browser. You can optionally install the Editor as an app from the browser's address bar; it then opens `.ply`, `.splat`, `.sog`, `.spz`, `.ksplat`, and `.ssproj` files directly from your file manager.
 
 ## What's next?
 

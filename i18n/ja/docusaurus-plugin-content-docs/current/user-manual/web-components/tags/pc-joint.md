@@ -28,7 +28,7 @@ description: "pc-joint要素のリファレンス: fixed・ball・hinge・slider
 
 <!-- ジョイントはどちらのボディでもなく、支点に置きます -->
 <pc-entity name="hinge" position="0 2 0" rotation="0 90 0">
-    <pc-joint type="hinge" entity-a="#hinge-arm" entity-b="#hinge-anchor"
+    <pc-joint type="hinge" entity-a="hinge-arm" entity-b="hinge-anchor"
               enable-limits limits="-100 100"></pc-joint>
 </pc-entity>
 ```
@@ -47,7 +47,7 @@ description: "pc-joint要素のリファレンス: fixed・ball・hinge・slider
 
 | 属性 | タイプ | デフォルト | 説明 |
 | --- | --- | --- | --- |
-| `angular-damping` | Vector3 | `"1 1 1"` | 角度軸ごとのスプリングのダンピング。`6dof`で使用します |
+| `angular-damping` | Vector3 | `"1 1 1"` | 角度軸ごとのスプリングのダンピング。0から1までで、1はダンピングなし、値が小さいほど強く減衰します。`6dof`で使用します |
 | `angular-equilibrium` | Vector3 | `"0 0 0"` | 角度スプリングの静止角度。`6dof`で使用します |
 | `angular-limits-x` | Vector2 | `"0 0"` | フレームのX軸まわりの回転リミット。「min max」を度で指定します。`6dof`で使用します |
 | `angular-limits-y` | Vector2 | `"0 0"` | フレームのY軸まわりの回転リミット。「min max」を度で指定します。`6dof`で使用します |
@@ -58,12 +58,12 @@ description: "pc-joint要素のリファレンス: fixed・ball・hinge・slider
 | `angular-stiffness` | Vector3 | `"0 0 0"` | 角度軸ごとのスプリングの剛性。`6dof`で使用します |
 | `break-impulse` | Number | 破断しない | 拘束が破断するインパルスのしきい値。何があっても保持するジョイントにするには省略します |
 | `enable-collision` | Boolean | `"false"` | 拘束される2つのボディが互いに衝突するかどうか |
-| `enable-limits` | Boolean | `"false"` | ジョイントのリミットを適用するかどうか。これを設定するまでリミット系の属性は効果がありません |
+| `enable-limits` | Boolean | `"false"` | `hinge`・`slider`・`ball`ジョイントのリミットを適用するかどうか。これを設定するまでリミット系の属性は効果がなく、これだけを設定するとリミットのデフォルト値が適用されます。`6dof`ジョイントはこれを無視します |
 | `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |
-| `entity-a` | [Entity Reference](../attributes.md#entity-references) | - | 1つ目のボディを提供する[`<pc-entity>`](../pc-entity)への参照。[`<pc-rigid-body>`](../pc-rigid-body)が必要です |
-| `entity-b` | [Entity Reference](../attributes.md#entity-references) | - | 2つ目のボディを提供する[`<pc-entity>`](../pc-entity)への参照。空にすると`entity-a`をワールド空間の固定点に拘束します |
+| `entity-a` | [Entity Reference](../attributes.md#entity-references) | - | 1つ目のボディを提供する[`<pc-entity>`](../pc-entity)、[`<pc-model>`](../pc-model)、[`<pc-node>`](../pc-node)への参照。[`<pc-rigid-body>`](../pc-rigid-body)が必要です |
+| `entity-b` | [Entity Reference](../attributes.md#entity-references) | - | 2つ目のボディを提供する[`<pc-entity>`](../pc-entity)、[`<pc-model>`](../pc-model)、[`<pc-node>`](../pc-node)への参照。空にすると`entity-a`をワールド空間の固定点に拘束します |
 | `limits` | Vector2 | `"-45 45"` | 主軸まわりの回転または移動のリミット。「min max」で、`hinge`では度、`slider`ではユニットです |
-| `linear-damping` | Vector3 | `"1 1 1"` | 直線軸ごとのスプリングのダンピング。`6dof`で使用します |
+| `linear-damping` | Vector3 | `"1 1 1"` | 直線軸ごとのスプリングのダンピング。0から1までで、1はダンピングなし、値が小さいほど強く減衰します。`6dof`で使用します |
 | `linear-equilibrium` | Vector3 | `"0 0 0"` | 直線スプリングの静止位置。`6dof`で使用します |
 | `linear-limits-x` | Vector2 | `"0 0"` | フレームのX軸に沿った移動リミット。「min max」で指定します。`6dof`で使用します |
 | `linear-limits-y` | Vector2 | `"0 0"` | フレームのY軸に沿った移動リミット。「min max」で指定します。`6dof`で使用します |
@@ -74,8 +74,8 @@ description: "pc-joint要素のリファレンス: fixed・ball・hinge・slider
 | `linear-stiffness` | Vector3 | `"0 0 0"` | 直線軸ごとのスプリングの剛性。`6dof`で使用します |
 | `max-motor-force` | Number | `"0"` | モーターが加えられる最大のトルクまたは力。モーターを使わない場合は0のままにします。`hinge`と`slider`で使用します |
 | `motor-speed` | Number | `"0"` | モーターの目標速度。`hinge`と`slider`で使用します |
-| `swing-limit-y` | Number | `"45"` | フレームのY軸まわりの最大スイング角（度）。`ball`で使用します |
-| `swing-limit-z` | Number | `"45"` | フレームのZ軸まわりの最大スイング角（度）。`ball`で使用します |
+| `swing-limit-y` | Number | `"45"` | 主軸がフレームのY軸に向かってスイングできる量（Z軸まわりの回転）。両側への角度（度）です。`ball`で使用します |
+| `swing-limit-z` | Number | `"45"` | 主軸がフレームのZ軸に向かってスイングできる量（Y軸まわりの回転）。両側への角度（度）です。`ball`で使用します |
 | `twist-limit` | Number | `"20"` | 主軸まわりの最大ひねり角（度）。`ball`で使用します |
 | `type` | Enum | `"fixed"` | 拘束の種類: `"fixed"` \| `"ball"` \| `"hinge"` \| `"slider"` \| `"6dof"` |
 
@@ -95,7 +95,7 @@ description: "pc-joint要素のリファレンス: fixed・ball・hinge・slider
 
 どのタイプでも`entity-a`、`entity-b`、`enable-collision`、`break-impulse`は有効です。
 
-リミットは二重にオプトインです。`enable-limits`*と*リミット値の両方が必要です。`limits="-100 100"`を設定しても`enable-limits`がない`hinge`は自由に振れます。
+リミットはオプトインです。`limits="-100 100"`を設定しても`enable-limits`がない`hinge`は自由に振れます。`enable-limits`だけを設定するとデフォルト値 — hingeでは±45度、sliderでは±45ユニット、ballでは45度のスイングと20度のツイスト — が適用されるため、必要なリミット値も一緒に設定してください。`6dof`ジョイントは`enable-limits`をまったく使いません。各軸は、その`*-motion-*`を`"limited"`にすることで制限します。
 
 `6dof`ジョイントでは各軸が`"locked"`から始まるため、他に何も設定しないジョイントは`fixed`と同じように振る舞います。`linear-motion-*`と`angular-motion-*`で開放したい軸を開き、`"limited"`にした軸を対応する`linear-limits-*`または`angular-limits-*`で制限してください。
 
@@ -115,7 +115,7 @@ description: "pc-joint要素のリファレンス: fixed・ball・hinge・slider
 
 | イベント | 説明 |
 | --- | --- |
-| `break` | ジョイントに加わるインパルスが`break-impulse`を超え、拘束が破断したときに発生します。 |
+| `break` | ジョイントに加わるインパルスが`break-impulse`を超え、拘束が破断したときに発生します。エンジンがそれに気づくタイミングは下記を参照してください。 |
 
 ここにある他のほとんどの要素イベントと違い、`break`はバブリングしcomposedであるため、祖先要素に1つリスナーを付けるだけでシーン内のすべてのジョイントを監視できます。
 
@@ -124,6 +124,8 @@ document.addEventListener('break', (event) => {
     console.log(`${event.target.getAttribute('entity-a')} came loose`);
 });
 ```
+
+物理エンジンはインパルスを超えた瞬間に拘束を破断しますが、このマニュアルが読み込む標準のammo.jsビルドはそれを報告できません。そのため要素が破断に気づくのは2つのアンカー点が0.2ユニット以上離れてからで、`6dof`ジョイントの破断は報告されません。
 
 破断したジョイントはボディの拘束をやめ、自動で復帰することはありません。次のいずれかで復帰します。基盤となるコンポーネントの`refreshFrames()`を呼ぶ、コンポーネントの`enabled`を切り替える、または`type`・`entity-a`・`entity-b`を変更する。
 
@@ -134,7 +136,7 @@ joint.component.refreshFrames(); // 復帰し、現在のトランスフォー�
 
 ## 例 {#example}
 
-モーター駆動のhingeジョイントが、静的なハブを軸にブレードを回転させます。ジョイントエンティティは支点に置かれ、`"0 90 0"` の回転により、ローカルX軸 — ヒンジ軸 — がカメラの方を向いています。`motor-speed` を変えたり (負の値で逆回転)、`enable-limits limits="-60 60"` を追加してモーターがストッパーで止まる様子を見たりしてみましょう:
+モーター駆動のhingeジョイントが、静的なハブを軸にブレードを回転させます。ジョイントエンティティは支点に置かれ、`"0 90 0"` の回転により、ローカルX軸 — ヒンジ軸 — は画面の奥、カメラから遠ざかる方向を向いており、正の `motor-speed` ではブレードがこちらから見て時計回りに回ります。`motor-speed` を変えたり (負の値で逆回転)、`enable-limits limits="-60 60"` を追加してモーターがストッパーで止まる様子を見たりしてみましょう:
 
 ```html live-example
 <pc-app>
@@ -170,7 +172,7 @@ joint.component.refreshFrames(); // 復帰し、現在のトランスフォー�
 </pc-app>
 ```
 
-[Physics Jointsのサンプル](https://playcanvas.github.io/web-components/examples/physics-joints.html)では各タイプを1つずつ構築しており、落下する重りで破断するfixedジョイントも含まれています。
+[Physics Jointsのサンプル](https://playcanvas.github.io/web-components/examples/#physics-joints.html)では各タイプを1つずつ構築しており、落下する重りで破断するfixedジョイントも含まれています。
 
 ## JavaScriptインターフェース {#javascript-interface}
 
@@ -193,4 +195,4 @@ joint.entityA = '#link-3'; // ここで再解決されます
 * [`<pc-collision>`](../pc-collision) — ボディに形状を与えます
 * [`<pc-wasm>`](../pc-wasm) — 物理に必要なAmmoモジュールをロードします
 
-サンプル: [Physics Joints](https://playcanvas.github.io/web-components/examples/physics-joints.html)、[Ragdoll](https://playcanvas.github.io/web-components/examples/ragdoll.html)、[AR Wiener Storm](https://playcanvas.github.io/web-components/examples/ar-wiener-storm.html)
+サンプル: [Physics Joints](https://playcanvas.github.io/web-components/examples/#physics-joints.html)、[Ragdoll](https://playcanvas.github.io/web-components/examples/#ragdoll.html)、[AR Wiener Storm](https://playcanvas.github.io/web-components/examples/#ar-wiener-storm.html)

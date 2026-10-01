@@ -8,7 +8,7 @@ import TabItem from '@theme/TabItem';
 
 :::warning[アルファ版]
 
-Jointコンポーネントはアルファ版のため、その挙動やAPIは変わる可能性があります。すべての環境でコードから利用でき、Web Componentsではタグとしても利用できますが、エディターにはまだ専用のインスペクターがなく、PlayCanvas Reactには対応するコンポーネントがありません。
+Jointコンポーネントはアルファ版のため、その挙動やAPIは変わる可能性があります。すべての環境でコードから利用でき、Web Componentsではタグとして、さらにEditor 2.32以降はエディターのインスペクターからも利用できます。PlayCanvas Reactには対応するコンポーネントがありません。
 
 :::
 
@@ -69,7 +69,9 @@ app.root.addChild(hinge);
 </TabItem>
 <TabItem value="editor" label="Editor">
 
-Jointのインスペクターはまだないため、ヒンジのエンティティにアタッチしたスクリプトからコンポーネントを追加します。エンティティの位置と回転はいつもどおりビューポートで設定し、2つのボディをスクリプトのアトリビュートに割り当てます。
+Editor 2.32以降は、**Add Component → Physics → Joint** からコンポーネントを直接追加し、インスペクターで設定できます。各フィールドの詳細は[Jointコンポーネント](/user-manual/editor/scenes/components/joint/)のリファレンスを参照してください。
+
+コードから制御する場合は、ヒンジのエンティティにアタッチしたスクリプトからコンポーネントを追加します。エンティティの位置と回転はいつもどおりビューポートで設定し、2つのボディをスクリプトのアトリビュートに割り当てます。
 
 ```javascript
 import { Script, Vec2, JOINTTYPE_HINGE } from 'playcanvas';
@@ -199,3 +201,4 @@ weld.on('break', () => {
 - [`<pc-joint>`](/user-manual/web-components/tags/pc-joint/) - Web Componentsでの同じジョイント。各タイプのライブ例付き
 - [Ragdoll](https://playcanvas.github.io/#/physics/ragdoll) - ボールジョイントとヒンジジョイントでキャラクターを組み立てるエンジンの例
 - [RigidBody](/user-manual/physics/rigid-bodies/) - すべてのジョイントが拘束するボディ
+- [Jointコンポーネント](/user-manual/editor/scenes/components/joint/) - 同じコンポーネントのエディターインスペクター

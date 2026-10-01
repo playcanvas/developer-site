@@ -166,4 +166,4 @@ solid = bit < 32 ? (lo >>> bit) & 1 : (hi >>> (bit - 32)) & 1
 ## 関連項目
 
 - [コリジョンメッシュ](/user-manual/splat-transform/collision) — splat-transformによるボクセルおよびコリジョンデータの生成。
-- [splat-transform CLIリファレンス](/user-manual/splat-transform/) — ボクセル出力オプションを含む全オプションのリファレンス。
+- [CLIリファレンス](/user-manual/splat-transform/cli-reference#voxel-output-options) — ボクセル出力オプションを含む全オプションのリファレンス。

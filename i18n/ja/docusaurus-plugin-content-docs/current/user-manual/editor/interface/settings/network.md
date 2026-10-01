@@ -16,12 +16,15 @@ description: PlayCanvas アプリケーションの Asset 読み込みの再試�
 
 ![Network Settings](/img/user-manual/editor/interface/settings/network.webp)
 
+<video autoPlay muted loop controls src='/video/editor-network-settings.mp4' style={{width: '100%', height: 'auto'}} />
+
 利用可能な設定は次のとおりです。
 
 ## 設定
 
 | 設定 | 説明 |
 | --- | --- |
+| **Asset Credentials** | Cookie、クライアント証明書、HTTP 認証などの資格情報を付けてアセットのリクエストを送信します。認証を要求するクロスオリジンのサーバー側では、資格情報を許可し、特定のオリジンを返す必要があります。 |
 | **Asset Retries** | アセットの読み込みが失敗した際に再試行する最大回数。失敗時はエクスポネンシャルバックオフで再試行されます。 |
 | **Max Concurrent Requests** | 同時に処理中にできるアセットリクエストの最大数。上限を超えたリクエストはキューに入れられ、先行するリクエストの完了に応じて送信されます。これにより、大量のアセットを一度に読み込む際にブラウザがリクエストを `net::ERR_INSUFFICIENT_RESOURCES` で拒否するのを防ぎます。デフォルトは 128 で、0 を設定するとスロットリングが無効になります。 |
 

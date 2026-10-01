@@ -11,12 +11,9 @@ To export your splat as an HTML viewer:
 
 1. Open the `File` > `Export` submenu in the SuperSplat Editor.
 2. Select `Viewer App…`.
+3. Choose the output folder under **Location** and enter a **Filename**, set the options below, and click **Export**. The Editor remembers the folder for next time; in browsers without the File System Access API the file is delivered as a download instead.
 
-:::note
-
-Viewer export requires a browser with **WebGPU** support, as the embedded splat data is compressed to SOG on the GPU. In a browser without WebGPU, the export fails with the error: "This export requires WebGPU, which is not available in this browser. Please try a recent version of Chrome, Edge or Safari."
-
-:::
+The splat data is compressed to SOG on the GPU as part of the export, so large scenes take a moment.
 
 ## Export Options
 
@@ -28,8 +25,8 @@ The viewer export can be configured via several options:
 |--------|-------------|
 | **Export Type** | Controls the format of the exported viewer:<br/>• **HTML**: A single-page `.html` file where the splat is compressed to SOG, Base64 encoded and embedded directly into the file. Very convenient since everything is packed into a single file that can be double-clicked to run in your browser using the `file://` protocol. However, the base64 encoding means it will be roughly 30% larger than the ZIP Package format, and browsers impose different limits on the maximum size (below 32MB should load everywhere, but above this you could encounter problems)<br/>• **ZIP Package**: A zip file containing the viewer app (`index.html`, `index.js`, `index.css` and `settings.json`) plus the splat data as a bundled SOG file (`index.sog`). Smaller, loads faster and guaranteed to load everywhere. However, it will only load over `http://`, so you will need to run a local web server (e.g. Node's [`serve`](https://www.npmjs.com/package/serve) or Python's [`http.server`](https://docs.python.org/3/library/http.server.html) (`python -m http.server`)) |
 | **Animation** | If enabled, the camera animation authored on the [Timeline](/user-manual/supersplat/editor/timeline) is included and plays when the viewer loads. Only available when the Timeline has keyframes (and enabled by default in that case) |
-| **Loop Mode** | How an included camera animation plays back:<br/>• **None**: Play once and stop<br/>• **Repeat** (default): Loop continuously<br/>• **Ping Pong**: Play forwards, then backwards, repeatedly |
-| **Background** | The background color of the viewer. Defaults to the Editor's current background color |
+| **Loop Mode** | How an included camera animation plays back:<br/>• **None**: Play once and stop<br/>• **Repeat**: Loop continuously<br/>• **Ping Pong**: Play forwards, then backwards, repeatedly<br/>Initialized from the Timeline's Loop toggle - **Repeat** if looping is enabled, **None** otherwise |
+| **Background** | The background color of the viewer. Defaults to the Editor's current background color (set in the [Appearance](/user-manual/supersplat/editor/interface#appearance) popup) |
 | **Field of View** | The vertical field of view of the viewer's camera in degrees. Defaults to the Editor camera's current setting |
 | **SH Bands** | The number of spherical harmonics bands to include in the exported splat data |
 

@@ -3,7 +3,9 @@ title: <pc-screen>
 description: "Reference for the pc-screen element: 2D screen space for UI elements, resolution, scale modes, and child pc-element hierarchies."
 ---
 
-The `<pc-screen>` tag is used to define a screen component.
+The `<pc-screen>` tag adds a screen component, the root of a 2D user interface. The [`<pc-element>`](../pc-element) entities below it are laid out in its units, and drawn either over the camera's view or on a panel in the scene.
+
+A `<pc-screen>` without attributes is a world-space screen: a 640 × 320 panel in its entity's local units, so at the entity's default scale it is 640 meters wide, and a 32 × 32 element on it is 32 meters across. For a HUD or a menu, set `screen-space`, as the example below does. For a panel in the world, scale the entity down — see [Size and Scale](/user-manual/user-interface/world-space-ui/#size-and-scale).
 
 :::note[Usage]
 
@@ -18,12 +20,12 @@ The `<pc-screen>` tag is used to define a screen component.
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
-| `priority` | Number | `"0"` | Rendering priority (0-255) |
-| `reference-resolution` | Vector2 | `"640 320"` | Reference resolution as "Width Height" values |
-| `resolution` | Vector2 | `"640 320"` | Screen resolution as "Width Height" values |
-| `scale-blend` | Number | `"0.5"` | How `resolution` and `reference-resolution` are weighted against each other when `scale-mode` is `"blend"`, from 0 (follow `resolution`) to 1 (follow `reference-resolution`). Ignored when `scale-mode` is `"none"` |
-| `scale-mode` | Enum | `"none"` | How the screen scales its contents: `"none"` \| `"blend"`. `"none"` renders at `resolution` and ignores `reference-resolution`; `"blend"` scales between the two, weighted by `scale-blend`, which is what keeps a UI laid out at one resolution usable at another. Requires `screen-space` |
-| `screen-space` | Boolean | `"false"` | Whether to render in screen space |
+| `priority` | Number | `"0"` | Drawing order among screens, from 0 to 127: a screen with a higher priority is drawn over screens with a lower one, and its elements receive input first |
+| `reference-resolution` | Vector2 | `"640 320"` | The resolution the UI is laid out for, as "Width Height" values. With `scale-mode="blend"`, the contents are scaled by the size of the canvas relative to it |
+| `resolution` | Vector2 | `"640 320"` | Size of a world-space screen in its entity's local units, as "Width Height" values. A screen-space screen takes its resolution from the canvas, so this has no effect on one |
+| `scale-blend` | Number | `"0.5"` | With `scale-mode="blend"`, how the width and the height of the canvas are weighted in the scale, from 0 (width only) to 1 (height only). 0.5 weights them equally. Ignored when `scale-mode` is `"none"` |
+| `scale-mode` | Enum | `"none"` | How the screen scales its contents: `"none"` \| `"blend"`. `"none"` doesn't scale them: on a screen-space screen, one unit is one pixel of the canvas's drawing buffer. `"blend"` scales them by the size of the canvas relative to `reference-resolution`, weighted by `scale-blend`, which is what keeps a UI laid out at one resolution usable at another. Requires `screen-space` |
+| `screen-space` | Boolean | `"false"` | Whether the screen is drawn over the camera's view, at the size of the canvas. Otherwise it is a world-space screen, placed in the scene by its entity's transform and sized by `resolution` |
 
 </div>
 
@@ -71,5 +73,7 @@ The `component` property is the engine [ScreenComponent](https://api.playcanvas.
 * [`<pc-layout-group>`](../pc-layout-group) — automatic arrangement of elements
 * [`<pc-scroll-view>`](../pc-scroll-view) — scrolling content on a screen
 * [`<pc-button>`](../pc-button) — interactive elements
+* [Screens](/user-manual/user-interface/screens/) — screen space and world space, resolution and scaling, in the User Interface section
+* [World-Space UI](/user-manual/user-interface/world-space-ui/) — screens placed in the scene, and sizing them in meters
 
-Examples: [2D Screen](https://playcanvas.github.io/web-components/examples/2d-screen.html), [UI Layout](https://playcanvas.github.io/web-components/examples/ui-layout.html) and [Scroll View](https://playcanvas.github.io/web-components/examples/scroll-view.html).
+Examples: [2D Screen](https://playcanvas.github.io/web-components/examples/#2d-screen.html), [UI Layout](https://playcanvas.github.io/web-components/examples/#ui-layout.html) and [Scroll View](https://playcanvas.github.io/web-components/examples/#scroll-view.html).

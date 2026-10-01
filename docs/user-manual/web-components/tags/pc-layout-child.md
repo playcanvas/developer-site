@@ -3,7 +3,7 @@ title: <pc-layout-child>
 description: "Reference for the pc-layout-child element: per-child layout constraints (min/max size and fit proportions) within a layout group."
 ---
 
-The `<pc-layout-child>` tag is used to define a layout child component, which controls how an element is sized by its parent [`<pc-layout-group>`](../pc-layout-group).
+The `<pc-layout-child>` tag adds a layout child component, which changes how the [`<pc-layout-group>`](../pc-layout-group) of its entity's parent sizes the entity's element, or leaves it out of the layout.
 
 :::note[Usage]
 
@@ -19,9 +19,9 @@ The `<pc-layout-child>` tag is used to define a layout child component, which co
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
-| `exclude-from-layout` | Boolean | `"false"` | Exclude this element from the layout so it takes up no space |
-| `fit-height-proportion` | Number | `"0"` | Proportion of the group's spare height this element takes when `height-fitting` stretches or shrinks |
-| `fit-width-proportion` | Number | `"0"` | Proportion of the group's spare width this element takes when `width-fitting` stretches or shrinks |
+| `exclude-from-layout` | Boolean | `"false"` | Whether to leave the element out of the layout, so that it takes up no space and keeps its own anchor and position |
+| `fit-height-proportion` | Number | `"0"` | The element's share of the height that `height-fitting` adds or removes in a vertical layout. See the note below |
+| `fit-width-proportion` | Number | `"0"` | The element's share of the width that `width-fitting` adds or removes in a horizontal layout. See the note below |
 | `max-height` | Number | - | Maximum height the element is laid out with (omit for no limit) |
 | `max-width` | Number | - | Maximum width the element is laid out with (omit for no limit) |
 | `min-height` | Number | `"0"` | Minimum height the element is laid out with |
@@ -29,9 +29,15 @@ The `<pc-layout-child>` tag is used to define a layout child component, which co
 
 </div>
 
+:::note[Proportions]
+
+When a layout group stretches its children along the layout, they share the extra space by their proportions: a child with 2 gets twice as much as a child with 1, and a child with 0 gets none — unless every child has 0, and they share it equally. Shrinking inverts the proportions, taking less from a larger one: two 100-unit children with 2 and 1, shrunk into 140 units, become 80 and 60. Across the layout, each child is fitted on its own. See [Layout Children](/user-manual/user-interface/layout-groups/#layout-children).
+
+:::
+
 ## Example
 
-Three items in a horizontal group with `width-fitting="stretch"`. The middle item's `fit-width-proportion="1"` means it alone absorbs the group's spare width. Try giving the first item a proportion of `1` too — they will share it — or set a `max-width` on the middle one:
+Three items in a horizontal group with `width-fitting="stretch"`. The middle item's `fit-width-proportion="1"` means it alone takes the group's spare width. Try giving the first item a proportion of `1` too, and the two share it, or `2`, and the first takes twice as much. Delete the middle item's proportion, and all three share it equally:
 
 ```html live-example
 <pc-app>
@@ -74,5 +80,6 @@ The `component` property is the engine [LayoutChildComponent](https://api.playca
 
 * [`<pc-layout-group>`](../pc-layout-group) — the group whose layout the child adjusts
 * [`<pc-element>`](../pc-element) — the element the child sizes
+* [Layout Children](/user-manual/user-interface/layout-groups/#layout-children) — sizes, proportions and exclusion, in the User Interface section
 
-Examples: [UI Layout](https://playcanvas.github.io/web-components/examples/ui-layout.html) and [Scroll View](https://playcanvas.github.io/web-components/examples/scroll-view.html).
+Examples: [UI Layout](https://playcanvas.github.io/web-components/examples/#ui-layout.html) and [Scroll View](https://playcanvas.github.io/web-components/examples/#scroll-view.html).

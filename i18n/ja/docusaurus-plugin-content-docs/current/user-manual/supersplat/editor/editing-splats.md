@@ -5,66 +5,54 @@ description: SuperSplatでガウシアンを選択、ロック、削除、復元
 
 編集前に**Scene Manager**でスプラットを選択します。複数のスプラットが表示されている場合でも、ガウシアンの選択とクリーンアップ操作はアクティブスプラットだけに適用されます。
 
-## 編集モード
+## Selection DepthとSelection Footprint {#selection-depth-and-footprint}
 
-SuperSplatは、以下の2つの**_編集モード_**のいずれかで動作します：
+下ツールバー左側の2つのトグルは、すべての選択ツールがどのガウシアンを対象にするかを制御します。Editorを初めて開いたとき、どちらもオフです。
 
-- センターモード
-- リングモード
+| トグル | ショートカット | オフ（デフォルト） | オン |
+|---|---|---|---|
+| **Selection Depth**（選択深度） | `N` | シーン全体を貫通して選択します。手前に何があっても、ツールの形状の下にあるすべてのガウシアンが対象になります。 | 可視サーフェスだけを選択します。他のガウシアンの背後に隠れたガウシアンはそのまま残ります。シーンを貫通せずに表面をクリーンアップしたいときにオンにします。 |
+| **Selection Footprint**（選択フットプリント） | `M` | 中心点で選択します。中心点がツールの形状の内側にあるガウシアンが対象になります。 | フットプリントで選択します。投影された楕円の一部でも形状の内側にあれば対象になるため、選択範囲の縁にある大きくて柔らかいガウシアンも含まれます。 |
 
-これらのモードは、選択の動作とビューポートに表示される内容に影響します。
+ビューポートには、ツールが判定している内容を表示できます。Selection Footprintがオフのときは各ガウシアンの中心に点が、オンのときは各フットプリントを囲むリングが表示されます。選択されたガウシアンは選択色（デフォルトは黄色）で、未選択のガウシアンは青色でハイライトされます。これらのオーバーレイは[Appearance](color-and-appearance.md#appearance)ポップアップの設定に従って描画され、サイズ、太さ、着色の強さ、色を変更できます。
 
-### センターモード
+![中心点で選択しているときに表示されるガウシアンの中心点](/img/user-manual/supersplat/editor/display-centers.webp)
 
-センターモードでは：
+![フットプリントで選択しているときに表示されるガウシアンのリング](/img/user-manual/supersplat/editor/display-rings.webp)
 
-- ガウシアンは、その中心に青い点がオーバーレイ表示されます。
-- 選択はすべてのガウシアンの中心に適用され、スクリーンの深度とは無関係です。
-- 中心は選択状態に応じて色分けされます。デフォルトでは、未選択のガウシアンには青が、選択されたガウシアンには黄色が使用されます。
-- 中心がレンダリングされるサイズは、SETTINGSパネルで制御できます。
+### 表示オーバーレイ
 
-<img width="1224" alt="Screenshot 2025-01-06 at 08 51 53" src="/img/user-manual/supersplat/editor/centers-mode.png" />
+`Tab`を押すと、中心点とリングのオーバーレイのオン・オフを切り替えられます。Editorの起動時はオフで、レンダリングされたスプラットがそのまま表示されます。作業中に個々のガウシアンを確認したいときは、`Tab`を押す（またはAppearanceでDisplayトグルをオンにする）と表示されます。オーバーレイを隠しても選択の動作は変わりません。Selection DepthとSelection Footprintは描画内容とは独立しており、選択されたガウシアンのハイライトは引き続き表示されます。
 
-### リングモード
-
-リングモードでは：
-
-- ガウシアンは、その外縁にリングがオーバーレイ表示されます。
-- 選択は、ガウシアンリングの最上位レイヤーにのみ適用されます。
-- 選択されたガウシアンは（デフォルトで）黄色に色分けされます。
-
-<img width="1224" alt="Screenshot 2025-01-06 at 08 51 58" src="/img/user-manual/supersplat/editor/rings-mode.png" />
-
-### オーバーレイの無効化
-
-モードオーバーレイは完全に無効にできます（**Tab**キーを使用）。そのため、点もリングも表示されません。
-
-ただし、選択動作は引き続きアクティブなモードによって決定されることに注意してください。
-
-<img width="1224" alt="Screenshot 2025-01-06 at 08 51 48" src="/img/user-manual/supersplat/editor/disable-overlay.png" />
+ロックまたは削除されたガウシアンは選択できません。完全に透明なガウシアンは選択できるため、目には見えなくてもメモリと描画時間を消費している残骸をクリーンアップできます。
 
 ## 選択ツール
 
-Scene Managerの各行はインポートしたスプラットを表し、選択ツールはアクティブスプラット内の個々のガウシアンに作用します。スプラットのクロップや不要なガウシアンの削除には、次の8つのツールを使用します。
+Scene Managerの各行はインポートしたスプラットを表し、選択ツールはアクティブスプラット内の個々のガウシアンに作用します。スプラットのクロップや不要なガウシアンの削除には、次のツールを使用します。
 
 <div class="no-wrap-first-col">
 
 | ツール | 説明 |
 |------|-------------|
-| ![Picker Select](/img/user-manual/supersplat/editor/select-picker.svg) **Picker Select** | クリックで単一のガウシアンを選択するか、クリック＆ドラッグで矩形の選択領域を作成します。これはデフォルトの選択ツールです。 |
-| ![Lasso Select](/img/user-manual/supersplat/editor/select-lasso.svg) **Lasso Select** | クリック＆ドラッグで自由な形状を描画します。図形のアウトライン内のガウシアンが選択されます。これは2Dスクリーン空間の選択ツールです。 |
-| ![Polygon Select](/img/user-manual/supersplat/editor/select-poly.svg) **Polygon Select** | クリックしてポリゴンの頂点を定義する点を配置します。`Backspace`または`Delete`キーで最後に配置した点を削除できます。最初の点をクリックする、ダブルクリックする、または`Enter`キーを押すことで図形を閉じます。ポリゴン内のガウシアンが選択されます。直線のエッジを持つ正確な選択に便利です。 |
-| ![Brush Select](/img/user-manual/supersplat/editor/select-brush.svg) **Brush Select** | クリック＆ドラッグで円形ブラシを使用して選択をペイントします。ブラシサイズは `[`（縮小）と `]`（拡大）キーで調整できます。有機的な選択作業に最適です。 |
-| ![Flood Select](/img/user-manual/supersplat/editor/select-flood.svg) **Flood Select** | ビューポート上でクリックして、塗りつぶしアルゴリズムに基づいた2D選択マスクを生成します。閾値スライダー（0-1）が塗りつぶしの感度を制御します。このツールは、シーン内で孤立して表示されるはぐれたガウシアン（フローターとも呼ばれます）を選択して削除するのに特に便利です。 |
-| ![Eyedropper Select](/img/user-manual/supersplat/editor/select-eyedropper.svg) **Eyedropper Select** | ビューポート上でクリックして、色の類似性に基づいてガウシアンを選択します。閾値スライダー（0-1）がカラーマッチングの感度を制御します。このツールは、類似した色を持つガウシアンのグループを選択するのに便利です。 |
-| ![Sphere Select](/img/user-manual/supersplat/editor/select-sphere.svg) **Sphere Select** | ボリューメトリック選択用の3D球体ボリュームを作成します。シーン内の任意の場所をダブルクリックして球の中心を配置します。ツールバーのMoveボタンとScaleボタン（または`1`キーと`3`キー）で球のギズモを切り替えられ、スケールギズモの中央ハンドルをドラッグすると半径が変わります。**位置**（X、Y、Z）と**半径**を数値で入力することもできます。**Set**、**Add**、**Remove**、または**Intersect**をクリックして、現在の選択にボリュームを適用します。 |
-| ![Box Select](/img/user-manual/supersplat/editor/select-box.svg) **Box Select** | ボリューメトリック選択用の3Dボックスを作成します。シーン内の任意の場所をダブルクリックしてボックスの中心を配置します。ツールバーのMove、Rotate、Scaleボタン（または`1`、`2`、`3`キー）でボックスのギズモを切り替えられ、ボックスを自由に移動・回転・リサイズできます。**位置**（X、Y、Z）と**サイズ**（X、Y、Z）を数値で入力することもできます。回転ギズモがアクティブな間は、**サイズ**フィールドの代わりに**回転**フィールドが表示されます（`0, 0, 0`を入力すると向きがリセットされます）。**Set**、**Add**、**Remove**、または**Intersect**をクリックして、現在の選択にボリュームを適用します。これは3D空間の特定領域内のガウシアンを選択するのに最適です。 |
+| ![Rectangle Selection](/img/user-manual/supersplat/editor/select-picker.svg) **Rectangle Selection**（`R`） | クリックで単一のガウシアンを選択するか、クリック＆ドラッグで矩形の内側をすべて選択します。これはデフォルトの選択ツールです。 |
+| ![Brush Selection](/img/user-manual/supersplat/editor/select-brush.svg) **Brush Selection**（`B`） | クリック＆ドラッグで円形ブラシを使用して選択をペイントします。ブラシサイズは`[`（縮小）と`]`（拡大）キー、または`Alt + ホイール`で調整できます。有機的な選択作業に最適です。 |
+| ![Polygon Selection](/img/user-manual/supersplat/editor/select-poly.svg) **Polygon Selection**（`P`） | クリックしてポリゴンの頂点を配置します。`Backspace`で最後に配置した点を削除できます。最初の点をクリックする、ダブルクリックする、または`Enter`キーを押すことで図形を閉じます。直線のエッジを持つ正確な選択に便利です。Lasso Selectionとツールバーのボタンを共有します。 |
+| ![Lasso Selection](/img/user-manual/supersplat/editor/select-lasso.svg) **Lasso Selection**（`L`） | クリック＆ドラッグで自由な形状を描画します。アウトライン内のガウシアンが選択されます。Polygon Selectionとツールバーのボタンを共有します。 |
+| ![Eyedropper Selection](/img/user-manual/supersplat/editor/select-eyedropper.svg) **Eyedropper Selection**（`Ctrl + E`） | ビューポートをクリックして、類似した色のガウシアンを選択します。閾値スライダー（0～1）がカラーマッチングの感度を制御します。Flood Selectionとツールバーのボタンを共有します。 |
+| ![Flood Selection](/img/user-manual/supersplat/editor/select-flood.svg) **Flood Selection**（`O`） | ビューポートをクリックして、その点から塗りつぶしで2D選択範囲を広げます。閾値スライダー（0～1）が感度を制御します。孤立したはぐれガウシアン（フローター）に特に便利です。Eyedropper Selectionとツールバーのボタンを共有します。 |
+| ![Sphere Brush Selection](/img/user-manual/supersplat/editor/select-sphere-brush.svg) **Sphere Brush Selection**（`Shift + B`） | 3Dで選択をペイントします。ストロークの各点はカーソル下のサーフェスに投影され、その位置の球の内側にあるガウシアンを選択するため、ブラシはシーンを貫通せずにサーフェスに沿います。ブラシサイズはBrush Selectionと共有され（`[`、`]`、`Alt + ホイール`）、ピックした深度でのワールド空間の半径に対応します。 |
+| ![Sphere Selection](/img/user-manual/supersplat/editor/select-sphere.svg) **Sphere Selection** | ボリューメトリック選択用の3D球体ボリュームを作成します。シーン内の任意の場所をダブルクリックして球の中心を配置します。ツールバーのMoveボタンとScaleボタン（または`1`キーと`3`キー）で球のギズモを切り替えられ、スケールギズモの中央ハンドルをドラッグすると半径が変わります。**Position**（X、Y、Z）と**Radius**を数値で入力することもできます。**Set**、**Add**、**Remove**、または**Intersect**をクリックして、現在の選択にボリュームを適用します。 |
+| ![Box Selection](/img/user-manual/supersplat/editor/select-box.svg) **Box Selection** | ボリューメトリック選択用の3Dボックスを作成します。シーン内の任意の場所をダブルクリックしてボックスの中心を配置します。ツールバーのMove、Rotate、Scaleボタン（または`1`、`2`、`3`キー）でボックスのギズモを切り替えられ、ボックスを自由に移動・回転・リサイズできます。**Position**（X、Y、Z）と**Size**（X、Y、Z）を数値で入力することもできます。回転ギズモがアクティブな間は、**Size**フィールドの代わりに**Rotation**フィールドが表示されます（`0, 0, 0`を入力すると向きがリセットされます）。**Set**、**Add**、**Remove**、または**Intersect**をクリックして、現在の選択にボリュームを適用します。3D空間の特定領域内のガウシアンを選択するのに最適です。 |
 
 </div>
 
+ツールバーのボタンのうち2つは、それぞれ2つのツールを持ちます：**Polygon** / **Lasso**と**Eyedropper** / **Flood**です。ボタンをクリックすると現在表示されているツールが有効になり、長押しするともう一方を選べます。ボタンは選んだツールを記憶します。キーボードショートカットは常に特定のツールを有効にします。
+
+![Polygon / Lassoポップアップを開いた下ツールバー](/img/user-manual/supersplat/editor/bottom-toolbar.png)
+
 ### 選択修飾キー {#selection-modifiers}
 
-2D選択ツールは、選択の適用方法を制御する修飾キーをサポートしています：
+2D選択ツールとSphere Brushは、選択の適用方法を制御する修飾キーをサポートしています：
 
 | 修飾キー | アクション |
 |----------|--------|
@@ -73,11 +61,9 @@ Scene Managerの各行はインポートしたスプラットを表し、選択�
 | **Ctrl** | 現在の選択から削除 |
 | **Shift + Ctrl** | 現在の選択と新しい選択の両方に含まれるガウシアンだけを保持 |
 
-**Intersect**はPicker、Lasso、Polygon、Brush、Flood Selectで利用できます。Eyedropper Selectは**Set**、**Add**、**Remove**に対応しますが、**Intersect**には対応しません。
+これらのツールがアクティブな間、カーソルには現在の修飾キーで適用される操作が表示されます。通常の十字カーソルは**Set**を表し、十字カーソルのバッジは**Add**（`+`）、**Remove**（`−`）、または**Intersect**（`∩`）を示します。[Splat Dataパネル](data-panel.md)で値の範囲を選択するときも、同じフィードバックが表示されます。
 
-Picker、Lasso、Polygon、Brush、またはFlood Selectがアクティブな間、カーソルには現在の修飾キーで適用される操作が表示されます。通常の十字カーソルは**Set**を表し、十字カーソルのバッジは**Add**（`+`）、**Remove**（`−`）、または**Intersect**（`∩`）を示します。[Splat Dataパネル](data-panel.md)で値の範囲を選択するときも、同じフィードバックが表示されます。
-
-3D選択ツール（Sphere Select、Box Select）は、修飾キーの代わりにツールバーに**Set**、**Add**、**Remove**、**Intersect**ボタンがあります。ボリュームの変形には変形ツールと同じギズモを使用します。アクティブなギズモモードのボタンをもう一度クリックするとギズモが非表示になり、ギズモはローカル/ワールド座標空間トグルに従い、ツールがアクティブな間のボリューム編集は元に戻すことができます。
+3Dボリュームツール（Sphere Selection、Box Selection）は、修飾キーの代わりにツールバーに**Set**、**Add**、**Remove**、**Intersect**ボタンがあります。ボリュームの変形には変形ツールと同じギズモを使用します。アクティブなギズモモードのボタンをもう一度クリックするとギズモが非表示になり、ギズモはローカル/ワールド座標空間トグルに従い、ツールがアクティブな間のボリューム編集は元に戻すことができます。`F`を押すとボリュームをビューポートにフレーミングします。
 
 ## ロック、削除、復元
 
@@ -94,21 +80,21 @@ Picker、Lasso、Polygon、Brush、またはFlood Selectがアクティブな間
 - **Duplicate**は、選択したガウシアンを新しいスプラットへコピーし、元のガウシアンを変更しません。
 - **Separate**は、選択したガウシアンから新しいスプラットを作成し、元のスプラットからそのガウシアンを削除します。
 
-どちらの操作も元に戻せます。領域ごとに異なる変形、表示、[Color](color-and-appearance.md)設定を適用する場合に便利です。
+どちらの操作も元に戻せます。領域ごとに異なる変形や表示を適用する場合に便利です。
 
 ## クリーンアップ手順
 
 ### フローターの除去
 
-1. **Rings**モードへ切り替え、選択が最前面の表示サーフェスで止まるようにします。
-2. 孤立した領域にはFlood Selectを使用し、より大きな領域にはLasso、Brush、Sphere、Box Selectを使用します。
+1. **Selection Depth**（`N`）をオンにして選択が可視サーフェスで止まるようにし、作業中にガウシアンの中心点を確認したい場合は`Tab`を押します。
+2. 孤立した領域にはFlood Selectionを使用し、より大きな領域にはLasso、Brush、Sphere Brush、Sphere、Box Selectionを使用します。
 3. カメラを回転し、目的のジオメトリだけが分離されるまで選択範囲へ追加または削除します。
 4. `Delete`または`Backspace`を押します。
 5. 複数のアングルから結果を確認し、削除しすぎた場合はUndoを使用します。
 
 ### スプラットのクロップ
 
-1. Box、Sphere、Lasso、Polygon Selectを使用して、保持する領域を選択します。
+1. Box、Sphere、Lasso、Polygon Selectionを使用して、保持する領域を選択します。選択がシーン全体を貫通するように、**Selection Depth**はオフのままにします。
 2. **Select > Invert**を選択します。
 3. 反転した選択範囲を削除します。
 4. クリーンアップした結果をエクスポートするか、スプラットとプロジェクトの設定を保持する場合は`.ssproj`を保存します。

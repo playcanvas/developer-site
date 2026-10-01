@@ -3,7 +3,7 @@ title: <pc-layout-child>
 description: "pc-layout-child要素のリファレンス: レイアウトグループ内での子ごとのレイアウト制約（最小/最大サイズとフィット比率）です。"
 ---
 
-`<pc-layout-child>`タグは、親の [`<pc-layout-group>`](../pc-layout-group) によって要素がどのようにサイズ調整されるかを制御するレイアウトの子コンポーネントを定義するために使用されます。
+`<pc-layout-child>`タグは、エンティティの親の [`<pc-layout-group>`](../pc-layout-group) がエンティティの要素のサイズをどう決めるかを変えたり、要素をレイアウトから外したりするレイアウトチャイルドコンポーネントを追加します。
 
 :::note[使用法]
 
@@ -19,9 +19,9 @@ description: "pc-layout-child要素のリファレンス: レイアウトグル�
 | 属性 | タイプ | デフォルト | 説明 |
 | --- | --- | --- | --- |
 | `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |
-| `exclude-from-layout` | Boolean | `"false"` | この要素をレイアウトから除外し、スペースを取らないようにします |
-| `fit-height-proportion` | Number | `"0"` | `height-fitting` が stretch または shrink のとき、この要素が取るグループの余剰高さの割合 |
-| `fit-width-proportion` | Number | `"0"` | `width-fitting` が stretch または shrink のとき、この要素が取るグループの余剰幅の割合 |
+| `exclude-from-layout` | Boolean | `"false"` | 要素をレイアウトから外すかどうか。外した要素はスペースを取らず、自身のアンカーと位置を保ちます |
+| `fit-height-proportion` | Number | `"0"` | 縦のレイアウトで、`height-fitting` が加える、または減らす高さのうち、この要素が受け持つ比率。下の注記を参照してください |
+| `fit-width-proportion` | Number | `"0"` | 横のレイアウトで、`width-fitting` が加える、または減らす幅のうち、この要素が受け持つ比率。下の注記を参照してください |
 | `max-height` | Number | - | 要素がレイアウトされる最大の高さ（制限しない場合は省略） |
 | `max-width` | Number | - | 要素がレイアウトされる最大の幅（制限しない場合は省略） |
 | `min-height` | Number | `"0"` | 要素がレイアウトされる最小の高さ |
@@ -29,9 +29,15 @@ description: "pc-layout-child要素のリファレンス: レイアウトグル�
 
 </div>
 
+:::note[比率]
+
+レイアウトグループがレイアウトの方向に子を引き伸ばすとき、子は追加のスペースを比率で分け合います。比率2の子は比率1の子の2倍を受け取り、比率0の子は何も受け取りません。ただし、すべての子が0の場合は均等に分け合います。縮小では比率が反転し、比率の大きい子ほど減る量が少なくなります。比率が2と1の100単位の子2つを140単位に縮小すると、80と60になります。レイアウトと交差する方向では、各子はそれぞれ単独で合わせられます。[レイアウトチャイルド](/user-manual/user-interface/layout-groups/#layout-children)を参照してください。
+
+:::
+
 ## 例 {#example}
 
-`width-fitting="stretch"` を設定した水平グループ内の3つのアイテムです。中央のアイテムの `fit-width-proportion="1"` により、グループの余剰幅は中央だけが吸収します。最初のアイテムにも `1` を与えて分け合わせたり、中央に `max-width` を設定したりしてみましょう:
+`width-fitting="stretch"` を設定した水平グループ内の3つのアイテムです。中央のアイテムの `fit-width-proportion="1"` により、グループの余剰幅は中央だけが受け取ります。最初のアイテムにも `1` を与えて2つで分け合わせたり、`2` を与えて最初のアイテムに2倍を受け取らせたりしてみましょう。中央のアイテムの比率を削除すると、3つすべてで均等に分け合います:
 
 ```html live-example
 <pc-app>
@@ -74,5 +80,6 @@ description: "pc-layout-child要素のリファレンス: レイアウトグル�
 
 * [`<pc-layout-group>`](../pc-layout-group) — 子が調整するレイアウトを持つグループ
 * [`<pc-element>`](../pc-element) — 子がサイズを決める要素
+* [レイアウトチャイルド](/user-manual/user-interface/layout-groups/#layout-children) — ユーザーインターフェースのセクションにある、サイズ、比率、除外の解説
 
-サンプル: [UI Layout](https://playcanvas.github.io/web-components/examples/ui-layout.html)、[Scroll View](https://playcanvas.github.io/web-components/examples/scroll-view.html)
+サンプル: [UI Layout](https://playcanvas.github.io/web-components/examples/#ui-layout.html)、[Scroll View](https://playcanvas.github.io/web-components/examples/#scroll-view.html)

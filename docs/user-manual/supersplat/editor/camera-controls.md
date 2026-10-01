@@ -45,16 +45,16 @@ Press **V** to toggle between modes, or use the WASD keys to automatically switc
 | **Alt** | 0.1× slower fly speed |
 | **V** | Toggle between orbit and fly modes |
 | **Shift + F** | Reset camera to default position |
-| **F** | Focus camera on selection |
+| **F** | Focus camera on the selection (or on the active Box, Sphere, Measure, or Orient tool) |
 | **I** | Toggle the [camera info overlay](#camera-info-overlay) |
 
 ## Camera Settings
 
-Access camera settings through the **Settings** panel (gear icon):
+Access camera settings through the **Preferences** popup (the gear icon in the right toolbar):
 
 | Setting | Range | Default | Description |
 |---------|-------|---------|-------------|
-| **Field of View** | 10° - 120° | 75° | Camera viewing angle |
+| **Field of View** | 10° - 120° | 85° | Vertical camera viewing angle |
 | **FOV Auto Dolly** | On / Off | Off | How Field of View changes affect the camera (see below) |
 | **Fly Speed** | 0.1 - 30 | 1 | Speed of WASD navigation |
 
@@ -62,7 +62,7 @@ By default, changing the Field of View behaves like a lens zoom: the camera stay
 
 ## Camera Info Overlay
 
-Press **I** (or enable **Show Camera Info** in the **Settings** panel) to toggle an information overlay in the bottom-left corner of the viewport:
+Press **I** (or enable **Camera Info** in the **Overlays** popup) to toggle an information overlay in the bottom-left corner of the viewport:
 
 ![Camera Info Overlay](/img/user-manual/supersplat/editor/camera-info-overlay.png)
 

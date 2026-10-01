@@ -141,3 +141,7 @@ If your model is missing a UV1 map, you will see a warning in the Model Componen
 To fix the warning, select the model asset and open the **Pipeline** section. Click the **Auto-Unwrap** button and wait for the progress bar to complete. Auto-unwrap will edit the model asset, so if you re-import the model from the source (e.g. upload a new FBX) the precomputed UV1 will be lost. If the uploaded model has no UV1, you will need to auto-unwrap the model again.
 
 The **Padding** option determines the space between sections when unwrapping occurs. If you see light bleeding (i.e. light that shouldn't be in the lightmap), you can increase the padding to reduce bleeding.
+
+## Recovery after device loss
+
+Runtime-baked lightmaps are GPU-generated, so device loss discards their contents. In Engine 2.23 and later, schedule another bake after the graphics device fires `devicerestored`. See [Device Loss and Recovery](../advanced-rendering/device-loss.md) for the recovery lifecycle.

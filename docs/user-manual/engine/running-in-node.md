@@ -19,21 +19,91 @@ The PlayCanvas Engine runs its own [unit tests](https://github.com/playcanvas/en
 
 ## Installation
 
-Before you begin, verify you have Node.js 18+ installed. Then you can install the PlayCanvas Engine and `jsdom` using npm.
+Before you begin, verify you have Node.js 18+ installed. Then you can install the PlayCanvas Engine using npm.
 
 ```bash
-npm install jsdom playcanvas --save-dev
+npm install playcanvas
 ```
 
-:::info
+## Creating a Headless Application
 
-The `jsdom` package is used to simulate a DOM environment in Node.js. This is required because the PlayCanvas Engine uses the DOM API in a number of places.
+When running a PlayCanvas application in Node.js, you are unlikely to require rendering. In this case, you can create a [`NullGraphicsDevice`](https://api.playcanvas.com/engine/classes/NullGraphicsDevice.html), which renders nothing. Since there is nothing to display, a plain object can stand in for the canvas.
 
-:::
+```javascript
+import { AppBase, AppOptions, NullGraphicsDevice, ScriptComponentSystem } from 'playcanvas';
 
-## Configuring jsdom
+// Nothing is rendered, so a plain object stands in for the canvas
+const canvas = { width: 1, height: 1 };
 
-Let's create a function that uses `jsdom` to configure the DOM environment so that the PlayCanvas Engine can run successfully.
+const options = new AppOptions();
+options.graphicsDevice = new NullGraphicsDevice(canvas);
+options.componentSystems = [ScriptComponentSystem];
+
+const app = new AppBase(canvas);
+app.init(options);
+app.start();
+```
+
+[`AppBase`](https://api.playcanvas.com/engine/classes/AppBase.html) only runs the component systems that you register. This application registers the script component system, which [Adding Scripts](#adding-scripts) uses. Register a system for each other component type you add, as described in [Configuring the Application](/user-manual/engine/standalone/#configuring-the-application).
+
+## Updating the Application
+
+In a browser, `app.start()` begins a main loop driven by `requestAnimationFrame`. Node.js has no `requestAnimationFrame`, so no main loop runs. Instead, call [`app.update(dt)`](https://api.playcanvas.com/engine/classes/AppBase.html#update) at the rate you need. This updates the component systems you registered, such as scripts, animation or physics, and skips rendering entirely.
+
+```javascript
+const TICK_RATE = 20; // updates per second
+
+setInterval(() => {
+    app.update(1 / TICK_RATE);
+}, 1000 / TICK_RATE);
+```
+
+Passing a fixed `dt` gives every update the same length, however much the timer drifts.
+
+## Adding Scripts
+
+[ESM scripts](/user-manual/scripting/esm-scripts/) are standard JavaScript modules, so Node.js can import them directly. For example, here is a script that rotates its entity:
+
+```javascript title="rotate.mjs"
+import { Script } from 'playcanvas';
+
+export class Rotate extends Script {
+    static scriptName = 'rotate';
+
+    update(dt) {
+        this.entity.rotate(0, 90 * dt, 0);
+    }
+}
+```
+
+Import the script class and pass it to the script component:
+
+```javascript
+import { Entity } from 'playcanvas';
+import { Rotate } from './rotate.mjs';
+
+const entity = new Entity('Box');
+entity.addComponent('script');
+entity.script.create(Rotate);
+app.root.addChild(entity);
+```
+
+The script's `update` method now runs every time you call `app.update(dt)`.
+
+## Using jsdom
+
+Some parts of the engine rely on DOM APIs that Node.js does not provide:
+
+* classic scripts, which are loaded with a `<script>` element
+* loading assets through the asset registry, which requests files with `XMLHttpRequest`
+
+If you need either of these, you can use the [`jsdom`](https://www.npmjs.com/package/jsdom) package to simulate a DOM environment.
+
+```bash
+npm install jsdom
+```
+
+The following function uses `jsdom` to configure the DOM environment so that the PlayCanvas Engine can run successfully.
 
 ```javascript
 import { JSDOM } from 'jsdom';
@@ -68,18 +138,4 @@ export function jsdomSetup() {
 }
 ```
 
-Once you have called `jsdomSetup()`, you can create your PlayCanvas application as normal.
-
-## Creating a PlayCanvas Application
-
-When running a PlayCanvas application in Node.js, you are unlikely to require rendering. In this case, you can create a Null graphics device which will not output any graphics.
-
-```javascript
-import { Application, NullGraphicsDevice } from 'playcanvas';
-
-export function createApp() {
-    const canvas = document.createElement('canvas');
-    const graphicsDevice = new NullGraphicsDevice(canvas);
-    return new Application(canvas, { graphicsDevice });
-}
-```
+Call `jsdomSetup()` before you create your application. To load assets, also register the resource handler for each asset type in `AppOptions`, such as `ScriptHandler` for classic scripts. `jsdom` does not provide a main loop either, so keep calling `app.update(dt)` as shown above.

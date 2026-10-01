@@ -122,12 +122,14 @@ scopeDepthUvMatrix.setValue(view.depthUvMatrix.data);
 
 With all the preparation we can cover mono/stereo scenarios and different texture formats in a single shader:
 
+`screen_size` and `view_index` are [built-in uniforms](/user-manual/graphics/shaders/built-in-uniforms) supplied by the forward renderer. `view_index` is an unsigned integer (`uint`).
+
 ```glsl
-uniform vec4 uScreenSize; // provided by the engine
+uniform vec4 screen_size; // provided by the engine
 uniform mat4 matrix_depth_uv;
 
 #ifdef XRDEPTH_ARRAY
-    uniform int view_index; // provided by the engine
+    uniform uint view_index; // provided by the engine
     uniform highp sampler2DArray depthMap;
 #else
     uniform sampler2D depthMap;
@@ -135,16 +137,16 @@ uniform mat4 matrix_depth_uv;
 
 void main (void) {
     // construct UV for screen-space
-    vec2 uvScreen = gl_FragCoord.xy * uScreenSize.zw;
+    vec2 uvScreen = gl_FragCoord.xy * screen_size.zw;
 
     #ifdef XRDEPTH_ARRAY
         // stereo
         // modify screen-space based on view_index (left/right eye)
-        uvScreen = uvScreen * vec2(2.0, 1.0) - vec2(view_index, 0.0);
+        uvScreen = uvScreen * vec2(2.0, 1.0) - vec2(float(view_index), 0.0);
         // normalize UV using provided matrix
         vec2 uvNormalized = (matrix_depth_uv * vec4(uvScreen.xy, 0.0, 1.0)).xy;
         // use view_index for array-texture index
-        vec3 uv = vec3(uvNormalized, view_index);
+        vec3 uv = vec3(uvNormalized, float(view_index));
     #else
         // mono
         // flip it vertically and normalize

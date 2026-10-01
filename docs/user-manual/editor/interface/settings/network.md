@@ -16,12 +16,15 @@ Navigate to the `NETWORK` section and expand the panel:
 
 ![Network Settings](/img/user-manual/editor/interface/settings/network.webp)
 
+<video autoPlay muted loop controls src='/video/editor-network-settings.mp4' style={{width: '100%', height: 'auto'}} />
+
 Here is a breakdown of the available settings:
 
 ## Settings
 
 | Setting | Description |
 | --- | --- |
+| **Asset Credentials** | Send asset requests with credentials such as cookies, client certificates, or HTTP authentication. Authenticated cross-origin servers must allow credentials and return a specific origin. |
 | **Asset Retries** | The maximum number of times to retry loading an asset if it fails to load. If an asset request fails, it will be retried with exponential backoff. |
 | **Max Concurrent Requests** | The maximum number of asset requests allowed to be in flight at the same time. Additional requests are queued and sent as earlier ones complete. This prevents the browser from rejecting requests with `net::ERR_INSUFFICIENT_RESOURCES` when a large number of assets load at once. Defaults to 128; set to 0 to disable throttling. |
 
