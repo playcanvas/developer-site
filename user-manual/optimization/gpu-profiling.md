@@ -2,8 +2,6 @@
 
 This section explains how to use native GPU profilers to capture and analyze WebGL or WebGPU frames, enabling debugging and performance profiling of GPU operations.
 
-For an initial measurement inside the application, use [MiniStats](https://developer.playcanvas.com/user-manual/optimization/mini-stats.md) or enable GPU timing through [AppStats](https://developer.playcanvas.com/user-manual/optimization/app-stats.md#enabling-gpu-timing). Native profilers help investigate the rendering work behind those measurements.
-
 This is particularly challenging on the Web platform, as web applications typically run within a sandboxed environment, which inherently limits compatibility and integration with native GPU profilers. This page outlines tested options available on certain platforms.
 
 ## WebGPU applications on macOS with Apple Silicon

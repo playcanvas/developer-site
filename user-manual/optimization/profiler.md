@@ -1,6 +1,6 @@
 # Profiler
 
-The Editor Launch page provides a real-time profiler to assist in diagnosing performance problems. This is a separate tool from the lightweight [MiniStats](https://developer.playcanvas.com/user-manual/optimization/mini-stats.md) overlay. To collect statistics directly from application code, see [Profiling with AppStats](https://developer.playcanvas.com/user-manual/optimization/app-stats.md).
+PlayCanvas provides a real-time profiler to assist in diagnosing performance problems.
 
 [Image: Profiler]
 
