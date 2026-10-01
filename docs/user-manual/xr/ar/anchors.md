@@ -1,127 +1,101 @@
 ---
 title: Anchors
-description: "WebXR anchors in PlayCanvas: creating stable world-locked points, persistence, hit-test-linked anchors, and session feature flags."
+description: "WebXR anchors in PlayCanvas: keeping virtual objects fixed to the real world as tracking improves, creating anchors from a pose or a hit test result, following and destroying them, and persisting them between sessions."
 ---
 
-Anchors provide the ability to create a point in 3D space that can be updated to match an ever-evolving understanding of the real world by the underlying AR system. This allows for the placement of virtual objects in relation to the real world that feel planted in the user's environment.
+An anchor is a point in the real world that the device keeps track of. As the device's understanding of the room improves during a session, the poses of things it reported earlier can drift a little from the real spots they were measured at. An anchor stays with its real spot instead, so an object that follows an anchor stays where the user put it. Some devices can also remember anchors from one session to the next.
 
-Each anchor is represented as a position and orientation and can be created from an arbitrary point as well as in relation to a hit test result that will make it more reliable.
+<EngineExample id="xr/ar-hit-test-anchors" title="AR Hit Test Anchors" />
 
-### Using Anchors {#using-anchors}
+## Requesting Anchors {#requesting-anchors}
 
-To start using anchors, when a session is requested, a flag should be provided to the session:
+Ask for anchors when you start an AR session:
 
 ```javascript
-app.xr.start(camera, pc.XRTYPE_AR, pc.XRSPACE_LOCALFLOOR, {
+camera.camera.startXr(pc.XRTYPE_AR, pc.XRSPACE_LOCALFLOOR, {
     anchors: true
 });
 ```
 
-## Support {#support}
-
-You can check if anchors are supported by the system:
-
-```javascript
-if (app.xr.anchors.supported) {
-    // anchors are supported
-}
-
-app.xr.on('start', () => {
-    if (app.xr.anchors.available) {
-        // anchors are supported and available
-    }
-});
-```
+`app.xr.anchors.supported` is `true` when the browser implements anchors, and `app.xr.anchors.available` becomes `true`, firing `available`, once a session has them.
 
 ## Creating Anchors {#creating-anchors}
 
-Then you can create an anchor, e.g. using an arbitrary position and rotation:
+Create an anchor at a position and rotation in [tracking space](/user-manual/xr/ar/#the-real-world-and-the-rig):
 
 ```javascript
-app.xr.anchors.create(position, rotation, (err, anchor) => {
-    if (!err) {
-        // new anchor has been created
-    }
-});
+app.xr.anchors.create(position, rotation);
 ```
 
-Or for more reliable tracking, an anchor can be created from the [Hit Test Result](/user-manual/xr/ar/hit-testing/#anchors).
+Or create one from a [hit test result](/user-manual/xr/ar/hit-testing/#anchoring-placed-objects), which attaches it to the surface the hit test found, so it follows that surface as the device refines it:
 
-## Anchor {#anchor}
+```javascript
+// hitTestResult is the last argument of a hit test source's result event
+app.xr.anchors.create(hitTestResult);
+```
 
-Each anchor has its position and rotation and can be updated at any point. When an anchor is updated, the application developer should update related virtual objects accordingly.
+Anchors are created asynchronously. `app.xr.anchors` fires `add` for each new anchor, including those [restored](#persistence) from earlier sessions, and lists the current ones in `app.xr.anchors.list`. `create()` also takes a callback as its last argument, which receives an error if the anchor can't be created. For an anchor created from a position and rotation, the callback isn't always called when it succeeds, so follow new anchors with `add`, as below.
 
-Anchors can be added and removed dynamically during the session:
+## Following an Anchor {#following-an-anchor}
+
+An anchor's `getPosition()` and `getRotation()` return its pose in tracking space, and it fires `change` when the pose changes. Keep an object on the anchor by making it a child of the camera rig, and updating its local pose:
 
 ```javascript
 app.xr.anchors.on('add', (anchor) => {
-    const entity = new pc.Entity();
+    const flag = new pc.Entity('flag');
+    flag.addComponent('render', { type: 'cone' });
+    flag.setLocalScale(0.1, 0.2, 0.1);
+    rig.addChild(flag);
 
-    // add a cone for an anchor
-    entity.addComponent('render', { type: 'cone' });
-    entity.setLocalScale(0.1, 0.1, 0.1); // 10cm diameter
-    app.root.addChild(entity);
+    const follow = () => {
+        flag.setLocalPosition(anchor.getPosition());
+        flag.setLocalRotation(anchor.getRotation());
+        flag.translateLocal(0, 0.1, 0); // Stand the cone on the anchor
+    };
+    follow();
+    anchor.on('change', follow);
 
-    // transform
-    entity.setLocalPosition(anchor.getPosition());
-    entity.setLocalRotation(anchor.getRotation());
-    entity.translateLocal(0, 0.05, 0); // offset cone
-
-    // update cone when anchor changes
-    anchor.on('change', () => {
-        entity.setLocalPosition(anchor.getPosition());
-        entity.setLocalRotation(anchor.getRotation());
-        entity.translateLocal(0, 0.05, 0); // offset cone
-    });
-
-    // remove cone when anchor is destroyed
     anchor.once('destroy', () => {
-        entity.destroy();
+        flag.destroy();
     });
 });
 ```
+
+## Destroying Anchors {#destroying-anchors}
+
+`anchor.destroy()` deletes an anchor, and fires its `destroy` event. Anchors are destroyed when the session ends, and the device can also destroy one if it can no longer track it, so remove what follows an anchor when it fires `destroy`, as above.
 
 ## Persistence {#persistence}
 
-Anchor persistence provides a way to remember anchors between sessions, with a limited number of anchors per origin. This allows applications to place virtual objects in relation to the real-world geometry and remain there between sessions.
-
-You can check if persistence is supported:
+On devices that support it, an anchor can outlive its session: give it an identifier with `anchor.persist()`, and restore it with that identifier in a later session. `app.xr.anchors.persistence` is `true` when the browser supports this:
 
 ```javascript
-if (app.xr.anchors.persistence) {
-    // application can persist anchors
-}
-```
-
-Each anchor can have a UUID that allows it to be referenced and restored between sessions.
-
-You can access a list of persistent anchors and restore them on session start:
-
-```javascript
-app.xr.on('start', () => {
-    const uuids = app.xr.anchors.uuids;
-    for(let i = 0; i < uuids.length; i++) {
-        app.xr.anchors.restore(uuids[i]);
-    }
-});
-```
-
-To manage individual anchor persistence, you can use `persist` and `forget` methods:
-
-```javascript
+// Remember an anchor, for example when the user places something
 anchor.persist((err, uuid) => {
-    if (uuid) {
-        // anchor has been persisted
+    if (!err) {
+        console.log(`Persisted the anchor as ${uuid}`);
     }
 });
 ```
 
+The device remembers the identifiers of the anchors your site has persisted. When a session starts, `app.xr.anchors.uuids` lists them, and `app.xr.anchors.restore()` recreates each anchor, which `app.xr.anchors` then adds as usual:
+
 ```javascript
-if (anchor.persistent) {
-    anchor.forget((err) => {
-        if (!err) {
-            // anchor is forgotten
-        }
-    });
-}
+app.xr.anchors.on('available', () => {
+    if (!app.xr.anchors.persistence) return;
+
+    for (const uuid of app.xr.anchors.uuids) {
+        app.xr.anchors.restore(uuid);
+    }
+});
 ```
+
+A restored anchor's `uuid` is its identifier, and `anchor.persistent` is `true`. To know which object goes on which anchor, store the identifiers with your own data, such as in `localStorage`, when you persist them.
+
+`anchor.forget()`, or `app.xr.anchors.forget(uuid)`, deletes a persisted identifier, so the anchor is not restored again. Devices limit how many anchors a site can persist, and can delete them, for example when the user clears the site's data. Meta Quest keeps at most 8 per site, and none in private browsing. Handle a failed `persist()` or `restore()` gracefully.
+
+## See Also
+
+- [Hit Testing](/user-manual/xr/ar/hit-testing/) - Finding the surfaces to anchor to
+- [AR](/user-manual/xr/ar/) - Placing content relative to the camera rig
+- [XrAnchors](https://api.playcanvas.com/engine/classes/XrAnchors.html) - The API reference for `app.xr.anchors`

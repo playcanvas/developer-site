@@ -1,122 +1,113 @@
 ---
 title: Mesh Detection
-description: "Real-world mesh detection for AR: semantic meshes, transforms, physics and occlusion uses, and PlayCanvas APIs for mesh geometry."
+description: "AR mesh detection in PlayCanvas: triangle meshes of the room and its furniture with semantic labels, following meshes as they are added, changed and removed, drawing them, building physics colliders from them, and using them for occlusion."
 ---
 
-Interaction between real-world and virtual objects is achieved via visual and logical interactions between the two. Mesh detection is an API that provides access to the representation of real-world geometry in the form of meshes. It can be used in a number of ways such as:
+Mesh detection gives you triangle meshes of the user's surroundings. Where [planes](/user-manual/xr/ar/plane-detection/) give you flat surfaces, meshes follow the shapes of things: a sofa, a lamp, the whole room. Use them for physics against real objects, for occlusion, and for effects that run over real surfaces.
 
-* Virtual object physics within a real-world environment
-* Path finding
-* Object placement
-* Occlusion
-* Procedural effects
+![The furniture of a room as detected meshes, drawn as translucent blue shapes with wireframe edges, and a virtual ball on the sofa](/img/user-manual/xr/ar/mesh-detection/meshes.webp)
 
-This API provides a list of meshes, their geometry, transformation and semantic labeling.
+<EngineExample id="xr/ar-mesh-detection" title="AR Mesh Detection" />
 
-The underlying system can provide pre-captured data as well as provide real-time reconstruction depending on the underlying system implementation.
+## Requesting Mesh Detection {#requesting-mesh-detection}
 
-## Support
+Ask for mesh detection when you start an AR session:
 
 ```javascript
-if (app.xr.meshDetection.supported) {
-    // mesh detection is supported
-}
-
-app.xr.on('start', () => {
-    if (app.xr.meshDetection.available) {
-        // mesh detection is available
-    }
-});
-```
-
-## Access
-
-A feature flag needs to be added to the session start:
-
-```javascript
-app.xr.start(camera, pc.XRTYPE_AR, pc.XRSPACE_LOCALFLOOR, {
+camera.camera.startXr(pc.XRTYPE_AR, pc.XRSPACE_LOCALFLOOR, {
     meshDetection: true
 });
 ```
 
-Meshes are added/removed asynchronously:
+`app.xr.meshDetection.supported` is `true` when the browser implements mesh detection, and `app.xr.meshDetection.available` becomes `true`, firing `available`, once a session has it. On Meta Quest, meshes come from the room the user has set up, as planes do, and `app.xr.initiateRoomCapture()` asks the device to start its room setup. See [Plane Detection](/user-manual/xr/ar/plane-detection/#requesting-plane-detection).
+
+## Meshes {#meshes}
+
+`app.xr.meshDetection` fires `add` for each mesh the device reports, and `remove` when it goes, and lists the current ones in `app.xr.meshDetection.meshes`. Each is an [`XrMesh`](https://api.playcanvas.com/engine/classes/XrMesh.html):
+
+| Property or method | Description |
+| --- | --- |
+| `getPosition()`, `getRotation()` | The mesh's pose in [tracking space](/user-manual/xr/ar/#the-real-world-and-the-rig) |
+| `vertices` | A `Float32Array` of vertex positions in the mesh's local space, three numbers per vertex |
+| `indices` | A `Uint32Array` of the vertices of its triangles, three per triangle |
+| `label` | What the mesh is, such as `'table'`, `'couch'` or `'global mesh'`, or an empty string |
+
+A mesh fires `change` when its vertices, indices or label change. Its pose can change in any frame without an event, so read it every frame. From engine 2.23, its properties keep their last values after `remove`. In earlier versions, its `vertices`, `indices` and `label` throw an error once it has been removed, even in a `remove` handler.
+
+Meta Quest reports a mesh for each piece of furniture the user has marked up, and one mesh of the whole room, labeled `'global mesh'`, on devices that scan it.
+
+## Drawing Meshes {#drawing-meshes}
+
+Turn each detected mesh into a render mesh, and follow its pose:
 
 ```javascript
 app.xr.meshDetection.on('add', (xrMesh) => {
-    // a new XrMesh has been added
-
-    xrMesh.once('remove', () => {
-        // an XrMesh has been removed
-    });
-});
-```
-
-Also, the list of XrMeshes is available:
-
-```javascript
-const xrMeshes = app.xr.meshDetection.meshes;
-for (let i = 0; i < xrMeshes.length; i++) {
-    const xrMesh = xrMeshes[i];
-}
-```
-
-## Mesh
-
-Each mesh is represented as an instance of XrMesh, which can be added/removed during an active session. It also has data that can be changed during its lifetime.
-
-You can access the position and rotation (world-space) of an XrMesh:
-
-```javascript
-entity.setPosition(xrMesh.getPosition());
-entity.setRotation(xrMesh.getRotation());
-```
-
-Each XrMesh has its vertices and indices (in local-space), that can be used to construct a visual mesh. An example below creates a visual mesh for each XrMesh and adds it to the root of the scene:
-
-```javascript
-app.xr.meshDetection.on('add', (xrMesh) => {
-    // geometry data
     const mesh = new pc.Mesh(app.graphicsDevice);
-    mesh.clear(true, true); // ensure that mesh is created with dynamic buffers
-    mesh.setPositions(xrMesh.vertices); // set vertices
-    mesh.setNormals(pc.calculateNormals(xrMesh.vertices, xrMesh.indices)); // calculate normals
-    mesh.setIndices(xrMesh.indices); // set indices
-    mesh.update(pc.PRIMITIVE_TRIANGLES); // update buffers
+    mesh.setPositions(xrMesh.vertices);
+    mesh.setNormals(pc.calculateNormals(xrMesh.vertices, xrMesh.indices));
+    mesh.setIndices(xrMesh.indices);
+    mesh.update();
 
     const material = new pc.StandardMaterial();
-    const meshInstance = new pc.MeshInstance(mesh, material);
+    material.opacity = 0.3;
+    material.blendType = pc.BLEND_NORMAL;
+    material.update();
 
-    const entity = new pc.Entity();
-
-    // add render component
+    const entity = new pc.Entity(xrMesh.label || 'mesh');
     entity.addComponent('render', {
-        meshInstances: [ meshInstance ]
+        meshInstances: [new pc.MeshInstance(mesh, material)]
+    });
+    rig.addChild(entity);
+
+    const follow = app.on('update', () => {
+        entity.setLocalPosition(xrMesh.getPosition());
+        entity.setLocalRotation(xrMesh.getRotation());
     });
 
-    // add entity to the scene root
-    app.root.addChild(entity);
-
-    // clean up after XrMesh is removed
     xrMesh.once('remove', () => {
-        material.destroy();
-        mesh.destroy();
+        follow.off();
         entity.destroy();
+        material.destroy();
     });
 });
 ```
 
-## Semantic Label
+To update a drawn mesh when it changes, create it with dynamic buffers, `mesh.clear(true, true)`, and set its positions, normals and indices again in a `change` handler.
 
-XrMesh can represent various real-world objects and a label can help to identify what it represents using its property `XrMesh.label`.
+## Physics {#physics}
 
-These labels can be any of: `floor`, `wall`, `door`, `window`, `table`, `screen`, `global mesh`, `other`, and `more`. Here is a [list of semantic labels](https://github.com/immersive-web/semantic-labels/blob/master/labels.json), although this list is not definitive and the platform can report anything it feels fit.
-
-## Changes
-
-Depending on the underlying system capabilities, the XrMesh geometry can change while an XR session is active. You can subscribe to that event and update a visual mesh accordingly:
+A static rigid body with a mesh collision shape makes virtual objects collide with the real room. Give the shape a model built from the detected mesh:
 
 ```javascript
-xrMesh.on('change', () => {
-    // vertices, indices and/or label has been changed
+app.xr.meshDetection.on('add', (xrMesh) => {
+    const mesh = new pc.Mesh(app.graphicsDevice);
+    mesh.setPositions(xrMesh.vertices);
+    mesh.setIndices(xrMesh.indices);
+    mesh.update();
+
+    const model = new pc.Model();
+    model.graph = new pc.GraphNode();
+    model.meshInstances = [new pc.MeshInstance(mesh, new pc.StandardMaterial(), model.graph)];
+
+    const collider = new pc.Entity('room collider');
+    rig.addChild(collider);
+    collider.setLocalPosition(xrMesh.getPosition());
+    collider.setLocalRotation(xrMesh.getRotation());
+    collider.addComponent('collision', { type: 'mesh', model });
+    collider.addComponent('rigidbody', { type: 'static' });
+
+    xrMesh.once('remove', () => collider.destroy());
 });
 ```
+
+Furniture and room meshes don't move, so the collider takes the mesh's pose once. Building a mesh shape from a large room mesh takes a moment, so build it once, rather than on every change. See [Collision Shapes](/user-manual/physics/collision-shapes/#mesh-colliders).
+
+## Occlusion {#occlusion}
+
+Draw meshes with a material that writes depth but no color, and virtual objects behind real ones are hidden, while the real objects show through. Set the material's `redWrite`, `greenWrite`, `blueWrite` and `alphaWrite` to `false`, and put the occluders in a [layer](/user-manual/graphics/layers/) that renders before the World layer. Meshes are coarse, so the edges of occlusion are only approximate. For per-pixel occlusion, use [depth sensing](/user-manual/xr/ar/depth-sensing/) where the device has it.
+
+## See Also
+
+- [Plane Detection](/user-manual/xr/ar/plane-detection/) - Flat surfaces, with room capture
+- [Collision Shapes](/user-manual/physics/collision-shapes/) - Mesh colliders
+- [XrMeshDetection](https://api.playcanvas.com/engine/classes/XrMeshDetection.html) - The API reference for `app.xr.meshDetection`

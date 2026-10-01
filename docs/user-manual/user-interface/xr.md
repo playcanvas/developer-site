@@ -34,7 +34,7 @@ While a session runs, the [`ElementInput`](/user-manual/user-interface/input/#en
 | `selectend` | The select ends |
 | `click` | The select started and ended on the element |
 
-So a [button](/user-manual/user-interface/buttons/) is hovered while a ray points at it, pressed while a select holds it, and clicked when the select ends over it, just as with the mouse. Its `click` listeners need no changes for XR. See [Input Sources](/user-manual/xr/input-sources/#primary-action-select) for what a select is on each kind of input source.
+So a [button](/user-manual/user-interface/buttons/) is hovered while a ray points at it, pressed while a select holds it, and clicked when the select ends over it, just as with the mouse. Its `click` listeners need no changes for XR. See [Input Sources](/user-manual/xr/input-sources/#select-and-squeeze) for what a select is on each kind of input source.
 
 Two properties of an input source control its interaction with the interface:
 
@@ -151,7 +151,7 @@ An item with a `label` but no `eventName` is a line of text rather than a button
 
 ## Entering XR {#entering-xr}
 
-Browsers only start an immersive session in response to a user action, such as a click or a tap. The engine's XR examples start it from an HTML button over the canvas. See [Using WebXR](/user-manual/xr/using-webxr/) for how to start and end a session.
+Browsers only start an immersive session in response to a user action, such as a click or a tap. The engine's XR examples start it from an HTML button over the canvas. See [Getting Started](/user-manual/xr/using-webxr/) for a first session, and [Sessions](/user-manual/xr/sessions/) for how to start and end them.
 
 ## See Also
 

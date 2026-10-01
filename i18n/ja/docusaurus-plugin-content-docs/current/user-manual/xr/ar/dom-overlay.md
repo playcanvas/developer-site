@@ -1,43 +1,41 @@
 ---
-title: DOM Overlay
-description: "単眼AR向けDOM Overlay: カメラ映像上にHTMLとCSSのUIを重ねる、ルート要素、PlayCanvasでの機能サポートの確認です。"
+title: DOMオーバーレイ
+description: "PlayCanvasのハンドヘルドAR向けDOMオーバーレイについて、スマートフォンのARセッションの上にHTMLとCSSを表示する方法、セッション開始前のオーバーレイのルート要素の選択、サポートの確認、HTMLへのタップがシーンでのセレクトにもならないようにする方法を解説します。"
 ---
 
-ARセッションでモノスクリーンディスプレイを使用する場合、UIには通常のHTMLとCSSを使用できます。このAPIは、ARアプリケーション画面上にDOM要素をオーバーレイする機能を提供します。
+スマートフォンでは、ARセッションが画面全体を占有し、ページのHTMLは見えなくなります。DOMオーバーレイを使うと、ページの一部をARビューに重ねて画面上に残せるため、ボタン、操作説明、メニュー、フォームといったハンドヘルドARのインターフェースを、HTMLとCSSで構築できます。
 
-ARセッションを開始する前に、DOM Overlayのルートとして要素を提供する必要があります。
+## ルートの設定 {#setting-the-root}
+
+表示する要素を選び、セッションの開始前にオーバーレイのルートとして設定します。設定後は、エンジンがすべてのARセッションでDOMオーバーレイを要求します。
 
 ```javascript
-app.xr.domOverlay.root = element;
-app.xr.start(camera, pc.XRTYPE_AR, pc.XRSPACE_LOCALFLOOR);
+app.xr.domOverlay.root = document.getElementById('ar-ui');
+camera.camera.startXr(pc.XRTYPE_AR, pc.XRSPACE_LOCALFLOOR);
 ```
 
-## サポート
+セッション中は、ルート要素とその子孫がARビューの上に表示され、ページのそれ以外の部分は非表示になります。そのため、インターフェースをまとめて含む要素を使ってください。セッションの実行中は、ルートを変更できません。
 
-DOM Overlayがサポートされているかどうかを確認できます。
+## サポート {#support}
+
+`app.xr.domOverlay.supported`は、ブラウザがDOMオーバーレイを実装している場合に`true`になり、`app.xr.domOverlay.available`は、セッションでDOMオーバーレイが使える間`true`になります。`app.xr.domOverlay.state`は、ブラウザがオーバーレイをどのように表示するかを示します。スマートフォンでは`'screen'`で、オーバーレイが画面全体を覆います。ヘッドセットがDOMオーバーレイをサポートしていることはまれです。ヘッドセット向けのインターフェースは[シーン内](/user-manual/user-interface/xr/)に構築し、HTMLのインターフェースはスマートフォン向けにしてください。
+
+## オーバーレイ上のタップ {#taps-on-the-overlay}
+
+オーバーレイ上のタップは、ARビューへのタップでもあります。HTMLのクリックに加えて一時的な入力ソースが作成され、それがシーンにセレクトのイベントを送ります。そのため、ボタンをタップしたときに、オブジェクトも配置されてしまうことがあります。これを防ぐには、`beforexrselect`イベントをキャンセルします。このイベントは、セレクトが始まる前に、ブラウザがタップされた位置の要素で発火します。
 
 ```javascript
-if (app.xr.domOverlay.supported) {
-    // DOM Overlayはサポートされています
-}
-
-app.xr.on('start', () => {
-    if (app.xr.domOverlay.available) {
-        // DOM Overlayは利用可能です
-    }
+// インターフェース上のタップでは、シーンでのセレクトを発生させない
+document.getElementById('ar-ui').addEventListener('beforexrselect', (event) => {
+    event.preventDefault();
 });
 ```
 
-## イベント
+`beforexrselect`はバブリングするため、ルートに1つリスナーを登録すれば、その中のすべての要素に対応できます。キャンセルすると、そのタップの`selectstart`、`select`、`selectend`イベントは発生しなくなりますが、HTMLのイベントには影響しません。オーバーレイの何もない部分へのタップをシーンに通すには、ターゲットがインタラクティブな要素の場合にだけキャンセルしてください。
 
-通常のHTMLと同じように要素を操作できます。しかし、`input source`の`select`イベントはアプリケーション内で引き続き発生します。`input source`イベントがDOM要素を通過するのを防ぐには、それらをインターセプトできます。
+## 関連情報 {#see-also}
 
-```javascript
-const buttons = app.xr.domOverlay.querySelectorAll('button');
-
-for (let i = 0; i < buttons.length; i++) {
-    buttons[i].addEventListener('beforexrselect', (evt) => {
-        evt.preventDefault();
-    });
-}
-```
+- [HTMLとCSS](/user-manual/user-interface/html-and-css/) - DOMによるインターフェースの構築
+- [AR](/user-manual/xr/ar/#handheld-and-headset-ar) - ハンドヘルドARとヘッドセットARの違い
+- [WebXR AR: DOM Overlay](/tutorials/webxr-ar-dom-overlay/) - エディターのプロジェクト付きのチュートリアル
+- [XrDomOverlay](https://api.playcanvas.com/engine/classes/XrDomOverlay.html) - `app.xr.domOverlay`のAPIリファレンス

@@ -96,6 +96,13 @@ const config = {
         { from: ['/user-manual/physics/compound-shapes/'], to: '/user-manual/physics/collision-shapes/' },
         // User Interface: Group Elements became a section of the Elements page
         { from: ['/user-manual/user-interface/group-elements/'], to: '/user-manual/user-interface/elements/' },
+        // XR: Capabilities became the Features section of the XR overview
+        { from: ['/user-manual/xr/capabilities/'], to: '/user-manual/xr/' },
+        // XR: the VR pages were folded into Getting Started, and the reference spaces of Types of VR into Sessions
+        { from: ['/user-manual/xr/vr/'], to: '/user-manual/xr/using-webxr/' },
+        { from: ['/user-manual/xr/vr/types-of-vr/'], to: '/user-manual/xr/sessions/' },
+        // XR: the 8th Wall and Zappar pages became Third-Party Frameworks
+        { from: ['/user-manual/xr/ar/8th-wall-integration/', '/user-manual/xr/ar/zappar-integration/'], to: '/user-manual/xr/ar/third-party-frameworks/' },
         { from: ['/user-manual/organizations/'], to: '/user-manual/account-management/organizations/' },
         { from: ['/user-manual/organizations/creating-organizations/'], to: '/user-manual/account-management/organizations/creating/' },
         { from: ['/user-manual/organizations/managing-organizations/'], to: '/user-manual/account-management/organizations/managing/' },

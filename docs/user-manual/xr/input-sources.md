@@ -1,144 +1,148 @@
 ---
 title: Input Sources
-description: Using XR input sources for controllers, tracked hands, gaze, and touch, including listing sources and handling transient input in PlayCanvas.
+description: "XR input in PlayCanvas: controllers, tracked hands, gaze, gaze-and-pinch and screen taps as input sources, following them as they connect and disconnect, pointing with their rays, select and squeeze actions, handedness and profiles, and interacting with UI."
 ---
 
-An [XrInputSource](https://api.playcanvas.com/engine/classes/XrInputSource.html) represents an input mechanism that allows the user to interact with a virtual world. Those include but are not limited to handheld controllers, optically tracked hands, gaze-based input methods, and touch screens. However, an input source is not explicitly associated with traditional gamepads, mice or keyboards.
+An [input source](https://api.playcanvas.com/engine/classes/XrInputSource.html) is anything the user acts with in a session: a handheld controller, a tracked hand, their gaze, or a tap on a phone's screen. Every input source has a ray to point with, and sends actions such as select, which is a trigger press, a pinch or a tap. Some also have a pose you can draw a model at, buttons and thumbsticks, or the joints of a hand. Code that uses rays and selects works for all of them.
 
-<img loading="lazy" src="/img/user-manual/xr/controllers.webp" alt="Controller models with a Ray" width="720" />
+![Two controllers pointing their rays at boxes in the scene](/img/user-manual/xr/input-sources/rays.webp)
 
-## Accessing Input Sources
+<EngineExample id="xr/xr-picking" title="XR Picking" />
 
-A list of input sources is available on the [XrInput](https://api.playcanvas.com/engine/classes/XrInput.html) manager which is created by the [XrManager](https://api.playcanvas.com/engine/classes/XrManager.html):
+## Kinds of Input Source {#kinds-of-input-source}
 
-```javascript
-const inputSources = app.xr.input.inputSources;
-for (let i = 0; i < inputSources.length; i++) {
-    // iterate through available input sources
-}
-```
+`inputSource.targetRayMode` tells you how an input source points:
 
-Input sources can be added and removed dynamically. This can be done by connecting physical devices or by switching input devices via the underlying platform.
+| Target ray mode | Constant | Input sources | Ray |
+| --- | --- | --- | --- |
+| `'tracked-pointer'` | `pc.XRTARGETRAY_POINTER` | Controllers, and tracked hands | From the controller or hand, pointing forward |
+| `'gaze'` | `pc.XRTARGETRAY_GAZE` | Headsets that track only the head, such as phone holders, where a button on the headset selects | From the head, along the view |
+| `'screen'` | `pc.XRTARGETRAY_SCREEN` | Taps on the screen of a phone in AR | From the camera, through the point that was touched |
+| `'transient-pointer'` | | Gaze and pinch on Apple Vision Pro | From the head along the gaze when the pinch starts, then following the hand |
 
-Some input sources are **transient** and have a short lifespan during their primary action. Examples are:
+Taps and gaze-and-pinch are *transient*: their input source exists only while the action lasts. It is added as the user touches the screen or pinches, sends its actions, and is removed when they let go.
 
-- Touch screen tap in AR session on mobile.
-- Gaze + pinch interaction used on devices with eye tracking, such as Apple Vision Pro.
-- Gaze VR interaction that is common for simple VR devices.
+## Following Input Sources {#following-input-sources}
 
-It is best to subscribe to `add` and `remove` events and then create their visual representation if needed:
+Input sources come and go during a session. A controller connects or loses tracking, the user puts the controllers down and the device switches to tracking their hands, or a transient input source starts and ends. `app.xr.input.inputSources` lists the current ones, and `app.xr.input` fires `add` and `remove` as they change:
 
 ```javascript
 app.xr.input.on('add', (inputSource) => {
-    // input source has been added
+    console.log(`Added a ${inputSource.targetRayMode} input source`);
 
     inputSource.once('remove', () => {
-        // know when input source has been removed
+        console.log('Removed it');
     });
 });
 ```
 
-## Primary Action (select) {#primary-action-select}
+Create the things that belong to an input source, such as a model of the controller, when it is added, and destroy them when it is removed. Every input source is removed when the session ends. `inputSource.id` is a number unique to the input source, which is not reused, even when the same controller reconnects.
 
-Each input source can have a primary action `select`. For controllers, it is a primary button/trigger. For the touch-screen, it is a tap. For hands, it is a pinch of thumb and index fingers. There are also `selectstart` and `selectend` events which you can subscribe to as follows:
+## Pointing {#pointing}
 
-```javascript
-inputSource.on('select', () => {
-    // primary action
-});
-```
-
-Or through the input manager:
+`inputSource.getOrigin()` and `inputSource.getDirection()` return the ray of an input source in world space, ready to test against the scene:
 
 ```javascript
-app.xr.input.on('select', (inputSource) => {
-    // primary action
-});
-```
+const ray = new pc.Ray();
+const end = new pc.Vec3();
 
-## Ray
+app.on('update', () => {
+    for (const inputSource of app.xr.input.inputSources) {
+        ray.set(inputSource.getOrigin(), inputSource.getDirection());
 
-Each input source has a ray which has an **origin** where it points from and a **direction** in which it is pointing. A ray is transformed into world space. Some examples of input sources might be, but are not limited to:
-
-- **Controllers** (e.g. Meta Quest Touch), will have a ray originating from the tip of the handheld device and the direction is based on the rotation of the device.
-- **Hands** have a ray that originates from a point between the thumb and index tips and points forward. If the underlying system does not provide a ray for hands, the PlayCanvas engine will emulate it. So all hands should have a ray.
-- **Screen**-based input. This might be available on mobile devices (mono screen) in AR session types, where the user can interact with the virtual world via a touch screen.
-- **Gaze**-based input, such as a mobile phone is inserted into a Google Cardboard style device. It will have an input source with `targetRayMode` set to `pc.XRTARGETRAY_GAZE`, and will originate from the viewer's position and point straight where the user is facing.
-
-<img loading="lazy" src="/img/user-manual/xr/controller-ray.webp" alt="A Ray from a Controller" width="480" />
-
-You can check the type of the target ray:
-
-```javascript
-switch (inputSource.targetRayMode) {
-    case pc.XRTARGETRAY_SCREEN:
-        // screen-based interaction, such as touch-screen on mobile in AR mode
-        break;
-    case pc.XRTARGETRAY_POINTER:
-        // pointer-based, such as hand-held controllers or hands
-        break;
-    case pc.XRTARGETRAY_GAZE:
-        // gaze-based, that is based on viewer device orientation and position
-        break;
-}
-```
-
-Here is an example illustrating how to check whether a ray has intersected with the bounding box of a mesh:
-
-```javascript
-// set ray with input source data
-ray.set(inputSource.getOrigin(), inputSource.getDirection());
-
-// check if mesh bounding box intersects with ray
-if (meshInstance.aabb.intersectsRay(ray)) {
-    // input source is pointing at a mesh
-}
-```
-
-## Grip
-
-Some input sources are associated with a physical handheld device, such as a Meta Quest Touch, and can have position and rotation. Their position and rotation are provided in world space.
-
-This can be used to render a virtual controller that matches real-world controller position and rotation.
-
-```javascript
-if (inputSource.grip) {
-    // can render device model
-    // position and rotate associated entity with model
-    entity.setPosition(inputSource.getPosition());
-    entity.setRotation(inputSource.getRotation());
-}
-```
-
-## GamePad
-
-If the platform supports the [WebXR Gamepads Module](https://www.w3.org/TR/webxr-gamepads-module-1/), then an input source might have an associated [GamePad](https://w3c.github.io/gamepad/) object with it, which provides access to its buttons, triggers, axes and other input hardware states:
-
-```javascript
-const gamepad = inputSource.gamepad;
-if (gamepad) {
-    if (gamepad.buttons[0] && gamepad.buttons[0].pressed) {
-        // user pressed a button on a gamepad
+        // Draw the ray, two meters long
+        end.copy(ray.direction).mulScalar(2).add(ray.origin);
+        app.drawLine(ray.origin, end, pc.Color.WHITE);
     }
-}
+});
 ```
 
-## Hands
+The two methods return vectors that the input source reuses, so copy them to keep them. [Pointing and Grabbing](/user-manual/xr/pointing-and-grabbing/) shows how to find what a ray points at.
 
-Check out the dedicated page for [Hand Tracking](/user-manual/xr/hand-tracking/).
+For tracked hands, the engine computes the ray from the joints of the hand, from between the thumb and the index finger, so every hand has a ray, whatever the device reports.
 
-## Profiles
+## Select and Squeeze {#select-and-squeeze}
 
-Each input source might have a list of strings describing a type of input source, which is described in a [profile registry](https://github.com/immersive-web/webxr-input-profiles/tree/master/packages/registry). Based on this, you can figure out what type of model to render for a handheld device or what capabilities it might have. Additionally, the profile registry lists gamepad mapping details, such as buttons and axes.
+Input sources send two kinds of action. Select is the primary action, and squeeze is a grab:
+
+| Input source | Select | Squeeze |
+| --- | --- | --- |
+| Controller | The trigger | The grip button |
+| Tracked hand | A pinch of the thumb and index finger | Closing the hand into a fist, which the engine detects from its joints |
+| Gaze | A button on the headset | |
+| Screen tap | The tap | |
+| Gaze and pinch | The pinch | |
+
+Each action fires three events on the input source: `selectstart` when it begins, `selectend` when it ends, and `select` just before `selectend` if it completed. Squeeze fires `squeezestart`, `squeeze` and `squeezeend`. While an action lasts, `inputSource.selecting` or `inputSource.squeezing` is `true`.
+
+Listen on one input source, or on all of them through `app.xr.input`, which passes the input source first:
 
 ```javascript
-if (inputSource.profiles.includes('oculus-touch-v2')) {
-    // it is an Oculus Touch™ handheld device
-}
+// Every input source
+app.xr.input.on('select', (inputSource) => {
+    console.log(`Select from the ${inputSource.handedness} hand`);
+});
+
+// One input source, as it is added
+app.xr.input.on('add', (inputSource) => {
+    inputSource.on('squeezestart', () => {
+        console.log('Grab');
+    });
+    inputSource.on('squeezeend', () => {
+        console.log('Release');
+    });
+});
 ```
 
-## UI
+The events of `app.xr.input` also pass the WebXR [`XRInputSourceEvent`](https://developer.mozilla.org/en-US/docs/Web/API/XRInputSourceEvent), and those of an input source pass it as their only argument. The input source's poses and ray are updated to the moment of the event before it fires, which is what you want for a tap or a quick trigger press.
 
-Elements and buttons respond to input sources as they do to the mouse and touch. The ray of an input source hovers the element it points at, and a select on an element clicks it, so `click` listeners and button states work unchanged. Elements also fire `selectenter`, `selectleave`, `selectstart`, `selectmove` and `selectend` for input sources, and buttons fire all of them except `selectmove`. Set an input source's `elementInput` to `false` to keep it away from the interface, and read its `elementEntity` for the entity of the element it points at.
+The engine also fires `selectstart`, `selectend` and other select events on the [UI elements](#interacting-with-ui) an input source points at, and other buttons on a controller are read from its [gamepad](/user-manual/xr/controllers/#buttons-and-thumbsticks).
 
-See [UI in XR](/user-manual/user-interface/xr/) for building interfaces for XR, pointing and selecting, and the `XrMenu` script.
+## Handedness {#handedness}
+
+`inputSource.handedness` says which hand an input source is held in or belongs to. It is `pc.XRHAND_LEFT` (`'left'`), `pc.XRHAND_RIGHT` (`'right'`) or `pc.XRHAND_NONE` (`'none'`), the last for gaze and screen taps:
+
+```javascript
+app.xr.input.on('add', (inputSource) => {
+    if (inputSource.handedness === pc.XRHAND_LEFT) {
+        // Use the left controller or hand for a wrist menu
+    }
+});
+```
+
+## Profiles {#profiles}
+
+`inputSource.profiles` names the kind of input source, from the most specific to the most generic, from the [WebXR input profiles registry](https://github.com/immersive-web/webxr-input-profiles/tree/main/packages/registry). A Meta Quest 3 controller reports `['meta-quest-touch-plus', 'oculus-touch-v3', 'oculus-touch', 'generic-trigger-squeeze-thumbstick']`, and tracked hands include `'generic-hand'` in theirs:
+
+```javascript
+app.xr.input.on('add', (inputSource) => {
+    if (inputSource.profiles.includes('generic-trigger-squeeze-thumbstick')) {
+        // A controller with a trigger, a grip button and a thumbstick
+    }
+});
+```
+
+The registry describes each profile's buttons and its 3D model, which is how `XrControllers` picks the model to draw. Test for the capabilities you need, through the generic profiles, rather than for particular devices.
+
+## Hands, Controllers and Transient Input {#hands-controllers-and-transient-input}
+
+An input source with a physical pose has more to offer:
+
+- `inputSource.grip` is `true` for an input source you can draw a model at, such as a controller. See [Controllers](/user-manual/xr/controllers/).
+- `inputSource.hand` is the [hand](/user-manual/xr/hand-tracking/) of a tracked hand, with its joints, and `null` otherwise.
+- `inputSource.gamepad` is the [gamepad](/user-manual/xr/controllers/#buttons-and-thumbsticks) of a controller, with its buttons and thumbsticks, and `null` when there is none.
+
+Platforms differ in how they mix these. On Meta Quest, a hand replaces its controller when the user puts the controller down, as a new input source. On Apple Vision Pro, a pinch adds a transient input source that sends the select events, and tracked hands, when they are present, are separate input sources that report poses but send no actions. Handle `add` and `remove`, and look at what each input source has, rather than assuming two controllers.
+
+## Interacting with UI {#interacting-with-ui}
+
+UI elements and buttons respond to input sources as they do to the mouse and touch. The ray of an input source hovers the element it points at, and a select on an element clicks it, so `click` listeners and button states work unchanged. Elements also fire `selectenter`, `selectleave`, `selectstart`, `selectmove` and `selectend` for input sources. Set an input source's `elementInput` to `false` to keep it away from the interface, and read its `elementEntity` for the entity of the element it points at.
+
+See [UI in XR](/user-manual/user-interface/xr/) for building interfaces for XR, and the `XrMenu` script.
+
+## See Also
+
+- [Controllers](/user-manual/xr/controllers/) - Controller models, poses, buttons, haptics and velocity
+- [Hand Tracking](/user-manual/xr/hand-tracking/) - The joints of tracked hands
+- [Pointing and Grabbing](/user-manual/xr/pointing-and-grabbing/) - Picking and grabbing objects
+- [XrInputSource](https://api.playcanvas.com/engine/classes/XrInputSource.html) - The API reference for input sources

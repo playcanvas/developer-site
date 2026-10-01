@@ -27,9 +27,9 @@
     "message": "XR",
     "description": "The label for category XR in sidebar userManualSidebar"
   },
-  "sidebar.userManualSidebar.category.VR": {
-    "message": "VR",
-    "description": "The label for category VR in sidebar userManualSidebar"
+  "sidebar.userManualSidebar.category.xr-input": {
+    "message": "入力",
+    "description": "The label for category Input in sidebar userManualSidebar"
   },
   "sidebar.userManualSidebar.category.AR": {
     "message": "AR",

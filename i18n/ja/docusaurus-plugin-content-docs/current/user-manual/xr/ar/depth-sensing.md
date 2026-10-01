@@ -1,178 +1,150 @@
 ---
 title: 深度センシング
-description: "PlayCanvasでのWebXR深度センシングによるオクルージョンとSceneのインタラクション: GPUとCPUのパス、テクスチャ、深度セッションオプションの設定です。"
+description: "PlayCanvasのWebXR深度センシング：深度のリクエスト、CPUとGPUのパスとデータ形式、ビュー内の点における現実世界までの距離の測定、UV行列とスケールを伴う深度テクスチャ、単一のビューとステレオのビューで深度テクスチャを読み取るシェーダー。"
 ---
 
-MRコンテキストでは、仮想オブジェクトと現実世界との視覚的・論理的な相互作用によって没入感が実現されます。これは、Depth Occlusion、世界と相互作用するパーティクル、3Dスキャンなど、多くの技術によって実現されます。
+深度センシングは、ビューのすべてのピクセルについて、現実世界がどれだけ離れているかを測定します。デバイスは、深度センサーを使うか、カメラの映像から深度を推定します。深度センシングを使うと、ユーザーが見ているあらゆる面にオブジェクトを配置したり、仮想オブジェクトを現実の物体の後ろに隠したり、部屋に仮想の光があふれるようなエフェクトを作ったりできます。
 
-深度センシングは、現実世界のオブジェクトの深度推定にリアルタイムでアクセスを提供します。基盤となるシステムは、Lidarハードウェアやコンピュータビジョンなど、さまざまな推定方法を持つ可能性があり、それらは多様な品質と信頼性を提供します。
+<EngineExample id="xr/ar-camera-depth" title="AR Camera Depth" />
 
-WebXR Depth Sensingは、各ビューの深度情報へのアクセスを提供し、カラー情報と一致させます。さまざまなブラウザが、CPUとGPUの2つのパスを実装する可能性があり、パスによってさまざまなパフォーマンスへの影響があります。PlayCanvasは、可能な限り違いを抽象化するAPIを統合しており、例えば、テクスチャはCPUパスとGPUパスの両方で利用可能です。
+## 深度センシングのリクエスト {#requesting-depth-sensing}
 
-プラットフォームは、CPUまたはGPUのいずれかのパス、あるいはその両方を実装する可能性があります。
-
-カメラ深度へのアクセスを要求するには、セッションを次のように開始する必要があります。
+ARセッションの開始時に、データの受け渡し方法についての優先設定を指定して、深度センシングをリクエストします。
 
 ```javascript
-app.xr.start(camera, pc.XRTYPE_AR, pc.XRSPACE_LOCALFLOOR, {
-    depthSensing: { // カメラ深度へのアクセスを要求
-        usagePreference: pc.XRDEPTHSENSINGUSAGE_GPU, // GPU実装を優先
-        dataFormatPreference: pc.XRDEPTHSENSINGFORMAT_F32 // データをFloat 32配列/テクスチャとして優先
+camera.camera.startXr(pc.XRTYPE_AR, pc.XRSPACE_LOCALFLOOR, {
+    depthSensing: {
+        usagePreference: pc.XRDEPTHSENSINGUSAGE_CPU,
+        dataFormatPreference: pc.XRDEPTHSENSINGFORMAT_F32
     }
 });
 ```
 
-## サポート
+デバイスは、優先設定を最初に試しつつ、サポートしているものを選びます。
 
-システムがカメラ深度をサポートしているか確認できます。
+| 優先設定 | 値 |
+| --- | --- |
+| `usagePreference` | `pc.XRDEPTHSENSINGUSAGE_CPU`：データはCPU上にあるため、JavaScriptで距離を読み取れる。エンジンは毎フレーム、データをテクスチャにアップロードする。`pc.XRDEPTHSENSINGUSAGE_GPU`：データはGPU上のテクスチャで、シェーダーでしか使えないが、より高速 |
+| `dataFormatPreference` | `pc.XRDEPTHSENSINGFORMAT_F32`：32ビット浮動小数点数。`pc.XRDEPTHSENSINGFORMAT_L8A8`：2つの8ビットチャンネルにパックされた16ビット整数で、すべてのデバイスがサポートしている。`pc.XRDEPTHSENSINGFORMAT_R16U`：16ビット整数 |
+
+セッションが開始されると、実際に何が得られたかを`app.xr.views`が示します。
+
+| プロパティ | 説明 |
+| --- | --- |
+| `supportedDepth` | ブラウザが深度センシングを実装しているかどうか |
+| `availableDepth` | セッションで深度センシングが利用可能かどうか |
+| `depthGpuOptimized` | GPUパスでは`true`、CPUパスでは`false` |
+| `depthPixelFormat` | 深度テクスチャのフォーマット。`pc.PIXELFORMAT_LA8`か`pc.PIXELFORMAT_R32F`、または16ビット整数の場合は`pc.PIXELFORMAT_DEPTH` |
+
+提供される内容はデバイスによって異なり、一方のパスしか提供しないデバイスもあるため、できる限り両方のパスに対応してください。
+
+## 距離の測定 {#measuring-distance}
+
+CPUパスでは、ビューの`getDepth(x, y)`が、ビュー内のある点における現実世界までの距離をメートル単位で返します。デバイスに推定値がない場合は`null`を返します。点は、ビューの左上隅を原点として、右方向と下方向にそれぞれ0〜1の値で指定します。
 
 ```javascript
-if (app.xr.views.supportedDepth) {
-    // カメラ深度アクセスがサポートされています
-}
-
-app.xr.on('start', () => {
-    if (app.xr.views.availableDepth) {
-        // カメラ深度情報が利用可能です
-
-        if (app.xr.views.depthGpuOptimized) {
-            // GPUパス
-        } else {
-            // CPUパス
-        }
+app.on('update', () => {
+    // スマートフォンの唯一のビュー、またはヘッドセットの左目
+    const view = app.xr.views.list[0];
+    const distance = view?.getDepth(0.5, 0.5);
+    if (distance) {
+        console.log(`The center of the view is ${distance.toFixed(2)} m away`);
     }
 });
 ```
 
-## 距離測定
+GPUパスでは、`getDepth()`は`null`を返します。距離は、その点までの直線に沿ってではなく、カメラの平面から正面方向に測られます。そのため、両者が一致するのはビューの中心だけです。ある点にオブジェクトを配置するには、カメラからビューの同じ点を通るレイをキャストし、カメラの正面方向にその距離だけ離れる位置まで、レイに沿って進めます。
 
-深度推定とデータの利用可能性は、基盤となるARシステムの信頼性に左右されるため、深度情報が常に利用可能であるとは限りません。
+## 深度テクスチャ {#the-depth-texture}
 
-WebXRはCPUパスのみをサポートしています。Depth Sensingを使用すると、画面の0から1の座標（左右、上下）であるUとVを提供することで距離を測定できます。
+各ビューの`textureDepth`は、そのビューの深度データを格納したテクスチャで、毎フレーム更新され、シェーダーで使用できます。ヘッドセットのようにビューが複数ある場合は、ビューごとにレイヤーを持つ配列テクスチャになります。このテクスチャを読み取るには、ビューのプロパティがさらに2つ必要です。
 
-```javascript
-// モノスコープビュー（モバイル画面）を取得
-const view = app.xr.views.get(pc.XREYE_NONE);
-if (view) {
-    // 画面中央からの距離を取得
-    const distance = view.getDepth(0.5, 0.5);
+- `depthUvMatrix`は、ビュー内の位置（0〜1）を深度テクスチャ内の位置に変換します。深度テクスチャは、デバイスによって回転や反転された状態で格納されていることがあります。この行列はテクスチャのサイズが変わると変化し、そのときビューが`depth:resize`を発火します。
+- `depthValueToMeters`は、テクスチャから読み取った値に掛けてメートルに変換するための係数です。
 
-    if (distance !== null) {
-        // 距離はメートル単位
-    }
-}
-```
+`pc.PIXELFORMAT_LA8`では、値は2つのチャンネルにまたがる16ビットで、下位バイトが輝度チャンネルに入っています。
 
-## テクスチャ
-
-深度のテクスチャにアクセスできます。PlayCanvasは、異なるCPU/GPUパスを拡張し、ステレオスコピック画面（例：HMD）の場合に配列テクスチャとなり得る1つのテクスチャを提供します。
-
-テクスチャへのアクセス:
-
-```javascript
-const view = app.xr.views.list[0];
-if (view) {
-    const texture = view.textureDepth;
-
-    if (texture) {
-        // グローバルユニフォームを取得
-        const scopeDepthMap = app.graphicsDevice.scope.resolve('depthMap');
-        // ユニフォームを設定
-        scopeDepthMap.setValue(texture);
-    }
-}
-```
-
-### ステレオビュー
-
-シェーダーで深度テクスチャを使用する場合、モノスコープまたはステレオスコープのシナリオに応じて、異なるアプローチを使用する必要があります。これは、シェーダー内の`#define`によって実装できます。
-
-```javascript
-const view = app.xr.views.list[0];
-if (view && view.eye !== pc.XREYE_NONE) {
-    // ステレオビューのdefineを追加
-    fragShader = '#define XRDEPTH_ARRAY\n' + fragShader;
-}
-```
-
-### データ形式
-
-WebXRは、深度センシングデータを2つの形式で提供できます。F32（32ビット浮動小数点数の配列）とLA8（8ビット値のペアのフラット配列）としてパックされたものです。それらは深度に対して32ビット対16ビットというわずかに異なる精度を提供しますが、16ビットでも近接使用には十分です。
-
-フォーマットに応じてテクスチャから深度値をアンパックするために、シェーダーブランチを使用できます。
-
-```javascript
-if (app.xr.views.depthPixelFormat === pc.PIXELFORMAT_R32F) {
-    fragShader = '#define XRDEPTH_FLOAT\n' + fragShader;
-}
-```
-
-### UV正規化
-
----
-
-WebXRは、テクスチャを任意の組み合わせで回転および反転して提供する場合があるため、提供された行列を使用して正規化を実装する必要があります。この行列は次のように設定できます。
-
-```javascript
-// グローバルなuniformスコープを取得
-const scopeDepthUvMatrix = app.graphicsDevice.scope.resolve('matrix_depth_uv');
-// UV正規化行列を設定
-scopeDepthUvMatrix.setValue(view.depthUvMatrix.data);
-```
-
-## シェーダー
-
-すべての準備が整ったので、単一のシェーダーでモノ/ステレオのシナリオと異なるテクスチャ形式に対応できます。
+次のGLSLシェーダーは、深度をグレーの濃淡で描画します。近い面ほど暗くなります。defineで、単一のビューとビューの配列、そして`pc.PIXELFORMAT_LA8`と`pc.PIXELFORMAT_R32F`のフォーマットを切り替えます。`pc.PIXELFORMAT_DEPTH`のテクスチャは読み取りません。
 
 ```glsl
-uniform vec4 uScreenSize; // エンジンによって提供されます
+uniform vec4 render_size;
 uniform mat4 matrix_depth_uv;
+uniform float depth_raw_to_meters;
 
 #ifdef XRDEPTH_ARRAY
-    uniform int view_index; // エンジンによって提供されます
+    uniform int view_index;
     uniform highp sampler2DArray depthMap;
 #else
     uniform sampler2D depthMap;
 #endif
 
-void main (void) {
-    // スクリーン空間用のUVを構築
-    vec2 uvScreen = gl_FragCoord.xy * uScreenSize.zw;
+void main(void) {
+    // ビュー内でのこのピクセルの位置（0〜1）
+    vec2 uvScreen = gl_FragCoord.xy * render_size.zw;
 
     #ifdef XRDEPTH_ARRAY
-        // ステレオ
-        // view_index（左目/右目）に基づいてスクリーン空間を変更
+        // 左右に並んだビュー：画面のうち、このビューが占める半分を使う
         uvScreen = uvScreen * vec2(2.0, 1.0) - vec2(view_index, 0.0);
-        // 提供された行列を使用してUVを正規化
-        vec2 uvNormalized = (matrix_depth_uv * vec4(uvScreen.xy, 0.0, 1.0)).xy;
-        // 配列テクスチャのインデックスとしてview_indexを使用
-        vec3 uv = vec3(uvNormalized, view_index);
+        vec3 uv = vec3((matrix_depth_uv * vec4(uvScreen, 0.0, 1.0)).xy, view_index);
     #else
-        // モノ
-        // 垂直方向に反転して正規化
+        // ビューのYは下向き、画面のYは上向き
         vec2 uv = (matrix_depth_uv * vec4(uvScreen.x, 1.0 - uvScreen.y, 0.0, 1.0)).xy;
     #endif
 
     #ifdef XRDEPTH_FLOAT
-        // F32
         float depth = texture2D(depthMap, uv).r;
     #else
-        // LA8
+        // 輝度とアルファのチャンネルから16ビットの値を取り出す
         vec2 packedDepth = texture2D(depthMap, uv).ra;
-        // AlphaLuminance（2つのfloat）から単一のfloatにアンパック
         float depth = dot(packedDepth, vec2(255.0, 256.0 * 255.0));
     #endif
 
-    // メートルに正規化
-    depth *= depth_raw_to_meters;
-
-    // グレースケールでレンダリング、暗いほど近く、明るいほど遠く
-    gl_FragColor = vec4(depth, depth, depth, 1.0);
+    // メートル単位の値を、0 mの黒から5 mの白までのグレーで表示する
+    float meters = depth * depth_raw_to_meters;
+    gl_FragColor = vec4(vec3(clamp(meters / 5.0, 0.0, 1.0)), 1.0);
 }
 ```
 
-## 例
+このシェーダーは、メッシュ（カメラの前の平面など）を配置する頂点シェーダーと組み合わせて、[`ShaderMaterial`](/user-manual/graphics/shaders/)で使います。ビューの数とフォーマットはビューが届いた時点でわかるため、defineはそのときに設定し、深度のパラメーターは毎フレーム設定します。
 
-上記で説明したものと同様のシェーダーで深度センシングを適用して、カメラの前にクアッドをレンダリングするこの例を確認できます。
+```javascript
+const material = new pc.ShaderMaterial({
+    uniqueName: 'depth-view',
+    vertexGLSL: /* glsl */ `
+        attribute vec3 aPosition;
+        uniform mat4 matrix_model;
+        uniform mat4 matrix_viewProjection;
+        void main(void) {
+            gl_Position = matrix_viewProjection * matrix_model * vec4(aPosition, 1.0);
+        }
+    `,
+    fragmentGLSL: depthFragmentShader, // 上のシェーダー
+    attributes: { aPosition: pc.SEMANTIC_POSITION }
+});
 
-<EngineExample id="xr/ar-camera-depth" title="この例" />
+app.xr.views.on('add', () => {
+    material.setDefine('XRDEPTH_ARRAY', app.xr.views.list.length > 1);
+    material.setDefine('XRDEPTH_FLOAT', app.xr.views.depthPixelFormat === pc.PIXELFORMAT_R32F);
+    material.update();
+});
+
+app.on('update', () => {
+    const view = app.xr.views.list[0];
+    if (!view?.textureDepth) return;
+
+    // セッションのフレームバッファーのサイズと、その逆数
+    const { width, height } = app.graphicsDevice;
+    material.setParameter('render_size', [width, height, 1 / width, 1 / height]);
+    material.setParameter('depthMap', view.textureDepth);
+    material.setParameter('matrix_depth_uv', view.depthUvMatrix.data);
+    material.setParameter('depth_raw_to_meters', view.depthValueToMeters);
+});
+```
+
+レンダリング中のビューのインデックスである`view_index`は、エンジンが提供します。セッション中のグラフィックスデバイスのサイズは、ビューを左右に並べて保持する、セッションのフレームバッファーのサイズです。仮想オブジェクトを現実の物体の後ろに隠すには、マテリアルで、各フラグメントのビュー空間におけるカメラの正面方向の深度を現実の距離と比較し、それより遠いフラグメントを破棄します。上のシェーダーはGLSLなので、WebGL 2で動作します。WebGPUでは、同じ処理をWGSLで記述してください。
+
+## 関連情報 {#see-also}
+
+- [メッシュ検出](/user-manual/xr/ar/mesh-detection/) - 部屋のメッシュを使った、より粗いオクルージョンと物理演算
+- [シェーダー](/user-manual/graphics/shaders/) - マテリアルのシェーダーの記述
+- [XrViews](https://api.playcanvas.com/engine/classes/XrViews.html)と[XrView](https://api.playcanvas.com/engine/classes/XrView.html) - ビューとその深度のAPIリファレンス

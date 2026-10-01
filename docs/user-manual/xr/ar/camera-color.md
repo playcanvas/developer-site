@@ -1,50 +1,51 @@
 ---
-title: Camera Color
-description: Accessing the AR camera color texture in PlayCanvas for pass-through compositing, session options, and runtime support checks.
+title: Camera Access
+description: "AR camera access in PlayCanvas: requesting the camera image in an AR session, checking that the session has it, the color texture of each view, and using the camera image in materials and effects."
 ---
 
-In AR, the rendered image is projected over the reconstructed camera texture on the pass-through device types. This texture can be accessed by the application.
+Camera access gives your application the image the device's camera sees, as a texture, every frame. Use it for effects that work on the real world, such as reflections of the room on virtual objects, glass that refracts the scene behind it, or image processing.
 
-To request access to the camera color, the session should be started with an extra flag:
+<EngineExample id="xr/ar-camera-color" title="AR Camera Color" />
+
+## Requesting Camera Access {#requesting-camera-access}
+
+Ask for camera access when you start an AR session. The browser asks the user's permission to use the camera:
 
 ```javascript
-app.xr.start(camera, pc.XRTYPE_AR, pc.XRSPACE_LOCALFLOOR, {
+camera.camera.startXr(pc.XRTYPE_AR, pc.XRSPACE_LOCALFLOOR, {
     cameraColor: true
 });
 ```
 
-## Support
+`app.xr.views.supportedColor` is `true` when the browser can give the image to the engine's graphics device, and `app.xr.views.availableColor` is `true` once a session has camera access. Camera access is mostly offered by phones. Meta Quest Browser doesn't support it, although pages can read the headset's cameras as ordinary video with [`getUserMedia()`](https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia), which isn't aligned with the views.
 
-You can check if the camera color is supported by the system:
+## The Camera Texture {#the-camera-texture}
+
+The session's views appear during its first frames, rather than when it starts. Each view's `textureColor` is the camera image for that view, updated every frame, or `null` without camera access. On a phone, there is one view:
 
 ```javascript
-if (app.xr.views.supportedColor) {
-    // camera color access is supported
-}
+app.xr.views.on('add', (view) => {
+    if (!view.textureColor) return;
 
-app.xr.on('start', () => {
-    if (app.xr.views.availableColor) {
-        // camera color texture is available
-    }
+    // Show the camera image on a material
+    material.emissiveMap = view.textureColor;
+    material.update();
 });
 ```
 
-## Texture
-
-WebXR can work on monoscopic as well as stereoscopic devices. This means there is a list of Views that represent either a screen (monoscopic device) or an eye (stereoscopic device).
-
-Bear in mind that Views are not available on session start, and can be created/removed during the session's lifetime.
-
-For a monoscopic device, we can access its view and its texture:
+The texture is the size of the camera image, in RGB, and lines up with the view: the pixel at a point in the texture is what the camera sees at the same point of the view. The engine destroys a view's texture when the session ends, so stop using it then:
 
 ```javascript
-app.xr.on('start', () => {
-    app.xr.views.on('add', (view) => {
-        if (view.eye === pc.XREYE_NONE) { // monoscopic view
-            if (view.textureColor) {
-                // camera color texture is available
-            }
-        }
-    });
+app.xr.on('end', () => {
+    material.emissiveMap = null;
+    material.update();
 });
 ```
+
+Copying the camera image costs time every frame, so request camera access only when you use it.
+
+## See Also
+
+- [Depth Sensing](/user-manual/xr/ar/depth-sensing/) - The distance to the real world at each pixel
+- [AR](/user-manual/xr/ar/) - Starting AR sessions and requesting features
+- [XrView](https://api.playcanvas.com/engine/classes/XrView.html) - The API reference for views

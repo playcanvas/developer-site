@@ -1,54 +1,159 @@
 ---
-title: WebXRアプリケーションの最適化
-description: "WebXRのパフォーマンス指針: フレームレート、ステレオレンダリングのコスト、ドローコール、バッチング、ライトマップ、モバイルARトラッキングのオーバーヘッドです。"
+title: パフォーマンス
+description: "PlayCanvasでWebXRアプリケーションを高速に保つ方法：ヘッドセットに必要なフレームレート、セッションの解像度の選択、固定フォービエーションとアンチエイリアス、目標フレームレート、2つのビューをレンダリングするコストの抑制、ヘッドセットでのパフォーマンスの測定。"
 ---
 
-## はじめに
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-快適なXR体験には、高く安定したフレームレートが不可欠です。VR/ARコンテンツを制作する際には、開発の初期段階でテストと最適化を行い、開発期間を通じて目標フレームレートを維持することがこれまで以上に重要になります。
+ヘッドセットには、それぞれの目に対して毎秒72〜120回、新しいフレームが必要です。フレーム落ちは目に見えるだけでなく体でも感じられ、ユーザーが頭を動かすと世界がカクつきます。ARでは、デバイスは現実世界のトラッキングにも時間を使います。スマートフォンは、もともと使える処理能力が少なめです。XRプロジェクトでは最初からパフォーマンスを考慮して計画し、開発を進めながら対象のデバイスでテストしてください。
 
-AR体験では、ワールドトラッキングがパフォーマンスに大きなコストをもたらすことがあるため、フレームレートを慎重に管理する必要があります。これは、ほとんどのユーザーが利用している、一般的にパフォーマンスが制限されたモバイルハードウェアに加えて考慮すべき点です。
+<EngineExample id="xr/vr-test-bed" title="VR Test Bed" />
 
-VR体験では、シーンを各ビュー（目）ごとに一度レンダリングする必要があるため、レンダリングは特にコストがかかります。PlayCanvasはVRレンダリングが完全に重複しないように高度に最適化されていますが、ステレオレンダリングはモノラルレンダリングよりも依然としてコストが高いです。
+## 解像度 {#resolution}
 
-パススルー体験では、ARとVRの要件が組み合わされ、基盤となるシステムは、位置特定、画像処理、レンダリングされた画像のオーバーレイのために多くの計算を実行する必要があります。これに加えて、深度センシング、カラーアクセス、画像トラッキングなどの他の使用可能なAPIや、各目に対する重複レンダリングも加わります。
+レンダリングするピクセルの数は、単一の要因としては最大のコストです。セッションの解像度は、開始時に`framebufferScaleFactor`オプションで設定します。値は、ブラウザがそのデバイスに推奨する解像度に対する比率です。
 
-さらに、現代のHMDデバイスは75Hzや90Hz以上の高いフレームレートを要求しており、高効率なレンダリングの必要性をさらに高めています。
+```javascript
+// 推奨される幅と高さの80%でレンダリングする
+camera.camera.startXr(pc.XRTYPE_VR, pc.XRSPACE_LOCALFLOOR, {
+    framebufferScaleFactor: 0.8
+});
+```
 
-しかし、PlayCanvasには、アプリケーションがより少ない時間でより多くのことを実行できるように特別に設計されたいくつかの機能が含まれています。
+エンジンは、グラフィックスデバイスのピクセル比でもこれをスケーリングします。係数には、グラフィックスデバイスの`maxPixelRatio`をディスプレイの`devicePixelRatio`で割った値が掛けられます。`maxPixelRatio`がディスプレイのピクセル比より低いグラフィックスデバイスは、ページのキャンバスと同じように、セッションも低い解像度でレンダリングします。フル解像度でレンダリングするには、グラフィックスデバイスがディスプレイのピクセル比を使うようにします。
 
-### ドローコールとバッチング
+<Tabs groupId="workflow" defaultValue="engine">
+<TabItem value="engine" label="Engine">
 
-ドローコールとは、エンジンがオブジェクトをレンダリングするために必要な情報をGPUに提供する操作のことです。シーン内のオブジェクトが多いほど、各フレームをレンダリングするために必要なドローコールも多くなります。ドローコールの数を減らすには、カリング、[スタティックバッチング](/user-manual/graphics/advanced-rendering/batching/)、[インスタンシング](/user-manual/graphics/advanced-rendering/hardware-instancing/)によってフレーム内のオブジェクトの数を最小限に抑えることを推奨します。
+```javascript
+device.maxPixelRatio = window.devicePixelRatio;
+```
 
-### ランタイムライトマップ生成
+グラフィックスデバイスのデフォルトは1です。ディスプレイのピクセル比の方が低い場合は、その値になります。
 
-各ダイナミックライトには、フレームごとのランタイムコストが発生します。ライトが多いほどコストが高くなり、シーンのレンダリング速度が低下します。ライトをライトマップにベイクすることで、スタティックライトのコストをテクスチャをレンダリングするだけのコストに大幅に削減できます。ライトマップは、お気に入りの3Dモデリングツールを使用してオフラインで生成することも、PlayCanvasの組み込み[ランタイムライトマッパー](/user-manual/graphics/lighting/runtime-lightmaps/)を使用することもできます。
+</TabItem>
+<TabItem value="editor" label="Editor">
 
-### リアルタイムシャドウの慎重な使用
+[Settings](/user-manual/editor/interface/settings/rendering/)パネルの**RENDERING**セクションで、**Device Pixel Ratio**を有効にします。
 
-ダイナミックライトと同様の理由で、ダイナミックシャドウにもフレームごとのランタイムコストが発生します。特にオムニライトは、シャドウマップを生成するためにシーンを6回レンダリングする必要があります。ダイナミックシャドウを落とすライトが多すぎるのを避けるべきです。
+</TabItem>
+<TabItem value="react" label="React">
 
-### フィルレートとオーバードローに注意する
+`<Application>`は、グラフィックスデバイスのデフォルト（最大1のピクセル比）を変更しません。`<Application>`の中のコンポーネントから値を引き上げます。
 
-フィルレートとは、GPUが時間内（通常は1秒あたり）に埋めることができるピクセル数のことです。高価なフラグメントシェーダー（例：多くのライトと複雑なマテリアル）と高解像度（例：高いデバイスピクセル比を持つ携帯電話）を使用している場合、アプリケーションは高いフレームレートを維持するためにシーンのレンダリングに多くの時間を費やしてしまいます。
+```jsx
+import { useEffect } from 'react';
+import { useApp } from '@playcanvas/react/hooks';
 
-オーバードローとは、同じ画面領域に対して複数のピクセル層が処理される際に発生するレンダリングの非効率性のことです。これは正当な理由（ブレンドや透過の複数の層）または冗長な理由（より遠いピクセルが手前の不透明なピクセルによって上書きされる）で発生する可能性があります。後者の場合、表示されないピクセルを描画しようとGPU処理を無駄にしていることになります。
+function FullResolution() {
+  const app = useApp();
+  useEffect(() => {
+    app.graphicsDevice.maxPixelRatio = window.devicePixelRatio;
+  }, [app]);
+  return null;
+}
+```
 
-:::tip
+</TabItem>
+<TabItem value="web-components" label="Web Components">
 
-[WebGL Insight](https://github.com/3Dparallax/insight)のような拡張機能を使用すると、オーバードローを視覚化するのに役立ちます。
+`<pc-app>`は、`max-pixel-ratio`で上限を設定しない限りディスプレイのピクセル比を使うため、何もする必要はありません。
 
-:::
+</TabItem>
+</Tabs>
 
-### ガーベージコレクションによる停止
+`app.xr.framebufferScaleFactor`で、実行中のセッションの係数を確認できます。係数を変更するには、セッションを終了してから新しいセッションを開始します。
 
-Webブラウザには、未使用のJavaScriptオブジェクトを自動的にガーベージコレクションする機能があります。PlayCanvasエンジンはランタイムアロケーションを最小限に抑えるように設計されており、あなたのコードでも同様に努めるべきです。ベクトルやその他のオブジェクトを事前に割り当てて再利用することで、毎フレーム多くのオブジェクトが作成されて破棄されることがなくなります。
+## 固定フォービエーション {#fixed-foveation}
 
-### プロファイリングツール
+ヘッドセットのレンズの周辺部はもともとぼやけて見えるため、そこをフル解像度でレンダリングするのは無駄な処理です。固定フォービエーションは、各ビューの周辺部を低い解像度でレンダリングします。セッションの実行中に、`app.xr.fixedFoveation`を0（オフ）から1（最大）の範囲で設定します。
 
-PlayCanvasには、組み込みの[プロファイラツール](/user-manual/optimization/profiler/)が付属しています。Editorでは、Launch menuでProfilerオプションを有効にして、プロファイリングを有効にした状態でアプリケーションを実行できます。
+```javascript
+app.xr.on('start', () => {
+    if (app.xr.fixedFoveation !== null) {
+        app.xr.fixedFoveation = 0.5;
+    }
+});
+```
 
-### 一般的な最適化のヒント
+デバイスがサポートしていない場合、`fixedFoveation`は`null`です。フォービエーションは、グラフィックスデバイスがアンチエイリアス（MSAA）なしでレンダリングする場合にのみ機能します。アンチエイリアスを使うと、エンジンは各フレームを別の場所にレンダリングしてから、セッションのフレームバッファーにフル解像度でコピーします。このとき、デバッグビルドはフォービエーションが無視されることを警告します。
 
-[さらに多くの最適化ガイドライン](/user-manual/optimization/guidelines/)が利用可能です。
+<Tabs groupId="workflow" defaultValue="engine">
+<TabItem value="engine" label="Engine">
+
+```javascript
+const device = await pc.createGraphicsDevice(canvas, {
+    deviceTypes: [pc.DEVICETYPE_WEBGL2],
+    antialias: false
+});
+```
+
+</TabItem>
+<TabItem value="editor" label="Editor">
+
+[Settings](/user-manual/editor/interface/settings/rendering/)パネルの**RENDERING**セクションで、**Anti-Alias**を無効にします。
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```jsx
+<Application graphicsDeviceOptions={{ antialias: false }}>
+```
+
+</TabItem>
+<TabItem value="web-components" label="Web Components">
+
+```html
+<pc-app backend="webgl2" antialias="false">
+```
+
+</TabItem>
+</Tabs>
+
+アンチエイリアスがないと、エッジがちらつくことがあります。解像度を上げたり、ミップマップ付きのテクスチャを使ったりすると、ちらつきを抑えられます。
+
+## フレームレート {#frame-rate}
+
+多くのヘッドセットは、複数のリフレッシュレートで動作できます。レートが低いと各フレームに使える時間が増え、レートが高いと、アプリケーションが追いつける限り、より滑らかに見えて快適になります。`app.xr.supportedFrameRates`はデバイスが提供するレートの一覧で、デバイスが示さない場合は`null`になります。`app.xr.frameRate`は現在のレートです。別のレートは`updateTargetFrameRate()`でリクエストします。
+
+```javascript
+app.xr.on('start', () => {
+    const rates = app.xr.supportedFrameRates;
+    if (rates?.includes(72)) {
+        app.xr.updateTargetFrameRate(72, (err) => {
+            if (err) console.warn(err.message);
+        });
+    }
+});
+
+app.xr.on('frameratechange', (frameRate) => {
+    console.log(`Running at ${frameRate} Hz`);
+});
+```
+
+## レンダリングのコスト {#rendering-cost}
+
+エンジンはビューごとにシーンを1回レンダリングするため、描画ごと、ピクセルごと、ライトごとに時間がかかる処理は、ヘッドセットではどれもコストが2倍になります。一般的な最適化手法が、これまで以上に重要になります。
+
+- **ドローコール。** [バッチング](/user-manual/graphics/advanced-rendering/batching/)でメッシュを結合し、繰り返し登場するオブジェクトは[インスタンシング](/user-manual/graphics/advanced-rendering/hardware-instancing/)で描画し、視界の外にあるものはカリングで省きます。
+- **ライトとシャドウ。** 動的なライトと、そのライトが落とすシャドウには、それぞれフレームごとにコストがかかります。静的なライティングは[ライトマップ](/user-manual/graphics/lighting/runtime-lightmaps/)にベイクし、シャドウを落とすライトはできるだけ少なくします。
+- **フィルレート。** 複雑なマテリアル、透明度、オーバードローのコストは、両方のビューのすべてのピクセルで発生します。シェーダーはシンプルに保ち、大きな透明の面は避けてください。
+- **ポストプロセス。** 全画面エフェクトはすべてのビューのすべてのピクセルで実行され、XRの解像度では大きな負荷になるため、避けてください。WebGPUのステレオセッションでは、カメラごとのポストプロセスや、シーンの深度や色を読み取るマテリアルはサポートされていません。
+- **ガベージコレクション。** ガベージコレクションによる一時停止は、フレーム落ちの原因になります。ベクトルなどのオブジェクトは、`update`の中で作成せずに再利用してください。
+
+詳しくは、[最適化のガイドライン](/user-manual/optimization/guidelines/)を参照してください。
+
+## 測定 {#measuring}
+
+ヘッドセットの中ではページ上のツールが見えないため、別の方法で測定します。
+
+- **リモートデバッグ。** ヘッドセットのブラウザをコンピューターの開発者ツールに接続し、アプリケーションを使いながらパフォーマンスプロファイルを記録します。[テストとデバッグ](/user-manual/xr/testing/#remote-debugging)を参照してください。
+- **シーン内の表示。** シーン内のパネルにフレームレートを表示します。[`XrMenu`](/user-manual/user-interface/xr/#xr-menus)スクリプトのラベル項目を`setItemLabel()`で更新すれば、手軽に作れます。上の例では、ラベル項目にフォービエーションのレベルを表示しています。
+- **デバイス独自のツール。** Quest向けのMetaのOVR Metrics Toolのように、独自のパフォーマンスオーバーレイを持つヘッドセットもあります。
+
+## 関連情報 {#see-also}
+
+- [最適化](/user-manual/optimization/) - PlayCanvasアプリケーション全般の最適化
+- [セッション](/user-manual/xr/sessions/#session-features) - `startXr()`のオプション
+- [テストとデバッグ](/user-manual/xr/testing/) - デバイスでのプロファイリング
