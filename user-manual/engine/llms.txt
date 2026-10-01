@@ -220,7 +220,7 @@ Use this index to write code against the engine directly. React, Web Components 
 
 ## Optional
 
-- [All pages of this index in one file](https://developer.playcanvas.com/user-manual/engine/llms-full.txt): 215 pages (1226 KB), for downloading and searching rather than reading into context.
+- [All pages of this index in one file](https://developer.playcanvas.com/user-manual/engine/llms-full.txt): 218 pages (1251 KB), for downloading and searching rather than reading into context.
 - [PlayCanvas Engine](https://developer.playcanvas.com/user-manual/engine.md)
 - [Assets](https://developer.playcanvas.com/user-manual/assets.md)
 - [Preloading](https://developer.playcanvas.com/user-manual/assets/preloading.md)
@@ -241,6 +241,7 @@ Use this index to write code against the engine directly. React, Web Components 
 - [Lightmapping](https://developer.playcanvas.com/user-manual/graphics/lighting/lightmapping.md)
 - [Ambient Occlusion](https://developer.playcanvas.com/user-manual/graphics/lighting/ambient-occlusion.md)
 - [Parallax Mapping](https://developer.playcanvas.com/user-manual/graphics/physical-rendering/parallax-mapping.md)
+- [Environment Lighting](https://developer.playcanvas.com/user-manual/graphics/physical-rendering/environment-lighting.md)
 - [HDR Rendering](https://developer.playcanvas.com/user-manual/graphics/linear-workflow/hdr-rendering.md)
 - [WGSL Reflection](https://developer.playcanvas.com/user-manual/graphics/shaders/wgsl-reflection.md)
 - [WGSL Capabilities](https://developer.playcanvas.com/user-manual/graphics/shaders/wgsl-capabilities.md)
@@ -261,12 +262,14 @@ Use this index to write code against the engine directly. React, Web Components 
 - [Sepia Effect](https://developer.playcanvas.com/user-manual/graphics/posteffects/legacy/sepia.md)
 - [Vignette Effect](https://developer.playcanvas.com/user-manual/graphics/posteffects/legacy/vignette.md)
 - [Advanced Rendering](https://developer.playcanvas.com/user-manual/graphics/advanced-rendering.md)
+- [Rendering Without Entities](https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/rendering-without-entities.md)
 - [Multi-Draw](https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/multi-draw.md)
 - [Multiple Render Targets](https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/multiple-render-targets.md)
 - [Dual-Source Blending](https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/dual-source-blending.md)
 - [Indirect Drawing](https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/indirect-drawing.md)
 - [Transform Feedback](https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/transform-feedback.md)
 - [HTML-in-Canvas](https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/html-in-canvas.md)
+- [Device Loss and Recovery](https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/device-loss.md)
 - [What is Gaussian Splatting?](https://developer.playcanvas.com/user-manual/gaussian-splatting/what-is-gaussian-splatting.md)
 - [The PLY Format](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/ply.md)
 - [The SOG Format](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/sog.md)

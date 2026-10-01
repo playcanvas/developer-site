@@ -3,7 +3,7 @@
 > The complete text of the PlayCanvas User Manual in one file, for indexing, or for downloading and searching.
 
 Index: https://developer.playcanvas.com/llms.txt
-Total Documents: 518
+Total Documents: 521
 Generated: 2026-10-01
 
 ================================================================================
@@ -30967,6 +30967,10 @@ To fix the warning, select the model asset and open the **Pipeline** section. Cl
 
 The **Padding** option determines the space between sections when unwrapping occurs. If you see light bleeding (i.e. light that shouldn't be in the lightmap), you can increase the padding to reduce bleeding.
 
+## Recovery after device loss
+
+Runtime-baked lightmaps are GPU-generated, so device loss discards their contents. In Engine 2.23 and later, schedule another bake after the graphics device fires `devicerestored`. See [Device Loss and Recovery](https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/device-loss.md) for the recovery lifecycle.
+
 --------------------------------------------------------------------------------
 
 ## Clustered Lighting
@@ -31383,6 +31387,8 @@ This can be done using two methods:
 1. Use CubeMap as Skybox in Scene Settings.
 2. Use CubeMap as environment map on the Material directly.
 
+See [Environment Lighting](https://developer.playcanvas.com/user-manual/graphics/physical-rendering/environment-lighting.md) for what each method feeds into a material, which one is used when both are set, and the settings that control the result.
+
 ## Box Projection Mapping
 
 This technique changes the projection of environment map which allows to specify box within the space so CubeMap corresponds to its bounds. The most common use is to simulate reflections on surfaces within room scale environment.
@@ -31396,6 +31402,114 @@ Here is an [example](https://playcanv.as/p/zdkARz26/) and [project](https://play
 [Image: Environment Box Projection Mapping](https://playcanv.as/p/zdkARz26/)
 
 The lighting in this scene is implemented using Lightmap and AO textures and Box Projected IBL (reflections).
+
+--------------------------------------------------------------------------------
+
+## Environment Lighting
+
+URL: https://developer.playcanvas.com/user-manual/graphics/physical-rendering/environment-lighting/
+Markdown: https://developer.playcanvas.com/user-manual/graphics/physical-rendering/environment-lighting.md
+
+Physical materials do not only react to the lights in your scene. They also pick up light from their surroundings: a shiny surface mirrors what is around it, a matte surface is tinted by the light arriving from every direction, and a glass surface shows the surroundings through it. All of this comes from an **environment map**, an image of the surroundings such as a sky, a room or an outdoor location.
+
+PlayCanvas can take that environment map from two places: the scene, or the material itself. This page explains what the environment contributes to a material, where it can come from, which source is used when, and which settings change the result.
+
+## What the environment feeds
+
+```mermaid
+graph TD
+    S["<b>Scene environment</b><br/>Skybox in Scene Settings"]
+    M["<b>Material environment</b><br/>Cube Map or Sphere Map on the material"]
+    subgraph MAT["What a physical material receives"]
+        direction LR
+        R["Reflections"]
+        A["Ambient light"]
+        F["Refraction"]
+        R ~~~ A ~~~ F
+    end
+    B["<b>Background</b><br/>the sky drawn behind everything"]
+    S -->|"materials without their own environment map"| MAT
+    M -->|"this material only"| MAT
+    S --> B
+```
+
+**Reflections.** The surface mirrors the environment. Smooth surfaces show a sharp image, rough surfaces a soft, blurred one, and metals tint the reflection with their own color. The material's Glossiness, Metalness and Reflectivity control how strong and how sharp the reflection is.
+
+**Ambient light.** Light that reaches the surface from all directions without coming from a specific light entity. With an environment map, ambient light varies with direction: brighter and bluer from the sky above, darker and warmer from the ground below. This is what makes an object look like it belongs in its surroundings. Without an environment map, ambient light is the flat **Ambient Color** from Scene Settings.
+
+**Refraction.** For materials with Refraction enabled but without Dynamic Refractions, the environment is what you see through the surface, bent according to the Index of Refraction. Dynamic Refractions show the actual objects behind the surface instead and do not use the environment.
+
+**Background.** The sky drawn behind everything else. Only the scene environment is drawn as the background. A material environment map affects the material it is assigned to and nothing else.
+
+## The scene environment
+
+The scene environment is the **Skybox** in Scene Settings → Rendering, or `app.scene.skybox` and `app.scene.envAtlas` in code. It is drawn as the background and lights every material that does not bring an environment of its own.
+
+To light materials, the skybox cubemap must be **prefiltered**: the Prefilter button on the [cubemap asset](https://developer.playcanvas.com/user-manual/editor/assets/inspectors/cubemap.md) precomputes the blurred versions needed for rough reflections and ambient light. A cubemap that is not prefiltered is drawn as the background only. See [Image Based Lighting](https://developer.playcanvas.com/user-manual/graphics/physical-rendering/image-based-lighting.md) for authoring and prefiltering environment maps.
+
+The following settings in Scene Settings → Rendering apply to the scene environment only:
+
+| Setting | Effect |
+| --- | --- |
+| **Intensity** | Brightens or darkens the sky together with everything it lights: reflections, ambient light and refraction. Use it to match the exposure of your lights. |
+| **Rotation** | Turns the environment around the scene. Reflections and ambient light turn with it. |
+| **Mip** | Blurs the background only. Materials keep their sharp reflections. |
+| **Ambient Color** | The flat ambient light, used only by materials that take no ambient light from an environment map. |
+
+## The material environment
+
+A material can bring its own environment in the **Environment** section of the [material inspector](https://developer.playcanvas.com/user-manual/editor/assets/inspectors/material.md#environment), or through the matching properties in code. A typical use is a cubemap of a room rendered from where the object stands, so that the reflections match the walls, floor and windows around it.
+
+| Setting | Effect |
+| --- | --- |
+| **Cube Map** (`cubeMap`) | A cubemap of the object's surroundings. If the cubemap is prefiltered, the material takes reflections, ambient light and refraction from it, just as it would from the scene skybox. A cubemap that is not prefiltered gives mirror-sharp reflections regardless of glossiness, and the ambient light falls back to the flat Ambient Color. |
+| **Sphere Map** (`sphereMap`) | A single 2D image of the surroundings as seen in a mirrored ball. The cheapest option: reflections only, fixed to the camera, so the reflection does not move when the camera orbits the object. Cube Map takes precedence when both are set. Sphere maps are kept for existing content and are planned for removal in a future major release. |
+| **Use Skybox** (`useSkybox`) | Whether the material may use the scene environment when it has no environment map of its own. Switch it off for a material that should not reflect the sky at all. It has no effect on a material with its own environment map. |
+| **Projection** (`cubeMapProjection`) | How the environment is placed around the object. **Normal** treats it as infinitely far away, which is right for a sky. **Box** maps it onto a box with the position and size you give, so that reflections line up with the walls, floor and ceiling of a room. See [Box Projection Mapping](https://developer.playcanvas.com/user-manual/graphics/physical-rendering/image-based-lighting.md#box-projection-mapping). |
+| **Reflectivity** (`reflectivity`) | Scales the strength of the environment reflection on this material, whichever environment it uses. |
+| **Ambient** color (`ambient`) | Tints the ambient light on this material, whichever environment it uses. |
+
+In code, the prefiltered lighting is a single texture called the environment atlas (`envAtlas`), which the `EnvLighting` helpers generate from a cubemap or an equirectangular image. Setting it on a material gives reflections, ambient light and refraction; setting a cube map alongside it adds mirror-sharp reflections on very glossy surfaces.
+
+## Which environment is used
+
+The rule is simple: **a material with an environment map of its own uses only that. Everything else comes from the scene.**
+
+| Material environment | Use Skybox | Reflections and refraction | Ambient light |
+| --- | --- | --- | --- |
+| None | On (default) | Scene skybox | Scene skybox |
+| None | Off | None | Ambient Color |
+| Prefiltered cube map | Any | Material cube map | Material cube map |
+| Plain cube map or sphere map | Any | Material map | Ambient Color |
+
+A material environment replaces the scene environment completely. The scene's Intensity and Rotation do not apply to it, and the scene does not fill in the ambient light for a plain cube map or a sphere map. If you want directional ambient light on a material with its own environment, prefilter its cubemap in the Editor, or generate an environment atlas for it in code.
+
+## Setting it up in code
+
+```javascript
+// Scene environment from an HDR image: a sharp sky for the background and mirror-like
+// reflections, plus a prefiltered lighting atlas for ambient light and rough reflections
+const skybox = pc.EnvLighting.generateSkyboxCubemap(hdrTexture);
+const lighting = pc.EnvLighting.generateLightingSource(hdrTexture);
+const envAtlas = pc.EnvLighting.generateAtlas(lighting);
+lighting.destroy();
+
+app.scene.skybox = skybox;
+app.scene.envAtlas = envAtlas;
+app.scene.skyboxIntensity = 1.5;
+
+// Material environment: this material ignores the scene skybox and reflects its own surroundings
+const material = new pc.StandardMaterial();
+material.envAtlas = roomAtlas;   // prefiltered lighting: reflections, ambient light and refraction
+material.cubeMap = roomCubemap;  // optional: mirror-sharp reflections on very glossy surfaces
+material.update();
+```
+
+## Examples
+
+- [HDR](https://playcanvas.github.io/#/graphics/hdr): a scene lit by a prefiltered environment atlas.
+- [Reflection Cubemap](https://playcanvas.github.io/#/graphics/reflection-cubemap): a material with its own cubemap, rendered at runtime from the object's position, with Use Skybox switched off.
+- [Reflection Box](https://playcanvas.github.io/#/graphics/reflection-box): a room whose materials use an environment atlas with Box projection so that the reflections line up with the walls.
 
 --------------------------------------------------------------------------------
 
@@ -33783,6 +33897,8 @@ compute.setupIndirectDispatch(0, customBuffer);
 
 When using a custom buffer, you manage its lifetime and contents—no frame validation is performed.
 
+In Engine 2.23 and later, compute resources are recreated during device recovery, but storage-buffer contents must be written again or regenerated. See [Device Loss and Recovery](https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/device-loss.md) for interrupted reads and explicit resource cleanup.
+
 ## Reading Data Back to CPU
 
 To read results from a storage buffer back to the CPU:
@@ -35821,6 +35937,129 @@ Markdown: https://developer.playcanvas.com/user-manual/graphics/advanced-renderi
 
 --------------------------------------------------------------------------------
 
+## Rendering Without Entities
+
+URL: https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/rendering-without-entities/
+Markdown: https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/rendering-without-entities.md
+
+You can render geometry without creating an Entity or a Render Component for each object. Create a [`MeshInstance`](https://api.playcanvas.com/engine/classes/MeshInstance.html) with a mesh, a material, and a [`GraphNode`](https://api.playcanvas.com/engine/classes/GraphNode.html), then add it to a [layer](https://developer.playcanvas.com/user-manual/graphics/layers.md). It participates in the layer's normal rendering, including lighting, shadows, sorting, and culling.
+
+This is useful for procedural environments, custom scene management, or large groups of repeated objects. Your application controls the transforms, layer membership, and resource lifetime that components would normally manage.
+
+## Live Example
+
+The example renders a ground plane with a manually created StandardMaterial and a forest of hardware-instanced trees loaded from a GLB. Only the camera and light use entities. Use **Show Trees** to remove and re-add the same mesh instance, or **Tree Count** to change how many trees use the existing instance buffer.
+
+[Live example: Rendering Without Entities](https://playcanvas.com/examples/#/graphics-advanced/rendering-without-entities) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/graphics-advanced/rendering-without-entities.example.mjs))
+
+## Create a Mesh Instance
+
+The following code assumes an initialized application with a camera and lighting. The World layer is already part of the application's default layer composition and camera configuration.
+
+```javascript
+import {
+    Color,
+    GraphNode,
+    LAYERID_WORLD,
+    Mesh,
+    MeshInstance,
+    PlaneGeometry,
+    StandardMaterial,
+    Vec2,
+    VertexBuffer,
+    VertexFormat
+} from 'playcanvas';
+
+const layer = app.scene.layers.getLayerById(LAYERID_WORLD);
+
+const material = new StandardMaterial();
+material.diffuse = new Color(0.53, 0.55, 0.43);
+material.gloss = 0.15;
+material.update();
+
+const mesh = Mesh.fromGeometry(app.graphicsDevice, new PlaneGeometry({
+    halfExtents: new Vec2(20, 20)
+}));
+
+const node = new GraphNode('Ground');
+const ground = new MeshInstance(mesh, material, node);
+const meshInstances = [ground];
+layer.addMeshInstances(meshInstances);
+```
+
+Supply the node explicitly when no component will assign one. It provides the world transform and a useful name for debugging. A standalone GraphNode does not need to be attached to `app.root`; you can move, rotate, or scale it with the usual GraphNode transform methods.
+
+## Keep Layer Membership Persistent
+
+[`Layer.addMeshInstances()`](https://api.playcanvas.com/engine/classes/Layer.html#addmeshinstances) registers the instances until you remove them. Call it when an object becomes part of the scene, and update its node or material as needed. There is no need to submit it again every frame.
+
+```javascript
+// Hide the ground while preserving its resources for reuse.
+layer.removeMeshInstances(meshInstances);
+
+// Show it again later, using the same mesh instance.
+layer.addMeshInstances(meshInstances);
+```
+
+The layer determines where these objects render in the scene's layer composition. For a custom layer, include it in the composition and in the camera's `layers` list. Lights must also affect that layer. See [Layers](https://developer.playcanvas.com/user-manual/graphics/layers.md) for ordering and camera configuration.
+
+To cast shadows, set `meshInstance.castShadow = true` **before** adding it to the layer; registration also adds eligible instances to the layer's shadow casters. Removing the instance removes it from both lists. StandardMaterial receives lighting and shadows through the normal renderer, just as it does on a Render Component.
+
+## Instance a Loaded Mesh
+
+A loaded container asset exposes render assets and materials without requiring `instantiateRenderEntity()`. The example's tree GLB contains one static mesh with one material:
+
+```javascript
+// treeAsset is an already loaded container asset.
+const treeMesh = treeAsset.resource.renders[0].resource.meshes[0];
+const treeMaterial = treeAsset.resource.materials[0].resource;
+const forest = new MeshInstance(treeMesh, treeMaterial, new GraphNode('Forest'));
+forest.castShadow = true;
+```
+
+This direct lookup is specific to the example asset. A general GLB can contain multiple primitives and materials, node transforms, skins, and morph targets. Those require the corresponding setup when bypassing entity instantiation. The example centers and grounds the tree's raw mesh before placing copies.
+
+For [hardware instancing](https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/hardware-instancing.md), create one buffer of transforms and attach it to the mesh instance. Here, `matrices` is a Float32Array containing `treeCount` world-space Mat4 transforms, and `forestBounds` encloses all transformed trees:
+
+```javascript
+const instanceBuffer = new VertexBuffer(
+    app.graphicsDevice,
+    VertexFormat.getDefaultInstancingFormat(app.graphicsDevice),
+    treeCount,
+    { data: matrices }
+);
+
+forest.setInstancing(instanceBuffer, true);
+forest.setCustomAabb(forestBounds);
+const forestInstances = [forest];
+layer.addMeshInstances(forestInstances);
+
+// Draw only the first half of the buffer, without reallocating it.
+forest.instancingCount = Math.floor(treeCount / 2);
+```
+
+The default instancing format uses world-space matrices, so the forest's GraphNode stays at identity. Passing `true` to `setInstancing()` enables frustum culling for the whole group. Supply a conservative bounding box covering every copy; individual trees are not culled separately. Update the bounds if the transforms change. Keeping the full forest bounds when reducing the count is safe, though less precise.
+
+Instancing reuses one mesh and material for all the trees. Layer removal and re-addition also preserve the mesh instance and its buffer, so neither operation requires rebuilding the forest.
+
+## Release Owned Resources
+
+Removing an instance from a layer does not destroy it. When it is no longer needed, remove it from every layer it belongs to and then destroy it:
+
+```javascript
+layer.removeMeshInstances(meshInstances);
+ground.destroy();
+material.destroy();
+
+layer.removeMeshInstances(forestInstances);
+forest.destroy();
+instanceBuffer.destroy();
+```
+
+`MeshInstance.destroy()` releases its mesh reference and destroys the mesh when no references remain. It does not destroy the material or an instance buffer you supplied. Destroy manually owned materials and buffers when no other objects use them. Let the asset registry manage the GLB resources, and unload the asset only after all of its users have finished with it. The complete example performs cleanup when the application is destroyed.
+
+--------------------------------------------------------------------------------
+
 ## Batching
 
 URL: https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/batching/
@@ -36643,6 +36882,7 @@ The following example renders a scene into a texture from a second camera and di
 - [Multiple Cameras](https://developer.playcanvas.com/user-manual/graphics/cameras/multiple-cameras.md) - composing views and assigning render targets to cameras.
 - [Layers](https://developer.playcanvas.com/user-manual/graphics/layers.md) - controlling which objects each camera renders.
 - [Post Effects](https://developer.playcanvas.com/user-manual/graphics/posteffects.md) - built-in and custom post-processing built on render targets.
+- [Device Loss and Recovery](https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/device-loss.md) - restoring GPU-generated contents after context or device loss.
 
 --------------------------------------------------------------------------------
 
@@ -36658,8 +36898,8 @@ MRT is supported on every device PlayCanvas runs on (WebGL2 and WebGPU). To dete
 Multiple render targets have the following restrictions:
 
 - All color attachments of a multiple render target must have the same width and height.
-- All color attachments are cleared to the same value, specified using [`CameraComponent.clearColor`](https://api.playcanvas.com/engine/classes/CameraComponent.html#clearcolor).
-- All color attachments use the same write mask and alpha blend mode, as specified using [`BlendState`](https://api.playcanvas.com/engine/classes/BlendState.html).
+- Color attachments are cleared to [`CameraComponent.clearColor`](https://api.playcanvas.com/engine/classes/CameraComponent.html#clearcolor), unless given their own clear color using [`CameraComponent.setClearColor`](https://api.playcanvas.com/engine/classes/CameraComponent.html#setclearcolor), described in [Clear Colors](https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/multiple-render-targets.md#clear-colors) below.
+- All color attachments use the same write mask and alpha blend mode, as specified using [`BlendState`](https://api.playcanvas.com/engine/classes/BlendState.html), unless the device reports [`GraphicsDevice.supportsIndependentBlending`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#supportsindependentblending), in which case [`BlendState.setAttachment`](https://api.playcanvas.com/engine/classes/BlendState.html#setattachment) gives an attachment its own.
 - [Dual-source blending](https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/dual-source-blending.md) cannot be used with MRT because it requires exactly one color attachment.
 
 ## How to use MRT
@@ -36710,6 +36950,21 @@ app.root.addChild(entity);
 entity.camera.setShaderPass('MyMRT');
 ```
 
+### Clear Colors
+
+At the start of the camera's rendering, every color attachment is cleared to the camera's [`clearColor`](https://api.playcanvas.com/engine/classes/CameraComponent.html#clearcolor). When the attachments hold different kinds of data, give each its own clear color using [`CameraComponent.setClearColor`](https://api.playcanvas.com/engine/classes/CameraComponent.html#setclearcolor), passing the index of the color attachment. For an integer format attachment, the color components are the integer values to clear to.
+
+```javascript
+// attachment 0 keeps clearing to entity.camera.clearColor
+// clear the normals attachment to a neutral normal, and the gloss attachment to black
+entity.camera.setClearColor(1, new pc.Color(0.5, 0.5, 1, 1));
+entity.camera.setClearColor(2, new pc.Color(0, 0, 0, 1));
+```
+
+Pass `null` to remove the clear color of an attachment, so that it clears to `clearColor` again, and use [`CameraComponent.getClearColor`](https://api.playcanvas.com/engine/classes/CameraComponent.html#getclearcolor) to read the color an attachment clears to.
+
+The per-attachment clear colors apply to the clear at the start of the camera's rendering. Clears performed during rendering - by a [`Layer`](https://api.playcanvas.com/engine/classes/Layer.html) with `clearColorBuffer` enabled, or by a camera whose `rect` does not cover the whole render target - do not support per-attachment colors, and are best avoided with multiple render targets.
+
 ### Standard Materials
 
 When rendering using [`StandardMaterial`](https://api.playcanvas.com/engine/classes/StandardMaterial.html) into Multiple Render Targets (MRT), override the `outputPS` shader chunk to direct values to the additional color buffers. Supply the chunk for each shader language your project targets — GLSL for WebGL2, WGSL for WebGPU. Apply both to every material in your target entity's render components, using [`Material.getShaderChunks`](https://api.playcanvas.com/engine/classes/Material.html#getshaderchunks):
@@ -36759,7 +37014,7 @@ To restrict the modification to a specific camera, gate it behind the shader pas
 
 ## Example
 
-A full working sample is available in the engine examples: Multiple Render Targets renders a chess board through a custom shader pass that writes its world normal and gloss into additional color targets, displayed on screen as separate textures.
+A full working sample is available in the engine examples: Multiple Render Targets renders a chess board through a custom shader pass that writes its world normal and gloss into additional color targets, each with its own clear color, displayed on screen as separate textures.
 
 [Live example: Multiple Render Targets](https://playcanvas.com/examples/#/graphics/multi-render-targets) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/graphics/multi-render-targets.example.mjs))
 
@@ -37254,6 +37509,124 @@ When `device.supportsHtmlTextures` is `false`, consider these approaches:
 
 - [GraphicsDevice.supportsHtmlTextures](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#supportsHtmlTextures) — Detect HTML-in-Canvas support.
 - [Texture.setSource()](https://api.playcanvas.com/engine/classes/Texture.html#setSource) — Set an HTML element as a texture source.
+
+--------------------------------------------------------------------------------
+
+## Device Loss and Recovery
+
+URL: https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/device-loss/
+Markdown: https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/device-loss.md
+
+The browser can lose access to the GPU because of a driver reset, resource pressure, or a change in the system's graphics configuration. Treat loss as something an application may encounter during normal use.
+
+In **WebGL2**, the rendering context is lost and the browser may restore it. In **WebGPU**, the lost native device cannot be reused: PlayCanvas requests a replacement device and recreates its GPU resources. The application keeps the same PlayCanvas graphics device object.
+
+## What the engine restores
+
+PlayCanvas pauses its application update and rendering loop while the device is lost, then resumes after successful recovery. JavaScript objects, entities, and application state remain in memory. Browser timers, network requests, and asynchronous callbacks can still run during this pause.
+
+The distinction is between recreating a resource and recovering its **contents**:
+
+| Resource or data | Recovery behavior |
+| --- | --- |
+| Engine-managed shaders, bindings, and pipelines | Recreated for the restored context or replacement device. |
+| Textures and vertex/index buffers with retained CPU sources | Uploaded again from those sources. |
+| Render targets | Recreated, but previously rendered pixels are lost. Render their contents again. |
+| Storage buffers | Recreated at the same size. Write their input data again or regenerate it with compute. |
+| Runtime lightmaps, generated environments, and one-off texture copies | Repeat the bake, generation, or copy operation. |
+| GPU-only particle, simulation, or painting history | Previous history is lost. Restart it or restore an application-owned backup. |
+
+Keep authoritative data or a way to regenerate it outside GPU memory. A loaded texture can return from its source image; paint subsequently accumulated into that texture cannot. Normal per-frame rendering regenerates many intermediate targets automatically.
+
+## Restoring application data
+
+Listen for `devicelost` and `devicerestored` on `app.graphicsDevice`. Stop application-owned GPU work on loss, and repopulate generated resources after restoration. Use these engine events on both backends instead of replacing the engine's native loss handling.
+
+This WebGPU example retains CPU input for a [storage buffer](https://api.playcanvas.com/engine/classes/StorageBuffer.html). It also tracks interrupted reads for the next section:
+
+```javascript
+const device = app.graphicsDevice;
+const values = new Float32Array([1, 2, 3, 4]);
+const buffer = new pc.StorageBuffer(
+    device,
+    values.byteLength,
+    pc.BUFFERUSAGE_COPY_SRC | pc.BUFFERUSAGE_COPY_DST
+);
+let readGeneration = 0;
+
+const restoreData = () => {
+    buffer.write(0, values);
+    app.renderNextFrame = true;
+};
+
+const lost = device.on('devicelost', () => {
+    readGeneration++;
+});
+const restored = device.on('devicerestored', restoreData);
+restoreData();
+
+app.on('destroy', () => {
+    readGeneration++;
+    lost.off();
+    restored.off();
+    buffer.destroy();
+});
+```
+
+Update the retained `values` when your application's input changes. Make restoration repeatable: another loss can happen later. Reuse engine resource objects and avoid creating duplicate listeners or resources on each recovery.
+
+For [runtime lightmaps](https://developer.playcanvas.com/user-manual/graphics/lighting/runtime-lightmaps.md), schedule another bake after restoration, as the [baked-lighting example](https://playcanvas.github.io/#/graphics/lights-baked) does. Regenerate application-created environment maps similarly. If `app.autoRender` is false, request a frame **after** the regenerated content is ready with `app.renderNextFrame = true`.
+
+## Handling asynchronous reads
+
+An in-flight read can reject before `devicelost` arrives, or settle after recovery. For WebGPU storage-buffer reads, handle `AbortError` and discard results from an older generation:
+
+```javascript
+async function readValues() {
+    const generation = readGeneration;
+    try {
+        const result = await buffer.read(
+            0,
+            values.byteLength,
+            new Float32Array(values.length),
+            true
+        );
+        return generation === readGeneration ? result : null;
+    } catch (error) {
+        if (
+            error.name === 'AbortError' ||
+            generation !== readGeneration
+        ) {
+            return null;
+        }
+        throw error;
+    }
+}
+```
+
+The final `true` submits this one-off read immediately, including outside the render loop. Immediate submission adds overhead; avoid it for routine per-frame reads.
+
+Here, `null` means the caller should wait for a fresh result. Other failures still propagate. Issue new GPU work only when the device is available, including work started by timers or network callbacks.
+
+Remove recovery listeners when their owner is destroyed. Explicitly destroy resources you no longer need, including `Compute` instances, which the device retains for recovery. Do not cache native WebGPU buffers, textures, or pipelines across device replacement.
+
+## Testing recovery
+
+In locally built engine examples using a debug build, paste this into the browser console:
+
+```javascript
+pc.AppBase.getApplication().graphicsDevice.debugLoseContext(1000);
+```
+
+This **internal testing helper is not a public API**. It triggers actual WebGL context loss or WebGPU device destruction, then attempts recovery after a 1,000 ms delay. The delay is not a guarantee of when recovery finishes. Its implementation is stripped from non-debug builds; do not use it in production application logic.
+
+Test more than once, including while reads or compute work are in flight. Check that rendering and interaction resume, generated lighting returns, and an on-demand scene redraws without camera movement. Check both backends and inspect the console for validation errors.
+
+## When recovery fails
+
+Recovery is not guaranteed: the browser may be unable to restore a context or obtain another GPU device. Do not assume every `devicelost` event will be followed by `devicerestored`. An application can show an HTML recovery message and, after an application-chosen timeout, offer a page reload. Use HTML rather than an in-canvas message, since rendering is paused. Preserve important user work outside GPU memory.
+
+For more background on the WebGPU lifecycle, see [WebGPU Device Loss by Brandon Jones](https://toji.dev/webgpu-best-practices/device-loss.html).
 
 --------------------------------------------------------------------------------
 
