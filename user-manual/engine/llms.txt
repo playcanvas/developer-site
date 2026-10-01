@@ -220,7 +220,7 @@ Use this index to write code against the engine directly. React, Web Components 
 
 ## Optional
 
-- [All pages of this index in one file](https://developer.playcanvas.com/user-manual/engine/llms-full.txt): 219 pages (1284 KB), for downloading and searching rather than reading into context.
+- [All pages of this index in one file](https://developer.playcanvas.com/user-manual/engine/llms-full.txt): 220 pages (1292 KB), for downloading and searching rather than reading into context.
 - [PlayCanvas Engine](https://developer.playcanvas.com/user-manual/engine.md)
 - [Assets](https://developer.playcanvas.com/user-manual/assets.md)
 - [Preloading](https://developer.playcanvas.com/user-manual/assets/preloading.md)
@@ -234,6 +234,7 @@ Use this index to write code against the engine directly. React, Web Components 
 - [Classic Reference](https://developer.playcanvas.com/user-manual/scripting/script-attributes/classic.md)
 - [Console Logging](https://developer.playcanvas.com/user-manual/scripting/debugging/console-logging.md)
 - [Browser Dev Tools](https://developer.playcanvas.com/user-manual/scripting/debugging/browser-dev-tools.md)
+- [Inspector](https://developer.playcanvas.com/user-manual/scripting/debugging/inspector.md)
 - [Projection](https://developer.playcanvas.com/user-manual/graphics/cameras/projection.md)
 - [Clearing](https://developer.playcanvas.com/user-manual/graphics/cameras/clearing.md)
 - [Depth Layer](https://developer.playcanvas.com/user-manual/graphics/cameras/depth-layer.md)

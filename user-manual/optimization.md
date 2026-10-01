@@ -27,6 +27,7 @@ Choose a repeatable scene or interaction, record a baseline on the target device
 | [Profiling with AppStats](https://developer.playcanvas.com/user-manual/optimization/app-stats.md) | Reading public statistics from code and collecting reports for dashboards, agents and automated comparisons. |
 | [Editor Profiler](https://developer.playcanvas.com/user-manual/optimization/profiler.md) | Inspecting the Editor Launch profiler, including asset loading and shader compilation timelines. |
 | [GPU Profiling](https://developer.playcanvas.com/user-manual/optimization/gpu-profiling.md) | Capturing frames with native GPU tools for detailed rendering investigations. |
+| [Inspector](https://developer.playcanvas.com/user-manual/scripting/debugging/inspector.md) | Finding where video memory goes, which passes and draws a frame makes, and what each mesh and material uses, in the running application. |
 
 :::ai
 Give an AI assistant a performance goal, repeatable scenario and baseline reports from **[AppStats](https://developer.playcanvas.com/user-manual/optimization/app-stats.md#collecting-periodic-reports)**. It can combine these with MiniStats or browser evidence and propose one measurable change at a time. Use the **[Editor MCP Server](https://developer.playcanvas.com/user-manual/editor/mcp-server.md)** to replay Editor input or follow **[Developing with AI](https://developer.playcanvas.com/user-manual/engine/developing-with-ai.md)** for standalone projects.
