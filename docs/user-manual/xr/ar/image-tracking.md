@@ -1,119 +1,81 @@
 ---
 title: Image Tracking
-description: "Tracking real-world images in AR with PlayCanvas: reference images, estimated size, pose updates, and runtime support checks."
+description: "AR image tracking in PlayCanvas: providing reference images and their real-world widths before a session, checking which images can be tracked, following the pose of tracked images, handling lost tracking, and choosing images that track well."
 ---
 
-Image Tracking provides the ability to track real-world images using the provided image samples and their estimated size. The underlying CV system will estimate image position and orientation and tracking status.
+Image tracking follows printed images in the real world, such as a poster, a product's packaging or a card, and gives you each one's position and rotation. Attach content to an image to bring it to life.
 
-## Support
+Image tracking is an experimental WebXR module. Chrome on Android implements it, behind the `chrome://flags/#webxr-incubations` flag, so it suits prototypes and installations where you control the device, rather than public applications.
 
-You can check if image tracking is supported by the system:
+## Adding Images {#adding-images}
+
+Add the images to track before the session starts, with the width of each in the real world, in meters. Images can be any image the browser can decode, as an `HTMLImageElement`, an `ImageBitmap`, a canvas or a `Blob`:
 
 ```javascript
-if (app.xr.imageTracking.supported) {
-    // image tracking is supported
-}
+const image = new Image();
+image.src = 'poster.jpg';
+await image.decode();
 
-app.xr.on('start', () => {
-    if (app.xr.imageTracking.available) {
-        // image tracking is supported and available
-        // it can still be false if images were not provided
+// A poster 40 cm wide
+const poster = app.xr.imageTracking.add(image, 0.4);
+```
+
+`add()` returns an [`XrTrackedImage`](https://api.playcanvas.com/engine/classes/XrTrackedImage.html), or `null` if the browser doesn't support image tracking or a session is running. `app.xr.imageTracking.remove()` removes an image, also only between sessions. Then request image tracking when you start an AR session:
+
+```javascript
+camera.camera.startXr(pc.XRTYPE_AR, pc.XRSPACE_LOCALFLOOR, {
+    imageTracking: true
+});
+```
+
+## Trackable Images {#trackable-images}
+
+When the session starts, the device examines each image. `app.xr.imageTracking.available` becomes `true` once it has, and each image's `trackable` property says whether the device can track it. An image can be untrackable if it is too small, has too few features, or is too uniform. If the device can't process the images at all, `app.xr.imageTracking` fires `error`:
+
+```javascript
+app.xr.imageTracking.on('error', (err) => {
+    console.warn(`Image tracking failed: ${err.message}`);
+});
+```
+
+Images track best when they:
+
+- Are at least 300 × 300 pixels. Larger images don't track better, and take longer to load.
+- Have plenty of detail and contrast, and no large plain areas or repeating patterns.
+- Match the printed image closely. Color doesn't matter, so grayscale images load faster.
+- Have the right width: the device uses it to work out how far away the image is.
+
+## Following Images {#following-images}
+
+An image fires `tracked` when the device starts tracking it, and `untracked` when it stops, and its `tracking` is `true` in between. Its `getPosition()` and `getRotation()` return the pose of its center in [tracking space](/user-manual/xr/ar/#the-real-world-and-the-rig). Follow it every frame while it is tracked:
+
+```javascript
+// A model standing on the poster, as a child of the camera rig
+const model = new pc.Entity('model');
+model.addComponent('render', { type: 'box' });
+model.setLocalScale(0.1, 0.1, 0.1);
+model.enabled = false;
+rig.addChild(model);
+
+poster.on('tracked', () => {
+    model.enabled = true;
+});
+poster.on('untracked', () => {
+    model.enabled = false;
+});
+
+app.on('update', () => {
+    if (poster.tracking) {
+        model.setLocalPosition(poster.getPosition());
+        model.setLocalRotation(poster.getRotation());
     }
 });
 ```
 
-## Images
+While the camera can't see an image, the device may keep reporting it where it last saw it, assuming it hasn't moved. Its `emulated` property is then `true`. Keep content on an emulated image if the image is fixed, such as a poster, and hide it if the image can be moved, such as a card.
 
-Images are provided **before the session starts** with their real-world width (in meters). Images can be in any web-friendly format and should match real-world images as closely as possible.
+## See Also
 
-**The resolution** should be at least 300x300 pixels. High resolution does **not** improve tracking performance and/or reliability.
-
-**The color** is irrelevant, so for download size optimization, grayscale images are preferred.
-
-**Repeating patterns** or too many geometric features will reduce tracking reliability.
-
-## Add/Remove Tracked Images
-
-You can modify the list of tracked images only when the XR session is not running.
-
-Adding an image to the tracking list:
-
-```javascript
-// image that is 20cm wide (0.2m)
-const trackedImage = app.xr.imageTracking.add(image, 0.2);
-```
-
-Removing a tracked image:
-
-```javascript
-app.xr.imageTracking.remove(trackedImage);
-```
-
-And you can access a list of tracked images like so:
-
-```javascript
-const trackedImages = app.xr.imageTracking.images;
-for (let i = 0; i < trackedImages.length; i++) {
-    const trackedImage = trackedImages[i];
-}
-```
-
-## Position & Rotation
-
-A tracked image's position and rotation (in world-space) are updated automatically and you can access the most recent information like so:
-
-```javascript
-const position = trackedImage.getPosition();
-const rotation = trackedImage.getRotation();
-```
-
-## Reliability
-
-Image Tracking is implemented using Computer Vision techniques that are running over the camera feed, which is subject to noise, unstable illumination, view angle, occlusion, motion blur, and more aspects of reality. The underlying system provides some details about its tracking state.
-
-Check if the image is trackable in the first place:
-
-```javascript
-if (!trackedImage.trackable) {
-    // it could be too small, or the underlying system is unable to parse the image
-}
-```
-
-When a session starts, if the underlying system is unable to use some images, the relevant error messages will be passed:
-
-```javascript
-app.xr.imageTracking.on('error', (err) => {
-    console.warn(err.message);
-});
-```
-
-## Tracking State
-
-You can check if an image is actively tracked right now:
-
-```javascript
-if (trackedImage.tracking) {
-    // actively tracked
-}
-```
-
-When tracking becomes unavailable, an image's position and rotation will be emulated, assuming that the real-world image has not been moved:
-
-```javascript
-if (trackedImage.emulated) {
-    // position and rotation is emulated
-    // based on previously known tracking information
-}
-```
-
-It is possible to subscribe to events to know when an image becomes tracked or loses active tracking:
-
-```javascript
-trackedImage.on('tracked', () => {
-    // image is now actively tracked
-});
-
-trackedImage.on('untracked', () => {
-    // image is no longer actively tracked
-});
-```
+- [AR](/user-manual/xr/ar/) - Starting AR sessions, and placing content relative to the camera rig
+- [WebXR: AR Image Tracking](/tutorials/webxr-ar-image-tracking/) - Tutorial with an Editor project
+- [XrImageTracking](https://api.playcanvas.com/engine/classes/XrImageTracking.html) - The API reference for `app.xr.imageTracking`

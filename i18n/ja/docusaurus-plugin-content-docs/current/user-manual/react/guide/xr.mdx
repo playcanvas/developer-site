@@ -21,14 +21,16 @@ React アプリケーションで XR サポートを有効にするには、以�
 
 ## XR Script
 
-PlayCanvas エンジンは 2 つの重要な XR Script を提供します:
+PlayCanvas エンジンは、よくある作業のための XR Script を提供しています。このガイドでは 3 つを使用します:
 
+- **`XrSession`** - アプリイベントに応じてセッションを開始・終了し、カメラリグを配置し、AR ではカメラを透過させる
 - **`XrControllers`** - 検出されたコントローラー（ハンドトラッキングを含む）の XR コントローラーモデルを自動的にダウンロードしてレンダリングする
 - **`XrNavigation`** - ポイントアンドセレクトアクションを使用したテレポーテーションベースのナビゲーションを実装する
 
 PlayCanvas Script パッケージからインポートします:
 
 ```tsx
+import { XrSession } from 'playcanvas/scripts/esm/xr/xr-session.mjs'
 import { XrControllers } from 'playcanvas/scripts/esm/xr/xr-controllers.mjs'
 import { XrNavigation } from 'playcanvas/scripts/esm/xr/xr-navigation.mjs'
 ```
@@ -42,34 +44,27 @@ XR を正しく動作させるには、XR Script をアタッチしたカメラ 
   <Entity name="camera" position={[0, 1.6, 0]}>
     <Camera clearColor="#1e1e1e" />
   </Entity>
+  <Script script={XrSession} />
   <Script script={XrControllers} />
   <Script script={XrNavigation} />
 </Entity>
 ```
 
-カメラはおよそ目の高さ（1.6 メートル）に配置され、Script は親 Entity にアタッチされています。
+カメラはおよそ目の高さ（1.6 メートル）に配置され、Script は親 Entity、つまりカメラリグにアタッチされています。セッション中はヘッドセットがリグの中でカメラを動かし、リグを動かすとユーザーが移動します。[セッション](/user-manual/xr/sessions/#the-camera-and-its-rig)を参照してください。
 
 ## XR セッションの開始
 
-WebXR ではセッションを開始するためにユーザージェスチャーが必要です。`app.xr` API を使用して XR セッションを開始・管理します:
+WebXR ではセッションを開始するためにユーザージェスチャーが必要です。カメラリグに `XrSession` がある場合は、クリックハンドラーからそのイベントを発火します。`XrSession` はリグ内のカメラでセッションを開始し、`xr:end` または Escape キーで終了します:
 
 ```tsx
 const app = useApp()
 
-const startVR = () => {
-  const camera = app.root.findComponent('camera')
-  if (camera) {
-    app.xr.start(camera, 'immersive-vr', 'local-floor')
-  }
-}
-
-const startAR = () => {
-  const camera = app.root.findComponent('camera')
-  if (camera) {
-    app.xr.start(camera, 'immersive-ar', 'local-floor')
-  }
-}
+const startVR = () => app.fire('vr:start')
+const startAR = () => app.fire('ar:start')
+const endXR = () => app.fire('xr:end')
 ```
+
+平面検出などの機能をリクエストするには、`camera.startXr()` でカメラのセッションを自分で開始します。[セッション](/user-manual/xr/sessions/#session-features)を参照してください。
 
 ## 完全な例
 
@@ -94,18 +89,24 @@ AR/VR モードに入るためのボタンと、XR で移動できるキュー�
 - **Escape** キーでアクティブな XR セッションを終了できます
 - XR の利用可能性はデバイスとブラウザのサポートに依存します
 - フル体験をテストするには VR ヘッドセットまたは AR 対応モバイルデバイスを使用してください
-- 開発中は Chrome と Edge が DevTools 経由で WebXR エミュレーションをサポートしています
+- 開発中は、[Immersive Web Emulator](/user-manual/xr/testing/#without-a-headset) 拡張機能で Chrome と Edge にヘッドセットをエミュレートできます
 
 :::
 
 ## XR の利用可能性チェック
 
-現在のデバイスで AR または VR が利用可能かどうかを確認できます:
+現在のデバイスで AR または VR が利用可能かどうかを確認できます。エンジンはアプリケーションの起動後と、デバイスが変化したときに確認するため、結果をステートに保持し、`available` イベントに従ってください:
 
 ```tsx
 const app = useApp()
-const arAvailable = app.xr.isAvailable('immersive-ar')
-const vrAvailable = app.xr.isAvailable('immersive-vr')
+const [vrAvailable, setVrAvailable] = useState(false)
+
+useEffect(() => {
+  const update = () => setVrAvailable(app.xr.isAvailable('immersive-vr'))
+  update()
+  const handle = app.xr.on('available', update)
+  return () => handle.off()
+}, [app])
 ```
 
 ## XR イベント
@@ -131,6 +132,7 @@ useEffect(() => {
 
 PlayCanvas エンジンは多くの高度な機能を備えた包括的な XR サポートを提供しています。詳細については以下を参照してください:
 
-- [XR ユーザーマニュアル](/user-manual/xr) - 包括的な XR ドキュメント
+- [XR ユーザーマニュアル](/user-manual/xr/) - 包括的な XR ドキュメント
+- [はじめに](/user-manual/xr/using-webxr/) - React などで構築する最初の VR シーン
 - [WebXR API リファレンス](https://api.playcanvas.com/engine/classes/XrManager.html) - 完全な API ドキュメント
 - [XR Script ソース](https://github.com/playcanvas/engine/tree/main/scripts/esm) - XR Script のソースコードを参照

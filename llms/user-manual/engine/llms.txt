@@ -170,13 +170,29 @@ Use this index to write code against the engine directly. React, Web Components 
 
 ## XR
 
-- [XR](/user-manual/xr/): WebXR AR and VR: platforms, capabilities and session setup.
-- [Using WebXR](/user-manual/xr/using-webxr/): Checking support, starting AR and VR sessions from user input, and configuring them with the camera component and `XrManager`.
-- [Input Sources](/user-manual/xr/input-sources/): Controllers, tracked hands, gaze and touch.
-- [Capabilities](/user-manual/xr/capabilities/): The supported WebXR modules, such as anchors, depth sensing, hand tracking, hit testing, and mesh and plane detection.
-- [Hit Testing](/user-manual/xr/ar/hit-testing/): Placing virtual objects on real-world surfaces in AR.
-- [Platforms](/user-manual/xr/platforms/): Tested devices and browsers for VR, AR and each capability.
-- [Optimizing WebXR Applications](/user-manual/xr/optimizing-webxr/): Keeping the frame rate up despite stereo rendering, draw calls and AR tracking costs.
+- [XR](/user-manual/xr/): WebXR VR and AR: how a session takes over the camera, the XR manager and the engine's XR scripts, and the features sessions offer.
+- [Getting Started](/user-manual/xr/using-webxr/): Requirements, setting up XR with `XrManager` and a WebGL 2 or WebGPU device, and a first VR scene with a camera rig, `XrSession` and `XrControllers`.
+- [Sessions](/user-manual/xr/sessions/): Session types, checking availability, starting and ending sessions, reference spaces, requesting features, the camera rig and tracking space.
+- [Input Sources](/user-manual/xr/input-sources/): Controllers, tracked hands, gaze, gaze and pinch, and screen taps: rays, select and squeeze, handedness and profiles.
+- [Controllers](/user-manual/xr/controllers/): Grip poses, controller models with `XrControllers`, gamepad buttons and thumbsticks, haptics and velocity.
+- [Hand Tracking](/user-manual/xr/hand-tracking/): The 25 joints of `XrHand`, drawing hands, tracking loss, gestures and poking with a fingertip.
+- [Pointing and Grabbing](/user-manual/xr/pointing-and-grabbing/): Picking with bounding boxes or physics ray casts, lasers, grabbing, throwing and pressing with a finger.
+- [Locomotion](/user-manual/xr/locomotion/): Moving the camera rig, teleporting and turning with `XrNavigation`, moving the world with `XrManipulation`, and comfort.
+- [AR](/user-manual/xr/ar/): Starting AR sessions, see-through cameras, the real-world features AR adds, placing content relative to the rig, and handheld and headset AR.
+- [Hit Testing](/user-manual/xr/ar/hit-testing/): Hit test sources, a placement reticle, hit tests from screen taps, and anchoring placed objects.
+- [Anchors](/user-manual/xr/ar/anchors/): Creating, following and destroying anchors, and persisting them between sessions.
+- [Plane Detection](/user-manual/xr/ar/plane-detection/): Detected planes and their labels, drawing them, room capture, and planes for placement, physics and occlusion.
+- [Mesh Detection](/user-manual/xr/ar/mesh-detection/): Detected meshes of the room, drawing them, and physics colliders and occlusion from them.
+- [Depth Sensing](/user-manual/xr/ar/depth-sensing/): CPU and GPU depth, measuring distances, and reading the depth texture in a shader.
+- [Light Estimation](/user-manual/xr/ar/light-estimation/): Lighting virtual objects with the estimated main light, and the ambient spherical harmonics.
+- [Camera Access](/user-manual/xr/ar/camera-color/): The camera image of each view as a texture.
+- [Image Tracking](/user-manual/xr/ar/image-tracking/): Tracking printed images, and choosing images that track well.
+- [DOM Overlay](/user-manual/xr/ar/dom-overlay/): HTML over handheld AR, and keeping taps on it from selecting in the scene.
+- [Third-Party Frameworks](/user-manual/xr/ar/third-party-frameworks/): AR in browsers without WebXR, with Zappar and 8th Wall.
+- [Performance](/user-manual/xr/optimizing-webxr/): Session resolution, fixed foveation and anti-aliasing, target frame rates, rendering cost and measuring in a headset.
+- [Testing and Debugging](/user-manual/xr/testing/): Emulating a headset with the Immersive Web Emulator or IWER, serving pages to devices and remote debugging.
+- [Platforms](/user-manual/xr/platforms/): Headsets, phones and browsers, their VR, AR and input support, AR features and graphics backends.
+- [Troubleshooting](/user-manual/xr/troubleshooting/): Causes and fixes for missing Enter VR buttons, failed sessions, black AR views, misplaced content and other common problems.
 
 ## Optimization
 

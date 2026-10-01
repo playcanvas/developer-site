@@ -1,90 +1,51 @@
 ---
 title: Light Estimation
-description: "Real-world light estimation for AR in PlayCanvas: directional and ambient probes, spherical harmonics, and matching virtual shading to the scene."
+description: "AR light estimation in PlayCanvas: starting estimation in an AR session, lighting virtual objects with the estimated direction, color and intensity of the main real-world light, and the spherical harmonics of the ambient light."
 ---
 
-In AR, the real world can have complex illumination and various environments. For better immersion and the ability to blend between the real and the virtual world, virtual objects can be shaded and illuminated based on Light Estimation data, such as:
+Virtual objects look most at home in AR when they are lit like the room around them. Light estimation tells you where the room's strongest light comes from, its color and its intensity, and gives you an estimate of the light from all around.
 
-* **Directional light** (the most prominent), its rotation, intensity and color.
-* **Ambient light** in the form of L3 spherical harmonics.
-* **Reflections** in the form of a cube map ([currently not integrated](https://github.com/playcanvas/engine/issues/6070)).
+## Starting Estimation {#starting-estimation}
 
-## Support
-
-You can check if light estimation is supported by the system:
+The engine requests light estimation for every AR session. Once the session has started, `app.xr.lightEstimation.supported` is `true` if the session can estimate light, and `start()` begins estimating:
 
 ```javascript
-if (app.xr.lightEstimation.supportedColor) {
-    // light estimation access is supported
-}
-
-app.xr.lightEstimation.on('available', () => {
-    // light estimation becomes available
+app.xr.on('start', () => {
+    if (app.xr.lightEstimation.supported) {
+        app.xr.lightEstimation.start();
+    }
 });
 ```
 
-## Directional Light
+The first estimate arrives a moment later: `app.xr.lightEstimation.available` becomes `true`, and it fires `available`. If estimation can't start, it fires `error`. Estimation stops when the session ends, or when you call `end()`.
 
-The most basic information that light estimation provides is the most prominent directional light rotation, intensity and color:
+## Directional Light {#directional-light}
 
-```javascript
-const lightEstimation = app.xr.lightEstimation;
-
-// check if light estimation is available
-if (lightEstimation.available) {
-    // rotate entity
-    entity.setRotation(lightEstimation.rotation());
-
-    // set light parameters
-    entity.light.intensity = lightEstimation.intensity;
-    entity.light.color = lightEstimation.color;
-}
-```
-
-## Ambient Light
-
-As the environment is usually much more complex than a single directional light, light estimation provides ambient light information in the form of L3 SH (spherical harmonics).
-
-To use SH, the material either has a prefiltered cube map applied (scene skybox works also), or the constant ambient shader chunk (`ambientConstantPS`) should be updated.
-
-You can set SH data per material:
+The estimate's `rotation`, `color` and `intensity` describe the strongest light in the room, as a directional light. Apply them to a directional light of your own every frame:
 
 ```javascript
-if (app.xr.lightEstimation.available) {
-    material.setParameter('ambientSH[0]', app.xr.lightEstimation.sphericalHarmonics);
-}
+app.on('update', () => {
+    const estimation = app.xr.lightEstimation;
+    if (!estimation.available) return;
+
+    sun.setRotation(estimation.rotation);
+    sun.light.color = estimation.color;
+    sun.light.intensity = estimation.intensity;
+});
 ```
 
-If there is no prefiltered cube map or skybox on the scene, you can update the material chunk:
+The rotation points a directional light's entity the way the real light shines, so shadows that the light casts fall the way real shadows do. The intensity is the largest of the light's red, green and blue values, and at least 1, and the color is those values divided by the intensity. All three are `null` until an estimate is available.
 
-```javascript
-material.chunks.ambientConstantPS = chunkCode;
-material.update();
-```
+## Ambient Light {#ambient-light}
 
-Shader chunk code:
+`sphericalHarmonics` is an estimate of the light from every direction, as 27 numbers: the red, green and blue values of nine L2 spherical harmonics coefficients, in the order the [WebXR Lighting Estimation](https://immersive-web.github.io/lighting-estimation/#xrlightestimate-interface) specification defines. Use it to drive ambient lighting in your own shaders.
 
-```glsl
-uniform vec3 ambientSH[9];
+The engine doesn't apply it to materials. The `ambientSH` property of a standard material takes its nine coefficients in a different order, so the WebXR values can't be assigned to it directly.
 
-void addAmbient(vec3 worldNormal) {
-    vec3 n = worldNormal;
+The specification also defines reflection cube maps, which the engine doesn't provide.
 
-    vec3 color =
-        ambientSH[0] +
-        ambientSH[1] * n.x +
-        ambientSH[2] * n.y +
-        ambientSH[3] * n.z +
-        ambientSH[4] * n.x * n.z +
-        ambientSH[5] * n.z * n.y +
-        ambientSH[6] * n.y * n.x +
-        ambientSH[7] * (3.0 * n.z * n.z - 1.0) +
-        ambientSH[8] * (n.x * n.x - n.y * n.y);
+## See Also
 
-    dDiffuseLight += color;
-}
-```
-
-## Reflections
-
-WebXR Light Estimation provides an estimation of the environment reflection in form of a cube map, but [at the moment](https://github.com/playcanvas/engine/issues/6070) it is not integrated into PlayCanvas Engine.
+- [Lights](/user-manual/graphics/lighting/lights/) - Directional lights and their properties
+- [Shadows](/user-manual/graphics/lighting/shadows/) - Shadows from the estimated light
+- [XrLightEstimation](https://api.playcanvas.com/engine/classes/XrLightEstimation.html) - The API reference for `app.xr.lightEstimation`

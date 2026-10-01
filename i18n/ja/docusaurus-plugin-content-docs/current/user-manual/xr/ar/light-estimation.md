@@ -1,90 +1,51 @@
 ---
-title: 光の推定
-description: "PlayCanvasのAR向け実世界ライト推定: ディレクショナルとアンビエントプローブ、球面調和関数、仮想シェーディングをSceneに合わせます。"
+title: ライト推定
+description: "PlayCanvasのARライト推定: ARセッションでの推定の開始、推定された現実世界の主光源の方向、色、強度による仮想オブジェクトのライティング、環境光の球面調和関数。"
 ---
 
-ARでは、現実世界は複雑な照明や様々な環境を持つことがあります。より良い没入感と、現実世界と仮想世界を融合させるために、仮想オブジェクトは光の推定データ（以下のようなもの）に基づいてシェーディングされ、照らされます。
+ARの仮想オブジェクトは、周りの部屋と同じように照らされているときに、最も自然になじんで見えます。ライト推定を使うと、部屋で最も強い光がどこから来ているか、その色と強度がわかります。また、周囲のあらゆる方向から届く光の推定値も得られます。
 
-* **指向性ライト**（最も顕著なもの）、その回転、強度、色。
-* **環境光**（L3球面調和関数形式）。
-* **反射**（キューブマップ形式）([現在未統合](https://github.com/playcanvas/engine/issues/6070)）。
+## 推定の開始 {#starting-estimation}
 
-## サポート
-
-システムが光の推定をサポートしているかどうかを確認できます。
+エンジンは、すべてのARセッションでライト推定をリクエストします。セッションの開始後、セッションが光を推定できる場合は`app.xr.lightEstimation.supported`が`true`になり、`start()`で推定を開始できます。
 
 ```javascript
-if (app.xr.lightEstimation.supportedColor) {
-    // 光の推定へのアクセスがサポートされています
-}
-
-app.xr.lightEstimation.on('available', () => {
-    // 光の推定が利用可能になります
+app.xr.on('start', () => {
+    if (app.xr.lightEstimation.supported) {
+        app.xr.lightEstimation.start();
+    }
 });
 ```
 
-## 指向性ライト
+最初の推定値は少し遅れて届きます。届くと`app.xr.lightEstimation.available`が`true`になり、`available`イベントが発火します。推定を開始できない場合は、`error`イベントが発火します。推定は、セッションが終了したとき、または`end()`を呼び出したときに停止します。
 
-光の推定が提供する最も基本的な情報は、最も顕著な指向性ライトの回転、強度、色です。
+## ディレクショナルライト {#directional-light}
 
-```javascript
-const lightEstimation = app.xr.lightEstimation;
-
-// 光の推定が利用可能かを確認
-if (lightEstimation.available) {
-    // エンティティを回転
-    entity.setRotation(lightEstimation.rotation());
-
-    // ライトのパラメータを設定
-    entity.light.intensity = lightEstimation.intensity;
-    entity.light.color = lightEstimation.color;
-}
-```
-
-## 環境光
-
-環境は通常、単一の指向性ライトよりもはるかに複雑であるため、光の推定はL3 SH（球面調和関数）形式で環境光情報を提供します。
-
-SHを使用するには、マテリアルにプリフィルタリングされたキューブマップが適用されているか（シーンのスカイボックスも機能します）、または定数環境シェーダーチャンク（`ambientConstantPS`）を更新する必要があります。
-
-マテリアルごとにSHデータを設定できます。
+推定値の`rotation`、`color`、`intensity`は、部屋で最も強い光をディレクショナルライトとして表したものです。毎フレーム、これらを自分のディレクショナルライトに適用します。
 
 ```javascript
-if (app.xr.lightEstimation.available) {
-    material.setParameter('ambientSH[0]', app.xr.lightEstimation.sphericalHarmonics);
-}
+app.on('update', () => {
+    const estimation = app.xr.lightEstimation;
+    if (!estimation.available) return;
+
+    sun.setRotation(estimation.rotation);
+    sun.light.color = estimation.color;
+    sun.light.intensity = estimation.intensity;
+});
 ```
 
-シーンにプリフィルタリングされたキューブマップやスカイボックスがない場合は、マテリアルチャンクを更新できます。
+回転は、ディレクショナルライトのエンティティを実際の光が差す方向に向けます。そのため、このライトが落とす影は、実際の影と同じ方向に落ちます。強度は光の赤、緑、青の値のうち最も大きい値で、1を下回ることはありません。色は、それらの値を強度で割ったものです。推定値が利用可能になるまで、3つとも`null`です。
 
-```javascript
-material.chunks.ambientConstantPS = chunkCode;
-material.update();
-```
+## 環境光 {#ambient-light}
 
-シェーダーチャンクコード：
+`sphericalHarmonics`は、あらゆる方向から届く光の推定値で、27個の数値からなります。これは、9個のL2球面調和関数の係数それぞれの赤、緑、青の値で、[WebXR Lighting Estimation](https://immersive-web.github.io/lighting-estimation/#xrlightestimate-interface)仕様が定める順序で並んでいます。独自のシェーダーで、環境光によるライティングに使ってください。
 
-```glsl
-uniform vec3 ambientSH[9];
+エンジンはこれをマテリアルに適用しません。StandardMaterialの`ambientSH`プロパティは9個の係数を異なる順序で受け取るため、WebXRの値をそのまま代入することはできません。
 
-void addAmbient(vec3 worldNormal) {
-    vec3 n = worldNormal;
+仕様では反射用のキューブマップも定義されていますが、エンジンはこれを提供していません。
 
-    vec3 color =
-        ambientSH[0] +
-        ambientSH[1] * n.x +
-        ambientSH[2] * n.y +
-        ambientSH[3] * n.z +
-        ambientSH[4] * n.x * n.z +
-        ambientSH[5] * n.z * n.y +
-        ambientSH[6] * n.y * n.x +
-        ambientSH[7] * (3.0 * n.z * n.z - 1.0) +
-        ambientSH[8] * (n.x * n.x - n.y * n.y);
+## 関連情報 {#see-also}
 
-    dDiffuseLight += color;
-}
-```
-
-## 反射
-
-WebXR Light Estimationは、環境反射の推定をキューブマップ形式で提供しますが、[現時点では](https://github.com/playcanvas/engine/issues/6070) PlayCanvas Engineには統合されていません。
+- [ライト](/user-manual/graphics/lighting/lights/) - ディレクショナルライトとそのプロパティ
+- [シャドウ](/user-manual/graphics/lighting/shadows/) - 推定したライトによるシャドウ
+- [XrLightEstimation](https://api.playcanvas.com/engine/classes/XrLightEstimation.html) - `app.xr.lightEstimation`のAPIリファレンス

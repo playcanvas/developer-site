@@ -1,127 +1,101 @@
 ---
 title: アンカー
-description: "PlayCanvasでのWebXRアンカー: 安定したワールド固定点の作成、永続化、ヒットテスト連動アンカー、セッション機能フラグです。"
+description: "PlayCanvasのWebXRアンカー：トラッキングの精度が上がっても仮想オブジェクトを現実世界に固定しておく方法、ポーズやヒットテストの結果からのアンカーの作成、アンカーへの追従と破棄、セッション間でのアンカーの永続化。"
 ---
 
-アンカーは、基盤となるARシステムによる現実世界の絶えず進化する理解に合わせて更新できる、3D空間内のポイントを作成する機能を提供します。これにより、ユーザーの環境に据え付けられているように感じられる、現実世界に関連する仮想オブジェクトの配置が可能になります。
+アンカーは、デバイスがトラッキングし続ける現実世界の点です。セッション中にデバイスによる部屋の把握が進むと、以前に報告されたもののポーズが、測定された現実の場所から少しずれていくことがあります。一方、アンカーは現実の場所から離れないため、アンカーに追従するオブジェクトは、ユーザーが置いた場所にとどまります。デバイスによっては、セッションをまたいでアンカーを記憶することもできます。
 
-各アンカーは位置と向きとして表現され、任意の点から作成できるだけでなく、より信頼性の高いものにするヒットテストの結果に関連して作成することもできます。
+<EngineExample id="xr/ar-hit-test-anchors" title="AR Hit Test Anchors" />
 
-### アンカーの使用 {#using-anchors}
+## アンカーのリクエスト {#requesting-anchors}
 
-アンカーの使用を開始するには、セッションがリクエストされた際に、そのセッションにフラグを提供する必要があります。
+ARセッションの開始時に、アンカーをリクエストします。
 
 ```javascript
-app.xr.start(camera, pc.XRTYPE_AR, pc.XRSPACE_LOCALFLOOR, {
+camera.camera.startXr(pc.XRTYPE_AR, pc.XRSPACE_LOCALFLOOR, {
     anchors: true
 });
 ```
 
-## サポート {#support}
-
-システムがアンカーをサポートしているか確認できます。
-
-```javascript
-if (app.xr.anchors.supported) {
-    // アンカーがサポートされています
-}
-
-app.xr.on('start', () => {
-    if (app.xr.anchors.available) {
-        // アンカーはサポートされており、利用可能です
-    }
-});
-```
+ブラウザがアンカーを実装していれば、`app.xr.anchors.supported`が`true`になります。セッションでアンカーが使えるようになると、`app.xr.anchors.available`が`true`になり、`available`が発火します。
 
 ## アンカーの作成 {#creating-anchors}
 
-次に、例えば任意のポジションと回転を使用して、アンカーを作成できます。
+[トラッキング空間](/user-manual/xr/ar/#the-real-world-and-the-rig)での位置と回転を指定して、アンカーを作成します。
 
 ```javascript
-app.xr.anchors.create(position, rotation, (err, anchor) => {
-    if (!err) {
-        // 新しいアンカーが作成されました
-    }
-});
+app.xr.anchors.create(position, rotation);
 ```
 
-または、より信頼性の高いトラッキングのために、アンカーは[Hit Test Result](/user-manual/xr/ar/hit-testing/#anchors)から作成できます。
+または、[ヒットテストの結果](/user-manual/xr/ar/hit-testing/#anchoring-placed-objects)から作成します。この場合、アンカーはヒットテストで見つかった面に結び付けられ、デバイスがその面をより正確に把握していくのに合わせて、面に追従します。
 
-## アンカー {#anchor}
+```javascript
+// hitTestResultは、ヒットテストソースのresultイベントの最後の引数
+app.xr.anchors.create(hitTestResult);
+```
 
-各アンカーは独自のポジションと回転を持ち、いつでも更新できます。アンカーが更新された場合、アプリケーション開発者は関連する仮想オブジェクトを適切に更新する必要があります。
+アンカーは非同期で作成されます。`app.xr.anchors`は、以前のセッションから[復元](#persistence)されたものも含め、新しいアンカーごとに`add`を発火します。現在のアンカーの一覧は`app.xr.anchors.list`にあります。`create()`は最後の引数としてコールバックも受け取り、アンカーを作成できなかった場合はエラーが渡されます。ただし、位置と回転から作成したアンカーでは、成功時にコールバックが呼ばれないことがあります。そのため、次のように、新しいアンカーには`add`で追従してください。
 
-アンカーはセッション中に動的に追加および削除できます。
+## アンカーへの追従 {#following-an-anchor}
+
+アンカーの`getPosition()`と`getRotation()`は、トラッキング空間でのアンカーのポーズを返します。ポーズが変わると、アンカーは`change`を発火します。オブジェクトをアンカーの位置に保つには、オブジェクトをカメラリグの子にして、そのローカルのポーズを更新します。
 
 ```javascript
 app.xr.anchors.on('add', (anchor) => {
-    const entity = new pc.Entity();
+    const flag = new pc.Entity('flag');
+    flag.addComponent('render', { type: 'cone' });
+    flag.setLocalScale(0.1, 0.2, 0.1);
+    rig.addChild(flag);
 
-    // アンカー用にコーンを追加
-    entity.addComponent('render', { type: 'cone' });
-    entity.setLocalScale(0.1, 0.1, 0.1); // 直径10cm
-    app.root.addChild(entity);
+    const follow = () => {
+        flag.setLocalPosition(anchor.getPosition());
+        flag.setLocalRotation(anchor.getRotation());
+        flag.translateLocal(0, 0.1, 0); // 円錐をアンカーの上に立たせる
+    };
+    follow();
+    anchor.on('change', follow);
 
-    // 変換
-    entity.setLocalPosition(anchor.getPosition());
-    entity.setLocalRotation(anchor.getRotation());
-    entity.translateLocal(0, 0.05, 0); // コーンをオフセット
-
-    // アンカーが変更されたときにコーンを更新
-    anchor.on('change', () => {
-        entity.setLocalPosition(anchor.getPosition());
-        entity.setLocalRotation(anchor.getRotation());
-        entity.translateLocal(0, 0.05, 0); // コーンをオフセット
-    });
-
-    // アンカーが破棄されたときにコーンを削除
     anchor.once('destroy', () => {
-        entity.destroy();
+        flag.destroy();
     });
 });
 ```
+
+## アンカーの破棄 {#destroying-anchors}
+
+`anchor.destroy()`はアンカーを削除し、アンカーの`destroy`イベントを発火します。アンカーはセッションの終了時に破棄されます。また、トラッキングできなくなったアンカーをデバイスが破棄することもあります。そのため、上の例のように、アンカーが`destroy`を発火したら、そのアンカーに追従しているものを削除してください。
 
 ## 永続化 {#persistence}
 
-アンカーの永続化は、セッション間でアンカーを記憶する方法を提供し、オリジンごとにアンカーの数が制限されています。これにより、アプリケーションは現実世界のジオメトリに関連して仮想オブジェクトを配置し、セッション間でそれらを維持することができます。
-
-永続化がサポートされているか確認できます。
+対応しているデバイスでは、アンカーをセッションの終了後も存続させることができます。`anchor.persist()`でアンカーに識別子を与え、後のセッションでその識別子を使って復元します。ブラウザがこれをサポートしている場合、`app.xr.anchors.persistence`は`true`です。
 
 ```javascript
-if (app.xr.anchors.persistence) {
-    // アプリケーションはアンカーを永続化できます
-}
-```
-
-各アンカーは、セッション間で参照および復元できるUUIDを持つことができます。
-
-永続的なアンカーのリストにアクセスし、セッション開始時にそれらを復元できます。
-
-```javascript
-app.xr.on('start', () => {
-    const uuids = app.xr.anchors.uuids;
-    for(let i = 0; i < uuids.length; i++) {
-        app.xr.anchors.restore(uuids[i]);
-    }
-});
-```
-
-個々のアンカーの永続化を管理するには、`persist` および `forget` メソッドを使用できます。
-
-```javascript
+// 例えばユーザーが何かを配置したときに、アンカーを記憶する
 anchor.persist((err, uuid) => {
-    if (uuid) {
-        // アンカーが永続化されました
+    if (!err) {
+        console.log(`Persisted the anchor as ${uuid}`);
     }
 });
 ```
 
+デバイスは、サイトが永続化したアンカーの識別子を記憶しています。セッションが開始されると、`app.xr.anchors.uuids`にその一覧が入ります。`app.xr.anchors.restore()`で各アンカーを再作成すると、`app.xr.anchors`が通常どおりそのアンカーを追加します。
+
 ```javascript
-if (anchor.persistent) {
-    anchor.forget((err) => {
-        if (!err) {
-            // アンカーは忘れられました
-        }
-    });
-}
+app.xr.anchors.on('available', () => {
+    if (!app.xr.anchors.persistence) return;
+
+    for (const uuid of app.xr.anchors.uuids) {
+        app.xr.anchors.restore(uuid);
+    }
+});
 ```
+
+復元されたアンカーの`uuid`はその識別子で、`anchor.persistent`は`true`です。どのオブジェクトをどのアンカーに置くかがわかるように、永続化するときに、識別子を独自のデータとともに`localStorage`などに保存しておきます。
+
+`anchor.forget()`または`app.xr.anchors.forget(uuid)`は、永続化された識別子を削除し、そのアンカーが再び復元されないようにします。デバイスは、サイトが永続化できるアンカーの数を制限しており、ユーザーがサイトのデータを消去したときなどに、アンカーを削除することもあります。Meta Questが保持するのは1サイトあたり最大8個で、プライベートブラウジングでは1つも保持しません。`persist()`や`restore()`が失敗した場合も、適切に処理してください。
+
+## 関連情報 {#see-also}
+
+- [ヒットテスト](/user-manual/xr/ar/hit-testing/) - アンカーを付ける面を見つける
+- [AR](/user-manual/xr/ar/) - カメラリグを基準にしたコンテンツの配置
+- [XrAnchors](https://api.playcanvas.com/engine/classes/XrAnchors.html) - `app.xr.anchors`のAPIリファレンス

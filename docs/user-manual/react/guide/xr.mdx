@@ -21,14 +21,16 @@ To enable XR support in your React application, you'll need:
 
 ## XR Scripts
 
-The PlayCanvas engine provides two essential XR scripts:
+The PlayCanvas engine provides XR scripts for the common jobs. This guide uses three:
 
+- **`XrSession`** - Starts and ends sessions in response to app events, places the camera rig, and makes the camera see-through in AR
 - **`XrControllers`** - Automatically downloads and renders XR controller models for detected controllers (including hand tracking)
 - **`XrNavigation`** - Implements teleportation-based navigation using point-and-select actions
 
 Import them from the PlayCanvas scripts package:
 
 ```tsx
+import { XrSession } from 'playcanvas/scripts/esm/xr/xr-session.mjs'
 import { XrControllers } from 'playcanvas/scripts/esm/xr/xr-controllers.mjs'
 import { XrNavigation } from 'playcanvas/scripts/esm/xr/xr-navigation.mjs'
 ```
@@ -42,34 +44,27 @@ For XR to work properly, you need a camera entity with the XR scripts attached. 
   <Entity name="camera" position={[0, 1.6, 0]}>
     <Camera clearColor="#1e1e1e" />
   </Entity>
+  <Script script={XrSession} />
   <Script script={XrControllers} />
   <Script script={XrNavigation} />
 </Entity>
 ```
 
-The camera is positioned at approximately eye-level (1.6 meters) and the scripts are attached to the parent entity.
+The camera is positioned at approximately eye-level (1.6 meters) and the scripts are attached to the parent entity, the camera rig. During a session the headset moves the camera within the rig, and moving the rig moves the user. See [Sessions](/user-manual/xr/sessions/#the-camera-and-its-rig).
 
 ## Starting XR Sessions
 
-WebXR requires a user gesture to start a session. Use the `app.xr` API to start and manage XR sessions:
+WebXR requires a user gesture to start a session. With `XrSession` on the camera rig, fire its events from a click handler. It starts the session on the camera in its rig, and ends it on `xr:end` or the Escape key:
 
 ```tsx
 const app = useApp()
 
-const startVR = () => {
-  const camera = app.root.findComponent('camera')
-  if (camera) {
-    app.xr.start(camera, 'immersive-vr', 'local-floor')
-  }
-}
-
-const startAR = () => {
-  const camera = app.root.findComponent('camera')
-  if (camera) {
-    app.xr.start(camera, 'immersive-ar', 'local-floor')
-  }
-}
+const startVR = () => app.fire('vr:start')
+const startAR = () => app.fire('ar:start')
+const endXR = () => app.fire('xr:end')
 ```
+
+To request features such as plane detection, start the session on the camera yourself, with `camera.startXr()`. See [Sessions](/user-manual/xr/sessions/#session-features).
 
 ## Complete Example
 
@@ -94,18 +89,24 @@ Here's a complete example with XR support, including buttons to enter AR/VR mode
 - Press **Escape** to exit an active XR session
 - XR availability depends on your device and browser support
 - Use a VR headset or AR-capable mobile device to test the full experience
-- During development, Chrome and Edge support WebXR emulation via DevTools
+- During development, the [Immersive Web Emulator](/user-manual/xr/testing/#without-a-headset) extension emulates a headset in Chrome and Edge
 
 :::
 
 ## Checking XR Availability
 
-You can check if AR or VR is available on the current device:
+You can check if AR or VR is available on the current device. The engine checks after the application starts, and again when devices change, so keep the answer in state and follow the `available` event:
 
 ```tsx
 const app = useApp()
-const arAvailable = app.xr.isAvailable('immersive-ar')
-const vrAvailable = app.xr.isAvailable('immersive-vr')
+const [vrAvailable, setVrAvailable] = useState(false)
+
+useEffect(() => {
+  const update = () => setVrAvailable(app.xr.isAvailable('immersive-vr'))
+  update()
+  const handle = app.xr.on('available', update)
+  return () => handle.off()
+}, [app])
 ```
 
 ## XR Events
@@ -131,6 +132,7 @@ useEffect(() => {
 
 The PlayCanvas Engine has comprehensive XR support with many advanced features. For more information, check out:
 
-- [XR User Manual](/user-manual/xr) - Comprehensive XR documentation
+- [XR User Manual](/user-manual/xr/) - Comprehensive XR documentation
+- [Getting Started](/user-manual/xr/using-webxr/) - A first VR scene, built in React and the other ways
 - [WebXR API Reference](https://api.playcanvas.com/engine/classes/XrManager.html) - Full API documentation
 - [XR Scripts Source](https://github.com/playcanvas/engine/tree/main/scripts/esm) - View the XR scripts source code

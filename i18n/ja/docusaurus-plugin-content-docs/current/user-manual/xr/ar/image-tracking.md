@@ -1,119 +1,81 @@
 ---
 title: 画像トラッキング
-description: "PlayCanvasのARで実世界の画像をトラッキング: 参照画像、推定サイズ、姿勢の更新、実行時のサポート確認です。"
+description: "PlayCanvasのARでの画像トラッキングについて、セッション前に参照画像と現実世界での幅を指定する方法、トラッキングできる画像の確認、トラッキングされた画像のポーズへの追従、トラッキングを失ったときの対処、トラッキングしやすい画像の選び方を解説します。"
 ---
 
-画像トラッキングは、提供された画像サンプルとその推定サイズを使用して、現実世界の画像を追跡する機能を提供します。基盤となるCVシステムは、画像の正確な位置と向き、および追跡ステータスを推定します。
+画像トラッキングは、ポスター、製品のパッケージ、カードなど、現実世界にある印刷された画像を追跡し、それぞれの位置と回転を提供します。画像にコンテンツを付けて、命を吹き込みましょう。
 
-## サポート
+画像トラッキングは、実験的なWebXRモジュールです。Android版Chromeが実装していますが、`chrome://flags/#webxr-incubations`フラグを有効にする必要があります。そのため、一般公開するアプリケーションよりも、デバイスを自分で管理できるプロトタイプや展示に向いています。
 
-システムが画像トラッキングをサポートしているかを確認できます。
+## 画像の追加 {#adding-images}
+
+トラッキングする画像は、それぞれの現実世界での幅（メートル単位）とともに、セッションの開始前に追加します。画像には、ブラウザがデコードできるあらゆる画像を、`HTMLImageElement`、`ImageBitmap`、キャンバス、`Blob`のいずれかとして渡せます。
 
 ```javascript
-if (app.xr.imageTracking.supported) {
-    // 画像トラッキングはサポートされています
-}
+const image = new Image();
+image.src = 'poster.jpg';
+await image.decode();
 
-app.xr.on('start', () => {
-    if (app.xr.imageTracking.available) {
-        // 画像トラッキングはサポートされており、利用可能です
-        // 画像が提供されなかった場合、まだfalseになる可能性があります
+// 幅40 cmのポスター
+const poster = app.xr.imageTracking.add(image, 0.4);
+```
+
+`add()`は[`XrTrackedImage`](https://api.playcanvas.com/engine/classes/XrTrackedImage.html)を返します。ブラウザが画像トラッキングをサポートしていない場合や、セッションの実行中は`null`を返します。`app.xr.imageTracking.remove()`は画像を削除しますが、これもセッションとセッションの間にしか使えません。続いて、ARセッションの開始時に画像トラッキングを要求します。
+
+```javascript
+camera.camera.startXr(pc.XRTYPE_AR, pc.XRSPACE_LOCALFLOOR, {
+    imageTracking: true
+});
+```
+
+## トラッキング可能な画像 {#trackable-images}
+
+セッションが開始されると、デバイスは各画像を調べます。それが済むと`app.xr.imageTracking.available`が`true`になり、各画像の`trackable`プロパティが、デバイスがその画像をトラッキングできるかどうかを示します。画像が小さすぎる、特徴が少なすぎる、均一すぎるといった場合は、トラッキングできないことがあります。デバイスが画像をまったく処理できない場合、`app.xr.imageTracking`は`error`を発火します。
+
+```javascript
+app.xr.imageTracking.on('error', (err) => {
+    console.warn(`Image tracking failed: ${err.message}`);
+});
+```
+
+次の条件を満たす画像は、最もよくトラッキングされます。
+
+- 300 × 300ピクセル以上であること。それより大きな画像でもトラッキングは向上せず、読み込みに時間がかかるだけです。
+- 細部とコントラストが豊富で、大きな無地の部分や繰り返しパターンがないこと。
+- 印刷された画像とよく一致していること。色は関係ないため、読み込みの速いグレースケールの画像を使えます。
+- 正しい幅が指定されていること。デバイスは、この幅を使って画像までの距離を割り出します。
+
+## 画像への追従 {#following-images}
+
+画像は、デバイスがトラッキングを開始すると`tracked`を、停止すると`untracked`を発火し、その間は`tracking`が`true`になります。画像の`getPosition()`と`getRotation()`は、[トラッキング空間](/user-manual/xr/ar/#the-real-world-and-the-rig)における画像の中心のポーズを返します。トラッキングされている間は、毎フレームそれに追従させます。
+
+```javascript
+// ポスターの上に立つモデル。カメラリグの子にする
+const model = new pc.Entity('model');
+model.addComponent('render', { type: 'box' });
+model.setLocalScale(0.1, 0.1, 0.1);
+model.enabled = false;
+rig.addChild(model);
+
+poster.on('tracked', () => {
+    model.enabled = true;
+});
+poster.on('untracked', () => {
+    model.enabled = false;
+});
+
+app.on('update', () => {
+    if (poster.tracking) {
+        model.setLocalPosition(poster.getPosition());
+        model.setLocalRotation(poster.getRotation());
     }
 });
 ```
 
-## 画像
+カメラが画像を捉えられない間も、デバイスは画像が動いていないと仮定して、最後に見えた位置で画像を報告し続けることがあります。このとき、画像の`emulated`プロパティは`true`です。ポスターのように固定された画像なら、エミュレートされた画像の上にコンテンツを残し、カードのように動かせる画像なら、コンテンツを非表示にしてください。
 
-画像は、**セッションが開始する前に**、現実世界での幅（メートル単位）と共に提供されます。画像は、あらゆるウェブフレンドリーな形式で提供でき、現実世界の画像と可能な限り一致させる必要があります。
+## 関連情報 {#see-also}
 
-**解像度**は300x300ピクセル以上であるべきです。高解像度だからといって、トラッキング性能や信頼性が向上するわけでは**ありません**。
-
-**色**は関係ありません。そのため、ダウンロードサイズを最適化するには、グレースケール画像が推奨されます。
-
-**繰り返しパターン**や、あまりに多くの幾何学的特徴があると、トラッキングの信頼性が低下します。
-
-## 追跡対象画像の追加/削除
-
-追跡対象画像のリストは、XRセッションが実行されていない場合にのみ変更できます。
-
-トラッキングリストに画像を追加する:
-
-```javascript
-// 幅20cm (0.2m) の画像
-const trackedImage = app.xr.imageTracking.add(image, 0.2);
-```
-
-追跡対象画像を削除する:
-
-```javascript
-app.xr.imageTracking.remove(trackedImage);
-```
-
-追跡対象画像のリストには、次のようにアクセスできます。
-
-```javascript
-const trackedImages = app.xr.imageTracking.images;
-for (let i = 0; i < trackedImages.length; i++) {
-    const trackedImage = trackedImages[i];
-}
-```
-
-## 位置と回転
-
-追跡対象画像の位置と回転（ワールド空間内）は自動的に更新され、最新の情報には次のようにアクセスできます。
-
-```javascript
-const position = trackedImage.getPosition();
-const rotation = trackedImage.getRotation();
-```
-
-## 信頼性
-
-画像トラッキングは、カメラフィード上で動作するコンピュータビジョン技術を使用して実装されています。これは、ノイズ、不安定な照明、視野角、オクルージョン、モーションブラー、その他現実のさまざまな側面の影響を受けやすいです。基盤となるシステムは、そのトラッキング状態に関するいくつかの詳細を提供します。
-
-そもそも画像がトラッキング可能かどうかを確認します。
-
-```javascript
-if (!trackedImage.trackable) {
-    // 小さすぎるか、または基盤となるシステムが画像を解析できない可能性があります
-}
-```
-
-セッション開始時、基盤となるシステムが一部の画像を使用できない場合、関連するエラーメッセージが渡されます。
-
-```javascript
-app.xr.imageTracking.on('error', (err) => {
-    console.warn(err.message);
-});
-```
-
-## トラッキング状態
-
-現在、画像がアクティブに追跡されているかを確認できます。
-
-```javascript
-if (trackedImage.tracking) {
-    // アクティブに追跡中
-}
-```
-
-トラッキングが利用できなくなった場合、現実世界の画像が移動していないと仮定して、画像の位置と回転はエミュレートされます。
-
-```javascript
-if (trackedImage.emulated) {
-    // 位置と回転はエミュレートされています
-    // 以前に判明したトラッキング情報に基づいて
-}
-```
-
-画像が追跡対象になったり、アクティブな追跡を失ったりしたときに知るために、イベントを購読することができます。
-
-```javascript
-trackedImage.on('tracked', () => {
-    // 画像が現在アクティブに追跡されています
-});
-
-trackedImage.on('untracked', () => {
-    // 画像はもはやアクティブに追跡されていません
-});
-```
+- [AR](/user-manual/xr/ar/) - ARセッションの開始と、カメラリグを基準にしたコンテンツの配置
+- [WebXR: AR Image Tracking](/tutorials/webxr-ar-image-tracking/) - エディターのプロジェクト付きのチュートリアル
+- [XrImageTracking](https://api.playcanvas.com/engine/classes/XrImageTracking.html) - `app.xr.imageTracking`のAPIリファレンス
