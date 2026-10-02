@@ -344,6 +344,12 @@ const config = {
         contextualSearch: true,
       },
       image: 'img/playcanvas-social-card.jpg',
+      docs: {
+        sidebar: {
+          // Expanding a category collapses its siblings, so the long sidebar stays short
+          autoCollapseCategories: true,
+        },
+      },
       navbar: {
         title: 'PlayCanvas Docs',
         logo: {
