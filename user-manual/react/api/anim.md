@@ -29,7 +29,7 @@ Learn more about the [Anim Component](https://api.playcanvas.com/engine/classes/
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `asset` | `Asset` | - | The asset containing the animations to play. Setting this prop will automatically assign the animations to the component. |
+| `asset` | `Asset<string>` | - | The asset containing the animations to play. Setting this prop will automatically assign the animations to the component. |
 | `stateGraphAsset?` | `any` | - |  |
 | `normalizeWeights?` | `boolean` | - | Sets whether the animation component will normalize the weights of its layers by their sum total. Gets whether the animation component will normalize the weights of its layers by their sum total. |
 | `animationAssets?` | `{}` | - |  |

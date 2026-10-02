@@ -1,10 +1,10 @@
 # PlayCanvas Engine: All Pages
 
-> The PlayCanvas Engine is an open-source JavaScript 3D engine that renders with WebGL2 or WebGPU. It is published as `playcanvas` on npm, with TypeScript declarations, and runs every PlayCanvas product. This index describes Engine 2.22.2.
+> The PlayCanvas Engine is an open-source JavaScript 3D engine that renders with WebGL2 or WebGPU. It is published as `playcanvas` on npm, with TypeScript declarations, and runs every PlayCanvas product. This index describes Engine 2.23.0.
 
 Index: https://developer.playcanvas.com/user-manual/engine/llms.txt
 Total Documents: 220
-Generated: 2026-10-01
+Generated: 2026-10-02
 
 ================================================================================
 

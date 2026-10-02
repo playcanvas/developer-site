@@ -81,6 +81,6 @@ Set `render={false}` when you only need the scene hierarchy—for example when g
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `asset` | `Asset` | - | The GLTF asset loaded via useModel |
+| `asset` | `Asset<string>` | - | The GLTF asset loaded via useModel |
 | `render?` | `boolean` | `true` | Whether to render the GLTF scene visuals |
 | `children?` | `ReactNode` | - | Children should contain <Modify.Node> components |

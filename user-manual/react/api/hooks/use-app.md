@@ -59,6 +59,7 @@ export const App = () => <Application>
 | `_batcher` | `any` | - | The application's batch manager. |
 | `_destroyRequested` | `any` | - |  |
 | `_inFrameUpdate` | `any` | - |  |
+| `_devtoolsRegistered` | `any` | - | Whether the app announced itself to a devtools hook, and so withdraws on destroy. |
 | `_librariesLoaded` | `any` | - |  |
 | `_fillMode` | `any` | - |  |
 | `_resolutionMode` | `any` | - |  |
@@ -70,6 +71,7 @@ export const App = () => <Application>
 | `timeScale` | `number` | - | Scales the global time delta. Defaults to 1. Scripts, animation and physics all receive the scaled delta, so 0 stops them together. To pause or slow down physics alone while the rest of the application keeps running, use RigidBodyComponentSystem#timeScale . |
 | `maxDeltaTime` | `number` | - | Clamps per-frame delta time to an upper bound. Useful since returning from a tab deactivation can generate huge values for dt, which can adversely affect game state. Defaults to 0.1 (seconds). |
 | `scriptsOrder` | `string[]` | - | Scripts in order of loading first. |
+| `_stats` | `any` | - |  |
 | `autoRender` | `boolean` | - | When true, the application's render function is called every frame. Setting autoRender to false is useful to applications where the rendered image may often be unchanged over time. This can heavily reduce the application's load on the CPU and GPU. Defaults to true. |
 | `graphicsDevice` | `GraphicsDevice` | - | The graphics device used by the application. |
 | `root` | `Entity` | - | The root entity of the application. |
@@ -97,9 +99,10 @@ export const App = () => <Application>
 | `_initProgramLibrary` | `any` | - |  |
 | `batcher` | `BatchManager` | - | The application's batch manager. The batch manager is used to merge mesh instances in the scene, which reduces the overall number of draw calls, thereby boosting performance. |
 | `fillMode` | `string` | - | The current fill mode of the canvas. Can be: - FILLMODE_NONE: the canvas will always match the size provided. - FILLMODE_FILL_WINDOW: the canvas will simply fill the window, changing aspect ratio. - FILLMODE_KEEP_ASPECT: the canvas will grow to fill the window as best it can while maintaining the aspect ratio. |
+| `stats` | `AppStats` | - | The application's performance statistics. Returns the same AppStats instance on every access. Engine measurements are read-only; AppStats#user  holds writable application-defined counters. See AppStats for units, sampling and GPU profiling setup. |
 | `resolutionMode` | `string` | - | The current resolution mode of the canvas, Can be: - RESOLUTION_AUTO: if width and height are not provided, canvas will be resized to match canvas client size. - RESOLUTION_FIXED: resolution of canvas will be fixed. |
 | `configure` | `(url: string, callback: ConfigureAppCallback) => void` | - | Load the application configuration file and apply application properties and fill the asset registry. |
-| `preload` | `(callback: PreloadAppCallback) => void` | - | Load all assets in the asset registry that are marked as 'preload'. |
+| `preload` | `(callback: PreloadAppCallback) => void` | - | Load all assets in the asset registry that are marked as 'preload'. Container-backed render assets wait for their referenced containers to be registered and loaded. If a preloaded render asset's `data.containerAsset` refers to a container that is never registered, this method never calls its callback or fires `preload:end`. Debug builds warn when a render asset starts waiting for an unregistered container. |
 | `_preloadScripts` | `(sceneData: any, callback: any) => void` | - |  |
 | `_parseApplicationProperties` | `(props: any, callback: any) => void` | - |  |
 | `_width` | `any` | - |  |
@@ -107,10 +110,10 @@ export const App = () => <Application>
 | `_loadLibraries` | `any` | - |  |
 | `_parseScenes` | `any` | - | Insert scene name/urls into the registry. |
 | `_parseAssets` | `any` | - | Insert assets into registry. |
-| `start` | `() => void` | - | Start the application. This function does the following: 1. Fires an event on the application named 'start' 2. Calls initialize for all components on entities in the hierarchy 3. Fires an event on the application named 'initialize' 4. Calls postInitialize for all components on entities in the hierarchy 5. Fires an event on the application named 'postinitialize' 6. Starts executing the main loop of the application This function is called internally by PlayCanvas applications made in the Editor but you will need to call start yourself if you are using the engine stand-alone. |
+| `start` | `() => void` | - | Start the application. This function does the following: 1. Fires an event on the application named 'start' 2. Calls initialize for all components on entities in the hierarchy 3. Fires an event on the application named 'initialize' 4. Calls postInitialize for all components on entities in the hierarchy 5. Fires an event on the application named 'postinitialize' 6. Starts executing the main loop of the application This function is called internally by PlayCanvas applications made in the Editor but you will need to call start yourself if you are using the engine stand-alone. The main loop is driven by `requestAnimationFrame`. Where that is unavailable, such as in Node.js, no loop runs, so call update yourself at the rate you need. |
 | `_alreadyStarted` | `boolean` | - |  |
 | `inputUpdate` | `any` | - | Update all input devices managed by the application. |
-| `update` | `(dt: number) => void` | - | Update the application. This function will call the update functions and then the postUpdate functions of all enabled components. It will then update the current state of all connected input devices. This function is called internally in the application's main loop and does not need to be called explicitly. |
+| `update` | `(dt: number) => void` | - | Update the application. This function will call the update functions and then the postUpdate functions of all enabled components. It will then update the current state of all connected input devices. This function is called internally in the application's main loop and does not need to be called explicitly, except where there is no main loop, such as in Node.js. |
 | `renderComposition` | `(layerComposition: any) => void` | - |  |
 | `setCanvasFillMode` | `(mode: string, width?: number \| undefined, height?: number \| undefined) => void` | - | Controls how the canvas fills the window. The canvas is sized when this is called and on every AppBase#resizeCanvas ; the engine installs no window `resize` listener of its own, so call `resizeCanvas` from your own handler to keep the window-relative modes tracking the window. |
 | `setCanvasResolution` | `(mode: string, width?: number \| undefined, height?: number \| undefined) => void` | - | Change the resolution of the canvas, and set the way it behaves when the window is resized. |
@@ -121,7 +124,7 @@ export const App = () => <Application>
 | `onLibrariesLoaded` | `any` | - | Event handler called when all code libraries have been loaded. Code libraries are passed into the constructor of the Application and the application won't start running or load packs until all libraries have been loaded. |
 | `applySceneSettings` | `(settings: { physics: { gravity: number[]; }; render: { global_ambient: number[]; fog: string; fog_color: number[]; fog_density: number; fog_start: number; fog_end: number; gamma_correction: number; tonemapping: number; ... 52 more ...; gsplatEnableIds?: boolean; }; }) => void` | - | Apply scene settings to the current scene. Useful when your scene settings are parsed or generated from a non-URL source. |
 | `setAreaLightLuts` | `(ltcMat1: number[], ltcMat2: number[]) => void` | - | Sets the area light LUT tables for this app. |
-| `setSkybox` | `(asset: Asset) => void` | - | Sets the skybox asset to current scene, and subscribes to asset load/change events. |
+| `setSkybox` | `(asset: Asset<string>) => void` | - | Sets the skybox asset to current scene, and subscribes to asset load/change events. |
 | `_onSkyboxRemoved` | `any` | - |  |
 | `_onSkyboxChanged` | `any` | - |  |
 | `_firstBake` | `any` | - |  |
@@ -129,6 +132,11 @@ export const App = () => <Application>
 | `drawLine` | `(start: Vec3, end: Vec3, color?: Color \| undefined, depthTest?: boolean \| undefined, layer?: Layer \| undefined) => void` | - | Draws a single line. Line start and end coordinates are specified in world space. The line will be flat-shaded with the specified color. |
 | `drawLines` | `(positions: Vec3[], colors: Color \| Color[], depthTest?: boolean \| undefined, layer?: Layer \| undefined) => void` | - | Renders an arbitrary number of discrete line segments. The lines are not connected by each subsequent point in the array. Instead, they are individual segments specified by two points. Therefore, the lengths of the supplied position and color arrays must be the same and also must be a multiple of 2. The colors of the ends of each line segment will be interpolated along the length of each line. |
 | `drawLineArrays` | `(positions: number[], colors: number[] \| Color, depthTest?: boolean \| undefined, layer?: Layer \| undefined) => void` | - | Renders an arbitrary number of discrete line segments. The lines are not connected by each subsequent point in the array. Instead, they are individual segments specified by two points. |
+| `drawMeshInstance` | `() => void` | - |  |
+| `drawMesh` | `() => void` | - |  |
+| `drawQuad` | `() => void` | - |  |
+| `drawTexture` | `() => void` | - |  |
+| `drawDepthTexture` | `() => void` | - |  |
 | `destroy` | `() => void` | - | Destroys application and removes all event listeners at the end of the current engine frame update. However, if called outside of the engine frame update, calling destroy() will destroy the application immediately. |
 | `_gsplatSortedEvt` | `EventHandle` | - |  |
 | `context` | `any` | - |  |

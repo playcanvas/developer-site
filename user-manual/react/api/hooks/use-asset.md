@@ -67,7 +67,7 @@ This is the full response of an asset hook.
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `asset` | `Asset \| null` | `null` | The loaded asset, or null if not loaded or failed |
+| `asset` | `Asset<string> \| null` | `null` | The loaded asset, or null if not loaded or failed |
 | `loading` | `boolean` | `true` | Whether the asset is currently loading, or false if it has loaded or failed |
 | `error` | `string \| null` | `null` | Error message if loading failed, or null if successful |
 | `subscribe` | `(cb: AssetResultCallback) => () => void` | - | Use this to subscribe to loading progress events |

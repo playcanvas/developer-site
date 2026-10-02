@@ -55,7 +55,7 @@ Learn more about the [Render Component](https://api.playcanvas.com/engine/classe
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | `type` | `"asset" \| "box" \| "capsule" \| "cone" \| "cylinder" \| "plane" \| "sphere" \| "torus"` | `"box"` | The type of primitive shape to render. |
-| `asset?` | `Asset` | - | The asset to render. |
+| `asset?` | `Asset<string>` | - | The asset to render. |
 | `children?` | `ReactNode` | - |  |
 | `isStatic?` | `boolean` | - | Mark meshes as non-movable (optimization). |
 | `renderStyle?` | `number` | - | Sets the render style of this component's MeshInstances. Can be: - RENDERSTYLE_SOLID - RENDERSTYLE_WIREFRAME - RENDERSTYLE_POINTS Defaults to RENDERSTYLE_SOLID. Gets the render style of this component's MeshInstances. |
@@ -70,7 +70,7 @@ Learn more about the [Render Component](https://api.playcanvas.com/engine/classe
 | `layers?` | `readonly number[]` | - | Sets the array of layer IDs (Layer#id ) to which the mesh instances belong. Don't push, pop, splice or modify this array. If you want to change it, set a new one instead. Gets the array of layer IDs (Layer#id ) to which the mesh instances belong. |
 | `batchGroupId?` | `number` | - | Sets the batch group for the mesh instances in this component (see BatchGroup). Default is -1 (no group). Gets the batch group for the mesh instances in this component (see BatchGroup). |
 | `material?` | `Material` | - | Sets the material Material that will be used to render the component. The material is ignored for renders of type 'asset' — which is the type every entity produced by `instantiateRenderEntity` carries, so this setter has no effect on models loaded from a container. For those, assign `material` on each entry of RenderComponent#meshInstances  instead. Gets the material Material that will be used to render the component. |
-| `materialAssets?` | `Asset[] \| number[]` | - | Sets the material assets that will be used to render the component. Each material corresponds to the respective mesh instance. Gets the material assets that will be used to render the component. |
+| `materialAssets?` | `Asset<string>[] \| number[]` | - | Sets the material assets that will be used to render the component. Each material corresponds to the respective mesh instance. Gets the material assets that will be used to render the component. |
 | `rootBone?` | `Entity \| null` | - | Sets the root bone entity (or entity guid) for the render component. Gets the root bone entity for the render component. |
 | `materialAsset?` | `any` | - |  |
 | `system?` | `ComponentSystem` | - | The ComponentSystem used to create this Component. |

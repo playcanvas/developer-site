@@ -46,12 +46,12 @@ function MyComponent() {
 | `sprite` | `SpriteComponent \| undefined` | - | Gets the SpriteComponent attached to this entity. |
 | `_app` | `any` | - |  |
 | `_guid` | `any` | - |  |
-| `addComponent` | `(type: string, data?: object \| undefined) => Component \| null` | - | Create a new component and add it to the entity. Use this to add functionality to the entity like rendering a model, playing sounds and so on. |
-| `removeComponent` | `(type: string) => void` | - | Remove a component from the Entity. |
-| `findComponent` | `(type: string) => Component \| null` | - | Search the entity and all of its descendants for the first component of specified type. |
-| `findComponents` | `(type: string) => Component[]` | - | Search the entity and all of its descendants for all components of specified type. |
-| `findScript` | `(nameOrType: string \| typeof ScriptType) => ScriptType \| undefined` | - | Search the entity and all of its descendants for the first script instance of specified type. |
-| `findScripts` | `(nameOrType: string \| typeof ScriptType) => ScriptType[]` | - | Search the entity and all of its descendants for all script instances of specified type. |
+| `addComponent` | `<K extends ComponentName \| (string & {})>(type: K, data?: (K extends ComponentName ? ComponentOptions<K> : object) \| undefined) => (K extends ComponentName ? ComponentMap[K] : Component) \| null` | - | Create a new component and add it to the entity. Use this to add functionality to the entity like rendering a model, playing sounds and so on. For the built-in components the `type` also types the options and the result: `entity.addComponent('camera', { fov: 45 })` accepts any settable property of CameraComponent and returns `CameraComponent \| null`. See ComponentOptions for the rule and ComponentMap for extending this to application-defined components. |
+| `removeComponent` | `(type: ComponentName \| (string & {})) => void` | - | Remove a component from the Entity. |
+| `findComponent` | `<K extends ComponentName \| (string & {})>(type: K) => (K extends ComponentName ? ComponentMap[K] : Component) \| null` | - | Search the entity and all of its descendants for the first component of specified type. |
+| `findComponents` | `<K extends ComponentName \| (string & {})>(type: K) => (K extends ComponentName ? ComponentMap[K] : Component)[]` | - | Search the entity and all of its descendants for all components of specified type. |
+| `findScript` | `{ <T extends Script>(type: new (...args: any[]) => T): T \| undefined; (name: string): Script \| undefined; }` | - | Search the entity and all of its descendants for the first script instance of the specified class. The result is typed as an instance of that class, so no cast is needed. Search the entity and all of its descendants for the first script instance with the specified name. |
+| `findScripts` | `{ <T extends Script>(type: new (...args: any[]) => T): T[]; (name: string): Script[]; }` | - | Search the entity and all of its descendants for all script instances of the specified class. The result is typed as an array of that class, so no cast is needed. Search the entity and all of its descendants for all script instances with the specified name. |
 | `_onHierarchyStatePostChanged` | `any` | - |  |
 | `findByGuid` | `(guid: string) => Entity \| null` | - | Find a descendant of this entity with the GUID. |
 | `clone` | `() => Entity` | - | Create a deep copy of the Entity. Duplicate the full Entity hierarchy, with all Components and all descendants. Note, this Entity is not in the hierarchy and must be added manually. |

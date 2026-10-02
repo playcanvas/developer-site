@@ -1,6 +1,6 @@
 # PlayCanvas Engine
 
-> The PlayCanvas Engine is an open-source JavaScript 3D engine that renders with WebGL2 or WebGPU. It is published as `playcanvas` on npm, with TypeScript declarations, and runs every PlayCanvas product. This index describes Engine 2.22.2.
+> The PlayCanvas Engine is an open-source JavaScript 3D engine that renders with WebGL2 or WebGPU. It is published as `playcanvas` on npm, with TypeScript declarations, and runs every PlayCanvas product. This index describes Engine 2.23.0.
 
 Use this index to write code against the engine directly. React, Web Components and Editor projects run on the same engine, so the features covered here (entities and components, scripts, graphics, Gaussian splats, physics, animation, XR, user interface and assets) apply to them too. How each surface expresses them is in its own index: [React](https://developer.playcanvas.com/user-manual/react/llms.txt), [Web Components](https://developer.playcanvas.com/user-manual/web-components/llms.txt) and [Editor](https://developer.playcanvas.com/user-manual/editor/llms.txt).
 
