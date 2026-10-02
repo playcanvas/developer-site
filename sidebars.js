@@ -11,14 +11,35 @@
 
 // @ts-check
 
+// Section headers are raw HTML items, which Docusaurus does not translate, so their
+// labels are picked per locale here. This file is reloaded for each locale, and both
+// `docusaurus build` and `docusaurus start` set DOCUSAURUS_CURRENT_LOCALE beforehand.
+/** @type {Record<string, Record<string, string>>} */
+const sectionHeaderLabels = {
+  ja: {
+    'Introduction': 'イントロダクション',
+    'Core Products': '主要製品',
+    'Common Topics': '共通トピック',
+    'Foundational APIs': '基盤API',
+    'Additional Resources': 'その他のリソース',
+  },
+};
+
+/**
+ * @param {string} label - The English label.
+ * @returns {{ type: 'html', value: string }} The header item for the current locale.
+ */
+const sectionHeader = (label) => {
+  const locale = process.env.DOCUSAURUS_CURRENT_LOCALE ?? 'en';
+  const text = sectionHeaderLabels[locale]?.[label] ?? label;
+  return { type: 'html', value: `<div class="sidebar-section-header">${text}</div>` };
+};
+
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sidebars = {
   // User Manual sidebar with custom groupings
   userManualSidebar: [
-    {
-      type: 'html',
-      value: '<div class="sidebar-section-header">Introduction</div>',
-    },
+    sectionHeader('Introduction'),
     'user-manual/index',
     {
       type: 'category',
@@ -72,10 +93,7 @@ const sidebars = {
         'user-manual/account-management/billing'
       ],
     },
-    {
-      type: 'html',
-      value: '<div class="sidebar-section-header">Core Products</div>',
-    },
+    sectionHeader('Core Products'),
     {
       type: 'category',
       label: 'PlayCanvas Engine',
@@ -661,10 +679,7 @@ const sidebars = {
         'user-manual/splat-transform/voxel-format',
       ],
     },
-    {
-      type: 'html',
-      value: '<div class="sidebar-section-header">Common Topics</div>',
-    },
+    sectionHeader('Common Topics'),
     {
       type: 'category',
       label: 'Entity Component System',
@@ -1203,10 +1218,7 @@ const sidebars = {
         'user-manual/optimization/troubleshooting-performance',
       ],
     },
-    {
-      type: 'html',
-      value: '<div class="sidebar-section-header">Foundational APIs</div>',
-    },
+    sectionHeader('Foundational APIs'),
     {
       type: 'category',
       label: 'REST API',
@@ -1286,10 +1298,7 @@ const sidebars = {
         },
       ],
     },
-    {
-      type: 'html',
-      value: '<div class="sidebar-section-header">Additional Resources</div>',
-    },
+    sectionHeader('Additional Resources'),
     'user-manual/glossary',
     'user-manual/press-pack',
     'user-manual/security',
