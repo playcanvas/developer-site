@@ -469,7 +469,8 @@ const config = {
       prism: {
         theme: prismThemes.github,
         darkTheme: prismThemes.dracula,
-        // GLSL depends on C, which Redocusaurus' Prism provider does not preload.
+        // GLSL extends C. The grammars are built on the prismjs package, whose core has no C, then
+        // copied to the code blocks' Prism (see src/theme/prism-include-languages.js).
         additionalLanguages: ['c', 'glsl', 'wgsl'],
       },
     }),
