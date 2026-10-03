@@ -61,6 +61,12 @@ const config = {
 
   themes: ['@docusaurus/theme-mermaid', '@docusaurus/theme-live-codeblock'],
 
+  // Both keep third-party scripts from changing the server-rendered HTML before React hydrates it
+  clientModules: [
+    './src/client-modules/prism-manual.js',
+    './src/client-modules/copy-page-button.js',
+  ],
+
   plugins: [
     [ '@docusaurus/plugin-client-redirects', {
       redirects: [
@@ -259,7 +265,8 @@ const config = {
     'docusaurus-plugin-sass',
     // Fail CI builds on docs the LLM files cannot represent faithfully
     [pluginLlms, { failOnError: process.env.CI === 'true' }],
-    'docusaurus-plugin-copy-page-button'
+    // Its client module is loaded after hydration by src/client-modules/copy-page-button.js
+    ['docusaurus-plugin-copy-page-button', { injectButton: false }]
   ],
 
   presets: [
