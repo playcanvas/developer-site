@@ -342,6 +342,33 @@ html[data-theme='dark'] .navbar--github-link:before {
   scrollbar-color: var(--ifm-color-emphasis-300) transparent;
 }
 
+/* Sidebar current page: only the page you're on is orange, and the categories above it are semibold */
+.theme-doc-sidebar-menu {
+  --sidebar-current-background: rgb(255 138 60 / 14%);
+  --sidebar-current-color: #a84300; /* 4.8:1 on the tinted background */
+}
+
+[data-theme='dark'] .theme-doc-sidebar-menu {
+  --sidebar-current-background: rgb(255 180 122 / 14%);
+  --sidebar-current-color: var(--ifm-color-primary);
+}
+
+.theme-doc-sidebar-menu .menu__link--active:not([aria-current='page']) {
+  color: var(--ifm-color-emphasis-900);
+  font-weight: 600;
+}
+
+.theme-doc-sidebar-menu .menu__link[aria-current='page'] {
+  color: var(--sidebar-current-color);
+  font-weight: 600;
+}
+
+/* a category page tints its whole row, so the chevron sits inside the highlight */
+.theme-doc-sidebar-menu .menu__link[aria-current='page']:not(.menu__link--sublist),
+.theme-doc-sidebar-menu .menu__list-item-collapsible.menu__list-item-collapsible--active {
+  background: var(--sidebar-current-background);
+}
+
 .theme-admonition-ai {
   background: linear-gradient(120deg, rgb(124 58 237 / 14%), rgb(6 182 212 / 18%), rgb(236 72 153 / 14%));
   background-size: 200% 100%;
