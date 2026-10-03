@@ -1,5 +1,5 @@
 ---
-title: PlayCanvasのワークフロー
+title: エディターのワークフロー
 description: Asset のインポートと Scene の構築から Script、公開まで、PlayCanvas のエンドツーエンドのワークフローをまとめます。
 ---
 

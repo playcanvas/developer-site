@@ -1,5 +1,5 @@
 ---
-title: 初めてのPlayCanvasアプリを作る
+title: 初めてのアプリ
 description: 新しい Scene からマテリアル、Script、移動、公開まで、シンプルな 3D の PlayCanvas Editor プロジェクトの作り方を順に説明します。
 ---
 

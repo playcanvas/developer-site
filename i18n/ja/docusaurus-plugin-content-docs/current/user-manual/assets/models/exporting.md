@@ -1,5 +1,5 @@
 ---
-title: PlayCanvas用の3Dモデルのエクスポート
+title: アセットのエクスポート
 description: Blender、Maya、または 3DS Max から GLB または FBX 形式で 3D モデルをエクスポートし、PlayCanvas にインポートします。
 ---
 

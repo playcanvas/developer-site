@@ -1,5 +1,5 @@
 ---
-title: PlayCanvas用の3Dモデル作成
+title: モデルの構築
 description: 推奨の GLB 形式を用いて、Blender、Maya、3DS Max などのツールで PlayCanvas 向けの 3D モデルを作成します。
 ---
 
