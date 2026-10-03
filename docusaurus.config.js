@@ -61,6 +61,10 @@ const config = {
 
   themes: ['@docusaurus/theme-mermaid', '@docusaurus/theme-live-codeblock'],
 
+  clientModules: [
+    './src/client-modules/reveal-current-page.js',
+  ],
+
   plugins: [
     [ '@docusaurus/plugin-client-redirects', {
       redirects: [
