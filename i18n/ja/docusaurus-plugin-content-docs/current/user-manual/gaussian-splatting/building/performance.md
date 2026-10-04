@@ -36,26 +36,27 @@ Gaussian splattingのフラグメント重視の性質を考えると、これ�
 
 ### グローバルスプラットバジェット {#global-splat-budget}
 
-グローバルスプラットバジェットは、Streamed SOGのレンダリングパフォーマンスを制御する主要な方法です。常に有効で、デフォルトは100万スプラットです。以下のように設定します：
+グローバルスプラットバジェットは、Streamed SOGのレンダリングパフォーマンスを制御する主要な方法です。[`splatBudget`](https://api.playcanvas.com/engine/classes/GSplatParams.html#splatbudget)のデフォルトは100万スプラットです。以下のように設定します：
 
 ```javascript
-app.scene.gsplat.splatBudget = 4000000; // 最大400万スプラット
+app.scene.gsplat.splatBudget = 4000000; // 400万スプラット
 ```
 
-エンジンはバジェット内に収まるようにすべてのGSplatアセットのLODレベルを自動的に調整し、画質への貢献が最も大きい場所に予算を割り当てます。通常は近くのジオメトリを細かい詳細レベルに保ち、遠くのジオメトリから先に品質を下げます。これにより、潜在的に表示可能なスプラット数に関係なく、一貫した処理負荷が維持されます。
+エンジンはバジェットに合わせてすべてのGSplatアセットのLODレベルを自動的に調整し、近くのジオメトリを細かい詳細レベルに保ちながら、遠くのジオメトリから先に品質を下げます。デフォルトではバジェットは目標値であり、カメラがどこにあっても、使い切るまで詳細が引き上げられます。これにより、潜在的に表示可能なスプラット数に関係なく、一貫した処理負荷が維持されます。バジェットを0以下にすると、バジェットはまったく適用されません。
 
-バジェットシステムは、Streamed SOGアセット（複数の詳細レベルを持つ）と固定アセット（単一の詳細レベル）の両方を含む、シーン内のすべてのGSplatアセットを考慮します。
+バジェットシステムは、Streamed SOGアセット（複数の詳細レベルを持つ）と固定アセット（単一の詳細レベル）の両方を含む、シーン内のすべてのGSplatアセットを考慮します。固定アセットは常にすべてのスプラットがレンダリングされるため、その分だけストリーミングアセットに使えるバジェットが少なくなります。
 
-### LODモードとフォールオフ
+### LOD距離とバジェットモード {#lod-distances-and-budget-mode}
 
-バジェットの範囲内では、デフォルトでカメラからの距離に基づいてLODレベルが選択され、カメラを中心とした同心円状のバンドで段階的に低下します。これを微調整する2つのプロパティがあります。`app.scene.gsplat`の[`lodMode`](https://api.playcanvas.com/engine/classes/GSplatParams.html#lodMode)はシーン全体を測定された視覚的誤差に基づく予算配分に切り替えられ（疎な背景領域の品質が向上しますが、メモリ使用量は著しく増加します）、各gsplatコンポーネントの[`lodFalloff`](https://api.playcanvas.com/engine/classes/GSplatComponent.html#lodFalloff)はそのスプラットの詳細を近景と遠景の間で傾けられます：
+バジェットの範囲内で、各gsplatコンポーネントは、カメラからの距離に応じて詳細がどのように段階的に低下するかを設定します。[`lodBaseDistance`](https://api.playcanvas.com/engine/classes/GSplatComponent.html#lodbasedistance)はLOD 0からLOD 1への切り替え距離で、[`lodMultiplier`](https://api.playcanvas.com/engine/classes/GSplatComponent.html#lodmultiplier)は各切り替え距離と次の切り替え距離の比率です。どちらを大きくしても、カメラから遠くまで細かい詳細が保たれますが、メモリ使用量は増加します。`app.scene.gsplat`の[`splatBudgetMode`](https://api.playcanvas.com/engine/classes/GSplatParams.html#splatbudgetmode)は、これらの距離とバジェットの組み合わせ方を決めます。デフォルトの`GSPLAT_BUDGET_TARGET`では、距離は詳細の低下の仕方を形作るだけで、詳細の総量はバジェットが決めます。`GSPLAT_BUDGET_LIMIT`では距離が詳細を決め、バジェットは距離がバジェットを超える場合にのみ詳細を下げます：
 
 ```javascript
-app.scene.gsplat.lodMode = pc.GSPLAT_LODMODE_ERROR;
-entity.gsplat.lodFalloff = 2; // カメラ付近の詳細を増やし、遠方の詳細を減らす
+entity.gsplat.lodBaseDistance = 10; // 10単位まではLOD 0
+entity.gsplat.lodMultiplier = 4; // その後40単位まではLOD 1、160単位まではLOD 2、...
+app.scene.gsplat.splatBudgetMode = pc.GSPLAT_BUDGET_LIMIT;
 ```
 
-詳細は[LOD動作の制御](/user-manual/gaussian-splatting/building/lod-streaming#controlling-lod-behavior)を参照してください。LOD選択はカメラの視野角（FOV）も自動的に補正します。視野角が広いほどオブジェクトは画面上で小さく見えるため、より早く粗いレベルに切り替わります。
+詳細は[LOD動作の制御](/user-manual/gaussian-splatting/building/lod-streaming#controlling-lod-behavior)を参照してください。LOD距離はカメラの視野角（FOV）に応じて自動的に補正されます。視野角が広いほどオブジェクトは画面上で小さく見えるため、より早く粗いレベルに切り替わります。
 
 ### LOD範囲制限
 
@@ -118,4 +119,4 @@ gsplatSystem.on('frame:ready', onFrameReady);
 
 1. ターゲットハードウェアに適した**グローバルスプラットバジェットを設定**します（例：モバイルでは100万、デスクトップでは300万以上）
 2. 特定のダウンロードやメモリの制約がない限り、**LOD範囲はデフォルトのままにします**（min=0、max=利用可能な最高値）
-3. 特定の距離での品質遷移をより細かく制御したい場合は、**LOD距離を調整**します
+3. **LOD距離を調整**して（`lodBaseDistance`、`lodMultiplier`）、詳細が距離に応じてどのように低下するかを形作ります。バジェットが決める位置ではなく、設定した距離で品質を切り替えたい場合は、`GSPLAT_BUDGET_LIMIT`に切り替えます
