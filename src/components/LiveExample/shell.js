@@ -4,8 +4,8 @@
 // The versions below pin every live example on the site. Bump them together
 // when the docs are updated to track a new @playcanvas/web-components release
 // (the engine version should match the library's dev-pinned engine).
-export const ENGINE_VERSION = '2.22.6';
-export const PWC_VERSION = '0.27.0';
+export const ENGINE_VERSION = '2.23.0';
+export const PWC_VERSION = '0.28.0';
 
 const CDN = 'https://cdn.jsdelivr.net/npm';
 

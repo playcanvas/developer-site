@@ -22,36 +22,45 @@ description: "pc-gsplat要素のリファレンス: Gaussian splat Assetをレ�
 | `asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | Gaussian splatアセットID (`gsplat`タイプのアセットを参照する必要があります) |
 | `cast-shadows` | Boolean | `"false"` | gsplatコンポーネントが影を落とすかどうか |
 | `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |
-| `lod-falloff` | Number | `"1"` | このスプラットのディテールがカメラから離れるにつれてどれだけ速く落ちるかを、0から8の指数で指定します。値が大きいほどシーン全体のスプラット予算をカメラ近くに集中させ、小さいほど均等に分散させます。LODレベルを含むアセットにのみ影響します。 |
-| `lod-range-max` | Number | `"99"` | 許可される最大のLODインデックス (この値を含む)。予算が選択するLODは、この値より粗い (インデックスが大きい) ものにならないようにクランプされます。デフォルトの`99`は事実上「上限なし」を意味します。LODレベルを含むアセットにのみ影響します。 |
-| `lod-range-min` | Number | `"0"` | 許可される最小のLODインデックス (この値を含む)。予算が選択するLODは、この値より細かい (インデックスが小さい) ものにならないようにクランプされます。値を上げると、最高品質 (最大) のLODファイルのダウンロードを回避できます。LODレベルを含むアセットにのみ影響します。 |
+| `lod-base-distance` | Number | `"5"` | 最初のLOD切り替え (LOD 0からLOD 1) が起きるカメラ距離。これより近い部分は最も細かいレベルを使います。ワールド単位で、カメラの視野角に応じて補正され、最小値0.1にクランプされます。LODレベルを含むアセットにのみ影響します。 |
+| `lod-multiplier` | Number | `"3"` | 連続するLOD切り替え距離の間の倍率。より粗い各レベルは、1つ前のレベルの距離にこの値を掛けた距離から始まります。値が大きいほどカメラから遠くまで細かいディテールが保たれますが、メモリのコストが増えます。最小値1.2にクランプされます。LODレベルを含むアセットにのみ影響します。 |
+| `lod-range-max` | Number | `"99"` | 許可される最大のLODインデックス (この値を含む)。選択されたLODは、この値より粗い (インデックスが大きい) ものにならないようにクランプされます。デフォルトの`99`は事実上「上限なし」を意味します。LODレベルを含むアセットにのみ影響します。 |
+| `lod-range-min` | Number | `"0"` | 許可される最小のLODインデックス (この値を含む)。選択されたLODは、この値より細かい (インデックスが小さい) ものにならないようにクランプされます。値を上げると、最高品質 (最大) のLODファイルのダウンロードを回避できます。LODレベルを含むアセットにのみ影響します。 |
 
 </div>
 
 ## レベルオブディテール {#level-of-detail}
 
-ストリーミング用のスプラットアセットとは、LODレベル付きでエクスポートされたものです。その[`<pc-asset>`](../pc-asset)の`src`はエクスポートの`lod-meta.json`を指し、このファイルが先に読み込まれ、スプラットデータ自体はオンデマンドでストリーミングされます。`.json`ファイルはそのままでは通常のJSONとして読み込まれるため、`type="gsplat"`を付けて宣言してください。こうしたアセットは、どこでもフルディテールで描画されるわけではありません。エンジンは**シーン全体のスプラット予算**、つまりシーン内のすべての`<pc-gsplat>`を合わせて画面に描くスプラット数の目標値に従って動き、最も効果の高い場所にそれを使います。予算とその使い方はシーンの性質なので[`<pc-scene>`](../pc-scene)に置かれ、各スプラットが自分の取り分をどう競うかはここに置かれます。
+ストリーミング用のスプラットアセットとは、LODレベル付きでエクスポートされたものです。その[`<pc-asset>`](../pc-asset)の`src`はエクスポートの`lod-meta.json`を指し、このファイルが先に読み込まれ、スプラットデータ自体はオンデマンドでストリーミングされます。`.json`ファイルはそのままでは通常のJSONとして読み込まれるため、`type="gsplat"`を付けて宣言してください。こうしたアセットは、どこでもフルディテールで描画されるわけではありません。ディテールはカメラからの距離に応じて段階的に下がります。`lod-base-distance`までは最も細かいレベルを使い、より粗い各レベルは、1つ前のレベルが始まった距離の`lod-multiplier`倍から始まります。エンジンはさらに**シーン全体のスプラット予算**、つまりシーン内のすべての`<pc-gsplat>`を合わせたスプラット数に従って動きます。予算とその使い方はシーンの性質なので[`<pc-scene>`](../pc-scene)に置かれ、各スプラットのディテールが距離に応じてどう下がるかはここに置かれます。
 
 | 属性 | 場所 | 制御する内容 |
 | --- | --- | --- |
-| `gsplat-splat-budget` | [`<pc-scene>`](../pc-scene) | シーン全体で描画するスプラットの総数。デフォルトは1,000,000。シーンより大きい予算を与えると、すべてのノードが最も細かいレベルで解決されます |
-| `gsplat-lod-mode` | [`<pc-scene>`](../pc-scene) | デフォルトの`"distance"`は、カメラからの距離だけでディテールの順序を決め、カメラを中心とした同心円状の帯で段階的に下げます。メモリ使用量も少なく済みます。`"error"`は同じ予算を近似誤差を最も減らせる場所に使うため、`"distance"`では粗いままになる空や遠景などの疎な領域の品質が上がりますが、ストリーミングされたデータを明らかに多くメモリに保持します |
-| `lod-falloff` | `<pc-gsplat>` | *この*スプラットが自分の予算の中で、遠方のディテールを近くのディテールとどれだけ急にトレードするか。1が中立で、大きい値ほどディテールをカメラ側へ引き寄せます |
-| `lod-range-min`・`lod-range-max` | `<pc-gsplat>` | 予算の判断にかかわらず、このスプラットが使えるLODインデックスの上下限。最小値を上げれば、最大のファイルを一切ダウンロードしないようにできます |
+| `gsplat-splat-budget` | [`<pc-scene>`](../pc-scene) | シーン全体で描画するスプラット数。デフォルトは1,000,000で、0以下は予算なしを意味します |
+| `gsplat-splat-budget-mode` | [`<pc-scene>`](../pc-scene) | デフォルトの`"target"`は、カメラの位置にかかわらず予算を使い切るまでディテールを上げ、LOD距離はディテールの下がり方とスプラット間での配分を形づくるだけです。`"limit"`はLOD距離にディテールを決めさせ、それが予算を超える場合にだけディテールを下げます。そのため、遠くのスプラットは距離に見合った少数のスプラットしか使いません |
+| `lod-base-distance`・`lod-multiplier` | `<pc-gsplat>` | *この*スプラットのディテールがどこで下がるか。どちらかを上げると、カメラから遠くまで細かいディテールが保たれます |
+| `lod-range-min`・`lod-range-max` | `<pc-gsplat>` | 距離と予算の判断にかかわらず、このスプラットが使えるLODインデックスの上下限。最小値を上げれば、最大のファイルを一切ダウンロードしないようにできます |
 
 ```html
 <pc-asset id="capture" src="capture/lod-meta.json" type="gsplat"></pc-asset>
 <!-- ... -->
-<pc-scene gsplat-splat-budget="1500000" gsplat-lod-mode="error">
+<pc-scene gsplat-splat-budget="1500000" gsplat-splat-budget-mode="limit">
     <pc-entity name="capture">
-        <pc-gsplat asset="capture" lod-falloff="1.5" lod-range-min="1"></pc-gsplat>
+        <pc-gsplat asset="capture" lod-base-distance="8" lod-range-min="1"></pc-gsplat>
     </pc-entity>
 </pc-scene>
 ```
 
-予算による選択を無効にする方法はありません。0以下の予算は上限を外すのではなく、すべてのノードを最も粗いレベルに固定してしまうため、エンジンは代わりにデフォルトを使います。すべてをフルディテールで見たい場合は、キャプチャより大きい予算を設定してください。LODレベルを持たない通常の`.ply`・`.sog`アセットは常にフルで描画されますが、そのスプラットは予算に数えられ、その分ストリーミングされるアセットに回る量が減ります。
+予算がない場合、`"target"`はすべてを最も細かいレベルで描画し、`"limit"`はディテールをLOD距離だけに任せます。LODレベルを持たない通常の`.ply`・`.sog`アセットは常にフルで描画されますが、そのスプラットは予算に数えられ、その分ストリーミングされるアセットに回る量が減ります。
 
 [Splat Streamingのサンプル](https://playcanvas.github.io/web-components/examples/#splat-streaming.html)は大きなLODキャプチャをストリーミングします。`lod-range-min`を最も粗いレベルに固定してシーン全体を素早く表示し、その後固定を外してより細かいレベルをストリーミングさせるため、予算の働きを見ることができます。
+
+## 確率的レンダリング {#stochastic-rendering}
+
+スプラットは通常、毎フレームソートされてアルファブレンドされます。WebGPUでは、[`<pc-scene>`](../pc-scene)の`gsplat-stochastic`を設定すると、代わりにソートせず、ディザリングしたカバレッジと深度書き込みで描画します。これによりフレームからソートがなくなる代わりに、細かいノイズが生じます。ノイズはテンポラルアンチエイリアシングで滑らかになり、そのパターンは`gsplat-dither`で選びます。WebGLでは両方の属性が無視されます。
+
+```html
+<pc-scene gsplat-stochastic gsplat-dither="bayer4">
+```
 
 ## 例 {#example}
 
@@ -59,7 +68,7 @@ description: "pc-gsplat要素のリファレンス: Gaussian splat Assetをレ�
 
 ```html live-example
 <pc-app antialias="false" max-pixel-ratio="1">
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.6/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.23.0/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset id="toy" src="https://developer.playcanvas.com/assets/toy-cat.sog"></pc-asset>
     <pc-scene>
         <pc-entity name="camera" position="0 0 2.5">

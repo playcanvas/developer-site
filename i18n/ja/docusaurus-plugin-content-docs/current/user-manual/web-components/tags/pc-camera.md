@@ -36,6 +36,7 @@ description: "pc-camera要素のリファレンス: エンジンのカメラComp
 | `projection` | Enum | `"perspective"` | カメラの投影方式: `"perspective"` \| `"orthographic"`。正射影のサイズは`ortho-height`で指定します |
 | `projection-offset` | Vector2 | `"0 0"` | シフトレンズのように、投影ウィンドウを視線方向からずらします。"X Y"値で、単位は視錐台の半分です。`"0 1"`はウィンドウを視錐台の高さの半分だけ上に移動します。カメラを水平に保ったままウィンドウをずらすと、背の高い被写体を垂直線が平行なままフレームに収められます。両方の投影方式に適用され、XRでは無視されます |
 | `rect` | Vector4 | `"0 0 1 1"` | "X Y Width Height"値としてのビューポート矩形 |
+| `scene-color-map` | Boolean | `"false"` | 透明なオブジェクトを描画する前のシーンの色のコピーをカメラがレンダリングし、透過を持つglTFマテリアルなどの屈折するマテリアルがサンプリングできるようにするかどうか。毎フレーム画面全体をコピーするコストがかかるため、デフォルトではオフです。`cameraFrame`スクリプトを通して描画されるカメラは、代わりにそのスクリプトの`rendering.sceneColorMap`からこの設定を受け取るため、この属性は効果がありません |
 | `scissor-rect` | Vector4 | `"0 0 1 1"` | "X Y Width Height"値としてのシザー矩形 |
 | `tonemap` | Enum | `"linear"` | トーンマッピング: `"none"` \| `"aces"` \| `"aces2"` \| `"filmic"` \| `"hejl"` \| `"linear"` \| `"neutral"` |
 

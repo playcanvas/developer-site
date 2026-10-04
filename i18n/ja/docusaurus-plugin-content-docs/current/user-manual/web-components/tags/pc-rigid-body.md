@@ -23,6 +23,7 @@ description: "pc-rigid-body要素のリファレンス: rigid bodyの種類、�
 | `angular-factor` | Vector3 | `"1 1 1"` | 角運動の制約を「X Y Z」値で指定 |
 | `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |
 | `friction` | Number | `"0.5"` | 表面摩擦係数 |
+| `gravity-scale` | Number | `"1"` | このボディに対するシーンの[`gravity`](../pc-scene)の倍率。`"1"`では通常どおり落下し、`"0"`では重力を無視し、負の値では上昇します。`dynamic`のボディにのみ適用されます |
 | `linear-damping` | Number | `"0"` | 線速度の減衰係数 |
 | `linear-factor` | Vector3 | `"1 1 1"` | 線形運動の制約を「X Y Z」値で指定 |
 | `mass` | Number | `"1"` | リジッドボディの質量（キログラム単位） |

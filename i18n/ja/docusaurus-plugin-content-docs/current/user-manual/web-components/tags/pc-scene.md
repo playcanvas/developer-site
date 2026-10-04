@@ -23,8 +23,10 @@ description: "pc-scene要素のリファレンス: pc-app内のシーンコン�
 | `fog-density` | Number | `"0"` | 指数フォグタイプの場合のフォグの密度 |
 | `fog-end` | Number | `"1000"` | 線形フォグの終了距離 |
 | `fog-start` | Number | `"1"` | 線形フォグの開始距離 |
-| `gsplat-lod-mode` | Enum | `"distance"` | ストリーミングされるGaussian splatのLODレベルを、スプラット予算の範囲内でどう選ぶか：`"error"` \| `"distance"`。[レベルオブディテール](../pc-gsplat#level-of-detail)を参照 |
-| `gsplat-splat-budget` | Number | `"1000000"` | シーン内のすべてのGaussian splatを合わせて描画するスプラット数の目標値。ストリーミングされるスプラットアセット間で配分されます。0以下の値はデフォルトとして扱われます |
+| `gsplat-dither` | Enum | `"bluenoise"` | 確率的なGaussian splatのカバレッジをディザリングするノイズパターン：`"bayer2"` \| `"bayer4"` \| `"bayer8"` \| `"bayer16"` \| `"bluenoise"` \| `"ignnoise"`。`gsplat-stochastic`が設定されていない場合は無視されます。テンポラルアンチエイリアシングの下では`"bluenoise"`が最もきれいに見えます |
+| `gsplat-splat-budget` | Number | `"1000000"` | シーン内のすべてのGaussian splatを合わせて描画するスプラット数。ストリーミングされるスプラットアセット間で配分され、`gsplat-splat-budget-mode`の指定に従って使われます。0以下の値は予算なしを意味します。[レベルオブディテール](../pc-gsplat#level-of-detail)を参照 |
+| `gsplat-splat-budget-mode` | Enum | `"target"` | ストリーミングされるGaussian splatでスプラット予算をどう使うか：`"target"` \| `"limit"`。`"target"`はカメラの位置にかかわらず、予算を使い切るまでディテールを上げます。`"limit"`は各[`<pc-gsplat>`](../pc-gsplat)のLOD距離にディテールを決めさせ、予算内に収めるためにだけディテールを下げます。[レベルオブディテール](../pc-gsplat#level-of-detail)を参照 |
+| `gsplat-stochastic` | Boolean | `"false"` | WebGPUでGaussian splatを確率的アルファで描画するかどうか。ソートしてアルファブレンドする代わりに、ソートせず、ディザリングしたカバレッジと深度書き込みで描画します。毎フレームのソートを省ける代わりにノイズが生じ、それはテンポラルアンチエイリアシングで滑らかになります。デプスバッファを使うため、[`<pc-app>`](../pc-app)の`depth-buffer`は有効のままにしてください。WebGLでは無視されます |
 | `gsplat-use-fog` | Boolean | `"true"` | シーンのフォグをGaussian splatに適用するかどうか |
 | `gsplat-use-tonemap` | Boolean | `"true"` | カメラのトーンマッピングとシーンの`exposure`をGaussian splatに適用するかどうか。`"false"`にすると、スプラットは保存されている色のままレンダリングされます。これはすでに表示用に仕上がっているキャプチャに適しています。フォグは引き続き適用されます |
 | `gravity` | Vector3 | `"0 -9.81 0"` | 「X Y Z」値としてリジッドボディに適用される重力 |
