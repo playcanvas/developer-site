@@ -17,6 +17,7 @@ The `<pc-app>` tag is the root element for your PlayCanvas application. It is us
 | `area-light-luts` | [Asset ID](https://developer.playcanvas.com/user-manual/web-components/attributes.md#asset-and-material-ids) | - | ID of a [`<pc-asset>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset.md) holding the area light lookup tables as JSON. Loading it switches area lights on for the whole application, so [`<pc-light>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-light.md) elements with a `rect`, `disk` or `sphere` `shape` render as intended; clearing it switches them off again. Applies immediately — see [Area Lights](https://developer.playcanvas.com/user-manual/web-components/tags/pc-light.md#area-lights) |
 | `backend` | Enum | `"webgpu"` | Graphics engine backend: `"webgpu"` \| `"webgl2"` \| `"null"`. WebGPU falls back to WebGL 2 in browsers where it is unavailable — set `"webgl2"` to force WebGL 2. `"null"` selects a renderer that draws nothing, and exists for headless testing |
 | `depth-buffer` | Boolean | `"true"` | Whether the application allocates a depth buffer |
+| `devtools` | Boolean | `"true"` | Whether the application announces itself to developer tools, such as the PlayCanvas Inspector browser extension, so they can find and inspect it. Set `"false"` to keep a production page from announcing itself. This is an opt-out, not a protection: code on the page can still reach the application, through the element's `app` property for one. Of the engine 2.23.0 builds, only the debug build announces: its release, profiler and minified builds never do, whatever this is set to |
 | `loading-bar` | Boolean | `"true"` | Whether the application shows its built-in loading bar while it boots and preloads its assets |
 | `max-pixel-ratio` | Number | uncapped | The highest pixel ratio the application renders at, above 0. The canvas is sized by the smaller of this value and the display's own device pixel ratio, so `"1"` renders at CSS resolution and `"2"` keeps a dense display sharp without paying for every one of its pixels |
 | `physics-time-scale` | Number | `"1"` | Scale on the time the physics simulation advances by each frame, applied on top of `time-scale`: below 1 is slow motion, above 1 speeds it up, and `"0"` pauses physics while the rest of the application keeps running — for a pause menu, say, that must stay interactive while the world stands still |
@@ -28,9 +29,10 @@ The `<pc-app>` tag is the root element for your PlayCanvas application. It is us
 :::note[When these are read]
 
 `alpha`, `antialias`, `backend`, `depth-buffer` and `stencil-buffer` configure the graphics device,
-so they are read once, when the element is inserted into the document and creates it. Changing one
-afterwards updates the element's property but has no effect on the running application, and logs a
-warning saying so — to apply a new value, remove the element and re-insert it.
+and `devtools` the application, so they are read once, when the element is inserted into the
+document and boots the application. Changing one afterwards updates the element's property but has
+no effect on the running application, and logs a warning saying so — to apply a new value, remove
+the element and re-insert it.
 
 Every other attribute is live, applying to the running application as soon as it changes, except
 that `loading-bar` can only remove the bar (see [Loading bar](https://developer.playcanvas.com/user-manual/web-components/tags/pc-app.md#loading-bar)). The two time scales

@@ -14,7 +14,7 @@ The `<pc-sound-slot>` tag declares one named sound of its parent [`<pc-sound>`](
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
 | `asset` | [Asset ID](https://developer.playcanvas.com/user-manual/web-components/attributes.md#asset-and-material-ids) | - | Audio asset ID (must reference an `audio` type asset) |
-| `auto-play` | Boolean | `"false"` | Whether the sound plays as soon as the slot is created. Browsers keep audio off until the user interacts with the page, so an auto-played sound starts at the first click, tap or mouse press |
+| `auto-play` | Boolean | `"false"` | Whether the sound plays as soon as the slot is created. A slot whose entity or `<pc-sound>` is disabled starts once both are enabled. Browsers keep audio off until the user interacts with the page, so an auto-played sound starts at the first click, tap or mouse press |
 | `duration` | Number | - | Duration of the sound in seconds (omit to play the full clip) |
 | `loop` | Boolean | `"false"` | Whether the sound loops |
 | `name` | String | - | The slot's name, which `component.slot(name)` finds it by |

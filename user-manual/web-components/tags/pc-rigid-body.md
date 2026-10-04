@@ -18,6 +18,7 @@ The `<pc-rigid-body>` tag makes an entity a rigid body in the physics simulation
 | `angular-factor` | Vector3 | `"1 1 1"` | Angular movement constraints as "X Y Z" values |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
 | `friction` | Number | `"0.5"` | Surface friction coefficient |
+| `gravity-scale` | Number | `"1"` | Multiplier on the scene's [`gravity`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scene.md) for this body: `"1"` falls normally, `"0"` ignores gravity and a negative value rises. Applies to `dynamic` bodies only |
 | `linear-damping` | Number | `"0"` | Linear velocity damping factor |
 | `linear-factor` | Vector3 | `"1 1 1"` | Linear movement constraints as "X Y Z" values |
 | `mass` | Number | `"1"` | Mass of the rigidbody in kilograms |

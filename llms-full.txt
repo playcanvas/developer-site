@@ -4,7 +4,7 @@
 
 Index: https://developer.playcanvas.com/llms.txt
 Total Documents: 523
-Generated: 2026-10-03
+Generated: 2026-10-04
 
 ================================================================================
 
@@ -17882,7 +17882,7 @@ A GLB with a single walk cycle, declared twice: `walk` at its authored speed and
 
 ```html live-example
 <pc-app>
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.6/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.23.0/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset src="https://developer.playcanvas.com/assets/t-rex.glb" id="t-rex"></pc-asset>
     <pc-material id="floor" diffuse="#3a3f4b"></pc-material>
     <pc-scene>
@@ -18054,7 +18054,7 @@ The same walk cycle declared as two clips, `walk` and a reversed, slowed `sneak`
 
 ```html live-example
 <pc-app>
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.6/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.23.0/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset src="https://developer.playcanvas.com/assets/t-rex.glb" id="t-rex"></pc-asset>
     <pc-material id="floor" diffuse="#3a3f4b"></pc-material>
     <pc-scene>
@@ -18156,6 +18156,7 @@ The `<pc-app>` tag is the root element for your PlayCanvas application. It is us
 | `area-light-luts` | [Asset ID](https://developer.playcanvas.com/user-manual/web-components/attributes.md#asset-and-material-ids) | - | ID of a [`<pc-asset>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset.md) holding the area light lookup tables as JSON. Loading it switches area lights on for the whole application, so [`<pc-light>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-light.md) elements with a `rect`, `disk` or `sphere` `shape` render as intended; clearing it switches them off again. Applies immediately — see [Area Lights](https://developer.playcanvas.com/user-manual/web-components/tags/pc-light.md#area-lights) |
 | `backend` | Enum | `"webgpu"` | Graphics engine backend: `"webgpu"` \| `"webgl2"` \| `"null"`. WebGPU falls back to WebGL 2 in browsers where it is unavailable — set `"webgl2"` to force WebGL 2. `"null"` selects a renderer that draws nothing, and exists for headless testing |
 | `depth-buffer` | Boolean | `"true"` | Whether the application allocates a depth buffer |
+| `devtools` | Boolean | `"true"` | Whether the application announces itself to developer tools, such as the PlayCanvas Inspector browser extension, so they can find and inspect it. Set `"false"` to keep a production page from announcing itself. This is an opt-out, not a protection: code on the page can still reach the application, through the element's `app` property for one. Of the engine 2.23.0 builds, only the debug build announces: its release, profiler and minified builds never do, whatever this is set to |
 | `loading-bar` | Boolean | `"true"` | Whether the application shows its built-in loading bar while it boots and preloads its assets |
 | `max-pixel-ratio` | Number | uncapped | The highest pixel ratio the application renders at, above 0. The canvas is sized by the smaller of this value and the display's own device pixel ratio, so `"1"` renders at CSS resolution and `"2"` keeps a dense display sharp without paying for every one of its pixels |
 | `physics-time-scale` | Number | `"1"` | Scale on the time the physics simulation advances by each frame, applied on top of `time-scale`: below 1 is slow motion, above 1 speeds it up, and `"0"` pauses physics while the rest of the application keeps running — for a pause menu, say, that must stay interactive while the world stands still |
@@ -18167,9 +18168,10 @@ The `<pc-app>` tag is the root element for your PlayCanvas application. It is us
 :::note[When these are read]
 
 `alpha`, `antialias`, `backend`, `depth-buffer` and `stencil-buffer` configure the graphics device,
-so they are read once, when the element is inserted into the document and creates it. Changing one
-afterwards updates the element's property but has no effect on the running application, and logs a
-warning saying so — to apply a new value, remove the element and re-insert it.
+and `devtools` the application, so they are read once, when the element is inserted into the
+document and boots the application. Changing one afterwards updates the element's property but has
+no effect on the running application, and logs a warning saying so — to apply a new value, remove
+the element and re-insert it.
 
 Every other attribute is live, applying to the running application as soon as it changes, except
 that `loading-bar` can only remove the bar (see [Loading bar](https://developer.playcanvas.com/user-manual/web-components/tags/pc-app.md#loading-bar)). The two time scales
@@ -18414,7 +18416,7 @@ Two assets: a script (an engine helper loaded straight from a CDN) and a GLB mod
 ```html live-example
 <pc-app>
     <!-- Script asset: type inferred from the .mjs extension -->
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.6/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.23.0/scripts/esm/camera-controls.mjs"></pc-asset>
     <!-- Container asset: type inferred from the .glb extension -->
     <pc-asset src="https://developer.playcanvas.com/assets/playcanvas-cube.glb" id="cube"></pc-asset>
     <pc-scene>
@@ -18694,6 +18696,7 @@ The `<pc-camera>` tag adds a camera to an entity: the viewpoint the scene is ren
 | `projection` | Enum | `"perspective"` | Projection of the camera: `"perspective"` \| `"orthographic"`. Use `ortho-height` to size an orthographic projection |
 | `projection-offset` | Vector2 | `"0 0"` | Shifts the projection window off the view direction, like a shift lens, as "X Y" values in half-frustum units: `"0 1"` moves it up by half the frustum height. Keeping the camera level and shifting the window frames a tall subject with its verticals parallel. Applies to both projections and is ignored in XR |
 | `rect` | Vector4 | `"0 0 1 1"` | Viewport rectangle as "X Y Width Height" values |
+| `scene-color-map` | Boolean | `"false"` | Whether the camera renders a copy of the scene's color, taken before its transparent objects draw, for refractive materials to sample, such as glTF materials with transmission. Off by default, because the copy costs a full-screen copy every frame. A camera rendered through the `cameraFrame` script takes this from that script's `rendering.sceneColorMap` instead, so the attribute has no effect on it |
 | `scissor-rect` | Vector4 | `"0 0 1 1"` | Scissor rectangle as "X Y Width Height" values |
 | `tonemap` | Enum | `"linear"` | Tone mapping: `"none"` \| `"aces"` \| `"aces2"` \| `"filmic"` \| `"hejl"` \| `"linear"` \| `"neutral"` |
 
@@ -19135,34 +19138,43 @@ When rendering splat-based scenes, it is recommended to set `antialias` to `fals
 | `asset` | [Asset ID](https://developer.playcanvas.com/user-manual/web-components/attributes.md#asset-and-material-ids) | - | Gaussian splat asset ID (must reference a `gsplat` type asset) |
 | `cast-shadows` | Boolean | `"false"` | Whether the gsplat component casts shadows |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
-| `lod-falloff` | Number | `"1"` | How quickly this splat's detail falls off away from the camera, as an exponent from 0 to 8. Higher values concentrate more of the scene-wide splat budget near the camera; lower values spread it more evenly. Only affects assets that contain LOD levels. |
-| `lod-range-max` | Number | `"99"` | Maximum allowed LOD index (inclusive). The LOD the budget selects is clamped so it never goes coarser (higher index) than this value. The default of `99` effectively means "no cap". Only affects assets that contain LOD levels. |
-| `lod-range-min` | Number | `"0"` | Minimum allowed LOD index (inclusive). The LOD the budget selects is clamped so it never goes finer (lower index) than this value. Raising it avoids downloading the highest-quality (largest) LOD files. Only affects assets that contain LOD levels. |
+| `lod-base-distance` | Number | `"5"` | Camera distance of the first LOD transition, from LOD 0 to LOD 1: parts of the splat closer than this use the finest level. In world units, compensated for the camera's field of view, and clamped to a minimum of 0.1. Only affects assets that contain LOD levels. |
+| `lod-multiplier` | Number | `"3"` | Multiplier between successive LOD transition distances: each coarser level starts at this many times the distance of the one before. Higher values keep finer detail further from the camera, at a higher memory cost. Clamped to a minimum of 1.2. Only affects assets that contain LOD levels. |
+| `lod-range-max` | Number | `"99"` | Maximum allowed LOD index (inclusive). The selected LOD is clamped so it never goes coarser (higher index) than this value. The default of `99` effectively means "no cap". Only affects assets that contain LOD levels. |
+| `lod-range-min` | Number | `"0"` | Minimum allowed LOD index (inclusive). The selected LOD is clamped so it never goes finer (lower index) than this value. Raising it avoids downloading the highest-quality (largest) LOD files. Only affects assets that contain LOD levels. |
 
 ## Level of Detail
 
-A streamed splat asset is one exported with LOD levels: its [`<pc-asset>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset.md) `src` points at the export's `lod-meta.json`, which is downloaded up front while the splat data itself streams in on demand. Declare it with `type="gsplat"`, since a `.json` file would otherwise be loaded as plain JSON. Such an asset is not rendered at full detail everywhere. The engine works to a **scene-wide splat budget**: a target number of splats on screen across every `<pc-gsplat>` in the scene, spent where it buys the most. The budget and how it is spent are properties of the scene, so they live on [`<pc-scene>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scene.md); how each splat competes for its share lives here:
+A streamed splat asset is one exported with LOD levels: its [`<pc-asset>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset.md) `src` points at the export's `lod-meta.json`, which is downloaded up front while the splat data itself streams in on demand. Declare it with `type="gsplat"`, since a `.json` file would otherwise be loaded as plain JSON. Such an asset is not rendered at full detail everywhere. Its detail steps down with camera distance: the finest level out to `lod-base-distance`, then each coarser level from `lod-multiplier` times the distance where the one before began. The engine also works to a **scene-wide splat budget**, a number of splats across every `<pc-gsplat>` in the scene. The budget and how it is used are properties of the scene, so they live on [`<pc-scene>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scene.md); how each splat's detail falls off with distance lives here:
 
 | Attribute | On | What it controls |
 | --- | --- | --- |
-| `gsplat-splat-budget` | [`<pc-scene>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scene.md) | The total number of splats to render across the scene. Defaults to 1,000,000; a budget larger than the scene resolves every node at its finest level |
-| `gsplat-lod-mode` | [`<pc-scene>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scene.md) | `"distance"`, the default, orders detail by camera distance alone, stepping it down in concentric bands around the camera, and uses less memory. `"error"` spends the same budget where it removes the most approximation error, which lifts sparse regions such as sky and distant background that `"distance"` leaves coarse, but keeps noticeably more of the streamed data in memory |
-| `lod-falloff` | `<pc-gsplat>` | How steeply *this* splat trades far-field detail for near-field detail within its share of the budget. 1 is neutral; higher values pull detail towards the camera |
-| `lod-range-min`, `lod-range-max` | `<pc-gsplat>` | Hard clamps on the LOD index this splat may use, whatever the budget decides — raise the minimum to avoid ever downloading the largest files |
+| `gsplat-splat-budget` | [`<pc-scene>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scene.md) | The number of splats to render across the scene. Defaults to 1,000,000; 0 or less means no budget |
+| `gsplat-splat-budget-mode` | [`<pc-scene>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scene.md) | `"target"`, the default, raises detail until the budget is used up, wherever the camera is, and the LOD distances only shape how detail falls off and how it divides between splats. `"limit"` lets the LOD distances decide the detail and only lowers it when they would exceed the budget, so a distant splat uses just the few splats its distance calls for |
+| `lod-base-distance`, `lod-multiplier` | `<pc-gsplat>` | Where *this* splat's detail steps down. Raise either to keep finer detail further from the camera |
+| `lod-range-min`, `lod-range-max` | `<pc-gsplat>` | Hard clamps on the LOD index this splat may use, whatever distance and the budget decide — raise the minimum to avoid ever downloading the largest files |
 
 ```html
 <pc-asset id="capture" src="capture/lod-meta.json" type="gsplat"></pc-asset>
 <!-- ... -->
-<pc-scene gsplat-splat-budget="1500000" gsplat-lod-mode="error">
+<pc-scene gsplat-splat-budget="1500000" gsplat-splat-budget-mode="limit">
     <pc-entity name="capture">
-        <pc-gsplat asset="capture" lod-falloff="1.5" lod-range-min="1"></pc-gsplat>
+        <pc-gsplat asset="capture" lod-base-distance="8" lod-range-min="1"></pc-gsplat>
     </pc-entity>
 </pc-scene>
 ```
 
-There is no way to switch budgeted selection off: a budget of zero or less would pin every node to its coarsest level rather than lift the cap, so the engine uses the default instead. To see everything at full detail, set a budget larger than the capture. A plain `.ply` or `.sog` asset with no LOD levels always renders in full, but its splats count against the budget, leaving that much less for the streamed ones.
+With no budget, `"target"` renders everything at its finest level and `"limit"` leaves the detail to the LOD distances alone. A plain `.ply` or `.sog` asset with no LOD levels always renders in full, but its splats count against the budget, leaving that much less for the streamed ones.
 
 The [Splat Streaming example](https://playcanvas.github.io/web-components/examples/#splat-streaming.html) streams a large LOD capture. It pins `lod-range-min` to the coarsest level so the whole scene arrives quickly, then removes the pin and lets finer levels stream in, which shows the budget at work.
+
+## Stochastic Rendering
+
+Splats are normally sorted every frame and alpha blended. On WebGPU, `gsplat-stochastic` on [`<pc-scene>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scene.md) draws them unsorted instead, with dithered coverage and depth writes, which takes the sort out of the frame at the cost of a fine noise. Temporal anti-aliasing smooths the noise out, and `gsplat-dither` picks its pattern. WebGL ignores both attributes.
+
+```html
+<pc-scene gsplat-stochastic gsplat-dither="bayer4">
+```
 
 ## Example
 
@@ -19170,7 +19182,7 @@ A Gaussian splat scanned from a real toy. Drag to orbit and scroll to zoom — a
 
 ```html live-example
 <pc-app antialias="false" max-pixel-ratio="1">
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.6/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.23.0/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset id="toy" src="https://developer.playcanvas.com/assets/toy-cat.sog"></pc-asset>
     <pc-scene>
         <pc-entity name="camera" position="0 0 2.5">
@@ -19970,7 +19982,7 @@ A GLB with a skeletal animation, played by the [`<pc-anim>`](https://developer.p
 
 ```html live-example
 <pc-app>
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.6/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.23.0/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset src="https://developer.playcanvas.com/assets/t-rex.glb" id="t-rex"></pc-asset>
     <pc-material id="floor" diffuse="#3a3f4b"></pc-material>
     <pc-scene>
@@ -20190,7 +20202,7 @@ This GLB instantiates two mesh nodes — `play` (the orange shell, its logo cut 
 
 ```html live-example
 <pc-app>
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.6/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.23.0/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset src="https://developer.playcanvas.com/assets/playcanvas-cube.glb" id="cube"></pc-asset>
     <pc-material id="repaint" name="Repaint" diffuse="#4a9eff"></pc-material>
     <pc-scene>
@@ -20455,6 +20467,7 @@ The `<pc-rigid-body>` tag makes an entity a rigid body in the physics simulation
 | `angular-factor` | Vector3 | `"1 1 1"` | Angular movement constraints as "X Y Z" values |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
 | `friction` | Number | `"0.5"` | Surface friction coefficient |
+| `gravity-scale` | Number | `"1"` | Multiplier on the scene's [`gravity`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scene.md) for this body: `"1"` falls normally, `"0"` ignores gravity and a negative value rises. Applies to `dynamic` bodies only |
 | `linear-damping` | Number | `"0"` | Linear velocity damping factor |
 | `linear-factor` | Vector3 | `"1 1 1"` | Linear movement constraints as "X Y Z" values |
 | `mass` | Number | `"1"` | Mass of the rigidbody in kilograms |
@@ -20540,8 +20553,10 @@ The `<pc-scene>` tag defines the scene an application renders: the root of its e
 | `fog-density` | Number | `"0"` | Fog density for exponential fog types |
 | `fog-end` | Number | `"1000"` | End distance for linear fog |
 | `fog-start` | Number | `"1"` | Start distance for linear fog |
-| `gsplat-lod-mode` | Enum | `"distance"` | How LOD levels are chosen for streamed Gaussian splats, within the splat budget: `"error"` \| `"distance"`. See [Level of Detail](https://developer.playcanvas.com/user-manual/web-components/tags/pc-gsplat.md#level-of-detail) |
-| `gsplat-splat-budget` | Number | `"1000000"` | Target number of splats rendered across every Gaussian splat in the scene. Distributed between streamed splat assets; a value of 0 or less is treated as the default |
+| `gsplat-dither` | Enum | `"bluenoise"` | The noise pattern stochastic Gaussian splats dither their coverage against: `"bayer2"` \| `"bayer4"` \| `"bayer8"` \| `"bayer16"` \| `"bluenoise"` \| `"ignnoise"`. Ignored unless `gsplat-stochastic` is set. `"bluenoise"` looks best under temporal anti-aliasing |
+| `gsplat-splat-budget` | Number | `"1000000"` | Number of splats rendered across every Gaussian splat in the scene, distributed between streamed splat assets and used as `gsplat-splat-budget-mode` directs. A value of 0 or less means no budget. See [Level of Detail](https://developer.playcanvas.com/user-manual/web-components/tags/pc-gsplat.md#level-of-detail) |
+| `gsplat-splat-budget-mode` | Enum | `"target"` | How the splat budget is used for streamed Gaussian splats: `"target"` \| `"limit"`. `"target"` raises detail until the budget is used up, wherever the camera is; `"limit"` lets the LOD distances of each [`<pc-gsplat>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-gsplat.md) decide the detail, and only lowers it to stay within the budget. See [Level of Detail](https://developer.playcanvas.com/user-manual/web-components/tags/pc-gsplat.md#level-of-detail) |
+| `gsplat-stochastic` | Boolean | `"false"` | Whether Gaussian splats render with stochastic alpha on WebGPU: drawn unsorted, with dithered coverage and depth writes, rather than sorted and alpha blended. This skips the per-frame sort at the cost of noise, which temporal anti-aliasing smooths out. It relies on the depth buffer, so leave `depth-buffer` on [`<pc-app>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-app.md) enabled. WebGL ignores it |
 | `gsplat-use-fog` | Boolean | `"true"` | Whether the scene's fog applies to Gaussian splats |
 | `gsplat-use-tonemap` | Boolean | `"true"` | Whether the camera's tone mapping and the scene's `exposure` apply to Gaussian splats. Set `"false"` to render splats with their stored colors, which suits captures that are already display-ready. Fog still applies |
 | `gravity` | Vector3 | `"0 -9.81 0"` | Gravity applied to rigid bodies as "X Y Z" values |
@@ -21078,7 +21093,7 @@ An equirectangular texture as a dome-projected sky that also lights the scene (n
 
 ```html live-example
 <pc-app>
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.6/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.23.0/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset id="skybox" src="https://developer.playcanvas.com/assets/sepulchral-chapel-rotunda-4k.webp"></pc-asset>
     <pc-scene>
         <pc-sky asset="skybox" type="dome" center="0 0.05 0" scale="20 20 20" lighting></pc-sky>
@@ -21224,7 +21239,7 @@ The `<pc-sound-slot>` tag declares one named sound of its parent [`<pc-sound>`](
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
 | `asset` | [Asset ID](https://developer.playcanvas.com/user-manual/web-components/attributes.md#asset-and-material-ids) | - | Audio asset ID (must reference an `audio` type asset) |
-| `auto-play` | Boolean | `"false"` | Whether the sound plays as soon as the slot is created. Browsers keep audio off until the user interacts with the page, so an auto-played sound starts at the first click, tap or mouse press |
+| `auto-play` | Boolean | `"false"` | Whether the sound plays as soon as the slot is created. A slot whose entity or `<pc-sound>` is disabled starts once both are enabled. Browsers keep audio off until the user interacts with the page, so an auto-played sound starts at the first click, tap or mouse press |
 | `duration` | Number | - | Duration of the sound in seconds (omit to play the full clip) |
 | `loop` | Boolean | `"false"` | Whether the sound loops |
 | `name` | String | - | The slot's name, which `component.slot(name)` finds it by |

@@ -17,34 +17,43 @@ When rendering splat-based scenes, it is recommended to set `antialias` to `fals
 | `asset` | [Asset ID](https://developer.playcanvas.com/user-manual/web-components/attributes.md#asset-and-material-ids) | - | Gaussian splat asset ID (must reference a `gsplat` type asset) |
 | `cast-shadows` | Boolean | `"false"` | Whether the gsplat component casts shadows |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
-| `lod-falloff` | Number | `"1"` | How quickly this splat's detail falls off away from the camera, as an exponent from 0 to 8. Higher values concentrate more of the scene-wide splat budget near the camera; lower values spread it more evenly. Only affects assets that contain LOD levels. |
-| `lod-range-max` | Number | `"99"` | Maximum allowed LOD index (inclusive). The LOD the budget selects is clamped so it never goes coarser (higher index) than this value. The default of `99` effectively means "no cap". Only affects assets that contain LOD levels. |
-| `lod-range-min` | Number | `"0"` | Minimum allowed LOD index (inclusive). The LOD the budget selects is clamped so it never goes finer (lower index) than this value. Raising it avoids downloading the highest-quality (largest) LOD files. Only affects assets that contain LOD levels. |
+| `lod-base-distance` | Number | `"5"` | Camera distance of the first LOD transition, from LOD 0 to LOD 1: parts of the splat closer than this use the finest level. In world units, compensated for the camera's field of view, and clamped to a minimum of 0.1. Only affects assets that contain LOD levels. |
+| `lod-multiplier` | Number | `"3"` | Multiplier between successive LOD transition distances: each coarser level starts at this many times the distance of the one before. Higher values keep finer detail further from the camera, at a higher memory cost. Clamped to a minimum of 1.2. Only affects assets that contain LOD levels. |
+| `lod-range-max` | Number | `"99"` | Maximum allowed LOD index (inclusive). The selected LOD is clamped so it never goes coarser (higher index) than this value. The default of `99` effectively means "no cap". Only affects assets that contain LOD levels. |
+| `lod-range-min` | Number | `"0"` | Minimum allowed LOD index (inclusive). The selected LOD is clamped so it never goes finer (lower index) than this value. Raising it avoids downloading the highest-quality (largest) LOD files. Only affects assets that contain LOD levels. |
 
 ## Level of Detail
 
-A streamed splat asset is one exported with LOD levels: its [`<pc-asset>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset.md) `src` points at the export's `lod-meta.json`, which is downloaded up front while the splat data itself streams in on demand. Declare it with `type="gsplat"`, since a `.json` file would otherwise be loaded as plain JSON. Such an asset is not rendered at full detail everywhere. The engine works to a **scene-wide splat budget**: a target number of splats on screen across every `<pc-gsplat>` in the scene, spent where it buys the most. The budget and how it is spent are properties of the scene, so they live on [`<pc-scene>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scene.md); how each splat competes for its share lives here:
+A streamed splat asset is one exported with LOD levels: its [`<pc-asset>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset.md) `src` points at the export's `lod-meta.json`, which is downloaded up front while the splat data itself streams in on demand. Declare it with `type="gsplat"`, since a `.json` file would otherwise be loaded as plain JSON. Such an asset is not rendered at full detail everywhere. Its detail steps down with camera distance: the finest level out to `lod-base-distance`, then each coarser level from `lod-multiplier` times the distance where the one before began. The engine also works to a **scene-wide splat budget**, a number of splats across every `<pc-gsplat>` in the scene. The budget and how it is used are properties of the scene, so they live on [`<pc-scene>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scene.md); how each splat's detail falls off with distance lives here:
 
 | Attribute | On | What it controls |
 | --- | --- | --- |
-| `gsplat-splat-budget` | [`<pc-scene>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scene.md) | The total number of splats to render across the scene. Defaults to 1,000,000; a budget larger than the scene resolves every node at its finest level |
-| `gsplat-lod-mode` | [`<pc-scene>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scene.md) | `"distance"`, the default, orders detail by camera distance alone, stepping it down in concentric bands around the camera, and uses less memory. `"error"` spends the same budget where it removes the most approximation error, which lifts sparse regions such as sky and distant background that `"distance"` leaves coarse, but keeps noticeably more of the streamed data in memory |
-| `lod-falloff` | `<pc-gsplat>` | How steeply *this* splat trades far-field detail for near-field detail within its share of the budget. 1 is neutral; higher values pull detail towards the camera |
-| `lod-range-min`, `lod-range-max` | `<pc-gsplat>` | Hard clamps on the LOD index this splat may use, whatever the budget decides — raise the minimum to avoid ever downloading the largest files |
+| `gsplat-splat-budget` | [`<pc-scene>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scene.md) | The number of splats to render across the scene. Defaults to 1,000,000; 0 or less means no budget |
+| `gsplat-splat-budget-mode` | [`<pc-scene>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scene.md) | `"target"`, the default, raises detail until the budget is used up, wherever the camera is, and the LOD distances only shape how detail falls off and how it divides between splats. `"limit"` lets the LOD distances decide the detail and only lowers it when they would exceed the budget, so a distant splat uses just the few splats its distance calls for |
+| `lod-base-distance`, `lod-multiplier` | `<pc-gsplat>` | Where *this* splat's detail steps down. Raise either to keep finer detail further from the camera |
+| `lod-range-min`, `lod-range-max` | `<pc-gsplat>` | Hard clamps on the LOD index this splat may use, whatever distance and the budget decide — raise the minimum to avoid ever downloading the largest files |
 
 ```html
 <pc-asset id="capture" src="capture/lod-meta.json" type="gsplat"></pc-asset>
 <!-- ... -->
-<pc-scene gsplat-splat-budget="1500000" gsplat-lod-mode="error">
+<pc-scene gsplat-splat-budget="1500000" gsplat-splat-budget-mode="limit">
     <pc-entity name="capture">
-        <pc-gsplat asset="capture" lod-falloff="1.5" lod-range-min="1"></pc-gsplat>
+        <pc-gsplat asset="capture" lod-base-distance="8" lod-range-min="1"></pc-gsplat>
     </pc-entity>
 </pc-scene>
 ```
 
-There is no way to switch budgeted selection off: a budget of zero or less would pin every node to its coarsest level rather than lift the cap, so the engine uses the default instead. To see everything at full detail, set a budget larger than the capture. A plain `.ply` or `.sog` asset with no LOD levels always renders in full, but its splats count against the budget, leaving that much less for the streamed ones.
+With no budget, `"target"` renders everything at its finest level and `"limit"` leaves the detail to the LOD distances alone. A plain `.ply` or `.sog` asset with no LOD levels always renders in full, but its splats count against the budget, leaving that much less for the streamed ones.
 
 The [Splat Streaming example](https://playcanvas.github.io/web-components/examples/#splat-streaming.html) streams a large LOD capture. It pins `lod-range-min` to the coarsest level so the whole scene arrives quickly, then removes the pin and lets finer levels stream in, which shows the budget at work.
+
+## Stochastic Rendering
+
+Splats are normally sorted every frame and alpha blended. On WebGPU, `gsplat-stochastic` on [`<pc-scene>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scene.md) draws them unsorted instead, with dithered coverage and depth writes, which takes the sort out of the frame at the cost of a fine noise. Temporal anti-aliasing smooths the noise out, and `gsplat-dither` picks its pattern. WebGL ignores both attributes.
+
+```html
+<pc-scene gsplat-stochastic gsplat-dither="bayer4">
+```
 
 ## Example
 
@@ -52,7 +61,7 @@ A Gaussian splat scanned from a real toy. Drag to orbit and scroll to zoom — a
 
 ```html live-example
 <pc-app antialias="false" max-pixel-ratio="1">
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.22.6/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.23.0/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset id="toy" src="https://developer.playcanvas.com/assets/toy-cat.sog"></pc-asset>
     <pc-scene>
         <pc-entity name="camera" position="0 0 2.5">

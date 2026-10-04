@@ -4,7 +4,7 @@
 
 Index: https://developer.playcanvas.com/user-manual/splat-transform/llms.txt
 Total Documents: 14
-Generated: 2026-10-03
+Generated: 2026-10-04
 
 ================================================================================
 
