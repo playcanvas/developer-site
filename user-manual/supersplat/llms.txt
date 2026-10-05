@@ -69,8 +69,9 @@ Use this index to edit, publish, present or embed splats. To render splats in yo
 
 ## Optional
 
-- [All pages of this index in one file](https://developer.playcanvas.com/user-manual/supersplat/llms-full.txt): 35 pages (198 KB), for downloading and searching rather than reading into context.
+- [All pages of this index in one file](https://developer.playcanvas.com/user-manual/supersplat/llms-full.txt): 36 pages (202 KB), for downloading and searching rather than reading into context.
 - [Camera Controls](https://developer.playcanvas.com/user-manual/supersplat/editor/camera-controls.md)
 - [Keyboard Shortcuts](https://developer.playcanvas.com/user-manual/supersplat/editor/keyboard-shortcuts.md)
 - [Explore](https://developer.playcanvas.com/user-manual/supersplat/explore.md)
 - [User Profile](https://developer.playcanvas.com/user-manual/supersplat/user-profile.md)
+- [Following Creators](https://developer.playcanvas.com/user-manual/supersplat/following.md)

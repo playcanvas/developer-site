@@ -2,7 +2,7 @@
 
 The **scene page** at `https://superspl.at/scene/<hash>` is the public face of a published splat. Whatever you authored in the [Editor](https://developer.playcanvas.com/user-manual/supersplat/editor.md) and curated in [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md) shows up here for visitors. Owners see additional controls that open Studio or take them back to Manage.
 
-Visitors can browse a scene page without a PlayCanvas account. An account is required to **like** the splat or **leave a comment**.
+Visitors can browse a scene page without a PlayCanvas account. An account is required to **like** the splat, **leave a comment** or **follow** its creator.
 
 ## What visitors see
 
@@ -19,7 +19,7 @@ The viewer is the open-source [SuperSplat Viewer](https://developer.playcanvas.c
 | Field | What it shows |
 |-------|---------------|
 | **Title** | The headline you set in the [Edit Splat dialog](https://developer.playcanvas.com/user-manual/supersplat/manage.md). |
-| **Author** | A chip linking to the creator's [user profile](https://developer.playcanvas.com/user-manual/supersplat/user-profile.md). |
+| **Author** | A chip linking to the creator's [user profile](https://developer.playcanvas.com/user-manual/supersplat/user-profile.md), with a **Follow** button so you can [follow them](https://developer.playcanvas.com/user-manual/supersplat/following.md). |
 | **Views** | Total view count. |
 | **Likes** | Total stars; highlighted if you've liked this splat. |
 | **Visibility badge** | **Public** or **Unlisted**. |

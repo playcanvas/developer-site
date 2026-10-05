@@ -3,8 +3,8 @@
 > SuperSplat turns a raw 3D Gaussian splat capture into a shareable scene: clean it in the browser-based SuperSplat Editor, publish it to superspl.at, curate the viewing experience in Studio, and embed it anywhere with the open-source SuperSplat Viewer.
 
 Index: https://developer.playcanvas.com/user-manual/supersplat/llms.txt
-Total Documents: 35
-Generated: 2026-10-04
+Total Documents: 36
+Generated: 2026-10-05
 
 ================================================================================
 
@@ -2230,7 +2230,7 @@ Markdown: https://developer.playcanvas.com/user-manual/supersplat/scene-page.md
 
 The **scene page** at `https://superspl.at/scene/<hash>` is the public face of a published splat. Whatever you authored in the [Editor](https://developer.playcanvas.com/user-manual/supersplat/editor.md) and curated in [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md) shows up here for visitors. Owners see additional controls that open Studio or take them back to Manage.
 
-Visitors can browse a scene page without a PlayCanvas account. An account is required to **like** the splat or **leave a comment**.
+Visitors can browse a scene page without a PlayCanvas account. An account is required to **like** the splat, **leave a comment** or **follow** its creator.
 
 ## What visitors see
 
@@ -2247,7 +2247,7 @@ The viewer is the open-source [SuperSplat Viewer](https://developer.playcanvas.c
 | Field | What it shows |
 |-------|---------------|
 | **Title** | The headline you set in the [Edit Splat dialog](https://developer.playcanvas.com/user-manual/supersplat/manage.md). |
-| **Author** | A chip linking to the creator's [user profile](https://developer.playcanvas.com/user-manual/supersplat/user-profile.md). |
+| **Author** | A chip linking to the creator's [user profile](https://developer.playcanvas.com/user-manual/supersplat/user-profile.md), with a **Follow** button so you can [follow them](https://developer.playcanvas.com/user-manual/supersplat/following.md). |
 | **Views** | Total view count. |
 | **Likes** | Total stars; highlighted if you've liked this splat. |
 | **Visibility badge** | **Public** or **Unlisted**. |
@@ -2849,6 +2849,16 @@ The [Explore page](https://superspl.at) is the public-facing home of SuperSplat 
 
 Browsing Explore is **anonymous** — no PlayCanvas account is required. An account becomes useful when you want to [like](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md#likes), [comment](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md#comments), or [publish your own splats](https://developer.playcanvas.com/user-manual/supersplat/upload.md).
 
+## Feed tabs
+
+The home page feed is split into tabs:
+
+| Tab | What it shows |
+|-----|---------------|
+| **Trending** (default) | Splats gaining the most traction right now. |
+| **Latest** (`?tab=latest`) | The most recently published splats. |
+| **Following** (`?tab=following`) | Public splats from the creators you follow, newest first. Only shown while you're signed in. See [Following Creators](https://developer.playcanvas.com/user-manual/supersplat/following.md). |
+
 ## The grid
 
 Splats are shown as cards with a thumbnail, title, and author. Click a card to open the splat's [scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md).
@@ -2912,7 +2922,7 @@ The top-nav search bar adds a `q=` parameter that matches against splat **title*
 
 ## Creator profiles
 
-Click a card's author chip to land on that user's [profile page](https://developer.playcanvas.com/user-manual/supersplat/user-profile.md) — a grid of every Public splat that user has shared, plus their avatar, bio, and social links.
+Click a card's author chip to land on that user's [profile page](https://developer.playcanvas.com/user-manual/supersplat/user-profile.md) — a grid of every Public splat that user has shared, plus their avatar, bio, and social links. From there you can [follow them](https://developer.playcanvas.com/user-manual/supersplat/following.md) to see their new splats in your Following tab.
 
 ## See also
 
@@ -2927,7 +2937,7 @@ Click a card's author chip to land on that user's [profile page](https://develop
 URL: https://developer.playcanvas.com/user-manual/supersplat/user-profile/
 Markdown: https://developer.playcanvas.com/user-manual/supersplat/user-profile.md
 
-Each creator on SuperSplat gets a public profile at `https://superspl.at/user?id=<username>`. The profile shows their avatar, display name, bio, any social links they've added, and a grid of every **Public** splat they've published.
+Each creator on SuperSplat gets a public profile at `https://superspl.at/user/<username>`. The profile shows their avatar, display name, bio, any social links they've added, their follower and following counts, and a grid of every **Public** splat they've published.
 
 Profiles are linked from the **author chip** that appears on every [scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md) and on every card in the [Explore](https://developer.playcanvas.com/user-manual/supersplat/explore.md) grid — clicking the author's name navigates to their profile.
 
@@ -2942,14 +2952,59 @@ Browsing a profile is anonymous; no PlayCanvas account is required.
 | **Avatar and display name** | The creator's PlayCanvas account avatar and chosen display name. |
 | **Bio** | A short profile description the creator has written about themselves. |
 | **Social links** | Links to any external profiles the creator has added (X, LinkedIn, personal site, etc.). |
+| **Followers and following** | How many people follow the creator and how many they follow. Click either number to see who. |
+| **Follow** | Follow the creator to see their splats in your [Following feed](https://developer.playcanvas.com/user-manual/supersplat/following.md). |
 | **Splat grid** | Every **Public** splat the creator has published, using the same card UI as [Explore](https://developer.playcanvas.com/user-manual/supersplat/explore.md). Click any card to open its [scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md). |
 
 Unlisted splats are not shown on the public profile — only the creator can see those, via the [Manage page](https://developer.playcanvas.com/user-manual/supersplat/manage.md).
 
+## Your own profile
+
+On your own profile you'll also find:
+
+- **Everyone you follow.** Click your **following** count to see the list and [unfollow](https://developer.playcanvas.com/user-manual/supersplat/following.md#managing) anyone you like.
+- **A Likes tab** with every splat you've liked. Only you can see it.
+
 ## See also
 
+- [Following Creators](https://developer.playcanvas.com/user-manual/supersplat/following.md) — follow creators and see their splats in one feed
 - [Explore](https://developer.playcanvas.com/user-manual/supersplat/explore.md) — discover splats across the whole platform
 - [Scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md) — open one specific splat
 - [Account Creation](https://developer.playcanvas.com/user-manual/account-management/user-accounts/account-creation.md) — set up your own profile
+
+--------------------------------------------------------------------------------
+
+## Following Creators
+
+URL: https://developer.playcanvas.com/user-manual/supersplat/following/
+Markdown: https://developer.playcanvas.com/user-manual/supersplat/following.md
+
+Found a creator whose work you love? Follow them, and their splats show up in your **Following** feed on the [superspl.at](https://superspl.at) home page.
+
+## Follow a creator
+
+1. Open the creator's [profile](https://developer.playcanvas.com/user-manual/supersplat/user-profile.md), or any of their [scenes](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md).
+2. Click **Follow**.
+
+The button changes to **Following**. You'll need to be signed in with your PlayCanvas account.
+
+## See splats from people you follow
+
+On the [home page](https://superspl.at), open the **Following** tab. It shows the public splats of everyone you follow, newest first, including the ones they published before you followed them.
+
+## Find more creators
+
+Every profile shows how many followers a creator has and how many people they follow. Click either number to see the list, and click anyone in it to visit their profile. Seeing who your favorite creators follow is a great way to discover new ones.
+
+## Unfollow a creator
+
+Click **Following** on the creator's profile or on one of their scenes.
+
+To review everyone you follow in one place, open your own profile and click your **following** count. Click **Following** next to anyone you want to unfollow.
+
+## See also
+
+- [User Profile](https://developer.playcanvas.com/user-manual/supersplat/user-profile.md) — what's on a creator's profile
+- [Explore](https://developer.playcanvas.com/user-manual/supersplat/explore.md) — find creators to follow
 
 --------------------------------------------------------------------------------
