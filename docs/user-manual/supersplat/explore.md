@@ -9,6 +9,16 @@ The [Explore page](https://superspl.at) is the public-facing home of SuperSplat 
 
 Browsing Explore is **anonymous** — no PlayCanvas account is required. An account becomes useful when you want to [like](/user-manual/supersplat/scene-page/#likes), [comment](/user-manual/supersplat/scene-page/#comments), or [publish your own splats](/user-manual/supersplat/upload).
 
+## Feed tabs
+
+The home page feed is split into tabs:
+
+| Tab | What it shows |
+|-----|---------------|
+| **Trending** (default) | Splats gaining the most traction right now. |
+| **Latest** (`?tab=latest`) | The most recently published splats. |
+| **Following** (`?tab=following`) | Public splats from the creators you follow, newest first. Only shown while you're signed in. See [Following Creators](/user-manual/supersplat/following). |
+
 ## The grid
 
 Splats are shown as cards with a thumbnail, title, and author. Click a card to open the splat's [scene page](/user-manual/supersplat/scene-page).
@@ -72,7 +82,7 @@ The top-nav search bar adds a `q=` parameter that matches against splat **title*
 
 ## Creator profiles
 
-Click a card's author chip to land on that user's [profile page](/user-manual/supersplat/user-profile) — a grid of every Public splat that user has shared, plus their avatar, bio, and social links.
+Click a card's author chip to land on that user's [profile page](/user-manual/supersplat/user-profile) — a grid of every Public splat that user has shared, plus their avatar, bio, and social links. From there you can [follow them](/user-manual/supersplat/following) to see their new splats in your Following tab.
 
 ## See also
 
