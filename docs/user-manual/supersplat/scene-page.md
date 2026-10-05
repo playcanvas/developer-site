@@ -5,7 +5,7 @@ description: "The public page for a published splat on superspl.at — embedded 
 
 The **scene page** at `https://superspl.at/scene/<hash>` is the public face of a published splat. Whatever you authored in the [Editor](/user-manual/supersplat/editor/) and curated in [Studio](/user-manual/supersplat/studio/) shows up here for visitors. Owners see additional controls that open Studio or take them back to Manage.
 
-Visitors can browse a scene page without a PlayCanvas account. An account is required to **like** the splat or **leave a comment**.
+Visitors can browse a scene page without a PlayCanvas account. An account is required to **like** the splat, **leave a comment** or **follow** its creator.
 
 ## What visitors see
 
@@ -22,7 +22,7 @@ The viewer is the open-source [SuperSplat Viewer](/user-manual/supersplat/viewer
 | Field | What it shows |
 |-------|---------------|
 | **Title** | The headline you set in the [Edit Splat dialog](/user-manual/supersplat/manage). |
-| **Author** | A chip linking to the creator's [user profile](/user-manual/supersplat/user-profile). |
+| **Author** | A chip linking to the creator's [user profile](/user-manual/supersplat/user-profile), with a **Follow** button so you can [follow them](/user-manual/supersplat/following). |
 | **Views** | Total view count. |
 | **Likes** | Total stars; highlighted if you've liked this splat. |
 | **Visibility badge** | **Public** or **Unlisted**. |

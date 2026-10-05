@@ -630,6 +630,7 @@ const sidebars = {
         'user-manual/supersplat/scene-page',
         'user-manual/supersplat/explore',
         'user-manual/supersplat/user-profile',
+        'user-manual/supersplat/following',
         'user-manual/supersplat/streaming',
         {
           type: 'category',

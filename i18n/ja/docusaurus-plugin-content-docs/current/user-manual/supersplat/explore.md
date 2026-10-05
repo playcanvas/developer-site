@@ -9,6 +9,16 @@ description: "superspl.atで公開スプラットを閲覧・発見する：並�
 
 Exploreの閲覧は**匿名**で可能です — PlayCanvasアカウントは不要です。アカウントは、スプラットに[いいね](/user-manual/supersplat/scene-page/#likes)したり、[コメント](/user-manual/supersplat/scene-page/#comments)したり、[自分のスプラットを公開](/user-manual/supersplat/upload)したりするときに役立ちます。
 
+## フィードのタブ
+
+ホームページのフィードはタブに分かれています。
+
+| タブ | 表示内容 |
+|-----|---------------|
+| **Trending**（デフォルト） | 現在最も注目を集めているスプラット。 |
+| **Latest**（`?tab=latest`） | 最近公開されたスプラット。 |
+| **Following**（`?tab=following`） | フォローしているクリエイターの公開スプラットを新しい順に表示。サインイン中のみ表示されます。[クリエイターのフォロー](/user-manual/supersplat/following)を参照してください。 |
+
 ## グリッド
 
 スプラットはサムネイル、タイトル、著者付きのカードとして表示されます。カードをクリックすると、スプラットの[シーンページ](/user-manual/supersplat/scene-page)が開きます。
@@ -72,7 +82,7 @@ Trending はすでに新しさを考慮しているため、下記の**期間ウ
 
 ## クリエイタープロファイル
 
-カードの著者チップをクリックすると、そのユーザーの[プロファイルページ](/user-manual/supersplat/user-profile)に移動します — そのユーザーが共有したすべてのPublicスプラットのグリッド、加えてアバター、自己紹介、ソーシャルリンクが表示されます。
+カードの著者チップをクリックすると、そのユーザーの[プロファイルページ](/user-manual/supersplat/user-profile)に移動します — そのユーザーが共有したすべてのPublicスプラットのグリッド、加えてアバター、自己紹介、ソーシャルリンクが表示されます。そこから[フォロー](/user-manual/supersplat/following)すると、そのユーザーの新しいスプラットがFollowingタブに表示されるようになります。
 
 ## 関連項目
 

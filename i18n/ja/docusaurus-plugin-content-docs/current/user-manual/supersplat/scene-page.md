@@ -5,7 +5,7 @@ description: "superspl.atに公開されたスプラットの公開ページ —
 
 `https://superspl.at/scene/<hash>`にある**シーンページ**は、公開済みスプラットの公開フェイスです。[Editor](/user-manual/supersplat/editor/)で作成し、[Studio](/user-manual/supersplat/studio/)でキュレーションした内容のすべてが、訪問者にはここに表示されます。オーナーには、Studioを開いたりManageに戻ったりする追加のコントロールが見えます。
 
-訪問者はPlayCanvasアカウントなしでシーンページを閲覧できます。スプラットへの**いいね**やコメント投稿にはアカウントが必要です。
+訪問者はPlayCanvasアカウントなしでシーンページを閲覧できます。スプラットへの**いいね**、コメント投稿、クリエイターの**フォロー**にはアカウントが必要です。
 
 ## 訪問者に表示されるもの
 
@@ -22,7 +22,7 @@ description: "superspl.atに公開されたスプラットの公開ページ —
 | フィールド | 表示内容 |
 |-------|---------------|
 | **Title** | [Edit Splatダイアログ](/user-manual/supersplat/manage)で設定した見出し。 |
-| **Author** | クリエイターの[ユーザープロファイル](/user-manual/supersplat/user-profile)へのリンク付きチップ。 |
+| **Author** | クリエイターの[ユーザープロファイル](/user-manual/supersplat/user-profile)へのリンク付きチップ。**Follow**ボタンで[クリエイターをフォロー](/user-manual/supersplat/following)できます。 |
 | **Views** | 総閲覧数。 |
 | **Likes** | 総スター数。あなたがこのスプラットにいいねしていればハイライトされます。 |
 | **Visibility badge** | **Public**または**Unlisted**。 |
