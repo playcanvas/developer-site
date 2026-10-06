@@ -21,6 +21,8 @@ To access one of these buffers in the shader as a texture, these are the uniform
 - for the color map: `uSceneColorMap`
 - for the depth map: `uSceneDepthMap`
 
+In Engine 2.24 and later, compute shaders do not use these uniforms. They access the maps of a camera through the compute instance instead, see [Scene Depth and Color Maps](/user-manual/graphics/shaders/compute-shaders#scene-depth-and-color-maps).
+
 ## Color Space Handling
 
 When using `uSceneColorMap`, it's important to handle color space correctly. The scene color texture contains either gamma-corrected values (when rendering LDR to a non-sRGB target) or linear values (when using HDR rendering with CameraFrame).
