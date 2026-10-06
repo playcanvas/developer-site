@@ -353,11 +353,12 @@ var output: texture_storage_2d<rgba16float, write>;
 
 @compute @workgroup_size(8, 8, 1)
 fn main(@builtin(global_invocation_id) id: vec3u) {
-    let size = sceneDepthSize();
-    if (id.x >= size.x || id.y >= size.y) {
+    // process the texels of the viewport the camera rendered to
+    let viewport = sceneDepthViewport();
+    if (id.x >= viewport.z || id.y >= viewport.w) {
         return;
     }
-    let texel = vec2i(id.xy);
+    let texel = vec2i(viewport.xy + id.xy);
 
     // the depth of the surface in front of the camera, and the scene color converted to linear
     let depth = sceneDepthLinear(texel);
@@ -365,7 +366,7 @@ fn main(@builtin(global_invocation_id) id: vec3u) {
 
     // fade the scene to gray with distance
     let fogged = mix(color, vec3f(0.5), saturate(depth / 100.0));
-    textureStore(output, id.xy, vec4f(fogged, 1.0));
+    textureStore(output, texel, vec4f(fogged, 1.0));
 }
 ```
 
@@ -374,10 +375,11 @@ The `sceneDepthCS` include provides:
 | Function | Description |
 |----------|-------------|
 | `sceneDepthSize() -> vec2u` | The dimensions of the depth map. |
+| `sceneDepthViewport() -> vec4u` | The viewport the camera rendered the depth map with, in texels: the x and y of its first texel, and its width and height. |
 | `sceneDepthNearClip() -> f32` | The near clip plane the depth map was rendered with. |
 | `sceneDepthFarClip() -> f32` | The far clip plane the depth map was rendered with. |
 | `sceneDepthLinear(texel: vec2i) -> f32` | The linear depth of the surface at the texel, along the view direction of the camera, in world units. |
-| `sceneDepthWorldPosition(texel: vec2i) -> vec3f` | The world position of the surface at the texel. |
+| `sceneDepthWorldPosition(texel: vec2i) -> vec3f` | The world position of the surface at the texel, which needs to be within the viewport. |
 
 The `sceneColorCS` include provides:
 
@@ -390,6 +392,8 @@ The `sceneColorCS` include provides:
 | `sceneColorToDisplay(color: vec3f) -> vec3f` | Converts a color read from the color map to gamma encoded. |
 
 The depth functions return the same values however the camera stored the depth. The colors are returned the way the camera stored them: linear when the camera renders with CameraFrame, and gamma encoded otherwise. When they are gamma encoded, `SCENE_COLORMAP_GAMMA` is defined in the compute shader. The two conversion functions take a color read from the color map, and return it unchanged when it is already in the requested space.
+
+A camera rendering to only a part of its target, see [`rect`](https://api.playcanvas.com/engine/classes/CameraComponent.html#rect), covers only its viewport of the maps. The rest of the maps holds what the camera did not render, such as the views of other cameras rendering to the same target. To process only the view of the camera, map the invocations to the viewport as in the example above, and dispatch over the size of the viewport, which matches the camera rect multiplied by the size of the target.
 
 ## Preprocessor
 

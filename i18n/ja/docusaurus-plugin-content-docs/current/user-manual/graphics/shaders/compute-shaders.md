@@ -353,11 +353,12 @@ var output: texture_storage_2d<rgba16float, write>;
 
 @compute @workgroup_size(8, 8, 1)
 fn main(@builtin(global_invocation_id) id: vec3u) {
-    let size = sceneDepthSize();
-    if (id.x >= size.x || id.y >= size.y) {
+    // カメラがレンダリングしたビューポートのテクセルを処理
+    let viewport = sceneDepthViewport();
+    if (id.x >= viewport.z || id.y >= viewport.w) {
         return;
     }
-    let texel = vec2i(id.xy);
+    let texel = vec2i(viewport.xy + id.xy);
 
     // カメラ前方にあるサーフェスの深度と、線形に変換したシーンカラー
     let depth = sceneDepthLinear(texel);
@@ -365,7 +366,7 @@ fn main(@builtin(global_invocation_id) id: vec3u) {
 
     // 距離に応じてシーンをグレーにフェード
     let fogged = mix(color, vec3f(0.5), saturate(depth / 100.0));
-    textureStore(output, id.xy, vec4f(fogged, 1.0));
+    textureStore(output, texel, vec4f(fogged, 1.0));
 }
 ```
 
@@ -374,10 +375,11 @@ fn main(@builtin(global_invocation_id) id: vec3u) {
 | 関数 | 説明 |
 |------|------|
 | `sceneDepthSize() -> vec2u` | 深度マップのサイズ。 |
+| `sceneDepthViewport() -> vec4u` | カメラが深度マップをレンダリングしたビューポート（テクセル単位）。最初のテクセルのxとy、および幅と高さです。 |
 | `sceneDepthNearClip() -> f32` | 深度マップのレンダリングに使用されたニアクリップ面。 |
 | `sceneDepthFarClip() -> f32` | 深度マップのレンダリングに使用されたファークリップ面。 |
 | `sceneDepthLinear(texel: vec2i) -> f32` | テクセル位置にあるサーフェスの線形深度。カメラの視線方向に沿った、ワールド単位の値です。 |
-| `sceneDepthWorldPosition(texel: vec2i) -> vec3f` | テクセル位置にあるサーフェスのワールド座標。 |
+| `sceneDepthWorldPosition(texel: vec2i) -> vec3f` | テクセル位置にあるサーフェスのワールド座標。テクセルはビューポート内にある必要があります。 |
 
 `sceneColorCS`インクルードは次の関数を提供します：
 
@@ -390,6 +392,8 @@ fn main(@builtin(global_invocation_id) id: vec3u) {
 | `sceneColorToDisplay(color: vec3f) -> vec3f` | カラーマップから読み取ったカラーをガンマエンコードに変換します。 |
 
 深度関数は、カメラが深度をどのように保存したかに関係なく同じ値を返します。カラーは、カメラが保存したとおりに返されます。CameraFrameでレンダリングするカメラでは線形、それ以外ではガンマエンコードです。ガンマエンコードの場合、コンピュートシェーダーでは`SCENE_COLORMAP_GAMMA`が定義されます。2つの変換関数はカラーマップから読み取ったカラーを受け取り、すでに要求された色空間にある場合はそのまま返します。
+
+ターゲットの一部にのみレンダリングするカメラ（[`rect`](https://api.playcanvas.com/engine/classes/CameraComponent.html#rect)を参照）は、マップのうち自身のビューポートだけをカバーします。マップの残りの部分には、同じターゲットにレンダリングする他のカメラのビューなど、そのカメラがレンダリングしなかった内容が含まれます。カメラのビューだけを処理するには、上の例のように呼び出しをビューポートに対応付け、ビューポートのサイズでディスパッチします。このサイズは、カメラのrectにターゲットのサイズを掛けたものと一致します。
 
 ## プリプロセッサ
 
