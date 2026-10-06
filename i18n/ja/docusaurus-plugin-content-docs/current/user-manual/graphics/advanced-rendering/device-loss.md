@@ -110,6 +110,31 @@ pc.AppBase.getApplication().graphicsDevice.debugLoseContext(1000);
 
 ## 復旧に失敗した場合 {#when-recovery-fails}
 
-復旧は保証されません。ブラウザーがコンテキストを復旧できなかったり、別のGPUデバイスを取得できなかったりする場合があります。すべての `devicelost` の後に `devicerestored` が発生するとは限りません。アプリケーションはHTMLで復旧中のメッセージを表示し、アプリケーション側で決めた時間が経過したらページの再読み込みを案内できます。レンダリングは一時停止しているため、キャンバス内のメッセージではなくHTMLを使ってください。重要なユーザーの作業内容はGPUメモリーの外に保存します。
+復旧は保証されません。ブラウザーがコンテキストを復旧できなかったり、別のGPUデバイスを取得できなかったりする場合があります。たとえばChromeは、GPUプロセスのクラッシュが繰り返されると、そのサイトからのGPUアクセスを数分間ブロックすることがあります。すべての `devicelost` の後に `devicerestored` が発生するとは限りません。
+
+代わりのWebGPUデバイスを取得できない場合は `devicerestorefailed` が発生します。ハンドラーにはエラーが渡され、デバイスはロストしたままになります。WebGL2には同等の通知がなく、ブラウザーがコンテキストを復旧しないままになる場合もあるため、アプリケーション側で決めた時間が経過したら待機を打ち切る処理も用意してください。
+
+```javascript
+const message = document.getElementById('gpu-lost-message');
+let recoveryTimeout = null;
+
+device.on('devicelost', () => {
+    // WebGL2は復旧の失敗を通知しないため、一定時間で待機を打ち切ります
+    recoveryTimeout = setTimeout(() => {
+        message.hidden = false;
+    }, 10000);
+});
+device.on('devicerestored', () => {
+    clearTimeout(recoveryTimeout);
+    message.hidden = true;
+});
+device.on('devicerestorefailed', (error) => {
+    clearTimeout(recoveryTimeout);
+    console.error(error);
+    message.hidden = false;
+});
+```
+
+レンダリングは一時停止しているため、メッセージはキャンバス内ではなくHTMLで表示し、ページの再読み込みを案内してください。重要なユーザーの作業内容はGPUメモリーの外に保存します。
 
 WebGPUのライフサイクルについて詳しくは、Brandon Jonesによる[WebGPU Device Loss](https://toji.dev/webgpu-best-practices/device-loss.html)を参照してください。
