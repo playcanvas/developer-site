@@ -100,6 +100,6 @@ material.update();
 
 ## サンプル
 
-- [HDR](https://playcanvas.github.io/#/graphics/hdr): プリフィルタされた環境アトラスでライティングされたシーン。
+- [HDR](https://playcanvas.github.io/#/camera-frame/hdr): プリフィルタされた環境アトラスでライティングされたシーン。
 - [Reflection Cubemap](https://playcanvas.github.io/#/graphics/reflection-cubemap): オブジェクトの位置から実行時にレンダリングした独自のキューブマップを持ち、Use Skybox をオフにしたマテリアル。
 - [Reflection Box](https://playcanvas.github.io/#/graphics/reflection-box): 反射が壁に一致するよう、マテリアルが Box プロジェクションの環境アトラスを使用する部屋。
