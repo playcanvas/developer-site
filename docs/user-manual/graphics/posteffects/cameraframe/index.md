@@ -76,35 +76,35 @@ For Gaussian splats, see [scene depth requirements](volumetric-fog.md#gaussian-s
 
 - HDR with Bloom and LUT - Demonstrates HDR bloom and color lookup table effects
 
-<EngineExample id="graphics/hdr" title="HDR with Bloom and LUT" />
+<EngineExample id="camera-frame/hdr" title="HDR with Bloom and LUT" />
 
 - Post-Processing - Shows bloom, grading, Color Enhance, colored vignette, fringing, and TAA
 
-<EngineExample id="graphics/post-processing" title="Post-Processing" />
+<EngineExample id="camera-frame/post-processing" title="Post-Processing" />
 
 - Ambient Occlusion - Demonstrates SSAO implementation
 
-<EngineExample id="graphics/ambient-occlusion" title="Ambient Occlusion" />
+<EngineExample id="camera-frame/ambient-occlusion" title="Ambient Occlusion" />
 
 - Depth of Field - Demonstrates depth of field effect
 
-<EngineExample id="graphics/depth-of-field" title="Depth of Field" />
+<EngineExample id="camera-frame/depth-of-field" title="Depth of Field" />
 
 - Temporal Anti-Aliasing - Demonstrates TAA implementation
 
-<EngineExample id="graphics/taa" title="Temporal Anti-Aliasing" />
+<EngineExample id="camera-frame/taa" title="Temporal Anti-Aliasing" />
 
 - Volumetric Fog - Height fog illuminated by a directional light
 
-<EngineExample id="graphics/volumetric-fog" title="Volumetric Fog" />
+<EngineExample id="camera-frame/volumetric-fog" title="Volumetric Fog" />
 
 - Volumetric Fog Local Lights - Omni and spot lights scattering in fog
 
-<EngineExample id="graphics/volumetric-fog-local-lights" title="Volumetric Fog Local Lights" />
+<EngineExample id="camera-frame/volumetric-fog-local-lights" title="Volumetric Fog Local Lights" />
 
 - Volumetric Fog Shafts - Shadowed spot light beams and light cookies
 
-<EngineExample id="graphics/volumetric-fog-shafts" title="Volumetric Fog Shafts" />
+<EngineExample id="camera-frame/volumetric-fog-shafts" title="Volumetric Fog Shafts" />
 
 - LUT Grading - Crossfade between two color grades on a Gaussian splat scene
 

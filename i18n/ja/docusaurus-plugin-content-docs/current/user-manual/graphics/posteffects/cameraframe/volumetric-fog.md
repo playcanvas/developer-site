@@ -106,8 +106,8 @@ if (pc.CameraFrame.isSplatSceneDepthSupported(app.graphicsDevice)) {
 
 ## 例
 
-<EngineExample id="graphics/volumetric-fog" title="ボリューメトリックフォグ" />
+<EngineExample id="camera-frame/volumetric-fog" title="ボリューメトリックフォグ" />
 
-<EngineExample id="graphics/volumetric-fog-local-lights" title="ローカルライトのボリューメトリックフォグ" />
+<EngineExample id="camera-frame/volumetric-fog-local-lights" title="ローカルライトのボリューメトリックフォグ" />
 
-<EngineExample id="graphics/volumetric-fog-shafts" title="ボリューメトリックフォグの光の筋" />
+<EngineExample id="camera-frame/volumetric-fog-shafts" title="ボリューメトリックフォグの光の筋" />
