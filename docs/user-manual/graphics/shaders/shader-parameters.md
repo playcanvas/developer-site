@@ -93,7 +93,7 @@ A mesh instance overriding a global value uses its own value for its draws only,
 
 As material parameters are not reset after the draws of the material, a name used as a global default should not be set as a parameter of only some of the materials. The draws of the other materials would read the value the last of those materials set, instead of the global one.
 
-In Engine 2.24 and later, compute shaders do not use global values. Every value a compute shader uses is set on its compute instance, see [Compute Shaders](/user-manual/graphics/shaders/compute-shaders#setting-parameters).
+Compute shaders do not use global values. Every value a compute shader uses is set on its compute instance, see [Compute Shaders](/user-manual/graphics/shaders/compute-shaders#setting-parameters).
 
 ## Values Set by the Renderer
 

@@ -114,7 +114,7 @@ compute.setParameter('count', 1024);
 compute.setParameter('tint', [1.0, 0.5, 0.0, 1.0]);
 ```
 
-Every uniform and resource the compute shader declares has to be given a value on the compute instance. In Engine 2.24 and later, compute shaders do not use values set globally on the scope of the graphics device, and debug builds report a declared uniform or resource that has no value.
+Every uniform and resource the compute shader declares has to be given a value on the compute instance. Compute shaders do not use values set globally on the scope of the graphics device, and debug builds report a declared uniform or resource that has no value.
 
 ## Creating Storage Buffers
 
@@ -329,7 +329,7 @@ Using `immediate: true` has a performance impact as it forces an early command b
 
 ## Scene Depth and Color Maps
 
-In Engine 2.24 and later, a compute shader can read the depth and color maps a camera renders of the scene, for example to implement screen-space effects or to analyze the rendered image.
+A compute shader can read the depth and color maps a camera renders of the scene, for example to implement screen-space effects or to analyze the rendered image.
 
 The camera renders the maps when they are requested on its camera component:
 
