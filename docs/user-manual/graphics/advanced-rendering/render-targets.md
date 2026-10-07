@@ -1,11 +1,11 @@
 ---
 title: Render Targets
-description: Render a scene into an offscreen texture instead of the screen, then use the result in your scene - covering creation, layer setup, orientation, formats, resizing and MSAA.
+description: Render a scene into an offscreen texture instead of the screen, then use the result in your scene - covering creation, layer setup, cubemap faces and texture arrays, mipmaps, orientation, formats, resizing and MSAA.
 ---
 
 A [render target](https://api.playcanvas.com/engine/classes/RenderTarget.html) is a rectangular rendering surface you can render into instead of the screen. It wraps one or more renderable color textures, along with an optional depth (and stencil) buffer. Once a camera has rendered into it, the color texture holds the result and can be used anywhere a normal texture can - most commonly applied to a material to display it in the scene, or fed into further processing.
 
-This underpins effects such as in-world screens, security monitors, mirrors and portals, reflection and refraction, and custom multi-pass pipelines.
+This underpins effects such as in-world screens, security monitors, mirrors and portals, reflection and refraction, and custom multi-pass pipelines. A render target can also render into a single face of a cubemap, or a single layer of a texture array - see [Cubemap faces and texture array layers](#cubemap-faces-and-texture-array-layers).
 
 ## Creating a render target
 
@@ -88,6 +88,100 @@ const material = new pc.StandardMaterial();
 material.emissiveMap = renderTarget.colorBuffer;
 material.emissive = pc.Color.WHITE;
 material.update();
+```
+
+## Cubemap faces and texture array layers
+
+Instead of a whole texture, a render target can render into a single face of a cubemap, or a single layer of a 2D texture array (a texture created with `arrayLength`). Select the cubemap face with the [`face`](https://api.playcanvas.com/engine/classes/RenderTarget.html#face) option, or the array layer with the [`layer`](https://api.playcanvas.com/engine/classes/RenderTarget.html#layer) option.
+
+To render to several faces or layers, create a render target for each of them, all sharing the same texture. Render targets are lightweight - when the faces or layers are only rendered once, for example to bake a set of views, the render targets can be destroyed afterwards, and the texture keeps the result:
+
+```javascript
+const layerCount = 16;
+
+const textureArray = new pc.Texture(app.graphicsDevice, {
+    name: 'RT-array',
+    width: 256,
+    height: 256,
+    arrayLength: layerCount,
+    format: pc.PIXELFORMAT_SRGBA8,
+    mipmaps: false
+});
+
+// a render target for each layer, all sharing the texture array
+const renderTargets = [];
+for (let layer = 0; layer < layerCount; layer++) {
+    renderTargets.push(new pc.RenderTarget({
+        colorBuffer: textureArray,
+        layer,
+        depth: true,
+        origin: pc.RENDERTARGET_ORIGIN_TOP
+    }));
+}
+```
+
+With `depth: true`, each render target allocates its own depth buffer. A depth buffer you provide with the `depthBuffer` option can be a texture array (or a cubemap) as well, in which case the same layer of it is rendered to, or a 2D depth texture shared by the render targets of all layers.
+
+`StandardMaterial` does not sample texture arrays. To display a layer, use a [custom shader](../shaders/index.md) that declares the texture array and selects the layer to sample:
+
+```glsl
+uniform mediump sampler2DArray uLayers;
+
+// in the fragment shader
+vec4 color = texture(uLayers, vec3(vUv0, layerIndex));
+```
+
+```wgsl
+var uLayers: texture_2d_array<f32>;
+var uLayersSampler: sampler;
+
+// in the fragment shader
+let color = textureSample(uLayers, uLayersSampler, input.vUv0, layerIndex);
+```
+
+```javascript
+material.setParameter('uLayers', textureArray);
+```
+
+### Sampling a texture while rendering into it
+
+A texture cannot be sampled in the same render pass that renders into it - even into one of its other layers - as the shader has access to the whole texture:
+
+- **WebGL2** - not possible. A sampler cannot be restricted to some of the layers of a texture array.
+- **WebGPU** - possible, by binding a [`TextureView`](https://api.playcanvas.com/engine/classes/TextureView.html) that excludes the layer being rendered to, created with [`Texture#getView`](https://api.playcanvas.com/engine/classes/Texture.html#getview). The shader indexes the layers of the view relative to its first layer:
+
+```javascript
+// sample only layer 1, while a render target renders into layer 0 - the shader samples it as its layer 0
+material.setParameter('uLayers', textureArray.getView(0, 1, 1, 1));
+```
+
+On WebGL, a `TextureView` binds the whole texture instead. To read and write the same data on all platforms, alternate between two textures - render into one while sampling the other.
+
+The following example renders a statue from 64 directions into the layers of a texture array, using a render target for each layer, and draws thousands of impostors - camera facing quads showing the view closest to the direction they are seen from:
+
+<EngineExample id="render-targets/texture-array-impostors" title="Texture Array Impostors" />
+
+## Mipmaps
+
+When the color texture has mipmaps, the render target regenerates them after each render pass, so the result can be sampled with mipmap filtering.
+
+To render into a specific mip level instead, use the `mipLevel` option. Specifying it - even as 0 - also disables the automatic mipmap generation. Rendering to a mip level other than 0 is not supported together with a depth buffer.
+
+When a render target renders into a cubemap face or an array layer, WebGPU regenerates the mipmaps of the rendered face or layer only. WebGL2 regenerates the mipmaps of all faces or layers of the texture, which is costly when rendering into many layers. To generate them only once, disable the mipmap generation on all render targets except the one rendered last:
+
+```javascript
+for (let layer = 0; layer < layerCount; layer++) {
+    const lastLayer = layer === layerCount - 1;
+    renderTargets.push(new pc.RenderTarget({
+        colorBuffer: textureArray,
+        layer,
+        depth: true,
+
+        // on WebGL2, generate the mipmaps of the whole texture array once, after the last layer
+        // is rendered (render the layers in order, for example using the camera priority)
+        mipLevel: app.graphicsDevice.isWebGL2 && !lastLayer ? 0 : undefined
+    }));
+}
 ```
 
 ## Orientation
@@ -176,6 +270,8 @@ A render target does not own its textures, so destroy them separately when you a
 renderTarget.colorBuffer.destroy();
 renderTarget.destroy();
 ```
+
+When the render targets of several cubemap faces or array layers share a texture, destroy each render target, and the shared texture once.
 
 ## Example
 

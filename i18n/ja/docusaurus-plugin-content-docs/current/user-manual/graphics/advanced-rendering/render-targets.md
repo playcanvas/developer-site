@@ -1,11 +1,11 @@
 ---
 title: レンダーターゲット
-description: 画面の代わりにオフスクリーンテクスチャへシーンをレンダリングし、その結果をシーン内で使用する方法を、作成・レイヤー構成・向き・フォーマット・リサイズ・MSAAとともに解説します。
+description: 画面の代わりにオフスクリーンテクスチャへシーンをレンダリングし、その結果をシーン内で使用する方法を、作成・レイヤー構成・キューブマップの面とテクスチャ配列・ミップマップ・向き・フォーマット・リサイズ・MSAAとともに解説します。
 ---
 
 [レンダーターゲット](https://api.playcanvas.com/engine/classes/RenderTarget.html)は、画面の代わりにレンダリング先として使用できる矩形のレンダリング面です。1つ以上のレンダリング可能なカラーテクスチャと、オプションの深度（およびステンシル）バッファをラップします。カメラがレンダーターゲットにレンダリングすると、そのカラーテクスチャに結果が保持され、通常のテクスチャと同じように使用できます。もっとも一般的には、マテリアルに適用してシーン内に表示したり、さらに加工したりします。
 
-これは、ゲーム内スクリーン、監視モニター、鏡やポータル、反射や屈折、カスタムのマルチパスパイプラインといった表現の基盤となります。
+これは、ゲーム内スクリーン、監視モニター、鏡やポータル、反射や屈折、カスタムのマルチパスパイプラインといった表現の基盤となります。レンダーターゲットは、キューブマップの1つの面や、テクスチャ配列の1つのレイヤーにレンダリングすることもできます。[キューブマップの面とテクスチャ配列のレイヤー](#cubemap-faces-and-texture-array-layers)を参照してください。
 
 ## レンダーターゲットの作成 {#creating-a-render-target}
 
@@ -88,6 +88,100 @@ const material = new pc.StandardMaterial();
 material.emissiveMap = renderTarget.colorBuffer;
 material.emissive = pc.Color.WHITE;
 material.update();
+```
+
+## キューブマップの面とテクスチャ配列のレイヤー {#cubemap-faces-and-texture-array-layers}
+
+レンダーターゲットは、テクスチャ全体の代わりに、キューブマップの1つの面や、2Dテクスチャ配列（`arrayLength` を指定して作成したテクスチャ）の1つのレイヤーにレンダリングできます。キューブマップの面は [`face`](https://api.playcanvas.com/engine/classes/RenderTarget.html#face) オプションで、配列のレイヤーは [`layer`](https://api.playcanvas.com/engine/classes/RenderTarget.html#layer) オプションで選択します。
+
+複数の面やレイヤーにレンダリングするには、それぞれにレンダーターゲットを作成し、すべてで同じテクスチャを共有します。レンダーターゲットは軽量です。複数のビューをベイクする場合など、面やレイヤーを一度だけレンダリングするときは、その後でレンダーターゲットを破棄でき、結果はテクスチャに残ります。
+
+```javascript
+const layerCount = 16;
+
+const textureArray = new pc.Texture(app.graphicsDevice, {
+    name: 'RT-array',
+    width: 256,
+    height: 256,
+    arrayLength: layerCount,
+    format: pc.PIXELFORMAT_SRGBA8,
+    mipmaps: false
+});
+
+// レイヤーごとのレンダーターゲット。すべてで同じテクスチャ配列を共有します
+const renderTargets = [];
+for (let layer = 0; layer < layerCount; layer++) {
+    renderTargets.push(new pc.RenderTarget({
+        colorBuffer: textureArray,
+        layer,
+        depth: true,
+        origin: pc.RENDERTARGET_ORIGIN_TOP
+    }));
+}
+```
+
+`depth: true` を指定すると、各レンダーターゲットは独自の深度バッファを確保します。`depthBuffer` オプションで指定する深度バッファは、テクスチャ配列（またはキューブマップ）にすることもでき、その場合は同じレイヤーにレンダリングされます。また、すべてのレイヤーのレンダーターゲットで共有する2Dの深度テクスチャにすることもできます。
+
+`StandardMaterial` はテクスチャ配列をサンプリングしません。レイヤーを表示するには、テクスチャ配列を宣言し、サンプリングするレイヤーを選択する[カスタムシェーダー](../shaders/index.md)を使用します。
+
+```glsl
+uniform mediump sampler2DArray uLayers;
+
+// フラグメントシェーダー内
+vec4 color = texture(uLayers, vec3(vUv0, layerIndex));
+```
+
+```wgsl
+var uLayers: texture_2d_array<f32>;
+var uLayersSampler: sampler;
+
+// フラグメントシェーダー内
+let color = textureSample(uLayers, uLayersSampler, input.vUv0, layerIndex);
+```
+
+```javascript
+material.setParameter('uLayers', textureArray);
+```
+
+### レンダリング中のテクスチャをサンプリングする {#sampling-a-texture-while-rendering-into-it}
+
+テクスチャは、そのテクスチャにレンダリングしているのと同じレンダーパス内ではサンプリングできません。他のレイヤーにレンダリングしている場合でも同様で、シェーダーはテクスチャ全体にアクセスできるためです。
+
+- **WebGL2** - できません。サンプラーをテクスチャ配列の一部のレイヤーに制限することはできません。
+- **WebGPU** - レンダリング中のレイヤーを含まない [`TextureView`](https://api.playcanvas.com/engine/classes/TextureView.html) をバインドすることで可能です。ビューは [`Texture#getView`](https://api.playcanvas.com/engine/classes/Texture.html#getview) で作成します。シェーダーは、ビューのレイヤーをその最初のレイヤーからの相対インデックスで参照します。
+
+```javascript
+// レンダーターゲットがレイヤー0にレンダリングしている間に、レイヤー1のみをサンプリングします。シェーダーからはレイヤー0として参照します
+material.setParameter('uLayers', textureArray.getView(0, 1, 1, 1));
+```
+
+WebGLでは、`TextureView` の代わりにテクスチャ全体がバインドされます。すべてのプラットフォームで同じデータの読み書きを行うには、2つのテクスチャを交互に使用し、一方にレンダリングしながらもう一方をサンプリングします。
+
+次の例は、テクスチャ配列のレイヤーごとにレンダーターゲットを使用して、64方向から見た像をテクスチャ配列にレンダリングし、数千個のインポスターを描画します。インポスターは、見る方向に最も近いビューを表示する、カメラに向いた四角形です。
+
+<EngineExample id="render-targets/texture-array-impostors" title="Texture Array Impostors" />
+
+## ミップマップ {#mipmaps}
+
+カラーテクスチャにミップマップがある場合、レンダーターゲットはレンダーパスのたびにミップマップを再生成するため、結果をミップマップフィルタリングでサンプリングできます。
+
+代わりに特定のミップレベルにレンダリングするには、`mipLevel` オプションを使用します。このオプションを指定すると（0であっても）、ミップマップの自動生成も無効になります。0以外のミップレベルへのレンダリングは、深度バッファと組み合わせて使用することはできません。
+
+レンダーターゲットがキューブマップの面や配列のレイヤーにレンダリングする場合、WebGPUはレンダリングした面またはレイヤーのミップマップのみを再生成します。WebGL2はテクスチャのすべての面またはレイヤーのミップマップを再生成するため、多くのレイヤーにレンダリングする場合にはコストが高くなります。ミップマップを一度だけ生成するには、最後にレンダリングするものを除くすべてのレンダーターゲットで、ミップマップの生成を無効にします。
+
+```javascript
+for (let layer = 0; layer < layerCount; layer++) {
+    const lastLayer = layer === layerCount - 1;
+    renderTargets.push(new pc.RenderTarget({
+        colorBuffer: textureArray,
+        layer,
+        depth: true,
+
+        // WebGL2では、最後のレイヤーをレンダリングした後に、テクスチャ配列全体のミップマップを一度だけ生成します
+        // （カメラのpriorityなどを使用して、レイヤーを順番にレンダリングします）
+        mipLevel: app.graphicsDevice.isWebGL2 && !lastLayer ? 0 : undefined
+    }));
+}
 ```
 
 ## 向き {#orientation}
@@ -176,6 +270,8 @@ const renderTarget = new pc.RenderTarget({
 renderTarget.colorBuffer.destroy();
 renderTarget.destroy();
 ```
+
+複数のキューブマップの面や配列のレイヤーのレンダーターゲットがテクスチャを共有している場合は、各レンダーターゲットを破棄し、共有テクスチャは一度だけ破棄します。
 
 ## 例 {#example}
 
