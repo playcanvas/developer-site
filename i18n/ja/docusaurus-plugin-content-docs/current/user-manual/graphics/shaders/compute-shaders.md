@@ -179,6 +179,18 @@ device.computeDispatch([compute1, compute2], 'BatchedDispatch');
 
 :::
 
+コンピュートインスタンスは1フレームに最大1回ディスパッチされます。1フレーム内でコンピュートシェーダーを複数回ディスパッチするには、ディスパッチごとに別のコンピュートインスタンスを使用してください。インスタンス間でシェーダーを共有でき、シェーダーのコンパイルは一度だけです：
+
+```javascript
+const computes = [0.25, 0.5].map((strength) => {
+    const compute = new pc.Compute(device, shader, `Blur-${strength}`);
+    compute.setParameter('strength', strength);
+    compute.setupDispatch(width, height);
+    return compute;
+});
+device.computeDispatch(computes, 'Blur');
+```
+
 ### ワークグループサイズ
 
 総呼び出し回数は`dispatchSize × workgroupSize`です。例えば、`(width, height)`でディスパッチし、シェーダーが`@workgroup_size(1, 1, 1)`の場合、`width × height`回の呼び出しが行われます。

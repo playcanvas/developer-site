@@ -179,6 +179,18 @@ device.computeDispatch([compute1, compute2], 'BatchedDispatch');
 
 :::
 
+A compute instance is dispatched at most once in a frame. To dispatch a compute shader more than once in a frame, use a separate compute instance for each dispatch. The instances can share the shader, which is compiled only once:
+
+```javascript
+const computes = [0.25, 0.5].map((strength) => {
+    const compute = new pc.Compute(device, shader, `Blur-${strength}`);
+    compute.setParameter('strength', strength);
+    compute.setupDispatch(width, height);
+    return compute;
+});
+device.computeDispatch(computes, 'Blur');
+```
+
 ### Workgroup Size
 
 The total number of invocations is `dispatchSize × workgroupSize`. For example, if you dispatch with `(width, height)` and your shader has `@workgroup_size(1, 1, 1)`, you get `width × height` invocations.
