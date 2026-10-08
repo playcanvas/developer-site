@@ -3,6 +3,9 @@ title: テクスチャ
 description: コードからテクスチャを作成して使用する方法を、2Dテクスチャ・キューブマップ・テクスチャ配列・ボリュームテクスチャ、ピクセルフォーマット、データのアップロード、サンプリング、ミップマップ、シェーダー、テクスチャデータの読み戻しとコピーとともに解説します。
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 [テクスチャ](https://api.playcanvas.com/engine/classes/Texture.html)は、GPU上に保存される画像やデータのグリッドです。テクスチャはもっとも一般的には[アセット](../assets/index.md)として読み込まれ、マテリアルで使用されますが、コードから作成してデータを書き込み、カスタムシェーダーでサンプリングしたり、[レンダーターゲット](./advanced-rendering/render-targets.md)を使ってレンダリング先にしたりすることもできます。
 
 ## テクスチャの種類 {#texture-types}
@@ -17,16 +20,16 @@ description: コードからテクスチャを作成して使用する方法を�
 ## テクスチャの作成 {#creating-a-texture}
 
 ```javascript
-const texture = new pc.Texture(app.graphicsDevice, {
+const texture = new Texture(app.graphicsDevice, {
     name: 'MyTexture',
     width: 256,
     height: 256,
-    format: pc.PIXELFORMAT_RGBA8,
+    format: PIXELFORMAT_RGBA8,
     mipmaps: true,
-    minFilter: pc.FILTER_LINEAR_MIPMAP_LINEAR,
-    magFilter: pc.FILTER_LINEAR,
-    addressU: pc.ADDRESS_CLAMP_TO_EDGE,
-    addressV: pc.ADDRESS_CLAMP_TO_EDGE
+    minFilter: FILTER_LINEAR_MIPMAP_LINEAR,
+    magFilter: FILTER_LINEAR,
+    addressU: ADDRESS_CLAMP_TO_EDGE,
+    addressV: ADDRESS_CLAMP_TO_EDGE
 });
 ```
 
@@ -34,13 +37,13 @@ const texture = new pc.Texture(app.graphicsDevice, {
 
 ```javascript
 // 128x128の面を6つ持つキューブマップ
-const cubemap = new pc.Texture(app.graphicsDevice, { width: 128, height: 128, cubemap: true });
+const cubemap = new Texture(app.graphicsDevice, { width: 128, height: 128, cubemap: true });
 
 // 256x256のレイヤーを16個持つテクスチャ配列
-const textureArray = new pc.Texture(app.graphicsDevice, { width: 256, height: 256, arrayLength: 16 });
+const textureArray = new Texture(app.graphicsDevice, { width: 256, height: 256, arrayLength: 16 });
 
 // 64x64x32テクセルのボリュームテクスチャ
-const volume = new pc.Texture(app.graphicsDevice, { width: 64, height: 64, depth: 32, volume: true });
+const volume = new Texture(app.graphicsDevice, { width: 64, height: 64, depth: 32, volume: true });
 ```
 
 ## ピクセルフォーマット {#pixel-formats}
@@ -69,12 +72,12 @@ const volume = new pc.Texture(app.graphicsDevice, { width: 64, height: 64, depth
 // すべての深度スライスのデータを書き込んだボリュームテクスチャ
 const data = new Uint8Array(64 * 64 * 32 * 4);
 // ... スライスごと、行ごとにデータを書き込みます
-const volume = new pc.Texture(app.graphicsDevice, {
+const volume = new Texture(app.graphicsDevice, {
     width: 64,
     height: 64,
     depth: 32,
     volume: true,
-    format: pc.PIXELFORMAT_RGBA8,
+    format: PIXELFORMAT_RGBA8,
     levels: [data]
 });
 ```
@@ -124,6 +127,9 @@ texture.unlock();
 
 例えば、テクスチャ配列とボリュームテクスチャは次のようになります。
 
+<Tabs groupId="shader-language" queryString="lang">
+<TabItem value="glsl" label="GLSL">
+
 ```glsl
 uniform mediump sampler2DArray uLayers;
 uniform mediump sampler3D uVolume;
@@ -132,6 +138,9 @@ uniform mediump sampler3D uVolume;
 vec4 layerColor = texture(uLayers, vec3(uv, layerIndex));
 vec4 volumeColor = texture(uVolume, uvw);
 ```
+
+</TabItem>
+<TabItem value="wgsl" label="WGSL">
 
 ```wgsl
 var uLayers: texture_2d_array<f32>;
@@ -143,6 +152,9 @@ var uVolumeSampler: sampler;
 let layerColor = textureSample(uLayers, uLayersSampler, uv, layerIndex);
 let volumeColor = textureSample(uVolume, uVolumeSampler, uvw);
 ```
+
+</TabItem>
+</Tabs>
 
 ```javascript
 material.setParameter('uLayers', textureArray);

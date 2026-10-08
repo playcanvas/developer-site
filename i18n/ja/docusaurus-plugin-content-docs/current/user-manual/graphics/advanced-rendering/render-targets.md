@@ -12,27 +12,27 @@ description: 画面の代わりにオフスクリーンテクスチャへシー�
 まず、レンダリング先となるカラー[テクスチャ](https://api.playcanvas.com/engine/classes/Texture.html)を作成します。テクスチャの種類とそのオプションについては[テクスチャ](../textures.md)を参照してください。テクスチャは、レンダリング可能で非圧縮のフォーマットを使用する必要があります（後述の[フォーマットの選択](#choosing-a-format)を参照）。
 
 ```javascript
-const texture = new pc.Texture(app.graphicsDevice, {
+const texture = new Texture(app.graphicsDevice, {
     name: 'RT-color',
     width: 512,
     height: 256,
-    format: pc.PIXELFORMAT_SRGBA8,
+    format: PIXELFORMAT_SRGBA8,
     mipmaps: true,
-    minFilter: pc.FILTER_LINEAR,
-    magFilter: pc.FILTER_LINEAR,
-    addressU: pc.ADDRESS_CLAMP_TO_EDGE,
-    addressV: pc.ADDRESS_CLAMP_TO_EDGE
+    minFilter: FILTER_LINEAR,
+    magFilter: FILTER_LINEAR,
+    addressU: ADDRESS_CLAMP_TO_EDGE,
+    addressV: ADDRESS_CLAMP_TO_EDGE
 });
 ```
 
 次に、それをレンダーターゲットでラップします。レンダリングするシーンで深度テストが必要な場合は深度バッファを要求し、ハードウェアアンチエイリアスには `samples` を設定します（[アンチエイリアス](#anti-aliasing)を参照）。
 
 ```javascript
-const renderTarget = new pc.RenderTarget({
+const renderTarget = new RenderTarget({
     name: 'RT',
     colorBuffer: texture,
     depth: true,
-    origin: pc.RENDERTARGET_ORIGIN_TOP
+    origin: RENDERTARGET_ORIGIN_TOP
 });
 ```
 
@@ -43,7 +43,7 @@ const renderTarget = new pc.RenderTarget({
 レンダーターゲットをカメラの [`renderTarget`](https://api.playcanvas.com/engine/classes/CameraComponent.html#rendertarget) プロパティに割り当てます。そのカメラは画面ではなくテクスチャにレンダリングするようになります。負の `priority` を設定して、メインカメラよりも前に毎フレームレンダリングされるようにし、メインカメラがテクスチャを使用する時点で内容が最新になるようにします。
 
 ```javascript
-const textureCamera = new pc.Entity('TextureCamera');
+const textureCamera = new Entity('TextureCamera');
 textureCamera.addComponent('camera', {
     // メインカメラ（デフォルトの優先度0）より前にレンダリングされます
     priority: -1,
@@ -66,7 +66,7 @@ app.root.addChild(textureCamera);
 
 ```javascript
 // テクスチャにレンダリングしてはいけないオブジェクト用のレイヤー
-const excludedLayer = new pc.Layer({ name: 'Excluded' });
+const excludedLayer = new Layer({ name: 'Excluded' });
 app.scene.layers.insert(excludedLayer, 1);
 
 const worldLayer = app.scene.layers.getLayerByName('World');
@@ -84,9 +84,9 @@ mainCamera.camera.layers = [worldLayer.id, excludedLayer.id, skyboxLayer.id];
 レンダーターゲットのカラーテクスチャは [`renderTarget.colorBuffer`](https://api.playcanvas.com/engine/classes/RenderTarget.html#colorbuffer) として利用できます（作成したテクスチャと同じものです）。他のテクスチャと同じようにマテリアルに適用できます。たとえば、表示面として機能する平面のエミッシブマップとして使用します。
 
 ```javascript
-const material = new pc.StandardMaterial();
+const material = new StandardMaterial();
 material.emissiveMap = renderTarget.colorBuffer;
-material.emissive = pc.Color.WHITE;
+material.emissive = Color.WHITE;
 material.update();
 ```
 
@@ -99,23 +99,23 @@ material.update();
 ```javascript
 const layerCount = 16;
 
-const textureArray = new pc.Texture(app.graphicsDevice, {
+const textureArray = new Texture(app.graphicsDevice, {
     name: 'RT-array',
     width: 256,
     height: 256,
     arrayLength: layerCount,
-    format: pc.PIXELFORMAT_SRGBA8,
+    format: PIXELFORMAT_SRGBA8,
     mipmaps: false
 });
 
 // レイヤーごとのレンダーターゲット。すべてで同じテクスチャ配列を共有します
 const renderTargets = [];
 for (let layer = 0; layer < layerCount; layer++) {
-    renderTargets.push(new pc.RenderTarget({
+    renderTargets.push(new RenderTarget({
         colorBuffer: textureArray,
         layer,
         depth: true,
-        origin: pc.RENDERTARGET_ORIGIN_TOP
+        origin: RENDERTARGET_ORIGIN_TOP
     }));
 }
 ```
@@ -149,20 +149,20 @@ WebGLでは、`TextureView` の代わりにテクスチャ全体がバインド�
 ```javascript
 const sliceCount = 32;
 
-const volume = new pc.Texture(app.graphicsDevice, {
+const volume = new Texture(app.graphicsDevice, {
     name: 'RT-volume',
     width: 128,
     height: 128,
     depth: sliceCount,
     volume: true,
-    format: pc.PIXELFORMAT_RGBA8,
+    format: PIXELFORMAT_RGBA8,
     mipmaps: false
 });
 
 // 深度スライスごとのレンダーターゲット。すべてで同じボリュームテクスチャを共有します
 const sliceTargets = [];
 for (let slice = 0; slice < sliceCount; slice++) {
-    sliceTargets.push(new pc.RenderTarget({
+    sliceTargets.push(new RenderTarget({
         colorBuffer: volume,
         slice,
         depth: false
@@ -193,7 +193,7 @@ for (let slice = 0; slice < sliceCount; slice++) {
 ```javascript
 for (let layer = 0; layer < layerCount; layer++) {
     const lastLayer = layer === layerCount - 1;
-    renderTargets.push(new pc.RenderTarget({
+    renderTargets.push(new RenderTarget({
         colorBuffer: textureArray,
         layer,
         depth: true,
@@ -245,10 +245,10 @@ WebGL2とWebGPUは、レンダリングされた画像を垂直方向に逆の�
 `samples` を1より大きく設定すると、ハードウェアのマルチサンプルアンチエイリアス（MSAA）でターゲットをレンダリングします。マルチサンプルの結果は、作成した単一サンプルのカラーテクスチャ（サンプリング対象となるもの）へ自動的に解決されます。
 
 ```javascript
-const renderTarget = new pc.RenderTarget({
+const renderTarget = new RenderTarget({
     colorBuffer: texture,
     depth: true,
-    origin: pc.RENDERTARGET_ORIGIN_TOP,
+    origin: RENDERTARGET_ORIGIN_TOP,
     samples: 4
 });
 ```
@@ -267,14 +267,14 @@ const renderTarget = new pc.RenderTarget({
 
 ```javascript
 // マルチサンプルテクスチャ - レンダーターゲットはそのサンプルへ直接レンダリングします
-const msColor = new pc.Texture(app.graphicsDevice, { width, height, format: pc.PIXELFORMAT_RGBA16F, samples: 4 });
-const msDepth = new pc.Texture(app.graphicsDevice, { width, height, format: pc.PIXELFORMAT_DEPTH, samples: 4 });
+const msColor = new Texture(app.graphicsDevice, { width, height, format: PIXELFORMAT_RGBA16F, samples: 4 });
+const msDepth = new Texture(app.graphicsDevice, { width, height, format: PIXELFORMAT_DEPTH, samples: 4 });
 
 // 任意の単一サンプル解決ターゲット
-const resolvedColor = new pc.Texture(app.graphicsDevice, { width, height, format: pc.PIXELFORMAT_RGBA16F, mipmaps: false });
-const resolvedDepth = new pc.Texture(app.graphicsDevice, { width, height, format: pc.PIXELFORMAT_R32F, mipmaps: false });
+const resolvedColor = new Texture(app.graphicsDevice, { width, height, format: PIXELFORMAT_RGBA16F, mipmaps: false });
+const resolvedDepth = new Texture(app.graphicsDevice, { width, height, format: PIXELFORMAT_R32F, mipmaps: false });
 
-const renderTarget = new pc.RenderTarget({
+const renderTarget = new RenderTarget({
     colorBuffer: msColor,
     resolveBuffer: resolvedColor,       // レンダーパス終了時のハードウェア解決
     depthBuffer: msDepth,

@@ -3,6 +3,9 @@ title: Textures
 description: Create and use textures from code - 2D textures, cubemaps, texture arrays and volume textures, pixel formats, uploading data, sampling, mipmaps, shaders, and reading back and copying texture data.
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 A [texture](https://api.playcanvas.com/engine/classes/Texture.html) is an image or a grid of data stored on the GPU. Textures are most commonly loaded as [assets](../assets/index.md) and used by materials, but they can also be created from code, filled with data, sampled in custom shaders, and rendered into using [render targets](./advanced-rendering/render-targets.md).
 
 ## Texture types
@@ -17,16 +20,16 @@ A [texture](https://api.playcanvas.com/engine/classes/Texture.html) is an image 
 ## Creating a texture
 
 ```javascript
-const texture = new pc.Texture(app.graphicsDevice, {
+const texture = new Texture(app.graphicsDevice, {
     name: 'MyTexture',
     width: 256,
     height: 256,
-    format: pc.PIXELFORMAT_RGBA8,
+    format: PIXELFORMAT_RGBA8,
     mipmaps: true,
-    minFilter: pc.FILTER_LINEAR_MIPMAP_LINEAR,
-    magFilter: pc.FILTER_LINEAR,
-    addressU: pc.ADDRESS_CLAMP_TO_EDGE,
-    addressV: pc.ADDRESS_CLAMP_TO_EDGE
+    minFilter: FILTER_LINEAR_MIPMAP_LINEAR,
+    magFilter: FILTER_LINEAR,
+    addressU: ADDRESS_CLAMP_TO_EDGE,
+    addressV: ADDRESS_CLAMP_TO_EDGE
 });
 ```
 
@@ -34,13 +37,13 @@ The other texture types use the same constructor, with the option selecting the 
 
 ```javascript
 // a cubemap with six 128x128 faces
-const cubemap = new pc.Texture(app.graphicsDevice, { width: 128, height: 128, cubemap: true });
+const cubemap = new Texture(app.graphicsDevice, { width: 128, height: 128, cubemap: true });
 
 // a texture array with 16 layers of 256x256
-const textureArray = new pc.Texture(app.graphicsDevice, { width: 256, height: 256, arrayLength: 16 });
+const textureArray = new Texture(app.graphicsDevice, { width: 256, height: 256, arrayLength: 16 });
 
 // a volume texture of 64x64x32 texels
-const volume = new pc.Texture(app.graphicsDevice, { width: 64, height: 64, depth: 32, volume: true });
+const volume = new Texture(app.graphicsDevice, { width: 64, height: 64, depth: 32, volume: true });
 ```
 
 ## Pixel formats
@@ -69,12 +72,12 @@ Data can be provided when the texture is created, using the `levels` option, whi
 // a volume texture, filled with data for all its depth slices
 const data = new Uint8Array(64 * 64 * 32 * 4);
 // ... fill the data, slice after slice, row after row
-const volume = new pc.Texture(app.graphicsDevice, {
+const volume = new Texture(app.graphicsDevice, {
     width: 64,
     height: 64,
     depth: 32,
     volume: true,
-    format: pc.PIXELFORMAT_RGBA8,
+    format: PIXELFORMAT_RGBA8,
     levels: [data]
 });
 ```
@@ -124,6 +127,9 @@ Materials such as `StandardMaterial` sample 2D textures and cubemaps. Texture ar
 
 For example, a texture array and a volume texture:
 
+<Tabs groupId="shader-language" queryString="lang">
+<TabItem value="glsl" label="GLSL">
+
 ```glsl
 uniform mediump sampler2DArray uLayers;
 uniform mediump sampler3D uVolume;
@@ -132,6 +138,9 @@ uniform mediump sampler3D uVolume;
 vec4 layerColor = texture(uLayers, vec3(uv, layerIndex));
 vec4 volumeColor = texture(uVolume, uvw);
 ```
+
+</TabItem>
+<TabItem value="wgsl" label="WGSL">
 
 ```wgsl
 var uLayers: texture_2d_array<f32>;
@@ -143,6 +152,9 @@ var uVolumeSampler: sampler;
 let layerColor = textureSample(uLayers, uLayersSampler, uv, layerIndex);
 let volumeColor = textureSample(uVolume, uVolumeSampler, uvw);
 ```
+
+</TabItem>
+</Tabs>
 
 ```javascript
 material.setParameter('uLayers', textureArray);

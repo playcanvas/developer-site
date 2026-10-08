@@ -12,27 +12,27 @@ This underpins effects such as in-world screens, security monitors, mirrors and 
 First create the color [texture](https://api.playcanvas.com/engine/classes/Texture.html) to render into - see [Textures](../textures.md) for the texture types and their options. It must use a renderable, uncompressed format (see [Choosing a format](#choosing-a-format) below):
 
 ```javascript
-const texture = new pc.Texture(app.graphicsDevice, {
+const texture = new Texture(app.graphicsDevice, {
     name: 'RT-color',
     width: 512,
     height: 256,
-    format: pc.PIXELFORMAT_SRGBA8,
+    format: PIXELFORMAT_SRGBA8,
     mipmaps: true,
-    minFilter: pc.FILTER_LINEAR,
-    magFilter: pc.FILTER_LINEAR,
-    addressU: pc.ADDRESS_CLAMP_TO_EDGE,
-    addressV: pc.ADDRESS_CLAMP_TO_EDGE
+    minFilter: FILTER_LINEAR,
+    magFilter: FILTER_LINEAR,
+    addressU: ADDRESS_CLAMP_TO_EDGE,
+    addressV: ADDRESS_CLAMP_TO_EDGE
 });
 ```
 
 Then wrap it in a render target. Request a depth buffer if the scene you render needs depth testing, and set `samples` for hardware anti-aliasing (see [Anti-aliasing](#anti-aliasing)):
 
 ```javascript
-const renderTarget = new pc.RenderTarget({
+const renderTarget = new RenderTarget({
     name: 'RT',
     colorBuffer: texture,
     depth: true,
-    origin: pc.RENDERTARGET_ORIGIN_TOP
+    origin: RENDERTARGET_ORIGIN_TOP
 });
 ```
 
@@ -43,7 +43,7 @@ The [`origin`](#orientation) option is explained below.
 Assign the render target to a camera's [`renderTarget`](https://api.playcanvas.com/engine/classes/CameraComponent.html#rendertarget) property. That camera then renders into the texture instead of the screen. Give it a negative `priority` so it renders before the main camera each frame, ensuring the texture is up to date when the main camera uses it:
 
 ```javascript
-const textureCamera = new pc.Entity('TextureCamera');
+const textureCamera = new Entity('TextureCamera');
 textureCamera.addComponent('camera', {
     // rendered before the main camera (default priority 0)
     priority: -1,
@@ -66,7 +66,7 @@ The clean way to arrange this is with [layers](../layers/index.md). A camera onl
 
 ```javascript
 // a layer for objects that must not render into the texture
-const excludedLayer = new pc.Layer({ name: 'Excluded' });
+const excludedLayer = new Layer({ name: 'Excluded' });
 app.scene.layers.insert(excludedLayer, 1);
 
 const worldLayer = app.scene.layers.getLayerByName('World');
@@ -84,9 +84,9 @@ mainCamera.camera.layers = [worldLayer.id, excludedLayer.id, skyboxLayer.id];
 The render target's color texture is available as [`renderTarget.colorBuffer`](https://api.playcanvas.com/engine/classes/RenderTarget.html#colorbuffer) (it is the same texture you created). Apply it to a material like any other texture - for instance as the emissive map of the plane that acts as the display surface:
 
 ```javascript
-const material = new pc.StandardMaterial();
+const material = new StandardMaterial();
 material.emissiveMap = renderTarget.colorBuffer;
-material.emissive = pc.Color.WHITE;
+material.emissive = Color.WHITE;
 material.update();
 ```
 
@@ -99,23 +99,23 @@ To render to several faces or layers, create a render target for each of them, a
 ```javascript
 const layerCount = 16;
 
-const textureArray = new pc.Texture(app.graphicsDevice, {
+const textureArray = new Texture(app.graphicsDevice, {
     name: 'RT-array',
     width: 256,
     height: 256,
     arrayLength: layerCount,
-    format: pc.PIXELFORMAT_SRGBA8,
+    format: PIXELFORMAT_SRGBA8,
     mipmaps: false
 });
 
 // a render target for each layer, all sharing the texture array
 const renderTargets = [];
 for (let layer = 0; layer < layerCount; layer++) {
-    renderTargets.push(new pc.RenderTarget({
+    renderTargets.push(new RenderTarget({
         colorBuffer: textureArray,
         layer,
         depth: true,
-        origin: pc.RENDERTARGET_ORIGIN_TOP
+        origin: RENDERTARGET_ORIGIN_TOP
     }));
 }
 ```
@@ -149,20 +149,20 @@ A render target can render into a single depth slice of a [volume texture](../te
 ```javascript
 const sliceCount = 32;
 
-const volume = new pc.Texture(app.graphicsDevice, {
+const volume = new Texture(app.graphicsDevice, {
     name: 'RT-volume',
     width: 128,
     height: 128,
     depth: sliceCount,
     volume: true,
-    format: pc.PIXELFORMAT_RGBA8,
+    format: PIXELFORMAT_RGBA8,
     mipmaps: false
 });
 
 // a render target for each depth slice, all sharing the volume texture
 const sliceTargets = [];
 for (let slice = 0; slice < sliceCount; slice++) {
-    sliceTargets.push(new pc.RenderTarget({
+    sliceTargets.push(new RenderTarget({
         colorBuffer: volume,
         slice,
         depth: false
@@ -193,7 +193,7 @@ When a render target renders into a cubemap face or an array layer, WebGPU regen
 ```javascript
 for (let layer = 0; layer < layerCount; layer++) {
     const lastLayer = layer === layerCount - 1;
-    renderTargets.push(new pc.RenderTarget({
+    renderTargets.push(new RenderTarget({
         colorBuffer: textureArray,
         layer,
         depth: true,
@@ -245,10 +245,10 @@ To change a render target's resolution - for example to keep it matched to the o
 Set `samples` greater than 1 to render the target with hardware multi-sample anti-aliasing (MSAA). The multi-sampled result is automatically resolved into the single-sampled color texture you created, which is the one you sample from:
 
 ```javascript
-const renderTarget = new pc.RenderTarget({
+const renderTarget = new RenderTarget({
     colorBuffer: texture,
     depth: true,
-    origin: pc.RENDERTARGET_ORIGIN_TOP,
+    origin: RENDERTARGET_ORIGIN_TOP,
     samples: 4
 });
 ```
@@ -267,14 +267,14 @@ The automatic resolve above averages the samples with a fixed hardware "box" fil
 
 ```javascript
 // multisampled textures - the render target renders directly into their samples
-const msColor = new pc.Texture(app.graphicsDevice, { width, height, format: pc.PIXELFORMAT_RGBA16F, samples: 4 });
-const msDepth = new pc.Texture(app.graphicsDevice, { width, height, format: pc.PIXELFORMAT_DEPTH, samples: 4 });
+const msColor = new Texture(app.graphicsDevice, { width, height, format: PIXELFORMAT_RGBA16F, samples: 4 });
+const msDepth = new Texture(app.graphicsDevice, { width, height, format: PIXELFORMAT_DEPTH, samples: 4 });
 
 // optional single-sampled resolve targets
-const resolvedColor = new pc.Texture(app.graphicsDevice, { width, height, format: pc.PIXELFORMAT_RGBA16F, mipmaps: false });
-const resolvedDepth = new pc.Texture(app.graphicsDevice, { width, height, format: pc.PIXELFORMAT_R32F, mipmaps: false });
+const resolvedColor = new Texture(app.graphicsDevice, { width, height, format: PIXELFORMAT_RGBA16F, mipmaps: false });
+const resolvedDepth = new Texture(app.graphicsDevice, { width, height, format: PIXELFORMAT_R32F, mipmaps: false });
 
-const renderTarget = new pc.RenderTarget({
+const renderTarget = new RenderTarget({
     colorBuffer: msColor,
     resolveBuffer: resolvedColor,       // hardware resolve at the end of a render pass
     depthBuffer: msDepth,
