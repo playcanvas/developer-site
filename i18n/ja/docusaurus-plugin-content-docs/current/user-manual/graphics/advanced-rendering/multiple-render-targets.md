@@ -128,4 +128,4 @@ renders.forEach((render) => {
 
 完全に動作するサンプルがエンジンの例にあります: Multiple Render Targets は、カスタムシェーダーパスを通してチェス盤をレンダリングし、ワールド法線とグロスをそれぞれ個別のクリアカラーを持つ追加のカラーターゲットに書き込んで、それぞれを画面上に別々のテクスチャとして表示します。
 
-<EngineExample id="graphics/multi-render-targets" title="Multiple Render Targets" />
+<EngineExample id="render-targets/multi-render-targets" title="Multiple Render Targets" />

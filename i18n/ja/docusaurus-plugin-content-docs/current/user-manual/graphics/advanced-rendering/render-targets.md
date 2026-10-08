@@ -287,9 +287,9 @@ const renderTarget = new RenderTarget({
 
 これらのテクニックを示す2つの例があります - ハードウェア解決と並べて比較するカスタムのトーンマップカラー解決、および解決済みデプスによるフォグと比較するサンプルごとのデプスフォグです。
 
-<EngineExample id="graphics-advanced/custom-msaa-resolve" title="Custom MSAA Resolve" />
+<EngineExample id="render-targets/custom-msaa-resolve" title="Custom MSAA Resolve" />
 
-<EngineExample id="graphics-advanced/msaa-depth-fog" title="MSAA Depth Fog" />
+<EngineExample id="render-targets/msaa-depth-fog" title="MSAA Depth Fog" />
 
 ## クリーンアップ {#cleaning-up}
 
@@ -306,7 +306,7 @@ renderTarget.destroy();
 
 次の例は、2つ目のカメラからシーンをテクスチャにレンダリングし、それをワールド内の平面に表示します。上記の3レイヤー構成を使って表示用の平面をレンダーターゲットから除外し、数秒ごとにテクスチャカメラを透視投影と平行投影で切り替えます。
 
-<EngineExample id="graphics/render-to-texture" title="Render to Texture" />
+<EngineExample id="render-targets/render-to-texture" title="Render to Texture" />
 
 ## 関連ページ {#related-pages}
 

@@ -287,9 +287,9 @@ const renderTarget = new RenderTarget({
 
 Two examples demonstrate these techniques - a custom tonemapped color resolve compared side by side against the hardware resolve, and per-sample depth fog compared against fog computed from a resolved depth:
 
-<EngineExample id="graphics-advanced/custom-msaa-resolve" title="Custom MSAA Resolve" />
+<EngineExample id="render-targets/custom-msaa-resolve" title="Custom MSAA Resolve" />
 
-<EngineExample id="graphics-advanced/msaa-depth-fog" title="MSAA Depth Fog" />
+<EngineExample id="render-targets/msaa-depth-fog" title="MSAA Depth Fog" />
 
 ## Cleaning up
 
@@ -306,7 +306,7 @@ When the render targets of several cubemap faces, array layers or volume slices 
 
 The following example renders a scene into a texture from a second camera and displays it on a plane in the world. It uses the three-layer setup described above to keep the display plane out of the render target, and switches the texture camera between perspective and orthographic projection every few seconds.
 
-<EngineExample id="graphics/render-to-texture" title="Render to Texture" />
+<EngineExample id="render-targets/render-to-texture" title="Render to Texture" />
 
 ## Related pages
 
