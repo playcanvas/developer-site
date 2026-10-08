@@ -1,15 +1,15 @@
 ---
 title: Render Targets
-description: Render a scene into an offscreen texture instead of the screen, then use the result in your scene - covering creation, layer setup, cubemap faces and texture arrays, mipmaps, orientation, formats, resizing and MSAA.
+description: Render a scene into an offscreen texture instead of the screen, then use the result in your scene - covering creation, layer setup, cubemap faces, texture arrays and volume textures, mipmaps, orientation, formats, resizing and MSAA.
 ---
 
 A [render target](https://api.playcanvas.com/engine/classes/RenderTarget.html) is a rectangular rendering surface you can render into instead of the screen. It wraps one or more renderable color textures, along with an optional depth (and stencil) buffer. Once a camera has rendered into it, the color texture holds the result and can be used anywhere a normal texture can - most commonly applied to a material to display it in the scene, or fed into further processing.
 
-This underpins effects such as in-world screens, security monitors, mirrors and portals, reflection and refraction, and custom multi-pass pipelines. A render target can also render into a single face of a cubemap, or a single layer of a texture array - see [Cubemap faces and texture array layers](#cubemap-faces-and-texture-array-layers).
+This underpins effects such as in-world screens, security monitors, mirrors and portals, reflection and refraction, and custom multi-pass pipelines. A render target can also render into a single face of a cubemap, a single layer of a texture array - see [Cubemap faces and texture array layers](#cubemap-faces-and-texture-array-layers) - or a single depth slice of a volume texture - see [Volume texture slices](#volume-texture-slices).
 
 ## Creating a render target
 
-First create the color [texture](https://api.playcanvas.com/engine/classes/Texture.html) to render into. It must use a renderable, uncompressed format (see [Choosing a format](#choosing-a-format) below):
+First create the color [texture](https://api.playcanvas.com/engine/classes/Texture.html) to render into - see [Textures](../textures.md) for the texture types and their options. It must use a renderable, uncompressed format (see [Choosing a format](#choosing-a-format) below):
 
 ```javascript
 const texture = new pc.Texture(app.graphicsDevice, {
@@ -122,26 +122,7 @@ for (let layer = 0; layer < layerCount; layer++) {
 
 With `depth: true`, each render target allocates its own depth buffer. A depth buffer you provide with the `depthBuffer` option can be a texture array (or a cubemap) as well, in which case the same layer of it is rendered to, or a 2D depth texture shared by the render targets of all layers.
 
-`StandardMaterial` does not sample texture arrays. To display a layer, use a [custom shader](../shaders/index.md) that declares the texture array and selects the layer to sample:
-
-```glsl
-uniform mediump sampler2DArray uLayers;
-
-// in the fragment shader
-vec4 color = texture(uLayers, vec3(vUv0, layerIndex));
-```
-
-```wgsl
-var uLayers: texture_2d_array<f32>;
-var uLayersSampler: sampler;
-
-// in the fragment shader
-let color = textureSample(uLayers, uLayersSampler, input.vUv0, layerIndex);
-```
-
-```javascript
-material.setParameter('uLayers', textureArray);
-```
+`StandardMaterial` does not sample texture arrays. To display a layer, use a custom shader that declares the texture array and selects the layer to sample - see [Sampling in shaders](../textures.md#sampling-in-shaders).
 
 ### Sampling a texture while rendering into it
 
@@ -160,6 +141,46 @@ On WebGL, a `TextureView` binds the whole texture instead. To read and write the
 The following example renders a statue from 64 directions into the layers of a texture array, using a render target for each layer, and draws thousands of impostors - camera facing quads showing the view closest to the direction they are seen from:
 
 <EngineExample id="render-targets/texture-array-impostors" title="Texture Array Impostors" />
+
+## Volume texture slices
+
+A render target can render into a single depth slice of a [volume texture](../textures.md#texture-types) (a texture created with `volume: true`), selected with the [`slice`](https://api.playcanvas.com/engine/classes/RenderTarget.html#slice) option. To render to several slices, create a render target for each of them, all sharing the same texture:
+
+```javascript
+const sliceCount = 32;
+
+const volume = new pc.Texture(app.graphicsDevice, {
+    name: 'RT-volume',
+    width: 128,
+    height: 128,
+    depth: sliceCount,
+    volume: true,
+    format: pc.PIXELFORMAT_RGBA8,
+    mipmaps: false
+});
+
+// a render target for each depth slice, all sharing the volume texture
+const sliceTargets = [];
+for (let slice = 0; slice < sliceCount; slice++) {
+    sliceTargets.push(new pc.RenderTarget({
+        colorBuffer: volume,
+        slice,
+        depth: false
+    }));
+}
+```
+
+Rendering to a volume texture has these differences from rendering to the faces of a cubemap or the layers of a texture array:
+
+- **No multisampling** - a multisampled rendering cannot be resolved into a depth slice, so the `samples` option is ignored.
+- **2D depth buffer** - a volume texture cannot be a depth buffer. With `depth: true`, each render target allocates its own 2D depth buffer, or a 2D depth texture can be shared by the render targets of all slices.
+- **No sampling while rendering** - the volume texture cannot be sampled in a render pass that renders into one of its slices, on both WebGL2 and WebGPU, and a `TextureView` cannot exclude a slice. To read and write the same data, alternate between two volume textures.
+
+A volume texture is sampled with 3D coordinates in a custom shader, see [Sampling in shaders](../textures.md#sampling-in-shaders).
+
+When the slices change over time, rendering only some of them each frame, in turn, spreads the cost of the render passes. The following example fills a volume texture with colorful fog data - either on the CPU, or rendered on the GPU into its slices, updating a few slices each frame - and raymarches it over the scene, optionally using its mipmaps:
+
+<EngineExample id="render-targets/volume-texture" title="Volume Texture" />
 
 ## Mipmaps
 
@@ -184,6 +205,8 @@ for (let layer = 0; layer < layerCount; layer++) {
 }
 ```
 
+For a volume texture, the mipmaps of the whole volume are regenerated after rendering into a slice, on both WebGL2 and WebGPU, as each mip level is filtered from several depth slices. So when rendering into many slices, generate them once on both, by passing `mipLevel: 0` to all render targets except the one rendered last.
+
 ## Orientation
 
 WebGL2 and WebGPU natively store a rendered image with the opposite vertical row order. If you leave the orientation unspecified and then sample the render target as a regular texture (with mesh UVs), the result appears vertically mirrored between the two APIs. The `origin` option pins the stored orientation so the render target looks identical everywhere. It can be:
@@ -196,14 +219,20 @@ In short: if you display a render target on a surface in your scene, use `RENDER
 
 ## Choosing a format
 
-The color texture must use a renderable, uncompressed format:
+The color texture must use a renderable, uncompressed format - see [Pixel formats](../textures.md#pixel-formats) for the groups of formats:
 
-- **`PIXELFORMAT_RGBA8`** (or its sRGB variant `PIXELFORMAT_SRGBA8`) is the standard choice, renderable everywhere.
-- **`PIXELFORMAT_RGB10A2`** offers 10 bits per RGB channel with 2-bit alpha - higher precision than `RGBA8` at the same memory cost, renderable on both WebGL2 and WebGPU.
-- **HDR formats** (float `PIXELFORMAT_RGBA32F`, half-float `PIXELFORMAT_RGBA16F`, small-float `PIXELFORMAT_111110F`) are renderable subject to device support. Rather than picking one directly, query [`GraphicsDevice.getRenderableHdrFormat`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#getrenderablehdrformat), which returns the first supported option. Support varies: on WebGPU float and half-float are always renderable; on WebGL2 half-float is widely available (including many mobile iOS devices) while full float rendering requires [`GraphicsDevice.textureFloatRenderable`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#texturefloatrenderable).
-- **`PIXELFORMAT_RGB9E5`** is a compact HDR format that can be sampled but **cannot** be used as a render target color buffer.
+- **`PIXELFORMAT_RGBA8`** is the standard choice, renderable everywhere.
+- **sRGB formats** such as `PIXELFORMAT_SRGBA8` are renderable as well. The rendered linear colors are converted to sRGB when written, and blending happens in linear space. See [sRGB texture handling](../linear-workflow/textures.md).
+- **`PIXELFORMAT_RGB10A2`** offers 10 bits per RGB channel with 2-bit alpha - higher precision than `RGBA8` at the same memory cost, renderable on both WebGL2 and WebGPU. `PIXELFORMAT_RGB10A2U` is its unsigned integer variant.
+- **HDR formats** - float `PIXELFORMAT_RGBA32F`, half-float `PIXELFORMAT_RGBA16F` and small-float `PIXELFORMAT_111110F` - are renderable subject to device support:
+  - on WebGPU, rendering to float and half-float formats is always supported, and to the small-float format when [`GraphicsDevice.textureRG11B10Renderable`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#texturerg11b10renderable) is true.
+  - on WebGL2, rendering to all three is supported when [`GraphicsDevice.textureFloatRenderable`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#texturefloatrenderable) is true. Otherwise, when [`GraphicsDevice.textureHalfFloatRenderable`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#texturehalffloatrenderable) is true, rendering to half-float formats only is supported - the case of many mobile iOS devices.
 
-See the [`Texture`](https://api.playcanvas.com/engine/classes/Texture.html) API reference for the full list and the detailed HDR support rules.
+  Rather than picking one directly, query [`GraphicsDevice.getRenderableHdrFormat`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#getrenderablehdrformat), which returns the first supported option. See [HDR Rendering](../linear-workflow/hdr-rendering.md) for rendering the scene in HDR.
+- **Integer formats**, such as `PIXELFORMAT_R8U`, are renderable too. They store the values a shader outputs as they are, with no filtering or blending, and a multisampled integer render target cannot be hardware-resolved.
+- **`PIXELFORMAT_RGB9E5`** is a compact HDR format that can be sampled but **cannot** be used as a render target color buffer, and neither can compressed formats.
+
+See the [`Texture`](https://api.playcanvas.com/engine/classes/Texture.html) API reference for the full list of formats and the detailed support rules.
 
 For depth testing during rendering, request a depth buffer with `depth: true` when creating the render target (as shown above). Use `stencil: true` as well if you need a stencil buffer.
 
@@ -271,7 +300,7 @@ renderTarget.colorBuffer.destroy();
 renderTarget.destroy();
 ```
 
-When the render targets of several cubemap faces or array layers share a texture, destroy each render target, and the shared texture once.
+When the render targets of several cubemap faces, array layers or volume slices share a texture, destroy each render target, and the shared texture once.
 
 ## Example
 
@@ -281,6 +310,7 @@ The following example renders a scene into a texture from a second camera and di
 
 ## Related pages
 
+- [Textures](../textures.md) - the texture types, pixel formats, uploading data, sampling, and reading back and copying textures.
 - [Multiple Render Targets](./multiple-render-targets.md) - render to several color buffers at once from a single pass.
 - [Multiple Cameras](../cameras/multiple-cameras.md) - composing views and assigning render targets to cameras.
 - [Layers](../layers/index.md) - controlling which objects each camera renders.

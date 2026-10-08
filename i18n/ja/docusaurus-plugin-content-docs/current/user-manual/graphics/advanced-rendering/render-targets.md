@@ -1,15 +1,15 @@
 ---
 title: レンダーターゲット
-description: 画面の代わりにオフスクリーンテクスチャへシーンをレンダリングし、その結果をシーン内で使用する方法を、作成・レイヤー構成・キューブマップの面とテクスチャ配列・ミップマップ・向き・フォーマット・リサイズ・MSAAとともに解説します。
+description: 画面の代わりにオフスクリーンテクスチャへシーンをレンダリングし、その結果をシーン内で使用する方法を、作成・レイヤー構成・キューブマップの面とテクスチャ配列とボリュームテクスチャ・ミップマップ・向き・フォーマット・リサイズ・MSAAとともに解説します。
 ---
 
 [レンダーターゲット](https://api.playcanvas.com/engine/classes/RenderTarget.html)は、画面の代わりにレンダリング先として使用できる矩形のレンダリング面です。1つ以上のレンダリング可能なカラーテクスチャと、オプションの深度（およびステンシル）バッファをラップします。カメラがレンダーターゲットにレンダリングすると、そのカラーテクスチャに結果が保持され、通常のテクスチャと同じように使用できます。もっとも一般的には、マテリアルに適用してシーン内に表示したり、さらに加工したりします。
 
-これは、ゲーム内スクリーン、監視モニター、鏡やポータル、反射や屈折、カスタムのマルチパスパイプラインといった表現の基盤となります。レンダーターゲットは、キューブマップの1つの面や、テクスチャ配列の1つのレイヤーにレンダリングすることもできます。[キューブマップの面とテクスチャ配列のレイヤー](#cubemap-faces-and-texture-array-layers)を参照してください。
+これは、ゲーム内スクリーン、監視モニター、鏡やポータル、反射や屈折、カスタムのマルチパスパイプラインといった表現の基盤となります。レンダーターゲットは、キューブマップの1つの面や、テクスチャ配列の1つのレイヤー（[キューブマップの面とテクスチャ配列のレイヤー](#cubemap-faces-and-texture-array-layers)を参照）、またはボリュームテクスチャの1つの深度スライス（[ボリュームテクスチャのスライス](#volume-texture-slices)を参照）にレンダリングすることもできます。
 
 ## レンダーターゲットの作成 {#creating-a-render-target}
 
-まず、レンダリング先となるカラー[テクスチャ](https://api.playcanvas.com/engine/classes/Texture.html)を作成します。テクスチャは、レンダリング可能で非圧縮のフォーマットを使用する必要があります（後述の[フォーマットの選択](#choosing-a-format)を参照）。
+まず、レンダリング先となるカラー[テクスチャ](https://api.playcanvas.com/engine/classes/Texture.html)を作成します。テクスチャの種類とそのオプションについては[テクスチャ](../textures.md)を参照してください。テクスチャは、レンダリング可能で非圧縮のフォーマットを使用する必要があります（後述の[フォーマットの選択](#choosing-a-format)を参照）。
 
 ```javascript
 const texture = new pc.Texture(app.graphicsDevice, {
@@ -122,26 +122,7 @@ for (let layer = 0; layer < layerCount; layer++) {
 
 `depth: true` を指定すると、各レンダーターゲットは独自の深度バッファを確保します。`depthBuffer` オプションで指定する深度バッファは、テクスチャ配列（またはキューブマップ）にすることもでき、その場合は同じレイヤーにレンダリングされます。また、すべてのレイヤーのレンダーターゲットで共有する2Dの深度テクスチャにすることもできます。
 
-`StandardMaterial` はテクスチャ配列をサンプリングしません。レイヤーを表示するには、テクスチャ配列を宣言し、サンプリングするレイヤーを選択する[カスタムシェーダー](../shaders/index.md)を使用します。
-
-```glsl
-uniform mediump sampler2DArray uLayers;
-
-// フラグメントシェーダー内
-vec4 color = texture(uLayers, vec3(vUv0, layerIndex));
-```
-
-```wgsl
-var uLayers: texture_2d_array<f32>;
-var uLayersSampler: sampler;
-
-// フラグメントシェーダー内
-let color = textureSample(uLayers, uLayersSampler, input.vUv0, layerIndex);
-```
-
-```javascript
-material.setParameter('uLayers', textureArray);
-```
+`StandardMaterial` はテクスチャ配列をサンプリングしません。レイヤーを表示するには、テクスチャ配列を宣言し、サンプリングするレイヤーを選択するカスタムシェーダーを使用します。[シェーダーでのサンプリング](../textures.md#sampling-in-shaders)を参照してください。
 
 ### レンダリング中のテクスチャをサンプリングする {#sampling-a-texture-while-rendering-into-it}
 
@@ -160,6 +141,46 @@ WebGLでは、`TextureView` の代わりにテクスチャ全体がバインド�
 次の例は、テクスチャ配列のレイヤーごとにレンダーターゲットを使用して、64方向から見た像をテクスチャ配列にレンダリングし、数千個のインポスターを描画します。インポスターは、見る方向に最も近いビューを表示する、カメラに向いた四角形です。
 
 <EngineExample id="render-targets/texture-array-impostors" title="Texture Array Impostors" />
+
+## ボリュームテクスチャのスライス {#volume-texture-slices}
+
+レンダーターゲットは、[ボリュームテクスチャ](../textures.md#texture-types)（`volume: true` を指定して作成したテクスチャ）の1つの深度スライスにレンダリングでき、スライスは [`slice`](https://api.playcanvas.com/engine/classes/RenderTarget.html#slice) オプションで選択します。複数のスライスにレンダリングするには、それぞれにレンダーターゲットを作成し、すべてで同じテクスチャを共有します。
+
+```javascript
+const sliceCount = 32;
+
+const volume = new pc.Texture(app.graphicsDevice, {
+    name: 'RT-volume',
+    width: 128,
+    height: 128,
+    depth: sliceCount,
+    volume: true,
+    format: pc.PIXELFORMAT_RGBA8,
+    mipmaps: false
+});
+
+// 深度スライスごとのレンダーターゲット。すべてで同じボリュームテクスチャを共有します
+const sliceTargets = [];
+for (let slice = 0; slice < sliceCount; slice++) {
+    sliceTargets.push(new pc.RenderTarget({
+        colorBuffer: volume,
+        slice,
+        depth: false
+    }));
+}
+```
+
+ボリュームテクスチャへのレンダリングには、キューブマップの面やテクスチャ配列のレイヤーへのレンダリングと比べて次の違いがあります。
+
+- **マルチサンプリングなし** - マルチサンプリングしたレンダリングは深度スライスに解決できないため、`samples` オプションは無視されます。
+- **2Dの深度バッファ** - ボリュームテクスチャは深度バッファにできません。`depth: true` を指定すると、各レンダーターゲットは独自の2Dの深度バッファを確保します。また、すべてのスライスのレンダーターゲットで2Dの深度テクスチャを共有することもできます。
+- **レンダリング中のサンプリングなし** - WebGL2とWebGPUのどちらでも、ボリュームテクスチャのスライスにレンダリングするレンダーパス内では、そのボリュームテクスチャをサンプリングできません。また、`TextureView` でスライスを除外することもできません。同じデータの読み書きを行うには、2つのボリュームテクスチャを交互に使用します。
+
+ボリュームテクスチャはカスタムシェーダーで3D座標を使ってサンプリングします。[シェーダーでのサンプリング](../textures.md#sampling-in-shaders)を参照してください。
+
+スライスが時間とともに変化する場合、毎フレーム一部のスライスだけを順番にレンダリングすることで、レンダーパスのコストを分散できます。次の例は、ボリュームテクスチャにカラフルなフォグのデータを書き込み（CPU上で書き込むか、毎フレーム数枚のスライスを更新しながらGPU上でスライスにレンダリングします）、シーンの上でレイマーチングします。必要に応じてミップマップも使用します。
+
+<EngineExample id="render-targets/volume-texture" title="Volume Texture" />
 
 ## ミップマップ {#mipmaps}
 
@@ -184,6 +205,8 @@ for (let layer = 0; layer < layerCount; layer++) {
 }
 ```
 
+ボリュームテクスチャの場合、スライスにレンダリングした後には、WebGL2とWebGPUのどちらでもボリューム全体のミップマップが再生成されます。各ミップレベルは複数の深度スライスからフィルタリングされるためです。そのため、多くのスライスにレンダリングする場合は、どちらでも最後にレンダリングするものを除くすべてのレンダーターゲットに `mipLevel: 0` を指定して、ミップマップを一度だけ生成します。
+
 ## 向き {#orientation}
 
 WebGL2とWebGPUは、レンダリングされた画像を垂直方向に逆の行順でネイティブに格納します。向きを指定しないままレンダーターゲットを通常のテクスチャとして（メッシュのUVで）サンプリングすると、2つのAPI間で結果が上下反転して見えます。`origin` オプションは、格納される向きを固定し、レンダーターゲットがどこでも同一に見えるようにします。次のいずれかを指定できます。
@@ -196,14 +219,20 @@ WebGL2とWebGPUは、レンダリングされた画像を垂直方向に逆の�
 
 ## フォーマットの選択 {#choosing-a-format}
 
-カラーテクスチャは、レンダリング可能で非圧縮のフォーマットを使用する必要があります。
+カラーテクスチャは、レンダリング可能で非圧縮のフォーマットを使用する必要があります。フォーマットのグループについては[ピクセルフォーマット](../textures.md#pixel-formats)を参照してください。
 
-- **`PIXELFORMAT_RGBA8`**（またはそのsRGBバリアントである `PIXELFORMAT_SRGBA8`）が標準的な選択肢で、どこでもレンダリング可能です。
-- **`PIXELFORMAT_RGB10A2`** はRGB各チャンネル10ビットと2ビットのアルファを提供し、`RGBA8` と同じメモリコストでより高い精度が得られます。WebGL2とWebGPUの両方でレンダリング可能です。
-- **HDRフォーマット**（float の `PIXELFORMAT_RGBA32F`、half-float の `PIXELFORMAT_RGBA16F`、small-float の `PIXELFORMAT_111110F`）は、デバイスのサポート状況に応じてレンダリング可能です。直接1つを選ぶ代わりに、[`GraphicsDevice.getRenderableHdrFormat`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#getrenderablehdrformat) をクエリすると、サポートされている最初の選択肢が返されます。サポート状況は異なります。WebGPUではfloatとhalf-floatは常にレンダリング可能です。WebGL2ではhalf-floatは広く利用可能（多くのモバイルiOSデバイスを含む）ですが、完全なfloatのレンダリングには [`GraphicsDevice.textureFloatRenderable`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#texturefloatrenderable) が必要です。
-- **`PIXELFORMAT_RGB9E5`** はコンパクトなHDRフォーマットで、サンプリングは可能ですが、レンダーターゲットのカラーバッファとしては**使用できません**。
+- **`PIXELFORMAT_RGBA8`** が標準的な選択肢で、どこでもレンダリング可能です。
+- **sRGBフォーマット**（`PIXELFORMAT_SRGBA8` など）もレンダリング可能です。レンダリングされたリニアの色は書き込み時にsRGBに変換され、ブレンドはリニア空間で行われます。[sRGBテクスチャの扱い](../linear-workflow/textures.md)を参照してください。
+- **`PIXELFORMAT_RGB10A2`** はRGB各チャンネル10ビットと2ビットのアルファを提供し、`RGBA8` と同じメモリコストでより高い精度が得られます。WebGL2とWebGPUの両方でレンダリング可能です。`PIXELFORMAT_RGB10A2U` はその符号なし整数版です。
+- **HDRフォーマット**（float の `PIXELFORMAT_RGBA32F`、half-float の `PIXELFORMAT_RGBA16F`、small-float の `PIXELFORMAT_111110F`）は、デバイスのサポート状況に応じてレンダリング可能です。
+  - WebGPUでは、floatとhalf-floatのフォーマットへのレンダリングは常にサポートされ、small-floatのフォーマットへのレンダリングは [`GraphicsDevice.textureRG11B10Renderable`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#texturerg11b10renderable) がtrueの場合にサポートされます。
+  - WebGL2では、[`GraphicsDevice.textureFloatRenderable`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#texturefloatrenderable) がtrueの場合に3つすべてへのレンダリングがサポートされます。そうでない場合、[`GraphicsDevice.textureHalfFloatRenderable`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#texturehalffloatrenderable) がtrueであれば、half-floatのフォーマットへのレンダリングのみがサポートされます。これは多くのモバイルiOSデバイスの場合です。
 
-フォーマットの完全な一覧と詳細なHDRサポート規則については、[`Texture`](https://api.playcanvas.com/engine/classes/Texture.html) APIリファレンスを参照してください。
+  直接1つを選ぶ代わりに、[`GraphicsDevice.getRenderableHdrFormat`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#getrenderablehdrformat) をクエリすると、サポートされている最初の選択肢が返されます。シーンをHDRでレンダリングする方法については[HDRレンダリング](../linear-workflow/hdr-rendering.md)を参照してください。
+- **整数フォーマット**（`PIXELFORMAT_R8U` など）もレンダリング可能です。シェーダーが出力した値をそのまま保存し、フィルタリングやブレンドは行われません。また、マルチサンプリングした整数のレンダーターゲットはハードウェアで解決できません。
+- **`PIXELFORMAT_RGB9E5`** はコンパクトなHDRフォーマットで、サンプリングは可能ですが、レンダーターゲットのカラーバッファとしては**使用できません**。圧縮フォーマットも同様です。
+
+フォーマットの完全な一覧と詳細なサポート規則については、[`Texture`](https://api.playcanvas.com/engine/classes/Texture.html) APIリファレンスを参照してください。
 
 レンダリング中の深度テストには、レンダーターゲットの作成時に `depth: true` で深度バッファを要求します（上記のとおり）。ステンシルバッファが必要な場合は `stencil: true` も指定します。
 
@@ -271,7 +300,7 @@ renderTarget.colorBuffer.destroy();
 renderTarget.destroy();
 ```
 
-複数のキューブマップの面や配列のレイヤーのレンダーターゲットがテクスチャを共有している場合は、各レンダーターゲットを破棄し、共有テクスチャは一度だけ破棄します。
+複数のキューブマップの面、配列のレイヤー、ボリュームのスライスのレンダーターゲットがテクスチャを共有している場合は、各レンダーターゲットを破棄し、共有テクスチャは一度だけ破棄します。
 
 ## 例 {#example}
 
@@ -281,6 +310,7 @@ renderTarget.destroy();
 
 ## 関連ページ {#related-pages}
 
+- [テクスチャ](../textures.md) - テクスチャの種類、ピクセルフォーマット、データのアップロード、サンプリング、テクスチャの読み戻しとコピーです。
 - [複数のレンダーターゲット](./multiple-render-targets.md) - 1つのパスから複数のカラーバッファへ同時にレンダリングします。
 - [複数のカメラ](../cameras/multiple-cameras.md) - ビューの合成とカメラへのレンダーターゲットの割り当てです。
 - [レイヤー](../layers/index.md) - 各カメラがどのオブジェクトをレンダリングするかを制御します。
