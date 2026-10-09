@@ -2,6 +2,8 @@
 
 PlayCanvas provides a powerful state-based animation system which can be used to animate character models and other arbitrary scene object models. Users can work with any of their .FBX animation assets. These can be organized using animation state machines to easily control the animated behavior of scene models at runtime.
 
+For 2D skeletal animations made with the Spine editor, see [Spine](https://developer.playcanvas.com/user-manual/2D/spine.md).
+
 ## System Overview
 
 The animation system touches on three main areas of the PlayCanvas platform. This section will walk through how these areas can be used together to create complex animation behavior for your models. The following sections of the animation user manual then will explore each area in more detail.

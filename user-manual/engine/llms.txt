@@ -141,6 +141,7 @@ Use this index to write code against the engine directly. React, Web Components 
 - [Animstategraph Assets](https://developer.playcanvas.com/user-manual/animation/anim-state-graph-assets.md): State machines of animation states, transitions, blending, layers and parameters.
 - [Anim Layer Masks](https://developer.playcanvas.com/user-manual/animation/anim-layer-masking.md): Driving separate parts of a skeleton from different layers.
 - [Anim Events](https://developer.playcanvas.com/user-manual/animation/anim-events.md): Firing named events on animation frames and handling them in scripts.
+- [Spine](https://developer.playcanvas.com/user-manual/2D/spine.md): Playing 2D skeletal animations from the Spine editor with the playcanvas-spine plugin: plugin versions, texture sRGB settings, animation state, colors and layers.
 
 ## User interface
 
@@ -220,7 +221,7 @@ Use this index to write code against the engine directly. React, Web Components 
 
 ## Optional
 
-- [All pages of this index in one file](https://developer.playcanvas.com/user-manual/engine/llms-full.txt): 220 pages (1292 KB), for downloading and searching rather than reading into context.
+- [All pages of this index in one file](https://developer.playcanvas.com/user-manual/engine/llms-full.txt): 221 pages (1301 KB), for downloading and searching rather than reading into context.
 - [PlayCanvas Engine](https://developer.playcanvas.com/user-manual/engine.md)
 - [Assets](https://developer.playcanvas.com/user-manual/assets.md)
 - [Preloading](https://developer.playcanvas.com/user-manual/assets/preloading.md)
