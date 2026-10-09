@@ -95,6 +95,10 @@ spineboy.spine.state.setAnimation(0, 'run', true);
 
 Spineの座標は0.01倍にスケーリングされるため、Spineエディターで高さ700ピクセルのスケルトンは、シーン内では高さ7ユニットになります。
 
+[Spineboyサンプル](https://playcanvas.com/examples/#/misc/spineboy)は、プラグインを使用したエンジンのみのプロジェクトの完全な例です。
+
+<EngineExample id="misc/spineboy" title="Spineboy" />
+
 ## アニメーションの制御
 
 spineコンポーネントから、スケルトンのspine-coreオブジェクトにアクセスできます。
