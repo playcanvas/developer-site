@@ -95,6 +95,10 @@ spineboy.spine.state.setAnimation(0, 'run', true);
 
 Spine coordinates are scaled by 0.01, so a skeleton 700 pixels tall in the Spine editor is 7 units tall in the scene.
 
+The [Spineboy example](https://playcanvas.com/examples/#/misc/spineboy) is a complete engine-only project using the plugin:
+
+<EngineExample id="misc/spineboy" title="Spineboy" />
+
 ## Controlling animations
 
 The spine component gives access to the spine-core objects of the skeleton:
