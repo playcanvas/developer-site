@@ -11,6 +11,7 @@ PlayCanvas does not itself provide a tool to convert photogrammetry into a Gauss
 |------|------------|-----------|------| :-----: |-------------|--------------|
 | [**Polycam**](https://poly.cam/) | Easy | iOS, Android, Web | Freemium | ❌ | Capture + Training | Mobile device |
 | [**Luma AI**](https://lumalabs.ai/app) | Easy | iOS, Android, Web | Freemium | ❌ | Capture + Training | Mobile device |
+| [**MakeSplat**](https://makesplat.com/) | Easy | Web, REST API | Pay per use | ❌ | Camera Poses + Training | |
 | [**COLMAP**](https://colmap.github.io/) | Advanced | Win, Linux, macOS | Free | ✔️ | Camera Poses | |
 | [**RealityScan**](https://www.realityscan.com/) | Medium | Win | Free* | ❌ | Camera Poses | CUDA GPU |
 | [**Postshot**](https://www.jawset.com/) | Medium | Win | Paid | ❌ | Camera Poses + Training | CUDA GPU |
@@ -42,6 +43,9 @@ AI-powered cloud service with mobile app for easy capture. Offers mobile app for
 Select **Gaussian Splat** on export from Luma and extract the PLY file from the downloaded ZIP file.
 
 :::
+
+[**MakeSplat**](https://makesplat.com/) (Web)  
+Cloud service that turns a video into a Gaussian splat. Upload an MP4 or MOV in the browser, or automate it with the REST API, and download a splat PLY in about 10 minutes. The first splat is free.
 
 ## Medium/Pro Tools
 
