@@ -26,3 +26,11 @@ PlayCanvasエンジンは、3Dゲームやアプリを素早く簡単に作成�
 [スプライトエディター](/user-manual/2D/sprite-editor)は、テクスチャアトラスのフレームとスプライトアセットを生成するためのツールです。スプライトエディターは、任意のテクスチャアトラスまたはスプライトアセットをダブルクリックすることで開くことができます。[詳細はこちら](/user-manual/2D/sprite-editor)。
 
 *アートワークは[PixelBoy](https://twitter.com/2pblog1)によって作成されました。*
+
+## スケルタルアニメーション
+
+### Spine
+
+![Spine](/img/user-manual/2D/spine/spine-4-3-example.webp)
+
+[Spine](https://esotericsoftware.com/)は、2Dスケルタルアニメーションのためのエディターです。[playcanvas-spine](https://github.com/playcanvas/playcanvas-spine)プラグインを使うと、Spineからエクスポートしたアニメーションを、Editorとエンジンのみのプロジェクトで再生できます。[詳細はこちら](/user-manual/2D/spine)。

@@ -1085,6 +1085,7 @@ const sidebars = {
         'user-manual/2D/sprite-editor',
         'user-manual/2D/slicing',
         'user-manual/2D/texture-packing',
+        'user-manual/2D/spine',
       ],
     },
     {

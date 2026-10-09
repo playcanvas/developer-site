@@ -26,3 +26,11 @@ A [Texture Atlas](/user-manual/editor/assets/inspectors/texture-atlas) is an enh
 The [Sprite Editor](/user-manual/2D/sprite-editor) is the tool used to generate Texture Atlas frames and Sprite Assets. You can open the Sprite Editor by double-clicking on any Texture Atlas or Sprite Asset. [Read More](/user-manual/2D/sprite-editor).
 
 *Artwork created by [PixelBoy](https://twitter.com/2pblog1)*
+
+## Skeletal Animation
+
+### Spine
+
+![Spine](/img/user-manual/2D/spine/spine-4-3-example.webp)
+
+[Spine](https://esotericsoftware.com/) is an editor for 2D skeletal animation. The [playcanvas-spine](https://github.com/playcanvas/playcanvas-spine) plugin plays animations exported from Spine, in Editor and engine-only projects. [Read More](/user-manual/2D/spine).
