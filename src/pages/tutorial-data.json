@@ -1043,6 +1043,16 @@
       "filename": "space-rocks"
     },
     {
+      "title": "Spine Animation",
+      "tags": [
+        "animation",
+        "scripts",
+        "ui"
+      ],
+      "thumb": "/img/tutorials/spine-animation/thumbnail.jpg",
+      "filename": "spine-animation"
+    },
+    {
       "title": "Static Batching",
       "tags": [
         "rendering",

@@ -28,6 +28,8 @@ Esoteric Softwareの[Spine](https://esotericsoftware.com/)は、2Dスケルタ�
 
 各スケルトンをJSONとしてエクスポートし、テクスチャアトラス (`.atlas`ファイルと1つ以上の`.png`ページ) も一緒にエクスポートします。アンチエイリアスされたエッジを最も高品質に表示できるため、乗算済みアルファ (Premultiplied alpha) を推奨します。
 
+Spine 4.3プラグインは、バイナリの`.skel`形式でエクスポートされたスケルトンも読み込めます。この形式はJSONより数倍小さく、読み込みも高速です。それ以前のSpineバージョンのプラグインは、バイナリスケルトンを渡されるとエラーをスローします。
+
 ## テクスチャ
 
 テクスチャアセットは正しいsRGB設定で読み込む必要があります。そうしないと、スケルトンが正しい色で描画されません。
@@ -41,8 +43,8 @@ Esoteric Softwareの[Spine](https://esotericsoftware.com/)は、2Dスケルタ�
 
 1. 使用するSpineバージョンのプラグインビルドと[spine.js](https://github.com/playcanvas/playcanvas-spine/blob/main/build/spine.js)をプロジェクトに追加します。
 2. [スクリプトの読み込み順序](/user-manual/editor/scripting/loading-order)で、プラグインが`spine.js`より先に読み込まれるようにします。
-3. エクスポートした`.json`、`.atlas`、`.png`ファイルをインポートします。アトラスはテキストアセットとしてインポートされます。Spine 4.3では、インポートした[テクスチャ](/user-manual/editor/assets/inspectors/texture)のsRGBを無効にします。
-4. エンティティにスクリプトコンポーネントを追加して`spine`スクリプトを割り当て、その属性にアトラス、スケルトン、テクスチャの各アセットを設定します。`priority`属性は、重なり合うスケルトンの描画順を制御します。
+3. エクスポートした`.json`または`.skel`、`.atlas`、`.png`ファイルをインポートします。アトラスはテキストアセットとして、`.skel`スケルトンはバイナリアセットとしてインポートされます。Spine 4.3では、インポートした[テクスチャ](/user-manual/editor/assets/inspectors/texture)のsRGBを無効にします。
+4. エンティティにスクリプトコンポーネントを追加して`spine`スクリプトを割り当て、その属性にアトラス、スケルトン、テクスチャの各アセットを設定します。バイナリスケルトンは`skeleton`の代わりに`skeletonBinary`属性に設定します。`priority`属性は、重なり合うスケルトンの描画順を制御します。
 
 `spine`スクリプトは初期化時にspineコンポーネントを追加するため、アニメーションは別のスクリプトの`postInitialize`メソッドから制御します。
 
@@ -57,6 +59,8 @@ export class PlayRun extends Script {
     }
 }
 ```
+
+[Spineアニメーション](/tutorials/spine-animation/)チュートリアルは、バイナリとJSONのスケルトン、およびそのアニメーションを制御するパネルを含む、完全なEditorプロジェクトです。
 
 ## エンジンのみのプロジェクトでSpineを使う
 
@@ -91,6 +95,12 @@ spineboy.addComponent('spine', {
 app.root.addChild(spineboy);
 
 spineboy.spine.state.setAnimation(0, 'run', true);
+```
+
+Spine 4.3プラグインでバイナリの`.skel`スケルトンを読み込むには、`binary`アセットとして読み込みます。
+
+```javascript
+const skeleton = new Asset('spineboy-pro.skel', 'binary', { url: 'spineboy-pro.skel' });
 ```
 
 Spineの座標は0.01倍にスケーリングされるため、Spineエディターで高さ700ピクセルのスケルトンは、シーン内では高さ7ユニットになります。
