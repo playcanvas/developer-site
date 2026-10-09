@@ -44,7 +44,7 @@ Spine 4.3プラグインは、バイナリの`.skel`形式でエクスポート�
 1. 使用するSpineバージョンのプラグインビルドと[spine.js](https://github.com/playcanvas/playcanvas-spine/blob/main/build/spine.js)をプロジェクトに追加します。
 2. [スクリプトの読み込み順序](/user-manual/editor/scripting/loading-order)で、プラグインが`spine.js`より先に読み込まれるようにします。
 3. エクスポートした`.json`または`.skel`、`.atlas`、`.png`ファイルをインポートします。アトラスはテキストアセットとして、`.skel`スケルトンはバイナリアセットとしてインポートされます。Spine 4.3では、インポートした[テクスチャ](/user-manual/editor/assets/inspectors/texture)のsRGBを無効にします。
-4. エンティティにスクリプトコンポーネントを追加して`spine`スクリプトを割り当て、その属性にアトラス、スケルトン、テクスチャの各アセットを設定します。バイナリスケルトンは`skeleton`の代わりに`skeletonBinary`属性に設定します。`priority`属性は、重なり合うスケルトンの描画順を制御します。
+4. エンティティにスクリプトコンポーネントを追加して`spine`スクリプトを割り当て、その属性にアトラス、スケルトン、テクスチャの各アセットを設定します。バイナリスケルトンは`skeleton`の代わりに`skeletonBinary`属性に設定します。`priority`属性は重なり合うスケルトンの描画順を制御し、`physicsInheritance`属性はエンティティの移動に[Physics](#physics)を反応させます。
 
 `spine`スクリプトは初期化時にspineコンポーネントを追加するため、アニメーションは別のスクリプトの`postInitialize`メソッドから制御します。
 
@@ -164,13 +164,36 @@ skeleton.findSlot('head').getPose().color.set(1, 0, 0, 1);
 
 Spine 4.3プラグインは、スロットのブレンドモード (normal、additive、multiply、screen) とTint blackをサポートしています。
 
+## Physics
+
+Spine 4.2で追加されたPhysics制約は、髪や布などのスケルトンの一部を自然に揺らし、落ち着かせます。4.2プラグインと4.3プラグインは、スケルトンのアニメーションに合わせてこれをシミュレーションします。
+
+Spine 4.3プラグインでは、Physics制約がエンティティの移動と回転にも反応できるため、エンティティがシーン内を移動すると、Physicsで動く部分が遅れてついてきたり、揺れたり、落ち着いたりします。このPhysicsの継承はデフォルトで無効です。Editorでは、`spine`スクリプトの`physicsInheritance`属性を有効にします。コードでは、プラグインの`skeletonPhysics`オブジェクトを使用します。これはspine-coreランタイムの`SkeletonPhysicsMovement`です。
+
+```javascript
+const { skeletonPhysics } = entity.spine.spine;
+
+// エンティティの移動と回転をすべてPhysicsに渡す
+skeletonPhysics.setPositionInheritance(1, 1);
+skeletonPhysics.rotationInheritance = 1;
+```
+
+水平方向と垂直方向の移動、および回転には、それぞれ別の係数があります。0から1の間の値は移動の一部を渡し、0は何も渡しません。回転は、スケルトン平面の法線であるエンティティのローカルZ軸周りの回転です。
+
+リスポーンなどでエンティティを瞬時に移動させる場合は、その移動がPhysicsに渡されないようにトランスフォームをリセットします。
+
+```javascript
+entity.setPosition(10, 0, 0);
+entity.spine.spine.skeletonPhysics.resetTransform();
+```
+
 ## Spine 4.3
 
 Spine 4.3ではspine-core APIの一部が変更されました。例えば`skeleton.setToSetupPose()`は`skeleton.setupPose()`になったため、4.3に移行する際はグローバル変数`spine`を使用するスクリプトの更新が必要です。詳細は[Spineランタイムの変更履歴](https://github.com/EsotericSoftware/spine-runtimes/blob/4.3/CHANGELOG.md)を参照してください。
 
 以前のプラグインの`setTint`メソッドは4.3プラグインではサポートされておらず、呼び出すと警告がログに出力されます。代わりに、スケルトン、スロット、アタッチメントの[色](#色)を使用してください。
 
-Spine 4.2で追加されたPhysics制約は、4.2プラグインと4.3プラグインでシミュレーションされます。
+4.3プラグインは、エンティティの移動を[Physics](#physics)に渡すこともできます。
 
 ## レイヤーと描画順
 
