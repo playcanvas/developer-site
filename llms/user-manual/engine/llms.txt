@@ -144,7 +144,7 @@ Use this index to write code against the engine directly. React, Web Components 
 - [Animstategraph Assets](/user-manual/animation/anim-state-graph-assets/): State machines of animation states, transitions, blending, layers and parameters.
 - [Anim Layer Masks](/user-manual/animation/anim-layer-masking/): Driving separate parts of a skeleton from different layers.
 - [Anim Events](/user-manual/animation/anim-events/): Firing named events on animation frames and handling them in scripts.
-- [Spine](/user-manual/2D/spine/): Playing 2D skeletal animations from the Spine editor with the playcanvas-spine plugin: plugin versions, texture sRGB settings, animation state, colors and layers.
+- [Spine](/user-manual/2D/spine/): Playing 2D skeletal animations from the Spine editor with the playcanvas-spine plugin: plugin versions, texture sRGB settings, binary skeletons, animation state, colors, physics and layers.
 
 ## User interface
 
