@@ -11833,6 +11833,8 @@ Use the plugin build matching the version of the Spine editor the animations wer
 
 Export each skeleton as JSON, together with its texture atlas: an `.atlas` file and one or more `.png` pages. Premultiplied alpha is recommended, as it gives the best quality antialiased edges.
 
+The Spine 4.3 plugin also loads skeletons exported in the binary `.skel` format, which is several times smaller than JSON and faster to load. The plugins for earlier Spine versions throw an error when given a binary skeleton.
+
 ## Textures
 
 The texture assets need to be loaded with the right sRGB setting, or the skeletons do not render with the right colors:
@@ -11846,8 +11848,8 @@ The plugin finds the texture for each page of the atlas by name, so the texture 
 
 1. Add the plugin build for your Spine version and [spine.js](https://github.com/playcanvas/playcanvas-spine/blob/main/build/spine.js) to your project.
 2. In the [script loading order](https://developer.playcanvas.com/user-manual/editor/scripting/loading-order.md), make sure the plugin loads before `spine.js`.
-3. Import the exported `.json`, `.atlas` and `.png` files. The atlas is imported as a text asset. For Spine 4.3, disable sRGB on the imported [textures](https://developer.playcanvas.com/user-manual/editor/assets/inspectors/texture.md).
-4. Add a script component with the `spine` script to an entity, and assign the atlas, skeleton and texture assets to its attributes. The `priority` attribute controls the order of overlapping skeletons.
+3. Import the exported `.json` or `.skel`, `.atlas` and `.png` files. The atlas is imported as a text asset, and a `.skel` skeleton as a binary asset. For Spine 4.3, disable sRGB on the imported [textures](https://developer.playcanvas.com/user-manual/editor/assets/inspectors/texture.md).
+4. Add a script component with the `spine` script to an entity, and assign the atlas, skeleton and texture assets to its attributes. Assign a binary skeleton to the `skeletonBinary` attribute instead of `skeleton`. The `priority` attribute controls the order of overlapping skeletons.
 
 The `spine` script adds the spine component when it initializes, so control the animation from another script in its `postInitialize` method:
 
@@ -11862,6 +11864,8 @@ export class PlayRun extends Script {
     }
 }
 ```
+
+The [Spine Animation](https://developer.playcanvas.com/tutorials/spine-animation/) tutorial is a complete Editor project, with a binary and a JSON skeleton, and a panel to control their animations.
 
 ## Using Spine in an engine-only project
 
@@ -11896,6 +11900,12 @@ spineboy.addComponent('spine', {
 app.root.addChild(spineboy);
 
 spineboy.spine.state.setAnimation(0, 'run', true);
+```
+
+To load a binary `.skel` skeleton with the Spine 4.3 plugin, load it as a `binary` asset:
+
+```javascript
+const skeleton = new Asset('spineboy-pro.skel', 'binary', { url: 'spineboy-pro.skel' });
 ```
 
 Spine coordinates are scaled by 0.01, so a skeleton 700 pixels tall in the Spine editor is 7 units tall in the scene.
