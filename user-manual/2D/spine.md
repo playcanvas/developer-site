@@ -41,7 +41,7 @@ The plugin finds the texture for each page of the atlas by name, so the texture 
 1. Add the plugin build for your Spine version and [spine.js](https://github.com/playcanvas/playcanvas-spine/blob/main/build/spine.js) to your project.
 2. In the [script loading order](https://developer.playcanvas.com/user-manual/editor/scripting/loading-order.md), make sure the plugin loads before `spine.js`.
 3. Import the exported `.json` or `.skel`, `.atlas` and `.png` files. The atlas is imported as a text asset, and a `.skel` skeleton as a binary asset. For Spine 4.3, disable sRGB on the imported [textures](https://developer.playcanvas.com/user-manual/editor/assets/inspectors/texture.md).
-4. Add a script component with the `spine` script to an entity, and assign the atlas, skeleton and texture assets to its attributes. Assign a binary skeleton to the `skeletonBinary` attribute instead of `skeleton`. The `priority` attribute controls the order of overlapping skeletons.
+4. Add a script component with the `spine` script to an entity, and assign the atlas, skeleton and texture assets to its attributes. Assign a binary skeleton to the `skeletonBinary` attribute instead of `skeleton`. The `priority` attribute controls the order of overlapping skeletons, and the `physicsInheritance` attribute makes [physics](https://developer.playcanvas.com/user-manual/2D/spine.md#physics) react to the movement of the entity.
 
 The `spine` script adds the spine component when it initializes, so control the animation from another script in its `postInitialize` method:
 
@@ -161,13 +161,36 @@ skeleton.findSlot('head').getPose().color.set(1, 0, 0, 1);
 
 Slot blend modes (normal, additive, multiply and screen) and tint black are supported by the Spine 4.3 plugin.
 
+## Physics
+
+Physics constraints, added in Spine 4.2, make parts of a skeleton such as hair and cloth swing and settle on their own. The 4.2 and 4.3 plugins simulate them as the skeleton animates.
+
+With the Spine 4.3 plugin, physics constraints can also react to the movement and rotation of the entity, so that the physics driven parts lag behind, swing and settle when the entity moves around the scene. This physics inheritance is disabled by default. In the Editor, enable the `physicsInheritance` attribute of the `spine` script. In code, use the `skeletonPhysics` object of the plugin, which is the `SkeletonPhysicsMovement` of the spine-core runtime:
+
+```javascript
+const { skeletonPhysics } = entity.spine.spine;
+
+// pass the full movement and rotation of the entity to physics
+skeletonPhysics.setPositionInheritance(1, 1);
+skeletonPhysics.rotationInheritance = 1;
+```
+
+The horizontal and vertical movement, and the rotation, have separate factors: values between 0 and 1 pass part of the movement, and 0 passes none. The rotation is the rotation of the entity around its local Z axis, which is the normal of the skeleton plane.
+
+When an entity is moved instantly, for example when it respawns, reset the transform so that the jump is not passed to physics:
+
+```javascript
+entity.setPosition(10, 0, 0);
+entity.spine.spine.skeletonPhysics.resetTransform();
+```
+
 ## Spine 4.3
 
 Spine 4.3 changed parts of the spine-core API, for example `skeleton.setToSetupPose()` is now `skeleton.setupPose()`, so scripts using the `spine` global need updating when moving to 4.3. See the [Spine runtimes changelog](https://github.com/EsotericSoftware/spine-runtimes/blob/4.3/CHANGELOG.md) for the details.
 
 The `setTint` method of earlier plugins is not supported by the 4.3 plugin, which logs a warning when it is called. Use the [colors](https://developer.playcanvas.com/user-manual/2D/spine.md#colors) of the skeleton, its slots and attachments instead.
 
-Physics constraints, added in Spine 4.2, are simulated by the 4.2 and 4.3 plugins.
+The 4.3 plugin can also pass the movement of entities to [physics](https://developer.playcanvas.com/user-manual/2D/spine.md#physics).
 
 ## Layers and draw order
 
