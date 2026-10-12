@@ -195,7 +195,7 @@ device.computeDispatch(computes, 'Blur');
 
 The total number of invocations is `dispatchSize × workgroupSize`. For example, if you dispatch with `(width, height)` and your shader has `@workgroup_size(1, 1, 1)`, you get `width × height` invocations.
 
-For better performance with large datasets, use larger workgroup sizes:
+For better performance with large datasets, use larger workgroup sizes, such as 64 for data in one dimension, or 8 × 8 for images:
 
 ```wgsl
 @compute @workgroup_size(64, 1, 1)
@@ -204,13 +204,44 @@ fn main(@builtin(global_invocation_id) global_id: vec3u) {
 }
 ```
 
-Then dispatch accordingly:
+### Dispatching for a Number of Threads
+
+[`setupDispatchThreads`](https://api.playcanvas.com/engine/classes/Compute.html#setupdispatchthreads) takes the number of threads to dispatch in each dimension, instead of the number of workgroups. A thread is one invocation of the shader, typically processing one element or pixel. The workgroups are derived from the workgroup size the shader declares, which needs to be written with integer literals, such as `@workgroup_size(8, 8)`. Values injected using `cdefines`, see [Defines and Includes](#defines-and-includes), are replaced with literals before the workgroup size is read.
 
 ```javascript
-const numElements = 1024 * 1024;
-const workgroupSize = 64;
-compute.setupDispatch(numElements / workgroupSize);
+// a thread for each element
+compute.setupDispatchThreads(numElements);
+
+// a thread for each pixel of an image
+compute.setupDispatchThreads(width, height);
 ```
+
+The dispatch is rounded up to whole workgroups, so the shader skips the threads beyond the requested number. The functions of the `dispatchThreadsCS` include do that, and index the threads:
+
+```wgsl
+#include "dispatchThreadsCS"
+
+var<storage, read_write> values: array<f32>;
+
+@compute @workgroup_size(64)
+fn main(@builtin(global_invocation_id) id: vec3u) {
+    if (!dispatchThreadInRange(id)) {
+        return;
+    }
+    let index = dispatchThreadIndex(id);
+    values[index] = values[index] * 2.0;
+}
+```
+
+The `dispatchThreadsCS` include provides:
+
+| Function | Description |
+|----------|-------------|
+| `dispatchThreadCount() -> vec3u` | The number of threads the dispatch was set up for. |
+| `dispatchThreadInRange(globalId: vec3u) -> bool` | True when the thread is one of the threads the dispatch was set up for. |
+| `dispatchThreadIndex(globalId: vec3u) -> u32` | The linear index of the thread, with x varying fastest. |
+
+A shader can also skip the threads using its own bounds, for example the size of the texture it writes. However, a device supports a limited number of workgroups in each dimension, at least 65535. A dispatch in one dimension which needs more is spread over rows of workgroups, and the shader then needs to include `dispatchThreadsCS` and index its threads using `dispatchThreadIndex`, which accounts for that.
 
 ## Indirect Dispatch
 
@@ -420,6 +451,7 @@ The engine provides built-in shader chunks that are automatically available in c
 | `halfTypesCS` | Half-precision type aliases (`half`, `half2`, etc.) that resolve to f16 when supported, f32 otherwise. See [Half-Precision Types](/user-manual/graphics/shaders/wgsl-capabilities#half-precision-types). |
 | `sceneDepthCS` | Access to the scene depth map of a camera. See [Scene Depth and Color Maps](#scene-depth-and-color-maps). |
 | `sceneColorCS` | Access to the scene color map of a camera. See [Scene Depth and Color Maps](#scene-depth-and-color-maps). |
+| `dispatchThreadsCS` | Skipping and indexing the threads of a dispatch set up using `setupDispatchThreads`. See [Dispatching for a Number of Threads](#dispatching-for-a-number-of-threads). |
 
 Example:
 
