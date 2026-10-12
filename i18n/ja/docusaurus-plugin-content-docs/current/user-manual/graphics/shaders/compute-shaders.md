@@ -195,7 +195,7 @@ device.computeDispatch(computes, 'Blur');
 
 総呼び出し回数は`dispatchSize × workgroupSize`です。例えば、`(width, height)`でディスパッチし、シェーダーが`@workgroup_size(1, 1, 1)`の場合、`width × height`回の呼び出しが行われます。
 
-大規模なデータセットでのパフォーマンス向上のために、より大きなワークグループサイズを使用してください：
+大規模なデータセットでのパフォーマンス向上のために、より大きなワークグループサイズを使用してください。例えば、1次元のデータには64、画像には8 × 8が適しています：
 
 ```wgsl
 @compute @workgroup_size(64, 1, 1)
@@ -204,13 +204,44 @@ fn main(@builtin(global_invocation_id) global_id: vec3u) {
 }
 ```
 
-そして、それに応じてディスパッチします：
+### スレッド数を指定したディスパッチ {#dispatching-for-a-number-of-threads}
+
+[`setupDispatchThreads`](https://api.playcanvas.com/engine/classes/Compute.html#setupdispatchthreads)は、ワークグループ数の代わりに、各次元でディスパッチするスレッド数を受け取ります。スレッドはシェーダーの1回の呼び出しで、通常は1つの要素またはピクセルを処理します。ワークグループ数は、シェーダーが宣言するワークグループサイズから求められます。そのため、ワークグループサイズは`@workgroup_size(8, 8)`のように整数リテラルで記述する必要があります。`cdefines`で注入した値（[定義とインクルード](#defines-and-includes)を参照）は、ワークグループサイズが読み取られる前にリテラルに置き換えられます。
 
 ```javascript
-const numElements = 1024 * 1024;
-const workgroupSize = 64;
-compute.setupDispatch(numElements / workgroupSize);
+// 要素ごとに1スレッド
+compute.setupDispatchThreads(numElements);
+
+// 画像のピクセルごとに1スレッド
+compute.setupDispatchThreads(width, height);
 ```
+
+ディスパッチはワークグループ単位に切り上げられるため、シェーダーは要求された数を超えるスレッドをスキップします。`dispatchThreadsCS`インクルードの関数は、このスキップとスレッドのインデックス計算を行います：
+
+```wgsl
+#include "dispatchThreadsCS"
+
+var<storage, read_write> values: array<f32>;
+
+@compute @workgroup_size(64)
+fn main(@builtin(global_invocation_id) id: vec3u) {
+    if (!dispatchThreadInRange(id)) {
+        return;
+    }
+    let index = dispatchThreadIndex(id);
+    values[index] = values[index] * 2.0;
+}
+```
+
+`dispatchThreadsCS`インクルードは次の関数を提供します：
+
+| 関数 | 説明 |
+|------|------|
+| `dispatchThreadCount() -> vec3u` | ディスパッチに設定されたスレッド数。 |
+| `dispatchThreadInRange(globalId: vec3u) -> bool` | スレッドが、ディスパッチに設定されたスレッドの1つである場合にtrue。 |
+| `dispatchThreadIndex(globalId: vec3u) -> u32` | スレッドの線形インデックス。xが最も速く変化します。 |
+
+シェーダーは、書き込むテクスチャのサイズなど、独自の範囲でスレッドをスキップすることもできます。ただし、デバイスが各次元でサポートするワークグループ数には上限があり、少なくとも65535です。それを超えるワークグループが必要な1次元のディスパッチは複数行のワークグループに分割されます。その場合、シェーダーは`dispatchThreadsCS`をインクルードし、分割を考慮する`dispatchThreadIndex`でスレッドのインデックスを求める必要があります。
 
 ## 間接ディスパッチ
 
@@ -420,6 +451,7 @@ fn main(@builtin(global_invocation_id) id: vec3u) {
 | `halfTypesCS` | 半精度型エイリアス（`half`、`half2`など）。サポートされている場合はf16に、そうでない場合はf32に解決されます。[半精度型](/user-manual/graphics/shaders/wgsl-capabilities#half-precision-types)を参照。 |
 | `sceneDepthCS` | カメラのシーン深度マップへのアクセス。[シーンの深度マップとカラーマップ](#scene-depth-and-color-maps)を参照。 |
 | `sceneColorCS` | カメラのシーンカラーマップへのアクセス。[シーンの深度マップとカラーマップ](#scene-depth-and-color-maps)を参照。 |
+| `dispatchThreadsCS` | `setupDispatchThreads`で設定したディスパッチのスレッドのスキップとインデックス計算。[スレッド数を指定したディスパッチ](#dispatching-for-a-number-of-threads)を参照。 |
 
 例：
 
@@ -434,7 +466,7 @@ fn main(@builtin(global_invocation_id) global_id: vec3u) {
 }
 ```
 
-### 定義とインクルード
+### 定義とインクルード {#defines-and-includes}
 
 `cdefines`を使用して定義を渡し、`cincludes`を使用してインクルードコンテンツを提供します：
 
