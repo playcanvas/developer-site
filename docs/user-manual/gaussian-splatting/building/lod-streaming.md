@@ -11,7 +11,7 @@ Streamed SOG works by:
 
 1. Pre-generating multiple versions of your splat at different detail levels
 2. Organizing them into a spatial tree structure for efficient streaming
-3. Dynamically loading and unloading detail levels to fit a global splat budget, spending detail where it improves the image the most
+3. Dynamically loading and unloading detail levels by camera distance, fitted to a global splat budget
 4. Rendering only the selected level of detail for each region of the scene
 
 This approach allows you to render massive splat scenes that would otherwise be impossible due to memory constraints.
@@ -45,30 +45,29 @@ Streaming is enabled simply by loading a Streamed SOG asset (`lod-meta.json`) on
 
 ### How LOD Is Chosen
 
-The engine picks one LOD level per region of the scene so that the total splat count fits the global [splat budget](/user-manual/gaussian-splatting/building/performance#global-splat-budget). By default detail is ordered by camera distance: each region steps down through concentric bands around the camera, with the band edges adapting to the budget. With `GSPLAT_LODMODE_ERROR` (see below) the engine instead combines each region's projected size on screen with a measure of how much visual error each of its LOD levels would leave. These error metrics are read from `lod-meta.json` when present ([SplatTransform](/user-manual/splat-transform) 3.3 and newer writes them) and are derived automatically from the splat counts otherwise — no configuration is required either way. LOD selection also compensates for the camera's field of view automatically.
-
-### LOD Mode
-
-[`lodMode`](https://api.playcanvas.com/engine/classes/GSplatParams.html#lodMode) on `app.scene.gsplat` selects between two strategies:
+The engine picks one LOD level per region of the scene from its distance to the camera. Each gsplat component sets where its detail steps down: the finest level (LOD 0) out to [`lodBaseDistance`](https://api.playcanvas.com/engine/classes/GSplatComponent.html#lodbasedistance), then each coarser level from [`lodMultiplier`](https://api.playcanvas.com/engine/classes/GSplatComponent.html#lodmultiplier) times the distance where the one before began. With the defaults of 5 and 3, LOD 1 begins at 5 world units, LOD 2 at 15 and LOD 3 at 45:
 
 ```javascript
-app.scene.gsplat.lodMode = pc.GSPLAT_LODMODE_ERROR;
+entity.gsplat.lodBaseDistance = 10; // LOD 0 out to 10 units
+entity.gsplat.lodMultiplier = 4; // then LOD 1 to 40 units, LOD 2 to 160, ...
 ```
 
-- `GSPLAT_LODMODE_DISTANCE` (default): error metadata is ignored and detail is ordered by camera distance alone, stepping down in concentric bands around the camera with the band edges adapting to the budget. It uses the least memory of the two modes, so prefer it on memory-constrained devices.
-- `GSPLAT_LODMODE_ERROR`: the budget goes where it removes the most visual error per splat. This lifts sparse, low-quality regions such as sky and distant background that distance alone leaves coarse, but it keeps considerably more source data resident, so memory use is noticeably higher.
+Raising either value keeps finer detail further from the camera, at a higher memory cost. `lodBaseDistance` has a minimum of 0.1 and `lodMultiplier` a minimum of 1.2. The distances are compensated for the camera's field of view: a wider FOV makes objects appear smaller on screen, so coarser levels are used sooner.
 
-Distance mode became the default in engine 2.23; 2.22 defaults to error mode.
+How these distances combine with the scene-wide [splat budget](/user-manual/gaussian-splatting/building/performance#global-splat-budget) is set by the budget mode.
 
-### LOD Falloff
+### Budget Mode
 
-[`lodFalloff`](https://api.playcanvas.com/engine/classes/GSplatComponent.html#lodFalloff) on the gsplat component controls how quickly that splat's detail drops with distance from the camera, in either mode:
+[`splatBudgetMode`](https://api.playcanvas.com/engine/classes/GSplatParams.html#splatbudgetmode) on `app.scene.gsplat` selects between two modes:
 
 ```javascript
-entity.gsplat.lodFalloff = 2; // more detail near the camera, less in the distance
+app.scene.gsplat.splatBudgetMode = pc.GSPLAT_BUDGET_LIMIT;
 ```
 
-The value ranges from 0 to 8 and defaults to 1, which gives a balanced falloff. Higher values concentrate detail near the camera at the cost of the far field, while values towards 0 spread it evenly across the scene regardless of the view. This primarily redistributes the detail the splat receives from the budget between its near and far field, though it can also shift how the budget divides between splats.
+- `GSPLAT_BUDGET_TARGET` (default): detail is raised until the budget is used up, wherever the camera is. The engine moves the LOD distances of every splat outward or inward by one shared factor until the scene fills the budget, so the distances you set only shape how detail falls off with distance and how it divides between splats, not how much of it there is.
+- `GSPLAT_BUDGET_LIMIT`: the LOD distances decide the detail, and the budget only lowers it when they would ask for more splats than it allows. A distant splat uses only the few splats its distance calls for and leaves the rest of the budget unused, so a scene seen from far away does not stream in finer levels just to fill the budget.
+
+A budget of 0 or less means no budget at all: target mode then renders everything at its finest level, and limit mode leaves the detail to the LOD distances alone.
 
 ### Scene-Level Control
 
@@ -87,7 +86,7 @@ const gsplatSettings = app.scene.gsplat;
 // (See API documentation for available properties)
 ```
 
-The most important scene-level setting for Streamed SOG is the global splat budget, which automatically balances detail across all GSplat assets to hit a target splat count. See [Global Splat Budget](/user-manual/gaussian-splatting/building/performance#global-splat-budget) in the Performance section for details.
+The most important scene-level setting for Streamed SOG is the global splat budget, which automatically balances detail across all GSplat assets, either as a target splat count to fill or as a limit, depending on the budget mode above. See [Global Splat Budget](/user-manual/gaussian-splatting/building/performance#global-splat-budget) in the Performance section for details.
 
 ## Using Streamed SOG in the Editor
 
