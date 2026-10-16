@@ -110,6 +110,31 @@ Test more than once, including while reads or compute work are in flight. Check 
 
 ## When recovery fails
 
-Recovery is not guaranteed: the browser may be unable to restore a context or obtain another GPU device. Do not assume every `devicelost` event will be followed by `devicerestored`. An application can show an HTML recovery message and, after an application-chosen timeout, offer a page reload. Use HTML rather than an in-canvas message, since rendering is paused. Preserve important user work outside GPU memory.
+Recovery is not guaranteed: the browser may be unable to restore a context or obtain another GPU device. For example, after repeated GPU process crashes, Chrome can block GPU access for the site for a few minutes. Do not assume every `devicelost` event will be followed by `devicerestored`.
+
+The device fires `devicerestorefailed` when it cannot obtain a replacement WebGPU device. The handler receives the error, and the device stays lost. WebGL2 has no equivalent signal, and the browser may never restore the context, so also stop waiting after an application-chosen timeout:
+
+```javascript
+const message = document.getElementById('gpu-lost-message');
+let recoveryTimeout = null;
+
+device.on('devicelost', () => {
+    // WebGL2 does not report a failed restore, so stop waiting after a while
+    recoveryTimeout = setTimeout(() => {
+        message.hidden = false;
+    }, 10000);
+});
+device.on('devicerestored', () => {
+    clearTimeout(recoveryTimeout);
+    message.hidden = true;
+});
+device.on('devicerestorefailed', (error) => {
+    clearTimeout(recoveryTimeout);
+    console.error(error);
+    message.hidden = false;
+});
+```
+
+Show the message in HTML rather than in the canvas, since rendering is paused, and offer a page reload. Preserve important user work outside GPU memory.
 
 For more background on the WebGPU lifecycle, see [WebGPU Device Loss by Brandon Jones](https://toji.dev/webgpu-best-practices/device-loss.html).
