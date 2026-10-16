@@ -215,6 +215,10 @@
     "message": "カメラ",
     "description": "The label for category Cameras in sidebar userManualSidebar"
   },
+  "sidebar.userManualSidebar.category.Meshes": {
+    "message": "メッシュ",
+    "description": "The label for category Meshes in sidebar userManualSidebar"
+  },
   "sidebar.userManualSidebar.category.Lighting": {
     "message": "ライティング",
     "description": "The label for category Lighting in sidebar userManualSidebar"

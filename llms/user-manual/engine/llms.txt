@@ -74,6 +74,12 @@ Use this index to write code against the engine directly. React, Web Components 
 - [Screen and World Coordinates](/user-manual/graphics/cameras/screen-and-world/): Converting between screen and world positions with `screenToWorld` and `worldToScreen`.
 - [Scene Picker](/user-manual/graphics/cameras/scene-picker/): Selecting the meshes and splats under a screen position with the `Picker` API.
 
+### Meshes
+
+- [Meshes](/user-manual/graphics/meshes/): What a `Mesh` holds, where meshes come from, and how they are shared.
+- [Creating Meshes](/user-manual/graphics/meshes/creating-meshes/): Building meshes from geometry classes, vertex data or vertex buffers, and updating them every frame.
+- [Mesh Instances](/user-manual/graphics/meshes/mesh-instances/): Creating, sharing and destroying mesh instances, rendering them through a render component or a layer, and their settings: visibility, culling, shadows, sort order, render style and shader parameters.
+
 ### Lighting and materials
 
 - [Lights](/user-manual/graphics/lighting/lights/): Directional, omni and spot lights, with shadows and cookies.
