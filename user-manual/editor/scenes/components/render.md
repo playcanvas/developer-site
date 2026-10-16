@@ -35,6 +35,7 @@ The Shadow Cascades mask is a row of four boxes, one per cascade. It pairs with 
 
 - [Render Assets](https://developer.playcanvas.com/user-manual/editor/assets/inspectors/render.md) - Learn about render assets
 - [Light Component](https://developer.playcanvas.com/user-manual/editor/scenes/components/light.md) - Configures the directional light cascades the mask selects from
+- [Mesh Instances](https://developer.playcanvas.com/user-manual/graphics/meshes/mesh-instances.md) - Creating, sharing and destroying the mesh instances of a render component
 
 ## Scripting Interface
 

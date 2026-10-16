@@ -2,7 +2,7 @@
 
 You can render geometry without creating an Entity or a Render Component for each object. Create a [`MeshInstance`](https://api.playcanvas.com/engine/classes/MeshInstance.html) with a mesh, a material, and a [`GraphNode`](https://api.playcanvas.com/engine/classes/GraphNode.html), then add it to a [layer](https://developer.playcanvas.com/user-manual/graphics/layers.md). It participates in the layer's normal rendering, including lighting, shadows, sorting, and culling.
 
-This is useful for procedural environments, custom scene management, or large groups of repeated objects. Your application controls the transforms, layer membership, and resource lifetime that components would normally manage.
+This is useful for procedural environments, custom scene management, or large groups of repeated objects. Your application controls the transforms, layer membership, and resource lifetime that components would normally manage. See [Mesh Instances](https://developer.playcanvas.com/user-manual/graphics/meshes/mesh-instances.md) for the settings of a mesh instance, and [Creating Meshes](https://developer.playcanvas.com/user-manual/graphics/meshes/creating-meshes.md) for building meshes in code.
 
 ## Live Example
 

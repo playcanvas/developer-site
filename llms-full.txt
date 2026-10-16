@@ -3,7 +3,7 @@
 > The complete text of the PlayCanvas User Manual in one file, for indexing, or for downloading and searching.
 
 Index: https://developer.playcanvas.com/llms.txt
-Total Documents: 525
+Total Documents: 528
 Generated: 2026-10-16
 
 ================================================================================
@@ -6640,6 +6640,7 @@ The Shadow Cascades mask is a row of four boxes, one per cascade. It pairs with 
 
 - [Render Assets](https://developer.playcanvas.com/user-manual/editor/assets/inspectors/render.md) - Learn about render assets
 - [Light Component](https://developer.playcanvas.com/user-manual/editor/scenes/components/light.md) - Configures the directional light cascades the mask selects from
+- [Mesh Instances](https://developer.playcanvas.com/user-manual/graphics/meshes/mesh-instances.md) - Creating, sharing and destroying the mesh instances of a render component
 
 ## Scripting Interface
 
@@ -30526,6 +30527,461 @@ These engine examples demonstrate the rendering of both the depth and the color 
 
 --------------------------------------------------------------------------------
 
+## Meshes
+
+URL: https://developer.playcanvas.com/user-manual/graphics/meshes/
+Markdown: https://developer.playcanvas.com/user-manual/graphics/meshes.md
+
+A [`Mesh`](https://api.playcanvas.com/engine/classes/Mesh.html) holds geometry: a vertex buffer, an optional index buffer, and the primitive that describes how to draw them as triangles, lines or points. A mesh has no material and no position of its own, so the same mesh can be rendered any number of times, in different places and with different materials.
+
+## Where Meshes Come From
+
+### Primitive Shapes
+
+A render component with a `type` of `box`, `capsule`, `cone`, `cylinder`, `plane`, `sphere` or `torus` renders a built-in mesh of that shape:
+
+```javascript
+const box = new Entity('Box');
+box.addComponent('render', { type: 'box' });
+app.root.addChild(box);
+```
+
+[Live example: Primitive Shapes](https://playcanvas.com/examples/#/graphics/shapes) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/graphics/shapes.example.mjs))
+
+### Loaded Models
+
+A GLB loads as a container asset whose render assets hold the meshes. `asset.resource.instantiateRenderEntity()` creates an entity hierarchy with a render component for each of them. See the [Render Asset](https://playcanvas.github.io/#/graphics/render-asset) example.
+
+### Meshes Created in Code
+
+A mesh can be built from one of the geometry classes, such as `BoxGeometry`, or from your own vertex data. See [Creating Meshes](https://developer.playcanvas.com/user-manual/graphics/meshes/creating-meshes.md).
+
+## Shared Meshes
+
+As one mesh can be rendered in many places, changing the vertices of a mesh changes all of them. This also applies to meshes you did not create:
+
+- The meshes of the primitive shapes are created once per graphics device and shared by every render component of that type.
+- The meshes of a loaded model are shared by every entity instantiated from its asset.
+
+To change the geometry of a single object, give it a mesh of its own.
+
+## In This Section
+
+- [Creating Meshes](https://developer.playcanvas.com/user-manual/graphics/meshes/creating-meshes.md) - Building meshes from geometry classes and vertex data, and updating them.
+- [Mesh Instances](https://developer.playcanvas.com/user-manual/graphics/meshes/mesh-instances.md) - Rendering meshes, and the settings that control how they render: visibility, shadows, sort order and shader parameters.
+
+--------------------------------------------------------------------------------
+
+## Creating Meshes
+
+URL: https://developer.playcanvas.com/user-manual/graphics/meshes/creating-meshes/
+Markdown: https://developer.playcanvas.com/user-manual/graphics/meshes/creating-meshes.md
+
+A [`Mesh`](https://api.playcanvas.com/engine/classes/Mesh.html) can be created in code in three ways, from the simplest to the most flexible:
+
+1. From a [geometry class](https://developer.playcanvas.com/user-manual/graphics/meshes/creating-meshes.md#geometry-classes), such as `SphereGeometry`, which generates a common shape.
+2. From [vertex data](https://developer.playcanvas.com/user-manual/graphics/meshes/creating-meshes.md#setting-vertex-data) you provide, such as positions, normals and texture coordinates.
+3. From [vertex and index buffers](https://developer.playcanvas.com/user-manual/graphics/meshes/creating-meshes.md#vertex-and-index-buffers) you create yourself.
+
+To render the mesh, create a mesh instance for it and give it to a render component or add it to a layer, as described in [Mesh Instances](https://developer.playcanvas.com/user-manual/graphics/meshes/mesh-instances.md#rendering-a-mesh-instance).
+
+## Geometry Classes
+
+A geometry class generates the vertex data of a shape on the CPU. [`Mesh.fromGeometry()`](https://api.playcanvas.com/engine/classes/Mesh.html#fromgeometry) uploads it to a new mesh:
+
+```javascript
+import { Mesh, SphereGeometry } from 'playcanvas';
+
+const mesh = Mesh.fromGeometry(app.graphicsDevice, new SphereGeometry({
+    radius: 2,
+    latitudeBands: 32,
+    longitudeBands: 32
+}));
+```
+
+| Class | Shape | Main options |
+| ----- | ----- | ------------ |
+| [`BoxGeometry`](https://api.playcanvas.com/engine/classes/BoxGeometry.html) | Box | `halfExtents`, `widthSegments`, `lengthSegments`, `heightSegments` |
+| [`PlaneGeometry`](https://api.playcanvas.com/engine/classes/PlaneGeometry.html) | Flat plane facing up | `halfExtents`, `widthSegments`, `lengthSegments` |
+| [`SphereGeometry`](https://api.playcanvas.com/engine/classes/SphereGeometry.html) | Sphere | `radius`, `latitudeBands`, `longitudeBands` |
+| [`CapsuleGeometry`](https://api.playcanvas.com/engine/classes/CapsuleGeometry.html) | Capsule | `radius`, `height`, `heightSegments`, `sides` |
+| [`CylinderGeometry`](https://api.playcanvas.com/engine/classes/CylinderGeometry.html) | Cylinder | `radius`, `height`, `heightSegments`, `capSegments` |
+| [`ConeGeometry`](https://api.playcanvas.com/engine/classes/ConeGeometry.html) | Cone or truncated cone | `baseRadius`, `peakRadius`, `height`, `heightSegments`, `capSegments` |
+| [`TorusGeometry`](https://api.playcanvas.com/engine/classes/TorusGeometry.html) | Torus or a sector of it | `tubeRadius`, `ringRadius`, `sectorAngle`, `segments`, `sides` |
+| [`CircleGeometry`](https://api.playcanvas.com/engine/classes/CircleGeometry.html) | Flat disc | `radius`, `sectors`, `rings`, `ringExponent` |
+| [`DomeGeometry`](https://api.playcanvas.com/engine/classes/DomeGeometry.html) | Sphere with a flattened base, such as a sky dome | `latitudeBands`, `longitudeBands` |
+
+All of them generate positions, normals, texture coordinates and indices. Most also accept `calculateTangents: true`, which adds the tangents a material needs for [normal maps](https://developer.playcanvas.com/user-manual/graphics/physical-rendering/physical-materials.md).
+
+A [`Geometry`](https://api.playcanvas.com/engine/classes/Geometry.html) is a plain container of arrays, so you can modify its data before creating the mesh. This example displaces a subdivided plane into a wavy terrain and recalculates its normals:
+
+```javascript
+import { Mesh, PlaneGeometry, Vec2 } from 'playcanvas';
+
+const geometry = new PlaneGeometry({
+    halfExtents: new Vec2(10, 10),
+    widthSegments: 64,
+    lengthSegments: 64
+});
+
+const positions = geometry.positions;
+for (let i = 0; i < positions.length; i += 3) {
+    positions[i + 1] = Math.sin(positions[i] * 0.5) * Math.cos(positions[i + 2] * 0.5);
+}
+geometry.calculateNormals();
+
+const mesh = Mesh.fromGeometry(app.graphicsDevice, geometry);
+```
+
+You can also fill an empty `Geometry` with your own `positions`, `normals`, `uvs`, `colors` and `indices`, and pass it to `Mesh.fromGeometry()`.
+
+## Setting Vertex Data
+
+To build a mesh from your own data, set each vertex stream on a new mesh and call [`update()`](https://api.playcanvas.com/engine/classes/Mesh.html#update), which creates the vertex and index buffers and uploads the data. This mesh is a single quad with texture coordinates:
+
+```javascript
+import { Mesh, calculateNormals } from 'playcanvas';
+
+const positions = new Float32Array([
+    -1, 0, 1,
+    1, 0, 1,
+    1, 0, -1,
+    -1, 0, -1
+]);
+const uvs = new Float32Array([
+    0, 0,
+    1, 0,
+    1, 1,
+    0, 1
+]);
+const indices = [
+    0, 1, 2,
+    0, 2, 3
+];
+
+const mesh = new Mesh(app.graphicsDevice);
+mesh.setPositions(positions);
+mesh.setNormals(calculateNormals(positions, indices));
+mesh.setUvs(0, uvs);
+mesh.setIndices(indices);
+mesh.update();
+```
+
+Each method sets one vertex stream:
+
+| Method | Data per vertex | Stored as |
+| ------ | --------------- | --------- |
+| [`setPositions()`](https://api.playcanvas.com/engine/classes/Mesh.html#setpositions) | x, y, z | 32-bit floats |
+| [`setNormals()`](https://api.playcanvas.com/engine/classes/Mesh.html#setnormals) | x, y, z | 32-bit floats |
+| [`setUvs()`](https://api.playcanvas.com/engine/classes/Mesh.html#setuvs) | u, v for texture coordinate set 0 to 7 | 32-bit floats |
+| [`setColors()`](https://api.playcanvas.com/engine/classes/Mesh.html#setcolors) | r, g, b, a | 32-bit floats, for HDR colors |
+| [`setColors32()`](https://api.playcanvas.com/engine/classes/Mesh.html#setcolors32) | r, g, b, a in the 0 to 255 range | 8-bit values, read as 0 to 1 by shaders |
+| [`setVertexStream()`](https://api.playcanvas.com/engine/classes/Mesh.html#setvertexstream) | Any semantic, such as `SEMANTIC_TANGENT` | The data type you choose |
+| [`setIndices()`](https://api.playcanvas.com/engine/classes/Mesh.html#setindices) | Indices of the vertices of each primitive | 16-bit, or 32-bit for meshes with more than 65535 vertices |
+
+The data can be a JavaScript array or a typed array. Typed arrays are faster for large meshes and for data that changes every frame, while plain arrays avoid the cost of creating typed arrays for small meshes. All vertex streams of a mesh must have the same number of vertices. Indices are optional: without them, the vertices are drawn in order.
+
+[`calculateNormals()`](https://api.playcanvas.com/engine/functions/calculateNormals.html) and [`calculateTangents()`](https://api.playcanvas.com/engine/functions/calculateTangents.html) generate normals and tangents from the positions, texture coordinates and indices of a triangle mesh.
+
+To draw with the vertex colors, enable them on the material, for example `material.diffuseVertexColor = true` on a `StandardMaterial`.
+
+### Primitive Types
+
+By default, `update()` draws the mesh as triangles, three vertices or indices per triangle. Pass a different primitive type to draw points or lines instead:
+
+```javascript
+import { PRIMITIVE_LINES } from 'playcanvas';
+
+mesh.update(PRIMITIVE_LINES);
+```
+
+The types are `PRIMITIVE_POINTS`, `PRIMITIVE_LINES`, `PRIMITIVE_LINELOOP`, `PRIMITIVE_LINESTRIP`, `PRIMITIVE_TRIANGLES`, `PRIMITIVE_TRISTRIP` and `PRIMITIVE_TRIFAN`. Lines drawn this way are one pixel wide. For thick lines, see [Wide Lines](https://developer.playcanvas.com/user-manual/graphics/wide-lines.md).
+
+### Bounding Box
+
+`update()` also computes the bounding box of the mesh from its positions, in the local space of the mesh, which the engine uses for frustum culling and for sorting. To skip that work, pass `false` as the second argument and set [`mesh.aabb`](https://api.playcanvas.com/engine/classes/Mesh.html#aabb) yourself:
+
+```javascript
+import { BoundingBox, PRIMITIVE_TRIANGLES, Vec3 } from 'playcanvas';
+
+mesh.aabb = new BoundingBox(new Vec3(0, 0, 0), new Vec3(10, 2, 10));
+mesh.update(PRIMITIVE_TRIANGLES, false);
+```
+
+The bounding box is computed only from positions with 3 components. Set `aabb` yourself for other positions, or when a shader moves the vertices outside the bounds of the vertex data.
+
+## Updating a Mesh
+
+A mesh can be updated at any time, including every frame. Set the vertex streams that changed and call `update()` again. Streams you do not set keep their previous data. This example creates a grid whose heights change every frame, while its texture coordinates and indices are set only once:
+
+```javascript
+const mesh = new Mesh(app.graphicsDevice);
+mesh.setPositions(positions);
+mesh.setNormals(calculateNormals(positions, indices));
+mesh.setUvs(0, uvs);
+mesh.setIndices(indices);
+mesh.update();
+
+app.on('update', (dt) => {
+    animateHeights(positions, dt);
+
+    // only the positions and normals change
+    mesh.setPositions(positions);
+    mesh.setNormals(calculateNormals(positions, indices));
+    mesh.update();
+});
+```
+
+[Live example: Mesh Generation](https://playcanvas.com/examples/#/graphics/mesh-generation) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/graphics/mesh-generation.example.mjs))
+
+Keep these rules in mind when updating a mesh:
+
+- **Set up all vertex streams before creating mesh instances.** A mesh instance sets up its shaders for the vertex streams the mesh has when the mesh is assigned to it, so call `update()` first. To change the streams later, see [Changing the Vertex Format](https://developer.playcanvas.com/user-manual/graphics/meshes/creating-meshes.md#changing-the-vertex-format).
+- **Reserve space for growing meshes.** When an update needs more vertices or indices than the buffers hold, they are created again at the new size, with only the vertex streams set since the last `update()`, so set all of them in that update. To avoid this, reserve space for the largest size by passing the maximum counts to [`clear()`](https://api.playcanvas.com/engine/classes/Mesh.html#clear) before setting the data, as in `mesh.clear(false, false, maxVertices, maxIndices)`. Its first two arguments are optional usage hints for the buffers.
+- **Updating the bounding box has a cost.** For large meshes that change every frame, consider setting a bounding box that contains every pose instead, as described in [Bounding Box](https://developer.playcanvas.com/user-manual/graphics/meshes/creating-meshes.md#bounding-box).
+
+### Changing the Vertex Format
+
+To change which vertex streams a mesh has, such as adding vertex colors or a texture coordinate set, call `clear()`. It discards the vertex format, and the next `update()` creates new vertex and index buffers from the data you set, so set all the streams and the indices again. As mesh instances set up their shaders for the vertex streams of a mesh when it is assigned to them, assign the mesh to each of its mesh instances again, even though it is already set. The debug build of the engine warns about mesh instances whose mesh changed its vertex streams since it was assigned.
+
+```javascript
+mesh.clear();
+mesh.setPositions(positions);
+mesh.setNormals(normals);
+mesh.setColors32(colors);
+mesh.setIndices(indices);
+mesh.update();
+
+// set up the shaders of the mesh instance for the new vertex streams
+meshInstance.mesh = mesh;
+```
+
+### Modifying Loaded Meshes
+
+The same methods work on loaded meshes. Read their current data with getters such as [`getPositions()`](https://api.playcanvas.com/engine/classes/Mesh.html#getpositions), modify it and set it back. Remember that a loaded mesh is shared by every entity instantiated from its asset, as described in [Shared Meshes](https://developer.playcanvas.com/user-manual/graphics/meshes.md#shared-meshes).
+
+```javascript
+const mesh = entity.render.meshInstances[0].mesh;
+
+const positions = [];
+mesh.getPositions(positions);
+
+// lift every vertex
+for (let i = 1; i < positions.length; i += 3) {
+    positions[i] += 0.5;
+}
+
+mesh.setPositions(positions);
+mesh.update();
+```
+
+[Live example: Mesh Deformation](https://playcanvas.com/examples/#/graphics/mesh-deformation) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/graphics/mesh-deformation.example.mjs))
+
+## Vertex and Index Buffers
+
+For full control over the vertex layout, create the [`VertexBuffer`](https://api.playcanvas.com/engine/classes/VertexBuffer.html) and [`IndexBuffer`](https://api.playcanvas.com/engine/classes/IndexBuffer.html) yourself and assign them to the mesh. This lets you upload data you already have in its final layout, such as interleaved data from a binary file, without copying it per vertex stream.
+
+A [`VertexFormat`](https://api.playcanvas.com/engine/classes/VertexFormat.html) describes the layout. By default it interleaves the attributes, with each attribute starting at a multiple of 4 bytes. This example draws a triangle with a position and an 8-bit color per vertex, 16 bytes in total:
+
+```javascript
+import {
+    BoundingBox,
+    Mesh,
+    PRIMITIVE_TRIANGLES,
+    SEMANTIC_COLOR,
+    SEMANTIC_POSITION,
+    TYPE_FLOAT32,
+    TYPE_UINT8,
+    Vec3,
+    VertexBuffer,
+    VertexFormat
+} from 'playcanvas';
+
+const device = app.graphicsDevice;
+const format = new VertexFormat(device, [
+    { semantic: SEMANTIC_POSITION, components: 3, type: TYPE_FLOAT32 },
+    { semantic: SEMANTIC_COLOR, components: 4, type: TYPE_UINT8, normalize: true }
+]);
+
+const vertices = [
+    { position: [-1, 0, 0], color: [255, 0, 0, 255] },
+    { position: [1, 0, 0], color: [0, 255, 0, 255] },
+    { position: [0, 1.5, 0], color: [0, 0, 255, 255] }
+];
+
+// format.size is the size of one vertex in bytes
+const data = new ArrayBuffer(format.size * vertices.length);
+const floats = new Float32Array(data);
+const bytes = new Uint8Array(data);
+vertices.forEach((vertex, i) => {
+    floats.set(vertex.position, i * format.size / 4);
+    bytes.set(vertex.color, i * format.size + 12);
+});
+
+const mesh = new Mesh(device);
+mesh.vertexBuffer = new VertexBuffer(device, format, vertices.length, { data });
+mesh.primitive[0] = {
+    type: PRIMITIVE_TRIANGLES,
+    base: 0,
+    baseVertex: 0,
+    count: vertices.length,
+    indexed: false
+};
+mesh.aabb = new BoundingBox(new Vec3(0, 0.75, 0), new Vec3(1, 0.75, 0));
+```
+
+When you assign the buffers yourself, also set the [primitive](https://api.playcanvas.com/engine/classes/Mesh.html#primitive) that describes the draw and the bounding box, as `update()` is not involved. For an indexed mesh, assign the index buffer to `mesh.indexBuffer[0]` and set `indexed` to `true`. Destroying the mesh destroys the buffers assigned to it.
+
+On WebGPU, the buffers of a mesh can also be read and written by [compute shaders](https://developer.playcanvas.com/user-manual/graphics/shaders/compute-shaders.md). Create the mesh with `new Mesh(device, { storageVertex: true, storageIndex: true })`, or pass the same options to `Mesh.fromGeometry()`.
+
+--------------------------------------------------------------------------------
+
+## Mesh Instances
+
+URL: https://developer.playcanvas.com/user-manual/graphics/meshes/mesh-instances/
+Markdown: https://developer.playcanvas.com/user-manual/graphics/meshes/mesh-instances.md
+
+A [`MeshInstance`](https://api.playcanvas.com/engine/classes/MeshInstance.html) represents the placement of a mesh in the world: it pairs the mesh with a material and with the node whose world transform positions it. A mesh instance is not rendered by itself. It is rendered once it is part of a render component, or once it is added to a layer. Its mesh and material can be shared with other mesh instances, so the settings of one placement, such as whether it casts shadows, live on the mesh instance.
+
+## Creating a Mesh Instance
+
+Create a mesh instance from a mesh, a material and, optionally, a node:
+
+```javascript
+import { MeshInstance } from 'playcanvas';
+
+const meshInstance = new MeshInstance(mesh, material, node);
+```
+
+The mesh and the material of a mesh instance can be changed at any time by assigning its `mesh` and `material` properties.
+
+## Rendering a Mesh Instance
+
+A mesh instance is rendered in one of two ways: as part of a render component, or added to a layer directly.
+
+### In a Render Component
+
+Assign the mesh instance to the [`meshInstances`](https://api.playcanvas.com/engine/classes/RenderComponent.html#meshinstances) of a render component. The component registers its mesh instances for rendering with each layer in its own [`layers`](https://api.playcanvas.com/engine/classes/RenderComponent.html#layers) list, which holds the World layer by default, and the cameras whose [`layers`](https://api.playcanvas.com/engine/classes/CameraComponent.html#layers) include one of those layers render them. See [Layers](https://developer.playcanvas.com/user-manual/graphics/layers.md).
+
+Create the mesh instance without a node, as in this example, so that the entity of the component places it. A mesh instance that already has a node keeps it, and is placed by that node instead of by the entity:
+
+```javascript
+import { BoxGeometry, Color, Entity, Mesh, MeshInstance, StandardMaterial } from 'playcanvas';
+
+const mesh = Mesh.fromGeometry(app.graphicsDevice, new BoxGeometry());
+
+const material = new StandardMaterial();
+material.diffuse = new Color(1, 0.5, 0);
+material.update();
+
+const entity = new Entity('Box');
+entity.addComponent('render', {
+    meshInstances: [new MeshInstance(mesh, material)]
+});
+app.root.addChild(entity);
+```
+
+When a mesh instance belongs to a render component, change its settings on the component wherever the component has a matching property: `castShadows`, `receiveShadows`, `shadowCascadeMask`, `renderStyle`, `lightmapped` and `customAabb`. The component passes these to each of its mesh instances. A value set directly on one of its mesh instances lasts only until the matching component property changes, or until the mesh instances are assigned again, which overrides it. The component also uses `castShadows` to register its mesh instances as shadow casters of its layers.
+
+### In a Layer
+
+A mesh instance can also be added to a layer directly, without an entity or a component. Your application then controls its node, its layer membership and its lifetime, and sets all of its properties, such as those described below, on the mesh instance itself. See [Rendering Without Entities](https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/rendering-without-entities.md).
+
+## Accessing the Mesh Instances of a Render Component
+
+A render component creates the mesh instances of primitive shapes and loaded models itself, and they are available in its `meshInstances`. A loaded model has one mesh instance for each primitive of the mesh, each with its own material:
+
+```javascript
+for (const meshInstance of entity.render.meshInstances) {
+    meshInstance.material = highlightMaterial;
+}
+```
+
+## Sharing a Mesh
+
+Any number of mesh instances can use the same mesh, each with its own node and material:
+
+```javascript
+const red = new Entity('Red');
+red.addComponent('render', { meshInstances: [new MeshInstance(mesh, redMaterial)] });
+
+const blue = new Entity('Blue');
+blue.addComponent('render', { meshInstances: [new MeshInstance(mesh, blueMaterial)] });
+```
+
+They all render the same geometry, so changing the vertices of the mesh changes every one of them. See [Shared Meshes](https://developer.playcanvas.com/user-manual/graphics/meshes.md#shared-meshes).
+
+## Destroying Mesh Instances
+
+- **A render component owns the mesh instances you assign to it.** It destroys them when you assign a different array to `meshInstances`, change its `type`, or when the component or its entity is destroyed. Do not use these mesh instances afterwards.
+- **`MeshInstance.destroy()` releases the mesh**, and destroys it once no other mesh instance or render asset uses it, so meshes do not need to be destroyed separately. Skin and morph instances are destroyed with it.
+- **Materials are never destroyed by the mesh instances that use them.** Destroy a material you created once nothing uses it.
+
+## Visibility and Culling
+
+- [`visible`](https://api.playcanvas.com/engine/classes/MeshInstance.html#visible) skips drawing the mesh instance without removing it from its layers. To stop drawing a render component, disable the component or its entity instead.
+- [`cull`](https://api.playcanvas.com/engine/classes/MeshInstance.html#cull) controls whether a camera that frustum culls can skip the mesh instance when it is outside its view. It defaults to `true`.
+
+Culling uses the bounding box of the mesh, [`mesh.aabb`](https://api.playcanvas.com/engine/classes/Mesh.html#aabb), which is in the local space of the mesh. The engine transforms it by the world transform of the node, and returns the result as the world space bounding box of the mesh instance, [`meshInstance.aabb`](https://api.playcanvas.com/engine/classes/MeshInstance.html#aabb). If a shader moves vertices outside the bounds of the mesh, such as for wind animation, the mesh instance can be culled while still in view. Enlarge the local space bounding box to cover the movement, either by setting `mesh.aabb` as described in [Creating Meshes](https://developer.playcanvas.com/user-manual/graphics/meshes/creating-meshes.md#bounding-box), or by setting [`customAabb`](https://api.playcanvas.com/engine/classes/RenderComponent.html#customaabb) on the render component, which overrides it for all of its mesh instances.
+
+`customAabb` is particularly useful for skinned meshes. Without it, the bounding box of a skinned mesh instance is evaluated precisely every frame from the positions of its bones, which is expensive. A custom bounding box large enough to contain every pose of the animation avoids that work.
+
+## Shadows
+
+- [`castShadow`](https://api.playcanvas.com/engine/classes/MeshInstance.html#castshadow) makes the mesh instance cast shadows, by including it in the shadow maps of lights.
+- `receiveShadow` makes the mesh instance receive shadows cast by other mesh instances.
+- [`shadowCascadeMask`](https://api.playcanvas.com/engine/classes/MeshInstance.html#shadowcascademask) selects which cascades of a directional light the mesh instance casts shadows into, for example to keep small objects out of the distant cascades.
+
+When you add a mesh instance to a layer yourself, set `castShadow` before adding it, as described in [Rendering Without Entities](https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/rendering-without-entities.md#keep-layer-membership-persistent). See [Shadows](https://developer.playcanvas.com/user-manual/graphics/lighting/shadows.md) for configuring the lights.
+
+## Sort Order
+
+The order in which a layer draws its mesh instances depends on its sort mode, described in [Layers](https://developer.playcanvas.com/user-manual/graphics/layers.md#sort-modes). Several mesh instance properties take part:
+
+- [`drawOrder`](https://api.playcanvas.com/engine/classes/MeshInstance.html#draworder) sets the order directly, in layers that use `SORTMODE_MANUAL`.
+- [`drawBucket`](https://api.playcanvas.com/engine/classes/MeshInstance.html#drawbucket) groups mesh instances before the other sort modes order them within each group.
+- [`calculateSortDistance`](https://api.playcanvas.com/engine/classes/MeshInstance.html#calculatesortdistance) replaces the distance used by `SORTMODE_BACK2FRONT` and `SORTMODE_FRONT2BACK`. By default, this is the depth of the center of the bounding box along the camera direction.
+
+A custom sort distance can improve the order of [transparent](https://developer.playcanvas.com/user-manual/graphics/transparency.md) objects whose bounding box centers are a poor guide, such as large meshes the camera can be inside:
+
+```javascript
+meshInstance.calculateSortDistance = (instance, cameraPosition, cameraForward) => {
+    // sort by the distance to the camera instead of the depth along its direction
+    return instance.aabb.center.distance(cameraPosition);
+};
+```
+
+## Render Style
+
+[`renderStyle`](https://api.playcanvas.com/engine/classes/MeshInstance.html#renderstyle) draws a triangle mesh as solid triangles (`RENDERSTYLE_SOLID`, the default), as a wireframe of its edges (`RENDERSTYLE_WIREFRAME`), or as points at its vertices (`RENDERSTYLE_POINTS`). The wireframe is generated from the mesh the first time it is needed.
+
+## Shader Parameters
+
+[`setParameter()`](https://api.playcanvas.com/engine/classes/MeshInstance.html#setparameter) sets the value of a shader uniform for the draws of one mesh instance. The material does not need to set the same parameter. When it does, the value set on the mesh instance takes precedence, so mesh instances can share a material and still differ in a few values. This sets the `tint` uniform of a custom shader for one mesh instance:
+
+```javascript
+meshInstance.setParameter('tint', [0, 1, 0]);
+```
+
+See [Shader Parameters](https://developer.playcanvas.com/user-manual/graphics/shaders/shader-parameters.md#mesh-instance-parameters) for overriding the properties of a `StandardMaterial`, and for the cost of these overrides.
+
+## Skinning and Morphing
+
+A mesh with a [`skin`](https://api.playcanvas.com/engine/classes/Mesh.html#skin) or a [`morph`](https://api.playcanvas.com/engine/classes/Mesh.html#morph) is animated per mesh instance, by its [`skinInstance`](https://api.playcanvas.com/engine/classes/MeshInstance.html#skininstance), which holds the bones that pose it, and its [`morphInstance`](https://api.playcanvas.com/engine/classes/MeshInstance.html#morphinstance), which holds the weights of its morph targets. A render component sets these up for the skinned and morphed meshes of a loaded model, and the [anim component](https://developer.playcanvas.com/user-manual/animation.md) drives them.
+
+[Live example: Mesh Morph](https://playcanvas.com/examples/#/graphics/mesh-morph) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/graphics/mesh-morph.example.mjs))
+
+## Drawing Many Copies
+
+Each mesh instance is normally one draw call. To draw many copies of a mesh more efficiently, see:
+
+- [Hardware Instancing](https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/hardware-instancing.md) - Many copies of a mesh from a single mesh instance, with per-copy data such as transforms.
+- [Batching](https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/batching.md) - Mesh instances that share a material are merged into fewer draw calls.
+- [Multi-Draw](https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/multi-draw.md) - A single mesh instance rendered as many sub-draws of its mesh in one call.
+- [Indirect Drawing](https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/indirect-drawing.md) - A compute shader writes the draw parameters on the GPU.
+
+--------------------------------------------------------------------------------
+
 ## Lighting
 
 URL: https://developer.playcanvas.com/user-manual/graphics/lighting/
@@ -36355,7 +36811,7 @@ Markdown: https://developer.playcanvas.com/user-manual/graphics/advanced-renderi
 
 You can render geometry without creating an Entity or a Render Component for each object. Create a [`MeshInstance`](https://api.playcanvas.com/engine/classes/MeshInstance.html) with a mesh, a material, and a [`GraphNode`](https://api.playcanvas.com/engine/classes/GraphNode.html), then add it to a [layer](https://developer.playcanvas.com/user-manual/graphics/layers.md). It participates in the layer's normal rendering, including lighting, shadows, sorting, and culling.
 
-This is useful for procedural environments, custom scene management, or large groups of repeated objects. Your application controls the transforms, layer membership, and resource lifetime that components would normally manage.
+This is useful for procedural environments, custom scene management, or large groups of repeated objects. Your application controls the transforms, layer membership, and resource lifetime that components would normally manage. See [Mesh Instances](https://developer.playcanvas.com/user-manual/graphics/meshes/mesh-instances.md) for the settings of a mesh instance, and [Creating Meshes](https://developer.playcanvas.com/user-manual/graphics/meshes/creating-meshes.md) for building meshes in code.
 
 ## Live Example
 
