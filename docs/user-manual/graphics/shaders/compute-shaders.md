@@ -114,6 +114,8 @@ compute.setParameter('count', 1024);
 compute.setParameter('tint', [1.0, 0.5, 0.0, 1.0]);
 ```
 
+Every uniform and resource the compute shader declares has to be given a value on the compute instance. Compute shaders do not use values set globally on the scope of the graphics device, and debug builds report a declared uniform or resource that has no value.
+
 ## Creating Storage Buffers
 
 Storage buffers hold data that compute shaders can read from and write to:
@@ -176,6 +178,18 @@ device.computeDispatch([compute1, compute2], 'BatchedDispatch');
 `device.computeDispatch` records into the current frame's command encoder, so it must be called **within the render frame** — typically from an `app.on('update', ...)` handler. Calling it from a bare `setTimeout` or a detached promise outside the frame is unreliable and may silently skip the dispatch.
 
 :::
+
+A compute instance is dispatched at most once in a frame. To dispatch a compute shader more than once in a frame, use a separate compute instance for each dispatch. The instances can share the shader, which is compiled only once:
+
+```javascript
+const computes = [0.25, 0.5].map((strength) => {
+    const compute = new pc.Compute(device, shader, `Blur-${strength}`);
+    compute.setParameter('strength', strength);
+    compute.setupDispatch(width, height);
+    return compute;
+});
+device.computeDispatch(computes, 'Blur');
+```
 
 ### Workgroup Size
 
@@ -313,6 +327,86 @@ Using `immediate: true` has a performance impact as it forces an early command b
 
 :::
 
+## Scene Depth and Color Maps
+
+A compute shader can read the depth and color maps a camera renders of the scene, for example to implement screen-space effects or to analyze the rendered image.
+
+The camera renders the maps when they are requested on its camera component:
+
+```javascript
+cameraEntity.camera.requestSceneDepthMap(true);
+cameraEntity.camera.requestSceneColorMap(true);
+```
+
+A camera rendering with [CameraFrame](/user-manual/graphics/posteffects/cameraframe/) renders them when it is configured to:
+
+```javascript
+cameraFrame.rendering.sceneDepthMap = true;
+cameraFrame.rendering.sceneColorMap = true;
+cameraFrame.update();
+```
+
+Attach the maps of the camera to the compute instance:
+
+```javascript
+compute.setSceneDepthMap(cameraEntity.camera.sceneDepthMapHandle);
+compute.setSceneColorMap(cameraEntity.camera.sceneColorMapHandle);
+```
+
+The maps only need to be attached once. Each dispatch uses the maps the camera rendered most recently, so a compute dispatched before the camera renders, for example from an `update` event, uses the maps of the previous frame. Pass `null` to detach a map when the compute no longer uses it, and before the camera is destroyed.
+
+The compute shader accesses the maps using the functions of the `sceneDepthCS` and `sceneColorCS` includes:
+
+```wgsl
+#include "sceneDepthCS"
+#include "sceneColorCS"
+
+var output: texture_storage_2d<rgba16float, write>;
+
+@compute @workgroup_size(8, 8, 1)
+fn main(@builtin(global_invocation_id) id: vec3u) {
+    // process the texels of the viewport the camera rendered to
+    let viewport = sceneDepthViewport();
+    if (id.x >= viewport.z || id.y >= viewport.w) {
+        return;
+    }
+    let texel = vec2i(viewport.xy + id.xy);
+
+    // the depth of the surface in front of the camera, and the scene color converted to linear
+    let depth = sceneDepthLinear(texel);
+    let color = sceneColorToLinear(sceneColorLoad(texel, 0).rgb);
+
+    // fade the scene to gray with distance
+    let fogged = mix(color, vec3f(0.5), saturate(depth / 100.0));
+    textureStore(output, texel, vec4f(fogged, 1.0));
+}
+```
+
+The `sceneDepthCS` include provides:
+
+| Function | Description |
+|----------|-------------|
+| `sceneDepthSize() -> vec2u` | The dimensions of the depth map. |
+| `sceneDepthViewport() -> vec4u` | The viewport the camera rendered the depth map with, in texels: the x and y of its first texel, and its width and height. |
+| `sceneDepthNearClip() -> f32` | The near clip plane the depth map was rendered with. |
+| `sceneDepthFarClip() -> f32` | The far clip plane the depth map was rendered with. |
+| `sceneDepthLinear(texel: vec2i) -> f32` | The linear depth of the surface at the texel, along the view direction of the camera, in world units. |
+| `sceneDepthWorldPosition(texel: vec2i) -> vec3f` | The world position of the surface at the texel, which needs to be within the viewport. |
+
+The `sceneColorCS` include provides:
+
+| Function | Description |
+|----------|-------------|
+| `sceneColorSize(lod: i32) -> vec2u` | The dimensions of a mip level of the color map. |
+| `sceneColorLoad(texel: vec2i, lod: i32) -> vec4f` | The color of a texel. |
+| `sceneColorSample(uv: vec2f, lod: f32) -> vec4f` | The color sampled with filtering. When the format of the color map cannot be filtered on the device, the color of the nearest texel is returned. |
+| `sceneColorToLinear(color: vec3f) -> vec3f` | Converts a color read from the color map to linear. |
+| `sceneColorToDisplay(color: vec3f) -> vec3f` | Converts a color read from the color map to gamma encoded. |
+
+The depth functions return the same values however the camera stored the depth. The colors are returned the way the camera stored them: linear when the camera renders with CameraFrame, and gamma encoded otherwise. When they are gamma encoded, `SCENE_COLORMAP_GAMMA` is defined in the compute shader. The two conversion functions take a color read from the color map, and return it unchanged when it is already in the requested space.
+
+A camera rendering to only a part of its target, see [`rect`](https://api.playcanvas.com/engine/classes/CameraComponent.html#rect), covers only its viewport of the maps. The rest of the maps holds what the camera did not render, such as the views of other cameras rendering to the same target. To process only the view of the camera, map the invocations to the viewport as in the example above, and dispatch over the size of the viewport, which matches the camera rect multiplied by the size of the target.
+
 ## Preprocessor
 
 Compute shaders support the same [shader preprocessor](/user-manual/graphics/shaders/preprocessor) as vertex and fragment shaders, including `#define`, `#ifdef`, `#if`, `#include`, and more.
@@ -324,6 +418,8 @@ The engine provides built-in shader chunks that are automatically available in c
 | Include | Description |
 |---------|-------------|
 | `halfTypesCS` | Half-precision type aliases (`half`, `half2`, etc.) that resolve to f16 when supported, f32 otherwise. See [Half-Precision Types](/user-manual/graphics/shaders/wgsl-capabilities#half-precision-types). |
+| `sceneDepthCS` | Access to the scene depth map of a camera. See [Scene Depth and Color Maps](#scene-depth-and-color-maps). |
+| `sceneColorCS` | Access to the scene color map of a camera. See [Scene Depth and Color Maps](#scene-depth-and-color-maps). |
 
 Example:
 
@@ -395,3 +491,7 @@ Explore these live examples demonstrating various compute shader use cases:
 - Indirect Dispatch - GPU-driven compute dispatch with depth-based tile classification
 
 <EngineExample id="compute/indirect-dispatch" title="Indirect Dispatch" />
+
+- Scene Maps - A scanner pulse sweeping through the scene, using the scene depth and color maps
+
+<EngineExample id="compute/scene-maps" title="Scene Maps" />

@@ -21,6 +21,8 @@ description: カメラレイヤーでSceneのカラーと深度バッファを�
 - Colorマップ: `uSceneColorMap`
 - Depthマップ: `uSceneDepthMap`
 
+コンピュートシェーダーはこれらのユニフォームを使用しません。代わりに、コンピュートインスタンスを通じてカメラのマップにアクセスします。[シーンの深度マップとカラーマップ](/user-manual/graphics/shaders/compute-shaders#scene-depth-and-color-maps)を参照してください。
+
 ## 例
 
 これらのエンジン例では、DepthマップとColorマップの両方のレンダリング、およびそれらを使用するカスタムシェーダーが示されています。
