@@ -38,6 +38,7 @@ Shadow Cascadesのマスクは、カスケードごとに1つ、計4つのボッ
 
 - [レンダーアセット](/user-manual/editor/assets/inspectors/render) - レンダーアセットについて学ぶ
 - [Lightコンポーネント](light.md) - マスクが選択対象とするディレクショナルライトのカスケードを設定します
+- [メッシュインスタンス](/user-manual/graphics/meshes/mesh-instances/) - Renderコンポーネントのメッシュインスタンスの作成、共有、破棄について
 
 ## スクリプトインターフェース
 

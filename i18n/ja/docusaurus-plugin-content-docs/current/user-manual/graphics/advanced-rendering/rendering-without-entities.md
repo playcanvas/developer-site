@@ -5,7 +5,7 @@ description: 名前付きGraphNode、永続的なMeshInstance、ハードウェ�
 
 オブジェクトごとにEntityやRender Componentを作成しなくても、ジオメトリを描画できます。メッシュ、マテリアル、[`GraphNode`](https://api.playcanvas.com/engine/classes/GraphNode.html)を指定して[`MeshInstance`](https://api.playcanvas.com/engine/classes/MeshInstance.html)を作成し、[レイヤー](../layers/index.md)に追加します。これにより、ライティング、影、ソート、カリングを含むレイヤーの通常のレンダリングに参加します。
 
-この方法は、プロシージャルな環境、独自のシーン管理、大量の繰り返しオブジェクトに適しています。通常はコンポーネントが管理するトランスフォーム、レイヤーへの登録、リソースのライフタイムをアプリケーション側で管理します。
+この方法は、プロシージャルな環境、独自のシーン管理、大量の繰り返しオブジェクトに適しています。通常はコンポーネントが管理するトランスフォーム、レイヤーへの登録、リソースのライフタイムをアプリケーション側で管理します。メッシュインスタンスの設定は[メッシュインスタンス](../meshes/mesh-instances.md)を、コードでのメッシュの構築は[メッシュの作成](../meshes/creating-meshes.md)を参照してください。
 
 ## ライブサンプル
 
