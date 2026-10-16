@@ -824,6 +824,7 @@ const sidebars = {
             'user-manual/graphics/physical-rendering/environment-lighting',
           ],
         },
+        'user-manual/graphics/textures',
         'user-manual/graphics/transparency',
         {
           type: 'category',
