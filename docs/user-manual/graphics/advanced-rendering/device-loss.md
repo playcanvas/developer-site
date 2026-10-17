@@ -61,7 +61,7 @@ app.on('destroy', () => {
 
 Update the retained `values` when your application's input changes. Make restoration repeatable: another loss can happen later. Reuse engine resource objects and avoid creating duplicate listeners or resources on each recovery.
 
-For [runtime lightmaps](../lighting/runtime-lightmaps.md), schedule another bake after restoration, as the [baked-lighting example](https://playcanvas.github.io/#/graphics/lights-baked) does. Regenerate application-created environment maps similarly. If `app.autoRender` is false, request a frame **after** the regenerated content is ready with `app.renderNextFrame = true`.
+For [runtime lightmaps](../lighting/runtime-lightmaps.md), schedule another bake after restoration, as the [baked-lighting example](https://playcanvas.github.io/#/lights-and-shadows/lights-baked) does. Regenerate application-created environment maps similarly. If `app.autoRender` is false, request a frame **after** the regenerated content is ready with `app.renderNextFrame = true`.
 
 ## Handling asynchronous reads
 

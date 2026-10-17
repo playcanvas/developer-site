@@ -83,7 +83,7 @@ Use this index to write code against the engine directly. React, Web Components 
 ### Lighting and materials
 
 - [Lights](/user-manual/graphics/lighting/lights/): Directional, omni and spot lights, with shadows and cookies.
-- [Shadows](/user-manual/graphics/lighting/shadows/): Shadow types (PCF, VSM and PCSS) and tuning them with cascades, resolution and bias.
+- [Shadows](/user-manual/graphics/lighting/shadows/): Shadow types (PCF, VSM and PCSS), tuning them with cascades, resolution and bias, and fitting a directional light's shadow to a box with shadow bounds.
 - [Clustered Lighting](/user-manual/graphics/lighting/clustered-lighting/): How many omni and spot lights, with shadows and cookies, stay affordable on the GPU.
 - [Runtime Lightmaps](/user-manual/graphics/lighting/runtime-lightmaps/): Baking lightmaps at runtime and mixing baked with dynamic lights.
 - [Physically Based Rendering](/user-manual/graphics/physical-rendering/): PBR fundamentals: diffuse and specular, energy conservation and metalness.

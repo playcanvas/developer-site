@@ -61,7 +61,7 @@ app.on('destroy', () => {
 
 アプリケーションの入力が変わったら、保持している `values` も更新します。再びデバイスロストが起こる可能性があるため、復元処理は繰り返し実行できるようにしてください。エンジンのリソースオブジェクトを再利用し、復旧のたびにリスナーやリソースを重複して作成しないようにします。
 
-[ランタイムライトマップ](../lighting/runtime-lightmaps.md)の場合は、[ベイクしたライティングのサンプル](https://playcanvas.github.io/#/graphics/lights-baked)のように、復旧後に再ベイクを予約します。アプリケーションで生成した環境マップも同様に再生成してください。`app.autoRender` がfalseの場合は、再生成した内容の準備ができた**後**に `app.renderNextFrame = true` でフレームを要求します。
+[ランタイムライトマップ](../lighting/runtime-lightmaps.md)の場合は、[ベイクしたライティングのサンプル](https://playcanvas.github.io/#/lights-and-shadows/lights-baked)のように、復旧後に再ベイクを予約します。アプリケーションで生成した環境マップも同様に再生成してください。`app.autoRender` がfalseの場合は、再生成した内容の準備ができた**後**に `app.renderNextFrame = true` でフレームを要求します。
 
 ## 非同期読み取りへの対応 {#handling-asynchronous-reads}
 
