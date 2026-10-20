@@ -11,7 +11,7 @@ Streamed SOGは以下のように動作します：
 
 1. スプラットの複数のバージョンを異なる詳細レベルで事前生成
 2. 効率的なストリーミングのために空間ツリー構造に整理
-3. グローバルなスプラット予算に収まるように詳細レベルを動的にロードおよびアンロードし、画質への貢献が最も大きい場所に詳細を割り当て
+3. カメラからの距離に応じて、グローバルなスプラット予算に合わせて詳細レベルを動的にロードおよびアンロード
 4. シーンの各領域で選択された詳細レベルのみをレンダリング
 
 このアプローチにより、メモリ制約により不可能だった大規模なスプラットシーンをレンダリングできます。
@@ -43,32 +43,31 @@ Streamed SOGの動作を確認するには、以下のライブサンプルを�
 
 ## LOD動作の制御 {#controlling-lod-behavior}
 
-### LODの選択方法
+### LODの選択方法 {#how-lod-is-chosen}
 
-エンジンは、合計スプラット数がグローバルな[スプラット予算](/user-manual/gaussian-splatting/building/performance#global-splat-budget)に収まるように、シーンの各領域に1つのLODレベルを選択します。デフォルトでは、詳細はカメラからの距離に基づいて順序付けられ、各領域はカメラを中心とした同心円状のバンドで段階的に低下し、バンドの境界は予算に応じて調整されます。`GSPLAT_LODMODE_ERROR`（後述）では、代わりに各領域の画面上での投影サイズと、各LODレベルが残す視覚的誤差の指標を組み合わせて判断します。誤差の指標は、`lod-meta.json`に含まれている場合はそこから読み取られ（[SplatTransform](/user-manual/splat-transform) 3.3以降が書き出します）、含まれていない場合はスプラット数から自動的に導出されるため、どちらの場合も設定は不要です。LOD選択はカメラの視野角（FOV）も自動的に補正します。
-
-### LODモード
-
-`app.scene.gsplat`の[`lodMode`](https://api.playcanvas.com/engine/classes/GSplatParams.html#lodMode)で、2つの戦略を切り替えられます：
+エンジンは、カメラからの距離に基づいて、シーンの各領域に1つのLODレベルを選択します。詳細がどこで段階的に低下するかは、各gsplatコンポーネントが設定します。[`lodBaseDistance`](https://api.playcanvas.com/engine/classes/GSplatComponent.html#lodbasedistance)までは最も細かいレベル（LOD 0）を使い、その先の各レベルは、1つ前のレベルが始まった距離の[`lodMultiplier`](https://api.playcanvas.com/engine/classes/GSplatComponent.html#lodmultiplier)倍の距離から始まります。デフォルトの5と3では、LOD 1は5ワールド単位、LOD 2は15、LOD 3は45から始まります：
 
 ```javascript
-app.scene.gsplat.lodMode = pc.GSPLAT_LODMODE_ERROR;
+entity.gsplat.lodBaseDistance = 10; // 10単位まではLOD 0
+entity.gsplat.lodMultiplier = 4; // その後40単位まではLOD 1、160単位まではLOD 2、...
 ```
 
-- `GSPLAT_LODMODE_DISTANCE`（デフォルト）：誤差メタデータを無視し、カメラからの距離のみに基づいて詳細を順序付けます。詳細はカメラを中心とした同心円状のバンドで段階的に低下し、バンドの境界は予算に応じて調整されます。2つのモードのうちメモリ使用量が最も少ないため、メモリに制約のあるデバイスではこちらを推奨します。
-- `GSPLAT_LODMODE_ERROR`：スプラット1つあたりの視覚的誤差の削減量が最も大きい場所に予算を割り当てます。距離だけでは粗いままになる空や遠景などの疎で低品質な領域の品質を引き上げますが、より多くのソースデータをメモリに保持するため、メモリ使用量は著しく増加します。
+どちらの値を大きくしても、カメラから遠くまで細かい詳細が保たれますが、メモリ使用量は増加します。`lodBaseDistance`の最小値は0.1、`lodMultiplier`の最小値は1.2です。これらの距離はカメラの視野角（FOV）に応じて補正されます。視野角が広いほどオブジェクトは画面上で小さく見えるため、より早く粗いレベルが使われます。
 
-距離モードはエンジン2.23でデフォルトになりました。2.22ではエラーモードがデフォルトです。
+これらの距離がシーン全体の[スプラット予算](/user-manual/gaussian-splatting/building/performance#global-splat-budget)とどのように組み合わされるかは、予算モードで設定します。
 
-### LODフォールオフ
+### 予算モード {#budget-mode}
 
-gsplatコンポーネントの[`lodFalloff`](https://api.playcanvas.com/engine/classes/GSplatComponent.html#lodFalloff)は、どちらのモードでも、そのスプラットの詳細がカメラからの距離に応じてどれだけ速く低下するかを制御します：
+`app.scene.gsplat`の[`splatBudgetMode`](https://api.playcanvas.com/engine/classes/GSplatParams.html#splatbudgetmode)で、2つのモードを切り替えられます：
 
 ```javascript
-entity.gsplat.lodFalloff = 2; // カメラ付近の詳細を増やし、遠方の詳細を減らす
+app.scene.gsplat.splatBudgetMode = pc.GSPLAT_BUDGET_LIMIT;
 ```
 
-値の範囲は0から8で、デフォルトは1（バランスの取れたフォールオフ）です。値が大きいほど遠方を犠牲にしてカメラ付近に詳細が集中し、0に近づけると視点に関係なくシーン全体に均等に分配されます。これは主に、そのスプラットが予算から受け取る詳細を近景と遠景の間で再配分するものですが、スプラット間での予算の配分にも影響することがあります。
+- `GSPLAT_BUDGET_TARGET`（デフォルト）：カメラがどこにあっても、予算を使い切るまで詳細を引き上げます。エンジンは、シーンが予算を満たすまで、すべてのスプラットのLOD距離を共通の1つの係数で外側または内側へ動かします。そのため、設定した距離は、詳細が距離に応じてどのように低下し、スプラット間でどのように配分されるかを形作るだけで、詳細の総量は決めません。
+- `GSPLAT_BUDGET_LIMIT`：LOD距離が詳細を決め、予算は、LOD距離が予算を超えるスプラット数を必要とする場合にのみ詳細を下げます。遠くのスプラットはその距離に必要な少数のスプラットだけを使い、残りの予算は使われないまま残るため、遠くから見たシーンが予算を満たすためだけに細かいレベルをストリーミングすることはありません。
+
+予算を0以下にすると、予算はまったく適用されません。その場合、ターゲットモードではすべてが最も細かいレベルでレンダリングされ、リミットモードでは詳細はLOD距離だけで決まります。
 
 ### シーンレベルの制御
 
@@ -87,7 +86,7 @@ const gsplatSettings = app.scene.gsplat;
 // （利用可能なプロパティについてはAPIドキュメントを参照）
 ```
 
-Streamed SOGで最も重要なシーンレベルの設定はグローバルスプラット予算で、すべてのGSplatアセット全体で目標スプラット数に収まるよう詳細度を自動的に調整します。詳細については、パフォーマンスセクションの[グローバルスプラット予算](/user-manual/gaussian-splatting/building/performance#global-splat-budget)を参照してください。
+Streamed SOGで最も重要なシーンレベルの設定はグローバルスプラット予算で、上記の予算モードに応じて、満たすべき目標スプラット数または上限として、すべてのGSplatアセット全体で詳細度を自動的に調整します。詳細については、パフォーマンスセクションの[グローバルスプラット予算](/user-manual/gaussian-splatting/building/performance#global-splat-budget)を参照してください。
 
 ## エディターでのStreamed SOGの使用
 

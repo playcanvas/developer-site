@@ -36,26 +36,27 @@ When using [Streamed SOG](/user-manual/gaussian-splatting/building/lod-streaming
 
 ### Global Splat Budget
 
-The global splat budget is the primary way to control rendering performance for Streamed SOG. It is always active and defaults to 1 million splats; set it via:
+The global splat budget is the primary way to control rendering performance for Streamed SOG. [`splatBudget`](https://api.playcanvas.com/engine/classes/GSplatParams.html#splatbudget) defaults to 1 million splats; set it via:
 
 ```javascript
-app.scene.gsplat.splatBudget = 4000000; // 4 million splats max
+app.scene.gsplat.splatBudget = 4000000; // 4 million splats
 ```
 
-The engine automatically adjusts LOD levels across all GSplat assets to stay within the budget, spending it where it improves the image the most — typically keeping nearby geometry at finer detail while degrading distant geometry first. This provides a consistent workload regardless of how many splats are potentially visible.
+The engine automatically adjusts LOD levels across all GSplat assets to fit the budget, keeping nearby geometry at finer detail while degrading distant geometry first. By default the budget is a target: detail is raised until it is used up, wherever the camera is, which provides a consistent workload regardless of how many splats are potentially visible. A budget of 0 or less means no budget at all.
 
-The budget system accounts for all GSplat assets in the scene, including both Streamed SOG assets (with multiple detail levels) and fixed assets (single detail level).
+The budget system accounts for all GSplat assets in the scene, including both Streamed SOG assets (with multiple detail levels) and fixed assets (single detail level). Fixed assets always render in full, so their splats leave that much less of the budget for the streamed ones.
 
-### LOD Mode and Falloff
+### LOD Distances and Budget Mode
 
-Within the budget, LOD levels are picked by camera distance by default, stepping down in concentric bands around the camera. Two properties fine-tune this — [`lodMode`](https://api.playcanvas.com/engine/classes/GSplatParams.html#lodMode) on `app.scene.gsplat` can switch the whole scene to spending the budget by measured visual error instead, which lifts sparse background regions at a noticeably higher memory cost, and [`lodFalloff`](https://api.playcanvas.com/engine/classes/GSplatComponent.html#lodFalloff) on each gsplat component tilts that splat's detail between the near and far field:
+Within the budget, each gsplat component sets how its detail steps down with distance from the camera: [`lodBaseDistance`](https://api.playcanvas.com/engine/classes/GSplatComponent.html#lodbasedistance) is the distance of the LOD 0 to LOD 1 transition, and [`lodMultiplier`](https://api.playcanvas.com/engine/classes/GSplatComponent.html#lodmultiplier) is the factor between each transition distance and the next. Raising either keeps finer detail further from the camera, at a higher memory cost. [`splatBudgetMode`](https://api.playcanvas.com/engine/classes/GSplatParams.html#splatbudgetmode) on `app.scene.gsplat` decides how these distances combine with the budget — with the default `GSPLAT_BUDGET_TARGET` they only shape the falloff and the budget decides how much detail there is, while with `GSPLAT_BUDGET_LIMIT` they decide the detail and the budget only lowers it when they would exceed it:
 
 ```javascript
-app.scene.gsplat.lodMode = pc.GSPLAT_LODMODE_ERROR;
-entity.gsplat.lodFalloff = 2; // more detail near the camera, less in the distance
+entity.gsplat.lodBaseDistance = 10; // LOD 0 out to 10 units
+entity.gsplat.lodMultiplier = 4; // then LOD 1 to 40 units, LOD 2 to 160, ...
+app.scene.gsplat.splatBudgetMode = pc.GSPLAT_BUDGET_LIMIT;
 ```
 
-See [Controlling LOD Behavior](/user-manual/gaussian-splatting/building/lod-streaming#controlling-lod-behavior) for details. LOD selection is also automatically compensated for the camera's field of view — a wider FOV makes objects appear smaller on screen, so it switches to coarser levels sooner.
+See [Controlling LOD Behavior](/user-manual/gaussian-splatting/building/lod-streaming#controlling-lod-behavior) for details. LOD distances are also automatically compensated for the camera's field of view — a wider FOV makes objects appear smaller on screen, so it switches to coarser levels sooner.
 
 ### LOD Range Limits
 
@@ -118,4 +119,4 @@ For most applications:
 
 1. **Set a global splat budget** appropriate for your target hardware (e.g., 1 million for mobile, 3+ million for desktop)
 2. **Leave LOD range at defaults** (min=0, max=highest available) unless you have specific download or memory constraints
-3. **Tune LOD distances** if you want finer control over quality transitions at specific distances
+3. **Tune LOD distances** (`lodBaseDistance`, `lodMultiplier`) to shape how detail falls off with distance, and switch to `GSPLAT_BUDGET_LIMIT` if quality should change at those distances rather than wherever the budget puts the transitions
