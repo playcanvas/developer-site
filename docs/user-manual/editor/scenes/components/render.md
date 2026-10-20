@@ -38,6 +38,7 @@ The Shadow Cascades mask is a row of four boxes, one per cascade. It pairs with 
 
 - [Render Assets](/user-manual/editor/assets/inspectors/render) - Learn about render assets
 - [Light Component](light.md) - Configures the directional light cascades the mask selects from
+- [Mesh Instances](/user-manual/graphics/meshes/mesh-instances/) - Creating, sharing and destroying the mesh instances of a render component
 
 ## Scripting Interface
 

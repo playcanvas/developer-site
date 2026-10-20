@@ -796,6 +796,18 @@ const sidebars = {
         },
         {
           type: 'category',
+          label: 'Meshes',
+          link: {
+            type: 'doc',
+            id: 'user-manual/graphics/meshes/index',
+          },
+          items: [
+            'user-manual/graphics/meshes/creating-meshes',
+            'user-manual/graphics/meshes/mesh-instances',
+          ],
+        },
+        {
+          type: 'category',
           label: 'Lighting',
           link: {
             type: 'doc',
