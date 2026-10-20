@@ -4,7 +4,7 @@
 
 Index: https://developer.playcanvas.com/user-manual/react/llms.txt
 Total Documents: 40
-Generated: 2026-10-16
+Generated: 2026-10-20
 
 ================================================================================
 
@@ -4652,7 +4652,7 @@ export const App = () => <Application>
 | `stats` | `AppStats` | - | The application's performance statistics. Returns the same AppStats instance on every access. Engine measurements are read-only; AppStats#user  holds writable application-defined counters. See AppStats for units, sampling and GPU profiling setup. |
 | `resolutionMode` | `string` | - | The current resolution mode of the canvas, Can be: - RESOLUTION_AUTO: if width and height are not provided, canvas will be resized to match canvas client size. - RESOLUTION_FIXED: resolution of canvas will be fixed. |
 | `configure` | `(url: string, callback: ConfigureAppCallback) => void` | - | Load the application configuration file and apply application properties and fill the asset registry. |
-| `preload` | `(callback: PreloadAppCallback) => void` | - | Load all assets in the asset registry that are marked as 'preload'. Container-backed render assets wait for their referenced containers to be registered and loaded. If a preloaded render asset's `data.containerAsset` refers to a container that is never registered, this method never calls its callback or fires `preload:end`. Debug builds warn when a render asset starts waiting for an unregistered container. |
+| `preload` | `(callback: PreloadAppCallback) => void` | - | Load all assets in the asset registry that are marked as 'preload'. Container-backed render assets wait for their referenced containers to be registered and loaded. If a preloaded render asset's `data.containerAsset` refers to a container that is never registered, this method never calls its callback or fires `preload:end`. Containers can be registered in any order before this method is called. Debug builds warn about preloaded render assets whose container is still unregistered when this method is called. |
 | `_preloadScripts` | `(sceneData: any, callback: any) => void` | - |  |
 | `_parseApplicationProperties` | `(props: any, callback: any) => void` | - |  |
 | `_width` | `any` | - |  |
