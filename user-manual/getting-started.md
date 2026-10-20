@@ -15,6 +15,10 @@ PlayCanvas is a collection of open-source products that you can use to build int
 
 Use [`create-playcanvas`](https://developer.playcanvas.com/user-manual/getting-started/start-with-create-playcanvas.md) to scaffold a Vite and TypeScript project for the Engine, React, or Web Components from one of 12 runnable starters. New projects include [PlayCanvas Skills](https://developer.playcanvas.com/user-manual/getting-started/use-playcanvas-skills.md), which give compatible AI coding agents PlayCanvas-specific development and verification workflows.
 
+## Coming from Unity
+
+[Migrating from Unity](https://developer.playcanvas.com/user-manual/getting-started/migrating-from-unity.md) maps the Unity Editor, Unity's concepts and its C# APIs to their PlayCanvas equivalents, and explains the differences that catch Unity developers out.
+
 ## Which Product is Right For You?
 
 Every developer is different, so picking the right entry point to PlayCanvas will depend on your background and skills. Let us help you choose:
@@ -48,7 +52,7 @@ Consult this simple questionnaire:
 **Prefer vanilla HTML and JavaScript?** → Try [**PlayCanvas Web Components**](https://developer.playcanvas.com/user-manual/web-components.md)  
 **A coder that needs maximum control?** → Go with the [**PlayCanvas Engine**](https://developer.playcanvas.com/user-manual/engine.md)  
 **Working in a team?** → The [**PlayCanvas Editor**](https://developer.playcanvas.com/user-manual/editor.md) offers the best collaboration  
-**Coming from Unity or Unreal?** → The [**PlayCanvas Editor**](https://developer.playcanvas.com/user-manual/editor.md) provides a similar end-user experience  
+**Coming from Unity or Unreal?** → The [**PlayCanvas Editor**](https://developer.playcanvas.com/user-manual/editor.md) provides a similar end-user experience. Unity developers, see [Migrating from Unity](https://developer.playcanvas.com/user-manual/getting-started/migrating-from-unity.md)  
 **Integrating into existing app or site?** → Choose [**React**](https://developer.playcanvas.com/user-manual/react.md) or [**Web Components**](https://developer.playcanvas.com/user-manual/web-components.md) based on your existing stack
 
 And if you still have questions, come and chat to us on [Discord](https://discord.gg/RSaMRzg).
