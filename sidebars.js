@@ -52,6 +52,7 @@ const sidebars = {
       items: [
         'user-manual/getting-started/start-with-create-playcanvas',
         'user-manual/getting-started/use-playcanvas-skills',
+        'user-manual/getting-started/migrating-from-unity',
         'user-manual/getting-started/community',
         'user-manual/getting-started/open-source',
         'user-manual/getting-started/made-with-playcanvas',
