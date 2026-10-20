@@ -220,7 +220,7 @@ Give the parent a **Collision** component with **Type** set to **Compound** and 
 
 ![Compound shapes chair](/img/user-manual/physics/compound-shape-chair.gif)
 
-Children can be moved at runtime. When a child's transform changes, the engine updates that shape's offset within the compound and wakes the parent body. The parent entity is also the body's center of mass, so keep it within the bounds of the shape (usually its center); otherwise the body may behave oddly when forces and torque are applied, such as rotating around an invisible pivot.
+The children of a dynamic or kinematic compound can be moved at runtime. When a child's transform changes, the engine updates that shape's offset within the compound and wakes the parent body. A static compound, like any [static body](/user-manual/physics/rigid-bodies/#moving-static-bodies), keeps the shape it was created with. The parent entity is also the body's center of mass, so keep it within the bounds of the shape (usually its center); otherwise the body may behave oddly when forces and torque are applied, such as rotating around an invisible pivot.
 
 <EngineExample id="physics/compound-collision" title="Compound Collision" />
 
@@ -228,7 +228,20 @@ The chair above comes from the [Compound Physics Shapes](/tutorials/compound-phy
 
 ## Scale {#scale}
 
-Primitive shapes ignore the entity's scale. A box collider is always its half extents in world units, so scaling an entity up does not enlarge its collider; change the half extents or radius instead. Mesh shapes are the exception: they follow the world scale of the entity, or of the model node, that they are built from. Children of a compound are placed by their local position and rotation relative to the parent.
+Primitive shapes ignore scale. A box collider is always its half extents in world units, whatever the scale of its entity or of the entity's parents, so scaling an entity up does not enlarge its collider. This is true for every body type and for triggers, and for scale set at runtime as well as in the scene.
+
+The reason is that a body's transform in the physics engine is a position and a rotation, with no scale. A rigid body never changes shape, so its size belongs to its collision shape, and a new size means a new shape. PlayCanvas therefore passes only the position and rotation of an entity to its body, and builds each primitive at the size its own properties give.
+
+To resize a primitive, change those properties. The engine rebuilds the shape and its body straight away, and a dynamic body keeps its velocity:
+
+```javascript
+// Double the size of a one unit box collider
+entity.collision.halfExtents = new pc.Vec3(1, 1, 1);
+```
+
+Mesh shapes are the exception, because their geometry comes from a mesh that is drawn at the entity's scale. They are built at the world scale of the entity, or of the model node, that they come from, and rebuilt at the start of the next physics step whenever that scale changes. Each rebuild recreates the body, so avoid changing the scale of a mesh collider every frame.
+
+The primitive shapes of a compound's children keep their size too. Scale in the hierarchy above them still moves their positions, so a scaled compound has its parts spread apart rather than enlarged. Leave a compound unscaled, and size each part through its shape properties.
 
 ## Visualizing Shapes {#visualizing-shapes}
 
