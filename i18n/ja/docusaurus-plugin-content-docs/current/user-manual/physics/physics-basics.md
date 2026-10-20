@@ -1,6 +1,6 @@
 ---
 title: はじめに
-description: エディター、エンジンのみのアプリ、React、Web Components で ammo.js 物理演算を有効化し、重力と単位を設定し、シミュレーションがどのようにステップするかを理解します。
+description: エディター、エンジンのみのアプリ、React、Web Components で ammo.js 物理演算を有効化し、重力と単位を設定し、シミュレーションがどのようにステップするかを理解し、シミュレーションを一時停止、減速、または手動でステップさせます。
 ---
 
 import Tabs from '@theme/Tabs';
@@ -92,7 +92,7 @@ import { Application } from '@playcanvas/react';
 
 ## 重力 (Gravity) {#gravity}
 
-重力は、すべてのDynamicなRigidBodyに適用される一定の加速度です。デフォルトのワールドY軸方向（真下）に-9.81という値は地球の重力に近いものです。宇宙を舞台にしたゲームではゼロに、月ならもう少し小さな値に設定します。
+重力は、すべてのDynamicなRigidBodyに適用される一定の加速度です。デフォルトのワールドY軸方向（真下）に-9.81という値は地球の重力に近いものです。宇宙を舞台にしたゲームではゼロに、月ならもう少し小さな値に設定します。個々のボディに対する重力の強さを変えるには、[重力スケール](/user-manual/physics/rigid-bodies/#gravity-scale)を設定します。
 
 <Tabs groupId="workflow" defaultValue="engine">
 <TabItem value="engine" label="Engine">
@@ -150,9 +150,103 @@ function LunarGravity() {
 - **StaticとKinematicなボディは開発者が所有します。** それらのトランスフォームは各ステップの開始時にエンティティから読み取られるため、他のエンティティと同じように動かせます。
 - **イベントはステップごとに発火します。** 衝突イベントとトリガーイベントは、フレームごとではなく物理ステップごとに1回通知されます。床の上で静止している箱は、静止している間ずっと毎ステップ`contact`イベントを発生させます。
 
+## 一時停止とスローモーション {#pausing-and-slow-motion}
+
+RigidBodyシステムの`timeScale`は、シミュレーションが毎フレーム進める時間に掛かる倍率です。デフォルトは1です。1未満の値では物理がスローモーションになり、1を超える値では速くなります。0にすると一時停止します。ボディはその場で止まって速度を保ち、Kinematicなボディはエンティティへの追従をやめ、再開するまで衝突イベントもトリガーイベントも発火しません。アプリケーションの他の部分は動き続けるため、ゲームの世界を止めたままポーズメニューを操作できます。
+
+<Tabs groupId="workflow" defaultValue="engine">
+<TabItem value="engine" label="Engine">
+
+```javascript
+// ポーズメニューを開いている間、ゲームの世界を止める
+app.systems.rigidbody.timeScale = 0;
+
+// スローモーション効果として、物理を4分の1の速度で動かす
+app.systems.rigidbody.timeScale = 0.25;
+```
+
+</TabItem>
+<TabItem value="editor" label="Editor">
+
+エディターにはこの設定はありません。`this.app`がアプリケーションを指すスクリプトから設定します。
+
+```javascript
+// ポーズメニューを開いている間、ゲームの世界を止める
+this.app.systems.rigidbody.timeScale = 0;
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+このためのプロパティはないため、`<Application>`の中のコンポーネントからアプリケーションに設定します。
+
+```jsx
+import { useEffect } from 'react';
+import { useApp } from '@playcanvas/react/hooks';
+
+function PhysicsTimeScale({ scale }) {
+  const app = useApp();
+  useEffect(() => {
+    app.systems.rigidbody.timeScale = scale;
+  }, [app, scale]);
+  return null;
+}
+
+// ポーズメニューを開いている間、ゲームの世界を止める
+<PhysicsTimeScale scale={paused ? 0 : 1} />
+```
+
+</TabItem>
+<TabItem value="web-components" label="Web Components">
+
+[`<pc-app>`](/user-manual/web-components/tags/pc-app/)の`physics-time-scale`属性を設定します。属性または要素の`physicsTimeScale`プロパティを通して、いつでも変更できます。
+
+```html
+<pc-app physics-time-scale="0">
+    <!-- ... -->
+</pc-app>
+```
+
+```javascript
+// スローモーション効果として、4分の1の速度で再開する
+document.querySelector('pc-app').physicsTimeScale = 0.25;
+```
+
+</TabItem>
+</Tabs>
+
+シミュレーションは引き続き1/60秒の固定ステップで進みます。スローモーションでは数フレームに1回だけステップが実行され、その間はボディのトランスフォームが補間されるため、動きは滑らかに保たれます。速くできる度合いは、1フレームに実行できるステップ数によって制限されます。60fpsでは物理は最大で10倍までしか速くならず、それより大きな値では指定より遅く動きます。
+
+物理のタイムスケールは、アプリケーションの`timeScale`に重ねて適用されます。アプリケーションの`timeScale`は、スクリプト、アニメーション、物理をまとめて遅くしたり一時停止したりします。すべてを一度に一時停止するにはアプリケーションのものを、物理だけを一時停止するにはRigidBodyシステムのものを使います。
+
+物理が一時停止している間もスクリプトは動き続け、`applyForce`で加えた力はシミュレーションがステップしたときにしかクリアされません。そのため、毎フレーム力を加えるスクリプトは一時停止中に大きな力をため込み、物理の再開時にそれが一度に解放されることがあります。タイムスケールが0の間は、そうした呼び出しを省略してください。インパルスと速度の変更はすぐに適用され、物理が再開するとボディは新しい速度で動き出します。
+
+## 手動でのステップ {#stepping-manually}
+
+`app.systems.rigidbody.step(dt)`は、シミュレーションをただちに`dt`秒進めます。自動更新と同じ処理をすべて行います。Kinematicなボディとトリガーがエンティティに追従し、シミュレーションは`dt`に収まる数だけ固定ステップを実行し、Dynamicなボディがエンティティに書き戻され、衝突イベントとトリガーイベントが発火します。`dt`にはタイムスケールが適用されません。
+
+タイムスケールが0より大きい間は自動ステップが続くため、毎フレーム`step`も呼び出すと、シミュレーションは1フレームに2回進みます。ステップを完全に自分で制御するには、先にタイムスケールを0にしてください。こうすると`step`はデバッグ用のツールになります。たとえば、一時停止したシミュレーションをキーを押すたびに1ステップずつ進めて、衝突の様子をフレームごとに確認できます。
+
+```javascript
+const physics = app.systems.rigidbody;
+physics.timeScale = 0;
+
+window.addEventListener('keydown', (event) => {
+    // ピリオドキーを押すたびに、一時停止したシミュレーションを固定ステップ1回分進める
+    if (event.key === '.') {
+        physics.step(1 / 60);
+    }
+});
+```
+
+固定ステップの長さである1/60を渡すと、ちょうど1ステップ実行されます。それより短い`dt`ではステップが1回も実行されず、ボディが補間された経路に沿って動くだけの場合があります。長い`dt`では複数のステップが実行されますが、1回の呼び出しにつき最大10回で、それを超える時間は切り捨てられます。`step`を続けて何回か呼び出すとシミュレーションを早送りでき、たとえばプレイヤーに見せる前に積み重なったオブジェクトを落ち着かせることができます。
+
+コードはどの環境でも同じで、`app`の取得方法だけが異なります。エディターのスクリプトでは`this.app`、Reactでは`useApp()`が返す値、Web Componentsでは`whenReady('pc-app')`が解決する`<pc-app>`要素の`app`プロパティです。
+
 ## 関連情報 {#see-also}
 
 - [RigidBody](/user-manual/physics/rigid-bodies/) - ボディのタイプとプロパティ。次に読むページ
 - [コリジョン形状](/user-manual/physics/collision-shapes/) - ボディに形状を与える
+- [RigidBodyComponentSystem](https://api.playcanvas.com/engine/classes/RigidBodyComponentSystem.html) - 重力、タイムスケール、手動ステップのAPIリファレンス
 - [Physics設定](/user-manual/editor/interface/settings/physics/) - エディターのシーン設定のPHYSICSセクション
 - [衝突とトリガー](/tutorials/collision-and-triggers/) - エディターで完全な物理シーンを構築するチュートリアル
