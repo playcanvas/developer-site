@@ -52,10 +52,10 @@ You can also use more complex tag queries:
 
 ```javascript
 // Assets tagged with BOTH 'level-1' AND 'enemy'
-const enemies = this.app.assets.findByTag('level-1', 'enemy');
+const enemies = this.app.assets.findByTag(['level-1', 'enemy']);
 
 // Assets tagged with 'level-1' OR 'level-2'
-const assets = this.app.assets.findByTag(['level-1', 'level-2']);
+const assets = this.app.assets.findByTag('level-1', 'level-2');
 ```
 
 ## Best Practices

@@ -1164,10 +1164,10 @@ Minimize deep hierarchies. Shallower hierarchies are easier to manage and can pe
 
 ```javascript
 childEntity.setLocalPosition(1, 0, 0); // relative to parent
-console.log(childEntity.getWorldPosition()); // global position
+console.log(childEntity.getPosition()); // world position
 ```
 
-See [`setLocalPosition`](https://api.playcanvas.com/engine/classes/GraphNode.html#setlocalposition) and [`getWorldPosition`](https://api.playcanvas.com/engine/classes/GraphNode.html#getworldposition).
+See [`setLocalPosition`](https://api.playcanvas.com/engine/classes/GraphNode.html#setlocalposition) and [`getPosition`](https://api.playcanvas.com/engine/classes/GraphNode.html#getposition).
 
 ## Re-parenting
 
@@ -2954,18 +2954,18 @@ Assets can be tagged for easy grouping. Find all assets with a specific tag:
 const levelAssets = this.app.assets.findByTag('level-1');
 ```
 
-Find assets matching multiple tags (AND logic):
+Pass several tags in an array to find assets that have all of them (AND logic):
 
 ```javascript
 // Assets tagged with BOTH 'level-1' AND 'enemy'
-const enemies = this.app.assets.findByTag('level-1', 'enemy');
+const enemies = this.app.assets.findByTag(['level-1', 'enemy']);
 ```
 
-Find assets matching any of several tags (OR logic):
+Pass several tags as separate arguments to find assets that have any of them (OR logic):
 
 ```javascript
 // Assets tagged with 'level-1' OR 'level-2'
-const assets = this.app.assets.findByTag(['level-1', 'level-2']);
+const assets = this.app.assets.findByTag('level-1', 'level-2');
 ```
 
 ## Asset Events
@@ -3312,13 +3312,15 @@ PlayCanvas supports a wide variety of file formats for different asset types. Th
 
 ## 3D Models
 
-| Format | Extension | Notes |
-|--------|-----------|-------|
-| glTF Binary | `.glb` | Recommended format. Efficient, widely supported |
-| glTF | `.gltf` | JSON-based with external files |
-| FBX | `.fbx` | Converted to GLB on import in Editor |
-| COLLADA | `.dae` | Converted to GLB on import in Editor |
-| OBJ | `.obj` | Basic mesh format, no animations |
+The Editor and the engine accept different model formats. The Editor imports model files into assets, while the engine loads glTF files directly at runtime.
+
+| Format | Extension | Editor | Engine | Notes |
+|--------|-----------|--------|--------|-------|
+| glTF Binary | `.glb` | Imported as a model | Loaded at runtime | Recommended format. Efficient, widely supported |
+| glTF | `.gltf` | Uploaded as a binary asset, not imported | Loaded at runtime | JSON-based with external files. Convert to GLB to import it in the Editor |
+| FBX | `.fbx` | Converted to GLB on import | Not supported | |
+| COLLADA | `.dae` | Converted to GLB on import | Not supported | |
+| OBJ | `.obj` | Converted to GLB on import | Not supported | Basic mesh format, no animations |
 
 :::tip
 
@@ -18120,10 +18122,10 @@ You can also use more complex tag queries:
 
 ```javascript
 // Assets tagged with BOTH 'level-1' AND 'enemy'
-const enemies = this.app.assets.findByTag('level-1', 'enemy');
+const enemies = this.app.assets.findByTag(['level-1', 'enemy']);
 
 // Assets tagged with 'level-1' OR 'level-2'
-const assets = this.app.assets.findByTag(['level-1', 'level-2']);
+const assets = this.app.assets.findByTag('level-1', 'level-2');
 ```
 
 ## Best Practices

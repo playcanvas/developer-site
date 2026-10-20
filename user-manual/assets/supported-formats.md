@@ -4,13 +4,15 @@ PlayCanvas supports a wide variety of file formats for different asset types. Th
 
 ## 3D Models
 
-| Format | Extension | Notes |
-|--------|-----------|-------|
-| glTF Binary | `.glb` | Recommended format. Efficient, widely supported |
-| glTF | `.gltf` | JSON-based with external files |
-| FBX | `.fbx` | Converted to GLB on import in Editor |
-| COLLADA | `.dae` | Converted to GLB on import in Editor |
-| OBJ | `.obj` | Basic mesh format, no animations |
+The Editor and the engine accept different model formats. The Editor imports model files into assets, while the engine loads glTF files directly at runtime.
+
+| Format | Extension | Editor | Engine | Notes |
+|--------|-----------|--------|--------|-------|
+| glTF Binary | `.glb` | Imported as a model | Loaded at runtime | Recommended format. Efficient, widely supported |
+| glTF | `.gltf` | Uploaded as a binary asset, not imported | Loaded at runtime | JSON-based with external files. Convert to GLB to import it in the Editor |
+| FBX | `.fbx` | Converted to GLB on import | Not supported | |
+| COLLADA | `.dae` | Converted to GLB on import | Not supported | |
+| OBJ | `.obj` | Converted to GLB on import | Not supported | Basic mesh format, no animations |
 
 :::tip
 

@@ -4244,10 +4244,13 @@ Here is a breakdown of the available settings:
 | **Convert to GLB** | Create model assets in GLB format. |
 | **Import Hierarchy** | Generates a template asset when importing 3D assets (FBX, etc.). The template asset contains the full entity hierarchy from the imported file. |
 | **Mesh Compression** | Specify the mesh compression to apply to imported models. |
+| **Draco Decode Speed** | Currently has no effect. The import pipeline ignores this setting and derives the decoding speed from Draco Mesh Size instead. Only shown when Mesh Compression is Draco. |
+| **Draco Mesh Size** | How many bits are used to compress mesh attributes, from 0 to 1. This value also sets the decoding speed. Lower values produce smaller files that decode more slowly, with less detail and possible artifacts. Only shown when Mesh Compression is Draco. |
 | **Unwrap UV** | Generates a set of unwrapped UV coordinates. |
 | **Texels Per Meter** | Specifies the number of texels per meter when UV unwrapping is enabled. Default: 16. |
 | **Import Morph Normals** | Imports morph target normals when importing a model. Disable this if morph target normals look incorrect. |
-| **Create FBX Folder** | Creates a new folder in the current directory when importing an FBX file to store the imported FBX contents. |
+| **Use Unique Indices** | When importing FBX models, identifies unique vertices by their attribute indices instead of their attribute values. This usually generates more vertices, but preserves their order. |
+| **Create FBX Folder** | Creates a new folder, named after the imported file, in the current directory to store the imported contents. Despite its name, this applies to every model format, not only FBX. |
 
 ## Animation Import
 
@@ -5582,7 +5585,7 @@ Controls how the material responds to ambient lighting and ambient occlusion.
 | Property | Description |
 |----------|-------------|
 | Ambient Occlusion | A texture containing pre-baked ambient occlusion data. Darker areas receive less ambient light. |
-| UV Channel | The UV set used to sample the AO texture (UV0 or UV1). |
+| UV Channel | The UV set used to sample the AO texture (UV0 to UV7). |
 | Color Channel | Which texture channel to read the AO value from (R, G, B, or A). |
 | Occlude Specular | Controls how AO affects specular reflections: Off, Multiply, or Gloss Based. |
 | Vertex Color | Use vertex colors for ambient occlusion instead of a texture. |
@@ -5598,7 +5601,7 @@ Controls the base color of the material when lit by dynamic light sources.
 | Property | Description |
 |----------|-------------|
 | Diffuse | The diffuse/albedo texture defining per-pixel color. |
-| UV Channel | The UV set used to sample the diffuse texture (UV0 or UV1). |
+| UV Channel | The UV set used to sample the diffuse texture (UV0 to UV7). |
 | Color Channel | Which texture channels to read (R, G, B, A, or RGB). |
 | Vertex Color | Use vertex colors for diffuse instead of a texture. |
 | Color | The diffuse color. If a texture is set, this tints the texture. |
@@ -5661,7 +5664,7 @@ Controls light emission from the material surface.
 | Property | Description |
 |----------|-------------|
 | Emissive | Texture defining per-pixel emission color. |
-| UV Channel | The UV set used to sample the emissive texture (UV0 or UV1). |
+| UV Channel | The UV set used to sample the emissive texture (UV0 to UV7). |
 | Color Channel | Which texture channels to read (R, G, B, A, or RGB). |
 | Vertex Color | Use vertex colors for emission instead of a texture. |
 | Color | The emissive color. If a texture is set, this tints the texture. |
@@ -5677,7 +5680,7 @@ Controls material transparency and alpha testing.
 |----------|-------------|
 | Blend Type | How the material blends with the background: None (opaque), Alpha, Additive, Additive Alpha, Screen, Premultiplied Alpha, Multiply, Modulate 2x, Min, Max. |
 | Opacity | Texture defining per-pixel opacity. |
-| UV Channel | The UV set used to sample the opacity texture (UV0 or UV1). |
+| UV Channel | The UV set used to sample the opacity texture (UV0 to UV7). |
 | Color Channel | Which texture channel to read the opacity from (R, G, B, or A). |
 | Vertex Color | Use vertex colors for opacity instead of a texture. |
 | Intensity | The overall opacity (0-1). 0 is fully transparent, 1 is fully opaque. |
@@ -5697,7 +5700,7 @@ Controls surface detail through normal mapping.
 | Property | Description |
 |----------|-------------|
 | Normals | The normal map texture defining per-pixel surface orientation. |
-| UV Channel | The UV set used to sample the normal texture (UV0 or UV1). |
+| UV Channel | The UV set used to sample the normal texture (UV0 to UV7). |
 | Bumpiness | Strength of the normal map effect (0-2). 0 has no effect, 1 is standard, 2 is exaggerated. |
 
 ## Parallax
@@ -5711,7 +5714,7 @@ Adds depth illusion to surfaces using height mapping. See [Parallax Mapping](htt
 | Property | Description |
 |----------|-------------|
 | Heightmap | The height map texture. White represents high areas, black represents low areas. |
-| UV Channel | The UV set used to sample the height texture (UV0 or UV1). |
+| UV Channel | The UV set used to sample the height texture (UV0 to UV7). |
 | Color Channel | Which texture channel to read the height from (R, G, B, or A). |
 | Mode | Selects a single height-map offset or ray-marched parallax occlusion. The mesh silhouette and depth buffer remain unchanged. Options: Offset, Occlusion. |
 | Strength | Intensity of the parallax effect (0-2). |
@@ -5729,7 +5732,7 @@ Adds a secondary specular layer simulating a clear coating (like car paint or la
 |----------|-------------|
 | Clear Coat Factor | Intensity of the clear coat layer (0-1). Set to 0 to disable. |
 | Clear Coat | Texture defining per-pixel clear coat intensity. |
-| UV Channel | The UV set used to sample the clear coat texture (UV0 or UV1). |
+| UV Channel | The UV set used to sample the clear coat texture (UV0 to UV7). |
 | Vertex Color | Use vertex colors for clear coat intensity. |
 | Vertex Color Channel | Which vertex color channel to use (R, G, B, or A). |
 | Clear Coat Gloss | Texture defining per-pixel clear coat glossiness. |
@@ -5748,7 +5751,7 @@ Adds soft, velvet-like reflections for fabrics and similar materials.
 |----------|-------------|
 | Use Sheen | Enable sheen specular effects. |
 | Sheen | Texture defining per-pixel sheen color. |
-| UV Channel | The UV set used to sample the sheen texture (UV0 or UV1). |
+| UV Channel | The UV set used to sample the sheen texture (UV0 to UV7). |
 | Vertex Color | Use vertex colors for sheen. |
 | Color | The sheen tint color. |
 | Sheen Glossiness | Texture defining per-pixel sheen glossiness. |
@@ -5765,7 +5768,7 @@ Controls light bending through transparent materials like glass or water.
 |----------|-------------|
 | Dynamic Refractions | Enable real-time refraction using a grab pass. |
 | Refraction | Texture defining per-pixel refraction intensity. |
-| UV Channel | The UV set used to sample the refraction texture (UV0 or UV1). |
+| UV Channel | The UV set used to sample the refraction texture (UV0 to UV7). |
 | Vertex Color | Use vertex colors for refraction intensity. |
 | Refraction | Amount of light passing through the material (0-1). |
 | Index Of Refraction | Controls light distortion. Represented as 1.0 / IOR. Common values: glass ~0.67, water ~0.75. |
@@ -5785,7 +5788,7 @@ Creates rainbow-like color shifts seen on soap bubbles, oil slicks, or beetle sh
 |----------|-------------|
 | Use Iridescence | Enable iridescent diffraction effects. |
 | Iridescence | Texture defining per-pixel iridescence intensity. |
-| UV Channel | The UV set used to sample the iridescence texture (UV0 or UV1). |
+| UV Channel | The UV set used to sample the iridescence texture (UV0 to UV7). |
 | Iridescence | Intensity of the iridescence effect (0-1). |
 | Iridescence Thickness | Texture defining per-pixel thin-film thickness. |
 | Thickness Minimum | Minimum thin-film thickness in nanometers (nm). |
@@ -5816,7 +5819,7 @@ Applies pre-baked lighting from a lightmap texture.
 | Property | Description |
 |----------|-------------|
 | Lightmap | The lightmap texture containing pre-baked diffuse lighting. |
-| UV Channel | The UV set used to sample the lightmap (typically UV1 for unique UVs). |
+| UV Channel | The UV set used to sample the lightmap (UV0 to UV7, typically UV1 for unique UVs). |
 | Color Channel | Which texture channels to read (R, G, B, A, or RGB). |
 | Vertex Color | Use vertex colors for lightmap data instead of a texture. |
 
@@ -6664,7 +6667,7 @@ The Camera Component enables an entity to render a scene from a certain viewpoin
 | Projection         | The projection type of the camera. Options are: <ul><li>Perspective</li><li>Orthographic</li></ul> |
 | Frustum Culling    | If enabled, the camera will only render mesh instances whose axis-aligned bounding boxes intersect with the camera's view frustum. Otherwise, the entire scene will be rendered regardless of visibility. |
 | Field of View      | The angle between top and bottom clip planes of a perspective camera. This property is only displayed if 'Projection' is set to 'Perspective'. |
-| Ortho Height       | The distance in world units between the top and bottom clip planes of an orthographic camera. This property is only displayed if 'Projection' is set to 'Orthographic'. |
+| Ortho Height       | Half the height of an orthographic camera's view volume in world units, so the view spans twice this value vertically. The width is derived from the aspect ratio. This property is only displayed if 'Projection' is set to 'Orthographic'. |
 | Near Clip          | The distance in camera space from the camera's eye point to the near clip plane. |
 | Far Clip           | The distance in camera space from the camera's eye point to the far clip plane. |
 | Priority           | A number that defines the order in which camera views are rendered by the engine. Smaller numbers are rendered first. |
@@ -7429,8 +7432,10 @@ Note that you must add a [Collision Component](https://developer.playcanvas.com/
 | Angular Damping | Dynamic only. Specifies the proportion of angular velocity lost per second (0 to 1). |
 | Linear Factor   | Dynamic only. Multiplier for the body's linear movement in each world axis (X, Y, Z). If set to 0 for any axis, no movement will occur in that axis - useful for creating 2D games or constrained movement. |
 | Angular Factor  | Dynamic only. Multiplier for the body's angular (rotational) movement about each world axis (X, Y, Z). If set to 0 for any axis, no rotation will occur around that axis. |
+| Gravity Scale   | Dynamic only. Multiplier for the scene's [gravity](https://developer.playcanvas.com/user-manual/editor/interface/settings/physics.md) on this body. 1 applies it unchanged, 0 makes the body ignore gravity and a negative value reverses it. |
 | Friction        | Controls how quickly a body loses velocity when in contact with other bodies (0 to 1). |
 | Restitution     | A measure of the bounciness of a body (0 to 1). Warning: setting to 1 means a moving body will never come to a stop (unless colliding with other bodies with restitutions below 1, or unless a stop is scripted). |
+| Rolling Friction | Resistance to rolling, which stops spheres and cylinders from rolling forever. 0 disables it. |
 
 ## See Also
 
@@ -26918,10 +26923,10 @@ Minimize deep hierarchies. Shallower hierarchies are easier to manage and can pe
 
 ```javascript
 childEntity.setLocalPosition(1, 0, 0); // relative to parent
-console.log(childEntity.getWorldPosition()); // global position
+console.log(childEntity.getPosition()); // world position
 ```
 
-See [`setLocalPosition`](https://api.playcanvas.com/engine/classes/GraphNode.html#setlocalposition) and [`getWorldPosition`](https://api.playcanvas.com/engine/classes/GraphNode.html#getworldposition).
+See [`setLocalPosition`](https://api.playcanvas.com/engine/classes/GraphNode.html#setlocalposition) and [`getPosition`](https://api.playcanvas.com/engine/classes/GraphNode.html#getposition).
 
 ## Re-parenting
 
@@ -27090,18 +27095,18 @@ Assets can be tagged for easy grouping. Find all assets with a specific tag:
 const levelAssets = this.app.assets.findByTag('level-1');
 ```
 
-Find assets matching multiple tags (AND logic):
+Pass several tags in an array to find assets that have all of them (AND logic):
 
 ```javascript
 // Assets tagged with BOTH 'level-1' AND 'enemy'
-const enemies = this.app.assets.findByTag('level-1', 'enemy');
+const enemies = this.app.assets.findByTag(['level-1', 'enemy']);
 ```
 
-Find assets matching any of several tags (OR logic):
+Pass several tags as separate arguments to find assets that have any of them (OR logic):
 
 ```javascript
 // Assets tagged with 'level-1' OR 'level-2'
-const assets = this.app.assets.findByTag(['level-1', 'level-2']);
+const assets = this.app.assets.findByTag('level-1', 'level-2');
 ```
 
 ## Asset Events
@@ -27255,10 +27260,10 @@ You can also use more complex tag queries:
 
 ```javascript
 // Assets tagged with BOTH 'level-1' AND 'enemy'
-const enemies = this.app.assets.findByTag('level-1', 'enemy');
+const enemies = this.app.assets.findByTag(['level-1', 'enemy']);
 
 // Assets tagged with 'level-1' OR 'level-2'
-const assets = this.app.assets.findByTag(['level-1', 'level-2']);
+const assets = this.app.assets.findByTag('level-1', 'level-2');
 ```
 
 ## Best Practices
@@ -27525,13 +27530,15 @@ PlayCanvas supports a wide variety of file formats for different asset types. Th
 
 ## 3D Models
 
-| Format | Extension | Notes |
-|--------|-----------|-------|
-| glTF Binary | `.glb` | Recommended format. Efficient, widely supported |
-| glTF | `.gltf` | JSON-based with external files |
-| FBX | `.fbx` | Converted to GLB on import in Editor |
-| COLLADA | `.dae` | Converted to GLB on import in Editor |
-| OBJ | `.obj` | Basic mesh format, no animations |
+The Editor and the engine accept different model formats. The Editor imports model files into assets, while the engine loads glTF files directly at runtime.
+
+| Format | Extension | Editor | Engine | Notes |
+|--------|-----------|--------|--------|-------|
+| glTF Binary | `.glb` | Imported as a model | Loaded at runtime | Recommended format. Efficient, widely supported |
+| glTF | `.gltf` | Uploaded as a binary asset, not imported | Loaded at runtime | JSON-based with external files. Convert to GLB to import it in the Editor |
+| FBX | `.fbx` | Converted to GLB on import | Not supported | |
+| COLLADA | `.dae` | Converted to GLB on import | Not supported | |
+| OBJ | `.obj` | Converted to GLB on import | Not supported | Basic mesh format, no animations |
 
 :::tip
 
