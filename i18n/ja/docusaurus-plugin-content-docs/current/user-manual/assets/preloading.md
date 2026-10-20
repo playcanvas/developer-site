@@ -55,10 +55,10 @@ for (const asset of assets) {
 
 ```javascript
 // 'level-1' と 'enemy' の両方のタグが付いたアセット
-const enemies = this.app.assets.findByTag('level-1', 'enemy');
+const enemies = this.app.assets.findByTag(['level-1', 'enemy']);
 
 // 'level-1' または 'level-2' のタグが付いたアセット
-const assets = this.app.assets.findByTag(['level-1', 'level-2']);
+const assets = this.app.assets.findByTag('level-1', 'level-2');
 ```
 
 ## ベストプラクティス

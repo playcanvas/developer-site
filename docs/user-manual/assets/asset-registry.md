@@ -45,18 +45,18 @@ Assets can be tagged for easy grouping. Find all assets with a specific tag:
 const levelAssets = this.app.assets.findByTag('level-1');
 ```
 
-Find assets matching multiple tags (AND logic):
+Pass several tags in an array to find assets that have all of them (AND logic):
 
 ```javascript
 // Assets tagged with BOTH 'level-1' AND 'enemy'
-const enemies = this.app.assets.findByTag('level-1', 'enemy');
+const enemies = this.app.assets.findByTag(['level-1', 'enemy']);
 ```
 
-Find assets matching any of several tags (OR logic):
+Pass several tags as separate arguments to find assets that have any of them (OR logic):
 
 ```javascript
 // Assets tagged with 'level-1' OR 'level-2'
-const assets = this.app.assets.findByTag(['level-1', 'level-2']);
+const assets = this.app.assets.findByTag('level-1', 'level-2');
 ```
 
 ## Asset Events

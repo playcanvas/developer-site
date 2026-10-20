@@ -19,7 +19,7 @@ The Camera Component enables an entity to render a scene from a certain viewpoin
 | Projection         | The projection type of the camera. Options are: <ul><li>Perspective</li><li>Orthographic</li></ul> |
 | Frustum Culling    | If enabled, the camera will only render mesh instances whose axis-aligned bounding boxes intersect with the camera's view frustum. Otherwise, the entire scene will be rendered regardless of visibility. |
 | Field of View      | The angle between top and bottom clip planes of a perspective camera. This property is only displayed if 'Projection' is set to 'Perspective'. |
-| Ortho Height       | The distance in world units between the top and bottom clip planes of an orthographic camera. This property is only displayed if 'Projection' is set to 'Orthographic'. |
+| Ortho Height       | Half the height of an orthographic camera's view volume in world units, so the view spans twice this value vertically. The width is derived from the aspect ratio. This property is only displayed if 'Projection' is set to 'Orthographic'. |
 | Near Clip          | The distance in camera space from the camera's eye point to the near clip plane. |
 | Far Clip           | The distance in camera space from the camera's eye point to the far clip plane. |
 | Priority           | A number that defines the order in which camera views are rendered by the engine. Smaller numbers are rendered first. |
