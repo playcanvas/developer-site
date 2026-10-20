@@ -53,6 +53,8 @@ npm create playcanvas@latest my-app -- -f engine
     npm install vite --save-dev
     ```
 
+    npmが今後どのEngineリリースに更新できるかを制御するには、[バージョニングとリリース](versioning.md)を参照してください。
+
 3. `index.html`を作成し、これを貼り付けます。
 
     ```html title="index.html"
@@ -162,6 +164,8 @@ npm create playcanvas@latest my-app -- -f engine
     npm install playcanvas
     npm install vite --save-dev
     ```
+
+    npmが今後どのEngineリリースに更新できるかを制御するには、[バージョニングとリリース](versioning.md)を参照してください。
 
 3. `index.html`を作成し、これを貼り付けます。
 
