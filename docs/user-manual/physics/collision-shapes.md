@@ -239,7 +239,7 @@ To resize a primitive, change those properties. The engine rebuilds the shape an
 entity.collision.halfExtents = new pc.Vec3(1, 1, 1);
 ```
 
-Mesh shapes are the exception, because their geometry comes from a mesh that is drawn at the entity's scale. They are built at the world scale of the entity, or of the model node, that they come from, and rebuilt at the start of the next physics step whenever that scale changes. Each rebuild recreates the body, so avoid changing the scale of a mesh collider every frame.
+Mesh shapes are the exception, because their geometry comes from a mesh that is drawn at the entity's scale. They are built at the world scale of their entity, including any scale on the model nodes inside it. They are rebuilt at the start of the next physics step whenever the entity's world scale changes, whether you scale the entity itself or one of its parents. Scaling a model node alone does not rebuild the shape. Each rebuild recreates the body, so avoid changing the scale of a mesh collider every frame.
 
 The primitive shapes of a compound's children keep their size too. Scale in the hierarchy above them still moves their positions, so a scaled compound has its parts spread apart rather than enlarged. Leave a compound unscaled, and size each part through its shape properties.
 
