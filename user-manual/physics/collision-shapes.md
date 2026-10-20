@@ -186,7 +186,7 @@ Give the parent a **Collision** component with **Type** set to **Compound** and 
 
 [Image: Compound shapes chair]
 
-Children can be moved at runtime. When a child's transform changes, the engine updates that shape's offset within the compound and wakes the parent body. The parent entity is also the body's center of mass, so keep it within the bounds of the shape (usually its center); otherwise the body may behave oddly when forces and torque are applied, such as rotating around an invisible pivot.
+The children of a dynamic or kinematic compound can be moved at runtime. When a child's transform changes, the engine updates that shape's offset within the compound and wakes the parent body. A static compound, like any [static body](https://developer.playcanvas.com/user-manual/physics/rigid-bodies.md#moving-static-bodies), keeps the shape it was created with. The parent entity is also the body's center of mass, so keep it within the bounds of the shape (usually its center); otherwise the body may behave oddly when forces and torque are applied, such as rotating around an invisible pivot.
 
 [Live example: Compound Collision](https://playcanvas.com/examples/#/physics/compound-collision) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/physics/compound-collision.example.mjs))
 
@@ -194,7 +194,26 @@ The chair above comes from the [Compound Physics Shapes](https://developer.playc
 
 ## Scale
 
-Primitive shapes ignore the entity's scale. A box collider is always its half extents in world units, so scaling an entity up does not enlarge its collider; change the half extents or radius instead. Mesh shapes are the exception: they follow the world scale of the entity, or of the model node, that they are built from. Children of a compound are placed by their local position and rotation relative to the parent.
+Primitive shapes ignore scale. A box collider is always its half extents in world units, whatever the scale of its entity or of the entity's parents, so scaling an entity up does not enlarge its collider. This is true for every body type and for triggers, and for scale set at runtime as well as in the scene.
+
+The reason is that a body's transform in the physics engine is a position and a rotation, with no scale. A rigid body never changes shape, so its size belongs to its collision shape, and a new size means a new shape. PlayCanvas therefore passes only the position and rotation of an entity to its body, and builds each primitive at the size its own properties give.
+
+To resize a primitive, change those properties. The engine rebuilds the shape and its body straight away, and a dynamic body keeps its velocity:
+
+```javascript
+// Double the size of a one unit box collider
+entity.collision.halfExtents = new pc.Vec3(1, 1, 1);
+```
+
+Mesh shapes are the exception, because their geometry comes from a mesh that is drawn at the entity's scale. They are built at the world scale of their entity, including any scale on the model nodes inside it. They are rebuilt at the start of the next physics step whenever the entity's world scale changes, whether you scale the entity itself or one of its parents. Scaling a model node alone does not rebuild the shape. Each rebuild recreates the body, so avoid changing the scale of a mesh collider every frame.
+
+:::note
+
+Rebuilding mesh colliders at a new scale needs an ammo.js build that includes `btScaledBvhTriangleMeshShape`. The build in the engine repository includes it from engine 2.23 onwards, as do the files on this site that the Web Components setup in [Getting Started](https://developer.playcanvas.com/user-manual/physics/physics-basics.md#enabling-physics) loads. sync-ammo 0.1.2, the package used with PlayCanvas React, does not. With an older build, mesh colliders keep the scale they were first built at, and entities that share a mesh at different scales all get a triangle mesh at the scale of the first one built. The debug build of the engine warns about this the first time it builds a scaled triangle mesh. To see which kind of build has loaded, check `typeof Ammo.btScaledBvhTriangleMeshShape === 'function'`.
+
+:::
+
+The primitive shapes of a compound's children keep their size too. Scale in the hierarchy above them still moves their positions, so a scaled compound has its parts spread apart rather than enlarged. Leave a compound unscaled, and size each part through its shape properties.
 
 ## Visualizing Shapes
 

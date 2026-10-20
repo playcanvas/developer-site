@@ -45033,7 +45033,7 @@ PlayCanvas physics is powered by [ammo.js](https://github.com/kripken/ammo.js), 
 This section covers:
 
 - [Getting Started](https://developer.playcanvas.com/user-manual/physics/physics-basics.md) - Enabling physics, gravity, units and how the simulation runs.
-- [Rigid Bodies](https://developer.playcanvas.com/user-manual/physics/rigid-bodies.md) - Static, dynamic and kinematic bodies, their properties, sleeping and teleporting.
+- [Rigid Bodies](https://developer.playcanvas.com/user-manual/physics/rigid-bodies.md) - Static, dynamic and kinematic bodies, their properties, sleeping, and how each type is moved and scaled.
 - [Collision Shapes](https://developer.playcanvas.com/user-manual/physics/collision-shapes.md) - Primitive, mesh and compound shapes, offsets and scale.
 - [Moving Bodies](https://developer.playcanvas.com/user-manual/physics/forces-and-impulses.md) - Forces, impulses, torque, velocity and kinematic motion.
 - [Collision Events](https://developer.playcanvas.com/user-manual/physics/collision-events.md) - Responding to contacts between rigid bodies.
@@ -45184,8 +45184,10 @@ The physics engine interprets 1 unit as 1 meter and measures mass in kilograms. 
 A few rules follow from the way the engine drives the simulation, and the rest of this section relies on them:
 
 - **The simulation steps at a fixed rate.** Each frame, the physics world advances in fixed steps of 1/60 of a second, taking as many as the frame time requires (up to a limit). Bodies therefore behave the same at 30 and at 144 frames per second. On displays faster than 60 Hz some frames run no step at all, and body transforms are interpolated so that motion stays smooth.
-- **Physics owns dynamic bodies.** After each step the engine writes the position and rotation of every dynamic body back to its entity. Anything you set on the entity's transform is overwritten, so dynamic bodies are moved with forces, velocities or `teleport` instead (see [Rigid Bodies](https://developer.playcanvas.com/user-manual/physics/rigid-bodies.md#moving-and-teleporting)).
-- **You own static and kinematic bodies.** Their transforms are read from the entity at the start of each step, so you move them like any other entity.
+- **Physics owns dynamic bodies.** After each step the engine writes the position and rotation of every moving dynamic body back to its entity. Setting the entity's transform does not move the body, so dynamic bodies are moved with forces, velocities or `teleport` instead (see [Rigid Bodies](https://developer.playcanvas.com/user-manual/physics/rigid-bodies.md#moving-and-teleporting)).
+- **You own kinematic bodies.** Their transforms are read from the entity at the start of each step, so you move them like any other entity.
+- **Static bodies stay where they were created.** The engine reads a static body's position and rotation when the body is created and never checks them again, so moving the entity afterwards leaves the body behind. Anything that moves during play should be kinematic.
+- **Bodies have no scale.** Only position and rotation pass from an entity to its body. Primitive collision shapes keep their size however the entity is scaled (see [Scale](https://developer.playcanvas.com/user-manual/physics/collision-shapes.md#scale)).
 - **Events fire per step.** Collision and trigger events are reported once per physics step, not per frame. A body resting on the floor produces a `contact` event every step for as long as it rests there.
 
 ## See Also
@@ -45208,7 +45210,7 @@ A rigid body is an entity that takes part in the physics simulation. It needs tw
 
 The `type` of a rigid body decides who moves it:
 
-- **Static** - Never moves. Use it for the ground, walls and anything else that is part of the environment. Static bodies are cheap, and the engine assumes they stay put.
+- **Static** - Never moves. Use it for the ground, walls and anything else that is part of the environment. Static bodies are cheap because the engine assumes they stay put: it places them when they are created and never checks their entity again.
 - **Dynamic** - Fully simulated. It falls under gravity, responds to collisions, [forces and impulses](https://developer.playcanvas.com/user-manual/physics/forces-and-impulses.md), and the physics engine owns its position and rotation.
 - **Kinematic** - Moved by you, through the entity's transform. It pushes dynamic bodies out of its way but is not affected by them or by gravity. Use it for moving platforms, doors driven by animation and anything else that follows a script rather than the laws of physics.
 
@@ -45339,7 +45341,19 @@ if (!entity.rigidbody.isActive()) {
 
 ## Moving and Teleporting
 
-The physics engine owns the position and rotation of a dynamic body, so anything you set on its entity's transform is overwritten on the next step. To move a dynamic body, apply [forces or velocities](https://developer.playcanvas.com/user-manual/physics/forces-and-impulses.md), or call `teleport` on the rigidbody component when it has to jump somewhere, for example when respawning. Teleporting does not clear the body's velocity, so reset that first if the body should arrive at rest:
+A body's type decides who owns its position and rotation, and so how you move it:
+
+| Type | How to move it | What setting the entity's transform does |
+| --- | --- | --- |
+| **Dynamic** | Forces, impulses and velocities, or `teleport` to jump | Nothing to the body. A moving body overwrites the change on the next step; a sleeping one is left behind |
+| **Kinematic** | The entity's transform | The body follows on the next step |
+| **Static** | Not meant to move. `teleport` repositions one | Nothing to the body, which stays where it was created |
+
+The calls below are the same wherever you build. In React, reach the entity with the [`useParent`](https://developer.playcanvas.com/user-manual/react/api/hooks/use-parent.md) hook from a component placed inside the `<Entity>`; in Web Components, through the `entity` property of the [`<pc-entity>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md) element. [Moving Bodies](https://developer.playcanvas.com/user-manual/physics/forces-and-impulses.md#running-physics-code) shows where per-frame code runs on each surface.
+
+### Dynamic Bodies
+
+The physics engine owns the position and rotation of a dynamic body. To move one, apply [forces or velocities](https://developer.playcanvas.com/user-manual/physics/forces-and-impulses.md), or call `teleport` on the rigidbody component when it has to jump somewhere, for example when respawning. Teleporting does not clear the body's velocity, so reset that first if the body should arrive at rest:
 
 ```javascript
 // Move to a position, keeping the current rotation
@@ -45354,6 +45368,10 @@ entity.rigidbody.angularVelocity = pc.Vec3.ZERO;
 entity.rigidbody.teleport(spawn.getPosition(), spawn.getRotation());
 ```
 
+Vector properties such as `linearVelocity` and `angularFactor` return read-only snapshots. Assign a new vector rather than editing the returned one.
+
+### Kinematic Bodies
+
 Kinematic bodies work the other way round. You move the entity with `setPosition`, `setRotation`, `lookAt` and the rest of the transform API, and the body follows on the next step, carrying any dynamic bodies that rest on it:
 
 ```javascript
@@ -45361,9 +45379,22 @@ Kinematic bodies work the other way round. You move the entity with `setPosition
 platform.setPosition(Math.sin(time) * 2, 0.5, 0);
 ```
 
-Vector properties such as `linearVelocity` and `angularFactor` return read-only snapshots. Assign a new vector rather than editing the returned one.
+### Static Bodies
 
-These calls are the same wherever you build. In React, reach the entity with the [`useParent`](https://developer.playcanvas.com/user-manual/react/api/hooks/use-parent.md) hook from a component placed inside the `<Entity>`; in Web Components, through the `entity` property of the [`<pc-entity>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md) element. [Moving Bodies](https://developer.playcanvas.com/user-manual/physics/forces-and-impulses.md#running-physics-code) shows where per-frame code runs on each surface.
+The engine reads a static body's position and rotation from its entity when the body is created, and never checks them again. Not tracking static bodies is part of what makes them cheap, but it means that moving or rotating the entity during play leaves the body behind: the model moves, and other bodies keep colliding with an invisible shape where it used to be.
+
+If an object moves during play, such as a door or a lift, make it kinematic. To reposition a static body now and then, for example when a level is rearranged, call `teleport`, which moves the entity and its body together:
+
+```javascript
+// Move a static wall, and its body, to a new position
+wall.rigidbody.teleport(0, 0, 10);
+```
+
+Teleporting a static body does not wake the bodies resting on it. Any that have fallen asleep stay where they are, even if that leaves them floating in the air.
+
+## Scaling
+
+A rigid body has a position and a rotation but no scale, so scaling its entity does not resize the body. Its size comes from its collision shape. Resize a box, sphere, capsule, cylinder or cone through properties such as its half extents or radius; the body is rebuilt at the new size and keeps moving. Mesh shapes are the exception, and follow the entity's scale. [Scale](https://developer.playcanvas.com/user-manual/physics/collision-shapes.md#scale) on the Collision Shapes page explains why, with the details for each kind of shape.
 
 ## Collision Groups and Masks
 
@@ -45579,7 +45610,7 @@ Give the parent a **Collision** component with **Type** set to **Compound** and 
 
 [Image: Compound shapes chair]
 
-Children can be moved at runtime. When a child's transform changes, the engine updates that shape's offset within the compound and wakes the parent body. The parent entity is also the body's center of mass, so keep it within the bounds of the shape (usually its center); otherwise the body may behave oddly when forces and torque are applied, such as rotating around an invisible pivot.
+The children of a dynamic or kinematic compound can be moved at runtime. When a child's transform changes, the engine updates that shape's offset within the compound and wakes the parent body. A static compound, like any [static body](https://developer.playcanvas.com/user-manual/physics/rigid-bodies.md#moving-static-bodies), keeps the shape it was created with. The parent entity is also the body's center of mass, so keep it within the bounds of the shape (usually its center); otherwise the body may behave oddly when forces and torque are applied, such as rotating around an invisible pivot.
 
 [Live example: Compound Collision](https://playcanvas.com/examples/#/physics/compound-collision) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/physics/compound-collision.example.mjs))
 
@@ -45587,7 +45618,26 @@ The chair above comes from the [Compound Physics Shapes](https://developer.playc
 
 ## Scale
 
-Primitive shapes ignore the entity's scale. A box collider is always its half extents in world units, so scaling an entity up does not enlarge its collider; change the half extents or radius instead. Mesh shapes are the exception: they follow the world scale of the entity, or of the model node, that they are built from. Children of a compound are placed by their local position and rotation relative to the parent.
+Primitive shapes ignore scale. A box collider is always its half extents in world units, whatever the scale of its entity or of the entity's parents, so scaling an entity up does not enlarge its collider. This is true for every body type and for triggers, and for scale set at runtime as well as in the scene.
+
+The reason is that a body's transform in the physics engine is a position and a rotation, with no scale. A rigid body never changes shape, so its size belongs to its collision shape, and a new size means a new shape. PlayCanvas therefore passes only the position and rotation of an entity to its body, and builds each primitive at the size its own properties give.
+
+To resize a primitive, change those properties. The engine rebuilds the shape and its body straight away, and a dynamic body keeps its velocity:
+
+```javascript
+// Double the size of a one unit box collider
+entity.collision.halfExtents = new pc.Vec3(1, 1, 1);
+```
+
+Mesh shapes are the exception, because their geometry comes from a mesh that is drawn at the entity's scale. They are built at the world scale of their entity, including any scale on the model nodes inside it. They are rebuilt at the start of the next physics step whenever the entity's world scale changes, whether you scale the entity itself or one of its parents. Scaling a model node alone does not rebuild the shape. Each rebuild recreates the body, so avoid changing the scale of a mesh collider every frame.
+
+:::note
+
+Rebuilding mesh colliders at a new scale needs an ammo.js build that includes `btScaledBvhTriangleMeshShape`. The build in the engine repository includes it from engine 2.23 onwards, as do the files on this site that the Web Components setup in [Getting Started](https://developer.playcanvas.com/user-manual/physics/physics-basics.md#enabling-physics) loads. sync-ammo 0.1.2, the package used with PlayCanvas React, does not. With an older build, mesh colliders keep the scale they were first built at, and entities that share a mesh at different scales all get a triangle mesh at the scale of the first one built. The debug build of the engine warns about this the first time it builds a scaled triangle mesh. To see which kind of build has loaded, check `typeof Ammo.btScaledBvhTriangleMeshShape === 'function'`.
+
+:::
+
+The primitive shapes of a compound's children keep their size too. Scale in the hierarchy above them still moves their positions, so a scaled compound has its parts spread apart rather than enlarged. Leave a compound unscaled, and size each part through its shape properties.
 
 ## Visualizing Shapes
 

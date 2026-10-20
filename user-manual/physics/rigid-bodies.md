@@ -6,7 +6,7 @@ A rigid body is an entity that takes part in the physics simulation. It needs tw
 
 The `type` of a rigid body decides who moves it:
 
-- **Static** - Never moves. Use it for the ground, walls and anything else that is part of the environment. Static bodies are cheap, and the engine assumes they stay put.
+- **Static** - Never moves. Use it for the ground, walls and anything else that is part of the environment. Static bodies are cheap because the engine assumes they stay put: it places them when they are created and never checks their entity again.
 - **Dynamic** - Fully simulated. It falls under gravity, responds to collisions, [forces and impulses](https://developer.playcanvas.com/user-manual/physics/forces-and-impulses.md), and the physics engine owns its position and rotation.
 - **Kinematic** - Moved by you, through the entity's transform. It pushes dynamic bodies out of its way but is not affected by them or by gravity. Use it for moving platforms, doors driven by animation and anything else that follows a script rather than the laws of physics.
 
@@ -137,7 +137,19 @@ if (!entity.rigidbody.isActive()) {
 
 ## Moving and Teleporting
 
-The physics engine owns the position and rotation of a dynamic body, so anything you set on its entity's transform is overwritten on the next step. To move a dynamic body, apply [forces or velocities](https://developer.playcanvas.com/user-manual/physics/forces-and-impulses.md), or call `teleport` on the rigidbody component when it has to jump somewhere, for example when respawning. Teleporting does not clear the body's velocity, so reset that first if the body should arrive at rest:
+A body's type decides who owns its position and rotation, and so how you move it:
+
+| Type | How to move it | What setting the entity's transform does |
+| --- | --- | --- |
+| **Dynamic** | Forces, impulses and velocities, or `teleport` to jump | Nothing to the body. A moving body overwrites the change on the next step; a sleeping one is left behind |
+| **Kinematic** | The entity's transform | The body follows on the next step |
+| **Static** | Not meant to move. `teleport` repositions one | Nothing to the body, which stays where it was created |
+
+The calls below are the same wherever you build. In React, reach the entity with the [`useParent`](https://developer.playcanvas.com/user-manual/react/api/hooks/use-parent.md) hook from a component placed inside the `<Entity>`; in Web Components, through the `entity` property of the [`<pc-entity>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md) element. [Moving Bodies](https://developer.playcanvas.com/user-manual/physics/forces-and-impulses.md#running-physics-code) shows where per-frame code runs on each surface.
+
+### Dynamic Bodies
+
+The physics engine owns the position and rotation of a dynamic body. To move one, apply [forces or velocities](https://developer.playcanvas.com/user-manual/physics/forces-and-impulses.md), or call `teleport` on the rigidbody component when it has to jump somewhere, for example when respawning. Teleporting does not clear the body's velocity, so reset that first if the body should arrive at rest:
 
 ```javascript
 // Move to a position, keeping the current rotation
@@ -152,6 +164,10 @@ entity.rigidbody.angularVelocity = pc.Vec3.ZERO;
 entity.rigidbody.teleport(spawn.getPosition(), spawn.getRotation());
 ```
 
+Vector properties such as `linearVelocity` and `angularFactor` return read-only snapshots. Assign a new vector rather than editing the returned one.
+
+### Kinematic Bodies
+
 Kinematic bodies work the other way round. You move the entity with `setPosition`, `setRotation`, `lookAt` and the rest of the transform API, and the body follows on the next step, carrying any dynamic bodies that rest on it:
 
 ```javascript
@@ -159,9 +175,22 @@ Kinematic bodies work the other way round. You move the entity with `setPosition
 platform.setPosition(Math.sin(time) * 2, 0.5, 0);
 ```
 
-Vector properties such as `linearVelocity` and `angularFactor` return read-only snapshots. Assign a new vector rather than editing the returned one.
+### Static Bodies
 
-These calls are the same wherever you build. In React, reach the entity with the [`useParent`](https://developer.playcanvas.com/user-manual/react/api/hooks/use-parent.md) hook from a component placed inside the `<Entity>`; in Web Components, through the `entity` property of the [`<pc-entity>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md) element. [Moving Bodies](https://developer.playcanvas.com/user-manual/physics/forces-and-impulses.md#running-physics-code) shows where per-frame code runs on each surface.
+The engine reads a static body's position and rotation from its entity when the body is created, and never checks them again. Not tracking static bodies is part of what makes them cheap, but it means that moving or rotating the entity during play leaves the body behind: the model moves, and other bodies keep colliding with an invisible shape where it used to be.
+
+If an object moves during play, such as a door or a lift, make it kinematic. To reposition a static body now and then, for example when a level is rearranged, call `teleport`, which moves the entity and its body together:
+
+```javascript
+// Move a static wall, and its body, to a new position
+wall.rigidbody.teleport(0, 0, 10);
+```
+
+Teleporting a static body does not wake the bodies resting on it. Any that have fallen asleep stay where they are, even if that leaves them floating in the air.
+
+## Scaling
+
+A rigid body has a position and a rotation but no scale, so scaling its entity does not resize the body. Its size comes from its collision shape. Resize a box, sphere, capsule, cylinder or cone through properties such as its half extents or radius; the body is rebuilt at the new size and keeps moving. Mesh shapes are the exception, and follow the entity's scale. [Scale](https://developer.playcanvas.com/user-manual/physics/collision-shapes.md#scale) on the Collision Shapes page explains why, with the details for each kind of shape.
 
 ## Collision Groups and Masks
 
