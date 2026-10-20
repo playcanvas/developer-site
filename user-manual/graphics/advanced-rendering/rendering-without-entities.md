@@ -12,7 +12,7 @@ The example renders a ground plane with a manually created StandardMaterial and 
 
 ## Create a Mesh Instance
 
-The following code assumes an initialized application with a camera and lighting. The World layer is already part of the application's default layer composition and camera configuration.
+The following code assumes an initialized application with a camera and lighting. The World layer is one of the application's default layers, and cameras and lights include it in their `layers` lists by default.
 
 ```javascript
 import {
@@ -45,7 +45,7 @@ const meshInstances = [ground];
 layer.addMeshInstances(meshInstances);
 ```
 
-Supply the node explicitly when no component will assign one. It provides the world transform and a useful name for debugging. A standalone GraphNode does not need to be attached to `app.root`; you can move, rotate, or scale it with the usual GraphNode transform methods.
+Every mesh instance needs a GraphNode. A Render Component uses its entity as that node; without one, you create the node yourself. The node provides the world transform and a useful name for debugging. A standalone GraphNode does not need to be attached to `app.root`; you can move, rotate, or scale it with the usual GraphNode transform methods.
 
 ## Keep Layer Membership Persistent
 
@@ -59,7 +59,7 @@ layer.removeMeshInstances(meshInstances);
 layer.addMeshInstances(meshInstances);
 ```
 
-The layer determines where these objects render in the scene's layer composition. For a custom layer, include it in the composition and in the camera's `layers` list. Lights must also affect that layer. See [Layers](https://developer.playcanvas.com/user-manual/graphics/layers.md) for ordering and camera configuration.
+The layer also controls when these objects render relative to the rest of the scene. The scene keeps its layers in a render order called the layer composition, available as `app.scene.layers`. To use a custom layer instead of World, add it to `app.scene.layers` and to the camera's `layers` list. Lights must also include that layer in their `layers` lists. See [Layers](https://developer.playcanvas.com/user-manual/graphics/layers.md#layer-composition) for ordering and camera configuration.
 
 To cast shadows, set `meshInstance.castShadow = true` **before** adding it to the layer; registration also adds eligible instances to the layer's shadow casters. Removing the instance removes it from both lists. StandardMaterial receives lighting and shadows through the normal renderer, just as it does on a Render Component.
 

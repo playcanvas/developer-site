@@ -23,7 +23,7 @@ The uniforms can be read in vertex and fragment shaders. Declare the names you u
 
 The projection matrices are the versions used for rendering. They can differ from a projection matrix calculated in application code before jitter or backend adjustments. Prefer `matrix_viewProjection` when projecting a world-space position in a shader.
 
-`matrix_model` and `matrix_normal` are per-mesh inputs, separate from these camera and scene values. For transformations that also support skinning, morphing, and instancing, use the [vertex shader chunks](https://developer.playcanvas.com/user-manual/graphics/shaders.md#vertex-shader).
+`matrix_model` and `matrix_normal` are per-mesh inputs, separate from the camera and scene values listed above. For transformations that also support skinning, morphing, and instancing, use the [vertex shader chunks](https://developer.playcanvas.com/user-manual/graphics/shaders.md#vertex-shader).
 
 The scene depth and color textures, `uSceneDepthMap` and `uSceneColorMap`, are described in [Depth Layer](https://developer.playcanvas.com/user-manual/graphics/cameras/depth-layer.md).
 

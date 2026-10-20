@@ -28,12 +28,18 @@ Listen for `devicelost` and `devicerestored` on `app.graphicsDevice`. Stop appli
 This WebGPU example retains CPU input for a [storage buffer](https://api.playcanvas.com/engine/classes/StorageBuffer.html). It also tracks interrupted reads for the next section:
 
 ```javascript
+import {
+    BUFFERUSAGE_COPY_DST,
+    BUFFERUSAGE_COPY_SRC,
+    StorageBuffer
+} from 'playcanvas';
+
 const device = app.graphicsDevice;
 const values = new Float32Array([1, 2, 3, 4]);
-const buffer = new pc.StorageBuffer(
+const buffer = new StorageBuffer(
     device,
     values.byteLength,
-    pc.BUFFERUSAGE_COPY_SRC | pc.BUFFERUSAGE_COPY_DST
+    BUFFERUSAGE_COPY_SRC | BUFFERUSAGE_COPY_DST
 );
 let readGeneration = 0;
 
