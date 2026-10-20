@@ -2,7 +2,7 @@
 
 The PlayCanvas Engine is continually evolving, and its updates occasionally introduce breaking changes that require users to adapt their scripts.
 
-This guide provides an overview of all major breaking changes across releases, offering users a helpful resource for migrating their code to newer versions.
+This guide provides an overview of all major breaking changes across releases, offering users a helpful resource for migrating their code to newer versions. To learn how Engine version numbers work and how to control which releases your project picks up, see [Versioning and Releases](https://developer.playcanvas.com/user-manual/engine/versioning.md).
 
 It’s advisable to use the debug version of the engine when troubleshooting issues, as it provides logs for deprecated messages, warnings, and errors related to incorrect usage.
 
