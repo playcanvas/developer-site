@@ -35,11 +35,13 @@ this.app.scripts.on('add', (name, scriptType) => {
 
 ## 公開 {#publishing}
 
-アプリケーションを公開またはダウンロードすると、ビルドはクラシック スクリプトとESMスクリプトを異なる方法で処理します。どこまで処理するかは **Concatenate Scripts** と **Minify Scripts** のビルドオプションで制御します（[PlayCanvasホスティング](../publishing/web/playcanvas-hosting.md#publishing-a-new-build)を参照）。プロジェクトの種類ごとに生成されるファイルについては、[プロジェクトのダウンロード](../projects/downloading.md#static-project-structure)を参照してください。
+アプリケーションを公開するか、`static`形式でダウンロードすると、ビルドはクラシック スクリプトとESMスクリプトを異なる方法で処理します。どこまで処理するかは **Concatenate Scripts** と **Minify Scripts** のビルドオプションで制御します（[PlayCanvasホスティング](../publishing/web/playcanvas-hosting.md#publishing-a-new-build)を参照）。プロジェクトの種類ごとに生成されるファイルについては、[プロジェクトのダウンロード](../projects/downloading.md#static-project-structure)を参照してください。
+
+`npm`の[ダウンロード形式](../projects/downloading.md#download-formats)は異なり、スクリプトをソースファイルのまま含むViteプロジェクトを生成します。そのため、このセクションの以降の内容とこれらのビルドオプションは適用されません。
 
 ### クラシック スクリプト {#publishing-classic-scripts}
 
-デフォルトでは、アプリケーションを公開またはダウンロードすると、すべてのプリロードされたクラシック スクリプトが1つのスクリプトファイルに連結されます。これにより、すべてのスクリプトをロードするために必要なリクエスト数を減らすことで、ロード時間を最適化します。
+デフォルトでは、すべてのプリロードされたクラシック スクリプトが1つのスクリプトファイルに連結されます。これにより、すべてのスクリプトをロードするために必要なリクエスト数を減らすことで、ロード時間を最適化します。
 
 ### ESMスクリプト {#publishing-esm-scripts}
 

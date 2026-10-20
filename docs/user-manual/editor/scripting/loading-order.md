@@ -35,11 +35,13 @@ this.app.scripts.on('add', (name, scriptType) => {
 
 ## Publishing {#publishing}
 
-When you publish or download your application, the build processes Classic scripts and ESM Scripts differently. The **Concatenate Scripts** and **Minify Scripts** build options control how much processing happens (see [PlayCanvas Hosting](../publishing/web/playcanvas-hosting.md#publishing-a-new-build)). For the files each kind of project produces, see [Downloading Projects](../projects/downloading.md#static-project-structure).
+When you publish your application, or download it in the `static` format, the build processes Classic scripts and ESM Scripts differently. The **Concatenate Scripts** and **Minify Scripts** build options control how much processing happens (see [PlayCanvas Hosting](../publishing/web/playcanvas-hosting.md#publishing-a-new-build)). For the files each kind of project produces, see [Downloading Projects](../projects/downloading.md#static-project-structure).
+
+The `npm` [download format](../projects/downloading.md#download-formats) works differently: it produces a Vite project that keeps your scripts as source files, so the rest of this section and these build options don't apply to it.
 
 ### Classic Scripts {#publishing-classic-scripts}
 
-By default, when you publish or download your application, all preloaded Classic scripts are concatenated into a single script file. This optimizes load time by reducing the number of requests that are needed to load all your scripts.
+By default, all preloaded Classic scripts are concatenated into a single script file. This optimizes load time by reducing the number of requests that are needed to load all your scripts.
 
 ### ESM Scripts {#publishing-esm-scripts}
 
