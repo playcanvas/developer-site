@@ -53,6 +53,8 @@ First, select whether you prefer to develop in JavaScript or TypeScript:
     npm install vite --save-dev
     ```
 
+    To control which future Engine releases npm can update to, see [Versioning and Releases](versioning.md).
+
 3. Create an `index.html` and paste this:
 
     ```html title="index.html"
@@ -155,6 +157,8 @@ First, select whether you prefer to develop in JavaScript or TypeScript:
     npm install playcanvas
     npm install vite --save-dev
     ```
+
+    To control which future Engine releases npm can update to, see [Versioning and Releases](versioning.md).
 
 3. Create an `index.html` and paste this:
 
