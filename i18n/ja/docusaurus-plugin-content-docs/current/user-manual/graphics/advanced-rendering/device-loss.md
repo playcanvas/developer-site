@@ -31,12 +31,18 @@ PlayCanvasはデバイスロスト中、アプリケーションの更新とレ�
 次のWebGPUの例では、[ストレージバッファ](https://api.playcanvas.com/engine/classes/StorageBuffer.html)の入力をCPU側に保持します。次のセクションで扱う、中断された読み取りを判別するための世代も記録します。
 
 ```javascript
+import {
+    BUFFERUSAGE_COPY_DST,
+    BUFFERUSAGE_COPY_SRC,
+    StorageBuffer
+} from 'playcanvas';
+
 const device = app.graphicsDevice;
 const values = new Float32Array([1, 2, 3, 4]);
-const buffer = new pc.StorageBuffer(
+const buffer = new StorageBuffer(
     device,
     values.byteLength,
-    pc.BUFFERUSAGE_COPY_SRC | pc.BUFFERUSAGE_COPY_DST
+    BUFFERUSAGE_COPY_SRC | BUFFERUSAGE_COPY_DST
 );
 let readGeneration = 0;
 
