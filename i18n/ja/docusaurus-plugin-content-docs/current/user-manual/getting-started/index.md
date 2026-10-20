@@ -18,6 +18,10 @@ PlayCanvasは、インタラクティブでグラフィカルなウェブアプ�
 
 [`create-playcanvas`](start-with-create-playcanvas)を使用すると、12個の実行可能なスターターからEngine、React、またはWeb Components用のViteとTypeScriptプロジェクトを作成できます。新しいプロジェクトには、対応するAIコーディングエージェントにPlayCanvas固有の開発と検証ワークフローを提供する[PlayCanvas Skills](use-playcanvas-skills)が含まれます。
 
+## Unityから移行する場合 {#coming-from-unity}
+
+[Unityからの移行](migrating-from-unity)では、Unity Editor、Unityの概念、C#のAPIをPlayCanvasでの対応するものに置き換え、Unityの開発者がつまずきやすい違いを解説しています。
+
 ## どの製品があなたに適していますか？
 
 開発者はそれぞれ異なるため、PlayCanvasへの適切な入り口を選ぶことは、あなたの経験とスキルに依存します。私たちが選ぶお手伝いをします：
@@ -51,7 +55,7 @@ PlayCanvasは、インタラクティブでグラフィカルなウェブアプ�
 **Vanilla HTMLとJavaScriptを好みますか？** → [**PlayCanvas Web Components**](../web-components)を試してください  
 **最大限のコントロールが必要なコーダーですか？** → [**PlayCanvas Engine**](../engine)を選びましょう  
 **チームで作業していますか？** → [**PlayCanvas Editor**](../editor)が最高のコラボレーションを提供します  
-**UnityやUnrealからの移行ですか？** → [**PlayCanvas Editor**](../editor)は似たようなエンドユーザーエクスペリエンスを提供します  
+**UnityやUnrealからの移行ですか？** → [**PlayCanvas Editor**](../editor)は似たようなエンドユーザーエクスペリエンスを提供します。Unityの開発者は[Unityからの移行](migrating-from-unity)を参照してください  
 **既存のアプリやサイトに統合しますか？** → 既存のスタックに基づいて[**React**](../react)または[**Web Components**](../web-components)を選択してください
 
 ご不明な点がありましたら、[Discord](https://discord.gg/RSaMRzg)でお気軽にご相談ください。

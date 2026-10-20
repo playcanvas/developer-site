@@ -481,7 +481,7 @@ const config = {
         darkTheme: prismThemes.dracula,
         // GLSL extends C. The grammars are built on the prismjs package, whose core has no C, then
         // copied to the code blocks' Prism (see src/theme/prism-include-languages.js).
-        additionalLanguages: ['c', 'glsl', 'wgsl'],
+        additionalLanguages: ['c', 'csharp', 'glsl', 'wgsl'],
       },
     }),
 };

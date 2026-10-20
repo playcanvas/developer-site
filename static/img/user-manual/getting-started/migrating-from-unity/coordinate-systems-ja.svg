@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="330" viewBox="0 0 800 330" font-family="system-ui, -apple-system, 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic UI', Meiryo, 'Noto Sans JP', sans-serif">
+  <title>Unityの左手座標系（+Zが前方）とPlayCanvasの右手座標系（-Zが前方）</title>
+  <defs>
+    <marker id="head-x" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="12" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto">
+      <path d="M0,0 L12,6 L0,12 z" fill="#e5484d"/>
+    </marker>
+    <marker id="head-y" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="12" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto">
+      <path d="M0,0 L12,6 L0,12 z" fill="#2f9e44"/>
+    </marker>
+    <marker id="head-z" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="12" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto">
+      <path d="M0,0 L12,6 L0,12 z" fill="#3e63dd"/>
+    </marker>
+  </defs>
+
+  <rect x="0.5" y="0.5" width="799" height="329" rx="12" fill="#f8f9fa" stroke="#dfe3e6"/>
+  <line x1="400" y1="24" x2="400" y2="306" stroke="#dfe3e6"/>
+
+  <!-- Unity: left-handed, +Z points into the screen -->
+  <g>
+    <text x="200" y="46" text-anchor="middle" font-size="20" font-weight="600" fill="#1c2024">Unity</text>
+    <text x="200" y="70" text-anchor="middle" font-size="15" fill="#60646c">左手座標系</text>
+
+    <line x1="170" y1="235" x2="170" y2="107" stroke="#2f9e44" stroke-width="3" marker-end="url(#head-y)"/>
+    <text x="170" y="94" text-anchor="middle" font-size="16" font-weight="700" fill="#2f9e44">+Y</text>
+
+    <line x1="170" y1="235" x2="303" y2="235" stroke="#e5484d" stroke-width="3" marker-end="url(#head-x)"/>
+    <text x="316" y="241" font-size="16" font-weight="700" fill="#e5484d">+X</text>
+
+    <line x1="170" y1="235" x2="260" y2="170" stroke="#3e63dd" stroke-width="3" marker-end="url(#head-z)"/>
+    <text x="270" y="166" font-size="16"><tspan font-weight="700" fill="#3e63dd">+Z</tspan><tspan fill="#60646c"> 前方</tspan></text>
+
+    <circle cx="170" cy="235" r="4" fill="#1c2024"/>
+  </g>
+
+  <!-- PlayCanvas: right-handed, +Z points out of the screen, so forward is -Z -->
+  <g>
+    <text x="600" y="46" text-anchor="middle" font-size="20" font-weight="600" fill="#1c2024">PlayCanvas</text>
+    <text x="600" y="70" text-anchor="middle" font-size="15" fill="#60646c">右手座標系</text>
+
+    <line x1="570" y1="235" x2="570" y2="107" stroke="#2f9e44" stroke-width="3" marker-end="url(#head-y)"/>
+    <text x="570" y="94" text-anchor="middle" font-size="16" font-weight="700" fill="#2f9e44">+Y</text>
+
+    <line x1="570" y1="235" x2="703" y2="235" stroke="#e5484d" stroke-width="3" marker-end="url(#head-x)"/>
+    <text x="716" y="241" font-size="16" font-weight="700" fill="#e5484d">+X</text>
+
+    <line x1="570" y1="235" x2="660" y2="170" stroke="#3e63dd" stroke-width="3" stroke-dasharray="7 6" marker-end="url(#head-z)"/>
+    <text x="670" y="166" font-size="16"><tspan font-weight="700" fill="#3e63dd">−Z</tspan><tspan fill="#60646c"> 前方</tspan></text>
+
+    <line x1="570" y1="235" x2="503" y2="284" stroke="#3e63dd" stroke-width="3" marker-end="url(#head-z)"/>
+    <text x="492" y="303" text-anchor="end" font-size="16" font-weight="700" fill="#3e63dd">+Z</text>
+
+    <circle cx="570" cy="235" r="4" fill="#1c2024"/>
+  </g>
+</svg>

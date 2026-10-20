@@ -11,7 +11,7 @@ const found = app.root.findByName('Player');
 
 [`findByName`](https://api.playcanvas.com/engine/classes/GraphNode.html#findbyname) を参照してください。
 
-## タグで検索
+## タグで検索 {#by-tag}
 
 タグはエンティティに付与できる文字列ラベルです（[`Tags`](https://api.playcanvas.com/engine/classes/Tags.html)）。
 
