@@ -241,6 +241,12 @@ entity.collision.halfExtents = new pc.Vec3(1, 1, 1);
 
 Mesh shapes are the exception, because their geometry comes from a mesh that is drawn at the entity's scale. They are built at the world scale of their entity, including any scale on the model nodes inside it. They are rebuilt at the start of the next physics step whenever the entity's world scale changes, whether you scale the entity itself or one of its parents. Scaling a model node alone does not rebuild the shape. Each rebuild recreates the body, so avoid changing the scale of a mesh collider every frame.
 
+:::note
+
+Rebuilding mesh colliders at a new scale needs an ammo.js build that includes `btScaledBvhTriangleMeshShape`. The build in the engine repository includes it from engine 2.23 onwards, as do the files on this site that the Web Components setup in [Getting Started](/user-manual/physics/physics-basics/#enabling-physics) loads. sync-ammo 0.1.2, the package used with PlayCanvas React, does not. With an older build, mesh colliders keep the scale they were first built at, and entities that share a mesh at different scales all get a triangle mesh at the scale of the first one built. The debug build of the engine warns about this the first time it builds a scaled triangle mesh. To see which kind of build has loaded, check `typeof Ammo.btScaledBvhTriangleMeshShape === 'function'`.
+
+:::
+
 The primitive shapes of a compound's children keep their size too. Scale in the hierarchy above them still moves their positions, so a scaled compound has its parts spread apart rather than enlarged. Leave a compound unscaled, and size each part through its shape properties.
 
 ## Visualizing Shapes {#visualizing-shapes}
