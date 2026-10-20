@@ -1,6 +1,6 @@
 ---
 title: RigidBody
-description: Static、Dynamic、Kinematic の rigid body、質量、摩擦、反発、ダンピング、ファクターのプロパティ、スリープ、テレポート、コリジョングループ。
+description: Static、Dynamic、Kinematic の rigid body、質量、摩擦、反発、ダンピング、ファクターのプロパティ、スリープ、タイプごとの移動とスケーリングの方法、コリジョングループ。
 ---
 
 import Tabs from '@theme/Tabs';
@@ -12,7 +12,7 @@ RigidBodyは、物理シミュレーションに参加するエンティティ�
 
 RigidBodyの`type`は、誰がそれを動かすかを決めます。
 
-- **Static** - 決して動きません。地面や壁など、環境の一部となるものに使います。Staticなボディは低コストで、エンジンはそれらが動かないことを前提とします。
+- **Static** - 決して動きません。地面や壁など、環境の一部となるものに使います。Staticなボディが低コストなのは、エンジンがそれらは動かないものと見なしているためです。作成時に配置した後、エンジンはそのエンティティを二度と確認しません。
 - **Dynamic** - 完全にシミュレートされます。重力で落下し、衝突や[力とインパルス](/user-manual/physics/forces-and-impulses/)に応答し、位置と回転は物理エンジンが所有します。
 - **Kinematic** - エンティティのトランスフォームを通して開発者が動かします。Dynamicなボディを押しのけますが、それらや重力の影響は受けません。動くプラットフォーム、アニメーションで駆動されるドアなど、物理法則ではなくスクリプトに従うものに使います。
 
@@ -164,7 +164,19 @@ if (!entity.rigidbody.isActive()) {
 
 ## 移動とテレポート {#moving-and-teleporting}
 
-Dynamicなボディの位置と回転は物理エンジンが所有するため、エンティティのトランスフォームに設定した値は次のステップで上書きされます。Dynamicなボディを動かすには、[力や速度](/user-manual/physics/forces-and-impulses/)を使うか、リスポーン時のようにどこかへ瞬間移動させる必要があるときにrigidbodyコンポーネントの`teleport`を呼び出します。テレポートはボディの速度をクリアしないため、静止した状態で到着させたい場合は先に速度をリセットしてください。
+ボディのタイプによって、その位置と回転を誰が所有するか、つまりどう動かすかが決まります。
+
+| タイプ | 動かし方 | エンティティのトランスフォームを設定したときの結果 |
+| --- | --- | --- |
+| **Dynamic** | 力、インパルス、速度。瞬間移動には`teleport` | ボディには何も起きません。動いているボディは次のステップで変更を上書きし、スリープ中のボディは取り残されます |
+| **Kinematic** | エンティティのトランスフォーム | 次のステップでボディが追従します |
+| **Static** | 動かすことは想定されていません。位置を変えるには`teleport` | ボディには何も起きず、作成された場所に留まります |
+
+以下の呼び出しは、どの方法で構築しても同じです。Reactでは`<Entity>`の中に配置したコンポーネントから[`useParent`](/user-manual/react/api/hooks/use-parent/)フックでエンティティを取得し、Web Componentsでは[`<pc-entity>`](/user-manual/web-components/tags/pc-entity/)要素の`entity`プロパティから取得します。[ボディを動かす](/user-manual/physics/forces-and-impulses/#running-physics-code)では、各環境で毎フレームのコードをどこで実行するかを示しています。
+
+### Dynamicなボディ {#moving-dynamic-bodies}
+
+Dynamicなボディの位置と回転は物理エンジンが所有します。動かすには[力や速度](/user-manual/physics/forces-and-impulses/)を使うか、リスポーン時のようにどこかへ瞬間移動させる必要があるときにrigidbodyコンポーネントの`teleport`を呼び出します。テレポートはボディの速度をクリアしないため、静止した状態で到着させたい場合は先に速度をリセットしてください。
 
 ```javascript
 // 現在の回転を保ったまま位置を移動する
@@ -179,6 +191,10 @@ entity.rigidbody.angularVelocity = pc.Vec3.ZERO;
 entity.rigidbody.teleport(spawn.getPosition(), spawn.getRotation());
 ```
 
+`linearVelocity`や`angularFactor`などのベクトルプロパティは、読み取り専用のスナップショットを返します。返されたベクトルを編集するのではなく、新しいベクトルを代入してください。
+
+### Kinematicなボディ {#moving-kinematic-bodies}
+
 Kinematicなボディは逆の仕組みです。`setPosition`、`setRotation`、`lookAt`などのトランスフォームAPIでエンティティを動かすと、ボディは次のステップで追従し、その上に乗っているDynamicなボディを運びます。
 
 ```javascript
@@ -186,9 +202,22 @@ Kinematicなボディは逆の仕組みです。`setPosition`、`setRotation`、
 platform.setPosition(Math.sin(time) * 2, 0.5, 0);
 ```
 
-`linearVelocity`や`angularFactor`などのベクトルプロパティは、読み取り専用のスナップショットを返します。返されたベクトルを編集するのではなく、新しいベクトルを代入してください。
+### Staticなボディ {#moving-static-bodies}
 
-これらの呼び出しは、どの方法で構築しても同じです。Reactでは`<Entity>`の中に配置したコンポーネントから[`useParent`](/user-manual/react/api/hooks/use-parent/)フックでエンティティを取得し、Web Componentsでは[`<pc-entity>`](/user-manual/web-components/tags/pc-entity/)要素の`entity`プロパティから取得します。[ボディを動かす](/user-manual/physics/forces-and-impulses/#running-physics-code)では、各環境で毎フレームのコードをどこで実行するかを示しています。
+エンジンはStaticなボディの位置と回転をボディの作成時にエンティティから読み取り、その後は二度と確認しません。Staticなボディを追跡しないことが低コストである理由の一つですが、そのためにプレイ中にエンティティを移動または回転させると、ボディは取り残されます。モデルは動いても、他のボディは元の場所にある見えない形状と衝突し続けます。
+
+ドアやエレベーターのようにプレイ中に動くオブジェクトはKinematicにしてください。レベルの配置を変えるときなど、Staticなボディの位置をときどき変える場合は`teleport`を呼び出します。エンティティとボディが一緒に移動します。
+
+```javascript
+// Staticな壁とそのボディを新しい位置に移動する
+wall.rigidbody.teleport(0, 0, 10);
+```
+
+Staticなボディをテレポートしても、その上に乗っているボディはスリープから復帰しません。スリープ中のボディはその場に留まり、宙に浮いたままになることもあります。
+
+## スケーリング {#scaling}
+
+RigidBodyには位置と回転はありますが、スケールはありません。そのため、エンティティをスケールしてもボディのサイズは変わりません。ボディのサイズはコリジョン形状で決まります。ボックス、球、カプセル、円柱、円錐は、Half ExtentsやRadiusなどのプロパティでサイズを変えます。ボディは新しいサイズで再構築され、動きを保ちます。例外はメッシュ形状で、エンティティのスケールに従います。理由と形状の種類ごとの詳細は、コリジョン形状ページの[スケール](/user-manual/physics/collision-shapes/#scale)で説明しています。
 
 ## コリジョングループとマスク {#collision-groups-and-masks}
 
