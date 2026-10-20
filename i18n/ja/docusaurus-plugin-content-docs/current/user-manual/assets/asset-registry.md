@@ -45,18 +45,18 @@ const assets = this.app.assets.findAll('Enemy');
 const levelAssets = this.app.assets.findByTag('level-1');
 ```
 
-複数のタグに一致するアセットを検索します（AND ロジック）。
+複数のタグを配列で渡すと、そのすべてのタグを持つアセットを検索します（AND ロジック）。
 
 ```javascript
 // 'level-1' と 'enemy' の両方のタグが付いたアセット
-const enemies = this.app.assets.findByTag('level-1', 'enemy');
+const enemies = this.app.assets.findByTag(['level-1', 'enemy']);
 ```
 
-複数のタグのいずれかに一致するアセットを検索します（OR ロジック）。
+複数のタグを個別の引数として渡すと、いずれかのタグを持つアセットを検索します（OR ロジック）。
 
 ```javascript
 // 'level-1' または 'level-2' のタグが付いたアセット
-const assets = this.app.assets.findByTag(['level-1', 'level-2']);
+const assets = this.app.assets.findByTag('level-1', 'level-2');
 ```
 
 ## アセットイベント

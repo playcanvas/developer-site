@@ -29,8 +29,10 @@ Note that you must add a [Collision Component](collision.md) to the same entity 
 | Angular Damping | Dynamic only. Specifies the proportion of angular velocity lost per second (0 to 1). |
 | Linear Factor   | Dynamic only. Multiplier for the body's linear movement in each world axis (X, Y, Z). If set to 0 for any axis, no movement will occur in that axis - useful for creating 2D games or constrained movement. |
 | Angular Factor  | Dynamic only. Multiplier for the body's angular (rotational) movement about each world axis (X, Y, Z). If set to 0 for any axis, no rotation will occur around that axis. |
+| Gravity Scale   | Dynamic only. Multiplier for the scene's [gravity](/user-manual/editor/interface/settings/physics/) on this body. 1 applies it unchanged, 0 makes the body ignore gravity and a negative value reverses it. |
 | Friction        | Controls how quickly a body loses velocity when in contact with other bodies (0 to 1). |
 | Restitution     | A measure of the bounciness of a body (0 to 1). Warning: setting to 1 means a moving body will never come to a stop (unless colliding with other bodies with restitutions below 1, or unless a stop is scripted). |
+| Rolling Friction | Resistance to rolling, which stops spheres and cylinders from rolling forever. 0 disables it. |
 
 ## See Also
 

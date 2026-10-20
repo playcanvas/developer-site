@@ -20,10 +20,10 @@ Minimize deep hierarchies. Shallower hierarchies are easier to manage and can pe
 
 ```javascript
 childEntity.setLocalPosition(1, 0, 0); // relative to parent
-console.log(childEntity.getWorldPosition()); // global position
+console.log(childEntity.getPosition()); // world position
 ```
 
-See [`setLocalPosition`](https://api.playcanvas.com/engine/classes/GraphNode.html#setlocalposition) and [`getWorldPosition`](https://api.playcanvas.com/engine/classes/GraphNode.html#getworldposition).
+See [`setLocalPosition`](https://api.playcanvas.com/engine/classes/GraphNode.html#setlocalposition) and [`getPosition`](https://api.playcanvas.com/engine/classes/GraphNode.html#getposition).
 
 ## Re-parenting
 

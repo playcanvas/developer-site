@@ -44,10 +44,13 @@ Here is a breakdown of the available settings:
 | **Convert to GLB** | Create model assets in GLB format. |
 | **Import Hierarchy** | Generates a template asset when importing 3D assets (FBX, etc.). The template asset contains the full entity hierarchy from the imported file. |
 | **Mesh Compression** | Specify the mesh compression to apply to imported models. |
+| **Draco Decode Speed** | Currently has no effect. The import pipeline ignores this setting and derives the decoding speed from Draco Mesh Size instead. Only shown when Mesh Compression is Draco. |
+| **Draco Mesh Size** | How many bits are used to compress mesh attributes, from 0 to 1. This value also sets the decoding speed. Lower values produce smaller files that decode more slowly, with less detail and possible artifacts. Only shown when Mesh Compression is Draco. |
 | **Unwrap UV** | Generates a set of unwrapped UV coordinates. |
 | **Texels Per Meter** | Specifies the number of texels per meter when UV unwrapping is enabled. Default: 16. |
 | **Import Morph Normals** | Imports morph target normals when importing a model. Disable this if morph target normals look incorrect. |
-| **Create FBX Folder** | Creates a new folder in the current directory when importing an FBX file to store the imported FBX contents. |
+| **Use Unique Indices** | When importing FBX models, identifies unique vertices by their attribute indices instead of their attribute values. This usually generates more vertices, but preserves their order. |
+| **Create FBX Folder** | Creates a new folder, named after the imported file, in the current directory to store the imported contents. Despite its name, this applies to every model format, not only FBX. |
 
 ## Animation Import
 

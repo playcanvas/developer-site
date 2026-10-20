@@ -35,7 +35,7 @@ Controls how the material responds to ambient lighting and ambient occlusion.
 | Property | Description |
 |----------|-------------|
 | Ambient Occlusion | A texture containing pre-baked ambient occlusion data. Darker areas receive less ambient light. |
-| UV Channel | The UV set used to sample the AO texture (UV0 or UV1). |
+| UV Channel | The UV set used to sample the AO texture (UV0 to UV7). |
 | Color Channel | Which texture channel to read the AO value from (R, G, B, or A). |
 | Occlude Specular | Controls how AO affects specular reflections: Off, Multiply, or Gloss Based. |
 | Vertex Color | Use vertex colors for ambient occlusion instead of a texture. |
@@ -51,7 +51,7 @@ Controls the base color of the material when lit by dynamic light sources.
 | Property | Description |
 |----------|-------------|
 | Diffuse | The diffuse/albedo texture defining per-pixel color. |
-| UV Channel | The UV set used to sample the diffuse texture (UV0 or UV1). |
+| UV Channel | The UV set used to sample the diffuse texture (UV0 to UV7). |
 | Color Channel | Which texture channels to read (R, G, B, A, or RGB). |
 | Vertex Color | Use vertex colors for diffuse instead of a texture. |
 | Color | The diffuse color. If a texture is set, this tints the texture. |
@@ -114,7 +114,7 @@ Controls light emission from the material surface.
 | Property | Description |
 |----------|-------------|
 | Emissive | Texture defining per-pixel emission color. |
-| UV Channel | The UV set used to sample the emissive texture (UV0 or UV1). |
+| UV Channel | The UV set used to sample the emissive texture (UV0 to UV7). |
 | Color Channel | Which texture channels to read (R, G, B, A, or RGB). |
 | Vertex Color | Use vertex colors for emission instead of a texture. |
 | Color | The emissive color. If a texture is set, this tints the texture. |
@@ -130,7 +130,7 @@ Controls material transparency and alpha testing.
 |----------|-------------|
 | Blend Type | How the material blends with the background: None (opaque), Alpha, Additive, Additive Alpha, Screen, Premultiplied Alpha, Multiply, Modulate 2x, Min, Max. |
 | Opacity | Texture defining per-pixel opacity. |
-| UV Channel | The UV set used to sample the opacity texture (UV0 or UV1). |
+| UV Channel | The UV set used to sample the opacity texture (UV0 to UV7). |
 | Color Channel | Which texture channel to read the opacity from (R, G, B, or A). |
 | Vertex Color | Use vertex colors for opacity instead of a texture. |
 | Intensity | The overall opacity (0-1). 0 is fully transparent, 1 is fully opaque. |
@@ -150,7 +150,7 @@ Controls surface detail through normal mapping.
 | Property | Description |
 |----------|-------------|
 | Normals | The normal map texture defining per-pixel surface orientation. |
-| UV Channel | The UV set used to sample the normal texture (UV0 or UV1). |
+| UV Channel | The UV set used to sample the normal texture (UV0 to UV7). |
 | Bumpiness | Strength of the normal map effect (0-2). 0 has no effect, 1 is standard, 2 is exaggerated. |
 
 ## Parallax
@@ -164,7 +164,7 @@ Adds depth illusion to surfaces using height mapping. See [Parallax Mapping](/us
 | Property | Description |
 |----------|-------------|
 | Heightmap | The height map texture. White represents high areas, black represents low areas. |
-| UV Channel | The UV set used to sample the height texture (UV0 or UV1). |
+| UV Channel | The UV set used to sample the height texture (UV0 to UV7). |
 | Color Channel | Which texture channel to read the height from (R, G, B, or A). |
 | Mode | Selects a single height-map offset or ray-marched parallax occlusion. The mesh silhouette and depth buffer remain unchanged. Options: Offset, Occlusion. |
 | Strength | Intensity of the parallax effect (0-2). |
@@ -182,7 +182,7 @@ Adds a secondary specular layer simulating a clear coating (like car paint or la
 |----------|-------------|
 | Clear Coat Factor | Intensity of the clear coat layer (0-1). Set to 0 to disable. |
 | Clear Coat | Texture defining per-pixel clear coat intensity. |
-| UV Channel | The UV set used to sample the clear coat texture (UV0 or UV1). |
+| UV Channel | The UV set used to sample the clear coat texture (UV0 to UV7). |
 | Vertex Color | Use vertex colors for clear coat intensity. |
 | Vertex Color Channel | Which vertex color channel to use (R, G, B, or A). |
 | Clear Coat Gloss | Texture defining per-pixel clear coat glossiness. |
@@ -201,7 +201,7 @@ Adds soft, velvet-like reflections for fabrics and similar materials.
 |----------|-------------|
 | Use Sheen | Enable sheen specular effects. |
 | Sheen | Texture defining per-pixel sheen color. |
-| UV Channel | The UV set used to sample the sheen texture (UV0 or UV1). |
+| UV Channel | The UV set used to sample the sheen texture (UV0 to UV7). |
 | Vertex Color | Use vertex colors for sheen. |
 | Color | The sheen tint color. |
 | Sheen Glossiness | Texture defining per-pixel sheen glossiness. |
@@ -218,7 +218,7 @@ Controls light bending through transparent materials like glass or water.
 |----------|-------------|
 | Dynamic Refractions | Enable real-time refraction using a grab pass. |
 | Refraction | Texture defining per-pixel refraction intensity. |
-| UV Channel | The UV set used to sample the refraction texture (UV0 or UV1). |
+| UV Channel | The UV set used to sample the refraction texture (UV0 to UV7). |
 | Vertex Color | Use vertex colors for refraction intensity. |
 | Refraction | Amount of light passing through the material (0-1). |
 | Index Of Refraction | Controls light distortion. Represented as 1.0 / IOR. Common values: glass ~0.67, water ~0.75. |
@@ -238,7 +238,7 @@ Creates rainbow-like color shifts seen on soap bubbles, oil slicks, or beetle sh
 |----------|-------------|
 | Use Iridescence | Enable iridescent diffraction effects. |
 | Iridescence | Texture defining per-pixel iridescence intensity. |
-| UV Channel | The UV set used to sample the iridescence texture (UV0 or UV1). |
+| UV Channel | The UV set used to sample the iridescence texture (UV0 to UV7). |
 | Iridescence | Intensity of the iridescence effect (0-1). |
 | Iridescence Thickness | Texture defining per-pixel thin-film thickness. |
 | Thickness Minimum | Minimum thin-film thickness in nanometers (nm). |
@@ -269,7 +269,7 @@ Applies pre-baked lighting from a lightmap texture.
 | Property | Description |
 |----------|-------------|
 | Lightmap | The lightmap texture containing pre-baked diffuse lighting. |
-| UV Channel | The UV set used to sample the lightmap (typically UV1 for unique UVs). |
+| UV Channel | The UV set used to sample the lightmap (UV0 to UV7, typically UV1 for unique UVs). |
 | Color Channel | Which texture channels to read (R, G, B, A, or RGB). |
 | Vertex Color | Use vertex colors for lightmap data instead of a texture. |
 

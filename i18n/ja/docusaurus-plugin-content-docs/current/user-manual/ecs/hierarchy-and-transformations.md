@@ -20,10 +20,10 @@ description: 親子 Entity の階層と、ローカル座標およびワール�
 
 ```javascript
 childEntity.setLocalPosition(1, 0, 0);
-console.log(childEntity.getWorldPosition());
+console.log(childEntity.getPosition());
 ```
 
-[`setLocalPosition`](https://api.playcanvas.com/engine/classes/GraphNode.html#setlocalposition) と [`getWorldPosition`](https://api.playcanvas.com/engine/classes/GraphNode.html#getworldposition) を参照してください。
+[`setLocalPosition`](https://api.playcanvas.com/engine/classes/GraphNode.html#setlocalposition) と [`getPosition`](https://api.playcanvas.com/engine/classes/GraphNode.html#getposition) を参照してください。
 
 ## 親の付け替え
 
