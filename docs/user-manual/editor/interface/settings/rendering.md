@@ -1,6 +1,6 @@
 ---
 title: Rendering Settings
-description: Rendering Project Settings controlling sky clustered lights shadows exposure fog mesh sketch overlays and resolution defaults shared with everyone on branch.
+description: Rendering settings for each scene's sky, clustered lights, shadows, Gaussian splats, tonemapping, exposure and fog, plus the project-wide resolution, graphics device, canvas and compression library options.
 sidebar_label: Rendering
 ---
 
@@ -8,7 +8,12 @@ Controls lighting, resolution, and rendering features.
 
 :::note
 
-These settings affect all users on the currently active [branch](../../version-control/branches.md) of the project.
+The `RENDERING` panel holds two kinds of settings:
+
+- [Scene settings](#scene-settings), such as the skybox, clustered lighting and fog, are saved with the scene that is open, so each scene can have its own values.
+- [Project settings](#project-settings), such as the resolution and the graphics device, apply to every scene in the project.
+
+Both kinds affect all users on the currently active [branch](../../version-control/branches.md) of the project.
 
 :::
 
@@ -20,7 +25,11 @@ Navigate to the `RENDERING` section and expand the panel:
 
 Here is a breakdown of the available settings:
 
-## Environment
+## Scene Settings {#scene-settings}
+
+The first part of the panel shows the settings of the current scene. When your application [changes scene](/user-manual/editor/scenes/loading-scenes/), the engine applies the settings of the scene it loads.
+
+### Environment {#environment}
 
 | Setting | Description |
 | --- | --- |
@@ -28,16 +37,17 @@ Here is a breakdown of the available settings:
 | **Skybox** | A cubemap asset rendered behind your 3D scene. Also used as the default environment map for physical materials when prefiltered. |
 | **Type** | Select the projection used to render the skybox cubemap:<ul><li><strong>Infinite</strong>: Rendered at infinity</li><li><strong>Box</strong>: Mapped to a box mesh</li><li><strong>Dome</strong>: Mapped to a hemispherical dome</li></ul> |
 | **Mesh Position / Rotation / Scale** | The position, rotation and scale of the sky mesh. |
-| **Center** | The relative normalized offset of the sky from the ground. |
+| **Sky Center** | The relative normalized offset of the sky from the ground. |
 | **Intensity** | The skybox intensity, used to match exposure levels. |
 | **Rotation** | Rotation of the skybox. |
 | **Mip** | Mip level of the prefiltered skybox. Higher values select lower-resolution, more blurred mips. |
+| **Sky Depth Write** | Whether the sky writes to the depth buffer. Disable it to allow 3D geometry to render on top of the sky. |
 
-## Clustered Lighting
+### Clustered Lighting {#clustered-lighting}
 
 | Setting | Description |
 | --- | --- |
-| **Clustered Lighting** | Enable clustered lighting. |
+| **Clustered Lighting** | Enable clustered lighting. After changing this setting, you need to reload the Editor, and the [Launch Page](../launch-page/index.md) if it is open. |
 | **Cells (X, Y, Z)** | Number of cells per world-space axis used to subdivide the space containing lights. |
 | **Max Lights Per Cell** | Maximum number of lights a cell can store. |
 | **Max Lights** | Maximum number of clustered lights visible in a frame. Keep this as low as the scene allows; values above 255 use a larger light-index texture. |
@@ -48,9 +58,9 @@ Here is a breakdown of the available settings:
 | **Shadow Type** | The type of shadow filtering used by all shadows. |
 | **Area Lights Enabled** | Clustered lights support area lights. |
 
-## Gaussian Splatting
+### Gaussian Splatting {#gaussian-splatting}
 
-Scene-wide settings for [Gaussian splat](/user-manual/gaussian-splatting) rendering. Per-entity LOD range and falloff live on the [GSplat Component](/user-manual/editor/scenes/components/gsplat).
+Scene-wide settings for [Gaussian splat](/user-manual/gaussian-splatting) rendering. Per-entity LOD range and distances are set on the [GSplat Component](/user-manual/editor/scenes/components/gsplat).
 
 | Setting | Description |
 | --- | --- |
@@ -59,7 +69,8 @@ Scene-wide settings for [Gaussian splat](/user-manual/gaussian-splatting) render
 | **LOD Update Angle** | Camera rotation in degrees that triggers an LOD update. Set to 0 to disable angle updates. |
 | **LOD Behind Penalty** | Distance multiplier used for splat nodes behind the camera during LOD selection. |
 | **LOD Underfill Limit** | Number of lower-detail LOD levels that can be used while optimal data loads. |
-| **Splat Budget** | Target number of splats rendered across the scene. Non-positive values use the engine default. |
+| **Splat Budget** | Number of splats rendered across the scene, used as set by **Splat Budget Mode**. Set to 0 for no budget. |
+| **Splat Budget Mode** | How the splat budget is used:<ul><li><strong>Target</strong>: Raises detail until the budget is used up</li><li><strong>Limit</strong>: Lets the LOD distances of each GSplat decide the detail, and only lowers it to fit the budget</li></ul> |
 | **Alpha Clip** | Alpha threshold for Gaussian splat shadow, picking and prepass rendering. |
 | **Forward Alpha Clip** | Alpha threshold below which splats are removed from the forward pass. |
 | **Min Pixel Size** | Minimum screen-space size below which splats are discarded. |
@@ -73,18 +84,24 @@ Scene-wide settings for [Gaussian splat](/user-manual/gaussian-splatting) render
 | **Cooldown Ticks** | Ticks an unused streamed splat resource waits before unloading. |
 | **Data Format** | Work-buffer format used for Gaussian splat rendering. Options: Compact, Large. |
 | **Enable IDs** | Store a unique component ID in the Gaussian splat work buffer. |
-| **LOD Mode** | Metric used to select Gaussian splat detail within the global budget. Options: Error, Distance. |
 
-## Exposure & Fog
+### Tonemapping, Exposure & Fog {#tonemapping-exposure-and-fog}
 
 | Setting | Description |
 | --- | --- |
+| **Tonemapping** | Engine v1 projects only. Tone mapping compresses HDR colors into the displayable range. Options: Linear, Filmic, Hejl, ACES, ACES2, Neutral. In Engine v2 projects, tone mapping is set on each [Camera](/user-manual/editor/scenes/components/camera). |
 | **Exposure** | The exposure value tweaks the overall brightness of the scene. |
-| **Fog** | Controls an approximation of ambient fog in your scene. Types:<ul><li><strong>None</strong>: Fog disabled</li><li><strong>Linear</strong>: Fades in linearly between Fog Start and Fog End distances</li><li><strong>Exp</strong>: Fades in from the view position according to an exponential function</li><li><strong>Exp2</strong>: Fades in from the view position according to an exponential squared function</li></ul> |
-| **Fog Density** | Controls the rate at which fog fades in for Exp and Exp2 fog types. Larger values cause fog to fade in more quickly. Must be positive. |
-| **Fog Start / End** | Distances, in scene units, where fog starts to fade in (start) and where it reaches maximum (end). |
+| **Gamma** | Engine v1 projects only. Gamma correction: 1.0 (none) or 2.2 (sRGB). In Engine v2 projects, gamma correction is set on each [Camera](/user-manual/editor/scenes/components/camera). |
+| **Fog** | Controls an approximation of ambient fog in your scene. Types:<ul><li><strong>None</strong>: Fog disabled</li><li><strong>Linear</strong>: Fades in linearly between the Distance Start and Distance End</li><li><strong>Exponential</strong>: Fades in from the view position according to an exponential function</li><li><strong>Exponential Squared</strong>: Fades in from the view position according to an exponential squared function</li></ul> |
+| **Distance Start / End** | Distances, in scene units, where Linear fog starts to fade in (start) and where it reaches maximum (end). |
+| **Density** | Controls the rate at which fog fades in for the Exponential and Exponential Squared fog types. Larger values cause fog to fade in more quickly. Must be positive. |
+| **Color** | The color of the fog. This color is blended with a surface's color more as the fog fades in. |
 
-## Resolution
+## Project Settings {#project-settings}
+
+The rest of the panel holds project settings, which apply to every scene.
+
+### Resolution {#resolution}
 
 | Setting | Description |
 | --- | --- |
@@ -92,25 +109,26 @@ Scene-wide settings for [Gaussian splat](/user-manual/gaussian-splatting) render
 | **Resolution Mode** | Decides whether the canvas resolution changes when it is resized. |
 | **Fill Mode** | Decides how the canvas fills the browser window. |
 
-## Device & API
+### Device & API {#device-and-api}
 
 | Setting | Description |
 | --- | --- |
 | **Device Order** | The order in which attempts are made to create the graphics devices. |
 | **Enable WebGPU** | When enabled, the application will try to use WebGPU if available. |
+| **Enable GLSL Shader Transpilation** | When enabled, GLSL-only shaders are supported under WebGPU. This adds shader compiler files to published and downloaded builds. Only shown while **Enable WebGPU** is enabled. |
 | **Enable WebGL 2.0** | When enabled, the application will try to use WebGL 2.0 if available. |
 
-## Rendering Options
+### Rendering Options {#rendering-options}
 
 | Setting | Description |
 | --- | --- |
 | **Power Preference** | Provides a hint to WebGL regarding the preferred power mode:<ul><li><strong>Default</strong>: Browser decides</li><li><strong>High Performance</strong>: Prioritize rendering performance</li><li><strong>Low Power</strong>: Prioritize power saving</li></ul> |
-| **Anti-Alias** | When disabled, anti-aliasing is disabled for the back buffer. |
+| **Anti-aliasing** | When disabled, anti-aliasing is disabled for the back buffer. |
 | **Device Pixel Ratio** | Multiplies the canvas back buffer resolution by the device pixel ratio (e.g., 2x on Retina). Increases sharpness and GPU/memory usage. |
 | **Transparent Canvas** | Makes the canvas background transparent so the web page shows through. Useful for overlaying the app on custom page designs or UI. |
 | **Preserve Drawing Buffer** | Preserves the drawing buffer until explicitly cleared. Useful for taking screenshots. |
 
-## External Libraries
+### External Libraries {#external-libraries}
 
 | Setting | Description |
 | --- | --- |

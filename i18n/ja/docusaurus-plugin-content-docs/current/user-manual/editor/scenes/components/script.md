@@ -1,13 +1,13 @@
 ---
 title: Script
-description: PlayCanvas の Script Component は、load、update、カスタムゲームプレイロジックのために Entity 上で動かす JavaScript または TypeScript の Script をアタッチします。
+description: PlayCanvas の Script Component は、load、update、カスタムゲームプレイロジックのために Entity 上で動かす JavaScript の Script（.mjs の ESM アセットまたは .js のクラシックアセット）をアタッチします。
 ---
 
-Scriptコンポーネントは、エンティティがユーザー提供のスクリプトを実行することを可能にします。これにより、ユーザーはJavaScriptまたはTypeScriptを使用してスクリプトを作成し、エンティティがインスタンス化されたときやフレームごとに更新されるときに実行できます。
+Scriptコンポーネントは、エンティティがユーザー提供のスクリプトを実行することを可能にします。これにより、ユーザーはJavaScriptでスクリプトを作成し、エンティティがインスタンス化されたときやフレームごとに更新されるときに実行できます。スクリプトアセットは、[ESM スクリプト](/user-manual/scripting/esm-scripts/)の場合は `.mjs` ファイル、クラシックスクリプトの場合は `.js` ファイルです。
 
 ![Script Component](/img/user-manual/editor/scenes/components/component-script.png)
 
-## スクリプトの追加
+## スクリプトの追加 {#adding-scripts}
 
 新しいスクリプトを作成するには、Scriptコンポーネントの**Add Script**ドロップダウンをクリックして、以下のいずれかを行います:
 
@@ -36,11 +36,11 @@ Scriptコンポーネントは、エンティティがユーザー提供のス�
 
 :::
 
-## スクリプトの順序
+## スクリプトの順序 {#script-ordering}
 
 エンティティに複数のスクリプトがアタッチされている場合、その順序が重要です。スクリプトは上から下へ順番に実行されます。スクリプトをドラッグ＆ドロップしてコンポーネント内で順序を変更できます。
 
-## スクリプト属性
+## スクリプト属性 {#script-attributes}
 
 スクリプトはインスペクターに表示されるカスタム属性を定義できます。これらの属性により、コードを変更せずにスクリプトの動作を設定できます。サポートされている属性タイプには以下が含まれます:
 
@@ -56,11 +56,11 @@ Scriptコンポーネントは、エンティティがユーザー提供のス�
 
 スクリプトで属性を定義する方法の詳細については、[Script Attributes](/user-manual/scripting/script-attributes/)ドキュメントを参照してください。
 
-## 関連項目
+## 関連項目 {#see-also}
 
 - [スクリプティング](/user-manual/scripting) - スクリプトの書き方を学ぶ
 - [エディタースクリプティング](/user-manual/editor/scripting) - エディターでのスクリプト管理
 
-## スクリプトインターフェース
+## スクリプトインターフェース {#scripting-interface}
 
 Scriptコンポーネントのスクリプトインターフェースは[こちら](https://api.playcanvas.com/engine/classes/ScriptComponent.html)です。

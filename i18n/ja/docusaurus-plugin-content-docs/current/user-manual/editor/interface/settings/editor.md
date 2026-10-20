@@ -1,14 +1,14 @@
 ---
 title: エディター設定
 sidebar_label: Editor
-description: 個人用の Editor 設定パネル。グリッド、スナップ、ズーム、グラブ、パス、プレビュークリップ、ガンマ、トーンマップ、フォグ、アイコン、ロケール、チャット、アラート、複製、ライトマッパーの自動再ベイクを扱います。
+description: 個人用の Editor 設定。グリッド、スナップ、ズーム、ギズモ、View Cube、カメラのグラブパス、クリップ、ガンマ、トーンマップ、フォグ、アイコン、ロケール、チャットの通知、複製、ライトマッパーの自動ベイク、コードエディターを扱います。
 ---
 
 既定では、エディターは多くのユーザーに適した設定になっています。必要に応じて、エディターの既定の動作を変更できます。
 
 :::note
 
-これらの設定はあなた個人にのみ適用され、プロジェクト全体でグローバルに保持されます。セッションをまたいで維持（スティッキー）されます。
+これらの設定はあなた個人にのみ適用され、セッションをまたいで維持（スティッキー）されます。ほとんどの設定はこのプロジェクトのすべてのシーンとブランチに適用されますが、**Zoom Sensitivity**、**Gizmo Size**、**Gizmo Preset**、**Show View Cube**、**View Cube Size**、**Icons Size** はあなたのすべてのプロジェクトに適用されます。
 
 :::
 
@@ -18,7 +18,7 @@ description: 個人用の Editor 設定パネル。グリッド、スナップ�
 
 利用可能な設定は次のとおりです。
 
-## 設定
+## 設定 {#settings}
 
 | 設定 | 説明 |
 | --- | --- |
@@ -26,6 +26,10 @@ description: 個人用の Editor 設定パネル。グリッド、スナップ�
 | **Grid Division Size** | 各セルのサイズ。 |
 | **Snap** | [ギズモ](../viewport.md#gizmos)のスナップ間隔。Shiftを押すかツールバーの Snap トグルでギズモ使用中にスナップを有効化します。 |
 | **Zoom Sensitivity** | エディターのビューポートでのズーム感度。 |
+| **Gizmo Size** | ビューポートに表示される[ギズモ](../viewport.md#gizmos)のサイズ。 |
+| **Gizmo Preset** | 変換ギズモのスタイルと操作方法:<ul><li><strong>Default</strong>: 視覚的なフィードバックを改善したモダンなスタイル</li><li><strong>Classic</strong>: 従来の PlayCanvas Editor のスタイル</li></ul> |
+| **Show View Cube** | ビューポートの [View Cube](../viewport.md#view-cube) を表示または非表示にします。 |
+| **View Cube Size** | View Cube のサイズ。**Show View Cube** が有効な場合にのみ表示されます。 |
 | **Camera Depth Grabpass** | エディタービューポート用のデプスマップテクスチャを生成します。特定のマテリアル効果のプレビューに必要です。 |
 | **Camera Color Grabpass** | エディタービューポート用のカラーマップテクスチャを生成します。特定のマテリアル効果のプレビューに必要です。 |
 | **Camera Clip Near** | エディターカメラの Near クリップ値。ゲームには影響しません。 |
@@ -36,6 +40,7 @@ description: 個人用の Editor 設定パネル。グリッド、スナップ�
 | **Show Fog** | ビューポートでのフォグ描画を有効化。 |
 | **Icons Size** | エディタービューポートに表示されるアイコンのサイズ。 |
 | **Locale** | エディターおよび Launch 実行時のプレビュー用ロケール。あなたのみに表示され、他のメンバーには共有されません。 |
-| **Chat Notifications** | エディター内蔵の[リアルタイムチャット](../../realtime-collaboration.md#real-time-chat)の通知を受け取ります。 |
+| **Chat Notification** | エディター内蔵の[リアルタイムチャット](../../realtime-collaboration.md#real-time-chat)の通知を受け取ります。 |
 | **Rename Duplicated Entities** | 有効化すると、重複作成したエンティティに連番を付けて一意にします（例: 'Box' → 'Box2'）。 |
 | **Lightmapper Auto Bake** | [ランタイムライトマッパー](/user-manual/graphics/lighting/runtime-lightmaps)がシーン更新のたびに自動リベイクするかを制御します。 |
+| **Code Editor** | スクリプトを編集するときに開くコードエディター:<ul><li><strong>Web</strong>: ブラウザベースの[コードエディター](../../scripting/code-editor.md)で開きます</li><li><strong>VS Code</strong>、<strong>Cursor</strong>、<strong>Antigravity IDE</strong>: [PlayCanvas VS Code 拡張機能](../../scripting/vscode-extension.md)を使って、そのデスクトップエディターで開きます</li></ul> |

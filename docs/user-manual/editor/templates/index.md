@@ -57,9 +57,9 @@ Before applying overrides across template instances, ask an AI assistant through
 
 ### Applying Overrides {#applying-overrides}
 
-To apply an override you can click APPLY in the tooltip shown when you hover over the overridden field.
+To apply an override you can click APPLY TO "&lt;name&gt;" in the tooltip shown when you hover over the overridden field, where &lt;name&gt; is the name of the Template instance. If the overridden Entity is part of nested Templates, the tooltip shows a button for each Template that the override can be applied to.
 
-To apply multiple overrides select the root of the Template Instance and click Apply All on the Entity Inspector. You can also right click on the root of the Template Instance and select Template &rarr; Apply To Template.
+To apply multiple overrides select the root of the Template Instance and click Apply All on the Entity Inspector. You can also right click on the root of the Template Instance and select Template &rarr; Apply to Template.
 
 Alternatively you can open the [Override Diff View](/user-manual/editor/templates/diff) and apply overrides from there too.
 

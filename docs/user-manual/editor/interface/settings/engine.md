@@ -8,7 +8,7 @@ Configure which PlayCanvas Engine version is used when launching, publishing, or
 
 :::note
 
-These settings affect all users on the currently active [branch](../../version-control/branches.md) of the project.
+This setting affects only you, and only for your current session. It is not saved or shared with other users.
 
 :::
 

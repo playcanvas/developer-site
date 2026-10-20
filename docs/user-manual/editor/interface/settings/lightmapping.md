@@ -1,6 +1,6 @@
 ---
 title: Lightmapping Settings
-description: Lightmapping panel settings for global lightmap resolution multipliers bake modes filtering ambient bakes and occlusion tweaks stored per active project branch.
+description: Lightmapping panel settings for each scene's lightmap resolution multipliers, bake modes, filtering, ambient bakes and occlusion tweaks, shared on the active project branch.
 sidebar_label: Lightmapping
 ---
 
@@ -8,7 +8,7 @@ Controls baked lighting resolution, filtering, and ambient occlusion.
 
 :::note
 
-These settings affect all users on the currently active [branch](../../version-control/branches.md) of the project.
+These are scene settings: they are saved with the scene that is open, so each scene can have its own values. They affect all users on the currently active [branch](../../version-control/branches.md) of the project.
 
 :::
 

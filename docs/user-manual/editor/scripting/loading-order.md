@@ -3,21 +3,19 @@ title: Script Loading Order
 description: Contrasts ESM imports with classic preload ordering, drag-reorder UI and dynamic loads, and explains how publishing concatenates Classic scripts and bundles ESM Scripts.
 ---
 
-## ESM Scripts
+## ESM Scripts {#esm-scripts}
 
 ESM Scripts do not have an explicit loading order, and should not be relied upon to load in a specific order. Instead, you should use module import statements to declare dependencies between modules.
 
-## Classic Scripts
+## Classic Scripts {#classic-scripts}
 
-Generally all scripts are loaded at the beginning of your application. The loading order is determined by a setting in your project which you can access from the main Editor menu or Scene Settings:
-
-![Loading Order](/img/user-manual/scripting/script-loading-order.jpg)
-
-The loading order panel shows all Classic scripts marked as `preload` and the order that they are loaded and executed in.
+Generally all scripts are loaded at the beginning of your application. The loading order is a project setting. To change it, open the [Settings](../interface/settings/index.md) and expand the `SCRIPTS LOADING ORDER` panel, or click **MANAGE** next to **Loading Order** in the Inspector of a script asset.
 
 ![Loading Order List](/img/user-manual/scripting/loading-order-list.jpg)
 
-You can click-and-drag to move individual scripts around to edit the order.
+The panel lists the scripts marked as `preload`, numbered in the order that they are loaded and executed in. You can click-and-drag to move individual scripts around to edit the order. Preloaded [ESM Scripts](#esm-scripts) appear in the list too, but the loading order only applies to Classic scripts.
+
+The **Script Priority** item in the main menu only appears in projects that use the legacy scripting system. It sets a separate loading priority for the legacy scripts of the current scene.
 
 When scripts are first loaded, they are immediately executed. That means that the scripts are first executed in the order that they are loaded. However, the loading order of the script **does not** affect the execution of order of script methods within script component. For example, the `initialize` methods of scripts on the same entity are called in the order that they are listed on the Entity, not the loading order.
 

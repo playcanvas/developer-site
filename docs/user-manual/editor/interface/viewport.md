@@ -17,11 +17,23 @@ The **orthographic** cameras: Top, Bottom, Front, Back, Left, Right, let you vie
 
 You can also use the camera menu to select any of the camera Entities in your scene. This way you can position your in-game camera exactly as required.
 
+To switch cameras from the keyboard, use the numeric keypad. See [Viewport Cameras](keyboard-shortcuts.md#viewport-cameras).
+
+## View Cube {#view-cube}
+
+The View Cube in the bottom-right corner of the viewport shows the orientation of the camera. Each axis ends in a circle: the colored circles labeled X, Y and Z mark the positive axes, and the gray circles with a colored outline mark the negative axes.
+
+Click a circle to view the scene from that side. The camera swings round onto that axis and looks back at the point it orbits around, keeping its distance and its perspective projection, so you can carry on orbiting from the new view. For example, click Y to look straight down on the scene, or Z to view it from the front.
+
+The View Cube is hidden while you use one of the orthographic cameras. To turn it off or change its size, use **Show View Cube** and **View Cube Size** in the [Editor settings](settings/editor.md).
+
 ## Gizmos {#gizmos}
 
 ![Gizmos](/img/user-manual/editor/viewport/gizmos.jpg)
 
-The 3-Colored Axis you can see in the screenshot above is called a [Gizmo](/user-manual/glossary#gizmo). This is used to manipulate the transform matrix of the selected Entity. There are three types of Gizmo: Translate (with arrows on the ends of the axes); Rotate (which is made up of three colored rings) and Scale (with cubes on the ends of the axes).
+The 3-Colored Axis you can see in the screenshot above is called a [Gizmo](/user-manual/glossary#gizmo). This is used to manipulate the transform matrix of the selected Entity. There are three types of transform Gizmo: Translate (with arrows on the ends of the axes); Rotate (which is made up of three colored rings) and Scale (with cubes on the ends of the axes). A fourth gizmo, Resize Element, changes the width and height of a [UI element](/user-manual/user-interface/elements/#element-resizing). Switch between them with the [Toolbar](toolbar.md) or the 1, 2, 3 and 4 keys.
+
+To change the size and style of the gizmos, use **Gizmo Size** and **Gizmo Preset** in the [Editor settings](settings/editor.md).
 
 ## Entity Icons {#entity-icons}
 
