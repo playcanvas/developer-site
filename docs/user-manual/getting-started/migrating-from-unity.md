@@ -306,10 +306,11 @@ In these tables, `entity` stands for any entity, such as `this.entity` in a scri
 | `Quaternion.Euler(x, y, z)` | `new Quat().setFromEulerAngles(x, y, z)` |
 | `rotation * vector` | `rotation.transformVector(vector, result)` |
 | `Vector3.Distance(a, b)` | `a.distance(b)` |
-| `Vector3.Lerp(a, b, t)` | `result.lerp(a, b, t)` |
+| `Vector3.Lerp(a, b, t)` | `result.lerp(a, b, math.clamp(t, 0, 1))`, because `lerp` doesn't clamp `t` |
 | `Mathf.Clamp`, `Mathf.Lerp` | `math.clamp`, `math.lerp` |
 | `Mathf.Deg2Rad` | `math.DEG_TO_RAD` |
-| `Random.Range(min, max)` | `math.random(min, max)` |
+| `Random.Range(min, max)` with floats | `math.random(min, max)` |
+| `Random.Range(min, max)` with integers | `Math.floor(math.random(min, max))`, because `math.random` always returns a float |
 | `Debug.Log`, `LogWarning`, `LogError` | `console.log`, `console.warn`, `console.error` |
 | `Debug.DrawLine(start, end, color)` | `this.app.drawLine(start, end, color)` |
 

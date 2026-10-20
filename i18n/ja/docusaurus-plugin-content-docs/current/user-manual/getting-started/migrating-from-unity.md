@@ -306,10 +306,11 @@ export class Spinner extends Script {
 | `Quaternion.Euler(x, y, z)` | `new Quat().setFromEulerAngles(x, y, z)` |
 | `rotation * vector` | `rotation.transformVector(vector, result)` |
 | `Vector3.Distance(a, b)` | `a.distance(b)` |
-| `Vector3.Lerp(a, b, t)` | `result.lerp(a, b, t)` |
+| `Vector3.Lerp(a, b, t)` | `result.lerp(a, b, math.clamp(t, 0, 1))`（`lerp`は`t`をクランプしないため） |
 | `Mathf.Clamp`、`Mathf.Lerp` | `math.clamp`、`math.lerp` |
 | `Mathf.Deg2Rad` | `math.DEG_TO_RAD` |
-| `Random.Range(min, max)` | `math.random(min, max)` |
+| 浮動小数点数の`Random.Range(min, max)` | `math.random(min, max)` |
+| 整数の`Random.Range(min, max)` | `Math.floor(math.random(min, max))`（`math.random`は常に浮動小数点数を返すため） |
 | `Debug.Log`、`LogWarning`、`LogError` | `console.log`、`console.warn`、`console.error` |
 | `Debug.DrawLine(start, end, color)` | `this.app.drawLine(start, end, color)` |
 
