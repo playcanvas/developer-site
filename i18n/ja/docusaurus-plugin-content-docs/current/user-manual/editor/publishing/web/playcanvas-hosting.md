@@ -34,9 +34,9 @@ PlayCanvasに公開するには、2つの単純な手順が必要です。
   * *Description*: ビルドの説明。これはビルドのリンクをソーシャルメディアで共有する際に使用されます。
   * *Version*: バージョンは、ビルドを区別するのに役立ちます。あなたにとって意味がある値を使用してください。
   * *Release Notes*: このビルドで行われた新しい変更を入力します。バージョンと同様に、これはあなただけに表示されますので、ビルドの追跡がしやすくなります。
-  * *Concatenate Scripts*: PlayCanvasスクリプトを1つのJavaScriptファイルにまとめるには、これをチェックしてください。
-  * *Minify Scripts*: PlayCanvasスクリプトを最小化してファイルサイズを縮小するには、これをチェックしてください。
-  * *Generate Source Map*: ビルドにソースマップを含めます。これはデバッグに役立つことがありますが、通常はアプリの本番バージョンを公開する際に無効になります。
+  * *Concatenate Scripts*: クラシック スクリプトを1つのJavaScriptファイルにまとめ、ESMスクリプトをエンジンと一緒にバンドルするには、これをチェックしてください。公開時のスクリプトの処理について詳しくは、[こちら](../../scripting/loading-order.md#publishing)を参照してください。
+  * *Minify Scripts*: スクリプトを最小化してファイルサイズを縮小するには、これをチェックしてください。Concatenate Scriptsがチェックされている場合にのみ使用できます。
+  * *Generate Source Map*: ビルドにソースマップを含めます。これはデバッグに役立つことがありますが、通常はアプリの本番バージョンを公開する際に無効になります。Concatenate ScriptsとMinify Scriptsがチェックされている場合にのみ使用できます。
   * *Optimize Scene Format*: シーンJSONを最大50％まで圧縮します。詳細は[こちら](/user-manual/optimization/optimizing-scene-format)で確認できます。
 
 ![Select scenes](/img/user-manual/editor/publishing/dialog-publish-build-scenes.png)

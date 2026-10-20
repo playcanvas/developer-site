@@ -34,9 +34,9 @@ To publish you will need to have at least one scene in your project.
   * *Description*: The description of your build. This will be used when sharing the link of your build on Social Media.
   * *Version*: The version is there to help you distinguish one build from another. Use a value that makes sense to you.
   * *Release Notes*: Enter any new changes you made for this build. Again like the Version, this will only be shown to you so that you keep better track of your builds.
-  * *Concatenate Scripts*: Check this to combine all of your PlayCanvas scripts into a single JavaScript file.
-  * *Minify Scripts*: Check this to minify your PlayCanvas scripts to reduce the file size.
-  * *Generate Source Map*: Include Source Maps with the build. This can be useful for debugging but is generally disabled when publishing a production version of your app.
+  * *Concatenate Scripts*: Check this to combine your Classic scripts into a single JavaScript file and to bundle your ESM Scripts with the engine. Read more about how scripts are [processed when publishing](../../scripting/loading-order.md#publishing).
+  * *Minify Scripts*: Check this to minify your scripts to reduce the file size. Only available when Concatenate Scripts is checked.
+  * *Generate Source Map*: Include Source Maps with the build. This can be useful for debugging but is generally disabled when publishing a production version of your app. Only available when Concatenate Scripts and Minify Scripts are checked.
   * *Optimize Scene Format*: Compresses the scene JSON up to 50%. Read more [here](/user-manual/optimization/optimizing-scene-format).
 
 ![Select scenes](/img/user-manual/editor/publishing/dialog-publish-build-scenes.png)
