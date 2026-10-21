@@ -94,50 +94,56 @@ app.on('update', (dt) => box.rotate(10 * dt, 20 * dt, 30 * dt));
 
 ## 作れるもの {#what-you-can-build}
 
-同じAPIで、ひとつのボックスから完成度の高い本格的な体験まで作れます。以下のサンプルはどれもサンプルブラウザ上で実際に動いており、ソースを読み、編集して、再実行できます。
+Engineのアプリはブラウザで動くため、作ったものはどんなデバイスからでも、リンクひとつで誰にでも届けられます。開発者がこのエンジンで作っているものの一例を紹介します。
 
 <div className="row path-cards">
   <div className="col col--4">
     <Link className="card path-card showcase-card" to="https://playcanvas.com/examples/#/demos/catapult">
       <div className="card__image"><img src="/img/user-manual/engine/showcases/catapult.jpg" alt="草の斜面から谷の兵士たちへ燃える岩を放つカタパルト" width="960" height="540" loading="lazy" /></div>
-      <div className="card__body"><h3>カタパルト</h3><p>カタパルトの狙いを定め、谷を進軍してくる軍勢に燃える岩を撃ち込む攻城ゲームです。</p></div>
+      <div className="card__body"><h3>ゲーム</h3><p>インストール不要で、リンクからすぐに遊べるブラウザゲームやモバイルゲーム。この攻城ゲームは、すべてエンジンで作られています。</p></div>
+      <div className="card__footer">デモをプレイ →</div>
+    </Link>
+  </div>
+  <div className="col col--4">
+    <Link className="card path-card showcase-card" to="https://playcanvas.com/examples/#/misc/html-texture-configurator">
+      <div className="card__image"><img src="/img/user-manual/engine/showcases/product-configurator.jpg" alt="スタイルの選択パネルの横に置かれた青いランニングシューズ" width="960" height="540" loading="lazy" /></div>
+      <div className="card__body"><h3>プロダクトコンフィギュレーター</h3><p>製品のスタイルを、購入者がリアルタイムで変更できます。このシューズは、3D空間に描画されたHTMLパネルから、glTFのマテリアルバリアントを切り替えます。</p></div>
+      <div className="card__footer">デモを試す →</div>
     </Link>
   </div>
   <div className="col col--4">
     <Link className="card path-card showcase-card" to="https://playcanvas.com/examples/#/gaussian-splatting/world">
       <div className="card__image"><img src="/img/user-manual/engine/showcases/gaussian-splat-world.jpg" alt="木々に囲まれたスケートパークのGaussian Splatキャプチャ" width="960" height="540" loading="lazy" /></div>
-      <div className="card__body"><h3>Gaussian Splatの世界</h3><p>詳細度（LOD）ごとにストリーミングされる大規模なスケートパークのキャプチャの中を、別のスプラットが動き回ります。</p></div>
+      <div className="card__body"><h3>Gaussian Splatアプリ</h3><p>写実的なキャプチャをもとにしたビューアー、ツアー、ゲーム。このスケートパークは、移動に合わせて詳細度（LOD）ごとにストリーミングされます。</p></div>
+      <div className="card__footer">デモを見る →</div>
     </Link>
   </div>
   <div className="col col--4">
-    <Link className="card path-card showcase-card" to="https://playcanvas.com/examples/#/camera-frame/dynamic-sky">
-      <div className="card__image"><img src="/img/user-manual/engine/showcases/dynamic-sky.jpg" alt="ピンクと青の雲の下、夕暮れの小さな島に立つヤシの木" width="960" height="540" loading="lazy" /></div>
-      <div className="card__body"><h3>ダイナミックスカイ</h3><p>星、月、ボリュメトリックな雲とともに、熱帯の島の上で昼と夜が移り変わります。</p></div>
+    <Link className="card path-card showcase-card" to="/user-manual/xr/">
+      <div className="card__image"><img src="/img/user-manual/xr/skinned-hands.webp" alt="VRでトラッキングされ、それぞれポインターレイを伸ばす両手" width="1024" height="720" loading="lazy" /></div>
+      <div className="card__body"><h3>XRアプリ</h3><p>WebXRでリンクから直接開けるVRとAR。ヘッドセットでもスマートフォンでも動作し、コントローラーとハンドトラッキングに対応します。</p></div>
+      <div className="card__footer">XRガイドを読む →</div>
     </Link>
   </div>
   <div className="col col--4">
-    <Link className="card path-card showcase-card" to="https://playcanvas.com/examples/#/camera-frame/volumetric-fog-shafts">
-      <div className="card__image"><img src="/img/user-manual/engine/showcases/volumetric-light.jpg" alt="穴の開いた金色の球体から放射状に広がる青い光の筋" width="960" height="540" loading="lazy" /></div>
-      <div className="card__body"><h3>ボリュメトリックライト</h3><p>球体の穴を通り抜けたライトが、ボリュメトリックフォグの中に光の筋を描きます。</p></div>
+    <Link className="card path-card showcase-card" to="/user-manual/editor/publishing/playable-ads/">
+      <div className="card__image"><img src="/img/user-manual/engine/showcases/playable-ad.jpg" alt="スマートフォンの縦画面で動くカタパルトのゲーム" width="960" height="540" loading="lazy" /></div>
+      <div className="card__body"><h3>プレイアブル広告</h3><p>カタパルトのようなゲームをインタラクティブな広告としてパッケージ化し、EditorからFacebookやSnapchat向けに書き出せます。</p></div>
+      <div className="card__footer">プレイアブル広告を公開する →</div>
     </Link>
   </div>
   <div className="col col--4">
-    <Link className="card path-card showcase-card" to="https://playcanvas.com/examples/#/animation/vat-characters">
-      <div className="card__image"><img src="/img/user-manual/engine/showcases/animated-crowd.jpg" alt="野原を歩くローポリの木こりの群衆" width="960" height="540" loading="lazy" /></div>
-      <div className="card__body"><h3>アニメーションする群衆</h3><p>頂点アニメーションテクスチャで動く数千人の歩くキャラクターを、1回のインスタンス描画で表示します。</p></div>
-    </Link>
-  </div>
-  <div className="col col--4">
-    <Link className="card path-card showcase-card" to="https://playcanvas.com/examples/#/lights-and-shadows/clustered-area-lights">
-      <div className="card__image"><img src="/img/user-manual/engine/showcases/clustered-lighting.jpg" alt="暗く濡れた床に映り込む、光る色とりどりの球体とパネル" width="960" height="540" loading="lazy" /></div>
-      <div className="card__body"><h3>クラスターライティング</h3><p>球体、円盤、長方形の形をした数十個のカラフルなエリアライトが、濡れた床に映り込みます。</p></div>
+    <Link className="card path-card showcase-card" to="https://playcanvas.github.io/web-components/examples/#solar-system.html">
+      <div className="card__image"><img src="/img/user-manual/web-components/showcases/solar-system.jpg" alt="太陽と、その解説パネル" width="960" height="540" loading="lazy" /></div>
+      <div className="card__body"><h3>教育</h3><p>インタラクティブな教材や解説。スクロールで太陽系を巡るこのツアーは、Web Componentsで作られた1つのHTMLページです。</p></div>
+      <div className="card__footer">デモを見る →</div>
     </Link>
   </div>
 </div>
 
-[サンプルブラウザ](https://playcanvas.com/examples/)には、物理演算、XR、ユーザーインターフェース、パーティクル、コンピュートシェーダーなど、250以上のサンプルがあります。
+[サンプルブラウザ](https://playcanvas.com/examples/)には、ボリュメトリックフォグやダイナミックスカイから、数千人のキャラクターがアニメーションする群衆まで、編集できるソースコード付きのライブサンプルが250以上あります。
 
-<small>モデル: AlexJJによる[Catapult](https://sketchfab.com/3d-models/atapult-1c33623dbe0049b98be97a750f27b51b)、Dazによる[Low Poly Lumberjack](https://sketchfab.com/3d-models/low-poly-lumberjack-a93a29105fc44bf594f8100b7726bcec)、Elinによる[Tropical Island](https://sketchfab.com/3d-models/tropical-island-f91862f8c38b481aa19edccac851eefb)、Random13による[CARBON 60 SPHERE](https://sketchfab.com/3d-models/carbon-60-sphere-5ef45e632eb8431998400ea73ddc51a5)（いずれも[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)）。スケートパークのスプラットは[Christoph Schindelar](https://superspl.at/user?id=schindelar3d)によるものです。</small>
+<small>モデル: AlexJJによる[Catapult](https://sketchfab.com/3d-models/atapult-1c33623dbe0049b98be97a750f27b51b)、Dazによる[Low Poly Lumberjack](https://sketchfab.com/3d-models/low-poly-lumberjack-a93a29105fc44bf594f8100b7726bcec)、Shopifyによる[Materials Variants Shoe](https://github.com/KhronosGroup/glTF-Sample-Assets/tree/main/Models/MaterialsVariantsShoe)（いずれも[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)）。スケートパークのスプラットは[Christoph Schindelar](https://superspl.at/user?id=schindelar3d)によるものです。</small>
 
 ## PlayCanvas Engineを使用する理由 {#why-the-playcanvas-engine}
 

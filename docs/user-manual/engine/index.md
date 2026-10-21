@@ -94,50 +94,56 @@ To build an app like this on your own machine, run `npm create playcanvas@latest
 
 ## What You Can Build
 
-The same API scales from one box to complete, polished experiences. Each of these examples runs live in the examples browser, where you can read its source, edit it and run it again.
+Engine apps run in the browser, so whatever you build is a link away for anyone, on any device. These are some of the things developers build with it:
 
 <div className="row path-cards">
   <div className="col col--4">
     <Link className="card path-card showcase-card" to="https://playcanvas.com/examples/#/demos/catapult">
       <div className="card__image"><img src="/img/user-manual/engine/showcases/catapult.jpg" alt="A catapult on a grassy slope launching a burning boulder at soldiers in a valley" width="960" height="540" loading="lazy" /></div>
-      <div className="card__body"><h3>Catapult</h3><p>A siege game: aim the catapult and launch burning boulders at an army marching up the valley.</p></div>
+      <div className="card__body"><h3>Games</h3><p>Browser and mobile games that start from a link, with nothing to install. This siege game is built entirely with the engine.</p></div>
+      <div className="card__footer">Play the demo →</div>
+    </Link>
+  </div>
+  <div className="col col--4">
+    <Link className="card path-card showcase-card" to="https://playcanvas.com/examples/#/misc/html-texture-configurator">
+      <div className="card__image"><img src="/img/user-manual/engine/showcases/product-configurator.jpg" alt="A blue running shoe beside a panel of style options" width="960" height="540" loading="lazy" /></div>
+      <div className="card__body"><h3>Product Configurators</h3><p>Let shoppers restyle a product in real time. This shoe switches between glTF material variants from an HTML panel rendered in 3D.</p></div>
+      <div className="card__footer">Try the demo →</div>
     </Link>
   </div>
   <div className="col col--4">
     <Link className="card path-card showcase-card" to="https://playcanvas.com/examples/#/gaussian-splatting/world">
       <div className="card__image"><img src="/img/user-manual/engine/showcases/gaussian-splat-world.jpg" alt="A Gaussian splat capture of a skate park surrounded by trees" width="960" height="540" loading="lazy" /></div>
-      <div className="card__body"><h3>Gaussian Splat World</h3><p>A large skate park capture that streams in by level of detail, with more splats moving through it.</p></div>
+      <div className="card__body"><h3>Gaussian Splat Apps</h3><p>Viewers, tours and games built on photoreal captures. This skate park streams in by level of detail as you move.</p></div>
+      <div className="card__footer">Explore the demo →</div>
     </Link>
   </div>
   <div className="col col--4">
-    <Link className="card path-card showcase-card" to="https://playcanvas.com/examples/#/camera-frame/dynamic-sky">
-      <div className="card__image"><img src="/img/user-manual/engine/showcases/dynamic-sky.jpg" alt="Palm trees on a small island at sunset, under pink and blue clouds" width="960" height="540" loading="lazy" /></div>
-      <div className="card__body"><h3>Dynamic Sky</h3><p>A day and night cycle over a tropical island, with stars, the moon and volumetric clouds.</p></div>
+    <Link className="card path-card showcase-card" to="/user-manual/xr/">
+      <div className="card__image"><img src="/img/user-manual/xr/skinned-hands.webp" alt="Two tracked hands in VR, each casting a pointer ray" width="1024" height="720" loading="lazy" /></div>
+      <div className="card__body"><h3>XR Apps</h3><p>VR and AR that open straight from a link with WebXR, on headsets and phones, with controller and hand tracking.</p></div>
+      <div className="card__footer">Read the XR guide →</div>
     </Link>
   </div>
   <div className="col col--4">
-    <Link className="card path-card showcase-card" to="https://playcanvas.com/examples/#/camera-frame/volumetric-fog-shafts">
-      <div className="card__image"><img src="/img/user-manual/engine/showcases/volumetric-light.jpg" alt="Blue shafts of light radiating from a perforated golden sphere" width="960" height="540" loading="lazy" /></div>
-      <div className="card__body"><h3>Volumetric Light</h3><p>Lights shine through the holes of a sphere and carve shafts through volumetric fog.</p></div>
+    <Link className="card path-card showcase-card" to="/user-manual/editor/publishing/playable-ads/">
+      <div className="card__image"><img src="/img/user-manual/engine/showcases/playable-ad.jpg" alt="The catapult game running in portrait on a phone" width="960" height="540" loading="lazy" /></div>
+      <div className="card__body"><h3>Playable Ads</h3><p>Package a game like the catapult as an interactive ad, and export it from the Editor for Facebook and Snapchat.</p></div>
+      <div className="card__footer">Publish a playable ad →</div>
     </Link>
   </div>
   <div className="col col--4">
-    <Link className="card path-card showcase-card" to="https://playcanvas.com/examples/#/animation/vat-characters">
-      <div className="card__image"><img src="/img/user-manual/engine/showcases/animated-crowd.jpg" alt="A crowd of low-poly lumberjacks walking across a field" width="960" height="540" loading="lazy" /></div>
-      <div className="card__body"><h3>Animated Crowds</h3><p>Thousands of walking characters in one instanced draw call, animated with vertex animation textures.</p></div>
-    </Link>
-  </div>
-  <div className="col col--4">
-    <Link className="card path-card showcase-card" to="https://playcanvas.com/examples/#/lights-and-shadows/clustered-area-lights">
-      <div className="card__image"><img src="/img/user-manual/engine/showcases/clustered-lighting.jpg" alt="Glowing colored spheres and panels reflected in a dark, wet floor" width="960" height="540" loading="lazy" /></div>
-      <div className="card__body"><h3>Clustered Lighting</h3><p>Dozens of colored area lights, shaped as spheres, disks and rectangles, reflected in a wet floor.</p></div>
+    <Link className="card path-card showcase-card" to="https://playcanvas.github.io/web-components/examples/#solar-system.html">
+      <div className="card__image"><img src="/img/user-manual/web-components/showcases/solar-system.jpg" alt="The Sun beside a panel of facts about it" width="960" height="540" loading="lazy" /></div>
+      <div className="card__body"><h3>Education</h3><p>Interactive lessons and explainers. This scroll-driven tour of the solar system is a single HTML page built with Web Components.</p></div>
+      <div className="card__footer">Explore the demo →</div>
     </Link>
   </div>
 </div>
 
-The [examples browser](https://playcanvas.com/examples/) has more than 250, covering physics, XR, user interfaces, particles, compute shaders and much more.
+The [examples browser](https://playcanvas.com/examples/) has more than 250 live examples, from volumetric fog and dynamic skies to crowds of thousands of animated characters, each with source code you can edit.
 
-<small>Models: [Catapult](https://sketchfab.com/3d-models/atapult-1c33623dbe0049b98be97a750f27b51b) by AlexJJ, [Low Poly Lumberjack](https://sketchfab.com/3d-models/low-poly-lumberjack-a93a29105fc44bf594f8100b7726bcec) by Daz, [Tropical Island](https://sketchfab.com/3d-models/tropical-island-f91862f8c38b481aa19edccac851eefb) by Elin and [CARBON 60 SPHERE](https://sketchfab.com/3d-models/carbon-60-sphere-5ef45e632eb8431998400ea73ddc51a5) by Random13, all [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Skatepark splat by [Christoph Schindelar](https://superspl.at/user?id=schindelar3d).</small>
+<small>Models: [Catapult](https://sketchfab.com/3d-models/atapult-1c33623dbe0049b98be97a750f27b51b) by AlexJJ, [Low Poly Lumberjack](https://sketchfab.com/3d-models/low-poly-lumberjack-a93a29105fc44bf594f8100b7726bcec) by Daz and [Materials Variants Shoe](https://github.com/KhronosGroup/glTF-Sample-Assets/tree/main/Models/MaterialsVariantsShoe) by Shopify, all [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Skatepark splat by [Christoph Schindelar](https://superspl.at/user?id=schindelar3d).</small>
 
 ## Why the PlayCanvas Engine?
 
