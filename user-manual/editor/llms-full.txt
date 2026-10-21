@@ -4323,6 +4323,7 @@ Controls material transparency and alpha testing.
 | Opacity Fades Specular | When enabled, opacity also fades specular reflections. Disable for glass-like materials. |
 | Opacity Dither | Dithering pattern for opacity: None, Bayer 8, or Blue Noise. |
 | Opacity Shadow Dither | Dithering pattern for shadow opacity. |
+| Dither Intensity | The opacity used for dithering (0-1). Intensity keeps driving alpha blending, so a blended material can also fade out through dithering. 1 turns dithering off without changing the dither mode. Only shown when Opacity Dither or Opacity Shadow Dither is not None. |
 | Alpha Fade | Fade factor for materials where Opacity Fades Specular is disabled (0-1). |
 
 ## Normals
@@ -4370,6 +4371,8 @@ Adds a secondary specular layer simulating a clear coating (like car paint or la
 | Vertex Color | Use vertex colors for clear coat intensity. |
 | Vertex Color Channel | Which vertex color channel to use (R, G, B, or A). |
 | Clear Coat Gloss | Texture defining per-pixel clear coat glossiness. |
+| Vertex Color | Use vertex colors for clear coat glossiness. |
+| Vertex Color Channel | Which vertex color channel to use (R, G, B, or A). |
 | Glossiness | Smoothness of the clear coat layer (0-1). |
 | Invert | Treat the gloss map as a roughness map. |
 | Clear Coat Normals | Normal map for the clear coat layer (e.g., orange peel effect). |
