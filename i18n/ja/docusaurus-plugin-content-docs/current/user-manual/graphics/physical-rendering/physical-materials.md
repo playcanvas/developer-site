@@ -81,7 +81,7 @@ Diffuseカラーは **アルベド** や **ベースカラー** と呼ばれる�
 
 物理的マテリアルの仕組みでは、**拡散**、**金属質**、**光沢度**が重要な役割を果たします。下のデモを使って色々な組み合わせを試してみてください。
 
-マテリアルの見た目をさらに良くするために、アンビエントオクルージョン、発光、透明度、法線マップとハイトマップといった様々なプロパティを使うことができます。
+マテリアルの見た目をさらに良くするために、アンビエントオクルージョン、発光、透明度、法線マップとハイトマップといった様々なプロパティを使うことができます。[マテリアルインスペクター](/user-manual/editor/assets/inspectors/material/) のリファレンスでは、クリアコート、シーン、屈折、イリデッセンス、異方性に対応したGGXスペキュラーを含むすべてのプロパティを説明しています。コードから設定する場合は、[StandardMaterial API](https://api.playcanvas.com/engine/classes/StandardMaterial.html) を参照してください。
 
 <div className="iframe-container">
     <iframe src="https://playcanv.as/p/Q28EwTwQ/" title="Physical Materials - All" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>

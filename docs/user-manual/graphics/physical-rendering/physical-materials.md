@@ -81,7 +81,7 @@ Sometimes glossiness and roughness are referred to as the **microsurface** value
 
 These three properties **diffuse**, **metalness** and **glossiness** are the core of the physical material system. You can try different combinations in the live demo below.
 
-There are many other additional properties to investigate that can be used to make great materials such as Ambient Occlusion, Emissive, Opacity, Normal and Height maps.
+There are many other additional properties to investigate that can be used to make great materials such as Ambient Occlusion, Emissive, Opacity, Normal and Height maps. The [Material Inspector](/user-manual/editor/assets/inspectors/material/) reference describes every property, including clear coat, sheen, refraction, iridescence and GGX specular with anisotropy. To set them from code, see the [StandardMaterial API](https://api.playcanvas.com/engine/classes/StandardMaterial.html).
 
 <div className="iframe-container">
     <iframe src="https://playcanv.as/p/Q28EwTwQ/" title="Physical Materials - All" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
