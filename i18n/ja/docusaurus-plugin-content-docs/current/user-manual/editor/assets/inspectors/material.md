@@ -139,6 +139,7 @@ Use Metalnessが無効な場合:
 | Opacity Fades Specular | 有効にすると、不透明度はスペキュラー反射もフェードさせます。ガラスのようなマテリアルでは無効にします。 |
 | Opacity Dither | 不透明度のディザリングパターン: None、Bayer 8、またはBlue Noise。 |
 | Opacity Shadow Dither | シャドウ不透明度のディザリングパターン。 |
+| Dither Intensity | ディザリングに使用する不透明度 (0-1)。アルファブレンディングには引き続きIntensityが使われるため、ブレンドしたマテリアルをディザリングでフェードアウトさせることもできます。1にすると、ディザーモードを変えずにディザリングを無効にできます。Opacity DitherまたはOpacity Shadow DitherがNone以外の場合のみ表示されます。 |
 | Alpha Fade | Opacity Fades Specularが無効なマテリアルのフェード係数 (0-1)。 |
 
 ## ノーマル
@@ -186,6 +187,8 @@ Use Metalnessが無効な場合:
 | Vertex Color | 頂点カラーをクリアコート強度に使用。 |
 | Vertex Color Channel | 使用する頂点カラーチャンネル (R, G, B, または A)。 |
 | Clear Coat Gloss | ピクセルごとのクリアコート光沢度を定義するテクスチャ。 |
+| Vertex Color | 頂点カラーをクリアコート光沢度に使用。 |
+| Vertex Color Channel | 使用する頂点カラーチャンネル (R, G, B, または A)。 |
 | Glossiness | クリアコートレイヤーの滑らかさ (0-1)。 |
 | Invert | グロスマップをラフネスマップとして扱います。 |
 | Clear Coat Normals | クリアコートレイヤー用のノーマルマップ (オレンジピール効果など)。 |
