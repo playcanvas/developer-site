@@ -1,6 +1,6 @@
 ---
 title: Getting Started
-description: Enable ammo.js physics in the Editor, engine-only apps, React and Web Components, set gravity and units, and understand how the simulation steps.
+description: Enable ammo.js physics in the Editor, engine-only apps, React and Web Components, set gravity and units, understand how the simulation steps, and pause, slow down or step it by hand.
 ---
 
 import Tabs from '@theme/Tabs';
@@ -92,7 +92,7 @@ The application waits for the module before it starts, so every physics tag in t
 
 ## Gravity {#gravity}
 
-Gravity is a constant acceleration applied to every dynamic rigid body. The default of -9.81 along the world's Y axis (straight down) approximates Earth. Set it to zero for a game in space, or to something smaller for the Moon.
+Gravity is a constant acceleration applied to every dynamic rigid body. The default of -9.81 along the world's Y axis (straight down) approximates Earth. Set it to zero for a game in space, or to something smaller for the Moon. To change how strongly it pulls on individual bodies, give them a [gravity scale](/user-manual/physics/rigid-bodies/#gravity-scale).
 
 <Tabs groupId="workflow" defaultValue="engine">
 <TabItem value="engine" label="Engine">
@@ -152,9 +152,103 @@ A few rules follow from the way the engine drives the simulation, and the rest o
 - **Bodies have no scale.** Only position and rotation pass from an entity to its body. Primitive collision shapes keep their size however the entity is scaled (see [Scale](/user-manual/physics/collision-shapes/#scale)).
 - **Events fire per step.** Collision and trigger events are reported once per physics step, not per frame. A body resting on the floor produces a `contact` event every step for as long as it rests there.
 
+## Pausing and Slow Motion {#pausing-and-slow-motion}
+
+The rigid body system's `timeScale` scales the time the simulation advances by each frame. It defaults to 1. Values below 1 run physics in slow motion and values above 1 speed it up. A value of 0 pauses it: bodies freeze in place and keep their velocities, kinematic bodies stop following their entities, and no collision or trigger events fire until it resumes. The rest of the application, including scripts and animation, keeps running, which suits a pause menu that must stay interactive while physics stands still.
+
+<Tabs groupId="workflow" defaultValue="engine">
+<TabItem value="engine" label="Engine">
+
+```javascript
+// Freeze physics while the pause menu is open
+app.systems.rigidbody.timeScale = 0;
+
+// Run physics at quarter speed for a slow motion effect
+app.systems.rigidbody.timeScale = 0.25;
+```
+
+</TabItem>
+<TabItem value="editor" label="Editor">
+
+There is no setting for it in the Editor. Set it from a script, where `this.app` is the application:
+
+```javascript
+// Freeze physics while the pause menu is open
+this.app.systems.rigidbody.timeScale = 0;
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+There is no prop for it, so set it on the application from a component inside `<Application>`:
+
+```jsx
+import { useEffect } from 'react';
+import { useApp } from '@playcanvas/react/hooks';
+
+function PhysicsTimeScale({ scale }) {
+  const app = useApp();
+  useEffect(() => {
+    app.systems.rigidbody.timeScale = scale;
+  }, [app, scale]);
+  return null;
+}
+
+// Freeze physics while the pause menu is open
+<PhysicsTimeScale scale={paused ? 0 : 1} />
+```
+
+</TabItem>
+<TabItem value="web-components" label="Web Components">
+
+Set the `physics-time-scale` attribute of [`<pc-app>`](/user-manual/web-components/tags/pc-app/). You can change it at any time, through the attribute or the element's `physicsTimeScale` property:
+
+```html
+<pc-app physics-time-scale="0">
+    <!-- ... -->
+</pc-app>
+```
+
+```javascript
+// Resume at quarter speed for a slow motion effect
+document.querySelector('pc-app').physicsTimeScale = 0.25;
+```
+
+</TabItem>
+</Tabs>
+
+The simulation still advances in fixed steps of 1/60 of a second. In slow motion a step runs only every few frames, and body transforms are interpolated in between, so motion stays smooth. Speeding up is limited by the number of steps the simulation can take in one frame: at 60 frames per second physics runs at most 10 times faster, and higher values run slower than requested.
+
+The physics time scale applies on top of the application's `timeScale`, which scales the delta time that scripts, animation and physics all receive. Setting the application's to 0 stops everything that advances with time, while setting the rigid body system's to 0 stops physics alone.
+
+Neither one pauses your scripts. Their `update` and `postUpdate` methods keep running every frame, with a `dt` of 0 while the application's time scale is 0, so input handling, spawning and any other logic that is not multiplied by `dt` carries on. Give gameplay code its own pause check. That includes physics calls: impulses and velocity changes made during a pause are applied straight away, and the body sets off with its new velocity when time resumes. Forces applied with `applyForce` while the physics time scale is 0 are not cleared until the simulation steps again, so a script that applies a force every frame builds up a large push that can be released all at once when physics resumes.
+
+## Stepping Manually {#stepping-manually}
+
+`app.systems.rigidbody.step(dt)` advances the simulation by `dt` seconds immediately. It does everything the automatic update does: kinematic bodies and triggers follow their entities, the simulation runs as many fixed steps as `dt` covers, dynamic bodies are written back to their entities, and collision and trigger events fire. The time scale is not applied to `dt`.
+
+Automatic stepping carries on while the time scale is above 0, so calling `step` every frame as well advances the simulation twice per frame. To take over stepping entirely, set the time scale to 0 first. That makes `step` a debugging tool, for example to advance a paused simulation one step per key press and watch a collision unfold frame by frame:
+
+```javascript
+const physics = app.systems.rigidbody;
+physics.timeScale = 0;
+
+window.addEventListener('keydown', (event) => {
+    // Advance the paused simulation by one fixed step each time the period key is pressed
+    if (event.key === '.') {
+        physics.step(1 / 60);
+    }
+});
+```
+
+Passing the fixed step length of 1/60 runs exactly one step. A shorter `dt` may run no step at all and only move bodies along their interpolated paths, while a longer one runs several, up to 10 per call, and drops any time beyond that. Calling `step` several times in a row fast forwards the simulation, for example to let a pile of objects settle before the player sees it.
+
+The code is the same on every surface; only the way you reach `app` differs. In an Editor script it is `this.app`, in React `useApp()` returns it, and in Web Components `whenReady('pc-app')` resolves with the `<pc-app>` element, whose `app` property holds it.
+
 ## See Also
 
 - [Rigid Bodies](/user-manual/physics/rigid-bodies/) - Body types and properties, the next thing to read
 - [Collision Shapes](/user-manual/physics/collision-shapes/) - Giving bodies a shape
+- [RigidBodyComponentSystem](https://api.playcanvas.com/engine/classes/RigidBodyComponentSystem.html) - API reference for gravity, the time scale and manual stepping
 - [Physics Settings](/user-manual/editor/interface/settings/physics/) - The PHYSICS section of the Editor's scene settings
 - [Collision and Triggers](/tutorials/collision-and-triggers/) - Tutorial that builds a complete physics scene in the Editor

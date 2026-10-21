@@ -1,6 +1,6 @@
 ---
 title: RigidBody
-description: Static、Dynamic、Kinematic の rigid body、質量、摩擦、反発、ダンピング、ファクターのプロパティ、スリープ、タイプごとの移動とスケーリングの方法、コリジョングループ。
+description: Static、Dynamic、Kinematic の rigid body、質量、摩擦、反発、ダンピング、ファクター、重力スケールのプロパティ、スリープ、タイプごとの移動とスケーリングの方法、コリジョングループ。
 ---
 
 import Tabs from '@theme/Tabs';
@@ -147,6 +147,48 @@ entity.rigidbody.linearFactor = new pc.Vec3(1, 1, 0);
 
 ```html
 <pc-rigid-body type="dynamic" linear-damping="0.2" angular-damping="0.2" angular-factor="0 0 0"></pc-rigid-body>
+```
+
+</TabItem>
+</Tabs>
+
+## 重力スケール {#gravity-scale}
+
+重力スケールは、1つのDynamicなボディに対してワールドの[重力](/user-manual/physics/physics-basics/#gravity)に掛ける倍率です。デフォルトは1で、ボディは他のものと同じように落下します。0から1の間の値ではよりゆるやかに落下し、0では重力の影響を受けずに浮かび、負の値では風船のように上昇します。この倍率はその時点のワールドの重力に適用されるため、後からワールドの重力を変更するとボディもそれに従います。StaticとKinematicのボディは重力で動かないため、このプロパティは影響しません。
+
+軸方向の移動をすべてロックするLinear Factorの0とは異なり、重力スケールの0は重力だけを取り除きます。ボディは引き続き衝突、力、インパルスに応答します。小さな惑星の中心に引き寄せる重力のように、ボディに独自の重力を与えるには、スケールを0にして、その[力を加える](/user-manual/physics/forces-and-impulses/#forces)処理を毎フレーム自分で行います。
+
+スケールを変更しても、スリープ中のボディは復帰しません。コード、Reactのプロパティ、Web Componentsの属性のどれから設定しても同じです。床の上で静止している箱は、負のスケールを与えても何かに乱されるまでその場にとどまるため、スリープしている可能性のあるボディのスケールを変更した後は`activate()`を呼び出してください（[スリープ](#sleeping)を参照）。
+
+<Tabs groupId="workflow" defaultValue="engine">
+<TabItem value="engine" label="Engine">
+
+```javascript
+// ワールドの重力の半分で落下する
+entity.rigidbody.gravityScale = 0.5;
+
+// 風船のようにゆっくり上昇する。スリープしている場合に備えてボディを復帰させる
+entity.rigidbody.gravityScale = -0.2;
+entity.rigidbody.activate();
+```
+
+</TabItem>
+<TabItem value="editor" label="Editor">
+
+[Rigid Body](/user-manual/editor/scenes/components/rigidbody/)コンポーネントで**Gravity Scale**を設定します。ダンピングやファクターのプロパティと同様に、Dynamicなボディでのみ表示されます。
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```jsx
+<RigidBody type="dynamic" gravityScale={-0.2} />
+```
+
+</TabItem>
+<TabItem value="web-components" label="Web Components">
+
+```html
+<pc-rigid-body type="dynamic" gravity-scale="-0.2"></pc-rigid-body>
 ```
 
 </TabItem>

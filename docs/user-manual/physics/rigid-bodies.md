@@ -1,6 +1,6 @@
 ---
 title: Rigid Bodies
-description: Static, dynamic and kinematic rigid bodies, their mass, friction, restitution, damping and factor properties, sleeping, how each type is moved and scaled, and collision groups.
+description: Static, dynamic and kinematic rigid bodies, their mass, friction, restitution, damping, factor and gravity scale properties, sleeping, how each type is moved and scaled, and collision groups.
 ---
 
 import Tabs from '@theme/Tabs';
@@ -147,6 +147,48 @@ Set **Linear Damping**, **Angular Damping**, **Linear Factor** and **Angular Fac
 
 ```html
 <pc-rigid-body type="dynamic" linear-damping="0.2" angular-damping="0.2" angular-factor="0 0 0"></pc-rigid-body>
+```
+
+</TabItem>
+</Tabs>
+
+## Gravity Scale {#gravity-scale}
+
+The gravity scale multiplies the world [gravity](/user-manual/physics/physics-basics/#gravity) for a single dynamic body. It defaults to 1, so the body falls like everything else. A value between 0 and 1 makes it fall more gently, 0 lets it float free of gravity, and a negative value makes it rise like a balloon. The scale is applied to whatever the world gravity is, so the body follows later changes to it. Static and kinematic bodies are not moved by gravity, so the property has no effect on them.
+
+Unlike a linear factor of 0, which locks all movement along an axis, a gravity scale of 0 removes only gravity: the body still responds to collisions, forces and impulses. To give a body a gravity of its own, for example one that pulls towards the center of a small planet, set its scale to 0 and [apply that force](/user-manual/physics/forces-and-impulses/#forces) yourself every frame.
+
+Changing the scale does not wake a sleeping body, whether you set it from code, a React prop or a Web Components attribute. A box resting on the floor stays put when given a negative scale until something disturbs it, so call `activate()` after changing the scale of a body that may be asleep (see [Sleeping](#sleeping)).
+
+<Tabs groupId="workflow" defaultValue="engine">
+<TabItem value="engine" label="Engine">
+
+```javascript
+// Fall under half the world gravity
+entity.rigidbody.gravityScale = 0.5;
+
+// Drift slowly upwards like a balloon, waking the body in case it is asleep
+entity.rigidbody.gravityScale = -0.2;
+entity.rigidbody.activate();
+```
+
+</TabItem>
+<TabItem value="editor" label="Editor">
+
+Set **Gravity Scale** on the [Rigid Body](/user-manual/editor/scenes/components/rigidbody/) component. Like the damping and factor properties, it is shown for dynamic bodies only.
+
+</TabItem>
+<TabItem value="react" label="React">
+
+```jsx
+<RigidBody type="dynamic" gravityScale={-0.2} />
+```
+
+</TabItem>
+<TabItem value="web-components" label="Web Components">
+
+```html
+<pc-rigid-body type="dynamic" gravity-scale="-0.2"></pc-rigid-body>
 ```
 
 </TabItem>
