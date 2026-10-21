@@ -18,6 +18,10 @@ Editorプロジェクトを作成するには、2つの方法があります。
 4. 名前、説明、所有者を設定し、プロジェクトを **Private** にするかを選びます。
 5. **Create project** を選択します。
 
+![New Project Button](/img/user-manual/editor/projects/new-project-button.png)
+
+![New Project Dialog](/img/user-manual/editor/projects/new-project-dialog.png)
+
 <video autoPlay muted loop controls src='/video/editor-project-dashboard-new-project.mp4' style={{width: '100%', height: 'auto'}} />
 
 プロジェクトの準備ができると、ダイアログに「Your new project is ready. It opens in a new tab.」と表示されます。**Open project** を選択すると専用のタブで開き、**Not now** を選択するとダッシュボードに留まります。
@@ -57,6 +61,10 @@ Editorプロジェクトを作成するには、2つの方法があります。
 1. プロジェクトのカードまたは行の **⋮** ボタンを選択し、**Fork** を選択します。
 2. フォークダイアログには、フォーク元のプロジェクトが名前と説明が入力済みの状態で表示されます。必要に応じて名前、説明、所有者を変更します。
 3. **Fork project** を選択します。
+
+![Fork Project Button](/img/user-manual/editor/projects/fork-project-button.png)
+
+![Fork Project Dialog](/img/user-manual/editor/projects/project-dashboard-fork.png)
 
 <video autoPlay muted loop controls src='/video/editor-project-dashboard-fork.mp4' style={{width: '100%', height: 'auto'}} />
 

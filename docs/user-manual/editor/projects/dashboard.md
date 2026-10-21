@@ -5,6 +5,8 @@ description: Find, create, fork and manage projects and organizations from the P
 
 The Project Dashboard is where you find, create and manage your projects and organizations. Open it at [playcanvas.com/editor](https://playcanvas.com/editor). From Editor 2.35 the dashboard is part of the Editor and replaces the dashboard pages on playcanvas.com.
 
+![Dashboard](/img/user-manual/editor/projects/project-dashboard.png)
+
 The dashboard runs in its own browser tab and doesn't load the Editor itself, so it opens quickly. It never opens a project inside itself: **Open editor** switches to the project's own tab, opening it only if it isn't already open. **All Projects** in the Editor's logo menu, <kbd>Ctrl</kbd>/<kbd>Cmd</kbd> + <kbd>O</kbd> and the **Projects** breadcrumb in the viewport switch back to the dashboard, and the Editor keeps its scene.
 
 ## Layout
@@ -16,6 +18,10 @@ The sidebar on the left can be resized by dragging its edge. It holds:
 - **Organizations** - the organizations you belong to. Select one to see its projects. The **+** button creates a new organization.
 - **Storage** - how much of your plan's storage is used. Select it for a breakdown by project.
 - Your account, with the **MCP server** button for connecting an AI assistant (see [MCP Server](/user-manual/editor/mcp-server/#connect-from-the-project-dashboard)).
+
+![MCP Server](/img/user-manual/editor/projects/project-dashboard-mcp.png)
+
+![Dashboard Header](/img/user-manual/editor/projects/dashboard-header.png)
 
 The main panel opens with **Continue editing**, which shows the project you edited last with **Open editor** and **Play** buttons, followed by your projects.
 
@@ -37,6 +43,8 @@ Narrow a search with these filters:
 
 Use quotes for spaces, for example `name:"orbit arena"`.
 
+![Search Filters](/img/user-manual/editor/projects/project-dashboard-search.png)
+
 <video autoPlay muted loop controls src='/video/editor-project-dashboard-search-star.mp4' style={{width: '100%', height: 'auto'}} />
 
 The tabs above the projects filter them further: **All**, **Mine**, **Shared with me**, **Private** and **Starred**.
@@ -46,6 +54,8 @@ The tabs above the projects filter them further: **All**, **Mine**, **Shared wit
 ## Cards and List View
 
 The buttons next to **Sort by** switch between **Cards** and **List**. Cards show each project's thumbnail, owner and members, the time since it was edited and its size, with its views, plays and stars along the bottom. Projects without a thumbnail show a placeholder. The list view has a row per project with **Forks**, **Views**, **Plays**, **Stars**, **Size** and **Edited** columns.
+
+![List View](/img/user-manual/editor/projects/project-dashboard-list-view.png)
 
 A project can carry one of these badges:
 
@@ -68,11 +78,15 @@ The **⋮** button on a card, a list row or the Continue editing panel opens the
 - **Watch**, **Fork** and **Export**
 - **Transfer ownership** and **Delete project**
 
+![Project Menu](/img/user-manual/editor/projects/fork-project-button.png)
+
 **Play** runs the project's primary build in a new tab. **Watch** shows the project's dev log updates in the [Global Feed](https://playcanvas.com/feed) when its **Watching** filter is enabled, and changes to **Stop watching** once you watch a project. Items you don't have permission for are hidden. **Transfer ownership** looks up the username as you type and sends the new owner a request to accept. Projects offered to you show **Accept** and **Decline** on their card, and transfers you sent show **Cancel transfer**. See [Ownership and Transfers](/user-manual/editor/projects/ownership-transfers/).
 
 ## Fork a Project
 
 Select **Fork** in the project menu to open the fork dialog. It shows the project you are forking from, with its name and description filled in, and an owner picker. Change anything you need and select **Fork project**.
+
+![Fork Project Dialog](/img/user-manual/editor/projects/project-dashboard-fork.png)
 
 <video autoPlay muted loop controls src='/video/editor-project-dashboard-fork.mp4' style={{width: '100%', height: 'auto'}} />
 
@@ -81,6 +95,8 @@ When the fork is ready, select **Open project** to open it in its own tab, or **
 ## Project Settings, Dev Log and Team
 
 Select a project's card, or **Project settings** in its menu, to open its settings. The panels on the left switch between **Project settings**, **Dev log** and **Team**, and **Open editor**, **Play** and **Delete Project** sit underneath.
+
+![Project Settings](/img/user-manual/editor/projects/project-settings.png)
 
 - **Project settings** shows the name, description and visibility, a **Forked From** link for forks, an **Activity** strip covering the last 28 days, and **Private Source Assets** when the project already uses it. The footer has **Copy link**, **Fork Project** and **Export Project**. See [Project Settings](/user-manual/editor/projects/settings/).
 - **Dev log** lists the project's posts, and lets you write, edit and delete them. See [Dev Logs](/user-manual/editor/projects/dev-logs/#write-a-post-from-the-project-dashboard).
@@ -92,6 +108,8 @@ A locked project shows only **Project settings**. If you are an admin of an orga
 
 Select **New project** to choose a starter kit. **Empty Project** creates a project with nothing in it. **Blank Project**, the default, starts with a skybox, a cube and a plane. The kits after them are provided by PlayCanvas.
 
+![New Project Dialog](/img/user-manual/editor/projects/new-project-dialog.png)
+
 <video autoPlay muted loop controls src='/video/editor-project-dashboard-new-project.mp4' style={{width: '100%', height: 'auto'}} />
 
 Set the name, description and owner, choose whether the project is private, and select **Create project**. When it is ready, the dialog says "Your new project is ready. It opens in a new tab." Select **Open project** to open it. See [Creating Projects](/user-manual/editor/projects/creating/#create-a-project-from-the-project-dashboard).
@@ -99,6 +117,8 @@ Set the name, description and owner, choose whether the project is private, and 
 ## Organizations
 
 Select **+** next to **Organizations** to create one. Enter its **Name**, its **URL** on playcanvas.com and a **Billing email**, then select **Create organization**. The new organization appears in the sidebar.
+
+![New Organization](/img/user-manual/editor/projects/project-dashboard-new-organization.png)
 
 <video autoPlay muted loop controls src='/video/editor-project-dashboard-organizations.mp4' style={{width: '100%', height: 'auto'}} />
 

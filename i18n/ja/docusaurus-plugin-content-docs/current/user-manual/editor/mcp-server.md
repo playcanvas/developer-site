@@ -68,6 +68,8 @@ Windows の JSON ベースのクライアントでは、`"command": "cmd"` を�
 
 [playcanvas.com/editor](https://playcanvas.com/editor) の[プロジェクトダッシュボード](/user-manual/editor/projects/dashboard/)には、サイドバー下部のアカウント行に **MCP server** ボタンがあります。選択すると **Status** と **Port** を表示する **MCP server** パネルが開くので、**Connect** を選択します。
 
+![MCP Server](/img/user-manual/editor/projects/project-dashboard-mcp.png)
+
 接続は記憶されます。タブがプロジェクトに移動すると、自分で開いた場合でもアシスタントが開いた場合でも、Editor は読み込み時に再度クリックすることなく再接続します。
 
 ## プロジェクトを管理する {#manage-projects}

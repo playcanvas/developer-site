@@ -18,6 +18,10 @@ Both are done from the [Project Dashboard](/user-manual/editor/projects/dashboar
 4. Set the name, description and owner, and choose whether the project is **Private**.
 5. Select **Create project**.
 
+![New Project Button](/img/user-manual/editor/projects/new-project-button.png)
+
+![New Project Dialog](/img/user-manual/editor/projects/new-project-dialog.png)
+
 <video autoPlay muted loop controls src='/video/editor-project-dashboard-new-project.mp4' style={{width: '100%', height: 'auto'}} />
 
 When the project is ready, the dialog says "Your new project is ready. It opens in a new tab." Select **Open project** to open it in its own tab, or **Not now** to stay on the dashboard.
@@ -57,6 +61,10 @@ To fork a project from the [Project Dashboard](/user-manual/editor/projects/dash
 1. Select the **⋮** button on the project's card or row, then **Fork**.
 2. The fork dialog shows the project you are forking from, with its name and description filled in. Change them, and the owner, as needed.
 3. Select **Fork project**.
+
+![Fork Project Button](/img/user-manual/editor/projects/fork-project-button.png)
+
+![Fork Project Dialog](/img/user-manual/editor/projects/project-dashboard-fork.png)
 
 <video autoPlay muted loop controls src='/video/editor-project-dashboard-fork.mp4' style={{width: '100%', height: 'auto'}} />
 

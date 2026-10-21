@@ -74,6 +74,8 @@ To use another port, append `--port <number>` to the server arguments and enter 
 
 The [Project Dashboard](/user-manual/editor/projects/dashboard/) at [playcanvas.com/editor](https://playcanvas.com/editor) has an **MCP server** button in the account row at the bottom of the sidebar. Select it to open the **MCP server** panel, which shows the **Status** and **Port**, and select **Connect**.
 
+![MCP Server](/img/user-manual/editor/projects/project-dashboard-mcp.png)
+
 The connection is remembered. When the tab moves into a project, whether you open it or the assistant does, the Editor reconnects on load without another click.
 
 ## Manage Projects {#manage-projects}

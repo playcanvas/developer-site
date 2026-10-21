@@ -5,6 +5,8 @@ description: プロジェクトダッシュボードからのプロジェクト�
 
 開発ログ（略してDev Logs）は、プロジェクトの更新、マイルストーン、ニュースをチームやコミュニティと共有するための強力な機能です。これらは進捗状況を追跡し、関係者にプロジェクトの開発状況を知らせるのに役立ちます。
 
+![Dev Log](/img/user-manual/editor/projects/dev-log.png)
+
 ## Dev Logsを理解する
 
 ### Dev Logsとは？
