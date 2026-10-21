@@ -15,27 +15,26 @@ Project owners have the following abilities (over and above what Admins are able
 
 ## Initiating Ownership Transfers {#initiating-ownership-transfers}
 
-### From the Projects List
+### From the Project Dashboard
 
 ![Transfer Ownership Menu](/img/user-manual/editor/projects/transfer-ownership.png)
 
 To transfer ownership of a project:
 
-1. When logged in, go to your [User Page](https://playcanvas.com/)
+1. Open the [Project Dashboard](/user-manual/editor/projects/dashboard/) at [playcanvas.com/editor](https://playcanvas.com/editor)
 2. Find the project you want to transfer
-3. Click the arrow next to the project name
-4. Select **"Transfer Ownership"** from the dropdown menu
+3. Open the project's **⋮** menu
+4. Select **Transfer ownership**
 
 ### Transfer Dialog
 
 ![Transfer Ownership Dialog](/img/user-manual/editor/projects/transfer-ownership-dialog.png)
 
-In the transfer dialog:
+The dialog asks you to choose who should own the project, and explains that they'll get a request to accept it. It also warns: "Once they accept, everyone else on the project loses access."
 
-1. **Enter the recipient's username** or organization name
-2. Click **FIND** or press Enter to verify the recipient
-3. Review the transfer details carefully
-4. Click **TRANSFER** to send the transfer request
+1. **Enter the recipient's username** or organization name. The recipient is looked up as you type
+2. Check that the match shown under the field is the right account
+3. Select **Transfer** to send the transfer request
 
 ### Supported Recipients
 
@@ -52,7 +51,8 @@ When you initiate a transfer:
 
 - A transfer request is sent to the recipient
 - The original owner retains control until accepted
-- The request appears in the recipient's project list
+- The request appears in the recipient's [Project Dashboard](/user-manual/editor/projects/dashboard/)
+- Your card for the project shows **Transfer pending** and "Sent to &lt;user&gt;" with a **Cancel transfer** button to withdraw the request
 - No changes occur until the transfer is accepted
 
 ### 2. Recipient Acceptance
@@ -61,9 +61,9 @@ When you initiate a transfer:
 
 The recipient will see:
 
-- Transfer request at the top of their project list
-- Details about the project being transferred
-- Options to **Accept** or **Decline** the transfer
+- The project's card at the top of their Project Dashboard, marked **Transfer request**
+- When it was offered ("Offered yesterday") under the owner's name. In list view the row reads "&lt;owner&gt; wants to give you this project"
+- **Accept** and **Decline** buttons on the card
 
 ### 3. Transfer Completion
 

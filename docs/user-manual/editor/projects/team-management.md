@@ -9,10 +9,9 @@ Effective team management is crucial for collaborative development in PlayCanvas
 
 To add team members to your project:
 
-1. Navigate to your Project Dashboard
-2. Go to the **SETTINGS** section
-3. Scroll to the **TEAM** section
-4. In the edit box, enter the username or email of the person you want to add and click **SEND**
+1. On the [Project Dashboard](/user-manual/editor/projects/dashboard/), select the project's card to open its settings
+2. Select **Team** in the panel on the left
+3. Enter the username or email address of the person you want to add and select **Invite**
 
 ## User Permissions
 
@@ -34,20 +33,18 @@ PlayCanvas projects support three permission levels: **Read**, **Write** and **A
 
 To modify a team member's permissions:
 
-1. Go to Project **SETTINGS** > **Team**
+1. Open the project's **Team** panel on the Project Dashboard
 2. Find the user in the team list
-3. Click on their current permission level
-4. Select the new permission level
-5. Confirm the change by clicking **SAVE**
+3. Select their current access level
+4. Select **Read Only**, **Read & Write** or **Admin**. The change applies straight away
 
 ## Removing Team Members
 
 To remove someone from your project:
 
-1. Go to Project **SETTINGS** > **Team**
+1. Open the project's **Team** panel on the Project Dashboard
 2. Find the user you want to remove
-3. Mouse over the tick icon and it will switch to an **X** - click it
-4. Confirm the removal by clicking **OK**
+3. Select the remove button on their row
 
 :::warning
 

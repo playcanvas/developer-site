@@ -15,27 +15,26 @@ description: ユーザー間および組織間の所有権譲渡リクエスト�
 
 ## 所有権の譲渡を開始する {#initiating-ownership-transfers}
 
-### プロジェクトリストから
+### プロジェクトダッシュボードから {#from-the-project-dashboard}
 
 ![Transfer Ownership Menu](/img/user-manual/editor/projects/transfer-ownership.png)
 
 プロジェクトの所有権を譲渡するには:
 
-1. ログイン後、[ユーザーページ](https://playcanvas.com/)にアクセスします。
+1. [playcanvas.com/editor](https://playcanvas.com/editor)で[プロジェクトダッシュボード](/user-manual/editor/projects/dashboard/)を開きます。
 2. 譲渡したいプロジェクトを見つけます。
-3. プロジェクト名の横にある矢印をクリックします。
-4. ドロップダウンメニューから**所有権を譲渡**を選択します。
+3. プロジェクトの**⋮**メニューを開きます。
+4. **Transfer ownership**を選択します。
 
 ### 譲渡ダイアログ
 
 ![Transfer Ownership Dialog](/img/user-manual/editor/projects/transfer-ownership-dialog.png)
 
-譲渡ダイアログで:
+ダイアログでは、プロジェクトの新しい所有者を選ぶよう求められ、相手に承認のリクエストが届くことが説明されます。また、「Once they accept, everyone else on the project loses access.」（承認されると、プロジェクトの他のメンバー全員がアクセスを失います）という警告も表示されます。
 
-1. 受信者の**ユーザー名**または組織名を入力します。
-2. 受信者を確認するには、**FIND**をクリックするかEnterキーを押します。
-3. 譲渡の詳細を慎重に確認します。
-4. 譲渡リクエストを送信するには、**TRANSFER**をクリックします。
+1. 受信者の**ユーザー名**または組織名を入力します。入力に合わせて受信者が検索されます。
+2. 入力欄の下に表示された候補が正しいアカウントであることを確認します。
+3. 譲渡リクエストを送信するには、**Transfer**を選択します。
 
 ### 対応する受信者
 
@@ -52,7 +51,8 @@ description: ユーザー間および組織間の所有権譲渡リクエスト�
 
 - 受信者に譲渡リクエストが送信されます。
 - 元の所有者は、承認されるまで管理権限を保持します。
-- リクエストは受信者のプロジェクトリストに表示されます。
+- リクエストは受信者の[プロジェクトダッシュボード](/user-manual/editor/projects/dashboard/)に表示されます。
+- 自分のプロジェクトカードには**Transfer pending**と「Sent to &lt;ユーザー&gt;」が表示され、**Cancel transfer**ボタンでリクエストを取り消せます。
 - 譲渡が承認されるまで、変更は発生しません。
 
 ### 2. 受信者の承認
@@ -61,9 +61,9 @@ description: ユーザー間および組織間の所有権譲渡リクエスト�
 
 受信者には以下が表示されます:
 
-- プロジェクトリストの上部に譲渡リクエスト
-- 譲渡されるプロジェクトの詳細
-- 譲渡を**承認**または**拒否**するオプション
+- プロジェクトダッシュボードの上部に、**Transfer request**と表示されたプロジェクトカード
+- 所有者名の下に、リクエストが送られた日時（「Offered yesterday」など）。リスト表示では「&lt;所有者&gt; wants to give you this project」と表示されます
+- カード上の**Accept**ボタンと**Decline**ボタン
 
 ### 3. 譲渡の完了
 

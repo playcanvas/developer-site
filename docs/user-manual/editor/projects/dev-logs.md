@@ -1,6 +1,6 @@
 ---
 title: Dev Logs
-description: Posts project updates previews publishing gating and discoverability across dashboard feeds and the public PlayCanvas feed.
+description: Posts project updates from the Project Dashboard, publishing gating and discoverability across the dashboard and the public PlayCanvas feed.
 ---
 
 Development Logs (or Dev Logs for short) are a powerful feature for communicating project updates, milestones, and news with your team and community. They help track progress and keep stakeholders informed about your project's development.
@@ -23,20 +23,22 @@ Development logs are project-specific news posts that allow you to:
 
 Dev logs are displayed in two locations:
 
-- **Project Dashboard Overview**: Chronological list of posts related to your project
+- **The Dev log panel** in the project's settings on the [Project Dashboard](/user-manual/editor/projects/dashboard/): Chronological list of posts related to your project
 - [**The Global Feed**](https://playcanvas.com/feed): Chronological list of all posts published by the entire community
 
-## Writing Your First Dev Log
+## Writing Your First Dev Log {#write-a-post-from-the-project-dashboard}
 
 To create a development log post:
 
-1. Navigate to your Project Dashboard
-2. Go to the **OVERVIEW** section
-3. In the center of the page, you will see the **DEV LOG FEED** section
-4. Click in the text box showing the text **What changes have you made today?**
-5. Add your title and content
-6. Click **PREVIEW** to see how your post will appear when it is published
-7. Click **POST** to finally share your update
+1. On the [Project Dashboard](/user-manual/editor/projects/dashboard/), select the project's card to open its settings.
+2. Select **Dev log** in the panel on the left.
+3. Select **Write the first post**, or **New post** if the project already has posts.
+4. Enter a **Title** and the post itself. Markdown is supported.
+5. Select **Post**.
+
+<video autoPlay muted loop controls src='/video/editor-project-dashboard-dev-log.mp4' style={{width: '100%', height: 'auto'}} />
+
+The post appears in the list, rendered from its Markdown. Each of your posts has buttons to edit and delete it.
 
 :::important
 

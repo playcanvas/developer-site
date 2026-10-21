@@ -1,6 +1,6 @@
 ---
 title: Dev Logs
-description: ダッシュボードフィードと公開の PlayCanvas フィードにわたるプロジェクト更新、プレビュー、公開のゲート、発見性の投稿について説明します。
+description: プロジェクトダッシュボードからのプロジェクト更新の投稿、公開のゲート、ダッシュボードと公開の PlayCanvas フィードでの発見性について説明します。
 ---
 
 開発ログ（略してDev Logs）は、プロジェクトの更新、マイルストーン、ニュースをチームやコミュニティと共有するための強力な機能です。これらは進捗状況を追跡し、関係者にプロジェクトの開発状況を知らせるのに役立ちます。
@@ -23,20 +23,22 @@ description: ダッシュボードフィードと公開の PlayCanvas フィー�
 
 Dev Logsは2つの場所に表示されます。
 
-- **プロジェクトダッシュボードの概要**: プロジェクトに関連する投稿の時系列リスト
+- [プロジェクトダッシュボード](/user-manual/editor/projects/dashboard/)のプロジェクト設定にある **Dev log** パネル: プロジェクトに関連する投稿の時系列リスト
 - [**グローバルフィード**](https://playcanvas.com/feed): コミュニティ全体によって公開されたすべての投稿の時系列リスト
 
-## 初めてのDev Logの作成
+## 初めてのDev Logの作成 {#write-a-post-from-the-project-dashboard}
 
 Dev Log投稿を作成するには：
 
-1. プロジェクトダッシュボードに移動します
-2. **概要**セクションに移動します
-3. ページ中央に**DEV LOG FEED**セクションが表示されます
-4. 「**今日、どのような変更を加えましたか？**」というテキストが表示されているテキストボックスをクリックします
-5. タイトルとコンテンツを追加します
-6. **PREVIEW**をクリックして、投稿が公開されたときにどのように表示されるかを確認します
-7. 最後に**POST**をクリックして、更新を共有します
+1. [プロジェクトダッシュボード](/user-manual/editor/projects/dashboard/)でプロジェクトのカードを選択し、設定を開きます。
+2. 左側のパネルで **Dev log** を選択します。
+3. **Write the first post** を選択します。すでに投稿がある場合は **New post** を選択します。
+4. **Title** と本文を入力します。Markdown を使用できます。
+5. **Post** を選択します。
+
+<video autoPlay muted loop controls src='/video/editor-project-dashboard-dev-log.mp4' style={{width: '100%', height: 'auto'}} />
+
+投稿は Markdown からレンダリングされて一覧に表示されます。自分の投稿には、編集と削除のボタンがあります。
 
 :::important
 

@@ -5,7 +5,7 @@ description: Connect AI assistants to the PlayCanvas Editor to modify and verify
 
 The [PlayCanvas Editor MCP Server](https://github.com/playcanvas/editor-mcp-server) connects AI assistants to an open PlayCanvas Editor session. It can modify project data and verify the result through the viewport or a running application.
 
-Your MCP client starts the local server, and the Editor connects to it. Every tool acts on the project currently open in that Editor; the server does not choose or administer PlayCanvas projects.
+Your MCP client starts the local server, and the Editor connects to it. Almost every tool acts on the project currently open in that Editor. A small set of [project tools](#manage-projects) can also list, create, update and open the projects of the signed-in account, so the assistant can work from the Project Dashboard before any project is open.
 
 ## Install the Server Once
 
@@ -69,6 +69,41 @@ Chromium browsers ask before letting a website reach a server running on your ow
 :::
 
 To use another port, append `--port <number>` to the server arguments and enter the same port in the Editor.
+
+### Connect from the Project Dashboard {#connect-from-the-project-dashboard}
+
+The [Project Dashboard](/user-manual/editor/projects/dashboard/) at [playcanvas.com/editor](https://playcanvas.com/editor) has an **MCP server** button in the account row at the bottom of the sidebar. Select it to open the **MCP server** panel, which shows the **Status** and **Port**, and select **Connect**.
+
+![MCP Server](/img/user-manual/editor/projects/project-dashboard-mcp.png)
+
+The connection is remembered. When the tab moves into a project, whether you open it or the assistant does, the Editor reconnects on load without another click.
+
+## Manage Projects {#manage-projects}
+
+With the Project Dashboard or a project connected, the assistant can manage the projects of the signed-in account:
+
+| Tool | What it does |
+| --- | --- |
+| `list_projects` | Lists your projects, or an organization's, with their ids. |
+| `get_project` | Reads one project's summary. With no id, it reads the project open in the Editor. |
+| `create_project` | Creates a project. Set `open` to open it once it is ready. |
+| `update_project` | Changes a project's name, description or visibility. |
+| `open_project` | Opens a project in the connected tab. The tab reloads into the project and the Editor reconnects. |
+
+Only `name`, `description`, `private` and `owner` (a username) can be set. Any other field is rejected by name. Plan limits apply, so a private project needs a paid plan. On the Project Dashboard no project is open, so the scene and asset tools report that until the assistant opens one.
+
+<video autoPlay muted loop controls src='/video/editor-mcp-projects.mp4' style={{width: '100%', height: 'auto'}} />
+
+```text
+List my PlayCanvas projects. Create a project called "Cube Garden", open it, and add a ring
+of ten colourful cubes around the box in its scene.
+```
+
+:::note
+
+The project tools need a version of the [Editor MCP Server](https://github.com/playcanvas/editor-mcp-server) newer than 0.7.1, and Editor 2.35 or later.
+
+:::
 
 ## Check the Connection Without Editing
 
@@ -158,7 +193,7 @@ The Launch window opens but the runtime tools report that it did not connect. Re
 
 ### The Assistant Is Operating on the Wrong Project
 
-MCP tools always target the project open in the connected Editor. Disconnect, open the intended project, and reconnect before making more changes.
+MCP tools always target the project open in the connected Editor. Ask the assistant to open the intended project with `open_project`, or disconnect, open it yourself and reconnect before making more changes.
 
 :::caution
 
