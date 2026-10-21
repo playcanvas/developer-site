@@ -1,6 +1,6 @@
 ---
 title: RigidBody
-description: Static、Dynamic、Kinematic の rigid body、質量、摩擦、反発、ダンピング、ファクターのプロパティ、スリープ、タイプごとの移動とスケーリングの方法、コリジョングループ。
+description: Static、Dynamic、Kinematic の rigid body、質量、摩擦、反発、ダンピング、ファクター、重力スケールのプロパティ、スリープ、タイプごとの移動とスケーリングの方法、コリジョングループ。
 ---
 
 import Tabs from '@theme/Tabs';

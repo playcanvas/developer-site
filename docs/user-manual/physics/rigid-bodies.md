@@ -1,6 +1,6 @@
 ---
 title: Rigid Bodies
-description: Static, dynamic and kinematic rigid bodies, their mass, friction, restitution, damping and factor properties, sleeping, how each type is moved and scaled, and collision groups.
+description: Static, dynamic and kinematic rigid bodies, their mass, friction, restitution, damping, factor and gravity scale properties, sleeping, how each type is moved and scaled, and collision groups.
 ---
 
 import Tabs from '@theme/Tabs';
