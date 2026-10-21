@@ -1,6 +1,6 @@
 ---
 title: Projects
-description: Maps project administration topics from creation through the projects home, dashboard settings, teamwork, dev logs, exports and ownership transfers.
+description: Maps project administration topics from creation through the dashboard, settings, teamwork, dev logs, exports and ownership transfers.
 ---
 
 ## Overview
@@ -15,8 +15,7 @@ Projects are the foundation for everything you create in the PlayCanvas Editor. 
 
 ### Working with Projects
 
-- **[Projects Home](projects-home)** - Find, create, fork and manage projects and organizations from the Editor.
-- **[Project Dashboard](dashboard)** - Understanding and navigating the project dashboard interface. In the Editor, open it from **Project Dashboard** in the logo menu.
+- **[Project Dashboard](dashboard)** - Find, create, fork and manage projects and organizations at playcanvas.com/editor.
 - **[Project Settings](settings)** - Configure your project's name, description, privacy, and branding.
 - **[Team Management](team-management)** - Adding collaborators and managing permissions.
 - **[Development Logs](dev-logs)** - Using dev logs for project updates and team communication.

@@ -5,7 +5,7 @@ description: Connect AI assistants to the PlayCanvas Editor to modify and verify
 
 The [PlayCanvas Editor MCP Server](https://github.com/playcanvas/editor-mcp-server) connects AI assistants to an open PlayCanvas Editor session. It can modify project data and verify the result through the viewport or a running application.
 
-Your MCP client starts the local server, and the Editor connects to it. Almost every tool acts on the project currently open in that Editor. A small set of [project tools](#manage-projects) can also list, create, update and open the projects of the signed-in account, so the assistant can work from the Editor's projects home before any project is open.
+Your MCP client starts the local server, and the Editor connects to it. Almost every tool acts on the project currently open in that Editor. A small set of [project tools](#manage-projects) can also list, create, update and open the projects of the signed-in account, so the assistant can work from the Project Dashboard before any project is open.
 
 ## Install the Server Once
 
@@ -70,15 +70,15 @@ Chromium browsers ask before letting a website reach a server running on your ow
 
 To use another port, append `--port <number>` to the server arguments and enter the same port in the Editor.
 
-### Connect from the Projects Home {#connect-from-the-projects-home}
+### Connect from the Project Dashboard {#connect-from-the-project-dashboard}
 
-The Editor's [projects home](/user-manual/editor/projects/projects-home/) at [playcanvas.com/editor](https://playcanvas.com/editor) has an **MCP server** button in the account row at the bottom of the sidebar. Select it to open the **MCP server** panel, which shows the **Status** and **Port**, and select **Connect**.
+The [Project Dashboard](/user-manual/editor/projects/dashboard/) at [playcanvas.com/editor](https://playcanvas.com/editor) has an **MCP server** button in the account row at the bottom of the sidebar. Select it to open the **MCP server** panel, which shows the **Status** and **Port**, and select **Connect**.
 
 The connection is remembered. When the tab moves into a project, whether you open it or the assistant does, the Editor reconnects on load without another click.
 
 ## Manage Projects {#manage-projects}
 
-With the projects home or a project connected, the assistant can manage the projects of the signed-in account:
+With the Project Dashboard or a project connected, the assistant can manage the projects of the signed-in account:
 
 | Tool | What it does |
 | --- | --- |
@@ -88,7 +88,7 @@ With the projects home or a project connected, the assistant can manage the proj
 | `update_project` | Changes a project's name, description or visibility. |
 | `open_project` | Opens a project in the connected tab. The tab reloads into the project and the Editor reconnects. |
 
-Only `name`, `description`, `private` and `owner` (a username) can be set. Any other field is rejected by name. Plan limits apply, so a private project needs a paid plan. On the projects home no project is open, so the scene and asset tools report that until the assistant opens one.
+Only `name`, `description`, `private` and `owner` (a username) can be set. Any other field is rejected by name. Plan limits apply, so a private project needs a paid plan. On the Project Dashboard no project is open, so the scene and asset tools report that until the assistant opens one.
 
 <video autoPlay muted loop controls src='/video/editor-mcp-projects.mp4' style={{width: '100%', height: 'auto'}} />
 

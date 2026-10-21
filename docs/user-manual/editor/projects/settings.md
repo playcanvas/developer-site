@@ -11,8 +11,8 @@ The Project Settings allow you to configure various aspects of your project incl
 
 To access your project settings:
 
-1. Open your project dashboard
-2. Navigate to the **SETTINGS** tab
+1. On the [Project Dashboard](/user-manual/editor/projects/dashboard/), select the project's card, or **Project settings** in its **⋮** menu
+2. The **Project settings** panel opens
 
 ## Project Information
 

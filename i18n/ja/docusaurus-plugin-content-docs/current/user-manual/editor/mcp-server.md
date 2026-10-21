@@ -5,7 +5,7 @@ description: AI アシスタントを PlayCanvas Editor に接続し、MCP ツ�
 
 [PlayCanvas Editor MCP Server](https://github.com/playcanvas/editor-mcp-server) は、AI アシスタントを開いている PlayCanvas Editor セッションに接続します。プロジェクトデータを変更し、ビューポートまたは実行中のアプリケーションで結果を検証できます。
 
-MCP クライアントがローカルサーバーを起動し、Editor がそのサーバーに接続します。ほとんどのツールは、接続中の Editor で現在開かれているプロジェクトを操作します。一部の[プロジェクトツール](#manage-projects)は、サインイン中のアカウントのプロジェクトを一覧表示、作成、更新、オープンすることもできるため、プロジェクトを開く前の Editor のプロジェクトホームからでもアシスタントが作業できます。
+MCP クライアントがローカルサーバーを起動し、Editor がそのサーバーに接続します。ほとんどのツールは、接続中の Editor で現在開かれているプロジェクトを操作します。一部の[プロジェクトツール](#manage-projects)は、サインイン中のアカウントのプロジェクトを一覧表示、作成、更新、オープンすることもできるため、プロジェクトを開く前のプロジェクトダッシュボードからでもアシスタントが作業できます。
 
 ## サーバーを一度インストールする
 
@@ -64,15 +64,15 @@ Windows の JSON ベースのクライアントでは、`"command": "cmd"` を�
 
 別のポートを使用するには、サーバー引数に `--port <number>` を追加し、Editor に同じポートを入力します。
 
-### プロジェクトホームから接続する {#connect-from-the-projects-home}
+### プロジェクトダッシュボードから接続する {#connect-from-the-project-dashboard}
 
-[playcanvas.com/editor](https://playcanvas.com/editor) の Editor の[プロジェクトホーム](/user-manual/editor/projects/projects-home/)には、サイドバー下部のアカウント行に **MCP server** ボタンがあります。選択すると **Status** と **Port** を表示する **MCP server** パネルが開くので、**Connect** を選択します。
+[playcanvas.com/editor](https://playcanvas.com/editor) の[プロジェクトダッシュボード](/user-manual/editor/projects/dashboard/)には、サイドバー下部のアカウント行に **MCP server** ボタンがあります。選択すると **Status** と **Port** を表示する **MCP server** パネルが開くので、**Connect** を選択します。
 
 接続は記憶されます。タブがプロジェクトに移動すると、自分で開いた場合でもアシスタントが開いた場合でも、Editor は読み込み時に再度クリックすることなく再接続します。
 
 ## プロジェクトを管理する {#manage-projects}
 
-プロジェクトホームまたはプロジェクトが接続されていれば、アシスタントはサインイン中のアカウントのプロジェクトを管理できます。
+プロジェクトダッシュボードまたはプロジェクトが接続されていれば、アシスタントはサインイン中のアカウントのプロジェクトを管理できます。
 
 | ツール | 機能 |
 | --- | --- |
@@ -82,7 +82,7 @@ Windows の JSON ベースのクライアントでは、`"command": "cmd"` を�
 | `update_project` | プロジェクトの名前、説明、公開設定を変更します。 |
 | `open_project` | 接続中のタブでプロジェクトを開きます。タブがそのプロジェクトに再読み込みされ、Editor が再接続します。 |
 
-設定できるのは `name`、`description`、`private`、`owner`（ユーザー名）だけです。それ以外のフィールドは、名前を示して拒否されます。プランの制限が適用されるため、プライベートプロジェクトには有料プランが必要です。プロジェクトホームではプロジェクトが開かれていないため、アシスタントがプロジェクトを開くまで、シーンとアセットのツールはその旨を報告します。
+設定できるのは `name`、`description`、`private`、`owner`（ユーザー名）だけです。それ以外のフィールドは、名前を示して拒否されます。プランの制限が適用されるため、プライベートプロジェクトには有料プランが必要です。プロジェクトダッシュボードではプロジェクトが開かれていないため、アシスタントがプロジェクトを開くまで、シーンとアセットのツールはその旨を報告します。
 
 <video autoPlay muted loop controls src='/video/editor-mcp-projects.mp4' style={{width: '100%', height: 'auto'}} />
 
