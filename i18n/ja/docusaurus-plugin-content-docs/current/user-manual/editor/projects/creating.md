@@ -8,6 +8,20 @@ Editorプロジェクトを作成するには、2つの方法があります。
 1. 定義済みの多数のスターターキットに基づいてプロジェクトを作成する。
 2. 既存のプロジェクトをフォークし、それを開始点として使用する。
 
+どちらも Editor の[プロジェクトホーム](/user-manual/editor/projects/projects-home/)または playcanvas.com から行えます。
+
+## プロジェクトホームからプロジェクトを作成する {#create-a-project-from-the-projects-home}
+
+1. [playcanvas.com/editor](https://playcanvas.com/editor) でプロジェクトホームを開きます。
+2. サイドバーの **New project** を選択します。
+3. スターターキットを選びます。**Empty Project** は何もないプロジェクトを作成します。デフォルトの **Blank Project** は、スカイボックス、キューブ、平面から始まります。
+4. 名前、説明、所有者を設定し、プロジェクトを **Private** にするかを選びます。
+5. **Create project** を選択します。
+
+<video autoPlay muted loop controls src='/video/editor-projects-home-new-project.mp4' style={{width: '100%', height: 'auto'}} />
+
+プロジェクトの準備ができると、ダイアログに「Your new project is ready. It opens in a new tab.」と表示されます。**Open project** を選択すると専用のタブで開き、**Not now** を選択するとプロジェクトホームに留まります。
+
 ## スターターキットから新しいプロジェクトを作成する
 
 新しいプロジェクトを作成するには：
@@ -51,7 +65,17 @@ PlayCanvasは、すぐに始められるようにいくつかのスターター�
 
 ### プロジェクトをフォークする方法
 
-プロジェクトをフォークするには：
+[プロジェクトホーム](/user-manual/editor/projects/projects-home/)からプロジェクトをフォークするには：
+
+1. プロジェクトのカードまたは行の **⋮** ボタンを選択し、**Fork** を選択します。
+2. フォークダイアログには、フォーク元のプロジェクトが名前と説明が入力済みの状態で表示されます。必要に応じて名前、説明、所有者を変更します。
+3. **Fork project** を選択します。
+
+<video autoPlay muted loop controls src='/video/editor-projects-home-fork.mp4' style={{width: '100%', height: 'auto'}} />
+
+プロジェクトをフォークできない場合、ダイアログはフォームの代わりにその理由を表示します。レガシースクリプトを使用している場合、所有者がソースアセットを非公開にしていてあなたに編集権限がない場合、またはプロジェクトがプライベートで新しい所有者に有料プランがない場合です。
+
+playcanvas.com からプロジェクトをフォークするには：
 
 1. プロジェクトのダッシュボードページに移動します
 2. ダッシュボードヘッダーにある**Fork**ボタンをクリックします

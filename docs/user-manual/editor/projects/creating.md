@@ -8,6 +8,20 @@ You can create Editor projects in two ways:
 1. Create a project based on a number of predefined starter kits.
 2. Fork an existing project, using it as a starting point.
 
+Both can be done from the Editor's [projects home](/user-manual/editor/projects/projects-home/) or from playcanvas.com.
+
+## Create a Project from the Projects Home {#create-a-project-from-the-projects-home}
+
+1. Open the projects home at [playcanvas.com/editor](https://playcanvas.com/editor).
+2. Select **New project** in the sidebar.
+3. Pick a starter kit. **Empty Project** creates a project with nothing in it. **Blank Project**, the default, starts with a skybox, a cube and a plane.
+4. Set the name, description and owner, and choose whether the project is **Private**.
+5. Select **Create project**.
+
+<video autoPlay muted loop controls src='/video/editor-projects-home-new-project.mp4' style={{width: '100%', height: 'auto'}} />
+
+When the project is ready, the dialog says "Your new project is ready. It opens in a new tab." Select **Open project** to open it in its own tab, or **Not now** to stay on the projects home.
+
 ## Create a New Project from a Starter Kit
 
 To create a new project:
@@ -51,7 +65,17 @@ Forking allows you to create a new project based on an existing public project (
 
 ### How to Fork a Project
 
-To fork a project:
+To fork a project from the [projects home](/user-manual/editor/projects/projects-home/):
+
+1. Select the **⋮** button on the project's card or row, then **Fork**.
+2. The fork dialog shows the project you are forking from, with its name and description filled in. Change them, and the owner, as needed.
+3. Select **Fork project**.
+
+<video autoPlay muted loop controls src='/video/editor-projects-home-fork.mp4' style={{width: '100%', height: 'auto'}} />
+
+The dialog explains why instead of showing the form when a project can't be forked: it uses legacy scripts, its owner keeps its source assets private and you can't edit it, or it is private and the new owner has no paid plan.
+
+To fork a project from playcanvas.com:
 
 1. Navigate to the project's dashboard page
 2. Click the **Fork** button in the dashboard header

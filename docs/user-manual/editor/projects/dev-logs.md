@@ -24,6 +24,7 @@ Development logs are project-specific news posts that allow you to:
 Dev logs are displayed in two locations:
 
 - **Project Dashboard Overview**: Chronological list of posts related to your project
+- **The Dev log panel** in the project's settings on the Editor's [projects home](/user-manual/editor/projects/projects-home/)
 - [**The Global Feed**](https://playcanvas.com/feed): Chronological list of all posts published by the entire community
 
 ## Writing Your First Dev Log
@@ -49,6 +50,18 @@ When you create a new project, you are initially blocked from posting to your De
 Dev Log posts support both [Markdown](https://daringfireball.net/projects/markdown/syntax) and [Emoji](https://www.webfx.com/tools/emoji-cheat-sheet/). Consider leveraging both to make your posts more engaging!
 
 :::
+
+### Write a Post from the Projects Home {#write-a-post-from-the-projects-home}
+
+1. On the [projects home](/user-manual/editor/projects/projects-home/), select the project's card to open its settings.
+2. Select **Dev log** in the panel on the left.
+3. Select **Write the first post**, or **New post** if the project already has posts.
+4. Enter a **Title** and the post itself. Markdown is supported.
+5. Select **Post**.
+
+<video autoPlay muted loop controls src='/video/editor-projects-home-dev-log.mp4' style={{width: '100%', height: 'auto'}} />
+
+The post appears in the list, rendered from its Markdown. Each of your posts has buttons to edit and delete it.
 
 ### Content Ideas
 

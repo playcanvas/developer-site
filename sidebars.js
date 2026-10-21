@@ -142,6 +142,7 @@ const sidebars = {
           },
           items: [
             'user-manual/editor/projects/creating',
+            'user-manual/editor/projects/projects-home',
             'user-manual/editor/projects/dashboard',
             'user-manual/editor/projects/settings',
             'user-manual/editor/projects/team-management',

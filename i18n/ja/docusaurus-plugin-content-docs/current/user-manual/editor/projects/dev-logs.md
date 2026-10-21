@@ -24,6 +24,7 @@ description: ダッシュボードフィードと公開の PlayCanvas フィー�
 Dev Logsは2つの場所に表示されます。
 
 - **プロジェクトダッシュボードの概要**: プロジェクトに関連する投稿の時系列リスト
+- Editor の[プロジェクトホーム](/user-manual/editor/projects/projects-home/)にあるプロジェクト設定の **Dev log** パネル
 - [**グローバルフィード**](https://playcanvas.com/feed): コミュニティ全体によって公開されたすべての投稿の時系列リスト
 
 ## 初めてのDev Logの作成
@@ -49,6 +50,18 @@ Dev Log投稿を作成するには：
 Dev Logの投稿は、[Markdown](https://daringfireball.net/projects/markdown/syntax)と[絵文字](https://www.webfx.com/tools/emoji-cheat-sheet/)の両方をサポートしています。投稿をより魅力的にするために、両方を活用することを検討してください！
 
 :::
+
+### プロジェクトホームから投稿する {#write-a-post-from-the-projects-home}
+
+1. [プロジェクトホーム](/user-manual/editor/projects/projects-home/)でプロジェクトのカードを選択し、設定を開きます。
+2. 左側のパネルで **Dev log** を選択します。
+3. **Write the first post** を選択します。すでに投稿がある場合は **New post** を選択します。
+4. **Title** と本文を入力します。Markdown を使用できます。
+5. **Post** を選択します。
+
+<video autoPlay muted loop controls src='/video/editor-projects-home-dev-log.mp4' style={{width: '100%', height: 'auto'}} />
+
+投稿は Markdown からレンダリングされて一覧に表示されます。自分の投稿には、編集と削除のボタンがあります。
 
 ### コンテンツのアイデア
 
