@@ -11,8 +11,6 @@ PlayCanvas Engineは、ウェブ向けのオープンソース3Dエンジンで�
     <iframe src="https://playcanvas.com/examples/iframe/graphics_clipping-planes.html" title="クリッピングプレーンでカットされ、ファン、コンプレッサー、タービンが見える展示台の上のターボファン" allow="fullscreen" allowFullScreen loading="lazy"></iframe>
 </div>
 
-上のターボファンはドラッグで回転し、スクロールまたはピンチでズームできます。クリッピングプレーンがすべての部品からくさび形を切り取ってファン、コンプレッサー、タービンを見せており、赤い部分は切り口から見える部品の裏面です。クリアコート塗装やヘアライン仕上げの金属から、背後の景色を屈折させるアクリルの台座まで、マテリアルはglTFからそのまま読み込まれ、エンジンがシャドウ、アンビエントオクルージョン、ブルームを加えています。これは、ブラウザ上で編集して再実行できるソースコード付きの[250以上のライブサンプル](https://playcanvas.com/examples/)のひとつです。
-
 <div className="cta-buttons">
     <Link className="button button--primary button--lg" to="/user-manual/engine/standalone/">はじめる →</Link>
     <Link className="button button--secondary button--lg" to="https://playcanvas.com/examples/">サンプルを見る</Link>

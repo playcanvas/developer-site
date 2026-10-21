@@ -11,8 +11,6 @@ The PlayCanvas Engine is an open-source 3D engine for the web. It renders with W
     <iframe src="https://playcanvas.com/examples/iframe/graphics_clipping-planes.html" title="A turbofan on a display stand, cut away with clipping planes to show its fan, compressor and turbine" allow="fullscreen" allowFullScreen loading="lazy"></iframe>
 </div>
 
-Drag to orbit the turbofan above, and scroll or pinch to zoom. Clipping planes cut a wedge out of every part to reveal the fan, compressor and turbine, and the red caps are the parts' back faces, seen through the cut. Its materials load straight from glTF, from the clearcoat paint and brushed metal to the acrylic stand that refracts the scene behind it, and the engine adds shadows, ambient occlusion and bloom. It's one of more than 250 [live examples](https://playcanvas.com/examples/), each with source code you can edit and run again in the browser.
-
 <div className="cta-buttons">
     <Link className="button button--primary button--lg" to="/user-manual/engine/standalone/">Get Started →</Link>
     <Link className="button button--secondary button--lg" to="https://playcanvas.com/examples/">Browse the Examples</Link>
