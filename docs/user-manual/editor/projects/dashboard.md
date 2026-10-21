@@ -3,29 +3,75 @@ title: Project Dashboard
 description: Find, create, fork and manage projects and organizations from the Project Dashboard at playcanvas.com/editor, including project settings, dev logs and teams.
 ---
 
-The Project Dashboard is where you find, create and manage your projects and organizations. Open it at [playcanvas.com/editor](https://playcanvas.com/editor). From Editor 2.35 the dashboard is part of the Editor and replaces the dashboard pages on playcanvas.com.
+The Project Dashboard is the control center for your projects. Open it at [playcanvas.com/editor](https://playcanvas.com/editor). From Editor 2.35 the dashboard is part of the Editor and replaces the dashboard pages on playcanvas.com.
 
 ![Dashboard](/img/user-manual/editor/projects/project-dashboard.png)
 
 The dashboard runs in its own browser tab and doesn't load the Editor itself, so it opens quickly. It never opens a project inside itself: **Open editor** switches to the project's own tab, opening it only if it isn't already open. **All Projects** in the Editor's logo menu, <kbd>Ctrl</kbd>/<kbd>Cmd</kbd> + <kbd>O</kbd> and the **Projects** breadcrumb in the viewport switch back to the dashboard, and the Editor keeps its scene.
 
-## Layout
+## Dashboard Overview
 
-The sidebar on the left can be resized by dragging its edge. It holds:
+From the Project Dashboard you can:
 
-- **New project** and **Import project**.
-- **Recents** - the projects you opened most recently.
-- **Organizations** - the organizations you belong to. Select one to see its projects. The **+** button creates a new organization.
-- **Storage** - how much of your plan's storage is used. Select it for a breakdown by project.
-- Your account, with the **MCP server** button for connecting an AI assistant (see [MCP Server](/user-manual/editor/mcp-server/#connect-from-the-project-dashboard)).
+- Find and filter your projects
+- Open a project in the Editor
+- Play a project's primary app
+- Star, watch, fork, export, transfer and delete projects
+- Edit project settings
+- Write dev log posts
+- Manage team members
+- Create and manage organizations
+- Connect an AI assistant over MCP
 
-![Dashboard Header](/img/user-manual/editor/projects/dashboard-header.png)
+## Sidebar
+
+The sidebar on the left can be resized by dragging its edge.
+
+![Sidebar](/img/user-manual/editor/projects/new-project-button.png)
+
+### New Project
+
+Select **New project** to create a project from a starter kit. See [Creating Projects](/user-manual/editor/projects/creating/#create-a-project-from-the-project-dashboard).
+
+### Import Project
+
+Select **Import project** and choose an exported project's `.zip` file to create a project from it. See [Backup and Export](/user-manual/editor/projects/backup-and-export/).
+
+### Recents
+
+**Recents** lists the projects you opened most recently.
+
+### Organizations
+
+**Organizations** lists the organizations you belong to. Select one to see its projects.
+
+Select **+** next to **Organizations** to create one. Enter its **Name**, its **URL** on playcanvas.com and a **Billing email**, then select **Create organization**. The new organization appears in the sidebar.
+
+![New Organization](/img/user-manual/editor/projects/project-dashboard-new-organization.png)
+
+An organization's **⋮** menu has **Organization details**, which opens its account page on playcanvas.com, and **Delete organization**. Deleting asks you to type the organization's name to confirm. If the organization has projects, they are transferred to your account.
+
+### Storage
+
+**Storage** shows how much of your plan's storage is used. Select it for a breakdown by project.
+
+### MCP Server
+
+The **MCP server** button next to your account connects the Project Dashboard to the [Editor MCP Server](/user-manual/editor/mcp-server/), so an AI assistant can list, create, update and open your projects before any project is open. See [Connect from the Project Dashboard](/user-manual/editor/mcp-server/#connect-from-the-project-dashboard).
+
+![MCP Server](/img/user-manual/editor/projects/project-dashboard-mcp.png)
+
+## Continue Editing
 
 The main panel opens with **Continue editing**, which shows the project you edited last with **Open editor** and **Play** buttons, followed by your projects.
 
-## Find a Project
+![Dashboard Header](/img/user-manual/editor/projects/dashboard-header.png)
+
+## Finding Projects
 
 Type in the search box to find projects by name, owner or description. Search tolerates typos. Press <kbd>/</kbd> to jump to it, unless a dialog or menu is open.
+
+![Search Filters](/img/user-manual/editor/projects/project-dashboard-search.png)
 
 Narrow a search with these filters:
 
@@ -41,15 +87,15 @@ Narrow a search with these filters:
 
 Use quotes for spaces, for example `name:"orbit arena"`.
 
-![Search Filters](/img/user-manual/editor/projects/project-dashboard-search.png)
-
-<video autoPlay muted loop controls src='/video/editor-project-dashboard-search-star.mp4' style={{width: '100%', height: 'auto'}} />
+### Tabs
 
 The tabs above the projects filter them further: **All**, **Mine**, **Shared with me**, **Private** and **Starred**.
 
+### Sort
+
 **Sort by** orders the projects by **Last edited**, **Created**, **Name**, **Most played** or **Size**, **Descending** or **Ascending**.
 
-## Cards and List View
+### Cards and List View
 
 The buttons next to **Sort by** switch between **Cards** and **List**. Cards show each project's thumbnail, owner and members, the time since it was edited and its size, with its views, plays and stars along the bottom. Projects without a thumbnail show a placeholder. The list view has a row per project with **Forks**, **Views**, **Plays**, **Stars**, **Size** and **Edited** columns.
 
@@ -65,32 +111,71 @@ A project can carry one of these badges:
 | **No access** | You can see it in a list, but you don't have access to it |
 | **Disabled** | It has been disabled by support |
 
-Select the star on a card or row to star the project, or select it again to remove the star. Stars show appreciation for a project and count towards its popularity, and **Starred** and `is:starred` list the projects you have starred.
+## Project Menu
 
-## The Project Menu
-
-The **⋮** button on a card, a list row or the Continue editing panel opens the project menu:
-
-- **Open editor** and **Play**
-- **Project settings** and **Copy link**
-- **Watch**, **Fork** and **Export**
-- **Transfer ownership** and **Delete project**
+The **⋮** button on a card, a list row or the Continue editing panel opens the project menu. Items you don't have permission for are hidden.
 
 ![Project Menu](/img/user-manual/editor/projects/fork-project-button.png)
 
-**Play** runs the project's primary build in a new tab. **Watch** shows the project's dev log updates in the [Global Feed](https://playcanvas.com/feed) when its **Watching** filter is enabled, and changes to **Stop watching** once you watch a project. Items you don't have permission for are hidden. **Transfer ownership** looks up the username as you type and sends the new owner a request to accept. Projects offered to you show **Accept** and **Decline** on their card, and transfers you sent show **Cancel transfer**. See [Ownership and Transfers](/user-manual/editor/projects/ownership-transfers/).
+### Open Editor
 
-## Fork a Project
+Select **Open editor** to open the project in the PlayCanvas Editor, in its own tab, where you can:
 
-Select **Fork** in the project menu to open the fork dialog. It shows the project you are forking from, with its name and description filled in, and an owner picker. Change anything you need and select **Fork project**.
+- Create and edit scenes and entities
+- Import and manage assets
+- Configure components and settings
+- Publish apps
+
+### Play
+
+Select **Play** to launch the project's Primary Build in a new tab. This allows you to:
+
+- Test your latest changes
+- Experience your project as end users would
+- Share a playable version with others
+
+### Project Settings {#project-settings-item}
+
+Select **Project settings** to open the project's settings. See [Project Settings](#project-settings) below.
+
+### Copy Link
+
+Select **Copy link** to copy a link to the project to the clipboard.
+
+### Watch
+
+Select **Watch** to show the project's dev log updates in the [Global Feed](https://playcanvas.com/feed) when its **Watching** filter is enabled. Once you watch a project, the item changes to **Stop watching**.
+
+### Fork
+
+Select **Fork** to create a copy of the project in your account. The fork dialog shows the project you are forking from, with its name and description filled in, and an owner picker. Change anything you need and select **Fork project**.
 
 ![Fork Project Dialog](/img/user-manual/editor/projects/project-dashboard-fork.png)
 
-<video autoPlay muted loop controls src='/video/editor-project-dashboard-fork.mp4' style={{width: '100%', height: 'auto'}} />
-
 When the fork is ready, select **Open project** to open it in its own tab, or **Not now** to stay on the dashboard, where the fork has a new card. See [Creating Projects](/user-manual/editor/projects/creating/#fork-an-existing-project) for what a fork copies and when forking is not possible.
 
-## Project Settings, Dev Log and Team
+### Export
+
+Select **Export** to export the project as an archive. See [Backup and Export](/user-manual/editor/projects/backup-and-export/).
+
+### Transfer Ownership
+
+Select **Transfer ownership** to hand the project to another user or organization. It looks up the username as you type and sends the new owner a request to accept. Projects offered to you show **Accept** and **Decline** on their card, and transfers you sent show **Cancel transfer**. See [Ownership and Transfers](/user-manual/editor/projects/ownership-transfers/).
+
+### Delete Project
+
+Select **Delete project** to delete the project. You are asked to confirm first.
+
+### Star
+
+Select the star on a card or row to star the project, or select it again to remove the star. Starring helps:
+
+- Show appreciation to the developer
+- Contribute to project popularity metrics
+
+The **Starred** tab and `is:starred` list the projects you have starred.
+
+## Project Settings {#project-settings}
 
 Select a project's card, or **Project settings** in its menu, to open its settings. The panels on the left switch between **Project settings**, **Dev log** and **Team**, and **Open editor**, **Play** and **Delete Project** sit underneath.
 
@@ -101,29 +186,3 @@ Select a project's card, or **Project settings** in its menu, to open its settin
 - **Team** lists the people on the project and their access. See [Team Management](/user-manual/editor/projects/team-management/).
 
 A locked project shows only **Project settings**. If you are an admin of an organization but not a member of one of its projects, that project shows only **Team**, where you can assign yourself as an admin.
-
-## Create a Project
-
-Select **New project** to choose a starter kit. **Empty Project** creates a project with nothing in it. **Blank Project**, the default, starts with a skybox, a cube and a plane. The kits after them are provided by PlayCanvas.
-
-![New Project Dialog](/img/user-manual/editor/projects/new-project-dialog.png)
-
-<video autoPlay muted loop controls src='/video/editor-project-dashboard-new-project.mp4' style={{width: '100%', height: 'auto'}} />
-
-Set the name, description and owner, choose whether the project is private, and select **Create project**. When it is ready, the dialog says "Your new project is ready. It opens in a new tab." Select **Open project** to open it. See [Creating Projects](/user-manual/editor/projects/creating/#create-a-project-from-the-project-dashboard).
-
-## Organizations
-
-Select **+** next to **Organizations** to create one. Enter its **Name**, its **URL** on playcanvas.com and a **Billing email**, then select **Create organization**. The new organization appears in the sidebar.
-
-![New Organization](/img/user-manual/editor/projects/project-dashboard-new-organization.png)
-
-<video autoPlay muted loop controls src='/video/editor-project-dashboard-organizations.mp4' style={{width: '100%', height: 'auto'}} />
-
-Select an organization in the sidebar to see its projects. Its **⋮** menu has **Organization details**, which opens its account page on playcanvas.com, and **Delete organization**. Deleting asks you to type the organization's name to confirm. If the organization has projects, they are transferred to your account.
-
-## Connect an AI Assistant {#connect-an-ai-assistant}
-
-The **MCP server** button next to your account connects the Project Dashboard to the [Editor MCP Server](/user-manual/editor/mcp-server/), so an AI assistant can list, create, update and open your projects before any project is open. See [Connect from the Project Dashboard](/user-manual/editor/mcp-server/#connect-from-the-project-dashboard).
-
-![MCP Server](/img/user-manual/editor/projects/project-dashboard-mcp.png)
