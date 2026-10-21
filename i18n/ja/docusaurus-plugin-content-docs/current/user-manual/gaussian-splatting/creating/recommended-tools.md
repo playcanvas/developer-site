@@ -9,7 +9,7 @@ PlayCanvas自体は、写真や動画をGaussian splatに変換するツール�
 
 | ツール | 難易度 | プラットフォーム | 費用 | オープンソース | 主な用途 | 要件 |
 |------|------------|-----------|------| :-----: |-------------|--------------|
-| [**Polycam**](https://poly.cam/) | 簡単 | iOS, Android, Web | フリーミアム | ❌ | キャプチャ + トレーニング | モバイルデバイス |
+| [**Polycam**](https://poly.cam/) | 簡単 | iOS, Web | フリーミアム‡ | ❌ | キャプチャ + トレーニング | モバイルデバイス |
 | [**Scaniverse**](https://scaniverse.com/) | 簡単 | iOS, Android, Web | フリーミアム | ❌ | キャプチャ + トレーニング | モバイルデバイス |
 | [**RealityScan**](https://www.realityscan.com/) | 中級 | Win | 無料* | ❌ | カメラポーズ | |
 | [**Postshot**](https://www.jawset.com/) | 中級 | Win | フリーミアム† | ❌ | カメラポーズ + トレーニング | CUDA GPU |
@@ -24,16 +24,18 @@ PlayCanvas自体は、写真や動画をGaussian splatに変換するツール�
 
 †_Postshotの無料プランは非商用利用に限られ、splatをエクスポートできません。_
 
+‡_Polycamの無料プランにはGaussian splatが含まれず、splatのエクスポートにはBusinessまたはEnterpriseプランが必要です。_
+
 ## 簡単/一般ユーザー向けツール
 
 これらのツールは、技術的な専門知識なしでGaussian splatを素早く作成したいユーザー向けに設計されています。
 
-[**Polycam**](https://poly.cam/) (iOS, Android, Web)  
-写真や動画からGaussian splatを作成する商用のキャプチャアプリおよびWebプラットフォームで、組み込みの編集ツールと簡単な共有機能を備えています。1回のキャプチャで使える画像の枚数はプランによって異なり、無料プランの150枚からBusinessプランの2,000枚までです。
+[**Polycam**](https://poly.cam/) (iOS, Web)  
+写真や動画からGaussian splatを作成する商用のキャプチャアプリおよびWebプラットフォームで、組み込みの編集ツールと簡単な共有機能を備えています。Gaussian splatには有料プランが必要です。1回のsplatキャプチャで使える画像はBasicプランで最大300枚、BusinessまたはEnterpriseプランで最大1,000枚で、splatをエクスポートできるのはBusinessとEnterpriseプランのみです。PolycamのAndroidアプリで作成できるのはフォトグラメトリのメッシュのみです。
 
 :::important
 
-Polycamからsplatキャプチャをダウンロードする際は、**PLY**形式を選択してください。
+PolycamからGaussian splatキャプチャをエクスポートする際は、**Splat PLY**を選択してください。通常の**PLY**オプションでは、splatではなく点群がエクスポートされます。
 
 :::
 

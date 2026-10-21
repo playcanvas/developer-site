@@ -9,7 +9,7 @@ PlayCanvas does not itself provide a tool to turn photos or video into a Gaussia
 
 | Tool | Difficulty | Platforms | Cost | Open Source | Primary Use | Requirements |
 |------|------------|-----------|------| :-----: |-------------|--------------|
-| [**Polycam**](https://poly.cam/) | Easy | iOS, Android, Web | Freemium | ❌ | Capture + Training | Mobile device |
+| [**Polycam**](https://poly.cam/) | Easy | iOS, Web | Freemium‡ | ❌ | Capture + Training | Mobile device |
 | [**Scaniverse**](https://scaniverse.com/) | Easy | iOS, Android, Web | Freemium | ❌ | Capture + Training | Mobile device |
 | [**RealityScan**](https://www.realityscan.com/) | Medium | Win | Free* | ❌ | Camera Poses | |
 | [**Postshot**](https://www.jawset.com/) | Medium | Win | Freemium† | ❌ | Camera Poses + Training | CUDA GPU |
@@ -24,16 +24,18 @@ PlayCanvas does not itself provide a tool to turn photos or video into a Gaussia
 
 †_Postshot's free plan is for non-commercial use and cannot export splats._
 
+‡_Polycam's free plan does not include Gaussian splats, and exporting a splat requires a Business or Enterprise plan._
+
 ## Easy/Consumer Tools
 
 These tools are designed for users who want to create Gaussian splats quickly without technical expertise:
 
-[**Polycam**](https://poly.cam/) (iOS, Android, Web)  
-Commercial capture app and web platform for creating Gaussian splats from photos or video, with built-in editing tools and easy sharing. The number of images per capture depends on your plan, from 150 on the free tier up to 2,000 on Business.
+[**Polycam**](https://poly.cam/) (iOS, Web)  
+Commercial capture app and web platform for creating Gaussian splats from photos or video, with built-in editing tools and easy sharing. Gaussian splats need a paid plan: a splat capture can use up to 300 images on Basic and up to 1,000 on Business or Enterprise, and only Business and Enterprise can export splats. Polycam's Android app creates photogrammetry meshes only.
 
 :::important
 
-Choose the **PLY** format when you download a splat capture from Polycam.
+Select **Splat PLY** when you export a Gaussian splat capture from Polycam. The plain **PLY** option exports a point cloud, not a splat.
 
 :::
 
