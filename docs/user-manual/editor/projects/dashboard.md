@@ -19,8 +19,6 @@ The sidebar on the left can be resized by dragging its edge. It holds:
 - **Storage** - how much of your plan's storage is used. Select it for a breakdown by project.
 - Your account, with the **MCP server** button for connecting an AI assistant (see [MCP Server](/user-manual/editor/mcp-server/#connect-from-the-project-dashboard)).
 
-![MCP Server](/img/user-manual/editor/projects/project-dashboard-mcp.png)
-
 ![Dashboard Header](/img/user-manual/editor/projects/dashboard-header.png)
 
 The main panel opens with **Continue editing**, which shows the project you edited last with **Open editor** and **Play** buttons, followed by your projects.
@@ -123,3 +121,9 @@ Select **+** next to **Organizations** to create one. Enter its **Name**, its **
 <video autoPlay muted loop controls src='/video/editor-project-dashboard-organizations.mp4' style={{width: '100%', height: 'auto'}} />
 
 Select an organization in the sidebar to see its projects. Its **⋮** menu has **Organization details**, which opens its account page on playcanvas.com, and **Delete organization**. Deleting asks you to type the organization's name to confirm. If the organization has projects, they are transferred to your account.
+
+## Connect an AI Assistant {#connect-an-ai-assistant}
+
+The **MCP server** button next to your account connects the Project Dashboard to the [Editor MCP Server](/user-manual/editor/mcp-server/), so an AI assistant can list, create, update and open your projects before any project is open. See [Connect from the Project Dashboard](/user-manual/editor/mcp-server/#connect-from-the-project-dashboard).
+
+![MCP Server](/img/user-manual/editor/projects/project-dashboard-mcp.png)

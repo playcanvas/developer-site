@@ -19,8 +19,6 @@ description: playcanvas.com/editor のプロジェクトダッシュボードか
 - **Storage** - プランのストレージ使用量。選択するとプロジェクトごとの内訳が表示されます。
 - アカウント。AI アシスタントを接続する **MCP server** ボタンがあります（[MCP Server](/user-manual/editor/mcp-server/#connect-from-the-project-dashboard) を参照）。
 
-![MCP Server](/img/user-manual/editor/projects/project-dashboard-mcp.png)
-
 ![Dashboard Header](/img/user-manual/editor/projects/dashboard-header.png)
 
 メインパネルの先頭には **Continue editing** があり、最後に編集したプロジェクトが **Open editor** と **Play** ボタンとともに表示されます。その下にプロジェクトが並びます。
@@ -123,3 +121,9 @@ description: playcanvas.com/editor のプロジェクトダッシュボードか
 <video autoPlay muted loop controls src='/video/editor-project-dashboard-organizations.mp4' style={{width: '100%', height: 'auto'}} />
 
 サイドバーで組織を選択すると、その組織のプロジェクトが表示されます。組織の **⋮** メニューには、playcanvas.com のアカウントページを開く **Organization details** と、**Delete organization** があります。削除するには、確認のため組織名を入力する必要があります。組織にプロジェクトがある場合、それらはあなたのアカウントに移されます。
+
+## AI アシスタントを接続する {#connect-an-ai-assistant}
+
+アカウントの横にある **MCP server** ボタンで、プロジェクトダッシュボードを [Editor MCP Server](/user-manual/editor/mcp-server/) に接続できます。プロジェクトを開く前から、AI アシスタントがプロジェクトの一覧表示、作成、更新、オープンを行えます。[プロジェクトダッシュボードから接続する](/user-manual/editor/mcp-server/#connect-from-the-project-dashboard)を参照してください。
+
+![MCP Server](/img/user-manual/editor/projects/project-dashboard-mcp.png)
