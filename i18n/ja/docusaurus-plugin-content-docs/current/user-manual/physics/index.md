@@ -14,7 +14,7 @@ PlayCanvasの物理演算は、オープンソースのBullet物理エンジン�
 このセクションでは次の内容を扱います。
 
 - [はじめに](/user-manual/physics/physics-basics/) - 物理演算の有効化、重力、単位、シミュレーションの仕組み、一時停止と手動ステップ。
-- [RigidBody](/user-manual/physics/rigid-bodies/) - Static、Dynamic、Kinematicのボディ、そのプロパティ、スリープ、テレポート。
+- [RigidBody](/user-manual/physics/rigid-bodies/) - Static、Dynamic、Kinematicのボディ、そのプロパティ、スリープ、タイプごとの移動とスケーリングの方法。
 - [コリジョン形状](/user-manual/physics/collision-shapes/) - プリミティブ、メッシュ、複合形状、オフセット、スケール。
 - [ボディを動かす](/user-manual/physics/forces-and-impulses/) - 力、インパルス、トルク、速度、Kinematicな運動。
 - [衝突イベント](/user-manual/physics/collision-events/) - RigidBody同士の接触への応答。

@@ -14,7 +14,7 @@ PlayCanvas physics is powered by [ammo.js](https://github.com/kripken/ammo.js), 
 This section covers:
 
 - [Getting Started](/user-manual/physics/physics-basics/) - Enabling physics, gravity, units, how the simulation runs, and pausing or stepping it.
-- [Rigid Bodies](/user-manual/physics/rigid-bodies/) - Static, dynamic and kinematic bodies, their properties, sleeping and teleporting.
+- [Rigid Bodies](/user-manual/physics/rigid-bodies/) - Static, dynamic and kinematic bodies, their properties, sleeping, and how each type is moved and scaled.
 - [Collision Shapes](/user-manual/physics/collision-shapes/) - Primitive, mesh and compound shapes, offsets and scale.
 - [Moving Bodies](/user-manual/physics/forces-and-impulses/) - Forces, impulses, torque, velocity and kinematic motion.
 - [Collision Events](/user-manual/physics/collision-events/) - Responding to contacts between rigid bodies.

@@ -146,8 +146,10 @@ The physics engine interprets 1 unit as 1 meter and measures mass in kilograms. 
 A few rules follow from the way the engine drives the simulation, and the rest of this section relies on them:
 
 - **The simulation steps at a fixed rate.** Each frame, the physics world advances in fixed steps of 1/60 of a second, taking as many as the frame time requires (up to a limit). Bodies therefore behave the same at 30 and at 144 frames per second. On displays faster than 60 Hz some frames run no step at all, and body transforms are interpolated so that motion stays smooth.
-- **Physics owns dynamic bodies.** After each step the engine writes the position and rotation of every dynamic body back to its entity. Anything you set on the entity's transform is overwritten, so dynamic bodies are moved with forces, velocities or `teleport` instead (see [Rigid Bodies](/user-manual/physics/rigid-bodies/#moving-and-teleporting)).
-- **You own static and kinematic bodies.** Their transforms are read from the entity at the start of each step, so you move them like any other entity.
+- **Physics owns dynamic bodies.** After each step the engine writes the position and rotation of every moving dynamic body back to its entity. Setting the entity's transform does not move the body, so dynamic bodies are moved with forces, velocities or `teleport` instead (see [Rigid Bodies](/user-manual/physics/rigid-bodies/#moving-and-teleporting)).
+- **You own kinematic bodies.** Their transforms are read from the entity at the start of each step, so you move them like any other entity.
+- **Static bodies stay where they were created.** The engine reads a static body's position and rotation when the body is created and never checks them again, so moving the entity afterwards leaves the body behind. Anything that moves during play should be kinematic.
+- **Bodies have no scale.** Only position and rotation pass from an entity to its body. Primitive collision shapes keep their size however the entity is scaled (see [Scale](/user-manual/physics/collision-shapes/#scale)).
 - **Events fire per step.** Collision and trigger events are reported once per physics step, not per frame. A body resting on the floor produces a `contact` event every step for as long as it rests there.
 
 ## Pausing and Slow Motion {#pausing-and-slow-motion}

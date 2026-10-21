@@ -89,7 +89,7 @@
     "@docusaurus/module-type-aliases": "^3.10.2",
     "@docusaurus/types": "^3.10.2",
     "gray-matter": "^4.0.3",
-    "markdownlint-cli2": "^0.23.3",
+    "markdownlint-cli2": "^0.24.0",
     "marked": "^18.1.1"
   },
   "browserslist": {
