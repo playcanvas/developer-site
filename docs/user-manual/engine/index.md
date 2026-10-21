@@ -8,7 +8,7 @@ import Link from '@docusaurus/Link';
 The PlayCanvas Engine is an open-source 3D engine for the web. It renders with WebGPU or WebGL 2 in any modern browser, on desktop and mobile, and it's the foundation that the [Editor](../editor/index.md), [PlayCanvas React](../react/index.mdx) and [Web Components](../web-components/index.md) are built on.
 
 <div className="iframe-container">
-    <iframe src="https://playcanvas.com/examples/iframe/graphics_clipping-planes.html" title="A turbofan on a display stand, cut away with clipping planes to show its fan, compressor and turbine" allow="fullscreen" allowFullScreen loading="lazy"></iframe>
+    <iframe src="https://playcanvas.com/examples/iframe/graphics_water.html" title="Tropical islands with palm trees on a rippling turquoise sea" allow="fullscreen" allowFullScreen loading="lazy"></iframe>
 </div>
 
 <div className="cta-buttons">
@@ -161,7 +161,7 @@ Engine apps run in the browser, so whatever you build is a link away for anyone,
 
 The [examples browser](https://playcanvas.com/examples/) has more than 250 live examples, from volumetric fog and dynamic skies to crowds of thousands of animated characters, each with source code you can edit.
 
-<small>Models: [Catapult](https://sketchfab.com/3d-models/atapult-1c33623dbe0049b98be97a750f27b51b) by AlexJJ, [Low Poly Lumberjack](https://sketchfab.com/3d-models/low-poly-lumberjack-a93a29105fc44bf594f8100b7726bcec) by Daz and [Materials Variants Shoe](https://github.com/KhronosGroup/glTF-Sample-Assets/tree/main/Models/MaterialsVariantsShoe) by Shopify, all [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Skatepark splat by [Christoph Schindelar](https://superspl.at/user?id=schindelar3d).</small>
+<small>Models: [Tropical Island](https://sketchfab.com/3d-models/tropical-island-f91862f8c38b481aa19edccac851eefb) by Elin (in the demo at the top of the page), [Catapult](https://sketchfab.com/3d-models/atapult-1c33623dbe0049b98be97a750f27b51b) by AlexJJ, [Low Poly Lumberjack](https://sketchfab.com/3d-models/low-poly-lumberjack-a93a29105fc44bf594f8100b7726bcec) by Daz and [Materials Variants Shoe](https://github.com/KhronosGroup/glTF-Sample-Assets/tree/main/Models/MaterialsVariantsShoe) by Shopify, all [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Skatepark splat by [Christoph Schindelar](https://superspl.at/user?id=schindelar3d).</small>
 
 ## Why the PlayCanvas Engine?
 

@@ -8,7 +8,7 @@ import Link from '@docusaurus/Link';
 PlayCanvas Engineは、ウェブ向けのオープンソース3Dエンジンです。最新のブラウザであれば、デスクトップでもモバイルでもWebGPUまたはWebGL 2でレンダリングでき、[Editor](../editor/index.md)、[PlayCanvas React](../react/index.mdx)、[Web Components](../web-components/index.md)もこのエンジンの上に構築されています。
 
 <div className="iframe-container">
-    <iframe src="https://playcanvas.com/examples/iframe/graphics_clipping-planes.html" title="クリッピングプレーンでカットされ、ファン、コンプレッサー、タービンが見える展示台の上のターボファン" allow="fullscreen" allowFullScreen loading="lazy"></iframe>
+    <iframe src="https://playcanvas.com/examples/iframe/graphics_water.html" title="ヤシの木が立つ熱帯の島々と、波打つターコイズ色の海" allow="fullscreen" allowFullScreen loading="lazy"></iframe>
 </div>
 
 <div className="cta-buttons">
@@ -161,7 +161,7 @@ Engineのアプリはブラウザで動くため、作ったものはどんな�
 
 [サンプルブラウザ](https://playcanvas.com/examples/)には、ボリュメトリックフォグやダイナミックスカイから、数千人のキャラクターがアニメーションする群衆まで、編集できるソースコード付きのライブサンプルが250以上あります。
 
-<small>モデル: AlexJJによる[Catapult](https://sketchfab.com/3d-models/atapult-1c33623dbe0049b98be97a750f27b51b)、Dazによる[Low Poly Lumberjack](https://sketchfab.com/3d-models/low-poly-lumberjack-a93a29105fc44bf594f8100b7726bcec)、Shopifyによる[Materials Variants Shoe](https://github.com/KhronosGroup/glTF-Sample-Assets/tree/main/Models/MaterialsVariantsShoe)（いずれも[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)）。スケートパークのスプラットは[Christoph Schindelar](https://superspl.at/user?id=schindelar3d)によるものです。</small>
+<small>モデル: Elinによる[Tropical Island](https://sketchfab.com/3d-models/tropical-island-f91862f8c38b481aa19edccac851eefb)（ページ上部のデモ）、AlexJJによる[Catapult](https://sketchfab.com/3d-models/atapult-1c33623dbe0049b98be97a750f27b51b)、Dazによる[Low Poly Lumberjack](https://sketchfab.com/3d-models/low-poly-lumberjack-a93a29105fc44bf594f8100b7726bcec)、Shopifyによる[Materials Variants Shoe](https://github.com/KhronosGroup/glTF-Sample-Assets/tree/main/Models/MaterialsVariantsShoe)（いずれも[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)）。スケートパークのスプラットは[Christoph Schindelar](https://superspl.at/user?id=schindelar3d)によるものです。</small>
 
 ## PlayCanvas Engineを使用する理由 {#why-the-playcanvas-engine}
 
