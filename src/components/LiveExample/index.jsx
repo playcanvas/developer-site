@@ -39,12 +39,19 @@ const ICONS = {
     warning: ['M21.73 18l-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3', 'M12 9v4', 'M12 17h.01']
 };
 
+// The product each example language runs on, named in StackBlitz projects.
+const PRODUCTS = {
+    html: 'PlayCanvas Web Components',
+    js: 'PlayCanvas Engine'
+};
+
 /**
- * An editable, live-running Web Components example. Authored in markdown as a
- * fenced ```html live-example``` block; utils/plugins/remark-live-example.mjs
- * swaps the fence for this component at compile time.
+ * An editable, live-running example: a Web Components scene, authored in
+ * markdown as a fenced ```html live-example``` block, or an Engine app, a
+ * ```js live-example``` block. utils/plugins/remark-live-example.mjs swaps the
+ * fence for this component at compile time.
  */
-export default function LiveExample({ code }) {
+export default function LiveExample({ code, language = 'html' }) {
     const isBrowser = useIsBrowser();
     const { colorMode } = useColorMode();
 
@@ -104,8 +111,8 @@ export default function LiveExample({ code }) {
     // not before the example approaches the viewport.
     const showIframe = isBrowser && nearViewport;
     const srcdoc = useMemo(
-        () => (showIframe ? buildPreviewHtml(preview.code, nonce) : null),
-        [showIframe, preview, nonce]
+        () => (showIframe ? buildPreviewHtml(preview.code, nonce, language) : null),
+        [showIframe, preview, nonce, language]
     );
 
     // Boot the (WebGL-heavy) iframe only once the example approaches the viewport.
@@ -168,13 +175,16 @@ export default function LiveExample({ code }) {
     };
 
     const handleStackBlitz = () => {
-        const pageTitle = document.title.split('|')[0].trim() || 'PlayCanvas Web Components';
-        const title = `${pageTitle} — PlayCanvas Web Components`;
+        const product = PRODUCTS[language] ?? PRODUCTS.html;
+        const pageTitle = document.title.split('|')[0].trim() || product;
+        // A product's own landing page is titled with the product name already.
+        const title = pageTitle.includes(product) ? pageTitle : `${pageTitle} — ${product}`;
         const slug = (window.location.pathname.split('/').filter(Boolean).pop() || 'example')
             .toLowerCase().replace(/[^a-z0-9-]/g, '-');
         const docUrl = window.location.href;
         openInStackBlitz({
-            files: buildProjectFiles(codeRef.current, { title, slug, docUrl }),
+            files: buildProjectFiles(codeRef.current, { title, slug, docUrl, language }),
+            openFile: language === 'js' ? 'main.js' : 'index.html',
             title,
             description: `Live example from ${docUrl}`
         });
@@ -221,7 +231,7 @@ export default function LiveExample({ code }) {
     // ------------------------------------------------------------------ render
 
     const staticCode = (
-        <CodeBlock language="html">{code}</CodeBlock>
+        <CodeBlock language={language === 'js' ? 'javascript' : 'html'}>{code}</CodeBlock>
     );
 
     return (
@@ -288,6 +298,7 @@ export default function LiveExample({ code }) {
                     <Suspense fallback={staticCode}>
                         <Editor
                             initialCode={code}
+                            language={language}
                             dark={colorMode === 'dark'}
                             ariaLabel={labels.editorLabel}
                             onChange={scheduleCommit}

@@ -8,11 +8,12 @@
  * @param {Record<string, string>} project.files - Map of file path to contents.
  * @param {string} project.title - Project title shown in StackBlitz.
  * @param {string} project.description - Project description.
+ * @param {string} [project.openFile] - The file StackBlitz opens in its editor.
  */
-export function openInStackBlitz({ files, title, description }) {
+export function openInStackBlitz({ files, title, description, openFile = 'index.html' }) {
     const form = document.createElement('form');
     form.method = 'POST';
-    form.action = 'https://stackblitz.com/run?file=index.html';
+    form.action = `https://stackblitz.com/run?file=${encodeURIComponent(openFile)}`;
     form.target = '_blank';
     form.style.display = 'none';
 
