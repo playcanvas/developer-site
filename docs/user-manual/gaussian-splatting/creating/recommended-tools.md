@@ -24,14 +24,14 @@ PlayCanvas does not itself provide a tool to turn photos or video into a Gaussia
 
 †_Postshot's free plan is for non-commercial use and cannot export splats._
 
-‡_Polycam's free plan does not include Gaussian splats, and exporting a splat requires a Business or Enterprise plan._
+‡_Polycam's free plan does not include Gaussian splats; creating and exporting them needs a Basic plan or higher._
 
 ## Easy/Consumer Tools
 
 These tools are designed for users who want to create Gaussian splats quickly without technical expertise:
 
 [**Polycam**](https://poly.cam/) (iOS, Web)  
-Commercial capture app and web platform for creating Gaussian splats from photos or video, with built-in editing tools and easy sharing. Gaussian splats need a paid plan: a splat capture can use up to 300 images on Basic and up to 1,000 on Business or Enterprise, and only Business and Enterprise can export splats. Polycam's Android app creates photogrammetry meshes only.
+Commercial capture app and web platform for creating Gaussian splats from photos or video, with built-in editing tools and easy sharing. Gaussian splats need a paid plan: a splat capture can use up to 300 images on Basic and up to 1,000 on Business or Enterprise. Polycam's Android app creates photogrammetry meshes only.
 
 :::important
 
