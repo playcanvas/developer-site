@@ -38,7 +38,7 @@ Polycamからsplatキャプチャをダウンロードする際は、**PLY**形�
 :::
 
 [**Scaniverse**](https://scaniverse.com/) (iOS, Android, Web)  
-Niantic Spatialによるキャプチャアプリで、Gaussian splatのトレーニングをデバイス上で行います。無料プランでも、デバイス上でのキャプチャと処理は無制限です。有料プランでは、360°カメラの動画からのsplat生成を含むクラウド処理が利用できます。PLY形式に加えて、PlayCanvasが直接読み込める圧縮形式の[SPZ](../formats/spz.md)でもエクスポートできます。
+Niantic Spatialによるキャプチャアプリで、Gaussian splatのトレーニングをデバイス上で行います。無料プランでも、デバイス上でのキャプチャと処理は無制限です。有料プランでは、360°カメラの動画からのsplat生成を含むクラウド処理が利用できます。splatはPLY形式でエクスポートできます。
 
 ## 中級/プロ向けツール
 
@@ -48,10 +48,10 @@ Niantic Spatialによるキャプチャアプリで、Gaussian splatのトレー
 Epic Gamesによる、カメラのアライメントとスパース点群生成のためのデスクトップアプリケーションです。splatのトレーニング自体は行いませんが、そのカメラポーズ（COLMAP形式でエクスポート）は、Postshot、LichtFeld Studio、Brushなどのツールでsplatトレーニングの基盤となります。アライメントはCUDA GPUなしで動作し、対応GPUが必要なのはRealityScanのメッシュ化とテクスチャリングの工程だけです。
 
 [**Postshot**](https://www.jawset.com/) (Windows)  
-カメラトラッキングとsplatトレーニングの両方をデバイス上で行う商用デスクトップアプリケーションで、迅速な結果とユーザーフレンドリーなインターフェースを提供します。PLY形式または圧縮されたSPZ形式でエクスポートできます。無料プランは非商用で、splatをエクスポートできないため、結果をPlayCanvasに取り込むには有料プランが必要です。Compute Capability 7.5以上のNVIDIA GPU（RTX 2060以降）が必要です。
+カメラトラッキングとsplatトレーニングの両方をデバイス上で行う商用デスクトップアプリケーションで、迅速な結果とユーザーフレンドリーなインターフェースを提供します。splatはPLY形式でエクスポートできます。無料プランは非商用で、splatをエクスポートできないため、結果をPlayCanvasに取り込むには有料プランが必要です。Compute Capability 7.5以上のNVIDIA GPU（RTX 2060以降）が必要です。
 
 [**LichtFeld Studio**](https://lichtfeld.io/) (Windows, Linux)  
-3D Gaussian Splatsをトレーニング、編集、レンダリングするためのオープンソースのデスクトップアプリケーションです。変形、クロップ、選択ツールを含む編集スイートを備えています。カメラポーズは自身では計算せず、既存のCOLMAPデータセットからトレーニングし、PLY、SOG、SPZ形式でエクスポートできます。[LichtFeld Studio向けSuperSplatプラグイン](https://github.com/playcanvas/supersplat-lichtfeld-plugin)を使うと、シーンをSuperSplatに直接公開できます。CUDA 12.8+搭載のNVIDIA GPUが必要です。
+3D Gaussian Splatsをトレーニング、編集、レンダリングするためのオープンソースのデスクトップアプリケーションです。変形、クロップ、選択ツールを含む編集スイートを備えています。カメラポーズは自身では計算せず、既存のCOLMAPデータセットからトレーニングし、PLYおよびSOG形式でエクスポートできます。[LichtFeld Studio向けSuperSplatプラグイン](https://github.com/playcanvas/supersplat-lichtfeld-plugin)を使うと、シーンをSuperSplatに直接公開できます。CUDA 12.8+搭載のNVIDIA GPUが必要です。
 
 [**Spirula Studio**](https://github.com/harry7557558/spirula-studio) (Windows, Linux, macOS)  
 写真や動画から学習済みのsplatまでを、1つの自己完結型バイナリで処理するオープンソースのデスクトップアプリケーションです。動画からのフレーム抽出、Structure-from-Motion、AIマスキングを内蔵しています。Vulkanを介してNVIDIA、AMD、Intel、Apple SiliconのGPUで動作するためCUDAは不要で、魚眼カメラや360°カメラにもネイティブ対応しています。既存のCOLMAP、Nerfstudio、Metashapeのデータセットからトレーニングすることもでき、PLY形式でエクスポートできます。

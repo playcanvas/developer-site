@@ -38,7 +38,7 @@ Choose the **PLY** format when you download a splat capture from Polycam.
 :::
 
 [**Scaniverse**](https://scaniverse.com/) (iOS, Android, Web)  
-Capture app from Niantic Spatial that trains Gaussian splats on the device itself, with unlimited on-device capture and processing on the free tier. Paid plans add cloud processing, including splats from 360° camera video. Exports PLY as well as the compressed [SPZ](../formats/spz.md) format, which PlayCanvas loads directly.
+Capture app from Niantic Spatial that trains Gaussian splats on the device itself, with unlimited on-device capture and processing on the free tier. Paid plans add cloud processing, including splats from 360° camera video. Exports splats as PLY.
 
 ## Medium/Pro Tools
 
@@ -48,10 +48,10 @@ These tools offer more control and customization than consumer capture apps whil
 Desktop application from Epic Games for camera alignment and sparse point cloud generation. It does not train splats itself, but its camera poses (exported in COLMAP format) are the foundation for splat training in tools like Postshot, LichtFeld Studio, and Brush. Alignment runs without a CUDA GPU; only RealityScan's meshing and texturing stages need a supported GPU.
 
 [**Postshot**](https://www.jawset.com/) (Windows)  
-Commercial desktop application that handles both camera tracking and splat training on-device, with quick results and a user-friendly interface. Exports PLY or the compressed SPZ format. The free plan is non-commercial and cannot export splats, so you need a paid plan to bring results into PlayCanvas. Requires an NVIDIA GPU with compute capability 7.5 or higher (RTX 2060 or newer).
+Commercial desktop application that handles both camera tracking and splat training on-device, with quick results and a user-friendly interface. Exports splats as PLY. The free plan is non-commercial and cannot export splats, so you need a paid plan to bring results into PlayCanvas. Requires an NVIDIA GPU with compute capability 7.5 or higher (RTX 2060 or newer).
 
 [**LichtFeld Studio**](https://lichtfeld.io/) (Windows, Linux)  
-Open-source desktop application to train, edit, and render 3D Gaussian Splats. Includes an editing suite with transform, crop, and selection tools. It trains from existing COLMAP datasets rather than computing camera poses itself, and exports PLY, SOG, and SPZ. The [SuperSplat plugin for LichtFeld Studio](https://github.com/playcanvas/supersplat-lichtfeld-plugin) publishes scenes straight to SuperSplat. Requires an NVIDIA GPU with CUDA 12.8+.
+Open-source desktop application to train, edit, and render 3D Gaussian Splats. Includes an editing suite with transform, crop, and selection tools. It trains from existing COLMAP datasets rather than computing camera poses itself, and exports PLY and SOG. The [SuperSplat plugin for LichtFeld Studio](https://github.com/playcanvas/supersplat-lichtfeld-plugin) publishes scenes straight to SuperSplat. Requires an NVIDIA GPU with CUDA 12.8+.
 
 [**Spirula Studio**](https://github.com/harry7557558/spirula-studio) (Windows, Linux, macOS)  
 Open source desktop application that goes from photos or video to a trained splat in one self-contained binary, with frame extraction, structure-from-motion, and AI masking built in. It runs on NVIDIA, AMD, Intel, and Apple Silicon GPUs via Vulkan, so it does not need CUDA, and handles fisheye and 360° cameras natively. It can also train from existing COLMAP, Nerfstudio, or Metashape datasets, and exports PLY.
