@@ -10,6 +10,7 @@ import {
 } from '@codemirror/language';
 import { closeBrackets, closeBracketsKeymap } from '@codemirror/autocomplete';
 import { html } from '@codemirror/lang-html';
+import { javascript } from '@codemirror/lang-javascript';
 import { tags } from '@lezer/highlight';
 
 import styles from './styles.module.css';
@@ -85,7 +86,7 @@ const buildTheme = dark => EditorView.theme({
  * via onViewReady, so the view is never re-created for resets, theme flips or
  * fullscreen toggles.
  */
-export default function Editor({ initialCode, dark, ariaLabel, onChange, onViewReady }) {
+export default function Editor({ initialCode, language = 'html', dark, ariaLabel, onChange, onViewReady }) {
     const hostRef = useRef(null);
     const viewRef = useRef(null);
     const onChangeRef = useRef(onChange);
@@ -109,7 +110,7 @@ export default function Editor({ initialCode, dark, ariaLabel, onChange, onViewR
                     closeBrackets(),
                     highlightActiveLine(),
                     keymap.of([...closeBracketsKeymap, ...defaultKeymap, ...historyKeymap, indentWithTab]),
-                    html(),
+                    language === 'js' ? javascript() : html(),
                     syntaxHighlighting(highlight),
                     themeCompartment.of(buildTheme(dark)),
                     EditorView.contentAttributes.of({ 'aria-label': ariaLabel }),
