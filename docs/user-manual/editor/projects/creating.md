@@ -14,13 +14,15 @@ Both are done from the [Project Dashboard](/user-manual/editor/projects/dashboar
 
 1. Open the Project Dashboard at [playcanvas.com/editor](https://playcanvas.com/editor).
 2. Select **New project** in the sidebar.
+
+   ![New Project Button](/img/user-manual/editor/projects/new-project-button.png)
+
 3. Pick a starter kit.
+
+   ![New Project Dialog](/img/user-manual/editor/projects/new-project-dialog.png)
+
 4. Set the name, description and owner, and choose whether the project is **Private**.
 5. Select **Create project**.
-
-![New Project Button](/img/user-manual/editor/projects/new-project-button.png)
-
-![New Project Dialog](/img/user-manual/editor/projects/new-project-dialog.png)
 
 <video autoPlay muted loop controls src='/video/editor-project-dashboard-new-project.mp4' style={{width: '100%', height: 'auto'}} />
 
@@ -59,12 +61,14 @@ Forking allows you to create a new project based on an existing public project (
 To fork a project from the [Project Dashboard](/user-manual/editor/projects/dashboard/):
 
 1. Select the **⋮** button on the project's card or row, then **Fork**.
+
+   ![Fork Project Button](/img/user-manual/editor/projects/fork-project-button.png)
+
 2. The fork dialog shows the project you are forking from, with its name and description filled in. Change them, and the owner, as needed.
+
+   ![Fork Project Dialog](/img/user-manual/editor/projects/project-dashboard-fork.png)
+
 3. Select **Fork project**.
-
-![Fork Project Button](/img/user-manual/editor/projects/fork-project-button.png)
-
-![Fork Project Dialog](/img/user-manual/editor/projects/project-dashboard-fork.png)
 
 <video autoPlay muted loop controls src='/video/editor-project-dashboard-fork.mp4' style={{width: '100%', height: 'auto'}} />
 

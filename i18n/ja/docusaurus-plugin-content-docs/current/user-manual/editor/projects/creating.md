@@ -14,13 +14,15 @@ Editorプロジェクトを作成するには、2つの方法があります。
 
 1. [playcanvas.com/editor](https://playcanvas.com/editor) でプロジェクトダッシュボードを開きます。
 2. サイドバーの **New project** を選択します。
+
+   ![New Project Button](/img/user-manual/editor/projects/new-project-button.png)
+
 3. スターターキットを選びます。
+
+   ![New Project Dialog](/img/user-manual/editor/projects/new-project-dialog.png)
+
 4. 名前、説明、所有者を設定し、プロジェクトを **Private** にするかを選びます。
 5. **Create project** を選択します。
-
-![New Project Button](/img/user-manual/editor/projects/new-project-button.png)
-
-![New Project Dialog](/img/user-manual/editor/projects/new-project-dialog.png)
 
 <video autoPlay muted loop controls src='/video/editor-project-dashboard-new-project.mp4' style={{width: '100%', height: 'auto'}} />
 
@@ -59,12 +61,14 @@ Editorプロジェクトを作成するには、2つの方法があります。
 [プロジェクトダッシュボード](/user-manual/editor/projects/dashboard/)からプロジェクトをフォークするには：
 
 1. プロジェクトのカードまたは行の **⋮** ボタンを選択し、**Fork** を選択します。
+
+   ![Fork Project Button](/img/user-manual/editor/projects/fork-project-button.png)
+
 2. フォークダイアログには、フォーク元のプロジェクトが名前と説明が入力済みの状態で表示されます。必要に応じて名前、説明、所有者を変更します。
+
+   ![Fork Project Dialog](/img/user-manual/editor/projects/project-dashboard-fork.png)
+
 3. **Fork project** を選択します。
-
-![Fork Project Button](/img/user-manual/editor/projects/fork-project-button.png)
-
-![Fork Project Dialog](/img/user-manual/editor/projects/project-dashboard-fork.png)
 
 <video autoPlay muted loop controls src='/video/editor-project-dashboard-fork.mp4' style={{width: '100%', height: 'auto'}} />
 
