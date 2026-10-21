@@ -51,7 +51,7 @@ The text element renders a string of text using a [font asset](/user-manual/edit
 | Color          | The color to tint the element. |
 | Opacity        | The transparency of the element, from 0 (fully transparent) to 1 (fully opaque). |
 | Rect           | Defines the area of the texture asset to display, specified as U, V, Width, Height in normalized coordinates. Only shown when using a Texture. |
-| Mask           | Switch Image Element into a mask. Masks do not render into the scene, but instead limit child elements to only be rendered where this element is rendered. |
+| Mask           | Switch Image Element into a mask. Masks do not render into the scene, but instead limit child elements to only be rendered where this element is rendered. The mask and its children must be on the same layer, or the children are not drawn (see [Masks and Layers](/user-manual/user-interface/masks/#masks-and-layers)). See [Masks](/user-manual/user-interface/masks/) for more information. |
 | Texture        | The texture asset to display. Either a Texture, Sprite, or Material can be assigned, but not multiple. |
 | Sprite         | The sprite asset to display. Either a Texture, Sprite, or Material can be assigned, but not multiple. |
 | Frame          | The sprite frame index to display. Only shown when a Sprite is assigned. |
