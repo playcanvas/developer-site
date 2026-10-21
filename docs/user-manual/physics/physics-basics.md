@@ -154,13 +154,13 @@ A few rules follow from the way the engine drives the simulation, and the rest o
 
 ## Pausing and Slow Motion {#pausing-and-slow-motion}
 
-The rigid body system's `timeScale` scales the time the simulation advances by each frame. It defaults to 1. Values below 1 run physics in slow motion and values above 1 speed it up. A value of 0 pauses it: bodies freeze in place and keep their velocities, kinematic bodies stop following their entities, and no collision or trigger events fire until it resumes. The rest of the application keeps running, so a pause menu stays interactive while the game world stands still.
+The rigid body system's `timeScale` scales the time the simulation advances by each frame. It defaults to 1. Values below 1 run physics in slow motion and values above 1 speed it up. A value of 0 pauses it: bodies freeze in place and keep their velocities, kinematic bodies stop following their entities, and no collision or trigger events fire until it resumes. The rest of the application, including scripts and animation, keeps running, which suits a pause menu that must stay interactive while physics stands still.
 
 <Tabs groupId="workflow" defaultValue="engine">
 <TabItem value="engine" label="Engine">
 
 ```javascript
-// Freeze the game world while the pause menu is open
+// Freeze physics while the pause menu is open
 app.systems.rigidbody.timeScale = 0;
 
 // Run physics at quarter speed for a slow motion effect
@@ -173,7 +173,7 @@ app.systems.rigidbody.timeScale = 0.25;
 There is no setting for it in the Editor. Set it from a script, where `this.app` is the application:
 
 ```javascript
-// Freeze the game world while the pause menu is open
+// Freeze physics while the pause menu is open
 this.app.systems.rigidbody.timeScale = 0;
 ```
 
@@ -194,7 +194,7 @@ function PhysicsTimeScale({ scale }) {
   return null;
 }
 
-// Freeze the game world while the pause menu is open
+// Freeze physics while the pause menu is open
 <PhysicsTimeScale scale={paused ? 0 : 1} />
 ```
 
@@ -219,9 +219,9 @@ document.querySelector('pc-app').physicsTimeScale = 0.25;
 
 The simulation still advances in fixed steps of 1/60 of a second. In slow motion a step runs only every few frames, and body transforms are interpolated in between, so motion stays smooth. Speeding up is limited by the number of steps the simulation can take in one frame: at 60 frames per second physics runs at most 10 times faster, and higher values run slower than requested.
 
-The physics time scale applies on top of the application's `timeScale`, which slows down or pauses scripts, animation and physics together. Use the application's to pause everything at once, and the rigid body system's to pause physics alone.
+The physics time scale applies on top of the application's `timeScale`, which scales the delta time that scripts, animation and physics all receive. Setting the application's to 0 stops everything that advances with time, while setting the rigid body system's to 0 stops physics alone.
 
-Scripts keep running while physics is paused, and forces applied with `applyForce` are only cleared when the simulation steps. A script that applies a force every frame therefore builds up a large push during the pause, which can be released all at once when physics resumes, so skip those calls while the time scale is 0. Impulses and velocity changes are applied straight away, and the body sets off with its new velocity when physics resumes.
+Neither one pauses your scripts. Their `update` methods keep running every frame, with a `dt` of 0 while the application's time scale is 0, so input handling, spawning and any other logic that is not multiplied by `dt` carries on. Give gameplay code its own pause check. That includes physics calls: impulses and velocity changes made during a pause are applied straight away, and the body sets off with its new velocity when time resumes. Forces applied with `applyForce` while the physics time scale is 0 are not cleared until the simulation steps again, so a script that applies a force every frame builds up a large push that can be released all at once when physics resumes.
 
 ## Stepping Manually {#stepping-manually}
 
