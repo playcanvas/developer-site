@@ -1,9 +1,9 @@
 ---
 title: プロジェクトホーム
-description: Editor のプロジェクトホームからプロジェクトと組織を検索、作成、フォーク、管理します。各プロジェクトは専用のタブで開きます。
+description: Editor のプロジェクトホームからプロジェクトと組織を検索、作成、フォーク、管理します。playcanvas.com のプロジェクトページの機能を Editor に取り込んだものです。
 ---
 
-[playcanvas.com/editor](https://playcanvas.com/editor) のプロジェクトホームでは、Editor を離れずにプロジェクトを検索、作成、管理できます。Editor 2.35 で導入されました。
+[playcanvas.com/editor](https://playcanvas.com/editor) のプロジェクトホームは、playcanvas.com のプロジェクトページにあったプロジェクト管理機能を Editor に取り込んだものです。プロジェクトの検索、作成、フォーク、譲渡、プロジェクト設定、Dev Log、チーム、組織の管理ができます。Editor 2.35 で導入されました。
 
 プロジェクトホームは専用のブラウザータブで動作し、その中でプロジェクトを開くことはありません。**Open editor** はそのプロジェクト専用のタブに切り替え、まだ開いていない場合にのみ新しく開きます。Editor のロゴメニューの **All Projects**、<kbd>Ctrl</kbd>/<kbd>Cmd</kbd> + <kbd>O</kbd>、ビューポートの **Projects** パンくずリストはプロジェクトホームに戻り、Editor はシーンをそのまま保持します。playcanvas.com の[プロジェクトダッシュボード](/user-manual/editor/projects/dashboard/)は、ロゴメニューの **Project Dashboard** から引き続き開けます。
 

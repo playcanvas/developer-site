@@ -1,9 +1,9 @@
 ---
 title: Projects Home
-description: Find, create, fork and manage projects and organizations from the Editor's projects home, where every project opens in its own tab.
+description: Find, create, fork and manage projects and organizations from the Editor's projects home, which brings the playcanvas.com projects page into the Editor.
 ---
 
-The projects home at [playcanvas.com/editor](https://playcanvas.com/editor) is where you find, create and manage your projects without leaving the Editor. It was introduced in Editor 2.35.
+The projects home at [playcanvas.com/editor](https://playcanvas.com/editor) brings the project management from the projects page on playcanvas.com into the Editor: finding, creating, forking and transferring projects, project settings, dev logs, teams and organizations. It was introduced in Editor 2.35.
 
 The projects home runs in its own browser tab and never opens a project inside itself. **Open editor** switches to the project's own tab, opening it only if it isn't already open. **All Projects** in the Editor's logo menu, <kbd>Ctrl</kbd>/<kbd>Cmd</kbd> + <kbd>O</kbd> and the **Projects** breadcrumb in the viewport switch back to the projects home, and the Editor keeps its scene. The [Project Dashboard](/user-manual/editor/projects/dashboard/) on playcanvas.com is still available from **Project Dashboard** in the logo menu.
 
