@@ -48,45 +48,65 @@ window.addEventListener('resize', () => app.resizeCanvas());
 app.start();
 
 // light the scene softly from all around
-app.scene.ambientLight = new pc.Color(0.2, 0.2, 0.2);
+app.scene.ambientLight = new pc.Color(0.3, 0.3, 0.35);
 
-// create a camera
+// create a camera looking down at the middle of the grid
 const camera = new pc.Entity('camera');
 camera.addComponent('camera', {
     clearColor: new pc.Color(0.12, 0.14, 0.17)
 });
-camera.setPosition(0, 0, 4);
+camera.setPosition(0, 7, 17);
+camera.lookAt(0, 0, 0);
 app.root.addChild(camera);
 
-// create a light
+// create a sun that casts shadows
 const light = new pc.Entity('light');
-light.addComponent('light');
+light.addComponent('light', {
+    castShadows: true,
+    shadowDistance: 40,
+    shadowBias: 0.2,
+    normalOffsetBias: 0.05
+});
 light.setEulerAngles(45, 30, 0);
 app.root.addChild(light);
 
-// create an orange material
-const material = new pc.StandardMaterial();
-material.diffuse = new pc.Color(1, 0.4, 0.1);
-material.update();
+// create a grid of boxes, shading from orange in the middle to purple at the edges
+const size = 10;
+const orange = new pc.Color(1, 0.4, 0.1);
+const purple = new pc.Color(0.4, 0.2, 1);
+const boxes = [];
+for (let x = -size; x <= size; x++) {
+    for (let z = -size; z <= size; z++) {
+        const material = new pc.StandardMaterial();
+        material.diffuse.lerp(orange, purple, Math.hypot(x, z) / (size * 1.5));
+        material.update();
 
-// create a box that renders with it
-const box = new pc.Entity('box');
-box.addComponent('render', {
-    type: 'box',
-    material: material
+        const box = new pc.Entity();
+        box.addComponent('render', { type: 'box', material: material });
+        box.setPosition(x, 0, z);
+        app.root.addChild(box);
+        boxes.push(box);
+    }
+}
+
+// every frame, ripple the boxes' heights out from the middle
+let time = 0;
+app.on('update', (dt) => {
+    time += dt;
+    for (const box of boxes) {
+        const { x, z } = box.getPosition();
+        const height = 2.2 + 2 * Math.sin(time * 3 - Math.hypot(x, z) * 0.5);
+        box.setLocalScale(0.9, height, 0.9);
+    }
 });
-app.root.addChild(box);
-
-// rotate the box a little every frame
-app.on('update', (dt) => box.rotate(10 * dt, 20 * dt, 30 * dt));
 ```
 
-[`createGraphicsDevice`](https://api.playcanvas.com/engine/functions/createGraphicsDevice.html) asks for WebGPU and falls back to WebGL 2 where the browser doesn't support it. [`AppBase`](https://api.playcanvas.com/engine/classes/AppBase.html) is the application: it runs the frame loop, but only the component systems you register, so a bundler can leave the others out of your build. Everything in the scene is an [entity](../ecs/entities.md) in a hierarchy under `app.root`, and components give each entity its abilities: this one is a camera, that one is a light, the third renders a box. The box's color comes from its [material](../graphics/physical-rendering/physical-materials.md). Every frame, the `update` event passes your code the time since the last one. Some things to try:
+The first lines are the same in every Engine app. [`createGraphicsDevice`](https://api.playcanvas.com/engine/functions/createGraphicsDevice.html) asks for WebGPU and falls back to WebGL 2 where the browser doesn't support it. [`AppBase`](https://api.playcanvas.com/engine/classes/AppBase.html) is the application: it runs the frame loop, but only the component systems you register, so a bundler can leave the others out of your build. Everything in the scene is an [entity](../ecs/entities.md) in a hierarchy under `app.root`, and components give each entity its abilities: here a camera, a sun that casts shadows, and 441 boxes, each rendered with its own [material](../graphics/physical-rendering/physical-materials.md). Every frame, the `update` event passes your code the time since the last one, which it uses to ripple the boxes. Some things to try:
 
-- Change the box's `type: 'box'` to `'sphere'`, `'cone'`, `'capsule'` or `'torus'`.
-- Recolor the box by changing the material's `diffuse`.
-- Paint the background by changing the camera's `clearColor`.
-- Add a second box: copy the box's lines, rename `box` to `box2` in the copy, and move it aside with `box2.setPosition(1.5, 0, 0)`. It stays still, because only the first box turns in `update`.
+- Speed the ripple up by raising the `3` in `time * 3`, or tighten its rings by raising the `0.5`.
+- Swap `orange` and `purple` for any two colors you like.
+- Grow the grid by changing `size` to `20`: that's 1,681 boxes.
+- Turn the boxes into columns with `type: 'cylinder'`.
 
 To build an app like this on your own machine, run `npm create playcanvas@latest` and pick the Engine format, or follow [Using the Engine Standalone](standalone.md) to set a project up by hand.
 

@@ -48,45 +48,65 @@ window.addEventListener('resize', () => app.resizeCanvas());
 app.start();
 
 // シーン全体をやわらかく照らします
-app.scene.ambientLight = new pc.Color(0.2, 0.2, 0.2);
+app.scene.ambientLight = new pc.Color(0.3, 0.3, 0.35);
 
-// カメラを作成します
+// グリッドの中央を見下ろすカメラを作成します
 const camera = new pc.Entity('camera');
 camera.addComponent('camera', {
     clearColor: new pc.Color(0.12, 0.14, 0.17)
 });
-camera.setPosition(0, 0, 4);
+camera.setPosition(0, 7, 17);
+camera.lookAt(0, 0, 0);
 app.root.addChild(camera);
 
-// ライトを作成します
+// 影を落とす太陽を作成します
 const light = new pc.Entity('light');
-light.addComponent('light');
+light.addComponent('light', {
+    castShadows: true,
+    shadowDistance: 40,
+    shadowBias: 0.2,
+    normalOffsetBias: 0.05
+});
 light.setEulerAngles(45, 30, 0);
 app.root.addChild(light);
 
-// オレンジ色のマテリアルを作成します
-const material = new pc.StandardMaterial();
-material.diffuse = new pc.Color(1, 0.4, 0.1);
-material.update();
+// 中央のオレンジから端の紫へと色が変わるボックスのグリッドを作成します
+const size = 10;
+const orange = new pc.Color(1, 0.4, 0.1);
+const purple = new pc.Color(0.4, 0.2, 1);
+const boxes = [];
+for (let x = -size; x <= size; x++) {
+    for (let z = -size; z <= size; z++) {
+        const material = new pc.StandardMaterial();
+        material.diffuse.lerp(orange, purple, Math.hypot(x, z) / (size * 1.5));
+        material.update();
 
-// そのマテリアルで描画するボックスを作成します
-const box = new pc.Entity('box');
-box.addComponent('render', {
-    type: 'box',
-    material: material
+        const box = new pc.Entity();
+        box.addComponent('render', { type: 'box', material: material });
+        box.setPosition(x, 0, z);
+        app.root.addChild(box);
+        boxes.push(box);
+    }
+}
+
+// 毎フレーム、ボックスの高さを中央から外側へ波打たせます
+let time = 0;
+app.on('update', (dt) => {
+    time += dt;
+    for (const box of boxes) {
+        const { x, z } = box.getPosition();
+        const height = 2.2 + 2 * Math.sin(time * 3 - Math.hypot(x, z) * 0.5);
+        box.setLocalScale(0.9, height, 0.9);
+    }
 });
-app.root.addChild(box);
-
-// 毎フレーム、ボックスを少しずつ回転させます
-app.on('update', (dt) => box.rotate(10 * dt, 20 * dt, 30 * dt));
 ```
 
-[`createGraphicsDevice`](https://api.playcanvas.com/engine/functions/createGraphicsDevice.html)はWebGPUを要求し、ブラウザが対応していない場合はWebGL 2にフォールバックします。[`AppBase`](https://api.playcanvas.com/engine/classes/AppBase.html)はアプリケーション本体で、フレームループを実行しますが、動かすのは登録したコンポーネントシステムだけなので、バンドラーはそれ以外をビルドから除外できます。シーン内のすべては`app.root`の下の階層に置かれた[エンティティ](../ecs/entities.md)で、コンポーネントが各エンティティに能力を与えます。ここでは、ひとつ目がカメラ、ふたつ目がライトになり、3つ目がボックスを描画します。ボックスの色は[マテリアル](../graphics/physical-rendering/physical-materials.md)で決まります。`update`イベントは毎フレーム、前のフレームからの経過時間をコードに渡します。次のような変更を試してみてください。
+最初の数行は、どのEngineアプリでも同じです。[`createGraphicsDevice`](https://api.playcanvas.com/engine/functions/createGraphicsDevice.html)はWebGPUを要求し、ブラウザが対応していない場合はWebGL 2にフォールバックします。[`AppBase`](https://api.playcanvas.com/engine/classes/AppBase.html)はアプリケーション本体で、フレームループを実行しますが、動かすのは登録したコンポーネントシステムだけなので、バンドラーはそれ以外をビルドから除外できます。シーン内のすべては`app.root`の下の階層に置かれた[エンティティ](../ecs/entities.md)で、コンポーネントが各エンティティに能力を与えます。ここでは、カメラ、影を落とす太陽、そしてそれぞれ専用の[マテリアル](../graphics/physical-rendering/physical-materials.md)で描画される441個のボックスです。`update`イベントは毎フレーム、前のフレームからの経過時間をコードに渡し、コードはそれを使ってボックスを波打たせます。次のような変更を試してみてください。
 
-- ボックスの`type: 'box'`を`'sphere'`、`'cone'`、`'capsule'`、`'torus'`に変える。
-- マテリアルの`diffuse`を変えて、ボックスの色を変える。
-- カメラの`clearColor`を変えて、背景の色を変える。
-- 2つ目のボックスを追加する。ボックスの行をコピーし、コピー内の`box`を`box2`に変えて、`box2.setPosition(1.5, 0, 0)`で横にずらします。`update`で回転するのは最初のボックスだけなので、コピーは静止したままです。
+- `time * 3`の`3`を大きくして波を速くする。`0.5`を大きくすると、波の輪の間隔が狭まります。
+- `orange`と`purple`を好きな2色に変える。
+- `size`を`20`に変えてグリッドを広げる。ボックスは1,681個になります。
+- `type: 'cylinder'`でボックスを円柱に変える。
 
 このようなアプリを自分のマシンで作るには、`npm create playcanvas@latest`を実行してEngine形式を選ぶか、[Engineをスタンドアロンで使用する](standalone.md)の手順に従ってプロジェクトを手動でセットアップしてください。
 
