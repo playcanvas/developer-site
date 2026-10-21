@@ -18,23 +18,19 @@ Regular backups protect against:
 
 The simplest way to create a backup is to fork your own project. Forking is [covered comprehensively](https://developer.playcanvas.com/user-manual/editor/projects/creating.md#fork-an-existing-project) earlier in this section.
 
-### 2. Exporting (via playcanvas.com)
+### 2. Exporting (from the Project Dashboard)
 
 Export files provide complete project backups that can be stored offline and imported later.
-
-#### From the Projects List
 
 [Image: Export Project]
 
 To export a project:
 
-1. Ensure you are logged in
-2. Visit the User Page that owns the project you wish to export
-3. Locate the project in the project list
-4. Click the down arrow next to the right of the project name
-5. Select **"Export Project"**
-6. Wait for the export to be generated
-7. Click **DOWNLOAD** to download the zip file
+1. Open the [Project Dashboard](https://developer.playcanvas.com/user-manual/editor/projects/dashboard.md) at [playcanvas.com/editor](https://playcanvas.com/editor)
+2. Open the project's **⋮** menu
+3. Select **Export**
+4. Wait while the dashboard shows **Exporting &lt;project name&gt;...** and builds the export
+5. The zip file downloads in a new tab when it is ready
 
 :::danger
 
@@ -87,11 +83,11 @@ PlayCanvas provides an [open-source Node.js tool](https://github.com/playcanvas/
 
 To restore a project from an export:
 
-1. Go to your [Projects Dashboard](https://playcanvas.com/projects)
-2. Click **"Import Project"** on the left side
-3. Select your export ZIP file
-4. Choose a name for the restored project
-5. Wait for the import to complete
+1. Open the [Project Dashboard](https://developer.playcanvas.com/user-manual/editor/projects/dashboard.md)
+2. Select **Import project** in the sidebar
+3. Choose your export `.zip` file
+4. Wait while the file uploads and the project is imported
+5. When the import is done, select **Open project**. If anything in the project had to be adjusted on import, such as materials, the dialog lists it
 
 #### Restore Considerations
 

@@ -20,20 +20,22 @@ Development logs are project-specific news posts that allow you to:
 
 Dev logs are displayed in two locations:
 
-- **Project Dashboard Overview**: Chronological list of posts related to your project
+- **The Dev log panel** in the project's settings on the [Project Dashboard](https://developer.playcanvas.com/user-manual/editor/projects/dashboard.md): Chronological list of posts related to your project
 - [**The Global Feed**](https://playcanvas.com/feed): Chronological list of all posts published by the entire community
 
 ## Writing Your First Dev Log
 
 To create a development log post:
 
-1. Navigate to your Project Dashboard
-2. Go to the **OVERVIEW** section
-3. In the center of the page, you will see the **DEV LOG FEED** section
-4. Click in the text box showing the text **What changes have you made today?**
-5. Add your title and content
-6. Click **PREVIEW** to see how your post will appear when it is published
-7. Click **POST** to finally share your update
+1. On the [Project Dashboard](https://developer.playcanvas.com/user-manual/editor/projects/dashboard.md), select the project's card to open its settings.
+2. Select **Dev log** in the panel on the left.
+3. Select **Write the first post**, or **New post** if the project already has posts.
+4. Enter a **Title** and the post itself. Markdown is supported.
+5. Select **Post**.
+
+[Video](https://developer.playcanvas.com/video/editor-project-dashboard-dev-log.mp4)
+
+The post appears in the list, rendered from its Markdown. Each of your posts has buttons to edit and delete it.
 
 :::important
 

@@ -12,7 +12,7 @@ Projects are the foundation for everything you create in the PlayCanvas Editor. 
 
 ### Working with Projects
 
-- **[Project Dashboard](https://developer.playcanvas.com/user-manual/editor/projects/dashboard.md)** - Understanding and navigating the project dashboard interface.
+- **[Project Dashboard](https://developer.playcanvas.com/user-manual/editor/projects/dashboard.md)** - Find, create, fork and manage projects and organizations at playcanvas.com/editor.
 - **[Project Settings](https://developer.playcanvas.com/user-manual/editor/projects/settings.md)** - Configure your project's name, description, privacy, and branding.
 - **[Team Management](https://developer.playcanvas.com/user-manual/editor/projects/team-management.md)** - Adding collaborators and managing permissions.
 - **[Development Logs](https://developer.playcanvas.com/user-manual/editor/projects/dev-logs.md)** - Using dev logs for project updates and team communication.
