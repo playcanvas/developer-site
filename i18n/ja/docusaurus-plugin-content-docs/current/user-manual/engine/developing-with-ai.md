@@ -31,7 +31,7 @@ PlayCanvas Engine アプリケーションは通常の JavaScript または Type
 npx skills add playcanvas/skills
 ```
 
-インストール後に新しいエージェント会話を開始すると、クライアントがSkillsを検出します。
+Claude Codeでは、代わりにAnthropic DirectoryからPlayCanvasプラグインをインストールすることもできます。クライアントごとに1つのインストール方法だけを使用してください。インストール後に新しいエージェント会話を開始すると、クライアントがSkillsを検出します。
 
 ## プロジェクトのコンテキストを提供する
 

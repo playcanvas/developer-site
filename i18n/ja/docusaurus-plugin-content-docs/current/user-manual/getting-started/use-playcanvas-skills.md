@@ -7,6 +7,12 @@ description: PlayCanvas固有のAIコーディングワークフローを使用�
 
 SkillsはPlayCanvas Engine、React、Web Componentsで構築されたコードベースのアプリケーションに対応しています。アプリケーション内では実行されず、ランタイム依存関係も追加しません。
 
+:::ai
+
+PlayCanvasはAnthropic Directoryに掲載されています。Claude Codeで`/plugin`を実行し、**Discover**を開いて`playcanvas`を検索します。
+
+:::
+
 ## 新しいプロジェクトを始める
 
 最も簡単な方法は[`create-playcanvas`](/user-manual/getting-started/start-with-create-playcanvas/)を使用することです。
@@ -25,7 +31,13 @@ npm create playcanvas@latest
 npx skills add playcanvas/skills
 ```
 
-検出されたすべてのクライアントにすべてのSkillをインストールするには`--all`を、ユーザーレベルでインストールするには`-g`を使用します。同じSkillsが重複して公開されないよう、クライアントごとに1つのインストール方法だけを使用してください。[PlayCanvas Skillsリポジトリ](https://github.com/playcanvas/skills#install)には、Claude Code、Codex、Cursor向けのネイティブプラグインのインストール方法も記載されています。
+検出されたすべてのクライアントにすべてのSkillをインストールするには`--all`を、ユーザーレベルでインストールするには`-g`を使用します。
+
+## Claude Codeプラグインをインストールする
+
+PlayCanvasは、Claude Code向けのAnthropic Directoryに掲載されています。Claude CodeまたはClaude DesktopのCodeタブで`/plugin`を実行し、**Discover**を開いて`playcanvas`を検索します。デスクトップアプリのCodeタブでは、インストール済みプラグインは**+ > Plugins**から利用できます。
+
+同じSkillsが重複して公開されないよう、クライアントごとに1つのインストール方法だけを使用してください。たとえば、Claude CodeにはAgent SkillsパッケージとClaude Codeプラグインの両方をインストールしないでください。[PlayCanvas Skillsリポジトリ](https://github.com/playcanvas/skills#native-plugins)には、Claude Code、Codex、Cursor向けのマーケットプレイスからのインストール方法も記載されています。
 
 Skillsをインストールまたは更新した後は、クライアントがメタデータを再読み込みできるよう、新しいエージェント会話を開始してください。
 
@@ -37,9 +49,10 @@ Skillsをインストールまたは更新した後は、クライアントが�
 | --- | --- |
 | アプリケーションのセットアップと規約 | `build-app`、`apply-conventions` |
 | 公式サンプルとEngine機能 | `find-examples`、`reuse-scripts` |
-| モデルの検査とアニメーション | `inspect-glb`、`calibrate-model`、`configure-animation` |
-| シーンとゲームプレイの構成 | `assemble-scene`、`manage-game-state` |
-| ビジュアルとインターフェースの仕上げ | `light-scene`、`add-effects`、`build-hud` |
+| アセット、モデル、アニメーション | `load-assets`、`inspect-glb`、`calibrate-model`、`configure-animation` |
+| シーンの構成と実行時の検査 | `assemble-scene`、`inspect-runtime` |
+| ライティングとエフェクト | `light-scene`、`bake-lighting`、`add-effects`、`override-shader-chunks` |
+| レンダリングの検証とパフォーマンス | `verify-pixels`、`reduce-draw-calls` |
 
 エージェントは現在のタスクに関連するSkillsのみを読み込みます。各Skillは、APIや実装を選択する前に、インストール済みパッケージの型宣言、Engineソース、スクリプト、公式サンプルのどれを確認するかを示します。
 
@@ -53,7 +66,7 @@ Engineに付属するカメラコントロールを再利用して、ブラウ�
 ```
 
 ```text
-このPlayCanvas Reactプロトタイプを、決定的なゲーム状態、状態駆動のHUD、プールされたエフェクト、
+このPlayCanvas Reactプロトタイプのドローコールを減らし、プールされたエフェクト、
 一貫したライティング、スクリーンショット検証を使用して仕上げてください。
 ```
 

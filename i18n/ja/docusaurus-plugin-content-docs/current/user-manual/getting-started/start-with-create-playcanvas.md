@@ -59,6 +59,10 @@ creatorでは、すべての形式で同じ12個の実行可能なスタータ�
 
 構築するアプリケーションに最も近いスターターを選び、まず変更せずに実行してから、アセットと動作を段階的に置き換えます。
 
+## Inspectorでデバッグする
+
+開発サーバーは、実行中のアプリケーション用に[Inspector](/user-manual/scripting/debugging/inspector/)を読み込みます。バッククォートキー（`` ` ``）で表示と非表示を切り替え、<kbd>F9</kbd>で一時停止し、<kbd>F10</kbd>で1フレームずつ進めます。Inspectorはプロダクションビルドには含まれません。
+
 ## プロンプトを省略する
 
 プロジェクト名、形式、スターターを指定すると、対話なしでプロジェクトを作成できます。
@@ -84,7 +88,7 @@ npm create playcanvas@latest my-viewer -- -f react -s model-viewer
 
 ## 含まれるPlayCanvas Skills
 
-新しいプロジェクトには、`.claude/skills/`と`.agents/skills/`に[PlayCanvas Skills](/user-manual/getting-started/use-playcanvas-skills/)が含まれます。対応するAIコーディングエージェントは、アプリケーションのセットアップ、アセット、シーン、アニメーション、ライティング、エフェクト、インターフェース、ゲーム状態に関するPlayCanvas固有のワークフローを利用できます。
+新しいプロジェクトには、`.claude/skills/`と`.agents/skills/`に[PlayCanvas Skills](/user-manual/getting-started/use-playcanvas-skills/)が含まれます。対応するAIコーディングエージェントは、アプリケーションのセットアップ、アセット、シーン、アニメーション、ライティング、エフェクト、レンダリングの検証、パフォーマンス、実行時の検査に関するPlayCanvas固有のワークフローを利用できます。
 
 プロジェクトでAIコーディングエージェントを使用しない場合、または別の方法でSkillsを管理する場合にのみ、`--no-skills`を指定してください。
 
