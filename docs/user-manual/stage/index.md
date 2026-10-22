@@ -66,6 +66,11 @@ Stage 0.1.0 is a prerelease. Expect rough edges and changes between versions, an
 Stage runs a small server on your machine. It proxies your app's dev server into a viewer in your browser and adds its tools to the page, while your agent talks to the same server through the Stage plugin.
 
 ```mermaid
+---
+config:
+  flowchart:
+    curve: step
+---
 flowchart LR
     you([You, in Stage]) -->|Apply or Send to Agent| agent([Coding agent])
     agent -->|writes the changes| source([Your source])
