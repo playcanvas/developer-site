@@ -1,5 +1,5 @@
 ---
-title: Getting Started
+title: Installation
 description: Install the PlayCanvas Stage plugin for Claude Code or Codex, then open a new scene or an existing PlayCanvas app in Stage.
 ---
 
@@ -15,7 +15,7 @@ Stage is a plugin for your coding agent. Install it once, then ask the agent to 
 - An app on PlayCanvas Engine 2.23 or later
 - Claude Code 2.1.275 or later, or Codex
 
-## Installation
+## Install the Plugin
 
 <Tabs defaultValue="claude" groupId='stage-agent'>
 <TabItem value="claude" label="Claude Code">

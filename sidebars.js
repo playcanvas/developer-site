@@ -52,6 +52,21 @@ const sidebars = {
       items: [
         'user-manual/getting-started/start-with-create-playcanvas',
         'user-manual/getting-started/use-playcanvas-skills',
+        {
+          type: 'category',
+          label: 'Use PlayCanvas Stage',
+          link: {
+            type: 'doc',
+            id: 'user-manual/stage/index',
+          },
+          items: [
+            'user-manual/stage/installation',
+            'user-manual/stage/editing',
+            'user-manual/stage/comments',
+            'user-manual/stage/viewer-tools',
+            'user-manual/stage/configuration',
+          ],
+        },
         'user-manual/getting-started/migrating-from-unity',
         'user-manual/getting-started/community',
         'user-manual/getting-started/open-source',
@@ -576,21 +591,6 @@ const sidebars = {
           ],
         },
         { type: 'link', label: 'Examples', key: 'web-components-examples', href: 'https://playcanvas.github.io/web-components/examples/' },
-      ],
-    },
-    {
-      type: 'category',
-      label: 'PlayCanvas Stage',
-      link: {
-        type: 'doc',
-        id: 'user-manual/stage/index',
-      },
-      items: [
-        'user-manual/stage/getting-started',
-        'user-manual/stage/editing',
-        'user-manual/stage/comments',
-        'user-manual/stage/viewer-tools',
-        'user-manual/stage/configuration',
       ],
     },
     {

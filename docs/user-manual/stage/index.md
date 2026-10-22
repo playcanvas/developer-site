@@ -10,7 +10,7 @@ import Link from '@docusaurus/Link';
 <video controls muted playsInline preload="metadata" poster="/img/user-manual/stage/stage.webp" src="/video/playcanvas-stage.mp4" style={{width: '100%', height: 'auto'}} />
 
 <div className="cta-buttons">
-    <Link className="button button--primary button--lg" to="/user-manual/stage/getting-started/">Get Started →</Link>
+    <Link className="button button--primary button--lg" to="/user-manual/stage/installation/">Get Started →</Link>
     <Link className="button button--secondary button--lg" to="https://github.com/playcanvas/stage">View on GitHub</Link>
 </div>
 
@@ -22,7 +22,7 @@ Stage 0.1.0 is a prerelease. Expect rough edges and changes between versions, an
 
 ## Your first stage in 5 minutes
 
-1. **Install.** Add the Stage plugin to Claude Code or Codex. See [Getting Started](getting-started.md#installation).
+1. **Install.** Add the Stage plugin to Claude Code or Codex. See [Installation](installation.md#install-the-plugin).
 2. **Ask.** Ask your agent for a scene ("build my desk in 3D at real scale"), or point it at an app you already have. Stage opens in your browser.
 3. **Pause and select.** Press <kbd>⌘</kbd>/<kbd>Ctrl</kbd>+<kbd>P</kbd> to pause the app, then click an entity. See [Editing Scenes](editing.md).
 4. **Move and Apply.** Drag the gizmo to move, rotate or scale it, then press **Apply**. The agent writes the edit into your source.
@@ -32,14 +32,14 @@ Stage 0.1.0 is a prerelease. Expect rough edges and changes between versions, an
 
 <div className="row path-cards">
   <div className="col col--6">
-    <Link className="card path-card" to="/user-manual/stage/getting-started/#start-from-a-new-scene">
+    <Link className="card path-card" to="/user-manual/stage/installation/#start-from-a-new-scene">
       <div className="card__header"><h3>✨ I'm starting from nothing</h3></div>
       <div className="card__body"><p>Ask for a scene and the agent scaffolds a PlayCanvas project, starts its dev server and opens it in Stage.</p></div>
       <div className="card__footer">Start from a new scene →</div>
     </Link>
   </div>
   <div className="col col--6">
-    <Link className="card path-card" to="/user-manual/stage/getting-started/#attach-an-existing-app">
+    <Link className="card path-card" to="/user-manual/stage/installation/#attach-an-existing-app">
       <div className="card__header"><h3>🔌 I have an app</h3></div>
       <div className="card__body"><p>Attach Stage to any running PlayCanvas app on Engine 2.23 or later, whatever it's built with. Its hot reload keeps working.</p></div>
       <div className="card__footer">Attach an existing app →</div>
