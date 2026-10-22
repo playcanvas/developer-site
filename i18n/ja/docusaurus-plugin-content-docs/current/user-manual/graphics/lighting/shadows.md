@@ -1,6 +1,6 @@
 ---
 title: シャドウ
-description: リアルタイムシャドウを有効化し、シャドウタイプ（PCF、VSM、PCSS）を選択し、カスケード、解像度、バイアスで品質を調整します。
+description: リアルタイムシャドウを有効化し、シャドウタイプ（PCF、VSM、PCSS）を選択し、カスケード、シャドウバウンズ、解像度、バイアスで品質を調整します。
 ---
 
 import Tabs from '@theme/Tabs';
@@ -105,7 +105,7 @@ Hierarchyでライトを選択し、その[Lightコンポーネント](/user-man
 
 ```javascript
 // SHADOW_PCF1_32F | SHADOW_PCF3_32F (default) | SHADOW_PCF5_32F
-entity.light.shadowType = pc.SHADOW_PCF5_32F;
+entity.light.shadowType = SHADOW_PCF5_32F;
 ```
 
 </TabItem>
@@ -153,11 +153,11 @@ VSM は Directional ライトと、クラスタードでない Spot ライトで
 <TabItem value="engine" label="Engine">
 
 ```javascript
-entity.light.shadowType = pc.SHADOW_VSM_16F;
+entity.light.shadowType = SHADOW_VSM_16F;
 
 // 任意の調整
 entity.light.vsmBlurSize = 11; // ブラーのカーネルサイズ、1-25
-entity.light.vsmBlurMode = pc.BLUR_GAUSSIAN; // または pc.BLUR_BOX（より低コスト）
+entity.light.vsmBlurMode = BLUR_GAUSSIAN; // または BLUR_BOX（より低コスト）
 entity.light.vsmBias = 0.0025; // シャドウアクネを軽減、0-1
 ```
 
@@ -212,7 +212,7 @@ PCSS は Directional ライトでのみ利用できます。
 <TabItem value="engine" label="Engine">
 
 ```javascript
-entity.light.shadowType = pc.SHADOW_PCSS_32F;
+entity.light.shadowType = SHADOW_PCSS_32F;
 
 // 任意の微調整
 entity.light.penumbraSize = 2; // ペナンブラの全体的なサイズ（柔らかさ）
@@ -283,6 +283,36 @@ PlayCanvasが使用するシャドウマッピング技術には有限の解像�
 
 個々のシャドウカスケードのカメラフラスタムのサブディビジョンの分布（`light.cascadeDistribution`）。0から1の値を指定できます。値0は線形分布を表し、値1は対数分布を表します。ビジュアル的には、値が高いほど、前景オブジェクトにシャドウマップ解像度がより多く割り当てられ、値が低いほど、遠くのオブジェクトに割り当てられます。
 
+### シャドウバウンズ {#shadow-bounds}
+
+デフォルトでは、Directional ライトはシャドウマップを各カメラのビューに合わせ、その解像度をカメラ前方の[シャドウ距離](#shadow-distance)全体に割り当てます。シャドウがシーンの一部でのみ必要な場合、たとえばライティングをベイクしたシーン内のキャラクターの周囲などでは、代わりにシャドウバウンズ（`light.shadowBounds`）を設定できます。これは、シャドウキャスターを囲むワールド空間のバウンディングボックスです。ライトは、ライトから見たバウンズに合わせた単一のシャドウマップをレンダリングするため、解像度のすべてがシャドウの必要な場所に使われます。シャドウマップはすべてのカメラに対して一度だけレンダリングされ、シャドウはカメラからの距離に制限されません。
+
+```javascript
+// 原点周辺の 10 x 4 x 10 の範囲にあるキャスターのシャドウ
+entity.light.shadowBounds = new BoundingBox(new Vec3(0, 2, 0), new Vec3(5, 2, 5));
+```
+
+バウンズで囲む必要があるのはシャドウキャスターだけで、レシーバーを含める必要はありません。シャドウはライトの方向に沿って落ちるため、キャラクターの下の地面のように、ライトの方向に沿ってバウンズより先にあるレシーバーには、バウンズ内のキャスターのシャドウが落ちます。ライトとバウンズの間にあるキャスターもシャドウを落とします。ライトから見てバウンズの横にあるキャスターや、ライトの方向に沿ってバウンズより先にあるキャスターは、シャドウを落としません。
+
+ライトはバウンズのコピーを保持するため、変更するにはバウンディングボックスを変更して再度設定します。たとえば、移動するキャラクターのシャドウを鮮明に保つには、毎フレームバウンズをキャラクターと一緒に移動します。
+
+```javascript
+const bounds = new BoundingBox(new Vec3(), new Vec3(1, 1.5, 1));
+
+app.on('update', () => {
+    bounds.center.copy(character.getPosition());
+    entity.light.shadowBounds = bounds;
+});
+```
+
+バウンズが設定されている間、ライトは `numCascades`、`shadowDistance`、`cascadeBlend`、`cascadeDistribution` を使用しません。各カメラに合わせたシャドウに戻すには、バウンズを `null` に設定します。シャドウは `light.shadowUpdateMode` の指定どおりに更新され、バウンズが変更されると再度レンダリングされます。そのため `SHADOWUPDATE_NONE` では、静的なキャスターのシャドウは一度だけレンダリングされ、バウンズが移動したときにのみ再度レンダリングされます。
+
+シャドウバウンズは Directional ライトでのみ利用でき、すべての[シャドウタイプ](#shadow-types)で動作します。Editor には設定項目がないため、スクリプトから設定してください。
+
+バウンズに合わせたシャドウとカメラに合わせたシャドウを比較する、エンジンのシャドウバウンズのサンプルで実際の動作を確認できます。
+
+<EngineExample id="lights-and-shadows/shadow-bounds" title="Shadow Bounds" />
+
 ### シャドウ強度 {#shadow-intensity}
 
 このライトによってキャストされる、1を完全な強度のシャドウ、0をシャドウのないものとするシャドウの強度（`light.shadowIntensity`）。
@@ -311,4 +341,5 @@ PlayCanvasが使用するシャドウマッピング技術には有限の解像�
 * シャドウマップの解像度を上げるとより鮮明な影を生成しますが、GPUはより多くのシャドウマップピクセルを埋める必要があり、フレームレートに影響を与える可能性があります。
 * [シャドウタイプ](#shadow-types)はコストに影響します。大きな PCF カーネル、VSM のブラー、特に PCSS（ピクセルごとに多数のサンプルを取得）は、ハードな単一サンプルのシャドウよりも GPU 負荷が高くなります。
 * Directional ライトでは、[シャドウカスケード](#shadow-cascades)を追加するごとに、シャドウキャスターが複数のシャドウマップにレンダリングされる場合があり、コストが増加します。
+* デフォルトでは、各カメラが自身のビューに合わせて Directional ライトのシャドウマップをレンダリングします。[シャドウバウンズ](#shadow-bounds)を設定したライトは、代わりにすべてのカメラに対して単一のシャドウマップをレンダリングします。
 * 影が環境の静的な部分から発生している場合は、[ライトマップ](/user-manual/graphics/lighting/lightmapping)を使用してテクスチャに影をbakeすることを検討してください。
