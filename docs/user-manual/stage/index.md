@@ -67,11 +67,9 @@ Stage runs a small server on your machine. It proxies your app's dev server into
 
 ```mermaid
 flowchart LR
-    you([You, in the viewer]) <--> stage([Stage server<br/>127.0.0.1])
-    agent([Coding agent]) <-->|Stage plugin| stage
-    stage <--> dev([Your app's dev server])
-    agent -->|writes edits| source([Your source])
-    source -->|hot reload| dev
+    you([You, in Stage]) -->|Apply or Send to Agent| agent([Coding agent])
+    agent -->|writes the changes| source([Your source])
+    source -.->|hot reload| you
 ```
 
 - **The viewer** shows your app with a toolbar above it, the comments sidebar and the [Inspector](viewer-tools.md#inspector).
