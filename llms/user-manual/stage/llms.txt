@@ -17,7 +17,12 @@ Use this index when a person works on an Engine app with a coding agent and want
 
 ## Guides
 
-- [PlayCanvas Stage](/user-manual/stage/): Installation, attaching an app, play and pause, gizmos, Apply, comments, devices, the Inspector, settings and limitations.
+- [PlayCanvas Stage](/user-manual/stage/): What Stage is, a quick start, and how the viewer, the Stage server, the agent and the app's dev server fit together.
+- [Getting Started](/user-manual/stage/getting-started/): Requirements, installing the plugin for Claude Code or Codex, starting from a new scene, attaching an existing app and opening the viewer.
+- [Editing Scenes](/user-manual/stage/editing/): Play and pause, the editor camera, selecting entities, the move, rotate and scale gizmos, and Apply and Discard.
+- [Comments](/user-manual/stage/comments/): Commenting on entities and areas, Send to Agent, thread statuses, withdrawing a request and session presence.
+- [Devices and Inspector](/user-manual/stage/viewer-tools/): Phone, tablet and Snapchat Web Lens viewports, the PlayCanvas Inspector and MiniStats.
+- [Configuration](/user-manual/stage/configuration/): Claude Code and Codex differences, environment settings, stopping the server, and data and network use.
 - [Developing with AI](/user-manual/engine/developing-with-ai/): Working on Engine apps with coding agents.
 
 ## Optional

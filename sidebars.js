@@ -579,9 +579,19 @@ const sidebars = {
       ],
     },
     {
-      type: 'doc',
-      id: 'user-manual/stage/index',
+      type: 'category',
       label: 'PlayCanvas Stage',
+      link: {
+        type: 'doc',
+        id: 'user-manual/stage/index',
+      },
+      items: [
+        'user-manual/stage/getting-started',
+        'user-manual/stage/editing',
+        'user-manual/stage/comments',
+        'user-manual/stage/viewer-tools',
+        'user-manual/stage/configuration',
+      ],
     },
     {
       type: 'category',
