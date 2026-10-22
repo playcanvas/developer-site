@@ -85,6 +85,7 @@ the evidence that the result works.
 
 Start with only the integrations needed for the task. Before adding a browser MCP server, check whether the selected desktop client's built-in browser or app preview already covers verification. Otherwise, choose one browser tool and add another only when it provides a missing capability.
 
+- **[PlayCanvas Stage](/user-manual/stage/):** Attach to the running app, then point at entities, move them with gizmos and comment on what you see, so the agent gets entity paths and captures instead of descriptions and writes your edits into the source.
 - **[Context7 MCP](https://github.com/upstash/context7):** Retrieve its indexed [PlayCanvas Engine documentation](https://context7.com/playcanvas/engine) when the client benefits from MCP-based lookup. Prefer the official AI-readable documentation above for authoritative content.
 - **[Playwright MCP](https://github.com/microsoft/playwright-mcp):** Launch and operate the application in a browser, exercise user flows, and capture screenshots.
 - **[Chrome DevTools MCP](https://github.com/ChromeDevTools/chrome-devtools-mcp):** Use instead of Playwright when console, network, or performance diagnosis is the main task.

@@ -474,3 +474,17 @@ html[data-theme='dark'] .navbar--github-link:before {
 .showcase-card code {
   white-space: nowrap;
 }
+
+/* Mermaid's dark theme sets edge labels on grey boxes; sit them on the page background instead */
+[data-theme='dark'] .docusaurus-mermaid-container {
+  .edgeLabel,
+  .edgeLabel p,
+  .labelBkg {
+    background-color: var(--ifm-background-color) !important;
+  }
+
+  .edgeLabel rect {
+    fill: var(--ifm-background-color) !important;
+    opacity: 1 !important;
+  }
+}
