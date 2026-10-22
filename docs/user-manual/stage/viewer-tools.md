@@ -30,4 +30,3 @@ The **Inspector** button in the header opens the [PlayCanvas Inspector](https://
 The **MiniStats** button shows the app's frame time, GPU and CPU timings, draw calls and memory over its canvas, at three sizes: compact, detailed, and with graphs. It stays on across reloads until you turn it off.
 
 <video autoPlay muted loop controls src='/video/stage-inspector-ministats.mp4' style={{width: '100%', height: 'auto'}} />
-
