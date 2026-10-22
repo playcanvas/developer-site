@@ -31,7 +31,7 @@ The clients have different plans and supported platforms. Use their official doc
 npx skills add playcanvas/skills
 ```
 
-Start a new agent conversation after installation so the client discovers the skills.
+For Claude Code, you can instead install the PlayCanvas plugin from the Anthropic Directory. Use one installation route per client. Start a new agent conversation after installation so the client discovers the skills.
 
 ## Provide Project Context
 

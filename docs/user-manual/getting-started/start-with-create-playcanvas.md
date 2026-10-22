@@ -59,6 +59,10 @@ The creator provides the same 12 runnable starters for every format:
 
 Choose the starter closest to the application you want to build, run it unchanged first, and then replace its assets and behavior incrementally.
 
+## Debug with the Inspector
+
+The development server loads the [Inspector](/user-manual/scripting/debugging/inspector/) for the running application. Press the backquote key (`` ` ``) to show or hide it, <kbd>F9</kbd> to pause, and <kbd>F10</kbd> to step one frame. Production builds do not include the Inspector.
+
 ## Skip the Prompts
 
 Pass a project name, format, and starter to create a project non-interactively:
@@ -84,7 +88,7 @@ npm create playcanvas@latest my-viewer -- -f react -s model-viewer
 
 ## Included PlayCanvas Skills
 
-New projects include [PlayCanvas Skills](/user-manual/getting-started/use-playcanvas-skills/) under `.claude/skills/` and `.agents/skills/`. Compatible AI coding agents can use them to follow PlayCanvas-specific workflows for application setup, assets, scenes, animation, lighting, effects, interfaces, and game state.
+New projects include [PlayCanvas Skills](/user-manual/getting-started/use-playcanvas-skills/) under `.claude/skills/` and `.agents/skills/`. Compatible AI coding agents can use them to follow PlayCanvas-specific workflows for application setup, assets, scenes, animation, lighting, effects, rendering verification, performance, and runtime inspection.
 
 Pass `--no-skills` only when the project does not use an AI coding agent or you manage the skills through another installation route.
 
