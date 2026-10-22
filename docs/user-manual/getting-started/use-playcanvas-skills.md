@@ -7,6 +7,12 @@ description: Use PlayCanvas-specific AI coding workflows to build and verify Eng
 
 The skills support code-based applications built with the PlayCanvas Engine, React, and Web Components. They do not run in the application or add a runtime dependency.
 
+:::ai
+
+PlayCanvas is listed in the Anthropic Directory. In Claude Code, run `/plugin`, open **Discover**, and search for `playcanvas`.
+
+:::
+
 ## Start a New Project
 
 The quickest way to start is with [`create-playcanvas`](/user-manual/getting-started/start-with-create-playcanvas/):

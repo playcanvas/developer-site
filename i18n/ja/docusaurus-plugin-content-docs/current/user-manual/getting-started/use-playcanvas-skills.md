@@ -7,6 +7,12 @@ description: PlayCanvas固有のAIコーディングワークフローを使用�
 
 SkillsはPlayCanvas Engine、React、Web Componentsで構築されたコードベースのアプリケーションに対応しています。アプリケーション内では実行されず、ランタイム依存関係も追加しません。
 
+:::ai
+
+PlayCanvasはAnthropic Directoryに掲載されています。Claude Codeで`/plugin`を実行し、**Discover**を開いて`playcanvas`を検索します。
+
+:::
+
 ## 新しいプロジェクトを始める
 
 最も簡単な方法は[`create-playcanvas`](/user-manual/getting-started/start-with-create-playcanvas/)を使用することです。
