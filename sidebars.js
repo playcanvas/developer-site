@@ -579,6 +579,11 @@ const sidebars = {
       ],
     },
     {
+      type: 'doc',
+      id: 'user-manual/stage/index',
+      label: 'PlayCanvas Stage',
+    },
+    {
       type: 'category',
       label: 'SuperSplat',
       link: {

@@ -29,6 +29,7 @@ This is the entry point for AI agents. Each product below has its own index: rea
 - [Web Components](/user-manual/web-components/llms.txt): `@playcanvas/web-components`, which builds scenes declaratively from HTML custom elements, with no build step required. Includes a reference for every tag and attribute.
 - [SuperSplat](/user-manual/supersplat/llms.txt): Turns a raw 3D Gaussian splat capture into a shareable scene: clean it in the browser-based SuperSplat Editor, publish it to superspl.at, curate it in Studio and embed it anywhere with the open-source viewer.
 - [SplatTransform](/user-manual/splat-transform/llms.txt): `@playcanvas/splat-transform`, a CLI and library that converts between splat formats, transforms, filters and merges splat data, generates streamed LODs and builds collision meshes.
+- [Stage](/user-manual/stage/llms.txt): A Claude Code and Codex plugin that shows a running Engine app in a local viewer, where the person points at entities, moves them with gizmos and comments, and the agent writes the changes into the source.
 - [PCUI](/user-manual/pcui/llms.txt): The UI component library behind the Editor, for building browser-based tools, with PCUI Graph for node-graph editors and Observer for data binding.
 
 ## Which product?

@@ -1,0 +1,25 @@
+---
+covers: [stage]
+---
+# PlayCanvas Stage
+
+> PlayCanvas Stage is a Claude Code and Codex plugin that attaches to a running PlayCanvas Engine app and shows it in a local viewer, where the person pauses it, selects entities, moves them with gizmos and comments on what they see. Applied edits and comments reach the agent as entity paths, 3D points and captures, and the agent writes the changes into the app's source.
+
+Use this index when a person works on an Engine app with a coding agent and wants to point at the scene instead of describing it. To build the app itself, see the [Engine](/user-manual/engine/llms.txt) index; to drive the hosted Editor, see the MCP server in the [Editor](/user-manual/editor/llms.txt) index.
+
+## Rules
+
+- **Install** with `claude plugin marketplace add playcanvas/stage` then `claude plugin install playcanvas-stage@stage`, or `codex plugin marketplace add playcanvas/stage` then `codex plugin add playcanvas-stage@stage`.
+- **It needs** Node.js 22.18 or later, Chrome or Chromium, and an app on PlayCanvas Engine 2.23 or later.
+- **Stage attaches to the app's own dev server** and never starts or stops it; an app that bundles the Engine into its own code needs one extra line, which the viewer shows.
+- **Edits stay out of the source until Apply**, which sends them to the agent to write into the source; Discard reverts them.
+- **Everything runs locally** on `127.0.0.1:47318`; Safari may not resolve the `*.localhost` stage origins.
+
+## Guides
+
+- [PlayCanvas Stage](/user-manual/stage/): Installation, attaching an app, play and pause, gizmos, Apply, comments, devices, the Inspector, settings and limitations.
+- [Developing with AI](/user-manual/engine/developing-with-ai/): Working on Engine apps with coding agents.
+
+## Optional
+
+{{OTHER_PAGES}}
