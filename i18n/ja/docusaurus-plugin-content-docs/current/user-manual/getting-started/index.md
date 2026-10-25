@@ -16,7 +16,11 @@ PlayCanvasは、インタラクティブでグラフィカルなウェブアプ�
 
 ## コードプロジェクトを始める
 
-[`create-playcanvas`](start-with-create-playcanvas)を使用すると、12個の実行可能なスターターからEngine、React、またはWeb Components用のViteとTypeScriptプロジェクトを作成できます。新しいプロジェクトには、対応するAIコーディングエージェントにPlayCanvas固有の開発と検証ワークフローを提供する[PlayCanvas Skills](use-playcanvas-skills)が含まれます。
+[`create-playcanvas`](start-with-create-playcanvas)を使用すると、実行可能なスターターからEngine、React、またはWeb Components用のViteとTypeScriptプロジェクトを作成できます。新しいプロジェクトには、対応するAIコーディングエージェントにPlayCanvas固有の開発と検証ワークフローを提供する[PlayCanvas Skills](use-playcanvas-skills)が含まれます。
+
+## Snapchatに公開する {#publish-to-snapchat}
+
+[Snapchat Web Lensを構築する](build-a-snapchat-web-lens)では、create-playcanvasのスターターまたはEditorから始めて、PlayCanvasのゲームをSnapchat向けに構築し、Web Lensとして公開する方法を説明します。
 
 ## Unityから移行する場合 {#coming-from-unity}
 

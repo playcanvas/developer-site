@@ -33,6 +33,8 @@ npm install
 npm run dev
 ```
 
+When you are ready to deploy, run `npm run build` to create a production build. Its URLs are relative, so it works from any folder on a server, not only from the root of a domain.
+
 ## Choose a Format
 
 Every format uses TypeScript and includes Vite, ESLint, Prettier, and a production build.
@@ -45,19 +47,21 @@ Every format uses TypeScript and includes Vite, ESLint, Prettier, and a producti
 
 ## Choose a Starter
 
-The creator provides the same 12 runnable starters for every format:
+The creator provides the same runnable starters for every format:
 
-![The twelve create-playcanvas starter scenes](/img/user-manual/getting-started/create-playcanvas-starters.webp)
+![The create-playcanvas starter scenes](/img/user-manual/getting-started/create-playcanvas-starters.webp)
 
 | Category | Starters |
 | --- | --- |
 | Basics | Spinning Cube, Interactive Sphere |
 | Viewers | Model Viewer, Splat Viewer, Product Configurator |
-| Games | Physics Playground, First-Person Controller, Third-Person Controller, Sprite Game |
+| Games | Physics Playground, First-Person Controller, Third-Person Controller, Sprite Game, Snapchat Web Lens |
 | Tools | Scene Editor |
 | XR | VR Starter, AR Placement |
 
 Choose the starter closest to the application you want to build, run it unchanged first, and then replace its assets and behavior incrementally.
+
+The Snapchat Web Lens starter is a portrait game set up to publish to Snapchat. See [Build a Snapchat Web Lens](/user-manual/getting-started/build-a-snapchat-web-lens/).
 
 ## Debug with the Inspector
 
@@ -70,6 +74,8 @@ Pass a project name, format, and starter to create a project non-interactively:
 ```sh
 npm create playcanvas@latest my-viewer -- -f react -s model-viewer
 ```
+
+When there is no terminal to answer the prompts, as when an AI coding agent or an automated build runs the command, the creator takes the defaults for any option you do not pass, as `--yes` does. It still stops with an error when a choice has no safe default, such as a non-empty target directory without `--overwrite`.
 
 | Option | Shorthand | Purpose |
 | --- | --- | --- |
@@ -97,3 +103,4 @@ Pass `--no-skills` only when the project does not use an AI coding agent or you 
 - For the direct Engine API, continue with [Using the Engine Standalone](/user-manual/engine/standalone/).
 - For React, continue with [Building a Scene](/user-manual/react/building-a-scene/).
 - For Web Components, continue with [Building a Scene](/user-manual/web-components/building-a-scene/).
+- To publish a game to Snapchat, see [Build a Snapchat Web Lens](/user-manual/getting-started/build-a-snapchat-web-lens/).
