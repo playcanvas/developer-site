@@ -130,7 +130,7 @@ Use this index for projects made in the Editor, where code lives in scripts atta
 - [Downloading Projects](/user-manual/editor/projects/downloading/): The static and npm package formats of downloaded projects.
 - [Communication with web pages](/user-manual/editor/publishing/web/communicating-webpage/): Messaging between an app and the page that hosts it.
 - [Playable Ads](/user-manual/editor/publishing/playable-ads/): Exporting playable ads for Facebook and Snapchat.
-- [Snapchat Web Lenses](/user-manual/publishing/snapchat-web-lenses/): Packaging a build to publish on Snapchat as a Web Lens, with the Web Lens API loaded before the engine.
+- [Snapchat Web Lenses](/user-manual/editor/publishing/snapchat-web-lenses/): Publishing a build on Snapchat as a Web Lens, with the Web Lens API loaded before the engine.
 
 ## API reference
 

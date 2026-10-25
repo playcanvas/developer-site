@@ -224,9 +224,7 @@ const config = {
           redirects.push(redirect);
         }
 
-        // The Editor's publishing pages used to live under /user-manual/publishing/. That index is
-        // now the Publishing section shared by every product, which links to the Editor's pages
-        if (existingPath.includes('/user-manual/editor/publishing/') && !existingPath.endsWith('/user-manual/editor/publishing/')) {
+        if (existingPath.includes('/user-manual/editor/publishing/')) {
           const redirect = existingPath.replace('/user-manual/editor/publishing/', '/user-manual/publishing/');
           redirects.push(redirect);
         }

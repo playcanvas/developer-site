@@ -11,4 +11,4 @@ description: Web ブラウザ、モバイルラッパー、デスクトップパ
 * [モバイル](/user-manual/editor/publishing/mobile)
 * [デスクトップ](/user-manual/editor/publishing/desktop)
 * [プレイアブル広告](/user-manual/editor/publishing/playable-ads)
-* [Snapchat Web Lens](/user-manual/publishing/snapchat-web-lenses)
+* [Snapchat Web Lens](/user-manual/editor/publishing/snapchat-web-lenses)

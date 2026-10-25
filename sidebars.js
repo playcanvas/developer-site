@@ -404,6 +404,7 @@ const sidebars = {
                 'user-manual/editor/publishing/playable-ads/snapchat-playable-ads',
               ],
             },
+            'user-manual/editor/publishing/snapchat-web-lenses',
           ],
         },
         'user-manual/editor/editor-api',
@@ -1232,18 +1233,6 @@ const sidebars = {
         'user-manual/optimization/load-time',
         'user-manual/optimization/optimizing-scene-format',
         'user-manual/optimization/troubleshooting-performance',
-      ],
-    },
-    {
-      type: 'category',
-      label: 'Publishing',
-      key: 'common-publishing',
-      link: {
-        type: 'doc',
-        id: 'user-manual/publishing/index',
-      },
-      items: [
-        'user-manual/publishing/snapchat-web-lenses',
       ],
     },
     sectionHeader('Foundational APIs'),

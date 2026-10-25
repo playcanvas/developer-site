@@ -11,4 +11,4 @@ Once you have built your game, you will no doubt want to publish it and allow pe
 * [Mobile](/user-manual/editor/publishing/mobile)
 * [Desktop](/user-manual/editor/publishing/desktop)
 * [Playable Ads](/user-manual/editor/publishing/playable-ads)
-* [Snapchat Web Lenses](/user-manual/publishing/snapchat-web-lenses)
+* [Snapchat Web Lenses](/user-manual/editor/publishing/snapchat-web-lenses)

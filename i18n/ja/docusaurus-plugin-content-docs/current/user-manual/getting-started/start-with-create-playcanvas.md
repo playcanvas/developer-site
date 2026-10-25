@@ -61,7 +61,27 @@ creatorでは、すべての形式で同じ実行可能なスターターを利�
 
 構築するアプリケーションに最も近いスターターを選び、まず変更せずに実行してから、アセットと動作を段階的に置き換えます。
 
-Snapchat Web Lensスターターは、Snapchatに公開できるように設定された縦向きのゲームです。[Snapchat Web Lens](/user-manual/publishing/snapchat-web-lenses/)を参照してください。
+## Snapchat Web Lensスターター {#snapchat-web-lens-starter}
+
+Snapchat Web Lensスターターは、Snapchatの中で[Web Lens](https://developers.snap.com/web-lenses/home)として動作するように設定された縦向きのゲームです。
+
+```sh
+npm create playcanvas@latest my-lens -- --starter web-lens
+```
+
+このスターターは、Snapの[プラットフォーム要件](https://developers.snap.com/web-lenses/requirements)に合わせて設定されています。ヘッドアップディスプレイ（HUD）をSnapchatのコントロールから離して配置する縦向きのレイアウト、ビルド内の相対URL、別のホストへのリクエストがないことです。また、[Web Lens API](https://developers.snap.com/web-lenses/web-lens-api)を通じて各プレイのスコアをリーダーボードに送信し、プレイヤーのベストスコアをSnapchatのストレージに保存し、プレイヤーのBitmojiを表示します。Snapchatの外では、APIが組み込みのスタブで応答するため、どのブラウザーでもゲームを実行できます。
+
+自分のゲームにするには、`src/dodge-game.ts`のゲームを置き換え、それ以外はそのまま残します。プロジェクトのREADMEに、置き換えるファイルと残すファイルが記載されています。
+
+ゲームの準備ができたら、パッケージ化します。
+
+```sh
+npm run package
+```
+
+このコマンドはゲームをビルドし、Snapのアップロードのルールに照らしてビルドを確認し、`dist/`にzipを書き出します。確認に失敗した場合は、修正するファイルを示し、zipは書き出しません。zipは、Snapの[Publishing](https://developers.snap.com/web-lenses/publishing)ガイドに従って[My Lenses](https://my-lenses.snapchat.com/)からアップロードします。
+
+EditorのプロジェクトをWeb Lensとして公開する場合は、[Snapchat Web Lens](/user-manual/editor/publishing/snapchat-web-lenses/)を参照してください。
 
 ## Inspectorでデバッグする
 
@@ -103,4 +123,3 @@ AIコーディングエージェントや自動ビルドがコマンドを実行
 - Engine APIを直接使用する場合は、[Engineをスタンドアロンで使用する](/user-manual/engine/standalone/)に進みます。
 - Reactの場合は、[シーンの構築](/user-manual/react/building-a-scene/)に進みます。
 - Web Componentsの場合は、[シーンの構築](/user-manual/web-components/building-a-scene/)に進みます。
-- ゲームをSnapchatに公開する場合は、[Snapchat Web Lens](/user-manual/publishing/snapchat-web-lenses/)を参照してください。

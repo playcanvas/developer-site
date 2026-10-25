@@ -61,7 +61,27 @@ The creator provides the same runnable starters for every format:
 
 Choose the starter closest to the application you want to build, run it unchanged first, and then replace its assets and behavior incrementally.
 
-The Snapchat Web Lens starter is a portrait game set up to publish to Snapchat. See [Snapchat Web Lenses](/user-manual/publishing/snapchat-web-lenses/).
+## Snapchat Web Lens Starter
+
+The Snapchat Web Lens starter is a portrait game set up to run inside Snapchat as a [Web Lens](https://developers.snap.com/web-lenses/home):
+
+```sh
+npm create playcanvas@latest my-lens -- --starter web-lens
+```
+
+It is set up for Snap's [platform requirements](https://developers.snap.com/web-lenses/requirements): a portrait layout that keeps the heads-up display (HUD) clear of Snapchat's controls, relative URLs in the build, and no requests to other hosts. Through the [Web Lens API](https://developers.snap.com/web-lenses/web-lens-api), it submits each run to the leaderboard, keeps the player's best score in Snapchat storage, and shows their Bitmoji. Outside Snapchat, the API answers from a built-in stub, so the game runs in any browser.
+
+To make it your own, replace the game in `src/dodge-game.ts` and keep the rest. The project's README lists which files to replace and which to keep.
+
+When your game is ready, package it:
+
+```sh
+npm run package
+```
+
+This builds the game, checks the build against Snap's upload rules, and writes a zip to `dist/`. If a check fails, it names the file to fix and writes no zip. Upload the zip through [My Lenses](https://my-lenses.snapchat.com/), following Snap's [Publishing](https://developers.snap.com/web-lenses/publishing) guide.
+
+To publish an Editor project as a Web Lens instead, see [Snapchat Web Lenses](/user-manual/editor/publishing/snapchat-web-lenses/).
 
 ## Debug with the Inspector
 
@@ -103,4 +123,3 @@ Pass `--no-skills` only when the project does not use an AI coding agent or you 
 - For the direct Engine API, continue with [Using the Engine Standalone](/user-manual/engine/standalone/).
 - For React, continue with [Building a Scene](/user-manual/react/building-a-scene/).
 - For Web Components, continue with [Building a Scene](/user-manual/web-components/building-a-scene/).
-- To publish a game to Snapchat, see [Snapchat Web Lenses](/user-manual/publishing/snapchat-web-lenses/).
