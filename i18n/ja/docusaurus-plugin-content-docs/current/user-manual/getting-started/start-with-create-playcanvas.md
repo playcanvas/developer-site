@@ -33,6 +33,8 @@ npm install
 npm run dev
 ```
 
+デプロイの準備ができたら、`npm run build`を実行してプロダクションビルドを作成します。URLは相対パスなので、ドメインのルートだけでなく、サーバー上のどのフォルダーからでも動作します。
+
 ## 形式を選択する
 
 すべての形式でTypeScriptを使用し、Vite、ESLint、Prettier、プロダクションビルドが含まれます。
@@ -45,19 +47,41 @@ npm run dev
 
 ## スターターを選択する
 
-creatorでは、すべての形式で同じ12個の実行可能なスターターを利用できます。
+creatorでは、すべての形式で同じ実行可能なスターターを利用できます。
 
-![create-playcanvasの12個のスターターシーン](/img/user-manual/getting-started/create-playcanvas-starters.webp)
+![create-playcanvasのスターターシーン](/img/user-manual/getting-started/create-playcanvas-starters.webp)
 
 | カテゴリ | スターター |
 | --- | --- |
 | 基本 | Spinning Cube、Interactive Sphere |
 | ビューアー | Model Viewer、Splat Viewer、Product Configurator |
-| ゲーム | Physics Playground、First-Person Controller、Third-Person Controller、Sprite Game |
+| ゲーム | Physics Playground、First-Person Controller、Third-Person Controller、Sprite Game、Snapchat Web Lens |
 | ツール | Scene Editor |
 | XR | VR Starter、AR Placement |
 
 構築するアプリケーションに最も近いスターターを選び、まず変更せずに実行してから、アセットと動作を段階的に置き換えます。
+
+## Snapchat Web Lensスターター {#snapchat-web-lens-starter}
+
+Snapchat Web Lensスターターは、Snapchatの中で[Web Lens](https://developers.snap.com/web-lenses/home)として動作するように設定された縦向きのゲームです。
+
+```sh
+npm create playcanvas@latest my-lens -- --starter web-lens
+```
+
+このスターターは、Snapの[プラットフォーム要件](https://developers.snap.com/web-lenses/requirements)に合わせて設定されています。ヘッドアップディスプレイ（HUD）をSnapchatのコントロールから離して配置する縦向きのレイアウト、ビルド内の相対URL、別のホストへのリクエストがないことです。また、[Web Lens API](https://developers.snap.com/web-lenses/web-lens-api)を通じて各プレイのスコアをリーダーボードに送信し、プレイヤーのベストスコアをSnapchatのストレージに保存し、プレイヤーのBitmojiを表示します。Snapchatの外では、APIが組み込みのスタブで応答するため、どのブラウザーでもゲームを実行できます。
+
+自分のゲームにするには、`src/dodge-game.ts`のゲームを置き換え、それ以外はそのまま残します。プロジェクトのREADMEに、置き換えるファイルと残すファイルが記載されています。
+
+ゲームの準備ができたら、パッケージ化します。
+
+```sh
+npm run package
+```
+
+このコマンドはゲームをビルドし、Snapのアップロードのルールに照らしてビルドを確認し、`dist/`にzipを書き出します。確認に失敗した場合は、修正するファイルを示し、zipは書き出しません。zipは、Snapの[Publishing](https://developers.snap.com/web-lenses/publishing)ガイドに従って[My Lenses](https://my-lenses.snapchat.com/)からアップロードします。
+
+EditorのプロジェクトをWeb Lensとして公開する場合は、[Snapchat Web Lens](/user-manual/editor/publishing/snapchat-web-lenses/)を参照してください。
 
 ## Inspectorでデバッグする
 
@@ -70,6 +94,8 @@ creatorでは、すべての形式で同じ12個の実行可能なスタータ�
 ```sh
 npm create playcanvas@latest my-viewer -- -f react -s model-viewer
 ```
+
+AIコーディングエージェントや自動ビルドがコマンドを実行する場合のように、プロンプトに答えるターミナルがないときは、`--yes`と同様に、指定しなかったオプションにはデフォルトを使用します。ただし、`--overwrite`を指定せずに空でないターゲットディレクトリを選んだ場合など、安全なデフォルトがない選択ではエラーで停止します。
 
 | オプション | 短縮形 | 用途 |
 | --- | --- | --- |

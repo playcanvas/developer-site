@@ -1,6 +1,6 @@
 ---
 title: プロジェクトの公開方法
-description: Web ブラウザ、モバイルラッパー、デスクトップパッケージング、プレイアブル広告ネットワークにわたる PlayCanvas の公開パスを一覧します。
+description: Web ブラウザ、モバイルラッパー、デスクトップパッケージング、プレイアブル広告ネットワーク、Snapchat Web Lens にわたる PlayCanvas の公開パスを一覧します。
 ---
 
 ゲームの構築が完了したら、それを公開して皆にプレイしてもらいましょう！PlayCanvasでは、如何なるOSやappストアを容易にターゲットできます。
@@ -11,3 +11,4 @@ description: Web ブラウザ、モバイルラッパー、デスクトップパ
 * [モバイル](/user-manual/editor/publishing/mobile)
 * [デスクトップ](/user-manual/editor/publishing/desktop)
 * [プレイアブル広告](/user-manual/editor/publishing/playable-ads)
+* [Snapchat Web Lens](/user-manual/editor/publishing/snapchat-web-lenses)

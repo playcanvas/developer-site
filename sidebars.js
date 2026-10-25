@@ -404,6 +404,7 @@ const sidebars = {
                 'user-manual/editor/publishing/playable-ads/snapchat-playable-ads',
               ],
             },
+            'user-manual/editor/publishing/snapchat-web-lenses',
           ],
         },
         'user-manual/editor/editor-api',

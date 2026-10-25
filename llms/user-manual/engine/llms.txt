@@ -29,6 +29,7 @@ Use this index to write code against the engine directly. React, Web Components 
 
 - [Using the Engine Standalone](/user-manual/engine/standalone/): Setting up an `AppBase` project with Vite and npm, or without a build step using an import map and the CDN build, and registering the component systems and resource handlers it uses.
 - [Start with create-playcanvas](/user-manual/getting-started/start-with-create-playcanvas/): `npm create playcanvas@latest my-app -- -f engine` creates a runnable Vite and TypeScript project, with PlayCanvas Skills for coding agents.
+- [Snapchat Web Lens starter](/user-manual/getting-started/start-with-create-playcanvas/#snapchat-web-lens-starter): A portrait game set up for Snapchat Web Lenses, with the Web Lens API wired up and `npm run package` to check and zip the build.
 - [Developing with AI](/user-manual/engine/developing-with-ai/): Setting up a coding agent on an Engine project and verifying its changes in a browser.
 - [Engine Migrations](/user-manual/engine/migrations/): The breaking changes of each major release. Read it before using an API you remember from Engine 1.
 - [Supported Browsers](/user-manual/engine/supported-browsers/): Minimum browser versions for WebGL2 and WebGPU.
