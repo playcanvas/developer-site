@@ -13,7 +13,7 @@ PlayCanvas is a collection of open-source products that you can use to build int
 
 ## Start a Code Project
 
-Use [`create-playcanvas`](https://developer.playcanvas.com/user-manual/getting-started/start-with-create-playcanvas.md) to scaffold a Vite and TypeScript project for the Engine, React, or Web Components from one of 12 runnable starters. New projects include [PlayCanvas Skills](https://developer.playcanvas.com/user-manual/getting-started/use-playcanvas-skills.md), which give compatible AI coding agents PlayCanvas-specific development and verification workflows.
+Use [`create-playcanvas`](https://developer.playcanvas.com/user-manual/getting-started/start-with-create-playcanvas.md) to scaffold a Vite and TypeScript project for the Engine, React, or Web Components from one of its runnable starters. New projects include [PlayCanvas Skills](https://developer.playcanvas.com/user-manual/getting-started/use-playcanvas-skills.md), which give compatible AI coding agents PlayCanvas-specific development and verification workflows.
 
 ## Coming from Unity
 

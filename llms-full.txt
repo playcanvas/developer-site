@@ -3,8 +3,8 @@
 > The complete text of the PlayCanvas User Manual in one file, for indexing, or for downloading and searching.
 
 Index: https://developer.playcanvas.com/llms.txt
-Total Documents: 530
-Generated: 2026-10-22
+Total Documents: 531
+Generated: 2026-10-25
 
 ================================================================================
 
@@ -39,7 +39,7 @@ PlayCanvas is a collection of open-source products that you can use to build int
 
 ## Start a Code Project
 
-Use [`create-playcanvas`](https://developer.playcanvas.com/user-manual/getting-started/start-with-create-playcanvas.md) to scaffold a Vite and TypeScript project for the Engine, React, or Web Components from one of 12 runnable starters. New projects include [PlayCanvas Skills](https://developer.playcanvas.com/user-manual/getting-started/use-playcanvas-skills.md), which give compatible AI coding agents PlayCanvas-specific development and verification workflows.
+Use [`create-playcanvas`](https://developer.playcanvas.com/user-manual/getting-started/start-with-create-playcanvas.md) to scaffold a Vite and TypeScript project for the Engine, React, or Web Components from one of its runnable starters. New projects include [PlayCanvas Skills](https://developer.playcanvas.com/user-manual/getting-started/use-playcanvas-skills.md), which give compatible AI coding agents PlayCanvas-specific development and verification workflows.
 
 ## Coming from Unity
 
@@ -120,6 +120,8 @@ npm install
 npm run dev
 ```
 
+When you are ready to deploy, run `npm run build` to create a production build. Its URLs are relative, so it works from any folder on a server, not only from the root of a domain.
+
 ## Choose a Format
 
 Every format uses TypeScript and includes Vite, ESLint, Prettier, and a production build.
@@ -132,19 +134,41 @@ Every format uses TypeScript and includes Vite, ESLint, Prettier, and a producti
 
 ## Choose a Starter
 
-The creator provides the same 12 runnable starters for every format:
+The creator provides the same runnable starters for every format:
 
-[Image: The twelve create-playcanvas starter scenes]
+[Image: The create-playcanvas starter scenes]
 
 | Category | Starters |
 | --- | --- |
 | Basics | Spinning Cube, Interactive Sphere |
 | Viewers | Model Viewer, Splat Viewer, Product Configurator |
-| Games | Physics Playground, First-Person Controller, Third-Person Controller, Sprite Game |
+| Games | Physics Playground, First-Person Controller, Third-Person Controller, Sprite Game, Snapchat Web Lens |
 | Tools | Scene Editor |
 | XR | VR Starter, AR Placement |
 
 Choose the starter closest to the application you want to build, run it unchanged first, and then replace its assets and behavior incrementally.
+
+## Snapchat Web Lens Starter
+
+The Snapchat Web Lens starter is a portrait game set up to run inside Snapchat as a [Web Lens](https://developers.snap.com/web-lenses/home):
+
+```sh
+npm create playcanvas@latest my-lens -- --starter web-lens
+```
+
+It is set up for Snap's [platform requirements](https://developers.snap.com/web-lenses/requirements): a portrait layout that keeps the heads-up display (HUD) clear of Snapchat's controls, relative URLs in the build, and no requests to other hosts. Through the [Web Lens API](https://developers.snap.com/web-lenses/web-lens-api), it submits each run to the leaderboard, keeps the player's best score in Snapchat storage, and shows their Bitmoji. Outside Snapchat, the API answers from a built-in stub, so the game runs in any browser.
+
+To make it your own, replace the game in `src/dodge-game.ts` and keep the rest. The project's README lists which files to replace and which to keep.
+
+When your game is ready, package it:
+
+```sh
+npm run package
+```
+
+This builds the game, checks the build against Snap's upload rules, and writes a zip to `dist/`. If a check fails, it names the file to fix and writes no zip. Upload the zip through [My Lenses](https://my-lenses.snapchat.com/), following Snap's [Publishing](https://developers.snap.com/web-lenses/publishing) guide.
+
+To publish an Editor project as a Web Lens instead, see [Snapchat Web Lenses](https://developer.playcanvas.com/user-manual/editor/publishing/snapchat-web-lenses.md).
 
 ## Debug with the Inspector
 
@@ -157,6 +181,8 @@ Pass a project name, format, and starter to create a project non-interactively:
 ```sh
 npm create playcanvas@latest my-viewer -- -f react -s model-viewer
 ```
+
+When there is no terminal to answer the prompts, as when an AI coding agent or an automated build runs the command, the creator takes the defaults for any option you do not pass, as `--yes` does. It still stops with an error when a choice has no safe default, such as a non-empty target directory without `--overwrite`.
 
 | Option | Shorthand | Purpose |
 | --- | --- | --- |
@@ -9500,6 +9526,7 @@ Once you have built your game, you will no doubt want to publish it and allow pe
 * [Mobile](https://developer.playcanvas.com/user-manual/editor/publishing/mobile.md)
 * [Desktop](https://developer.playcanvas.com/user-manual/editor/publishing/desktop.md)
 * [Playable Ads](https://developer.playcanvas.com/user-manual/editor/publishing/playable-ads.md)
+* [Snapchat Web Lenses](https://developer.playcanvas.com/user-manual/editor/publishing/snapchat-web-lenses.md)
 
 --------------------------------------------------------------------------------
 
@@ -10446,6 +10473,37 @@ When the ad is ready to be uploaded for Snapchat, we need to add Snapchat's CDN 
 ```
 
 The ZIP can then be given to your Snapchat representative to upload to the ad network.
+
+--------------------------------------------------------------------------------
+
+## Snapchat Web Lenses
+
+URL: https://developer.playcanvas.com/user-manual/editor/publishing/snapchat-web-lenses/
+Markdown: https://developer.playcanvas.com/user-manual/editor/publishing/snapchat-web-lenses.md
+
+A [Snapchat Web Lens](https://developers.snap.com/web-lenses/home) is a web app that runs inside Snapchat as a Lens, full screen and in portrait, on iOS and Android. This page explains how to publish an Editor project as one. For a code project, start from the [Snapchat Web Lens starter](https://developer.playcanvas.com/user-manual/getting-started/start-with-create-playcanvas.md#snapchat-web-lens-starter) instead.
+
+Before you publish, check your game against Snap's [Platform requirements](https://developers.snap.com/web-lenses/requirements) and [Capabilities and restrictions](https://developers.snap.com/web-lenses/capabilities). In particular, a Lens runs in portrait and can load files only from its own zip, so your project must not load anything from another host.
+
+## Add the Web Lens API
+
+The [Web Lens API](https://developers.snap.com/web-lenses/web-lens-api) gives your game leaderboards, the player's Bitmoji, and storage that lasts between launches. To add it to your project:
+
+1. Download `snap-api.js` from the `dist` folder of the [`@snap/web-lens-api`](https://www.npmjs.com/package/@snap/web-lens-api) package.
+2. Upload it to your project as a script asset.
+3. In the asset's Inspector, set **Loading Type** to **Before Engine**.
+
+The script installs the API as `window.snapchat`, so your scripts can call `snapchat.init()` at startup and check `snapchat.isSupported()` before using each capability. The API must ship inside your zip, so do not add it under **Settings > External Scripts**. Outside Snapchat, including on the Launch page, the API answers from a built-in stub with canned data.
+
+## Download and Zip the Build
+
+1. [Download a build](https://developer.playcanvas.com/user-manual/editor/publishing/web/self-hosting.md) of your project from the **Publish** dialog.
+2. Zip the *contents* of the build folder, so that `index.html` sits at the root of the zip rather than inside a folder. On Windows, avoid PowerShell's `Compress-Archive`, which writes backslashes into the zip that break relative paths.
+3. Check the zip with `unzip -l`. It must be no more than 8 MB, and `index.html` no more than 1 MB.
+
+## Upload to Snapchat
+
+Sign in to [My Lenses](https://my-lenses.snapchat.com/), create a new Lens, choose the Web Lens option, and upload your zip. Snap's [Publishing](https://developers.snap.com/web-lenses/publishing) guide covers the details you add, such as the icon and the preview video, and the review process.
 
 --------------------------------------------------------------------------------
 

@@ -127,6 +127,7 @@ Use this index for projects made in the Editor, where code lives in scripts atta
 - [Downloading Projects](https://developer.playcanvas.com/user-manual/editor/projects/downloading.md): The static and npm package formats of downloaded projects.
 - [Communication with web pages](https://developer.playcanvas.com/user-manual/editor/publishing/web/communicating-webpage.md): Messaging between an app and the page that hosts it.
 - [Playable Ads](https://developer.playcanvas.com/user-manual/editor/publishing/playable-ads.md): Exporting playable ads for Facebook and Snapchat.
+- [Snapchat Web Lenses](https://developer.playcanvas.com/user-manual/editor/publishing/snapchat-web-lenses.md): Publishing a build on Snapchat as a Web Lens, with the Web Lens API loaded before the engine.
 
 ## API reference
 
@@ -135,7 +136,7 @@ Use this index for projects made in the Editor, where code lives in scripts atta
 
 ## Optional
 
-- [All pages of this index in one file](https://developer.playcanvas.com/user-manual/editor/llms-full.txt): 150 pages (534 KB), for downloading and searching rather than reading into context.
+- [All pages of this index in one file](https://developer.playcanvas.com/user-manual/editor/llms-full.txt): 151 pages (537 KB), for downloading and searching rather than reading into context.
 - [Getting Started](https://developer.playcanvas.com/user-manual/editor/getting-started.md)
 - [Projects](https://developer.playcanvas.com/user-manual/editor/projects.md)
 - [Creating Projects](https://developer.playcanvas.com/user-manual/editor/projects/creating.md)

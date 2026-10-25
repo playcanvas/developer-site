@@ -30,6 +30,8 @@ npm install
 npm run dev
 ```
 
+When you are ready to deploy, run `npm run build` to create a production build. Its URLs are relative, so it works from any folder on a server, not only from the root of a domain.
+
 ## Choose a Format
 
 Every format uses TypeScript and includes Vite, ESLint, Prettier, and a production build.
@@ -42,19 +44,41 @@ Every format uses TypeScript and includes Vite, ESLint, Prettier, and a producti
 
 ## Choose a Starter
 
-The creator provides the same 12 runnable starters for every format:
+The creator provides the same runnable starters for every format:
 
-[Image: The twelve create-playcanvas starter scenes]
+[Image: The create-playcanvas starter scenes]
 
 | Category | Starters |
 | --- | --- |
 | Basics | Spinning Cube, Interactive Sphere |
 | Viewers | Model Viewer, Splat Viewer, Product Configurator |
-| Games | Physics Playground, First-Person Controller, Third-Person Controller, Sprite Game |
+| Games | Physics Playground, First-Person Controller, Third-Person Controller, Sprite Game, Snapchat Web Lens |
 | Tools | Scene Editor |
 | XR | VR Starter, AR Placement |
 
 Choose the starter closest to the application you want to build, run it unchanged first, and then replace its assets and behavior incrementally.
+
+## Snapchat Web Lens Starter
+
+The Snapchat Web Lens starter is a portrait game set up to run inside Snapchat as a [Web Lens](https://developers.snap.com/web-lenses/home):
+
+```sh
+npm create playcanvas@latest my-lens -- --starter web-lens
+```
+
+It is set up for Snap's [platform requirements](https://developers.snap.com/web-lenses/requirements): a portrait layout that keeps the heads-up display (HUD) clear of Snapchat's controls, relative URLs in the build, and no requests to other hosts. Through the [Web Lens API](https://developers.snap.com/web-lenses/web-lens-api), it submits each run to the leaderboard, keeps the player's best score in Snapchat storage, and shows their Bitmoji. Outside Snapchat, the API answers from a built-in stub, so the game runs in any browser.
+
+To make it your own, replace the game in `src/dodge-game.ts` and keep the rest. The project's README lists which files to replace and which to keep.
+
+When your game is ready, package it:
+
+```sh
+npm run package
+```
+
+This builds the game, checks the build against Snap's upload rules, and writes a zip to `dist/`. If a check fails, it names the file to fix and writes no zip. Upload the zip through [My Lenses](https://my-lenses.snapchat.com/), following Snap's [Publishing](https://developers.snap.com/web-lenses/publishing) guide.
+
+To publish an Editor project as a Web Lens instead, see [Snapchat Web Lenses](https://developer.playcanvas.com/user-manual/editor/publishing/snapchat-web-lenses.md).
 
 ## Debug with the Inspector
 
@@ -67,6 +91,8 @@ Pass a project name, format, and starter to create a project non-interactively:
 ```sh
 npm create playcanvas@latest my-viewer -- -f react -s model-viewer
 ```
+
+When there is no terminal to answer the prompts, as when an AI coding agent or an automated build runs the command, the creator takes the defaults for any option you do not pass, as `--yes` does. It still stops with an error when a choice has no safe default, such as a non-empty target directory without `--overwrite`.
 
 | Option | Shorthand | Purpose |
 | --- | --- | --- |

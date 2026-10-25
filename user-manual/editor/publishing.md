@@ -8,3 +8,4 @@ Once you have built your game, you will no doubt want to publish it and allow pe
 * [Mobile](https://developer.playcanvas.com/user-manual/editor/publishing/mobile.md)
 * [Desktop](https://developer.playcanvas.com/user-manual/editor/publishing/desktop.md)
 * [Playable Ads](https://developer.playcanvas.com/user-manual/editor/publishing/playable-ads.md)
+* [Snapchat Web Lenses](https://developer.playcanvas.com/user-manual/editor/publishing/snapchat-web-lenses.md)
