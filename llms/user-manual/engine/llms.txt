@@ -1,5 +1,5 @@
 ---
-covers: [engine, ecs, scripting, assets, graphics, gaussian-splatting, physics, animation, user-interface, xr, optimization, 2D]
+covers: [engine, ecs, scripting, assets, graphics, gaussian-splatting, physics, animation, user-interface, xr, optimization, publishing, 2D]
 ---
 # PlayCanvas Engine
 
@@ -29,7 +29,6 @@ Use this index to write code against the engine directly. React, Web Components 
 
 - [Using the Engine Standalone](/user-manual/engine/standalone/): Setting up an `AppBase` project with Vite and npm, or without a build step using an import map and the CDN build, and registering the component systems and resource handlers it uses.
 - [Start with create-playcanvas](/user-manual/getting-started/start-with-create-playcanvas/): `npm create playcanvas@latest my-app -- -f engine` creates a runnable Vite and TypeScript project, with PlayCanvas Skills for coding agents.
-- [Build a Snapchat Web Lens](/user-manual/getting-started/build-a-snapchat-web-lens/): Publishing a game to Snapchat as a Web Lens, starting from the `web-lens` starter.
 - [Developing with AI](/user-manual/engine/developing-with-ai/): Setting up a coding agent on an Engine project and verifying its changes in a browser.
 - [Engine Migrations](/user-manual/engine/migrations/): The breaking changes of each major release. Read it before using an API you remember from Engine 1.
 - [Supported Browsers](/user-manual/engine/supported-browsers/): Minimum browser versions for WebGL2 and WebGPU.
@@ -194,6 +193,10 @@ Use this index to write code against the engine directly. React, Web Components 
 - [MiniStats](/user-manual/optimization/mini-stats/): An on-screen overlay of draw calls, frame time, and CPU and GPU timings.
 - [GPU Profiling](/user-manual/optimization/gpu-profiling/): Capturing WebGL and WebGPU frames with native GPU profilers.
 - [Device Pixel Ratio](/user-manual/optimization/runtime-devicepixelratio/): Trading sharpness for fill rate with `maxPixelRatio`.
+
+## Publishing
+
+- [Snapchat Web Lenses](/user-manual/publishing/snapchat-web-lenses/): Publishing a game inside Snapchat as a Web Lens, from the create-playcanvas `web-lens` starter or the Editor.
 
 ## API reference
 

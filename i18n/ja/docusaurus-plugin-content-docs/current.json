@@ -67,6 +67,10 @@
     "message": "はじめに",
     "description": "The label for category Getting Started (Editor) in sidebar userManualSidebar"
   },
+  "sidebar.userManualSidebar.category.common-publishing": {
+    "message": "公開",
+    "description": "The label for category Publishing (Common Topics) in sidebar userManualSidebar"
+  },
   "sidebar.userManualSidebar.category.react-getting-started": {
     "message": "はじめに",
     "description": "The label for category Getting Started (React) in sidebar userManualSidebar"

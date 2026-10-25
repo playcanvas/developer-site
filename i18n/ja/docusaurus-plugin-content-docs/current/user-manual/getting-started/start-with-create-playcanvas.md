@@ -61,7 +61,7 @@ creatorでは、すべての形式で同じ実行可能なスターターを利�
 
 構築するアプリケーションに最も近いスターターを選び、まず変更せずに実行してから、アセットと動作を段階的に置き換えます。
 
-Snapchat Web Lensスターターは、Snapchatに公開できるように設定された縦向きのゲームです。[Snapchat Web Lensを構築する](/user-manual/getting-started/build-a-snapchat-web-lens/)を参照してください。
+Snapchat Web Lensスターターは、Snapchatに公開できるように設定された縦向きのゲームです。[Snapchat Web Lens](/user-manual/publishing/snapchat-web-lenses/)を参照してください。
 
 ## Inspectorでデバッグする
 
@@ -103,4 +103,4 @@ AIコーディングエージェントや自動ビルドがコマンドを実行
 - Engine APIを直接使用する場合は、[Engineをスタンドアロンで使用する](/user-manual/engine/standalone/)に進みます。
 - Reactの場合は、[シーンの構築](/user-manual/react/building-a-scene/)に進みます。
 - Web Componentsの場合は、[シーンの構築](/user-manual/web-components/building-a-scene/)に進みます。
-- ゲームをSnapchatに公開する場合は、[Snapchat Web Lensを構築する](/user-manual/getting-started/build-a-snapchat-web-lens/)を参照してください。
+- ゲームをSnapchatに公開する場合は、[Snapchat Web Lens](/user-manual/publishing/snapchat-web-lenses/)を参照してください。

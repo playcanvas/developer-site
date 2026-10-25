@@ -1,9 +1,11 @@
 ---
-title: Build a Snapchat Web Lens
-description: Build a PlayCanvas game for Snapchat and publish it as a Web Lens, starting from the create-playcanvas starter or the Editor.
+title: Snapchat Web Lenses
+description: Publish a PlayCanvas game to Snapchat as a Web Lens, built with the Engine, React, Web Components, or the Editor.
 ---
 
 A [Snapchat Web Lens](https://developers.snap.com/web-lenses/home) is a web app that runs inside Snapchat as a Lens, full screen and in portrait, on iOS and Android. You upload a zip of your build through [My Lenses](https://my-lenses.snapchat.com/), and once it passes review, players can find it by name or by scanning its Snapcode.
+
+You can build a Web Lens with any PlayCanvas product. This page covers code projects for the Engine, React, or Web Components, which can start from the create-playcanvas `web-lens` starter, and projects built in the Editor.
 
 Web Lenses are in beta, so Snap may change some of the limits below. Snap's [Platform requirements](https://developers.snap.com/web-lenses/requirements) and [Capabilities and restrictions](https://developers.snap.com/web-lenses/capabilities) pages have the current rules.
 

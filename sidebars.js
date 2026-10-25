@@ -52,7 +52,6 @@ const sidebars = {
       items: [
         'user-manual/getting-started/start-with-create-playcanvas',
         'user-manual/getting-started/use-playcanvas-skills',
-        'user-manual/getting-started/build-a-snapchat-web-lens',
         'user-manual/getting-started/migrating-from-unity',
         'user-manual/getting-started/community',
         'user-manual/getting-started/open-source',
@@ -1233,6 +1232,18 @@ const sidebars = {
         'user-manual/optimization/load-time',
         'user-manual/optimization/optimizing-scene-format',
         'user-manual/optimization/troubleshooting-performance',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Publishing',
+      key: 'common-publishing',
+      link: {
+        type: 'doc',
+        id: 'user-manual/publishing/index',
+      },
+      items: [
+        'user-manual/publishing/snapchat-web-lenses',
       ],
     },
     sectionHeader('Foundational APIs'),

@@ -1,9 +1,11 @@
 ---
-title: Snapchat Web Lensを構築する
-description: create-playcanvasのスターターまたはEditorから始めて、PlayCanvasのゲームをSnapchat向けに構築し、Web Lensとして公開します。
+title: Snapchat Web Lens
+description: Engine、React、Web Components、またはEditorで構築したPlayCanvasのゲームを、SnapchatにWeb Lensとして公開します。
 ---
 
 [Snapchat Web Lens](https://developers.snap.com/web-lenses/home)は、Snapchatの中でLensとして動作するWebアプリです。iOSとAndroidで、全画面かつ縦向きで実行されます。ビルドのzipを[My Lenses](https://my-lenses.snapchat.com/)からアップロードし、審査に通ると、プレイヤーは名前で検索するかSnapcodeをスキャンしてゲームを見つけられます。
+
+Web LensはどのPlayCanvas製品でも構築できます。このページでは、create-playcanvasの`web-lens`スターターから始められるEngine、React、Web Componentsのコードプロジェクトと、Editorで構築したプロジェクトについて説明します。
 
 Web Lensはベータ版のため、以下の制限の一部はSnapによって変更される可能性があります。最新のルールは、Snapの[Platform requirements](https://developers.snap.com/web-lenses/requirements)と[Capabilities and restrictions](https://developers.snap.com/web-lenses/capabilities)のページを参照してください。
 

@@ -18,10 +18,6 @@ PlayCanvas is a collection of open-source products that you can use to build int
 
 Use [`create-playcanvas`](start-with-create-playcanvas) to scaffold a Vite and TypeScript project for the Engine, React, or Web Components from one of its runnable starters. New projects include [PlayCanvas Skills](use-playcanvas-skills), which give compatible AI coding agents PlayCanvas-specific development and verification workflows.
 
-## Publish to Snapchat
-
-[Build a Snapchat Web Lens](build-a-snapchat-web-lens) shows how to build a PlayCanvas game for Snapchat and publish it as a Web Lens, starting from the create-playcanvas starter or the Editor.
-
 ## Coming from Unity
 
 [Migrating from Unity](migrating-from-unity) maps the Unity Editor, Unity's concepts and its C# APIs to their PlayCanvas equivalents, and explains the differences that catch Unity developers out.
