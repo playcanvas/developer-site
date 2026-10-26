@@ -213,7 +213,7 @@ function placeOver(element, html) {
 
 ## キャンバス内のHTML {#html-in-the-canvas}
 
-実験的なブラウザAPIであるHTML-in-Canvasは、HTMLをテクスチャに描画します。このテクスチャは、ワールド空間のパネルなど、シーンの中で使えます。対応しているブラウザはまだ少ないため、実験的なものとして扱い、フォールバックを用意しておきます。
+Chrome 157以降でデフォルトで有効になっているブラウザAPIのHTML-in-Canvasは、HTMLをテクスチャに描画します。このテクスチャは、ワールド空間のパネルなど、シーンの中で使えます。他のブラウザはまだ対応していないため、フォールバックを用意しておきます。使い方は[HTML-in-Canvas](/user-manual/graphics/advanced-rendering/html-in-canvas/)を参照してください。
 
 <EngineExample id="misc/html-texture" title="HTML Texture" />
 
