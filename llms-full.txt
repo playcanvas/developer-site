@@ -4,7 +4,7 @@
 
 Index: https://developer.playcanvas.com/llms.txt
 Total Documents: 531
-Generated: 2026-10-25
+Generated: 2026-10-27
 
 ================================================================================
 
@@ -18311,7 +18311,7 @@ Keep that entry's URL identical to the library's `<script>` tag, or the page loa
 
 :::note[Elements That Never Become Ready]
 
-The promise never settles if the element cannot finish initializing — for example, a `<pc-script-instance>` that is not a direct child of `<pc-script>`, a [`<pc-node>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-node.md) that cannot resolve its `name`, a [`<pc-model>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-model.md) whose `asset` names no declared asset, a [`<pc-wasm>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-wasm.md) without a `name` or whose module fails to load, or a [`<pc-app>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-app.md) that could not create a graphics device (see its [`error` event](https://developer.playcanvas.com/user-manual/web-components/tags/pc-app.md#events)). A component element with no `<pc-entity>`, `<pc-model>` or `<pc-node>` above it is the exception: it still becomes ready, but its `component` is `null`. In each of these cases, the console says what went wrong.
+The promise never settles if the element cannot finish initializing — for example, a `<pc-script-instance>` that is not a direct child of `<pc-script>`, a [`<pc-node>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-node.md) that cannot resolve its `name`, a [`<pc-model>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-model.md) whose `asset` names no declared asset, a [`<pc-wasm>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-wasm.md) without a `name` or with one in the wrong case, or a [`<pc-app>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-app.md) that could not create a graphics device (see its [`error` event](https://developer.playcanvas.com/user-manual/web-components/tags/pc-app.md#events)). A component element with no `<pc-entity>`, `<pc-model>` or `<pc-node>` above it is the exception: it still becomes ready, but its `component` is `null`. In each of these cases, the console says what went wrong.
 
 An element *removed* from the document before it finished initializing does not become ready either — nothing is wrong, so nothing is reported, but an await on its `ready()` will not complete unless the element is put back, which carries the wait over to its next initialization. When teardown can race initialization (common with [cloned templates](https://developer.playcanvas.com/user-manual/web-components/templates.md)), race the await against your own teardown signal — see [Removing an Instance](https://developer.playcanvas.com/user-manual/web-components/templates.md#removing-an-instance).
 
@@ -18400,10 +18400,10 @@ const material = MaterialElement.get('gold'); // the material declared by <pc-ma
 
 `AssetElement.get` returns the registered [`Asset`](https://api.playcanvas.com/engine/classes/Asset.html), which may not have finished loading yet — check `asset.loaded`, or subscribe to its `load` event, before using `asset.resource`. A failed load also sets `loaded`, with no `resource`. Looking a `lazy` asset up this way does not start its load, so call `app.assets.load(asset)` if nothing else will.
 
-[`<pc-wasm>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-wasm.md) initializes asynchronously like the elements above — it becomes ready once its module has loaded, so `whenReady('pc-wasm')` awaits the load. (`Basis` is the exception: it is ready as soon as its transcoder starts loading.) You will rarely need it: `<pc-app>` waits for every `<pc-wasm>` among its children before it creates its graphics device, so an app that is ready is an app whose modules have loaded. Awaiting the app is how you wait for Ammo:
+[`<pc-wasm>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-wasm.md) initializes asynchronously like the elements above — it becomes ready once its module has loaded or failed to load, so `whenReady('pc-wasm')` awaits the load. (`Basis` is the exception: it is ready as soon as its transcoder starts loading.) Readiness does not mean success: a module that fails also fires an [`error` event](https://developer.playcanvas.com/user-manual/web-components/tags/pc-wasm.md#events). You will rarely need it: `<pc-app>` waits for every `<pc-wasm>` among its children to settle before it creates its graphics device, so by the time the app is ready each module has loaded or reported its failure. Awaiting the app is how you wait for Ammo:
 
 ```javascript
-const { app } = await whenReady('pc-app'); // every <pc-wasm> has loaded by now
+const { app } = await whenReady('pc-app'); // every <pc-wasm> has loaded or failed by now
 ```
 
 One caveat sets `<pc-wasm>` apart: its readiness is sticky. WebAssembly modules configure engine-global state that never unloads, so removing and re-inserting the element neither resets its readiness nor loads the module again — see [Readiness](https://developer.playcanvas.com/user-manual/web-components/tags/pc-wasm.md#readiness).
@@ -19371,7 +19371,7 @@ The `<pc-app>` tag is the root element for your PlayCanvas application. It is us
 | `physics-time-scale` | Number | `"1"` | Scale on the time the physics simulation advances by each frame, applied on top of `time-scale`: below 1 is slow motion, above 1 speeds it up, and `"0"` pauses physics while the rest of the application keeps running — for a pause menu, say, that must stay interactive while the world stands still |
 | `picking` | Enum | `"auto"` | When the application picks the scene under the pointer to dispatch [pointer events](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md#events) on entity elements: `"auto"` \| `"always"` \| `"none"`. `auto` picks for an event type only while a listener for it is registered on an entity element or on [`<pc-scene>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scene.md); `always` picks for every pointer event, which listeners the application cannot see need, such as one on the document or a framework's delegated handler like React's `onPointerMove`; `none` never picks, so entities receive no pointer events. Picking renders the scene again, which is why `auto` is the default. See [When Events Are Dispatched](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md#when-events-are-dispatched) |
 | `stencil-buffer` | Boolean | `"true"` | Whether the application allocates a stencil buffer |
-| `time-scale` | Number | `"1"` | Scale on the time the application advances by each frame. Scripts, animation and physics all advance by the scaled time, so below 1 is slow motion, above 1 speeds it up, and `"0"` pauses all three together while the scene keeps rendering. To slow down or pause physics alone, use `physics-time-scale` |
+| `time-scale` | Number | `"1"` | Scale on the time the application advances by each frame. Scripts, animation and physics all advance by the scaled time, so below 1 is slow motion, above 1 speeds it up, and `"0"` freezes everything that advances with time while the scene keeps rendering. It does not pause scripts: their `update` and `postUpdate` methods still run every frame with a `dt` of 0, so input handling, spawning and any other logic that is not multiplied by `dt` carries on — give gameplay code its own pause check. To slow down or pause physics alone, use `physics-time-scale` |
 | `with-credentials` | Boolean | `"false"` | Whether asset requests send credentials (cookies and HTTP authentication) to other origins, which the asset server must allow through CORS. The engine keeps this setting in an HTTP client shared by the whole page, so it applies to every `<pc-app>` on the page: an app that boots with it switches it on for all of them, and a later change on any app sets it for all of them |
 
 :::note[When these are read]
@@ -19606,7 +19606,7 @@ Listen to these events using [`addEventListener()`](https://developer.mozilla.or
 | `load` | Fired each time the asset finishes loading, including a `lazy` asset loaded later and any subsequent reloads. |
 | `error` | An [`ErrorEvent`](https://developer.mozilla.org/en-US/docs/Web/API/ErrorEvent) fired when the asset fails to load, with the engine's error in `message`. |
 
-Neither event bubbles, so listen on the element itself — or use a capture-phase listener on `<pc-app>` to observe every asset it holds. The same listener also sees other elements' `error` events, such as [`<pc-model>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-model.md)'s and the app's own, so check the target:
+Neither event bubbles, so listen on the element itself — or use a capture-phase listener on `<pc-app>` to observe every asset it holds. The same listener also sees other elements' `error` events, such as [`<pc-model>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-model.md)'s, [`<pc-wasm>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-wasm.md)'s and the app's own, so check the target:
 
 ```javascript
 document.querySelector('pc-app').addEventListener('error', (event) => {
@@ -22536,7 +22536,7 @@ The `<pc-wasm>` tag loads a WebAssembly module the engine needs before the appli
 | `name` | String | - | Module name used to reference it in scripts |
 | `wasm` | String | - | Path to the WebAssembly (.wasm) file |
 
-The `name` is case-sensitive — the engine looks the module up by exact name. The modules consumed by the engine are `Ammo` (physics), `Basis` (texture transcoding) and `DracoDecoderModule` (mesh decompression).
+The `name` is case-sensitive — the engine looks the module up by exact name. The modules consumed by the engine are `Ammo` (physics), `Basis` (texture transcoding) and `DracoDecoderModule` (mesh decompression). Getting the case wrong is the one load failure the element cannot report: with `name="ammo"`, the engine throws a `TypeError` as the glue script loads, no `error` event fires, and neither the element nor its `<pc-app>` ever becomes ready.
 
 :::note[When these are read]
 
@@ -22549,25 +22549,42 @@ attributes before appending the element to the document.
 
 ## Readiness
 
-The element initializes asynchronously and becomes ready once its module has loaded: it fires the
-standard `ready` event and can be awaited with `whenReady('pc-wasm')` — see
+The element initializes asynchronously and becomes ready once its module has loaded or failed to
+load: it fires the standard `ready` event and can be awaited with `whenReady('pc-wasm')` — see
 [Programmatic Access](https://developer.playcanvas.com/user-manual/web-components/programmatic-access.md). (`Basis` is the exception: it is ready as soon
-as its transcoder starts loading.) You will rarely need to, though: a `<pc-app>` waits for every
-`<pc-wasm>` among its children before creating its graphics device, so an app that is ready is an
-app whose modules have loaded. A `<pc-wasm>` nested any deeper still loads, but the app does not
-wait for it.
+as its transcoder starts loading.) Readiness means the load settled, not that it succeeded; a
+module that fails also fires [`error`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-wasm.md#events). You will rarely need to wait for the element,
+though: a `<pc-app>` waits for every `<pc-wasm>` among its children to settle before creating its
+graphics device, so by the time the app is ready each module has either loaded or reported its
+failure. A `<pc-wasm>` nested any deeper still loads, but the app does not wait for it.
 
 Readiness is deliberately sticky. A WebAssembly module configures engine-global state that never
 unloads, so removing the element does not return it to a pending state, and re-inserting it does
 not load the module again.
 
 A `<pc-wasm>` without a `name` logs a warning and never becomes ready — but it does not block
-the containing `<pc-app>` from booting. A module that fails to load, from a mistyped URL or a
-server that refuses it, is worse: the element never becomes ready and its `<pc-app>` never starts,
-with only a `failed to initialize module=...` error in the console to show for it.
+the containing `<pc-app>` from booting.
 
 Declare `Ammo` in the markup rather than adding it later. The engine looks for the physics module
 once, as the application starts, so an app that booted without it runs without physics.
+
+## Events
+
+Listen to this event using [`addEventListener()`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener) or by assigning an event listener to the `oneventname` property of this interface.
+
+| Event | Description |
+| --- | --- |
+| `error` | An [`ErrorEvent`](https://developer.mozilla.org/en-US/docs/Web/API/ErrorEvent) fired when the module fails to load — from a mistyped URL, say, or a server that refuses it — with the engine's error in `message`. It fires once per element, and the element still becomes ready. A `Basis` module never fires it. |
+
+The event does not bubble, so listen on the element itself or with a capture-phase listener on
+`<pc-app>`.
+
+A module that fails to load does not stop the application. The element logs
+`pc-wasm failed to load module '<name>' - <error>` to the console, and the containing `<pc-app>`
+boots without the module — a failed `Ammo` leaves the app running without physics. The engine
+never tries to load a failed module again, so every `<pc-wasm>` for that module fails with it: one
+already waiting when the load fails, and one added later, in a second `<pc-app>` say, which fails
+straight away.
 
 ## Example
 
@@ -22602,7 +22619,7 @@ Loading the `Ammo` physics module. The box only falls because the module is decl
 
 You can programmatically create and manipulate `<pc-wasm>` elements using the [WasmElement API](https://api.playcanvas.com/web-components/classes/WasmElement.html).
 
-The element exposes no engine object of its own. Once it is ready the module has been instantiated through the engine's `WasmModule` under its `name` (`Basis` goes through the engine's Basis initializer instead). Ammo's glue script defines the global `Ammo`, so scripts can use it directly; reach other modules through `WasmModule.getInstance(name, callback)`.
+The element exposes no engine object of its own. A module that loads is instantiated through the engine's `WasmModule` under its `name` (`Basis` goes through the engine's Basis initializer instead). Ammo's glue script defines the global `Ammo`, so scripts can use it directly; reach other modules through `WasmModule.getInstance(name, callback)`. Both depend on the load succeeding, which readiness does not tell you: after a failed load the element is still ready, but `Ammo` stays undefined and `getInstance` never calls its callback. Code that needs a module must handle that outcome — listen for the element's [`error`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-wasm.md#events) event and carry on without the module, running without physics for a failed `Ammo`, rather than wait on `getInstance`.
 
 ## See Also
 
