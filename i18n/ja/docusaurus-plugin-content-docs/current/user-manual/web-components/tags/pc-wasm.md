@@ -87,7 +87,7 @@ description: "pc-wasm要素のリファレンス: glue・wasm・fallbackのパ�
 
 [WasmElement API](https://api.playcanvas.com/web-components/classes/WasmElement.html)を使用して、`<pc-wasm>`要素をプログラムで作成および操作できます。
 
-この要素はエンジンオブジェクトを公開しません。準備が完了した時点で、モジュールは`name`の下でエンジンの`WasmModule`を通じてインスタンス化されています（`Basis`だけはエンジンのBasis初期化処理を通ります）。Ammoのglueスクリプトはグローバルの`Ammo`を定義するため、スクリプトから直接利用できます。その他のモジュールには`WasmModule.getInstance(name, callback)`でアクセスしてください。
+この要素はエンジンオブジェクトを公開しません。読み込みに成功したモジュールは、`name`の下でエンジンの`WasmModule`を通じてインスタンス化されます（`Basis`だけはエンジンのBasis初期化処理を通ります）。Ammoのglueスクリプトはグローバルの`Ammo`を定義するため、スクリプトから直接利用できます。その他のモジュールには`WasmModule.getInstance(name, callback)`でアクセスしてください。どちらも読み込みが成功していることが前提ですが、ready状態からはそれがわかりません。読み込みに失敗しても要素はready状態になりますが、`Ammo`は未定義のままで、`getInstance`はコールバックを決して呼び出しません。モジュールを必要とするコードは、この結果に対処する必要があります。`getInstance`を待ち続けるのではなく、要素の[`error`](#events)イベントをリッスンし、モジュールなしで処理を続けてください。`Ammo`が失敗した場合は、物理なしで動作させます。
 
 ## 関連項目 {#see-also}
 

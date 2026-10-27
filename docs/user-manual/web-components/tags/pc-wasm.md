@@ -107,7 +107,7 @@ Loading the `Ammo` physics module. The box only falls because the module is decl
 
 You can programmatically create and manipulate `<pc-wasm>` elements using the [WasmElement API](https://api.playcanvas.com/web-components/classes/WasmElement.html).
 
-The element exposes no engine object of its own. Once it is ready the module has been instantiated through the engine's `WasmModule` under its `name` (`Basis` goes through the engine's Basis initializer instead). Ammo's glue script defines the global `Ammo`, so scripts can use it directly; reach other modules through `WasmModule.getInstance(name, callback)`.
+The element exposes no engine object of its own. A module that loads is instantiated through the engine's `WasmModule` under its `name` (`Basis` goes through the engine's Basis initializer instead). Ammo's glue script defines the global `Ammo`, so scripts can use it directly; reach other modules through `WasmModule.getInstance(name, callback)`. Both depend on the load succeeding, which readiness does not tell you: after a failed load the element is still ready, but `Ammo` stays undefined and `getInstance` never calls its callback. Code that needs a module must handle that outcome — listen for the element's [`error`](#events) event and carry on without the module, running without physics for a failed `Ammo`, rather than wait on `getInstance`.
 
 ## See Also
 
