@@ -39,7 +39,7 @@ PlayCanvas Web Components を使えば、HTML だけでリッチな 3D シーン
 
 :::note[準備完了にならない要素]
 
-要素が初期化を完了できない場合、Promiseは決して解決されません。たとえば、`<pc-script>` の直接の子ではない `<pc-script-instance>`、`name` を解決できない [`<pc-node>`](./tags/pc-node.md)、`asset` が宣言されたどのアセットも指していない [`<pc-model>`](./tags/pc-model.md)、`name` がないかモジュールの読み込みに失敗した [`<pc-wasm>`](./tags/pc-wasm.md)、グラフィックスデバイスを作成できなかった [`<pc-app>`](./tags/pc-app.md)（その [`error` イベント](./tags/pc-app.md#events)を参照）などです。例外は、上に `<pc-entity>`・`<pc-model>`・`<pc-node>` のいずれもないコンポーネント要素で、この場合はready状態にはなりますが、`component` は `null` になります。これらのいずれの場合も、何が問題だったかがコンソールに出力されます。
+要素が初期化を完了できない場合、Promiseは決して解決されません。たとえば、`<pc-script>` の直接の子ではない `<pc-script-instance>`、`name` を解決できない [`<pc-node>`](./tags/pc-node.md)、`asset` が宣言されたどのアセットも指していない [`<pc-model>`](./tags/pc-model.md)、`name` がないか、その大文字と小文字が誤っている [`<pc-wasm>`](./tags/pc-wasm.md)、グラフィックスデバイスを作成できなかった [`<pc-app>`](./tags/pc-app.md)（その [`error` イベント](./tags/pc-app.md#events)を参照）などです。例外は、上に `<pc-entity>`・`<pc-model>`・`<pc-node>` のいずれもないコンポーネント要素で、この場合はready状態にはなりますが、`component` は `null` になります。これらのいずれの場合も、何が問題だったかがコンソールに出力されます。
 
 初期化が完了する前にドキュメントから*削除された*要素も、ready状態にはなりません — 何も問題は起きていないので何も報告されませんが、要素が元に戻されない限り、その `ready()` に対するawaitは完了しません。元に戻された場合、待機は次の初期化に引き継がれます。破棄が初期化と競合しうる場合（[クローンされたテンプレート](templates.md)ではよくあることです）は、awaitを自分自身の破棄シグナルと競争させてください — [インスタンスを削除する](templates.md#removing-an-instance)を参照してください。
 
@@ -128,10 +128,10 @@ const material = MaterialElement.get('gold'); // <pc-material id="gold"> が宣�
 
 `AssetElement.get` は登録済みの [`Asset`](https://api.playcanvas.com/engine/classes/Asset.html) を返しますが、読み込みが完了していない場合があります。`asset.resource` を使用する前に、`asset.loaded` を確認するか、`load` イベントを購読してください。読み込みに失敗した場合も `loaded` は設定され、`resource` はありません。`lazy` のアセットをこの方法で取得しても読み込みは始まらないため、他に読み込むものがなければ `app.assets.load(asset)` を呼び出してください。
 
-[`<pc-wasm>`](./tags/pc-wasm.md) は、上記の要素と同じく非同期に初期化されます。モジュールの読み込みが完了するとready状態になるため、`whenReady('pc-wasm')` で読み込みを待機できます（例外は `Basis` で、トランスコーダーの読み込みが始まった時点でready状態になります）。とはいえ、これが必要になることはほとんどありません。`<pc-app>` は、自身の子要素であるすべての `<pc-wasm>` を待ってからグラフィックスデバイスを作成するため、準備完了したアプリとは、モジュールの読み込みが完了したアプリです。Ammoを待つ方法は、アプリを待つことです。
+[`<pc-wasm>`](./tags/pc-wasm.md) は、上記の要素と同じく非同期に初期化されます。モジュールの読み込みが完了するか失敗するとready状態になるため、`whenReady('pc-wasm')` で読み込みを待機できます（例外は `Basis` で、トランスコーダーの読み込みが始まった時点でready状態になります）。ready状態は成功を意味しません。失敗したモジュールは [`error` イベント](./tags/pc-wasm.md#events)も発生させます。とはいえ、これが必要になることはほとんどありません。`<pc-app>` は、自身の子要素であるすべての `<pc-wasm>` の読み込みが決着するのを待ってからグラフィックスデバイスを作成するため、アプリが準備完了した時点で、各モジュールは読み込みを完了しているか、失敗を報告しています。Ammoを待つ方法は、アプリを待つことです。
 
 ```javascript
-const { app } = await whenReady('pc-app'); // この時点ですべての <pc-wasm> は読み込み済みです
+const { app } = await whenReady('pc-app'); // この時点ですべての <pc-wasm> の読み込みは完了または失敗しています
 ```
 
 1つだけ `<pc-wasm>` に特有の注意点があります。そのready状態は固定（スティッキー）です。WebAssemblyモジュールは決してアンロードされないエンジングローバルな状態を構成するため、要素を削除して再挿入してもready状態はリセットされず、モジュールが再読み込みされることもありません。[準備完了](./tags/pc-wasm.md#readiness)を参照してください。

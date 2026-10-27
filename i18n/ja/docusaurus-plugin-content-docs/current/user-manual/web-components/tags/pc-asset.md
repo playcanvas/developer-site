@@ -90,7 +90,7 @@ description: "pc-asset要素のリファレンス: URLで読み込むアセッ�
 | `load` | アセットの読み込みが完了するたびに発生します。後から読み込まれる`lazy`アセットや、その後の再読み込みも含みます。 |
 | `error` | アセットの読み込みが失敗したときに発生する[`ErrorEvent`](https://developer.mozilla.org/en-US/docs/Web/API/ErrorEvent)で、エンジンのエラーが`message`に入ります。 |
 
-どちらのイベントもバブリングしないため、要素自身でリッスンしてください。あるいは、`<pc-app>`が保持するすべてのアセットを監視するには、`<pc-app>`でキャプチャフェーズのリスナーを使用します。同じリスナーは[`<pc-model>`](../pc-model)やアプリ自身のものなど、他の要素の`error`イベントも受け取るため、ターゲットを確認してください。
+どちらのイベントもバブリングしないため、要素自身でリッスンしてください。あるいは、`<pc-app>`が保持するすべてのアセットを監視するには、`<pc-app>`でキャプチャフェーズのリスナーを使用します。同じリスナーは[`<pc-model>`](../pc-model)、[`<pc-wasm>`](../pc-wasm)、アプリ自身のものなど、他の要素の`error`イベントも受け取るため、ターゲットを確認してください。
 
 ```javascript
 document.querySelector('pc-app').addEventListener('error', (event) => {

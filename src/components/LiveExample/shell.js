@@ -6,7 +6,7 @@
 // a new @playcanvas/web-components release (the engine version should match
 // the library's dev-pinned engine).
 export const ENGINE_VERSION = '2.23.0';
-export const PWC_VERSION = '0.28.0';
+export const PWC_VERSION = '0.28.1';
 
 // The Vite version that Engine examples opened in StackBlitz install, matching
 // the create-playcanvas starters.
