@@ -90,7 +90,7 @@ Listen to these events using [`addEventListener()`](https://developer.mozilla.or
 | `load` | Fired each time the asset finishes loading, including a `lazy` asset loaded later and any subsequent reloads. |
 | `error` | An [`ErrorEvent`](https://developer.mozilla.org/en-US/docs/Web/API/ErrorEvent) fired when the asset fails to load, with the engine's error in `message`. |
 
-Neither event bubbles, so listen on the element itself — or use a capture-phase listener on `<pc-app>` to observe every asset it holds. The same listener also sees other elements' `error` events, such as [`<pc-model>`](../pc-model)'s and the app's own, so check the target:
+Neither event bubbles, so listen on the element itself — or use a capture-phase listener on `<pc-app>` to observe every asset it holds. The same listener also sees other elements' `error` events, such as [`<pc-model>`](../pc-model)'s, [`<pc-wasm>`](../pc-wasm)'s and the app's own, so check the target:
 
 ```javascript
 document.querySelector('pc-app').addEventListener('error', (event) => {
