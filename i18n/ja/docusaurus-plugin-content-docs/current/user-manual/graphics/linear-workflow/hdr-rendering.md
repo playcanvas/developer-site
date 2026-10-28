@@ -150,6 +150,20 @@ cameraFrame.update();
 
 ![CameraFrame Script](/img/user-manual/graphics/linear-workflow/camera-frame.png)
 
+### エフェクトのスクリプト {#effect-scripts}
+
+カメラフレームに組み込まれていないエフェクトには、それぞれ専用のスクリプトがあります。各スクリプトは、それが付いているカメラエンティティのカメラフレームにエフェクトを追加するため、`cameraFrame` スクリプトと同じエンティティに追加してください。
+
+| スクリプト | ファイル | 追加するもの |
+| ---------- | -------- | ------------ |
+| `autoExposureEffect` | [`auto-exposure.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/auto-exposure.mjs) | [自動露出](/user-manual/graphics/posteffects/cameraframe/auto-exposure/) |
+| `smaaEffect` | [`smaa.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/smaa.mjs) | [SMAA](/user-manual/graphics/posteffects/cameraframe/#smaa) によるアンチエイリアス |
+| `lensFlareEffect` | [`lens-flare.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/lens-flare.mjs) | [レンズフレア](/user-manual/graphics/posteffects/cameraframe/lens-flare/)のエフェクトと、その形状ライブラリ。同じファイルの `lensFlare` スクリプトは、それが付いているエンティティにフレアを付けます。 |
+
+これらのスクリプトは [`camera-frame-effect.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/camera-frame-effect.mjs) をインポートするため、このファイルもそれらと並べてプロジェクトに追加してください。このファイルは、独自のエフェクトのスクリプトの基底クラスでもあります。[エディターでのエフェクト](/user-manual/graphics/posteffects/cameraframe/custom-effects/#effects-in-the-editor)を参照してください。
+
+スクリプトのエフェクトは、スクリプトの有効状態に従い、スクリプトとともに破棄され、その際にカメラフレームから取り除かれます。スクリプトの **Debug** 属性は、そのエフェクトのデバッグ表示を表示します。この属性と `cameraFrame` スクリプトのデバッグ設定は互いに上書きし合い、最後に変更した方が表示されます。[ダイナミックスカイ](/user-manual/graphics/posteffects/cameraframe/dynamic-sky/)にはエディター用のスクリプトがないため、コードで設定してください。
+
 ## CameraFrameのヒント
 
 - HDR bloomには、少なくとも1つのレンダリング可能な浮動小数点フォーマット（例: RG11B10、RGBA16F、またはRGBA32F）が必要です。これらのフォーマットのいずれもデバイスでサポートされていない場合、HDR bloomは自動的に無効になります。
