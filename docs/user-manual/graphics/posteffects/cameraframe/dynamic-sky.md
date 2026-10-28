@@ -98,7 +98,7 @@ The cameras without the effect, such as the cameras rendering planar reflections
 ## Limitations
 
 - The effect is not supported in XR.
-- The sky does not work together with the [volumetric fog](volumetric-fog.md) of the camera frame: the clouds cast no shadows into the fog, and the fog is not lit by the light of the sky.
+- The sky does not work together with the [volumetric fog](/user-manual/graphics/posteffects/cameraframe/volumetric-fog/) of the camera frame: the clouds cast no shadows into the fog, and the fog is not lit by the light of the sky.
 
 ## Example
 

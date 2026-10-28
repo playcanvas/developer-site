@@ -3,7 +3,7 @@ title: Render Passes
 description: "RenderPass draws into a render target or the back buffer: initializing it, resizing its render target, clearing, storing and mipmaps, and writing a pass."
 ---
 
-A [`RenderPass`](https://api.playcanvas.com/engine/classes/RenderPass.html) is a [frame pass](frame-passes.md) which draws into a [render target](../render-targets.md). When it executes, its draw calls are recorded into a physical render pass for its render target: usually one of its own, which starts right before the pass executes and ends right after, or one it shares with the passes next to it which render into the same render target, see [Passes sharing a render target](#passes-sharing-a-render-target).
+A [`RenderPass`](https://api.playcanvas.com/engine/classes/RenderPass.html) is a [frame pass](frame-passes.md) which draws into a [render target](/user-manual/graphics/advanced-rendering/render-targets/). When it executes, its draw calls are recorded into a physical render pass for its render target: usually one of its own, which starts right before the pass executes and ends right after, or one it shares with the passes next to it which render into the same render target, see [Passes sharing a render target](#passes-sharing-a-render-target).
 
 ## Classes derived from RenderPass
 

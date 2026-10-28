@@ -3,7 +3,7 @@ title: Frame Graph
 description: "How the GPU renders a frame as a sequence of render and compute passes, and how a frame graph describes them."
 ---
 
-The GPU renders into a [render target](../render-targets.md), a texture or a set of textures, or into the **back buffer**, which is displayed on the screen. Rendering into one of them, from start to end, is called a **physical render pass**. A frame takes several physical render passes, and a **frame graph** describes the steps of the frame which produce them, as **logical passes**. This page explains these concepts, and the pages in this section show how PlayCanvas implements them.
+The GPU renders into a [render target](/user-manual/graphics/advanced-rendering/render-targets/), a texture or a set of textures, or into the **back buffer**, which is displayed on the screen. Rendering into one of them, from start to end, is called a **physical render pass**. A frame takes several physical render passes, and a **frame graph** describes the steps of the frame which produce them, as **logical passes**. This page explains these concepts, and the pages in this section show how PlayCanvas implements them.
 
 ## Physical render passes
 
