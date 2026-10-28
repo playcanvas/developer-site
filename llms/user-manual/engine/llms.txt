@@ -106,6 +106,9 @@ Use this index to write code against the engine directly. React, Web Components 
 ### Post-processing and rendering
 
 - [Modern Post Processing](/user-manual/graphics/posteffects/cameraframe/): The CameraFrame HDR stack: volumetric fog, bloom, SSAO, TAA, depth of field, color enhancement and grading.
+- [Auto Exposure](/user-manual/graphics/posteffects/cameraframe/auto-exposure/): The CameraFrame auto exposure: metering, adaptation speeds and limits, cuts, and reading the exposure back.
+- [Lens Flare](/user-manual/graphics/posteffects/cameraframe/lens-flare/): CameraFrame lens flares: shape libraries, flare looks, following lights, occlusion and fading.
+- [Dynamic Sky](/user-manual/graphics/posteffects/cameraframe/dynamic-sky/): A CameraFrame day and night sky with clouds, lighting the scene and keeping the sun light in sync.
 - [Custom Effects](/user-manual/graphics/posteffects/cameraframe/custom-effects/): Writing CameraFrame effects with CameraFrameEffect: compose slots, the shader chunk, parameters and effect scripts.
 - [Effects with Passes](/user-manual/graphics/posteffects/cameraframe/effect-passes/): CameraFrame effects owning frame passes: stages, frame resources, rebuilding passes and resolving the scene.
 - [Layers](/user-manual/graphics/layers/): Controlling render order and visibility with layers and the layer composition.

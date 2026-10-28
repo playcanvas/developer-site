@@ -890,6 +890,7 @@ const sidebars = {
               },
               items: [
                 'user-manual/graphics/posteffects/cameraframe/volumetric-fog',
+                'user-manual/graphics/posteffects/cameraframe/auto-exposure',
                 'user-manual/graphics/posteffects/cameraframe/lens-flare',
                 'user-manual/graphics/posteffects/cameraframe/dynamic-sky',
                 'user-manual/graphics/posteffects/cameraframe/custom-effects',

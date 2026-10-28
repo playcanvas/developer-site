@@ -13,8 +13,8 @@ The `CameraFrame` enables advanced rendering techniques including:
 - **[Volumetric Fog](volumetric-fog.md)** - Height fog and light shafts lit by directional, omni, and spot lights
 - **SSAO (Screen Space Ambient Occlusion)** - Enhances depth perception by simulating ambient light occlusion
 - **Depth of Field (DoF)** - Mimics camera focus effects, blurring objects outside the focal plane
-- **Temporal Anti-Aliasing (TAA)** - Reduces visual artifacts by smoothing jagged edges over time, and can upscale a scene rendered at a lower resolution
-- **SMAA (Subpixel Morphological Anti-Aliasing)** - Smooths jagged edges within a single frame, without jittering the camera or ghosting
+- **Temporal Anti-Aliasing (TAA)** - Reduces visual artifacts by smoothing jagged edges over time, and can [upscale](#taa-upscaling) a scene rendered at a lower resolution
+- **[SMAA (Subpixel Morphological Anti-Aliasing)](#smaa)** - Smooths jagged edges within a single frame, without jittering the camera or ghosting
 - **Vignette** - Blends the image edges towards a configurable color using `vignette.color`
 - **Color Grading** - Adjusts brightness, contrast, saturation, and color tint for stylistic effects
 - **[Color Enhance](#color-enhance)** - Adjusts shadows, highlights, midtones, vibrance, and dehaze in HDR
@@ -22,7 +22,7 @@ The `CameraFrame` enables advanced rendering techniques including:
 - **Fringing** - Chromatic aberration effect that simulates color channel separation
 - **Tone Mapping** - Controls how HDR colors are mapped to displayable range
 - **Sharpness** - Enhances image sharpness to counteract blurriness from TAA or upscaling
-- **Auto Exposure** - Adapts the exposure of the camera to the brightness of what it sees
+- **[Auto Exposure](auto-exposure.md)** - Adapts the exposure of the camera to the brightness of what it sees
 - **[Lens Flare](lens-flare.md)** - Flares of lights, fading as their light is covered by the scene
 - **[Dynamic Sky](dynamic-sky.md)** - A day and night sky with clouds, lighting the scene and keeping the sun light in sync
 
@@ -65,9 +65,57 @@ cameraFrame.update();
 
 `inner`, `outer`, and `curvature` control the shape and falloff. Setting `outer` below `inner` reverses the effect, applying it towards the center.
 
+### TAA Upscaling {#taa-upscaling}
+
+`rendering.renderTargetScale`, 0.1-1, renders the scene at a lower resolution as an optimization. The post-processing runs at that resolution too, and the image is then stretched to the full resolution with bilinear filtering, before the UI renders over it at the full resolution.
+
+With TAA enabled, [`taa.upscale`](https://api.playcanvas.com/engine/classes/TaaEffect.html#upscale) accumulates the frames rendered at the lower resolution at the full resolution instead. The jitter of the camera places the samples of each frame at different positions within the full resolution pixels, which recovers much of the detail the lower resolution loses. The effects after the TAA, such as the bloom and the composition, then work with the full resolution scene.
+
+```javascript
+cameraFrame.rendering.renderTargetScale = 0.5;
+cameraFrame.taa.enabled = true;
+cameraFrame.taa.upscale = true;
+cameraFrame.rendering.sharpness = 0.5;
+cameraFrame.update();
+```
+
+Moving objects can blur or ghost more than with TAA alone, as the history is relied on for longer while upscaling. `rendering.sharpness` counteracts the softness TAA leaves. In the Editor, the `cameraFrame` script exposes these as its `taa.upscale`, `rendering.renderTargetScale` and `rendering.sharpness` attributes. The Temporal Anti-Aliasing example in [Examples](#examples) compares the full resolution with a lower one, upscaled with bilinear filtering or by the TAA, with and without sharpening.
+
+### SMAA {#smaa}
+
+The [`SmaaEffect`](https://api.playcanvas.com/engine/classes/SmaaEffect.html), Subpixel Morphological Anti-Aliasing, smooths the jagged edges of the geometry within a single frame. It finds the edges in the image, recognizes the shape of each aliased edge, and blends the pixels along it with their neighbors by the area the edge would cover without aliasing. Unlike TAA, it does not jitter the camera, needs no history and does not ghost, but it does not resolve detail finer than a pixel.
+
+SMAA is not a built-in effect of the camera frame, so add it with `addEffect`:
+
+```javascript
+const smaa = new SmaaEffect(app.graphicsDevice);
+cameraFrame.addEffect(smaa);
+cameraFrame.update();
+```
+
+Four properties set its quality and cost, defaulting to the high preset of the reference implementation:
+
+| Preset | `threshold` | `maxSearchSteps` | `maxSearchStepsDiag` | `cornerRounding` |
+| ------ | ----------- | ---------------- | -------------------- | ---------------- |
+| Low | 0.15 | 4 | 0 | 100 |
+| Medium | 0.1 | 8 | 0 | 100 |
+| High (default) | 0.1 | 16 | 8 | 25 |
+| Ultra | 0.05 | 32 | 16 | 25 |
+
+- `threshold`, 0-0.5, is the brightness difference between neighboring pixels above which they are separated by an edge. Lower values smooth more edges at a higher cost, and can smooth texture detail along with the geometry.
+- `maxSearchSteps`, 1-112, is the maximum number of steps searching for the end of a horizontal or vertical edge, each covering two pixels. The ends of longer edges are not found, which smooths them less accurately.
+- `maxSearchStepsDiag`, 0-20, is the same for diagonal edges. 0 disables the detection of diagonal edges, which are then smoothed as horizontal and vertical ones.
+- `cornerRounding`, 0-100, is how much the sharp corners of the geometry are rounded. 0 keeps them the sharpest, 100 smooths them like the rest of the edges.
+
+SMAA can be combined with multisampling, `rendering.samples`, which smooths the edges further at a higher cost. Combined with TAA, it resolves the scene after the TAA, unless inserted before it with `cameraFrame.insertEffectBefore(smaa, 'taa')`. Its debug views, `'smaaedges'` and `'smaaweights'`, show the edges it found and how much it blends the pixels across them. In the Editor, the `smaaEffect` script from [`smaa.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/smaa.mjs) adds it to the camera frame of its camera entity.
+
+This example compares the SMAA presets with TAA, TAA upscaling and multisampling:
+
+<EngineExample id="camera-frame/anti-aliasing" title="Anti-Aliasing" />
+
 ### Debug Views {#debug-views}
 
-Set `cameraFrame.debug` to inspect an intermediate result: `'scene'`, `'ssao'`, `'bloom'`, `'vignette'`, `'dofcoc'` (depth-of-field circle of confusion), `'dofblur'`, or `'depth'`.
+Set `cameraFrame.debug` to inspect an intermediate result: `'scene'`, `'ssao'`, `'bloom'`, `'vignette'`, `'dofcoc'` (depth-of-field circle of confusion), `'dofblur'`, or `'depth'`. The effects added to the camera frame provide their own views: `'smaaedges'` and `'smaaweights'` for [SMAA](#smaa), `'autoexposure'` for the [auto exposure](auto-exposure.md#debug-view), and `'lensflare'` for the [lens flare](lens-flare.md).
 
 ```javascript
 cameraFrame.debug = 'depth';
