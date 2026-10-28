@@ -890,8 +890,10 @@ const sidebars = {
               },
               items: [
                 'user-manual/graphics/posteffects/cameraframe/volumetric-fog',
-                'user-manual/graphics/posteffects/cameraframe/compose-shader',
-                'user-manual/graphics/posteffects/cameraframe/extending-class',
+                'user-manual/graphics/posteffects/cameraframe/lens-flare',
+                'user-manual/graphics/posteffects/cameraframe/dynamic-sky',
+                'user-manual/graphics/posteffects/cameraframe/custom-effects',
+                'user-manual/graphics/posteffects/cameraframe/effect-passes',
               ],
             },
             {

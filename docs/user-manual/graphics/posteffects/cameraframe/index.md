@@ -13,7 +13,8 @@ The `CameraFrame` enables advanced rendering techniques including:
 - **[Volumetric Fog](volumetric-fog.md)** - Height fog and light shafts lit by directional, omni, and spot lights
 - **SSAO (Screen Space Ambient Occlusion)** - Enhances depth perception by simulating ambient light occlusion
 - **Depth of Field (DoF)** - Mimics camera focus effects, blurring objects outside the focal plane
-- **Temporal Anti-Aliasing (TAA)** - Reduces visual artifacts by smoothing jagged edges over time
+- **Temporal Anti-Aliasing (TAA)** - Reduces visual artifacts by smoothing jagged edges over time, and can upscale a scene rendered at a lower resolution
+- **SMAA (Subpixel Morphological Anti-Aliasing)** - Smooths jagged edges within a single frame, without jittering the camera or ghosting
 - **Vignette** - Blends the image edges towards a configurable color using `vignette.color`
 - **Color Grading** - Adjusts brightness, contrast, saturation, and color tint for stylistic effects
 - **[Color Enhance](#color-enhance)** - Adjusts shadows, highlights, midtones, vibrance, and dehaze in HDR
@@ -21,6 +22,11 @@ The `CameraFrame` enables advanced rendering techniques including:
 - **Fringing** - Chromatic aberration effect that simulates color channel separation
 - **Tone Mapping** - Controls how HDR colors are mapped to displayable range
 - **Sharpness** - Enhances image sharpness to counteract blurriness from TAA or upscaling
+- **Auto Exposure** - Adapts the exposure of the camera to the brightness of what it sees
+- **[Lens Flare](lens-flare.md)** - Flares of lights, fading as their light is covered by the scene
+- **[Dynamic Sky](dynamic-sky.md)** - A day and night sky with clouds, lighting the scene and keeping the sun light in sync
+
+Apart from tone mapping, each of these is an effect, a [`CameraFrameEffect`](https://api.playcanvas.com/engine/classes/CameraFrameEffect.html). Most are built into the camera frame, such as `cameraFrame.bloom` and `cameraFrame.vignette`. SMAA, auto exposure, lens flare and dynamic sky are added to it with [`addEffect`](https://api.playcanvas.com/engine/classes/CameraFrame.html#addeffect). You can also write [effects of your own](custom-effects.md).
 
 ## Setup and Usage
 
@@ -112,22 +118,22 @@ For Gaussian splats, see [scene depth requirements](volumetric-fog.md#gaussian-s
 
 ## Custom Post Processing
 
-Modern post-processing can be customized and extended in several ways. Choose the approach that best fits your needs:
+Modern post-processing can be extended in three ways. Choose the approach that best fits your needs:
 
-### [Customizing the Compose Shader](compose-shader)
+### [Custom Effects](custom-effects.md)
 
-Extend the `CameraFrame` by adding effects to the final compose pass only. This is the simplest approach when you don't need additional render passes.
+Add effects of your own to the composition of the `CameraFrame`, next to the built-in effects. An effect contributes a shader chunk to the single compose pass, so it costs no additional full-screen pass.
 
-**Best for:** Simple screen-space effects, color adjustments, quick prototyping.
+**Best for:** Screen-space effects, color adjustments, stylized looks.
 
-### [Extending FramePassCameraFrame Class](extending-class)
+### [Effects with Passes](effect-passes.md)
 
-Extend the `CameraFrame` by adding custom frame passes. This allows you to integrate additional rendering techniques while leveraging built-in effects.
+Write effects which own frame passes, rendering at the stages of the camera frame, such as before the scene, between its opaque and transparent geometry, or after it.
 
-**Best for:** Multi-pass effects, advanced integrations, processing intermediate results.
+**Best for:** Multi-pass effects, effects at a lower resolution, rendering into the scene, effects accumulating frames over time.
 
-### [Custom Render Passes](/user-manual/graphics/advanced-rendering/frame-graph/camera-passes/)
+### [Camera Passes](/user-manual/graphics/advanced-rendering/frame-graph/camera-passes/)
 
-Build a complete custom post-processing stack without using `CameraFrame`. This gives you full control over the entire rendering pipeline.
+Replace the rendering of a camera with frame passes of your own, without using `CameraFrame`. This gives you full control over the whole rendering of the camera.
 
 **Best for:** Complete custom pipelines, specialized rendering, maximum flexibility.

@@ -106,6 +106,8 @@ Use this index to write code against the engine directly. React, Web Components 
 ### Post-processing and rendering
 
 - [Modern Post Processing](/user-manual/graphics/posteffects/cameraframe/): The CameraFrame HDR stack: volumetric fog, bloom, SSAO, TAA, depth of field, color enhancement and grading.
+- [Custom Effects](/user-manual/graphics/posteffects/cameraframe/custom-effects/): Writing CameraFrame effects with CameraFrameEffect: compose slots, the shader chunk, parameters and effect scripts.
+- [Effects with Passes](/user-manual/graphics/posteffects/cameraframe/effect-passes/): CameraFrame effects owning frame passes: stages, frame resources, rebuilding passes and resolving the scene.
 - [Layers](/user-manual/graphics/layers/): Controlling render order and visibility with layers and the layer composition.
 - [Render Targets](/user-manual/graphics/advanced-rendering/render-targets/): Rendering into an offscreen texture and using the result in the scene.
 - [Frame Graph](/user-manual/graphics/advanced-rendering/frame-graph/): How a frame renders as logical passes in physical render and compute passes, and the engine's frame passes: adding passes to a camera, render passes, shader quad passes, rendering the scene into a texture, and compute passes.
