@@ -68,5 +68,5 @@ Rotate.prototype.update = function(dt) {
 - [Script Attributes](./script-attributes/index.md) — Exposing configurable properties.
 - [Engine API](./engine-api.md) — Key classes and patterns.
 - [Events](./events.md) — Communication between scripts.
-- [Debugging](./debugging/index.md) — Tools and techniques for troubleshooting.
+- [Debugging](/user-manual/debugging/) — Tools and techniques for troubleshooting.
 - [Migration Guide](./migration-guide.md) — Upgrading from classic to ESM scripts.
