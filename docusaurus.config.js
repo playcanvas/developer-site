@@ -170,6 +170,8 @@ const config = {
         { from: ['/user-manual/supersplat/timeline/'], to: '/user-manual/supersplat/editor/timeline/' },
         { from: ['/user-manual/supersplat/rendering/'], to: '/user-manual/supersplat/editor/rendering/' },
         { from: ['/user-manual/supersplat/publishing/'], to: '/user-manual/supersplat/editor/publishing/' },
+        // CameraFrame custom render passes moved to the Frame Graph section
+        { from: ['/user-manual/graphics/posteffects/cameraframe/custom-passes/'], to: '/user-manual/graphics/advanced-rendering/frame-graph/camera-passes/' },
       ],
       createRedirects: (existingPath) => {
         // Create redirects from old paths prefixed with /en

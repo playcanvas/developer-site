@@ -126,7 +126,7 @@ Gaussian Splat でフォグや被写界深度を使用する場合は、[シー�
 
 **向いている用途：** マルチパスエフェクト、高度な連携、中間結果の処理。
 
-### [カスタムレンダーパス](custom-passes)
+### [カスタムレンダーパス](/user-manual/graphics/advanced-rendering/frame-graph/camera-passes/)
 
 `CameraFrame` を使わず、完全なカスタムポストプロセススタックを構築します。レンダリングパイプライン全体を完全に制御できます。
 

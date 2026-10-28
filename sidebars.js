@@ -892,7 +892,6 @@ const sidebars = {
                 'user-manual/graphics/posteffects/cameraframe/volumetric-fog',
                 'user-manual/graphics/posteffects/cameraframe/compose-shader',
                 'user-manual/graphics/posteffects/cameraframe/extending-class',
-                'user-manual/graphics/posteffects/cameraframe/custom-passes',
               ],
             },
             {
@@ -931,6 +930,31 @@ const sidebars = {
             'user-manual/graphics/advanced-rendering/multi-draw',
             'user-manual/graphics/advanced-rendering/render-targets',
             'user-manual/graphics/advanced-rendering/multiple-render-targets',
+            {
+              type: 'category',
+              label: 'Frame Graph',
+              link: {
+                type: 'doc',
+                id: 'user-manual/graphics/advanced-rendering/frame-graph/index',
+              },
+              items: [
+                'user-manual/graphics/advanced-rendering/frame-graph/frame-passes',
+                'user-manual/graphics/advanced-rendering/frame-graph/camera-passes',
+                {
+                  type: 'category',
+                  label: 'Render Passes',
+                  link: {
+                    type: 'doc',
+                    id: 'user-manual/graphics/advanced-rendering/frame-graph/render-pass',
+                  },
+                  items: [
+                    'user-manual/graphics/advanced-rendering/frame-graph/render-pass-shader-quad',
+                    'user-manual/graphics/advanced-rendering/frame-graph/render-pass-forward',
+                  ],
+                },
+                'user-manual/graphics/advanced-rendering/frame-graph/compute-pass',
+              ],
+            },
             'user-manual/graphics/advanced-rendering/dual-source-blending',
             'user-manual/graphics/advanced-rendering/indirect-drawing',
             'user-manual/graphics/advanced-rendering/transform-feedback',

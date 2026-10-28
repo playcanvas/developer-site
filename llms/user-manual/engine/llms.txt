@@ -108,6 +108,7 @@ Use this index to write code against the engine directly. React, Web Components 
 - [Modern Post Processing](/user-manual/graphics/posteffects/cameraframe/): The CameraFrame HDR stack: volumetric fog, bloom, SSAO, TAA, depth of field, color enhancement and grading.
 - [Layers](/user-manual/graphics/layers/): Controlling render order and visibility with layers and the layer composition.
 - [Render Targets](/user-manual/graphics/advanced-rendering/render-targets/): Rendering into an offscreen texture and using the result in the scene.
+- [Frame Graph](/user-manual/graphics/advanced-rendering/frame-graph/): How a frame renders as logical passes in physical render and compute passes, and the engine's frame passes: adding passes to a camera, render passes, shader quad passes, rendering the scene into a texture, and compute passes.
 - [Hardware Instancing](/user-manual/graphics/advanced-rendering/hardware-instancing/): Drawing many copies of a mesh at once: instance buffer formats, mesh instance setup and shader chunks.
 - [Batching](/user-manual/graphics/advanced-rendering/batching/): Merging mesh instances into batch groups to reduce draw calls.
 - [Particles](/user-manual/graphics/particles/): Particle systems, starting them from scripts, and soft particles.

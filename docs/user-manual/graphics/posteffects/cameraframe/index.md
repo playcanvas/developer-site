@@ -126,7 +126,7 @@ Extend the `CameraFrame` by adding custom frame passes. This allows you to integ
 
 **Best for:** Multi-pass effects, advanced integrations, processing intermediate results.
 
-### [Custom Render Passes](custom-passes)
+### [Custom Render Passes](/user-manual/graphics/advanced-rendering/frame-graph/camera-passes/)
 
 Build a complete custom post-processing stack without using `CameraFrame`. This gives you full control over the entire rendering pipeline.
 
