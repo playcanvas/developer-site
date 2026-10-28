@@ -59,7 +59,7 @@ The effect keeps the directional light assigned to its [`light`](https://api.pla
 
 The sky has no clouds by default. Set [`cloudType`](https://api.playcanvas.com/engine/classes/DynamicSkyEffect.html#cloudtype) to add them:
 
-- `CLOUDTYPE_FLAT`: a single flat layer of noise, which is cheap.
+- `CLOUDTYPE_FLAT`: a single flat layer of noise with simple shading, which is cheap. The sky shader evaluates them for each pixel, like the rest of the sky, so they also work in [XR](#xr).
 - `CLOUDTYPE_VOLUMETRIC`: volumetric clouds, ray marched through a layer of 3D noise. They are the expensive part of the sky, and render to a texture of their own, at a reduced resolution. Their noise is generated on the CPU when they are first used.
 
 | Property | Description |
@@ -95,9 +95,13 @@ Generating the lighting has a cost, so the effect generates it again only when t
 
 The cameras without the effect, such as the cameras rendering planar reflections, render the sky of the scene from that environment atlas: a still image of this sky.
 
+## XR {#xr}
+
+In XR, the sky renders for each view, like the rest of the scene, and so do the flat clouds. The volumetric clouds render to their texture once, for the view of the camera, and each view reads them from it. Where the view of an eye extends past the view of the camera, the texture has no clouds to read, and they streak at its edge. Use `CLOUDTYPE_FLAT` clouds in XR.
+
 ## Limitations
 
-- The effect is not supported in XR.
+- The volumetric clouds are not supported in XR, see [XR](#xr).
 - The sky does not work together with the [volumetric fog](/user-manual/graphics/posteffects/cameraframe/volumetric-fog/) of the camera frame: the clouds cast no shadows into the fog, and the fog is not lit by the light of the sky.
 
 ## Example
