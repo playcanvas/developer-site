@@ -4,7 +4,7 @@
 
 Index: https://developer.playcanvas.com/llms.txt
 Total Documents: 531
-Generated: 2026-10-27
+Generated: 2026-10-29
 
 ================================================================================
 
@@ -9121,7 +9121,7 @@ Before an AI assistant changes multiple scenes or assets, use the **[Editor MCP 
 
 You cannot delete a checkpoint, but you can restore a previous checkpoint. Restoring a checkpoint works a little like a `git checkout <commit>` or `hg update -r <commit>`. However, in PlayCanvas we don't allow branches unless they have been explicitly created (no detached heads or similar). When you restore a previous checkpoint future changes will be children of the latest checkpoint in the branch.
 
-**Branches** in PlayCanvas work like branches in other systems. A branch forms an isolated line of development made up of checkpoints. All users who have set a branch as their current branch will see their changes in a real-time collaborative fashion. Branches cannot be deleted, but when you are finished working on a branch it can be *closed*.
+**Branches** in PlayCanvas work like branches in other systems. A branch forms an isolated line of development made up of checkpoints. All users who have set a branch as their current branch will see their changes in a real-time collaborative fashion. When you are finished working on a branch, you can *close* it. Branches can only be deleted in [limited cases](https://developer.playcanvas.com/user-manual/editor/version-control/branches.md#deleting-a-branch).
 
 Merging works in a similar way to other VCSs. However, in PlayCanvas it's important to note that merging occurs *between checkpoints* so any changes that you have not committed in a checkpoint will not be included in your merge. PlayCanvas automatically creates checkpoints in the destination branch of a merge to prevent you accidentally losing changes when merging.
 
@@ -9131,14 +9131,17 @@ More details can be found on the specific pages for [checkpoints](https://develo
 
 Using Version Control will use more storage for checkpoints and branches.
 
-Every checkpoint created only stores the changes from the previous checkpoint. The amount of data used is dependent on the changes such as new assets, texture changes etc.
+Every checkpoint created only stores the changes from the previous checkpoint. The amount of data used depends on the changes, such as new assets or replaced textures.
 
-Creating a branch from a checkpoint makes a copy of the project state at that checkpoint. This can increase storage usage significantly depending on the project.
+Creating a branch from a checkpoint makes a copy of the project's assets at that checkpoint. Every open branch counts its full copy towards your storage allowance, even if its files are identical to those in other branches. A project with many open branches can therefore use several times the storage of its assets alone.
 
-Unfortunately, it is not possible to delete branches or checkpoints except in these specific cases:
+To reduce the storage used by version control:
 
-- [Hard reset to a checkpoint](https://developer.playcanvas.com/user-manual/editor/version-control/checkpoints.md#hard-reset-to-a-checkpoint)
-- [Deleting a branch](https://developer.playcanvas.com/user-manual/editor/version-control/branches.md#deleting-a-branch)
+- [Close branches](https://developer.playcanvas.com/user-manual/editor/version-control/branches.md#closing-a-branch) you are no longer working on. Closing a branch removes its copy of the assets from your storage usage, while keeping its checkpoints. If you reopen the branch later, its assets count towards your usage again.
+- [Delete a branch](https://developer.playcanvas.com/user-manual/editor/version-control/branches.md#deleting-a-branch) to also remove its checkpoints. Close the branch first, so that its assets stop counting too. Deletion is only possible for branches that haven't been merged into another branch, and can't be undone.
+- [Hard reset to a checkpoint](https://developer.playcanvas.com/user-manual/editor/version-control/checkpoints.md#hard-reset-to-a-checkpoint) to delete the checkpoints after it. This also can't be undone.
+
+Other checkpoints can't be deleted, so the storage they use stays in your project's history.
 
 If you need more storage space, please email us at [support@playcanvas.com](mailto:support@playcanvas.com). In most cases, we can increase your storage allowance with no extra charge.
 
@@ -9154,6 +9157,8 @@ A checkpoint is a snapshot of your project at a point in time. It contains the c
 [Image: Checkpoint]
 
 A checkpoint is a permanent record of the state of your project and forms part of the graph that is used for branches and merging changes. As such, once created checkpoints cannot be deleted. This means that once you have committed your changes as part of a checkpoint they are safe forever in your project history.
+
+Although each checkpoint lets you restore the complete project, it only stores the changes since the previous checkpoint. Checkpoints count towards your storage allowance, and replacing large assets between checkpoints uses the most storage. See [How Version Control Affects Your Storage](https://developer.playcanvas.com/user-manual/editor/version-control.md#how-version-control-affects-your-storage).
 
 ## Creating a checkpoint
 
@@ -9183,6 +9188,8 @@ Hard reset can only delete the checkpoints if the following conditions are met:
 
 - No branches have been created from the checkpoints being deleted
 - The checkpoints being deleted have not been created by a merge of branches
+
+The deleted checkpoints no longer count towards your storage usage.
 
 **Note, deleted checkpoints cannot be recovered.**
 
@@ -9273,7 +9280,11 @@ Unticking this checkbox will lose any work you have made in the branch since you
 
 :::
 
-Closed branches can also be reopened at a later date.
+Closing a branch also reduces your storage usage. A closed branch's copy of the project's assets no longer counts towards your storage allowance, although its checkpoints are kept.
+
+Closed branches can be reopened at a later date. Set the [branch filter](https://developer.playcanvas.com/user-manual/editor/version-control/branches.md#filtering-branch-list) to **Closed**, select the branch and choose the "Re-Open This Branch" option in the branch's drop-down menu. Reopening a branch restores its assets, which count towards your storage usage again.
+
+Closing is the only way to tidy up a branch that has been merged into another branch, because merged branches can't be deleted.
 
 ## Deleting a branch
 
@@ -9287,6 +9298,8 @@ To delete a branch open the version control panel, select the branch you wish to
 [Image: Delete a branch]
 
 You will be asked to confirm the deletion of the branch by typing the name of the branch in the dialog box.
+
+Deleting a branch removes its checkpoints, so they no longer count towards your storage usage. To make sure the branch's assets also stop counting, [close the branch](https://developer.playcanvas.com/user-manual/editor/version-control/branches.md#closing-a-branch) before you delete it.
 
 **Note, deleted branches cannot be recovered after deletion! If in doubt, please close the branch instead.**
 
@@ -56894,15 +56907,21 @@ Click the `x` icon to the right of a listed user to remove them from all of your
 
 This section tracks your account resource consumption. The usage meter shows current consumption against your plan limits.
 
-### Storage Breakdown
+### Projects
 
 - **Public Projects** - Number created vs. limit
 - **Private Projects** - Number created vs. limit (plan-dependent)
-- **Assets** - Storage used for 3D models, textures, audio
-- **Apps** - Published application data
+
+### Storage Breakdown
+
+These categories count towards your plan's storage allowance:
+
+- **Assets** - Storage used for 3D models, textures, audio. Every open branch of a project counts its own copy of the assets. See [How Version Control Affects Your Storage](https://developer.playcanvas.com/user-manual/editor/version-control.md#how-version-control-affects-your-storage).
+- **Apps** - Published application data. Deleting a published build removes its full size from your usage.
 - **Code** - Script and code storage
 - **Checkpoints** - Version history storage
-- **Splats** - Gaussian splat data (uploaded from SuperSplat)
+
+Your usage also shows **Splats**, the Gaussian splat data you have published to [SuperSplat](https://developer.playcanvas.com/user-manual/supersplat.md). Splats don't count towards your storage allowance. SuperSplat has its own upload limits instead.
 
 ## API Tokens
 

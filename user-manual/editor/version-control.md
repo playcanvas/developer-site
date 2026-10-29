@@ -20,7 +20,7 @@ Before an AI assistant changes multiple scenes or assets, use the **[Editor MCP 
 
 You cannot delete a checkpoint, but you can restore a previous checkpoint. Restoring a checkpoint works a little like a `git checkout <commit>` or `hg update -r <commit>`. However, in PlayCanvas we don't allow branches unless they have been explicitly created (no detached heads or similar). When you restore a previous checkpoint future changes will be children of the latest checkpoint in the branch.
 
-**Branches** in PlayCanvas work like branches in other systems. A branch forms an isolated line of development made up of checkpoints. All users who have set a branch as their current branch will see their changes in a real-time collaborative fashion. Branches cannot be deleted, but when you are finished working on a branch it can be *closed*.
+**Branches** in PlayCanvas work like branches in other systems. A branch forms an isolated line of development made up of checkpoints. All users who have set a branch as their current branch will see their changes in a real-time collaborative fashion. When you are finished working on a branch, you can *close* it. Branches can only be deleted in [limited cases](https://developer.playcanvas.com/user-manual/editor/version-control/branches.md#deleting-a-branch).
 
 Merging works in a similar way to other VCSs. However, in PlayCanvas it's important to note that merging occurs *between checkpoints* so any changes that you have not committed in a checkpoint will not be included in your merge. PlayCanvas automatically creates checkpoints in the destination branch of a merge to prevent you accidentally losing changes when merging.
 
@@ -30,13 +30,16 @@ More details can be found on the specific pages for [checkpoints](https://develo
 
 Using Version Control will use more storage for checkpoints and branches.
 
-Every checkpoint created only stores the changes from the previous checkpoint. The amount of data used is dependent on the changes such as new assets, texture changes etc.
+Every checkpoint created only stores the changes from the previous checkpoint. The amount of data used depends on the changes, such as new assets or replaced textures.
 
-Creating a branch from a checkpoint makes a copy of the project state at that checkpoint. This can increase storage usage significantly depending on the project.
+Creating a branch from a checkpoint makes a copy of the project's assets at that checkpoint. Every open branch counts its full copy towards your storage allowance, even if its files are identical to those in other branches. A project with many open branches can therefore use several times the storage of its assets alone.
 
-Unfortunately, it is not possible to delete branches or checkpoints except in these specific cases:
+To reduce the storage used by version control:
 
-- [Hard reset to a checkpoint](https://developer.playcanvas.com/user-manual/editor/version-control/checkpoints.md#hard-reset-to-a-checkpoint)
-- [Deleting a branch](https://developer.playcanvas.com/user-manual/editor/version-control/branches.md#deleting-a-branch)
+- [Close branches](https://developer.playcanvas.com/user-manual/editor/version-control/branches.md#closing-a-branch) you are no longer working on. Closing a branch removes its copy of the assets from your storage usage, while keeping its checkpoints. If you reopen the branch later, its assets count towards your usage again.
+- [Delete a branch](https://developer.playcanvas.com/user-manual/editor/version-control/branches.md#deleting-a-branch) to also remove its checkpoints. Close the branch first, so that its assets stop counting too. Deletion is only possible for branches that haven't been merged into another branch, and can't be undone.
+- [Hard reset to a checkpoint](https://developer.playcanvas.com/user-manual/editor/version-control/checkpoints.md#hard-reset-to-a-checkpoint) to delete the checkpoints after it. This also can't be undone.
+
+Other checkpoints can't be deleted, so the storage they use stays in your project's history.
 
 If you need more storage space, please email us at [support@playcanvas.com](mailto:support@playcanvas.com). In most cases, we can increase your storage allowance with no extra charge.

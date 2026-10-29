@@ -74,7 +74,11 @@ Unticking this checkbox will lose any work you have made in the branch since you
 
 :::
 
-Closed branches can also be reopened at a later date.
+Closing a branch also reduces your storage usage. A closed branch's copy of the project's assets no longer counts towards your storage allowance, although its checkpoints are kept.
+
+Closed branches can be reopened at a later date. Set the [branch filter](https://developer.playcanvas.com/user-manual/editor/version-control/branches.md#filtering-branch-list) to **Closed**, select the branch and choose the "Re-Open This Branch" option in the branch's drop-down menu. Reopening a branch restores its assets, which count towards your storage usage again.
+
+Closing is the only way to tidy up a branch that has been merged into another branch, because merged branches can't be deleted.
 
 ## Deleting a branch
 
@@ -88,6 +92,8 @@ To delete a branch open the version control panel, select the branch you wish to
 [Image: Delete a branch]
 
 You will be asked to confirm the deletion of the branch by typing the name of the branch in the dialog box.
+
+Deleting a branch removes its checkpoints, so they no longer count towards your storage usage. To make sure the branch's assets also stop counting, [close the branch](https://developer.playcanvas.com/user-manual/editor/version-control/branches.md#closing-a-branch) before you delete it.
 
 **Note, deleted branches cannot be recovered after deletion! If in doubt, please close the branch instead.**
 

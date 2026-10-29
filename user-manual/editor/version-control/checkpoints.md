@@ -6,6 +6,8 @@ A checkpoint is a snapshot of your project at a point in time. It contains the c
 
 A checkpoint is a permanent record of the state of your project and forms part of the graph that is used for branches and merging changes. As such, once created checkpoints cannot be deleted. This means that once you have committed your changes as part of a checkpoint they are safe forever in your project history.
 
+Although each checkpoint lets you restore the complete project, it only stores the changes since the previous checkpoint. Checkpoints count towards your storage allowance, and replacing large assets between checkpoints uses the most storage. See [How Version Control Affects Your Storage](https://developer.playcanvas.com/user-manual/editor/version-control.md#how-version-control-affects-your-storage).
+
 ## Creating a checkpoint
 
 Checkpoints are created from the Version Control panel.
@@ -34,6 +36,8 @@ Hard reset can only delete the checkpoints if the following conditions are met:
 
 - No branches have been created from the checkpoints being deleted
 - The checkpoints being deleted have not been created by a merge of branches
+
+The deleted checkpoints no longer count towards your storage usage.
 
 **Note, deleted checkpoints cannot be recovered.**
 
