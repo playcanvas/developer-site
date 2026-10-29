@@ -19,6 +19,14 @@
     "message": "2D",
     "description": "The label for category 2D in sidebar userManualSidebar"
   },
+  "sidebar.userManualSidebar.category.Debugging and Optimization": {
+    "message": "デバッグと最適化",
+    "description": "The label for category Debugging and Optimization in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Profiling": {
+    "message": "プロファイリング",
+    "description": "The label for category Profiling in sidebar userManualSidebar"
+  },
   "sidebar.userManualSidebar.category.Optimization": {
     "message": "最適化",
     "description": "The label for category Optimization in sidebar userManualSidebar"
@@ -198,6 +206,10 @@
   "sidebar.userManualSidebar.category.Script Attributes": {
     "message": "スクリプト属性",
     "description": "The label for category Script Attributes in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.doc.Debugging": {
+    "message": "デバッグ",
+    "description": "The label for the doc item Debugging in sidebar userManualSidebar, linking to the doc user-manual/debugging/index"
   },
   "sidebar.userManualSidebar.category.Debugging": {
     "message": "デバッグ",
