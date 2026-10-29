@@ -95,15 +95,21 @@ Click the `x` icon to the right of a listed user to remove them from all of your
 
 This section tracks your account resource consumption. The usage meter shows current consumption against your plan limits.
 
-### Storage Breakdown
+### Projects
 
 - **Public Projects** - Number created vs. limit
 - **Private Projects** - Number created vs. limit (plan-dependent)
-- **Assets** - Storage used for 3D models, textures, audio
-- **Apps** - Published application data
+
+### Storage Breakdown
+
+These categories count towards your plan's storage allowance:
+
+- **Assets** - Storage used for 3D models, textures, audio. Every open branch of a project counts its own copy of the assets. See [How Version Control Affects Your Storage](/user-manual/editor/version-control/#how-version-control-affects-your-storage).
+- **Apps** - Published application data. Deleting a published build removes its full size from your usage.
 - **Code** - Script and code storage
 - **Checkpoints** - Version history storage
-- **Splats** - Gaussian splat data (uploaded from SuperSplat)
+
+Your usage also shows **Splats**, the Gaussian splat data you have published to [SuperSplat](/user-manual/supersplat/). Splats don't count towards your storage allowance. SuperSplat has its own upload limits instead.
 
 ## API Tokens
 
