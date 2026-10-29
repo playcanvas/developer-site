@@ -166,10 +166,11 @@ The effects which are not built into the camera frame have scripts of their own.
 | `autoExposureEffect` | [`auto-exposure.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/auto-exposure.mjs) | The [auto exposure](/user-manual/graphics/posteffects/cameraframe/auto-exposure/) |
 | `smaaEffect` | [`smaa.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/smaa.mjs) | [SMAA](/user-manual/graphics/posteffects/cameraframe/#smaa) anti-aliasing |
 | `lensFlareEffect` | [`lens-flare.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/lens-flare.mjs) | The [lens flare](/user-manual/graphics/posteffects/cameraframe/lens-flare/) effect, with its shape library. The `lensFlare` script from the same file gives the entities it is on a flare. |
+| `dynamicSkyEffect` | [`dynamic-sky.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/dynamic-sky.mjs) | The [dynamic sky](/user-manual/graphics/posteffects/cameraframe/dynamic-sky/) |
 
 These scripts import [`camera-frame-effect.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/camera-frame-effect.mjs), so add it to the project next to them. It is also the base class for scripts of your own effects, see [Effects in the Editor](/user-manual/graphics/posteffects/cameraframe/custom-effects/#effects-in-the-editor).
 
-The effect of a script follows its enabled state, and is destroyed with it, which removes it from the camera frame. The **Debug** attribute of a script displays the debug view of its effect. It and the debug setting of the `cameraFrame` script override each other, and the last one changed is displayed. The [dynamic sky](/user-manual/graphics/posteffects/cameraframe/dynamic-sky/) has no Editor script, so set it up in code.
+The effect of a script follows its enabled state, and is destroyed with it, which removes it from the camera frame. The **Debug** attribute of a script displays the debug view of its effect. It and the debug setting of the `cameraFrame` script override each other, and the last one changed is displayed.
 
 ## CameraFrame Tips
 

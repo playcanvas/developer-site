@@ -15,6 +15,8 @@ cameraFrame.addEffect(sky);
 cameraFrame.update();
 ```
 
+In the Editor, its script adds it, see [The dynamic sky in the Editor](#the-dynamic-sky-in-the-editor).
+
 Like all effects, its settings apply on the next [`CameraFrame#update`](https://api.playcanvas.com/engine/classes/CameraFrame.html#update). A day and night cycle moving the sun calls it every frame:
 
 ```javascript
@@ -98,6 +100,30 @@ The cameras without the effect, such as the cameras rendering planar reflections
 ## XR {#xr}
 
 In XR, the sky renders for each view, like the rest of the scene, and so do the flat clouds. The volumetric clouds render to their texture once, for the view of the camera, and each view reads them from it. Where the view of an eye extends past the view of the camera, the texture has no clouds to read, and they streak at its edge. Use `CLOUDTYPE_FLAT` clouds in XR.
+
+## The dynamic sky in the Editor
+
+The `dynamicSkyEffect` script, from [`dynamic-sky.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/dynamic-sky.mjs), adds the effect to the camera frame of the camera entity it is on, next to the [`cameraFrame` script](/user-manual/graphics/linear-workflow/hdr-rendering/#cameraframe-in-the-editor). Its attributes are the properties of the effect, in the groups **Sun**, **Day**, **Night**, **Clouds** and **Lighting**. The **Light** attribute of the **Sun** group is the entity of the directional light kept in sync with the sun.
+
+The script does not animate the time of day. It copies its attributes into the effect every frame, so a script of your own on the same entity moves the sun by changing them:
+
+```javascript
+import { Script } from 'playcanvas';
+
+class DayNightCycle extends Script {
+    static scriptName = 'dayNightCycle';
+
+    time = 0;
+
+    update(dt) {
+        this.time += dt;
+        const sky = this.entity.script.dynamicSkyEffect;
+        sky.sun.elevation = Math.sin(this.time * 0.1) * 60;
+    }
+}
+
+export { DayNightCycle };
+```
 
 ## Limitations
 

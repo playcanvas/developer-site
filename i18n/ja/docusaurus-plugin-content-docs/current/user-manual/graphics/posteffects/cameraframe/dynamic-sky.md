@@ -15,6 +15,8 @@ cameraFrame.addEffect(sky);
 cameraFrame.update();
 ```
 
+エディターでは、専用のスクリプトでエフェクトを追加します。[エディターでのダイナミックスカイ](#the-dynamic-sky-in-the-editor)を参照してください。
+
 すべてのエフェクトと同様に、設定は次の [`CameraFrame#update`](https://api.playcanvas.com/engine/classes/CameraFrame.html#update) で適用されます。太陽を動かす昼夜サイクルでは、これを毎フレーム呼び出します。
 
 ```javascript
@@ -98,6 +100,30 @@ app.on('update', (dt) => {
 ## XR {#xr}
 
 XR では、シーンの他の部分と同様に空は各ビューごとにレンダリングされ、フラットな雲も同様です。ボリューメトリックな雲は、カメラのビューに対して一度だけテクスチャにレンダリングされ、各ビューはそのテクスチャから雲を読み取ります。目のビューがカメラのビューの外側まで広がる部分では、テクスチャに読み取る雲がないため、テクスチャの端で雲が筋状に引き伸ばされます。XR では `CLOUDTYPE_FLAT` の雲を使用してください。
+
+## エディターでのダイナミックスカイ {#the-dynamic-sky-in-the-editor}
+
+[`dynamic-sky.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/dynamic-sky.mjs) の `dynamicSkyEffect` スクリプトは、[`cameraFrame` スクリプト](/user-manual/graphics/linear-workflow/hdr-rendering/#cameraframe-in-the-editor)と並べてカメラエンティティに追加すると、そのカメラエンティティのカメラフレームにエフェクトを追加します。属性はエフェクトのプロパティで、**Sun**、**Day**、**Night**、**Clouds**、**Lighting** のグループに分かれています。**Sun** グループの **Light** 属性は、太陽に同期させるディレクショナルライトのエンティティです。
+
+このスクリプトは時刻をアニメーションしません。スクリプトは毎フレーム属性をエフェクトにコピーするため、同じエンティティに付けた独自のスクリプトから属性を変更すると、太陽が動きます。
+
+```javascript
+import { Script } from 'playcanvas';
+
+class DayNightCycle extends Script {
+    static scriptName = 'dayNightCycle';
+
+    time = 0;
+
+    update(dt) {
+        this.time += dt;
+        const sky = this.entity.script.dynamicSkyEffect;
+        sky.sun.elevation = Math.sin(this.time * 0.1) * 60;
+    }
+}
+
+export { DayNightCycle };
+```
 
 ## 制限事項 {#limitations}
 
