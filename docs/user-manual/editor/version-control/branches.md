@@ -96,7 +96,7 @@ To delete a branch open the version control panel, select the branch you wish to
 
 You will be asked to confirm the deletion of the branch by typing the name of the branch in the dialog box.
 
-Deleting a branch removes both its assets and its checkpoints, so neither counts towards your storage usage any more.
+Deleting a branch removes its checkpoints, so they no longer count towards your storage usage. To make sure the branch's assets also stop counting, [close the branch](#closing-a-branch) before you delete it.
 
 **Note, deleted branches cannot be recovered after deletion! If in doubt, please close the branch instead.**
 

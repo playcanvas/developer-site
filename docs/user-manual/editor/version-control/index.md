@@ -40,7 +40,7 @@ Creating a branch from a checkpoint makes a copy of the project's assets at that
 To reduce the storage used by version control:
 
 - [Close branches](/user-manual/editor/version-control/branches/#closing-a-branch) you are no longer working on. Closing a branch removes its copy of the assets from your storage usage, while keeping its checkpoints. If you reopen the branch later, its assets count towards your usage again.
-- [Delete a branch](/user-manual/editor/version-control/branches/#deleting-a-branch) to remove both its assets and its checkpoints. This is only possible for branches that haven't been merged into another branch, and can't be undone.
+- [Delete a branch](/user-manual/editor/version-control/branches/#deleting-a-branch) to also remove its checkpoints. Close the branch first, so that its assets stop counting too. Deletion is only possible for branches that haven't been merged into another branch, and can't be undone.
 - [Hard reset to a checkpoint](/user-manual/editor/version-control/checkpoints/#hard-reset-to-a-checkpoint) to delete the checkpoints after it. This also can't be undone.
 
 Other checkpoints can't be deleted, so the storage they use stays in your project's history.
