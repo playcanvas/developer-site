@@ -37,11 +37,11 @@ Use this index to write code against the engine directly. React, Web Components 
 
 ## Entities and components
 
-- [Entity Component System](/user-manual/ecs/): How entities, components and systems organize objects and behavior.
-- [Entities](/user-manual/ecs/entities/): Creating, parenting, enabling and managing entities.
-- [Components](/user-manual/ecs/components/): Adding cameras, lights, physics, scripts and other behavior to entities.
-- [Hierarchy and Transformations](/user-manual/ecs/hierarchy-and-transformations/): Local and world position, rotation and scale in a parent-child hierarchy.
-- [Searching the Hierarchy](/user-manual/ecs/searching-the-hierarchy/): Finding entities at runtime by name, tag, path or callback.
+- [Entity Component System](/user-manual/ecs/): How a scene is built from entities, the components that give them abilities and the systems that run them, on every surface.
+- [Entities](/user-manual/ecs/entities/): Creating, naming, tagging, enabling, destroying and copying entities, with clone() and templates.
+- [Components](/user-manual/ecs/components/): The built-in components and their names on each surface; adding, changing, disabling and removing them; scripts and component systems.
+- [Hierarchy and Transforms](/user-manual/ecs/hierarchy-and-transformations/): The coordinate system, local and world space, moving and rotating, parenting and scale.
+- [Finding Entities](/user-manual/ecs/searching-the-hierarchy/): Looking entities up by name, path, tag, component, script or a test of your own.
 
 ## Scripting
 
