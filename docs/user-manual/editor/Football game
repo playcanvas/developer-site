@@ -1,0 +1,130 @@
+docs/user-manual/editor/projects/index.md
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3D Battle Arena</title>
+<style>
+body{margin:0;overflow:hidden;background:#111;font-family:Arial}
+#info{position:fixed;top:12px;left:0;width:100%;text-align:center;color:white;font-size:20px;z-index:5}
+#controls{position:fixed;bottom:25px;left:0;width:100%;display:flex;justify-content:space-around;z-index:5}
+button{background:#222;color:white;border:2px solid white;border-radius:15px;padding:17px;font-size:18px}
+</style>
+</head>
+<body>
+<div id="info">3D BATTLE ARENA | SCORE: <span id="score">0</span></div>
+<div id="controls">
+<button id="left">◀</button>
+<button id="shoot">إطلاق</button>
+<button id="right">▶</button>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const scene=new THREE.Scene();
+scene.background=new THREE.Color(0x87ceeb);
+scene.fog=new THREE.Fog(0x87ceeb,20,100);
+
+const camera=new THREE.PerspectiveCamera(70,innerWidth/innerHeight,.1,1000);
+camera.position.set(0,5,9);
+camera.lookAt(0,0,0);
+
+const renderer=new THREE.WebGLRenderer({antialias:true});
+renderer.setSize(innerWidth,innerHeight);
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+document.body.appendChild(renderer.domElement);
+
+scene.add(new THREE.HemisphereLight(0xffffff,0x555555,2));
+
+const light=new THREE.DirectionalLight(0xffffff,2);
+light.position.set(5,10,5);
+scene.add(light);
+
+const ground=new THREE.Mesh(
+new THREE.PlaneGeometry(200,200),
+new THREE.MeshStandardMaterial({color:0x477b36})
+);
+ground.rotation.x=-Math.PI/2;
+scene.add(ground);
+
+function box(x,y,z,w,h,d,color){
+const m=new THREE.Mesh(
+new THREE.BoxGeometry(w,h,d),
+new THREE.MeshStandardMaterial({color})
+);
+m.position.set(x,y,z);
+scene.add(m);
+return m;
+}
+
+// مباني الساحة
+for(let i=0;i<18;i++){
+let x=(Math.random()-.5)*55;
+let z=(Math.random()-.5)*55;
+if(Math.abs(x)<7&&Math.abs(z)<7)continue;
+box(x,2,z,5,4,5,0x777777);
+}
+
+// شخصية اللاعب
+const player=new THREE.Group();
+const body=box(0,1,0,0.8,1.2,0.5,0x2255cc);
+body.position.y=1;
+const head=new THREE.Mesh(
+new THREE.SphereGeometry(.35,16,16),
+new THREE.MeshStandardMaterial({color:0xffcc99})
+);
+head.position.y=1.95;
+player.add(head);
+player.add(body);
+scene.add(player);
+
+// سلاح خيالي
+const gun=box(.55,1.35,-.3,.18,.18,.8,0x222222);
+player.add(gun);
+
+let score=0;
+let direction=0;
+let enemies=[];
+
+for(let i=0;i<6;i++){
+let e=box((Math.random()-.5)*35,1,(Math.random()-.5)*35,.8,2,.8,0xaa3333);
+enemies.push(e);
+}
+
+function shoot(){
+let nearest=null;
+let distance=Infinity;
+for(let e of enemies){
+let d=player.position.distanceTo(e.position);
+if(d<distance){distance=d;nearest=e;}
+}
+if(nearest&&distance<12){
+scene.remove(nearest);
+enemies=enemies.filter(e=>e!==nearest);
+score++;
+document.getElementById("score").textContent=score;
+}
+}
+
+document.getElementById("shoot").onclick=shoot;
+document.getElementById("left").onpointerdown=()=>direction=-1;
+document.getElementById("right").onpointerdown=()=>direction=1;
+document.onpointerup=()=>direction=0;
+
+function animate(){
+requestAnimationFrame(animate);
+player.position.x+=direction*.08;
+camera.position.x=player.position.x;
+camera.lookAt(player.position.x,0,0);
+renderer.render(scene,camera);
+}
+animate();
+
+window.onresize=()=>{
+camera.aspect=innerWidth/innerHeight;
+camera.updateProjectionMatrix();
+renderer.setSize(innerWidth,innerHeight);
+};
+</script>
+</body>
+</html>
