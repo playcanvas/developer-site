@@ -25,7 +25,7 @@ import { convertDoc, readFrontMatter } from './llms/markdown.mjs';
  *   to site root
  * @param {string} [options.sidebarPath='sidebars.js'] - Path to the sidebars file relative to
  *   site root, which sets the order of the docs
- * @param {string[]} [options.excludeDirs=['shader-editor', 'tutorials']] - Directories to exclude
+ * @param {string[]} [options.excludeDirs=['tutorials']] - Directories to exclude
  *   from LLM file generation (e.g., private or unlisted documentation sections)
  * @param {boolean} [options.failOnError=false] - If true, build will fail when LLM file
  *   generation encounters an error, when a doc cannot be converted faithfully or does not
@@ -38,7 +38,7 @@ export default function pluginLlms(context, options = {}) {
     const indexDir = path.join(siteDir, options.indexDir || 'llms');
     const sidebarPath = path.join(siteDir, options.sidebarPath || 'sidebars.js');
     const baseUrl = siteConfig.url;
-    const excludeDirs = options.excludeDirs ?? ['shader-editor', 'tutorials'];
+    const excludeDirs = options.excludeDirs ?? ['tutorials'];
     const failOnError = options.failOnError ?? false;
 
     return {

@@ -39,26 +39,6 @@
     "message": "REST API",
     "description": "The label for category REST API in sidebar userManualSidebar"
   },
-  "sidebar.shaderEditorSidebar.category.概要": {
-    "message": "概要",
-    "description": "The label for category 概要 in sidebar shaderEditorSidebar"
-  },
-  "sidebar.shaderEditorSidebar.category.グラフ": {
-    "message": "グラフ",
-    "description": "The label for category グラフ in sidebar shaderEditorSidebar"
-  },
-  "sidebar.shaderEditorSidebar.category.ノード": {
-    "message": "ノード",
-    "description": "The label for category ノード in sidebar shaderEditorSidebar"
-  },
-  "sidebar.shaderEditorSidebar.category.ウィンドウの配置": {
-    "message": "ウィンドウの配置",
-    "description": "The label for category ウィンドウの配置 in sidebar shaderEditorSidebar"
-  },
-  "sidebar.shaderEditorSidebar.category.インスペクターペイン": {
-    "message": "インスペクターペイン",
-    "description": "The label for category インスペクターペイン in sidebar shaderEditorSidebar"
-  },
   "sidebar.userManualSidebar.category.general-getting-started": {
     "message": "はじめに",
     "description": "The label for category Getting Started (General) in sidebar userManualSidebar"
