@@ -154,10 +154,12 @@ useEffect(() => {
 </TabItem>
 <TabItem value="web-components" label="Web Components">
 
-ドキュメントは階層を反映しているので、DOMでエンティティの要素を選択して、そのエンティティを使えます。
+ドキュメントは階層を反映しているので、CSSセレクターでエンティティの要素を選択できます。要素の準備ができるまで、その`entity`は`null`なので、同じセレクターを受け取る`whenReady()`で待ちます。
 
 ```javascript
-const door = document.querySelector('pc-entity[name="door"]');
+import { whenReady } from '@playcanvas/web-components';
+
+const door = await whenReady('pc-entity[name="door"]');
 console.log(door.entity.getPosition().toString());
 ```
 

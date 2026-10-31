@@ -154,10 +154,12 @@ useEffect(() => {
 </TabItem>
 <TabItem value="web-components" label="Web Components">
 
-The document mirrors the hierarchy, so you can select an entity's element with the DOM and use its entity:
+The document mirrors the hierarchy, so you can select an entity's element with a CSS selector. Its `entity` is `null` until the element is ready, so wait for it with `whenReady()`, which takes the same selector:
 
 ```javascript
-const door = document.querySelector('pc-entity[name="door"]');
+import { whenReady } from '@playcanvas/web-components';
+
+const door = await whenReady('pc-entity[name="door"]');
 console.log(door.entity.getPosition().toString());
 ```
 

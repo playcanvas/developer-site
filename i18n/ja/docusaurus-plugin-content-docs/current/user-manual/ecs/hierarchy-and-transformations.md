@@ -299,18 +299,25 @@ DynamicなRigidBodyは物理エンジンが動かし、そのトランスフォ�
 <Tabs groupId="workflow" defaultValue="engine">
 <TabItem value="engine" label="Engine">
 
-```javascript
-// ローカルトランスフォームを保ちます。wheelはtrailer上の同じ相対位置へ飛びます
-trailer.addChild(wheel);
+wheelをtrailerに移してローカルトランスフォームを保つには、trailerに追加します。wheelは、古い親に対して持っていたのと同じ相対位置へ、trailerに対して飛びます。
 
-// ワールドトランスフォームを保ちます。wheelは今の場所に留まります
+```javascript
+trailer.addChild(wheel);
+```
+
+代わりにワールドトランスフォームを保って今の場所に留めるには、移す前にワールドでの位置と回転を保存し、移した後でそれを設定し直します。
+
+```javascript
 const position = wheel.getPosition().clone();
 const rotation = wheel.getRotation().clone();
 trailer.addChild(wheel);
 wheel.setPosition(position);
 wheel.setRotation(rotation);
+```
 
-// 子をリストの末尾ではなく先頭に挿入します
+子をリストの末尾ではなく先頭に挿入するには、次のようにします。
+
+```javascript
 trailer.insertChild(spare, 0);
 ```
 

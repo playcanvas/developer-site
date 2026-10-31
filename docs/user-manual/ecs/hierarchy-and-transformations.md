@@ -299,18 +299,25 @@ The order of an entity's children is the order they were added in, unless you in
 <Tabs groupId="workflow" defaultValue="engine">
 <TabItem value="engine" label="Engine">
 
-```javascript
-// keeps the local transform: the wheel jumps to the same position on the trailer
-trailer.addChild(wheel);
+To move the wheel onto the trailer and keep its local transform, add it to the trailer. It jumps to the position relative to the trailer that it had relative to its old parent:
 
-// keeps the world transform: the wheel stays where it is
+```javascript
+trailer.addChild(wheel);
+```
+
+To keep its world transform instead, so that it stays where it is, save its world position and rotation before you move it, and set them again afterwards:
+
+```javascript
 const position = wheel.getPosition().clone();
 const rotation = wheel.getRotation().clone();
 trailer.addChild(wheel);
 wheel.setPosition(position);
 wheel.setRotation(rotation);
+```
 
-// insert a child at the start of the list instead of the end
+To insert a child at the start of the list instead of the end:
+
+```javascript
 trailer.insertChild(spare, 0);
 ```
 
