@@ -96,7 +96,7 @@ On macOS, use Cmd in place of Ctrl. Unity's View tool (Q) has no equivalent, bec
 | --- | --- | --- |
 | GameObject | [Entity](/user-manual/ecs/entities/) | |
 | Component | [Component](/user-manual/ecs/components/) | Components are properties of the entity: `entity.camera`, `entity.light`. |
-| Transform | Part of every entity | Entities have a position, rotation and scale of their own. See [Hierarchy & Transforms](/user-manual/ecs/hierarchy-and-transformations/). |
+| Transform | Part of every entity | Entities have a position, rotation and scale of their own. See [Hierarchy and Transforms](/user-manual/ecs/hierarchy-and-transformations/). |
 | MonoBehaviour | [Script](/user-manual/scripting/) | Attached through an entity's Script component. |
 | Prefab | [Template](/user-manual/editor/templates/) | See [Prefabs and Templates](#prefabs-and-templates). |
 | Scene | [Scene](/user-manual/editor/scenes/) | |
