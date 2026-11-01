@@ -16,7 +16,8 @@ const ACRONYMS = /\b(Ar|Glb|Gpu|Hdr|Html|Lod|Lut|Taa|Vr|Webgl|Webgpu|Xr)\b/g;
 
 // Set `controls` for examples that need the Examples Browser's controls panel, which the embedded
 // iframe doesn't show: the placeholder then links to the example in the browser instead of loading it.
-export default function EngineExample({ id, title = 'PlayCanvas engine example', buttonLabel, controls = false }) {
+// Set `src` and `thumbnail` instead of `id` to embed an example from elsewhere, such as the Web Components examples.
+export default function EngineExample({ id, src, thumbnail, title = 'PlayCanvas engine example', buttonLabel, controls = false }) {
     const [loaded, setLoaded] = useState(false);
     const defaultButtonLabel = controls ? translate({
         id: 'engineExample.openInBrowser',
@@ -30,15 +31,16 @@ export default function EngineExample({ id, title = 'PlayCanvas engine example',
     const resolvedButtonLabel = buttonLabel ?? defaultButtonLabel;
     const path = id?.replace(/^#?\//, '').replace(/^#/, '');
 
-    if (!path) {
+    if (!path && !src) {
         return <a href={BASE}>{title}</a>;
     }
 
-    const name = path.replace('/', '_');
-    const src = `${BASE}/iframe/${name}.html`;
-    const thumbnail = `${BASE}/thumbnails/${name}_large.webp`;
-    const slug = path.split('/').pop();
-    const label = GENERIC_TITLES.has(title.toLowerCase())
+    const name = path?.replace('/', '_');
+    const frameSrc = src ?? `${BASE}/iframe/${name}.html`;
+    const thumbnailSrc = thumbnail ?? `${BASE}/thumbnails/${name}_large.webp`;
+    const browserUrl = path ? `${BASE}/#/${path}` : src;
+    const slug = path?.split('/').pop();
+    const label = slug && GENERIC_TITLES.has(title.toLowerCase())
         ? slug.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()).replace(ACRONYMS, (v) => v.toUpperCase())
         : title;
 
@@ -46,7 +48,7 @@ export default function EngineExample({ id, title = 'PlayCanvas engine example',
         <div className="iframe-container">
             {loaded ? (
                 <iframe
-                    src={src}
+                    src={frameSrc}
                     title={title}
                     loading="lazy"
                     allow="camera; microphone; xr-spatial-tracking; fullscreen"
@@ -54,12 +56,12 @@ export default function EngineExample({ id, title = 'PlayCanvas engine example',
             ) : (
                 <div
                     className="engine-example-placeholder"
-                    style={{ '--engine-example-thumbnail': `url("${thumbnail}")` }}>
+                    style={{ '--engine-example-thumbnail': `url("${thumbnailSrc}")` }}>
                     <div className="engine-example-title">{label}</div>
                     {controls ? (
                         <a
                             className="button button--primary"
-                            href={`${BASE}/#/${path}`}
+                            href={browserUrl}
                             target="_blank"
                             rel="noopener noreferrer"
                             aria-label={`${resolvedButtonLabel}: ${label}`}>

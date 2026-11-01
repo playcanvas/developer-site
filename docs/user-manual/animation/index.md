@@ -5,7 +5,9 @@ description: "How PlayCanvas plays animation clips on characters, machines and a
 
 PlayCanvas animates entity hierarchies by playing **animation clips** on them. A clip is a set of keyframes over time for properties of named nodes: the bones of a character, the parts of a machine, or the properties of components, such as the color of a light. The **anim component** plays clips on the hierarchy below its entity, and everything else in this section builds on it.
 
-<EngineExample id="animation/events" title="Events" />
+<EngineExample src="https://playcanvas.github.io/web-components/examples/#glb-animation.html" thumbnail="/img/user-manual/animation/t-rex.jpg" title="GLB Animation" />
+
+Load the T-Rex above, and drag to orbit around it. It is a [Web Components example](https://playcanvas.github.io/web-components/examples/#glb-animation.html), and all of its animation comes from one empty `<pc-anim>` element inside the model's `<pc-model>` element. With no clips declared, it plays the model's own clip on a loop. [On Each Surface](#on-each-surface) compares how each surface does the same.
 
 ## How Animation Works {#how-animation-works}
 

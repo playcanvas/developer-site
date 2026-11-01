@@ -5,7 +5,9 @@ description: "PlayCanvasが、Animコンポーネント、ステートグラフ�
 
 PlayCanvasは、エンティティの階層で**アニメーションクリップ**を再生することで、その階層をアニメーションさせます。クリップは、名前の付いたノードのプロパティについて、時間に沿ったキーフレームをまとめたものです。対象になるのは、キャラクターのボーン、機械の部品、あるいはライトの色のようなコンポーネントのプロパティです。**Animコンポーネント**は、そのエンティティの下にある階層でクリップを再生します。このセクションのほかの内容は、すべてこのコンポーネントの上に成り立っています。
 
-<EngineExample id="animation/events" title="Events" />
+<EngineExample src="https://playcanvas.github.io/web-components/examples/#glb-animation.html" thumbnail="/img/user-manual/animation/t-rex.jpg" title="GLB Animation" />
+
+上のT-Rexを読み込むと、ドラッグでその周りを回れます。これは[Web Componentsのサンプル](https://playcanvas.github.io/web-components/examples/#glb-animation.html)で、アニメーションはすべて、モデルの`<pc-model>`要素の中にある空の`<pc-anim>`要素ひとつから来ています。クリップを宣言していないので、モデル自体のクリップをループ再生します。[各環境での使い方](#on-each-surface)で、同じことを各環境でどう行うかを比べられます。
 
 ## アニメーションの仕組み {#how-animation-works}
 
