@@ -35,7 +35,7 @@ Each name links to the component's reference on that surface. The engine name is
 | [`scrollbar`](https://api.playcanvas.com/engine/classes/ScrollbarComponent.html) | [Scrollbar](/user-manual/editor/scenes/components/scrollbar/) | - | [`<pc-scrollbar>`](/user-manual/web-components/tags/pc-scrollbar/) | A scrollbar for a scroll view |
 | [`scrollview`](https://api.playcanvas.com/engine/classes/ScrollViewComponent.html) | [Scroll View](/user-manual/editor/scenes/components/scrollview/) | - | [`<pc-scroll-view>`](/user-manual/web-components/tags/pc-scroll-view/) | A scrollable area of user interface |
 | [`sound`](https://api.playcanvas.com/engine/classes/SoundComponent.html) | [Sound](/user-manual/editor/scenes/components/sound/) | - | [`<pc-sound>`](/user-manual/web-components/tags/pc-sound/) | Plays sounds, optionally positioned in 3D |
-| [`sprite`](https://api.playcanvas.com/engine/classes/SpriteComponent.html) | [Sprite](/user-manual/editor/scenes/components/sprite/) | `<Sprite>` | - | Draws a [2D sprite](/user-manual/2D/) or sprite animation |
+| [`sprite`](https://api.playcanvas.com/engine/classes/SpriteComponent.html) | [Sprite](/user-manual/editor/scenes/components/sprite/) | `<Sprite>` | [`<pc-sprite>`](/user-manual/web-components/tags/pc-sprite/) | Draws a [2D sprite](/user-manual/2D/) or sprite animation |
 
 React and Web Components wrap the components that most applications use. A dash means there is no wrapper, but you can still add the component to the engine entity from code, as described [below](#components-without-a-wrapper).
 

@@ -573,6 +573,8 @@ const sidebars = {
             'user-manual/web-components/tags/pc-sky',
             'user-manual/web-components/tags/pc-sound',
             'user-manual/web-components/tags/pc-sound-slot',
+            'user-manual/web-components/tags/pc-sprite',
+            'user-manual/web-components/tags/pc-sprite-clip',
             'user-manual/web-components/tags/pc-wasm',
           ],
         },

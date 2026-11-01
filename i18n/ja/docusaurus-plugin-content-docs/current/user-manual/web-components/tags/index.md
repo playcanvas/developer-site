@@ -75,6 +75,8 @@ PlayCanvas Web Components のすべてのタグを、役割別にまとめて掲
 | [`<pc-camera>`](pc-camera) | シーンのレンダリングに使用されるカメラを定義します。 |
 | [`<pc-light>`](pc-light) | ディレクショナル、オムニ、スポットのライトを定義します。影も設定できます。 |
 | [`<pc-render>`](pc-render) | マテリアルを付けてプリミティブ形状を描くレンダーコンポーネントを定義します。 |
+| [`<pc-sprite>`](pc-sprite) | 静止またはアニメーションする2Dスプライトを描くスプライトコンポーネントを定義します。 |
+| [`<pc-sprite-clip>`](pc-sprite-clip) | スプライトコンポーネントに割り当てられる単一のアニメーションクリップを定義します。 |
 | [`<pc-gsplat>`](pc-gsplat) | 3D Gaussian Splats をレンダリングする gsplat コンポーネントを定義します。 |
 | [`<pc-particle-system>`](pc-particle-system) | JSON設定アセットで駆動するパーティクルシステムを定義します。 |
 | [`<pc-sky>`](pc-sky) | 画像ベースのスカイボックスを定義します。 |
@@ -135,10 +137,10 @@ PlayCanvas Web Components のすべてのタグを、役割別にまとめて掲
 
 :::
 
-繰り返し可能な子要素は、親のタグをプレフィックスとして取ります。[`<pc-anim>`](pc-anim)の中の[`<pc-anim-clip>`](pc-anim-clip)、[`<pc-sound>`](pc-sound)の中の[`<pc-sound-slot>`](pc-sound-slot)、[`<pc-script>`](pc-script)の中の[`<pc-script-instance>`](pc-script-instance)です。
+繰り返し可能な子要素は、親のタグをプレフィックスとして取ります。[`<pc-anim>`](pc-anim)の中の[`<pc-anim-clip>`](pc-anim-clip)、[`<pc-sound>`](pc-sound)の中の[`<pc-sound-slot>`](pc-sound-slot)、[`<pc-sprite>`](pc-sprite)の中の[`<pc-sprite-clip>`](pc-sprite-clip)、[`<pc-script>`](pc-script)の中の[`<pc-script-instance>`](pc-script-instance)です。
 
 [`<pc-material>`](pc-material)を除くすべてのタグは非同期に初期化され、初期化が完了すると`ready`イベントを発火します。`whenReady()`が解決するのもこの時点です。タイミングについては[`ready`イベント](../programmatic-access.md#the-ready-event)を参照してください。各タグのページのイベントセクションには、そのタグに固有のイベントのみを記載しています。
 
 ## すべてのタグ（A–Z） {#all-tags-a-z}
 
-[`<pc-anim>`](pc-anim)・[`<pc-anim-clip>`](pc-anim-clip)・[`<pc-app>`](pc-app)・[`<pc-asset>`](pc-asset)・[`<pc-audio-listener>`](pc-audio-listener)・[`<pc-button>`](pc-button)・[`<pc-camera>`](pc-camera)・[`<pc-collision>`](pc-collision)・[`<pc-element>`](pc-element)・[`<pc-entity>`](pc-entity)・[`<pc-gsplat>`](pc-gsplat)・[`<pc-joint>`](pc-joint)・[`<pc-layout-child>`](pc-layout-child)・[`<pc-layout-group>`](pc-layout-group)・[`<pc-light>`](pc-light)・[`<pc-material>`](pc-material)・[`<pc-model>`](pc-model)・[`<pc-node>`](pc-node)・[`<pc-particle-system>`](pc-particle-system)・[`<pc-render>`](pc-render)・[`<pc-rigid-body>`](pc-rigid-body)・[`<pc-scene>`](pc-scene)・[`<pc-screen>`](pc-screen)・[`<pc-script>`](pc-script)・[`<pc-script-instance>`](pc-script-instance)・[`<pc-scrollbar>`](pc-scrollbar)・[`<pc-scroll-view>`](pc-scroll-view)・[`<pc-sky>`](pc-sky)・[`<pc-sound>`](pc-sound)・[`<pc-sound-slot>`](pc-sound-slot)・[`<pc-wasm>`](pc-wasm)
+[`<pc-anim>`](pc-anim)・[`<pc-anim-clip>`](pc-anim-clip)・[`<pc-app>`](pc-app)・[`<pc-asset>`](pc-asset)・[`<pc-audio-listener>`](pc-audio-listener)・[`<pc-button>`](pc-button)・[`<pc-camera>`](pc-camera)・[`<pc-collision>`](pc-collision)・[`<pc-element>`](pc-element)・[`<pc-entity>`](pc-entity)・[`<pc-gsplat>`](pc-gsplat)・[`<pc-joint>`](pc-joint)・[`<pc-layout-child>`](pc-layout-child)・[`<pc-layout-group>`](pc-layout-group)・[`<pc-light>`](pc-light)・[`<pc-material>`](pc-material)・[`<pc-model>`](pc-model)・[`<pc-node>`](pc-node)・[`<pc-particle-system>`](pc-particle-system)・[`<pc-render>`](pc-render)・[`<pc-rigid-body>`](pc-rigid-body)・[`<pc-scene>`](pc-scene)・[`<pc-screen>`](pc-screen)・[`<pc-script>`](pc-script)・[`<pc-script-instance>`](pc-script-instance)・[`<pc-scrollbar>`](pc-scrollbar)・[`<pc-scroll-view>`](pc-scroll-view)・[`<pc-sky>`](pc-sky)・[`<pc-sound>`](pc-sound)・[`<pc-sound-slot>`](pc-sound-slot)・[`<pc-sprite>`](pc-sprite)・[`<pc-sprite-clip>`](pc-sprite-clip)・[`<pc-wasm>`](pc-wasm)

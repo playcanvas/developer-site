@@ -47,6 +47,8 @@ Use this index for pages built from `<pc-*>` elements. The engine features the t
 - [pc-render](/user-manual/web-components/tags/pc-render/): Primitive shapes with a material and shadow settings.
 - [pc-sky](/user-manual/web-components/tags/pc-sky/): A skybox from a texture asset, with box, dome or infinite projection and optional scene lighting.
 - [pc-gsplat](/user-manual/web-components/tags/pc-gsplat/): Renders a Gaussian splat asset, with shadow and LOD settings.
+- [pc-sprite](/user-manual/web-components/tags/pc-sprite/): A 2D sprite from a texture atlas: one frame, or animated clips, tinted, flipped, tiled or 9-sliced.
+- [pc-sprite-clip](/user-manual/web-components/tags/pc-sprite-clip/): Declares a named animation clip of a `pc-sprite`, with its frame rate and looping.
 - [pc-rigid-body](/user-manual/web-components/tags/pc-rigid-body/): The rigid body type, mass, friction and restitution.
 - [pc-collision](/user-manual/web-components/tags/pc-collision/): Box, sphere, capsule, cone, cylinder and mesh collision shapes.
 - [pc-joint](/user-manual/web-components/tags/pc-joint/): Fixed, ball, hinge, slider and 6DoF joints between two rigid bodies.

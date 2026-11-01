@@ -9,7 +9,7 @@ description: "pc-entity要素のリファレンス: 名前、変換、階層の�
 
 * それは[`<pc-scene>`](../pc-scene)、別の`<pc-entity>`、[`<pc-model>`](../pc-model)、または[`<pc-node>`](../pc-node)の直接の子でなければなりません。モデルの下に置くとそのモデルのホストエンティティに、ノードの下に置くと読み込まれたモデル内のそのノードに親子付けされます。
 * それは0からn個の[`<pc-entity>`](../pc-entity)または[`<pc-model>`](../pc-model)の子を持つことができます。
-* それはオプションで、各コンポーネントタイプの子を1つ持つことができます：[`<pc-anim>`](../pc-anim)、[`<pc-audio-listener>`](../pc-audio-listener)、[`<pc-button>`](../pc-button)、[`<pc-camera>`](../pc-camera)、[`<pc-collision>`](../pc-collision)、[`<pc-element>`](../pc-element)、[`<pc-gsplat>`](../pc-gsplat)、[`<pc-joint>`](../pc-joint)、[`<pc-layout-child>`](../pc-layout-child)、[`<pc-layout-group>`](../pc-layout-group)、[`<pc-light>`](../pc-light)、[`<pc-particle-system>`](../pc-particle-system)、[`<pc-render>`](../pc-render)、[`<pc-rigid-body>`](../pc-rigid-body)、[`<pc-screen>`](../pc-screen)、[`<pc-script>`](../pc-script)、[`<pc-scrollbar>`](../pc-scrollbar)、[`<pc-scroll-view>`](../pc-scroll-view)、[`<pc-sound>`](../pc-sound)。
+* それはオプションで、各コンポーネントタイプの子を1つ持つことができます：[`<pc-anim>`](../pc-anim)、[`<pc-audio-listener>`](../pc-audio-listener)、[`<pc-button>`](../pc-button)、[`<pc-camera>`](../pc-camera)、[`<pc-collision>`](../pc-collision)、[`<pc-element>`](../pc-element)、[`<pc-gsplat>`](../pc-gsplat)、[`<pc-joint>`](../pc-joint)、[`<pc-layout-child>`](../pc-layout-child)、[`<pc-layout-group>`](../pc-layout-group)、[`<pc-light>`](../pc-light)、[`<pc-particle-system>`](../pc-particle-system)、[`<pc-render>`](../pc-render)、[`<pc-rigid-body>`](../pc-rigid-body)、[`<pc-screen>`](../pc-screen)、[`<pc-script>`](../pc-script)、[`<pc-scrollbar>`](../pc-scrollbar)、[`<pc-scroll-view>`](../pc-scroll-view)、[`<pc-sound>`](../pc-sound)、[`<pc-sprite>`](../pc-sprite)。
 
 :::
 
