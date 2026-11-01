@@ -39,7 +39,7 @@ Unityのその他のウィンドウやメニューに相当するものは、次
 | Consoleウィンドウ | 起動したタブで開く、ブラウザーの開発者ツールのコンソール。エディター左下にあるエディター自体の **CONSOLE** パネルには、スクリプトの解析エラーなど、エディターのメッセージが表示されます。 |
 | Project SettingsとLightingウィンドウ | ツールバーの歯車アイコンから開く[設定](/user-manual/editor/interface/settings/) |
 | Build Settings | ツールバーの **Publish / Download** |
-| Animatorウィンドウ | anim state graphアセットを選択すると開く[anim state graph](/user-manual/animation/anim-state-graph-assets/)エディター |
+| Animatorウィンドウ | anim state graphアセットを選択すると開く[anim state graph](/user-manual/animation/state-graphs/)エディター |
 | Asset Store | PlayCanvasストアとSketchfabのアセットがある、アセットパネル右上の **ASSET STORE** |
 | Visual StudioまたはRider | 組み込みの[コードエディター](/user-manual/editor/scripting/code-editor/)、または[VS Code拡張機能](/user-manual/editor/scripting/vscode-extension/)を入れたVS Code |
 | Unity Version ControlまたはGit | 組み込みの[バージョン管理](/user-manual/editor/version-control/) |
@@ -111,7 +111,7 @@ macOSでは、Ctrlの代わりにCmdを使います。UnityのViewツール（Q�
 | Audio Source | [Sound](/user-manual/editor/scenes/components/sound/)コンポーネント | 1つのコンポーネントで、スロットと呼ばれる任意の数のサウンドを再生できます。 |
 | Audio Listener | [Audio Listener](/user-manual/editor/scenes/components/audiolistener/)コンポーネント | |
 | Particle System | [Particle System](/user-manual/editor/scenes/components/particlesystem/)コンポーネント | |
-| AnimatorとAnimator Controller | [Anim](/user-manual/editor/scenes/components/anim/)コンポーネントと[anim state graph](/user-manual/animation/anim-state-graph-assets/)アセット | |
+| AnimatorとAnimator Controller | [Anim](/user-manual/editor/scenes/components/anim/)コンポーネントと[anim state graph](/user-manual/animation/state-graphs/)アセット | |
 | Canvas | [Screen](/user-manual/editor/scenes/components/screen/)コンポーネント | |
 | RectTransform、Image、Text | [Element](/user-manual/editor/scenes/components/element/)コンポーネント | |
 | Sprite Renderer | [Sprite](/user-manual/editor/scenes/components/sprite/)コンポーネント | |
@@ -588,15 +588,15 @@ PlayCanvasのキャンバス内UIは、UnityのUI（uGUI）とほぼ同じよう
 
 | Unity | PlayCanvas |
 | --- | --- |
-| Animatorコンポーネント | [Anim](/user-manual/animation/anim-component/)コンポーネント |
-| Animator Controller | ステート、トランジション、パラメーター、レイヤーを持つ[anim state graph](/user-manual/animation/anim-state-graph-assets/)アセット |
+| Animatorコンポーネント | [Anim](/user-manual/animation/playing-animations/)コンポーネント |
+| Animator Controller | ステート、トランジション、パラメーター、レイヤーを持つ[anim state graph](/user-manual/animation/state-graphs/)アセット |
 | Animation Clip | モデルのインポート時に作成されるアニメーションアセット |
 | `animator.SetFloat("Speed", 2f)` | `entity.anim.setFloat('Speed', 2)` |
 | `SetBool`、`SetInteger`、`SetTrigger` | `setBoolean`、`setInteger`、`setTrigger` |
-| Avatar Mask | [レイヤーマスク](/user-manual/animation/anim-layer-masking/) |
-| Blend Tree | コードで作成したステートグラフでのブレンドツリー（1D、2D、Direct）。エディターのステートグラフエディターにはありません。 |
+| Avatar Mask | [レイヤーマスク](/user-manual/animation/layers-and-masks/) |
+| Blend Tree | コードで作成したステートグラフでの[ブレンドツリー](/user-manual/animation/blend-trees/)（1D、2D、Direct）。エディターのステートグラフエディターにはありません。 |
 | Root Motion | なし。スクリプトでエンティティを動かします。 |
-| Animation Event | アニメーションアセットの[Animイベント](/user-manual/animation/anim-events/) |
+| Animation Event | アニメーションアセットの[Animイベント](/user-manual/animation/events/) |
 | Animator Override Controller | 1つのanim state graphを使い、エンティティごとに異なるアニメーションアセットをステートに割り当てる |
 
 PlayCanvasには、ヒューマノイドのリターゲットはありません。アニメーションはボーンを名前で動かすため、同じ名前のボーンを持つモデルであれば再生できますが、プロポーションの異なるスケルトンに合わせて調整されることはありません。アニメーションは、再生するスケルトン向けに作成するか、そのスケルトンにベイクしてください。

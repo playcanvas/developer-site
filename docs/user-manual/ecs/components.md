@@ -14,7 +14,7 @@ Each name links to the component's reference on that surface. The engine name is
 
 | Engine | Editor | React | Web Components | What it does |
 | --- | --- | --- | --- | --- |
-| [`anim`](https://api.playcanvas.com/engine/classes/AnimComponent.html) | [Anim](/user-manual/editor/scenes/components/anim/) | [`<Anim>`](/user-manual/react/api/anim/) | [`<pc-anim>`](/user-manual/web-components/tags/pc-anim/) | Plays animations, blended by an [anim state graph](/user-manual/animation/anim-state-graph-assets/) |
+| [`anim`](https://api.playcanvas.com/engine/classes/AnimComponent.html) | [Anim](/user-manual/editor/scenes/components/anim/) | [`<Anim>`](/user-manual/react/api/anim/) | [`<pc-anim>`](/user-manual/web-components/tags/pc-anim/) | Plays animations, blended by an [anim state graph](/user-manual/animation/state-graphs/) |
 | [`animation`](https://api.playcanvas.com/engine/classes/AnimationComponent.html) | [Animation](/user-manual/editor/scenes/components/animation/) | - | - | Legacy: plays animation clips. Use Anim |
 | [`audiolistener`](https://api.playcanvas.com/engine/classes/AudioListenerComponent.html) | [Audio Listener](/user-manual/editor/scenes/components/audiolistener/) | - | [`<pc-audio-listener>`](/user-manual/web-components/tags/pc-audio-listener/) | The point that sounds are heard from |
 | [`button`](https://api.playcanvas.com/engine/classes/ButtonComponent.html) | [Button](/user-manual/editor/scenes/components/button/) | - | [`<pc-button>`](/user-manual/web-components/tags/pc-button/) | Makes a UI element respond to hovers and clicks |

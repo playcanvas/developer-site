@@ -1064,11 +1064,12 @@ const sidebars = {
         id: 'user-manual/animation/index',
       },
       items: [
-        'user-manual/animation/anim-component',
-        'user-manual/animation/anim-animation-assets',
-        'user-manual/animation/anim-state-graph-assets',
-        'user-manual/animation/anim-layer-masking',
-        'user-manual/animation/anim-events'
+        'user-manual/animation/playing-animations',
+        'user-manual/animation/clips',
+        'user-manual/animation/state-graphs',
+        'user-manual/animation/blend-trees',
+        'user-manual/animation/layers-and-masks',
+        'user-manual/animation/events'
       ],
     },
     {

@@ -11,7 +11,7 @@ The inspector has a viewer that can be used to preview the animation with any Te
 
 ![Asset Inspector Preview](/img/user-manual/assets/animation/inspector-preview.gif)
 
-There is also a viewer in the [Anim State Graph Editor](/user-manual/animation/anim-state-graph-assets/) when you select a state in the graph. When selected, all Entities in the scene that are using the graph will show in a list and can be selected for preview.
+There is also a viewer in the [Anim State Graph Editor](/user-manual/animation/state-graphs/) when you select a state in the graph. When selected, all Entities in the scene that are using the graph will show in a list and can be selected for preview.
 
 ![Anim State Graph Preview](/img/user-manual/assets/animation/anim-state-graph-preview.gif)
 
