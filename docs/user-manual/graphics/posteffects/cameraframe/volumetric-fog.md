@@ -106,8 +106,8 @@ Enable the **Volumetric Fog** group. Its **Light** field takes the directional l
 
 ## Examples
 
-<EngineExample id="graphics/volumetric-fog" title="Volumetric Fog" />
+<EngineExample id="camera-frame/volumetric-fog" title="Volumetric Fog" />
 
-<EngineExample id="graphics/volumetric-fog-local-lights" title="Volumetric Fog Local Lights" />
+<EngineExample id="camera-frame/volumetric-fog-local-lights" title="Volumetric Fog Local Lights" />
 
-<EngineExample id="graphics/volumetric-fog-shafts" title="Volumetric Fog Shafts" />
+<EngineExample id="camera-frame/volumetric-fog-shafts" title="Volumetric Fog Shafts" />

@@ -64,7 +64,7 @@ app.on('update', () => {
 
 - Custom Compose Shader の例 — 動作する完全なデモ
 
-<EngineExample id="graphics/custom-compose-shader" title="Custom Compose Shader の例" />
+<EngineExample id="camera-frame/custom-compose-shader" title="Custom Compose Shader の例" />
 
 ## 用途
 

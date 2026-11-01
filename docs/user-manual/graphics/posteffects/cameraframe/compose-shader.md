@@ -64,7 +64,7 @@ app.on('update', () => {
 
 - Custom Compose Shader Example - Complete working demonstration
 
-<EngineExample id="graphics/custom-compose-shader" title="Custom Compose Shader Example" />
+<EngineExample id="camera-frame/custom-compose-shader" title="Custom Compose Shader Example" />
 
 ## Use Cases
 
