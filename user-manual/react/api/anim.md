@@ -17,11 +17,15 @@ const AnimatingDinosaur = (props) => {
   return (
     <Entity {...props}>
       <Render type="asset" asset={asset} />
-      <Anim asset={asset} clip="Walk" loop />
+      <Anim asset={asset} playing />
     </Entity>
   )
 }
 ```
+
+Given an asset, `<Anim>` puts all of its animations into one state, so with several of them, only the last one plays. To play clips by name, and to use state graphs, layers and events, see the [Animation](https://developer.playcanvas.com/user-manual/animation.md) section.
+
+Always pass `playing`. Each time `<Anim>` renders, it sets every one of its props on the engine component, and the default of `playing` is `false`, so without it the animation stops as soon as anything renders the component again.
 
 Learn more about the [Anim Component](https://api.playcanvas.com/engine/classes/AnimComponent.html) in the PlayCanvas documentation.
 

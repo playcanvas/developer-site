@@ -3,7 +3,7 @@
 > The PlayCanvas Engine is an open-source JavaScript 3D engine that renders with WebGL2 or WebGPU. It is published as `playcanvas` on npm, with TypeScript declarations, and runs every PlayCanvas product. This index describes Engine 2.23.3.
 
 Index: https://developer.playcanvas.com/user-manual/engine/llms.txt
-Total Documents: 225
+Total Documents: 226
 Generated: 2026-11-01
 
 ================================================================================
@@ -1630,7 +1630,7 @@ Each name links to the component's reference on that surface. The engine name is
 
 | Engine | Editor | React | Web Components | What it does |
 | --- | --- | --- | --- | --- |
-| [`anim`](https://api.playcanvas.com/engine/classes/AnimComponent.html) | [Anim](https://developer.playcanvas.com/user-manual/editor/scenes/components/anim.md) | [`<Anim>`](https://developer.playcanvas.com/user-manual/react/api/anim.md) | [`<pc-anim>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-anim.md) | Plays animations, blended by an [anim state graph](https://developer.playcanvas.com/user-manual/animation/anim-state-graph-assets.md) |
+| [`anim`](https://api.playcanvas.com/engine/classes/AnimComponent.html) | [Anim](https://developer.playcanvas.com/user-manual/editor/scenes/components/anim.md) | [`<Anim>`](https://developer.playcanvas.com/user-manual/react/api/anim.md) | [`<pc-anim>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-anim.md) | Plays animations, blended by an [anim state graph](https://developer.playcanvas.com/user-manual/animation/state-graphs.md) |
 | [`animation`](https://api.playcanvas.com/engine/classes/AnimationComponent.html) | [Animation](https://developer.playcanvas.com/user-manual/editor/scenes/components/animation.md) | - | - | Legacy: plays animation clips. Use Anim |
 | [`audiolistener`](https://api.playcanvas.com/engine/classes/AudioListenerComponent.html) | [Audio Listener](https://developer.playcanvas.com/user-manual/editor/scenes/components/audiolistener.md) | - | [`<pc-audio-listener>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-audio-listener.md) | The point that sounds are heard from |
 | [`button`](https://api.playcanvas.com/engine/classes/ButtonComponent.html) | [Button](https://developer.playcanvas.com/user-manual/editor/scenes/components/button.md) | - | [`<pc-button>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-button.md) | Makes a UI element respond to hovers and clicks |
@@ -13398,290 +13398,1798 @@ Breaking cannot be detected for `6dof` joints on ammo.js builds that do not expo
 URL: https://developer.playcanvas.com/user-manual/animation/
 Markdown: https://developer.playcanvas.com/user-manual/animation.md
 
-PlayCanvas provides a powerful state-based animation system which can be used to animate character models and other arbitrary scene object models. Users can work with any of their .FBX animation assets. These can be organized using animation state machines to easily control the animated behavior of scene models at runtime.
+PlayCanvas animates entity hierarchies by playing **animation clips** on them. A clip is a set of keyframes over time for properties of named nodes: the bones of a character, the parts of a machine, or the properties of components, such as the color of a light. The **anim component** plays clips on the hierarchy below its entity, and everything else in this section builds on it.
 
-For 2D skeletal animations made with the Spine editor, see [Spine](https://developer.playcanvas.com/user-manual/2D/spine.md).
+[GLB Animation](https://playcanvas.com/examples)
 
-## System Overview
+Load the T-Rex above, and drag to orbit around it. It is a [Web Components example](https://playcanvas.github.io/web-components/examples/#glb-animation.html), and all of its animation comes from one empty `<pc-anim>` element inside the model's `<pc-model>` element. With no clips declared, it plays the model's own clip on a loop. [On Each Surface](https://developer.playcanvas.com/user-manual/animation.md#on-each-surface) compares how each surface does the same.
 
-The animation system touches on three main areas of the PlayCanvas platform. This section will walk through how these areas can be used together to create complex animation behavior for your models. The following sections of the animation user manual then will explore each area in more detail.
+## How Animation Works
 
-### Animating in PlayCanvas
+- **[Clips](https://developer.playcanvas.com/user-manual/animation/clips.md)** usually come from the models you import. A GLB, or an FBX file imported in the Editor, brings its animations with it, and you can also build a clip from keyframes in code. A clip binds to its targets by node name, so one clip can animate any model whose nodes have the same names.
+- **[The anim component](https://developer.playcanvas.com/user-manual/animation/playing-animations.md)** plays clips on the hierarchy below its entity. Each clip it plays is held in a **state**, and the component cross-fades between states when you switch.
+- **[State graphs](https://developer.playcanvas.com/user-manual/animation/state-graphs.md)** decide which state plays. A state graph is a state machine of states, the **transitions** between them and the **parameters** that the transitions test, such as a `speed` or a `jump` trigger. You set the parameters from code, and the graph does the rest.
+- **[Blend trees](https://developer.playcanvas.com/user-manual/animation/blend-trees.md)** blend several clips in one state by the value of parameters, so a character can move smoothly from a walk into a run.
+- **[Layers and masks](https://developer.playcanvas.com/user-manual/animation/layers-and-masks.md)** play several state graphs on one model at the same time, each limited to some of its nodes, so a character can wave while it walks.
+- **[Events](https://developer.playcanvas.com/user-manual/animation/events.md)** fire at chosen times in a clip, for footstep sounds, effects or gameplay.
 
-In order to begin animating a PlayCanvas entity, you must have a set of animation assets available and imported into your PlayCanvas project. These animation assets will drive the animation of a given model you wish to animate. For example a humanoid character may have a set of animations; Idle, Walk, Jump.
+## On Each Surface
 
-[Image: Animations]
+The anim component is the same everywhere, but the surfaces expose different amounts of it. Anything a surface has no markup or UI for, you can reach through the engine component from code.
 
-These three animations can be organized into a single animation system to create a simple locomotion system for that character. The way this is achieved in PlayCanvas is through the use of an animstategraph asset. These assets can be thought of as state machines for an entity’s animation behavior. With each state in this asset relating to an animation, the state machine can be set up to define the complex animation behavior of an entity’s model. This includes defining when the system should stop one animation and start another and how the transition between these animations should be blended.
+| | Engine | Editor | React | Web Components |
+| --- | --- | --- | --- | --- |
+| Play a model's clips | `entity.anim.assignAnimation()` | An Anim component and a state graph asset | `<Anim playing />` | [`<pc-anim>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-anim.md) |
+| Switch clips with a cross-fade | `layer.transition()` | Transitions in the state graph | The engine API | The `clip` and `transition-time` attributes |
+| State graphs and parameters | `entity.anim.loadStateGraph()` | The Anim State Graph asset editor | The engine API | The engine API |
+| Blend trees | In the state graph data | From a script only | The engine API | The engine API |
+| Layers and masks | `entity.anim.addLayer()` | Layers in the graph, masks in the Anim component | The engine API | The engine API |
+| Events | `new pc.AnimEvents()` on a clip | Events on the animation asset | The engine API | The engine API |
 
-The anim component is then used to assign an animstategraph asset to a particular entity in your scene. Once an entity has been assigned an animstategraph asset, each state in the graph can have an actual animation asset assigned to it. Once all states have been assigned animations, the anim component will become playable. At this point the animation system is complete and the defined animation behavior will be viewable in the PlayCanvas launcher.
+:::note
+
+The anim component replaced the older **animation** component, which plays clips without state graphs. That component still works, but use the anim component in new projects. For 2D skeletal animation made with Spine, see [Spine](https://developer.playcanvas.com/user-manual/2D/spine.md).
+
+:::
+
+## In This Section
+
+- [Playing Animations](https://developer.playcanvas.com/user-manual/animation/playing-animations.md) - Adding the anim component, playing and switching clips, speed, pausing, looping and finished clips.
+- [Animation Clips](https://developer.playcanvas.com/user-manual/animation/clips.md) - Clips in GLB and FBX files, how they bind to nodes, and building clips in code.
+- [State Graphs](https://developer.playcanvas.com/user-manual/animation/state-graphs.md) - States, transitions, parameters and conditions, built in the Editor or in code.
+- [Blend Trees](https://developer.playcanvas.com/user-manual/animation/blend-trees.md) - Blending clips by one or two parameters, or by a weight each.
+- [Layers and Masks](https://developer.playcanvas.com/user-manual/animation/layers-and-masks.md) - Playing several graphs at once, blending them, and masking them to parts of a model.
+- [Animation Events](https://developer.playcanvas.com/user-manual/animation/events.md) - Firing events at chosen times in a clip and handling them.
+
+## See Also
+
+- [Anim Component](https://developer.playcanvas.com/user-manual/editor/scenes/components/anim.md) - The Editor reference for the component
+- [Animation Asset](https://developer.playcanvas.com/user-manual/editor/assets/inspectors/animation.md) - Previewing clips and the animation import settings in the Editor
+- [Anim State Graph Blending](https://developer.playcanvas.com/tutorials/anim-blending/) - Tutorial that builds a blended state graph in the Editor
+- [Animation examples](https://playcanvas.com/examples/#/animation/locomotion) - Engine examples of locomotion, blend trees, layer masks, events and more
+- [AnimComponent](https://api.playcanvas.com/engine/classes/AnimComponent.html) and [AnimComponentLayer](https://api.playcanvas.com/engine/classes/AnimComponentLayer.html) - The engine API reference
 
 --------------------------------------------------------------------------------
 
-## Anim Component
+## Playing Animations
 
-URL: https://developer.playcanvas.com/user-manual/animation/anim-component/
-Markdown: https://developer.playcanvas.com/user-manual/animation/anim-component.md
+URL: https://developer.playcanvas.com/user-manual/animation/playing-animations/
+Markdown: https://developer.playcanvas.com/user-manual/animation/playing-animations.md
 
-Click here to learn how to use the [Anim Component](https://developer.playcanvas.com/user-manual/editor/scenes/components/anim.md).
+The [anim component](https://developer.playcanvas.com/user-manual/editor/scenes/components/anim.md) plays animation clips on the entities below it. This page plays the clips that come with a model: it adds the component, gives each clip a state, switches between them and controls their playback.
 
-[Image: New Anim Component]
+## Adding the Anim Component
+
+Add the anim component to the root of the hierarchy that the clips animate, usually the root entity of a model. A clip finds the nodes it animates by name, among the descendants of the component's entity. If the nodes are below a different entity, point the component's **Root Bone** (`rootBone`) at it.
+
+**Engine**
+
+Load the GLB as a container asset, create its entities, and add the component to their root. Register the anim component system and the container handler with your application:
+
+```javascript
+const asset = new pc.Asset('robot-arm', 'container', {
+    url: 'https://developer.playcanvas.com/assets/robot-arm.glb'
+});
+asset.ready(() => {
+    const arm = asset.resource.instantiateRenderEntity();
+    arm.addComponent('anim', { activate: true });
+    app.root.addChild(arm);
+});
+app.assets.add(asset);
+app.assets.load(asset);
+```
+
+`activate: true` starts playback as soon as the component has a clip to play.
+
+**Editor**
+
+Select the root entity of the model, click **Add Component** and choose **Anim**. In the Editor, the component plays clips through a [state graph](https://developer.playcanvas.com/user-manual/animation/state-graphs.md): an asset that lists the states the model can be in. Once you choose one as the component's **State Graph**, the component shows a slot for each of its states, and you drag an animation asset into each slot. **Activate** starts playback when the scene launches.
+
+**React**
+
+Add an `<Anim>` to the `<Entity>` that renders the model. Given the model's asset, it plays the model's animation:
+
+```jsx
+import { Entity } from '@playcanvas/react';
+import { Anim, Render } from '@playcanvas/react/components';
+import { useModel } from '@playcanvas/react/hooks';
+
+function RobotArm() {
+  const { asset } = useModel('https://developer.playcanvas.com/assets/robot-arm.glb');
+  if (!asset) return null;
+
+  return (
+    <Entity name="robot-arm">
+      <Render type="asset" asset={asset} />
+      <Anim asset={asset} playing />
+    </Entity>
+  );
+}
+```
+
+`<Anim asset>` puts all of the model's animations into one state, so with several of them, only the last one plays. To play them by name, see [Playing Clips](https://developer.playcanvas.com/user-manual/animation/playing-animations.md#playing-clips).
+
+:::caution
+
+Always pass `playing`. Each time `<Anim>` renders, it sets every one of its props on the engine component, and the default of `playing` is `false`. Without it, the clips stop as soon as anything renders the component again.
+
+:::
+
+**Web Components**
+
+Put a [`<pc-anim>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-anim.md) inside the [`<pc-model>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-model.md). With no children, it gives every animation in the model a clip named after it, and plays the first:
+
+```html
+<pc-asset id="robot-arm" src="https://developer.playcanvas.com/assets/robot-arm.glb"></pc-asset>
+<pc-scene>
+    <pc-model asset="robot-arm">
+        <pc-anim></pc-anim>
+    </pc-model>
+</pc-scene>
+```
+
+## Playing Clips
+
+The component holds each clip in a **state**. To play the clips of a model by name, give each one a state of its own, named after the clip. The animations of a GLB are named in the file, and the component starts with the first one you add. To decide which clip plays when, from parameters such as a character's speed, use a [state graph](https://developer.playcanvas.com/user-manual/animation/state-graphs.md).
+
+**Engine**
+
+A container's animations are animation assets, whose resources are the clips, as [`AnimTrack`](https://api.playcanvas.com/engine/classes/AnimTrack.html) objects. [`assignAnimation()`](https://api.playcanvas.com/engine/classes/AnimComponent.html#assignanimation) creates a state for a clip:
+
+```javascript
+for (const animation of asset.resource.animations) {
+    arm.anim.assignAnimation(animation.resource.name, animation.resource);
+}
+console.log(arm.anim.baseLayer.states); // ['START', 'idle', 'pick', 'place', 'inspect', 'stow']
+```
+
+**Editor**
+
+Create a state graph with one state for each clip, add it to the Anim component, and fill each state's slot with the animation asset for it. See [Building a State Graph](https://developer.playcanvas.com/user-manual/animation/state-graphs.md#building-a-state-graph).
+
+**React**
+
+Give the entity an `<Anim playing />` without an asset, and add the clips to its engine component from a component of your own. `useParent()` returns the engine entity of the enclosing `<Entity>`:
+
+```jsx
+import { useEffect } from 'react';
+import { Entity } from '@playcanvas/react';
+import { Anim, Render } from '@playcanvas/react/components';
+import { useModel, useParent } from '@playcanvas/react/hooks';
+
+function Clips({ asset }) {
+  const entity = useParent();
+
+  useEffect(() => {
+    for (const animation of asset.resource.animations) {
+      entity.anim.assignAnimation(animation.resource.name, animation.resource);
+    }
+  }, [entity, asset]);
+
+  return null;
+}
+
+function RobotArm() {
+  const { asset } = useModel('https://developer.playcanvas.com/assets/robot-arm.glb');
+  if (!asset) return null;
+
+  return (
+    <Entity name="robot-arm">
+      <Render type="asset" asset={asset} />
+      <Anim playing />
+      <Clips asset={asset} />
+    </Entity>
+  );
+}
+```
+
+**Web Components**
+
+Declare the clips you want with [`<pc-anim-clip>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-anim-clip.md) children, each named after an animation in the model, and choose the one to play with `clip`:
+
+```html
+<pc-model asset="robot-arm">
+    <pc-anim clip="idle">
+        <pc-anim-clip name="idle"></pc-anim-clip>
+        <pc-anim-clip name="pick"></pc-anim-clip>
+        <pc-anim-clip name="place"></pc-anim-clip>
+    </pc-anim>
+</pc-model>
+```
+
+## Switching Clips
+
+Switching to another state can cut straight to it, or cross-fade to it over a time you choose. A cross-fade of a few tenths of a second hides the jump between two poses.
+
+**Engine**
+
+```javascript
+arm.anim.baseLayer.transition('pick', 0.4); // cross-fade over 0.4 seconds
+arm.anim.baseLayer.play('idle');            // cut straight to the start of idle
+```
+
+**Editor**
+
+The transitions of the state graph switch between states for you, as their conditions are met. From a script, you can also switch to any state, for example `this.entity.anim.baseLayer.transition('pick', 0.4)`.
+
+**React**
+
+Switch on the engine component when a prop changes:
+
+```jsx
+function Clip({ name }) {
+  const entity = useParent();
+
+  useEffect(() => {
+    entity.anim.baseLayer.transition(name, 0.4);
+  }, [entity, name]);
+
+  return null;
+}
+
+<Entity name="robot-arm">
+  <Render type="asset" asset={asset} />
+  <Anim playing />
+  <Clips asset={asset} />
+  <Clip name={clip} />
+</Entity>
+```
+
+**Web Components**
+
+Change the `clip` attribute. With `transition-time`, the switch cross-fades over that many seconds:
+
+```html
+<pc-anim id="arm-anim" clip="idle" transition-time="0.4">
+    <pc-anim-clip name="idle"></pc-anim-clip>
+    <pc-anim-clip name="pick"></pc-anim-clip>
+</pc-anim>
+
+<script>
+    document.getElementById('arm-anim').setAttribute('clip', 'pick');
+</script>
+```
+
+The element's `play()` and `transition()` methods cut or cross-fade for a single switch.
+
+## Example
+
+This Engine app loads a robot arm with five animations, gives each one a state, and cross-fades to the next one each time you click the canvas.
+
+```js live-example
+import * as pc from 'playcanvas';
+
+// create the application with the component systems and resource handlers it uses
+const canvas = document.getElementById('application');
+const device = await pc.createGraphicsDevice(canvas, {
+    deviceTypes: [pc.DEVICETYPE_WEBGPU]
+});
+device.maxPixelRatio = Math.min(window.devicePixelRatio, 2);
+
+const options = new pc.AppOptions();
+options.graphicsDevice = device;
+options.componentSystems = [
+    pc.RenderComponentSystem,
+    pc.CameraComponentSystem,
+    pc.LightComponentSystem,
+    pc.AnimComponentSystem
+];
+options.resourceHandlers = [pc.ContainerHandler, pc.TextureHandler];
+
+const app = new pc.AppBase(canvas);
+app.init(options);
+app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
+app.setCanvasResolution(pc.RESOLUTION_AUTO);
+window.addEventListener('resize', () => app.resizeCanvas());
+app.start();
+
+app.scene.ambientLight = new pc.Color(0.35, 0.35, 0.4);
+
+// load the robot arm, a GLB with five animations
+const asset = new pc.Asset('robot-arm', 'container', {
+    url: 'https://developer.playcanvas.com/assets/robot-arm.glb'
+});
+await new Promise((resolve) => {
+    asset.ready(resolve);
+    app.assets.add(asset);
+    app.assets.load(asset);
+});
+
+const camera = new pc.Entity('camera');
+camera.addComponent('camera', {
+    clearColor: new pc.Color(0.11, 0.12, 0.17)
+});
+camera.setPosition(1.75, 1.4, 2.15);
+camera.lookAt(0, 0.75, 0);
+app.root.addChild(camera);
+
+const light = new pc.Entity('light');
+light.addComponent('light', {
+    castShadows: true,
+    shadowBias: 0.2,
+    normalOffsetBias: 0.05
+});
+light.setEulerAngles(48, 38, 0);
+app.root.addChild(light);
+
+const floor = new pc.Entity('floor');
+const floorMaterial = new pc.StandardMaterial();
+floorMaterial.diffuse = new pc.Color(0.24, 0.26, 0.31);
+floorMaterial.update();
+floor.addComponent('render', { type: 'plane', material: floorMaterial });
+floor.setLocalScale(20, 1, 20);
+app.root.addChild(floor);
+
+// create the arm's entities, and give its root an anim component
+const arm = asset.resource.instantiateRenderEntity({ castShadows: true });
+arm.addComponent('anim', { activate: true });
+app.root.addChild(arm);
+
+// give each animation in the GLB a state of its own, named after it
+const clips = asset.resource.animations.map((animation) => {
+    arm.anim.assignAnimation(animation.resource.name, animation.resource);
+    return animation.resource.name;
+});
+
+// click to cross-fade to the next clip over 0.4 seconds
+let current = 0;
+canvas.addEventListener('click', () => {
+    current = (current + 1) % clips.length;
+    arm.anim.baseLayer.transition(clips[current], 0.4);
+});
+
+const label = document.createElement('div');
+label.style.cssText = 'position: absolute; left: 12px; bottom: 10px; color: #ccc; font: 14px sans-serif;';
+document.body.appendChild(label);
+app.on('update', () => {
+    label.textContent = `Playing: ${arm.anim.baseLayer.activeState}. Click for the next clip.`;
+});
+```
+
+Some things to try:
+
+- Raise the cross-fade time from `0.4` to `2` to see the two clips blend.
+- Replace `transition()` with `play()`, and drop the time, to cut between clips instead.
+- Add `arm.anim.speed = 0.5;` after the component is created to play every clip at half speed.
+
+## Speed, Pausing and Looping
+
+Playback speed multiplies at two levels. Each state has a speed of its own, and the component's `speed` multiplies every state's. A speed of 0 freezes playback. A negative state speed plays a clip backwards, but a negative component speed does not: it holds every clip at its first frame.
+
+```javascript
+arm.anim.speed = 0.5;                                   // everything at half speed
+arm.anim.assignAnimation('pick', pickTrack, undefined, 2); // this state at double speed
+```
+
+A state loops by default. A state that does not loop holds the last frame of its clip until it is left. Pass `false` as the last argument of `assignAnimation()` for a state that plays once. In the Editor, set **Speed** and **Loop** on the state in the [state graph](https://developer.playcanvas.com/user-manual/animation/state-graphs.md#states), and in Web Components, set `speed` and `loop` on the [`<pc-anim-clip>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-anim-clip.md).
+
+To pause, set the component's `playing` to `false`, and set it back to `true` to carry on. That pauses every layer at once. Each [layer](https://developer.playcanvas.com/user-manual/animation/layers-and-masks.md) also has `pause()` and `play()` methods of its own.
+
+In React, set the component's `speed` and `playing` as props of `<Anim>`, such as `<Anim playing={!paused} speed={0.5} />`. `<Anim>` sets its props again each time it renders, so values set on the engine component from code do not last.
+
+:::caution
+
+With **Activate** turned off, setting `playing` to `true` is not enough to start playback, because no layer has been started either. Start each layer as well: `entity.anim.playing = true` followed by `entity.anim.baseLayer.play()`.
+
+:::
+
+## Knowing When a Clip Has Finished
+
+The component fires no event when a clip ends. A clip that does not loop holds its last frame and stays in its state. There are three ways to act when it finishes:
+
+- **Move on in the state graph.** A transition with an [exit time](https://developer.playcanvas.com/user-manual/animation/state-graphs.md#transitions) of 1 leaves the state as soon as its clip has played through.
+- **Add an event to the end of the clip.** An [animation event](https://developer.playcanvas.com/user-manual/animation/events.md) at the clip's duration fires when playback reaches it.
+- **Compare the time in the state with its duration.** A layer's `activeStateCurrentTime` is the time its clip has played, in the clip's own seconds, and `activeStateDuration` is the clip's length:
+
+```javascript
+const layer = arm.anim.baseLayer;
+const finished = layer.activeStateCurrentTime >= layer.activeStateDuration;
+```
+
+This works for a clip that plays forwards once. In a looping state, `activeStateCurrentTime` keeps growing rather than wrapping back to 0, and a clip played backwards counts down from 0. Avoid `activeStateProgress` for this: with a state speed other than 1, it applies the speed a second time.
+
+## See Also
+
+- [Animation Clips](https://developer.playcanvas.com/user-manual/animation/clips.md) - Where clips come from and how they bind
+- [State Graphs](https://developer.playcanvas.com/user-manual/animation/state-graphs.md) - Deciding which clip plays from parameters
+- [Anim Component](https://developer.playcanvas.com/user-manual/editor/scenes/components/anim.md) - The Editor reference for the component
+- [`<Anim/>`](https://developer.playcanvas.com/user-manual/react/api/anim.md), [`<pc-anim>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-anim.md) and [`<pc-anim-clip>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-anim-clip.md) - The React and Web Components references
+- [AnimComponent](https://api.playcanvas.com/engine/classes/AnimComponent.html) and [AnimComponentLayer](https://api.playcanvas.com/engine/classes/AnimComponentLayer.html) - The engine API reference
 
 --------------------------------------------------------------------------------
 
-## Animstategraph Assets
+## Animation Clips
 
-URL: https://developer.playcanvas.com/user-manual/animation/anim-state-graph-assets/
-Markdown: https://developer.playcanvas.com/user-manual/animation/anim-state-graph-assets.md
+URL: https://developer.playcanvas.com/user-manual/animation/clips/
+Markdown: https://developer.playcanvas.com/user-manual/animation/clips.md
 
-Animstategraph assets are used to organize a set of different animation states, which are all the various ways in which a model might animate. It can be used to define each of these animation states, determine when each state should play and how states transition and therefore blend between one another. Animstategraph assets do not store or link to any real animation assets themselves, but rather act as a template for how animation assets should be organized. Actual animation assets are linked to the animstategraphs animation states through the [Anim Component](https://developer.playcanvas.com/user-manual/editor/scenes/components/anim.md).
+An animation clip is a named set of **curves** with a duration. Each curve holds keyframes, which are values at chosen times, and names the property it drives: the position, rotation or scale of a node, the weight of a morph target, or a property of a component. Playback interpolates between the keyframes, so a clip only needs keyframes where the motion changes. In the engine, a clip is an [`AnimTrack`](https://api.playcanvas.com/engine/classes/AnimTrack.html).
 
-The system was designed so that a single animstategraph can be used on many different entities, each with their own set of animation assets. An example being an animstategraph asset which manages the animations of humanoid character locomotion. This single asset could be used on a human entity, an elf entity and a dwarf entity. Each of these entities would be able to link their own character animation assets, all the while maintaining the same animation behavior as each other.
+## Clips in Models
 
-These assets are therefore state machines for a model's animation behavior and they control the flow of animation sequences over the lifecycle of an entity. A simple animstategraph asset used to define the behavior of a wheel may define only two animation states; static and spinning. This asset can be defined to control when the wheel starts and stops spinning, for how long it will spin, the speed of the wheel spin and how sharply it starts / stops spinning. More advanced assets can be used to combine a multitude of animation states to create complex humanoid character animation behavior.
+Most clips come with a model. A GLB or glTF file can contain any number of animations, each with a name, and loading the model gives you a clip for each one.
 
-When selecting an animstategraph asset in the editors asset panel, you’ll open up the anim state graph editor view:
+**Engine**
 
-[Image: Initial Editor]
+Load the file as a `container` asset. Its resource has an `animations` array of animation assets, and each asset's resource is a clip named after the animation:
 
-Within this view you can edit your animation state graph. The following sections will highlight how different elements of the animstategraph asset can be used to define specific animation behavior.
+```javascript
+const asset = new pc.Asset('robot-arm', 'container', {
+    url: 'https://developer.playcanvas.com/assets/robot-arm.glb'
+});
+asset.ready(() => {
+    for (const animation of asset.resource.animations) {
+        const track = animation.resource;
+        console.log(track.name, track.duration); // idle 4.03, pick 5.03, ...
+    }
+});
+app.assets.add(asset);
+app.assets.load(asset);
+```
+
+**Editor**
+
+Upload a GLB or FBX file to the Assets panel, and the Editor creates an **Animation** asset for each animation in it, next to the model. With **Convert to GLB** on in the [Asset Import settings](https://developer.playcanvas.com/user-manual/editor/interface/settings/asset-import.md), FBX files are converted to GLB on import, and the same settings choose how imported animations are named and sampled.
+
+Select an animation asset to see its duration and name in the Inspector, and to [preview it on a model](https://developer.playcanvas.com/user-manual/editor/assets/inspectors/animation.md).
+
+[Image: The Inspector for an animation asset, showing its duration and name, and an events panel with two foot_step events]
+
+**React**
+
+`useModel()` loads a GLB as a container asset, whose resource holds the clips:
+
+```jsx
+import { useModel } from '@playcanvas/react/hooks';
+
+const { asset } = useModel('https://developer.playcanvas.com/assets/robot-arm.glb');
+const tracks = asset?.resource.animations.map(animation => animation.resource);
+```
+
+**Web Components**
+
+A [`<pc-asset>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset.md) loads the file, and a [`<pc-anim-clip>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-anim-clip.md) inside the model's [`<pc-anim>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-anim.md) picks a clip by name. Its `asset` attribute takes the clip from another file instead of the model:
+
+```html
+<pc-asset id="robot-arm" src="https://developer.playcanvas.com/assets/robot-arm.glb"></pc-asset>
+<pc-asset id="calibrate" src="https://developer.playcanvas.com/assets/robot-arm-calibrate.glb" type="animation"></pc-asset>
+<pc-scene>
+    <pc-model asset="robot-arm">
+        <pc-anim clip="calibrate">
+            <pc-anim-clip name="idle"></pc-anim-clip>
+            <pc-anim-clip name="calibrate" asset="calibrate"></pc-anim-clip>
+        </pc-anim>
+    </pc-model>
+</pc-scene>
+```
+
+## How Clips Bind
+
+A clip does not hold references to entities. Each curve names its target by path: the names of the nodes from the root of the animated hierarchy down to the target. When a clip is assigned to an anim component, the component looks each path up among the descendants of its entity, or of its **Root Bone** (`rootBone`) when one is set, and binds the curve to the node it finds. Curves whose nodes it cannot find are ignored.
+
+This has three consequences:
+
+- **One clip animates many models.** Any model whose nodes have the same names can play a clip, so one set of animations can serve every character built on the same skeleton.
+- **Clips can live in their own files.** A GLB that contains only animations, with no meshes, is a small way to ship clips. Load it as a container like any other, and assign its clips to a model's component.
+- **Binding happens when a clip is assigned.** If nodes are added to the hierarchy afterwards, for example because a model finished loading later, call `entity.anim.rebind()` so that the component looks them up again. Web Components does this for you.
+
+```javascript
+// play a clip from an animation-only GLB on a model whose nodes have the same names
+const walk = walkAsset.resource.animations[0].resource;
+character.anim.assignAnimation('Walk', walk);
+```
+
+## Building Clips in Code
+
+You can build a clip from keyframes yourself, to animate entities that came from no model, or properties that no model animates. A clip is made of three kinds of object:
+
+- [`AnimData`](https://api.playcanvas.com/engine/classes/AnimData.html) holds keyframe data: a flat array of numbers, with the number of components in each value. Times have one component, positions three, and rotations, as quaternions, four.
+- [`AnimCurve`](https://api.playcanvas.com/engine/classes/AnimCurve.html) links one set of times to one set of values, names the properties they drive, and sets the interpolation between keyframes: `pc.INTERPOLATION_STEP`, `pc.INTERPOLATION_LINEAR` or `pc.INTERPOLATION_CUBIC`.
+- [`AnimTrack`](https://api.playcanvas.com/engine/classes/AnimTrack.html) is the clip: a name, a duration, the times and values, and the curves.
+
+A curve's path has three parts. `entityPath` is the names of the entities from the anim component's entity down to the target, starting with the component's own entity. `component` is `graph` for the target's transform, or the name of one of its components. `propertyPath` names the property: `localPosition`, `localRotation` or `localScale` for a transform, or a property of the component, such as a light's `intensity` or `color`.
+
+```js live-example
+import * as pc from 'playcanvas';
+
+// create the application with the component systems it uses
+const canvas = document.getElementById('application');
+const device = await pc.createGraphicsDevice(canvas, {
+    deviceTypes: [pc.DEVICETYPE_WEBGPU]
+});
+device.maxPixelRatio = Math.min(window.devicePixelRatio, 2);
+
+const options = new pc.AppOptions();
+options.graphicsDevice = device;
+options.componentSystems = [
+    pc.RenderComponentSystem,
+    pc.CameraComponentSystem,
+    pc.LightComponentSystem,
+    pc.AnimComponentSystem
+];
+
+const app = new pc.AppBase(canvas);
+app.init(options);
+app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
+app.setCanvasResolution(pc.RESOLUTION_AUTO);
+window.addEventListener('resize', () => app.resizeCanvas());
+app.start();
+
+app.scene.ambientLight = new pc.Color(0.1, 0.1, 0.12);
+
+const camera = new pc.Entity('camera');
+camera.addComponent('camera', {
+    clearColor: new pc.Color(0.05, 0.06, 0.09)
+});
+camera.setPosition(0, 2, 5);
+camera.lookAt(0, 0.8, 0);
+app.root.addChild(camera);
+
+const floorMaterial = new pc.StandardMaterial();
+floorMaterial.diffuse = new pc.Color(0.5, 0.5, 0.55);
+floorMaterial.update();
+
+const floor = new pc.Entity('floor');
+floor.addComponent('render', { type: 'plane', material: floorMaterial });
+floor.setLocalScale(20, 1, 20);
+app.root.addChild(floor);
+
+// the beacon is the root of the hierarchy that the clip animates: a glowing cube,
+// with an omni light inside it
+const beacon = new pc.Entity('beacon');
+app.root.addChild(beacon);
+
+const glow = new pc.StandardMaterial();
+glow.emissive = new pc.Color(1, 0.55, 0.2);
+glow.update();
+
+const cube = new pc.Entity('cube');
+cube.addComponent('render', { type: 'box', material: glow, castShadows: false });
+beacon.addChild(cube);
+
+const lamp = new pc.Entity('lamp');
+lamp.addComponent('light', { type: 'omni', color: new pc.Color(1, 0.55, 0.2), range: 6 });
+cube.addChild(lamp);
+
+// the keyframe times, in seconds, and two sets of values at those times
+const times = new pc.AnimData(1, [0, 0.5, 1]);
+const positions = new pc.AnimData(3, [0, 0.4, 0, 0, 1.6, 0, 0, 0.4, 0]);
+const intensities = new pc.AnimData(1, [0.5, 3, 0.5]);
+
+// each curve links the times to one set of values, and names the property it drives
+const curves = [
+    new pc.AnimCurve([{ entityPath: ['beacon', 'cube'], component: 'graph', propertyPath: ['localPosition'] }], 0, 0, pc.INTERPOLATION_LINEAR),
+    new pc.AnimCurve([{ entityPath: ['beacon', 'cube', 'lamp'], component: 'light', propertyPath: ['intensity'] }], 0, 1, pc.INTERPOLATION_LINEAR)
+];
+const track = new pc.AnimTrack('bob', 1, [times], [positions, intensities], curves);
+
+// play the clip on the beacon
+beacon.addComponent('anim', { activate: true });
+beacon.anim.assignAnimation('bob', track);
+```
+
+Some things to try:
+
+- Make the cube sink below the floor by changing the first and last heights from `0.4` to `-0.5`.
+- Add a keyframe: put `2` at the end of the times, three more numbers at the end of the positions and one more intensity, and raise the track's duration to `2`.
+- Swap `pc.INTERPOLATION_LINEAR` for `pc.INTERPOLATION_STEP`, and the values jump from keyframe to keyframe instead of moving between them.
+
+The Component Properties example builds two clips in code that animate the color and rotation of two spot lights. In the Examples Browser, press Flash in the controls panel to cross-fade from the steady green clip to the flashing red one, and press it again to go back:
+
+[Live example: Component Properties](https://playcanvas.com/examples/#/animation/component-properties) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/animation/component-properties.example.mjs))
+
+## See Also
+
+- [Playing Animations](https://developer.playcanvas.com/user-manual/animation/playing-animations.md) - Playing, switching and timing clips
+- [Animation Events](https://developer.playcanvas.com/user-manual/animation/events.md) - Adding events to clips
+- [Animation Asset](https://developer.playcanvas.com/user-manual/editor/assets/inspectors/animation.md) - The Editor's animation asset inspector and import settings
+- [Supported Formats](https://developer.playcanvas.com/user-manual/assets/supported-formats.md) - The model formats that PlayCanvas loads
+- [AnimTrack](https://api.playcanvas.com/engine/classes/AnimTrack.html), [AnimCurve](https://api.playcanvas.com/engine/classes/AnimCurve.html) and [AnimData](https://api.playcanvas.com/engine/classes/AnimData.html) - The engine API reference
+
+--------------------------------------------------------------------------------
+
+## State Graphs
+
+URL: https://developer.playcanvas.com/user-manual/animation/state-graphs/
+Markdown: https://developer.playcanvas.com/user-manual/animation/state-graphs.md
+
+A state graph is a state machine for the animation of a model. Its **states** are the things the model can be doing, such as idling, walking and jumping, and each plays a clip. Its **transitions** say how one state can lead to another: when, how quickly the clips cross-fade, and under what **conditions**. The conditions test **parameters**, values such as a character's speed that your code sets as the game runs. You set the parameters, and the graph chooses the clip.
+
+[Image: A state graph: START leads to the default state Idle. Idle and Walk lead to each other when the speed parameter rises above or falls to 0.5. ANY leads to Jump when the jump trigger is set, and Jump leads to END at an exit time of 1, from where the graph returns to START]
+
+A state graph does not contain clips. It is a template, and each anim component that uses it links its states to clips of its own, so one graph can drive every character that moves in the same way, each with its own animations. A graph has at least one **layer**, and each layer is a state machine of its own; see [Layers and Masks](https://developer.playcanvas.com/user-manual/animation/layers-and-masks.md).
+
+## States
+
+Only one state of a layer is active at a time. There are four kinds.
+
+### Animation States
+
+An animation state plays a clip, or blends several with a [blend tree](https://developer.playcanvas.com/user-manual/animation/blend-trees.md). It has a **name**, which must be unique in its layer, a **speed**, which multiplies the speed of its clip, and a **loop** setting. A state that does not loop holds the last frame of its clip until a transition leaves it.
+
+### START
+
+Every layer begins at START, which leads straight to the layer's **default state**. START can have no other transitions, from or to it.
+
+### END
+
+A transition to END leaves the graph, which goes straight back to START and from there to the default state. Use it to return to the beginning from wherever a sequence of states finishes, without drawing a transition back.
+
+### ANY
+
+Transitions from ANY can be taken from whichever state is active, as if they started from it. Use it for a state that every other state can lead to, such as a jump or a hit reaction, instead of a transition from each of them. There can be no transitions to ANY.
+
+## Transitions
+
+A transition leads from one state to another. Its settings are:
+
+| Setting | Description |
+| --- | --- |
+| Duration (`time`) | How long the two states cross-fade, in seconds. 0 cuts straight to the next state. |
+| Exit time (`exitTime`) | When the transition can be taken, as a fraction of the source state's clip. A value below 1 makes it available at that point in every loop: 0.75 is three quarters of the way through each loop. 1 is the end of the first time through, and 2.5 is halfway through the third. Without an exit time, the transition can be taken at any time. |
+| Offset (`transitionOffset`) | Where the destination state's clip starts, as a fraction from 0 to 1 of its duration. |
+| Interruption source (`interruptionSource`) | Whether other transitions can interrupt this one while it cross-fades: none, those from the previous state, those from the next state, or both in either order. |
+| Conditions (`conditions`) | Tests of parameter values. The transition can only be taken when all of them pass. |
+
+A transition with neither an exit time nor conditions is taken straight away, and a transition to the state that is already active is never taken. When several transitions can be taken at once, the one with the lowest `priority` wins, and those from the active state come before those from ANY.
+
+## Parameters and Conditions
+
+Parameters are the inputs of a state graph. Each has a name, a type and a default value:
+
+- **Float**, **Integer** and **Boolean** parameters hold the value you last set.
+- A **Trigger** is a Boolean that resets itself to `false` when a transition uses it. Use one for an event that should cause one transition, such as a jump. A trigger stays set until a transition uses it, unless you pass `true` as the second argument of `setTrigger()`, which resets it at the end of the frame even if no transition took it.
+
+Set them on the anim component, by name:
+
+```javascript
+entity.anim.setFloat('speed', 1.2);
+entity.anim.setInteger('weapon', 2);
+entity.anim.setBoolean('crouching', true);
+entity.anim.setTrigger('jump');
+```
+
+A condition compares a parameter with a value, using one of the operators `==`, `!=`, `<`, `<=`, `>` and `>=`. In data, these are `pc.ANIM_EQUAL_TO`, `pc.ANIM_NOT_EQUAL_TO`, `pc.ANIM_LESS_THAN`, `pc.ANIM_LESS_THAN_EQUAL_TO`, `pc.ANIM_GREATER_THAN` and `pc.ANIM_GREATER_THAN_EQUAL_TO`.
+
+## Building a State Graph
+
+Here is the graph in the image above, as the data that the engine loads. The Editor builds the same data for you in its graph editor.
+
+```javascript
+const stateGraph = {
+    layers: [{
+        name: 'Base',
+        states: [
+            { name: 'START' },
+            { name: 'Idle', loop: true, defaultState: true },
+            { name: 'Walk', loop: true },
+            { name: 'Jump', loop: false },
+            { name: 'ANY' },
+            { name: 'END' }
+        ],
+        transitions: [
+            { from: 'START', to: 'Idle' },
+            { from: 'Idle', to: 'Walk', time: 0.2, conditions: [{ parameterName: 'speed', predicate: pc.ANIM_GREATER_THAN, value: 0.5 }] },
+            { from: 'Walk', to: 'Idle', time: 0.2, conditions: [{ parameterName: 'speed', predicate: pc.ANIM_LESS_THAN_EQUAL_TO, value: 0.5 }] },
+            { from: 'ANY', to: 'Jump', time: 0.1, conditions: [{ parameterName: 'jump', predicate: pc.ANIM_EQUAL_TO, value: true }] },
+            { from: 'Jump', to: 'END', time: 0.2, exitTime: 1 }
+        ]
+    }],
+    parameters: {
+        speed: { name: 'speed', type: pc.ANIM_PARAMETER_FLOAT, value: 0 },
+        jump: { name: 'jump', type: pc.ANIM_PARAMETER_TRIGGER, value: false }
+    }
+};
+```
+
+**Engine**
+
+Load the graph into the component, then link each state to a clip through the layer:
+
+```javascript
+character.addComponent('anim', { activate: true });
+character.anim.loadStateGraph(stateGraph);
+
+const layer = character.anim.baseLayer;
+layer.assignAnimation('Idle', idleTrack);
+layer.assignAnimation('Walk', walkTrack);
+layer.assignAnimation('Jump', jumpTrack);
+```
+
+Playback starts when every state has a clip.
+
+:::caution
+
+The layer's `assignAnimation()` keeps the speed and loop that the graph gives each state. The component's own `entity.anim.assignAnimation()` replaces them with its arguments, which default to a speed of 1 and looping, so with it, Jump above would loop. Pass the values you want, or assign through the layer.
+
+:::
+
+**Editor**
+
+1. In the Assets panel, click **+** and choose **Anim State Graph**. Select the new asset to open the graph editor.
+2. Right-click the empty canvas and choose **Add new state** for each state, and set its **Name**, **Speed** and **Loop** in the Inspector. Choose the **Default State** in the layer's settings on the left.
+3. Right-click a state and choose **Add transition**, then click the state it leads to. Select the transition's arrow to set its **Duration**, **Offset** and **Interruption Source**, turn on **Has Exit Time** to give it an **Exit Time**, and add conditions with **New Condition**. When there are several transitions between the same two states, drag them into priority order here.
+4. Add the parameters with **+ PARAMETER** on the left.
+5. Select the entity's Anim component, choose the asset as its **State Graph**, and drag an animation asset into the slot of each state.
+
+[Image: The Editor's graph editor, showing START, ANY and END on the left, the Idle, Walk and Jump states connected by transitions, and the layers and parameters panels]
+
+**React**
+
+Load the graph and the clips into the engine component from a component of your own, placed in the model's `<Entity>` after its `<Anim playing />`:
+
+```jsx
+import { useEffect } from 'react';
+import { useParent } from '@playcanvas/react/hooks';
+
+function Locomotion({ tracks }) {
+  const entity = useParent();
+
+  useEffect(() => {
+    entity.anim.loadStateGraph(stateGraph);
+    entity.anim.baseLayer.assignAnimation('Idle', tracks.idle);
+    entity.anim.baseLayer.assignAnimation('Walk', tracks.walk);
+    entity.anim.baseLayer.assignAnimation('Jump', tracks.jump);
+  }, [entity, tracks]);
+
+  return null;
+}
+```
+
+**Web Components**
+
+[`<pc-anim>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-anim.md) plays clips without a state graph, and replaces the graph of its component when its clips change. For a state graph, leave it out, and add the anim component to the model's entity from code:
+
+```html
+<pc-asset id="character" src="character.glb"></pc-asset>
+<pc-scene>
+    <pc-model name="character" asset="character"></pc-model>
+</pc-scene>
+
+<script type="module">
+    import { whenReady } from '@playcanvas/web-components';
+
+    const model = await whenReady('pc-model[name="character"]');
+    const container = document.getElementById('character').asset.resource;
+    const tracks = Object.fromEntries(container.animations.map(animation => [animation.resource.name, animation.resource]));
+
+    model.entity.addComponent('anim', { activate: true });
+    model.entity.anim.loadStateGraph(stateGraph);
+    model.entity.anim.baseLayer.assignAnimation('Idle', tracks.idle);
+    model.entity.anim.baseLayer.assignAnimation('Walk', tracks.walk);
+    model.entity.anim.baseLayer.assignAnimation('Jump', tracks.jump);
+</script>
+```
+
+## Driving a State Graph
+
+Once the graph is loaded, set its parameters as the game runs, from whatever decides them: input, physics or game logic. Set a value every frame if it changes continuously, like a speed, and set a trigger when its event happens.
+
+**Engine**
+
+```javascript
+app.on('update', () => {
+    character.anim.setFloat('speed', velocity.length());
+});
+app.keyboard.on('keydown', (event) => {
+    if (event.key === pc.KEY_SPACE) character.anim.setTrigger('jump');
+});
+```
+
+**Editor**
+
+Set the parameters from a script on the entity:
+
+```javascript
+import { KEY_SPACE, KEY_UP, Script } from 'playcanvas';
+
+export class CharacterAnimation extends Script {
+    static scriptName = 'characterAnimation';
+
+    update(dt) {
+        const moving = this.app.keyboard.isPressed(KEY_UP);
+        this.entity.anim.setFloat('speed', moving ? 1 : 0);
+
+        if (this.app.keyboard.wasPressed(KEY_SPACE)) {
+            this.entity.anim.setTrigger('jump');
+        }
+    }
+}
+```
+
+**React**
+
+Set a parameter when a prop changes:
+
+```jsx
+function Speed({ value }) {
+  const entity = useParent();
+
+  useEffect(() => {
+    entity.anim.setFloat('speed', value);
+  }, [entity, value]);
+
+  return null;
+}
+```
+
+**Web Components**
+
+```javascript
+document.getElementById('jump-button').addEventListener('click', () => {
+    model.entity.anim.setTrigger('jump');
+});
+```
+
+To read where the graph is, a layer has `activeState`, the name of the active state, `previousState` and `transitioning`. Parameters can be read back with `getFloat()`, `getInteger()`, `getBoolean()` and `getTrigger()`.
 
 :::ai
 For complex graphs, ask an AI assistant through the **[Editor MCP Server](https://developer.playcanvas.com/user-manual/editor/mcp-server.md)** to trace a failing transition across its conditions, parameters, scripts, and Anim mappings, then reproduce it in Launcher.
 :::
 
-## States
+## Example
 
-In essence, states are used to specify which animations should play at a given point in time. An anim state graph can only be in one of these states at a given time.
+This Engine app gives a robot arm a state graph. The arm idles until a `work` trigger is set. Then it picks something up and places it, and returns to idling. Each step of the cycle is a state that does not loop, left by a transition with an exit time of 1. Click the canvas to set the trigger.
 
-There are four types of states present in state graphs. Animation states, along with the START state, END state and ANY state. Only animation states can be created and deleted by the user and only these will be linked to animation assets. The other states are used to control the flow through the state machine.
+```js live-example
+import * as pc from 'playcanvas';
 
-### Animation States
+// create the application with the component systems and resource handlers it uses
+const canvas = document.getElementById('application');
+const device = await pc.createGraphicsDevice(canvas, {
+    deviceTypes: [pc.DEVICETYPE_WEBGPU]
+});
+device.maxPixelRatio = Math.min(window.devicePixelRatio, 2);
 
-[Image: State]
+const options = new pc.AppOptions();
+options.graphicsDevice = device;
+options.componentSystems = [
+    pc.RenderComponentSystem,
+    pc.CameraComponentSystem,
+    pc.LightComponentSystem,
+    pc.AnimComponentSystem
+];
+options.resourceHandlers = [pc.ContainerHandler, pc.TextureHandler];
 
-Animation states define a playable animation such as ‘Idle’, ‘Jump’ or ‘Walk’. New animation states can be created by right clicking on the blank canvas behind the state graph and selecting ‘Add new state’ from the menu. The editor will target your newly created state and show its inspector panel on the right hand side. Within this inspector the following state variables can be modified:
+const app = new pc.AppBase(canvas);
+app.init(options);
+app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
+app.setCanvasResolution(pc.RESOLUTION_AUTO);
+window.addEventListener('resize', () => app.resizeCanvas());
+app.start();
 
-| Variable | Description |
-|----------|-------------|
-| Name     | The name that this state should be called by. This is used to find and edit and play states via script. Names must be unique per state graph layer. |
-| Speed    | The playback speed for animations that are linked to this state. |
-| Loop     | Whether animations linked to this state should loop during playback. If set to false the animation will pause on its last keyframe until this state is exited. |
+app.scene.ambientLight = new pc.Color(0.35, 0.35, 0.4);
 
-### START state
+// load the robot arm, a GLB with five animations
+const asset = new pc.Asset('robot-arm', 'container', {
+    url: 'https://developer.playcanvas.com/assets/robot-arm.glb'
+});
+await new Promise((resolve) => {
+    asset.ready(resolve);
+    app.assets.add(asset);
+    app.assets.load(asset);
+});
 
-[Image: Start State]
+const camera = new pc.Entity('camera');
+camera.addComponent('camera', {
+    clearColor: new pc.Color(0.11, 0.12, 0.17)
+});
+camera.setPosition(1.75, 1.4, 2.15);
+camera.lookAt(0, 0.75, 0);
+app.root.addChild(camera);
 
-The START state is the entry point of every state graph. When an anim component begins playing its assigned anim state graph, it will first enter this state and transition directly to the animation state it’s connected to. This animation state is called the default state and it can be selected via the layers panel here:
+const light = new pc.Entity('light');
+light.addComponent('light', {
+    castShadows: true,
+    shadowBias: 0.2,
+    normalOffsetBias: 0.05
+});
+light.setEulerAngles(48, 38, 0);
+app.root.addChild(light);
 
-[Image: Layers]
+const floor = new pc.Entity('floor');
+const floorMaterial = new pc.StandardMaterial();
+floorMaterial.diffuse = new pc.Color(0.24, 0.26, 0.31);
+floorMaterial.update();
+floor.addComponent('render', { type: 'plane', material: floorMaterial });
+floor.setLocalScale(20, 1, 20);
+app.root.addChild(floor);
 
-It is not possible to create any other transitions to or from the START state. It can only be entered again by transitioning to the END state.
+// create the arm's entities, and give its root an anim component
+const arm = asset.resource.instantiateRenderEntity({ castShadows: true });
+arm.addComponent('anim', { activate: true });
+app.root.addChild(arm);
 
-### END state
+// the arm idles until it is told to work, then picks, places and goes back to idling
+arm.anim.loadStateGraph({
+    layers: [{
+        name: 'Base',
+        states: [
+            { name: 'START' },
+            { name: 'Idle', loop: true },
+            { name: 'Pick', loop: false },
+            { name: 'Place', loop: false }
+        ],
+        transitions: [
+            { from: 'START', to: 'Idle' },
+            // the work trigger starts a cycle, and is reset when this transition uses it
+            { from: 'Idle', to: 'Pick', time: 0.4, conditions: [{ parameterName: 'work', predicate: pc.ANIM_EQUAL_TO, value: true }] },
+            // once a clip has played through, cross-fade to the next one
+            { from: 'Pick', to: 'Place', time: 0.4, exitTime: 1 },
+            { from: 'Place', to: 'Idle', time: 0.4, exitTime: 1 }
+        ]
+    }],
+    parameters: {
+        work: { name: 'work', type: pc.ANIM_PARAMETER_TRIGGER, value: false }
+    }
+});
 
-[Image: End State]
+// link each state to a GLB animation, keeping the speed and loop the graph gave it
+const tracks = Object.fromEntries(asset.resource.animations.map(animation => [animation.resource.name, animation.resource]));
+arm.anim.baseLayer.assignAnimation('Idle', tracks.idle);
+arm.anim.baseLayer.assignAnimation('Pick', tracks.pick);
+arm.anim.baseLayer.assignAnimation('Place', tracks.place);
 
-The end state marks an exit out of the current state graph. If your animation state is set up to transition to the END state, the system will move directly to the default animation state which is connected to the START state. This is useful to create cyclical flows through the graph while still laying out your graph in a linear fashion. It is not possible to create transitions from the END state to any other state. It will always transition directly to the START state.
+// click to set the trigger
+canvas.addEventListener('click', () => {
+    arm.anim.setTrigger('work');
+});
 
-### ANY state
-
-[Image: Any State]
-
-This state is used to create transitions which can be activated while the system is currently in any of the other animation states. Any transitions that trigger from this state will blend as if they had been connected directly from the currently active animation state. You can create transitions from the ANY state but not to it.
-
-This is useful to set up transitions which you want to activate, no matter which state you’re currently in. For example you could have a jump state which should be reachable from both an idle and walk state. Instead of setting up transitions from both the idle and walk states to the jump state, a transition can be set up between the ANY state and the jump state.
-
-### Transitions
-
-Transitions define how the anim state graph can move from one animation state to another. They can be created by right clicking an animation state and selecting `Add transition` from the context menu.
-
-By setting the variables of a given transition you can also control how the animations of the transitioning states will blend together.
-
-The available transition variables are:
-
-| Variable            | Description |
-|---------------------|-------------|
-| Duration            | The duration of the transition in seconds. |
-| Exit Time           | The time at which to exit the source state and enter the destination state. Given in normalized time based on the source state's duration. Providing no value allows the source state to exit with this transition at any time. A value of less than 1 will make the transition available for exit at that time during every loop of the source state. |
-| Offset              | If provided, the destination state will begin playing its animation at this time. Given in normalized time based on the destination state's duration. Must be between 0 and 1. |
-| Interruption Source | Defines whether another transition can interrupt this one and which of the current or previous states' transitions can do so. |
-
-It is possible to create multiple transitions between two animation states, which have different values and conditions set. The priority of these transitions can be reordered in the transition inspector after selecting a transition's arrow in the graph. The priority order determines which transition will be used by the state graph if multiple transitions have their conditions met.
-
-### Parameters
-
-The parameters of an anim state graph are variables which are used to control the flow of animations during runtime. These variables can be accessed via scripts and set to new values at any time. They are then the way in which users can control the behavior of an entity's animation during its lifecycle.
-
-New parameters can be added to a state graph via the parameters panel on the left inspector:
-
-[Image: Parameters]
-
-Each parameter has three variables which can be set:
-
-| Variable      | Description |
-|---------------|-------------|
-| Name          | The name that this parameter should be called by. This is used to find and set the parameter via script. Names must be unique per state graph. |
-| Type          | The type of variable that the parameter contains. One of: Boolean, Float, Integer or Trigger. The Trigger type acts as a Boolean but with the special property that its value is set back to false after it has been used to successfully activate a transition. |
-| Default Value | The value of the parameters variable when the state graph launches. |
-
-The way in which they control the state graph is through the use of transition conditions. Each transition in the graph can have a list of conditions which define when a transition is usable by the system. A state will not be able to pass to another state through a given transition unless all of its conditions are met.
-
-Each condition consists of a conditional statement which compares the current value of a parameters variable to the given value in the condition using the designated operator. For example, the following condition:
-
-[Image: Condition]
-
-Can be used in the transition between the Idle and Jump animation states to ensure that a character only jumps when the ‘Jump’ parameter has been set to true via a script.
-
-### Layers
-
-So far, animstategraph assets have been discussed in the context of editing a single animation state graph. It may sometimes be necessary however to have the animations of a single model driven by multiple separate state graphs, each with their own defined behavior. An example could be animating a main character's movement and locomotion on a single layer, while animating its facial expressions on a separate layer that’s driven by its own state graph and parameters.
-
-When an animstategraph is created, it comes with a single base layer. This layer is not deletable and for many scenarios will be the only one necessary. However if you wish to create another layer you can do so by selecting the new layer button on the layers panel to the left of the state graph view:
-
-[Image: Layers]
-
-It is then possible to switch to editing this layer by selecting it from the layer select dropdown which is present at the top right of the graph view:
-
-[Image: Select Layer]
-
-### Layer Blending
-
-By default, layers animate a model in the order that they’re created in the layers panel. Any animation values they set on a model's bones will be overwritten by subsequent layers. If instead you wish to blend the animation values of the layers together, you can set the `blend type` of your layers to `Additive` rather than the default `Override`:
-
-[Image: Layer Blend]
-
-The blend weight value of each layer is used when blending multiple layers to determine how much each layer should contribute to the final animation. These blend weights can be adjusted at runtime in your game scripts to update the blends of your layers in real time:
-
-**ESM**
-
-```javascript
-import { Script } from 'playcanvas';
-
-export class AnimationBlending extends Script {
-  static scriptName = "animationBlending";
-
-  initialize() {
-    this.entity.anim.on('smile_start', (event) => {
-      this.entity.anim.findAnimationLayer('smile').weight = 1;
-    });
-    this.entity.anim.on('smile_end', (event) => {
-      this.entity.anim.findAnimationLayer('smile').weight = 0;
-    });
-  }
-}
+const label = document.createElement('div');
+label.style.cssText = 'position: absolute; left: 12px; bottom: 10px; color: #ccc; font: 14px sans-serif;';
+document.body.appendChild(label);
+app.on('update', () => {
+    label.textContent = `State: ${arm.anim.baseLayer.activeState}. Click to start a work cycle.`;
+});
 ```
 
-**Classic**
+Some things to try:
+
+- Click again during a cycle. The trigger stays set until the arm is back in Idle, so it starts another cycle straight away.
+- Change the exit time of the Pick transition to `0.5`, and the arm moves on to placing before it has finished picking.
+- Add an `inspect` state with the arm's `inspect` clip, and lead to it from Place instead of to Idle.
+
+The Locomotion example drives a character's state graph with a `speed` integer and a `jump` trigger that leads from ANY. In the Examples Browser, click the floor to walk there, turn on Run in the controls panel to jog there instead, and press Jump at any time:
+
+[Live example: Locomotion](https://playcanvas.com/examples/#/animation/locomotion) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/animation/locomotion.example.mjs))
+
+## See Also
+
+- [Blend Trees](https://developer.playcanvas.com/user-manual/animation/blend-trees.md) - States that blend several clips
+- [Layers and Masks](https://developer.playcanvas.com/user-manual/animation/layers-and-masks.md) - Several state graphs on one model
+- [Anim State Graph Blending](https://developer.playcanvas.com/tutorials/anim-blending/) - Tutorial that builds a blended state graph in the Editor
+- [Anim Component](https://developer.playcanvas.com/user-manual/editor/scenes/components/anim.md) - Linking a state graph's states to clips in the Editor
+- [AnimComponent](https://api.playcanvas.com/engine/classes/AnimComponent.html) and [AnimComponentLayer](https://api.playcanvas.com/engine/classes/AnimComponentLayer.html) - The engine API reference
+
+--------------------------------------------------------------------------------
+
+## Blend Trees
+
+URL: https://developer.playcanvas.com/user-manual/animation/blend-trees/
+Markdown: https://developer.playcanvas.com/user-manual/animation/blend-trees.md
+
+A blend tree is a [state graph](https://developer.playcanvas.com/user-manual/animation/state-graphs.md) state that plays several clips at once and blends them, weighted by the values of parameters. It turns a few clips into a continuous range of motion: a walk and a run become every speed between them, and eight walks in eight directions become movement in any direction.
+
+Each **child** of a tree is a clip at a **point**: a value, or a position on a plane, of the tree's parameters. As the parameters change, the tree weights the children by how near their points are, and their weights add up to 1. Unlike a transition, a blend tree never finishes blending: the mix follows the parameters for as long as the state is active.
+
+The Editor's graph editor does not create blend trees, so they are built in code, as part of a state graph's data.
+
+## Kinds of Blend Tree
+
+A tree's `type` decides how many parameters it reads, and how its points are compared with them.
+
+| Type | Parameters | Points | Use it for |
+| --- | --- | --- | --- |
+| `pc.ANIM_BLEND_1D` | One, as `parameter` | Numbers | One value, such as walking speed. Between two points, the two children on either side are blended in proportion. Keep the value between the lowest and highest points: outside them, no child has any weight. |
+| `pc.ANIM_BLEND_2D_CARTESIAN` | Two, as `parameters` | `[x, y]` | Two independent values, such as how happy and how energetic a character is. |
+| `pc.ANIM_BLEND_2D_DIRECTIONAL` | Two, as `parameters` | `[x, y]` | A direction, such as a movement vector. Points are directions from `[0, 0]`, compared by angle and length, so a walk and a run in the same direction blend properly. Put the idle at `[0, 0]`. |
+| `pc.ANIM_BLEND_DIRECT` | One per child, as `parameters` | None | Mixing clips by hand. Each child's weight is its parameter's value, divided by the sum of them all. Negative values count as 0. |
+
+Children are blended only with the other children of their tree. A child cannot be a blend tree of its own.
+
+## Building a Blend Tree
+
+A blend tree is the `blendTree` of a state, with its children listed in `children`. Each child has a `name`, its `point` and, optionally, a `speed` that multiplies the speed of its clip. Here a 1D tree blends idling, walking and running by a `speed` parameter:
 
 ```javascript
-var AnimationBlending = pc.createScript('animationBlending');
-
-// initialize code called once per entity
-AnimationBlending.prototype.initialize = function() {
-    this.entity.anim.on('smile_start', (event) => {
-        this.entity.anim.findAnimationLayer('smile').weight = 1;
-    });
-    this.entity.anim.on('smile_end', (event) => {
-        this.entity.anim.findAnimationLayer('smile').weight = 0;
-    });
+const stateGraph = {
+    layers: [{
+        name: 'Base',
+        states: [
+            { name: 'START' },
+            {
+                name: 'Movement',
+                loop: true,
+                blendTree: {
+                    type: pc.ANIM_BLEND_1D,
+                    parameter: 'speed',
+                    children: [
+                        { name: 'Idle', point: 0 },
+                        { name: 'Walk', point: 1 },
+                        { name: 'Run', point: 3 }
+                    ]
+                }
+            }
+        ],
+        transitions: [{ from: 'START', to: 'Movement' }]
+    }],
+    parameters: {
+        speed: { name: 'speed', type: pc.ANIM_PARAMETER_FLOAT, value: 0 }
+    }
 };
 ```
 
-If you [mask your layers](https://developer.playcanvas.com/user-manual/animation/anim-layer-masking.md), you can set the `blend type` of your layers to `Additive` to blend in an animation which only controls part of your model's bones. Updating the `blend weight` in real time as described above can allow you to create smooth blends between animations on different layers. This is particularly useful when animating characters that need to carry out different actions using their upper and lower body. For example, you could have a `shooting` animation that is blended in and out on a characters upper body, while freeing up the lower body for various locomotion animations such as `walking` and `running`.
+A 2D tree takes two parameter names instead, and its children's points are pairs:
 
-Any layers that are set to `Overwrite` will completely replace the animation values of the model's bones that are animated in that layer. In these instances, previous layers will not be taken into consideration when producing the final animation.
+```javascript
+blendTree: {
+    type: pc.ANIM_BLEND_2D_DIRECTIONAL,
+    parameters: ['moveX', 'moveZ'],
+    children: [
+        { name: 'Idle', point: [0, 0] },
+        { name: 'Forward', point: [0, 1] },
+        { name: 'Back', point: [0, -1] },
+        { name: 'Left', point: [-1, 0] },
+        { name: 'Right', point: [1, 0] }
+    ]
+}
+```
+
+Link each child to a clip by its path: the name of the state, a dot, and the name of the child. The state plays once all of its children have clips. Then set the parameters as the game runs.
+
+**Engine**
+
+```javascript
+character.addComponent('anim', { activate: true });
+character.anim.loadStateGraph(stateGraph);
+
+const layer = character.anim.baseLayer;
+layer.assignAnimation('Movement.Idle', idleTrack);
+layer.assignAnimation('Movement.Walk', walkTrack);
+layer.assignAnimation('Movement.Run', runTrack);
+
+app.on('update', () => {
+    character.anim.setFloat('speed', velocity.length());
+});
+```
+
+**Editor**
+
+Load the graph from a script on the entity, and take its clips from animation assets given to the script as attributes. Leave the Anim component's **State Graph** empty:
+
+```javascript
+import { Asset, Script } from 'playcanvas';
+
+export class Movement extends Script {
+    static scriptName = 'movement';
+
+    /**
+     * @attribute
+     * @type {Asset}
+     * @resource animation
+     */
+    idle;
+
+    /**
+     * @attribute
+     * @type {Asset}
+     * @resource animation
+     */
+    walk;
+
+    /**
+     * @attribute
+     * @type {Asset}
+     * @resource animation
+     */
+    run;
+
+    initialize() {
+        this.entity.anim.loadStateGraph(stateGraph);
+
+        const layer = this.entity.anim.baseLayer;
+        layer.assignAnimation('Movement.Idle', this.idle.resource);
+        layer.assignAnimation('Movement.Walk', this.walk.resource);
+        layer.assignAnimation('Movement.Run', this.run.resource);
+    }
+}
+```
+
+**React**
+
+```jsx
+import { useEffect } from 'react';
+import { useParent } from '@playcanvas/react/hooks';
+
+function Movement({ tracks, speed }) {
+  const entity = useParent();
+
+  useEffect(() => {
+    entity.anim.loadStateGraph(stateGraph);
+    entity.anim.baseLayer.assignAnimation('Movement.Idle', tracks.idle);
+    entity.anim.baseLayer.assignAnimation('Movement.Walk', tracks.walk);
+    entity.anim.baseLayer.assignAnimation('Movement.Run', tracks.run);
+  }, [entity, tracks]);
+
+  useEffect(() => {
+    entity.anim.setFloat('speed', speed);
+  }, [entity, speed]);
+
+  return null;
+}
+```
+
+Place it in the model's `<Entity>`, after its `<Anim playing />`.
+
+**Web Components**
+
+As for any [state graph](https://developer.playcanvas.com/user-manual/animation/state-graphs.md#building-a-state-graph), leave out `<pc-anim>`, and add the anim component to the model's entity from code:
+
+```javascript
+const model = await whenReady('pc-model[name="character"]');
+const container = document.getElementById('character').asset.resource;
+const tracks = Object.fromEntries(container.animations.map(animation => [animation.resource.name, animation.resource]));
+
+model.entity.addComponent('anim', { activate: true });
+model.entity.anim.loadStateGraph(stateGraph);
+model.entity.anim.baseLayer.assignAnimation('Movement.Idle', tracks.idle);
+model.entity.anim.baseLayer.assignAnimation('Movement.Walk', tracks.walk);
+model.entity.anim.baseLayer.assignAnimation('Movement.Run', tracks.run);
+```
+
+## Keeping Clips in Step
+
+The clips of a blend tree rarely have the same duration: a run cycle is shorter than a walk cycle. Blended at their own speeds, their steps would drift apart, and a character's feet would slide. So by default, a tree changes the speed of each child so that all of them take the same time to play through: the average of their durations, weighted by the children's weights. Blended half and half, a 1-second clip and a 2-second clip both take 1.5 seconds.
+
+For clips that are not cycles of the same motion, set `syncAnimations: false` on the tree, and each child plays at its own speed.
+
+## Example
+
+This Engine app blends two of the robot arm's clips, idling and inspecting, with a 1D blend tree. Moving the pointer from the left of the canvas to the right sets the tree's `look` parameter from 0 to 1.
+
+```js live-example
+import * as pc from 'playcanvas';
+
+// create the application with the component systems and resource handlers it uses
+const canvas = document.getElementById('application');
+const device = await pc.createGraphicsDevice(canvas, {
+    deviceTypes: [pc.DEVICETYPE_WEBGPU]
+});
+device.maxPixelRatio = Math.min(window.devicePixelRatio, 2);
+
+const options = new pc.AppOptions();
+options.graphicsDevice = device;
+options.componentSystems = [
+    pc.RenderComponentSystem,
+    pc.CameraComponentSystem,
+    pc.LightComponentSystem,
+    pc.AnimComponentSystem
+];
+options.resourceHandlers = [pc.ContainerHandler, pc.TextureHandler];
+
+const app = new pc.AppBase(canvas);
+app.init(options);
+app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
+app.setCanvasResolution(pc.RESOLUTION_AUTO);
+window.addEventListener('resize', () => app.resizeCanvas());
+app.start();
+
+app.scene.ambientLight = new pc.Color(0.35, 0.35, 0.4);
+
+// load the robot arm, a GLB with five animations
+const asset = new pc.Asset('robot-arm', 'container', {
+    url: 'https://developer.playcanvas.com/assets/robot-arm.glb'
+});
+await new Promise((resolve) => {
+    asset.ready(resolve);
+    app.assets.add(asset);
+    app.assets.load(asset);
+});
+
+const camera = new pc.Entity('camera');
+camera.addComponent('camera', {
+    clearColor: new pc.Color(0.11, 0.12, 0.17)
+});
+camera.setPosition(1.75, 1.4, 2.15);
+camera.lookAt(0, 0.75, 0);
+app.root.addChild(camera);
+
+const light = new pc.Entity('light');
+light.addComponent('light', {
+    castShadows: true,
+    shadowBias: 0.2,
+    normalOffsetBias: 0.05
+});
+light.setEulerAngles(48, 38, 0);
+app.root.addChild(light);
+
+const floor = new pc.Entity('floor');
+const floorMaterial = new pc.StandardMaterial();
+floorMaterial.diffuse = new pc.Color(0.24, 0.26, 0.31);
+floorMaterial.update();
+floor.addComponent('render', { type: 'plane', material: floorMaterial });
+floor.setLocalScale(20, 1, 20);
+app.root.addChild(floor);
+
+// create the arm's entities, and give its root an anim component
+const arm = asset.resource.instantiateRenderEntity({ castShadows: true });
+arm.addComponent('anim', { activate: true });
+app.root.addChild(arm);
+
+// one state, whose 1D blend tree blends idle and inspect by the value of the look parameter
+arm.anim.loadStateGraph({
+    layers: [{
+        name: 'Base',
+        states: [
+            { name: 'START' },
+            {
+                name: 'Blend',
+                loop: true,
+                blendTree: {
+                    type: pc.ANIM_BLEND_1D,
+                    parameter: 'look',
+                    children: [
+                        { name: 'Idle', point: 0 },
+                        { name: 'Inspect', point: 1 }
+                    ]
+                }
+            }
+        ],
+        transitions: [{ from: 'START', to: 'Blend' }]
+    }],
+    parameters: {
+        look: { name: 'look', type: pc.ANIM_PARAMETER_FLOAT, value: 0 }
+    }
+});
+
+// link each child of the tree to a GLB animation, by the path State.Child
+const tracks = Object.fromEntries(asset.resource.animations.map(animation => [animation.resource.name, animation.resource]));
+arm.anim.baseLayer.assignAnimation('Blend.Idle', tracks.idle);
+arm.anim.baseLayer.assignAnimation('Blend.Inspect', tracks.inspect);
+
+// move the pointer across the canvas to set look from 0 at the left to range at the right
+const range = 1;
+canvas.addEventListener('pointermove', (event) => {
+    arm.anim.setFloat('look', range * pc.math.clamp(event.offsetX / canvas.clientWidth, 0, 1));
+});
+
+const label = document.createElement('div');
+label.style.cssText = 'position: absolute; left: 12px; bottom: 10px; color: #ccc; font: 14px sans-serif;';
+document.body.appendChild(label);
+app.on('update', () => {
+    label.textContent = `look: ${arm.anim.getFloat('look').toFixed(2)}. Move the pointer from left to right to blend.`;
+});
+```
+
+Some things to try:
+
+- Add `{ name: 'Pick', point: 2 }` to the children, link it with `arm.anim.baseLayer.assignAnimation('Blend.Pick', tracks.pick);`, and change `range` to `2`.
+- Add `syncAnimations: false` to the blend tree, and watch the two clips drift apart as you blend them.
+- Change the type to `pc.ANIM_BLEND_DIRECT`, replace `parameter: 'look'` with `parameters: ['still', 'look']`, add a `still` parameter with a value of 1, and remove the points.
+
+These Engine examples blend a character's clips with 2D trees. In the Examples Browser, drag across the pad in the controls panel to move the blend point, and the circle around each clip's point grows with its weight:
+
+[Live example: Blend Trees 2D Cartesian](https://playcanvas.com/examples/#/animation/blend-trees-2d-cartesian) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/animation/blend-trees-2d-cartesian.example.mjs))
+
+[Live example: Blend Trees 2D Directional](https://playcanvas.com/examples/#/animation/blend-trees-2d-directional) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/animation/blend-trees-2d-directional.example.mjs))
+
+## See Also
+
+- [State Graphs](https://developer.playcanvas.com/user-manual/animation/state-graphs.md) - The states, transitions and parameters that blend trees are part of
+- [Layers and Masks](https://developer.playcanvas.com/user-manual/animation/layers-and-masks.md) - Blending whole state graphs together
+- [AnimComponent](https://api.playcanvas.com/engine/classes/AnimComponent.html) and [AnimComponentLayer](https://api.playcanvas.com/engine/classes/AnimComponentLayer.html) - The engine API reference
 
 --------------------------------------------------------------------------------
 
-## Anim Layer Masks
+## Layers and Masks
 
-URL: https://developer.playcanvas.com/user-manual/animation/anim-layer-masking/
-Markdown: https://developer.playcanvas.com/user-manual/animation/anim-layer-masking.md
+URL: https://developer.playcanvas.com/user-manual/animation/layers-and-masks/
+Markdown: https://developer.playcanvas.com/user-manual/animation/layers-and-masks.md
 
-When creating complex animation behavior for your game objects, it is often necessary to isolate the playback of certain animations to specific bones in each object's model. This is particularly useful when animating characters that need to carry out multiple actions at the same time. This can be achieved in PlayCanvas by creating a mask for a given [animation layer](https://developer.playcanvas.com/user-manual/animation/anim-state-graph-assets.md#layers) in your anim component.
+An anim component can run several state machines at once, one on each **layer**. Each layer has states, transitions and a default state of its own, and all of them share the component's parameters. Use layers for actions that happen at the same time and change independently: a character's legs can walk, run and jump on one layer while its arms aim and shoot on another, and its face smiles and blinks on a third.
 
-### Creating a mask
+Every component has a **base layer**, the first, and the layers are applied in order, each on top of the layers before it. Each layer has a **weight**, which sets how much it contributes, and a **blend type**, which sets how it combines with the layers below. A **mask** limits a layer to some of the model's nodes, so that it animates only the arms, say, and leaves the rest to the layers below.
 
-After creating an Anim State Graph asset and attaching it to an anim component, you'll be presented with a list of layers contained in your graph. You can create a mask for any of these layers by clicking the **Create Mask** button under each layer panel:
+## Adding Layers
 
-[Image: Anim Component Create Mask]
+**Engine**
 
- This will open up the mask inspector for that layer which is shown below:
+[`addLayer()`](https://api.playcanvas.com/engine/classes/AnimComponent.html#addlayer) adds a layer, with its weight, mask and blend type, and returns it. Give the layer states with its own `assignAnimation()`:
 
-[Image: Mask Inspector]
+```javascript
+const upperBody = character.anim.addLayer('UpperBody', 1, upperBodyMask, pc.ANIM_LAYER_OVERWRITE);
+upperBody.assignAnimation('Aim', aimTrack);
+upperBody.assignAnimation('Shoot', shootTrack, 1, false);
+```
 
-The mask inspector displays the full hierarchy which the anim component is driving, starting at the `root bone` specified in the anim component. Each bone in the hierarchy can be selected to be included in the mask. You can also right-click specific bones to include or exclude whole sections of the hierarchy. Any bones which are not selected in this mask will not be driven by any of the animations which play in this mask's layer.
+A state graph's data can also hold several layers. Each entry of `layers` takes a `weight` and a `blendType` as well as its states and transitions:
 
-After creating masks, you can use [layer blending](https://developer.playcanvas.com/user-manual/animation/anim-state-graph-assets.md#layer-blending) to smoothly blend the masked animations of multiple layers together.
+```javascript
+layers: [
+    { name: 'Base', states: [/* ... */], transitions: [/* ... */] },
+    { name: 'UpperBody', weight: 1, blendType: pc.ANIM_LAYER_OVERWRITE, states: [/* ... */], transitions: [/* ... */] }
+]
+```
+
+Find a layer by name with `findAnimationLayer()`, or through the `layers` array.
+
+**Editor**
+
+A state graph asset starts with a base layer, which cannot be deleted. Click **+ LAYER** in the layers panel of the graph editor to add another, and set its **Name**, **Default State**, **Blend Type** and **Blend Weight** there. Choose the layer to edit from the dropdown at the top right of the graph.
+
+[Image: The layers panel of the graph editor, with a Base layer and a Shooting layer, each with a Name, Blend Weight, Blend Type and Default State, and the blend type dropdown open on Overwrite and Additive]
+
+The Anim component shows a section for each layer, with a slot for each of its states.
+
+**React**
+
+Add the layer to the engine component from a component of your own, placed in the model's `<Entity>` after its `<Anim playing />`:
+
+```jsx
+import { useEffect } from 'react';
+import { useParent } from '@playcanvas/react/hooks';
+
+function UpperBody({ tracks }) {
+  const entity = useParent();
+
+  useEffect(() => {
+    const layer = entity.anim.addLayer('UpperBody', 1, upperBodyMask);
+    layer.assignAnimation('Aim', tracks.aim);
+  }, [entity, tracks]);
+
+  return null;
+}
+```
+
+**Web Components**
+
+[`<pc-anim>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-anim.md) plays clips on a single layer. For several layers, add the anim component to the model's entity from code, as for a [state graph](https://developer.playcanvas.com/user-manual/animation/state-graphs.md#building-a-state-graph), then add the layers to it:
+
+```javascript
+model.entity.addComponent('anim', { activate: true });
+model.entity.anim.assignAnimation('Walk', tracks.walk);
+
+const upperBody = model.entity.anim.addLayer('UpperBody', 1, upperBodyMask);
+upperBody.assignAnimation('Aim', tracks.aim);
+```
+
+## Weights and Blend Types
+
+A layer's weight runs from 0, where it has no effect, to 1. What it does at the weights in between depends on the layer's blend type:
+
+- An **Overwrite** layer (`pc.ANIM_LAYER_OVERWRITE`), the default, blends from the result of the layers below it towards its own pose, by its weight. At 1, it replaces them; at 0.5, the result is halfway between. The base layer blends with the model's original pose in the same way, so a base layer with a weight of 0.5 plays its clips at half strength.
+- An **Additive** layer (`pc.ANIM_LAYER_ADDITIVE`) adds its clips' difference from the model's original pose to the result of the layers below, scaled by its weight. Use it to add a motion on top of another, such as a recoil on top of an aim, or breathing on top of any pose.
+
+Change a weight at any time with the layer's `weight`. To fade a layer in or out smoothly, `blendToWeight()` moves its weight to a value over a time in seconds:
+
+```javascript
+const upperBody = character.anim.findAnimationLayer('UpperBody');
+upperBody.blendToWeight(1, 0.3); // fade in over 0.3 seconds
+upperBody.blendToWeight(0, 0.3); // and out again
+```
+
+The anim component's **Normalize Weights** (`normalizeWeights`) option changes how layers combine. With it on, the weights of the layers that animate a node are scaled by their total, so the original pose never shows through. A layer that is alone on a node plays at full strength whatever its weight, an overwrite layer replaces every layer below it on the nodes it animates, and additive layers are blended with the layers below instead of added to them. Leave it off unless you need that behavior. The Editor turns it on for anim components created before the option existed, to keep their behavior the same.
+
+## Masks
+
+A mask lists the nodes that a layer animates. Nodes that are not in its layer's mask are left to the layers below, as if the layer were not there. A layer without a mask animates every node that its clips animate.
+
+**Engine**
+
+A mask is an object whose keys are node paths: the names of the nodes from the anim component's entity, or its **Root Bone** when one is set, down to the node, separated by `/`. A path starts with the name of that entity, like the paths of a clip's curves. A value of `true` puts that node in the mask, and `{ children: true }` puts that node and everything below it in the mask. Here the component is on an entity named `Root`:
+
+```javascript
+upperBody.mask = {
+    // the upper spine and everything below it, such as the arms and head
+    'Root/Hips/Spine/Spine1': { children: true },
+    // the lower spine, without its children
+    'Root/Hips/Spine': true
+};
+```
+
+Pass the mask as the third argument of `addLayer()`, or set it later with the layer's `mask`. Set it to `null` to remove it.
+
+**Editor**
+
+Masks belong to each entity's Anim component, not to the state graph asset, so the same graph can be masked differently on different models.
+
+1. Select the entity, and in the Anim component's section for a layer, click **CREATE MASK**.
+
+   [Image: The Anim component with a state graph that has Base and Shooting layers, each with a CREATE MASK button above its states]
+
+2. The mask inspector shows the hierarchy that the component animates, from its **Root Bone**. Check the nodes that the layer should animate. Right-click a node and choose **Add hierarchy** or **Remove hierarchy** to check or uncheck it and everything below it at once.
+
+   [Image: The mask inspector for a Shooting layer, showing the bones of a character in a tree, each with a checkbox]
+
+Click **EDIT MASK** to change a mask later, and the delete button beside it to remove it.
+
+**React**
+
+Pass the mask to `addLayer()`, or set the layer's `mask`, from your own component, as in the Engine tab.
+
+**Web Components**
+
+Pass the mask to `addLayer()`, or set the layer's `mask`, on the component you added from code, as in the Engine tab.
+
+## Example
+
+This Engine app idles a robot arm on its base layer, and adds a second layer that plays the arm's inspect clip. The second layer's mask holds only the wrist and the joints below it, so the rest of the arm keeps idling. Click the canvas to fade the layer in or out with `blendToWeight()`.
+
+```js live-example
+import * as pc from 'playcanvas';
+
+// create the application with the component systems and resource handlers it uses
+const canvas = document.getElementById('application');
+const device = await pc.createGraphicsDevice(canvas, {
+    deviceTypes: [pc.DEVICETYPE_WEBGPU]
+});
+device.maxPixelRatio = Math.min(window.devicePixelRatio, 2);
+
+const options = new pc.AppOptions();
+options.graphicsDevice = device;
+options.componentSystems = [
+    pc.RenderComponentSystem,
+    pc.CameraComponentSystem,
+    pc.LightComponentSystem,
+    pc.AnimComponentSystem
+];
+options.resourceHandlers = [pc.ContainerHandler, pc.TextureHandler];
+
+const app = new pc.AppBase(canvas);
+app.init(options);
+app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
+app.setCanvasResolution(pc.RESOLUTION_AUTO);
+window.addEventListener('resize', () => app.resizeCanvas());
+app.start();
+
+app.scene.ambientLight = new pc.Color(0.35, 0.35, 0.4);
+
+// load the robot arm, a GLB with five animations
+const asset = new pc.Asset('robot-arm', 'container', {
+    url: 'https://developer.playcanvas.com/assets/robot-arm.glb'
+});
+await new Promise((resolve) => {
+    asset.ready(resolve);
+    app.assets.add(asset);
+    app.assets.load(asset);
+});
+
+const camera = new pc.Entity('camera');
+camera.addComponent('camera', {
+    clearColor: new pc.Color(0.11, 0.12, 0.17)
+});
+camera.setPosition(1.75, 1.4, 2.15);
+camera.lookAt(0, 0.75, 0);
+app.root.addChild(camera);
+
+const light = new pc.Entity('light');
+light.addComponent('light', {
+    castShadows: true,
+    shadowBias: 0.2,
+    normalOffsetBias: 0.05
+});
+light.setEulerAngles(48, 38, 0);
+app.root.addChild(light);
+
+const floor = new pc.Entity('floor');
+const floorMaterial = new pc.StandardMaterial();
+floorMaterial.diffuse = new pc.Color(0.24, 0.26, 0.31);
+floorMaterial.update();
+floor.addComponent('render', { type: 'plane', material: floorMaterial });
+floor.setLocalScale(20, 1, 20);
+app.root.addChild(floor);
+
+// create the arm's entities, and give its root an anim component
+const arm = asset.resource.instantiateRenderEntity({ castShadows: true });
+arm.addComponent('anim', { activate: true });
+app.root.addChild(arm);
+
+const tracks = Object.fromEntries(asset.resource.animations.map(animation => [animation.resource.name, animation.resource]));
+
+// the base layer idles the whole arm
+arm.anim.assignAnimation('Idle', tracks.idle);
+
+// a second layer, masked to the wrist and everything below it, plays inspect at a weight of 0
+const wrist = arm.anim.addLayer('Wrist', 0, {
+    'arm_base/arm_column/arm_upper/arm_forearm/arm_wrist_roll': { children: true }
+}, pc.ANIM_LAYER_OVERWRITE);
+wrist.assignAnimation('Inspect', tracks.inspect);
+
+// click to blend the wrist layer in or out over half a second
+let on = false;
+canvas.addEventListener('click', () => {
+    on = !on;
+    wrist.blendToWeight(on ? 1 : 0, 0.5);
+});
+
+const label = document.createElement('div');
+label.style.cssText = 'position: absolute; left: 12px; bottom: 10px; color: #ccc; font: 14px sans-serif;';
+document.body.appendChild(label);
+app.on('update', () => {
+    label.textContent = `Wrist layer weight: ${wrist.weight.toFixed(2)}. Click to blend it in or out.`;
+});
+```
+
+Some things to try:
+
+- Move the mask up the arm, to `'arm_base/arm_column/arm_upper'`, and the layer takes over the upper arm and forearm as well.
+- Replace the mask with `null`, and the whole arm inspects when the layer is in.
+- Change `pc.ANIM_LAYER_OVERWRITE` to `pc.ANIM_LAYER_ADDITIVE`, and the wrist adds the inspect motion to its idling instead of replacing it.
+
+The Layer Masks example plays an upper-body layer over a character's full-body layer. In the Examples Browser, use the controls panel to switch each layer's state, change the upper-body layer's blend type, turn its mask on and off, and set how much each layer contributes:
+
+[Live example: Layer Masks](https://playcanvas.com/examples/#/animation/layer-masks) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/animation/layer-masks.example.mjs))
+
+## See Also
+
+- [State Graphs](https://developer.playcanvas.com/user-manual/animation/state-graphs.md) - The states and transitions of each layer
+- [Anim Component](https://developer.playcanvas.com/user-manual/editor/scenes/components/anim.md) - The Editor reference for the component, its layers and masks
+- [AnimComponent](https://api.playcanvas.com/engine/classes/AnimComponent.html) and [AnimComponentLayer](https://api.playcanvas.com/engine/classes/AnimComponentLayer.html) - The engine API reference
 
 --------------------------------------------------------------------------------
 
-## Anim Events
+## Animation Events
 
-URL: https://developer.playcanvas.com/user-manual/animation/anim-events/
-Markdown: https://developer.playcanvas.com/user-manual/animation/anim-events.md
+URL: https://developer.playcanvas.com/user-manual/animation/events/
+Markdown: https://developer.playcanvas.com/user-manual/animation/events.md
 
-Anim events can be used to trigger event listeners during the playback of an animation. Each event is associated with a specified frame of the animation asset it is attached to. When the playback of the animation reaches that frame, the event will fire and the associated event listener is called.
+An animation event marks a moment in a clip with a name. When an anim component plays past that moment, it fires the event, and your listeners run. Use events to keep things in time with an animation: a footstep sound as a foot lands, a dust cloud under it, the frame of an attack that deals damage, or the end of a clip that should start something else.
 
-### Creating Events
+## Adding Events
 
-To create a new event, select the animation asset in the asset panel which you'd like to create an event for. You should then see the `+ EVENT` button in the asset inspector as shown below:
+Events belong to a clip, so every anim component that plays the clip fires them. Each event has a `time` in seconds from the start of the clip, a `name`, and any other properties you want to pass to its listeners.
 
-[Image: Animation Asset With Event]
+**Engine**
 
-Each event has the following modifiable properties:
+Set a clip's `events` to an [`AnimEvents`](https://api.playcanvas.com/engine/classes/AnimEvents.html) holding all of its events. The events can be listed in any order:
 
-| Variable | Description |
-|----------|-------------|
-| time     | Defines the specific time during the playback of the animation when the event should trigger. Given in seconds. |
-| name     | The name of the event is used to identify the event when attaching an event listener to the anim component. |
-| number   | An additional property which can be set to any number. Used to pass additional details to the event listener. |
-| string   | An additional property which can be set to any string. Used to pass additional details to the event listener. |
+```javascript
+walkTrack.events = new pc.AnimEvents([
+    { time: 0.2, name: 'footstep', foot: 'left' },
+    { time: 0.7, name: 'footstep', foot: 'right' }
+]);
+```
 
-### Event Listeners
+This replaces any events the clip already has.
 
-After creating an event for an animation asset, the event will be fired whenever that asset is played back by an anim component. You can therefore attach listeners to the anim component to handle the event. The following example shows how to attach event listeners to the anim component:
+**Editor**
 
-**ESM**
+Select an animation asset in the Assets panel, and click **+ EVENT** in the **EVENTS** panel of the Inspector. Set each event's fields:
+
+| Field | Description |
+| --- | --- |
+| **time** | When the event fires, in seconds from the start of the clip. |
+| **name** | The name that listeners use to listen for it. |
+| **number** | A number to pass to the listeners, as `number`. |
+| **string** | A string to pass to the listeners, as `string`. |
+
+[Image: The Inspector for an animation asset, showing its duration and name, and an events panel with two foot_step events]
+
+**React**
+
+Set the events on the clip, as in the Engine tab, once its model has loaded:
+
+```jsx
+import { useEffect } from 'react';
+import { AnimEvents } from 'playcanvas';
+import { useModel } from '@playcanvas/react/hooks';
+
+const { asset } = useModel('character.glb');
+
+useEffect(() => {
+  if (!asset) return;
+  const walk = asset.resource.animations.find(animation => animation.resource.name === 'walk').resource;
+  walk.events = new AnimEvents([
+    { time: 0.2, name: 'footstep', foot: 'left' },
+    { time: 0.7, name: 'footstep', foot: 'right' }
+  ]);
+}, [asset]);
+```
+
+**Web Components**
+
+Set the events on the clip, as in the Engine tab. Once a [`<pc-model>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-model.md) is ready, the [`<pc-asset>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset.md) it uses has loaded, and its `asset` holds the clips:
+
+```javascript
+import { AnimEvents } from 'playcanvas';
+import { whenReady } from '@playcanvas/web-components';
+
+await whenReady('pc-model[name="character"]');
+const container = document.getElementById('character').asset.resource;
+const walk = container.animations.find(animation => animation.resource.name === 'walk').resource;
+walk.events = new AnimEvents([
+    { time: 0.2, name: 'footstep', foot: 'left' },
+    { time: 0.7, name: 'footstep', foot: 'right' }
+]);
+```
+
+## Listening for Events
+
+The anim component fires each event under its name, with an object that holds the event's properties: its `name`, its `time`, the `track` it belongs to, and the other properties you gave it, such as `number` and `string` from the Editor.
+
+**Engine**
+
+```javascript
+character.anim.on('footstep', (event) => {
+    console.log(`${event.foot} foot down at ${event.time} s of ${event.track.name}`);
+});
+```
+
+**Editor**
+
+Listen from a script on the entity with the Anim component:
 
 ```javascript
 import { Script } from 'playcanvas';
 
-// initialize code called once per entity
-export class AnimationEvents extends Script {
-    static scriptName = "animationEvents";
+export class Footsteps extends Script {
+    static scriptName = 'footsteps';
 
     initialize() {
-        this.entity.anim.on('plant_foot', (event) => {
-            // get the foot bone from the event's string property, either right_foot or left_foot
-            const footBone = this.entity.findByName(event.string);
-            createDustCloudAtLocation(footBone.getPosition());
+        this.entity.anim.on('foot_step', (event) => {
+            // the event's string field names the foot that landed
+            const foot = this.entity.findByName(event.string);
+            this.app.fire('dust', foot.getPosition());
         });
     }
 }
 ```
 
-**Classic**
+**React**
 
-```javascript
-var AnimationEvents = pc.createScript('animationEvents');
+Listen from a component placed in the model's `<Entity>` after its `<Anim playing />`, and stop listening when it unmounts:
 
-// initialize code called once per entity
-AnimationEvents.prototype.initialize = function() {
-    this.entity.anim.on('plant_foot', function (event) {
-        // get the foot bone from the event's string property, either right_foot or left_foot
-        const footBone = this.entity.findByName(event.string);
-        createDustCloudAtLocation(footBone.getPosition());
-    }, this);
-};
+```jsx
+function Footsteps({ onFootstep }) {
+  const entity = useParent();
+
+  useEffect(() => {
+    entity.anim.on('footstep', onFootstep);
+    return () => entity.anim.off('footstep', onFootstep);
+  }, [entity, onFootstep]);
+
+  return null;
+}
 ```
 
-Any number of animation events can be attached to a single animation asset and used by any number of anim components. Making use of the additional `number` and `string` properties of an event allows you to differentiate between events that are passed to the same event listener.
+**Web Components**
+
+Listen on the anim component of the [`<pc-anim>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-anim.md):
+
+```javascript
+const anim = await whenReady('pc-anim');
+anim.component.on('footstep', (event) => {
+    console.log(`${event.foot} foot down`);
+});
+```
+
+## When Events Fire
+
+An event fires in the frame in which playback passes its time:
+
+- **On every loop.** A looping clip fires its events again each time round.
+- **At the end of a clip.** An event at a clip's duration fires when it reaches the end, even if it does not loop, so use one to tell when a clip has finished.
+- **At any speed.** Events fire when a clip plays faster, slower or backwards.
+- **On every layer.** Each [layer](https://developer.playcanvas.com/user-manual/animation/layers-and-masks.md) fires the events of the clips it plays, even at a weight of 0. Two layers that play clips with the same event fire it twice.
+- **During cross-fades.** The state being left keeps playing during a cross-fade, and keeps firing its events until the cross-fade ends.
 
 :::ai
 When one effect spans several animations, ask an AI assistant through the **[Editor MCP Server](https://developer.playcanvas.com/user-manual/editor/mcp-server.md)** to check event names and payloads against script listeners, then reproduce the animations in Launcher to find missing or mistimed effects.
 :::
+
+## Example
+
+This Engine app plays the robot arm's pick clip on a loop, and adds two events to the clip: one when its jaws have closed, and one when they have opened again. A listener makes the jaws glow while they are closed, and shows the last event.
+
+```js live-example
+import * as pc from 'playcanvas';
+
+// create the application with the component systems and resource handlers it uses
+const canvas = document.getElementById('application');
+const device = await pc.createGraphicsDevice(canvas, {
+    deviceTypes: [pc.DEVICETYPE_WEBGPU]
+});
+device.maxPixelRatio = Math.min(window.devicePixelRatio, 2);
+
+const options = new pc.AppOptions();
+options.graphicsDevice = device;
+options.componentSystems = [
+    pc.RenderComponentSystem,
+    pc.CameraComponentSystem,
+    pc.LightComponentSystem,
+    pc.AnimComponentSystem
+];
+options.resourceHandlers = [pc.ContainerHandler, pc.TextureHandler];
+
+const app = new pc.AppBase(canvas);
+app.init(options);
+app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
+app.setCanvasResolution(pc.RESOLUTION_AUTO);
+window.addEventListener('resize', () => app.resizeCanvas());
+app.start();
+
+app.scene.ambientLight = new pc.Color(0.35, 0.35, 0.4);
+
+// load the robot arm, a GLB with five animations
+const asset = new pc.Asset('robot-arm', 'container', {
+    url: 'https://developer.playcanvas.com/assets/robot-arm.glb'
+});
+await new Promise((resolve) => {
+    asset.ready(resolve);
+    app.assets.add(asset);
+    app.assets.load(asset);
+});
+
+const camera = new pc.Entity('camera');
+camera.addComponent('camera', {
+    clearColor: new pc.Color(0.11, 0.12, 0.17)
+});
+camera.setPosition(1.75, 1.4, 2.15);
+camera.lookAt(0, 0.75, 0);
+app.root.addChild(camera);
+
+const light = new pc.Entity('light');
+light.addComponent('light', {
+    castShadows: true,
+    shadowBias: 0.2,
+    normalOffsetBias: 0.05
+});
+light.setEulerAngles(48, 38, 0);
+app.root.addChild(light);
+
+const floor = new pc.Entity('floor');
+const floorMaterial = new pc.StandardMaterial();
+floorMaterial.diffuse = new pc.Color(0.24, 0.26, 0.31);
+floorMaterial.update();
+floor.addComponent('render', { type: 'plane', material: floorMaterial });
+floor.setLocalScale(20, 1, 20);
+app.root.addChild(floor);
+
+// create the arm's entities, and give its root an anim component
+const arm = asset.resource.instantiateRenderEntity({ castShadows: true });
+arm.addComponent('anim', { activate: true });
+app.root.addChild(arm);
+
+// give the gripper's jaws a material of their own, which the events make glow while they are closed
+const jaws = ['arm_jaw_l', 'arm_jaw_r'].flatMap(name => arm.findByName(name).render.meshInstances);
+const jawMaterial = jaws[0].material.clone();
+jaws.forEach((meshInstance) => {
+    meshInstance.material = jawMaterial;
+});
+
+// add two events to the pick clip: the jaws are closed at 2.3 seconds, and open again at 4.6
+const pick = asset.resource.animations.find(animation => animation.resource.name === 'pick').resource;
+pick.events = new pc.AnimEvents([
+    { time: 2.3, name: 'jaws', string: 'closed' },
+    { time: 4.6, name: 'jaws', string: 'open' }
+]);
+arm.anim.assignAnimation('Pick', pick);
+
+// the anim component fires each event as it plays past it, on every loop
+const label = document.createElement('div');
+label.style.cssText = 'position: absolute; left: 12px; bottom: 10px; color: #ccc; font: 14px sans-serif;';
+label.textContent = 'Waiting for an event...';
+document.body.appendChild(label);
+arm.anim.on('jaws', (event) => {
+    jawMaterial.emissive = event.string === 'closed' ? new pc.Color(0.2, 1, 0.3) : pc.Color.BLACK;
+    jawMaterial.update();
+    label.textContent = `Event: ${event.name}, ${event.string}, at ${event.time} seconds into ${event.track.name}`;
+});
+```
+
+Some things to try:
+
+- Move the `closed` event to `1.9` seconds, when the jaws start to close.
+- Add `{ time: 0, name: 'jaws', string: 'open' }`, and the event fires at the start of each loop.
+- Play the clip backwards, with `arm.anim.assignAnimation('Pick', pick, undefined, -1);`. The events fire the other way round, so the jaws glow while they are open.
+
+[Live example: Events](https://playcanvas.com/examples/#/animation/events) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/animation/events.example.mjs))
+
+## See Also
+
+- [Animation Clips](https://developer.playcanvas.com/user-manual/animation/clips.md) - The clips that events belong to
+- [Animation Asset](https://developer.playcanvas.com/user-manual/editor/assets/inspectors/animation.md) - The Editor's animation asset inspector
+- [AnimEvents](https://api.playcanvas.com/engine/classes/AnimEvents.html) and [AnimComponent](https://api.playcanvas.com/engine/classes/AnimComponent.html) - The engine API reference
 
 --------------------------------------------------------------------------------
 
@@ -27891,21 +29399,6 @@ scripts/esm/gsplat/gsplat-text.mjs
 - [Mesh to Splats](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/procedural-splats/mesh.md)
 - [Image to Splats](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/procedural-splats/image.md)
 - [Lines and Shapes](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/procedural-splats/lines.md)
-
---------------------------------------------------------------------------------
-
-## Animation Assets
-
-URL: https://developer.playcanvas.com/user-manual/animation/anim-animation-assets/
-Markdown: https://developer.playcanvas.com/user-manual/animation/anim-animation-assets.md
-
-[Image: Animation Assets]
-
-Animation assets are the animation keyframe data that’s used to drive animations of a model in PlayCanvas. They are linked to an animstategraph asset via an entity's anim component.
-
-The anim component currently supports animation assets that have been imported into a PlayCanvas project from .FBX files using the `Convert to GLB` setting in Project Settings > Asset Import.
-
-[Image: Asset Import]
 
 --------------------------------------------------------------------------------
 

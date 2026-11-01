@@ -143,11 +143,13 @@ Use this index to write code against the engine directly. React, Web Components 
 
 ## Animation
 
-- [Animation](https://developer.playcanvas.com/user-manual/animation.md): State-based animation with animation clips, animstategraph assets and the anim component.
-- [Anim Component](https://developer.playcanvas.com/user-manual/animation/anim-component.md): Connecting an animstategraph and animation assets to an entity.
-- [Animstategraph Assets](https://developer.playcanvas.com/user-manual/animation/anim-state-graph-assets.md): State machines of animation states, transitions, blending, layers and parameters.
-- [Anim Layer Masks](https://developer.playcanvas.com/user-manual/animation/anim-layer-masking.md): Driving separate parts of a skeleton from different layers.
-- [Anim Events](https://developer.playcanvas.com/user-manual/animation/anim-events.md): Firing named events on animation frames and handling them in scripts.
+- [Animation](https://developer.playcanvas.com/user-manual/animation.md): How the anim component plays clips with states, state graphs, blend trees, layers, masks and events, and how each surface sets it up.
+- [Playing Animations](https://developer.playcanvas.com/user-manual/animation/playing-animations.md): Adding the anim component, playing and cross-fading clips by name, speed, pausing, looping, and telling when a clip has finished.
+- [Animation Clips](https://developer.playcanvas.com/user-manual/animation/clips.md): Clips in GLB and FBX files, animation-only files, how curves bind to nodes by path, and building clips from keyframes with AnimTrack, AnimCurve and AnimData.
+- [State Graphs](https://developer.playcanvas.com/user-manual/animation/state-graphs.md): States, the START, END and ANY states, transitions with durations, exit times, conditions and priorities, parameters and triggers, built in the Editor or loaded with loadStateGraph.
+- [Blend Trees](https://developer.playcanvas.com/user-manual/animation/blend-trees.md): 1D, 2D Cartesian, 2D Directional and Direct blend trees, State.Child clip paths, and keeping clips in step with syncAnimations.
+- [Layers and Masks](https://developer.playcanvas.com/user-manual/animation/layers-and-masks.md): Several state machines on one model, overwrite and additive blending by weight, blendToWeight, normalizeWeights, and masks that limit a layer to part of a hierarchy.
+- [Animation Events](https://developer.playcanvas.com/user-manual/animation/events.md): Adding named events to clips in the Editor or with AnimEvents, listening for them on the anim component, and when they fire.
 - [Spine](https://developer.playcanvas.com/user-manual/2D/spine.md): Playing 2D skeletal animations from the Spine editor with the playcanvas-spine plugin: plugin versions, texture sRGB settings, binary skeletons, animation state, colors, physics and layers.
 
 ## User interface
@@ -228,7 +230,7 @@ Use this index to write code against the engine directly. React, Web Components 
 
 ## Optional
 
-- [All pages of this index in one file](https://developer.playcanvas.com/user-manual/engine/llms-full.txt): 225 pages (1431 KB), for downloading and searching rather than reading into context.
+- [All pages of this index in one file](https://developer.playcanvas.com/user-manual/engine/llms-full.txt): 226 pages (1493 KB), for downloading and searching rather than reading into context.
 - [PlayCanvas Engine](https://developer.playcanvas.com/user-manual/engine.md)
 - [Versioning and Releases](https://developer.playcanvas.com/user-manual/engine/versioning.md)
 - [Assets](https://developer.playcanvas.com/user-manual/assets.md)
@@ -309,7 +311,6 @@ Use this index to write code against the engine directly. React, Web Components 
 - [Image to Splats](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/procedural-splats/image.md)
 - [Lines and Shapes](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/procedural-splats/lines.md)
 - [Text to Splats](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/procedural-splats/text.md)
-- [Animation Assets](https://developer.playcanvas.com/user-manual/animation/anim-animation-assets.md)
 - [Calling ammo.js Directly](https://developer.playcanvas.com/user-manual/physics/calling-ammo.md)
 - [Alternatives to ammo.js](https://developer.playcanvas.com/user-manual/physics/ammo-alternatives.md)
 - [2D](https://developer.playcanvas.com/user-manual/2D.md)

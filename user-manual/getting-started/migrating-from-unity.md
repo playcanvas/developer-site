@@ -36,7 +36,7 @@ Other Unity windows and menus have these equivalents:
 | Console window | The browser's developer tools console in the launched tab. The Editor's own **CONSOLE** panel, at the bottom left, shows Editor messages such as script parse errors. |
 | Project Settings and Lighting window | [Settings](https://developer.playcanvas.com/user-manual/editor/interface/settings.md), from the cog icon on the toolbar |
 | Build Settings | **Publish / Download** on the toolbar |
-| Animator window | The [anim state graph](https://developer.playcanvas.com/user-manual/animation/anim-state-graph-assets.md) editor, which opens when you select an anim state graph asset |
+| Animator window | The [anim state graph](https://developer.playcanvas.com/user-manual/animation/state-graphs.md) editor, which opens when you select an anim state graph asset |
 | Asset Store | **ASSET STORE** at the top right of the assets panel, with PlayCanvas Store and Sketchfab assets |
 | Visual Studio or Rider | The built-in [Code Editor](https://developer.playcanvas.com/user-manual/editor/scripting/code-editor.md), or VS Code with the [VS Code extension](https://developer.playcanvas.com/user-manual/editor/scripting/vscode-extension.md) |
 | Unity Version Control or Git | Built-in [version control](https://developer.playcanvas.com/user-manual/editor/version-control.md) |
@@ -108,7 +108,7 @@ On macOS, use Cmd in place of Ctrl. Unity's View tool (Q) has no equivalent, bec
 | Audio Source | [Sound](https://developer.playcanvas.com/user-manual/editor/scenes/components/sound.md) component | One component plays any number of sounds, called slots. |
 | Audio Listener | [Audio Listener](https://developer.playcanvas.com/user-manual/editor/scenes/components/audiolistener.md) component | |
 | Particle System | [Particle System](https://developer.playcanvas.com/user-manual/editor/scenes/components/particlesystem.md) component | |
-| Animator and Animator Controller | [Anim](https://developer.playcanvas.com/user-manual/editor/scenes/components/anim.md) component and [anim state graph](https://developer.playcanvas.com/user-manual/animation/anim-state-graph-assets.md) asset | |
+| Animator and Animator Controller | [Anim](https://developer.playcanvas.com/user-manual/editor/scenes/components/anim.md) component and [anim state graph](https://developer.playcanvas.com/user-manual/animation/state-graphs.md) asset | |
 | Canvas | [Screen](https://developer.playcanvas.com/user-manual/editor/scenes/components/screen.md) component | |
 | RectTransform, Image and Text | [Element](https://developer.playcanvas.com/user-manual/editor/scenes/components/element.md) component | |
 | Sprite Renderer | [Sprite](https://developer.playcanvas.com/user-manual/editor/scenes/components/sprite.md) component | |
@@ -585,15 +585,15 @@ Because your app runs in a web page, you can also build any part of the interfac
 
 | Unity | PlayCanvas |
 | --- | --- |
-| Animator component | [Anim](https://developer.playcanvas.com/user-manual/animation/anim-component.md) component |
-| Animator Controller | [Anim state graph](https://developer.playcanvas.com/user-manual/animation/anim-state-graph-assets.md) asset, with states, transitions, parameters and layers |
+| Animator component | [Anim](https://developer.playcanvas.com/user-manual/animation/playing-animations.md) component |
+| Animator Controller | [Anim state graph](https://developer.playcanvas.com/user-manual/animation/state-graphs.md) asset, with states, transitions, parameters and layers |
 | Animation Clip | Animation asset, created when you import a model |
 | `animator.SetFloat("Speed", 2f)` | `entity.anim.setFloat('Speed', 2)` |
 | `SetBool`, `SetInteger`, `SetTrigger` | `setBoolean`, `setInteger`, `setTrigger` |
-| Avatar Mask | [Layer mask](https://developer.playcanvas.com/user-manual/animation/anim-layer-masking.md) |
-| Blend Tree | Blend trees (1D, 2D and direct), in state graphs created from code. The Editor's state graph editor has none. |
+| Avatar Mask | [Layer mask](https://developer.playcanvas.com/user-manual/animation/layers-and-masks.md) |
+| Blend Tree | [Blend trees](https://developer.playcanvas.com/user-manual/animation/blend-trees.md) (1D, 2D and direct), in state graphs created from code. The Editor's state graph editor has none. |
 | Root Motion | None. Move the entity from a script. |
-| Animation Events | [Anim events](https://developer.playcanvas.com/user-manual/animation/anim-events.md) on the animation asset |
+| Animation Events | [Anim events](https://developer.playcanvas.com/user-manual/animation/events.md) on the animation asset |
 | Animator Override Controller | One anim state graph, with different animation assets assigned to its states on each entity |
 
 PlayCanvas has no humanoid retargeting. An animation drives bones by name, so it plays on any model whose bones have the same names, but nothing adapts it to a skeleton with different proportions. Author or bake animations for the skeleton they play on.

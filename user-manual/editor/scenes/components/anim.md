@@ -20,7 +20,7 @@ After selecting an animstategraph asset, the Anim Component will display a list 
 
 [Image: Anim Component With Graph]
 
-Multiple Anim Components can use the same animstategraph asset, each with their own set of animation assets. After all animation state slots have been filled, the Anim Component will become playable. The animations can be played via script by calling `entity.anim.playing = true` or automatically if the Activate option is enabled.
+Multiple Anim Components can use the same animstategraph asset, each with their own set of animation assets. After all animation state slots have been filled, the Anim Component will become playable. With the Activate option enabled, the animations play automatically. Otherwise, start them from a script by setting `entity.anim.playing = true` and calling `play()` on each layer, such as `entity.anim.baseLayer.play()`.
 
 ## Layer Masks
 

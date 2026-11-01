@@ -8,7 +8,7 @@ The inspector has a viewer that can be used to preview the animation with any Te
 
 [Image: Asset Inspector Preview]
 
-There is also a viewer in the [Anim State Graph Editor](https://developer.playcanvas.com/user-manual/animation/anim-state-graph-assets.md) when you select a state in the graph. When selected, all Entities in the scene that are using the graph will show in a list and can be selected for preview.
+There is also a viewer in the [Anim State Graph Editor](https://developer.playcanvas.com/user-manual/animation/state-graphs.md) when you select a state in the graph. When selected, all Entities in the scene that are using the graph will show in a list and can be selected for preview.
 
 [Image: Anim State Graph Preview]
 
