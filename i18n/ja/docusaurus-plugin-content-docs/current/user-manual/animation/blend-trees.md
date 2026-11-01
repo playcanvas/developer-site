@@ -6,7 +6,7 @@ description: "パラメーターの値に応じて、1つのステートで複�
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-ブレンドツリーは、複数のクリップを同時に再生し、パラメーターの値に応じたウェイトでそれらをブレンドする[ステートグラフ](/user-manual/animation/anim-state-graph-assets/)のステートです。これにより、少数のクリップを連続した動きの幅に変えられます。歩きと走りはその間のあらゆる速度の動きになり、8方向への8つの歩きはあらゆる方向への移動になります。
+ブレンドツリーは、複数のクリップを同時に再生し、パラメーターの値に応じたウェイトでそれらをブレンドする[ステートグラフ](/user-manual/animation/state-graphs/)のステートです。これにより、少数のクリップを連続した動きの幅に変えられます。歩きと走りはその間のあらゆる速度の動きになり、8方向への8つの歩きはあらゆる方向への移動になります。
 
 ツリーの各**子**は、ある**ポイント**に置かれたクリップです。ポイントとは、ツリーのパラメーターの値、または平面上の位置のことです。パラメーターが変わると、ツリーは各子のポイントがどれだけ近いかに応じて子にウェイトを割り当て、それらのウェイトの合計は1になります。遷移とは異なり、ブレンドツリーのブレンドが終わることはありません。ステートがアクティブである間、ブレンドの割合はパラメーターに従い続けます。
 
@@ -165,7 +165,7 @@ function Movement({ tracks, speed }) {
 </TabItem>
 <TabItem value="web-components" label="Web Components">
 
-どの[ステートグラフ](/user-manual/animation/anim-state-graph-assets/#building-a-state-graph)の場合も同じですが、`<pc-anim>`は使わずに、コードからモデルのエンティティにAnimコンポーネントを追加します。
+どの[ステートグラフ](/user-manual/animation/state-graphs/#building-a-state-graph)の場合も同じですが、`<pc-anim>`は使わずに、コードからモデルのエンティティにAnimコンポーネントを追加します。
 
 ```javascript
 const model = await whenReady('pc-model[name="character"]');
@@ -320,6 +320,6 @@ app.on('update', () => {
 
 ## 関連情報 {#see-also}
 
-- [ステートグラフ](/user-manual/animation/anim-state-graph-assets/) - ブレンドツリーが属する、ステート、遷移、パラメーター
-- [レイヤーとマスク](/user-manual/animation/anim-layer-masking/) - ステートグラフ全体どうしをブレンドする
+- [ステートグラフ](/user-manual/animation/state-graphs/) - ブレンドツリーが属する、ステート、遷移、パラメーター
+- [レイヤーとマスク](/user-manual/animation/layers-and-masks/) - ステートグラフ全体どうしをブレンドする
 - [AnimComponent](https://api.playcanvas.com/engine/classes/AnimComponent.html)と[AnimComponentLayer](https://api.playcanvas.com/engine/classes/AnimComponentLayer.html) - エンジンのAPIリファレンス

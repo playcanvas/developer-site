@@ -10,7 +10,7 @@ A state graph is a state machine for the animation of a model. Its **states** ar
 
 ![A state graph: START leads to the default state Idle. Idle and Walk lead to each other when the speed parameter rises above or falls to 0.5. ANY leads to Jump when the jump trigger is set, and Jump leads to END at an exit time of 1, from where the graph returns to START](/img/user-manual/animation/state-graph.webp)
 
-A state graph does not contain clips. It is a template, and each anim component that uses it links its states to clips of its own, so one graph can drive every character that moves in the same way, each with its own animations. A graph has at least one **layer**, and each layer is a state machine of its own; see [Layers and Masks](/user-manual/animation/anim-layer-masking/).
+A state graph does not contain clips. It is a template, and each anim component that uses it links its states to clips of its own, so one graph can drive every character that moves in the same way, each with its own animations. A graph has at least one **layer**, and each layer is a state machine of its own; see [Layers and Masks](/user-manual/animation/layers-and-masks/).
 
 ## States {#states}
 
@@ -383,7 +383,7 @@ The Locomotion example drives a character's state graph with a `speed` integer a
 ## See Also
 
 - [Blend Trees](/user-manual/animation/blend-trees/) - States that blend several clips
-- [Layers and Masks](/user-manual/animation/anim-layer-masking/) - Several state graphs on one model
+- [Layers and Masks](/user-manual/animation/layers-and-masks/) - Several state graphs on one model
 - [Anim State Graph Blending](/tutorials/anim-blending/) - Tutorial that builds a blended state graph in the Editor
 - [Anim Component](/user-manual/editor/scenes/components/anim/) - Linking a state graph's states to clips in the Editor
 - [AnimComponent](https://api.playcanvas.com/engine/classes/AnimComponent.html) and [AnimComponentLayer](https://api.playcanvas.com/engine/classes/AnimComponentLayer.html) - The engine API reference

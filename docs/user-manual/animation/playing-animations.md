@@ -35,7 +35,7 @@ app.assets.load(asset);
 </TabItem>
 <TabItem value="editor" label="Editor">
 
-Select the root entity of the model, click **Add Component** and choose **Anim**. In the Editor, the component plays clips through a [state graph](/user-manual/animation/anim-state-graph-assets/): an asset that lists the states the model can be in. Once you choose one as the component's **State Graph**, the component shows a slot for each of its states, and you drag an animation asset into each slot. **Activate** starts playback when the scene launches.
+Select the root entity of the model, click **Add Component** and choose **Anim**. In the Editor, the component plays clips through a [state graph](/user-manual/animation/state-graphs/): an asset that lists the states the model can be in. Once you choose one as the component's **State Graph**, the component shows a slot for each of its states, and you drag an animation asset into each slot. **Activate** starts playback when the scene launches.
 
 </TabItem>
 <TabItem value="react" label="React">
@@ -87,7 +87,7 @@ Put a [`<pc-anim>`](/user-manual/web-components/tags/pc-anim/) inside the [`<pc-
 
 ## Playing Clips {#playing-clips}
 
-The component holds each clip in a **state**. To play the clips of a model by name, give each one a state of its own, named after the clip. The animations of a GLB are named in the file, and the component starts with the first one you add. To decide which clip plays when, from parameters such as a character's speed, use a [state graph](/user-manual/animation/anim-state-graph-assets/).
+The component holds each clip in a **state**. To play the clips of a model by name, give each one a state of its own, named after the clip. The animations of a GLB are named in the file, and the component starts with the first one you add. To decide which clip plays when, from parameters such as a character's speed, use a [state graph](/user-manual/animation/state-graphs/).
 
 <Tabs groupId="workflow" defaultValue="engine">
 <TabItem value="engine" label="Engine">
@@ -104,7 +104,7 @@ console.log(arm.anim.baseLayer.states); // ['START', 'idle', 'pick', 'place', 'i
 </TabItem>
 <TabItem value="editor" label="Editor">
 
-Create a state graph with one state for each clip, add it to the Anim component, and fill each state's slot with the animation asset for it. See [Building a State Graph](/user-manual/animation/anim-state-graph-assets/#building-a-state-graph).
+Create a state graph with one state for each clip, add it to the Anim component, and fill each state's slot with the animation asset for it. See [Building a State Graph](/user-manual/animation/state-graphs/#building-a-state-graph).
 
 </TabItem>
 <TabItem value="react" label="React">
@@ -332,9 +332,9 @@ arm.anim.speed = 0.5;                                   // everything at half sp
 arm.anim.assignAnimation('pick', pickTrack, undefined, 2); // this state at double speed
 ```
 
-A state loops by default. A state that does not loop holds the last frame of its clip until it is left. Pass `false` as the last argument of `assignAnimation()` for a state that plays once. In the Editor, set **Speed** and **Loop** on the state in the [state graph](/user-manual/animation/anim-state-graph-assets/#states), and in Web Components, set `speed` and `loop` on the [`<pc-anim-clip>`](/user-manual/web-components/tags/pc-anim-clip/).
+A state loops by default. A state that does not loop holds the last frame of its clip until it is left. Pass `false` as the last argument of `assignAnimation()` for a state that plays once. In the Editor, set **Speed** and **Loop** on the state in the [state graph](/user-manual/animation/state-graphs/#states), and in Web Components, set `speed` and `loop` on the [`<pc-anim-clip>`](/user-manual/web-components/tags/pc-anim-clip/).
 
-To pause, set the component's `playing` to `false`, and set it back to `true` to carry on. That pauses every layer at once. Each [layer](/user-manual/animation/anim-layer-masking/) also has `pause()` and `play()` methods of its own.
+To pause, set the component's `playing` to `false`, and set it back to `true` to carry on. That pauses every layer at once. Each [layer](/user-manual/animation/layers-and-masks/) also has `pause()` and `play()` methods of its own.
 
 In React, set the component's `speed` and `playing` as props of `<Anim>`, such as `<Anim playing={!paused} speed={0.5} />`. `<Anim>` sets its props again each time it renders, so values set on the engine component from code do not last.
 
@@ -348,8 +348,8 @@ With **Activate** turned off, setting `playing` to `true` is not enough to start
 
 The component fires no event when a clip ends. A clip that does not loop holds its last frame and stays in its state. There are three ways to act when it finishes:
 
-- **Move on in the state graph.** A transition with an [exit time](/user-manual/animation/anim-state-graph-assets/#transitions) of 1 leaves the state as soon as its clip has played through.
-- **Add an event to the end of the clip.** An [animation event](/user-manual/animation/anim-events/) at the clip's duration fires when playback reaches it.
+- **Move on in the state graph.** A transition with an [exit time](/user-manual/animation/state-graphs/#transitions) of 1 leaves the state as soon as its clip has played through.
+- **Add an event to the end of the clip.** An [animation event](/user-manual/animation/events/) at the clip's duration fires when playback reaches it.
 - **Compare the time in the state with its duration.** A layer's `activeStateCurrentTime` is the time its clip has played, in the clip's own seconds, and `activeStateDuration` is the clip's length:
 
 ```javascript
@@ -361,8 +361,8 @@ This works for a clip that plays forwards once. In a looping state, `activeState
 
 ## See Also
 
-- [Animation Clips](/user-manual/animation/anim-animation-assets/) - Where clips come from and how they bind
-- [State Graphs](/user-manual/animation/anim-state-graph-assets/) - Deciding which clip plays from parameters
+- [Animation Clips](/user-manual/animation/clips/) - Where clips come from and how they bind
+- [State Graphs](/user-manual/animation/state-graphs/) - Deciding which clip plays from parameters
 - [Anim Component](/user-manual/editor/scenes/components/anim/) - The Editor reference for the component
 - [`<Anim/>`](/user-manual/react/api/anim/), [`<pc-anim>`](/user-manual/web-components/tags/pc-anim/) and [`<pc-anim-clip>`](/user-manual/web-components/tags/pc-anim-clip/) - The React and Web Components references
 - [AnimComponent](https://api.playcanvas.com/engine/classes/AnimComponent.html) and [AnimComponentLayer](https://api.playcanvas.com/engine/classes/AnimComponentLayer.html) - The engine API reference

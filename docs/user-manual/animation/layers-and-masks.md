@@ -67,7 +67,7 @@ function UpperBody({ tracks }) {
 </TabItem>
 <TabItem value="web-components" label="Web Components">
 
-[`<pc-anim>`](/user-manual/web-components/tags/pc-anim/) plays clips on a single layer. For several layers, add the anim component to the model's entity from code, as for a [state graph](/user-manual/animation/anim-state-graph-assets/#building-a-state-graph), then add the layers to it:
+[`<pc-anim>`](/user-manual/web-components/tags/pc-anim/) plays clips on a single layer. For several layers, add the anim component to the model's entity from code, as for a [state graph](/user-manual/animation/state-graphs/#building-a-state-graph), then add the layers to it:
 
 ```javascript
 model.entity.addComponent('anim', { activate: true });
@@ -256,6 +256,6 @@ The Layer Masks example plays an upper-body layer over a character's full-body l
 
 ## See Also
 
-- [State Graphs](/user-manual/animation/anim-state-graph-assets/) - The states and transitions of each layer
+- [State Graphs](/user-manual/animation/state-graphs/) - The states and transitions of each layer
 - [Anim Component](/user-manual/editor/scenes/components/anim/) - The Editor reference for the component, its layers and masks
 - [AnimComponent](https://api.playcanvas.com/engine/classes/AnimComponent.html) and [AnimComponentLayer](https://api.playcanvas.com/engine/classes/AnimComponentLayer.html) - The engine API reference

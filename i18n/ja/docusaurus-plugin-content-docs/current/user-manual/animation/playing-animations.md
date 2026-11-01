@@ -35,7 +35,7 @@ app.assets.load(asset);
 </TabItem>
 <TabItem value="editor" label="Editor">
 
-モデルのルートエンティティを選択し、**Add Component**をクリックして**Anim**を選択します。エディターでは、コンポーネントは[ステートグラフ](/user-manual/animation/anim-state-graph-assets/)を通してクリップを再生します。ステートグラフは、モデルが取りうるステートを列挙したアセットです。ステートグラフをコンポーネントの**State Graph**に選択すると、コンポーネントにそのステートごとのスロットが表示されるので、各スロットにアニメーションアセットをドラッグします。**Activate**は、シーンの起動時に再生を開始します。
+モデルのルートエンティティを選択し、**Add Component**をクリックして**Anim**を選択します。エディターでは、コンポーネントは[ステートグラフ](/user-manual/animation/state-graphs/)を通してクリップを再生します。ステートグラフは、モデルが取りうるステートを列挙したアセットです。ステートグラフをコンポーネントの**State Graph**に選択すると、コンポーネントにそのステートごとのスロットが表示されるので、各スロットにアニメーションアセットをドラッグします。**Activate**は、シーンの起動時に再生を開始します。
 
 </TabItem>
 <TabItem value="react" label="React">
@@ -87,7 +87,7 @@ function RobotArm() {
 
 ## クリップの再生 {#playing-clips}
 
-コンポーネントは、各クリップを**ステート**に保持します。モデルのクリップを名前で再生するには、クリップごとに専用のステートを与え、そのクリップの名前を付けます。GLBのアニメーションにはファイル内で名前が付けられており、コンポーネントは最初に追加したクリップから再生を始めます。キャラクターの速度のようなパラメーターから、どのクリップをいつ再生するかを決めるには、[ステートグラフ](/user-manual/animation/anim-state-graph-assets/)を使います。
+コンポーネントは、各クリップを**ステート**に保持します。モデルのクリップを名前で再生するには、クリップごとに専用のステートを与え、そのクリップの名前を付けます。GLBのアニメーションにはファイル内で名前が付けられており、コンポーネントは最初に追加したクリップから再生を始めます。キャラクターの速度のようなパラメーターから、どのクリップをいつ再生するかを決めるには、[ステートグラフ](/user-manual/animation/state-graphs/)を使います。
 
 <Tabs groupId="workflow" defaultValue="engine">
 <TabItem value="engine" label="Engine">
@@ -104,7 +104,7 @@ console.log(arm.anim.baseLayer.states); // ['START', 'idle', 'pick', 'place', 'i
 </TabItem>
 <TabItem value="editor" label="Editor">
 
-クリップごとに1つのステートを持つステートグラフを作成してAnimコンポーネントに追加し、各ステートのスロットに対応するアニメーションアセットを入れます。[ステートグラフの構築](/user-manual/animation/anim-state-graph-assets/#building-a-state-graph)を参照してください。
+クリップごとに1つのステートを持つステートグラフを作成してAnimコンポーネントに追加し、各ステートのスロットに対応するアニメーションアセットを入れます。[ステートグラフの構築](/user-manual/animation/state-graphs/#building-a-state-graph)を参照してください。
 
 </TabItem>
 <TabItem value="react" label="React">
@@ -332,9 +332,9 @@ arm.anim.speed = 0.5;                                   // すべてが半分の
 arm.anim.assignAnimation('pick', pickTrack, undefined, 2); // このステートは2倍の速度になります
 ```
 
-ステートはデフォルトでループします。ループしないステートは、そのステートを離れるまで、クリップの最後のフレームを保持します。1回だけ再生するステートにするには、`assignAnimation()`の最後の引数に`false`を渡します。エディターでは[ステートグラフ](/user-manual/animation/anim-state-graph-assets/#states)のステートで**Speed**と**Loop**を設定し、Web Componentsでは[`<pc-anim-clip>`](/user-manual/web-components/tags/pc-anim-clip/)で`speed`と`loop`を設定します。
+ステートはデフォルトでループします。ループしないステートは、そのステートを離れるまで、クリップの最後のフレームを保持します。1回だけ再生するステートにするには、`assignAnimation()`の最後の引数に`false`を渡します。エディターでは[ステートグラフ](/user-manual/animation/state-graphs/#states)のステートで**Speed**と**Loop**を設定し、Web Componentsでは[`<pc-anim-clip>`](/user-manual/web-components/tags/pc-anim-clip/)で`speed`と`loop`を設定します。
 
-一時停止するには、コンポーネントの`playing`を`false`に設定し、再開するには`true`に戻します。これで、すべてのレイヤーが一度に一時停止します。各[レイヤー](/user-manual/animation/anim-layer-masking/)にも、独自の`pause()`メソッドと`play()`メソッドがあります。
+一時停止するには、コンポーネントの`playing`を`false`に設定し、再開するには`true`に戻します。これで、すべてのレイヤーが一度に一時停止します。各[レイヤー](/user-manual/animation/layers-and-masks/)にも、独自の`pause()`メソッドと`play()`メソッドがあります。
 
 Reactでは、コンポーネントの`speed`と`playing`を、`<Anim playing={!paused} speed={0.5} />`のように`<Anim>`のpropとして設定します。`<Anim>`はレンダリングのたびにpropを設定し直すので、コードからエンジンのコンポーネントに設定した値は維持されません。
 
@@ -348,8 +348,8 @@ Reactでは、コンポーネントの`speed`と`playing`を、`<Anim playing={!
 
 コンポーネントは、クリップが終わってもイベントを発火しません。ループしないクリップは、最後のフレームを保持したまま、そのステートにとどまります。クリップが終わったときに処理を行う方法は3つあります。
 
-- **ステートグラフで次に進む。** [終了時間](/user-manual/animation/anim-state-graph-assets/#transitions)が1の遷移は、クリップを最後まで再生した時点でステートを離れます。
-- **クリップの最後にイベントを追加する。** クリップの長さの時点に置いた[アニメーションイベント](/user-manual/animation/anim-events/)は、再生がそこに達したときに発火します。
+- **ステートグラフで次に進む。** [終了時間](/user-manual/animation/state-graphs/#transitions)が1の遷移は、クリップを最後まで再生した時点でステートを離れます。
+- **クリップの最後にイベントを追加する。** クリップの長さの時点に置いた[アニメーションイベント](/user-manual/animation/events/)は、再生がそこに達したときに発火します。
 - **ステート内の時間をその長さと比べる。** レイヤーの`activeStateCurrentTime`は、クリップが再生された時間をクリップ自体の秒数で表したもので、`activeStateDuration`はクリップの長さです。
 
 ```javascript
@@ -361,8 +361,8 @@ const finished = layer.activeStateCurrentTime >= layer.activeStateDuration;
 
 ## 関連情報 {#see-also}
 
-- [アニメーションクリップ](/user-manual/animation/anim-animation-assets/) - クリップの入手元とバインドの仕組み
-- [ステートグラフ](/user-manual/animation/anim-state-graph-assets/) - パラメーターから再生するクリップを決める
+- [アニメーションクリップ](/user-manual/animation/clips/) - クリップの入手元とバインドの仕組み
+- [ステートグラフ](/user-manual/animation/state-graphs/) - パラメーターから再生するクリップを決める
 - [Animコンポーネント](/user-manual/editor/scenes/components/anim/) - エディターでのこのコンポーネントのリファレンス
 - [`<Anim/>`](/user-manual/react/api/anim/)、[`<pc-anim>`](/user-manual/web-components/tags/pc-anim/)、[`<pc-anim-clip>`](/user-manual/web-components/tags/pc-anim-clip/) - ReactとWeb Componentsのリファレンス
 - [AnimComponent](https://api.playcanvas.com/engine/classes/AnimComponent.html)と[AnimComponentLayer](https://api.playcanvas.com/engine/classes/AnimComponentLayer.html) - エンジンのAPIリファレンス

@@ -11,12 +11,12 @@ Load the T-Rex above, and drag to orbit around it. It is a [Web Components examp
 
 ## How Animation Works {#how-animation-works}
 
-- **[Clips](/user-manual/animation/anim-animation-assets/)** usually come from the models you import. A GLB, or an FBX file imported in the Editor, brings its animations with it, and you can also build a clip from keyframes in code. A clip binds to its targets by node name, so one clip can animate any model whose nodes have the same names.
-- **[The anim component](/user-manual/animation/anim-component/)** plays clips on the hierarchy below its entity. Each clip it plays is held in a **state**, and the component cross-fades between states when you switch.
-- **[State graphs](/user-manual/animation/anim-state-graph-assets/)** decide which state plays. A state graph is a state machine of states, the **transitions** between them and the **parameters** that the transitions test, such as a `speed` or a `jump` trigger. You set the parameters from code, and the graph does the rest.
+- **[Clips](/user-manual/animation/clips/)** usually come from the models you import. A GLB, or an FBX file imported in the Editor, brings its animations with it, and you can also build a clip from keyframes in code. A clip binds to its targets by node name, so one clip can animate any model whose nodes have the same names.
+- **[The anim component](/user-manual/animation/playing-animations/)** plays clips on the hierarchy below its entity. Each clip it plays is held in a **state**, and the component cross-fades between states when you switch.
+- **[State graphs](/user-manual/animation/state-graphs/)** decide which state plays. A state graph is a state machine of states, the **transitions** between them and the **parameters** that the transitions test, such as a `speed` or a `jump` trigger. You set the parameters from code, and the graph does the rest.
 - **[Blend trees](/user-manual/animation/blend-trees/)** blend several clips in one state by the value of parameters, so a character can move smoothly from a walk into a run.
-- **[Layers and masks](/user-manual/animation/anim-layer-masking/)** play several state graphs on one model at the same time, each limited to some of its nodes, so a character can wave while it walks.
-- **[Events](/user-manual/animation/anim-events/)** fire at chosen times in a clip, for footstep sounds, effects or gameplay.
+- **[Layers and masks](/user-manual/animation/layers-and-masks/)** play several state graphs on one model at the same time, each limited to some of its nodes, so a character can wave while it walks.
+- **[Events](/user-manual/animation/events/)** fire at chosen times in a clip, for footstep sounds, effects or gameplay.
 
 ## On Each Surface {#on-each-surface}
 
@@ -39,12 +39,12 @@ The anim component replaced the older **animation** component, which plays clips
 
 ## In This Section {#in-this-section}
 
-- [Playing Animations](/user-manual/animation/anim-component/) - Adding the anim component, playing and switching clips, speed, pausing, looping and finished clips.
-- [Animation Clips](/user-manual/animation/anim-animation-assets/) - Clips in GLB and FBX files, how they bind to nodes, and building clips in code.
-- [State Graphs](/user-manual/animation/anim-state-graph-assets/) - States, transitions, parameters and conditions, built in the Editor or in code.
+- [Playing Animations](/user-manual/animation/playing-animations/) - Adding the anim component, playing and switching clips, speed, pausing, looping and finished clips.
+- [Animation Clips](/user-manual/animation/clips/) - Clips in GLB and FBX files, how they bind to nodes, and building clips in code.
+- [State Graphs](/user-manual/animation/state-graphs/) - States, transitions, parameters and conditions, built in the Editor or in code.
 - [Blend Trees](/user-manual/animation/blend-trees/) - Blending clips by one or two parameters, or by a weight each.
-- [Layers and Masks](/user-manual/animation/anim-layer-masking/) - Playing several graphs at once, blending them, and masking them to parts of a model.
-- [Animation Events](/user-manual/animation/anim-events/) - Firing events at chosen times in a clip and handling them.
+- [Layers and Masks](/user-manual/animation/layers-and-masks/) - Playing several graphs at once, blending them, and masking them to parts of a model.
+- [Animation Events](/user-manual/animation/events/) - Firing events at chosen times in a clip and handling them.
 
 ## See Also
 

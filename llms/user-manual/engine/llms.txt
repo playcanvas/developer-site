@@ -147,12 +147,12 @@ Use this index to write code against the engine directly. React, Web Components 
 ## Animation
 
 - [Animation](/user-manual/animation/): How the anim component plays clips with states, state graphs, blend trees, layers, masks and events, and how each surface sets it up.
-- [Playing Animations](/user-manual/animation/anim-component/): Adding the anim component, playing and cross-fading clips by name, speed, pausing, looping, and telling when a clip has finished.
-- [Animation Clips](/user-manual/animation/anim-animation-assets/): Clips in GLB and FBX files, animation-only files, how curves bind to nodes by path, and building clips from keyframes with AnimTrack, AnimCurve and AnimData.
-- [State Graphs](/user-manual/animation/anim-state-graph-assets/): States, the START, END and ANY states, transitions with durations, exit times, conditions and priorities, parameters and triggers, built in the Editor or loaded with loadStateGraph.
+- [Playing Animations](/user-manual/animation/playing-animations/): Adding the anim component, playing and cross-fading clips by name, speed, pausing, looping, and telling when a clip has finished.
+- [Animation Clips](/user-manual/animation/clips/): Clips in GLB and FBX files, animation-only files, how curves bind to nodes by path, and building clips from keyframes with AnimTrack, AnimCurve and AnimData.
+- [State Graphs](/user-manual/animation/state-graphs/): States, the START, END and ANY states, transitions with durations, exit times, conditions and priorities, parameters and triggers, built in the Editor or loaded with loadStateGraph.
 - [Blend Trees](/user-manual/animation/blend-trees/): 1D, 2D Cartesian, 2D Directional and Direct blend trees, State.Child clip paths, and keeping clips in step with syncAnimations.
-- [Layers and Masks](/user-manual/animation/anim-layer-masking/): Several state machines on one model, overwrite and additive blending by weight, blendToWeight, normalizeWeights, and masks that limit a layer to part of a hierarchy.
-- [Animation Events](/user-manual/animation/anim-events/): Adding named events to clips in the Editor or with AnimEvents, listening for them on the anim component, and when they fire.
+- [Layers and Masks](/user-manual/animation/layers-and-masks/): Several state machines on one model, overwrite and additive blending by weight, blendToWeight, normalizeWeights, and masks that limit a layer to part of a hierarchy.
+- [Animation Events](/user-manual/animation/events/): Adding named events to clips in the Editor or with AnimEvents, listening for them on the anim component, and when they fire.
 - [Spine](/user-manual/2D/spine/): Playing 2D skeletal animations from the Spine editor with the playcanvas-spine plugin: plugin versions, texture sRGB settings, binary skeletons, animation state, colors, physics and layers.
 
 ## User interface

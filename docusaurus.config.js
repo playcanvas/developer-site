@@ -100,6 +100,12 @@ const config = {
         { from: ['/user-manual/physics/compound-shapes/'], to: '/user-manual/physics/collision-shapes/' },
         // User Interface: Group Elements became a section of the Elements page
         { from: ['/user-manual/user-interface/group-elements/'], to: '/user-manual/user-interface/elements/' },
+        // Animation: the section's pages were renamed to match their titles
+        { from: ['/user-manual/animation/anim-component/', '/en/user-manual/animation/anim-component/'], to: '/user-manual/animation/playing-animations/' },
+        { from: ['/user-manual/animation/anim-animation-assets/', '/en/user-manual/animation/anim-animation-assets/'], to: '/user-manual/animation/clips/' },
+        { from: ['/user-manual/animation/anim-state-graph-assets/', '/en/user-manual/animation/anim-state-graph-assets/'], to: '/user-manual/animation/state-graphs/' },
+        { from: ['/user-manual/animation/anim-layer-masking/', '/en/user-manual/animation/anim-layer-masking/'], to: '/user-manual/animation/layers-and-masks/' },
+        { from: ['/user-manual/animation/anim-events/', '/en/user-manual/animation/anim-events/'], to: '/user-manual/animation/events/' },
         { from: ['/user-manual/organizations/'], to: '/user-manual/account-management/organizations/' },
         { from: ['/user-manual/organizations/creating-organizations/'], to: '/user-manual/account-management/organizations/creating/' },
         { from: ['/user-manual/organizations/managing-organizations/'], to: '/user-manual/account-management/organizations/managing/' },

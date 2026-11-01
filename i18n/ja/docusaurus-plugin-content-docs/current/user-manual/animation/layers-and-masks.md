@@ -67,7 +67,7 @@ function UpperBody({ tracks }) {
 </TabItem>
 <TabItem value="web-components" label="Web Components">
 
-[`<pc-anim>`](/user-manual/web-components/tags/pc-anim/)は、1つのレイヤーでクリップを再生します。複数のレイヤーを使うには、[ステートグラフ](/user-manual/animation/anim-state-graph-assets/#building-a-state-graph)の場合と同じようにコードからモデルのエンティティにAnimコンポーネントを追加し、そこにレイヤーを追加します。
+[`<pc-anim>`](/user-manual/web-components/tags/pc-anim/)は、1つのレイヤーでクリップを再生します。複数のレイヤーを使うには、[ステートグラフ](/user-manual/animation/state-graphs/#building-a-state-graph)の場合と同じようにコードからモデルのエンティティにAnimコンポーネントを追加し、そこにレイヤーを追加します。
 
 ```javascript
 model.entity.addComponent('anim', { activate: true });
@@ -256,6 +256,6 @@ Layer Masksのサンプルは、キャラクターの全身のレイヤーの上
 
 ## 関連情報 {#see-also}
 
-- [ステートグラフ](/user-manual/animation/anim-state-graph-assets/) - 各レイヤーのステートと遷移
+- [ステートグラフ](/user-manual/animation/state-graphs/) - 各レイヤーのステートと遷移
 - [Animコンポーネント](/user-manual/editor/scenes/components/anim/) - コンポーネントとそのレイヤーやマスクについてのエディターリファレンス
 - [AnimComponent](https://api.playcanvas.com/engine/classes/AnimComponent.html)と[AnimComponentLayer](https://api.playcanvas.com/engine/classes/AnimComponentLayer.html) - エンジンのAPIリファレンス

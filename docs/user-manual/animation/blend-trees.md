@@ -6,7 +6,7 @@ description: "Blend several animation clips in one state by the value of paramet
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-A blend tree is a [state graph](/user-manual/animation/anim-state-graph-assets/) state that plays several clips at once and blends them, weighted by the values of parameters. It turns a few clips into a continuous range of motion: a walk and a run become every speed between them, and eight walks in eight directions become movement in any direction.
+A blend tree is a [state graph](/user-manual/animation/state-graphs/) state that plays several clips at once and blends them, weighted by the values of parameters. It turns a few clips into a continuous range of motion: a walk and a run become every speed between them, and eight walks in eight directions become movement in any direction.
 
 Each **child** of a tree is a clip at a **point**: a value, or a position on a plane, of the tree's parameters. As the parameters change, the tree weights the children by how near their points are, and their weights add up to 1. Unlike a transition, a blend tree never finishes blending: the mix follows the parameters for as long as the state is active.
 
@@ -165,7 +165,7 @@ Place it in the model's `<Entity>`, after its `<Anim playing />`.
 </TabItem>
 <TabItem value="web-components" label="Web Components">
 
-As for any [state graph](/user-manual/animation/anim-state-graph-assets/#building-a-state-graph), leave out `<pc-anim>`, and add the anim component to the model's entity from code:
+As for any [state graph](/user-manual/animation/state-graphs/#building-a-state-graph), leave out `<pc-anim>`, and add the anim component to the model's entity from code:
 
 ```javascript
 const model = await whenReady('pc-model[name="character"]');
@@ -320,6 +320,6 @@ These Engine examples blend a character's clips with 2D trees. In the Examples B
 
 ## See Also
 
-- [State Graphs](/user-manual/animation/anim-state-graph-assets/) - The states, transitions and parameters that blend trees are part of
-- [Layers and Masks](/user-manual/animation/anim-layer-masking/) - Blending whole state graphs together
+- [State Graphs](/user-manual/animation/state-graphs/) - The states, transitions and parameters that blend trees are part of
+- [Layers and Masks](/user-manual/animation/layers-and-masks/) - Blending whole state graphs together
 - [AnimComponent](https://api.playcanvas.com/engine/classes/AnimComponent.html) and [AnimComponentLayer](https://api.playcanvas.com/engine/classes/AnimComponentLayer.html) - The engine API reference

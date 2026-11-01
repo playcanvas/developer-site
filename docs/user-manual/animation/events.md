@@ -157,7 +157,7 @@ An event fires in the frame in which playback passes its time:
 - **On every loop.** A looping clip fires its events again each time round.
 - **At the end of a clip.** An event at a clip's duration fires when it reaches the end, even if it does not loop, so use one to tell when a clip has finished.
 - **At any speed.** Events fire when a clip plays faster, slower or backwards.
-- **On every layer.** Each [layer](/user-manual/animation/anim-layer-masking/) fires the events of the clips it plays, even at a weight of 0. Two layers that play clips with the same event fire it twice.
+- **On every layer.** Each [layer](/user-manual/animation/layers-and-masks/) fires the events of the clips it plays, even at a weight of 0. Two layers that play clips with the same event fire it twice.
 - **During cross-fades.** The state being left keeps playing during a cross-fade, and keeps firing its events until the cross-fade ends.
 
 :::ai
@@ -274,6 +274,6 @@ Some things to try:
 
 ## See Also
 
-- [Animation Clips](/user-manual/animation/anim-animation-assets/) - The clips that events belong to
+- [Animation Clips](/user-manual/animation/clips/) - The clips that events belong to
 - [Animation Asset](/user-manual/editor/assets/inspectors/animation/) - The Editor's animation asset inspector
 - [AnimEvents](https://api.playcanvas.com/engine/classes/AnimEvents.html) and [AnimComponent](https://api.playcanvas.com/engine/classes/AnimComponent.html) - The engine API reference

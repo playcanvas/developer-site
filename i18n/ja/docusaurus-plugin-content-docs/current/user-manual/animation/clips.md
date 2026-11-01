@@ -190,8 +190,8 @@ Component Propertiesのサンプルは、2つのスポットライトの色と�
 
 ## 関連情報 {#see-also}
 
-- [アニメーションの再生](/user-manual/animation/anim-component/) - クリップの再生、切り替え、タイミングの調整
-- [アニメーションイベント](/user-manual/animation/anim-events/) - クリップへのイベントの追加
+- [アニメーションの再生](/user-manual/animation/playing-animations/) - クリップの再生、切り替え、タイミングの調整
+- [アニメーションイベント](/user-manual/animation/events/) - クリップへのイベントの追加
 - [アニメーションアセット](/user-manual/editor/assets/inspectors/animation/) - エディターのアニメーションアセットのインスペクターとインポート設定
 - [サポートされているフォーマット](/user-manual/assets/supported-formats/) - PlayCanvasが読み込むモデルのフォーマット
 - [AnimTrack](https://api.playcanvas.com/engine/classes/AnimTrack.html)、[AnimCurve](https://api.playcanvas.com/engine/classes/AnimCurve.html)、[AnimData](https://api.playcanvas.com/engine/classes/AnimData.html) - エンジンのAPIリファレンス

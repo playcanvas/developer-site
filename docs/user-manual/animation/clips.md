@@ -190,8 +190,8 @@ The Component Properties example builds two clips in code that animate the color
 
 ## See Also
 
-- [Playing Animations](/user-manual/animation/anim-component/) - Playing, switching and timing clips
-- [Animation Events](/user-manual/animation/anim-events/) - Adding events to clips
+- [Playing Animations](/user-manual/animation/playing-animations/) - Playing, switching and timing clips
+- [Animation Events](/user-manual/animation/events/) - Adding events to clips
 - [Animation Asset](/user-manual/editor/assets/inspectors/animation/) - The Editor's animation asset inspector and import settings
 - [Supported Formats](/user-manual/assets/supported-formats/) - The model formats that PlayCanvas loads
 - [AnimTrack](https://api.playcanvas.com/engine/classes/AnimTrack.html), [AnimCurve](https://api.playcanvas.com/engine/classes/AnimCurve.html) and [AnimData](https://api.playcanvas.com/engine/classes/AnimData.html) - The engine API reference

@@ -11,7 +11,7 @@ Animationアセットは、3Dモデルで単一のアニメーションを再生
 
 ![Asset Inspector Preview](/img/user-manual/assets/animation/inspector-preview.gif)
 
-また、グラフで状態を選択すると、[Anim State Graph Editor](/user-manual/animation/anim-state-graph-assets/)にもビューアがあります。選択すると、グラフを使用しているシーン内のすべてのエンティティが一覧表示され、プレビューのために選択できます。
+また、グラフで状態を選択すると、[Anim State Graph Editor](/user-manual/animation/state-graphs/)にもビューアがあります。選択すると、グラフを使用しているシーン内のすべてのエンティティが一覧表示され、プレビューのために選択できます。
 
 ![Anim State Graph Preview](/img/user-manual/assets/animation/anim-state-graph-preview.gif)
 

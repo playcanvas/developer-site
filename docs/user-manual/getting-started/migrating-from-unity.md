@@ -39,7 +39,7 @@ Other Unity windows and menus have these equivalents:
 | Console window | The browser's developer tools console in the launched tab. The Editor's own **CONSOLE** panel, at the bottom left, shows Editor messages such as script parse errors. |
 | Project Settings and Lighting window | [Settings](/user-manual/editor/interface/settings/), from the cog icon on the toolbar |
 | Build Settings | **Publish / Download** on the toolbar |
-| Animator window | The [anim state graph](/user-manual/animation/anim-state-graph-assets/) editor, which opens when you select an anim state graph asset |
+| Animator window | The [anim state graph](/user-manual/animation/state-graphs/) editor, which opens when you select an anim state graph asset |
 | Asset Store | **ASSET STORE** at the top right of the assets panel, with PlayCanvas Store and Sketchfab assets |
 | Visual Studio or Rider | The built-in [Code Editor](/user-manual/editor/scripting/code-editor/), or VS Code with the [VS Code extension](/user-manual/editor/scripting/vscode-extension/) |
 | Unity Version Control or Git | Built-in [version control](/user-manual/editor/version-control/) |
@@ -111,7 +111,7 @@ On macOS, use Cmd in place of Ctrl. Unity's View tool (Q) has no equivalent, bec
 | Audio Source | [Sound](/user-manual/editor/scenes/components/sound/) component | One component plays any number of sounds, called slots. |
 | Audio Listener | [Audio Listener](/user-manual/editor/scenes/components/audiolistener/) component | |
 | Particle System | [Particle System](/user-manual/editor/scenes/components/particlesystem/) component | |
-| Animator and Animator Controller | [Anim](/user-manual/editor/scenes/components/anim/) component and [anim state graph](/user-manual/animation/anim-state-graph-assets/) asset | |
+| Animator and Animator Controller | [Anim](/user-manual/editor/scenes/components/anim/) component and [anim state graph](/user-manual/animation/state-graphs/) asset | |
 | Canvas | [Screen](/user-manual/editor/scenes/components/screen/) component | |
 | RectTransform, Image and Text | [Element](/user-manual/editor/scenes/components/element/) component | |
 | Sprite Renderer | [Sprite](/user-manual/editor/scenes/components/sprite/) component | |
@@ -588,15 +588,15 @@ Because your app runs in a web page, you can also build any part of the interfac
 
 | Unity | PlayCanvas |
 | --- | --- |
-| Animator component | [Anim](/user-manual/animation/anim-component/) component |
-| Animator Controller | [Anim state graph](/user-manual/animation/anim-state-graph-assets/) asset, with states, transitions, parameters and layers |
+| Animator component | [Anim](/user-manual/animation/playing-animations/) component |
+| Animator Controller | [Anim state graph](/user-manual/animation/state-graphs/) asset, with states, transitions, parameters and layers |
 | Animation Clip | Animation asset, created when you import a model |
 | `animator.SetFloat("Speed", 2f)` | `entity.anim.setFloat('Speed', 2)` |
 | `SetBool`, `SetInteger`, `SetTrigger` | `setBoolean`, `setInteger`, `setTrigger` |
-| Avatar Mask | [Layer mask](/user-manual/animation/anim-layer-masking/) |
+| Avatar Mask | [Layer mask](/user-manual/animation/layers-and-masks/) |
 | Blend Tree | [Blend trees](/user-manual/animation/blend-trees/) (1D, 2D and direct), in state graphs created from code. The Editor's state graph editor has none. |
 | Root Motion | None. Move the entity from a script. |
-| Animation Events | [Anim events](/user-manual/animation/anim-events/) on the animation asset |
+| Animation Events | [Anim events](/user-manual/animation/events/) on the animation asset |
 | Animator Override Controller | One anim state graph, with different animation assets assigned to its states on each entity |
 
 PlayCanvas has no humanoid retargeting. An animation drives bones by name, so it plays on any model whose bones have the same names, but nothing adapts it to a skeleton with different proportions. Author or bake animations for the skeleton they play on.

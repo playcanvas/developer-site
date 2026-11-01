@@ -157,7 +157,7 @@ anim.component.on('footstep', (event) => {
 - **すべてのループで。** ループするクリップは、1周するたびにイベントを再び発火します。
 - **クリップの終わりで。** クリップの長さと同じ時刻にあるイベントは、クリップがループしない場合でも、再生が終わりに達したときに発火します。そのため、クリップが終了したことを知るのに使えます。
 - **どの速度でも。** クリップを速く、遅く、または逆方向に再生しても、イベントは発火します。
-- **すべてのレイヤーで。** 各[レイヤー](/user-manual/animation/anim-layer-masking/)は、ウェイトが0であっても、自身が再生するクリップのイベントを発火します。同じイベントを持つクリップを2つのレイヤーで再生すると、そのイベントは2回発火します。
+- **すべてのレイヤーで。** 各[レイヤー](/user-manual/animation/layers-and-masks/)は、ウェイトが0であっても、自身が再生するクリップのイベントを発火します。同じイベントを持つクリップを2つのレイヤーで再生すると、そのイベントは2回発火します。
 - **クロスフェード中も。** 遷移元のステートはクロスフェード中も再生を続け、クロスフェードが終わるまでイベントを発火し続けます。
 
 :::ai
@@ -274,6 +274,6 @@ arm.anim.on('jaws', (event) => {
 
 ## 関連情報 {#see-also}
 
-- [アニメーションクリップ](/user-manual/animation/anim-animation-assets/) - イベントが属するクリップ
+- [アニメーションクリップ](/user-manual/animation/clips/) - イベントが属するクリップ
 - [アニメーションアセット](/user-manual/editor/assets/inspectors/animation/) - エディターのアニメーションアセットのインスペクター
 - [AnimEvents](https://api.playcanvas.com/engine/classes/AnimEvents.html)と[AnimComponent](https://api.playcanvas.com/engine/classes/AnimComponent.html) - エンジンのAPIリファレンス

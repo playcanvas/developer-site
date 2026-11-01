@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 
 ![ステートグラフ。STARTはデフォルトステートのIdleにつながります。IdleとWalkは、speedパラメーターが0.5を上回ったとき、または0.5以下に下がったときに互いに遷移します。ANYはjumpトリガーが設定されるとJumpにつながり、Jumpは終了時間1でENDにつながります。そこからグラフはSTARTに戻ります](/img/user-manual/animation/state-graph.webp)
 
-ステートグラフはクリップを含みません。ステートグラフはテンプレートであり、それを使う各Animコンポーネントが、そのステートを自分自身のクリップに結び付けます。そのため、1つのグラフで、同じように動くすべてのキャラクターを、それぞれ独自のアニメーションで駆動できます。グラフには少なくとも1つの**レイヤー**があり、各レイヤーはそれぞれ独立したステートマシンです。[レイヤーとマスク](/user-manual/animation/anim-layer-masking/)を参照してください。
+ステートグラフはクリップを含みません。ステートグラフはテンプレートであり、それを使う各Animコンポーネントが、そのステートを自分自身のクリップに結び付けます。そのため、1つのグラフで、同じように動くすべてのキャラクターを、それぞれ独自のアニメーションで駆動できます。グラフには少なくとも1つの**レイヤー**があり、各レイヤーはそれぞれ独立したステートマシンです。[レイヤーとマスク](/user-manual/animation/layers-and-masks/)を参照してください。
 
 ## ステート {#states}
 
@@ -383,7 +383,7 @@ Locomotionのサンプルは、`speed`の整数パラメーターと、ANYから
 ## 関連情報 {#see-also}
 
 - [ブレンドツリー](/user-manual/animation/blend-trees/) - 複数のクリップをブレンドするステート
-- [レイヤーとマスク](/user-manual/animation/anim-layer-masking/) - 1つのモデルで複数のステートグラフを使う
+- [レイヤーとマスク](/user-manual/animation/layers-and-masks/) - 1つのモデルで複数のステートグラフを使う
 - [Anim State Graph Blending](/tutorials/anim-blending/) - エディターでブレンドするステートグラフを構築するチュートリアル
 - [Animコンポーネント](/user-manual/editor/scenes/components/anim/) - エディターでステートグラフのステートをクリップに結び付ける
 - [AnimComponent](https://api.playcanvas.com/engine/classes/AnimComponent.html)と[AnimComponentLayer](https://api.playcanvas.com/engine/classes/AnimComponentLayer.html) - エンジンのAPIリファレンス
