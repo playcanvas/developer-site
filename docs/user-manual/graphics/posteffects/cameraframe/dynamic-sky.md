@@ -1,9 +1,12 @@
 ---
 title: Dynamic Sky
-description: "The CameraFrame dynamic sky effect: an analytic day sky, the night sky, flat and volumetric clouds, a sun light kept in sync, and the lighting of the scene generated from the sky."
+description: "The CameraFrame dynamic sky effect: an analytic day sky, the night sky, flat and volumetric clouds, a sun light kept in sync, the lighting of the scene generated from the sky, and haze in the color of the sky."
 ---
 
-The [`DynamicSkyEffect`](https://api.playcanvas.com/engine/classes/DynamicSkyEffect.html) renders the sky of a camera in place of the sky of the scene: a day sky of an analytic atmosphere lit by the sun, a night sky of stars and the moon, and optionally clouds drifting with the wind. The position of the sun sets the time of day, and the effect can keep a directional light in sync with it. It also generates the lighting of the scene from its sky.
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+The [`DynamicSkyEffect`](https://api.playcanvas.com/engine/classes/DynamicSkyEffect.html) renders the sky of a camera in place of the sky of the scene: a day sky of an analytic atmosphere lit by the sun, a night sky of stars and the moon, and optionally clouds drifting with the wind. The position of the sun sets the time of day, and the effect can keep a directional light in sync with it. It also generates the lighting of the scene from its sky, and can haze the scene with it.
 
 The dynamic sky is not a built-in effect of the camera frame: create it, and add it to a camera frame with [`addEffect`](https://api.playcanvas.com/engine/classes/CameraFrame.html#addeffect):
 
@@ -97,6 +100,89 @@ Generating the lighting has a cost, so the effect generates it again only when t
 
 The cameras without the effect, such as the cameras rendering planar reflections, render the sky of the scene from that environment atlas: a still image of this sky.
 
+## Haze
+
+While its [`haze`](https://api.playcanvas.com/engine/classes/DynamicSkyEffect.html#haze) is enabled, the effect adds aerial perspective to the scene its camera renders: with their distance, surfaces fade into the color of the sky behind them. The haze is warm toward a low sun, blue away from it, and follows the gradient of the night sky after the sunset. It is densest at its base height and thins out with the height above it, so the valleys stay hazy while the view from high up is clear.
+
+```javascript
+sky.haze = true;
+sky.hazeDensity = 0.0002;
+sky.hazeHeight = 300;
+sky.hazeBaseHeight = 0;
+cameraFrame.update();
+```
+
+| Property | Description |
+| -------- | ----------- |
+| `hazeDensity` | The density of the haze at its base height, per world unit: the fraction of the light it scatters over a unit of distance. A level view at the base height is 95% hidden at a distance of about 3 / density. |
+| `hazeHeight` | The height over which the density falls to about a third, in world units. Lower values keep the haze closer to the ground. |
+| `hazeBaseHeight` | The height the haze is densest at, in world units: usually the lowest ground of the scene, such as the level of the sea. Below it, the haze grows denser still. |
+
+Keep the density low. The haze takes the color of the sky near the horizon, which is much brighter than the sunlit ground, so even a few percent of haze brightens the distant surfaces noticeably.
+
+The haze takes the place of the fog of the camera, [`Scene#fog`](https://api.playcanvas.com/engine/classes/Scene.html#fog) or [`CameraComponent#fog`](https://api.playcanvas.com/engine/classes/CameraComponent.html#fog): while it is enabled, the effect gives its camera a fog of its own, and gives the camera its fog back once the haze is disabled. The other cameras keep their fog.
+
+- The lit materials, such as [`StandardMaterial`](https://api.playcanvas.com/engine/classes/StandardMaterial.html), are hazed.
+- The particles and the gaussian splats render without fog on the camera.
+- A material opts out of the haze, and renders without fog, with [`useFog`](https://api.playcanvas.com/engine/classes/StandardMaterial.html#usefog) set to `false`, or with the `DYNAMIC_SKY_NO_HAZE` define:
+
+```javascript
+material.setDefine('DYNAMIC_SKY_NO_HAZE', true);
+material.update();
+```
+
+Enabling or disabling the haze compiles the shaders of the lit materials the camera renders again, so set it up front rather than toggling it during the game.
+
+The effect hazes the materials with a replacement of the `fogPS` shader chunk, for all the materials of the graphics device. A material replacing `fogPS` with a chunk of its own is not hazed, and finds the `FOG` define of its shaders set to `DYNAMICSKYHAZE` on the camera.
+
+## The sky in other shaders
+
+The effect sets the uniforms of its sky on the graphics device every frame, so the shaders of other materials can evaluate the same sky, for example a water shader reflecting it. Its shader chunks, in GLSL and WGSL, evaluate the sky from these uniforms:
+
+- `dynamicSkyAtmospherePS`: `dynamicSkyBase(dir, ambient)` returns the radiance of the sky in a direction, without the sun disc, the stars and the moon, and sets `ambient` to the light of the sky around it. The direction is in the space of the sky: a world space direction turned by the rotation of the sky, the `dynSkyRotation` uniform, with X flipped.
+- `dynamicSkyHazePS`: `dynamicSkyHaze(color, cameraPos, worldPos)` returns a linear color seen through the [haze](#haze), for the shaders the haze does not reach on its own.
+
+<Tabs groupId="shader-language" queryString="lang">
+<TabItem value="glsl" label="GLSL">
+
+```glsl
+#include "dynamicSkyAtmospherePS"
+uniform mat3 dynSkyRotation;
+
+vec3 skyColor(vec3 worldDir) {
+    vec3 dir = worldDir * dynSkyRotation;
+    dir.x = -dir.x;
+    vec3 ambient;
+    return dynamicSkyBase(dir, ambient);
+}
+```
+
+</TabItem>
+<TabItem value="wgsl" label="WGSL">
+
+```wgsl
+#include "dynamicSkyAtmospherePS"
+uniform dynSkyRotation: mat3x3f;
+
+fn skyColor(worldDir: vec3f) -> vec3f {
+    var dir = worldDir * uniform.dynSkyRotation;
+    dir.x = -dir.x;
+    var ambient: vec3f;
+    return dynamicSkyBase(dir, &ambient);
+}
+```
+
+</TabItem>
+</Tabs>
+
+On the CPU, [`getSkyColor`](https://api.playcanvas.com/engine/classes/DynamicSkyEffect.html#getskycolor) evaluates the same sky in a direction, for lighting worked out in a script, such as the light the sky gives to particles:
+
+```javascript
+const zenith = sky.getSkyColor(Vec3.UP);
+```
+
+With more than one dynamic sky, a material renders with the sky that was updated last.
+
 ## XR {#xr}
 
 In XR, the sky renders for each view, like the rest of the scene, and so do the flat clouds. The volumetric clouds render to their texture once, for the view of the camera, and each view reads them from it. Where the view of an eye extends past the view of the camera, the texture has no clouds to read, and they streak at its edge. Use `CLOUDTYPE_FLAT` clouds in XR.
@@ -125,13 +211,37 @@ class DayNightCycle extends Script {
 export { DayNightCycle };
 ```
 
+The [haze](#haze) is not one of the attributes of the script. Set it on the effect the script drives, its `effect`, which the script creates in its `initialize`:
+
+```javascript
+import { Script } from 'playcanvas';
+
+class SkyHaze extends Script {
+    static scriptName = 'skyHaze';
+
+    postInitialize() {
+        const sky = this.entity.script.dynamicSkyEffect.effect;
+        sky.haze = true;
+        sky.hazeDensity = 0.0002;
+        sky.hazeHeight = 300;
+    }
+}
+
+export { SkyHaze };
+```
+
 ## Limitations
 
 - The volumetric clouds are not supported in XR, see [XR](#xr).
 - The sky does not work together with the [volumetric fog](/user-manual/graphics/posteffects/cameraframe/volumetric-fog/) of the camera frame: the clouds cast no shadows into the fog, and the fog is not lit by the light of the sky.
+- The haze does not reach the particles and the gaussian splats, which render without fog on the camera with the haze.
 
-## Example
+## Examples
 
 An analytic atmosphere over a day and night cycle, with stars, the moon and volumetric clouds drifting with the wind, lighting the scene and keeping the sun light in sync with the sky.
 
 <EngineExample id="camera-frame/dynamic-sky" title="Dynamic Sky" />
+
+A desert landscape under the sky over a day, with the haze fading the distant ground into the color of the sky.
+
+<EngineExample id="graphics/procedural-sky" title="Procedural Sky" />
