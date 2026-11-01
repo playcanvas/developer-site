@@ -16,7 +16,7 @@ The `<pc-sprite-clip>` tag declares one named animation clip on its parent [`<pc
 
 A clip plays the frames of its sprite `asset` in the order that asset's `frame-keys` lists them, so a sprite asset made for a clip lists its frames in playback order. Each clip has a sprite asset of its own, cut from the same atlas as its siblings or from another — see [Sprite Assets](../pc-sprite#sprite-assets) for how one is declared.
 
-`fps` sets the pace, and the frame count sets the length: six frames at `fps="12"` last half a second. `fps` defaults to 0, which holds the first frame, so give every clip that should move a rate. The parent sprite's [`speed`](../pc-sprite#attributes) multiplies it, which slows or speeds up every clip at once.
+`fps` sets the pace, and the frame count sets the length: six frames at `fps="12"` last half a second. `fps` defaults to 0, which stops a clip from advancing — one left at the default holds its first frame — so give every clip that should move a rate. The parent sprite's [`speed`](../pc-sprite#attributes) multiplies it, which slows or speeds up every clip at once.
 
 What happens at the last frame depends on `loop`:
 
@@ -32,7 +32,7 @@ A negative `fps` plays a clip backwards. Playback still starts on the first fram
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
 | `asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | Sprite asset ID (must reference a `sprite` type asset) of the sprite whose frames the clip plays, in the order of its `frame-keys` |
-| `fps` | Number | `"0"` | Rate the clip plays at, in frames per second, where negative values play it backwards. 0 holds the first frame |
+| `fps` | Number | `"0"` | Rate the clip plays at, in frames per second, where negative values play it backwards. 0 stops the clip advancing, so it stays on its current frame — the first, for a clip that starts at 0 |
 | `loop` | Boolean | `"false"` | Whether the clip loops. A clip that does not loop stops on its last frame |
 | `name` | String | - | The clip's name, which the parent `<pc-sprite>`'s `clip` attribute selects it by. Required, and unique within the `<pc-sprite>` |
 
@@ -131,14 +131,13 @@ Clips can be added and removed at runtime. Appending a `<pc-sprite-clip>` adds i
 
 ```javascript
 const slime = document.querySelector('#slime');
+slime.clip = 'wave'; // no clip has this name yet, so the current clip plays on
 
 const clip = document.createElement('pc-sprite-clip');
 clip.setAttribute('name', 'wave');
 clip.setAttribute('asset', 'slime-wave');
 clip.setAttribute('fps', '10');
-slime.appendChild(clip);
-
-slime.clip = 'wave'; // plays as soon as the clip is added
+slime.appendChild(clip); // wave plays as soon as the clip is added
 ```
 
 ## See Also

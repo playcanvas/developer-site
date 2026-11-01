@@ -16,7 +16,7 @@ description: "pc-sprite-clip要素のリファレンス: pc-spriteの名前付�
 
 クリップは、スプライト`asset`のフレームを、そのアセットの`frame-keys`に並んだ順に再生します。そのため、クリップ用のスプライトアセットは再生順にフレームを列挙します。各クリップは専用のスプライトアセットを持ち、兄弟のクリップと同じアトラスから切り出すことも、別のアトラスから切り出すこともできます。宣言のしかたは[スプライトアセット](../pc-sprite#sprite-assets)を参照してください。
 
-`fps`がペースを、フレーム数が長さを決めます。6フレームを`fps="12"`で再生すると0.5秒です。`fps`のデフォルトは0で、最初のフレームを表示し続けるため、動かしたいクリップにはすべてレートを指定してください。親スプライトの[`speed`](../pc-sprite#attributes)がこれに乗算されるため、すべてのクリップをまとめて遅くしたり速くしたりできます。
+`fps`がペースを、フレーム数が長さを決めます。6フレームを`fps="12"`で再生すると0.5秒です。`fps`のデフォルトは0で、クリップが進まなくなります。デフォルトのままのクリップは最初のフレームを表示し続けるため、動かしたいクリップにはすべてレートを指定してください。親スプライトの[`speed`](../pc-sprite#attributes)がこれに乗算されるため、すべてのクリップをまとめて遅くしたり速くしたりできます。
 
 最後のフレームで何が起こるかは`loop`によって決まります。
 
@@ -32,7 +32,7 @@ description: "pc-sprite-clip要素のリファレンス: pc-spriteの名前付�
 | 属性 | タイプ | デフォルト | 説明 |
 | --- | --- | --- | --- |
 | `asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | クリップが再生するフレームを持つスプライトのスプライトアセットID（`sprite`型アセットを参照する必要があります）。フレームは`frame-keys`の順に再生されます |
-| `fps` | Number | `"0"` | クリップを再生するレート（1秒あたりのフレーム数）。負の値では逆再生します。0では最初のフレームを表示し続けます |
+| `fps` | Number | `"0"` | クリップを再生するレート（1秒あたりのフレーム数）。負の値では逆再生します。0ではクリップが進まなくなり、現在のフレームにとどまります。0のまま再生を始めたクリップでは、それが最初のフレームです |
 | `loop` | Boolean | `"false"` | クリップがループするかどうか。ループしないクリップは最後のフレームで止まります |
 | `name` | String | - | クリップの名前。親の`<pc-sprite>`の`clip`属性はこの名前でクリップを選びます。必須で、`<pc-sprite>`の中で一意である必要があります |
 
@@ -131,14 +131,13 @@ clip.spriteAnimationClip.on('end', () => console.log('landed'));
 
 ```javascript
 const slime = document.querySelector('#slime');
+slime.clip = 'wave'; // この名前のクリップはまだないため、現在のクリップが再生を続けます
 
 const clip = document.createElement('pc-sprite-clip');
 clip.setAttribute('name', 'wave');
 clip.setAttribute('asset', 'slime-wave');
 clip.setAttribute('fps', '10');
-slime.appendChild(clip);
-
-slime.clip = 'wave'; // クリップが追加されるとすぐに再生されます
+slime.appendChild(clip); // クリップが追加されるとすぐにwaveが再生されます
 ```
 
 ## 関連項目 {#see-also}
