@@ -61,14 +61,14 @@
     "@mdx-js/react": "^3.1.1",
     "@playcanvas/react": "^0.11.7",
     "@slorber/remark-comment": "^1.0.0",
-    "@tanstack/react-query": "^5.104.5",
+    "@tanstack/react-query": "^5.105.1",
     "canvas-confetti": "^1.9.4",
     "clsx": "^2.1.1",
     "docusaurus-plugin-copy-page-button": "^0.8.5",
     "docusaurus-plugin-sass": "^0.2.7",
     "js-yaml": "^5.5.0",
     "leva": "^0.10.1",
-    "motion": "^14.4.0",
+    "motion": "^14.9.0",
     "playcanvas": "^2.23.3",
     "prism-react-renderer": "^2.4.1",
     "prismjs": "^1.30.0",
@@ -80,18 +80,18 @@
     "remark-gfm": "^4.0.1",
     "remark-mdx": "^3.1.1",
     "remark-parse": "^11.0.0",
-    "sass": "^1.105.2",
+    "sass": "^1.107.1",
     "sync-ammo": "^0.1.2",
     "ts-morph": "^28.0.0",
     "unified": "^11.0.5",
-    "unist-util-visit": "^5.1.0"
+    "unist-util-visit": "^5.2.0"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "^3.10.2",
     "@docusaurus/types": "^3.10.2",
     "gray-matter": "^4.0.3",
     "markdownlint-cli2": "^0.24.0",
-    "marked": "^18.1.1"
+    "marked": "^18.1.2"
   },
   "browserslist": {
     "production": [
