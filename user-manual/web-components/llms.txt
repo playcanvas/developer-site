@@ -44,6 +44,8 @@ Use this index for pages built from `<pc-*>` elements. The engine features the t
 - [pc-render](https://developer.playcanvas.com/user-manual/web-components/tags/pc-render.md): Primitive shapes with a material and shadow settings.
 - [pc-sky](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sky.md): A skybox from a texture asset, with box, dome or infinite projection and optional scene lighting.
 - [pc-gsplat](https://developer.playcanvas.com/user-manual/web-components/tags/pc-gsplat.md): Renders a Gaussian splat asset, with shadow and LOD settings.
+- [pc-sprite](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sprite.md): A 2D sprite from a texture atlas: one frame, or animated clips, tinted, flipped, tiled or 9-sliced.
+- [pc-sprite-clip](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sprite-clip.md): Declares a named animation clip of a `pc-sprite`, with its frame rate and looping.
 - [pc-rigid-body](https://developer.playcanvas.com/user-manual/web-components/tags/pc-rigid-body.md): The rigid body type, mass, friction and restitution.
 - [pc-collision](https://developer.playcanvas.com/user-manual/web-components/tags/pc-collision.md): Box, sphere, capsule, cone, cylinder and mesh collision shapes.
 - [pc-joint](https://developer.playcanvas.com/user-manual/web-components/tags/pc-joint.md): Fixed, ball, hinge, slider and 6DoF joints between two rigid bodies.
@@ -71,4 +73,4 @@ Use this index for pages built from `<pc-*>` elements. The engine features the t
 
 ## Optional
 
-- [All pages of this index in one file](https://developer.playcanvas.com/user-manual/web-components/llms-full.txt): 41 pages (408 KB), for downloading and searching rather than reading into context.
+- [All pages of this index in one file](https://developer.playcanvas.com/user-manual/web-components/llms-full.txt): 43 pages (438 KB), for downloading and searching rather than reading into context.
