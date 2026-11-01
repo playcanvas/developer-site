@@ -132,7 +132,7 @@ camera.framePasses = [scenePass, blurHPass, blurVPass];
 
 - Render Pass Example - Complete demonstration of custom render passes
 
-<EngineExample id="graphics/render-pass" title="Render Pass Example" />
+<EngineExample id="render-targets/render-pass" title="Render Pass Example" />
 
 ## Use Cases
 
