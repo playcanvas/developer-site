@@ -748,6 +748,10 @@
     "message": "クリックして読み込む",
     "description": "Button label to load an embedded PlayCanvas engine example"
   },
+  "engineExample.openInBrowser": {
+    "message": "サンプルブラウザで開く",
+    "description": "Button label to open a PlayCanvas engine example, with its controls panel, in the Examples Browser"
+  },
   "liveExample.badge": {
     "message": "ライブサンプル",
     "description": "Badge label on the live example toolbar"

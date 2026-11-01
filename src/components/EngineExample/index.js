@@ -14,9 +14,15 @@ const GENERIC_TITLES = new Set([
 ]);
 const ACRONYMS = /\b(Ar|Glb|Gpu|Hdr|Html|Lod|Lut|Taa|Vr|Webgl|Webgpu|Xr)\b/g;
 
-export default function EngineExample({ id, title = 'PlayCanvas engine example', buttonLabel }) {
+// Set `controls` for examples that need the Examples Browser's controls panel, which the embedded
+// iframe doesn't show: the placeholder then links to the example in the browser instead of loading it.
+export default function EngineExample({ id, title = 'PlayCanvas engine example', buttonLabel, controls = false }) {
     const [loaded, setLoaded] = useState(false);
-    const defaultButtonLabel = translate({
+    const defaultButtonLabel = controls ? translate({
+        id: 'engineExample.openInBrowser',
+        message: 'Open in Examples Browser',
+        description: 'Button label to open a PlayCanvas engine example, with its controls panel, in the Examples Browser'
+    }) : translate({
         id: 'engineExample.clickToLoad',
         message: 'Click to load',
         description: 'Button label to load an embedded PlayCanvas engine example'
@@ -50,13 +56,24 @@ export default function EngineExample({ id, title = 'PlayCanvas engine example',
                     className="engine-example-placeholder"
                     style={{ '--engine-example-thumbnail': `url("${thumbnail}")` }}>
                     <div className="engine-example-title">{label}</div>
-                    <button
-                        type="button"
-                        className="button button--primary"
-                        aria-label={`${resolvedButtonLabel}: ${label}`}
-                        onClick={() => setLoaded(true)}>
-                        {resolvedButtonLabel}
-                    </button>
+                    {controls ? (
+                        <a
+                            className="button button--primary"
+                            href={`${BASE}/#/${path}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`${resolvedButtonLabel}: ${label}`}>
+                            {resolvedButtonLabel}
+                        </a>
+                    ) : (
+                        <button
+                            type="button"
+                            className="button button--primary"
+                            aria-label={`${resolvedButtonLabel}: ${label}`}
+                            onClick={() => setLoaded(true)}>
+                            {resolvedButtonLabel}
+                        </button>
+                    )}
                 </div>
             )}
         </div>

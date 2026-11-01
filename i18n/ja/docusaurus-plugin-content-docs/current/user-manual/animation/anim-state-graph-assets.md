@@ -1,141 +1,389 @@
 ---
-title: Animstategraphアセット
-description: アニメーション状態、トランジション、ブレンド、レイヤー、パラメーターのanimstategraphステートマシンを作成します。
+title: ステートグラフ
+description: "ステートグラフで再生するアニメーションを決める方法を説明します。ステート、START・END・ANYの各ステート、長さ・終了時間・条件を持つ遷移、遷移を駆動するパラメーターを扱い、エディターのグラフエディターとコードのそれぞれでの構築方法を紹介します。"
 ---
 
-Animstategraphアセットは、さまざまなアニメーション状態を整理するために使用されます。アニメーション状態は、モデルがアニメーションするさまざまな方法を表します。これらのアニメーション状態を定義し、各状態が再生されるタイミングや状態間のトランジション、およびブレンド方法を決定するために使用することができます。AnimStateGraphアセット自体は、実際のアニメーションアセットを格納したりリンクしたりするものではありません。代わりに、アニメーションアセットの組織化方法のテンプレートとして機能します。実際のアニメーションアセットは、[Anim Component](/user-manual/editor/scenes/components/anim/)を介してanimstategraphのアニメーション状態にリンクされます。
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-システムは、1つのanimstategraphが多数の異なるエンティティで使用できるように設計されています。たとえば、人間型キャラクターの移動アニメーションを管理するAnimstategraphアセットがある場合、この1つのアセットは人間エンティティ、エルフエンティティ、およびドワーフエンティティで使用できます。これらのエンティティのそれぞれは、独自のキャラクターアニメーションアセットをリンクでき、同じアニメーション動作を保持できます。
+ステートグラフは、モデルのアニメーションのためのステートマシンです。その**ステート**は、待機、歩行、ジャンプなど、モデルが行える動作を表し、それぞれが1つのクリップを再生します。**遷移**は、あるステートから別のステートへどのように移れるかを表します。いつ移るか、クリップがどれくらいの速さでクロスフェードするか、そしてどのような**条件**で移るかです。条件は**パラメーター**をテストします。パラメーターは、キャラクターの速度のように、ゲームの実行中にコードが設定する値です。パラメーターを設定するのは開発者で、クリップを選ぶのはグラフです。
 
-したがって、これらのアセットは、モデルのアニメーション動作のステートマシンであり、エンティティのライフサイクルにわたってアニメーションシーケンスのフローを制御します。ホイールの動作を定義する単純なAnimstategraphアセットでは、静止状態と回転状態の2つのアニメーション状態のみを定義できます。このアセットは、ホイールがどの時点で回転を始め、停止するか、どのくらいの時間回転するか、ホイールの回転速度、および回転の開始/停止時の急激さを制御するように定義できます。より高度なアセットは、多数のアニメーション状態を組み合わせて複雑な人間型キャラクターアニメーション動作を作成するために使用できます。
+![ステートグラフ。STARTはデフォルトステートのIdleにつながります。IdleとWalkは、speedパラメーターが0.5を上回ったとき、または0.5以下に下がったときに互いに遷移します。ANYはjumpトリガーが設定されるとJumpにつながり、Jumpは終了時間1でENDにつながります。そこからグラフはSTARTに戻ります](/img/user-manual/animation/state-graph.webp)
 
-エディターのアセットパネルでAnimstategraphアセットを選択すると、anim state graphエディタービューが表示されます:
+ステートグラフはクリップを含みません。ステートグラフはテンプレートであり、それを使う各Animコンポーネントが、そのステートを自分自身のクリップに結び付けます。そのため、1つのグラフで、同じように動くすべてのキャラクターを、それぞれ独自のアニメーションで駆動できます。グラフには少なくとも1つの**レイヤー**があり、各レイヤーはそれぞれ独立したステートマシンです。[レイヤーとマスク](/user-manual/animation/anim-layer-masking/)を参照してください。
 
-![Initial Editor](/img/user-manual/animation/state-graph-editor.png)
+## ステート {#states}
 
-このビューで、アニメーションステートグラフを編集できます。以下のセクションでは、Animstategraphアセットの異なる要素が特定のアニメーション動作を定義するためにどのように使用できるかを強調します。
+1つのレイヤーで一度にアクティブになるステートは1つだけです。ステートには4つの種類があります。
 
-:::ai
-複雑なグラフでは、AIアシスタントに[**Editor MCP Server**](/user-manual/editor/mcp-server/)で問題のトランジションを条件、パラメーター、スクリプト、Animマッピングまで追跡させ、Launcherで再現します。
-:::
+### アニメーションステート {#animation-states}
 
-## States {#states}
+アニメーションステートは、1つのクリップを再生するか、[ブレンドツリー](/user-manual/animation/blend-trees/)で複数のクリップをブレンドします。アニメーションステートには、レイヤー内で一意である必要がある**名前**、クリップの速度に掛け合わされる**速度**、そして**ループ**の設定があります。ループしないステートは、遷移によってそのステートを離れるまで、クリップの最後のフレームを保持します。
 
-基本的に、ステートは特定の時点で再生するアニメーションを指定するために使用されます。anim state graphは、特定の時点でこれらの状態のいずれかにしか存在できません。
+### START {#start-state}
 
-ステートグラフには、アニメーションステート、STARTステート、ENDステート、ANYステートの4種類のステートがあります。ユーザーによって作成および削除できるのはアニメーションステートのみであり、これらのみがアニメーションアセットにリンクされます。他のステートはステートマシンのフローを制御するために使用されます。
+すべてのレイヤーはSTARTから始まり、STARTからはすぐにレイヤーの**デフォルトステート**に進みます。STARTには、それ以外の遷移を、STARTからもSTARTへも設定できません。
 
-### Animation States {#animation-states}
+### END {#end-state}
 
-![State](/img/user-manual/animation/state.png)
+ENDへの遷移はグラフを抜けます。するとグラフはすぐにSTARTに戻り、そこからデフォルトステートに進みます。一連のステートがどこで終わっても、戻りの遷移を描かずに最初に戻るために使います。
 
-アニメーションステートは、 'Idle'、 'Jump'、 'Walk'などの再生可能なアニメーションを定義します。新しいアニメーションステートは、ステートグラフの背後の空のキャンバスを右クリックして、メニューから '新しいステートを追加'を選択することで作成できます。エディターは新しく作成されたステートを対象とし、そのインスペクタパネルを右側に表示します。このインスペクタ内で、次のステート変数を変更できます。
+### ANY {#any-state}
 
-| 変数 | 説明 |
-|----------|-------------|
-| Name     | このステートの呼び出し方の名前。これはスクリプトを介してステートを検索、編集、および再生するために使用されます。名前はステートグラフレイヤーごとに一意である必要があります。 |
-| スピード    | このステートにリンクされたアニメーションの再生速度。 |
-| ループ (Loop)     | このステートにリンクされたアニメーションが再生中にループするかどうか。falseに設定すると、アニメーションは最後のキーフレームで一時停止し、このステートから退出するまで再開されません。 |
+ANYからの遷移は、どのステートがアクティブであっても、そのステートから始まるかのように実行できます。ジャンプや被弾のリアクションのように、ほかのすべてのステートから移れるステートには、それぞれのステートから遷移を設けるかわりにANYを使います。ANYへの遷移は設定できません。
 
-### START state {#start-state}
+## 遷移 {#transitions}
 
-![Start State](/img/user-manual/animation/start-state.png)
+遷移は、あるステートから別のステートへとつながります。遷移の設定は次のとおりです。
 
-STARTステートは、ステートグラフの入り口です。Animコンポーネントが割り当てられたanim state graphを再生し始めると、最初にこのステートに入り、直接接続されたアニメーションステートに遷移します。このアニメーションステートはデフォルトステートと呼ばれ、ここで選択できます:
+| 設定 | 説明 |
+| --- | --- |
+| 長さ（`time`） | 2つのステートがクロスフェードする時間（秒）。0にすると、次のステートにすぐ切り替わります。 |
+| 終了時間（`exitTime`） | 遷移を実行できるタイミング。遷移元のステートのクリップに対する割合で表します。1未満の値にすると、ループのたびにその時点で実行できるようになります。0.75は各ループの4分の3の時点です。1は1回目の再生の終わり、2.5は3回目の再生の半分の時点です。終了時間がない場合、遷移はいつでも実行できます。 |
+| オフセット（`transitionOffset`） | 遷移先のステートのクリップが始まる位置。クリップの長さに対する0から1の割合で表します。 |
+| 割り込み元（`interruptionSource`） | この遷移のクロスフェード中に、ほかの遷移が割り込めるかどうか。なし、前のステートからの遷移、次のステートからの遷移、またはその両方（どちらの順序も選べます）から指定します。 |
+| 条件（`conditions`） | パラメーターの値のテスト。すべての条件を満たした場合にのみ、遷移を実行できます。 |
 
-![Layers](/img/user-manual/animation/layers.png)
+終了時間も条件もない遷移はすぐに実行され、すでにアクティブなステートへの遷移は決して実行されません。複数の遷移を同時に実行できる場合は、`priority`が最も小さい遷移が選ばれ、アクティブなステートからの遷移がANYからの遷移より先になります。
 
-STARTステートから他のステートへの遷移を作成することはできません。それは、ENDステートに遷移して再び入ることができます。
+## パラメーターと条件 {#parameters}
 
-### END state {#end-state}
+パラメーターは、ステートグラフへの入力です。各パラメーターは、名前、型、デフォルト値を持ちます。
 
-![End State](/img/user-manual/animation/end-state.png)
+- **Float**、**Integer**、**Boolean**のパラメーターは、最後に設定した値を保持します。
+- **Trigger**は、遷移に使われると自動的に`false`に戻るBooleanです。ジャンプのように、1回の遷移を引き起こすべきイベントに使います。トリガーは遷移に使われるまで設定されたままになります。ただし、2番目の引数として`true`を`setTrigger()`に渡すと、どの遷移にも使われなかった場合でも、フレームの終わりにリセットされます。
 
-ENDステートは、現在のステートグラフからの出口を示します。アニメーションステートがENDステートに遷移するように設定されている場合、システムはSTARTステートに接続されたデフォルトアニメーションステートに直接移動します。これにより、グラフを線形にレイアウトしながら、グラフ内でサイクルフローを作成するのに役立ちます。ENDステートから他のステートへの遷移を作成することはできません。常にSTARTステートに直接遷移します。
-
-### ANY state {#any-state}
-
-![Any State](/img/user-manual/animation/any-state.png)
-
-このステートは、システムが現在他のどのアニメーションステートにある場合でもアクティブになるトランジションを作成するために使用されます。このステートからトリガーされるすべてのトランジションは、現在有効なアニメーションステートから直接接続された場合と同様にブレンドされます。ANYステートからトランジションを作成できますが、それには戻ることはできません。
-
-現在のステートに関係なくアクティブにしたいトランジションを設定するために使用できます。たとえば、アイドル状態と歩行状態の両方から到達できるジャンプ状態を持つことができます。ジャンプステートへのトランジションをアイドルと歩行の両方から設定する代わりに、ANYステートとジャンプステートの間にトランジションを設定できます。
-
-### Transitions {#transitions}
-
-トランジションは、anim state graphが1つのアニメーションステートから別のアニメーションステートに移動する方法を定義します。アニメーションステートを右クリックし、 `Add transition` をクリックしてトランジションを作成できます。
-
-トランジションの変数を設定することにより、トランジション中のステートのアニメーションがどのようにブレンドされるかも制御できグラフには、システムが使用可能な遷移を定義する条件のリストが含まれる場合があります。 すべての条件が満たされていない場合、状態は指定された遷移を介して別の状態に移行できません。
-
-各条件は、パラメータ変数の現在の値を、指定された演算子を使用して条件で与えられた値と比較する条件付きステートメントで構成されます。 たとえば、次の条件:
-
-| 変数            | 説明 |
-|---------------------|-------------|
-| Duration            | The duration of the transition in seconds. |
-| Exit Time           | ソース状態を終了し、目的状態に遷移する時間です。これはソース状態の持続時間に基づいて正規化された時間で示されます。値を提供しないと、この遷移を使用してソース状態をいつでも終了できます。1未満の値は、ソース状態の各ループでその時間に遷移が利用可能になることを意味します。 |
-| Offset              | 提供された場合、目的状態はこの時間にアニメーションの再生を開始します。これは目的状態の持続時間に基づいて正規化された時間で示されます。0から1の間でなければなりません。 |
-| Interruption Source | 他の遷移がこの遷移を中断できるかどうか、そして現在の状態または前の状態の遷移のどちらがそれを行うことができるかを定義します。 |
-
-異なる値と条件を設定した2つのアニメーション状態間に複数の遷移を作成することが可能です。これらの遷移の優先順位は、グラフ内で遷移の矢印を選択した後、遷移インスペクタで並べ替えることができます。優先順位は、複数の遷移がその条件を満たしている場合に、状態グラフがどの遷移を使用するかを決定します。
-
-### パラメーター {#parameters}
-
-アニメーションステートグラフのパラメータは、ランタイム時のアニメーションの流れを制御するために使用される変数です。これらの変数はスクリプト経由でアクセス可能で、いつでも新しい値に設定することができます。それらはユーザーがエンティティのアニメーションの動作をそのライフサイクル中に制御する手段となります。
-
-新しいパラメータは、左側のインスペクタのパラメータパネルを通じて状態グラフに追加することができます。
-
-![Parameters](/img/user-manual/animation/parameters.png)
-
-各パラメータは以下の3つの変数を設定することができます。
-
-| 変数      | 説明 |
-|---------------|-------------|
-| Name          | このパラメータが呼び出されるべき名前。これはスクリプト経由でパラメータを見つけて設定するために使用されます。名前は状態グラフごとに一意でなければなりません。 |
-| タイプ          | パラメータが含む変数のタイプです。次のいずれかです：Boolean（ブール値）、Float（浮動小数点数）、Integer（整数）、またはTrigger（トリガー）。Triggerタイプは、ブール値と同じように機能しますが、トランジションを正常にアクティブ化した後に値が自動的にfalseに戻る特殊なプロパティを持ちます。 |
-| Default Value | パラメータ変数の値は、ステートグラフが起動するときの値です。 |
-
-彼らが状態グラフを制御する方法は、遷移条件の使用を通じてです。グラフ内の各遷移には、システムが遷移を使用できるタイミングを定義する条件のリストを持つことができます。全ての条件が満たされていない限り、状態は指定の遷移を通じて別の状態に進むことはできません。
-
-各条件は、指定された演算子を使用して条件で与えられた値とパラメータ変数の現在の値を比較する条件文から成ります。例えば、次の条件:
-
-![Condition](/img/user-manual/animation/condition.png)
-
-これは、IdleとJumpのアニメーション状態間の遷移で使用でき、スクリプトを通じて'Jump'パラメータがtrueに設定されたときにのみキャラクターがジャンプすることを保証します。
-
-### レイヤーの一覧 (Layers) {#layers}
-
-これまでに、animstategraphアセットは単一のアニメーション状態グラフを編集する文脈で議論されてきました。しかし、時には、各々が独自の定義された動作を持つ複数の別々の状態グラフによって単一のモデルのアニメーションを制御することが必要となる場合があります。一例としては、主要キャラクターの動きや移動を単一のレイヤーでアニメーション化し、一方で顔の表情を独自の状態グラフとパラメータによって制御される別のレイヤーでアニメーション化する場合が挙げられます。
-
-animstategraphが作成されると、それには一つの基本レイヤーが含まれます。このレイヤーは削除できず、多くのシナリオでは唯一必要なものとなります。しかし、別のレイヤーを作成したい場合は、状態グラフビューの左のレイヤーパネルで新しいレイヤーボタンを選択して作成することができます:
-
-![Layers](/img/user-manual/animation/layers.png)
-
-次に、グラフビューの右上にあるレイヤー選択ドロップダウンから選択することで、このレイヤーの編集に切り替えることが可能です:
-
-![Select Layer](/img/user-manual/animation/select-layer.png)
-
-### Layer Blending {#layer-blending}
-
-デフォルトでは、レイヤーはレイヤーパネルで作成された順序でモデルをアニメートします。モデルのボーンに設定されたアニメーション値は、後続のレイヤーによって上書きされます。代わりにレイヤーのアニメーション値を混合したい場合は、レイヤーの`ブレンドタイプ (Blend Type)`をデフォルトの`オーバーライド (Override)`ではなく`アディティブ (Additive)`に設定します。
-
-![Layer Blend](/img/user-manual/animation/anim-layer-blend.png)
-
-各レイヤーのブレンドウェイト値は、複数のレイヤーをブレンドする際に、各レイヤーが最終アニメーションにどれだけ寄与するかを決定するために使用されます。これらのブレンドウェイトは、ゲームスクリプトでランタイムで調整し、レイヤーのブレンドをリアルタイムで更新することができます。
+パラメーターは、Animコンポーネントで名前を指定して設定します。
 
 ```javascript
-var AnimationBlending = pc.createScript('animationBlending');
+entity.anim.setFloat('speed', 1.2);
+entity.anim.setInteger('weapon', 2);
+entity.anim.setBoolean('crouching', true);
+entity.anim.setTrigger('jump');
+```
 
-// initialize code called once per entity
-AnimationBlending.prototype.initialize = function() {
-    this.entity.anim.on('smile_start', (event) => {
-        this.entity.anim.findAnimationLayer('smile').weight = 1;
-    });
-    this.entity.anim.on('smile_end', (event) => {
-        this.entity.anim.findAnimationLayer('smile').weight = 0;
-    });
+条件は、`==`、`!=`、`<`、`<=`、`>`、`>=`のいずれかの演算子を使って、パラメーターを値と比較します。データでは、これらは`pc.ANIM_EQUAL_TO`、`pc.ANIM_NOT_EQUAL_TO`、`pc.ANIM_LESS_THAN`、`pc.ANIM_LESS_THAN_EQUAL_TO`、`pc.ANIM_GREATER_THAN`、`pc.ANIM_GREATER_THAN_EQUAL_TO`です。
+
+## ステートグラフの構築 {#building-a-state-graph}
+
+上の画像のグラフを、エンジンが読み込むデータとして表すと次のようになります。エディターでは、グラフエディターがこれと同じデータを作成します。
+
+```javascript
+const stateGraph = {
+    layers: [{
+        name: 'Base',
+        states: [
+            { name: 'START' },
+            { name: 'Idle', loop: true, defaultState: true },
+            { name: 'Walk', loop: true },
+            { name: 'Jump', loop: false },
+            { name: 'ANY' },
+            { name: 'END' }
+        ],
+        transitions: [
+            { from: 'START', to: 'Idle' },
+            { from: 'Idle', to: 'Walk', time: 0.2, conditions: [{ parameterName: 'speed', predicate: pc.ANIM_GREATER_THAN, value: 0.5 }] },
+            { from: 'Walk', to: 'Idle', time: 0.2, conditions: [{ parameterName: 'speed', predicate: pc.ANIM_LESS_THAN_EQUAL_TO, value: 0.5 }] },
+            { from: 'ANY', to: 'Jump', time: 0.1, conditions: [{ parameterName: 'jump', predicate: pc.ANIM_EQUAL_TO, value: true }] },
+            { from: 'Jump', to: 'END', time: 0.2, exitTime: 1 }
+        ]
+    }],
+    parameters: {
+        speed: { name: 'speed', type: pc.ANIM_PARAMETER_FLOAT, value: 0 },
+        jump: { name: 'jump', type: pc.ANIM_PARAMETER_TRIGGER, value: false }
+    }
 };
 ```
 
-あなたが[レイヤーをマスクする](anim-layer-masking.md)場合、モデルの骨の一部のみを制御するアニメーションをブレンドするために、レイヤーの`blend type`を`Additive`に設定することができます。上記のようにリアルタイムで`blend weight`を更新することで、異なるレイヤーのアニメーション間でスムーズなブレンドを作成することができます。これは特に、上半身と下半身で異なるアクションを行う必要があるキャラクターのアニメーションに非常に役立ちます。例えば、キャラクターの上半身に`shooting`アニメーションをブレンドインとブレンドアウトさせる一方で、下半身を`walking`や`running`などのさまざまな移動アニメーションにフリーにすることができます。
+<Tabs groupId="workflow" defaultValue="engine">
+<TabItem value="engine" label="Engine">
 
-`Overwrite`に設定されたレイヤーは、そのレイヤーでアニメーション化されるモデルの骨のアニメーション値を完全に置き換えます。これらの場合、最終的なアニメーションを生成する際には、以前のレイヤーは考慮されません。
+グラフをコンポーネントに読み込み、レイヤーを通して各ステートをクリップに結び付けます。
+
+```javascript
+character.addComponent('anim', { activate: true });
+character.anim.loadStateGraph(stateGraph);
+
+const layer = character.anim.baseLayer;
+layer.assignAnimation('Idle', idleTrack);
+layer.assignAnimation('Walk', walkTrack);
+layer.assignAnimation('Jump', jumpTrack);
+```
+
+すべてのステートにクリップがそろうと、再生が始まります。
+
+:::caution
+
+レイヤーの`assignAnimation()`は、グラフが各ステートに与えた速度とループの設定を保持します。コンポーネント自体の`entity.anim.assignAnimation()`は、それらを引数の値で置き換えます。引数のデフォルトは速度1でループありなので、こちらを使うと上のJumpはループしてしまいます。必要な値を渡すか、レイヤーを通して割り当ててください。
+
+:::
+
+</TabItem>
+<TabItem value="editor" label="Editor">
+
+1. アセットパネルで **+** をクリックし、**Anim State Graph**を選択します。新しいアセットを選択すると、グラフエディターが開きます。
+2. ステートごとに、空のキャンバスを右クリックして**Add new state**を選択し、インスペクターでその**Name**、**Speed**、**Loop**を設定します。左側のレイヤーの設定で**Default State**を選択します。
+3. ステートを右クリックして**Add transition**を選択し、遷移先のステートをクリックします。遷移の矢印を選択して**Duration**、**Offset**、**Interruption Source**を設定し、**Has Exit Time**をオンにして**Exit Time**を指定し、**New Condition**で条件を追加します。同じ2つのステートの間に複数の遷移がある場合は、ここでドラッグして優先度の順に並べ替えます。
+4. 左側の **+ PARAMETER** でパラメーターを追加します。
+5. エンティティのAnimコンポーネントを選択し、その**State Graph**としてアセットを選び、各ステートのスロットにアニメーションアセットをドラッグします。
+
+![エディターのグラフエディター。左側にSTART、ANY、END、遷移でつながったIdle、Walk、Jumpの各ステート、そしてレイヤーとパラメーターのパネルが表示されています](/img/user-manual/animation/state-graph-editor.png)
+
+</TabItem>
+<TabItem value="react" label="React">
+
+モデルの`<Entity>`の中で`<Anim playing />`の後に置いた独自のコンポーネントから、グラフとクリップをエンジンのコンポーネントに読み込みます。
+
+```jsx
+import { useEffect } from 'react';
+import { useParent } from '@playcanvas/react/hooks';
+
+function Locomotion({ tracks }) {
+  const entity = useParent();
+
+  useEffect(() => {
+    entity.anim.loadStateGraph(stateGraph);
+    entity.anim.baseLayer.assignAnimation('Idle', tracks.idle);
+    entity.anim.baseLayer.assignAnimation('Walk', tracks.walk);
+    entity.anim.baseLayer.assignAnimation('Jump', tracks.jump);
+  }, [entity, tracks]);
+
+  return null;
+}
+```
+
+</TabItem>
+<TabItem value="web-components" label="Web Components">
+
+[`<pc-anim>`](/user-manual/web-components/tags/pc-anim/)はステートグラフなしでクリップを再生し、クリップが変わるとそのコンポーネントのグラフを置き換えます。ステートグラフを使う場合はこのタグを使わず、コードからモデルのエンティティにAnimコンポーネントを追加します。
+
+```html
+<pc-asset id="character" src="character.glb"></pc-asset>
+<pc-scene>
+    <pc-model name="character" asset="character"></pc-model>
+</pc-scene>
+
+<script type="module">
+    import { whenReady } from '@playcanvas/web-components';
+
+    const model = await whenReady('pc-model[name="character"]');
+    const container = document.getElementById('character').asset.resource;
+    const tracks = Object.fromEntries(container.animations.map(animation => [animation.resource.name, animation.resource]));
+
+    model.entity.addComponent('anim', { activate: true });
+    model.entity.anim.loadStateGraph(stateGraph);
+    model.entity.anim.baseLayer.assignAnimation('Idle', tracks.idle);
+    model.entity.anim.baseLayer.assignAnimation('Walk', tracks.walk);
+    model.entity.anim.baseLayer.assignAnimation('Jump', tracks.jump);
+</script>
+```
+
+</TabItem>
+</Tabs>
+
+## ステートグラフの駆動 {#driving-a-state-graph}
+
+グラフを読み込んだら、ゲームの実行中に、入力、物理、ゲームロジックなど、パラメーターを決めるものからパラメーターを設定します。速度のように連続的に変化する値は毎フレーム設定し、トリガーはそのイベントが起きたときに設定します。
+
+<Tabs groupId="workflow" defaultValue="engine">
+<TabItem value="engine" label="Engine">
+
+```javascript
+app.on('update', () => {
+    character.anim.setFloat('speed', velocity.length());
+});
+app.keyboard.on('keydown', (event) => {
+    if (event.key === pc.KEY_SPACE) character.anim.setTrigger('jump');
+});
+```
+
+</TabItem>
+<TabItem value="editor" label="Editor">
+
+エンティティのスクリプトからパラメーターを設定します。
+
+```javascript
+import { KEY_SPACE, KEY_UP, Script } from 'playcanvas';
+
+export class CharacterAnimation extends Script {
+    static scriptName = 'characterAnimation';
+
+    update(dt) {
+        const moving = this.app.keyboard.isPressed(KEY_UP);
+        this.entity.anim.setFloat('speed', moving ? 1 : 0);
+
+        if (this.app.keyboard.wasPressed(KEY_SPACE)) {
+            this.entity.anim.setTrigger('jump');
+        }
+    }
+}
+```
+
+</TabItem>
+<TabItem value="react" label="React">
+
+propが変わったときにパラメーターを設定します。
+
+```jsx
+function Speed({ value }) {
+  const entity = useParent();
+
+  useEffect(() => {
+    entity.anim.setFloat('speed', value);
+  }, [entity, value]);
+
+  return null;
+}
+```
+
+</TabItem>
+<TabItem value="web-components" label="Web Components">
+
+```javascript
+document.getElementById('jump-button').addEventListener('click', () => {
+    model.entity.anim.setTrigger('jump');
+});
+```
+
+</TabItem>
+</Tabs>
+
+グラフが今どこにあるかを読み取るために、レイヤーには、アクティブなステートの名前である`activeState`のほか、`previousState`と`transitioning`があります。パラメーターの値は、`getFloat()`、`getInteger()`、`getBoolean()`、`getTrigger()`で読み戻せます。
+
+:::ai
+複雑なグラフでは、AIアシスタントに[**Editor MCP Server**](/user-manual/editor/mcp-server/)を通して依頼し、うまくいかない遷移を、その条件、パラメーター、スクリプト、Animのマッピングにわたって追跡させてから、Launcherで再現させます。
+:::
+
+## 例 {#example}
+
+このエンジンアプリは、ロボットアームにステートグラフを与えます。アームは`work`トリガーが設定されるまで待機します。トリガーが設定されると、何かを拾い上げて置き、待機に戻ります。サイクルの各ステップはループしないステートで、終了時間1の遷移によってそのステートを離れます。キャンバスをクリックするとトリガーが設定されます。
+
+```js live-example
+import * as pc from 'playcanvas';
+
+// 使用するコンポーネントシステムとリソースハンドラーを指定してアプリケーションを作成します
+const canvas = document.getElementById('application');
+const device = await pc.createGraphicsDevice(canvas, {
+    deviceTypes: [pc.DEVICETYPE_WEBGPU]
+});
+device.maxPixelRatio = Math.min(window.devicePixelRatio, 2);
+
+const options = new pc.AppOptions();
+options.graphicsDevice = device;
+options.componentSystems = [
+    pc.RenderComponentSystem,
+    pc.CameraComponentSystem,
+    pc.LightComponentSystem,
+    pc.AnimComponentSystem
+];
+options.resourceHandlers = [pc.ContainerHandler, pc.TextureHandler];
+
+const app = new pc.AppBase(canvas);
+app.init(options);
+app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
+app.setCanvasResolution(pc.RESOLUTION_AUTO);
+window.addEventListener('resize', () => app.resizeCanvas());
+app.start();
+
+app.scene.ambientLight = new pc.Color(0.35, 0.35, 0.4);
+
+// 5つのアニメーションを含むGLBのロボットアームを読み込みます
+const asset = new pc.Asset('robot-arm', 'container', {
+    url: 'https://developer.playcanvas.com/assets/robot-arm.glb'
+});
+await new Promise((resolve) => {
+    asset.ready(resolve);
+    app.assets.add(asset);
+    app.assets.load(asset);
+});
+
+const camera = new pc.Entity('camera');
+camera.addComponent('camera', {
+    clearColor: new pc.Color(0.11, 0.12, 0.17)
+});
+camera.setPosition(1.75, 1.4, 2.15);
+camera.lookAt(0, 0.75, 0);
+app.root.addChild(camera);
+
+const light = new pc.Entity('light');
+light.addComponent('light', {
+    castShadows: true,
+    shadowBias: 0.2,
+    normalOffsetBias: 0.05
+});
+light.setEulerAngles(48, 38, 0);
+app.root.addChild(light);
+
+const floor = new pc.Entity('floor');
+const floorMaterial = new pc.StandardMaterial();
+floorMaterial.diffuse = new pc.Color(0.24, 0.26, 0.31);
+floorMaterial.update();
+floor.addComponent('render', { type: 'plane', material: floorMaterial });
+floor.setLocalScale(20, 1, 20);
+app.root.addChild(floor);
+
+// アームのエンティティを作成し、そのルートにAnimコンポーネントを追加します
+const arm = asset.resource.instantiateRenderEntity({ castShadows: true });
+arm.addComponent('anim', { activate: true });
+app.root.addChild(arm);
+
+// アームは作業を指示されるまで待機し、指示されると拾い上げて置き、待機に戻ります
+arm.anim.loadStateGraph({
+    layers: [{
+        name: 'Base',
+        states: [
+            { name: 'START' },
+            { name: 'Idle', loop: true },
+            { name: 'Pick', loop: false },
+            { name: 'Place', loop: false }
+        ],
+        transitions: [
+            { from: 'START', to: 'Idle' },
+            // workトリガーがサイクルを開始し、この遷移に使われるとリセットされます
+            { from: 'Idle', to: 'Pick', time: 0.4, conditions: [{ parameterName: 'work', predicate: pc.ANIM_EQUAL_TO, value: true }] },
+            // クリップを最後まで再生したら、次のクリップにクロスフェードします
+            { from: 'Pick', to: 'Place', time: 0.4, exitTime: 1 },
+            { from: 'Place', to: 'Idle', time: 0.4, exitTime: 1 }
+        ]
+    }],
+    parameters: {
+        work: { name: 'work', type: pc.ANIM_PARAMETER_TRIGGER, value: false }
+    }
+});
+
+// グラフが与えた速度とループの設定を保ったまま、各ステートをGLBのアニメーションに結び付けます
+const tracks = Object.fromEntries(asset.resource.animations.map(animation => [animation.resource.name, animation.resource]));
+arm.anim.baseLayer.assignAnimation('Idle', tracks.idle);
+arm.anim.baseLayer.assignAnimation('Pick', tracks.pick);
+arm.anim.baseLayer.assignAnimation('Place', tracks.place);
+
+// クリックでトリガーを設定します
+canvas.addEventListener('click', () => {
+    arm.anim.setTrigger('work');
+});
+
+const label = document.createElement('div');
+label.style.cssText = 'position: absolute; left: 12px; bottom: 10px; color: #ccc; font: 14px sans-serif;';
+document.body.appendChild(label);
+app.on('update', () => {
+    label.textContent = `State: ${arm.anim.baseLayer.activeState}. Click to start a work cycle.`;
+});
+```
+
+次のことを試してみてください。
+
+- サイクルの途中でもう一度クリックします。トリガーはアームがIdleに戻るまで設定されたままなので、すぐに次のサイクルが始まります。
+- Pickからの遷移の終了時間を`0.5`に変更すると、アームは拾い上げ終わる前に置く動作に移ります。
+- アームの`inspect`クリップを使う`inspect`ステートを追加し、PlaceからIdleではなくそのステートへ遷移させます。
+
+Locomotionのサンプルは、`speed`の整数パラメーターと、ANYから遷移する`jump`トリガーで、キャラクターのステートグラフを動かします。サンプルブラウザで床をクリックすると、キャラクターがそこまで歩きます。コントロールパネルでRunをオンにすると走って移動し、Jumpを押すといつでもジャンプします。
+
+<EngineExample id="animation/locomotion" title="Locomotion" controls />
+
+## 関連情報 {#see-also}
+
+- [ブレンドツリー](/user-manual/animation/blend-trees/) - 複数のクリップをブレンドするステート
+- [レイヤーとマスク](/user-manual/animation/anim-layer-masking/) - 1つのモデルで複数のステートグラフを使う
+- [Anim State Graph Blending](/tutorials/anim-blending/) - エディターでブレンドするステートグラフを構築するチュートリアル
+- [Animコンポーネント](/user-manual/editor/scenes/components/anim/) - エディターでステートグラフのステートをクリップに結び付ける
+- [AnimComponent](https://api.playcanvas.com/engine/classes/AnimComponent.html)と[AnimComponentLayer](https://api.playcanvas.com/engine/classes/AnimComponentLayer.html) - エンジンのAPIリファレンス
