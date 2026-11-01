@@ -92,4 +92,4 @@ camera.camera.sensitivity = 1000;   // ISO — 高いほど露出は多くなり
 
 エンジンの物理ライト単位のサンプルで実際の動作を確認できます:
 
-<EngineExample id="graphics/light-physical-units" title="Physical Light Units" />
+<EngineExample id="lights-and-shadows/light-physical-units" title="Physical Light Units" />
