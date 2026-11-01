@@ -15,6 +15,14 @@
     "message": "高度なレンダリング",
     "description": "The label for category Advanced Rendering in sidebar userManualSidebar"
   },
+  "sidebar.userManualSidebar.category.Frame Graph": {
+    "message": "フレームグラフ",
+    "description": "The label for category Frame Graph in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Render Passes": {
+    "message": "レンダーパス",
+    "description": "The label for category Render Passes in sidebar userManualSidebar"
+  },
   "sidebar.userManualSidebar.category.2D": {
     "message": "2D",
     "description": "The label for category 2D in sidebar userManualSidebar"
