@@ -226,7 +226,7 @@ Use this index to write code against the engine directly. React, Web Components 
 
 ## Examples and scripts
 
-- [Engine Examples Browser](https://playcanvas.com/examples): Hundreds of live examples by category, including animation, cameras, compute, Gaussian splatting, graphics, input, loaders, materials, physics, shaders, sound, user interface and XR. The source of each is at `https://github.com/playcanvas/engine/blob/main/examples/src/examples/<category>/<name>.example.mjs`: read it and port what you need rather than importing it.
+- [Engine Examples Browser](https://playcanvas.com/examples): Hundreds of live examples by category, including animation, cameras, compute, Gaussian splatting, graphics, input, loaders, materials, physics, shaders, sound, user interface and XR. The source of each is at `https://github.com/playcanvas/engine/blob/main/examples/src/examples/<category>/<name>/example.mjs`, next to the files it imports: read it and port what you need rather than importing it.
 - [Engine scripts](https://github.com/playcanvas/engine/tree/main/scripts/esm): Production `Script` classes shipped in the npm package under `playcanvas/scripts/esm/`: camera controls, first- and third-person controllers, CameraFrame post-processing, planar reflections, a shadow catcher, a reference grid, a procedural sky, annotations, XR helpers and Gaussian splat effects.
 
 ## Optional
