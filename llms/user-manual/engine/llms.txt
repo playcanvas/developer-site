@@ -1,5 +1,5 @@
 ---
-covers: [engine, ecs, scripting, assets, graphics, gaussian-splatting, physics, animation, user-interface, xr, optimization, 2D]
+covers: [engine, ecs, scripting, assets, graphics, gaussian-splatting, physics, animation, user-interface, xr, debugging, optimization, 2D]
 ---
 # PlayCanvas Engine
 
@@ -52,7 +52,8 @@ Use this index to write code against the engine directly. React, Web Components 
 - [Events](/user-manual/scripting/events/): Communicating between scripts with `on`, `once`, `off` and `fire`.
 - [Application Lifecycle](/user-manual/scripting/application-lifecycle/): The order in which an application initializes and runs its update loop.
 - [Migration Guide](/user-manual/scripting/migration-guide/): Converting classic scripts to ESM scripts step by step.
-- [Debugging](/user-manual/scripting/debugging/): Finding script bugs with the browser's developer tools.
+- [Debugging](/user-manual/debugging/): Finding bugs with logging, the browser's developer tools, the Inspector and debug drawing.
+- [Inspector](/user-manual/debugging/inspector/): A debug panel for the running application: its entities, cameras, assets, frame graph, GPU resources and scripts, and stepping through the draws of a frame.
 
 ## Assets
 
@@ -186,8 +187,10 @@ Use this index to write code against the engine directly. React, Web Components 
 - [Platforms](/user-manual/xr/platforms/): Tested devices and browsers for VR, AR and each capability.
 - [Optimizing WebXR Applications](/user-manual/xr/optimizing-webxr/): Keeping the frame rate up despite stereo rendering, draw calls and AR tracking costs.
 
-## Optimization
+## Debugging and Optimization
 
+- [Debugging and Optimization](/user-manual/optimization/): Which tool to use to debug and profile an application, and the goals of optimizing it.
+- [Inspector Performance](/user-manual/optimization/inspector-performance/): Recording frames with the Inspector: frame, CPU, GPU and script times, loading and the start of the application, counters, and each frame on a timeline.
 - [General Guidelines](/user-manual/optimization/guidelines/): Tuning scripts, draw calls, batching, shaders, lighting, textures and post effects.
 - [Optimizing Load Time](/user-manual/optimization/load-time/): Image formats, texture sizes, preloading, asset audits, compression and staged loading.
 - [Texture Compression](/user-manual/optimization/texture-compression/): Reducing GPU memory and download size with Basis compressed textures.

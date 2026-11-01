@@ -85,7 +85,7 @@ To publish an Editor project as a Web Lens instead, see [Snapchat Web Lenses](/u
 
 ## Debug with the Inspector
 
-The development server loads the [Inspector](/user-manual/scripting/debugging/inspector/) for the running application. Press the backquote key (`` ` ``) to show or hide it, <kbd>F9</kbd> to pause, and <kbd>F10</kbd> to step one frame. Production builds do not include the Inspector.
+The development server loads the [Inspector](/user-manual/debugging/inspector/) for the running application. Press the backquote key (`` ` ``) to show or hide it, <kbd>F9</kbd> to pause, and <kbd>F10</kbd> to step one frame. Production builds do not include the Inspector.
 
 ## Skip the Prompts
 

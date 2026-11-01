@@ -757,19 +757,8 @@ const sidebars = {
         },
         'user-manual/scripting/engine-api',
         'user-manual/scripting/events',
-        {
-          type: 'category',
-          label: 'Debugging',
-          link: {
-            type: 'doc',
-            id: 'user-manual/scripting/debugging/index',
-          },
-          items: [
-            'user-manual/scripting/debugging/console-logging',
-            'user-manual/scripting/debugging/browser-dev-tools',
-            'user-manual/scripting/debugging/inspector'
-          ],
-        },
+        // the debugging of scripts is part of Debugging and Optimization, linked from here
+        { type: 'ref', id: 'user-manual/debugging/index', label: 'Debugging' },
         'user-manual/scripting/migration-guide'
       ],
     },
@@ -1219,22 +1208,48 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'Optimization',
+      label: 'Debugging and Optimization',
       link: {
         type: 'doc',
         id: 'user-manual/optimization/index',
       },
       items: [
-        'user-manual/optimization/guidelines',
-        'user-manual/optimization/texture-compression',
-        'user-manual/optimization/mini-stats',
-        'user-manual/optimization/app-stats',
-        'user-manual/optimization/profiler',
-        'user-manual/optimization/gpu-profiling',
-        'user-manual/optimization/runtime-devicepixelratio',
-        'user-manual/optimization/load-time',
-        'user-manual/optimization/optimizing-scene-format',
-        'user-manual/optimization/troubleshooting-performance',
+        {
+          type: 'category',
+          label: 'Debugging',
+          link: {
+            type: 'doc',
+            id: 'user-manual/debugging/index',
+          },
+          items: [
+            'user-manual/debugging/console-logging',
+            'user-manual/debugging/browser-dev-tools',
+            'user-manual/debugging/inspector',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Profiling',
+          items: [
+            'user-manual/optimization/mini-stats',
+            'user-manual/optimization/app-stats',
+            'user-manual/optimization/inspector-performance',
+            'user-manual/optimization/profiler',
+            'user-manual/optimization/gpu-profiling',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Optimization',
+          items: [
+            'user-manual/optimization/guidelines',
+            'user-manual/optimization/texture-compression',
+            'user-manual/optimization/runtime-devicepixelratio',
+            'user-manual/optimization/load-time',
+            'user-manual/optimization/optimizing-scene-format',
+            'user-manual/optimization/troubleshooting-performance',
+          ],
+        },
       ],
     },
     sectionHeader('Foundational APIs'),
