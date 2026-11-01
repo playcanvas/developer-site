@@ -594,7 +594,7 @@ Because your app runs in a web page, you can also build any part of the interfac
 | `animator.SetFloat("Speed", 2f)` | `entity.anim.setFloat('Speed', 2)` |
 | `SetBool`, `SetInteger`, `SetTrigger` | `setBoolean`, `setInteger`, `setTrigger` |
 | Avatar Mask | [Layer mask](/user-manual/animation/anim-layer-masking/) |
-| Blend Tree | Blend trees (1D, 2D and direct), in state graphs created from code. The Editor's state graph editor has none. |
+| Blend Tree | [Blend trees](/user-manual/animation/blend-trees/) (1D, 2D and direct), in state graphs created from code. The Editor's state graph editor has none. |
 | Root Motion | None. Move the entity from a script. |
 | Animation Events | [Anim events](/user-manual/animation/anim-events/) on the animation asset |
 | Animator Override Controller | One anim state graph, with different animation assets assigned to its states on each entity |

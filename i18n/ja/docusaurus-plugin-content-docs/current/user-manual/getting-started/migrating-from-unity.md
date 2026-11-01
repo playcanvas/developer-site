@@ -594,7 +594,7 @@ PlayCanvasのキャンバス内UIは、UnityのUI（uGUI）とほぼ同じよう
 | `animator.SetFloat("Speed", 2f)` | `entity.anim.setFloat('Speed', 2)` |
 | `SetBool`、`SetInteger`、`SetTrigger` | `setBoolean`、`setInteger`、`setTrigger` |
 | Avatar Mask | [レイヤーマスク](/user-manual/animation/anim-layer-masking/) |
-| Blend Tree | コードで作成したステートグラフでのブレンドツリー（1D、2D、Direct）。エディターのステートグラフエディターにはありません。 |
+| Blend Tree | コードで作成したステートグラフでの[ブレンドツリー](/user-manual/animation/blend-trees/)（1D、2D、Direct）。エディターのステートグラフエディターにはありません。 |
 | Root Motion | なし。スクリプトでエンティティを動かします。 |
 | Animation Event | アニメーションアセットの[Animイベント](/user-manual/animation/anim-events/) |
 | Animator Override Controller | 1つのanim state graphを使い、エンティティごとに異なるアニメーションアセットをステートに割り当てる |

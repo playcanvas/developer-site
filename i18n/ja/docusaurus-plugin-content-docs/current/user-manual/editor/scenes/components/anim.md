@@ -23,7 +23,7 @@ Animstategraphアセットを選択すると、Animコンポーネントにレ�
 
 ![Anim Component With Graph](/img/user-manual/animation/anim-component-with-graph.png)
 
-複数のAnimコンポーネントが同じAnimstategraphアセットを使用でき、それぞれが独自のアニメーションアセットセットを持つことができます。すべてのアニメーションステートスロットが埋められると、Animコンポーネントは再生可能になります。アニメーションはスクリプトで`entity.anim.playing = true`を呼び出すか、Activateオプションが有効な場合は自動的に再生できます。
+複数のAnimコンポーネントが同じAnimstategraphアセットを使用でき、それぞれが独自のアニメーションアセットセットを持つことができます。すべてのアニメーションステートスロットが埋められると、Animコンポーネントは再生可能になります。Activateオプションが有効な場合、アニメーションは自動的に再生されます。無効な場合は、スクリプトで`entity.anim.playing = true`を設定し、`entity.anim.baseLayer.play()`のように各レイヤーの`play()`を呼び出して再生を開始します。
 
 ## レイヤーマスク
 

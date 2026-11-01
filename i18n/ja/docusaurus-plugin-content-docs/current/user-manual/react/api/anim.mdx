@@ -21,11 +21,15 @@ const AnimatingDinosaur = (props) => {
   return (
     <Entity {...props}>
       <Render type="asset" asset={asset} />
-      <Anim asset={asset} clip="Walk" loop />
+      <Anim asset={asset} playing />
     </Entity>
   )
 }
 ```
+
+Asset を指定すると、`<Anim>` はそのアニメーションをすべて 1 つのステートに入れるため、アニメーションが複数ある場合は最後のものだけが再生されます。クリップを名前で再生する方法や、ステートグラフ、レイヤー、イベントの使い方は、[アニメーション](/user-manual/animation/)セクションを参照してください。
+
+`playing` は必ず指定してください。`<Anim>` はレンダリングされるたびにすべての props をエンジンのコンポーネントに設定し、`playing` のデフォルトは `false` です。指定しないと、コンポーネントが再びレンダリングされた時点でアニメーションが止まります。
 
 PlayCanvas ドキュメントの [Anim Component](https://api.playcanvas.com/engine/classes/AnimComponent.html) で詳細を確認できます。
 
