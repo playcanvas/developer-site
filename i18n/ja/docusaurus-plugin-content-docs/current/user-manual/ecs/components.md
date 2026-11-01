@@ -35,7 +35,7 @@ import TabItem from '@theme/TabItem';
 | [`scrollbar`](https://api.playcanvas.com/engine/classes/ScrollbarComponent.html) | [Scrollbar](/user-manual/editor/scenes/components/scrollbar/) | - | [`<pc-scrollbar>`](/user-manual/web-components/tags/pc-scrollbar/) | スクロールビュー用のスクロールバーです |
 | [`scrollview`](https://api.playcanvas.com/engine/classes/ScrollViewComponent.html) | [Scroll View](/user-manual/editor/scenes/components/scrollview/) | - | [`<pc-scroll-view>`](/user-manual/web-components/tags/pc-scroll-view/) | スクロールできるユーザーインターフェースの領域です |
 | [`sound`](https://api.playcanvas.com/engine/classes/SoundComponent.html) | [Sound](/user-manual/editor/scenes/components/sound/) | - | [`<pc-sound>`](/user-manual/web-components/tags/pc-sound/) | サウンドを再生します。3D空間に配置することもできます |
-| [`sprite`](https://api.playcanvas.com/engine/classes/SpriteComponent.html) | [Sprite](/user-manual/editor/scenes/components/sprite/) | `<Sprite>` | - | [2Dスプライト](/user-manual/2D/)やスプライトアニメーションを描画します |
+| [`sprite`](https://api.playcanvas.com/engine/classes/SpriteComponent.html) | [Sprite](/user-manual/editor/scenes/components/sprite/) | `<Sprite>` | [`<pc-sprite>`](/user-manual/web-components/tags/pc-sprite/) | [2Dスプライト](/user-manual/2D/)やスプライトアニメーションを描画します |
 
 ReactとWeb Componentsは、ほとんどのアプリケーションが使うコンポーネントをラップしています。ダッシュはラッパーがないことを示しますが、[後述](#components-without-a-wrapper)のように、コードからエンジンのエンティティにそのコンポーネントを追加することはできます。
 

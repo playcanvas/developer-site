@@ -75,6 +75,8 @@ Direct children of `<pc-app>`, declared once and referenced by `id` from the tag
 | [`<pc-camera>`](pc-camera) | Defines a camera that is used to render the scene. |
 | [`<pc-light>`](pc-light) | Defines a directional, omni or spot light, with optional shadows. |
 | [`<pc-render>`](pc-render) | Defines a render component that draws a primitive shape with a material. |
+| [`<pc-sprite>`](pc-sprite) | Defines a sprite component that draws a 2D sprite, still or animated. |
+| [`<pc-sprite-clip>`](pc-sprite-clip) | Defines a single animation clip assigned to a sprite component. |
 | [`<pc-gsplat>`](pc-gsplat) | Defines a gsplat component that renders 3D Gaussian Splats. |
 | [`<pc-particle-system>`](pc-particle-system) | Defines a particle system driven by a JSON configuration asset. |
 | [`<pc-sky>`](pc-sky) | Defines an image-based skybox. |
@@ -135,10 +137,10 @@ Drop the `pc-` prefix, drop the hyphens, and you have the engine's component id:
 
 :::
 
-A repeatable child takes its parent's tag as a prefix: [`<pc-anim-clip>`](pc-anim-clip) inside [`<pc-anim>`](pc-anim), [`<pc-sound-slot>`](pc-sound-slot) inside [`<pc-sound>`](pc-sound), [`<pc-script-instance>`](pc-script-instance) inside [`<pc-script>`](pc-script).
+A repeatable child takes its parent's tag as a prefix: [`<pc-anim-clip>`](pc-anim-clip) inside [`<pc-anim>`](pc-anim), [`<pc-sound-slot>`](pc-sound-slot) inside [`<pc-sound>`](pc-sound), [`<pc-sprite-clip>`](pc-sprite-clip) inside [`<pc-sprite>`](pc-sprite), [`<pc-script-instance>`](pc-script-instance) inside [`<pc-script>`](pc-script).
 
 Every tag except [`<pc-material>`](pc-material) initializes asynchronously and fires a `ready` event once it has, which is also when `whenReady()` resolves for it — see [The `ready` Event](../programmatic-access.md#the-ready-event) for the timing. The Events section on a tag's page lists only the events specific to that tag.
 
 ## All Tags A–Z {#all-tags-a-z}
 
-[`<pc-anim>`](pc-anim) · [`<pc-anim-clip>`](pc-anim-clip) · [`<pc-app>`](pc-app) · [`<pc-asset>`](pc-asset) · [`<pc-audio-listener>`](pc-audio-listener) · [`<pc-button>`](pc-button) · [`<pc-camera>`](pc-camera) · [`<pc-collision>`](pc-collision) · [`<pc-element>`](pc-element) · [`<pc-entity>`](pc-entity) · [`<pc-gsplat>`](pc-gsplat) · [`<pc-joint>`](pc-joint) · [`<pc-layout-child>`](pc-layout-child) · [`<pc-layout-group>`](pc-layout-group) · [`<pc-light>`](pc-light) · [`<pc-material>`](pc-material) · [`<pc-model>`](pc-model) · [`<pc-node>`](pc-node) · [`<pc-particle-system>`](pc-particle-system) · [`<pc-render>`](pc-render) · [`<pc-rigid-body>`](pc-rigid-body) · [`<pc-scene>`](pc-scene) · [`<pc-screen>`](pc-screen) · [`<pc-script>`](pc-script) · [`<pc-script-instance>`](pc-script-instance) · [`<pc-scrollbar>`](pc-scrollbar) · [`<pc-scroll-view>`](pc-scroll-view) · [`<pc-sky>`](pc-sky) · [`<pc-sound>`](pc-sound) · [`<pc-sound-slot>`](pc-sound-slot) · [`<pc-wasm>`](pc-wasm)
+[`<pc-anim>`](pc-anim) · [`<pc-anim-clip>`](pc-anim-clip) · [`<pc-app>`](pc-app) · [`<pc-asset>`](pc-asset) · [`<pc-audio-listener>`](pc-audio-listener) · [`<pc-button>`](pc-button) · [`<pc-camera>`](pc-camera) · [`<pc-collision>`](pc-collision) · [`<pc-element>`](pc-element) · [`<pc-entity>`](pc-entity) · [`<pc-gsplat>`](pc-gsplat) · [`<pc-joint>`](pc-joint) · [`<pc-layout-child>`](pc-layout-child) · [`<pc-layout-group>`](pc-layout-group) · [`<pc-light>`](pc-light) · [`<pc-material>`](pc-material) · [`<pc-model>`](pc-model) · [`<pc-node>`](pc-node) · [`<pc-particle-system>`](pc-particle-system) · [`<pc-render>`](pc-render) · [`<pc-rigid-body>`](pc-rigid-body) · [`<pc-scene>`](pc-scene) · [`<pc-screen>`](pc-screen) · [`<pc-script>`](pc-script) · [`<pc-script-instance>`](pc-script-instance) · [`<pc-scrollbar>`](pc-scrollbar) · [`<pc-scroll-view>`](pc-scroll-view) · [`<pc-sky>`](pc-sky) · [`<pc-sound>`](pc-sound) · [`<pc-sound-slot>`](pc-sound-slot) · [`<pc-sprite>`](pc-sprite) · [`<pc-sprite-clip>`](pc-sprite-clip) · [`<pc-wasm>`](pc-wasm)

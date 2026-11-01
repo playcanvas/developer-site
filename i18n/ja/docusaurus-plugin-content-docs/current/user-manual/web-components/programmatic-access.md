@@ -69,6 +69,7 @@ const { entity } = await whenReady('pc-entity[name="player"]');
 | [`<pc-scene>`](./tags/pc-scene.md) | `scene` | [`Scene`](https://api.playcanvas.com/engine/classes/Scene.html) |
 | [`<pc-script-instance>`](./tags/pc-script-instance.md) | `script` | [`Script`](https://api.playcanvas.com/engine/classes/Script.html) |
 | [`<pc-sound-slot>`](./tags/pc-sound-slot.md) | `soundSlot` | [`SoundSlot`](https://api.playcanvas.com/engine/classes/SoundSlot.html) |
+| [`<pc-sprite-clip>`](./tags/pc-sprite-clip.md) | `spriteAnimationClip` | [`SpriteAnimationClip`](https://api.playcanvas.com/engine/classes/SpriteAnimationClip.html) |
 | コンポーネントタグ (`<pc-camera>`、`<pc-light>` など) | `component` | 対応する [`Component`](https://api.playcanvas.com/engine/classes/Component.html) |
 
 これらのアクセサーはnull許容として型付けされています。要素の準備が完了するまでは `null` を返すことがあり、破棄された後は `null` を返します。先に準備完了を待つことが非nullの結果を保証しますが、例外が2つあります。エンティティがすでに同じ型のコンポーネントを持っているコンポーネント要素は、警告をログに出力してコンポーネントを得られないため、その `component` は `null` のままです。そして [`<pc-model>`](./tags/pc-model.md) の `contentEntity` もnull許容のままです。この要素の準備完了は `asset` の選択が決着したことを意味し、読み込みの失敗やassetが未指定の場合も含みます。そのため、ファイルが到達しない可能性がある場合は `contentEntity` を確認するか、要素の `error` イベントをリッスンしてください。ホストの `entity` はいずれの場合も起動時から非nullです。
