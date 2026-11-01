@@ -93,7 +93,7 @@ On macOS, use Cmd in place of Ctrl. Unity's View tool (Q) has no equivalent, bec
 | --- | --- | --- |
 | GameObject | [Entity](https://developer.playcanvas.com/user-manual/ecs/entities.md) | |
 | Component | [Component](https://developer.playcanvas.com/user-manual/ecs/components.md) | Components are properties of the entity: `entity.camera`, `entity.light`. |
-| Transform | Part of every entity | Entities have a position, rotation and scale of their own. See [Hierarchy & Transforms](https://developer.playcanvas.com/user-manual/ecs/hierarchy-and-transformations.md). |
+| Transform | Part of every entity | Entities have a position, rotation and scale of their own. See [Hierarchy and Transforms](https://developer.playcanvas.com/user-manual/ecs/hierarchy-and-transformations.md). |
 | MonoBehaviour | [Script](https://developer.playcanvas.com/user-manual/scripting.md) | Attached through an entity's Script component. |
 | Prefab | [Template](https://developer.playcanvas.com/user-manual/editor/templates.md) | See [Prefabs and Templates](https://developer.playcanvas.com/user-manual/getting-started/migrating-from-unity.md#prefabs-and-templates). |
 | Scene | [Scene](https://developer.playcanvas.com/user-manual/editor/scenes.md) | |

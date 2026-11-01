@@ -1048,23 +1048,162 @@ Call `jsdomSetup()` before you create your application. To load assets, also reg
 
 --------------------------------------------------------------------------------
 
-## Entity Component System (ECS)
+## Entity Component System
 
 URL: https://developer.playcanvas.com/user-manual/ecs/
 Markdown: https://developer.playcanvas.com/user-manual/ecs.md
 
-PlayCanvas uses an **Entity Component System (ECS)** to organize and manage the objects in your application.  
-In this design pattern:
+Everything in a PlayCanvas scene is an **entity**: the camera that views it, the lights that light it, every model, sound and piece of UI, and the objects of your game. On its own, an entity is a named point in space, with a position, a rotation and a scale, and a place in a hierarchy of other entities. **Components** give it abilities. A camera component makes it a camera, a render component draws a mesh at its position, a rigidbody component hands it to the physics engine, and a script component runs your own code on it. For each type of component, the application has one **system** that runs every component of that type.
 
-- **[Entities](https://api.playcanvas.com/engine/classes/Entity.html)** are containers — they hold components but have no behavior of their own.
-- **[Components](https://api.playcanvas.com/engine/classes/Component.html)** add functionality or data to an Entity.
-- **[Systems](https://api.playcanvas.com/engine/classes/ComponentSystem.html)** manage all instances of a given Component type.
+[Image: A tree of entities under app.root, camera, light and car with the car's body and wheel below it, with each entity's components in a row beside it. Each component sits in the column of its system in app.systems, so the render column holds the render components of the car, its body and its wheel]
 
-This approach provides:
+This pattern is called an Entity Component System, or ECS. You use it however you build: the Editor, React and Web Components all create the same entities and components as code written against the engine. Each page in this section explains a concept once and then shows how to apply it on each of those surfaces.
 
-- **Flexibility** — you can mix and match components to build complex behaviors.
-- **Modularity** — logic is encapsulated within components.
-- **Performance** — systems process components in efficient batches.
+## Entities
+
+An [entity](https://developer.playcanvas.com/user-manual/ecs/entities.md) is an object of the [`Entity`](https://api.playcanvas.com/engine/classes/Entity.html) class. It has a name and tags, which you can use to find it, and an enabled state, which switches it on and off together with everything below it. Its position, rotation and scale are relative to its parent, so moving an entity moves its children with it.
+
+The entities of a scene form a tree whose root is `app.root`. An entity joins the scene when you add it to that tree: until then, it is not drawn and its scripts do not run. See [Hierarchy and Transforms](https://developer.playcanvas.com/user-manual/ecs/hierarchy-and-transformations.md).
+
+## Components
+
+A [component](https://developer.playcanvas.com/user-manual/ecs/components.md) adds one ability to its entity, and holds the settings of that ability as properties, such as `entity.light.color` or `entity.camera.fov`. An entity has at most one component of each type. To give an object two lights, give it two child entities with a light each.
+
+The engine has around twenty types of component, covering cameras, lights, rendering, sound, physics, animation, particles and user interface. You do not write new types of component for your own behavior. Instead, you write [scripts](https://developer.playcanvas.com/user-manual/scripting.md), and the script component runs any number of them on its entity.
+
+## Systems
+
+Each type of component has a system, a [`ComponentSystem`](https://api.playcanvas.com/engine/classes/ComponentSystem.html) that creates, updates and destroys every component of that type and holds the settings they share. You rarely need a system directly. One exception is shared settings: `app.systems.rigidbody.gravity` is the gravity that pulls on every rigid body, for example.
+
+An application runs only the systems registered with it. [`pc.AppBase`](https://api.playcanvas.com/engine/classes/AppBase.html) starts with none, so you list the ones you use and a bundler can leave the rest out of your build. [`pc.Application`](https://api.playcanvas.com/engine/classes/Application.html) registers every built-in system, and so do the Editor, React and Web Components. See [Component Systems](https://developer.playcanvas.com/user-manual/ecs/components.md#component-systems).
+
+:::note
+
+If you come from Unity, entities are game objects and components are components: see [Migrating from Unity](https://developer.playcanvas.com/user-manual/getting-started/migrating-from-unity.md). If you come from a data-oriented ECS, such as Unity's DOTS or Bevy, note that PlayCanvas entities are objects in a scene graph rather than plain identifiers, and that components keep both their data and their behavior.
+
+:::
+
+## One Scene, Four Ways
+
+Here is a scene with three entities: a camera, a light and an orange box. The camera is raised and tilted down to look at the box, which is turned to show three of its sides.
+
+[Image: An orange box, turned to show its top and two of its sides, lit from the upper left against a dark background]
+
+**Engine**
+
+With an application set up as in [Using the Engine Standalone](https://developer.playcanvas.com/user-manual/engine/standalone.md), and the render, camera and light component systems registered:
+
+```javascript
+const camera = new pc.Entity('camera');
+camera.addComponent('camera', {
+    clearColor: new pc.Color(0.11, 0.12, 0.17)
+});
+camera.setPosition(0, 1.1, 3.2);
+camera.setEulerAngles(-20, 0, 0);
+app.root.addChild(camera);
+
+const light = new pc.Entity('light');
+light.addComponent('light');
+light.setEulerAngles(45, -30, 0);
+app.root.addChild(light);
+
+const material = new pc.StandardMaterial();
+material.diffuse = new pc.Color(1, 0.55, 0.2);
+material.update();
+
+const box = new pc.Entity('box');
+box.addComponent('render', { type: 'box', material: material });
+box.setEulerAngles(0, 35, 0);
+app.root.addChild(box);
+```
+
+**Editor**
+
+1. In the [Hierarchy](https://developer.playcanvas.com/user-manual/editor/interface/hierarchy.md), select the **Root** entity, click **+** and choose **Camera › Perspective**. In the [Inspector](https://developer.playcanvas.com/user-manual/editor/interface/inspector.md), set its **Position** to (0, 1.1, 3.2), its **Rotation** to (-20, 0, 0) and the camera component's **Clear Color** to a dark blue.
+2. Select **Root** again, click **+** and choose **Light › Directional Light**. Set its **Rotation** to (45, -30, 0).
+3. Select **Root** again, click **+** and choose **3D › Box**. Set its **Rotation** to (0, 35, 0).
+4. To color the box, create a [material](https://developer.playcanvas.com/user-manual/editor/assets/inspectors/material.md) with an orange **Diffuse** color and drag it from the Assets panel onto the box in the viewport.
+
+Each of these menu items creates an entity that already has the component its name says. Any entity can be given more components with the Inspector's **Add Component** button.
+
+**React**
+
+```jsx
+import { Application, Entity } from '@playcanvas/react';
+import { Camera, Light, Render } from '@playcanvas/react/components';
+import { useMaterial } from '@playcanvas/react/hooks';
+
+function Scene() {
+  const orange = useMaterial({ diffuse: '#ff8c33' });
+
+  return (
+    <>
+      <Entity name="camera" position={[0, 1.1, 3.2]} rotation={[-20, 0, 0]}>
+        <Camera clearColor="#1c1f2b" />
+      </Entity>
+      <Entity name="light" rotation={[45, -30, 0]}>
+        <Light type="directional" />
+      </Entity>
+      <Entity name="box" rotation={[0, 35, 0]}>
+        <Render type="box" material={orange} />
+      </Entity>
+    </>
+  );
+}
+
+export default function App() {
+  return (
+    <Application>
+      <Scene />
+    </Application>
+  );
+}
+```
+
+**Web Components**
+
+```html
+<pc-app>
+    <pc-material id="orange" diffuse="#ff8c33"></pc-material>
+    <pc-scene>
+        <pc-entity name="camera" position="0 1.1 3.2" rotation="-20 0 0">
+            <pc-camera clear-color="#1c1f2b"></pc-camera>
+        </pc-entity>
+        <pc-entity name="light" rotation="45 -30 0">
+            <pc-light></pc-light>
+        </pc-entity>
+        <pc-entity name="box" rotation="0 35 0">
+            <pc-render type="box" material="orange"></pc-render>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
+```
+
+Whichever way you build, the result is the same tree of entities under `app.root`, each with one component. The Editor, React and Web Components create these engine objects for you, and each gives you a way to reach them when you need to:
+
+| | Engine | Editor | React | Web Components |
+| --- | --- | --- | --- | --- |
+| An entity | `new pc.Entity('box')` | An item in the Hierarchy | `<Entity name="box">` | `<pc-entity name="box">` |
+| Its place in the tree | `parent.addChild(box)` | Drag it onto its parent in the Hierarchy | Nest it inside its parent's `<Entity>` | Nest it inside its parent's `<pc-entity>` |
+| A component | `box.addComponent('render', { type: 'box' })` | **Add Component** in the Inspector | `<Render type="box" />` inside the `<Entity>` | `<pc-render type="box">` inside the `<pc-entity>` |
+| A property | `box.render.castShadows = false` | A field in the Inspector | `castShadows={false}` | `cast-shadows="false"` |
+| Your own behavior | `box.addComponent('script').create(Spin)` | A script in a **Script** component | `<Script script={Spin} />` | `<pc-script-instance name="spin">` in a `<pc-script>` |
+| The engine entity, from your code | `box` | `this.entity` in a script on it | The `ref` of the `<Entity>` | The `entity` property of the `<pc-entity>` |
+
+## In This Section
+
+- [Entities](https://developer.playcanvas.com/user-manual/ecs/entities.md) - Creating, naming, enabling, destroying and copying entities.
+- [Components](https://developer.playcanvas.com/user-manual/ecs/components.md) - The built-in components, and adding, changing, disabling and removing them.
+- [Hierarchy and Transforms](https://developer.playcanvas.com/user-manual/ecs/hierarchy-and-transformations.md) - The coordinate system, local and world space, moving and rotating, and parenting.
+- [Finding Entities](https://developer.playcanvas.com/user-manual/ecs/searching-the-hierarchy.md) - Looking entities up by name, path, tag, component or script.
+
+## See Also
+
+- [Scripting](https://developer.playcanvas.com/user-manual/scripting.md) - Giving entities your own behavior
+- [Migrating from Unity](https://developer.playcanvas.com/user-manual/getting-started/migrating-from-unity.md) - How Unity's game objects, components and prefabs map to PlayCanvas
+- [Hierarchy Panel](https://developer.playcanvas.com/user-manual/editor/interface/hierarchy.md) and [Inspector Panel](https://developer.playcanvas.com/user-manual/editor/interface/inspector.md) - Working with entities and components in the Editor
+- [`<Entity/>`](https://developer.playcanvas.com/user-manual/react/api/entity.md) and [`<pc-entity>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md) - The React and Web Components entity references
+- [Entity](https://api.playcanvas.com/engine/classes/Entity.html), [Component](https://api.playcanvas.com/engine/classes/Component.html) and [ComponentSystem](https://api.playcanvas.com/engine/classes/ComponentSystem.html) - The engine API reference
 
 --------------------------------------------------------------------------------
 
@@ -1073,44 +1212,408 @@ This approach provides:
 URL: https://developer.playcanvas.com/user-manual/ecs/entities/
 Markdown: https://developer.playcanvas.com/user-manual/ecs/entities.md
 
-An **Entity** is the basic building block of your PlayCanvas scene ([`Entity`](https://api.playcanvas.com/engine/classes/Entity.html)).
+An entity is an object in your scene. It has a name, a position, rotation and scale, a parent and any number of children, and it gains abilities from the [components](https://developer.playcanvas.com/user-manual/ecs/components.md) attached to it. This page follows an entity through its life: creating it, finding a name and tags for it, switching it off and on, destroying it, and making copies of it.
 
-## Key characteristics
+## Creating an Entity
 
-- An Entity can have **zero or more components**.
-- Entities can be **parented** to form a hierarchy ([`addChild`](https://api.playcanvas.com/engine/classes/GraphNode.html#addchild), [`removeChild`](https://api.playcanvas.com/engine/classes/GraphNode.html#removechild)).
-- Entities can be **enabled** or **disabled** ([`enabled`](https://api.playcanvas.com/engine/classes/GraphNode.html#enabled)).
+An entity becomes part of the scene when it is added to the scene's tree of entities, whose root is `app.root`. Until then it is not drawn, its scripts do not run and its physics body, if it has one, is not simulated. Every entity can be the parent of others, so you can add a new entity to `app.root` or to any entity already in the scene.
 
-:::tip
-Keep Entities lightweight — avoid adding unnecessary components.
-:::
-
-## Creating an Entity in code
+**Engine**
 
 ```javascript
-const entity = new pc.Entity("MyEntity");
-app.root.addChild(entity);
+const player = new pc.Entity('player');
+app.root.addChild(player);
+
+// a child of the player
+const hat = new pc.Entity('hat');
+player.addChild(hat);
 ```
 
-## Enabling / Disabling Entities
+In a [script](https://developer.playcanvas.com/user-manual/scripting.md), the root is `this.app.root`, and `this.entity` is the entity that the script is attached to.
+
+**Editor**
+
+Click **+** at the top of the [Hierarchy](https://developer.playcanvas.com/user-manual/editor/interface/hierarchy.md), or right-click an entity and choose **New Entity**. The menu offers an empty **Entity** and ready-made ones, such as **3D › Box** and **Light › Spot Light**, that already have the components their names say. A new entity is added as a child of the selected entity, so select its parent first. Press **Ctrl+E** (**Cmd+E** on Mac) to add an empty entity without the menu.
+
+[Image: The Hierarchy panel, showing the Root entity at the top and nested entities below it, with the add, duplicate and delete buttons in its header]
+
+To create entities while the application runs, use the Engine API from a script.
+
+**React**
+
+```jsx
+import { Entity } from '@playcanvas/react';
+
+<Entity name="player">
+  <Entity name="hat" />
+</Entity>
+```
+
+Rendering an `<Entity>` creates an engine entity and adds it to the entity of the nearest enclosing `<Entity>`, or to `app.root` at the top level of the `<Application>`.
+
+**Web Components**
+
+```html
+<pc-scene>
+    <pc-entity name="player">
+        <pc-entity name="hat"></pc-entity>
+    </pc-entity>
+</pc-scene>
+```
+
+Each `<pc-entity>` creates an engine entity and adds it to the entity of the enclosing `<pc-entity>`, or to `app.root` directly inside the `<pc-scene>`. A `<pc-entity>` that you append at runtime is created as soon as it joins the document:
 
 ```javascript
-entity.enabled = false; // Disables the Entity and all its components
+const hat = document.createElement('pc-entity');
+hat.setAttribute('name', 'hat');
+document.querySelector('pc-entity[name="player"]').appendChild(hat);
 ```
 
-:::tip
-Disable Entities when not in use to reduce processing and improve performance.
-:::
+## Names and Tags
 
-## Lifecycle
+An entity's name identifies it for you. It shows in the Editor's Hierarchy, and you can look an entity up by it. Names do not have to be unique; an entity created without one is called `Untitled`.
 
-- **Creation** — [`Entity constructor`](https://api.playcanvas.com/engine/classes/Entity.html#constructor).
-- **Parenting** — [`addChild`](https://api.playcanvas.com/engine/classes/GraphNode.html#addchild) / [`removeChild`](https://api.playcanvas.com/engine/classes/GraphNode.html#removechild).
-- **Destruction** — [`destroy`](https://api.playcanvas.com/engine/classes/GraphNode.html#destroy).
+Tags are labels for groups of entities. An entity can have any number of them, and many entities can share one, so you can tag every enemy `enemy` and find them all at once. See [Finding Entities](https://developer.playcanvas.com/user-manual/ecs/searching-the-hierarchy.md#by-tag).
 
-:::tip
-When an Entity is no longer needed, call `destroy` to free resources and detach it from the hierarchy.
-:::
+**Engine**
+
+```javascript
+const enemy = new pc.Entity('goblin');
+enemy.tags.add('enemy', 'melee');
+
+enemy.name = 'goblin chief';
+enemy.tags.remove('melee');
+console.log(enemy.tags.list()); // ['enemy']
+```
+
+**Editor**
+
+Set an entity's **Name** and **Tags** at the top of the [Inspector](https://developer.playcanvas.com/user-manual/editor/interface/inspector.md). You can also rename the selected entity by pressing **F2**, or by double-clicking it in the Hierarchy.
+
+**React**
+
+`<Entity>` takes a `name` prop. Add tags to the engine entity through a ref:
+
+```jsx
+import { useEffect, useRef } from 'react';
+import { Entity } from '@playcanvas/react';
+
+function Goblin() {
+  const ref = useRef(null);
+
+  useEffect(() => {
+    ref.current.tags.add('enemy', 'melee');
+  }, []);
+
+  return <Entity ref={ref} name="goblin" />;
+}
+```
+
+**Web Components**
+
+```html
+<pc-entity name="goblin" tags="enemy, melee"></pc-entity>
+```
+
+The `tags` attribute is a comma-separated list.
+
+## Enabling and Disabling
+
+A disabled entity is switched off, together with everything below it in the hierarchy. Its components stop: it is not drawn, its scripts' `update` methods are not called, and its physics body leaves the simulation. They keep their settings, though, so enabling the entity again switches it back on as it was. Disable entities that you will need again, such as a menu that comes and goes, rather than destroying and recreating them.
+
+An entity's `enabled` property reports whether it is actually on, so it reads `false` while any of its ancestors is disabled, and for an entity that has not been added to the scene yet. Setting `enabled` to `true` under a disabled parent is remembered, and takes effect when the parent is enabled again.
+
+**Engine**
+
+```javascript
+door.enabled = false; // the door and all of its children switch off
+door.enabled = true;  // and back on
+```
+
+**Editor**
+
+Uncheck **Enabled** at the top of the Inspector, or right-click entities in the Hierarchy and choose **Disable**. The Hierarchy shows disabled entities grayed out. To change it at runtime, set `this.entity.enabled` from a script.
+
+**Hide** in the same menu is different: it hides the entity in your own viewport for the rest of the session, without changing the scene or the launched application.
+
+**React**
+
+`<Entity>` has no `enabled` prop. Stop rendering an entity to remove it, which destroys it; rendering it again creates a new one. To switch an entity off and keep it as it is, set `enabled` on the engine entity through a ref:
+
+```jsx
+import { useEffect, useRef } from 'react';
+import { Entity } from '@playcanvas/react';
+import { Render } from '@playcanvas/react/components';
+
+function Door({ open }) {
+  const ref = useRef(null);
+
+  useEffect(() => {
+    ref.current.enabled = !open;
+  }, [open]);
+
+  return (
+    <Entity ref={ref} name="door">
+      <Render type="box" />
+    </Entity>
+  );
+}
+```
+
+**Web Components**
+
+```html
+<pc-entity name="door" enabled="false">
+    <pc-render type="box"></pc-render>
+</pc-entity>
+```
+
+Change it at runtime with `door.setAttribute('enabled', 'true')`, or through the element's `enabled` property. That property reports the element's own setting, so it can read `true` while a parent entity is disabled.
+
+## Destroying an Entity
+
+Destroying an entity removes it from its parent, removes all of its components and destroys all of its descendants with it. Each entity fires a `destroy` event as it goes, the deepest descendants first. A destroyed entity cannot be used again, so drop any references you hold to it.
+
+Removing an entity from its parent with `removeChild()` is not the same thing, and does not switch it off. A detached entity stops being drawn, but its scripts keep running and its lights keep lighting the scene. To take an entity out of action, disable it. To get rid of it, destroy it.
+
+**Engine**
+
+```javascript
+enemy.once('destroy', () => {
+    console.log('enemy destroyed');
+});
+enemy.destroy();
+```
+
+**Editor**
+
+Select entities and press **Delete**, click the delete button at the top of the Hierarchy, or right-click and choose **Delete**. To destroy an entity at runtime, call `destroy()` on it from a script, for example `this.entity.destroy()`.
+
+**React**
+
+Stop rendering the `<Entity>`. When it unmounts, its engine entity is destroyed together with everything inside it:
+
+```jsx
+{alive && (
+  <Entity name="enemy">
+    <Render type="sphere" />
+  </Entity>
+)}
+```
+
+**Web Components**
+
+Remove the element. Its entity is destroyed together with the entities of every `<pc-entity>` inside it:
+
+```javascript
+document.querySelector('pc-entity[name="enemy"]').remove();
+```
+
+## Copying an Entity
+
+[`clone()`](https://api.playcanvas.com/engine/classes/Entity.html#clone) makes a deep copy of an entity: its name, tags, transform and enabled state, its components with their settings, and copies of all of its descendants. The copy is not in the scene until you add it. References between entities inside the copied tree are updated to point at the copies, so a button's image entity, for example, is the copy's own image.
+
+The scripts of a copy are new instances, which initialize when the copy joins the scene. Each one starts with the attribute values that the original script was created with, such as the ones set in the Editor, not with the current values of the original's fields.
+
+For objects you place many times, such as trees, pickups and enemies, the Editor has [templates](https://developer.playcanvas.com/user-manual/editor/templates.md): entity trees saved as assets, which you can place in scenes and also create at runtime.
+
+**Engine**
+
+```javascript
+const copy = enemy.clone();
+copy.setPosition(5, 0, 0);
+app.root.addChild(copy);
+```
+
+A copy can only get the scripts that are registered with the application. A script attached by class with `entity.script.create(MyScript)` is not registered automatically, so register it first, or the copy has no instance of it:
+
+```javascript
+app.scripts.add(MyScript);
+```
+
+**Editor**
+
+To copy entities in the scene, select them and press **Ctrl+D** (**Cmd+D** on Mac), or right-click and choose **Duplicate**. Each copy is placed next to its original.
+
+At runtime, call `clone()` on an entity in the scene, or create an instance of a template asset. A template needs to be loaded before you instantiate it, so mark its asset to preload, or [load it](https://developer.playcanvas.com/user-manual/assets/loading-unloading.md) first:
+
+```javascript
+import { Asset, Script } from 'playcanvas';
+
+export class Spawner extends Script {
+    static scriptName = 'spawner';
+
+    /**
+     * The template to spawn.
+     *
+     * @attribute
+     * @type {Asset}
+     * @resource template
+     */
+    template;
+
+    spawn() {
+        const instance = this.template.resource.instantiate();
+        instance.setPosition(0, 2, 0);
+        this.app.root.addChild(instance);
+    }
+}
+```
+
+**React**
+
+There is no need to copy entities: render the same component again. To create one entity for each item of your data, map over it, giving each `<Entity>` a stable `key`:
+
+```jsx
+{enemies.map(enemy => (
+  <Entity key={enemy.id} name="enemy" position={enemy.position}>
+    <Render type="sphere" />
+  </Entity>
+))}
+```
+
+**Web Components**
+
+Copy the element. Cloning a `<pc-entity>` element copies its markup, so the copy is created from its attributes and child tags, not from the current state of the original's entity:
+
+```javascript
+const enemy = document.querySelector('pc-entity[name="enemy"]');
+const copy = enemy.cloneNode(true);
+copy.setAttribute('position', '5 0 0');
+enemy.parentElement.appendChild(copy);
+```
+
+To declare a subtree once and stamp out copies of it, put it in a native `<template>` element. See [Reusable Scenes with Templates](https://developer.playcanvas.com/user-manual/web-components/templates.md).
+
+## Example
+
+This Engine app uses everything on this page. It builds one cube with a script that throws the cube up and destroys it once it falls out of view, and keeps that cube out of the scene as a template. Every frame, it adds copies of the template to a `fountain` entity. Click the canvas to disable the fountain: every cube in it disappears and freezes, because disabling an entity switches off its descendants. Click again, and they carry on from where they were.
+
+```js live-example
+import * as pc from 'playcanvas';
+
+// create the application with the component systems it uses
+const canvas = document.getElementById('application');
+const device = await pc.createGraphicsDevice(canvas, {
+    deviceTypes: [pc.DEVICETYPE_WEBGPU]
+});
+device.maxPixelRatio = Math.min(window.devicePixelRatio, 2);
+
+const options = new pc.AppOptions();
+options.graphicsDevice = device;
+options.componentSystems = [
+    pc.RenderComponentSystem,
+    pc.CameraComponentSystem,
+    pc.LightComponentSystem,
+    pc.ScriptComponentSystem
+];
+
+const app = new pc.AppBase(canvas);
+app.init(options);
+app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
+app.setCanvasResolution(pc.RESOLUTION_AUTO);
+window.addEventListener('resize', () => app.resizeCanvas());
+app.start();
+
+app.scene.ambientLight = new pc.Color(0.3, 0.3, 0.35);
+
+const camera = new pc.Entity('camera');
+camera.addComponent('camera', {
+    clearColor: new pc.Color(0.11, 0.12, 0.17)
+});
+camera.setPosition(0, 3, 14);
+camera.lookAt(0, 3, 0);
+app.root.addChild(camera);
+
+const light = new pc.Entity('light');
+light.addComponent('light');
+light.setEulerAngles(45, 30, 0);
+app.root.addChild(light);
+
+// three materials for the cubes to pick from
+const materials = [
+    new pc.Color(1, 0.55, 0.2),
+    new pc.Color(0.4, 0.2, 1),
+    new pc.Color(0.2, 0.8, 0.6)
+].map((color) => {
+    const material = new pc.StandardMaterial();
+    material.diffuse = color;
+    material.update();
+    return material;
+});
+
+// a script that throws its entity up, and destroys it once it falls out of view
+class Fall extends pc.Script {
+    static scriptName = 'fall';
+
+    velocity = new pc.Vec3();
+
+    initialize() {
+        this.velocity.set(pc.math.random(-2, 2), pc.math.random(8, 11), pc.math.random(-2, 2));
+        this.entity.render.material = materials[Math.floor(Math.random() * materials.length)];
+    }
+
+    update(dt) {
+        this.velocity.y -= 9.8 * dt;
+        this.entity.translate(this.velocity.x * dt, this.velocity.y * dt, this.velocity.z * dt);
+        this.entity.rotateLocal(120 * dt, 80 * dt, 0);
+        if (this.entity.getPosition().y < -4) {
+            this.entity.destroy();
+        }
+    }
+}
+
+// clone() can only copy scripts that are registered with the application
+app.scripts.add(Fall);
+
+// the template is never added to the scene, so it is never drawn and its script never runs
+const template = new pc.Entity('cube');
+template.addComponent('render', { type: 'box' });
+template.addComponent('script');
+template.script.create(Fall);
+template.setLocalScale(0.3, 0.3, 0.3);
+
+// the fountain holds every cube, so disabling it disables them all
+const fountain = new pc.Entity('fountain');
+app.root.addChild(fountain);
+
+const label = document.createElement('div');
+label.style.cssText = 'position: absolute; left: 12px; bottom: 10px; color: #ccc; font: 14px sans-serif;';
+document.body.appendChild(label);
+
+// every frame, while the fountain is enabled, add copies of the template to it
+let timer = 0;
+app.on('update', (dt) => {
+    if (fountain.enabled) {
+        timer += dt;
+        while (timer > 0.05) {
+            timer -= 0.05;
+            fountain.addChild(template.clone());
+        }
+    }
+    label.textContent = `Cubes: ${fountain.children.length}. Click to ${fountain.enabled ? 'disable' : 'enable'} the fountain.`;
+});
+
+// disable and enable the fountain, and with it every cube
+canvas.addEventListener('click', () => {
+    fountain.enabled = !fountain.enabled;
+});
+```
+
+Some things to try:
+
+- Make the fountain spray faster by lowering the `0.05` in both places it appears.
+- Scale the fountain up with `fountain.setLocalScale(2, 2, 2)`. Its cubes are its children, so they are drawn twice as large. They still fly the same paths, though, because `translate()` moves an entity in world space.
+- Delete the `app.scripts.add(Fall)` line. The copies then have no script, so they pile up in the middle, uncolored, and are never destroyed.
+
+## See Also
+
+- [Components](https://developer.playcanvas.com/user-manual/ecs/components.md) - Giving entities their abilities
+- [Hierarchy and Transforms](https://developer.playcanvas.com/user-manual/ecs/hierarchy-and-transformations.md) - Parents, children, and positioning entities
+- [Templates](https://developer.playcanvas.com/user-manual/editor/templates.md) - Reusable entity trees in the Editor
+- [Hierarchy Panel](https://developer.playcanvas.com/user-manual/editor/interface/hierarchy.md) - Creating, duplicating and organizing entities in the Editor
+- [`<Entity/>`](https://developer.playcanvas.com/user-manual/react/api/entity.md) and [`<pc-entity>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-entity.md) - The React and Web Components entity references
+- [Entity](https://api.playcanvas.com/engine/classes/Entity.html) and [GraphNode](https://api.playcanvas.com/engine/classes/GraphNode.html) - The engine API reference
 
 --------------------------------------------------------------------------------
 
@@ -1119,139 +1622,855 @@ When an Entity is no longer needed, call `destroy` to free resources and detach 
 URL: https://developer.playcanvas.com/user-manual/ecs/components/
 Markdown: https://developer.playcanvas.com/user-manual/ecs/components.md
 
-A **[`Component`](https://api.playcanvas.com/engine/classes/Component.html)** adds data and behavior to an Entity.
+A component gives an entity one ability. An entity with a camera component renders the scene, one with a light component lights it, and one with rigidbody and collision components falls, bounces and collides. Components hold the settings of their ability as properties, and an entity can have at most one component of each type.
 
-## Examples
+## Built-in Components
 
-- [`CameraComponent`](https://api.playcanvas.com/engine/classes/CameraComponent.html)
-- [`LightComponent`](https://api.playcanvas.com/engine/classes/LightComponent.html)
-- [`RenderComponent`](https://api.playcanvas.com/engine/classes/RenderComponent.html)
-- [`RigidBodyComponent`](https://api.playcanvas.com/engine/classes/RigidBodyComponent.html) & [`CollisionComponent`](https://api.playcanvas.com/engine/classes/CollisionComponent.html)
-- [`ScriptComponent`](https://api.playcanvas.com/engine/classes/ScriptComponent.html)
+Each name links to the component's reference on that surface. The engine name is the one you pass to `addComponent()`, and also the property that holds the component on its entity: `entity.camera`, `entity.rigidbody` and so on.
 
-:::tip
-Only add components you actually need, and remove unused ones to keep Entities lean.
-:::
+| Engine | Editor | React | Web Components | What it does |
+| --- | --- | --- | --- | --- |
+| [`anim`](https://api.playcanvas.com/engine/classes/AnimComponent.html) | [Anim](https://developer.playcanvas.com/user-manual/editor/scenes/components/anim.md) | [`<Anim>`](https://developer.playcanvas.com/user-manual/react/api/anim.md) | [`<pc-anim>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-anim.md) | Plays animations, blended by an [anim state graph](https://developer.playcanvas.com/user-manual/animation/anim-state-graph-assets.md) |
+| [`animation`](https://api.playcanvas.com/engine/classes/AnimationComponent.html) | [Animation](https://developer.playcanvas.com/user-manual/editor/scenes/components/animation.md) | - | - | Legacy: plays animation clips. Use Anim |
+| [`audiolistener`](https://api.playcanvas.com/engine/classes/AudioListenerComponent.html) | [Audio Listener](https://developer.playcanvas.com/user-manual/editor/scenes/components/audiolistener.md) | - | [`<pc-audio-listener>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-audio-listener.md) | The point that sounds are heard from |
+| [`button`](https://api.playcanvas.com/engine/classes/ButtonComponent.html) | [Button](https://developer.playcanvas.com/user-manual/editor/scenes/components/button.md) | - | [`<pc-button>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-button.md) | Makes a UI element respond to hovers and clicks |
+| [`camera`](https://api.playcanvas.com/engine/classes/CameraComponent.html) | [Camera](https://developer.playcanvas.com/user-manual/editor/scenes/components/camera.md) | [`<Camera>`](https://developer.playcanvas.com/user-manual/react/api/camera.md) | [`<pc-camera>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-camera.md) | Renders the scene from the entity's point of view |
+| [`collision`](https://api.playcanvas.com/engine/classes/CollisionComponent.html) | [Collision](https://developer.playcanvas.com/user-manual/editor/scenes/components/collision.md) | [`<Collision>`](https://developer.playcanvas.com/user-manual/react/api/collision.md) | [`<pc-collision>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-collision.md) | Gives a rigid body or trigger volume its [shape](https://developer.playcanvas.com/user-manual/physics/collision-shapes.md) |
+| [`element`](https://api.playcanvas.com/engine/classes/ElementComponent.html) | [Element](https://developer.playcanvas.com/user-manual/editor/scenes/components/element.md) | [`<Element>`](https://developer.playcanvas.com/user-manual/react/api/element.md) | [`<pc-element>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-element.md) | A rectangle of [user interface](https://developer.playcanvas.com/user-manual/user-interface.md): an image, text or group |
+| [`gsplat`](https://api.playcanvas.com/engine/classes/GSplatComponent.html) | [GSplat](https://developer.playcanvas.com/user-manual/editor/scenes/components/gsplat.md) | [`<GSplat>`](https://developer.playcanvas.com/user-manual/react/api/gsplat.md) | [`<pc-gsplat>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-gsplat.md) | Renders a [3D Gaussian splat](https://developer.playcanvas.com/user-manual/gaussian-splatting.md) |
+| [`joint`](https://api.playcanvas.com/engine/classes/JointComponent.html) | [Joint](https://developer.playcanvas.com/user-manual/editor/scenes/components/joint.md) | - | [`<pc-joint>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-joint.md) | Alpha: connects rigid bodies with a [joint](https://developer.playcanvas.com/user-manual/physics/joints.md) |
+| [`layoutchild`](https://api.playcanvas.com/engine/classes/LayoutChildComponent.html) | [Layout Child](https://developer.playcanvas.com/user-manual/editor/scenes/components/layoutchild.md) | - | [`<pc-layout-child>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-layout-child.md) | Overrides how a layout group sizes its element |
+| [`layoutgroup`](https://api.playcanvas.com/engine/classes/LayoutGroupComponent.html) | [Layout Group](https://developer.playcanvas.com/user-manual/editor/scenes/components/layoutgroup.md) | - | [`<pc-layout-group>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-layout-group.md) | Arranges child UI elements in rows, columns or grids |
+| [`light`](https://api.playcanvas.com/engine/classes/LightComponent.html) | [Light](https://developer.playcanvas.com/user-manual/editor/scenes/components/light.md) | [`<Light>`](https://developer.playcanvas.com/user-manual/react/api/light.md) | [`<pc-light>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-light.md) | A directional, omni or spot [light](https://developer.playcanvas.com/user-manual/graphics/lighting/lights.md) |
+| [`model`](https://api.playcanvas.com/engine/classes/ModelComponent.html) | [Model](https://developer.playcanvas.com/user-manual/editor/scenes/components/model.md) | - | - | Legacy: renders a model asset. Use Render |
+| [`particlesystem`](https://api.playcanvas.com/engine/classes/ParticleSystemComponent.html) | [Particle System](https://developer.playcanvas.com/user-manual/editor/scenes/components/particlesystem.md) | - | [`<pc-particle-system>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-particle-system.md) | Emits and draws [particles](https://developer.playcanvas.com/user-manual/graphics/particles.md) |
+| [`render`](https://api.playcanvas.com/engine/classes/RenderComponent.html) | [Render](https://developer.playcanvas.com/user-manual/editor/scenes/components/render.md) | [`<Render>`](https://developer.playcanvas.com/user-manual/react/api/render.md) | [`<pc-render>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-render.md) | Draws a primitive shape, or the meshes of a render asset |
+| [`rigidbody`](https://api.playcanvas.com/engine/classes/RigidBodyComponent.html) | [Rigid Body](https://developer.playcanvas.com/user-manual/editor/scenes/components/rigidbody.md) | [`<RigidBody>`](https://developer.playcanvas.com/user-manual/react/api/rigidbody.md) | [`<pc-rigid-body>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-rigid-body.md) | Hands the entity to the [physics](https://developer.playcanvas.com/user-manual/physics.md) simulation |
+| [`screen`](https://api.playcanvas.com/engine/classes/ScreenComponent.html) | [Screen](https://developer.playcanvas.com/user-manual/editor/scenes/components/screen.md) | [`<Screen>`](https://developer.playcanvas.com/user-manual/react/api/screen.md) | [`<pc-screen>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-screen.md) | The root of a [user interface](https://developer.playcanvas.com/user-manual/user-interface/screens.md) |
+| [`script`](https://api.playcanvas.com/engine/classes/ScriptComponent.html) | [Script](https://developer.playcanvas.com/user-manual/editor/scenes/components/script.md) | [`<Script>`](https://developer.playcanvas.com/user-manual/react/api/script.md) | [`<pc-script>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-script.md) | Runs your [scripts](https://developer.playcanvas.com/user-manual/scripting.md) on the entity |
+| [`scrollbar`](https://api.playcanvas.com/engine/classes/ScrollbarComponent.html) | [Scrollbar](https://developer.playcanvas.com/user-manual/editor/scenes/components/scrollbar.md) | - | [`<pc-scrollbar>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scrollbar.md) | A scrollbar for a scroll view |
+| [`scrollview`](https://api.playcanvas.com/engine/classes/ScrollViewComponent.html) | [Scroll View](https://developer.playcanvas.com/user-manual/editor/scenes/components/scrollview.md) | - | [`<pc-scroll-view>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-scroll-view.md) | A scrollable area of user interface |
+| [`sound`](https://api.playcanvas.com/engine/classes/SoundComponent.html) | [Sound](https://developer.playcanvas.com/user-manual/editor/scenes/components/sound.md) | - | [`<pc-sound>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sound.md) | Plays sounds, optionally positioned in 3D |
+| [`sprite`](https://api.playcanvas.com/engine/classes/SpriteComponent.html) | [Sprite](https://developer.playcanvas.com/user-manual/editor/scenes/components/sprite.md) | `<Sprite>` | - | Draws a [2D sprite](https://developer.playcanvas.com/user-manual/2D.md) or sprite animation |
 
-## Adding a Component in code
+React and Web Components wrap the components that most applications use. A dash means there is no wrapper, but you can still add the component to the engine entity from code, as described [below](https://developer.playcanvas.com/user-manual/ecs/components.md#components-without-a-wrapper).
+
+## Adding a Component
+
+You add a component to an entity with the settings it should start with. Any setting you leave out takes its default value.
+
+**Engine**
 
 ```javascript
-entity.addComponent('camera', {
-    nearClip: 1,
-    farClip: 100,
-    fov: 55
+const lamp = new pc.Entity('lamp');
+lamp.addComponent('light', {
+    type: 'omni',
+    color: new pc.Color(1, 0.8, 0.6),
+    range: 10
 });
+app.root.addChild(lamp);
 ```
 
-See [`addComponent`](https://api.playcanvas.com/engine/classes/Entity.html#addcomponent).
+`addComponent()` returns the new component, which is also available as `lamp.light`. It returns `null`, and logs a warning in the debug engine, if the entity already has a light. It also returns `null` if the application has not registered the light component system; see [Component Systems](https://developer.playcanvas.com/user-manual/ecs/components.md#component-systems).
 
-## Accessing a Component
+**Editor**
+
+Select the entity and click **Add Component** in the Inspector, or right-click the entity in the Hierarchy and choose **Add Component**. The menu groups the components by what they do, and grays out the ones the entity already has. The new component appears as a panel in the Inspector, showing its properties at their default values.
+
+[Image: The Inspector panel showing an entity's name, tags, position, rotation and scale above its Add Component button, and below them a Render component with its on/off switch and properties]
+
+**React**
+
+Place the component inside the `<Entity>`, with its settings as props:
+
+```jsx
+import { Entity } from '@playcanvas/react';
+import { Light } from '@playcanvas/react/components';
+
+<Entity name="lamp">
+  <Light type="omni" color="#ffcc99" range={10} />
+</Entity>
+```
+
+**Web Components**
+
+Place the component's tag inside the `<pc-entity>`, with its settings as attributes:
+
+```html
+<pc-entity name="lamp">
+    <pc-light type="omni" color="#ffcc99" range="10"></pc-light>
+</pc-entity>
+```
+
+A component tag that you append to a `<pc-entity>` at runtime adds its component straight away.
+
+### Components Without a Wrapper
+
+In React and Web Components, you can add a component that has no wrapper to the engine entity, from code.
+
+**React**
+
+Write a component that adds the engine component to the entity it is placed in, and removes it when it unmounts. `useParent()` returns the engine entity of the enclosing `<Entity>`:
+
+```jsx
+import { useEffect } from 'react';
+import { Entity } from '@playcanvas/react';
+import { useParent } from '@playcanvas/react/hooks';
+
+function AudioListener() {
+  const entity = useParent();
+
+  useEffect(() => {
+    entity.addComponent('audiolistener');
+    return () => {
+      // unmounting the whole entity has already destroyed its components
+      if (entity.audiolistener) entity.removeComponent('audiolistener');
+    };
+  }, [entity]);
+
+  return null;
+}
+
+<Entity name="camera">
+  <AudioListener />
+</Entity>
+```
+
+**Web Components**
+
+Wait for the entity to be ready, then add the component to it:
+
+```html
+<pc-entity name="logo"></pc-entity>
+
+<script type="module">
+    import { whenReady } from '@playcanvas/web-components';
+
+    const logo = await whenReady('pc-entity[name="logo"]');
+    logo.entity.addComponent('sprite', { type: 'simple' });
+</script>
+```
+
+## Reading and Changing Properties
+
+A component's settings are properties that you can read and change at any time, and the component reacts straight away. To change a vector or color property, assign a new value to it.
+
+**Engine**
 
 ```javascript
-const camera = entity.camera;
+lamp.light.intensity = 2;
+lamp.light.color = new pc.Color(1, 0, 0);
+
+console.log(lamp.light.range); // 10
 ```
 
-## Removing a Component
+**Editor**
+
+Edit the fields in the component's panel in the Inspector. While the scene is launched, your changes are sent to the running application, so you can tune values as you watch. Right-click a field to copy its value and paste it into a field of the same type.
+
+To change a property at runtime, set it from a script, for example `this.entity.light.intensity = 2`.
+
+**React**
+
+Change the prop. The component's property is updated when the component renders:
+
+```jsx
+function Lamp({ on }) {
+  return (
+    <Entity name="lamp">
+      <Light type="omni" intensity={on ? 2 : 0} />
+    </Entity>
+  );
+}
+```
+
+**Web Components**
+
+Change the attribute:
 
 ```javascript
-entity.removeComponent('camera');
+const light = document.querySelector('pc-entity[name="lamp"] > pc-light');
+light.setAttribute('intensity', '2');
 ```
 
-See [`removeComponent`](https://api.playcanvas.com/engine/classes/Entity.html#removecomponent).
+Once the element is ready, its `component` property is the engine component, for the properties that have no attribute.
 
-## Enabling / Disabling Components
+## Disabling and Removing a Component
+
+Every component has an `enabled` property. A disabled component stops working, so a disabled render component is not drawn and a disabled script component stops running its scripts, but it keeps its settings until you enable it again. Removing a component deletes it and its settings. Disabling the whole entity disables all of its components at once; see [Enabling and Disabling](https://developer.playcanvas.com/user-manual/ecs/entities.md#enabling-and-disabling).
+
+**Engine**
 
 ```javascript
-entity.model.enabled = false;
+box.render.enabled = false; // stop drawing the box
+box.render.enabled = true;  // draw it again
+
+box.removeComponent('render');
 ```
 
-See [`enabled`](https://api.playcanvas.com/engine/classes/Component.html#enabled).
+**Editor**
 
-:::tip
-If a component is temporarily not needed, consider disabling it instead of removing it.
-:::
+Turn a component off and on with the switch in its panel's header. The cog in the header opens a menu to **Copy Component**, **Paste Component** onto another entity, and **Remove Component**.
+
+**React**
+
+Stop rendering a component to remove it. The components have no `enabled` prop, so to disable one and keep its settings, set `enabled` on the engine component, through a ref to its entity:
+
+```jsx
+import { useEffect, useRef } from 'react';
+import { Entity } from '@playcanvas/react';
+import { Light, Render } from '@playcanvas/react/components';
+
+function Box({ visible, lit }) {
+  const ref = useRef(null);
+
+  useEffect(() => {
+    ref.current.render.enabled = visible;
+  }, [visible]);
+
+  return (
+    <Entity ref={ref} name="box">
+      <Render type="box" />
+      {lit && <Light type="omni" />}
+    </Entity>
+  );
+}
+```
+
+**Web Components**
+
+Set the `enabled` attribute of the tag to disable the component, and remove the tag to remove it:
+
+```html
+<pc-entity name="box">
+    <pc-render type="box" enabled="false"></pc-render>
+</pc-entity>
+```
+
+## Adding Your Own Behavior
+
+The built-in components cover the abilities the engine provides. For everything else, from a door that opens to the rules of your game, write a [script](https://developer.playcanvas.com/user-manual/scripting.md) and attach it to an entity with a script component. A script component can run any number of scripts, and each one reaches its entity as `this.entity`. Here is a script that spins its entity around its vertical axis:
+
+```javascript
+import { Script } from 'playcanvas';
+
+export class Spin extends Script {
+    static scriptName = 'spin';
+
+    /**
+     * How fast to spin, in degrees per second.
+     *
+     * @attribute
+     */
+    speed = 90;
+
+    update(dt) {
+        this.entity.rotate(0, this.speed * dt, 0);
+    }
+}
+```
+
+**Engine**
+
+```javascript
+box.addComponent('script');
+box.script.create(Spin, { properties: { speed: 45 } });
+```
+
+**Editor**
+
+Save the script as an asset, such as `spin.mjs`, add a **Script** component to the entity and choose `spin` from its **Add Script** list. The Inspector then shows a field for the `speed` attribute. See [Managing Scripts](https://developer.playcanvas.com/user-manual/editor/scripting/managing-scripts.md).
+
+**React**
+
+Props other than `script` are assigned to the script instance:
+
+```jsx
+import { Script } from '@playcanvas/react/components';
+
+<Entity name="box">
+  <Render type="box" />
+  <Script script={Spin} speed={45} />
+</Entity>
+```
+
+**Web Components**
+
+Register the script with the application under its name, then add it with a `<pc-script-instance>` inside a `<pc-script>`:
+
+```html
+<pc-entity name="box">
+    <pc-render type="box"></pc-render>
+    <pc-script>
+        <pc-script-instance name="spin" attributes='{"speed": 45}'></pc-script-instance>
+    </pc-script>
+</pc-entity>
+
+<script type="module">
+    import { registerScript } from 'playcanvas';
+    import { whenReady } from '@playcanvas/web-components';
+    import { Spin } from './spin.mjs';
+
+    await whenReady('pc-app');
+    registerScript(Spin, 'spin');
+</script>
+```
+
+## Component Systems
+
+For each type of component, the application has one component system, which creates every component of that type, updates them each frame and destroys them. Systems live in `app.systems`, under the same names as the components, and some of them hold settings that all of their components share:
+
+```javascript
+// the gravity that pulls on every rigid body
+app.systems.rigidbody.gravity = new pc.Vec3(0, -1.62, 0);
+```
+
+An application can only add components whose system it has registered. [`pc.Application`](https://api.playcanvas.com/engine/classes/Application.html) registers every built-in system, as do the Editor, React and Web Components. [`pc.AppBase`](https://api.playcanvas.com/engine/classes/AppBase.html) registers only the systems you list, so that a bundler can leave the others out of your build:
+
+```javascript
+const options = new pc.AppOptions();
+options.graphicsDevice = device;
+options.componentSystems = [
+    pc.RenderComponentSystem,
+    pc.CameraComponentSystem,
+    pc.LightComponentSystem,
+    pc.ScriptComponentSystem
+];
+
+const app = new pc.AppBase(canvas);
+app.init(options);
+```
+
+See [Using the Engine Standalone](https://developer.playcanvas.com/user-manual/engine/standalone.md) for the rest of the setup.
+
+## See Also
+
+- [Entities](https://developer.playcanvas.com/user-manual/ecs/entities.md) - Creating, enabling, destroying and copying the entities that components live on
+- [Scripting](https://developer.playcanvas.com/user-manual/scripting.md) - Writing scripts, their lifecycle and their attributes
+- [Inspector Panel](https://developer.playcanvas.com/user-manual/editor/interface/inspector.md) - Editing components in the Editor
+- [PlayCanvas React](https://developer.playcanvas.com/user-manual/react.md) and [Web Components](https://developer.playcanvas.com/user-manual/web-components.md) - The React components and the Web Components tags
+- [Component](https://api.playcanvas.com/engine/classes/Component.html) and [ComponentSystem](https://api.playcanvas.com/engine/classes/ComponentSystem.html) - The engine API reference
 
 --------------------------------------------------------------------------------
 
-## Hierarchy and Transformations
+## Hierarchy and Transforms
 
 URL: https://developer.playcanvas.com/user-manual/ecs/hierarchy-and-transformations/
 Markdown: https://developer.playcanvas.com/user-manual/ecs/hierarchy-and-transformations.md
 
-Entities can be arranged in a **parent-child hierarchy**. The `Entity` class inherits its transform capabilities from the [`GraphNode`](https://api.playcanvas.com/engine/classes/GraphNode.html) superclass.
+Every entity has a transform: a position, a rotation and a scale. These are relative to the entity's parent, so when a parent moves, turns or grows, its children move, turn and grow with it. That is what makes the hierarchy useful. A car's wheels stay on the car wherever it drives, a sword stays in its owner's hand, and a menu moves as a whole when you move its panel.
 
-## Key points
+## How the Hierarchy Works
 
-- **Transforms are relative** to the parent.
-- **World transforms** are calculated by combining local transforms through the hierarchy.
-- Moving a parent affects all its children.
+This Engine app is a small solar system, built from five entities:
 
-:::tip
-Minimize deep hierarchies. Shallower hierarchies are easier to manage and can perform better.
+```none
+sun
+earthOrbit          at the center, spinning slowly
+└── earth           6 units out along its parent's X axis
+    └── moonOrbit   at the center of the earth, spinning faster
+        └── moon    1.5 units out along its parent's X axis
+```
+
+No code ever moves the earth or the moon. Each frame, the app only turns the two orbit entities around their own Y axes. The earth sits at a fixed position relative to `earthOrbit`, so as that entity turns, it carries the earth around the sun. The moon is two levels further down, so it is carried around the earth by `moonOrbit`, and around the sun by `earthOrbit` as well.
+
+```js live-example
+import * as pc from 'playcanvas';
+
+// create the application with the component systems it uses
+const canvas = document.getElementById('application');
+const device = await pc.createGraphicsDevice(canvas, {
+    deviceTypes: [pc.DEVICETYPE_WEBGPU]
+});
+device.maxPixelRatio = Math.min(window.devicePixelRatio, 2);
+
+const options = new pc.AppOptions();
+options.graphicsDevice = device;
+options.componentSystems = [
+    pc.RenderComponentSystem,
+    pc.CameraComponentSystem,
+    pc.LightComponentSystem
+];
+
+const app = new pc.AppBase(canvas);
+app.init(options);
+app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
+app.setCanvasResolution(pc.RESOLUTION_AUTO);
+window.addEventListener('resize', () => app.resizeCanvas());
+app.start();
+
+app.scene.ambientLight = new pc.Color(0.1, 0.1, 0.12);
+
+const camera = new pc.Entity('camera');
+camera.addComponent('camera', {
+    clearColor: new pc.Color(0.03, 0.04, 0.07)
+});
+camera.setPosition(0, 7, 12);
+camera.lookAt(0, 0, 0);
+app.root.addChild(camera);
+
+// a sphere with a material of the given color, which glows if emissive is true
+const createSphere = (name, color, emissive = false) => {
+    const material = new pc.StandardMaterial();
+    if (emissive) {
+        material.diffuse = new pc.Color(0, 0, 0);
+        material.emissive = color;
+    } else {
+        material.diffuse = color;
+    }
+    material.update();
+
+    const entity = new pc.Entity(name);
+    entity.addComponent('render', { type: 'sphere', material: material });
+    return entity;
+};
+
+// the sun glows, and lights the planets with an omni light
+const sun = createSphere('sun', new pc.Color(1, 0.75, 0.3), true);
+sun.addComponent('light', { type: 'omni', range: 30, intensity: 2 });
+sun.setLocalScale(2, 2, 2);
+app.root.addChild(sun);
+
+// the earth is a child of an orbit entity at the center
+const earthOrbit = new pc.Entity('earthOrbit');
+app.root.addChild(earthOrbit);
+
+const earth = createSphere('earth', new pc.Color(0.2, 0.45, 1));
+earth.setLocalPosition(6, 0, 0);
+earthOrbit.addChild(earth);
+
+// the moon is set up the same way, one level further down
+const moonOrbit = new pc.Entity('moonOrbit');
+earth.addChild(moonOrbit);
+
+const moon = createSphere('moon', new pc.Color(0.75, 0.75, 0.75));
+moon.setLocalPosition(1.5, 0, 0);
+moon.setLocalScale(0.35, 0.35, 0.35);
+moonOrbit.addChild(moon);
+
+// every frame, turn the orbits around their own Y axes, in degrees per second
+app.on('update', (dt) => {
+    earthOrbit.rotateLocal(0, 20 * dt, 0);
+    moonOrbit.rotateLocal(0, 90 * dt, 0);
+});
+```
+
+Some things to try:
+
+- Speed the moon up by raising the `90`.
+- Tilt the moon's orbit by adding `moonOrbit.setLocalEulerAngles(30, 0, 0);` after the line that creates `moonOrbit`. The orbit keeps turning around its own Y axis, which is now tilted.
+- Scale the earth up with `earth.setLocalScale(2, 2, 2);`. The moon is below the earth in the hierarchy, so it grows too, and its orbit doubles in size.
+- Add a planet of your own. Copy the lines that create `earthOrbit` and `earth` under new names, put the new planet further from the sun, and turn its orbit more slowly in the `update` handler.
+
+## The Coordinate System
+
+PlayCanvas uses a right-handed coordinate system in which +Y is up. With the default view, looking from the front, +X points right and +Z points toward you, out of the screen. An entity's own forward direction is its -Z axis. That is the direction a camera looks in and the direction [`lookAt()`](https://api.playcanvas.com/engine/classes/GraphNode.html#lookat) points, and it is why moving forward in code means moving along -Z.
+
+[Image: The three axes of the coordinate system: X in red pointing right, Y in green pointing up and Z in blue pointing toward the viewer, with an entity's forward direction along -Z]
+
+- **Units** - One unit is one meter by convention. The [physics engine](https://developer.playcanvas.com/user-manual/physics/physics-basics.md#gravity) works in meters, and a primitive box is one unit wide.
+- **Angles** - Euler angles are in degrees, applied in X, Y, Z order.
+- **Directions** - [`forward`](https://api.playcanvas.com/engine/classes/GraphNode.html#forward), [`right`](https://api.playcanvas.com/engine/classes/GraphNode.html#right) and [`up`](https://api.playcanvas.com/engine/classes/GraphNode.html#up) give an entity's -Z, +X and +Y axes in world space, wherever it has been turned.
+
+## Local and World Space
+
+An entity's transform is stored in **local space**, relative to its parent. Its **world space** transform is where that puts it in the scene, after all of its ancestors' transforms have been applied. For an entity directly under `app.root`, the two are the same.
+
+The engine has methods for both. The `Local` ones work relative to the parent, and the others in world space:
+
+| | Local space | World space |
+| --- | --- | --- |
+| Position | `getLocalPosition()`, `setLocalPosition()` | `getPosition()`, `setPosition()` |
+| Rotation as Euler angles | `getLocalEulerAngles()`, `setLocalEulerAngles()` | `getEulerAngles()`, `setEulerAngles()` |
+| Rotation as a quaternion | `getLocalRotation()`, `setLocalRotation()` | `getRotation()`, `setRotation()` |
+| Scale | `getLocalScale()`, `setLocalScale()` | `getScale()`, read-only |
+
+The vectors and quaternions that the `get` methods return belong to the entity, and change when it moves. Treat them as read-only, and `clone()` one to keep its value or to modify it. World scale can only be read, and only reliably when there is no skew, which is introduced by non-uniform scale higher up the hierarchy combined with rotation; see [Scale](https://developer.playcanvas.com/user-manual/ecs/hierarchy-and-transformations.md#scale).
+
+**Engine**
+
+```javascript
+const car = new pc.Entity('car');
+car.setPosition(10, 0, 0);
+app.root.addChild(car);
+
+const wheel = new pc.Entity('wheel');
+car.addChild(wheel);
+wheel.setLocalPosition(1, 0, 2); // relative to the car
+
+console.log(wheel.getPosition().toString()); // [11, 0, 2]
+
+wheel.setPosition(0, 0, 0); // the world origin
+console.log(wheel.getLocalPosition().toString()); // [-10, 0, 0]
+```
+
+**Editor**
+
+The **Position**, **Rotation** and **Scale** fields in the Inspector are the entity's local transform, relative to its parent, with the rotation as Euler angles in degrees. In the viewport, the **World/Local** button in the [toolbar](https://developer.playcanvas.com/user-manual/editor/interface/toolbar.md) switches the [gizmos](https://developer.playcanvas.com/user-manual/editor/interface/viewport.md#gizmos) between the world axes and the entity's own.
+
+**React**
+
+The `position`, `rotation` and `scale` props of an `<Entity>` are its local transform, relative to the enclosing `<Entity>`, with `rotation` as Euler angles in degrees:
+
+```jsx
+<Entity name="car" position={[10, 0, 0]}>
+  <Entity name="wheel" position={[1, 0, 2]} rotation={[0, 0, 90]} />
+</Entity>
+```
+
+To read world space values, use the engine entity through a ref, for example `ref.current.getPosition()`.
+
+**Web Components**
+
+The `position`, `rotation` and `scale` attributes of a `<pc-entity>` are its local transform, relative to the enclosing `<pc-entity>`, with `rotation` as Euler angles in degrees:
+
+```html
+<pc-entity name="car" position="10 0 0">
+    <pc-entity name="wheel" position="1 0 2" rotation="0 0 90"></pc-entity>
+</pc-entity>
+```
+
+To read world space values, use the engine entity, for example `element.entity.getPosition()`.
+
+## Moving and Rotating
+
+Setting a position or rotation puts an entity in a new place outright. To move or turn it from where it is, use these methods:
+
+- [`translate()`](https://api.playcanvas.com/engine/classes/GraphNode.html#translate) moves the entity along the world's axes, and [`translateLocal()`](https://api.playcanvas.com/engine/classes/GraphNode.html#translatelocal) along its own, so `translateLocal(0, 0, -1)` moves it one unit forward, whichever way it faces.
+- [`rotate()`](https://api.playcanvas.com/engine/classes/GraphNode.html#rotate) turns the entity around the world's axes, and [`rotateLocal()`](https://api.playcanvas.com/engine/classes/GraphNode.html#rotatelocal) around its own. Both take Euler angles in degrees.
+- [`lookAt()`](https://api.playcanvas.com/engine/classes/GraphNode.html#lookat) turns the entity so that its -Z axis points at a position.
+
+To move at the same speed whatever the frame rate, scale each frame's movement by `dt`, the time in seconds since the previous frame.
+
+:::caution
+
+Don't read Euler angles back to add to them. A rotation has more than one Euler form, and the one you read can differ from the one you set: after `setLocalEulerAngles(0, 120, 0)`, `getLocalEulerAngles()` returns (180, 60, 180). Keep the angle in a variable of your own and set it each time, or use `rotate()` and `rotateLocal()`.
+
 :::
 
-## Example
+**Engine**
 
 ```javascript
-childEntity.setLocalPosition(1, 0, 0); // relative to parent
-console.log(childEntity.getPosition()); // world position
+app.on('update', (dt) => {
+    ship.translateLocal(0, 0, -5 * dt); // 5 units per second, forward
+    ship.rotate(0, 45 * dt, 0);         // 45 degrees per second, around the world's Y axis
+});
 ```
 
-See [`setLocalPosition`](https://api.playcanvas.com/engine/classes/GraphNode.html#setlocalposition) and [`getPosition`](https://api.playcanvas.com/engine/classes/GraphNode.html#getposition).
+**Editor**
 
-## Re-parenting
+Move entities from a script, in its `update` method:
 
 ```javascript
-newParent.addChild(childEntity);
+import { Script } from 'playcanvas';
+
+export class Fly extends Script {
+    static scriptName = 'fly';
+
+    update(dt) {
+        this.entity.translateLocal(0, 0, -5 * dt);
+        this.entity.rotate(0, 45 * dt, 0);
+    }
+}
 ```
 
-## Scaling considerations
+**React**
 
-- Non-uniform scaling can cause visual or physics issues.
-- Avoid scaling physics-enabled entities unless necessary.
+Move the engine entity each frame through a ref, rather than through its props, so that React does not have to render every frame:
+
+```jsx
+import { useRef } from 'react';
+import { Entity } from '@playcanvas/react';
+import { Render } from '@playcanvas/react/components';
+import { useAppEvent } from '@playcanvas/react/hooks';
+
+function Ship() {
+  const ref = useRef(null);
+
+  useAppEvent('update', (dt) => {
+    ref.current.translateLocal(0, 0, -5 * dt);
+    ref.current.rotate(0, 45 * dt, 0);
+  });
+
+  return (
+    <Entity ref={ref} name="ship">
+      <Render type="cone" />
+    </Entity>
+  );
+}
+```
+
+You can also attach a script with the [`<Script>`](https://developer.playcanvas.com/user-manual/react/api/script.md) component.
+
+**Web Components**
+
+Move the engine entity each frame from the application's `update` event, or attach a script with [`<pc-script>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-script.md):
+
+```html
+<pc-entity name="ship">
+    <pc-render type="cone"></pc-render>
+</pc-entity>
+
+<script type="module">
+    import { whenReady } from '@playcanvas/web-components';
+
+    const { app } = await whenReady('pc-app');
+    const { entity } = await whenReady('pc-entity[name="ship"]');
+
+    app.on('update', (dt) => {
+        entity.translateLocal(0, 0, -5 * dt);
+        entity.rotate(0, 45 * dt, 0);
+    });
+</script>
+```
+
+Setting the entity's `position` or `rotation` attribute later puts it back where the attribute says.
+
+Dynamic rigid bodies are moved by the physics engine, which overwrites changes made to their transform. Move them with forces and impulses, or teleport them. See [Moving and Teleporting](https://developer.playcanvas.com/user-manual/physics/rigid-bodies.md#moving-and-teleporting).
+
+## Parenting
+
+Adding an entity to a new parent takes it away from its old one. It keeps its local transform, so it jumps to the same position relative to its new parent. To keep it where it is in the world, save its world position and rotation first and set them again afterwards.
+
+The order of an entity's children is the order they were added in, unless you insert a child at a particular index. For most entities it makes no difference, but user interface elements are [drawn in hierarchy order](https://developer.playcanvas.com/user-manual/user-interface/draw-order-and-performance.md), so later siblings are drawn on top.
+
+**Engine**
+
+To move the wheel onto the trailer and keep its local transform, add it to the trailer. It jumps to the position relative to the trailer that it had relative to its old parent:
+
+```javascript
+trailer.addChild(wheel);
+```
+
+To keep its world transform instead, so that it stays where it is, save its world position and rotation before you move it, and set them again afterwards:
+
+```javascript
+const position = wheel.getPosition().clone();
+const rotation = wheel.getRotation().clone();
+trailer.addChild(wheel);
+wheel.setPosition(position);
+wheel.setRotation(rotation);
+```
+
+To insert a child at the start of the list instead of the end:
+
+```javascript
+trailer.insertChild(spare, 0);
+```
+
+**Editor**
+
+Drag an entity onto another in the Hierarchy to make it its child, or between two entities to move it there. The Editor keeps the entity's world transform when you reparent it, so it doesn't move in the viewport; hold **Ctrl** (**Cmd** on Mac) while you drop it to keep its local transform instead. See [Hierarchy Panel](https://developer.playcanvas.com/user-manual/editor/interface/hierarchy.md#organizing-the-hierarchy).
+
+**React**
+
+An `<Entity>` is the child of the `<Entity>` it is nested in. Moving it to a different parent in your JSX makes React unmount it and mount a new one, so its engine entity is destroyed and created again under the new parent.
+
+**Web Components**
+
+A `<pc-entity>` is the child of the `<pc-entity>` it is nested in. Moving the element to a new parent destroys its entity and creates a new one from its attributes and child tags, so changes made to the old entity from code are lost.
+
+## Scale
+
+Scale multiplies everything below an entity, its children's positions as well as their sizes. That is what you want for a model that should be drawn larger as a whole, but it gets in the way when you only want to change the shape of one part. Non-uniform scale, which stretches an entity more along one axis than another, is the most awkward: under a child that is rotated, it no longer stretches along the child's own axes, which skews the child.
+
+To keep scale where you want it, put it on the leaf entities that draw things, and group them under unscaled parents. A table, for example, is a `table` entity with an unscaled transform, whose children are a flattened box for the top and four thin boxes for the legs.
+
+Scale also matters for physics: collision shapes made from primitives ignore it. See [Collision Shapes](https://developer.playcanvas.com/user-manual/physics/collision-shapes.md#scale).
+
+## See Also
+
+- [Entities](https://developer.playcanvas.com/user-manual/ecs/entities.md) - Creating and destroying the entities in the hierarchy
+- [Finding Entities](https://developer.playcanvas.com/user-manual/ecs/searching-the-hierarchy.md) - Looking up entities by name, path, tag or component
+- [Hierarchy Panel](https://developer.playcanvas.com/user-manual/editor/interface/hierarchy.md) and [Viewport](https://developer.playcanvas.com/user-manual/editor/interface/viewport.md) - Arranging entities and transforming them with gizmos in the Editor
+- [Hierarchy](https://playcanvas.com/examples/#/graphics/hierarchy) - An engine example of a hierarchy of moving entities
+- [GraphNode](https://api.playcanvas.com/engine/classes/GraphNode.html) - The engine API reference for transforms and the hierarchy
 
 --------------------------------------------------------------------------------
 
-## Searching the Hierarchy
+## Finding Entities
 
 URL: https://developer.playcanvas.com/user-manual/ecs/searching-the-hierarchy/
 Markdown: https://developer.playcanvas.com/user-manual/ecs/searching-the-hierarchy.md
 
+Your code often needs an entity that it did not create: the player, the door that a key opens, every enemy in the level. Every entity can search itself and its descendants for others, so you can search the whole scene from `app.root`, or a smaller part of it from any entity below.
+
+## Search Methods
+
+| To find entities | The first match | Every match |
+| --- | --- | --- |
+| By name | `findByName('door')` | `find('name', 'door')` |
+| By path | `findByPath('house/door')` | - |
+| By tag | - | `findByTag('enemy')` |
+| With a component | `findComponent('light')` | `findComponents('light')` |
+| With a script | `findScript('health')` | `findScripts('health')` |
+| That pass a test of your own | `findOne(entity => ...)` | `find(entity => ...)` |
+
+The searches are depth-first: they visit an entity's first child and all of its descendants before its second child. They cover the entity you call them on as well as its descendants, except `findByTag()`, which only searches the descendants. The methods that look for the first match return `null` when there is none, apart from `findScript()`, which returns `undefined`. The ones that look for every match return an empty array.
+
+`findComponent()` and `findComponents()` return components rather than entities, and `findScript()` and `findScripts()` return script instances. Each of these has an `entity` property for the entity it belongs to.
+
 ## By Name
 
 ```javascript
-const found = app.root.findByName("Player");
+const door = app.root.findByName('door');
 ```
 
-See [`findByName`](https://api.playcanvas.com/engine/classes/GraphNode.html#findbyname).
+Names do not have to be unique, so `findByName()` returns whichever matching entity it reaches first. To get all the entities with a name, use `find('name', 'door')`. If you give entities unique names, `findByName()` is the simplest way to find them.
+
+## By Path
+
+A path names the entities on the way down to the one you want, separated by slashes, starting below the entity you search from. It picks out one entity even when names repeat elsewhere in the scene:
+
+```javascript
+const door = house.findByPath('ground-floor/door');
+```
+
+An entity's `path` property is its path from the root of the hierarchy. In a scene made in the Editor, every entity is below the scene's root entity, called `Root`, so paths from `app.root` start with it:
+
+```javascript
+const door = app.root.findByPath('Root/house/ground-floor/door');
+console.log(door.path); // 'Root/house/ground-floor/door'
+```
 
 ## By Tag
 
-Tags are string labels you can assign to Entities ([`Tags`](https://api.playcanvas.com/engine/classes/Tags.html)).
+[Tags](https://developer.playcanvas.com/user-manual/ecs/entities.md#names-and-tags) label groups of entities, and `findByTag()` returns every descendant with a tag. Pass several tags to find entities with any of them, and an array of tags to find entities with all of them:
 
 ```javascript
-entity.tags.add("enemy");
-const enemies = app.root.findByTag("enemy");
+const enemies = app.root.findByTag('enemy');
+
+// entities tagged 'enemy' OR 'boss'
+const hostile = app.root.findByTag('enemy', 'boss');
+
+// entities tagged both 'enemy' AND 'flying'
+const flyers = app.root.findByTag(['enemy', 'flying']);
 ```
 
-See [`tags`](https://api.playcanvas.com/engine/classes/Entity.html#tags) and [`findByTag`](https://api.playcanvas.com/engine/classes/Entity.html#findbytag).
+To test a single entity, `entity.tags.has()` takes its arguments in the same way, so `goblin.tags.has('enemy', 'boss')` is `true` if the goblin has either tag.
 
-:::tip
-Use tags for grouping related Entities. Tag-based searches are typically faster and more flexible than deep name-based searches.
-:::
-
-## By Component
+## By Component or Script
 
 ```javascript
-const lights = app.root.findComponents("light");
+// every light in the scene
+const lights = app.root.findComponents('light');
+lights.forEach(light => light.enabled = false);
+
+// the first instance of the Health script below the player, by class or by name
+const health = player.findScript(Health);
 ```
 
-See [`findComponents`](https://api.playcanvas.com/engine/classes/Entity.html#findcomponents).
+## With a Test of Your Own
 
-## Recursion and Scope
+`find()` and `findOne()` take a function, which is called for each entity and returns `true` for the ones you want:
 
-- Searches can be started from any Entity, not just `app.root`.
-- Searching from a smaller subtree is faster than searching the whole scene.
+```javascript
+const coins = level.find(entity => entity.name.startsWith('coin') && entity.enabled);
+```
+
+To visit every entity in a subtree without collecting them, use `forEach()`:
+
+```javascript
+level.forEach(entity => console.log(entity.path));
+```
+
+## On Each Surface
+
+**Engine**
+
+Call the methods on `app.root` to search the whole scene, or on any entity to search the entities below it. In a script, `this.app.root` is the root and `this.entity` is the script's own entity:
+
+```javascript
+const wheels = this.entity.findByTag('wheel');
+```
+
+**Editor**
+
+To find entities while you edit, type in the search box at the top of the Hierarchy. Click the magnifying glass to choose what it matches: **Name**, **Component Type**, **Script Name** or **Tags**, the same things the search methods look for. **Smart Search** also matches names that are close to what you type.
+
+[Image: The Hierarchy panel's search options: a Smart Search switch, and Search By checkboxes for Name, Component Type, Script Name and Tags]
+
+In scripts, you rarely need to search. Give the script an [entity attribute](https://developer.playcanvas.com/user-manual/scripting/script-attributes/esm.md) and drag the entity onto it in the Inspector. The reference then survives renaming and moving the entity, which a search by name or path does not:
+
+```javascript
+import { Entity, Script } from 'playcanvas';
+
+export class Key extends Script {
+    static scriptName = 'key';
+
+    /**
+     * The door that this key opens.
+     *
+     * @attribute
+     * @type {Entity}
+     */
+    door;
+
+    open() {
+        this.door.enabled = false;
+    }
+}
+```
+
+**React**
+
+You rarely need to search, because you rendered the entities yourself. Keep a ref to the ones your code needs:
+
+```jsx
+const door = useRef(null);
+
+<Entity ref={door} name="door" />
+```
+
+To search the scene, start from the root of the application, in an effect so that the entities you rendered exist:
+
+```jsx
+import { useEffect } from 'react';
+import { useApp } from '@playcanvas/react/hooks';
+
+const app = useApp();
+
+useEffect(() => {
+  const enemies = app.root.findByTag('enemy');
+}, [app]);
+```
+
+**Web Components**
+
+The document mirrors the hierarchy, so you can select an entity's element with a CSS selector. Its `entity` is `null` until the element is ready, so wait for it with `whenReady()`, which takes the same selector:
+
+```javascript
+import { whenReady } from '@playcanvas/web-components';
+
+const door = await whenReady('pc-entity[name="door"]');
+console.log(door.entity.getPosition().toString());
+```
+
+The DOM sees the markup, not the engine's state. For entities created from code, and for tags added at runtime, search the engine instead:
+
+```javascript
+import { whenReady } from '@playcanvas/web-components';
+
+const { app } = await whenReady('pc-app');
+const enemies = app.root.findByTag('enemy');
+```
+
+## Searching Efficiently
+
+A search visits every entity it covers, so its cost grows with the size of the scene below it.
+
+- **Search once.** Find the entities a script needs in its `initialize` method and keep them, rather than searching every frame.
+- **Search close by.** Searching from the nearest entity that you know of visits fewer entities than searching from `app.root`.
+- **Prefer references.** An entity attribute, a ref or an element you keep is faster than any search, and does not break when names change.
+
+To browse the hierarchy of a running application, and to see what its entities and components are set to right now, use the [Inspector](https://developer.playcanvas.com/user-manual/scripting/debugging/inspector.md) debug panel.
+
+## See Also
+
+- [Entities](https://developer.playcanvas.com/user-manual/ecs/entities.md) - Naming and tagging entities
+- [Script Attributes](https://developer.playcanvas.com/user-manual/scripting/script-attributes.md) - Passing entity references to scripts
+- [Hierarchy Panel](https://developer.playcanvas.com/user-manual/editor/interface/hierarchy.md#searching-the-hierarchy) - Searching the hierarchy in the Editor
+- [GraphNode](https://api.playcanvas.com/engine/classes/GraphNode.html), [Entity](https://api.playcanvas.com/engine/classes/Entity.html) and [Tags](https://api.playcanvas.com/engine/classes/Tags.html) - The engine API reference
 
 --------------------------------------------------------------------------------
 

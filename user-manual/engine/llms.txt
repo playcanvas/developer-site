@@ -34,11 +34,11 @@ Use this index to write code against the engine directly. React, Web Components 
 
 ## Entities and components
 
-- [Entity Component System](https://developer.playcanvas.com/user-manual/ecs.md): How entities, components and systems organize objects and behavior.
-- [Entities](https://developer.playcanvas.com/user-manual/ecs/entities.md): Creating, parenting, enabling and managing entities.
-- [Components](https://developer.playcanvas.com/user-manual/ecs/components.md): Adding cameras, lights, physics, scripts and other behavior to entities.
-- [Hierarchy and Transformations](https://developer.playcanvas.com/user-manual/ecs/hierarchy-and-transformations.md): Local and world position, rotation and scale in a parent-child hierarchy.
-- [Searching the Hierarchy](https://developer.playcanvas.com/user-manual/ecs/searching-the-hierarchy.md): Finding entities at runtime by name, tag, path or callback.
+- [Entity Component System](https://developer.playcanvas.com/user-manual/ecs.md): How a scene is built from entities, the components that give them abilities and the systems that run them, on every surface.
+- [Entities](https://developer.playcanvas.com/user-manual/ecs/entities.md): Creating, naming, tagging, enabling, destroying and copying entities, with clone() and templates.
+- [Components](https://developer.playcanvas.com/user-manual/ecs/components.md): The built-in components and their names on each surface; adding, changing, disabling and removing them; scripts and component systems.
+- [Hierarchy and Transforms](https://developer.playcanvas.com/user-manual/ecs/hierarchy-and-transformations.md): The coordinate system, local and world space, moving and rotating, parenting and scale.
+- [Finding Entities](https://developer.playcanvas.com/user-manual/ecs/searching-the-hierarchy.md): Looking entities up by name, path, tag, component, script or a test of your own.
 
 ## Scripting
 
@@ -228,7 +228,7 @@ Use this index to write code against the engine directly. React, Web Components 
 
 ## Optional
 
-- [All pages of this index in one file](https://developer.playcanvas.com/user-manual/engine/llms-full.txt): 225 pages (1368 KB), for downloading and searching rather than reading into context.
+- [All pages of this index in one file](https://developer.playcanvas.com/user-manual/engine/llms-full.txt): 225 pages (1430 KB), for downloading and searching rather than reading into context.
 - [PlayCanvas Engine](https://developer.playcanvas.com/user-manual/engine.md)
 - [Versioning and Releases](https://developer.playcanvas.com/user-manual/engine/versioning.md)
 - [Assets](https://developer.playcanvas.com/user-manual/assets.md)
