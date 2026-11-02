@@ -183,7 +183,7 @@ const enemies = app.root.findByTag('enemy');
 - **近くから検索する。** 分かっている最も近いエンティティから検索すれば、`app.root`から検索するよりも調べるエンティティが少なくて済みます。
 - **参照を優先する。** エンティティ属性、ref、保持している要素は、どんな検索よりも速く、名前が変わっても壊れません。
 
-実行中のアプリケーションの階層を調べ、エンティティやコンポーネントの現在の設定を確認するには、[Inspector](/user-manual/scripting/debugging/inspector/)デバッグパネルを使います。
+実行中のアプリケーションの階層を調べ、エンティティやコンポーネントの現在の設定を確認するには、[Inspector](/user-manual/debugging/inspector/)デバッグパネルを使います。
 
 ## 関連情報 {#see-also}
 

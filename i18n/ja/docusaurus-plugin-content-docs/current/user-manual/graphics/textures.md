@@ -196,7 +196,7 @@ destinationArray.copy(textureArray, { layer: 3 });
 テクスチャは破棄されるまでGPUメモリを保持します。そのサイズは寸法、フォーマット、ミップレベルによって決まり、キューブマップのすべての面、テクスチャ配列のすべてのレイヤー、ボリュームテクスチャのすべての深度スライスが含まれます。テクスチャが使用するメモリは次の方法で確認できます。
 
 - [MiniStats](../optimization/mini-stats.md) は、テクスチャが使用するGPUメモリをVRAMセクションに表示します。
-- [Inspector](../scripting/debugging/inspector.md) は、Texturesタブでデバイス上のテクスチャを大きい順に一覧表示し、Memoryタブでビデオメモリをリソースの種類ごとに分類します。
+- [Inspector](../debugging/inspector.md) は、Texturesタブでデバイス上のテクスチャを大きい順に一覧表示し、Memoryタブでビデオメモリをリソースの種類ごとに分類します。
 
 コードから作成したテクスチャは、不要になったら破棄します。
 
@@ -211,4 +211,4 @@ texture.destroy();
 - [HDRレンダリング](./linear-workflow/hdr-rendering.md) - HDRフォーマットとHDRレンダリングです。
 - [テクスチャ圧縮](../optimization/texture-compression.md) - 圧縮テクスチャのフォーマットです。
 - [シェーダー](./shaders/index.md) - テクスチャをサンプリングするカスタムシェーダーの作成です。
-- [MiniStats](../optimization/mini-stats.md)と[Inspector](../scripting/debugging/inspector.md) - テクスチャが使用するメモリの確認です。
+- [MiniStats](../optimization/mini-stats.md)と[Inspector](../debugging/inspector.md) - テクスチャが使用するメモリの確認です。

@@ -196,7 +196,7 @@ A texture can be rendered into, including into a face of a cubemap, a layer of a
 A texture holds GPU memory until it is destroyed. Its size depends on its dimensions, its format and its mip levels - all faces of a cubemap, all layers of a texture array and all depth slices of a volume texture count. To observe the memory used by textures:
 
 - [MiniStats](../optimization/mini-stats.md) shows the GPU memory used by textures in its VRAM section.
-- The [Inspector](../scripting/debugging/inspector.md) lists the textures on the device, largest first, in its Textures tab, and breaks the video memory down by kind of resource in its Memory tab.
+- The [Inspector](../debugging/inspector.md) lists the textures on the device, largest first, in its Textures tab, and breaks the video memory down by kind of resource in its Memory tab.
 
 Destroy a texture created from code when it is no longer needed:
 
@@ -211,4 +211,4 @@ texture.destroy();
 - [HDR Rendering](./linear-workflow/hdr-rendering.md) - HDR formats and rendering.
 - [Texture Compression](../optimization/texture-compression.md) - compressed texture formats.
 - [Shaders](./shaders/index.md) - writing custom shaders sampling textures.
-- [MiniStats](../optimization/mini-stats.md) and the [Inspector](../scripting/debugging/inspector.md) - observing the memory used by textures.
+- [MiniStats](../optimization/mini-stats.md) and the [Inspector](../debugging/inspector.md) - observing the memory used by textures.
