@@ -3,6 +3,12 @@ title: Vignette Effect
 description: Legacy vignette offset and darkness controls to darken edges, with GitHub link for the vignette script.
 ---
 
+:::warning[Deprecated]
+
+This legacy effect is deprecated. Use the vignette of [CameraFrame](/user-manual/graphics/posteffects/cameraframe) instead. See [Migrating to CameraFrame](/user-manual/graphics/posteffects/legacy#migrating-to-cameraframe).
+
+:::
+
 In photography and optics, [vignetting](https://en.wikipedia.org/wiki/Vignetting) is the reduction of an image's brightness or saturation at the periphery compared to the image center. You can use it to draw attention to the center of the frame.
 
 Here is an image without the effect:

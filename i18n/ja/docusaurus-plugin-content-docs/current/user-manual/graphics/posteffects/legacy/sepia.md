@@ -3,6 +3,12 @@ title: セピアエフェクト
 description: レガシーのセピア Script エフェクトの量と、セピアポストプロセス用カメラ Script の GitHub 参照です。
 ---
 
+:::warning[非推奨]
+
+このレガシーエフェクトは非推奨です。代わりに [CameraFrame](/user-manual/graphics/posteffects/cameraframe) のカラールックアップテーブルを使用してください。[CameraFrame への移行](/user-manual/graphics/posteffects/legacy#migrating-to-cameraframe) を参照してください。
+
+:::
+
 セピアエフェクトは画像を古い写真のような見え方にするエフェクトです。
 
 これはエフェクトをかけていない画像です。

@@ -1,22 +1,41 @@
 ---
 title: ポストエフェクト
-description: モダンな CameraFrame の HDR ポストプロセスとレガシーの Script エフェクトを比較し、各フィルターへのリンクを探します。
+description: CameraFrame で HDR ポストプロセスを追加し、非推奨のレガシー Script エフェクトを CameraFrame に移行します。
 ---
 
 PlayCanvasでは、プロジェクトへのポストプロセッシングエフェクトを追加することができます。ポストエフェクトは最終的にレンダリングされるイメージを変更し、アプリケーションにビジュアル効果を簡単に追加する方法を提供します。
 
-ポストエフェクトは、[Camera](/user-manual/editor/scenes/components/camera) コンポーネントがアタッチされた Entity に追加できるスクリプトとして実装されています。カメラにポストエフェクトを追加するには、以下の手順を実行します。
+PlayCanvas には、ポストプロセスの方法が 2 つあります。新しい作業にはすべて `CameraFrame` を使用してください。レガシーの Script ベースのポストエフェクトは非推奨です。
 
-1. 以下のエフェクトのうち、一つを選択し、GitHub リンクからスクリプトを取得します。
+## モダンなポストプロセス
 
-    - [ブルーム](/user-manual/graphics/posteffects/legacy/bloom)
-    - [ブライトネス・コントラスト](/user-manual/graphics/posteffects/legacy/brightness_contrast)
-    - [色相・彩度](/user-manual/graphics/posteffects/legacy/hue_saturation)
-    - [FXAA](/user-manual/graphics/posteffects/legacy/fxaa)
-    - [セピア](/user-manual/graphics/posteffects/legacy/sepia)
-    - [ビネット](/user-manual/graphics/posteffects/legacy/vignette)
+モダンな方法は、HDR に対応し拡張性のある、高度でパフォーマンスのよいポストプロセスを提供します。主な方法は組み込みエフェクト付きの `CameraFrame` クラスを使うことですが、完全な制御のために独自のレンダーパスを作成することもできます。
 
-2. カメラに [Script](/user-manual/editor/scenes/components/script) コンポーネントを追加します。
-3. カメラの Script コンポーネントに、必要なポストエフェクトスクリプトを割り当てます。ポストエフェクトスクリプトが Scriptコンポーネント内でリストされる順序が、適用順序を決定することに注意してください。
+**主な機能:**
 
-また、カスタムポストエフェクトを作成することもできます。追加のポストエフェクトについては、[GitHub](https://github.com/playcanvas/engine/tree/main/scripts/posteffects)で探すことができます。
+- HDR 物理ベースのブルーム
+- スクリーンスペースアンビエントオクルージョン (SSAO)
+- 被写界深度 (DoF)
+- テンポラルアンチエイリアス (TAA)
+- カラーグレーディングと LUT
+- ビネットとフリンジのエフェクト
+- その他
+
+このシステムは拡張性が高く、コンポーズシェーダーのカスタマイズ、独自のレンダーパスの追加、完全に独自のパイプラインの構築が可能です。
+
+[モダンなポストプロセスの詳細 →](cameraframe)
+
+## レガシーポストエフェクト (非推奨)
+
+レガシーの方法では、カメラ Entity にアタッチされ、カメラの `postEffects` キューに追加される Script ベースのポストエフェクトを使用します。この方法は非推奨です。エフェクトは引き続き動作しますが、追加するとデバッグビルドのエンジンで非推奨の警告が出力され、将来のメジャーバージョンで削除されます。[CameraFrame への移行](legacy#migrating-to-cameraframe) の一覧に従い、対応する `CameraFrame` のエフェクトに置き換えてください。
+
+**レガシーエフェクト:**
+
+- ブルーム
+- ブライトネス・コントラスト
+- 色相・彩度
+- FXAA
+- セピア
+- ビネット
+
+[レガシーポストエフェクトの詳細 →](legacy)

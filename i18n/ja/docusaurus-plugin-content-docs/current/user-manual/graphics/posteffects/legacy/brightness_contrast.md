@@ -3,6 +3,12 @@ title: ブライトネス・コントラストエフェクト
 description: "レガシーの明るさ・コントラスト Script エフェクト：パラメータ範囲とカメラポストパイプラインの GitHub ソース。"
 ---
 
+:::warning[非推奨]
+
+このレガシーエフェクトは非推奨です。代わりに [CameraFrame](/user-manual/graphics/posteffects/cameraframe) のカラーグレーディングの `brightness` と `contrast` を使用してください。[CameraFrame への移行](/user-manual/graphics/posteffects/legacy#migrating-to-cameraframe) を参照してください。
+
+:::
+
 ブライトネス (Brightness) とコントラスト (Contrast) エフェクトは、レンダリング後の画像の輝度とコントラストを調整します。
 
 これはエフェクトをかけていない画像です。

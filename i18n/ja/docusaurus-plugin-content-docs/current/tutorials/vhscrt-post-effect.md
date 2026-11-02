@@ -7,6 +7,12 @@ description: フルスクリーンパスでスキャンライン、ロール、�
 
 import Link from '@docusaurus/Link';
 
+:::warning[非推奨]
+
+このチュートリアルでは、非推奨のレガシーポストエフェクトを使用しています。新しいプロジェクトでは、代わりにエフェクトを [CameraFrame の独自エフェクト](/user-manual/graphics/posteffects/cameraframe/#custom-post-processing) として作成してください。
+
+:::
+
 古いCRTのような劣化したビデオ画面をシミュレートする基本的なフルスクリーンエフェクト。
 
 <div className="iframe-container">
