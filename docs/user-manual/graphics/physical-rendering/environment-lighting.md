@@ -100,6 +100,6 @@ material.update();
 
 ## Examples
 
-- [HDR](https://playcanvas.github.io/#/graphics/hdr): a scene lit by a prefiltered environment atlas.
+- [HDR](https://playcanvas.github.io/#/camera-frame/hdr): a scene lit by a prefiltered environment atlas.
 - [Reflection Cubemap](https://playcanvas.github.io/#/graphics/reflection-cubemap): a material with its own cubemap, rendered at runtime from the object's position, with Use Skybox switched off.
 - [Reflection Box](https://playcanvas.github.io/#/graphics/reflection-box): a room whose materials use an environment atlas with Box projection so that the reflections line up with the walls.

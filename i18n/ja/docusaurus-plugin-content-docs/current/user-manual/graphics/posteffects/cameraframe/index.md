@@ -76,35 +76,35 @@ Gaussian Splat でフォグや被写界深度を使用する場合は、[シー�
 
 - HDR と Bloom、LUT — HDR ブルームとカラールックアップテーブルをデモ
 
-<EngineExample id="graphics/hdr" title="HDR と Bloom、LUT" />
+<EngineExample id="camera-frame/hdr" title="HDR と Bloom、LUT" />
 
 - ポストプロセス — ブルーム、グレーディング、カラーエンハンス、色付きビネット、フリンジ、TAA を表示
 
-<EngineExample id="graphics/post-processing" title="ポストプロセス" />
+<EngineExample id="camera-frame/post-processing" title="ポストプロセス" />
 
 - アンビエントオクルージョン — SSAO の実装をデモ
 
-<EngineExample id="graphics/ambient-occlusion" title="アンビエントオクルージョン" />
+<EngineExample id="camera-frame/ambient-occlusion" title="アンビエントオクルージョン" />
 
 - 被写界深度 — 被写界深度エフェクトをデモ
 
-<EngineExample id="graphics/depth-of-field" title="被写界深度" />
+<EngineExample id="camera-frame/depth-of-field" title="被写界深度" />
 
 - 時間的反エイリアシング — TAA の実装をデモ
 
-<EngineExample id="graphics/taa" title="時間的反エイリアシング" />
+<EngineExample id="camera-frame/taa" title="時間的反エイリアシング" />
 
 - ボリューメトリックフォグ — ディレクショナルライトに照らされる高さに応じたフォグ
 
-<EngineExample id="graphics/volumetric-fog" title="ボリューメトリックフォグ" />
+<EngineExample id="camera-frame/volumetric-fog" title="ボリューメトリックフォグ" />
 
 - ローカルライトのボリューメトリックフォグ — フォグ内で散乱するオムニとスポットライト
 
-<EngineExample id="graphics/volumetric-fog-local-lights" title="ローカルライトのボリューメトリックフォグ" />
+<EngineExample id="camera-frame/volumetric-fog-local-lights" title="ローカルライトのボリューメトリックフォグ" />
 
 - ボリューメトリックフォグの光の筋 — 影のあるスポットライトのビームとライト Cookie
 
-<EngineExample id="graphics/volumetric-fog-shafts" title="ボリューメトリックフォグの光の筋" />
+<EngineExample id="camera-frame/volumetric-fog-shafts" title="ボリューメトリックフォグの光の筋" />
 
 - LUT グレーディング — Gaussian Splat シーンで 2 つのカラーグレードをクロスフェード
 
