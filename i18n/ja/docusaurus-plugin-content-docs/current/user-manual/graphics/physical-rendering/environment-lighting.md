@@ -1,11 +1,11 @@
 ---
 title: 環境ライティング
-description: シーンのスカイボックスとマテリアルの環境マップが物理マテリアルをどのようにライティングするか、どちらがいつ使われるか、そして反射・アンビエントライト・屈折に影響する設定を説明します。
+description: シーンのスカイボックス、マテリアルの環境マップ、平面反射が物理マテリアルをどのようにライティングするか、どれがいつ使われるか、そして反射・アンビエントライト・屈折に影響する設定を説明します。
 ---
 
 物理マテリアルは、シーン内のライトにだけ反応するわけではありません。周囲からの光も取り込みます。光沢のある表面は周囲を鏡のように映し、マットな表面はあらゆる方向から届く光で色づき、ガラスの表面は周囲を透かして見せます。これらはすべて、空・部屋・屋外の風景など周囲の画像である **環境マップ** から得られます。
 
-PlayCanvas は、この環境マップをシーンとマテリアル自身の 2 つの場所から取得できます。このページでは、環境がマテリアルに何を供給するか、どこから供給されるか、どちらがいつ使われるか、そしてどの設定が結果を変えるかを説明します。
+PlayCanvas は、この環境マップをシーンとマテリアル自身の 2 つの場所から取得できます。このページでは、環境がマテリアルに何を供給するか、どこから供給されるか、どちらがいつ使われるか、そしてどの設定が結果を変えるかを説明します。また、床・鏡・水面などの平らな表面に、周囲のシーンを正確に映す平面反射についても説明します。
 
 ## 環境が供給するもの
 
@@ -21,8 +21,10 @@ graph TD
         R ~~~ A ~~~ F
     end
     B["<b>背景</b><br/>すべての後ろに描かれる空"]
+    P["<b>平面反射</b><br/>鏡映したカメラでレンダリングしたシーン"]
     S -->|"独自の環境マップを持たないマテリアル"| MAT
     M -->|"このマテリアルのみ"| MAT
+    P -->|"このマテリアルの反射を置き換える"| R
     S --> B
 ```
 
@@ -77,14 +79,16 @@ graph TD
 
 マテリアルの環境は、シーンの環境を完全に置き換えます。シーンの Intensity と Rotation は適用されず、通常のキューブマップやスフィアマップのアンビエントライトをシーンが補うこともありません。独自の環境を持つマテリアルに方向性のあるアンビエントライトが必要な場合は、エディタでキューブマップをプリフィルタするか、コードで環境アトラスを生成してください。
 
+[平面反射](#平面反射)は例外です。マテリアルの反射だけを置き換え、アンビエントライトは引き続きこの表に従った環境から受け取ります。
+
 ## コードでの設定
 
 ```javascript
 // HDR 画像からのシーン環境: 背景と鏡のような反射のための鮮明な空と、
 // アンビエントライトと粗い反射のためのプリフィルタされたライティングアトラス
-const skybox = pc.EnvLighting.generateSkyboxCubemap(hdrTexture);
-const lighting = pc.EnvLighting.generateLightingSource(hdrTexture);
-const envAtlas = pc.EnvLighting.generateAtlas(lighting);
+const skybox = EnvLighting.generateSkyboxCubemap(hdrTexture);
+const lighting = EnvLighting.generateLightingSource(hdrTexture);
+const envAtlas = EnvLighting.generateAtlas(lighting);
 lighting.destroy();
 
 app.scene.skybox = skybox;
@@ -92,10 +96,59 @@ app.scene.envAtlas = envAtlas;
 app.scene.skyboxIntensity = 1.5;
 
 // マテリアルの環境: このマテリアルはシーンのスカイボックスを無視し、独自の周囲を反射します
-const material = new pc.StandardMaterial();
+const material = new StandardMaterial();
 material.envAtlas = roomAtlas;   // プリフィルタされたライティング: 反射、アンビエントライト、屈折
 material.cubeMap = roomCubemap;  // 任意: 非常に光沢のある表面での鏡のように鮮明な反射
 material.update();
+```
+
+## 平面反射
+
+環境マップは 1 つの点から見た周囲を表すため、床の上に置かれたオブジェクトや、それらが床に接する部分を映すことはできません。磨かれた床・鏡・水面などの平らな表面は、代わりに **平面反射** を映すことができます。平面反射とは、表面の平面で鏡映した 2 台目のカメラが、毎フレームテクスチャにレンダリングしたシーンです。
+
+`PlanarRenderer` スクリプト(`scripts/esm/planar-renderer.mjs`)が、このカメラとテクスチャを作成し、毎フレームメインカメラに合わせてカメラを動かします。マテリアルは `planarReflectionMap` に設定したテクスチャを、`planarReflectionMatrix` に設定したカメラのビュー射影行列で投影して映します。
+
+- 平面反射が置き換えるのは反射だけです。マテリアルのライト・シャドウ・フレネルは変わらず、アンビエントライトは[どの環境が使われるか](#どの環境が使われるか)で説明したとおり、引き続き環境から受け取ります。
+- 粗い表面はテクスチャのミップマップを使って反射をぼかします。完全な鏡以外では、スクリプトの `mipmaps` を有効にしてください。
+- ノーマルマップは、凹凸のある表面や濡れた表面の反射のように、反射を歪ませます。
+- スクリプトの `hdr` を有効にすると、明るい光源が反射の中でもシーンと同じ明るさになります。テクスチャにはリニアな色が保存され、マテリアルをレンダリングするカメラがトーンマッピングを適用します。
+- 平面反射を持つマテリアルの屈折には Dynamic Refractions が必要です。テクスチャには、表面を透かして見せる環境が含まれないためです。
+- 表面は自分自身の反射に映ることができないため、反射する表面は反射カメラがレンダリングしないレイヤーに置いてください。
+- 反射のために、シーンが毎フレームもう一度レンダリングされます。スクリプトの `scale` を下げて画面解像度の一部でレンダリングし、反射カメラには反射させる価値のあるレイヤーだけを与えてください。
+
+平面反射はコードで設定します。
+
+```javascript
+import { PlanarRenderer } from 'playcanvas/scripts/esm/planar-renderer.mjs';
+
+// 反射カメラは、反射させるレイヤーをメインカメラより先にレンダリングします
+const reflectionCamera = new Entity('ReflectionCamera');
+reflectionCamera.addComponent('camera', {
+    layers: [worldLayer.id, skyboxLayer.id],
+    priority: -1
+});
+reflectionCamera.addComponent('script');
+const planarRenderer = reflectionCamera.script.create(PlanarRenderer, {
+    properties: {
+        sceneCameraEntity: cameraEntity,
+        planePoint: new Vec3(0, 0, 0),
+        planeNormal: new Vec3(0, 1, 0),
+        mipmaps: true,  // 粗い表面でのぼけた反射
+        hdr: true       // 明るいライトは反射の中でも明るいまま
+    }
+});
+app.root.addChild(reflectionCamera);
+
+// 床は専用のレイヤーに置き、メインカメラではレンダリングし、反射カメラではレンダリングしません
+floorEntity.render.layers = [floorLayer.id];
+
+// 毎フレーム、メインカメラが動いた後に、床は更新されたテクスチャを映します
+app.on('update', () => {
+    const texture = planarRenderer.frameUpdate();
+    floorMaterial.planarReflectionMap = texture;
+    floorMaterial.planarReflectionMatrix = planarRenderer.viewProjectionMatrix;
+    floorMaterial.update();
+});
 ```
 
 ## サンプル
@@ -103,3 +156,4 @@ material.update();
 - [HDR](https://playcanvas.github.io/#/camera-frame/hdr): プリフィルタされた環境アトラスでライティングされたシーン。
 - [Reflection Cubemap](https://playcanvas.github.io/#/graphics/reflection-cubemap): オブジェクトの位置から実行時にレンダリングした独自のキューブマップを持ち、Use Skybox をオフにしたマテリアル。
 - [Reflection Box](https://playcanvas.github.io/#/graphics/reflection-box): 反射が壁に一致するよう、マテリアルが Box プロジェクションの環境アトラスを使用する部屋。
+- [Reflection Planar](https://playcanvas.github.io/#/graphics/reflection-planar): 平面反射で部屋とその中のオブジェクトを映す磨かれた床。Cubemap モードで、ボックスプロジェクションの環境アトラスと比較できます。
