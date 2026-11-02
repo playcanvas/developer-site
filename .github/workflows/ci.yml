@@ -4,8 +4,8 @@ on:
   workflow_dispatch:
   push:
     branches: [ main ]
+  # Every pull request, whatever its base, so PRs into release docs branches are checked too
   pull_request:
-    branches: [ main ]
 
 concurrency:
   group: ci-${{ github.event.pull_request.number || github.ref }}
