@@ -68,5 +68,5 @@ Rotate.prototype.update = function(dt) {
 - [スクリプト属性](./script-attributes/index.md) — 設定可能なプロパティの公開。
 - [Engine API](./engine-api.md) — 主要なクラスとパターン。
 - [イベント](./events.md) — スクリプト間の通信。
-- [デバッグ](./debugging/index.md) — トラブルシューティングのためのツールと手法。
+- [デバッグ](/user-manual/debugging/) — トラブルシューティングのためのツールと手法。
 - [移行ガイド](./migration-guide.md) — クラシックスクリプトからESMスクリプトへのアップグレード。

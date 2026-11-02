@@ -68,6 +68,11 @@ const config = {
   plugins: [
     [ '@docusaurus/plugin-client-redirects', {
       redirects: [
+        // Debugging moved out of Scripting into Debugging and Optimization
+        { from: ['/user-manual/scripting/debugging/'], to: '/user-manual/debugging/' },
+        { from: ['/user-manual/scripting/debugging/console-logging/'], to: '/user-manual/debugging/console-logging/' },
+        { from: ['/user-manual/scripting/debugging/browser-dev-tools/'], to: '/user-manual/debugging/browser-dev-tools/' },
+        { from: ['/user-manual/scripting/debugging/inspector/'], to: '/user-manual/debugging/inspector/' },
         { from: ['/api', '/en/api'], to: 'https://api.playcanvas.com' },
         // Retired Facebook docs (the Facebook Canvas web games platform was discontinued)
         { from: ['/tutorials/facebook-api/'], to: '/tutorials/' },

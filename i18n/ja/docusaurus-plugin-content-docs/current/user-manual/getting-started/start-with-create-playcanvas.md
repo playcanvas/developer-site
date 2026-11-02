@@ -85,7 +85,7 @@ EditorのプロジェクトをWeb Lensとして公開する場合は、[Snapchat
 
 ## Inspectorでデバッグする
 
-開発サーバーは、実行中のアプリケーション用に[Inspector](/user-manual/scripting/debugging/inspector/)を読み込みます。バッククォートキー（`` ` ``）で表示と非表示を切り替え、<kbd>F9</kbd>で一時停止し、<kbd>F10</kbd>で1フレームずつ進めます。Inspectorはプロダクションビルドには含まれません。
+開発サーバーは、実行中のアプリケーション用に[Inspector](/user-manual/debugging/inspector/)を読み込みます。バッククォートキー（`` ` ``）で表示と非表示を切り替え、<kbd>F9</kbd>で一時停止し、<kbd>F10</kbd>で1フレームずつ進めます。Inspectorはプロダクションビルドには含まれません。
 
 ## プロンプトを省略する
 

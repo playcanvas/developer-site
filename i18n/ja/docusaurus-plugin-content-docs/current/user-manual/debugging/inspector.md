@@ -1,11 +1,11 @@
 ---
 title: Inspector
-description: 実行中の PlayCanvas アプリケーションをデバッグパネルで調べます。エンティティ、カメラ、アセット、フレームグラフ、GPU リソース、Script、シェーダーを確認し、フレームの描画を1つずつ進められます。
+description: 実行中の PlayCanvas アプリケーションをデバッグパネルで調べます。エンティティ、カメラ、アセット、フレームグラフ、GPU リソース、Script、シェーダーを確認し、フレームの描画を1つずつ進め、パフォーマンスを記録できます。
 ---
 
 Inspectorは、実行中のPlayCanvasアプリケーション用のデバッグパネルです。キャンバスの横にドッキングし、アプリケーションのシーン、GPUリソース、描画されたフレームを現在の状態で表示します。選択したもののプロパティは、下のビューでリアルタイムに更新されます。
 
-<img loading="lazy" alt="実行中のアプリケーションの横にドッキングしたInspectorパネル。ヒエラルキーでエンティティを選択しています" width="800" src="/img/user-manual/scripting/debugging/inspector/inspector.png" />
+<img loading="lazy" alt="実行中のアプリケーションの横にドッキングしたInspectorパネル。ヒエラルキーでエンティティを選択しています" width="800" src="/img/user-manual/debugging/inspector/inspector.png" />
 
 次のような疑問を解決するのに役立ちます。
 
@@ -13,6 +13,7 @@ Inspectorは、実行中のPlayCanvasアプリケーション用のデバッグ�
 - メッシュはどのマテリアルとシェーダーで描画され、どのテクスチャを使っているか。
 - フレームは何を、どのパスで、どの順序で描画しているか。
 - ビデオメモリはどこで使われているか。
+- どのフレームが遅く、何がそれを遅らせているか。
 
 Inspectorはアプリケーションを読み取るだけです。変更を加えるのは、ユーザーが指示した場合に限られます。エンティティのオン・オフ、アプリケーションの一時停止とコマ送り、そして表示だけに関わる上書き（レンダーモード、ワイヤーフレーム、飛行またはオービットするカメラ）です。これらはInspectorを閉じると元に戻ります。
 
@@ -56,6 +57,7 @@ app.root.addChild(entity);
 | `toggleKey` | `` 'Backquote' `` | パネルの表示・非表示を切り替えるキー。 |
 | `pauseKey` | `'F9'` | アプリケーションを一時停止・再開するキー。 |
 | `stepKey` | `'F10'` | 一時停止中に1フレーム進めるキー。 |
+| `record` | `false` | Performance タブでフレームの記録を開始するかどうか。アプリケーションの最初のフレームより前に作成すると、Inspector はその起動も記録します。[アプリケーションの起動の記録](/user-manual/optimization/inspector-performance/#recording-the-start-of-the-application)を参照してください。 |
 | `storageKey` | `'pc-inspector'` | アクティブなタブやパネルの幅など、パネルの設定を保存するローカルストレージのキー。`null`の場合は何も保存しません。 |
 
 ## ツールバー {#the-toolbar}
@@ -82,6 +84,7 @@ Escキーで、ピック、飛行、オービットを終了します。
 | **Cameras** | 描画順のカメラと、それぞれの描画先。レンダーモードを使うと、最終的な画像の代わりにアルベド、ワールド法線、ライティングなどのシーンのマテリアル入力を、1つのカメラまたはすべてのカメラで表示できます。シーンをワイヤーフレームで描画することもできます。 |
 | **Assets** | レジストリ内のすべてのアセットと、そのファイル、読み込み状態、使用箇所。 |
 | **Frame graph** | 直前のフレームを描画したパスを順に表示し、それぞれのレイヤー、描画、レンダーターゲットを示します。**GPU timings**はデバイスが計測できる場合に各パスのGPU時間を表示し、**Freeze**はアプリケーションの実行中も現在のフレームを表示し続け、**Preview**は選択したパスのレンダーターゲットをビューの上に描画します。 |
+| **Performance** | アプリケーションのフレームを記録し、フレーム、CPU、GPU、スクリプトの時間、ロードされたもの、メモリ、リソースを時間に沿ってチャート表示し、各フレームを独自のタイムラインで表示します。[Inspector のパフォーマンス](/user-manual/optimization/inspector-performance/)を参照してください。 |
 | **Render targets** | デバイス上のレンダーターゲットと、そこに描画したパス、選択したアタッチメントのライブプレビュー。 |
 | **Textures** | デバイス上のテクスチャを大きい順に表示し、ライブプレビューと表示するチャンネルの選択を提供します。 |
 | **Meshes** | アプリケーションのメッシュを大きい順に表示し、そのジオメトリと使用箇所を示します。 |
@@ -91,7 +94,7 @@ Escキーで、ピック、飛行、オービットを終了します。
 | **Shaders** | コンパイル済みのシェーダーとそのソース。 |
 | **Physics** | 物理ワールドの剛体とジョイント、そしてワールドをシーンの上に描画するオプション。 |
 
-<img loading="lazy" alt="フォワードパスを選択し、そのレンダーターゲットをビューの上にプレビューしているFrame graphタブ" width="800" src="/img/user-manual/scripting/debugging/inspector/frame-graph.png" />
+<img loading="lazy" alt="フォワードパスを選択し、そのレンダーターゲットをビューの上にプレビューしているFrame graphタブ" width="800" src="/img/user-manual/debugging/inspector/frame-graph.png" />
 
 ## フレームのステップ実行 {#stepping-through-a-frame}
 
@@ -102,7 +105,7 @@ Frame graphタブでは、フレームをドローコール1つずつ描画で�
 3. 上下の矢印キーで、描画を1つずつ戻ったり進めたりします。プロパティビューには描画されたメッシュインスタンスが一覧表示され、現在のものが強調表示されます。ビューではその輪郭が表示され、ステータスバーには*draw 8 of 12 · World opaque*のようにその番号が表示されます。項目を展開すると、メッシュやマテリアルなどの詳細を確認できます。
 4. **Debug frame**をオフにすると、再びフレーム全体が描画されます。
 
-<img loading="lazy" alt="Worldレイヤーの描画を1つずつ進めている様子" width="800" src="/img/user-manual/scripting/debugging/inspector/debug-frame.webp" />
+<img loading="lazy" alt="Worldレイヤーの描画を1つずつ進めている様子" width="800" src="/img/user-manual/debugging/inspector/debug-frame.webp" />
 
 :::note
 描画のステップ実行にはエンジンのデバッグビルドが必要で、他のビルドではこのオプションは無効になります。Viteなどのバンドラーは、開発時に`playcanvas`パッケージの`development`エクスポート条件によってデバッグビルドを選択します。
