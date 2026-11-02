@@ -60,7 +60,7 @@ This is the entry point for AI agents. Each product below has its own index: rea
 
 ## Examples and source
 
-- [Engine Examples Browser](https://playcanvas.com/examples): Hundreds of live engine examples. The source of each is at `https://github.com/playcanvas/engine/blob/main/examples/src/examples/<category>/<name>.example.mjs`: read it and port what you need rather than importing it.
+- [Engine Examples Browser](https://playcanvas.com/examples): Hundreds of live engine examples. The source of each is at `https://github.com/playcanvas/engine/blob/main/examples/src/examples/<category>/<name>/example.mjs`, next to the files it imports: read it and port what you need rather than importing it.
 - [Engine source](https://github.com/playcanvas/engine): The engine, its examples, and the production scripts in `scripts/esm`.
 - [PlayCanvas on GitHub](https://github.com/playcanvas): The source of every open-source product listed here.
 
