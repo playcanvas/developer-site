@@ -7,6 +7,12 @@ description: ポストプロセスパスでビネットで画像端を暗くし�
 
 import Link from '@docusaurus/Link';
 
+:::warning[非推奨]
+
+このチュートリアルでは、非推奨のレガシーポストエフェクトを使用しています。新しいプロジェクトでは、代わりにエフェクトを [CameraFrame の独自エフェクト](/user-manual/graphics/posteffects/cameraframe/#custom-post-processing) として作成してください。
+
+:::
+
 <div className="iframe-container">
     <iframe src="https://playcanv.as/p/UwEmhiJf/" title="Vignette Aberration" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>

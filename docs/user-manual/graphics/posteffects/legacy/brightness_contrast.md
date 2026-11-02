@@ -3,6 +3,12 @@ title: Brightness-Contrast Effect
 description: "Legacy brightness and contrast script effect: parameter ranges and GitHub source for the camera post pipeline."
 ---
 
+:::warning[Deprecated]
+
+This legacy effect is deprecated. Use the color grading `brightness` and `contrast` of [CameraFrame](/user-manual/graphics/posteffects/cameraframe) instead. See [Migrating to CameraFrame](/user-manual/graphics/posteffects/legacy#migrating-to-cameraframe).
+
+:::
+
 The brightness-contrast effect allows you to modify the brightness and contrast of the rendered image.
 
 Here is an image without the effect:

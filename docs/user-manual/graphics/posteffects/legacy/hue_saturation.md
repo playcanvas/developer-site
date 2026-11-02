@@ -3,6 +3,12 @@ title: Hue-Saturation Effect
 description: Legacy hue and saturation script effect controls plus GitHub link for the huesaturation post effect source.
 ---
 
+:::warning[Deprecated]
+
+This legacy effect is deprecated. Use the color grading `saturation` of [CameraFrame](/user-manual/graphics/posteffects/cameraframe) instead, or a color lookup table for a hue shift. See [Migrating to CameraFrame](/user-manual/graphics/posteffects/legacy#migrating-to-cameraframe).
+
+:::
+
 The hue-saturation effect allows you to modify the hue and saturation of the rendered image.
 
 Here is an image without the effect:

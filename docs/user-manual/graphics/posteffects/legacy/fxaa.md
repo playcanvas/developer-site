@@ -3,6 +3,12 @@ title: FXAA Effect
 description: Legacy FXAA script for fast full-screen anti-aliasing and where to find the engine posteffect-fxaa implementation.
 ---
 
+:::warning[Deprecated]
+
+This legacy effect is deprecated. Use the multisampling, the temporal anti-aliasing or the SMAA of [CameraFrame](/user-manual/graphics/posteffects/cameraframe) instead. See [Migrating to CameraFrame](/user-manual/graphics/posteffects/legacy#migrating-to-cameraframe).
+
+:::
+
 Fast Approximate Anti-Aliasing (FXAA) is an anti-aliasing algorithm created by NVIDIA. It provides an easy and fast way to add anti-aliasing to your scene.
 
 Here is an image without the effect:
