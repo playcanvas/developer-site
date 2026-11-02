@@ -164,7 +164,7 @@ Gaussian Splat でフォグや被写界深度を使用する場合は、[シー�
 
 <EngineExample id="gaussian-splatting/lut-grading" title="LUT グレーディング" />
 
-## カスタムポストプロセス
+## カスタムポストプロセス {#custom-post-processing}
 
 モダンなポストプロセスは、3 つの方法で拡張できます。ニーズに合うアプローチを選んでください。
 
