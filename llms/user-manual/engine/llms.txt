@@ -131,6 +131,7 @@ Use this index to write code against the engine directly. React, Web Components 
 - [Picking](/user-manual/gaussian-splatting/building/picking/): Picking splats with the `Picker`, including world positions from depth.
 - [Custom Shaders](/user-manual/gaussian-splatting/building/custom-shaders/): Changing how splats render with vertex and fragment shader chunks.
 - [Tonemapping and Exposure](/user-manual/gaussian-splatting/building/tonemapping/): How tone mapping, exposure and fog affect splats, and how to opt splats out.
+- [Anti-Aliasing](/user-manual/gaussian-splatting/building/anti-aliasing/): Rendering splats trained with anti-aliasing, detected from the file or set per resource.
 - [Shadows](/user-manual/gaussian-splatting/building/shadows/): Casting shadows from splats onto meshes.
 - [Relighting](/user-manual/gaussian-splatting/building/relighting/): Relighting a splat scene with standard lights through a proxy mesh.
 - [Render on Demand](/user-manual/gaussian-splatting/building/render-on-demand/): Rendering only when something changes, while streaming continues in the background.

@@ -47,6 +47,7 @@ interface LodMeta {
     generator?: string;        // 例: "splat-transform v2.5.2"
   };
   count: number;               // 全LODレベルにわたるGaussianの総数 (環境を除く)
+  model?: "antialiased" | "2dgs"; // オプション。シーンの学習方法 (すべてのチャンクに適用)。通常のガウス分布の場合は省略
   counts: number[];            // LODレベルごとのGaussian数; インデックス = LODレベル, 長さ = lodLevels
   lodLevels: number;           // LODレベルの数
   lodErrors?: boolean;         // trueの場合、すべてのリーフがレベルごとの `errors` を持つ

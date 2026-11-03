@@ -47,6 +47,7 @@ interface LodMeta {
     generator?: string;        // e.g. "splat-transform v2.5.2"
   };
   count: number;               // Total gaussians across all LOD levels (excludes environment)
+  model?: "antialiased" | "2dgs"; // Optional. How the scene was trained, for all its chunks; omitted for ordinary gaussians
   counts: number[];            // Gaussians per LOD level; index = LOD level, length = lodLevels
   lodLevels: number;           // Number of LOD levels
   lodErrors?: boolean;         // If true, every leaf supplies per-level `errors`

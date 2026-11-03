@@ -1039,6 +1039,7 @@ const sidebars = {
             'user-manual/gaussian-splatting/building/shadows',
             'user-manual/gaussian-splatting/building/fisheye',
             'user-manual/gaussian-splatting/building/tonemapping',
+            'user-manual/gaussian-splatting/building/anti-aliasing',
             {
               type: 'category',
               label: 'Custom Shaders',
