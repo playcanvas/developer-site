@@ -50,7 +50,7 @@ See the [simple-spz example](https://playcanvas.github.io/#/gaussian-splatting/s
 - The splat data is kept in its quantized form in GPU memory (roughly 20 bytes per splat plus spherical harmonics) and dequantized in the shader, so GPU memory use is comparable to compressed PLY and SOG rather than uncompressed formats.
 - Spherical harmonics are supported up to 3 bands. Files with degree 4 harmonics load with the extra band ignored.
 - **Coordinate system**: splat data uses a +Y up coordinate system (like glTF), so unlike PLY files, no flip rotation is needed when placing the loaded splat in a scene.
-- The `antialiased` flag and vendor extensions are ignored.
+- The `antialiased` flag sets [`antiAlias`](https://api.playcanvas.com/engine/classes/GSplatResourceBase.html#antialias) on the loaded resource, see [Anti-Aliasing](../building/anti-aliasing.md). Vendor extensions are ignored.
 
 ## When to Use SPZ
 
