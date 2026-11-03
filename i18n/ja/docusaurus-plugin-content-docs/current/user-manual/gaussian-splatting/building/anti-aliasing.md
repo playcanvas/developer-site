@@ -52,6 +52,17 @@ app.scene.gsplat.antiAlias = false;
 app.scene.gsplat.antiAlias = undefined;
 ```
 
+## フィルタサイズ
+
+学習ツールによって使うアンチエイリアスフィルタは異なります。gsplat のアンチエイリアスモードは 0.3 ピクセル² のフィルタで、Mip-Splatting と Brush の mip モードは 0.1 で学習します。ファイルにはサイズが記録されないため、学習ツールに合わせて [`app.scene.gsplat.antiAliasFilterSize`](https://api.playcanvas.com/engine/classes/GSplatParams.html#antialiasfiltersize) を設定してください。デフォルトは 0.3 です。スプラットの学習時より大きなフィルタを使うと、ぼやけて描画されます：
+
+```javascript
+// Mip-Splatting または Brush の mip モードで学習されたスプラット
+app.scene.gsplat.antiAliasFilterSize = 0.1;
+```
+
+このサイズは補正付きで描画されるスプラットに適用されます。それ以外のスプラットは、常に標準的な学習の 0.3 フィルタで描画されます。
+
 ## パフォーマンス
 
 補正はスプラットごとに数命令を追加します。アンチエイリアスありとなしで学習されたスプラットが混在するシーンでは、さらにスプラットごとのフラグの読み取りが加わります。これは1種類のスプラットだけのシーンにはかからない、わずかな追加コストです。
