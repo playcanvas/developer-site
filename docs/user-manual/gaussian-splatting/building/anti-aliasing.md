@@ -52,6 +52,17 @@ app.scene.gsplat.antiAlias = false;
 app.scene.gsplat.antiAlias = undefined;
 ```
 
+## Filter Size
+
+Trainers use different anti-aliasing filters: the anti-aliased mode of gsplat trains with a filter of 0.3 pixels squared, Mip-Splatting and the mip mode of Brush with 0.1. Files do not record the size, so set [`app.scene.gsplat.antiAliasFilterSize`](https://api.playcanvas.com/engine/classes/GSplatParams.html#antialiasfiltersize) to match the trainer. It defaults to 0.3. A filter larger than the one the splats were trained with renders them too soft:
+
+```javascript
+// splats trained with Mip-Splatting or Brush's mip mode
+app.scene.gsplat.antiAliasFilterSize = 0.1;
+```
+
+The size applies to the splats rendered with the compensation. Other splats always render with the 0.3 filter of standard training.
+
 ## Performance
 
 The compensation adds a few instructions per splat. A scene that mixes splats trained with and without anti-aliasing also reads a per-splat flag, a small extra cost that scenes with a single kind of splats don't pay.
