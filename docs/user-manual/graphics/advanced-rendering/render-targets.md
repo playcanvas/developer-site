@@ -224,7 +224,7 @@ The color texture must use a renderable, uncompressed format - see [Pixel format
 - **`PIXELFORMAT_RGBA8`** is the standard choice, renderable everywhere.
 - **sRGB formats** such as `PIXELFORMAT_SRGBA8` are renderable as well. The rendered linear colors are converted to sRGB when written, and blending happens in linear space. See [sRGB texture handling](../linear-workflow/textures.md).
 - **`PIXELFORMAT_RGB10A2`** offers 10 bits per RGB channel with 2-bit alpha - higher precision than `RGBA8` at the same memory cost, renderable on both WebGL2 and WebGPU. `PIXELFORMAT_RGB10A2U` is its unsigned integer variant.
-- **HDR formats** - float `PIXELFORMAT_RGBA32F`, half-float `PIXELFORMAT_RGBA16F` and small-float `PIXELFORMAT_111110F` - are renderable subject to device support:
+- **HDR formats** - float `PIXELFORMAT_RGBA32F`, half-float `PIXELFORMAT_RGBA16F` and small-float `PIXELFORMAT_RG11B10F` - are renderable subject to device support:
   - on WebGPU, rendering to float and half-float formats is always supported, and to the small-float format when [`GraphicsDevice.textureRG11B10Renderable`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#texturerg11b10renderable) is true.
   - on WebGL2, rendering to all three is supported when [`GraphicsDevice.textureFloatRenderable`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#texturefloatrenderable) is true. Otherwise, when [`GraphicsDevice.textureHalfFloatRenderable`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#texturehalffloatrenderable) is true, rendering to half-float formats only is supported - the case of many mobile iOS devices.
 

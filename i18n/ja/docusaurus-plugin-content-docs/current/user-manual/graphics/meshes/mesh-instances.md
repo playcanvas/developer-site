@@ -90,11 +90,11 @@ blue.addComponent('render', { meshInstances: [new MeshInstance(mesh, blueMateria
 
 ## 影
 
-- [`castShadow`](https://api.playcanvas.com/engine/classes/MeshInstance.html#castshadow)は、メッシュインスタンスをライトのシャドウマップに含めて、影を落とすようにします。
-- `receiveShadow`は、ほかのメッシュインスタンスが落とす影をメッシュインスタンスが受け取るようにします。
+- [`castShadows`](https://api.playcanvas.com/engine/classes/MeshInstance.html#castshadows)は、メッシュインスタンスをライトのシャドウマップに含めて、影を落とすようにします。
+- [`receiveShadows`](https://api.playcanvas.com/engine/classes/MeshInstance.html#receiveshadows)は、ほかのメッシュインスタンスが落とす影をメッシュインスタンスが受け取るようにします。
 - [`shadowCascadeMask`](https://api.playcanvas.com/engine/classes/MeshInstance.html#shadowcascademask)は、メッシュインスタンスがディレクショナルライトのどのカスケードに影を落とすかを選択します。たとえば、小さなオブジェクトを遠くのカスケードから除外できます。
 
-メッシュインスタンスを自分でレイヤーに追加する場合は、[エンティティを使わないレンダリング](../advanced-rendering/rendering-without-entities.md#レイヤーへの登録を維持する)で説明しているように、追加する前に`castShadow`を設定してください。ライトの設定については[シャドウ](../lighting/shadows.md)を参照してください。
+メッシュインスタンスを自分でレイヤーに追加する場合は、[エンティティを使わないレンダリング](../advanced-rendering/rendering-without-entities.md#レイヤーへの登録を維持する)で説明しているように、追加する前に`castShadows`を設定してください。ライトの設定については[シャドウ](../lighting/shadows.md)を参照してください。
 
 ## ソート順序
 

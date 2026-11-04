@@ -52,7 +52,7 @@ The `format` option selects how each texel is stored. The [`Texture`](https://ap
 
 - **8-bit formats** - `PIXELFORMAT_RGBA8` (the default), `PIXELFORMAT_RG8` and `PIXELFORMAT_R8`, for colors and general data.
 - **sRGB formats** - color textures authored in sRGB, such as most color images, should use an sRGB format (for example `PIXELFORMAT_SRGBA8`), or the `srgb: true` option, which selects the sRGB variant of the format. They are converted to linear space when sampled, which keeps the lighting physically correct. See [Linear Workflow](./linear-workflow/index.md) and [sRGB texture handling](./linear-workflow/textures.md).
-- **HDR formats** - half-float (`PIXELFORMAT_RGBA16F`), float (`PIXELFORMAT_RGBA32F`), small-float (`PIXELFORMAT_111110F`) and the compact shared-exponent `PIXELFORMAT_RGB9E5`, for values outside of the 0 to 1 range. See [HDR Rendering](./linear-workflow/hdr-rendering.md).
+- **HDR formats** - half-float (`PIXELFORMAT_RGBA16F`), float (`PIXELFORMAT_RGBA32F`), small-float (`PIXELFORMAT_RG11B10F`) and the compact shared-exponent `PIXELFORMAT_RGB9E5`, for values outside of the 0 to 1 range. See [HDR Rendering](./linear-workflow/hdr-rendering.md).
 - **Integer formats** - for example `PIXELFORMAT_R8U` or `PIXELFORMAT_RGBA32U`, holding integer values. They cannot be filtered, and are read in a shader by texel coordinates.
 - **Compressed formats** - such as the DXT, ETC, PVRTC and ASTC families, which use much less memory. They are usually produced from texture assets, see [Texture Compression](../optimization/texture-compression.md).
 - **Depth formats** - `PIXELFORMAT_DEPTH`, `PIXELFORMAT_DEPTH16` and `PIXELFORMAT_DEPTHSTENCIL`, used as the depth buffers of render targets.

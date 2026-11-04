@@ -32,7 +32,7 @@ layers: [
 ]
 ```
 
-レイヤーを名前で見つけるには`findAnimationLayer()`を使うか、`layers`配列から取得します。
+レイヤーを名前で見つけるには`findLayer()`を使うか、`layers`配列から取得します。
 
 </TabItem>
 <TabItem value="editor" label="Editor">
@@ -90,7 +90,7 @@ upperBody.assignAnimation('Aim', tracks.aim);
 ウェイトは、レイヤーの`weight`でいつでも変更できます。レイヤーを滑らかにフェードインまたはフェードアウトさせるには`blendToWeight()`を使います。これは、秒単位で指定した時間をかけて、ウェイトを指定した値まで動かします。
 
 ```javascript
-const upperBody = character.anim.findAnimationLayer('UpperBody');
+const upperBody = character.anim.findLayer('UpperBody');
 upperBody.blendToWeight(1, 0.3); // 0.3秒かけてフェードイン
 upperBody.blendToWeight(0, 0.3); // そして再びフェードアウト
 ```
