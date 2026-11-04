@@ -16,7 +16,7 @@ PlayCanvas では、視覚的に高度でパフォーマンスのよいモダン
 - **テンポラルアンチエイリアス（TAA）** — 時間方向にエッジを平滑化してギザつきを軽減。低い解像度でレンダリングしたシーンを[アップスケール](#taa-upscaling)することもできます
 - **[SMAA（Subpixel Morphological Anti-Aliasing）](#smaa)** — カメラをジッターさせず、ゴーストも生じさせずに、単一フレーム内でギザつきを平滑化
 - **ビネット** — `vignette.color` で指定した色に向かって画像の端をブレンド
-- **カラーグレーディング** — 明るさ、コントラスト、彩度、色味を調整してスタイルを付与
+- **カラーグレーディング** — 明るさ、コントラスト、彩度、色味を調整してスタイルを付与し、[チャンネルミキサー](#channel-mixer)で色チャンネルを組み替え
 - **[カラーエンハンス](#color-enhance)** — HDR でシャドウ、ハイライト、中間調、自然な彩度、かすみの除去を調整
 - **カラー LUT** — 高度な色変換のためにルックアップテーブルを適用。詳細は [HDR レンダリング > カラー LUT](/user-manual/graphics/linear-workflow/hdr-rendering/#color-lut) を参照してください。
 - **フリンジ** — 色チャンネルの分離をシミュレートする色収差
@@ -52,6 +52,31 @@ cameraFrame.update();
 ```
 
 5 つの調整値のデフォルトはすべて 0 で、エフェクトはデフォルトで無効です。
+
+### チャンネルミキサー {#channel-mixer}
+
+`grading` のチャンネルミキサーは、画像編集ソフトのチャンネルミキサー調整と同様に、各出力チャンネルを赤、緑、青の入力チャンネルの重み付きの組み合わせから作ります。`mixerRed`、`mixerGreen`、`mixerBlue` は、それぞれの出力チャンネルにおける赤、緑、青の入力の重みを保持し、各成分の範囲は -2 から 2 です。デフォルトは恒等変換で、画像は変化しません。
+
+```javascript
+const grading = cameraFrame.grading;
+grading.enabled = true;
+
+// 赤と青のチャンネルを入れ替える
+grading.mixerRed.set(0, 0, 1);
+grading.mixerBlue.set(1, 0, 0);
+cameraFrame.update();
+```
+
+チャンネルごとの重みを指定した白黒にするには、3 つの出力チャンネルすべてに同じ重みを使用します。
+
+```javascript
+grading.mixerRed.set(0.5, 0.4, 0.1);
+grading.mixerGreen.copy(grading.mixerRed);
+grading.mixerBlue.copy(grading.mixerRed);
+cameraFrame.update();
+```
+
+ミキサーはトーンマッピングの前のリニア HDR 空間で、グレーディングの色味、明るさ、彩度、コントラストより先に適用されます。線形な変換なので、[自動露出](auto-exposure.md)を使う場合も含め、どの露出でも同じ結果になります。画像編集ソフトで作成したルックを正確に再現するには、トーンマッピングの後に適用される[カラー LUT](/user-manual/graphics/linear-workflow/hdr-rendering/#color-lut) を使用してください。
 
 ### ビネットの色
 
@@ -132,7 +157,7 @@ Gaussian Splat でフォグや被写界深度を使用する場合は、[シー�
 
 <EngineExample id="camera-frame/hdr" title="HDR と Bloom、LUT" />
 
-- ポストプロセス — ブルーム、グレーディング、カラーエンハンス、色付きビネット、フリンジ、TAA を表示
+- ポストプロセス — ブルーム、チャンネルミキサーを含むグレーディング、カラーエンハンス、色付きビネット、フリンジ、TAA を表示
 
 <EngineExample id="camera-frame/post-processing" title="ポストプロセス" />
 

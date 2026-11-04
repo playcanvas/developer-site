@@ -16,7 +16,7 @@ The `CameraFrame` enables advanced rendering techniques including:
 - **Temporal Anti-Aliasing (TAA)** - Reduces visual artifacts by smoothing jagged edges over time, and can [upscale](#taa-upscaling) a scene rendered at a lower resolution
 - **[SMAA (Subpixel Morphological Anti-Aliasing)](#smaa)** - Smooths jagged edges within a single frame, without jittering the camera or ghosting
 - **Vignette** - Blends the image edges towards a configurable color using `vignette.color`
-- **Color Grading** - Adjusts brightness, contrast, saturation, and color tint for stylistic effects
+- **Color Grading** - Adjusts brightness, contrast, saturation, and color tint for stylistic effects, and remaps the color channels with a [channel mixer](#channel-mixer)
 - **[Color Enhance](#color-enhance)** - Adjusts shadows, highlights, midtones, vibrance, and dehaze in HDR
 - **Color LUT** - Apply color lookup tables for advanced color transformations. See [HDR Rendering > Color LUT](/user-manual/graphics/linear-workflow/hdr-rendering/#color-lut) for details.
 - **Fringing** - Chromatic aberration effect that simulates color channel separation
@@ -52,6 +52,31 @@ cameraFrame.update();
 ```
 
 All five adjustments default to 0, and the effect is disabled by default.
+
+### Channel Mixer {#channel-mixer}
+
+The channel mixer of `grading` builds each output channel from a weighted mix of the red, green, and blue input channels, like the Channel Mixer adjustment of image editors. `mixerRed`, `mixerGreen`, and `mixerBlue` hold the weights of the red, green, and blue inputs in each output channel, with a range of -2 to 2 per component. They default to the identity, which leaves the image unchanged.
+
+```javascript
+const grading = cameraFrame.grading;
+grading.enabled = true;
+
+// swap the red and blue channels
+grading.mixerRed.set(0, 0, 1);
+grading.mixerBlue.set(1, 0, 0);
+cameraFrame.update();
+```
+
+For black and white with custom channel weights, use the same weights in all three output channels:
+
+```javascript
+grading.mixerRed.set(0.5, 0.4, 0.1);
+grading.mixerGreen.copy(grading.mixerRed);
+grading.mixerBlue.copy(grading.mixerRed);
+cameraFrame.update();
+```
+
+The mixer is applied in linear HDR space before tone mapping, ahead of the tint, brightness, saturation, and contrast of the grading. As it is linear, it gives the same result at any exposure, including with [auto exposure](auto-exposure.md). To match a look authored in an image editor exactly, use a [color LUT](/user-manual/graphics/linear-workflow/hdr-rendering/#color-lut) instead, which is applied after tone mapping.
 
 ### Vignette Color
 
@@ -132,7 +157,7 @@ For Gaussian splats, see [scene depth requirements](volumetric-fog.md#gaussian-s
 
 <EngineExample id="camera-frame/hdr" title="HDR with Bloom and LUT" />
 
-- Post-Processing - Shows bloom, grading, Color Enhance, colored vignette, fringing, and TAA
+- Post-Processing - Shows bloom, grading with its channel mixer, Color Enhance, colored vignette, fringing, and TAA
 
 <EngineExample id="camera-frame/post-processing" title="Post-Processing" />
 
