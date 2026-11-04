@@ -224,7 +224,7 @@ WebGL2とWebGPUは、レンダリングされた画像を垂直方向に逆の�
 - **`PIXELFORMAT_RGBA8`** が標準的な選択肢で、どこでもレンダリング可能です。
 - **sRGBフォーマット**（`PIXELFORMAT_SRGBA8` など）もレンダリング可能です。レンダリングされたリニアの色は書き込み時にsRGBに変換され、ブレンドはリニア空間で行われます。[sRGBテクスチャの扱い](../linear-workflow/textures.md)を参照してください。
 - **`PIXELFORMAT_RGB10A2`** はRGB各チャンネル10ビットと2ビットのアルファを提供し、`RGBA8` と同じメモリコストでより高い精度が得られます。WebGL2とWebGPUの両方でレンダリング可能です。`PIXELFORMAT_RGB10A2U` はその符号なし整数版です。
-- **HDRフォーマット**（float の `PIXELFORMAT_RGBA32F`、half-float の `PIXELFORMAT_RGBA16F`、small-float の `PIXELFORMAT_111110F`）は、デバイスのサポート状況に応じてレンダリング可能です。
+- **HDRフォーマット**（float の `PIXELFORMAT_RGBA32F`、half-float の `PIXELFORMAT_RGBA16F`、small-float の `PIXELFORMAT_RG11B10F`）は、デバイスのサポート状況に応じてレンダリング可能です。
   - WebGPUでは、floatとhalf-floatのフォーマットへのレンダリングは常にサポートされ、small-floatのフォーマットへのレンダリングは [`GraphicsDevice.textureRG11B10Renderable`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#texturerg11b10renderable) がtrueの場合にサポートされます。
   - WebGL2では、[`GraphicsDevice.textureFloatRenderable`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#texturefloatrenderable) がtrueの場合に3つすべてへのレンダリングがサポートされます。そうでない場合、[`GraphicsDevice.textureHalfFloatRenderable`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#texturehalffloatrenderable) がtrueであれば、half-floatのフォーマットへのレンダリングのみがサポートされます。これは多くのモバイルiOSデバイスの場合です。
 

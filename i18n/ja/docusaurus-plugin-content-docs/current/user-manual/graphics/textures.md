@@ -52,7 +52,7 @@ const volume = new Texture(app.graphicsDevice, { width: 64, height: 64, depth: 3
 
 - **8ビットフォーマット** - `PIXELFORMAT_RGBA8`（デフォルト）、`PIXELFORMAT_RG8`、`PIXELFORMAT_R8` で、色や一般的なデータに使用します。
 - **sRGBフォーマット** - ほとんどのカラー画像のように、sRGBで作成されたカラーテクスチャには、sRGBフォーマット（例：`PIXELFORMAT_SRGBA8`）か、フォーマットのsRGB版を選択する `srgb: true` オプションを使用します。サンプリング時にリニア空間へ変換されるため、ライティングが物理的に正しく保たれます。[リニアワークフロー](./linear-workflow/index.md)と[sRGBテクスチャの扱い](./linear-workflow/textures.md)を参照してください。
-- **HDRフォーマット** - 0から1の範囲外の値のための、半精度浮動小数点（`PIXELFORMAT_RGBA16F`）、単精度浮動小数点（`PIXELFORMAT_RGBA32F`）、小さい浮動小数点（`PIXELFORMAT_111110F`）、およびコンパクトな共有指数の `PIXELFORMAT_RGB9E5` です。[HDRレンダリング](./linear-workflow/hdr-rendering.md)を参照してください。
+- **HDRフォーマット** - 0から1の範囲外の値のための、半精度浮動小数点（`PIXELFORMAT_RGBA16F`）、単精度浮動小数点（`PIXELFORMAT_RGBA32F`）、小さい浮動小数点（`PIXELFORMAT_RG11B10F`）、およびコンパクトな共有指数の `PIXELFORMAT_RGB9E5` です。[HDRレンダリング](./linear-workflow/hdr-rendering.md)を参照してください。
 - **整数フォーマット** - 例えば `PIXELFORMAT_R8U` や `PIXELFORMAT_RGBA32U` で、整数値を保持します。フィルタリングはできず、シェーダーではテクセル座標で読み取ります。
 - **圧縮フォーマット** - DXT、ETC、PVRTC、ASTCなどのファミリーで、使用するメモリが大幅に少なくなります。通常はテクスチャアセットから生成されます。[テクスチャ圧縮](../optimization/texture-compression.md)を参照してください。
 - **深度フォーマット** - `PIXELFORMAT_DEPTH`、`PIXELFORMAT_DEPTH16`、`PIXELFORMAT_DEPTHSTENCIL` で、レンダーターゲットの深度バッファとして使用します。

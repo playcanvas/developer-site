@@ -90,11 +90,11 @@ Culling uses the bounding box of the mesh, [`mesh.aabb`](https://api.playcanvas.
 
 ## Shadows
 
-- [`castShadow`](https://api.playcanvas.com/engine/classes/MeshInstance.html#castshadow) makes the mesh instance cast shadows, by including it in the shadow maps of lights.
-- `receiveShadow` makes the mesh instance receive shadows cast by other mesh instances.
+- [`castShadows`](https://api.playcanvas.com/engine/classes/MeshInstance.html#castshadows) makes the mesh instance cast shadows, by including it in the shadow maps of lights.
+- [`receiveShadows`](https://api.playcanvas.com/engine/classes/MeshInstance.html#receiveshadows) makes the mesh instance receive shadows cast by other mesh instances.
 - [`shadowCascadeMask`](https://api.playcanvas.com/engine/classes/MeshInstance.html#shadowcascademask) selects which cascades of a directional light the mesh instance casts shadows into, for example to keep small objects out of the distant cascades.
 
-When you add a mesh instance to a layer yourself, set `castShadow` before adding it, as described in [Rendering Without Entities](../advanced-rendering/rendering-without-entities.md#keep-layer-membership-persistent). See [Shadows](../lighting/shadows.md) for configuring the lights.
+When you add a mesh instance to a layer yourself, set `castShadows` before adding it, as described in [Rendering Without Entities](../advanced-rendering/rendering-without-entities.md#keep-layer-membership-persistent). See [Shadows](../lighting/shadows.md) for configuring the lights.
 
 ## Sort Order
 

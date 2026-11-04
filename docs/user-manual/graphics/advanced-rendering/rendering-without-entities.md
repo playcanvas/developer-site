@@ -64,7 +64,7 @@ layer.addMeshInstances(meshInstances);
 
 The layer also controls when these objects render relative to the rest of the scene. The scene keeps its layers in a render order called the layer composition, available as `app.scene.layers`. To use a custom layer instead of World, add it to `app.scene.layers` and to the camera's `layers` list. Lights must also include that layer in their `layers` lists. See [Layers](../layers/index.md#layer-composition) for ordering and camera configuration.
 
-To cast shadows, set `meshInstance.castShadow = true` **before** adding it to the layer; registration also adds eligible instances to the layer's shadow casters. Removing the instance removes it from both lists. StandardMaterial receives lighting and shadows through the normal renderer, just as it does on a Render Component.
+To cast shadows, set `meshInstance.castShadows = true` **before** adding it to the layer; registration also adds eligible instances to the layer's shadow casters. Removing the instance removes it from both lists. StandardMaterial receives lighting and shadows through the normal renderer, just as it does on a Render Component.
 
 ## Instance a Loaded Mesh
 
@@ -75,7 +75,7 @@ A loaded container asset exposes render assets and materials without requiring `
 const treeMesh = treeAsset.resource.renders[0].resource.meshes[0];
 const treeMaterial = treeAsset.resource.materials[0].resource;
 const forest = new MeshInstance(treeMesh, treeMaterial, new GraphNode('Forest'));
-forest.castShadow = true;
+forest.castShadows = true;
 ```
 
 This direct lookup is specific to the example asset. A general GLB can contain multiple primitives and materials, node transforms, skins, and morph targets. Those require the corresponding setup when bypassing entity instantiation. The example centers and grounds the tree's raw mesh before placing copies.
