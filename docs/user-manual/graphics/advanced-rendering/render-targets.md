@@ -186,6 +186,23 @@ When the slices change over time, rendering only some of them each frame, in tur
 
 When the color texture has mipmaps, the render target regenerates them after each render pass, so the result can be sampled with mipmap filtering.
 
+The mipmaps are generated with a box filter, which averages each block of 2x2 texels of the previous level. When the small mip levels are sampled to blur the result, such as for the reflection of a rough surface, their blocks show and flicker as the content moves. The `mipmapFilter` option of the texture selects a smooth Gaussian filter instead, at a higher cost of generating the mipmaps:
+
+```javascript
+const texture = new Texture(app.graphicsDevice, {
+    name: 'RT-color',
+    width: 512,
+    height: 256,
+    format: PIXELFORMAT_SRGBA8,
+    mipmaps: true,
+    mipmapFilter: MIPMAPFILTER_GAUSSIAN,
+    minFilter: FILTER_LINEAR_MIPMAP_LINEAR,
+    magFilter: FILTER_LINEAR
+});
+```
+
+The Gaussian filter applies to 2D textures of formats which can be filtered. Cubemaps, texture arrays and volume textures use the box filter, as do the mipmaps generated for data uploaded to a texture.
+
 To render into a specific mip level instead, use the `mipLevel` option. Specifying it - even as 0 - also disables the automatic mipmap generation. Rendering to a mip level other than 0 is not supported together with a depth buffer.
 
 When a render target renders into a cubemap face or an array layer, WebGPU regenerates the mipmaps of the rendered face or layer only. WebGL2 regenerates the mipmaps of all faces or layers of the texture, which is costly when rendering into many layers. To generate them only once, disable the mipmap generation on all render targets except the one rendered last:
