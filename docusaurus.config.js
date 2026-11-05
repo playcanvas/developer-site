@@ -68,6 +68,9 @@ const config = {
   plugins: [
     [ '@docusaurus/plugin-client-redirects', {
       redirects: [
+        // Spine and the tweening tutorial moved into the Add-on Libraries section of the engine
+        { from: ['/user-manual/2D/spine/'], to: '/user-manual/engine/libraries/spine/' },
+        { from: ['/tutorials/tweening/'], to: '/user-manual/engine/libraries/tween/' },
         // Debugging moved out of Scripting into Debugging and Optimization
         { from: ['/user-manual/scripting/debugging/'], to: '/user-manual/debugging/' },
         { from: ['/user-manual/scripting/debugging/console-logging/'], to: '/user-manual/debugging/console-logging/' },

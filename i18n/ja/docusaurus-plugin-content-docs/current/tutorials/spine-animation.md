@@ -11,7 +11,7 @@ thumb: /img/tutorials/spine-animation/thumbnail.jpg
 
 *パネルを使って、各スケルトンが再生するアニメーションの選択、速度の変更、一時停止ができます。*
 
-このチュートリアルでは、[Spine](https://esotericsoftware.com/)エディターで作成した2つのスケルタルアニメーションを、[playcanvas-spine](https://github.com/playcanvas/playcanvas-spine)プラグインを使って再生します。戦車はバイナリの`.skel`エクスポートから、Celestial CircusはJSONエクスポートから読み込まれます。完成したシーンは[チュートリアルプロジェクト](https://playcanvas.com/project/1615675)で確認できます。プラグインの詳細は、ユーザーマニュアルの[Spine](/user-manual/2D/spine/)ページを参照してください。
+このチュートリアルでは、[Spine](https://esotericsoftware.com/)エディターで作成した2つのスケルタルアニメーションを、[playcanvas-spine](https://github.com/playcanvas/playcanvas-spine)プラグインを使って再生します。戦車はバイナリの`.skel`エクスポートから、Celestial CircusはJSONエクスポートから読み込まれます。完成したシーンは[チュートリアルプロジェクト](https://playcanvas.com/project/1615675)で確認できます。プラグインの詳細は、ユーザーマニュアルの[Spine](/user-manual/engine/libraries/spine/)ページを参照してください。
 
 ## プラグインの追加
 

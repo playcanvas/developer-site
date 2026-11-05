@@ -109,6 +109,20 @@ const sidebars = {
         'user-manual/engine/versioning',
         'user-manual/engine/migrations',
         'user-manual/engine/developing-with-ai',
+        {
+          type: 'category',
+          label: 'Add-on Libraries',
+          link: {
+            type: 'doc',
+            id: 'user-manual/engine/libraries/index',
+          },
+          items: [
+            'user-manual/engine/libraries/spine',
+            'user-manual/engine/libraries/3d-tiles',
+            'user-manual/engine/libraries/tween',
+            'user-manual/engine/libraries/loaders-gl',
+          ],
+        },
         { type: 'link', label: 'Examples', key: 'engine-examples', href: 'https://playcanvas.com/examples' },
       ],
     },
@@ -1121,7 +1135,7 @@ const sidebars = {
         'user-manual/2D/sprite-editor',
         'user-manual/2D/slicing',
         'user-manual/2D/texture-packing',
-        'user-manual/2D/spine',
+        { type: 'ref', id: 'user-manual/engine/libraries/spine' },
       ],
     },
     {
