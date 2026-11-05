@@ -109,12 +109,13 @@ An environment map shows the surroundings as seen from a single point, so it can
 The `PlanarRenderer` script (`scripts/esm/planar-renderer.mjs`) creates that camera and its texture, and moves the camera with the main camera each frame. The material reflects the texture set as its `planarReflectionMap`, projected with the view projection matrix of the camera set as its `planarReflectionMatrix`.
 
 - The planar reflection replaces only the reflections. The lights, shadows and fresnel of the material are unchanged, and its ambient light still comes from the environment, as described in [Which environment is used](#which-environment-is-used).
-- Rougher surfaces blur the reflection using the mipmaps of the texture, so enable `mipmaps` on the script for anything but a perfect mirror.
+- Rougher surfaces blur the reflection using the mipmaps of the texture, so enable `mipmaps` on the script for anything but a perfect mirror. The script generates them with a Gaussian filter, which keeps the blurred reflection smooth as the camera moves. Set its `mipmapFilter` to `'box'` for cheaper mipmaps, with a blockier blur.
 - A normal map distorts the reflection, like the reflection on an uneven or wet surface.
 - Enable `hdr` on the script so that bright light sources are as bright in the reflection as in the scene. The texture then stores linear colors, and the camera rendering the material applies the tone mapping.
+- When the main camera uses TAA, the reflection camera follows its jitter, so the reflection is antialiased as well.
 - Refraction on a material with a planar reflection requires Dynamic Refractions, as the texture holds no environment to show through the surface.
 - Put the reflective surface on a layer that the reflection camera does not render, as a surface cannot appear in its own reflection.
-- The reflection renders the scene a second time each frame. Lower the `scale` of the script to render it at a fraction of the screen resolution, and give the reflection camera only the layers worth reflecting.
+- The reflection renders the scene a second time each frame. Lower the `scale` of the script to render it at a fraction of the screen resolution, and give the reflection camera only the layers worth reflecting. A perfect mirror reads the texture once per pixel, while rougher surfaces read it a few more times to blur it smoothly.
 
 Planar reflections are set up in code:
 
