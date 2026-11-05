@@ -121,7 +121,7 @@ camera.script.create('cameraControls');
 [`AssetListLoader`](https://api.playcanvas.com/engine/classes/AssetListLoader.html)を使用してカメラコントロールスクリプトをすでにロードしているため、直接スクリプトコンポーネントを作成できます。カメラコントロールを使用すると、次のことができます：
 
 - **マウス左ドラッグ**: ターゲットの周りを軌道移動
-- **マウス右ドラッグ**: カメラをパン
+- **マウス中ボタンドラッグ**: カメラをパン
 - **マウスホイール**: ズームイン/ズームアウト
 
 ## Splatの追加
