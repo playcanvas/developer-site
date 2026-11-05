@@ -366,5 +366,9 @@
   "sidebar.userManualSidebar.category.PCUI Graph": {
     "message": "PCUIグラフ",
     "description": "The label for category PCUI Graph in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Add-on Libraries": {
+    "message": "アドオンライブラリ",
+    "description": "The label for category Add-on Libraries in sidebar userManualSidebar"
   }
 }

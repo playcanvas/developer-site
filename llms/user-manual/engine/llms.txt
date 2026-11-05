@@ -35,6 +35,14 @@ Use this index to write code against the engine directly. React, Web Components 
 - [Supported Browsers](/user-manual/engine/supported-browsers/): Minimum browser versions for WebGL2 and WebGPU.
 - [Running the Engine in Node.js](/user-manual/engine/running-in-node/): Running the engine on a server for multiplayer, asset processing or unit tests.
 
+## Add-on libraries
+
+- [Add-on Libraries](/user-manual/engine/libraries/): Libraries used alongside the engine, what each one adds and who maintains it.
+- [Spine](/user-manual/engine/libraries/spine/): Playing 2D skeletal animations from the Spine editor with the playcanvas-spine plugin: plugin versions, texture sRGB settings, binary skeletons, animation state, colors, physics and layers.
+- [3D Tiles](/user-manual/engine/libraries/3d-tiles/): Streaming 3D Tiles tilesets with the PlayCanvas renderer of 3DTilesRendererJS: setup, error target and memory budget, Draco and KTX2 decoders, adjusting loaded tiles, plugins and limitations.
+- [Tween](/user-manual/engine/libraries/tween/): Animating entity transforms and other values over time with playcanvas-tween: its UMD and ESM builds, chaining, looping, yoyo, callbacks and easing curves.
+- [loaders.gl](/user-manual/engine/libraries/loaders-gl/): Parsing data formats the engine does not load itself with loaders.gl, and building engine meshes from the parsed arrays.
+
 ## Entities and components
 
 - [Entity Component System](/user-manual/ecs/): How a scene is built from entities, the components that give them abilities and the systems that run them, on every surface.
@@ -161,7 +169,6 @@ Use this index to write code against the engine directly. React, Web Components 
 - [Blend Trees](/user-manual/animation/blend-trees/): 1D, 2D Cartesian, 2D Directional and Direct blend trees, State.Child clip paths, and keeping clips in step with syncAnimations.
 - [Layers and Masks](/user-manual/animation/layers-and-masks/): Several state machines on one model, overwrite and additive blending by weight, blendToWeight, normalizeWeights, and masks that limit a layer to part of a hierarchy.
 - [Animation Events](/user-manual/animation/events/): Adding named events to clips in the Editor or with AnimEvents, listening for them on the anim component, and when they fire.
-- [Spine](/user-manual/2D/spine/): Playing 2D skeletal animations from the Spine editor with the playcanvas-spine plugin: plugin versions, texture sRGB settings, binary skeletons, animation state, colors, physics and layers.
 
 ## User interface
 

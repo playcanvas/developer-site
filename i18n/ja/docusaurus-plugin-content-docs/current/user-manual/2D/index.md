@@ -33,4 +33,4 @@ PlayCanvasエンジンは、3Dゲームやアプリを素早く簡単に作成�
 
 ![Spine](/img/user-manual/2D/spine/spine-4-3-example.webp)
 
-[Spine](https://esotericsoftware.com/)は、2Dスケルタルアニメーションのためのエディターです。[playcanvas-spine](https://github.com/playcanvas/playcanvas-spine)プラグインを使うと、Spineからエクスポートしたアニメーションを、Editorとエンジンのみのプロジェクトで再生できます。[詳細はこちら](/user-manual/2D/spine)。
+[Spine](https://esotericsoftware.com/)は、2Dスケルタルアニメーションのためのエディターです。[playcanvas-spine](https://github.com/playcanvas/playcanvas-spine)プラグインを使うと、Spineからエクスポートしたアニメーションを、Editorとエンジンのみのプロジェクトで再生できます。[詳細はこちら](/user-manual/engine/libraries/spine/)。
