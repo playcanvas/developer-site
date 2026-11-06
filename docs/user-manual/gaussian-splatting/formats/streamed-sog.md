@@ -56,7 +56,7 @@ interface LodMeta {
   environment?: string;        // Relative path to the environment SOG's meta.json; omitted if none
   filenames: string[];         // Relative paths to chunk SOG meta.json files, referenced by index
   tree: Node;                  // Root of the spatial tree
-  extras?: any;                // Application-defined JSON for the whole scene (see SOG §4)
+  extras?: any;                // Application-defined JSON for the whole scene (see SOG §4); only with SOG version 3 chunks
   comments?: string[];         // Free-form producer comments for the whole scene (see SOG §5); only with SOG version 3 chunks
 }
 

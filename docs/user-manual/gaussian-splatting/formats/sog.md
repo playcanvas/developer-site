@@ -523,7 +523,7 @@ As noted in §1, a blind texture whose fields use the A byte can contain pixels 
 
 * Readers **must** check `version`. This document describes **version 3**; [version 2](./sog-v2.md) is specified separately. Readers **should** reject versions they do not support.
 * Additional optional properties may appear in future versions; readers **should** ignore unrecognized fields.
-* A version 3 file cannot be stored as version 2 without loss. When writing version 2, a tool **should** clamp opacity to 1, drop blind data, reduce SH to 3 bands and the SH palette to 65536 entries, and warn about each. `comments` is a version 3 property and is left out of version 2 files.
+* A version 3 file cannot be stored as version 2 without loss. When writing version 2, a tool **should** clamp opacity to 1, drop blind data, reduce SH to 3 bands and the SH palette to 65536 entries, and warn about each.
 
 ---
 
@@ -536,7 +536,7 @@ As noted in §1, a blind texture whose fields use the A byte can contain pixels 
 | SH bands | 1–3 | 1–4 (§3.5) |
 | SH palette | up to 65536 entries, 16-bit labels | up to 2^24 entries, 24-bit labels (§3.5) |
 | Blind data | — | optional blind textures `blind_<i>.webp` described by `meta.blind` (§3.7) |
-| Extras | optional `extras` | unchanged (§4) |
+| Extras | — | optional `extras`: application-defined JSON (§4) |
 | Comments | — | optional `comments`: free-form producer comments (§5) |
 
 Everything else (positions, scales, DC color, the SH palette layout, indexing and bundling) is unchanged.

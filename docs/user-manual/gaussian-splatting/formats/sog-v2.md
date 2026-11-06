@@ -105,8 +105,6 @@ interface Meta {
       "shN_labels.webp"    // Per-gaussian palette index (0..count-1)
     ];
   };
-
-  extras?: any;            // Application-defined JSON (§3.6)
 }
 ```
 
@@ -295,13 +293,6 @@ for (let c = 0; c < shCoeffs; c++) {
 ```
 
 The SH basis, coefficient order and evaluation are the same as in [version 3](./sog.md#351-basis-and-evaluation), for bands 1–3.
-
-### 3.6 Extras
-
-`extras` is an optional top-level property holding **application-defined JSON**, in the spirit of glTF's `extras`. It may be any JSON value; an object is recommended.
-
-* Readers **must not** require `extras` and **should** expose it to the application unchanged.
-* Tools that convert or process a SOG **should** carry `extras` through to their output. Tools that combine several scenes **should** keep `extras` only when every input carries identical extras.
 
 ---
 
