@@ -449,7 +449,7 @@ PlayCanvasでは、スプラットをワークバッファにコピーする際�
 
 `model` は、シーンがどのように学習されたかを記録し、それによってシーンをどのようにレンダリングしなければならないかが決まります。通常の3D Gaussianの場合は省略されます。
 
-* `"antialiased"`: スクリーン空間のアンチエイリアスフィルター（Mip-Splattingの2Dフィルター）を用いて学習されたもの。レンダラーは、投影された各Gaussianに通常の0.3 px²の膨張の代わりにそのフィルターを適用し（2D共分散Σの対角成分に加算します）、フィルター適用前のGaussianの質量を描画するように、その不透明度を `sqrt(det Σ / det(Σ + filter))` でスケーリング**すべきです**。このスケーリングは、1を超える不透明度のプロファイル（3.6節）の前に適用してください。フィルターのサイズは格納されません。0.1 px²（Mip-Splattingの値で、Brush、LichtFeld Studio、Spirulaが使用）がSplatTransformのデフォルトで、SplatTransformとPlayCanvasの両方で上書きできます。PlayCanvasがこれらのシーンをどのように検出してレンダリングするかについては、[アンチエイリアス](../building/anti-aliasing.md)を参照してください。
+* `"antialiased"`: スクリーン空間のアンチエイリアスフィルター（Mip-Splattingの2Dフィルター）を用いて学習されたもの。レンダラーは、投影された各Gaussianに通常の0.3 px²の膨張の代わりにそのフィルターを適用し（2D共分散Σの対角成分に加算します）、フィルター適用前のGaussianの質量を描画するように、その不透明度を `sqrt(det Σ / det(Σ + filter))` でスケーリング**すべきです**。このスケーリングは、1を超える不透明度のプロファイル（3.6節）の前に適用してください。フィルターのサイズは格納されません。0.1 px²（Mip-Splattingの値で、Brush、LichtFeld Studio、Spirulaが使用）がPlayCanvasとSplatTransformのデフォルトで、どちらでも上書きできます。PlayCanvasがこれらのシーンをどのように検出してレンダリングするかについては、[アンチエイリアス](../building/anti-aliasing.md)を参照してください。
 * `"2dgs"`: 2D Gaussian Splattingのサーフェル。3番目のスケールが厚さゼロの軸です。
 
 ---

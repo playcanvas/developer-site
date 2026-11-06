@@ -449,7 +449,7 @@ In PlayCanvas, shaders read blind fields while splats are copied to the work buf
 
 `model` records how the scene was trained, which decides how it must be rendered. It is omitted for ordinary 3D gaussians.
 
-* `"antialiased"`: trained with a screen-space anti-aliasing filter (Mip-Splatting's 2D filter). A renderer **should** filter each projected gaussian with that filter instead of the usual 0.3 px² dilation, adding it to the diagonal of the 2D covariance Σ, and scale its opacity by `sqrt(det Σ / det(Σ + filter))` so that it draws the unfiltered gaussian's mass. Apply this scale before the over-unity profile (§3.6). The filter size is not stored: 0.1 px² (Mip-Splatting's, used by Brush, LichtFeld Studio and Spirula) is SplatTransform's default, and both SplatTransform and PlayCanvas let it be overridden. See [Anti-Aliasing](../building/anti-aliasing.md) for how PlayCanvas detects and renders these scenes.
+* `"antialiased"`: trained with a screen-space anti-aliasing filter (Mip-Splatting's 2D filter). A renderer **should** filter each projected gaussian with that filter instead of the usual 0.3 px² dilation, adding it to the diagonal of the 2D covariance Σ, and scale its opacity by `sqrt(det Σ / det(Σ + filter))` so that it draws the unfiltered gaussian's mass. Apply this scale before the over-unity profile (§3.6). The filter size is not stored: 0.1 px² (Mip-Splatting's, used by Brush, LichtFeld Studio and Spirula) is the default in PlayCanvas and SplatTransform, and both let it be overridden. See [Anti-Aliasing](../building/anti-aliasing.md) for how PlayCanvas detects and renders these scenes.
 * `"2dgs"`: 2D Gaussian Splatting surfels. The third scale is the zero-thickness axis.
 
 ---
