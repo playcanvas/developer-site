@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 
 **ライブサンプルを見る** - 各スプラットをそれぞれの色のリングとして描画し、ハイライトの波を加えます。
 
-<EngineExample id="gaussian-splatting/shader-rings" title="ライブサンプルを見る" />
+<EngineExample id="gaussian-splatting-fx/shader-rings" title="ライブサンプルを見る" />
 
 ## オーバーライド可能な関数
 

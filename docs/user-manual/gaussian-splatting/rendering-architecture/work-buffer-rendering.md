@@ -197,7 +197,7 @@ const glslModifier = `
 
 See the LOD Instances example which demonstrates:
 
-<EngineExample id="gaussian-splatting/lod-instances" title="LOD Instances example" />
+<EngineExample id="gaussian-splatting/streamed-instances" title="LOD Instances example" />
 
 - Reading component IDs written during copy
 - Looking up colors from a texture

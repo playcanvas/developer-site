@@ -12,7 +12,7 @@ The typical use is classification: decide something about a splat once, then let
 
 **View Live Example** - Splats clipped by an animated box, with per-pixel clipping only on splats intersecting the box surface.
 
-<EngineExample id="gaussian-splatting/clipping" title="View Live Example" />
+<EngineExample id="gaussian-splatting-fx/clipping" title="View Live Example" />
 
 ## Adding Streams
 

@@ -10,7 +10,7 @@ The `gsplatModifyPS` chunk customizes the final splat color in the fragment stag
 
 **View Live Example** - Each splat rendered as a ring of its own color, with a highlight wave.
 
-<EngineExample id="gaussian-splatting/shader-rings" title="View Live Example" />
+<EngineExample id="gaussian-splatting-fx/shader-rings" title="View Live Example" />
 
 ## Overridable Function
 

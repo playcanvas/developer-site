@@ -187,7 +187,7 @@ For Gaussian splats, see [scene depth requirements](volumetric-fog.md#gaussian-s
 
 - LUT Grading - Crossfade between two color grades on a Gaussian splat scene
 
-<EngineExample id="gaussian-splatting/lut-grading" title="LUT Grading" />
+<EngineExample id="gaussian-splatting-fx/color-grading" title="LUT Grading" />
 
 ## Custom Post Processing
 
