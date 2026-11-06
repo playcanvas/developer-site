@@ -202,7 +202,7 @@ vec4 otherColor = getColor();
 
 ## SOGブラインドデータの読み取り {#reading-sog-blind-data}
 
-[SOG](/user-manual/gaussian-splatting/formats/sog)バージョン3のファイルは[ブラインドデータ](/user-manual/gaussian-splatting/formats/sog#36-blind-data-v3-only-optional)を持つことができます。これは、意味をアプリケーションが定義するGaussianごとのフィールドです。このようなアセットを描画するコンポーネントのコピーモディファイアは、各フィールドを次の方法で読み取れます。
+[SOG](/user-manual/gaussian-splatting/formats/sog)バージョン3のファイルは[ブラインドデータ](/user-manual/gaussian-splatting/formats/sog#37-blind-data-optional)を持つことができます。これは、意味をアプリケーションが定義するGaussianごとのフィールドです。このようなアセットを描画するコンポーネントのコピーモディファイアは、各フィールドを次の方法で読み取れます。
 
 - `getBlind_<name>()` - 現在のスプラットのフィールド値を返します。整数型の `u8` から `u32` では `uint`（WGSLでは `u32`）、`f16`、`f32`、`unorm8`、`unorm16` では `float`（`f32`）です。
 - `SOG_BLIND_<name>` - アセットがそのフィールドを持つ場合に設定されるdefineです。1つのモディファイアで、フィールドを持つアセットと持たないアセットの両方に対応できます。

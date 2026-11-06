@@ -11,7 +11,7 @@ description: "アンチエイリアスを使って学習された Gaussian ス�
 
 | フォーマット | 記録方法 |
 | --- | --- |
-| [PLY](../formats/ply.md) | ヘッダーコメント `antialiased 1`（Postshot）、または `SplatRenderMode: mip`（Brush、SplatTransform） |
+| [PLY](../formats/ply.md) | ヘッダーコメント `postshot.anti_aliasing=1`（Postshot）、または `SplatRenderMode: mip`（Brush、SplatTransform） |
 | [SOG](../formats/sog.md) | `meta.json` の `"model": "antialiased"` |
 | [Streamed SOG](../formats/streamed-sog.md) | `lod-meta.json` の `"model": "antialiased"`（ストリーミングされるすべてのファイルに適用） |
 | [SPZ](../formats/spz.md) | ヘッダーのアンチエイリアスフラグ |
