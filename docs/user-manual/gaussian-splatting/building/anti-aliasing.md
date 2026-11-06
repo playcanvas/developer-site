@@ -11,7 +11,7 @@ By default, each splat is rendered the way its file asks for. When a splat file 
 
 | Format | Recorded as |
 | --- | --- |
-| [PLY](../formats/ply.md) | The `antialiased 1` header comment (Postshot), or `SplatRenderMode: mip` (Brush, SplatTransform) |
+| [PLY](../formats/ply.md) | The `postshot.anti_aliasing=1` header comment (Postshot), or `SplatRenderMode: mip` (Brush, SplatTransform) |
 | [SOG](../formats/sog.md) | `"model": "antialiased"` in `meta.json` |
 | [Streamed SOG](../formats/streamed-sog.md) | `"model": "antialiased"` in `lod-meta.json`, for all the files it streams |
 | [SPZ](../formats/spz.md) | The anti-aliased header flag |
@@ -54,11 +54,11 @@ app.scene.gsplat.antiAlias = undefined;
 
 ## Filter Size
 
-Trainers use different anti-aliasing filters: the anti-aliased mode of gsplat trains with a filter of 0.3 pixels squared, Mip-Splatting and the mip mode of Brush with 0.1. Files do not record the size, so set [`app.scene.gsplat.antiAliasFilterSize`](https://api.playcanvas.com/engine/classes/GSplatParams.html#antialiasfiltersize) to match the trainer. It defaults to 0.3. A filter larger than the one the splats were trained with renders them too soft:
+Trainers use different anti-aliasing filters: Mip-Splatting, the mip mode of Brush, LichtFeld Studio and Spirula train with a filter of 0.1 pixels squared, and the anti-aliased mode of gsplat with 0.3. Files do not record the size, so set [`app.scene.gsplat.antiAliasFilterSize`](https://api.playcanvas.com/engine/classes/GSplatParams.html#antialiasfiltersize) to match the trainer. It defaults to 0.1, Mip-Splatting's filter. A filter larger than the one the splats were trained with renders them too soft:
 
 ```javascript
-// splats trained with Mip-Splatting or Brush's mip mode
-app.scene.gsplat.antiAliasFilterSize = 0.1;
+// splats trained with gsplat's anti-aliased mode
+app.scene.gsplat.antiAliasFilterSize = 0.3;
 ```
 
 The size applies to the splats rendered with the compensation. Other splats always render with the 0.3 filter of standard training.

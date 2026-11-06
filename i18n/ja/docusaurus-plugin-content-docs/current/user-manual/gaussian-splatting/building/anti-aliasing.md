@@ -11,7 +11,7 @@ description: "アンチエイリアスを使って学習された Gaussian ス�
 
 | フォーマット | 記録方法 |
 | --- | --- |
-| [PLY](../formats/ply.md) | ヘッダーコメント `antialiased 1`（Postshot）、または `SplatRenderMode: mip`（Brush、SplatTransform） |
+| [PLY](../formats/ply.md) | ヘッダーコメント `postshot.anti_aliasing=1`（Postshot）、または `SplatRenderMode: mip`（Brush、SplatTransform） |
 | [SOG](../formats/sog.md) | `meta.json` の `"model": "antialiased"` |
 | [Streamed SOG](../formats/streamed-sog.md) | `lod-meta.json` の `"model": "antialiased"`（ストリーミングされるすべてのファイルに適用） |
 | [SPZ](../formats/spz.md) | ヘッダーのアンチエイリアスフラグ |
@@ -54,11 +54,11 @@ app.scene.gsplat.antiAlias = undefined;
 
 ## フィルタサイズ
 
-学習ツールによって使うアンチエイリアスフィルタは異なります。gsplat のアンチエイリアスモードは 0.3 ピクセル² のフィルタで、Mip-Splatting と Brush の mip モードは 0.1 で学習します。ファイルにはサイズが記録されないため、学習ツールに合わせて [`app.scene.gsplat.antiAliasFilterSize`](https://api.playcanvas.com/engine/classes/GSplatParams.html#antialiasfiltersize) を設定してください。デフォルトは 0.3 です。スプラットの学習時より大きなフィルタを使うと、ぼやけて描画されます：
+学習ツールによって使うアンチエイリアスフィルタは異なります。Mip-Splatting、Brush の mip モード、LichtFeld Studio、Spirula は 0.1 ピクセル² のフィルタで、gsplat のアンチエイリアスモードは 0.3 で学習します。ファイルにはサイズが記録されないため、学習ツールに合わせて [`app.scene.gsplat.antiAliasFilterSize`](https://api.playcanvas.com/engine/classes/GSplatParams.html#antialiasfiltersize) を設定してください。デフォルトは Mip-Splatting のフィルタである 0.1 です。スプラットの学習時より大きなフィルタを使うと、ぼやけて描画されます：
 
 ```javascript
-// Mip-Splatting または Brush の mip モードで学習されたスプラット
-app.scene.gsplat.antiAliasFilterSize = 0.1;
+// gsplat のアンチエイリアスモードで学習されたスプラット
+app.scene.gsplat.antiAliasFilterSize = 0.3;
 ```
 
 このサイズは補正付きで描画されるスプラットに適用されます。それ以外のスプラットは、常に標準的な学習の 0.3 フィルタで描画されます。

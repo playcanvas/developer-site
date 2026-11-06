@@ -45,9 +45,12 @@ SplatTransform detects file format from the file extension:
 
 Scenes trained with antialiasing (a mip-splatting style screen-space filter) or as 2D Gaussian surfels (2DGS) are tagged on read, and the tag is preserved wherever the output format can hold it. `--info` reports it as `model`.
 
-- **On read:** a PLY header comment — Brush's `comment SplatRenderMode: default | mip | 2dgs` or Postshot's `comment antialiased 0 | 1` (the last one wins) — the SPZ antialiased header bit, or the `model` entry of a SOG `meta.json`. A PLY with `scale_0` and `scale_1` but no `scale_2` is read as 2DGS regardless of comments, and the missing column is filled with a zero-thickness scale so the rest of the pipeline is unaffected.
+- **On read:** a PLY header comment — Brush's `comment SplatRenderMode: default | mip | 2dgs` or Postshot's `comment postshot.anti_aliasing=1` (the last one wins) — the SPZ antialiased header bit, or the `model` entry of a SOG `meta.json`. A PLY with `scale_0` and `scale_1` but no `scale_2` is read as 2DGS regardless of comments, and the missing column is filled with a zero-thickness scale so the rest of the pipeline is unaffected.
 - **On write:** `.ply` and `.compressed.ply` carry `comment SplatRenderMode: mip | 2dgs` (Brush's spelling, whichever form was read); `.sog` and `meta.json` carry `"model": "antialiased" | "2dgs"`; `.spz` sets its antialiased bit, and warns that it cannot represent 2DGS. A 2DGS PLY output drops the `scale_2` column again. Other output formats have nowhere to record the tag and drop it silently.
+- **Rendering:** `.webp` output renders an antialiased scene with its training filter, 0.1 px² by default (`--aa-filter-size` overrides it), instead of the 0.3 px² dilation, scaling opacity so each splat draws its unfiltered mass, as the PlayCanvas engine does.
 - **Merging:** combining inputs whose tags disagree warns and writes the result untagged.
+
+A PLY's other header comments (for example `Postshot v1.1.69` or `postshot.color.eotf=sRGB`) are carried through as well: `.ply` and `.compressed.ply` write them back as `comment` lines, and SOG version 3 output (`.sog`, `meta.json`, `lod-meta.json`) stores them as `comments`. They are not interpreted, so ones describing coordinates are not updated by transforms.
 
 ## Actions
 
@@ -173,7 +176,20 @@ Apply when writing `.sog`, `meta.json`, `lod-meta.json`, or `.html` outputs.
 
 ```none
 -i, --sh-iterations    <n>              Iterations for SH compression (more=better). Default: 10
+    --sh-palette-size  <n>              SH palette entries for .sog / meta.json (more=better, slower). Up to 262144
+                                          with SOG v3, 65536 with v2. Default: one per 1024 gaussians, at most 65536
     --max-workers      <n>              Worker threads for SOG and image-sequence encoding (0 = inline/serial). Default: 4
+    --sog-version      <2|3>            SOG format version to write. 2 is for older viewers: it drops opacity
+                                          above 1, blind data and a 4th SH band. Default: 3 (.html always embeds 2)
+    --sog-blind        <field>[,...]    Store columns as per-gaussian blind data (v3): one blind texture per flag,
+                                          its fields filling 4 bytes (R,G,B,A) in order. field = <col>[:<enc>]
+                                          enc: u8 u16 u24 u32 (unsigned integers), f16 f32 (float bits),
+                                          unorm8 unorm16 (float in [0,1], or unorm8[min,max]). Default: the
+                                          fewest-byte uint that fits. Repeatable, e.g. --sog-blind id
+                                          --sog-blind a:unorm8,b:unorm8,depth:f16
+    --sog-extras       <file.json>      Store this JSON as the output's extras (meta.json / lod-meta.json,
+                                          SOG v3 only), application-defined data as in glTF. Default: the input's
+                                          extras, if any
 ```
 
 ### SPZ Output Options
@@ -261,6 +277,10 @@ Apply when writing `.webp` (lossless WebP rendered via GPU rasterizer). See the 
     --resolution       <WxH>            Output resolution, e.g. 1920x1080. Default: 1280x720 (pinhole) or 2048x1024 (equirect)
     --camera-near      <n>              Near clip distance. Default: 0.2 (matches reference 3DGS)
     --background       <r,g,b[,a]>      Background color in [0,1]. Default: 0,0,0,1
+    --no-compensation                   Clamp opacity above 1 (opacity_linear from decimation) and draw every
+                                          gaussian at opacity <= 1. For debugging and A/B comparison.
+    --aa-filter-size   <px²>            Screen-space filter of scenes trained with anti-aliasing (splat model
+                                          antialiased), used in place of the 0.3 px² dilation. Default: 0.1
     --f-stop           <N>              Aperture as a photographic f-stop (e.g. 2.8, 5.6, 11). Enables defocus blur;
                                         smaller = more blur. Pinhole only. Default: disabled (no defocus).
     --focus-distance   <n>              Camera-space Z of the focus plane (world units). Default: distance to --camera-target.

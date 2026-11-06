@@ -41,7 +41,7 @@ property float f_rest_44
 end_header
 ```
 
-The header can also record how the scene was trained, as a comment line: Postshot writes `comment antialiased 1`, and Brush and SplatTransform write `comment SplatRenderMode: mip`. PlayCanvas reads either to render the splats with the anti-aliasing compensation they need, see [Anti-Aliasing](../building/anti-aliasing.md).
+The header can also record how the scene was trained, as a comment line: Postshot writes `comment postshot.anti_aliasing=1`, and Brush and SplatTransform write `comment SplatRenderMode: mip`. PlayCanvas reads either to render the splats with the anti-aliasing compensation they need, see [Anti-Aliasing](../building/anti-aliasing.md).
 
 ### Element Definitions
 
