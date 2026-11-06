@@ -403,7 +403,7 @@ const alpha = peak * Math.max(0, Math.exp(-0.5 * s * s) - f);
 
 1を超える不透明度をサポートしないレンダラーは、`A` を1にクランプ**しなければなりません**。その場合、シーンは1を超える不透明度が格納される以前と同じようにレンダリングされます。
 
-PLYに変換する際、ツールは `opacity = logit(min(A, 1))` と、残りの `opacity_excess = max(0, A − 1)` を追加のfloatプロパティとして出力**すべきです**。これにより、`opacity_excess` を無視するツールでも有効なPLYとして読み取れます。
+PLYに変換する際、ツールは `A` そのものを追加のfloatプロパティ `opacity_linear` として出力し、`opacity = logit(min(A, 1))` も出力**すべきです**。これにより、`opacity_linear` を無視するツールでも有効なPLYとして読み取れます。`opacity_linear` を見つけたリーダーは、`opacity` の値に関係なく、それを不透明度として使用**しなければなりません**。
 
 ### 3.7 ブラインドデータ (オプション) {#37-blind-data-optional}
 
