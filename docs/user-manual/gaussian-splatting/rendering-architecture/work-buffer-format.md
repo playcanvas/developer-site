@@ -3,6 +3,9 @@ title: Work Buffer Format
 description: "Work buffer format: copy stage customization, streams, and how data flows from resources into the work buffer."
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 The work buffer format defines the data streams available in the work buffer and how splat data is copied from resources. You can customize the copy operation to transform splats and write additional per-component data.
 
 :::note
@@ -196,6 +199,60 @@ vec4 otherColor = getColor();
 ```
 
 See [Splat Data Format - Shader Access](/user-manual/gaussian-splatting/rendering-architecture/splat-data-format#shader-access) for more details.
+
+## Reading SOG Blind Data
+
+[SOG](/user-manual/gaussian-splatting/formats/sog) version 3 files can carry [blind data](/user-manual/gaussian-splatting/formats/sog#36-blind-data-v3-only-optional): per-gaussian fields whose meaning the application defines. The copy modifier of a component that renders such an asset can read each field through:
+
+- `getBlind_<name>()` - Returns the field's value for the current splat: `uint` (`u32` in WGSL) for the integer types `u8` to `u32`, `float` (`f32`) for `f16`, `f32`, `unorm8` and `unorm16`.
+- `SOG_BLIND_<name>` - A define that is set when the asset has the field, so one modifier can serve assets with and without it.
+
+`<name>` is the field name with every character other than a letter, digit or `_` replaced by `_`, repeated `_` collapsed and leading or trailing `_` removed. A field named `part-id` is read with `getBlind_part_id()`.
+
+This modifier colors the splats whose `logo` field is 1:
+
+<Tabs groupId="shader-language" queryString="lang">
+<TabItem value="glsl" label="GLSL">
+
+```glsl
+void modifySplatCenter(inout vec3 center) {}
+void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, inout vec4 rotation, inout vec3 scale) {}
+void modifySplatColor(vec3 center, inout vec4 color) {
+    #ifdef SOG_BLIND_logo
+        if (getBlind_logo() == 1u) {
+            color.rgb = vec3(1.0, 0.65, 0.15);
+        }
+    #endif
+}
+```
+
+</TabItem>
+<TabItem value="wgsl" label="WGSL">
+
+```wgsl
+fn modifySplatCenter(center: ptr<function, vec3f>) {}
+fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f, rotation: ptr<function, vec4f>, scale: ptr<function, vec3f>) {}
+fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
+    #ifdef SOG_BLIND_logo
+        if (getBlind_logo() == 1u) {
+            *color = vec4f(1.0, 0.65, 0.15, (*color).a);
+        }
+    #endif
+}
+```
+
+</TabItem>
+</Tabs>
+
+```javascript
+entity.gsplat.setWorkBufferModifier({ glsl: glslModifier, wgsl: wgslModifier });
+```
+
+Blind data is read from the asset and is not part of the work buffer. To use a field when rendering, write it to an [extra stream](#adding-extra-streams) during the copy.
+
+The Blind Data example reads two fields from a SOG version 3 file: a `logo` flag that adds a shine to the logo, and an `edge` distance that drives hue waves across the rest of the splat. Its **View** option shows the fields themselves.
+
+<EngineExample id="gaussian-splatting-fx/blind-data" title="Blind Data example" />
 
 ## Live Example
 
