@@ -27,7 +27,7 @@ scene/
 ```
 
 * The index file is always named `lod-meta.json`. Loaders identify the format by this filename.
-* Each chunk is a standard **unbundled** [SOG](./sog.md) dataset (a `meta.json` plus WebP texture files). Bundled (single-archive) SOG chunks are not part of this format.
+* Each chunk is a standard **unbundled** [SOG](./sog.md) dataset (a `meta.json` plus WebP texture files), of SOG version 2 or 3. Bundled (single-archive) SOG chunks are not part of this format.
 * All paths in `lod-meta.json` are relative to the directory containing `lod-meta.json`.
 
 :::note[Chunk naming]
