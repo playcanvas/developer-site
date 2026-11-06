@@ -22,7 +22,7 @@ A SOG dataset is a set of images plus a metadata file:
 | `scales.webp`        | Per-axis sizes via codebook (RGB) + rotation byte 2 (A) | R,G,B,A        |
 | `sh0.webp`           | Base color (DC) + opacity                             | R,G,B,A          |
 | `shN_centroids.webp` | SH palette coefficients (optional)                    | R,G,B            |
-| `shN_labels.webp`    | Indices into SH palette (optional)                    | R,G              |
+| `shN_labels.webp`    | Indices into SH palette (optional)                    | R,G,B            |
 | `blind_<i>.webp`     | Per-gaussian blind data, one file per blind texture (optional) | 1–4 of R,G,B,A |
 
 :::note[Image formats]
