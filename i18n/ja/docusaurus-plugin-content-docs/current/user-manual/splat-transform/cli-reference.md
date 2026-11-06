@@ -45,9 +45,12 @@ SplatTransform はファイル拡張子からフォーマットを検出しま�
 
 アンチエイリアス（mip-splatting方式のスクリーンスペースフィルタ）付きで学習されたシーンや、2Dガウシアンサーフェル（2DGS）として学習されたシーンは読み取り時にタグ付けされ、出力フォーマットが保持できる場合はそのタグが維持されます。`--info` はこれを `model` として報告します。
 
-- **読み取り時**：PLYヘッダーコメント（Brushの `comment SplatRenderMode: default | mip | 2dgs` またはPostshotの `comment antialiased 0 | 1`。複数ある場合は最後のものが優先）、SPZのアンチエイリアスヘッダービット、またはSOG `meta.json` の `model` エントリから読み取ります。`scale_0` と `scale_1` はあるが `scale_2` がないPLYは、コメントに関係なく2DGSとして読み取られ、欠けているカラムは厚さゼロのスケールで補われるため、パイプラインの残りの部分には影響しません。
+- **読み取り時**：PLYヘッダーコメント（Brushの `comment SplatRenderMode: default | mip | 2dgs` またはPostshotの `comment postshot.anti_aliasing=1`。複数ある場合は最後のものが優先）、SPZのアンチエイリアスヘッダービット、またはSOG `meta.json` の `model` エントリから読み取ります。`scale_0` と `scale_1` はあるが `scale_2` がないPLYは、コメントに関係なく2DGSとして読み取られ、欠けているカラムは厚さゼロのスケールで補われるため、パイプラインの残りの部分には影響しません。
 - **書き込み時**：`.ply` と `.compressed.ply` には `comment SplatRenderMode: mip | 2dgs`（読み取った形式にかかわらずBrushの表記）が、`.sog` と `meta.json` には `"model": "antialiased" | "2dgs"` が書き込まれます。`.spz` はアンチエイリアスビットを設定し、2DGSを表現できないことを警告します。2DGSのPLY出力では `scale_2` カラムが再び削除されます。その他の出力フォーマットにはタグを記録する場所がないため、タグは警告なしに破棄されます。
+- **レンダリング時**：`.webp` 出力では、アンチエイリアス付きで学習されたシーンを、0.3 px² の膨張の代わりにその学習時のフィルター（デフォルトは 0.1 px²、`--aa-filter-size` で上書き可能）でレンダリングし、PlayCanvasエンジンと同様に、各スプラットがフィルター前の量を描画するよう不透明度をスケーリングします。
 - **マージ時**：タグが一致しない入力を結合すると警告が出され、結果はタグなしで書き込まれます。
+
+PLYのその他のヘッダーコメント（例：`Postshot v1.1.69` や `postshot.color.eotf=sRGB`）も引き継がれます。`.ply` と `.compressed.ply` はこれらを `comment` 行として書き戻し、SOGバージョン3の出力（`.sog`、`meta.json`、`lod-meta.json`）は `comments` として保存します。コメントは解釈されないため、座標を記述するコメントは変換によって更新されません。
 
 ## アクション {#actions}
 
@@ -173,7 +176,20 @@ NVIDIA GPUを搭載したサーバーでsplat-transformを実行する方法に�
 
 ```none
 -i, --sh-iterations    <n>              Iterations for SH compression (more=better). Default: 10
+    --sh-palette-size  <n>              SH palette entries for .sog / meta.json (more=better, slower). Up to 262144
+                                          with SOG v3, 65536 with v2. Default: one per 1024 gaussians, at most 65536
     --max-workers      <n>              Worker threads for SOG and image-sequence encoding (0 = inline/serial). Default: 4
+    --sog-version      <2|3>            SOG format version to write. 2 is for older viewers: it drops excess
+                                          opacity, blind data and a 4th SH band. Default: 3 (.html always embeds 2)
+    --sog-blind        <field>[,...]    Store columns as per-gaussian blind data (v3): one blind texture per flag,
+                                          its fields filling 4 bytes (R,G,B,A) in order. field = <col>[:<enc>]
+                                          enc: u8 u16 u24 u32 (unsigned integers), f16 f32 (float bits),
+                                          unorm8 unorm16 (float in [0,1], or unorm8[min,max]). Default: the
+                                          fewest-byte uint that fits. Repeatable, e.g. --sog-blind id
+                                          --sog-blind a:unorm8,b:unorm8,depth:f16
+    --sog-extras       <file.json>      Store this JSON as the output's extras (meta.json / lod-meta.json,
+                                          SOG v3 only), application-defined data as in glTF. Default: the input's
+                                          extras, if any
 ```
 
 ### SPZ出力オプション {#spz-output-options}
@@ -261,6 +277,10 @@ NVIDIA GPUを搭載したサーバーでsplat-transformを実行する方法に�
     --resolution       <WxH>            Output resolution, e.g. 1920x1080. Default: 1280x720 (pinhole) or 2048x1024 (equirect)
     --camera-near      <n>              Near clip distance. Default: 0.2 (matches reference 3DGS)
     --background       <r,g,b[,a]>      Background color in [0,1]. Default: 0,0,0,1
+    --no-compensation                   Ignore excess opacity (opacity_excess from decimation) and draw every
+                                          gaussian at opacity <= 1. For debugging and A/B comparison.
+    --aa-filter-size   <px²>            Screen-space filter of scenes trained with anti-aliasing (splat model
+                                          antialiased), used in place of the 0.3 px² dilation. Default: 0.1
     --f-stop           <N>              Aperture as a photographic f-stop (e.g. 2.8, 5.6, 11). Enables defocus blur;
                                         smaller = more blur. Pinhole only. Default: disabled (no defocus).
     --focus-distance   <n>              Camera-space Z of the focus plane (world units). Default: distance to --camera-target.
