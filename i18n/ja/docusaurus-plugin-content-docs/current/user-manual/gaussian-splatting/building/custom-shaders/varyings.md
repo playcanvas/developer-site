@@ -12,7 +12,7 @@ Varying ストリームは、スプラットごとのカスタムデータを[�
 
 **ライブサンプルを見る** - アニメーションするボックスでスプラットをクリップし、ボックスの表面と交差するスプラットだけにピクセル単位のクリッピングを適用します。
 
-<EngineExample id="gaussian-splatting/clipping" title="ライブサンプルを見る" />
+<EngineExample id="gaussian-splatting-fx/clipping" title="ライブサンプルを見る" />
 
 ## ストリームの追加
 

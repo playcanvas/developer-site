@@ -143,7 +143,7 @@ Lines are rendered as a series of splats placed along the line path:
 
 See the Procedural Shapes example which demonstrates CAD-style dimension annotations on a Gaussian splat scene.
 
-<EngineExample id="gaussian-splatting/procedural-shapes" title="Procedural Shapes example" />
+<EngineExample id="gaussian-splatting-fx/procedural-shapes" title="Procedural Shapes example" />
 
 ## Script Location
 

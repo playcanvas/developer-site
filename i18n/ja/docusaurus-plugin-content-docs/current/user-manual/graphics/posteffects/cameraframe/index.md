@@ -187,7 +187,7 @@ Gaussian Splat でフォグや被写界深度を使用する場合は、[シー�
 
 - LUT グレーディング — Gaussian Splat シーンで 2 つのカラーグレードをクロスフェード
 
-<EngineExample id="gaussian-splatting/lut-grading" title="LUT グレーディング" />
+<EngineExample id="gaussian-splatting-fx/color-grading" title="LUT グレーディング" />
 
 ## カスタムポストプロセス {#custom-post-processing}
 

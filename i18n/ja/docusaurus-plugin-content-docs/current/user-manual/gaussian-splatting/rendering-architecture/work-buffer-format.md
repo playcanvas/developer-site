@@ -201,7 +201,7 @@ vec4 otherColor = getColor();
 
 以下を示すLOD Instancesサンプルを参照してください：
 
-<EngineExample id="gaussian-splatting/lod-instances" title="LOD Instancesサンプル" />
+<EngineExample id="gaussian-splatting/streamed-instances" title="LOD Instancesサンプル" />
 
 - ワークバッファへの`splatId`ストリームの追加
 - `setWorkBufferModifier()`を使用したコピー中のコンポーネントIDの書き込み

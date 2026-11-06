@@ -201,7 +201,7 @@ See [Splat Data Format - Shader Access](/user-manual/gaussian-splatting/renderin
 
 See the LOD Instances example which demonstrates:
 
-<EngineExample id="gaussian-splatting/lod-instances" title="LOD Instances example" />
+<EngineExample id="gaussian-splatting/streamed-instances" title="LOD Instances example" />
 
 - Adding a `splatId` stream to the work buffer
 - Writing component IDs during copy using `setWorkBufferModifier()`

@@ -86,7 +86,7 @@ imageSplat.imageAsset = anotherTextureAsset;
 
 `GsplatImage`を使用して地面や壁の装飾としてテクスチャを表示する方法を示すProcedural Shapesサンプルを参照してください。
 
-<EngineExample id="gaussian-splatting/procedural-shapes" title="Procedural Shapesサンプル" />
+<EngineExample id="gaussian-splatting-fx/procedural-shapes" title="Procedural Shapesサンプル" />
 
 ## スクリプトの場所
 

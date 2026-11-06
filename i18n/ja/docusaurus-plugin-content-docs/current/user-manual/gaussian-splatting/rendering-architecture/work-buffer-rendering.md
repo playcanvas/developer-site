@@ -195,7 +195,7 @@ const glslModifier = `
 
 以下を示すLOD Instancesサンプルを参照してください：
 
-<EngineExample id="gaussian-splatting/lod-instances" title="LOD Instancesサンプル" />
+<EngineExample id="gaussian-splatting/streamed-instances" title="LOD Instancesサンプル" />
 
 - コピー中に書き込まれたコンポーネントIDの読み取り
 - テクスチャからの色のルックアップ
