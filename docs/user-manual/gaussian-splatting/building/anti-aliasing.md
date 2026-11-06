@@ -11,7 +11,7 @@ By default, each splat is rendered the way its file asks for. When a splat file 
 
 | Format | Recorded as |
 | --- | --- |
-| [PLY](../formats/ply.md) | The `antialiased 1` header comment (Postshot), or `SplatRenderMode: mip` (Brush, SplatTransform) |
+| [PLY](../formats/ply.md) | The `postshot.anti_aliasing=1` header comment (Postshot), or `SplatRenderMode: mip` (Brush, SplatTransform) |
 | [SOG](../formats/sog.md) | `"model": "antialiased"` in `meta.json` |
 | [Streamed SOG](../formats/streamed-sog.md) | `"model": "antialiased"` in `lod-meta.json`, for all the files it streams |
 | [SPZ](../formats/spz.md) | The anti-aliased header flag |

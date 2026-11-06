@@ -202,7 +202,7 @@ See [Splat Data Format - Shader Access](/user-manual/gaussian-splatting/renderin
 
 ## Reading SOG Blind Data
 
-[SOG](/user-manual/gaussian-splatting/formats/sog) version 3 files can carry [blind data](/user-manual/gaussian-splatting/formats/sog#36-blind-data-v3-only-optional): per-gaussian fields whose meaning the application defines. The copy modifier of a component that renders such an asset can read each field through:
+[SOG](/user-manual/gaussian-splatting/formats/sog) version 3 files can carry [blind data](/user-manual/gaussian-splatting/formats/sog#37-blind-data-optional): per-gaussian fields whose meaning the application defines. The copy modifier of a component that renders such an asset can read each field through:
 
 - `getBlind_<name>()` - Returns the field's value for the current splat: `uint` (`u32` in WGSL) for the integer types `u8` to `u32`, `float` (`f32`) for `f16`, `f32`, `unorm8` and `unorm16`.
 - `SOG_BLIND_<name>` - A define that is set when the asset has the field, so one modifier can serve assets with and without it.
