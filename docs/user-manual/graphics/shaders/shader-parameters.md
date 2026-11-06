@@ -93,6 +93,8 @@ A mesh instance overriding a global value uses its own value for its draws only,
 
 As material parameters are not reset after the draws of the material, a name used as a global default should not be set as a parameter of only some of the materials. The draws of the other materials would read the value the last of those materials set, instead of the global one.
 
+Compute shaders do not use global values. Every value a compute shader uses is set on its compute instance, see [Compute Shaders](/user-manual/graphics/shaders/compute-shaders#setting-parameters).
+
 ## Values Set by the Renderer
 
 The renderer sets some uniforms itself, once for each render pass: the camera values listed in [Built-in Shader Uniforms](/user-manual/graphics/shaders/built-in-uniforms), and the values of the lights and of the fog. Values set for these names on a material, on a mesh instance or globally have no effect.

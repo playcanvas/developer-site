@@ -121,6 +121,8 @@ app.on('update', (dt) => {
 });
 ```
 
+Set every uniform and texture the chunk uses on the material. Values set globally on the scope of the graphics device are not supported for these chunks.
+
 ## See Also
 
 - [Fragment Stage Customization](/user-manual/gaussian-splatting/building/custom-shaders/fragment) — per-pixel color modification

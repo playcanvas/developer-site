@@ -1,6 +1,6 @@
 ---
 title: Shadows
-description: Enable real-time shadows, choose a shadow type (PCF, VSM, or PCSS), and tune quality with cascades, resolution, and bias.
+description: Enable real-time shadows, choose a shadow type (PCF, VSM, or PCSS), and tune quality with cascades, shadow bounds, resolution, and bias.
 ---
 
 import Tabs from '@theme/Tabs';
@@ -105,7 +105,7 @@ Set the shadow type to a PCF variant:
 
 ```javascript
 // SHADOW_PCF1_32F | SHADOW_PCF3_32F (default) | SHADOW_PCF5_32F
-entity.light.shadowType = pc.SHADOW_PCF5_32F;
+entity.light.shadowType = SHADOW_PCF5_32F;
 ```
 
 </TabItem>
@@ -153,11 +153,11 @@ Set the shadow type to VSM and tune it:
 <TabItem value="engine" label="Engine">
 
 ```javascript
-entity.light.shadowType = pc.SHADOW_VSM_16F;
+entity.light.shadowType = SHADOW_VSM_16F;
 
 // Optional tuning
 entity.light.vsmBlurSize = 11; // blur kernel size, 1-25
-entity.light.vsmBlurMode = pc.BLUR_GAUSSIAN; // or pc.BLUR_BOX (cheaper)
+entity.light.vsmBlurMode = BLUR_GAUSSIAN; // or BLUR_BOX (cheaper)
 entity.light.vsmBias = 0.0025; // reduces shadow acne, 0-1
 ```
 
@@ -212,7 +212,7 @@ Set the shadow type to PCSS and fine-tune it:
 <TabItem value="engine" label="Engine">
 
 ```javascript
-entity.light.shadowType = pc.SHADOW_PCSS_32F;
+entity.light.shadowType = SHADOW_PCSS_32F;
 
 // Optional fine-tuning
 entity.light.penumbraSize = 2; // overall penumbra size (softness)
@@ -283,6 +283,36 @@ A screenshot showing four shadow cascades.
 
 The distribution (`light.cascadeDistribution`) of subdivision of the camera frustum for individual shadow cascades. A value in the range of 0 to 1 can be specified. A value of 0 represents a linear distribution and a value of 1 represents a logarithmic distribution. Visually, a higher value distributes more shadow map resolution to foreground objects, while a lower value distributes it to more distant objects.
 
+### Shadow Bounds {#shadow-bounds}
+
+By default, a directional light fits its shadow map to the view of each camera, spreading the resolution over the [shadow distance](#shadow-distance) in front of the camera. When shadows are only needed on a small part of the scene, for example around a character in a scene with baked lighting, you can set shadow bounds (`light.shadowBounds`) instead: a world space bounding box enclosing the shadow casters. The light then renders a single shadow map fitted to the bounds as seen from the light, so all of its resolution goes where the shadows are. The shadow map is rendered once for all cameras, and the shadows are not limited by the distance from the camera.
+
+```javascript
+// shadows of the casters in a 10 x 4 x 10 area around the origin
+entity.light.shadowBounds = new BoundingBox(new Vec3(0, 2, 0), new Vec3(5, 2, 5));
+```
+
+The bounds only need to enclose the shadow casters, not the receivers. Shadows fall along the direction of the light, so receivers further along it than the bounds, such as the ground below a character, are shadowed by the casters inside the bounds. Casters between the light and the bounds cast shadows too. Casters beside the bounds as seen from the light, or further along the light than the bounds, do not.
+
+The light keeps a copy of the bounds, so to change them, modify your bounding box and set it again. For example, to keep the shadow of a moving character sharp, move the bounds with it every frame:
+
+```javascript
+const bounds = new BoundingBox(new Vec3(), new Vec3(1, 1.5, 1));
+
+app.on('update', () => {
+    bounds.center.copy(character.getPosition());
+    entity.light.shadowBounds = bounds;
+});
+```
+
+While the bounds are set, the light does not use `numCascades`, `shadowDistance`, `cascadeBlend` or `cascadeDistribution`. Set the bounds to `null` to go back to shadows fitted to each camera. The shadow is updated as `light.shadowUpdateMode` specifies, and is rendered again when the bounds change, so with `SHADOWUPDATE_NONE` the shadow of static casters renders once, and again only when the bounds move.
+
+Shadow bounds are only available for directional lights, and work with every [shadow type](#shadow-types). The Editor has no setting for them, so set them from a script.
+
+See it in action in the engine's shadow bounds example, which compares the shadow fitted to the bounds with one fitted to the camera:
+
+<EngineExample id="lights-and-shadows/shadow-bounds" title="Shadow Bounds" />
+
 ### Shadow Intensity {#shadow-intensity}
 
 The intensity of the shadow (`light.shadowIntensity`), where 1 represents full intensity shadow cast by this light, and 0 represents no shadow.
@@ -311,4 +341,5 @@ Enabling shadows has performance implications:
 * Using a greater shadow map resolution will generate crisper shadows but the GPU must fill more shadow map pixels and therefore this may affect frame rate.
 * The [shadow type](#shadow-types) affects cost: larger PCF kernels, VSM blurring, and especially PCSS (which takes many samples per pixel) are more expensive on the GPU than a hard, single-sample shadow.
 * For directional lights, each additional [shadow cascade](#shadow-cascades) may require shadow casters to be rendered into more than one shadow map, increasing cost.
+* By default, each camera renders the shadow maps of directional lights for its own view. A light with [shadow bounds](#shadow-bounds) renders a single shadow map for all cameras instead.
 * If your shadows are from static parts of the environment consider using [lightmaps](/user-manual/graphics/lighting/lightmapping) to bake shadows into textures.

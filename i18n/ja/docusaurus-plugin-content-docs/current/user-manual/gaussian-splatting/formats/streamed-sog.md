@@ -27,7 +27,7 @@ scene/
 ```
 
 * インデックスファイルの名前は常に `lod-meta.json` です。ローダーはこのファイル名でフォーマットを識別します。
-* 各チャンクは標準の **unbundled** な[SOG](./sog.md)データセット（`meta.json` とWebPテクスチャファイル）です。バンドルされた（単一アーカイブの）SOGチャンクはこのフォーマットには含まれません。
+* 各チャンクは標準の **unbundled** な[SOG](./sog.md)データセット（`meta.json` とWebPテクスチャファイル）で、SOGのバージョンは2または3です。バンドルされた（単一アーカイブの）SOGチャンクはこのフォーマットには含まれません。
 * `lod-meta.json` 内のすべてのパスは、`lod-meta.json` を含むディレクトリからの相対パスです。
 
 :::note[チャンクの命名]
@@ -47,6 +47,7 @@ interface LodMeta {
     generator?: string;        // 例: "splat-transform v2.5.2"
   };
   count: number;               // 全LODレベルにわたるGaussianの総数 (環境を除く)
+  model?: "antialiased" | "2dgs"; // オプション。シーンの学習方法 (すべてのチャンクに適用)。通常のガウス分布の場合は省略
   counts: number[];            // LODレベルごとのGaussian数; インデックス = LODレベル, 長さ = lodLevels
   lodLevels: number;           // LODレベルの数
   lodErrors?: boolean;         // trueの場合、すべてのリーフがレベルごとの `errors` を持つ

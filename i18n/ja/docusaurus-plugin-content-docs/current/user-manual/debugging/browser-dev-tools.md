@@ -11,11 +11,11 @@ Chrome、Firefoxや他のブラウザでは、ブラウザに直接組み込ま�
 
 スクリプトをデバッグするためには、Developer Tools (Chrome)でSourcesタブを選択します。Sourcesペインの左上隅にあるアイコンをクリックして 'navigator' を開きます。以下のようなものが表示されるはずです：
 
-![Debugger](/img/user-manual/scripting/debugging/chrome-debugger.png)
+![Debugger](/img/user-manual/debugging/chrome-debugger.png)
 
 Firefoxでは次のようになります：
 
-![Firefox](/img/user-manual/scripting/debugging/firefox-debugger.png)
+![Firefox](/img/user-manual/debugging/firefox-debugger.png)
 
 ナビゲータには、自身で書いたPlayCanvasスクリプトを含む、現在アクティブなタブで実行している全てのスクリプトがリストされます。ナビゲーターからスクリプトを探し、選択するとソースコードが開きます。これで、ブレイクポイントを設定してデバッグが行えます。
 

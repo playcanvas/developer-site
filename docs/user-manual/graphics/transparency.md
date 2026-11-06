@@ -111,14 +111,14 @@ const device = await pc.createGraphicsDevice(canvas, {
 });
 ```
 
-On WebGPU there is an additional requirement: the first color attachment of the render target must use a blendable format that has an alpha channel. This matters in practice because [`CameraFrame`](https://api.playcanvas.com/engine/classes/CameraFrame.html) prefers `PIXELFORMAT_111110F` for its HDR render target, and that format has no alpha channel. Alpha to coverage is therefore ignored for geometry rendered through `CameraFrame` with its default formats, and a warning is logged in debug builds. Requesting a format with an alpha channel resolves it:
+On WebGPU there is an additional requirement: the first color attachment of the render target must use a blendable format that has an alpha channel. This matters in practice because [`CameraFrame`](https://api.playcanvas.com/engine/classes/CameraFrame.html) prefers `PIXELFORMAT_RG11B10F` for its HDR render target, and that format has no alpha channel. Alpha to coverage is therefore ignored for geometry rendered through `CameraFrame` with its default formats, and a warning is logged in debug builds. Requesting a format with an alpha channel resolves it:
 
 ```javascript
 cameraFrame.rendering.renderFormats = [pc.PIXELFORMAT_RGBA16F];
 cameraFrame.update();
 ```
 
-WebGL has no equivalent restriction, as it uses the alpha the shader outputs regardless of whether the render target stores an alpha channel. Alpha to coverage therefore still applies on WebGL with formats such as `PIXELFORMAT_111110F`, which is a deliberate difference between the two backends rather than a bug.
+WebGL has no equivalent restriction, as it uses the alpha the shader outputs regardless of whether the render target stores an alpha channel. Alpha to coverage therefore still applies on WebGL with formats such as `PIXELFORMAT_RG11B10F`, which is a deliberate difference between the two backends rather than a bug.
 
 ## Choosing an Approach
 

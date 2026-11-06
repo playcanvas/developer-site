@@ -304,7 +304,7 @@ function setOpacity(entity, opacity) {
 }
 ```
 
-This sets the same opacity on every element, so store the elements' own opacities first if they differ. Buttons fade between their tints with `fadeDuration`. See the [Tweening](/tutorials/tweening/) tutorial for a tween library.
+This sets the same opacity on every element, so store the elements' own opacities first if they differ. Buttons fade between their tints with `fadeDuration`. For a tween library, see [Tween](/user-manual/engine/libraries/tween/).
 
 ## Loading Screens and Scene Changes {#loading-screens}
 

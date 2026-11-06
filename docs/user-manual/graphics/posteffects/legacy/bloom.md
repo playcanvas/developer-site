@@ -3,6 +3,12 @@ title: Bloom Effect
 description: "Legacy script bloom: intensity, threshold, blur, and links to the engine posteffect-bloom source on GitHub."
 ---
 
+:::warning[Deprecated]
+
+This legacy effect is deprecated. Use the bloom of [CameraFrame](/user-manual/graphics/posteffects/cameraframe) instead. See [Migrating to CameraFrame](/user-manual/graphics/posteffects/legacy#migrating-to-cameraframe).
+
+:::
+
 [Bloom](https://en.wikipedia.org/wiki/Bloom_(shader_effect)) is a post-processing effect used to reproduce an imaging artifact of real-world cameras. The effect produces fringes (or feathers) of light extending from the borders of bright areas in an image, contributing to the illusion of an extremely bright light overwhelming the camera capturing the scene.
 
 Here is an image without bloom:

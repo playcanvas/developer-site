@@ -1,5 +1,5 @@
 ---
-covers: [engine, ecs, scripting, assets, graphics, gaussian-splatting, physics, animation, user-interface, xr, optimization, 2D]
+covers: [engine, ecs, scripting, assets, graphics, gaussian-splatting, physics, animation, user-interface, xr, debugging, optimization, 2D]
 ---
 # PlayCanvas Engine
 
@@ -35,6 +35,14 @@ Use this index to write code against the engine directly. React, Web Components 
 - [Supported Browsers](/user-manual/engine/supported-browsers/): Minimum browser versions for WebGL2 and WebGPU.
 - [Running the Engine in Node.js](/user-manual/engine/running-in-node/): Running the engine on a server for multiplayer, asset processing or unit tests.
 
+## Add-on libraries
+
+- [Add-on Libraries](/user-manual/engine/libraries/): Libraries used alongside the engine, what each one adds and who maintains it.
+- [Spine](/user-manual/engine/libraries/spine/): Playing 2D skeletal animations from the Spine editor with the playcanvas-spine plugin: plugin versions, texture sRGB settings, binary skeletons, animation state, colors, physics and layers.
+- [3D Tiles](/user-manual/engine/libraries/3d-tiles/): Streaming 3D Tiles tilesets with the PlayCanvas renderer of 3DTilesRendererJS: setup, error target and memory budget, Draco and KTX2 decoders, adjusting loaded tiles, plugins and limitations.
+- [Tween](/user-manual/engine/libraries/tween/): Animating entity transforms and other values over time with playcanvas-tween: its UMD and ESM builds, chaining, looping, yoyo, callbacks and easing curves.
+- [loaders.gl](/user-manual/engine/libraries/loaders-gl/): Parsing data formats the engine does not load itself with loaders.gl, and building engine meshes from the parsed arrays.
+
 ## Entities and components
 
 - [Entity Component System](/user-manual/ecs/): How a scene is built from entities, the components that give them abilities and the systems that run them, on every surface.
@@ -52,7 +60,8 @@ Use this index to write code against the engine directly. React, Web Components 
 - [Events](/user-manual/scripting/events/): Communicating between scripts with `on`, `once`, `off` and `fire`.
 - [Application Lifecycle](/user-manual/scripting/application-lifecycle/): The order in which an application initializes and runs its update loop.
 - [Migration Guide](/user-manual/scripting/migration-guide/): Converting classic scripts to ESM scripts step by step.
-- [Debugging](/user-manual/scripting/debugging/): Finding script bugs with the browser's developer tools.
+- [Debugging](/user-manual/debugging/): Finding bugs with logging, the browser's developer tools, the Inspector and debug drawing.
+- [Inspector](/user-manual/debugging/inspector/): A debug panel for the running application: its entities, cameras, assets, frame graph, GPU resources and scripts, and stepping through the draws of a frame.
 
 ## Assets
 
@@ -84,7 +93,7 @@ Use this index to write code against the engine directly. React, Web Components 
 ### Lighting and materials
 
 - [Lights](/user-manual/graphics/lighting/lights/): Directional, omni and spot lights, with shadows and cookies.
-- [Shadows](/user-manual/graphics/lighting/shadows/): Shadow types (PCF, VSM and PCSS) and tuning them with cascades, resolution and bias.
+- [Shadows](/user-manual/graphics/lighting/shadows/): Shadow types (PCF, VSM and PCSS), tuning them with cascades, resolution and bias, and fitting a directional light's shadow to a box with shadow bounds.
 - [Clustered Lighting](/user-manual/graphics/lighting/clustered-lighting/): How many omni and spot lights, with shadows and cookies, stay affordable on the GPU.
 - [Runtime Lightmaps](/user-manual/graphics/lighting/runtime-lightmaps/): Baking lightmaps at runtime and mixing baked with dynamic lights.
 - [Physically Based Rendering](/user-manual/graphics/physical-rendering/): PBR fundamentals: diffuse and specular, energy conservation and metalness.
@@ -106,8 +115,14 @@ Use this index to write code against the engine directly. React, Web Components 
 ### Post-processing and rendering
 
 - [Modern Post Processing](/user-manual/graphics/posteffects/cameraframe/): The CameraFrame HDR stack: volumetric fog, bloom, SSAO, TAA, depth of field, color enhancement and grading.
+- [Auto Exposure](/user-manual/graphics/posteffects/cameraframe/auto-exposure/): The CameraFrame auto exposure: metering, adaptation speeds and limits, cuts, and reading the exposure back.
+- [Lens Flare](/user-manual/graphics/posteffects/cameraframe/lens-flare/): CameraFrame lens flares: shape libraries, flare looks, following lights, occlusion and fading.
+- [Dynamic Sky](/user-manual/graphics/posteffects/cameraframe/dynamic-sky/): A CameraFrame day and night sky with clouds, lighting the scene and keeping the sun light in sync.
+- [Custom Effects](/user-manual/graphics/posteffects/cameraframe/custom-effects/): Writing CameraFrame effects with CameraFrameEffect: compose slots, the shader chunk, parameters and effect scripts.
+- [Effects with Passes](/user-manual/graphics/posteffects/cameraframe/effect-passes/): CameraFrame effects owning frame passes: stages, frame resources, rebuilding passes and resolving the scene.
 - [Layers](/user-manual/graphics/layers/): Controlling render order and visibility with layers and the layer composition.
 - [Render Targets](/user-manual/graphics/advanced-rendering/render-targets/): Rendering into an offscreen texture and using the result in the scene.
+- [Frame Graph](/user-manual/graphics/advanced-rendering/frame-graph/): How a frame renders as logical passes in physical render and compute passes, and the engine's frame passes: adding passes to a camera, render passes, shader quad passes, rendering the scene into a texture, and compute passes.
 - [Hardware Instancing](/user-manual/graphics/advanced-rendering/hardware-instancing/): Drawing many copies of a mesh at once: instance buffer formats, mesh instance setup and shader chunks.
 - [Batching](/user-manual/graphics/advanced-rendering/batching/): Merging mesh instances into batch groups to reduce draw calls.
 - [Particles](/user-manual/graphics/particles/): Particle systems, starting them from scripts, and soft particles.
@@ -124,6 +139,7 @@ Use this index to write code against the engine directly. React, Web Components 
 - [Picking](/user-manual/gaussian-splatting/building/picking/): Picking splats with the `Picker`, including world positions from depth.
 - [Custom Shaders](/user-manual/gaussian-splatting/building/custom-shaders/): Changing how splats render with vertex and fragment shader chunks.
 - [Tonemapping and Exposure](/user-manual/gaussian-splatting/building/tonemapping/): How tone mapping, exposure and fog affect splats, and how to opt splats out.
+- [Anti-Aliasing](/user-manual/gaussian-splatting/building/anti-aliasing/): Rendering splats trained with anti-aliasing, detected from the file or set per resource.
 - [Shadows](/user-manual/gaussian-splatting/building/shadows/): Casting shadows from splats onto meshes.
 - [Relighting](/user-manual/gaussian-splatting/building/relighting/): Relighting a splat scene with standard lights through a proxy mesh.
 - [Render on Demand](/user-manual/gaussian-splatting/building/render-on-demand/): Rendering only when something changes, while streaming continues in the background.
@@ -153,7 +169,6 @@ Use this index to write code against the engine directly. React, Web Components 
 - [Blend Trees](/user-manual/animation/blend-trees/): 1D, 2D Cartesian, 2D Directional and Direct blend trees, State.Child clip paths, and keeping clips in step with syncAnimations.
 - [Layers and Masks](/user-manual/animation/layers-and-masks/): Several state machines on one model, overwrite and additive blending by weight, blendToWeight, normalizeWeights, and masks that limit a layer to part of a hierarchy.
 - [Animation Events](/user-manual/animation/events/): Adding named events to clips in the Editor or with AnimEvents, listening for them on the anim component, and when they fire.
-- [Spine](/user-manual/2D/spine/): Playing 2D skeletal animations from the Spine editor with the playcanvas-spine plugin: plugin versions, texture sRGB settings, binary skeletons, animation state, colors, physics and layers.
 
 ## User interface
 
@@ -188,8 +203,10 @@ Use this index to write code against the engine directly. React, Web Components 
 - [Platforms](/user-manual/xr/platforms/): Tested devices and browsers for VR, AR and each capability.
 - [Optimizing WebXR Applications](/user-manual/xr/optimizing-webxr/): Keeping the frame rate up despite stereo rendering, draw calls and AR tracking costs.
 
-## Optimization
+## Debugging and Optimization
 
+- [Debugging and Optimization](/user-manual/optimization/): Which tool to use to debug and profile an application, and the goals of optimizing it.
+- [Inspector Performance](/user-manual/optimization/inspector-performance/): Recording frames with the Inspector: frame, CPU, GPU and script times, loading and the start of the application, counters, and each frame on a timeline.
 - [General Guidelines](/user-manual/optimization/guidelines/): Tuning scripts, draw calls, batching, shaders, lighting, textures and post effects.
 - [Optimizing Load Time](/user-manual/optimization/load-time/): Image formats, texture sizes, preloading, asset audits, compression and staged loading.
 - [Texture Compression](/user-manual/optimization/texture-compression/): Reducing GPU memory and download size with Basis compressed textures.
@@ -228,7 +245,7 @@ Use this index to write code against the engine directly. React, Web Components 
 
 ## Examples and scripts
 
-- [Engine Examples Browser](https://playcanvas.com/examples): Hundreds of live examples by category, including animation, cameras, compute, Gaussian splatting, graphics, input, loaders, materials, physics, shaders, sound, user interface and XR. The source of each is at `https://github.com/playcanvas/engine/blob/main/examples/src/examples/<category>/<name>.example.mjs`: read it and port what you need rather than importing it.
+- [Engine Examples Browser](https://playcanvas.com/examples): Hundreds of live examples by category, including animation, cameras, compute, Gaussian splatting, graphics, input, loaders, materials, physics, shaders, sound, user interface and XR. The source of each is at `https://github.com/playcanvas/engine/blob/main/examples/src/examples/<category>/<name>/example.mjs`, next to the files it imports: read it and port what you need rather than importing it.
 - [Engine scripts](https://github.com/playcanvas/engine/tree/main/scripts/esm): Production `Script` classes shipped in the npm package under `playcanvas/scripts/esm/`: camera controls, first- and third-person controllers, CameraFrame post-processing, planar reflections, a shadow catcher, a reference grid, a procedural sky, annotations, XR helpers and Gaussian splat effects.
 
 ## Optional

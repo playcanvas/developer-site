@@ -11,7 +11,7 @@ thumb: /img/tutorials/spine-animation/thumbnail.jpg
 
 *Use the panel to pick the animation each skeleton plays, change its speed, and pause it.*
 
-This tutorial plays two skeletal animations made with the [Spine](https://esotericsoftware.com/) editor, using the [playcanvas-spine](https://github.com/playcanvas/playcanvas-spine) plugin. The tank is loaded from a binary `.skel` export, and Celestial Circus from a JSON export. You can explore the finished scene in the [tutorial project](https://playcanvas.com/project/1615675). The [Spine](/user-manual/2D/spine/) page of the User Manual covers the plugin in more detail.
+This tutorial plays two skeletal animations made with the [Spine](https://esotericsoftware.com/) editor, using the [playcanvas-spine](https://github.com/playcanvas/playcanvas-spine) plugin. The tank is loaded from a binary `.skel` export, and Celestial Circus from a JSON export. You can explore the finished scene in the [tutorial project](https://playcanvas.com/project/1615675). The [Spine](/user-manual/engine/libraries/spine/) page of the User Manual covers the plugin in more detail.
 
 ## Adding the plugin
 

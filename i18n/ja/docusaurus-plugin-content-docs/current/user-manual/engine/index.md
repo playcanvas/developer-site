@@ -234,6 +234,7 @@ PlayCanvasのすべての製品はこのエンジンを動かしているので�
 - [エンジンマイグレーション](migrations.md) — 破壊的変更と、コードを更新する方法。
 - [サポートされているブラウザ](supported-browsers.md) — WebGL 2とWebGPUに必要なブラウザの最小バージョン。
 - [AI を活用した開発](developing-with-ai.md) — Engineプロジェクトにコーディングエージェントをセットアップし、その変更を検証します。
+- [アドオンライブラリ](libraries/index.md) — エンジンと組み合わせて使う、Spineアニメーション、3D Tilesのストリーミング、トゥイーン、loaders.gl。
 - [サンプル](https://playcanvas.com/examples/) — 編集できるソースコード付きの250以上のライブサンプル。
 - [APIリファレンス](https://api.playcanvas.com/engine/) — すべてのクラス、メソッド、プロパティ。
 

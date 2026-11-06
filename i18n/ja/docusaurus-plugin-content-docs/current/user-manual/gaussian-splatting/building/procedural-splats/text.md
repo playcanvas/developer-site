@@ -115,7 +115,7 @@ textSplat.text = 'New Score: 200';
 
 CADスタイルの可視化で寸法ラベルに`GsplatText`を使用する方法を示すProcedural Shapesサンプルを参照してください。
 
-<EngineExample id="gaussian-splatting/procedural-shapes" title="Procedural Shapesサンプル" />
+<EngineExample id="gaussian-splatting-fx/procedural-shapes" title="Procedural Shapesサンプル" />
 
 ## スクリプトの場所
 

@@ -1,11 +1,11 @@
 ---
 title: Inspector
-description: Inspect a running PlayCanvas application in a debug panel - its entities, cameras, assets, frame graph, GPU resources, scripts and shaders - and step through the draws of a frame.
+description: Inspect a running PlayCanvas application in a debug panel - its entities, cameras, assets, frame graph, GPU resources, scripts and shaders - step through the draws of a frame, and record its performance.
 ---
 
 The Inspector is a debug panel for a running PlayCanvas application. It docks over the canvas and shows the application's scene, GPU resources and rendered frames as they are now, with the properties of whatever you select updating live below.
 
-<img loading="lazy" alt="The Inspector panel docked beside a running application, with an entity selected in the hierarchy" width="800" src="/img/user-manual/scripting/debugging/inspector/inspector.png" />
+<img loading="lazy" alt="The Inspector panel docked beside a running application, with an entity selected in the hierarchy" width="800" src="/img/user-manual/debugging/inspector/inspector.png" />
 
 Use it to answer questions such as:
 
@@ -13,6 +13,7 @@ Use it to answer questions such as:
 - Which material and shader does a mesh draw with, and which textures does it use?
 - What does a frame render, in which passes and in what order?
 - Where does the video memory go?
+- Which frames are slow, and what holds them back?
 
 The Inspector only reads the application. The changes it makes are the ones you ask for: turning entities on and off, pausing and stepping the application, and view-only overrides (render modes, wireframe and a flown or orbited camera), which it removes when it closes.
 
@@ -56,6 +57,7 @@ app.root.addChild(entity);
 | `toggleKey` | `` 'Backquote' `` | The key that shows and hides the panel. |
 | `pauseKey` | `'F9'` | The key that pauses and resumes the application. |
 | `stepKey` | `'F10'` | The key that advances one frame while paused. |
+| `record` | `false` | Whether to start recording frames on the Performance tab. Created before the application's first frame, the Inspector records its start too, see [Recording the Start of the Application](/user-manual/optimization/inspector-performance/#recording-the-start-of-the-application). |
 | `storageKey` | `'pc-inspector'` | The local storage key the panel's settings are kept under, such as the active tab and the panel width. `null` keeps nothing. |
 
 ## The Toolbar
@@ -82,6 +84,7 @@ Each tab lists one kind of object, and the property view below it shows the sele
 | **Cameras** | The cameras in render order, with where each draws. A render mode shows the scene's material inputs instead of the final image, such as albedo, world normals or lighting, for one camera or all of them, and the scene can be drawn in wireframe. |
 | **Assets** | Every asset in the registry, with its file, its load state and what uses it. |
 | **Frame graph** | The passes that rendered the last frame, in order, with the layers, draws and render targets of each. **GPU timings** shows the time each pass takes on the GPU where the device can measure it, **Freeze** keeps showing the current frame while the application runs on, and **Preview** draws the selected pass's render target over the view. |
+| **Performance** | Records the frames of the application and charts their frame, CPU, GPU and script times, what loaded, memory and resources over time, with each frame on a timeline of its own. See [Inspector Performance](/user-manual/optimization/inspector-performance/). |
 | **Render targets** | The render targets on the device, with the passes that rendered into them and a live preview of a chosen attachment. |
 | **Textures** | The textures on the device, largest first, with a live preview and a choice of channels to show. |
 | **Meshes** | The meshes of the application, largest first, with their geometry and what uses them. |
@@ -91,7 +94,7 @@ Each tab lists one kind of object, and the property view below it shows the sele
 | **Shaders** | The compiled shaders, with their sources. |
 | **Physics** | The rigid bodies and joints of the physics world, and an option to draw the world over the scene. |
 
-<img loading="lazy" alt="The Frame graph tab, with the forward pass selected and its render target previewed over the view" width="800" src="/img/user-manual/scripting/debugging/inspector/frame-graph.png" />
+<img loading="lazy" alt="The Frame graph tab, with the forward pass selected and its render target previewed over the view" width="800" src="/img/user-manual/debugging/inspector/frame-graph.png" />
 
 ## Stepping Through a Frame
 
@@ -102,7 +105,7 @@ The Frame graph tab can draw a frame one draw call at a time, to see how the ima
 3. Press the Up and Down arrow keys to step back and forward one draw at a time. The property view lists the drawn mesh instances with the current one highlighted, the view outlines it, and the status bar shows its number, such as *draw 8 of 12 · World opaque*. Expand an entry to see more about it, such as its mesh and material.
 4. Turn off **Debug frame** to draw the full frame again.
 
-<img loading="lazy" alt="Stepping through the draws of the World layer one at a time" width="800" src="/img/user-manual/scripting/debugging/inspector/debug-frame.webp" />
+<img loading="lazy" alt="Stepping through the draws of the World layer one at a time" width="800" src="/img/user-manual/debugging/inspector/debug-frame.webp" />
 
 :::note
 Stepping through draws needs the debug build of the engine, and the option is disabled with other builds. Bundlers such as Vite pick the debug build in development through the `development` export condition of the `playcanvas` package.

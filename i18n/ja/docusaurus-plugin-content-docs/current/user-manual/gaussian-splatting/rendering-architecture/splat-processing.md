@@ -282,7 +282,7 @@ void process() {
 
 - Paintサンプル - ブラシでスプラットをペイントするデモ
 
-<EngineExample id="gaussian-splatting/paint" title="Paintサンプル" />
+<EngineExample id="gaussian-splatting-fx/paint" title="Paintサンプル" />
 
 - Editorサンプル - 選択、削除、クローンのデモ
 

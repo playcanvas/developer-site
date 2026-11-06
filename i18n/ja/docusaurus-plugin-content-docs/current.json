@@ -15,9 +15,25 @@
     "message": "高度なレンダリング",
     "description": "The label for category Advanced Rendering in sidebar userManualSidebar"
   },
+  "sidebar.userManualSidebar.category.Frame Graph": {
+    "message": "フレームグラフ",
+    "description": "The label for category Frame Graph in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Render Passes": {
+    "message": "レンダーパス",
+    "description": "The label for category Render Passes in sidebar userManualSidebar"
+  },
   "sidebar.userManualSidebar.category.2D": {
     "message": "2D",
     "description": "The label for category 2D in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Debugging and Optimization": {
+    "message": "デバッグと最適化",
+    "description": "The label for category Debugging and Optimization in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Profiling": {
+    "message": "プロファイリング",
+    "description": "The label for category Profiling in sidebar userManualSidebar"
   },
   "sidebar.userManualSidebar.category.Optimization": {
     "message": "最適化",
@@ -178,6 +194,10 @@
   "sidebar.userManualSidebar.category.Script Attributes": {
     "message": "スクリプト属性",
     "description": "The label for category Script Attributes in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.doc.Debugging": {
+    "message": "デバッグ",
+    "description": "The label for the doc item Debugging in sidebar userManualSidebar, linking to the doc user-manual/debugging/index"
   },
   "sidebar.userManualSidebar.category.Debugging": {
     "message": "デバッグ",
@@ -346,5 +366,9 @@
   "sidebar.userManualSidebar.category.PCUI Graph": {
     "message": "PCUIグラフ",
     "description": "The label for category PCUI Graph in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.Add-on Libraries": {
+    "message": "アドオンライブラリ",
+    "description": "The label for category Add-on Libraries in sidebar userManualSidebar"
   }
 }

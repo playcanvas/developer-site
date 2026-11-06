@@ -3,6 +3,9 @@ title: ワークバッファフォーマット
 description: "ワークバッファフォーマット：コピーステージのカスタマイズ、ストリーム、リソースからワークバッファへのデータの流れ。"
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 ワークバッファフォーマットは、ワークバッファで利用可能なデータストリームと、スプラットデータがリソースからどのようにコピーされるかを定義します。コピー操作をカスタマイズして、スプラットを変換し、コンポーネントごとの追加データを書き込むことができます。
 
 :::note
@@ -86,7 +89,7 @@ entity.gsplat.setWorkBufferModifier({
 });
 ```
 
-## 追加ストリームの追加
+## 追加ストリームの追加 {#adding-extra-streams}
 
 デフォルトでは、ワークバッファには標準的なスプラットデータ（位置、色、回転、スケール）が含まれています。カスタムのスプラットごとのデータを格納するために追加ストリームを追加できます：
 
@@ -197,11 +200,65 @@ vec4 otherColor = getColor();
 
 詳細については[スプラットデータフォーマット - シェーダーアクセス](/user-manual/gaussian-splatting/rendering-architecture/splat-data-format#shader-access)を参照してください。
 
+## SOGブラインドデータの読み取り {#reading-sog-blind-data}
+
+[SOG](/user-manual/gaussian-splatting/formats/sog)バージョン3のファイルは[ブラインドデータ](/user-manual/gaussian-splatting/formats/sog#36-blind-data-v3-only-optional)を持つことができます。これは、意味をアプリケーションが定義するGaussianごとのフィールドです。このようなアセットを描画するコンポーネントのコピーモディファイアは、各フィールドを次の方法で読み取れます。
+
+- `getBlind_<name>()` - 現在のスプラットのフィールド値を返します。整数型の `u8` から `u32` では `uint`（WGSLでは `u32`）、`f16`、`f32`、`unorm8`、`unorm16` では `float`（`f32`）です。
+- `SOG_BLIND_<name>` - アセットがそのフィールドを持つ場合に設定されるdefineです。1つのモディファイアで、フィールドを持つアセットと持たないアセットの両方に対応できます。
+
+`<name>` は、フィールド名の英字、数字、`_` 以外の文字をすべて `_` に置き換え、連続する `_` を1つにまとめ、先頭と末尾の `_` を取り除いたものです。`part-id` という名前のフィールドは `getBlind_part_id()` で読み取ります。
+
+次のモディファイアは、`logo` フィールドが1のスプラットに色を付けます。
+
+<Tabs groupId="shader-language" queryString="lang">
+<TabItem value="glsl" label="GLSL">
+
+```glsl
+void modifySplatCenter(inout vec3 center) {}
+void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, inout vec4 rotation, inout vec3 scale) {}
+void modifySplatColor(vec3 center, inout vec4 color) {
+    #ifdef SOG_BLIND_logo
+        if (getBlind_logo() == 1u) {
+            color.rgb = vec3(1.0, 0.65, 0.15);
+        }
+    #endif
+}
+```
+
+</TabItem>
+<TabItem value="wgsl" label="WGSL">
+
+```wgsl
+fn modifySplatCenter(center: ptr<function, vec3f>) {}
+fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f, rotation: ptr<function, vec4f>, scale: ptr<function, vec3f>) {}
+fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
+    #ifdef SOG_BLIND_logo
+        if (getBlind_logo() == 1u) {
+            *color = vec4f(1.0, 0.65, 0.15, (*color).a);
+        }
+    #endif
+}
+```
+
+</TabItem>
+</Tabs>
+
+```javascript
+entity.gsplat.setWorkBufferModifier({ glsl: glslModifier, wgsl: wgslModifier });
+```
+
+ブラインドデータはアセットから読み取られ、ワークバッファには含まれません。描画時にフィールドを使用するには、コピーの際に[追加ストリーム](#adding-extra-streams)へ書き込んでください。
+
+Blind Dataサンプルは、SOGバージョン3のファイルから2つのフィールドを読み取ります。ロゴに光沢を加える `logo` フラグと、スプラットの残りの部分に色相の波を走らせる `edge` 距離です。**View** オプションでは、フィールドそのものを表示します。
+
+<EngineExample id="gaussian-splatting-fx/blind-data" title="Blind Dataサンプル" />
+
 ## ライブサンプル
 
 以下を示すLOD Instancesサンプルを参照してください：
 
-<EngineExample id="gaussian-splatting/lod-instances" title="LOD Instancesサンプル" />
+<EngineExample id="gaussian-splatting/streamed-instances" title="LOD Instancesサンプル" />
 
 - ワークバッファへの`splatId`ストリームの追加
 - `setWorkBufferModifier()`を使用したコピー中のコンポーネントIDの書き込み

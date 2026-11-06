@@ -213,7 +213,7 @@ In-canvas UI is pixels: screen readers can't read it, and keyboard users can't r
 
 ## HTML in the Canvas {#html-in-the-canvas}
 
-An experimental browser API, HTML-in-Canvas, draws HTML into a texture that can be used in the scene, for example on a world-space panel. Few browsers support it yet, so treat it as an experiment and keep a fallback:
+HTML-in-Canvas, a browser API enabled by default in Chrome 157 and later, draws HTML into a texture that can be used in the scene, for example on a world-space panel. Other browsers don't support it yet, so keep a fallback. See [HTML-in-Canvas](/user-manual/graphics/advanced-rendering/html-in-canvas/) for how to use it:
 
 <EngineExample id="misc/html-texture" title="HTML Texture" />
 

@@ -7,6 +7,12 @@ description: ポストエフェクトのシェーダーでフレームバッフ�
 
 import Link from '@docusaurus/Link';
 
+:::warning[非推奨]
+
+このチュートリアルでは、非推奨のレガシーポストエフェクトを使用しています。新しいプロジェクトでは、代わりにエフェクトを [CameraFrame の独自エフェクト](/user-manual/graphics/posteffects/cameraframe/#custom-post-processing) として作成してください。
+
+:::
+
 ショックウェーブ波紋ポストエフェクト
 
 <div className="iframe-container">

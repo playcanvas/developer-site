@@ -3,6 +3,12 @@ title: Sepia Effect
 description: Legacy sepia script effect amount and GitHub reference for the sepia post-processing camera script.
 ---
 
+:::warning[Deprecated]
+
+This legacy effect is deprecated. Use a color lookup table of [CameraFrame](/user-manual/graphics/posteffects/cameraframe) instead. See [Migrating to CameraFrame](/user-manual/graphics/posteffects/legacy#migrating-to-cameraframe).
+
+:::
+
 The Sepia effect makes the image look like an old photograph.
 
 Here is an image without the effect:

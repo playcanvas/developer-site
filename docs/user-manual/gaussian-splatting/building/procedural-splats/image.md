@@ -86,7 +86,7 @@ The number of splats equals the number of non-transparent pixels in the image. F
 
 See the Procedural Shapes example which demonstrates using `GsplatImage` to display textures as ground and wall decorations.
 
-<EngineExample id="gaussian-splatting/procedural-shapes" title="Procedural Shapes example" />
+<EngineExample id="gaussian-splatting-fx/procedural-shapes" title="Procedural Shapes example" />
 
 ## Script Location
 

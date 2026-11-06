@@ -3,6 +3,12 @@ title: 色相・彩度エフェクト
 description: レガシーの色相・彩度 Script エフェクトのコントロールと、huesaturation ポストエフェクトソースの GitHub リンクです。
 ---
 
+:::warning[非推奨]
+
+このレガシーエフェクトは非推奨です。代わりに [CameraFrame](/user-manual/graphics/posteffects/cameraframe) のカラーグレーディングの `saturation` を使用してください。色相の変更にはカラールックアップテーブルを使用します。[CameraFrame への移行](/user-manual/graphics/posteffects/legacy#migrating-to-cameraframe) を参照してください。
+
+:::
+
 色相 (Hue) 彩度 (Saturation) エフェクトは、レンダリングされたイメージの色相と彩度を変更できます。
 
 これはエフェクトをかけていない画像です。

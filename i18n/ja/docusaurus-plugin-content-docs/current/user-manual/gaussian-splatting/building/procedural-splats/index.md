@@ -265,7 +265,7 @@ PlayCanvasは、一般的なユースケース用に`GSplatContainer`をラッ�
 
 カスタム`GSplatContainer`をカスタムフォーマットとインスタンスごとのシェーダーユニフォームで作成する方法を示すProcedural Instancedサンプルを参照してください。
 
-<EngineExample id="gaussian-splatting/procedural-instanced" title="Procedural Instancedサンプル" />
+<EngineExample id="gaussian-splatting-fx/procedural-instanced" title="Procedural Instancedサンプル" />
 
 ## 関連項目
 

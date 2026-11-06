@@ -41,6 +41,8 @@ property float f_rest_44
 end_header
 ```
 
+ヘッダーには、シーンの学習方法をコメント行として記録することもできます。Postshot は `comment antialiased 1` を、Brush と SplatTransform は `comment SplatRenderMode: mip` を書き出します。PlayCanvas はどちらも読み取り、スプラットを必要なアンチエイリアス補正付きで描画します。[アンチエイリアス](../building/anti-aliasing.md)を参照してください。
+
 ### 要素の定義
 
 ヘッダーは、要素（通常、個々の Gaussian Splat を表す頂点）の構造とプロパティを定義します。
