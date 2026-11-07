@@ -403,7 +403,7 @@ const alpha = peak * Math.max(0, Math.exp(-0.5 * s * s) - f);
 
 A renderer that does not support opacity above 1 **must** clamp `A` to 1. The scene then renders as it would have before over-unity opacity was stored.
 
-When converting to PLY, a tool **should** write `A` itself as an extra float property `opacity_linear`, and `opacity = logit(min(A, 1))` so that tools that ignore `opacity_linear` still read a valid PLY. A reader that finds `opacity_linear` **must** use it as the opacity, whatever `opacity` holds.
+When converting to PLY, a tool **should** write `A` itself as a float property `opacity_linear` in place of `opacity` when some gaussian's opacity exceeds 1, and the standard `opacity` logit otherwise, so a PLY carries one or the other, never both. A reader that finds `opacity_linear` **must** use it as the opacity, even if `opacity` is also present. Tools that don't know `opacity_linear` cannot read such a PLY; a converter **may** offer to write the standard logit instead, clamping `A` to 1.
 
 ### 3.7 Blind data (optional)
 

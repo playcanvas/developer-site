@@ -52,6 +52,10 @@ SplatTransform はファイル拡張子からフォーマットを検出しま�
 
 PLYのその他のヘッダーコメント（例：`Postshot v1.1.69` や `postshot.color.eotf=sRGB`）も引き継がれます。`.ply` と `.compressed.ply` はこれらを `comment` 行として書き戻し、SOGバージョン3の出力（`.sog`、`meta.json`、`lod-meta.json`）は `comments` として保存します。コメントは解釈されないため、座標を記述するコメントは変換によって更新されません。
 
+### 1を超える不透明度 {#opacity-above-1}
+
+デシメーションはガウシアンをその量を失わずにマージするため、マージされたガウシアンの不透明度は1を超えることがあります（レンダラーは1.5625までを不透明なコアとして描画します）。PLYは不透明度を1つのプロパティとして保持します。1を超えないシーンには標準の `opacity` ロジット（最大1）を、デシメーションされたシーンや1を超える不透明度を持つSOGバージョン3の入力には `opacity` の代わりに不透明度そのものである `opacity_linear` を使用します。`opacity_linear` を認識しないツールはこれらのファイルを読み取れません。`--ply-logit-opacity` を指定すると、1を超える不透明度をクランプして標準のロジットを出力します。読み取り時は、`opacity_linear` があればそれが使用されます。SOGバージョン3は1を超える不透明度をそのまま保存し、SOGバージョン2やその他のフォーマットでは1にクランプされます。
+
 ## アクション {#actions}
 
 アクションは指定された順序で実行され、繰り返し使用できます。アクションは任意の入力または出力ファイルの後に配置できます：
@@ -63,14 +67,15 @@ PLYのその他のヘッダーコメント（例：`Postshot v1.1.69` や `posts
 -H, --filter-harmonics <0|1|2|3>        Remove spherical harmonic bands > n
 -N, --filter-nan                        Remove Gaussians with NaN values, most Inf values, or a
                                           zero-norm (unrenderable) rotation quaternion;
-                                          retains +Infinity in opacity and -Infinity in scale_*
+                                          retains -Infinity in scale_*
 -B, --filter-box       <x,y,z,X,Y,Z>    Remove Gaussians outside box (min, max corners)
 -S, --filter-sphere    <x,y,z,radius>   Remove Gaussians outside sphere (center, radius)
 -V, --filter-value     <name,cmp,value> Keep Gaussians where <name> <cmp> <value>
                                           cmp ∈ {lt,lte,gt,gte,eq,neq}
                                           opacity, scale_*, f_dc_* use transformed values
-                                          (linear opacity 0-1, linear scale, linear color 0-1).
-                                          Append _raw for raw PLY values (e.g. opacity_raw).
+                                          (linear opacity, above 1 for merged Gaussians, linear
+                                          scale, linear color 0-1). Append _raw for raw PLY values
+                                          (e.g. opacity_raw, the opacity logit).
 -d, --decimate         <n|n%>           Simplify to n Gaussians via merge-based decimation,
                                           removing at a uniform rate everywhere.
                                           Use n% to keep a percentage of Gaussians.
@@ -200,6 +205,16 @@ NVIDIA GPUを搭載したサーバーでsplat-transformを実行する方法に�
     --spz-version      <3|4>            The SPZ format version to write. Default: 4
 ```
 
+### PLY出力オプション {#ply-output-options}
+
+`.ply` の出力を書き込む際に適用されます。
+
+```none
+    --ply-logit-opacity                 Write the standard opacity logit even when some gaussian's opacity
+                                          exceeds 1 (clamped to 1), instead of opacity_linear. For tools that
+                                          don't read opacity_linear
+```
+
 ### HTMLビューア出力オプション {#html-viewer-output-options}
 
 `.html` の出力を書き込む際に適用されます。
@@ -277,7 +292,7 @@ NVIDIA GPUを搭載したサーバーでsplat-transformを実行する方法に�
     --resolution       <WxH>            Output resolution, e.g. 1920x1080. Default: 1280x720 (pinhole) or 2048x1024 (equirect)
     --camera-near      <n>              Near clip distance. Default: 0.2 (matches reference 3DGS)
     --background       <r,g,b[,a]>      Background color in [0,1]. Default: 0,0,0,1
-    --no-compensation                   Clamp opacity above 1 (opacity_linear from decimation) and draw every
+    --no-compensation                   Clamp opacity above 1 (from decimation) to 1 and draw every
                                           gaussian at opacity <= 1. For debugging and A/B comparison.
     --aa-filter-size   <px²>            Screen-space filter of scenes trained with anti-aliasing (splat model
                                           antialiased), used in place of the 0.3 px² dilation. Default: 0.1

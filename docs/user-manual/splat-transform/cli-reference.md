@@ -52,6 +52,10 @@ Scenes trained with antialiasing (a mip-splatting style screen-space filter) or 
 
 A PLY's other header comments (for example `Postshot v1.1.69` or `postshot.color.eotf=sRGB`) are carried through as well: `.ply` and `.compressed.ply` write them back as `comment` lines, and SOG version 3 output (`.sog`, `meta.json`, `lod-meta.json`) stores them as `comments`. They are not interpreted, so ones describing coordinates are not updated by transforms.
 
+### Opacity Above 1
+
+Decimation merges Gaussians without losing their mass, so a merged Gaussian's opacity can exceed 1 (renderers draw it, up to 1.5625, as an opaque core). A PLY holds opacity as one property: the standard `opacity` logit (at most 1) for scenes that cannot exceed 1, or `opacity_linear`, the opacity itself, in place of `opacity` for decimated scenes and for SOG version 3 input that holds opacity above 1. Tools that don't know `opacity_linear` cannot read these files; `--ply-logit-opacity` writes the standard logit instead, clamping opacity above 1. On read, `opacity_linear` is used when present. SOG version 3 stores opacity above 1 directly; SOG version 2 and the other formats clamp it to 1.
+
 ## Actions
 
 Actions execute in the order specified and can be repeated. Any action may appear after any input or output file:
@@ -63,14 +67,15 @@ Actions execute in the order specified and can be repeated. Any action may appea
 -H, --filter-harmonics <0|1|2|3>        Remove spherical harmonic bands > n
 -N, --filter-nan                        Remove Gaussians with NaN values, most Inf values, or a
                                           zero-norm (unrenderable) rotation quaternion;
-                                          retains +Infinity in opacity and -Infinity in scale_*
+                                          retains -Infinity in scale_*
 -B, --filter-box       <x,y,z,X,Y,Z>    Remove Gaussians outside box (min, max corners)
 -S, --filter-sphere    <x,y,z,radius>   Remove Gaussians outside sphere (center, radius)
 -V, --filter-value     <name,cmp,value> Keep Gaussians where <name> <cmp> <value>
                                           cmp ∈ {lt,lte,gt,gte,eq,neq}
                                           opacity, scale_*, f_dc_* use transformed values
-                                          (linear opacity 0-1, linear scale, linear color 0-1).
-                                          Append _raw for raw PLY values (e.g. opacity_raw).
+                                          (linear opacity, above 1 for merged Gaussians, linear
+                                          scale, linear color 0-1). Append _raw for raw PLY values
+                                          (e.g. opacity_raw, the opacity logit).
 -d, --decimate         <n|n%>           Simplify to n Gaussians via merge-based decimation,
                                           removing at a uniform rate everywhere.
                                           Use n% to keep a percentage of Gaussians.
@@ -200,6 +205,16 @@ Apply when writing `.spz` outputs.
     --spz-version      <3|4>            The SPZ format version to write. Default: 4
 ```
 
+### PLY Output Options
+
+Apply when writing `.ply` outputs.
+
+```none
+    --ply-logit-opacity                 Write the standard opacity logit even when some gaussian's opacity
+                                          exceeds 1 (clamped to 1), instead of opacity_linear. For tools that
+                                          don't read opacity_linear
+```
+
 ### HTML Viewer Output Options
 
 Apply when writing `.html` outputs.
@@ -277,7 +292,7 @@ Apply when writing `.webp` (lossless WebP rendered via GPU rasterizer). See the 
     --resolution       <WxH>            Output resolution, e.g. 1920x1080. Default: 1280x720 (pinhole) or 2048x1024 (equirect)
     --camera-near      <n>              Near clip distance. Default: 0.2 (matches reference 3DGS)
     --background       <r,g,b[,a]>      Background color in [0,1]. Default: 0,0,0,1
-    --no-compensation                   Clamp opacity above 1 (opacity_linear from decimation) and draw every
+    --no-compensation                   Clamp opacity above 1 (from decimation) to 1 and draw every
                                           gaussian at opacity <= 1. For debugging and A/B comparison.
     --aa-filter-size   <px²>            Screen-space filter of scenes trained with anti-aliasing (splat model
                                           antialiased), used in place of the 0.3 px² dilation. Default: 0.1
