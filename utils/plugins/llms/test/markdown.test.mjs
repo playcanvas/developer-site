@@ -195,7 +195,7 @@ describe('components', () => {
         assert.equal(
             convert('<EngineExample id="xr/ar-hit-test" title="View Live Example" />').markdown,
             '[Live example: AR Hit Test](https://playcanvas.com/examples/#/xr/ar-hit-test) ' +
-            '([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/xr/ar-hit-test.example.mjs))'
+            '([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/xr/ar-hit-test/example.mjs))'
         );
         assert.equal(
             convert('<EngineExample title="PlayCanvas Engine Examples Browser" />').markdown,

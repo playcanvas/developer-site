@@ -21,6 +21,8 @@ To access one of these buffers in the shader as a texture, these are the uniform
 - for the color map: `uSceneColorMap`
 - for the depth map: `uSceneDepthMap`
 
+Compute shaders do not use these uniforms. They access the maps of a camera through the compute instance instead, see [Scene Depth and Color Maps](/user-manual/graphics/shaders/compute-shaders#scene-depth-and-color-maps).
+
 ## Color Space Handling
 
 When using `uSceneColorMap`, it's important to handle color space correctly. The scene color texture contains either gamma-corrected values (when rendering LDR to a non-sRGB target) or linear values (when using HDR rendering with CameraFrame).
@@ -68,11 +70,26 @@ When using [`CameraFrame`](/user-manual/graphics/posteffects/cameraframe/) for H
 
 The color map in CameraFrame contains linear HDR values (no gamma correction needed), so the `SCENE_COLORMAP_GAMMA` define will not be set. This ensures consistent color space handling across different rendering configurations.
 
+## Color map mipmaps
+
+The color map has mipmaps, which materials with rough refraction sample to blur what is behind them. A custom shader selects the mip level with `texture2DLod` in GLSL, or `textureSampleLevel` in WGSL. Two properties of the camera component control the mipmaps, of the color map captured by the Depth layer as well as by CameraFrame:
+
+- [`sceneColorMapMipmapFilter`](https://api.playcanvas.com/engine/classes/CameraComponent.html#scenecolormapmipmapfilter) selects the filter generating the mipmaps. The default `MIPMAPFILTER_BOX` averages blocks of texels, which show as blocks that flicker in a strongly blurred refraction. `MIPMAPFILTER_GAUSSIAN` blurs it smoothly, at a higher cost of generating the mipmaps.
+- [`sceneColorMapMipmaps`](https://api.playcanvas.com/engine/classes/CameraComponent.html#scenecolormapmipmaps) set to `false` captures the color map without mipmaps. Refraction is then always sharp, which suits clear glass or a heat haze, and this saves generating the mipmaps each frame and about a third of the memory of the color map.
+
+```javascript
+// a smooth blur of rough refraction
+cameraEntity.camera.sceneColorMapMipmapFilter = MIPMAPFILTER_GAUSSIAN;
+
+// or, where only sharp refraction is needed
+cameraEntity.camera.sceneColorMapMipmaps = false;
+```
+
 ## Examples
 
 These engine examples demonstrate the rendering of both the depth and the color map, and also custom shaders allowing their use:
 
-- GrabPass demonstrates the use of the color buffer: `GrabPass`
+- GrabPass demonstrates the use of the color buffer by frosted glass, which samples its blurred mip levels, and compares the box and Gaussian mipmap filters: `GrabPass`
 
 <EngineExample id="shaders/grab-pass" title="GrabPass" />
 

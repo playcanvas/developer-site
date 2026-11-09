@@ -115,7 +115,7 @@ For labels with many characters or large font sizes, the splat count can be sign
 
 See the Procedural Shapes example which demonstrates using `GsplatText` for dimension labels in a CAD-style visualization.
 
-<EngineExample id="gaussian-splatting/procedural-shapes" title="Procedural Shapes example" />
+<EngineExample id="gaussian-splatting-fx/procedural-shapes" title="Procedural Shapes example" />
 
 ## Script Location
 

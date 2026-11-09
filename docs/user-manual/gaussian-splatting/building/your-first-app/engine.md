@@ -121,7 +121,7 @@ camera.script.create('cameraControls');
 Since we've already loaded the camera controls script using [`AssetListLoader`](https://api.playcanvas.com/engine/classes/AssetListLoader.html), we can directly create the script component. The camera controls will allow you to:
 
 - **Left mouse drag**: Orbit around the target
-- **Right mouse drag**: Pan the camera
+- **Middle mouse drag**: Pan the camera
 - **Mouse wheel**: Zoom in and out
 
 ## Adding the Splat

@@ -7,7 +7,7 @@ Gaussian splat scenes are captured with their lighting baked in. Relighting lets
 
 **View Live Example** - A splat scene relit by an HDRI environment, a PCSS directional light and shadow-casting omni lights.
 
-<EngineExample id="gaussian-splatting/relighting" title="View Live Example" />
+<EngineExample id="gaussian-splatting-fx/relighting" title="View Live Example" />
 
 ## How It Works
 

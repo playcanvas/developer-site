@@ -3,6 +3,12 @@ title: Bloom エフェクト
 description: "レガシーの Script ブルーム：intensity、threshold、blur、および GitHub 上のエンジン posteffect-bloom ソースへのリンク。"
 ---
 
+:::warning[非推奨]
+
+このレガシーエフェクトは非推奨です。代わりに [CameraFrame](/user-manual/graphics/posteffects/cameraframe) のブルームを使用してください。[CameraFrame への移行](/user-manual/graphics/posteffects/legacy#migrating-to-cameraframe) を参照してください。
+
+:::
+
 [ブルーム (Bloom)](https://en.wikipedia.org/wiki/Bloom_(shader_effect))は現実世界のカメラが現実には存在しないものを写しだしてしまうアーティファクトを再現するために使うポストプロセスエフェクトです。このエフェクトは画像の明るい領域のエッジから漏れ広がる光のふちを描画し、非常に明るい光がそのシーンを撮影しているカメラの露出限界を超えている様子を表現します。
 
 次は、ブルームを適用していないイメージです。

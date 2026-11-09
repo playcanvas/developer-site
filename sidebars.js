@@ -109,6 +109,20 @@ const sidebars = {
         'user-manual/engine/versioning',
         'user-manual/engine/migrations',
         'user-manual/engine/developing-with-ai',
+        {
+          type: 'category',
+          label: 'Add-on Libraries',
+          link: {
+            type: 'doc',
+            id: 'user-manual/engine/libraries/index',
+          },
+          items: [
+            'user-manual/engine/libraries/spine',
+            'user-manual/engine/libraries/3d-tiles',
+            'user-manual/engine/libraries/tween',
+            'user-manual/engine/libraries/loaders-gl',
+          ],
+        },
         { type: 'link', label: 'Examples', key: 'engine-examples', href: 'https://playcanvas.com/examples' },
       ],
     },
@@ -757,19 +771,8 @@ const sidebars = {
         },
         'user-manual/scripting/engine-api',
         'user-manual/scripting/events',
-        {
-          type: 'category',
-          label: 'Debugging',
-          link: {
-            type: 'doc',
-            id: 'user-manual/scripting/debugging/index',
-          },
-          items: [
-            'user-manual/scripting/debugging/console-logging',
-            'user-manual/scripting/debugging/browser-dev-tools',
-            'user-manual/scripting/debugging/inspector'
-          ],
-        },
+        // the debugging of scripts is part of Debugging and Optimization, linked from here
+        { type: 'ref', id: 'user-manual/debugging/index', label: 'Debugging' },
         'user-manual/scripting/migration-guide'
       ],
     },
@@ -841,6 +844,7 @@ const sidebars = {
             'user-manual/graphics/physical-rendering/environment-lighting',
           ],
         },
+        'user-manual/graphics/textures',
         'user-manual/graphics/transparency',
         {
           type: 'category',
@@ -892,9 +896,11 @@ const sidebars = {
               },
               items: [
                 'user-manual/graphics/posteffects/cameraframe/volumetric-fog',
-                'user-manual/graphics/posteffects/cameraframe/compose-shader',
-                'user-manual/graphics/posteffects/cameraframe/extending-class',
-                'user-manual/graphics/posteffects/cameraframe/custom-passes',
+                'user-manual/graphics/posteffects/cameraframe/auto-exposure',
+                'user-manual/graphics/posteffects/cameraframe/lens-flare',
+                'user-manual/graphics/posteffects/cameraframe/dynamic-sky',
+                'user-manual/graphics/posteffects/cameraframe/custom-effects',
+                'user-manual/graphics/posteffects/cameraframe/effect-passes',
               ],
             },
             {
@@ -933,6 +939,31 @@ const sidebars = {
             'user-manual/graphics/advanced-rendering/multi-draw',
             'user-manual/graphics/advanced-rendering/render-targets',
             'user-manual/graphics/advanced-rendering/multiple-render-targets',
+            {
+              type: 'category',
+              label: 'Frame Graph',
+              link: {
+                type: 'doc',
+                id: 'user-manual/graphics/advanced-rendering/frame-graph/index',
+              },
+              items: [
+                'user-manual/graphics/advanced-rendering/frame-graph/frame-passes',
+                'user-manual/graphics/advanced-rendering/frame-graph/camera-passes',
+                {
+                  type: 'category',
+                  label: 'Render Passes',
+                  link: {
+                    type: 'doc',
+                    id: 'user-manual/graphics/advanced-rendering/frame-graph/render-pass',
+                  },
+                  items: [
+                    'user-manual/graphics/advanced-rendering/frame-graph/render-pass-shader-quad',
+                    'user-manual/graphics/advanced-rendering/frame-graph/render-pass-forward',
+                  ],
+                },
+                'user-manual/graphics/advanced-rendering/frame-graph/compute-pass',
+              ],
+            },
             'user-manual/graphics/advanced-rendering/dual-source-blending',
             'user-manual/graphics/advanced-rendering/indirect-drawing',
             'user-manual/graphics/advanced-rendering/transform-feedback',
@@ -964,6 +995,7 @@ const sidebars = {
             'user-manual/gaussian-splatting/formats/streamed-sog',
             'user-manual/gaussian-splatting/formats/glb',
             'user-manual/gaussian-splatting/formats/spz',
+            'user-manual/gaussian-splatting/formats/lcc2',
           ],
         },
         {
@@ -1022,6 +1054,7 @@ const sidebars = {
             'user-manual/gaussian-splatting/building/shadows',
             'user-manual/gaussian-splatting/building/fisheye',
             'user-manual/gaussian-splatting/building/tonemapping',
+            'user-manual/gaussian-splatting/building/anti-aliasing',
             {
               type: 'category',
               label: 'Custom Shaders',
@@ -1103,7 +1136,7 @@ const sidebars = {
         'user-manual/2D/sprite-editor',
         'user-manual/2D/slicing',
         'user-manual/2D/texture-packing',
-        'user-manual/2D/spine',
+        { type: 'ref', id: 'user-manual/engine/libraries/spine' },
       ],
     },
     {
@@ -1220,22 +1253,48 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'Optimization',
+      label: 'Debugging and Optimization',
       link: {
         type: 'doc',
         id: 'user-manual/optimization/index',
       },
       items: [
-        'user-manual/optimization/guidelines',
-        'user-manual/optimization/texture-compression',
-        'user-manual/optimization/mini-stats',
-        'user-manual/optimization/app-stats',
-        'user-manual/optimization/profiler',
-        'user-manual/optimization/gpu-profiling',
-        'user-manual/optimization/runtime-devicepixelratio',
-        'user-manual/optimization/load-time',
-        'user-manual/optimization/optimizing-scene-format',
-        'user-manual/optimization/troubleshooting-performance',
+        {
+          type: 'category',
+          label: 'Debugging',
+          link: {
+            type: 'doc',
+            id: 'user-manual/debugging/index',
+          },
+          items: [
+            'user-manual/debugging/console-logging',
+            'user-manual/debugging/browser-dev-tools',
+            'user-manual/debugging/inspector',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Profiling',
+          items: [
+            'user-manual/optimization/mini-stats',
+            'user-manual/optimization/app-stats',
+            'user-manual/optimization/inspector-performance',
+            'user-manual/optimization/profiler',
+            'user-manual/optimization/gpu-profiling',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Optimization',
+          items: [
+            'user-manual/optimization/guidelines',
+            'user-manual/optimization/texture-compression',
+            'user-manual/optimization/runtime-devicepixelratio',
+            'user-manual/optimization/load-time',
+            'user-manual/optimization/optimizing-scene-format',
+            'user-manual/optimization/troubleshooting-performance',
+          ],
+        },
       ],
     },
     sectionHeader('Foundational APIs'),

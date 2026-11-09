@@ -436,7 +436,7 @@ function renderEngineExample(node) {
     }
 
     const name = GENERIC_EXAMPLE_TITLES.has(title.toLowerCase()) ? exampleName(examplePath) : title;
-    return `[Live example: ${name}](${EXAMPLES_URL}/#/${examplePath}) ([source](${EXAMPLES_SOURCE_URL}/${examplePath}.example.mjs))`;
+    return `[Live example: ${name}](${EXAMPLES_URL}/#/${examplePath}) ([source](${EXAMPLES_SOURCE_URL}/${examplePath}/example.mjs))`;
 }
 
 /**

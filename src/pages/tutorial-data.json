@@ -1177,15 +1177,6 @@
       "filename": "tutorial-shop-user-interface"
     },
     {
-      "title": "Using the Tween library",
-      "tags": [
-        "animation",
-        "scripts"
-      ],
-      "thumb": "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/452634/BDFB7E-image-75.jpg",
-      "filename": "tweening"
-    },
-    {
       "title": "User Interface - Buttons",
       "tags": [
         "ui"

@@ -98,7 +98,7 @@ const updateShader = new pc.Shader(device, {
 const compute = new pc.Compute(device, shader, 'MyComputeInstance');
 ```
 
-## パラメータの設定
+## パラメータの設定 {#setting-parameters}
 
 `setParameter`を使用してリソースをバインドし、ユニフォーム値を設定します。リソースは名前によってシェーダーの宣言に対応付けられます：
 
@@ -113,6 +113,8 @@ compute.setParameter('inputTexture', texture);
 compute.setParameter('count', 1024);
 compute.setParameter('tint', [1.0, 0.5, 0.0, 1.0]);
 ```
+
+コンピュートシェーダーが宣言するすべてのユニフォームとリソースには、コンピュートインスタンスで値を設定する必要があります。コンピュートシェーダーはグラフィックスデバイスのスコープにグローバルに設定された値を使用しません。また、デバッグビルドでは、値が設定されていない宣言済みのユニフォームやリソースが報告されます。
 
 ## ストレージバッファの作成
 
@@ -177,11 +179,23 @@ device.computeDispatch([compute1, compute2], 'BatchedDispatch');
 
 :::
 
+コンピュートインスタンスは1フレームに最大1回ディスパッチされます。1フレーム内でコンピュートシェーダーを複数回ディスパッチするには、ディスパッチごとに別のコンピュートインスタンスを使用してください。インスタンス間でシェーダーを共有でき、シェーダーのコンパイルは一度だけです：
+
+```javascript
+const computes = [0.25, 0.5].map((strength) => {
+    const compute = new pc.Compute(device, shader, `Blur-${strength}`);
+    compute.setParameter('strength', strength);
+    compute.setupDispatch(width, height);
+    return compute;
+});
+device.computeDispatch(computes, 'Blur');
+```
+
 ### ワークグループサイズ
 
 総呼び出し回数は`dispatchSize × workgroupSize`です。例えば、`(width, height)`でディスパッチし、シェーダーが`@workgroup_size(1, 1, 1)`の場合、`width × height`回の呼び出しが行われます。
 
-大規模なデータセットでのパフォーマンス向上のために、より大きなワークグループサイズを使用してください：
+大規模なデータセットでのパフォーマンス向上のために、より大きなワークグループサイズを使用してください。例えば、1次元のデータには64、画像には8 × 8が適しています：
 
 ```wgsl
 @compute @workgroup_size(64, 1, 1)
@@ -190,13 +204,44 @@ fn main(@builtin(global_invocation_id) global_id: vec3u) {
 }
 ```
 
-そして、それに応じてディスパッチします：
+### スレッド数を指定したディスパッチ {#dispatching-for-a-number-of-threads}
+
+[`setupDispatchThreads`](https://api.playcanvas.com/engine/classes/Compute.html#setupdispatchthreads)は、ワークグループ数の代わりに、各次元でディスパッチするスレッド数を受け取ります。スレッドはシェーダーの1回の呼び出しで、通常は1つの要素またはピクセルを処理します。ワークグループ数は、シェーダーが宣言するワークグループサイズから求められます。そのため、ワークグループサイズは`@workgroup_size(8, 8)`のように整数リテラルで記述する必要があります。`cdefines`で注入した値（[定義とインクルード](#defines-and-includes)を参照）は、ワークグループサイズが読み取られる前にリテラルに置き換えられます。
 
 ```javascript
-const numElements = 1024 * 1024;
-const workgroupSize = 64;
-compute.setupDispatch(numElements / workgroupSize);
+// 要素ごとに1スレッド
+compute.setupDispatchThreads(numElements);
+
+// 画像のピクセルごとに1スレッド
+compute.setupDispatchThreads(width, height);
 ```
+
+ディスパッチはワークグループ単位に切り上げられるため、シェーダーは要求された数を超えるスレッドをスキップします。`dispatchThreadsCS`インクルードの関数は、このスキップとスレッドのインデックス計算を行います：
+
+```wgsl
+#include "dispatchThreadsCS"
+
+var<storage, read_write> values: array<f32>;
+
+@compute @workgroup_size(64)
+fn main(@builtin(global_invocation_id) id: vec3u) {
+    if (!dispatchThreadInRange(id)) {
+        return;
+    }
+    let index = dispatchThreadIndex(id);
+    values[index] = values[index] * 2.0;
+}
+```
+
+`dispatchThreadsCS`インクルードは次の関数を提供します：
+
+| 関数 | 説明 |
+|------|------|
+| `dispatchThreadCount() -> vec3u` | ディスパッチに設定されたスレッド数。 |
+| `dispatchThreadInRange(globalId: vec3u) -> bool` | スレッドが、ディスパッチに設定されたスレッドの1つである場合にtrue。 |
+| `dispatchThreadIndex(globalId: vec3u) -> u32` | スレッドの線形インデックス。xが最も速く変化します。 |
+
+シェーダーは、書き込むテクスチャのサイズなど、独自の範囲でスレッドをスキップすることもできます。ただし、デバイスが各次元でサポートするワークグループ数には上限があり、少なくとも65535です。それを超えるワークグループが必要な1次元のディスパッチは複数行のワークグループに分割されます。その場合、シェーダーは`dispatchThreadsCS`をインクルードし、分割を考慮する`dispatchThreadIndex`でスレッドのインデックスを求める必要があります。
 
 ## 間接ディスパッチ
 
@@ -313,6 +358,86 @@ storageBuffer.read(0, undefined, resultData, true).then((data) => {
 
 :::
 
+## シーンの深度マップとカラーマップ {#scene-depth-and-color-maps}
+
+コンピュートシェーダーはカメラがレンダリングしたシーンの深度マップとカラーマップを読み取ることができます。たとえば、スクリーンスペースエフェクトの実装や、レンダリングされた画像の解析に使用できます。
+
+カメラは、カメラコンポーネントでリクエストされるとこれらのマップをレンダリングします：
+
+```javascript
+cameraEntity.camera.requestSceneDepthMap(true);
+cameraEntity.camera.requestSceneColorMap(true);
+```
+
+[CameraFrame](/user-manual/graphics/posteffects/cameraframe/)でレンダリングするカメラは、そのように設定されている場合にマップをレンダリングします：
+
+```javascript
+cameraFrame.rendering.sceneDepthMap = true;
+cameraFrame.rendering.sceneColorMap = true;
+cameraFrame.update();
+```
+
+カメラのマップをコンピュートインスタンスにアタッチします：
+
+```javascript
+compute.setSceneDepthMap(cameraEntity.camera.sceneDepthMapHandle);
+compute.setSceneColorMap(cameraEntity.camera.sceneColorMapHandle);
+```
+
+マップのアタッチは一度だけで済みます。各ディスパッチでは、カメラが最後にレンダリングしたマップが使用されます。そのため、`update`イベントなどからカメラのレンダリング前にディスパッチされたコンピュートは、前のフレームのマップを使用します。コンピュートがマップを使用しなくなったとき、およびカメラが破棄される前には、`null`を渡してマップをデタッチしてください。
+
+コンピュートシェーダーは、`sceneDepthCS`と`sceneColorCS`インクルードの関数を使用してマップにアクセスします：
+
+```wgsl
+#include "sceneDepthCS"
+#include "sceneColorCS"
+
+var output: texture_storage_2d<rgba16float, write>;
+
+@compute @workgroup_size(8, 8, 1)
+fn main(@builtin(global_invocation_id) id: vec3u) {
+    // カメラがレンダリングしたビューポートのテクセルを処理
+    let viewport = sceneDepthViewport();
+    if (id.x >= viewport.z || id.y >= viewport.w) {
+        return;
+    }
+    let texel = vec2i(viewport.xy + id.xy);
+
+    // カメラ前方にあるサーフェスの深度と、線形に変換したシーンカラー
+    let depth = sceneDepthLinear(texel);
+    let color = sceneColorToLinear(sceneColorLoad(texel, 0).rgb);
+
+    // 距離に応じてシーンをグレーにフェード
+    let fogged = mix(color, vec3f(0.5), saturate(depth / 100.0));
+    textureStore(output, texel, vec4f(fogged, 1.0));
+}
+```
+
+`sceneDepthCS`インクルードは次の関数を提供します：
+
+| 関数 | 説明 |
+|------|------|
+| `sceneDepthSize() -> vec2u` | 深度マップのサイズ。 |
+| `sceneDepthViewport() -> vec4u` | カメラが深度マップをレンダリングしたビューポート（テクセル単位）。最初のテクセルのxとy、および幅と高さです。 |
+| `sceneDepthNearClip() -> f32` | 深度マップのレンダリングに使用されたニアクリップ面。 |
+| `sceneDepthFarClip() -> f32` | 深度マップのレンダリングに使用されたファークリップ面。 |
+| `sceneDepthLinear(texel: vec2i) -> f32` | テクセル位置にあるサーフェスの線形深度。カメラの視線方向に沿った、ワールド単位の値です。 |
+| `sceneDepthWorldPosition(texel: vec2i) -> vec3f` | テクセル位置にあるサーフェスのワールド座標。テクセルはビューポート内にある必要があります。 |
+
+`sceneColorCS`インクルードは次の関数を提供します：
+
+| 関数 | 説明 |
+|------|------|
+| `sceneColorSize(lod: i32) -> vec2u` | カラーマップのミップレベルのサイズ。 |
+| `sceneColorLoad(texel: vec2i, lod: i32) -> vec4f` | テクセルのカラー。 |
+| `sceneColorSample(uv: vec2f, lod: f32) -> vec4f` | フィルタリングしてサンプリングしたカラー。カラーマップのフォーマットがデバイスでフィルタリングできない場合は、最も近いテクセルのカラーを返します。 |
+| `sceneColorToLinear(color: vec3f) -> vec3f` | カラーマップから読み取ったカラーを線形に変換します。 |
+| `sceneColorToDisplay(color: vec3f) -> vec3f` | カラーマップから読み取ったカラーをガンマエンコードに変換します。 |
+
+深度関数は、カメラが深度をどのように保存したかに関係なく同じ値を返します。カラーは、カメラが保存したとおりに返されます。CameraFrameでレンダリングするカメラでは線形、それ以外ではガンマエンコードです。ガンマエンコードの場合、コンピュートシェーダーでは`SCENE_COLORMAP_GAMMA`が定義されます。2つの変換関数はカラーマップから読み取ったカラーを受け取り、すでに要求された色空間にある場合はそのまま返します。
+
+ターゲットの一部にのみレンダリングするカメラ（[`rect`](https://api.playcanvas.com/engine/classes/CameraComponent.html#rect)を参照）は、マップのうち自身のビューポートだけをカバーします。マップの残りの部分には、同じターゲットにレンダリングする他のカメラのビューなど、そのカメラがレンダリングしなかった内容が含まれます。カメラのビューだけを処理するには、上の例のように呼び出しをビューポートに対応付け、ビューポートのサイズでディスパッチします。このサイズは、カメラのrectにターゲットのサイズを掛けたものと一致します。
+
 ## プリプロセッサ
 
 コンピュートシェーダーは、頂点シェーダーやフラグメントシェーダーと同じ[シェーダープリプロセッサ](/user-manual/graphics/shaders/preprocessor)をサポートしており、`#define`、`#ifdef`、`#if`、`#include`などが含まれます。
@@ -324,6 +449,9 @@ storageBuffer.read(0, undefined, resultData, true).then((data) => {
 | インクルード | 説明 |
 |-------------|------|
 | `halfTypesCS` | 半精度型エイリアス（`half`、`half2`など）。サポートされている場合はf16に、そうでない場合はf32に解決されます。[半精度型](/user-manual/graphics/shaders/wgsl-capabilities#half-precision-types)を参照。 |
+| `sceneDepthCS` | カメラのシーン深度マップへのアクセス。[シーンの深度マップとカラーマップ](#scene-depth-and-color-maps)を参照。 |
+| `sceneColorCS` | カメラのシーンカラーマップへのアクセス。[シーンの深度マップとカラーマップ](#scene-depth-and-color-maps)を参照。 |
+| `dispatchThreadsCS` | `setupDispatchThreads`で設定したディスパッチのスレッドのスキップとインデックス計算。[スレッド数を指定したディスパッチ](#dispatching-for-a-number-of-threads)を参照。 |
 
 例：
 
@@ -338,7 +466,7 @@ fn main(@builtin(global_invocation_id) global_id: vec3u) {
 }
 ```
 
-### 定義とインクルード
+### 定義とインクルード {#defines-and-includes}
 
 `cdefines`を使用して定義を渡し、`cincludes`を使用してインクルードコンテンツを提供します：
 
@@ -395,3 +523,7 @@ const shader = new pc.Shader(device, {
 - Indirect Dispatch - 深度ベースのタイル分類によるGPU駆動コンピュートディスパッチ
 
 <EngineExample id="compute/indirect-dispatch" title="Indirect Dispatch" />
+
+- Scene Maps - シーンの深度マップとカラーマップを使用し、シーンを走査するスキャナーパルス
+
+<EngineExample id="compute/scene-maps" title="Scene Maps" />

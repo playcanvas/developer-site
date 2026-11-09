@@ -282,7 +282,7 @@ void process() {
 
 - Paint example - Demonstrates painting splats with a brush
 
-<EngineExample id="gaussian-splatting/paint" title="Paint example" />
+<EngineExample id="gaussian-splatting-fx/paint" title="Paint example" />
 
 - Editor example - Demonstrates selection, deletion, and cloning
 

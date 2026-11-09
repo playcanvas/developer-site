@@ -68,6 +68,14 @@ const config = {
   plugins: [
     [ '@docusaurus/plugin-client-redirects', {
       redirects: [
+        // Spine and the tweening tutorial moved into the Add-on Libraries section of the engine
+        { from: ['/user-manual/2D/spine/'], to: '/user-manual/engine/libraries/spine/' },
+        { from: ['/tutorials/tweening/'], to: '/user-manual/engine/libraries/tween/' },
+        // Debugging moved out of Scripting into Debugging and Optimization
+        { from: ['/user-manual/scripting/debugging/'], to: '/user-manual/debugging/' },
+        { from: ['/user-manual/scripting/debugging/console-logging/'], to: '/user-manual/debugging/console-logging/' },
+        { from: ['/user-manual/scripting/debugging/browser-dev-tools/'], to: '/user-manual/debugging/browser-dev-tools/' },
+        { from: ['/user-manual/scripting/debugging/inspector/'], to: '/user-manual/debugging/inspector/' },
         { from: ['/api', '/en/api'], to: 'https://api.playcanvas.com' },
         // Retired Facebook docs (the Facebook Canvas web games platform was discontinued)
         { from: ['/tutorials/facebook-api/'], to: '/tutorials/' },
@@ -176,6 +184,11 @@ const config = {
         { from: ['/user-manual/supersplat/timeline/'], to: '/user-manual/supersplat/editor/timeline/' },
         { from: ['/user-manual/supersplat/rendering/'], to: '/user-manual/supersplat/editor/rendering/' },
         { from: ['/user-manual/supersplat/publishing/'], to: '/user-manual/supersplat/editor/publishing/' },
+        // CameraFrame custom render passes moved to the Frame Graph section
+        { from: ['/user-manual/graphics/posteffects/cameraframe/custom-passes/'], to: '/user-manual/graphics/advanced-rendering/frame-graph/camera-passes/' },
+        // CameraFrame compose shader customization and FramePassCameraFrame subclassing replaced by effects
+        { from: ['/user-manual/graphics/posteffects/cameraframe/compose-shader/'], to: '/user-manual/graphics/posteffects/cameraframe/custom-effects/' },
+        { from: ['/user-manual/graphics/posteffects/cameraframe/extending-class/'], to: '/user-manual/graphics/posteffects/cameraframe/effect-passes/' },
       ],
       createRedirects: (existingPath) => {
         // Create redirects from old paths prefixed with /en

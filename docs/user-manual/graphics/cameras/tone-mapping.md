@@ -92,4 +92,4 @@ camera.camera.sensitivity = 1000;   // ISO — higher means more exposure (defau
 
 See it in action in the engine's physical units example:
 
-<EngineExample id="graphics/light-physical-units" title="Physical Light Units" />
+<EngineExample id="lights-and-shadows/light-physical-units" title="Physical Light Units" />

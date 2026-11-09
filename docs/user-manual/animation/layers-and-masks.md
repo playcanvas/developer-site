@@ -32,7 +32,7 @@ layers: [
 ]
 ```
 
-Find a layer by name with `findAnimationLayer()`, or through the `layers` array.
+Find a layer by name with `findLayer()`, or through the `layers` array.
 
 </TabItem>
 <TabItem value="editor" label="Editor">
@@ -90,7 +90,7 @@ A layer's weight runs from 0, where it has no effect, to 1. What it does at the 
 Change a weight at any time with the layer's `weight`. To fade a layer in or out smoothly, `blendToWeight()` moves its weight to a value over a time in seconds:
 
 ```javascript
-const upperBody = character.anim.findAnimationLayer('UpperBody');
+const upperBody = character.anim.findLayer('UpperBody');
 upperBody.blendToWeight(1, 0.3); // fade in over 0.3 seconds
 upperBody.blendToWeight(0, 0.3); // and out again
 ```

@@ -137,7 +137,7 @@ describe('the generated files', () => {
     });
 
     it('keeps the code of every tab', () => {
-        const fences = section('/user-manual/scripting/debugging/console-logging/').match(/^```/gm);
+        const fences = section('/user-manual/debugging/console-logging/').match(/^```/gm);
         assert.equal(fences.length, 10);
     });
 

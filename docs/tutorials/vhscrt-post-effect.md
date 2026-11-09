@@ -7,6 +7,12 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/3730
 
 import Link from '@docusaurus/Link';
 
+:::warning[Deprecated]
+
+This tutorial uses the deprecated legacy post effects. For new projects, write the effect as a [custom CameraFrame effect](/user-manual/graphics/posteffects/cameraframe/#custom-post-processing) instead.
+
+:::
+
 Basic fullscreen effect simulating a bad video screen like an old CRT.
 
 <div className="iframe-container">

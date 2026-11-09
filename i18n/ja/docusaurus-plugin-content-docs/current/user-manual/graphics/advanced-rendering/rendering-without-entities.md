@@ -64,7 +64,7 @@ layer.addMeshInstances(meshInstances);
 
 レイヤーは、これらのオブジェクトがシーンの他の部分に対していつ描画されるかも決めます。シーンはレイヤーを描画順に保持しており、これをレイヤー構成と呼びます。レイヤー構成は`app.scene.layers`で参照できます。Worldの代わりにカスタムレイヤーを使う場合は、そのレイヤーを`app.scene.layers`とカメラの`layers`リストに追加してください。ライトの`layers`リストにもそのレイヤーを含める必要があります。描画順序とカメラ設定については、[レイヤー](../layers/index.md#layer-composition)を参照してください。
 
-影を落とすには、レイヤーに追加する**前に**`meshInstance.castShadow = true`を設定してください。登録時に、対象のインスタンスはレイヤーのシャドウキャスターにも追加されます。インスタンスを削除すると、両方のリストから削除されます。StandardMaterialは、Render Componentで使う場合と同じように、通常のレンダラーを通じてライティングと影を受け取ります。
+影を落とすには、レイヤーに追加する**前に**`meshInstance.castShadows = true`を設定してください。登録時に、対象のインスタンスはレイヤーのシャドウキャスターにも追加されます。インスタンスを削除すると、両方のリストから削除されます。StandardMaterialは、Render Componentで使う場合と同じように、通常のレンダラーを通じてライティングと影を受け取ります。
 
 ## 読み込んだメッシュのインスタンシング
 
@@ -75,7 +75,7 @@ layer.addMeshInstances(meshInstances);
 const treeMesh = treeAsset.resource.renders[0].resource.meshes[0];
 const treeMaterial = treeAsset.resource.materials[0].resource;
 const forest = new MeshInstance(treeMesh, treeMaterial, new GraphNode('Forest'));
-forest.castShadow = true;
+forest.castShadows = true;
 ```
 
 この直接参照は、サンプルのアセットに特化したものです。一般的なGLBには、複数のプリミティブとマテリアル、ノードのトランスフォーム、スキン、モーフターゲットが含まれる場合があります。エンティティのインスタンス化を使わない場合は、それらに対応する設定を行う必要があります。サンプルでは、木を配置する前に、生のメッシュの中心と接地位置を補正しています。
