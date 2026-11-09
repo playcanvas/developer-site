@@ -28,12 +28,13 @@ Use this index to process splat files from a command line, a script or a pipelin
 
 ## Formats
 
-- [Splat File Formats](/user-manual/gaussian-splatting/formats/): Choosing between PLY, SOG, Streamed SOG, GLB and SPZ.
+- [Splat File Formats](/user-manual/gaussian-splatting/formats/): Choosing between PLY, SOG, Streamed SOG, GLB, SPZ and LCC2.
 - [The SOG Format](/user-manual/gaussian-splatting/formats/sog/): The SOG specification.
 - [The Streamed SOG Format](/user-manual/gaussian-splatting/formats/streamed-sog/): The Streamed SOG specification.
 - [The PLY Format](/user-manual/gaussian-splatting/formats/ply/): How training tools store splats in PLY files.
 - [The GLB Format](/user-manual/gaussian-splatting/formats/glb/): Splats in glTF with the `KHR_gaussian_splatting` extension.
 - [The SPZ Format](/user-manual/gaussian-splatting/formats/spz/): Niantic's compressed splat format.
+- [The LCC2 Format](/user-manual/gaussian-splatting/formats/lcc2/): XGRIDS level of detail scenes with SOG or SPZ splat files.
 
 ## API reference
 

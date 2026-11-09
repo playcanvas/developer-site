@@ -16,18 +16,18 @@ sidebar_label: SPZ
 splat-transform scene.ply scene.spz
 ```
 
-デフォルトではSPZバージョン4で書き出されます。これはエンジンのパーサーがサポートするバージョンです。
+デフォルトではSPZバージョン4で書き出されます。エンジンのパーサーはバージョン3と4をサポートしています。
 
-## PlayCanvasでの読み込み
+## PlayCanvasでの読み込み {#loading-in-playcanvas}
 
 SPZパーサーはエンジン本体には含まれていません。エンジンに同梱されるスクリプト ([`scripts/esm/parsers/spz-parser.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/parsers/spz-parser.mjs)) として提供され、アプリケーションが`gsplat`リソースハンドラーに登録します。
 
-SPZの属性ストリームはZSTDで圧縮されているため、パーサーにはZSTD展開用のWebAssemblyモジュールの登録も必要です。ビルド済みのモジュールは[エンジンのリポジトリ](https://github.com/playcanvas/engine/tree/main/examples/assets/wasm/zstd)から入手できます。
+SPZバージョン4ファイルの属性ストリームはZSTDで圧縮されているため、パーサーにはZSTD展開用のWebAssemblyモジュールの登録も必要です。ビルド済みのモジュールは[エンジンのリポジトリ](https://github.com/playcanvas/engine/tree/main/examples/assets/wasm/zstd)から入手できます。バージョン3のファイルはファイル全体がgzipで圧縮されており、モジュールは不要です。
 
 ```javascript
 import { SpzParser } from 'playcanvas/scripts/esm/parsers/spz-parser.mjs';
 
-// spzの属性ストリームはZSTD圧縮されているため、デコーダーモジュールを登録します
+// バージョン4の属性ストリームはZSTD圧縮されているため、デコーダーモジュールを登録します
 pc.WasmModule.setConfig('ZstdDecoderModule', {
     glueUrl: 'zstd.wasm.js',
     wasmUrl: 'zstd.wasm.wasm'
@@ -46,7 +46,8 @@ app.assets.load(asset);
 
 ## エンジンサポートに関する注意
 
-- SPZ**バージョン4**のみがサポートされています。旧形式のgzipベースのファイル (バージョン1～3) は読み込めません。[SplatTransform](/user-manual/splat-transform/)で再変換してください。
+- SPZ**バージョン3と4**がサポートされています。旧形式のファイル (バージョン1と2) は読み込めません。[SplatTransform](/user-manual/splat-transform/)で再変換してください。
+- XGRIDSの**LCC2**シーンは、スプラットファイルをSPZ (通常はバージョン3) として保存できます。パーサーを登録すれば、このようなシーンも他のLCC2シーンと同様に読み込まれ、ストリーミングされます。スプラットファイルは`.spz`拡張子で要求されるためです。
 - スプラットデータは量子化されたままGPUメモリに保持され (スプラットあたり約20バイト + 球面調和関数)、シェーダーで逆量子化されます。そのため、GPUメモリ使用量は非圧縮形式ではなく、圧縮PLYやSOGと同程度です。
 - 球面調和関数は3バンドまでサポートされています。4次の球面調和関数を持つファイルは、超過分のバンドが無視された状態で読み込まれます。
 - **座標系**: スプラットデータは (glTFと同様に) +Yが上の座標系を使用するため、PLYファイルとは異なり、読み込んだスプラットをシーンに配置する際に反転回転は不要です。
