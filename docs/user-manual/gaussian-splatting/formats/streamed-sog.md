@@ -118,7 +118,7 @@ The optional `environment` field points to a standard unbundled [SOG](./sog.md) 
 
 ## 5. Precision
 
-Non-integer numbers in `lod-meta.json` are quantized to 7 significant digits (approximately 32-bit float precision).
+Non-integer numbers in `lod-meta.json`'s own fields are quantized to 7 significant digits (approximately 32-bit float precision). `extras` is application data and is written exactly as given.
 
 ---
 
