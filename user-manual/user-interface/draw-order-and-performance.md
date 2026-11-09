@@ -43,7 +43,7 @@ sparkles.addComponent('particlesystem', {
 screen.screen.syncDrawOrder();
 ```
 
-[Live example: Particle System](https://playcanvas.com/examples/#/user-interface/particle-system) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/particle-system.example.mjs))
+[Live example: Particle System](https://playcanvas.com/examples/#/user-interface/particle-system) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/particle-system/example.mjs))
 
 ## Multiple Screens and Priority
 

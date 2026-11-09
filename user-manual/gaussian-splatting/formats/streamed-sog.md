@@ -23,7 +23,7 @@ scene/
 ```
 
 * The index file is always named `lod-meta.json`. Loaders identify the format by this filename.
-* Each chunk is a standard **unbundled** [SOG](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/sog.md) dataset (a `meta.json` plus WebP texture files). Bundled (single-archive) SOG chunks are not part of this format.
+* Each chunk is a standard **unbundled** [SOG](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/sog.md) dataset (a `meta.json` plus WebP texture files), of SOG version 2 or 3. Bundled (single-archive) SOG chunks are not part of this format.
 * All paths in `lod-meta.json` are relative to the directory containing `lod-meta.json`.
 
 :::note[Chunk naming]
@@ -43,6 +43,7 @@ interface LodMeta {
     generator?: string;        // e.g. "splat-transform v2.5.2"
   };
   count: number;               // Total gaussians across all LOD levels (excludes environment)
+  model?: "antialiased" | "2dgs"; // Optional. How the scene was trained, for all its chunks; omitted for ordinary gaussians
   counts: number[];            // Gaussians per LOD level; index = LOD level, length = lodLevels
   lodLevels: number;           // Number of LOD levels
   lodErrors?: boolean;         // If true, every leaf supplies per-level `errors`

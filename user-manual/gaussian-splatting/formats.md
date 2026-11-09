@@ -1,6 +1,6 @@
 # Splat File Formats
 
-PlayCanvas supports five formats for 3D Gaussian Splat data:
+PlayCanvas supports six formats for 3D Gaussian Splat data:
 
 ## [PLY Format](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/ply.md) - Source & Interchange
 
@@ -42,14 +42,22 @@ Binary glTF with the Khronos [KHR_gaussian_splatting](https://github.com/Khronos
 - **File size**: Small (compressed)
 - **Quality**: Visually optimized
 
+## [LCC2 Format](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/lcc2.md) - XGRIDS Large-Scene Streaming
+
+[XGRIDS'](https://github.com/xgrids/LCC2Whitepaper) level of detail tree of splat files, stored as SOG or SPZ. The engine streams `.lcc2` scenes directly, so scenes exported by XGRIDS software need no conversion.
+
+- **Use for**: Large scans from XGRIDS scanners and LCC Studio
+- **File size**: Small per chunk, loaded on demand
+- **Quality**: Lossy, view-dependent detail
+
 ## Quick Comparison
 
-| | PLY | SOG | Streamed SOG | GLB | SPZ |
-|---|---|---|---|---|---|
-| **Size** | Large | Small (15-20× compression) | Small (SOG chunks, loaded on demand) | Large | Small (~10× compression) |
-| **Quality** | Lossless | Lossy | Lossy, view-dependent detail | Lossless | Lossy |
-| **Use** | Source/editing | Runtime/delivery | Very large scenes | glTF interchange | Niantic ecosystem |
-| **Speed** | Slow loading | Fast loading | Progressive streaming | Fast loading | Fast loading |
+| | PLY | SOG | Streamed SOG | GLB | SPZ | LCC2 |
+|---|---|---|---|---|---|---|
+| **Size** | Large | Small (15-20× compression) | Small (SOG chunks, loaded on demand) | Large | Small (~10× compression) | Small (SOG or SPZ chunks, loaded on demand) |
+| **Quality** | Lossless | Lossy | Lossy, view-dependent detail | Lossless | Lossy | Lossy, view-dependent detail |
+| **Use** | Source/editing | Runtime/delivery | Very large scenes | glTF interchange | Niantic ecosystem | XGRIDS scans |
+| **Speed** | Slow loading | Fast loading | Progressive streaming | Fast loading | Fast loading | Progressive streaming |
 
 ## Workflow
 
@@ -58,4 +66,5 @@ Binary glTF with the Khronos [KHR_gaussian_splatting](https://github.com/Khronos
 3. For very large scenes, convert to **Streamed SOG** instead
 4. Use **GLB** when splats need to flow through standard glTF pipelines
 5. Load **SPZ** directly when assets come from tools like Scaniverse
-6. Deploy for optimal performance
+6. Load **LCC2** directly when scenes come from XGRIDS scanners
+7. Deploy for optimal performance

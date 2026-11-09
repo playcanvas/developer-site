@@ -1,5 +1,11 @@
 # Brightness-Contrast Effect
 
+:::warning[Deprecated]
+
+This legacy effect is deprecated. Use the color grading `brightness` and `contrast` of [CameraFrame](https://developer.playcanvas.com/user-manual/graphics/posteffects/cameraframe.md) instead. See [Migrating to CameraFrame](https://developer.playcanvas.com/user-manual/graphics/posteffects/legacy.md#migrating-to-cameraframe).
+
+:::
+
 The brightness-contrast effect allows you to modify the brightness and contrast of the rendered image.
 
 Here is an image without the effect:

@@ -1,5 +1,11 @@
 # Bloom Effect
 
+:::warning[Deprecated]
+
+This legacy effect is deprecated. Use the bloom of [CameraFrame](https://developer.playcanvas.com/user-manual/graphics/posteffects/cameraframe.md) instead. See [Migrating to CameraFrame](https://developer.playcanvas.com/user-manual/graphics/posteffects/legacy.md#migrating-to-cameraframe).
+
+:::
+
 [Bloom](https://en.wikipedia.org/wiki/Bloom_(shader_effect)) is a post-processing effect used to reproduce an imaging artifact of real-world cameras. The effect produces fringes (or feathers) of light extending from the borders of bright areas in an image, contributing to the illusion of an extremely bright light overwhelming the camera capturing the scene.
 
 Here is an image without bloom:

@@ -2,7 +2,7 @@
 
 PlayCanvas supports adding post-processing effects to your projects. Post effects modify the final rendered image and provide an easy way to add visual flair to your application.
 
-PlayCanvas offers two approaches to post-processing:
+PlayCanvas offers two approaches to post-processing. Use `CameraFrame` for all new work. The legacy script-based post effects are deprecated.
 
 ## Modern Post Processing
 
@@ -22,11 +22,11 @@ The system is highly extensible, allowing you to customize the compose shader, a
 
 [Learn more about Modern Post Processing →](https://developer.playcanvas.com/user-manual/graphics/posteffects/cameraframe.md)
 
-## Legacy Post Effects (Script-Based)
+## Legacy Post Effects (Deprecated)
 
-The legacy approach uses script-based post effects that can be attached to camera entities. While older, these effects are still fully supported and functional. They provide a simpler setup for basic post-processing needs.
+The legacy approach uses script-based post effects that are attached to camera entities and added to the camera's `postEffects` queue. This approach is deprecated. The effects still work, but adding one logs a deprecation warning in the debug build of the engine, and they will be removed in a future major version. Replace them with the equivalent `CameraFrame` effects, as listed in [Migrating to CameraFrame](https://developer.playcanvas.com/user-manual/graphics/posteffects/legacy.md#migrating-to-cameraframe).
 
-**Available effects:**
+**Legacy effects:**
 
 - Bloom
 - Brightness-Contrast

@@ -194,11 +194,60 @@ vec4 otherColor = getColor();
 
 See [Splat Data Format - Shader Access](https://developer.playcanvas.com/user-manual/gaussian-splatting/rendering-architecture/splat-data-format.md#shader-access) for more details.
 
+## Reading SOG Blind Data
+
+[SOG](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/sog.md) version 3 files can carry [blind data](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/sog.md#36-blind-data-v3-only-optional): per-gaussian fields whose meaning the application defines. The copy modifier of a component that renders such an asset can read each field through:
+
+- `getBlind_<name>()` - Returns the field's value for the current splat: `uint` (`u32` in WGSL) for the integer types `u8` to `u32`, `float` (`f32`) for `f16`, `f32`, `unorm8` and `unorm16`.
+- `SOG_BLIND_<name>` - A define that is set when the asset has the field, so one modifier can serve assets with and without it.
+
+`<name>` is the field name with every character other than a letter, digit or `_` replaced by `_`, repeated `_` collapsed and leading or trailing `_` removed. A field named `part-id` is read with `getBlind_part_id()`.
+
+This modifier colors the splats whose `logo` field is 1:
+
+**GLSL**
+
+```glsl
+void modifySplatCenter(inout vec3 center) {}
+void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, inout vec4 rotation, inout vec3 scale) {}
+void modifySplatColor(vec3 center, inout vec4 color) {
+    #ifdef SOG_BLIND_logo
+        if (getBlind_logo() == 1u) {
+            color.rgb = vec3(1.0, 0.65, 0.15);
+        }
+    #endif
+}
+```
+
+**WGSL**
+
+```wgsl
+fn modifySplatCenter(center: ptr<function, vec3f>) {}
+fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f, rotation: ptr<function, vec4f>, scale: ptr<function, vec3f>) {}
+fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
+    #ifdef SOG_BLIND_logo
+        if (getBlind_logo() == 1u) {
+            *color = vec4f(1.0, 0.65, 0.15, (*color).a);
+        }
+    #endif
+}
+```
+
+```javascript
+entity.gsplat.setWorkBufferModifier({ glsl: glslModifier, wgsl: wgslModifier });
+```
+
+Blind data is read from the asset and is not part of the work buffer. To use a field when rendering, write it to an [extra stream](https://developer.playcanvas.com/user-manual/gaussian-splatting/rendering-architecture/work-buffer-format.md#adding-extra-streams) during the copy.
+
+The Blind Data example reads two fields from a SOG version 3 file: a `logo` flag that adds a shine to the logo, and an `edge` distance that drives hue waves across the rest of the splat. Its **View** option shows the fields themselves.
+
+[Live example: Blind Data example](https://playcanvas.com/examples/#/gaussian-splatting-fx/blind-data) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/gaussian-splatting-fx/blind-data/example.mjs))
+
 ## Live Example
 
 See the LOD Instances example which demonstrates:
 
-[Live example: LOD Instances example](https://playcanvas.com/examples/#/gaussian-splatting/lod-instances) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/gaussian-splatting/lod-instances.example.mjs))
+[Live example: LOD Instances example](https://playcanvas.com/examples/#/gaussian-splatting/streamed-instances) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/gaussian-splatting/streamed-instances/example.mjs))
 
 - Adding a `splatId` stream to the work buffer
 - Writing component IDs during copy using `setWorkBufferModifier()`

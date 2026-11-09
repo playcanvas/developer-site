@@ -85,7 +85,7 @@ gsplatSystem.on('frame:request', () => {
 
 This example renders a single (non-streamed) splat on demand: it stops drawing once the splat is shown and only renders again when the camera moves, the window resizes, or a setting changes.
 
-[Live example: Simple (On Demand)](https://playcanvas.com/examples/#/gaussian-splatting/simple-on-demand) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/gaussian-splatting/simple-on-demand.example.mjs))
+[Live example: Simple (On Demand)](https://playcanvas.com/examples/#/gaussian-splatting/simple-on-demand) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/gaussian-splatting/simple-on-demand/example.mjs))
 
 ## See also
 

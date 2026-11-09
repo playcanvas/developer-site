@@ -28,11 +28,11 @@ Explore these live examples to see Streamed SOG in action:
 
 - Streamed SOG (Basic) - Demonstrates basic streaming with different detail levels
 
-[Live example: Streamed SOG (Basic)](https://playcanvas.com/examples/#/gaussian-splatting/lod-streaming) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/gaussian-splatting/lod-streaming.example.mjs))
+[Live example: Streamed SOG (Basic)](https://playcanvas.com/examples/#/gaussian-splatting/lod-streaming) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/gaussian-splatting/lod-streaming/example.mjs))
 
 - Streamed SOG with Spherical Harmonics - Shows streaming with spherical harmonic data
 
-[Live example: Streamed SOG with Spherical Harmonics](https://playcanvas.com/examples/#/gaussian-splatting/lod-streaming-sh) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/gaussian-splatting/lod-streaming-sh.example.mjs))
+[Live example: Streamed SOG with Spherical Harmonics](https://playcanvas.com/examples/#/gaussian-splatting/lod-streaming-sh) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/gaussian-splatting/lod-streaming-sh/example.mjs))
 
 ## Enabling Streamed SOG
 

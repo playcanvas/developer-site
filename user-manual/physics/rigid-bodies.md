@@ -50,7 +50,7 @@ import { Render, Collision, RigidBody } from '@playcanvas/react/components';
 </pc-entity>
 ```
 
-[Live example: Falling Shapes](https://playcanvas.com/examples/#/physics/falling-shapes) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/physics/falling-shapes.example.mjs))
+[Live example: Falling Shapes](https://playcanvas.com/examples/#/physics/falling-shapes) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/physics/falling-shapes/example.mjs))
 
 ## Mass and Materials
 

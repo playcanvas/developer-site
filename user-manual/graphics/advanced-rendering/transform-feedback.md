@@ -27,11 +27,11 @@ There is no WebGPU equivalent. On WebGPU the same workloads are expressed with [
 
 - Transform Feedback - a particle cloud simulated in a single interleaved buffer
 
-[Live example: Transform Feedback](https://playcanvas.com/examples/#/graphics/transform-feedback) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/graphics/transform-feedback.example.mjs))
+[Live example: Transform Feedback](https://playcanvas.com/examples/#/graphics/transform-feedback) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/graphics/transform-feedback/example.mjs))
 
 - Transform Feedback Separate - a GPU flock using one buffer per captured varying, feeding instanced cones
 
-[Live example: Transform Feedback Separate](https://playcanvas.com/examples/#/graphics/transform-feedback-separate) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/graphics/transform-feedback-separate.example.mjs))
+[Live example: Transform Feedback Separate](https://playcanvas.com/examples/#/graphics/transform-feedback-separate) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/graphics/transform-feedback-separate/example.mjs))
 
 ## A Single Interleaved Buffer
 

@@ -140,7 +140,7 @@ Lines are rendered as a series of splats placed along the line path:
 
 See the Procedural Shapes example which demonstrates CAD-style dimension annotations on a Gaussian splat scene.
 
-[Live example: Procedural Shapes example](https://playcanvas.com/examples/#/gaussian-splatting/procedural-shapes) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/gaussian-splatting/procedural-shapes.example.mjs))
+[Live example: Procedural Shapes example](https://playcanvas.com/examples/#/gaussian-splatting-fx/procedural-shapes) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/gaussian-splatting-fx/procedural-shapes/example.mjs))
 
 ## Script Location
 

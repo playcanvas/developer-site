@@ -157,7 +157,7 @@ fitReference();
 app.graphicsDevice.on('resizecanvas', fitReference);
 ```
 
-[Live example: Screen Scaling](https://playcanvas.com/examples/#/user-interface/screen-scaling) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/screen-scaling.example.mjs))
+[Live example: Screen Scaling](https://playcanvas.com/examples/#/user-interface/screen-scaling) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/screen-scaling/example.mjs))
 
 ## Pixel Ratio
 

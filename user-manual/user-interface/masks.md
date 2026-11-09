@@ -87,7 +87,7 @@ A mask clips input as well as drawing. An element inside a mask receives input o
 
 Each mask adds two draw calls: one that writes its shape into the stencil buffer before its children are drawn, and one that removes it after them. Elements inside a mask are also [batched](https://developer.playcanvas.com/user-manual/user-interface/draw-order-and-performance.md#reducing-draw-calls) separately from elements outside it. Use masks where you need them, such as the viewport of a scroll view, rather than on every panel.
 
-[Live example: Masking](https://playcanvas.com/examples/#/user-interface/masking) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/masking.example.mjs))
+[Live example: Masking](https://playcanvas.com/examples/#/user-interface/masking) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/masking/example.mjs))
 
 ## See Also
 

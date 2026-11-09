@@ -163,8 +163,8 @@ In all cases, values are assigned by name with `setParameter`, regardless of whe
 
 The following examples use manually-authored bind group formats:
 
-[Live example: Histogram](https://playcanvas.com/examples/#/compute/histogram) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/compute/histogram.example.mjs))
+[Live example: Histogram](https://playcanvas.com/examples/#/compute/histogram) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/compute/histogram/example.mjs))
 
-[Live example: Texture Generation](https://playcanvas.com/examples/#/compute/texture-gen) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/compute/texture-gen.example.mjs))
+[Live example: Texture Generation](https://playcanvas.com/examples/#/compute/texture-gen) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/compute/texture-gen/example.mjs))
 
-[Live example: Indirect Dispatch](https://playcanvas.com/examples/#/compute/indirect-dispatch) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/compute/indirect-dispatch.example.mjs))
+[Live example: Indirect Dispatch](https://playcanvas.com/examples/#/compute/indirect-dispatch) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/compute/indirect-dispatch/example.mjs))

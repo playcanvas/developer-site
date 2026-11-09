@@ -170,7 +170,7 @@ app.on('update', () => {
 
 This assumes that the tag's container covers the canvas, with the tag at its top-left corner. See [Labels Over Characters](https://developer.playcanvas.com/user-manual/user-interface/world-space-ui.md#labels-over-characters) for the same with in-canvas elements. The engine's `annotations` script builds labeled hotspots on a model this way:
 
-[Live example: Annotations](https://playcanvas.com/examples/#/misc/annotations) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/misc/annotations.example.mjs))
+[Live example: Annotations](https://playcanvas.com/examples/#/misc/annotations) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/misc/annotations/example.mjs))
 
 ### Over an Element
 
@@ -200,9 +200,9 @@ In-canvas UI is pixels: screen readers can't read it, and keyboard users can't r
 
 ## HTML in the Canvas
 
-An experimental browser API, HTML-in-Canvas, draws HTML into a texture that can be used in the scene, for example on a world-space panel. Few browsers support it yet, so treat it as an experiment and keep a fallback:
+HTML-in-Canvas, a browser API enabled by default in Chrome 157 and later, draws HTML into a texture that can be used in the scene, for example on a world-space panel. Other browsers don't support it yet, so keep a fallback. See [HTML-in-Canvas](https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/html-in-canvas.md) for how to use it:
 
-[Live example: HTML Texture](https://playcanvas.com/examples/#/misc/html-texture) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/misc/html-texture.example.mjs))
+[Live example: HTML Texture](https://playcanvas.com/examples/#/misc/html-texture) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/misc/html-texture/example.mjs))
 
 ## PCUI for Tools
 

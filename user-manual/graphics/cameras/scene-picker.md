@@ -76,7 +76,7 @@ The picker fully supports Gaussian Splat instances with the same API as regular 
 
 This enables interactive applications like placing markers on splats, measuring distances, or selecting individual splat entities in complex scenes. See the Gaussian Splatting Picking example for a complete demonstration.
 
-[Live example: Gaussian Splatting Picking example](https://playcanvas.com/examples/#/gaussian-splatting/picking) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/gaussian-splatting/picking.example.mjs))
+[Live example: Gaussian Splatting Picking example](https://playcanvas.com/examples/#/gaussian-splatting/picking) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/gaussian-splatting/picking/example.mjs))
 
 ## Examples
 
@@ -84,6 +84,6 @@ These engine examples demonstrate the picker in action:
 
 - **Area Picker** - Shows how to pick mesh instances in rectangular screen regions with visual feedback
 
-[Live example: Area Picker](https://playcanvas.com/examples/#/graphics/area-picker) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/graphics/area-picker.example.mjs))
+[Live example: Area Picker](https://playcanvas.com/examples/#/graphics/area-picker) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/graphics/area-picker/example.mjs))
 
 - **Gaussian Splatting Picking** - Demonstrates picking splat instances and using world position picking to place markers on splat surfaces

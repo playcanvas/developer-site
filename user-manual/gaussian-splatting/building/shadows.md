@@ -4,7 +4,7 @@ Gaussian Splats can cast shadows onto meshes and other surfaces in your scene.
 
 **View Live Example** - See splat shadows in action.
 
-[Live example: Simple](https://playcanvas.com/examples/#/gaussian-splatting/simple) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/gaussian-splatting/simple.example.mjs))
+[Live example: Simple](https://playcanvas.com/examples/#/gaussian-splatting/simple) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/gaussian-splatting/simple/example.mjs))
 
 [Image: Splat Shadows]
 

@@ -4,7 +4,7 @@ The `gsplatModifyVS` chunk customizes splats in the vertex stage. It runs **once
 
 **View Live Example** - See shader chunk customization in action with animated splats.
 
-[Live example: Multi Splat](https://playcanvas.com/examples/#/gaussian-splatting/multi-splat) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/gaussian-splatting/multi-splat.example.mjs))
+[Live example: Multi Splat](https://playcanvas.com/examples/#/gaussian-splatting/multi-splat) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/gaussian-splatting/multi-splat/example.mjs))
 
 ## Overridable Functions
 
@@ -104,6 +104,8 @@ app.on('update', (dt) => {
     sceneMat.update();
 });
 ```
+
+Set every uniform and texture the chunk uses on the material. Values set globally on the scope of the graphics device are not supported for these chunks.
 
 ## See Also
 

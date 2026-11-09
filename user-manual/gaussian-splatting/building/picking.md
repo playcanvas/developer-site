@@ -4,7 +4,7 @@ The PlayCanvas Engine provides a [Picker API](https://api.playcanvas.com/engine/
 
 **View Live Example** - See splat picking in action with interactive selection and world position detection.
 
-[Live example: Picking](https://playcanvas.com/examples/#/gaussian-splatting/picking) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/gaussian-splatting/picking.example.mjs))
+[Live example: Picking](https://playcanvas.com/examples/#/gaussian-splatting/picking) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/gaussian-splatting/picking/example.mjs))
 
 ## Setting Up the Picker
 

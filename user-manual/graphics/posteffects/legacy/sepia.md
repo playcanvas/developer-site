@@ -1,5 +1,11 @@
 # Sepia Effect
 
+:::warning[Deprecated]
+
+This legacy effect is deprecated. Use a color lookup table of [CameraFrame](https://developer.playcanvas.com/user-manual/graphics/posteffects/cameraframe.md) instead. See [Migrating to CameraFrame](https://developer.playcanvas.com/user-manual/graphics/posteffects/legacy.md#migrating-to-cameraframe).
+
+:::
+
 The Sepia effect makes the image look like an old photograph.
 
 Here is an image without the effect:

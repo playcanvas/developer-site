@@ -125,4 +125,4 @@ To restrict the modification to a specific camera, gate it behind the shader pas
 
 A full working sample is available in the engine examples: Multiple Render Targets renders a chess board through a custom shader pass that writes its world normal and gloss into additional color targets, each with its own clear color, displayed on screen as separate textures.
 
-[Live example: Multiple Render Targets](https://playcanvas.com/examples/#/graphics/multi-render-targets) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/graphics/multi-render-targets.example.mjs))
+[Live example: Multiple Render Targets](https://playcanvas.com/examples/#/render-targets/multi-render-targets) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/render-targets/multi-render-targets/example.mjs))

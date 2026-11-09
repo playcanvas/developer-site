@@ -103,8 +103,8 @@ Enable the **Volumetric Fog** group. Its **Light** field takes the directional l
 
 ## Examples
 
-[Live example: Volumetric Fog](https://playcanvas.com/examples/#/graphics/volumetric-fog) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/graphics/volumetric-fog.example.mjs))
+[Live example: Volumetric Fog](https://playcanvas.com/examples/#/camera-frame/volumetric-fog) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/camera-frame/volumetric-fog/example.mjs))
 
-[Live example: Volumetric Fog Local Lights](https://playcanvas.com/examples/#/graphics/volumetric-fog-local-lights) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/graphics/volumetric-fog-local-lights.example.mjs))
+[Live example: Volumetric Fog Local Lights](https://playcanvas.com/examples/#/camera-frame/volumetric-fog-local-lights) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/camera-frame/volumetric-fog-local-lights/example.mjs))
 
-[Live example: Volumetric Fog Shafts](https://playcanvas.com/examples/#/graphics/volumetric-fog-shafts) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/graphics/volumetric-fog-shafts.example.mjs))
+[Live example: Volumetric Fog Shafts](https://playcanvas.com/examples/#/camera-frame/volumetric-fog-shafts) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/camera-frame/volumetric-fog-shafts/example.mjs))

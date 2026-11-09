@@ -240,7 +240,7 @@ The layouts in the image at the top of this page use these properties:
 - **Toolbar.** Stretch fitting on both axes shares the width of the toolbar between the buttons and gives them its height, less the padding, so the buttons keep an even share as buttons are added or removed.
 - **Grid.** The children are 100 units square and the group is 320 units wide, so three fit on each row. The alignment of `0.5, 1` starts the grid at the top and centers each row, including a last row that is not full.
 
-[Live example: Layout Group](https://playcanvas.com/examples/#/user-interface/layout-group) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/layout-group.example.mjs))
+[Live example: Layout Group](https://playcanvas.com/examples/#/user-interface/layout-group) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/layout-group/example.mjs))
 
 ## Changing a Layout at Runtime
 

@@ -6,7 +6,7 @@ PlayCanvas supports a fisheye (barrel distortion) projection for Gaussian splats
 
 **View Live Example** - Open the Settings panel and drag the `fisheye` slider from `0` to `1`. Try combining it with higher `cameraFov` values and different HDRI environments to reproduce the skydome and tiny-planet looks.
 
-[Live example: LOD Streaming](https://playcanvas.com/examples/#/gaussian-splatting/lod-streaming) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/gaussian-splatting/lod-streaming.example.mjs))
+[Live example: LOD Streaming](https://playcanvas.com/examples/#/gaussian-splatting/lod-streaming) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/gaussian-splatting/lod-streaming/example.mjs))
 
 ## What Is It?
 

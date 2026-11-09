@@ -1,5 +1,11 @@
 # Vignette Effect
 
+:::warning[Deprecated]
+
+This legacy effect is deprecated. Use the vignette of [CameraFrame](https://developer.playcanvas.com/user-manual/graphics/posteffects/cameraframe.md) instead. See [Migrating to CameraFrame](https://developer.playcanvas.com/user-manual/graphics/posteffects/legacy.md#migrating-to-cameraframe).
+
+:::
+
 In photography and optics, [vignetting](https://en.wikipedia.org/wiki/Vignetting) is the reduction of an image's brightness or saturation at the periphery compared to the image center. You can use it to draw attention to the center of the frame.
 
 Here is an image without the effect:

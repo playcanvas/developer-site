@@ -202,7 +202,7 @@ Debug drawing shows you *where* things are. To see how long they take, use [Mini
 
 ## Examples
 
-[Live example: Texture Renderer](https://playcanvas.com/examples/#/debug/texture-renderer) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/debug/texture-renderer.example.mjs))
+[Live example: Texture Renderer](https://playcanvas.com/examples/#/debug/texture-renderer) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/debug/texture-renderer/example.mjs))
 
 - [Wire Shapes](https://playcanvas.github.io/#/debug/wire-shapes) — every shape, animated
 - [Frustum Culling](https://playcanvas.github.io/#/debug/frustum-culling) — a camera's view volume, and bounds colored by whether it contains them

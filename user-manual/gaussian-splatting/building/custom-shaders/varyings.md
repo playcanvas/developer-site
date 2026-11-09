@@ -6,7 +6,7 @@ The typical use is classification: decide something about a splat once, then let
 
 **View Live Example** - Splats clipped by an animated box, with per-pixel clipping only on splats intersecting the box surface.
 
-[Live example: Clipping](https://playcanvas.com/examples/#/gaussian-splatting/clipping) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/gaussian-splatting/clipping.example.mjs))
+[Live example: Clipping](https://playcanvas.com/examples/#/gaussian-splatting-fx/clipping) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/gaussian-splatting-fx/clipping/example.mjs))
 
 ## Adding Streams
 

@@ -112,7 +112,7 @@ For labels with many characters or large font sizes, the splat count can be sign
 
 See the Procedural Shapes example which demonstrates using `GsplatText` for dimension labels in a CAD-style visualization.
 
-[Live example: Procedural Shapes example](https://playcanvas.com/examples/#/gaussian-splatting/procedural-shapes) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/gaussian-splatting/procedural-shapes.example.mjs))
+[Live example: Procedural Shapes example](https://playcanvas.com/examples/#/gaussian-splatting-fx/procedural-shapes) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/gaussian-splatting-fx/procedural-shapes/example.mjs))
 
 ## Script Location
 

@@ -10,19 +10,19 @@ Note that all instances are submitted for rendering by the GPU with no camera fr
 
 - Basic Instancing - Demonstrates default Mat4 instancing format with StandardMaterial
 
-[Live example: Basic Instancing](https://playcanvas.com/examples/#/graphics/instancing-basic) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/graphics/instancing-basic.example.mjs))
+[Live example: Basic Instancing](https://playcanvas.com/examples/#/graphics/instancing-basic) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/graphics/instancing-basic/example.mjs))
 
 - Custom Instancing - Shows custom vertex format with shader chunks override
 
-[Live example: Custom Instancing](https://playcanvas.com/examples/#/graphics/instancing-custom) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/graphics/instancing-custom.example.mjs))
+[Live example: Custom Instancing](https://playcanvas.com/examples/#/graphics/instancing-custom) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/graphics/instancing-custom/example.mjs))
 
 - GLB Instancing - Uses EXT_mesh_gpu_instancing extension in GLB files
 
-[Live example: GLB Instancing](https://playcanvas.com/examples/#/graphics/instancing-glb) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/graphics/instancing-glb.example.mjs))
+[Live example: GLB Instancing](https://playcanvas.com/examples/#/graphics/instancing-glb) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/graphics/instancing-glb/example.mjs))
 
 - Gooch Instancing - Full custom ShaderMaterial with instancing support
 
-[Live example: Gooch Instancing](https://playcanvas.com/examples/#/graphics/instancing-gooch) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/graphics/instancing-gooch.example.mjs))
+[Live example: Gooch Instancing](https://playcanvas.com/examples/#/graphics/instancing-gooch) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/graphics/instancing-gooch/example.mjs))
 
 ## Basic Instancing with Default Format
 

@@ -131,7 +131,7 @@ Set **Position Offset** and **Rotation Offset** (in degrees) on the [Collision](
 <pc-collision type="capsule" radius="0.5" height="2" linear-offset="0 1 0" angular-offset="0 45 0"></pc-collision>
 ```
 
-[Live example: Offset Collision](https://playcanvas.com/examples/#/physics/offset-collision) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/physics/offset-collision.example.mjs))
+[Live example: Offset Collision](https://playcanvas.com/examples/#/physics/offset-collision) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/physics/offset-collision/example.mjs))
 
 ## Compound Shapes
 
@@ -188,7 +188,7 @@ Give the parent a **Collision** component with **Type** set to **Compound** and 
 
 The children of a dynamic or kinematic compound can be moved at runtime. When a child's transform changes, the engine updates that shape's offset within the compound and wakes the parent body. A static compound, like any [static body](https://developer.playcanvas.com/user-manual/physics/rigid-bodies.md#moving-static-bodies), keeps the shape it was created with. The parent entity is also the body's center of mass, so keep it within the bounds of the shape (usually its center); otherwise the body may behave oddly when forces and torque are applied, such as rotating around an invisible pivot.
 
-[Live example: Compound Collision](https://playcanvas.com/examples/#/physics/compound-collision) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/physics/compound-collision.example.mjs))
+[Live example: Compound Collision](https://playcanvas.com/examples/#/physics/compound-collision) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/physics/compound-collision/example.mjs))
 
 The chair above comes from the [Compound Physics Shapes](https://developer.playcanvas.com/tutorials/compound-physics-shapes/) tutorial project.
 

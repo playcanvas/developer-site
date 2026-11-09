@@ -225,4 +225,4 @@ The engine does not reset user counters. For a per-frame total, initialize the e
 
 The resource allocation example repeatedly creates and releases entities, materials, vertex buffers and textures. Watch their effect on the counters, click section headings to collapse or expand them, and click elsewhere in the overlay to compare all three views.
 
-[Live example: MiniStats resource allocation example](https://playcanvas.com/examples/#/debug/mini-stats) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/debug/mini-stats.example.mjs))
+[Live example: MiniStats resource allocation example](https://playcanvas.com/examples/#/debug/mini-stats) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/debug/mini-stats/example.mjs))

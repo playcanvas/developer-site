@@ -111,6 +111,8 @@ compute.setParameter('count', 1024);
 compute.setParameter('tint', [1.0, 0.5, 0.0, 1.0]);
 ```
 
+Every uniform and resource the compute shader declares has to be given a value on the compute instance. Compute shaders do not use values set globally on the scope of the graphics device, and debug builds report a declared uniform or resource that has no value.
+
 ## Creating Storage Buffers
 
 Storage buffers hold data that compute shaders can read from and write to:
@@ -174,11 +176,23 @@ device.computeDispatch([compute1, compute2], 'BatchedDispatch');
 
 :::
 
+A compute instance is dispatched at most once in a frame. To dispatch a compute shader more than once in a frame, use a separate compute instance for each dispatch. The instances can share the shader, which is compiled only once:
+
+```javascript
+const computes = [0.25, 0.5].map((strength) => {
+    const compute = new pc.Compute(device, shader, `Blur-${strength}`);
+    compute.setParameter('strength', strength);
+    compute.setupDispatch(width, height);
+    return compute;
+});
+device.computeDispatch(computes, 'Blur');
+```
+
 ### Workgroup Size
 
 The total number of invocations is `dispatchSize × workgroupSize`. For example, if you dispatch with `(width, height)` and your shader has `@workgroup_size(1, 1, 1)`, you get `width × height` invocations.
 
-For better performance with large datasets, use larger workgroup sizes:
+For better performance with large datasets, use larger workgroup sizes, such as 64 for data in one dimension, or 8 × 8 for images:
 
 ```wgsl
 @compute @workgroup_size(64, 1, 1)
@@ -187,13 +201,44 @@ fn main(@builtin(global_invocation_id) global_id: vec3u) {
 }
 ```
 
-Then dispatch accordingly:
+### Dispatching for a Number of Threads
+
+[`setupDispatchThreads`](https://api.playcanvas.com/engine/classes/Compute.html#setupdispatchthreads) takes the number of threads to dispatch in each dimension, instead of the number of workgroups. A thread is one invocation of the shader, typically processing one element or pixel. The workgroups are derived from the workgroup size the shader declares, which needs to be written with integer literals, such as `@workgroup_size(8, 8)`. Values injected using `cdefines`, see [Defines and Includes](https://developer.playcanvas.com/user-manual/graphics/shaders/compute-shaders.md#defines-and-includes), are replaced with literals before the workgroup size is read.
 
 ```javascript
-const numElements = 1024 * 1024;
-const workgroupSize = 64;
-compute.setupDispatch(numElements / workgroupSize);
+// a thread for each element
+compute.setupDispatchThreads(numElements);
+
+// a thread for each pixel of an image
+compute.setupDispatchThreads(width, height);
 ```
+
+The dispatch is rounded up to whole workgroups, so the shader skips the threads beyond the requested number. The functions of the `dispatchThreadsCS` include do that, and index the threads:
+
+```wgsl
+#include "dispatchThreadsCS"
+
+var<storage, read_write> values: array<f32>;
+
+@compute @workgroup_size(64)
+fn main(@builtin(global_invocation_id) id: vec3u) {
+    if (!dispatchThreadInRange(id)) {
+        return;
+    }
+    let index = dispatchThreadIndex(id);
+    values[index] = values[index] * 2.0;
+}
+```
+
+The `dispatchThreadsCS` include provides:
+
+| Function | Description |
+|----------|-------------|
+| `dispatchThreadCount() -> vec3u` | The number of threads the dispatch was set up for. |
+| `dispatchThreadInRange(globalId: vec3u) -> bool` | True when the thread is one of the threads the dispatch was set up for. |
+| `dispatchThreadIndex(globalId: vec3u) -> u32` | The linear index of the thread, with x varying fastest. |
+
+A shader can also skip the threads using its own bounds, for example the size of the texture it writes. However, a device supports a limited number of workgroups in each dimension, at least 65535. A dispatch in one dimension which needs more is spread over rows of workgroups, and the shader then needs to include `dispatchThreadsCS` and index its threads using `dispatchThreadIndex`, which accounts for that.
 
 ## Indirect Dispatch
 
@@ -310,6 +355,86 @@ Using `immediate: true` has a performance impact as it forces an early command b
 
 :::
 
+## Scene Depth and Color Maps
+
+A compute shader can read the depth and color maps a camera renders of the scene, for example to implement screen-space effects or to analyze the rendered image.
+
+The camera renders the maps when they are requested on its camera component:
+
+```javascript
+cameraEntity.camera.requestSceneDepthMap(true);
+cameraEntity.camera.requestSceneColorMap(true);
+```
+
+A camera rendering with [CameraFrame](https://developer.playcanvas.com/user-manual/graphics/posteffects/cameraframe.md) renders them when it is configured to:
+
+```javascript
+cameraFrame.rendering.sceneDepthMap = true;
+cameraFrame.rendering.sceneColorMap = true;
+cameraFrame.update();
+```
+
+Attach the maps of the camera to the compute instance:
+
+```javascript
+compute.setSceneDepthMap(cameraEntity.camera.sceneDepthMapHandle);
+compute.setSceneColorMap(cameraEntity.camera.sceneColorMapHandle);
+```
+
+The maps only need to be attached once. Each dispatch uses the maps the camera rendered most recently, so a compute dispatched before the camera renders, for example from an `update` event, uses the maps of the previous frame. Pass `null` to detach a map when the compute no longer uses it, and before the camera is destroyed.
+
+The compute shader accesses the maps using the functions of the `sceneDepthCS` and `sceneColorCS` includes:
+
+```wgsl
+#include "sceneDepthCS"
+#include "sceneColorCS"
+
+var output: texture_storage_2d<rgba16float, write>;
+
+@compute @workgroup_size(8, 8, 1)
+fn main(@builtin(global_invocation_id) id: vec3u) {
+    // process the texels of the viewport the camera rendered to
+    let viewport = sceneDepthViewport();
+    if (id.x >= viewport.z || id.y >= viewport.w) {
+        return;
+    }
+    let texel = vec2i(viewport.xy + id.xy);
+
+    // the depth of the surface in front of the camera, and the scene color converted to linear
+    let depth = sceneDepthLinear(texel);
+    let color = sceneColorToLinear(sceneColorLoad(texel, 0).rgb);
+
+    // fade the scene to gray with distance
+    let fogged = mix(color, vec3f(0.5), saturate(depth / 100.0));
+    textureStore(output, texel, vec4f(fogged, 1.0));
+}
+```
+
+The `sceneDepthCS` include provides:
+
+| Function | Description |
+|----------|-------------|
+| `sceneDepthSize() -> vec2u` | The dimensions of the depth map. |
+| `sceneDepthViewport() -> vec4u` | The viewport the camera rendered the depth map with, in texels: the x and y of its first texel, and its width and height. |
+| `sceneDepthNearClip() -> f32` | The near clip plane the depth map was rendered with. |
+| `sceneDepthFarClip() -> f32` | The far clip plane the depth map was rendered with. |
+| `sceneDepthLinear(texel: vec2i) -> f32` | The linear depth of the surface at the texel, along the view direction of the camera, in world units. |
+| `sceneDepthWorldPosition(texel: vec2i) -> vec3f` | The world position of the surface at the texel, which needs to be within the viewport. |
+
+The `sceneColorCS` include provides:
+
+| Function | Description |
+|----------|-------------|
+| `sceneColorSize(lod: i32) -> vec2u` | The dimensions of a mip level of the color map. |
+| `sceneColorLoad(texel: vec2i, lod: i32) -> vec4f` | The color of a texel. |
+| `sceneColorSample(uv: vec2f, lod: f32) -> vec4f` | The color sampled with filtering. When the format of the color map cannot be filtered on the device, the color of the nearest texel is returned. |
+| `sceneColorToLinear(color: vec3f) -> vec3f` | Converts a color read from the color map to linear. |
+| `sceneColorToDisplay(color: vec3f) -> vec3f` | Converts a color read from the color map to gamma encoded. |
+
+The depth functions return the same values however the camera stored the depth. The colors are returned the way the camera stored them: linear when the camera renders with CameraFrame, and gamma encoded otherwise. When they are gamma encoded, `SCENE_COLORMAP_GAMMA` is defined in the compute shader. The two conversion functions take a color read from the color map, and return it unchanged when it is already in the requested space.
+
+A camera rendering to only a part of its target, see [`rect`](https://api.playcanvas.com/engine/classes/CameraComponent.html#rect), covers only its viewport of the maps. The rest of the maps holds what the camera did not render, such as the views of other cameras rendering to the same target. To process only the view of the camera, map the invocations to the viewport as in the example above, and dispatch over the size of the viewport, which matches the camera rect multiplied by the size of the target.
+
 ## Preprocessor
 
 Compute shaders support the same [shader preprocessor](https://developer.playcanvas.com/user-manual/graphics/shaders/preprocessor.md) as vertex and fragment shaders, including `#define`, `#ifdef`, `#if`, `#include`, and more.
@@ -321,6 +446,9 @@ The engine provides built-in shader chunks that are automatically available in c
 | Include | Description |
 |---------|-------------|
 | `halfTypesCS` | Half-precision type aliases (`half`, `half2`, etc.) that resolve to f16 when supported, f32 otherwise. See [Half-Precision Types](https://developer.playcanvas.com/user-manual/graphics/shaders/wgsl-capabilities.md#half-precision-types). |
+| `sceneDepthCS` | Access to the scene depth map of a camera. See [Scene Depth and Color Maps](https://developer.playcanvas.com/user-manual/graphics/shaders/compute-shaders.md#scene-depth-and-color-maps). |
+| `sceneColorCS` | Access to the scene color map of a camera. See [Scene Depth and Color Maps](https://developer.playcanvas.com/user-manual/graphics/shaders/compute-shaders.md#scene-depth-and-color-maps). |
+| `dispatchThreadsCS` | Skipping and indexing the threads of a dispatch set up using `setupDispatchThreads`. See [Dispatching for a Number of Threads](https://developer.playcanvas.com/user-manual/graphics/shaders/compute-shaders.md#dispatching-for-a-number-of-threads). |
 
 Example:
 
@@ -367,28 +495,32 @@ Explore these live examples demonstrating various compute shader use cases:
 
 - Edge Detect - Image processing with edge detection
 
-[Live example: Edge Detect](https://playcanvas.com/examples/#/compute/edge-detect) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/compute/edge-detect.example.mjs))
+[Live example: Edge Detect](https://playcanvas.com/examples/#/compute/edge-detect) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/compute/edge-detect/example.mjs))
 
 - Particles - GPU-based particle simulation with collision detection
 
-[Live example: Particles](https://playcanvas.com/examples/#/compute/particles) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/compute/particles.example.mjs))
+[Live example: Particles](https://playcanvas.com/examples/#/compute/particles) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/compute/particles/example.mjs))
 
 - Histogram - Compute image histogram using atomic operations
 
-[Live example: Histogram](https://playcanvas.com/examples/#/compute/histogram) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/compute/histogram.example.mjs))
+[Live example: Histogram](https://playcanvas.com/examples/#/compute/histogram) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/compute/histogram/example.mjs))
 
 - Texture Generation - Generate and modify textures with compute shaders
 
-[Live example: Texture Generation](https://playcanvas.com/examples/#/compute/texture-gen) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/compute/texture-gen.example.mjs))
+[Live example: Texture Generation](https://playcanvas.com/examples/#/compute/texture-gen) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/compute/texture-gen/example.mjs))
 
 - Vertex Update - Modify mesh vertex buffers in real-time
 
-[Live example: Vertex Update](https://playcanvas.com/examples/#/compute/vertex-update) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/compute/vertex-update.example.mjs))
+[Live example: Vertex Update](https://playcanvas.com/examples/#/compute/vertex-update) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/compute/vertex-update/example.mjs))
 
 - Indirect Draw - GPU-driven rendering with indirect draw calls
 
-[Live example: Indirect Draw](https://playcanvas.com/examples/#/compute/indirect-draw) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/compute/indirect-draw.example.mjs))
+[Live example: Indirect Draw](https://playcanvas.com/examples/#/compute/indirect-draw) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/compute/indirect-draw/example.mjs))
 
 - Indirect Dispatch - GPU-driven compute dispatch with depth-based tile classification
 
-[Live example: Indirect Dispatch](https://playcanvas.com/examples/#/compute/indirect-dispatch) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/compute/indirect-dispatch.example.mjs))
+[Live example: Indirect Dispatch](https://playcanvas.com/examples/#/compute/indirect-dispatch) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/compute/indirect-dispatch/example.mjs))
+
+- Scene Maps - A scanner pulse sweeping through the scene, using the scene depth and color maps
+
+[Live example: Scene Maps](https://playcanvas.com/examples/#/compute/scene-maps) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/compute/scene-maps/example.mjs))

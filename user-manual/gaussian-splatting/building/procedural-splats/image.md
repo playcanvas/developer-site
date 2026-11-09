@@ -83,7 +83,7 @@ The number of splats equals the number of non-transparent pixels in the image. F
 
 See the Procedural Shapes example which demonstrates using `GsplatImage` to display textures as ground and wall decorations.
 
-[Live example: Procedural Shapes example](https://playcanvas.com/examples/#/gaussian-splatting/procedural-shapes) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/gaussian-splatting/procedural-shapes.example.mjs))
+[Live example: Procedural Shapes example](https://playcanvas.com/examples/#/gaussian-splatting-fx/procedural-shapes) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/gaussian-splatting-fx/procedural-shapes/example.mjs))
 
 ## Script Location
 

@@ -4,7 +4,7 @@ Gaussian splat scenes are captured with their lighting baked in. Relighting lets
 
 **View Live Example** - A splat scene relit by an HDRI environment, a PCSS directional light and shadow-casting omni lights.
 
-[Live example: Relighting](https://playcanvas.com/examples/#/gaussian-splatting/relighting) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/gaussian-splatting/relighting.example.mjs))
+[Live example: Relighting](https://playcanvas.com/examples/#/gaussian-splatting-fx/relighting) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/gaussian-splatting-fx/relighting/example.mjs))
 
 ## How It Works
 

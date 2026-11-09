@@ -2,7 +2,7 @@
 
 Physical materials do not only react to the lights in your scene. They also pick up light from their surroundings: a shiny surface mirrors what is around it, a matte surface is tinted by the light arriving from every direction, and a glass surface shows the surroundings through it. All of this comes from an **environment map**, an image of the surroundings such as a sky, a room or an outdoor location.
 
-PlayCanvas can take that environment map from two places: the scene, or the material itself. This page explains what the environment contributes to a material, where it can come from, which source is used when, and which settings change the result.
+PlayCanvas can take that environment map from two places: the scene, or the material itself. This page explains what the environment contributes to a material, where it can come from, which source is used when, and which settings change the result. It also covers planar reflections, which give flat surfaces such as floors, mirrors and water an exact reflection of the scene around them.
 
 ## What the environment feeds
 
@@ -18,8 +18,10 @@ graph TD
         R ~~~ A ~~~ F
     end
     B["<b>Background</b><br/>the sky drawn behind everything"]
+    P["<b>Planar reflection</b><br/>the scene rendered by a mirrored camera"]
     S -->|"materials without their own environment map"| MAT
     M -->|"this material only"| MAT
+    P -->|"replaces the reflections of this material"| R
     S --> B
 ```
 
@@ -74,14 +76,16 @@ The rule is simple: **a material with an environment map of its own uses only th
 
 A material environment replaces the scene environment completely. The scene's Intensity and Rotation do not apply to it, and the scene does not fill in the ambient light for a plain cube map or a sphere map. If you want directional ambient light on a material with its own environment, prefilter its cubemap in the Editor, or generate an environment atlas for it in code.
 
+A [planar reflection](https://developer.playcanvas.com/user-manual/graphics/physical-rendering/environment-lighting.md#planar-reflections) is the exception: it replaces only the reflections of a material, which still takes its ambient light from the environment given by this table.
+
 ## Setting it up in code
 
 ```javascript
 // Scene environment from an HDR image: a sharp sky for the background and mirror-like
 // reflections, plus a prefiltered lighting atlas for ambient light and rough reflections
-const skybox = pc.EnvLighting.generateSkyboxCubemap(hdrTexture);
-const lighting = pc.EnvLighting.generateLightingSource(hdrTexture);
-const envAtlas = pc.EnvLighting.generateAtlas(lighting);
+const skybox = EnvLighting.generateSkyboxCubemap(hdrTexture);
+const lighting = EnvLighting.generateLightingSource(hdrTexture);
+const envAtlas = EnvLighting.generateAtlas(lighting);
 lighting.destroy();
 
 app.scene.skybox = skybox;
@@ -89,14 +93,65 @@ app.scene.envAtlas = envAtlas;
 app.scene.skyboxIntensity = 1.5;
 
 // Material environment: this material ignores the scene skybox and reflects its own surroundings
-const material = new pc.StandardMaterial();
+const material = new StandardMaterial();
 material.envAtlas = roomAtlas;   // prefiltered lighting: reflections, ambient light and refraction
 material.cubeMap = roomCubemap;  // optional: mirror-sharp reflections on very glossy surfaces
 material.update();
 ```
 
+## Planar reflections
+
+An environment map shows the surroundings as seen from a single point, so it cannot reflect the objects standing on a floor, or show where they touch it. A flat surface such as a polished floor, a mirror or water can instead reflect a **planar reflection**: the scene rendered each frame into a texture by a second camera, mirrored by the plane of the surface.
+
+The `PlanarRenderer` script (`scripts/esm/planar-renderer.mjs`) creates that camera and its texture, and moves the camera with the main camera each frame. The material reflects the texture set as its `planarReflectionMap`, projected with the view projection matrix of the camera set as its `planarReflectionMatrix`.
+
+- The planar reflection replaces only the reflections. The lights, shadows and fresnel of the material are unchanged, and its ambient light still comes from the environment, as described in [Which environment is used](https://developer.playcanvas.com/user-manual/graphics/physical-rendering/environment-lighting.md#which-environment-is-used).
+- Rougher surfaces blur the reflection using the mipmaps of the texture, so enable `mipmaps` on the script for anything but a perfect mirror. The script generates them with a Gaussian filter, which keeps the blurred reflection smooth as the camera moves. Set its `mipmapFilter` to `'box'` for cheaper mipmaps, with a blockier blur.
+- A normal map distorts the reflection, like the reflection on an uneven or wet surface.
+- Enable `hdr` on the script so that bright light sources are as bright in the reflection as in the scene. The texture then stores linear colors, and the camera rendering the material applies the tone mapping.
+- When the main camera uses TAA, the reflection camera follows its jitter, so the reflection is antialiased as well.
+- Refraction on a material with a planar reflection requires Dynamic Refractions, as the texture holds no environment to show through the surface.
+- Put the reflective surface on a layer that the reflection camera does not render, as a surface cannot appear in its own reflection.
+- The reflection renders the scene a second time each frame. Lower the `scale` of the script to render it at a fraction of the screen resolution, and give the reflection camera only the layers worth reflecting. A perfect mirror reads the texture once per pixel, while rougher surfaces read it a few more times to blur it smoothly.
+
+Planar reflections are set up in code:
+
+```javascript
+import { PlanarRenderer } from 'playcanvas/scripts/esm/planar-renderer.mjs';
+
+// The reflection camera renders the reflected layers before the main camera
+const reflectionCamera = new Entity('ReflectionCamera');
+reflectionCamera.addComponent('camera', {
+    layers: [worldLayer.id, skyboxLayer.id],
+    priority: -1
+});
+reflectionCamera.addComponent('script');
+const planarRenderer = reflectionCamera.script.create(PlanarRenderer, {
+    properties: {
+        sceneCameraEntity: cameraEntity,
+        planePoint: new Vec3(0, 0, 0),
+        planeNormal: new Vec3(0, 1, 0),
+        mipmaps: true,  // blurred reflections on rough surfaces
+        hdr: true       // bright lights stay bright in the reflection
+    }
+});
+app.root.addChild(reflectionCamera);
+
+// The floor is on its own layer, rendered by the main camera but not by the reflection camera
+floorEntity.render.layers = [floorLayer.id];
+
+// Each frame, after the main camera has moved, the floor reflects the updated texture
+app.on('update', () => {
+    const texture = planarRenderer.frameUpdate();
+    floorMaterial.planarReflectionMap = texture;
+    floorMaterial.planarReflectionMatrix = planarRenderer.viewProjectionMatrix;
+    floorMaterial.update();
+});
+```
+
 ## Examples
 
-- [HDR](https://playcanvas.github.io/#/graphics/hdr): a scene lit by a prefiltered environment atlas.
+- [HDR](https://playcanvas.github.io/#/camera-frame/hdr): a scene lit by a prefiltered environment atlas.
 - [Reflection Cubemap](https://playcanvas.github.io/#/graphics/reflection-cubemap): a material with its own cubemap, rendered at runtime from the object's position, with Use Skybox switched off.
 - [Reflection Box](https://playcanvas.github.io/#/graphics/reflection-box): a room whose materials use an environment atlas with Box projection so that the reflections line up with the walls.
+- [Reflection Planar](https://playcanvas.github.io/#/graphics/reflection-planar): a polished floor reflecting the room and the objects in it with a planar reflection, with a Cubemap mode to compare it with the box projected environment atlas.

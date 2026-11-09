@@ -46,7 +46,7 @@ CCD is one example. The same approach reaches other Bullet features:
 - **Vehicles.** Bullet's raycast vehicle simulates wheels, suspension and steering on top of a chassis rigid body. There is no vehicle component, so the [Vehicle Physics](https://developer.playcanvas.com/tutorials/vehicle-physics/) tutorial and the engine's [vehicle.js](https://github.com/playcanvas/engine/blob/main/scripts/physics/vehicle.js) script drive `btRaycastVehicle` directly.
 - **Soft bodies and cloth.** Bullet's soft body solver is included in ammo.js, but it needs a soft-rigid dynamics world rather than the discrete world the engine creates, which makes it an advanced integration.
 
-[Live example: Vehicle](https://playcanvas.com/examples/#/physics/vehicle) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/physics/vehicle.example.mjs))
+[Live example: Vehicle](https://playcanvas.com/examples/#/physics/vehicle) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/physics/vehicle/example.mjs))
 
 ## See Also
 

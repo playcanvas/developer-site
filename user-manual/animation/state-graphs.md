@@ -358,7 +358,7 @@ Some things to try:
 
 The Locomotion example drives a character's state graph with a `speed` integer and a `jump` trigger that leads from ANY. In the Examples Browser, click the floor to walk there, turn on Run in the controls panel to jog there instead, and press Jump at any time:
 
-[Live example: Locomotion](https://playcanvas.com/examples/#/animation/locomotion) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/animation/locomotion.example.mjs))
+[Live example: Locomotion](https://playcanvas.com/examples/#/animation/locomotion) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/animation/locomotion/example.mjs))
 
 ## See Also
 

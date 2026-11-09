@@ -6,7 +6,7 @@ The PlayCanvas physics engine allows you to perform ray casts. A ray cast is a q
 
 One application of ray casting is picking, where the user can touch or click the screen to select an entity. The example below casts a ray from the camera through the pointer position and reports the closest body it hits:
 
-[Live example: Raycast](https://playcanvas.com/examples/#/physics/raycast) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/physics/raycast.example.mjs))
+[Live example: Raycast](https://playcanvas.com/examples/#/physics/raycast) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/physics/raycast/example.mjs))
 
 The ray starts at the camera and ends where the pointer position lands on the camera's far clip plane, so it passes through whatever is under the pointer:
 

@@ -4,7 +4,7 @@ The `gsplatModifyPS` chunk customizes the final splat color in the fragment stag
 
 **View Live Example** - Each splat rendered as a ring of its own color, with a highlight wave.
 
-[Live example: Shader Rings](https://playcanvas.com/examples/#/gaussian-splatting/shader-rings) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/gaussian-splatting/shader-rings.example.mjs))
+[Live example: Shader Rings](https://playcanvas.com/examples/#/gaussian-splatting-fx/shader-rings) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/gaussian-splatting-fx/shader-rings/example.mjs))
 
 ## Overridable Function
 

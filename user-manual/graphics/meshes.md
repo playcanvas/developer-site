@@ -14,7 +14,7 @@ box.addComponent('render', { type: 'box' });
 app.root.addChild(box);
 ```
 
-[Live example: Primitive Shapes](https://playcanvas.com/examples/#/graphics/shapes) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/graphics/shapes.example.mjs))
+[Live example: Primitive Shapes](https://playcanvas.com/examples/#/graphics/shapes) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/graphics/shapes/example.mjs))
 
 ### Loaded Models
 

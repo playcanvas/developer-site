@@ -279,11 +279,11 @@ void process() {
 
 - Paint example - Demonstrates painting splats with a brush
 
-[Live example: Paint example](https://playcanvas.com/examples/#/gaussian-splatting/paint) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/gaussian-splatting/paint.example.mjs))
+[Live example: Paint example](https://playcanvas.com/examples/#/gaussian-splatting-fx/paint) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/gaussian-splatting-fx/paint/example.mjs))
 
 - Editor example - Demonstrates selection, deletion, and cloning
 
-[Live example: Editor example](https://playcanvas.com/examples/#/gaussian-splatting/editor) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/gaussian-splatting/editor.example.mjs))
+[Live example: Editor example](https://playcanvas.com/examples/#/gaussian-splatting/editor) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/gaussian-splatting/editor/example.mjs))
 
 ## See Also
 

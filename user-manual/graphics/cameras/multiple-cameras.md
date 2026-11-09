@@ -4,7 +4,7 @@ A scene can contain any number of cameras, and they compose into the final image
 
 This model supports a wide range of setups: split-screen multiplayer, picture-in-picture overlays such as minimaps and rear-view mirrors, UI rendered over the 3D scene, and live render-to-texture surfaces like security monitors and portals.
 
-[Live example: Multi View](https://playcanvas.com/examples/#/graphics/multi-view) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/graphics/multi-view.example.mjs))
+[Live example: Multi View](https://playcanvas.com/examples/#/graphics/multi-view) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/graphics/multi-view/example.mjs))
 
 ## Viewports
 
@@ -80,7 +80,7 @@ overlay.camera.clearDepthBuffer = true;  // don't depth-test against the main vi
 
 Instead of the screen, a camera can render into an offscreen texture by assigning a [RenderTarget](https://api.playcanvas.com/engine/classes/RenderTarget.html) to its `renderTarget` property. The resulting texture can then be applied to a material — for in-world screens, mirrors and portals — or processed further. See the [Render Targets](https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/render-targets.md) page for the full details, and the engine's render-to-texture example:
 
-[Live example: Render to Texture](https://playcanvas.com/examples/#/graphics/render-to-texture) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/graphics/render-to-texture.example.mjs))
+[Live example: Render to Texture](https://playcanvas.com/examples/#/render-targets/render-to-texture) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/render-targets/render-to-texture/example.mjs))
 
 ## Performance Considerations
 

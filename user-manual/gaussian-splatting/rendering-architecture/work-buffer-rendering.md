@@ -194,7 +194,7 @@ const glslModifier = `
 
 See the LOD Instances example which demonstrates:
 
-[Live example: LOD Instances example](https://playcanvas.com/examples/#/gaussian-splatting/lod-instances) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/gaussian-splatting/lod-instances.example.mjs))
+[Live example: LOD Instances example](https://playcanvas.com/examples/#/gaussian-splatting/streamed-instances) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/gaussian-splatting/streamed-instances/example.mjs))
 
 - Reading component IDs written during copy
 - Looking up colors from a texture

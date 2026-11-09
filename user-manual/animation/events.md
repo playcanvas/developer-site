@@ -250,7 +250,7 @@ Some things to try:
 - Add `{ time: 0, name: 'jaws', string: 'open' }`, and the event fires at the start of each loop.
 - Play the clip backwards, with `arm.anim.assignAnimation('Pick', pick, undefined, -1);`. The events fire the other way round, so the jaws glow while they are open.
 
-[Live example: Events](https://playcanvas.com/examples/#/animation/events) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/animation/events.example.mjs))
+[Live example: Events](https://playcanvas.com/examples/#/animation/events) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/animation/events/example.mjs))
 
 ## See Also
 

@@ -2,7 +2,7 @@
 
 A text element draws a string with a [font asset](https://developer.playcanvas.com/user-manual/user-interface/fonts.md). Every label, title, score, line of dialogue and other piece of text in an in-canvas interface is a text element.
 
-[Live example: Text](https://playcanvas.com/examples/#/user-interface/text) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/text.example.mjs))
+[Live example: Text](https://playcanvas.com/examples/#/user-interface/text) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/text/example.mjs))
 
 ## Creating Text
 
@@ -97,13 +97,13 @@ badge.element.maxFontSize = 32;
 badge.element.minFontSize = 12;
 ```
 
-[Live example: Text Auto Font Size](https://playcanvas.com/examples/#/user-interface/text-auto-font-size) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/text-auto-font-size.example.mjs))
+[Live example: Text Auto Font Size](https://playcanvas.com/examples/#/user-interface/text-auto-font-size) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/text-auto-font-size/example.mjs))
 
 ## Justified Text
 
 With **Justify** on, wrapped lines are stretched to the full width of the element by widening the gaps between their words. The last line of a paragraph, and any line that ends with a line break, keeps its alignment instead. Justified text needs wrapping, so turn on **Wrap Lines** as well. The `justify` property is available from engine 2.22.
 
-[Live example: Text Justify](https://playcanvas.com/examples/#/user-interface/text-justify) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/text-justify.example.mjs))
+[Live example: Text Justify](https://playcanvas.com/examples/#/user-interface/text-justify) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/text-justify/example.mjs))
 
 ## Outline and Shadow
 
@@ -131,7 +131,7 @@ message.element.text = 'You found the [color="#ffcc00"]golden key[/color]!';
 
 Write `\[` for a `[` that doesn't start a tag. When the markup has an error, such as a tag that is never closed, the whole text is drawn as written, tags included, and the engine logs a warning.
 
-[Live example: Text Markup](https://playcanvas.com/examples/#/user-interface/text-markup) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/text-markup.example.mjs))
+[Live example: Text Markup](https://playcanvas.com/examples/#/user-interface/text-markup) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/text-markup/example.mjs))
 
 ## Revealing Text
 
@@ -151,7 +151,7 @@ const handle = app.on('update', (dt) => {
 });
 ```
 
-[Live example: Text Typewriter](https://playcanvas.com/examples/#/user-interface/text-typewriter) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/text-typewriter.example.mjs))
+[Live example: Text Typewriter](https://playcanvas.com/examples/#/user-interface/text-typewriter) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/text-typewriter/example.mjs))
 
 ## Changing Text at Runtime
 

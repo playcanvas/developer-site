@@ -87,11 +87,11 @@ Culling uses the bounding box of the mesh, [`mesh.aabb`](https://api.playcanvas.
 
 ## Shadows
 
-- [`castShadow`](https://api.playcanvas.com/engine/classes/MeshInstance.html#castshadow) makes the mesh instance cast shadows, by including it in the shadow maps of lights.
-- `receiveShadow` makes the mesh instance receive shadows cast by other mesh instances.
+- [`castShadows`](https://api.playcanvas.com/engine/classes/MeshInstance.html#castshadows) makes the mesh instance cast shadows, by including it in the shadow maps of lights.
+- [`receiveShadows`](https://api.playcanvas.com/engine/classes/MeshInstance.html#receiveshadows) makes the mesh instance receive shadows cast by other mesh instances.
 - [`shadowCascadeMask`](https://api.playcanvas.com/engine/classes/MeshInstance.html#shadowcascademask) selects which cascades of a directional light the mesh instance casts shadows into, for example to keep small objects out of the distant cascades.
 
-When you add a mesh instance to a layer yourself, set `castShadow` before adding it, as described in [Rendering Without Entities](https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/rendering-without-entities.md#keep-layer-membership-persistent). See [Shadows](https://developer.playcanvas.com/user-manual/graphics/lighting/shadows.md) for configuring the lights.
+When you add a mesh instance to a layer yourself, set `castShadows` before adding it, as described in [Rendering Without Entities](https://developer.playcanvas.com/user-manual/graphics/advanced-rendering/rendering-without-entities.md#keep-layer-membership-persistent). See [Shadows](https://developer.playcanvas.com/user-manual/graphics/lighting/shadows.md) for configuring the lights.
 
 ## Sort Order
 
@@ -128,7 +128,7 @@ See [Shader Parameters](https://developer.playcanvas.com/user-manual/graphics/sh
 
 A mesh with a [`skin`](https://api.playcanvas.com/engine/classes/Mesh.html#skin) or a [`morph`](https://api.playcanvas.com/engine/classes/Mesh.html#morph) is animated per mesh instance, by its [`skinInstance`](https://api.playcanvas.com/engine/classes/MeshInstance.html#skininstance), which holds the bones that pose it, and its [`morphInstance`](https://api.playcanvas.com/engine/classes/MeshInstance.html#morphinstance), which holds the weights of its morph targets. A render component sets these up for the skinned and morphed meshes of a loaded model, and the [anim component](https://developer.playcanvas.com/user-manual/animation.md) drives them.
 
-[Live example: Mesh Morph](https://playcanvas.com/examples/#/graphics/mesh-morph) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/graphics/mesh-morph.example.mjs))
+[Live example: Mesh Morph](https://playcanvas.com/examples/#/graphics/mesh-morph) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/graphics/mesh-morph/example.mjs))
 
 ## Drawing Many Copies
 

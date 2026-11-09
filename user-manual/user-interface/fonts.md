@@ -148,7 +148,7 @@ screen.addChild(message);
 
 The first call to `createTextures` creates the font's textures. Before you set text with characters the textures don't have yet, add the characters with `updateTextures`.
 
-[Live example: Text Emojis](https://playcanvas.com/examples/#/user-interface/text-emojis) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/text-emojis.example.mjs))
+[Live example: Text Emojis](https://playcanvas.com/examples/#/user-interface/text-emojis) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/text-emojis/example.mjs))
 
 ## See Also
 

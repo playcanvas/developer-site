@@ -173,7 +173,7 @@ Some things to try:
 
 The Component Properties example builds two clips in code that animate the color and rotation of two spot lights. In the Examples Browser, press Flash in the controls panel to cross-fade from the steady green clip to the flashing red one, and press it again to go back:
 
-[Live example: Component Properties](https://playcanvas.com/examples/#/animation/component-properties) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/animation/component-properties.example.mjs))
+[Live example: Component Properties](https://playcanvas.com/examples/#/animation/component-properties) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/animation/component-properties/example.mjs))
 
 ## See Also
 

@@ -81,7 +81,7 @@ Now let's make the camera interactive by adding the camera controls script using
 The camera controls script will allow you to:
 
 - **Left mouse drag**: Orbit around the target
-- **Right mouse drag**: Pan the camera
+- **Middle mouse drag**: Pan the camera
 - **Mouse wheel**: Zoom in and out
 
 ## Adding the Splat

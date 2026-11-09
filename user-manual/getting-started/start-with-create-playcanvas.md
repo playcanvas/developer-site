@@ -82,7 +82,7 @@ To publish an Editor project as a Web Lens instead, see [Snapchat Web Lenses](ht
 
 ## Debug with the Inspector
 
-The development server loads the [Inspector](https://developer.playcanvas.com/user-manual/scripting/debugging/inspector.md) for the running application. Press the backquote key (`` ` ``) to show or hide it, <kbd>F9</kbd> to pause, and <kbd>F10</kbd> to step one frame. Production builds do not include the Inspector.
+The development server loads the [Inspector](https://developer.playcanvas.com/user-manual/debugging/inspector.md) for the running application. Press the backquote key (`` ` ``) to show or hide it, <kbd>F9</kbd> to pause, and <kbd>F10</kbd> to step one frame. Production builds do not include the Inspector.
 
 ## Skip the Prompts
 

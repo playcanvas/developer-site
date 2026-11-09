@@ -309,7 +309,7 @@ export function FirstInterface() {
 </script>
 ```
 
-[Live example: Buttons](https://playcanvas.com/examples/#/user-interface/buttons) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/buttons.example.mjs))
+[Live example: Buttons](https://playcanvas.com/examples/#/user-interface/buttons) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/buttons/example.mjs))
 
 ## How It Fits Together
 

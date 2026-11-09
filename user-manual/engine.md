@@ -161,6 +161,7 @@ The engine's features are documented by topic, and each topic applies whichever 
 - [Engine Migrations](https://developer.playcanvas.com/user-manual/engine/migrations.md) — breaking changes and how to update your code.
 - [Supported Browsers](https://developer.playcanvas.com/user-manual/engine/supported-browsers.md) — minimum browser versions for WebGL 2 and WebGPU.
 - [Developing with AI](https://developer.playcanvas.com/user-manual/engine/developing-with-ai.md) — set up a coding agent on an Engine project and verify its changes.
+- [Add-on Libraries](https://developer.playcanvas.com/user-manual/engine/libraries.md) — Spine animation, 3D Tiles streaming, tweening and loaders.gl, used alongside the engine.
 - [Examples](https://playcanvas.com/examples/) — more than 250 live examples with editable source code.
 - [API Reference](https://api.playcanvas.com/engine/) — every class, method and property.
 

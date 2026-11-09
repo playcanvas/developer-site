@@ -2,7 +2,7 @@
 
 In an immersive session there is no flat screen to put a HUD on: the user sees the scene through a headset, or through a phone's camera in AR. Interfaces in XR are [world-space screens](https://developer.playcanvas.com/user-manual/user-interface/world-space-ui.md), panels in the scene that the user points at with controllers or hands. Screen-space screens are made for flat displays, so don't use them in XR.
 
-[Live example: XR UI](https://playcanvas.com/examples/#/xr/xr-ui) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/xr/xr-ui.example.mjs))
+[Live example: XR UI](https://playcanvas.com/examples/#/xr/xr-ui) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/xr/xr-ui/example.mjs))
 
 ## Building a Panel
 
@@ -127,7 +127,7 @@ Declare the `<pc-asset>` inside `<pc-app>`, with the font asset. See [XR Scripts
 
 An item with a `label` but no `eventName` is a line of text rather than a button, and `setItemLabel()` changes an item's text while the menu is shown. The `xr:end` event in this example ends the session when the engine's `XrSession` script is in the scene, as it handles that event; see [XR Scripts](https://developer.playcanvas.com/user-manual/web-components/xr.md#xr-scripts) for what it does. XrMenu also fires `xr:menu:active` when the menu is shown or hidden.
 
-[Live example: XR Menu](https://playcanvas.com/examples/#/xr/xr-menu) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/xr/xr-menu.example.mjs))
+[Live example: XR Menu](https://playcanvas.com/examples/#/xr/xr-menu) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/xr/xr-menu/example.mjs))
 
 ## Comfort
 

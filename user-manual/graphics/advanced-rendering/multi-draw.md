@@ -40,15 +40,15 @@ Sub-draws that differ only in which portion of the geometry they render behave t
 
 - Multi-Draw - Terrain rendering with dynamic patch culling
 
-[Live example: Multi-Draw](https://playcanvas.com/examples/#/graphics/multi-draw) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/graphics/multi-draw.example.mjs))
+[Live example: Multi-Draw](https://playcanvas.com/examples/#/graphics/multi-draw) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/graphics/multi-draw/example.mjs))
 
 - Multi-Draw Instanced - Different geometries with instancing (WebGPU only)
 
-[Live example: Multi-Draw Instanced](https://playcanvas.com/examples/#/graphics/multi-draw-instanced) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/graphics/multi-draw-instanced.example.mjs))
+[Live example: Multi-Draw Instanced](https://playcanvas.com/examples/#/graphics/multi-draw-instanced) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/graphics/multi-draw-instanced/example.mjs))
 
 - Multi-Draw Instanced Multi-Platform - Cross-platform instanced multi-draw
 
-[Live example: Multi-Draw Instanced Multi-Platform](https://playcanvas.com/examples/#/graphics/multi-draw-instanced-multi-platform) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/graphics/multi-draw-instanced-multi-platform.example.mjs))
+[Live example: Multi-Draw Instanced Multi-Platform](https://playcanvas.com/examples/#/graphics/multi-draw-instanced-multi-platform) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/graphics/multi-draw-instanced-multi-platform/example.mjs))
 
 ## Basic Multi-Draw
 

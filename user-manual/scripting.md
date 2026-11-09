@@ -57,5 +57,5 @@ Rotate.prototype.update = function(dt) {
 - [Script Attributes](https://developer.playcanvas.com/user-manual/scripting/script-attributes.md) — Exposing configurable properties.
 - [Engine API](https://developer.playcanvas.com/user-manual/scripting/engine-api.md) — Key classes and patterns.
 - [Events](https://developer.playcanvas.com/user-manual/scripting/events.md) — Communication between scripts.
-- [Debugging](https://developer.playcanvas.com/user-manual/scripting/debugging.md) — Tools and techniques for troubleshooting.
+- [Debugging](https://developer.playcanvas.com/user-manual/debugging.md) — Tools and techniques for troubleshooting.
 - [Migration Guide](https://developer.playcanvas.com/user-manual/scripting/migration-guide.md) — Upgrading from classic to ESM scripts.

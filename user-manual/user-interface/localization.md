@@ -2,7 +2,7 @@
 
 Localization shows an application's text in the player's language. Translations live in **localization files**, JSON assets that hold a message for each **key** in one or more locales. Text elements and scripts ask for a key, and the application's [`I18n`](https://api.playcanvas.com/engine/classes/I18n.html) object, `app.i18n`, returns the message for the current locale.
 
-[Live example: Text Localization](https://playcanvas.com/examples/#/user-interface/text-localization) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/text-localization.example.mjs))
+[Live example: Text Localization](https://playcanvas.com/examples/#/user-interface/text-localization) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/text-localization/example.mjs))
 
 ## Localization Files
 

@@ -301,9 +301,9 @@ Some things to try:
 
 These Engine examples blend a character's clips with 2D trees. In the Examples Browser, drag across the pad in the controls panel to move the blend point, and the circle around each clip's point grows with its weight:
 
-[Live example: Blend Trees 2D Cartesian](https://playcanvas.com/examples/#/animation/blend-trees-2d-cartesian) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/animation/blend-trees-2d-cartesian.example.mjs))
+[Live example: Blend Trees 2D Cartesian](https://playcanvas.com/examples/#/animation/blend-trees-2d-cartesian) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/animation/blend-trees-2d-cartesian/example.mjs))
 
-[Live example: Blend Trees 2D Directional](https://playcanvas.com/examples/#/animation/blend-trees-2d-directional) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/animation/blend-trees-2d-directional.example.mjs))
+[Live example: Blend Trees 2D Directional](https://playcanvas.com/examples/#/animation/blend-trees-2d-directional) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/animation/blend-trees-2d-directional/example.mjs))
 
 ## See Also
 

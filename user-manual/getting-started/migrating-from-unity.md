@@ -49,7 +49,7 @@ The Launch Page stays connected to the Editor. Changes to entities, components, 
 
 Scripts never run in the Editor's viewport, so there is nothing like Unity's `[ExecuteInEditMode]`: anything a script creates or changes appears only in the launched app.
 
-The Launch button's menu has options for testing: choose the graphics API, open the [Profiler](https://developer.playcanvas.com/user-manual/optimization/profiler.md), [MiniStats](https://developer.playcanvas.com/user-manual/optimization/mini-stats.md) or [Inspector](https://developer.playcanvas.com/user-manual/scripting/debugging/inspector.md), and tick **Debug** to log the engine's warnings and errors to the console.
+The Launch button's menu has options for testing: choose the graphics API, open the [Profiler](https://developer.playcanvas.com/user-manual/optimization/profiler.md), [MiniStats](https://developer.playcanvas.com/user-manual/optimization/mini-stats.md) or [Inspector](https://developer.playcanvas.com/user-manual/debugging/inspector.md), and tick **Debug** to log the engine's warnings and errors to the console.
 
 ### Navigating the Viewport
 
@@ -638,11 +638,11 @@ Your app runs in the browser, so you debug it with the browser's developer tools
 
 | Unity | PlayCanvas |
 | --- | --- |
-| Console window | The **Console** tab of the developer tools. See [Console Logging](https://developer.playcanvas.com/user-manual/scripting/debugging/console-logging.md). |
-| Attaching Visual Studio or Rider | Breakpoints in the **Sources** tab of the developer tools. See [Browser Dev Tools](https://developer.playcanvas.com/user-manual/scripting/debugging/browser-dev-tools.md). |
+| Console window | The **Console** tab of the developer tools. See [Console Logging](https://developer.playcanvas.com/user-manual/debugging/console-logging.md). |
+| Attaching Visual Studio or Rider | Breakpoints in the **Sources** tab of the developer tools. See [Browser Dev Tools](https://developer.playcanvas.com/user-manual/debugging/browser-dev-tools.md). |
 | `Debug.Break()` | A `debugger;` statement, which pauses the app while the developer tools are open |
 | Profiler | The [Profiler](https://developer.playcanvas.com/user-manual/optimization/profiler.md) and [MiniStats](https://developer.playcanvas.com/user-manual/optimization/mini-stats.md), from the Launch button's menu, and the **Performance** tab of the developer tools |
-| Frame Debugger | The [Inspector](https://developer.playcanvas.com/user-manual/scripting/debugging/inspector.md), also from the Launch button's menu, which shows the render passes and draw calls of each frame, and [native GPU profilers](https://developer.playcanvas.com/user-manual/optimization/gpu-profiling.md) |
+| Frame Debugger | The [Inspector](https://developer.playcanvas.com/user-manual/debugging/inspector.md), also from the Launch button's menu, which shows the render passes and draw calls of each frame, and [native GPU profilers](https://developer.playcanvas.com/user-manual/optimization/gpu-profiling.md) |
 | `Debug.DrawLine` and Gizmos | `this.app.drawLine()`, and [`WireRenderer`](https://developer.playcanvas.com/user-manual/graphics/debug-drawing.md) for spheres, boxes and other shapes |
 
 ## Version Control and Collaboration

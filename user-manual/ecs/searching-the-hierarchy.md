@@ -170,7 +170,7 @@ A search visits every entity it covers, so its cost grows with the size of the s
 - **Search close by.** Searching from the nearest entity that you know of visits fewer entities than searching from `app.root`.
 - **Prefer references.** An entity attribute, a ref or an element you keep is faster than any search, and does not break when names change.
 
-To browse the hierarchy of a running application, and to see what its entities and components are set to right now, use the [Inspector](https://developer.playcanvas.com/user-manual/scripting/debugging/inspector.md) debug panel.
+To browse the hierarchy of a running application, and to see what its entities and components are set to right now, use the [Inspector](https://developer.playcanvas.com/user-manual/debugging/inspector.md) debug panel.
 
 ## See Also
 

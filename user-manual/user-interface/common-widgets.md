@@ -2,7 +2,7 @@
 
 The UI components are building blocks. This page puts them together into the widgets that most interfaces need. Each recipe shows the hierarchy to build, in the Editor or in code, and the code that makes it work.
 
-[Live example: Common Widgets](https://playcanvas.com/examples/#/user-interface/common-widgets) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/common-widgets.example.mjs))
+[Live example: Common Widgets](https://playcanvas.com/examples/#/user-interface/common-widgets) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/common-widgets/example.mjs))
 
 ## Progress and Health Bars
 
@@ -257,7 +257,7 @@ drag.on('drag:end', () => {
 
 Pass `'x'` or `'y'` as a second argument to drag along one axis only. `drag:start` and `drag:move` fire as the drag begins and continues.
 
-[Live example: Drag and Drop](https://playcanvas.com/examples/#/user-interface/drag-and-drop) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/drag-and-drop.example.mjs))
+[Live example: Drag and Drop](https://playcanvas.com/examples/#/user-interface/drag-and-drop) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/drag-and-drop/example.mjs))
 
 ## Text Fields
 
@@ -291,7 +291,7 @@ function setOpacity(entity, opacity) {
 }
 ```
 
-This sets the same opacity on every element, so store the elements' own opacities first if they differ. Buttons fade between their tints with `fadeDuration`. See the [Tweening](https://developer.playcanvas.com/tutorials/tweening/) tutorial for a tween library.
+This sets the same opacity on every element, so store the elements' own opacities first if they differ. Buttons fade between their tints with `fadeDuration`. For a tween library, see [Tween](https://developer.playcanvas.com/user-manual/engine/libraries/tween.md).
 
 ## Loading Screens and Scene Changes
 

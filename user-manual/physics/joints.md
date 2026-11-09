@@ -8,7 +8,7 @@ The joint component is in alpha, so its behavior and API may change. It is avail
 
 Joints constrain the relative motion of two rigid bodies: a door swinging on its hinge, a drawer sliding on its runner, a chain of links, a crate bobbing on a spring, or a tower of blocks welded together until something hits it hard enough to break the weld.
 
-[Live example: Joints](https://playcanvas.com/examples/#/physics/joints) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/physics/joints.example.mjs))
+[Live example: Joints](https://playcanvas.com/examples/#/physics/joints) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/physics/joints/example.mjs))
 
 ## How Joints Work
 

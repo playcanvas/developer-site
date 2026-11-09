@@ -63,7 +63,7 @@ When a camera renders a layer containing GSplat components, it draws the sorted 
 
 The Global Sorting example demonstrates how sorting all splats together eliminates artifacts when rendering multiple overlapping splat components.
 
-[Live example: Global Sorting example](https://playcanvas.com/examples/#/gaussian-splatting/global-sorting) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/gaussian-splatting/global-sorting.example.mjs))
+[Live example: Global Sorting example](https://playcanvas.com/examples/#/gaussian-splatting/global-sorting) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/gaussian-splatting/global-sorting/example.mjs))
 
 ## Benefits
 

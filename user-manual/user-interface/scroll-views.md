@@ -15,7 +15,7 @@ The viewport is a [mask](https://developer.playcanvas.com/user-manual/user-inter
 
 The scroll view moves the content by setting its local position, which is 0, 0 when the content is scrolled to its top-left. So anchor the content to the top-left corner of the viewport, or across its top edge, and give it a top-left pivot, `[0, 1]`. With any other pivot, part of the content starts out of view.
 
-[Live example: Scroll View](https://playcanvas.com/examples/#/user-interface/scroll-view) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/scroll-view.example.mjs))
+[Live example: Scroll View](https://playcanvas.com/examples/#/user-interface/scroll-view) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/scroll-view/example.mjs))
 
 ## Creating a Scroll View
 

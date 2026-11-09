@@ -155,7 +155,7 @@ app.on('update', (dt) => {
 });
 ```
 
-[Live example: Mesh Generation](https://playcanvas.com/examples/#/graphics/mesh-generation) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/graphics/mesh-generation.example.mjs))
+[Live example: Mesh Generation](https://playcanvas.com/examples/#/graphics/mesh-generation) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/graphics/mesh-generation/example.mjs))
 
 Keep these rules in mind when updating a mesh:
 
@@ -198,7 +198,7 @@ mesh.setPositions(positions);
 mesh.update();
 ```
 
-[Live example: Mesh Deformation](https://playcanvas.com/examples/#/graphics/mesh-deformation) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/graphics/mesh-deformation.example.mjs))
+[Live example: Mesh Deformation](https://playcanvas.com/examples/#/graphics/mesh-deformation) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/graphics/mesh-deformation/example.mjs))
 
 ## Vertex and Index Buffers
 

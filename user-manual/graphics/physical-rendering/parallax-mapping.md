@@ -8,11 +8,11 @@ It is a per-pixel effect on the [Standard Material](https://developer.playcanvas
 
 - Parallax Mapping - a brick room comparing the modes on flat walls and a sphere
 
-[Live example: Parallax Mapping](https://playcanvas.com/examples/#/materials/parallax-mapping) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/materials/parallax-mapping.example.mjs))
+[Live example: Parallax Mapping](https://playcanvas.com/examples/#/materials/parallax-mapping) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/materials/parallax-mapping/example.mjs))
 
 - Parallax Terrain - one ground material seen across a wide range of distances and angles
 
-[Live example: Parallax Terrain](https://playcanvas.com/examples/#/materials/parallax-terrain) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/materials/parallax-terrain.example.mjs))
+[Live example: Parallax Terrain](https://playcanvas.com/examples/#/materials/parallax-terrain) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/materials/parallax-terrain/example.mjs))
 
 ## The Two Modes
 

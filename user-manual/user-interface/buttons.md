@@ -4,7 +4,7 @@ A button component turns an element into a button. It reacts to input on its ent
 
 [Image: One orange button in each of its four states: default, hovered, pressed and inactive. The button turns lighter when hovered, darker when pressed, and dark grey when inactive]
 
-[Live example: Buttons](https://playcanvas.com/examples/#/user-interface/buttons) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/buttons.example.mjs))
+[Live example: Buttons](https://playcanvas.com/examples/#/user-interface/buttons) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/buttons/example.mjs))
 
 ## Creating a Button
 

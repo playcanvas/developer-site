@@ -49,7 +49,7 @@ export default function App() {
 We've positioned the camera 2.5 units down the Z axis. By default, a camera looks down the negative Z axis, so our camera is now looking toward the origin where we'll place our splat. The `CameraControls` will allow you to:
 
 - **Left mouse drag**: Orbit around the target
-- **Right mouse drag**: Pan the camera
+- **Middle mouse drag**: Pan the camera
 - **Mouse wheel**: Zoom in and out
 
 ## Adding the Splat

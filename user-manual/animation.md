@@ -30,7 +30,7 @@ The anim component is the same everywhere, but the surfaces expose different amo
 
 :::note
 
-The anim component replaced the older **animation** component, which plays clips without state graphs. That component still works, but use the anim component in new projects. For 2D skeletal animation made with Spine, see [Spine](https://developer.playcanvas.com/user-manual/2D/spine.md).
+The anim component replaced the older **animation** component, which plays clips without state graphs. That component still works, but use the anim component in new projects. For 2D skeletal animation made with Spine, see [Spine](https://developer.playcanvas.com/user-manual/engine/libraries/spine.md).
 
 :::
 

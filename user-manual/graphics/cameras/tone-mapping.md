@@ -79,4 +79,4 @@ camera.camera.sensitivity = 1000;   // ISO — higher means more exposure (defau
 
 See it in action in the engine's physical units example:
 
-[Live example: Physical Light Units](https://playcanvas.com/examples/#/graphics/light-physical-units) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/graphics/light-physical-units.example.mjs))
+[Live example: Physical Light Units](https://playcanvas.com/examples/#/lights-and-shadows/light-physical-units) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/lights-and-shadows/light-physical-units/example.mjs))

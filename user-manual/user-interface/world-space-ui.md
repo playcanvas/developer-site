@@ -2,7 +2,7 @@
 
 A world-space interface sits in the scene: a sign on a wall, a control panel on a machine, a name tag over a character or a menu in [XR](https://developer.playcanvas.com/user-manual/user-interface/xr.md). It is built from the same elements as a HUD, on a world-space screen that the scene's camera sees like any other object.
 
-[Live example: World UI](https://playcanvas.com/examples/#/user-interface/world-ui) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/world-ui.example.mjs))
+[Live example: World UI](https://playcanvas.com/examples/#/user-interface/world-ui) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/world-ui/example.mjs))
 
 ## World-Space Screens
 
@@ -149,7 +149,7 @@ Give the label a pivot at the middle of its bottom edge, `0.5, 0`, so that it si
 
 A label can also be an HTML element, placed at the same CSS pixels without any conversion. See [HTML and CSS](https://developer.playcanvas.com/user-manual/user-interface/html-and-css.md#positioning-over-3d).
 
-[Live example: World to Screen](https://playcanvas.com/examples/#/user-interface/world-to-screen) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/world-to-screen.example.mjs))
+[Live example: World to Screen](https://playcanvas.com/examples/#/user-interface/world-to-screen) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/world-to-screen/example.mjs))
 
 ## Interacting
 

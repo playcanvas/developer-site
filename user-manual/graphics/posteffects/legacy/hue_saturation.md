@@ -1,5 +1,11 @@
 # Hue-Saturation Effect
 
+:::warning[Deprecated]
+
+This legacy effect is deprecated. Use the color grading `saturation` of [CameraFrame](https://developer.playcanvas.com/user-manual/graphics/posteffects/cameraframe.md) instead, or a color lookup table for a hue shift. See [Migrating to CameraFrame](https://developer.playcanvas.com/user-manual/graphics/posteffects/legacy.md#migrating-to-cameraframe).
+
+:::
+
 The hue-saturation effect allows you to modify the hue and saturation of the rendered image.
 
 Here is an image without the effect:
