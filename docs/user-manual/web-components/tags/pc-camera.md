@@ -22,6 +22,8 @@ The `<pc-camera>` tag adds a camera to an entity: the viewpoint the scene is ren
 | `clear-depth` | Number | `"1"` | The depth value the depth buffer is cleared to |
 | `clear-depth-buffer` | Boolean | `"true"` | Controls whether the camera clears the depth buffer |
 | `clear-stencil-buffer` | Boolean | `"true"` | Controls whether the camera clears the stencil buffer |
+| `clip-intersection` | Boolean | `"false"` | Whether the `clipping-planes` clip only what is behind all of them, in place of what is behind any of them. Two planes then cut out a wedge, and three a corner |
+| `clipping-planes` | String | - | Planes that cut away part of everything the camera renders, as a section view does. Each plane is four numbers in world space, the "X Y Z" of its normal and then how far the world origin lies in front of it, and planes are separated by commas: `"0 -1 0 3"` faces down from a height of 3, and hides everything above it. Whatever is behind a plane, on the side its normal points away from, is not rendered. Shadows are still cast whole, and screen space elements are not clipped. Up to 8 planes are used. To cut open one object and leave the rest of the scene whole, use `clipping-planes` on its [`<pc-render>`](../pc-render) |
 | `cull-faces` | Boolean | `"true"` | Controls whether the camera culls faces |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
 | `far-clip` | Number | `"1000"` | The far clipping plane distance |
@@ -38,7 +40,7 @@ The `<pc-camera>` tag adds a camera to an entity: the viewpoint the scene is ren
 | `rect` | Vector4 | `"0 0 1 1"` | Viewport rectangle as "X Y Width Height" values |
 | `scene-color-map` | Boolean | `"false"` | Whether the camera renders a copy of the scene's color, taken before its transparent objects draw, for refractive materials to sample, such as glTF materials with transmission. Off by default, because the copy costs a full-screen copy every frame. A camera rendered through the `cameraFrame` script takes this from that script's `rendering.sceneColorMap` instead, so the attribute has no effect on it |
 | `scissor-rect` | Vector4 | `"0 0 1 1"` | Scissor rectangle as "X Y Width Height" values |
-| `tonemap` | Enum | `"linear"` | Tone mapping: `"none"` \| `"aces"` \| `"aces2"` \| `"filmic"` \| `"hejl"` \| `"linear"` \| `"neutral"` |
+| `tonemap` | Enum | `"linear"` | Tone mapping: `"none"` \| `"aces"` \| `"aces2"` \| `"agx"` \| `"agx-punchy"` \| `"filmic"` \| `"hejl"` \| `"linear"` \| `"neutral"`. `agx` gives a neutral, flat look that suits color grading, and `agx-punchy` raises its contrast and saturation |
 
 </div>
 
@@ -86,4 +88,4 @@ The element also has a small API for WebXR: `startXr(type, space)` and `endXr()`
 * [`<pc-script>`](../pc-script) — camera controls are engine scripts attached beside the camera
 * [XR Support](../xr.md) — entering VR and AR from the camera element
 
-Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/#basic-shapes.html) and [First Person Controller](https://playcanvas.github.io/web-components/examples/#first-person-controller.html).
+Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/#basic-shapes.html), [First Person Controller](https://playcanvas.github.io/web-components/examples/#first-person-controller.html) and [Clipping Planes](https://playcanvas.github.io/web-components/examples/#clipping-planes.html).

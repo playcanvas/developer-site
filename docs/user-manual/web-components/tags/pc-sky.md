@@ -19,22 +19,23 @@ The `<pc-sky>` tag gives a scene its sky from an image: a background drawn behin
 | --- | --- | --- | --- |
 | `asset` | [Asset ID](../attributes.md#asset-and-material-ids) | - | Texture asset ID (must reference a `texture` type asset) |
 | `center` | Vector3 | `"0 0.01 0"` | Sky center as "X Y Z" values (0-1 range). Used by the `box` and `dome` types |
+| `enabled` | Boolean | `"true"` | Whether the sky is drawn as the scene's background. It does not affect `lighting`: with `"false"`, the image still lights the scene without showing behind it |
 | `intensity` | Number | `"1"` | Brightness of the sky, and of the lighting it provides |
 | `lighting` | Boolean | `"false"` | Whether the sky's image also lights the scene, including the reflections in its materials. Read when the image loads |
 | `mip-level` | Number | `"0"` | Mip level of the skybox, where 0 is the sharpest. Raising it selects a blurrier mip, which is how a skybox is softened without blurring the texture itself. Needs `lighting`, which is what creates the blurred mips |
 | `rotation` | Vector3 | `"0 0 0"` | Sky rotation as "X Y Z" Euler angles in degrees |
 | `scale` | Vector3 | `"100 100 100"` | Sky scale as "X Y Z" values. Used by the `box` and `dome` types |
-| `type` | Enum | `"infinite"` | Sky type: `"box"` \| `"dome"` \| `"infinite"` \| `"none"`. `"none"` draws no background, while `lighting` still lights the scene |
+| `type` | Enum | `"infinite"` | Sky type: `"box"` \| `"dome"` \| `"infinite"`. A sky hidden with `enabled` keeps its type |
 
 </div>
 
 ## Example
 
-An equirectangular texture as a dome-projected sky that also lights the scene (note `lighting`). Drag to look around, and try `type="infinite"`, a `rotation` of `"0 90 0"`, `type="none"` to keep only the lighting, or a higher `mip-level` to soften it:
+An equirectangular texture as a dome-projected sky that also lights the scene (note `lighting`). Drag to look around, and try `type="infinite"`, a `rotation` of `"0 90 0"`, `enabled="false"` to keep only the lighting, or a higher `mip-level` to soften it:
 
 ```html live-example
 <pc-app>
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.23.0/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.24.0/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset id="skybox" src="https://developer.playcanvas.com/assets/sepulchral-chapel-rotunda-4k.webp"></pc-asset>
     <pc-scene>
         <pc-sky asset="skybox" type="dome" center="0 0.05 0" scale="20 20 20" lighting></pc-sky>

@@ -32,6 +32,7 @@ description: "pc-light要素のリファレンス: ライトの種類、色、�
 | `range` | Number | `"10"` | ライトの有効距離 |
 | `shadow-bias` | Number | `"0.05"` | 影の深度バイアス |
 | `shadow-blocker-samples` | Number | `"16"` | PCSSシャドウブロッカーのサンプル数 |
+| `shadow-bounds` | String | - | `directional`ライトの影を、カメラごとに合わせたカスケードの代わりにフィットさせるワールド空間のボックス。6つの数値で、ボックスの中心の"X Y Z"、続いて半範囲を指定します。[シャドウバウンズ](#shadow-bounds)を参照 |
 | `shadow-distance` | Number | `"40"` | シャドウレンダリングの最大距離 |
 | `shadow-intensity` | Number | `"1"` | 影の強度乗数 |
 | `shadow-resolution` | Number | `"1024"` | シャドウマップの解像度 |
@@ -73,6 +74,21 @@ description: "pc-light要素のリファレンス: ライトの種類、色、�
 全体の範囲は依然として`shadow-distance`が決めます。これがカスケードで分割される距離なので、距離を上げずにカスケード数だけ増やしても、同じ近距離範囲をさらに細分するだけです。`shadow-resolution`はカスケードが共有する1枚のマップのサイズなので、カスケードが2〜4の場合、それぞれは各辺でその半分の解像度で描画されます。カスケードには透視投影のカメラが必要で、正射影のカメラでは機能しません。
 
 [Shadow Cascadesのサンプル](https://playcanvas.github.io/web-components/examples/#shadow-cascades.html)は、カスケードが必要になるほど長い砂漠の堤道で3つの属性すべてを操作でき、レンダラーが導出する分割距離もプロットします。エンジンにはカスケードのデバッグビューがなく、それがないと`cascade-distribution`のスライダーは何も効いていないように見えるため、一見の価値があります。
+
+## シャドウバウンズ {#shadow-bounds}
+
+カスケードは、ディレクショナルライトのシャドウマップを、各カメラに見える範囲全体に割り当てます。広いシーンの一部でだけ影が重要な場合は、`shadow-bounds`を使うと、シャドウマップ全体を指定したボックスにフィットさせられます。
+
+```html
+<!-- 影は、高さ2を中心とする10 x 4 x 10のボックスをカバーします -->
+<pc-entity name="sun" rotation="45 30 0">
+    <pc-light type="directional" cast-shadows shadow-bounds="0 2 0 5 2 5"></pc-light>
+</pc-entity>
+```
+
+値はワールド空間の6つの数値で、ボックスの中心、続いて半範囲です。ボックスは、影を落とすオブジェクトだけを囲んでいれば十分です。その下の地面のように、ライトの進む先で影を受けるものには引き続き影が落ちます。一方、ライトから見てボックスの横にあるオブジェクトは影を落としません。
+
+設定されている間、`num-cascades`、`shadow-distance`、`cascade-blend`、`cascade-distribution`は使用されず、影はカメラからの距離にかかわらずレンダリングされます。属性を削除するとカスケードに戻ります。詳しくは、シャドウのガイドの[シャドウバウンズ](../../graphics/lighting/shadows.md#shadow-bounds)を参照してください。
 
 ## エリアライト {#area-lights}
 

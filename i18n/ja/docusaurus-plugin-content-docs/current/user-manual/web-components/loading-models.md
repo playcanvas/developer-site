@@ -68,17 +68,19 @@ document.querySelector('pc-model').addEventListener('error', (event) => {
 
 圧縮テクスチャのトランスコードに使う`Basis`も同じ仕組みで供給します。`KHR_texture_basisu`を使うモデルにはこれが必要です。
 
+`EXT_meshopt_compression`または`KHR_meshopt_compression`によって[meshoptimizer](https://meshoptimizer.org/)で圧縮されたモデルには、セットアップは不要です。ライブラリがそのデコーダーをバンドルし、エンジンに渡します。
+
 ### モデルを照らす {#lighting-the-model}
 
 この車の塗装は金属であり、金属には拡散色がありません。見えているものはすべて映り込みです。車の周りにクリアカラーしかないシーンでは塗装に映り込むものがないため、ライトをどれだけ明るくしてもボディはほぼ黒く描画されます。物理ベースレンダリング（PBR）向けに作られたモデルの多くは映り込む環境を必要とし、金属は特にそれを必要とします。
 
-それを供給するのが[`<pc-sky>`](tags/pc-sky.md)です。画像を指定して`lighting`を加えると、シーンはその画像によって映り込みも含めて照らされます。`type="none"`は画像を背景に出さないため、車の後ろに表示することなく車を照らします。
+それを供給するのが[`<pc-sky>`](tags/pc-sky.md)です。画像を指定して`lighting`を加えると、シーンはその画像によって映り込みも含めて照らされます。`enabled="false"`は画像を背景に出さないため、車の後ろに表示することなく車を照らします。
 
 ```html
 <pc-asset id="chapel" src="assets/sepulchral-chapel-rotunda-4k.webp"></pc-asset>
 <!-- ... -->
 <pc-scene>
-    <pc-sky asset="chapel" type="none" lighting></pc-sky>
+    <pc-sky asset="chapel" enabled="false" lighting></pc-sky>
     <!-- ... -->
 </pc-scene>
 ```
@@ -91,7 +93,7 @@ document.querySelector('pc-model').addEventListener('error', (event) => {
     <pc-asset id="car" src="https://developer.playcanvas.com/assets/porsche-911-carrera-4s.glb"></pc-asset>
     <pc-asset id="chapel" src="https://developer.playcanvas.com/assets/sepulchral-chapel-rotunda-4k.webp"></pc-asset>
     <pc-scene>
-        <pc-sky asset="chapel" type="none" lighting></pc-sky>
+        <pc-sky asset="chapel" enabled="false" lighting></pc-sky>
         <pc-entity name="camera" position="3.2 0.9 3.6" rotation="-12 42 0">
             <pc-camera clear-color="#dfe4ea"></pc-camera>
         </pc-entity>
@@ -103,7 +105,7 @@ document.querySelector('pc-model').addEventListener('error', (event) => {
 次のような変更を試してみてください。
 
 * `<pc-sky>`から`lighting`を削除して、塗装が暗くなる様子を見る。
-* `type="none"`を削除して、車が映し込んでいる環境を表示する。
+* `enabled="false"`を削除して、車が映し込んでいる環境を表示する。
 * `<pc-wasm>`を削除する。車は表示されず、コンソールは`draco.wasm.js`の取得失敗で埋まります。
 
 ## 読み込んだ内容を確認する {#seeing-what-you-loaded}
@@ -228,7 +230,7 @@ Sketchfabのモデルにはベイクされた影用のプレーンが同梱さ�
     <pc-asset id="chapel" src="https://developer.playcanvas.com/assets/sepulchral-chapel-rotunda-4k.webp"></pc-asset>
     <pc-material id="candy-red" name="Candy Red" diffuse="#c8102e" metalness="1" roughness="0.25"></pc-material>
     <pc-scene>
-        <pc-sky asset="chapel" type="none" lighting></pc-sky>
+        <pc-sky asset="chapel" enabled="false" lighting></pc-sky>
         <pc-entity name="camera" position="3.2 0.9 3.6" rotation="-12 42 0">
             <pc-camera clear-color="#dfe4ea"></pc-camera>
         </pc-entity>

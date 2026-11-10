@@ -273,7 +273,9 @@ function expectedType(attribute) {
     if (text === 'number') return 'Number';
     if (text.includes('|')) return 'Enum';
     if (/Accepts a CSS color name/.test(description)) return 'Color';
-    const vector = description.match(/Accepts (\d) space-separated/);
+    // Only 2 to 4 numbers make a vector: longer lists, such as the 6 numbers of a bounding box,
+    // have no Type of their own and are shown as String.
+    const vector = description.match(/Accepts ([234]) space-separated/);
     return vector ? `Vector${vector[1]}` : null;
 }
 

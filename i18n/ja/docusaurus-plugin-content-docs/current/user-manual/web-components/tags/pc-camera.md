@@ -22,6 +22,8 @@ description: "pc-camera要素のリファレンス: エンジンのカメラComp
 | `clear-depth` | Number | `"1"` | デプスバッファをクリアする際の深度値 |
 | `clear-depth-buffer` | Boolean | `"true"` | カメラがデプスバッファをクリアするかどうかを制御します |
 | `clear-stencil-buffer` | Boolean | `"true"` | カメラがステンシルバッファをクリアするかどうかを制御します |
+| `clip-intersection` | Boolean | `"false"` | `clipping-planes`が、いずれかの平面の裏側にあるものではなく、すべての平面の裏側にあるものだけをクリップするかどうか。その場合、2つの平面はくさび形を、3つの平面は角を切り取ります |
+| `clipping-planes` | String | - | カメラがレンダリングするすべてのものの一部を、断面図のように切り取る平面。各平面はワールド空間の4つの数値で、法線の"X Y Z"に続けて、ワールド原点が平面の表側にどれだけ離れているかを指定します。複数の平面はカンマで区切ります。`"0 -1 0 3"`は高さ3から下を向く平面で、それより上にあるものをすべて隠します。平面の裏側、つまり法線が指す向きと反対側にあるものはレンダリングされません。影は切り取られずに落ち、スクリーン空間の要素はクリップされません。使用される平面は8つまでです。1つのオブジェクトだけを切り開き、シーンの残りをそのままにするには、その[`<pc-render>`](../pc-render)の`clipping-planes`を使用します |
 | `cull-faces` | Boolean | `"true"` | カメラが面をカリングするかどうかを制御します |
 | `enabled` | Boolean | `"true"` | コンポーネントの有効状態 |
 | `far-clip` | Number | `"1000"` | ファーカリングプレーンの距離 |
@@ -38,7 +40,7 @@ description: "pc-camera要素のリファレンス: エンジンのカメラComp
 | `rect` | Vector4 | `"0 0 1 1"` | "X Y Width Height"値としてのビューポート矩形 |
 | `scene-color-map` | Boolean | `"false"` | 透明なオブジェクトを描画する前のシーンの色のコピーをカメラがレンダリングし、透過を持つglTFマテリアルなどの屈折するマテリアルがサンプリングできるようにするかどうか。毎フレーム画面全体をコピーするコストがかかるため、デフォルトではオフです。`cameraFrame`スクリプトを通して描画されるカメラは、代わりにそのスクリプトの`rendering.sceneColorMap`からこの設定を受け取るため、この属性は効果がありません |
 | `scissor-rect` | Vector4 | `"0 0 1 1"` | "X Y Width Height"値としてのシザー矩形 |
-| `tonemap` | Enum | `"linear"` | トーンマッピング: `"none"` \| `"aces"` \| `"aces2"` \| `"filmic"` \| `"hejl"` \| `"linear"` \| `"neutral"` |
+| `tonemap` | Enum | `"linear"` | トーンマッピング: `"none"` \| `"aces"` \| `"aces2"` \| `"agx"` \| `"agx-punchy"` \| `"filmic"` \| `"hejl"` \| `"linear"` \| `"neutral"`。`agx`はカラーグレーディングに適したニュートラルでフラットな見た目になり、`agx-punchy`はそのコントラストと彩度を高めます |
 
 </div>
 
@@ -86,4 +88,4 @@ description: "pc-camera要素のリファレンス: エンジンのカメラComp
 * [`<pc-script>`](../pc-script) — カメラ操作はカメラの隣に付けるエンジンスクリプト
 * [XR のサポート](../xr.md) — カメラ要素からVRやARを開始する方法
 
-サンプル: [Basic Shapes](https://playcanvas.github.io/web-components/examples/#basic-shapes.html)、[First Person Controller](https://playcanvas.github.io/web-components/examples/#first-person-controller.html)
+サンプル: [Basic Shapes](https://playcanvas.github.io/web-components/examples/#basic-shapes.html)、[First Person Controller](https://playcanvas.github.io/web-components/examples/#first-person-controller.html)、[Clipping Planes](https://playcanvas.github.io/web-components/examples/#clipping-planes.html)
