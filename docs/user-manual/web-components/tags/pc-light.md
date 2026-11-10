@@ -32,7 +32,7 @@ The `<pc-light>` tag adds a light to an entity: a directional light such as the 
 | `range` | Number | `"10"` | Light range distance |
 | `shadow-bias` | Number | `"0.05"` | Shadow depth bias |
 | `shadow-blocker-samples` | Number | `"16"` | Number of PCSS shadow blocker samples |
-| `shadow-bounds` | String | - | World space box that the shadow of a `directional` light is fitted to, in place of cascades fitted to each camera, as six numbers: the "X Y Z" of the box's center, then its half extents. See [Shadow Bounds](#shadow-bounds) |
+| `shadow-bounds` | BoundingBox | - | World space box that the shadow of a `directional` light is fitted to, in place of cascades fitted to each camera. See [Shadow Bounds](#shadow-bounds) |
 | `shadow-distance` | Number | `"40"` | Maximum shadow rendering distance |
 | `shadow-intensity` | Number | `"1"` | Shadow intensity multiplier |
 | `shadow-resolution` | Number | `"1024"` | Shadow map resolution |

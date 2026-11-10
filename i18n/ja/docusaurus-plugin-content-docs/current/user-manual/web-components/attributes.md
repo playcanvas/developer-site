@@ -36,6 +36,7 @@ description: "PlayCanvas Web Componentsの属性が値を解析する方法: デ
 | Number | 任意の有限な数値 — [数値](#numbers)を参照 |
 | Enum | 決められた名前の集合のうちの1つ。属性の説明に一覧があります — [列挙型](#enums)を参照 |
 | Vector2、Vector3、Vector4 | スペース区切りの2つ、3つ、または4つの数値 — [ベクトル](#vectors)を参照 |
+| BoundingBox | スペース区切りの6つの数値。ボックスの中心の"X Y Z"、続いて各軸の半範囲です。`"0 2 0 5 2 5"`は、高さ2を中心とする10 x 4 x 10のボックスです |
 | Color | CSSカラー名、16進コード、または3つか4つの数値 — [カラー](#colors)を参照 |
 | String | 自由なテキスト。名前、パス、JSONオブジェクトなど |
 | Asset ID、Material ID | [`<pc-asset>`](tags/pc-asset.md)または[`<pc-material>`](tags/pc-material.md)の`id` — [アセットIDとマテリアルID](#asset-and-material-ids)を参照 |

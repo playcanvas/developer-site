@@ -32,7 +32,7 @@ description: "pc-light要素のリファレンス: ライトの種類、色、�
 | `range` | Number | `"10"` | ライトの有効距離 |
 | `shadow-bias` | Number | `"0.05"` | 影の深度バイアス |
 | `shadow-blocker-samples` | Number | `"16"` | PCSSシャドウブロッカーのサンプル数 |
-| `shadow-bounds` | String | - | `directional`ライトの影を、カメラごとに合わせたカスケードの代わりにフィットさせるワールド空間のボックス。6つの数値で、ボックスの中心の"X Y Z"、続いて半範囲を指定します。[シャドウバウンズ](#shadow-bounds)を参照 |
+| `shadow-bounds` | BoundingBox | - | `directional`ライトの影を、カメラごとに合わせたカスケードの代わりにフィットさせるワールド空間のボックス。[シャドウバウンズ](#shadow-bounds)を参照 |
 | `shadow-distance` | Number | `"40"` | シャドウレンダリングの最大距離 |
 | `shadow-intensity` | Number | `"1"` | 影の強度乗数 |
 | `shadow-resolution` | Number | `"1024"` | シャドウマップの解像度 |

@@ -36,6 +36,7 @@ The *Type* column of each attribute table names how a value is written. Every ty
 | Number | Any finite number — see [Numbers](#numbers) |
 | Enum | One of a fixed set of names, listed in the attribute's description — see [Enums](#enums) |
 | Vector2, Vector3, Vector4 | Two, three or four space-separated numbers — see [Vectors](#vectors) |
+| BoundingBox | Six space-separated numbers: the "X Y Z" of a box's center, then its half extents along each axis. `"0 2 0 5 2 5"` is a 10 x 4 x 10 box centered at a height of 2 |
 | Color | A CSS color name, a hex code, or three or four numbers — see [Colors](#colors) |
 | String | Free text: a name, a path, a JSON object |
 | Asset ID, Material ID | The `id` of a [`<pc-asset>`](tags/pc-asset.md) or a [`<pc-material>`](tags/pc-material.md) — see [Asset and Material IDs](#asset-and-material-ids) |
