@@ -68,7 +68,7 @@ const SHARED_EVENTS = ['ready'];
 // The vocabulary of the Type column, defined under "The Type Column" in attributes.md. Every
 // row must use one of these, in every locale, so a translated or misspelt token is reported.
 const TYPE_VOCABULARY = new Set([
-    'Boolean', 'Number', 'Enum', 'String', 'Color', 'Vector2', 'Vector3', 'Vector4', 'BoundingBox',
+    'Boolean', 'Number', 'Enum', 'String', 'Color', 'Vector2', 'Vector3', 'Vector4', 'BoundingBox', 'Planes',
     'Asset ID', 'Material ID', 'Entity Reference'
 ]);
 
@@ -263,7 +263,7 @@ function sameDefault(documented, declared) {
  * Derives the Type the page should show from the manifest's type and its description hints.
  *
  * @param {object} attribute - A manifest attribute.
- * @returns {string | null} `Boolean`, `Number`, `Enum`, `Color`, `Vector2`..`Vector4`, `BoundingBox`, or null when
+ * @returns {string | null} `Boolean`, `Number`, `Enum`, `Color`, `Vector2`..`Vector4`, `BoundingBox`, `Planes`, or null when
  * the manifest only knows it is a string.
  */
 function expectedType(attribute) {
@@ -275,6 +275,7 @@ function expectedType(attribute) {
     if (/Accepts a CSS color name/.test(description)) return 'Color';
     // 6 numbers are a bounding box: its center, then its half extents.
     if (/Accepts 6 space-separated numbers: the center of the box/.test(description)) return 'BoundingBox';
+    if (/Accepts planes separated by commas/.test(description)) return 'Planes';
     const vector = description.match(/Accepts ([234]) space-separated/);
     return vector ? `Vector${vector[1]}` : null;
 }
