@@ -85,6 +85,8 @@ Frame、CPU、GPU のチャートでは、破線がディスプレイの間隔�
 
 ## アプリケーションの起動の記録 {#recording-the-start-of-the-application}
 
+Editor では、Launch ボタンのメニューで **Profiler** にチェックを入れます。起動したアプリケーションは Inspector を Performance タブで開き、起動から記録します。エンジンはプロファイラービルド、**Debug** にチェックを入れた場合はデバッグビルドです。エンジン 2.23 以降が必要です。
+
 アプリケーションが最初に実行するフレームから記録するには、Inspector に `record: true` を渡すか、`EntityInspector` スクリプトの `record` 属性を設定します。`app.init()` の直後のように、アプリケーションが最初のフレームを実行する前に作成すると、Inspector はアプリケーションの起動も記録します。
 
 ```javascript

@@ -185,7 +185,7 @@ For a dashboard or agent integration, replace the console output with your own r
 ## Comparing Changes
 
 1. Choose a repeatable camera path or interaction and a target frame budget. Use the same device, backend, resolution, quality settings and engine build for both runs.
-2. Let assets load and shaders compile before collecting steady-state samples. Measure startup separately with the [Editor Profiler](/user-manual/optimization/profiler/) or browser performance tools.
+2. Let assets load and shaders compile before collecting steady-state samples. Measure startup separately with the [Performance tab of the Inspector](/user-manual/optimization/inspector-performance/#recording-the-start-of-the-application) or browser performance tools.
 3. Keep the application visible and repeat the same scenario for a fixed period. Background throttling changes the frame intervals.
 4. Save the baseline reports, make one change and repeat. Compare averages, peaks and memory trends rather than a single frame or FPS alone.
 5. Investigate high CPU phase times with browser performance tools, GPU costs with MiniStats pass timings or native profilers, and persistent memory growth by checking resource lifetimes.

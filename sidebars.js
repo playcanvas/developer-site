@@ -1279,7 +1279,6 @@ const sidebars = {
             'user-manual/optimization/mini-stats',
             'user-manual/optimization/app-stats',
             'user-manual/optimization/inspector-performance',
-            'user-manual/optimization/profiler',
             'user-manual/optimization/gpu-profiling',
           ],
         },
