@@ -4,7 +4,7 @@
 
 Index: https://developer.playcanvas.com/llms.txt
 Total Documents: 551
-Generated: 2026-11-09
+Generated: 2026-11-10
 
 ================================================================================
 
@@ -18026,17 +18026,19 @@ The two files are a [Draco](https://google.github.io/draco/) decoder build: the 
 
 The same mechanism supplies `Basis` for transcoding compressed textures, which models using `KHR_texture_basisu` need.
 
+Models compressed with [meshoptimizer](https://meshoptimizer.org/), through `EXT_meshopt_compression` or `KHR_meshopt_compression`, need no setup: the library bundles that decoder and hands it to the engine.
+
 ### Lighting the Model
 
 The car's paint is a metal, and a metal has no diffuse color: everything you see of it is reflection. A scene with nothing around the car but a clear color gives the paint nothing to reflect, so the body renders close to black, however bright its lights. Most models authored for physically based rendering (PBR) need an environment to reflect, and metals need it most.
 
-[`<pc-sky>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sky.md) supplies one. Point it at an image and add `lighting`, and the scene is lit by that image, reflections included. `type="none"` keeps the image out of the background, so it lights the car without showing up behind it:
+[`<pc-sky>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sky.md) supplies one. Point it at an image and add `lighting`, and the scene is lit by that image, reflections included. `enabled="false"` keeps the image out of the background, so it lights the car without showing up behind it:
 
 ```html
 <pc-asset id="chapel" src="assets/sepulchral-chapel-rotunda-4k.webp"></pc-asset>
 <!-- ... -->
 <pc-scene>
-    <pc-sky asset="chapel" type="none" lighting></pc-sky>
+    <pc-sky asset="chapel" enabled="false" lighting></pc-sky>
     <!-- ... -->
 </pc-scene>
 ```
@@ -18049,7 +18051,7 @@ Here is the car with both additions, running live. It is the markup from [Loadin
     <pc-asset id="car" src="https://developer.playcanvas.com/assets/porsche-911-carrera-4s.glb"></pc-asset>
     <pc-asset id="chapel" src="https://developer.playcanvas.com/assets/sepulchral-chapel-rotunda-4k.webp"></pc-asset>
     <pc-scene>
-        <pc-sky asset="chapel" type="none" lighting></pc-sky>
+        <pc-sky asset="chapel" enabled="false" lighting></pc-sky>
         <pc-entity name="camera" position="3.2 0.9 3.6" rotation="-12 42 0">
             <pc-camera clear-color="#dfe4ea"></pc-camera>
         </pc-entity>
@@ -18061,7 +18063,7 @@ Here is the car with both additions, running live. It is the markup from [Loadin
 Some things to try:
 
 * Delete `lighting` from the `<pc-sky>` and watch the paint go dark.
-* Delete `type="none"` to see the environment the car is reflecting.
+* Delete `enabled="false"` to see the environment the car is reflecting.
 * Delete the `<pc-wasm>`: the car never appears, and the console fills with failed requests for `draco.wasm.js`.
 
 ## Seeing What You Loaded
@@ -18186,7 +18188,7 @@ Because these are replacements, removing the attribute at runtime — or assigni
     <pc-asset id="chapel" src="https://developer.playcanvas.com/assets/sepulchral-chapel-rotunda-4k.webp"></pc-asset>
     <pc-material id="candy-red" name="Candy Red" diffuse="#c8102e" metalness="1" roughness="0.25"></pc-material>
     <pc-scene>
-        <pc-sky asset="chapel" type="none" lighting></pc-sky>
+        <pc-sky asset="chapel" enabled="false" lighting></pc-sky>
         <pc-entity name="camera" position="3.2 0.9 3.6" rotation="-12 42 0">
             <pc-camera clear-color="#dfe4ea"></pc-camera>
         </pc-entity>
@@ -18393,6 +18395,8 @@ The *Type* column of each attribute table names how a value is written. Every ty
 | Number | Any finite number — see [Numbers](https://developer.playcanvas.com/user-manual/web-components/attributes.md#numbers) |
 | Enum | One of a fixed set of names, listed in the attribute's description — see [Enums](https://developer.playcanvas.com/user-manual/web-components/attributes.md#enums) |
 | Vector2, Vector3, Vector4 | Two, three or four space-separated numbers — see [Vectors](https://developer.playcanvas.com/user-manual/web-components/attributes.md#vectors) |
+| BoundingBox | Six space-separated numbers: the "X Y Z" of a box's center, then its half extents along each axis. `"0 2 0 5 2 5"` is a 10 x 4 x 10 box centered at a height of 2 |
+| Planes | One or more planes separated by commas, each as four space-separated numbers: the "X Y Z" of the plane's normal, then how far the origin lies in front of the plane. `"0 -1 0 3"` is a plane at a height of 3 that faces down, and `"0 -1 0 3, 1 0 0 0"` adds a second through the origin that faces along X |
 | Color | A CSS color name, a hex code, or three or four numbers — see [Colors](https://developer.playcanvas.com/user-manual/web-components/attributes.md#colors) |
 | String | Free text: a name, a path, a JSON object |
 | Asset ID, Material ID | The `id` of a [`<pc-asset>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset.md) or a [`<pc-material>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-material.md) — see [Asset and Material IDs](https://developer.playcanvas.com/user-manual/web-components/attributes.md#asset-and-material-ids) |
@@ -19598,7 +19602,7 @@ A GLB with a single walk cycle, declared twice: `walk` at its authored speed and
 
 ```html live-example
 <pc-app>
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.23.0/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.24.0/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset src="https://developer.playcanvas.com/assets/t-rex.glb" id="t-rex"></pc-asset>
     <pc-material id="floor" diffuse="#3a3f4b"></pc-material>
     <pc-scene>
@@ -19770,7 +19774,7 @@ The same walk cycle declared as two clips, `walk` and a reversed, slowed `sneak`
 
 ```html live-example
 <pc-app>
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.23.0/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.24.0/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset src="https://developer.playcanvas.com/assets/t-rex.glb" id="t-rex"></pc-asset>
     <pc-material id="floor" diffuse="#3a3f4b"></pc-material>
     <pc-scene>
@@ -19872,7 +19876,7 @@ The `<pc-app>` tag is the root element for your PlayCanvas application. It is us
 | `area-light-luts` | [Asset ID](https://developer.playcanvas.com/user-manual/web-components/attributes.md#asset-and-material-ids) | - | ID of a [`<pc-asset>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset.md) holding the area light lookup tables as JSON. Loading it switches area lights on for the whole application, so [`<pc-light>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-light.md) elements with a `rect`, `disk` or `sphere` `shape` render as intended; clearing it switches them off again. Applies immediately — see [Area Lights](https://developer.playcanvas.com/user-manual/web-components/tags/pc-light.md#area-lights) |
 | `backend` | Enum | `"webgpu"` | Graphics engine backend: `"webgpu"` \| `"webgl2"` \| `"null"`. WebGPU falls back to WebGL 2 in browsers where it is unavailable — set `"webgl2"` to force WebGL 2. `"null"` selects a renderer that draws nothing, and exists for headless testing |
 | `depth-buffer` | Boolean | `"true"` | Whether the application allocates a depth buffer |
-| `devtools` | Boolean | `"true"` | Whether the application announces itself to developer tools, such as the PlayCanvas Inspector browser extension, so they can find and inspect it. Set `"false"` to keep a production page from announcing itself. This is an opt-out, not a protection: code on the page can still reach the application, through the element's `app` property for one. Of the engine 2.23.0 builds, only the debug build announces: its release, profiler and minified builds never do, whatever this is set to |
+| `devtools` | Boolean | `"true"` | Whether the application announces itself to developer tools, such as the PlayCanvas Inspector browser extension, so they can find and inspect it. Set `"false"` to keep a production page from announcing itself. This is an opt-out, not a protection: code on the page can still reach the application, through the element's `app` property for one |
 | `loading-bar` | Boolean | `"true"` | Whether the application shows its built-in loading bar while it boots and preloads its assets |
 | `max-pixel-ratio` | Number | uncapped | The highest pixel ratio the application renders at, above 0. The canvas is sized by the smaller of this value and the display's own device pixel ratio, so `"1"` renders at CSS resolution and `"2"` keeps a dense display sharp without paying for every one of its pixels |
 | `physics-time-scale` | Number | `"1"` | Scale on the time the physics simulation advances by each frame, applied on top of `time-scale`: below 1 is slow motion, above 1 speeds it up, and `"0"` pauses physics while the rest of the application keeps running — for a pause menu, say, that must stay interactive while the world stands still |
@@ -20094,7 +20098,7 @@ When `type` is omitted, it is inferred from the file extension of `src`:
 | `binary` | `.bin` |
 | `container` | `.glb`, `.gltf` |
 | `css` | `.css` |
-| `gsplat` | `.ply`, `.sog` |
+| `gsplat` | `.lcc2`, `.ply`, `.sog` |
 | `html` | `.html` |
 | `json` | `.json` |
 | `script` | `.js`, `.mjs` |
@@ -20132,7 +20136,7 @@ Two assets: a script (an engine helper loaded straight from a CDN) and a GLB mod
 ```html live-example
 <pc-app>
     <!-- Script asset: type inferred from the .mjs extension -->
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.23.0/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.24.0/scripts/esm/camera-controls.mjs"></pc-asset>
     <!-- Container asset: type inferred from the .glb extension -->
     <pc-asset src="https://developer.playcanvas.com/assets/playcanvas-cube.glb" id="cube"></pc-asset>
     <pc-scene>
@@ -20398,6 +20402,8 @@ The `<pc-camera>` tag adds a camera to an entity: the viewpoint the scene is ren
 | `clear-depth` | Number | `"1"` | The depth value the depth buffer is cleared to |
 | `clear-depth-buffer` | Boolean | `"true"` | Controls whether the camera clears the depth buffer |
 | `clear-stencil-buffer` | Boolean | `"true"` | Controls whether the camera clears the stencil buffer |
+| `clip-intersection` | Boolean | `"false"` | Whether the `clipping-planes` clip only what is behind all of them, in place of what is behind any of them. Two planes then cut out a wedge, and three a corner |
+| `clipping-planes` | Planes | - | Planes, in world space, that cut away part of everything the camera renders, as a section view does: `"0 -1 0 3"` faces down from a height of 3, and hides everything above it. Whatever is behind a plane, on the side its normal points away from, is not rendered. Shadows are still cast whole, and screen space elements are not clipped. Up to 8 planes are used. To cut open one object and leave the rest of the scene whole, use `clipping-planes` on its [`<pc-render>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-render.md) |
 | `cull-faces` | Boolean | `"true"` | Controls whether the camera culls faces |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
 | `far-clip` | Number | `"1000"` | The far clipping plane distance |
@@ -20414,7 +20420,7 @@ The `<pc-camera>` tag adds a camera to an entity: the viewpoint the scene is ren
 | `rect` | Vector4 | `"0 0 1 1"` | Viewport rectangle as "X Y Width Height" values |
 | `scene-color-map` | Boolean | `"false"` | Whether the camera renders a copy of the scene's color, taken before its transparent objects draw, for refractive materials to sample, such as glTF materials with transmission. Off by default, because the copy costs a full-screen copy every frame. A camera rendered through the `cameraFrame` script takes this from that script's `rendering.sceneColorMap` instead, so the attribute has no effect on it |
 | `scissor-rect` | Vector4 | `"0 0 1 1"` | Scissor rectangle as "X Y Width Height" values |
-| `tonemap` | Enum | `"linear"` | Tone mapping: `"none"` \| `"aces"` \| `"aces2"` \| `"filmic"` \| `"hejl"` \| `"linear"` \| `"neutral"` |
+| `tonemap` | Enum | `"linear"` | Tone mapping: `"none"` \| `"aces"` \| `"aces2"` \| `"agx"` \| `"agx-punchy"` \| `"filmic"` \| `"hejl"` \| `"linear"` \| `"neutral"`. `agx` gives a neutral, flat look that suits color grading, and `agx-punchy` raises its contrast and saturation |
 
 ## Example
 
@@ -20460,7 +20466,7 @@ The element also has a small API for WebXR: `startXr(type, space)` and `endXr()`
 * [`<pc-script>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-script.md) — camera controls are engine scripts attached beside the camera
 * [XR Support](https://developer.playcanvas.com/user-manual/web-components/xr.md) — entering VR and AR from the camera element
 
-Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/#basic-shapes.html) and [First Person Controller](https://playcanvas.github.io/web-components/examples/#first-person-controller.html).
+Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/#basic-shapes.html), [First Person Controller](https://playcanvas.github.io/web-components/examples/#first-person-controller.html) and [Clipping Planes](https://playcanvas.github.io/web-components/examples/#clipping-planes.html).
 
 --------------------------------------------------------------------------------
 
@@ -20608,6 +20614,7 @@ Image elements draw a texture or a sprite — including a 9-sliced or tiled spri
 | `font-size` | Number | `"32"` | Size of the text, in screen units. Text elements only |
 | `height` | Number | `"32"` | Height of the element, in screen units. Ignored where the anchor is split vertically, and on a text element while `auto-height` fits it to its text |
 | `justify` | Boolean | `"false"` | Whether wrapped lines are stretched flush with both edges of the element by widening the gaps between their words. Needs `wrap-lines` and a fixed width. The last line, and any line ended by an explicit line break, follows `alignment` instead. Text elements only |
+| `letter-spacing` | Number | `"0"` | Extra space between the letters of the text, as a fraction of the font size, like the CSS `letter-spacing` property: `"0.1"` adds a tenth of the font size between each pair of characters, and a negative value tightens the text. It is added on top of `spacing`. Text elements only |
 | `line-height` | Number | `"32"` | Distance between the baselines of neighboring lines, in screen units. It doesn't follow `font-size`, so set it with a larger font, or wrapped lines overlap. Text elements only |
 | `margin` | Vector4 | - | Distance of each edge from its anchor, as `left bottom right top`, on the axes where the anchor is split. Positive values move the edges inwards. Without it, a split axis keeps the engine's default margins of `0 0 -32 -32`, and the element overhangs its right and top anchors by 32 units, so set it whenever you split an anchor. See [Margins](https://developer.playcanvas.com/user-manual/user-interface/elements.md#margin) |
 | `mask` | Boolean | `"false"` | Whether the element clips its descendants to its rectangle, or to the opaque parts of its texture or sprite. The mask itself isn't drawn, so its `color` has no effect. See [Masks](https://developer.playcanvas.com/user-manual/user-interface/masks.md). Image elements only |
@@ -20898,7 +20905,7 @@ A Gaussian splat scanned from a real toy. Drag to orbit and scroll to zoom — a
 
 ```html live-example
 <pc-app antialias="false" max-pixel-ratio="1">
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.23.0/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.24.0/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset id="toy" src="https://developer.playcanvas.com/assets/toy-cat.sog"></pc-asset>
     <pc-scene>
         <pc-entity name="camera" position="0 0 2.5">
@@ -21328,6 +21335,7 @@ The `<pc-light>` tag adds a light to an entity: a directional light such as the 
 | `range` | Number | `"10"` | Light range distance |
 | `shadow-bias` | Number | `"0.05"` | Shadow depth bias |
 | `shadow-blocker-samples` | Number | `"16"` | Number of PCSS shadow blocker samples |
+| `shadow-bounds` | BoundingBox | - | World space box that the shadow of a `directional` light is fitted to, in place of cascades fitted to each camera. See [Shadow Bounds](https://developer.playcanvas.com/user-manual/web-components/tags/pc-light.md#shadow-bounds) |
 | `shadow-distance` | Number | `"40"` | Maximum shadow rendering distance |
 | `shadow-intensity` | Number | `"1"` | Shadow intensity multiplier |
 | `shadow-resolution` | Number | `"1024"` | Shadow map resolution |
@@ -21367,6 +21375,21 @@ The three attributes do distinct jobs, and only `num-cascades` above 1 brings th
 `shadow-distance` still bounds the whole thing — it is the range the cascades divide up, so raising the cascade count without raising the distance just subdivides the same near-field. `shadow-resolution` sizes the one map the cascades share, so with 2 to 4 cascades each renders at half that resolution along each side. Cascades need a perspective camera: they do not work with an orthographic one.
 
 The [Shadow Cascades example](https://playcanvas.github.io/web-components/examples/#shadow-cascades.html) drives all three over a desert causeway long enough to need them, and plots the split distances the renderer derives — worth a look, because the engine has no cascade debug view and the distribution slider otherwise appears to do nothing.
+
+## Shadow Bounds
+
+Cascades spread a directional light's shadow map over whatever each camera sees. When the shadows only matter in one part of a large scene, `shadow-bounds` fits the whole shadow map to a box you choose instead:
+
+```html
+<!-- the shadow covers a 10 x 4 x 10 box centered at a height of 2 -->
+<pc-entity name="sun" rotation="45 30 0">
+    <pc-light type="directional" cast-shadows shadow-bounds="0 2 0 5 2 5"></pc-light>
+</pc-entity>
+```
+
+The value is six numbers in world space: the center of the box, then its half extents. The box only needs to enclose the objects that cast the shadows. What they fall on further along the light, such as the ground below them, is still shadowed, while casters beside the box, as the light sees it, cast no shadow.
+
+While it is set, `num-cascades`, `shadow-distance`, `cascade-blend` and `cascade-distribution` are not used, and the shadow is rendered whatever its distance from the camera. Removing the attribute restores the cascades. See [Shadow Bounds](https://developer.playcanvas.com/user-manual/graphics/lighting/shadows.md#shadow-bounds) in the shadows guide for more.
 
 ## Area Lights
 
@@ -21698,7 +21721,7 @@ A GLB with a skeletal animation, played by the [`<pc-anim>`](https://developer.p
 
 ```html live-example
 <pc-app>
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.23.0/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.24.0/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset src="https://developer.playcanvas.com/assets/t-rex.glb" id="t-rex"></pc-asset>
     <pc-material id="floor" diffuse="#3a3f4b"></pc-material>
     <pc-scene>
@@ -21918,7 +21941,7 @@ This GLB instantiates two mesh nodes — `play` (the orange shell, its logo cut 
 
 ```html live-example
 <pc-app>
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.23.0/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.24.0/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset src="https://developer.playcanvas.com/assets/playcanvas-cube.glb" id="cube"></pc-asset>
     <pc-material id="repaint" name="Repaint" diffuse="#4a9eff"></pc-material>
     <pc-scene>
@@ -22093,6 +22116,8 @@ The `<pc-render>` tag adds a render component that draws a primitive shape — a
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
 | `cast-shadows` | Boolean | `"true"` | Whether the component casts shadows |
+| `clip-intersection` | Boolean | `"false"` | Whether the `clipping-planes` clip only what is behind all of them, in place of what is behind any of them. Two planes then cut out a wedge, and three a corner |
+| `clipping-planes` | Planes | - | Planes, in world space, that cut the primitive open, as a cutaway does, while the rest of the scene stays whole: `"0 -1 0 0, 0 0 -1 0"` with `clip-intersection` cuts a quarter out of a box at the origin. Whatever is behind a plane, on the side its normal points away from, is not rendered, casts no shadow and cannot be picked. Up to 8 planes are used. To clip everything a camera renders, use `clipping-planes` on its [`<pc-camera>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-camera.md) |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
 | `material` | [Material ID](https://developer.playcanvas.com/user-manual/web-components/attributes.md#asset-and-material-ids) | - | `id` of a [`<pc-material>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-material.md) to render the primitive with. If omitted, a default material is used |
 | `receive-shadows` | Boolean | `"true"` | Whether the component receives shadows |
@@ -22156,7 +22181,7 @@ The `component` property is the engine [RenderComponent](https://api.playcanvas.
 * [`<pc-light>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-light.md) — lights and shadows the primitive
 * [`<pc-collision>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-collision.md) — a matching physics shape
 
-Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/#basic-shapes.html), [Falling Blocks](https://playcanvas.github.io/web-components/examples/#falling-blocks.html) and [Physics Joints](https://playcanvas.github.io/web-components/examples/#physics-joints.html).
+Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/#basic-shapes.html), [Falling Blocks](https://playcanvas.github.io/web-components/examples/#falling-blocks.html), [Physics Joints](https://playcanvas.github.io/web-components/examples/#physics-joints.html) and [Clipping Planes](https://playcanvas.github.io/web-components/examples/#clipping-planes.html).
 
 --------------------------------------------------------------------------------
 
@@ -22796,20 +22821,21 @@ The `<pc-sky>` tag gives a scene its sky from an image: a background drawn behin
 | --- | --- | --- | --- |
 | `asset` | [Asset ID](https://developer.playcanvas.com/user-manual/web-components/attributes.md#asset-and-material-ids) | - | Texture asset ID (must reference a `texture` type asset) |
 | `center` | Vector3 | `"0 0.01 0"` | Sky center as "X Y Z" values (0-1 range). Used by the `box` and `dome` types |
+| `enabled` | Boolean | `"true"` | Whether the sky is drawn as the scene's background. It does not affect `lighting`: with `"false"`, the image still lights the scene without showing behind it |
 | `intensity` | Number | `"1"` | Brightness of the sky, and of the lighting it provides |
 | `lighting` | Boolean | `"false"` | Whether the sky's image also lights the scene, including the reflections in its materials. Read when the image loads |
 | `mip-level` | Number | `"0"` | Mip level of the skybox, where 0 is the sharpest. Raising it selects a blurrier mip, which is how a skybox is softened without blurring the texture itself. Needs `lighting`, which is what creates the blurred mips |
 | `rotation` | Vector3 | `"0 0 0"` | Sky rotation as "X Y Z" Euler angles in degrees |
 | `scale` | Vector3 | `"100 100 100"` | Sky scale as "X Y Z" values. Used by the `box` and `dome` types |
-| `type` | Enum | `"infinite"` | Sky type: `"box"` \| `"dome"` \| `"infinite"` \| `"none"`. `"none"` draws no background, while `lighting` still lights the scene |
+| `type` | Enum | `"infinite"` | Sky type: `"box"` \| `"dome"` \| `"infinite"`. A sky hidden with `enabled` keeps its type |
 
 ## Example
 
-An equirectangular texture as a dome-projected sky that also lights the scene (note `lighting`). Drag to look around, and try `type="infinite"`, a `rotation` of `"0 90 0"`, `type="none"` to keep only the lighting, or a higher `mip-level` to soften it:
+An equirectangular texture as a dome-projected sky that also lights the scene (note `lighting`). Drag to look around, and try `type="infinite"`, a `rotation` of `"0 90 0"`, `enabled="false"` to keep only the lighting, or a higher `mip-level` to soften it:
 
 ```html live-example
 <pc-app>
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.23.0/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.24.0/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset id="skybox" src="https://developer.playcanvas.com/assets/sepulchral-chapel-rotunda-4k.webp"></pc-asset>
     <pc-scene>
         <pc-sky asset="skybox" type="dome" center="0 0.05 0" scale="20 20 20" lighting></pc-sky>

@@ -64,7 +64,7 @@ When `type` is omitted, it is inferred from the file extension of `src`:
 | `binary` | `.bin` |
 | `container` | `.glb`, `.gltf` |
 | `css` | `.css` |
-| `gsplat` | `.ply`, `.sog` |
+| `gsplat` | `.lcc2`, `.ply`, `.sog` |
 | `html` | `.html` |
 | `json` | `.json` |
 | `script` | `.js`, `.mjs` |
@@ -102,7 +102,7 @@ Two assets: a script (an engine helper loaded straight from a CDN) and a GLB mod
 ```html live-example
 <pc-app>
     <!-- Script asset: type inferred from the .mjs extension -->
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.23.0/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.24.0/scripts/esm/camera-controls.mjs"></pc-asset>
     <!-- Container asset: type inferred from the .glb extension -->
     <pc-asset src="https://developer.playcanvas.com/assets/playcanvas-cube.glb" id="cube"></pc-asset>
     <pc-scene>

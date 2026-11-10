@@ -27,6 +27,7 @@ The `<pc-light>` tag adds a light to an entity: a directional light such as the 
 | `range` | Number | `"10"` | Light range distance |
 | `shadow-bias` | Number | `"0.05"` | Shadow depth bias |
 | `shadow-blocker-samples` | Number | `"16"` | Number of PCSS shadow blocker samples |
+| `shadow-bounds` | BoundingBox | - | World space box that the shadow of a `directional` light is fitted to, in place of cascades fitted to each camera. See [Shadow Bounds](https://developer.playcanvas.com/user-manual/web-components/tags/pc-light.md#shadow-bounds) |
 | `shadow-distance` | Number | `"40"` | Maximum shadow rendering distance |
 | `shadow-intensity` | Number | `"1"` | Shadow intensity multiplier |
 | `shadow-resolution` | Number | `"1024"` | Shadow map resolution |
@@ -66,6 +67,21 @@ The three attributes do distinct jobs, and only `num-cascades` above 1 brings th
 `shadow-distance` still bounds the whole thing — it is the range the cascades divide up, so raising the cascade count without raising the distance just subdivides the same near-field. `shadow-resolution` sizes the one map the cascades share, so with 2 to 4 cascades each renders at half that resolution along each side. Cascades need a perspective camera: they do not work with an orthographic one.
 
 The [Shadow Cascades example](https://playcanvas.github.io/web-components/examples/#shadow-cascades.html) drives all three over a desert causeway long enough to need them, and plots the split distances the renderer derives — worth a look, because the engine has no cascade debug view and the distribution slider otherwise appears to do nothing.
+
+## Shadow Bounds
+
+Cascades spread a directional light's shadow map over whatever each camera sees. When the shadows only matter in one part of a large scene, `shadow-bounds` fits the whole shadow map to a box you choose instead:
+
+```html
+<!-- the shadow covers a 10 x 4 x 10 box centered at a height of 2 -->
+<pc-entity name="sun" rotation="45 30 0">
+    <pc-light type="directional" cast-shadows shadow-bounds="0 2 0 5 2 5"></pc-light>
+</pc-entity>
+```
+
+The value is six numbers in world space: the center of the box, then its half extents. The box only needs to enclose the objects that cast the shadows. What they fall on further along the light, such as the ground below them, is still shadowed, while casters beside the box, as the light sees it, cast no shadow.
+
+While it is set, `num-cascades`, `shadow-distance`, `cascade-blend` and `cascade-distribution` are not used, and the shadow is rendered whatever its distance from the camera. Removing the attribute restores the cascades. See [Shadow Bounds](https://developer.playcanvas.com/user-manual/graphics/lighting/shadows.md#shadow-bounds) in the shadows guide for more.
 
 ## Area Lights
 
