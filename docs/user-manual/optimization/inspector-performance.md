@@ -87,6 +87,8 @@ Hover the section for what was loading, and click an asset to show it on the Ass
 
 In the Editor, tick **Profiler** in the menu of the Launch button. The launched application opens the Inspector on its Performance tab, recording from the start, on the profiler build of the engine, or the debug build with **Debug** ticked. It needs engine 2.23 or newer.
 
+<img loading="lazy" alt="The menu of the Editor's Launch button, with Profiler ticked" width="226" src="/img/user-manual/optimization/inspector-performance/launch-profiler.webp" />
+
 To record from the first frame the application runs, pass `record: true` to the Inspector, or set the `record` attribute of the `EntityInspector` script. Created before the application runs its first frame, as right after `app.init()`, the Inspector records the start of the application too:
 
 ```javascript
