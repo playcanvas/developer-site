@@ -18,6 +18,8 @@ The `<pc-render>` tag adds a render component that draws a primitive shape — a
 | Attribute | Type | Default | Description |
 | --- | --- | --- | --- |
 | `cast-shadows` | Boolean | `"true"` | Whether the component casts shadows |
+| `clip-intersection` | Boolean | `"false"` | Whether the `clipping-planes` clip only what is behind all of them, in place of what is behind any of them. Two planes then cut out a wedge, and three a corner |
+| `clipping-planes` | Planes | - | Planes, in world space, that cut the primitive open, as a cutaway does, while the rest of the scene stays whole: `"0 -1 0 0, 0 0 -1 0"` with `clip-intersection` cuts a quarter out of a box at the origin. Whatever is behind a plane, on the side its normal points away from, is not rendered, casts no shadow and cannot be picked. Up to 8 planes are used. To clip everything a camera renders, use `clipping-planes` on its [`<pc-camera>`](../pc-camera) |
 | `enabled` | Boolean | `"true"` | Enabled state of the component |
 | `material` | [Material ID](../attributes.md#asset-and-material-ids) | - | `id` of a [`<pc-material>`](../pc-material) to render the primitive with. If omitted, a default material is used |
 | `receive-shadows` | Boolean | `"true"` | Whether the component receives shadows |
@@ -83,4 +85,4 @@ The `component` property is the engine [RenderComponent](https://api.playcanvas.
 * [`<pc-light>`](../pc-light) — lights and shadows the primitive
 * [`<pc-collision>`](../pc-collision) — a matching physics shape
 
-Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/#basic-shapes.html), [Falling Blocks](https://playcanvas.github.io/web-components/examples/#falling-blocks.html) and [Physics Joints](https://playcanvas.github.io/web-components/examples/#physics-joints.html).
+Examples: [Basic Shapes](https://playcanvas.github.io/web-components/examples/#basic-shapes.html), [Falling Blocks](https://playcanvas.github.io/web-components/examples/#falling-blocks.html), [Physics Joints](https://playcanvas.github.io/web-components/examples/#physics-joints.html) and [Clipping Planes](https://playcanvas.github.io/web-components/examples/#clipping-planes.html).

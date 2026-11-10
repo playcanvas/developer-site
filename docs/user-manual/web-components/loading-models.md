@@ -68,17 +68,19 @@ The two files are a [Draco](https://google.github.io/draco/) decoder build: the 
 
 The same mechanism supplies `Basis` for transcoding compressed textures, which models using `KHR_texture_basisu` need.
 
+Models compressed with [meshoptimizer](https://meshoptimizer.org/), through `EXT_meshopt_compression` or `KHR_meshopt_compression`, need no setup: the library bundles that decoder and hands it to the engine.
+
 ### Lighting the Model
 
 The car's paint is a metal, and a metal has no diffuse color: everything you see of it is reflection. A scene with nothing around the car but a clear color gives the paint nothing to reflect, so the body renders close to black, however bright its lights. Most models authored for physically based rendering (PBR) need an environment to reflect, and metals need it most.
 
-[`<pc-sky>`](tags/pc-sky.md) supplies one. Point it at an image and add `lighting`, and the scene is lit by that image, reflections included. `type="none"` keeps the image out of the background, so it lights the car without showing up behind it:
+[`<pc-sky>`](tags/pc-sky.md) supplies one. Point it at an image and add `lighting`, and the scene is lit by that image, reflections included. `enabled="false"` keeps the image out of the background, so it lights the car without showing up behind it:
 
 ```html
 <pc-asset id="chapel" src="assets/sepulchral-chapel-rotunda-4k.webp"></pc-asset>
 <!-- ... -->
 <pc-scene>
-    <pc-sky asset="chapel" type="none" lighting></pc-sky>
+    <pc-sky asset="chapel" enabled="false" lighting></pc-sky>
     <!-- ... -->
 </pc-scene>
 ```
@@ -91,7 +93,7 @@ Here is the car with both additions, running live. It is the markup from [Loadin
     <pc-asset id="car" src="https://developer.playcanvas.com/assets/porsche-911-carrera-4s.glb"></pc-asset>
     <pc-asset id="chapel" src="https://developer.playcanvas.com/assets/sepulchral-chapel-rotunda-4k.webp"></pc-asset>
     <pc-scene>
-        <pc-sky asset="chapel" type="none" lighting></pc-sky>
+        <pc-sky asset="chapel" enabled="false" lighting></pc-sky>
         <pc-entity name="camera" position="3.2 0.9 3.6" rotation="-12 42 0">
             <pc-camera clear-color="#dfe4ea"></pc-camera>
         </pc-entity>
@@ -103,7 +105,7 @@ Here is the car with both additions, running live. It is the markup from [Loadin
 Some things to try:
 
 * Delete `lighting` from the `<pc-sky>` and watch the paint go dark.
-* Delete `type="none"` to see the environment the car is reflecting.
+* Delete `enabled="false"` to see the environment the car is reflecting.
 * Delete the `<pc-wasm>`: the car never appears, and the console fills with failed requests for `draco.wasm.js`.
 
 ## Seeing What You Loaded
@@ -228,7 +230,7 @@ Because these are replacements, removing the attribute at runtime — or assigni
     <pc-asset id="chapel" src="https://developer.playcanvas.com/assets/sepulchral-chapel-rotunda-4k.webp"></pc-asset>
     <pc-material id="candy-red" name="Candy Red" diffuse="#c8102e" metalness="1" roughness="0.25"></pc-material>
     <pc-scene>
-        <pc-sky asset="chapel" type="none" lighting></pc-sky>
+        <pc-sky asset="chapel" enabled="false" lighting></pc-sky>
         <pc-entity name="camera" position="3.2 0.9 3.6" rotation="-12 42 0">
             <pc-camera clear-color="#dfe4ea"></pc-camera>
         </pc-entity>
