@@ -22,31 +22,11 @@ These must be configured on the host machine — they cannot be installed from i
 
 ### AWS GPU instances
 
-On AWS GPU instances (`g4dn`, `g5`, `g6`, etc.) running Amazon Linux 2023 the default driver is the *compute-only* Tesla driver and does not include Vulkan. To use any of the WebGPU paths you need to install the **NVIDIA GRID Driver v19.2 or newer** on the host — the GRID driver ships the Vulkan ICD that the Tesla driver lacks.
+AWS GPU instances such as `g4dn`, `g5` and `g6` can run the Vulkan backend with a compatible NVIDIA driver. **A GRID driver is not required solely for Vulkan support**: [AWS lists Vulkan among the APIs supported by Tesla, GRID and gaming drivers](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/install-nvidia-driver.html). The installation steps depend on your AMI.
 
-NVIDIA hosts the GRID installer in an S3 bucket, so the EC2 instance role must have the `AmazonS3ReadOnlyAccess` policy attached.
+For **EKS**, the [Amazon Linux 2023 NVIDIA accelerated AMI](https://docs.aws.amazon.com/eks/latest/userguide/ml-eks-optimized-ami.html) (`AL2023_x86_64_NVIDIA`) includes the NVIDIA driver and NVIDIA Container Toolkit. PlayCanvas uses this AMI on `g5.4xlarge` and `g5.8xlarge` instances with NVIDIA A10G GPUs, without a separate GRID driver installation. Install the NVIDIA Kubernetes device plugin and request `nvidia.com/gpu: 1` for each GPU worker pod.
 
-Update and reboot first:
-
-```bash
-sudo dnf update -y
-sudo reboot
-```
-
-After the reboot, install the driver and reboot again:
-
-```bash
-sudo aws s3 cp --recursive s3://ec2-linux-nvidia-drivers/grid-19.2/ .   # installs v580.x.x
-sudo chmod +x NVIDIA-Linux-x86_64*.run
-sudo ./NVIDIA-Linux-x86_64*.run
-sudo reboot
-```
-
-Install the Vulkan loader, tools, and `libXext` (which `vulkaninfo` links against):
-
-```bash
-sudo dnf install vulkan vulkan-tools libXext
-```
+For **standalone Docker or other AMIs**, follow the host prerequisites above and the [AWS driver installation options](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/install-nvidia-driver.html) for your instance and operating system. EKS is not required. Check the existing driver and Vulkan support before replacing drivers; install `vulkan-tools` if the diagnostic command below is unavailable.
 
 Verify the driver and Vulkan ICD from the host:
 
@@ -55,11 +35,11 @@ nvidia-smi             # driver version, GPU model
 vulkaninfo --summary   # NVIDIA Vulkan ICD with a physical device
 ```
 
-This is host/OS level — it cannot be done from inside the container. The Dockerfile in the next section assumes the driver and Vulkan packages are already installed on the host.
+The NVIDIA driver and container runtime integration must be configured on the host. The Dockerfile below installs the container-side Vulkan loader and libraries; verify GPU access inside the container as well.
 
 ## Minimal Dockerfile
 
-A minimal multi-stage Dockerfile that installs the published CLI on top of an NVIDIA CUDA + Vulkan base image:
+A minimal multi-stage Dockerfile that installs the published CLI and Vulkan dependencies on Ubuntu 22.04. The CUDA toolkit is not used by `splat-transform`, so a CUDA base image is unnecessary:
 
 ```dockerfile
 # syntax=docker/dockerfile:1.4
@@ -68,11 +48,12 @@ A minimal multi-stage Dockerfile that installs the published CLI on top of an NV
 # install script to bash.
 FROM node:22-slim AS node
 
-FROM nvidia/cuda:12.8.1-devel-ubuntu22.04
+FROM ubuntu:22.04
 
 # Expose compute + graphics + utility caps so the NVIDIA Container Toolkit
 # projects the host's NVIDIA driver libraries and Vulkan ICD into the
 # container at runtime.
+ENV NVIDIA_VISIBLE_DEVICES=all
 ENV NVIDIA_DRIVER_CAPABILITIES=compute,graphics,utility
 
 RUN apt-get update \
@@ -97,7 +78,8 @@ ENTRYPOINT ["splat-transform"]
 
 A few notes on what each part is doing:
 
-- `nvidia/cuda:...-devel-ubuntu22.04` — gives you a CUDA-aware base image that the NVIDIA Container Toolkit recognises. The CUDA toolkit itself is not used by `splat-transform`; we just need a base where `--gpus all` projects the host's NVIDIA driver and Vulkan ICD correctly.
+- `ubuntu:22.04` — provides the base operating system. The NVIDIA Container Toolkit supplies the host driver libraries at runtime.
+- `NVIDIA_VISIBLE_DEVICES=all` — exposes the GPUs made available to the container by Docker or Kubernetes.
 - `NVIDIA_DRIVER_CAPABILITIES=compute,graphics,utility` — `graphics` is the important one; without it the toolkit will not mount the Vulkan ICD.
 - `vulkan-tools` — provides `vulkaninfo` (useful for debugging) and pulls in the Vulkan loader the container needs.
 - `libgl1`, `libglvnd0`, `libglx0`, `libegl1`, `libxext6` — runtime libraries Vulkan/EGL drivers depend on.
@@ -161,7 +143,7 @@ Sanity-check Vulkan directly:
 docker run --rm --gpus all --entrypoint vulkaninfo splat-transform --summary
 ```
 
-`vulkaninfo` should print a `GPU0` section with an NVIDIA `driverID`. If this fails, the host setup (driver / NVIDIA Container Toolkit / Vulkan ICD) is the problem, not the image.
+`vulkaninfo` should print a `GPU0` section with an NVIDIA `driverID`. If this fails, check Vulkan on the host first, then check the NVIDIA Container Toolkit configuration, GPU allocation and container libraries.
 
 ## CPU-only variant
 
@@ -193,7 +175,7 @@ Note that `-g cpu` is incompatible with the GPU-only features (`--filter-cluster
 ## Troubleshooting
 
 - **`--list-gpus` reports no adapters.** The Vulkan ICD is not reaching the container. Check that you ran with `--gpus all`, that `NVIDIA_DRIVER_CAPABILITIES` includes `graphics`, and that the NVIDIA Container Toolkit is installed and configured on the host.
-- **`vulkaninfo` reports `Could not find a Vulkan ICD`.** The host NVIDIA driver does not expose Vulkan. On AWS, switch from the Tesla driver to the GRID driver (v19.2+) and reinstall, then install `vulkan vulkan-tools libXext` on the host.
+- **`vulkaninfo` reports `Could not find a Vulkan ICD`.** Check that the host has a working NVIDIA Vulkan driver. If Vulkan works on the host, check that the container has GPU access and `NVIDIA_DRIVER_CAPABILITIES` includes `graphics`. On AWS, use a suitable driver or accelerated AMI as described above; a GRID driver is not automatically required.
 - **`vulkaninfo` segfaults or fails to load `libXext.so.6`.** `libxext6` is missing from the image — make sure the `apt-get install` line in the Dockerfile includes it (and on AWS, that `libXext` is also installed on the host).
 - **`docker: Error response from daemon: could not select device driver "" with capabilities: [[gpu]]`.** The NVIDIA Container Toolkit is not installed or the Docker daemon has not picked up its config. Reinstall the toolkit and restart Docker.
 - **Outputs in the bind-mounted directory aren't owned by my host user.** The container's default user (UID 2000 in the GPU image, root in the slim image) doesn't match your host UID. Pass `--user "$(id -u):$(id -g)"` to `docker run` to align them, or `chown` the output directory to the container UID before mounting.
