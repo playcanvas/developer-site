@@ -5,6 +5,8 @@ covers: [getting-started, account-management, glossary, press-pack, security]
 
 > PlayCanvas is an open-source 3D engine for the web, rendering with WebGL2 or WebGPU, and a set of products built on it for games, product configurators, 3D Gaussian splat experiences and other interactive 3D in the browser.
 
+All PlayCanvas products are free and open source. The Editor is a hosted service that also offers [optional paid plans](https://playcanvas.com/plans).
+
 This is the entry point for AI agents. Each product below has its own index: read the index for your task, then fetch only the pages you need. Page links in the indexes point to Markdown versions of the pages.
 
 ## Rules
