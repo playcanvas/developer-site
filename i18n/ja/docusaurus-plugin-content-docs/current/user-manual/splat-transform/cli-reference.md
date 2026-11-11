@@ -45,9 +45,16 @@ SplatTransform はファイル拡張子からフォーマットを検出しま�
 
 アンチエイリアス（mip-splatting方式のスクリーンスペースフィルタ）付きで学習されたシーンや、2Dガウシアンサーフェル（2DGS）として学習されたシーンは読み取り時にタグ付けされ、出力フォーマットが保持できる場合はそのタグが維持されます。`--info` はこれを `model` として報告します。
 
-- **読み取り時**：PLYヘッダーコメント（Brushの `comment SplatRenderMode: default | mip | 2dgs` またはPostshotの `comment antialiased 0 | 1`。複数ある場合は最後のものが優先）、SPZのアンチエイリアスヘッダービット、またはSOG `meta.json` の `model` エントリから読み取ります。`scale_0` と `scale_1` はあるが `scale_2` がないPLYは、コメントに関係なく2DGSとして読み取られ、欠けているカラムは厚さゼロのスケールで補われるため、パイプラインの残りの部分には影響しません。
+- **読み取り時**：PLYヘッダーコメント（Brushの `comment SplatRenderMode: default | mip | 2dgs` またはPostshotの `comment postshot.anti_aliasing=1`。複数ある場合は最後のものが優先）、SPZのアンチエイリアスヘッダービット、またはSOG `meta.json` の `model` エントリから読み取ります。`scale_0` と `scale_1` はあるが `scale_2` がないPLYは、コメントに関係なく2DGSとして読み取られ、欠けているカラムは厚さゼロのスケールで補われるため、パイプラインの残りの部分には影響しません。
 - **書き込み時**：`.ply` と `.compressed.ply` には `comment SplatRenderMode: mip | 2dgs`（読み取った形式にかかわらずBrushの表記）が、`.sog` と `meta.json` には `"model": "antialiased" | "2dgs"` が書き込まれます。`.spz` はアンチエイリアスビットを設定し、2DGSを表現できないことを警告します。2DGSのPLY出力では `scale_2` カラムが再び削除されます。その他の出力フォーマットにはタグを記録する場所がないため、タグは警告なしに破棄されます。
+- **レンダリング時**：`.webp` 出力では、アンチエイリアス付きで学習されたシーンを、0.3 px² の膨張の代わりにその学習時のフィルター（デフォルトは 0.1 px²、`--aa-filter-size` で上書き可能）でレンダリングし、PlayCanvasエンジンと同様に、各スプラットがフィルター前の量を描画するよう不透明度をスケーリングします。
 - **マージ時**：タグが一致しない入力を結合すると警告が出され、結果はタグなしで書き込まれます。
+
+PLYのその他のヘッダーコメント（例：`Postshot v1.1.69` や `postshot.color.eotf=sRGB`）も引き継がれます。`.ply` と `.compressed.ply` はこれらを `comment` 行として書き戻し、SOGバージョン3の出力（`.sog`、`meta.json`、`lod-meta.json`）は `comments` として保存します。コメントは解釈されないため、座標を記述するコメントは変換によって更新されません。
+
+### 1を超える不透明度 {#opacity-above-1}
+
+デシメーションはガウシアンをその量を失わずにマージするため、マージされたガウシアンの不透明度は1を超えることがあります（レンダラーは1.5625までを不透明なコアとして描画します）。PLYは不透明度を1つのプロパティとして保持します。1を超えないシーンには標準の `opacity` ロジット（最大1）を、デシメーションされたシーンや1を超える不透明度を持つSOGバージョン3の入力には `opacity` の代わりに不透明度そのものである `opacity_linear` を使用します。`opacity_linear` を認識しないツールはこれらのファイルを読み取れません。`--ply-logit-opacity` を指定すると、1を超える不透明度をクランプして標準のロジットを出力します。読み取り時は、`opacity_linear` があればそれが使用されます。SOGバージョン3は1を超える不透明度をそのまま保存し、SOGバージョン2やその他のフォーマットでは1にクランプされます。
 
 ## アクション {#actions}
 
@@ -57,17 +64,18 @@ SplatTransform はファイル拡張子からフォーマットを検出しま�
 -t, --translate        <x,y,z>          Translate Gaussians by (x, y, z)
 -r, --rotate           <x,y,z>          Rotate Gaussians by Euler angles (x, y, z), in degrees
 -s, --scale            <factor>         Uniformly scale Gaussians by factor
--H, --filter-harmonics <0|1|2|3>        Remove spherical harmonic bands > n
+-H, --filter-harmonics <0|1|2|3|4>      Remove spherical harmonic bands > n
 -N, --filter-nan                        Remove Gaussians with NaN values, most Inf values, or a
                                           zero-norm (unrenderable) rotation quaternion;
-                                          retains +Infinity in opacity and -Infinity in scale_*
+                                          retains -Infinity in scale_*
 -B, --filter-box       <x,y,z,X,Y,Z>    Remove Gaussians outside box (min, max corners)
 -S, --filter-sphere    <x,y,z,radius>   Remove Gaussians outside sphere (center, radius)
 -V, --filter-value     <name,cmp,value> Keep Gaussians where <name> <cmp> <value>
                                           cmp ∈ {lt,lte,gt,gte,eq,neq}
                                           opacity, scale_*, f_dc_* use transformed values
-                                          (linear opacity 0-1, linear scale, linear color 0-1).
-                                          Append _raw for raw PLY values (e.g. opacity_raw).
+                                          (linear opacity, above 1 for merged Gaussians, linear
+                                          scale, linear color 0-1). Append _raw for raw PLY values
+                                          (e.g. opacity_raw, the opacity logit).
 -d, --decimate         <n|n%>           Simplify to n Gaussians via merge-based decimation,
                                           removing at a uniform rate everywhere.
                                           Use n% to keep a percentage of Gaussians.
@@ -173,7 +181,22 @@ NVIDIA GPUを搭載したサーバーでsplat-transformを実行する方法に�
 
 ```none
 -i, --sh-iterations    <n>              Iterations for SH compression (more=better). Default: 10
+    --sh-palette-size  <n>              SH palette entries for .sog / meta.json (more=better, slower). Up to 262144
+                                          with SOG v3, 65536 with v2. Default: the gaussian count rounded down to a
+                                          power of 2, at most 65536
     --max-workers      <n>              Worker threads for SOG and image-sequence encoding (0 = inline/serial). Default: 4
+    --sog-version      <2|3>            SOG format version to write. 2 is for older viewers: it drops opacity
+                                          above 1, blind data and a 4th SH band. Default: 3 (.html always embeds 2)
+    --sog-blind        <field>[,...]    Store columns as per-gaussian blind data (v3): one blind texture per flag,
+                                          its fields filling 4 bytes (R,G,B,A) in order. field = <col>[:<enc>]
+                                          enc: u8 u16 u24 u32 (unsigned integers), f16 f32 (float bits),
+                                          unorm8 unorm16 (float in [0,1], or unorm8[min,max]). Default: the
+                                          fewest-byte uint that fits. Repeatable, e.g. --sog-blind id
+                                          --sog-blind a:unorm8,b:unorm8,depth:f16. Without the flag, columns read
+                                          from SOG blind data are stored as they were; --sog-blind none stores none
+    --sog-extras       <file.json>      Store this JSON as the output's extras (meta.json / lod-meta.json,
+                                          SOG v3 only), application-defined data as in glTF. Default: the input's
+                                          extras, if any
 ```
 
 ### SPZ出力オプション {#spz-output-options}
@@ -182,6 +205,16 @@ NVIDIA GPUを搭載したサーバーでsplat-transformを実行する方法に�
 
 ```none
     --spz-version      <3|4>            The SPZ format version to write. Default: 4
+```
+
+### PLY出力オプション {#ply-output-options}
+
+`.ply` の出力を書き込む際に適用されます。
+
+```none
+    --ply-logit-opacity                 Write the standard opacity logit even when some gaussian's opacity
+                                          exceeds 1 (clamped to 1), instead of opacity_linear. For tools that
+                                          don't read opacity_linear
 ```
 
 ### HTMLビューア出力オプション {#html-viewer-output-options}
@@ -261,6 +294,10 @@ NVIDIA GPUを搭載したサーバーでsplat-transformを実行する方法に�
     --resolution       <WxH>            Output resolution, e.g. 1920x1080. Default: 1280x720 (pinhole) or 2048x1024 (equirect)
     --camera-near      <n>              Near clip distance. Default: 0.2 (matches reference 3DGS)
     --background       <r,g,b[,a]>      Background color in [0,1]. Default: 0,0,0,1
+    --no-compensation                   Clamp opacity above 1 (from decimation) to 1 and draw every
+                                          gaussian at opacity <= 1. For debugging and A/B comparison.
+    --aa-filter-size   <px²>            Screen-space filter of scenes trained with anti-aliasing (splat model
+                                          antialiased), used in place of the 0.3 px² dilation. Default: 0.1
     --f-stop           <N>              Aperture as a photographic f-stop (e.g. 2.8, 5.6, 11). Enables defocus blur;
                                         smaller = more blur. Pinhole only. Default: disabled (no defocus).
     --focus-distance   <n>              Camera-space Z of the focus plane (world units). Default: distance to --camera-target.

@@ -25,31 +25,11 @@ GPU 専用機能を必要とせず、SH 圧縮の CPU コストを許容でき�
 
 ### AWS GPU インスタンス
 
-Amazon Linux 2023 を実行する AWS GPU インスタンス（`g4dn`、`g5`、`g6` など）では、デフォルトのドライバは*コンピュート専用*の Tesla ドライバで、Vulkan を含みません。WebGPU パスを使用するには、ホストに **NVIDIA GRID Driver v19.2 以降**をインストールする必要があります — GRID ドライバは Tesla ドライバには含まれていない Vulkan ICD を出荷します。
+`g4dn`、`g5`、`g6` などの AWS GPU インスタンスでは、互換性のある NVIDIA ドライバで Vulkan バックエンドを実行できます。**Vulkan を使用するためだけに GRID ドライバを導入する必要はありません**。[AWS は Tesla、GRID、ゲーミングドライバがサポートする API に Vulkan を挙げています](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/install-nvidia-driver.html)。インストール手順は使用する AMI によって異なります。
 
-NVIDIA は GRID インストーラを S3 バケットでホストしているため、EC2 インスタンスロールに `AmazonS3ReadOnlyAccess` ポリシーがアタッチされている必要があります。
+**EKS** 向けの [Amazon Linux 2023 NVIDIA 高速化 AMI](https://docs.aws.amazon.com/eks/latest/userguide/ml-eks-optimized-ami.html)（`AL2023_x86_64_NVIDIA`）には、NVIDIA ドライバと NVIDIA Container Toolkit が含まれています。PlayCanvas では、NVIDIA A10G GPU を搭載した `g5.4xlarge` および `g5.8xlarge` インスタンスでこの AMI を使用しており、GRID ドライバを別途インストールしていません。NVIDIA Kubernetes デバイスプラグインをインストールし、各 GPU ワーカー Pod に `nvidia.com/gpu: 1` を要求してください。
 
-まず更新と再起動：
-
-```bash
-sudo dnf update -y
-sudo reboot
-```
-
-再起動後、ドライバをインストールしてもう一度再起動：
-
-```bash
-sudo aws s3 cp --recursive s3://ec2-linux-nvidia-drivers/grid-19.2/ .   # v580.x.x をインストール
-sudo chmod +x NVIDIA-Linux-x86_64*.run
-sudo ./NVIDIA-Linux-x86_64*.run
-sudo reboot
-```
-
-Vulkan ローダー、ツール、`libXext`（`vulkaninfo` がリンクする）をインストール：
-
-```bash
-sudo dnf install vulkan vulkan-tools libXext
-```
+**スタンドアロンの Docker やその他の AMI** では、上記のホストの前提条件と、インスタンスおよび OS に対応する [AWS のドライバインストール方法](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/install-nvidia-driver.html)に従ってください。EKS は必須ではありません。ドライバを置き換える前に、既存のドライバと Vulkan の動作を確認してください。以下の診断コマンドが利用できない場合は、`vulkan-tools` をインストールしてください。
 
 ホストからドライバと Vulkan ICD を検証：
 
@@ -58,11 +38,11 @@ nvidia-smi             # ドライババージョン、GPU モデル
 vulkaninfo --summary   # 物理デバイスを持つ NVIDIA Vulkan ICD
 ```
 
-これはホスト/OS レベル — コンテナ内からは実行できません。次のセクションの Dockerfile は、ドライバと Vulkan パッケージが既にホストにインストールされていることを前提としています。
+NVIDIA ドライバとコンテナランタイムの連携はホスト上で設定する必要があります。以下の Dockerfile はコンテナ側の Vulkan ローダーとライブラリをインストールします。コンテナ内でも GPU アクセスを確認してください。
 
 ## 最小限の Dockerfile
 
-NVIDIA CUDA + Vulkan ベースイメージの上に公開された CLI をインストールする、最小限のマルチステージ Dockerfile：
+Ubuntu 22.04 に公開された CLI と Vulkan の依存パッケージをインストールする、最小限のマルチステージ Dockerfile です。`splat-transform` は CUDA ツールキットを使用しないため、CUDA ベースイメージは不要です：
 
 ```dockerfile
 # syntax=docker/dockerfile:1.4
@@ -71,11 +51,12 @@ NVIDIA CUDA + Vulkan ベースイメージの上に公開された CLI をイン
 # 公式イメージから Node.js を取得します。
 FROM node:22-slim AS node
 
-FROM nvidia/cuda:12.8.1-devel-ubuntu22.04
+FROM ubuntu:22.04
 
 # NVIDIA Container Toolkit がランタイムにホストの NVIDIA ドライバ
 # ライブラリと Vulkan ICD をコンテナに投影できるように、
 # compute + graphics + utility capabilities を公開します。
+ENV NVIDIA_VISIBLE_DEVICES=all
 ENV NVIDIA_DRIVER_CAPABILITIES=compute,graphics,utility
 
 RUN apt-get update \
@@ -100,7 +81,8 @@ ENTRYPOINT ["splat-transform"]
 
 各部分が何をしているかについてのいくつかのメモ：
 
-- `nvidia/cuda:...-devel-ubuntu22.04` — NVIDIA Container Toolkit が認識する CUDA 対応のベースイメージを提供します。CUDA ツールキット自体は `splat-transform` では使用されません；`--gpus all` がホストの NVIDIA ドライバと Vulkan ICD を正しく投影するベースが必要なだけです。
+- `ubuntu:22.04` — ベースとなる OS を提供します。NVIDIA Container Toolkit が実行時にホストのドライバライブラリを提供します。
+- `NVIDIA_VISIBLE_DEVICES=all` — Docker または Kubernetes がコンテナに割り当てた GPU を公開します。
 - `NVIDIA_DRIVER_CAPABILITIES=compute,graphics,utility` — `graphics` が重要です；これなしではツールキットは Vulkan ICD をマウントしません。
 - `vulkan-tools` — `vulkaninfo`（デバッグに役立つ）を提供し、コンテナが必要とする Vulkan ローダーをプルインします。
 - `libgl1`、`libglvnd0`、`libglx0`、`libegl1`、`libxext6` — Vulkan/EGL ドライバが依存するランタイムライブラリ。
@@ -164,7 +146,7 @@ Vulkan を直接サニティチェック：
 docker run --rm --gpus all --entrypoint vulkaninfo splat-transform --summary
 ```
 
-`vulkaninfo` は NVIDIA の `driverID` を持つ `GPU0` セクションを出力するはずです。これが失敗した場合、問題はイメージではなくホストのセットアップ（ドライバ / NVIDIA Container Toolkit / Vulkan ICD）です。
+`vulkaninfo` は NVIDIA の `driverID` を持つ `GPU0` セクションを出力するはずです。失敗した場合は、まずホスト上の Vulkan を確認し、次に NVIDIA Container Toolkit の設定、GPU の割り当て、コンテナのライブラリを確認してください。
 
 ## CPU 専用バリアント {#cpu-only-variant}
 
@@ -196,7 +178,7 @@ docker run --rm -v "$PWD":/work splat-transform -g cpu input.ply output.sog
 ## トラブルシューティング
 
 - **`--list-gpus` がアダプタを報告しない。** Vulkan ICD がコンテナに届いていません。`--gpus all` で実行したこと、`NVIDIA_DRIVER_CAPABILITIES` に `graphics` が含まれていること、NVIDIA Container Toolkit がホストにインストールおよび構成されていることを確認してください。
-- **`vulkaninfo` が `Could not find a Vulkan ICD` を報告する。** ホストの NVIDIA ドライバが Vulkan を公開していません。AWS では Tesla ドライバから GRID ドライバ（v19.2+）に切り替えて再インストールし、ホストに `vulkan vulkan-tools libXext` をインストールしてください。
+- **`vulkaninfo` が `Could not find a Vulkan ICD` を報告する。** ホスト上で NVIDIA の Vulkan ドライバが動作することを確認してください。ホスト上で Vulkan が動作する場合は、コンテナが GPU にアクセスできることと、`NVIDIA_DRIVER_CAPABILITIES` に `graphics` が含まれていることを確認してください。AWS では上記のとおり適切なドライバまたは高速化 AMI を使用してください。GRID ドライバが必須とは限りません。
 - **`vulkaninfo` がセグフォルトするか `libXext.so.6` のロードに失敗する。** `libxext6` がイメージから欠落しています — Dockerfile の `apt-get install` 行に含まれていること（および AWS では `libXext` がホストにもインストールされていること）を確認してください。
 - **`docker: Error response from daemon: could not select device driver "" with capabilities: [[gpu]]`。** NVIDIA Container Toolkit がインストールされていないか、Docker デーモンが構成を取得していません。ツールキットを再インストールし、Docker を再起動してください。
 - **バインドマウントされたディレクトリ内の出力がホストユーザーに所有されていない。** コンテナのデフォルトユーザー（GPU イメージでは UID 2000、slim イメージでは root）がホストの UID と一致しません。`--user "$(id -u):$(id -g)"` を `docker run` に渡してそれらを揃えるか、マウントする前にコンテナの UID に出力ディレクトリを `chown` してください。

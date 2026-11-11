@@ -28,6 +28,8 @@ scene/
 
 * The index file is always named `lod-meta.json`. Loaders identify the format by this filename.
 * Each chunk is a standard **unbundled** [SOG](./sog.md) dataset (a `meta.json` plus WebP texture files), of SOG version 2 or 3. Bundled (single-archive) SOG chunks are not part of this format.
+* Scene-wide application data lives in `lod-meta.json`'s `extras`, and scene-wide producer comments in its `comments`; writers **should not** repeat them in each chunk's `meta.json`.
+* `lod-meta.json`'s `model` records how the whole scene was trained (see SOG §3.8). Readers **should** use it for every chunk, in preference to the chunks' own `model`; without it, the chunks' `model` decides.
 * All paths in `lod-meta.json` are relative to the directory containing `lod-meta.json`.
 
 :::note[Chunk naming]
@@ -47,13 +49,15 @@ interface LodMeta {
     generator?: string;        // e.g. "splat-transform v2.5.2"
   };
   count: number;               // Total gaussians across all LOD levels (excludes environment)
-  model?: "antialiased" | "2dgs"; // Optional. How the scene was trained, for all its chunks; omitted for ordinary gaussians
+  model?: "antialiased" | "2dgs"; // How the scene was trained, for all its chunks (see SOG §3.8); omitted for ordinary gaussians
   counts: number[];            // Gaussians per LOD level; index = LOD level, length = lodLevels
   lodLevels: number;           // Number of LOD levels
-  lodErrors?: boolean;         // If true, every leaf supplies per-level `errors`
+  lodErrors?: boolean;         // Legacy (§3.3): if true, every leaf supplies per-level `errors`
   environment?: string;        // Relative path to the environment SOG's meta.json; omitted if none
   filenames: string[];         // Relative paths to chunk SOG meta.json files, referenced by index
   tree: Node;                  // Root of the spatial tree
+  extras?: any;                // Application-defined JSON for the whole scene (see SOG §4); only with SOG version 3 chunks
+  comments?: string[];         // Free-form producer comments for the whole scene (see SOG §5); only with SOG version 3 chunks
 }
 
 interface Node {
@@ -69,7 +73,7 @@ interface Node {
       count: number;           // Number of consecutive splats
     };
   };
-  errors?: number[];           // Leaf node: per-level approximation error; index = LOD level
+  errors?: number[];           // Legacy (§3.3), leaf node: per-level approximation error; index = LOD level
 }
 ```
 
@@ -98,7 +102,7 @@ Each `lods` entry addresses a contiguous run of splats within one chunk:
 
 A chunk file's contents are exactly the concatenation of the leaf runs that reference it: the runs are non-overlapping and cover the chunk completely. Within each run, splats are sorted in Morton order for spatial locality; no ordering holds across run boundaries. A chunk only ever contains splats of a single LOD level.
 
-### 3.3 LOD errors
+### 3.3 LOD errors (legacy)
 
 When the top-level `lodErrors` flag is `true`, every leaf carries an `errors` array measuring how much each of its LOD levels deviates from the highest-detail representation, indexed by LOD level. Errors are finite, non-negative and non-decreasing with level; level `0` is typically `0`. Only relative magnitudes are meaningful — a viewer can use them to decide which regions benefit most from finer levels. The PlayCanvas engine chooses LOD levels by camera distance and does not read them. Entries for levels a leaf does not hold are ignored.
 
@@ -114,7 +118,7 @@ The optional `environment` field points to a standard unbundled [SOG](./sog.md) 
 
 ## 5. Precision
 
-Non-integer numbers in `lod-meta.json` are quantized to 7 significant digits (approximately 32-bit float precision).
+Non-integer numbers in `lod-meta.json`'s own fields are quantized to 7 significant digits (approximately 32-bit float precision). `extras` is application data and is written exactly as given.
 
 ---
 
@@ -129,7 +133,6 @@ A two-level scene with an environment, split into one interior node with two lea
   "count": 1500000,
   "counts": [1000000, 500000],
   "lodLevels": 2,
-  "lodErrors": true,
   "environment": "env/meta.json",
   "filenames": [
     "0_0/meta.json",
@@ -143,16 +146,14 @@ A two-level scene with an environment, split into one interior node with two lea
         "lods": {
           "0": { "file": 0, "offset": 0, "count": 600000 },
           "1": { "file": 1, "offset": 0, "count": 300000 }
-        },
-        "errors": [0, 0.8127411]
+        }
       },
       {
         "bound": { "min": [0.5, 0, -10], "max": [10, 4.5, 10] },
         "lods": {
           "0": { "file": 0, "offset": 600000, "count": 400000 },
           "1": { "file": 1, "offset": 300000, "count": 200000 }
-        },
-        "errors": [0, 1.244906]
+        }
       }
     ]
   }
