@@ -209,6 +209,7 @@ Use this index to write code against the engine directly. React, Web Components 
 - [Inspector Performance](/user-manual/optimization/inspector-performance/): Recording frames with the Inspector: frame, CPU, GPU and script times, loading and the start of the application, counters, and each frame on a timeline.
 - [General Guidelines](/user-manual/optimization/guidelines/): Tuning scripts, draw calls, batching, shaders, lighting, textures and post effects.
 - [Optimizing Load Time](/user-manual/optimization/load-time/): Image formats, texture sizes, preloading, asset audits, compression and staged loading.
+- [Shader Precompilation](/user-manual/optimization/shader-precompilation/): Compiling shaders and render pipelines in parallel before rendering with `app.precompile()`, with progress events.
 - [Texture Compression](/user-manual/optimization/texture-compression/): Reducing GPU memory and download size with Basis compressed textures.
 - [MiniStats](/user-manual/optimization/mini-stats/): An on-screen overlay of draw calls, frame time, and CPU and GPU timings.
 - [GPU Profiling](/user-manual/optimization/gpu-profiling/): Capturing WebGL and WebGPU frames with native GPU profilers.

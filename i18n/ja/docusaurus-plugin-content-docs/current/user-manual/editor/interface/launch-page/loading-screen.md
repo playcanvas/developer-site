@@ -92,6 +92,27 @@ pc.script.createLoadingScreen((app) => {
 });
 ```
 
+### シェーダーのプリコンパイル中もローディング画面を表示する {#keeping-the-loading-screen-during-shader-precompilation}
+
+[シェーダーのプリコンパイル](/user-manual/optimization/shader-precompilation/)を使用すると、アプリケーションはシェーダーのコンパイルが終わるまで何も描画しません。それまでローディング画面を表示したままにするには、アプリの開始時にプリコンパイルを開始し、終了時にローディング画面を非表示にします。これは上の例の`start`ハンドラーを置き換えます。
+
+```javascript
+    // シーンのシェーダーをプリコンパイルし、その進捗を表示する
+    app.once('start', () => {
+        progressFiller.style.width = '0%';
+        app.on('precompile:progress', (value) => {
+            progressFiller.style.width = (value * 100) + '%';
+        });
+        app.precompile();
+    });
+
+    // シェーダーのコンパイルが終わったらローディング画面を非表示にする
+    app.once('precompile:end', () => {
+        app.off('precompile:progress');
+        document.body.removeChild(div);
+    });
+```
+
 ### 画像を追加する
 
 カスタムローディング画面は通常の DOM コンテンツなので、標準の HTML と CSS で画像を追加できます。ローディング画面が表示されたらすぐに見せたいブランド画像には、画像を Base64 の Data URI としてローディング画面スクリプトに埋め込む方法をおすすめします。
