@@ -51,7 +51,23 @@ To compile fewer shaders up front, enable frustum culling to include only the me
 app.precompile({ frustumCulling: true });
 ```
 
-The forward rendering of the cameras and the shadow maps of the lights are included. Other rendering, such as post-processing effects of [CameraFrame](/user-manual/graphics/posteffects/cameraframe/), is compiled when it first renders.
+## Which Rendering Is Included
+
+The frame is prepared the way it renders, including:
+
+- The forward rendering of the cameras, and the depth prepass.
+- The shadow maps of the lights, including their VSM blur.
+- The passes of [CameraFrame](/user-manual/graphics/posteffects/cameraframe/), such as TAA, bloom, ambient occlusion, depth of field, volumetric fog and the final composition.
+- Custom passes based on `RenderPassShaderQuad`. Their `onBefore` callback runs, so parameters set there are available to the shader, while `onAfter` does not run, as nothing renders.
+
+The following rendering still compiles when it first renders:
+
+- Environment and sky lighting generation, such as cubemap reprojection and prefiltering, and mipmap generation.
+- Compute shaders.
+- Utility rendering, such as picking, outlines and gizmos.
+- The work buffer of Gaussian splats.
+- The shadows of local lights that are not visible to the cameras.
+- Content added, and CameraFrame effects enabled or changed, after the precompile. Call `precompile()` again after such changes.
 
 ## Showing Progress
 
