@@ -94,7 +94,7 @@ The recommended way to get started is to use the official [`create-playcanvas`](
 npm create playcanvas@latest my-app -- -f react
 ```
 
-Choose one of the 12 runnable starters when prompted. The generated TypeScript project includes Vite, development and production scripts, and [PlayCanvas Skills](https://developer.playcanvas.com/user-manual/getting-started/use-playcanvas-skills.md) for compatible AI coding agents.
+Choose one of the runnable starters when prompted. The generated TypeScript project includes Vite, development and production scripts, and [PlayCanvas Skills](https://developer.playcanvas.com/user-manual/getting-started/use-playcanvas-skills.md) for compatible AI coding agents.
 
 We recommend following [this guide](https://developer.playcanvas.com/user-manual/react/building-a-scene.md) to start building your first project.
 
@@ -153,16 +153,16 @@ If you've not already done so, **follow the [Installation Guide](https://develop
 create a new PlayCanvas React project.
 
 ```bash
-npm create playcanvas@latest my-first-3d-app -t react-ts
+npm create playcanvas@latest my-first-3d-app -- -f react
 ```
 
 Before we get to anything more complex, let's create a simple example that displays a box. Any PlayCanvas scene starts with an **Application**, a **Scene** and a **Camera** so we can see something.
 
-In your `/src/App.jsx` file, you can delete everything and replace it with the following code.
+In your `/src/App.tsx` file, you can delete everything and replace it with the following code.
 
 **Rendering a simple box**
 
-```jsx title="/src/App.jsx"
+```jsx title="/src/App.tsx"
 import { Application, Entity } from '@playcanvas/react'
 import { Render, Camera } from '@playcanvas/react/components'
 
@@ -206,7 +206,7 @@ This is a great start, but we don't have any lights in the scene. You can add li
 
 **Adding lights to the scene**
 
-```jsx title="/src/App.jsx"
+```jsx title="/src/App.tsx"
 import { Application, Entity } from '@playcanvas/react'
 import { Render, Camera, Light, Environment } from '@playcanvas/react/components'
 import { useEnvAtlas } from '@playcanvas/react/hooks'
@@ -259,7 +259,7 @@ Ok, so we have some lighting. Let's add some interactivity by adding a `Script` 
 
 **Adding interactivity to the scene**
 
-```jsx title="/src/App.jsx"
+```jsx title="/src/App.tsx"
 import { Application, Entity } from '@playcanvas/react'
 import { Render, Camera, Light, Environment } from '@playcanvas/react/components'
 import { useEnvAtlas } from '@playcanvas/react/hooks'
@@ -314,7 +314,7 @@ Ok, so we have a camera and a rotating box. Let's make it more interesting by ad
 
 **Adding a 3D model to the scene**
 
-```jsx title="/src/App.jsx"
+```jsx title="/src/App.tsx"
 import { Application, Entity } from '@playcanvas/react'
 import { CameraControls } from 'playcanvas/scripts/esm/camera-controls.mjs'
 import { Render, Environment, Script, Light, Camera } from '@playcanvas/react/components'
@@ -358,7 +358,7 @@ We've now got a basic 3D scene with a camera, a rotating model, and some environ
 
 **Staging the scene**
 
-```jsx title="/src/App.jsx"
+```jsx title="/src/App.tsx"
 import { Application, Entity } from '@playcanvas/react'
 import { Environment, Light, Render, Camera } from '@playcanvas/react/components'
 import { useEnvAtlas, useModel } from '@playcanvas/react/hooks'
@@ -407,7 +407,7 @@ export const App = () => (
 
 We now have a complete 3D scene with a camera, a rotating model, and some environment lighting. You can now start adding your own assets and creating your own scenes. Check out the [loading assets guide](https://developer.playcanvas.com/user-manual/react/guide/loading-assets.md) to learn how to load your own assets and add interactivity with scripts.
 
-```jsx title="src/App.jsx" live noInline
+```jsx title="src/App.tsx" live noInline
 const Scene = () => {
   // load the assets
   const { asset: envAtlas } = useEnvAtlas('/assets/environment.png');
@@ -5836,7 +5836,7 @@ The fastest way to get started is with [`create-playcanvas`](https://developer.p
 npm create playcanvas@latest my-app -- -f react
 ```
 
-Choose one of the 12 runnable starters when prompted. The generated project includes [PlayCanvas Skills](https://developer.playcanvas.com/user-manual/getting-started/use-playcanvas-skills.md) for compatible AI coding agents. You can also try our [online playground](https://playcanvas-react.vercel.app/new) without installing anything locally.
+Choose one of the runnable starters when prompted. The generated project includes [PlayCanvas Skills](https://developer.playcanvas.com/user-manual/getting-started/use-playcanvas-skills.md) for compatible AI coding agents. You can also try our [online playground](https://playcanvas-react.vercel.app/new) without installing anything locally.
 
 ## Next Steps
 

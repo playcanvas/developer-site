@@ -10,7 +10,7 @@ For a Vite and TypeScript project, use [`create-playcanvas`](https://developer.p
 npm create playcanvas@latest my-app -- -f web-components
 ```
 
-The generated project includes one of 12 runnable starters and [PlayCanvas Skills](https://developer.playcanvas.com/user-manual/getting-started/use-playcanvas-skills.md) for compatible AI coding agents. Use the CDN or npm setup below when integrating Web Components manually.
+The generated project includes a runnable starter and [PlayCanvas Skills](https://developer.playcanvas.com/user-manual/getting-started/use-playcanvas-skills.md) for compatible AI coding agents. Use the CDN or npm setup below when integrating Web Components manually.
 
 :::
 

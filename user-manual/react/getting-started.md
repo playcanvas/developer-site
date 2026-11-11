@@ -26,7 +26,7 @@ The fastest way to get started is with [`create-playcanvas`](https://developer.p
 npm create playcanvas@latest my-app -- -f react
 ```
 
-Choose one of the 12 runnable starters when prompted. The generated project includes [PlayCanvas Skills](https://developer.playcanvas.com/user-manual/getting-started/use-playcanvas-skills.md) for compatible AI coding agents. You can also try our [online playground](https://playcanvas-react.vercel.app/new) without installing anything locally.
+Choose one of the runnable starters when prompted. The generated project includes [PlayCanvas Skills](https://developer.playcanvas.com/user-manual/getting-started/use-playcanvas-skills.md) for compatible AI coding agents. You can also try our [online playground](https://playcanvas-react.vercel.app/new) without installing anything locally.
 
 ## Next Steps
 

@@ -6,7 +6,7 @@ The recommended way to get started is to use the official [`create-playcanvas`](
 npm create playcanvas@latest my-app -- -f react
 ```
 
-Choose one of the 12 runnable starters when prompted. The generated TypeScript project includes Vite, development and production scripts, and [PlayCanvas Skills](https://developer.playcanvas.com/user-manual/getting-started/use-playcanvas-skills.md) for compatible AI coding agents.
+Choose one of the runnable starters when prompted. The generated TypeScript project includes Vite, development and production scripts, and [PlayCanvas Skills](https://developer.playcanvas.com/user-manual/getting-started/use-playcanvas-skills.md) for compatible AI coding agents.
 
 We recommend following [this guide](https://developer.playcanvas.com/user-manual/react/building-a-scene.md) to start building your first project.
 

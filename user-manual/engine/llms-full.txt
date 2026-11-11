@@ -591,7 +591,7 @@ Pass a project name, format, and starter to create a project non-interactively:
 npm create playcanvas@latest my-viewer -- -f react -s model-viewer
 ```
 
-When there is no terminal to answer the prompts, as when an AI coding agent or an automated build runs the command, the creator takes the defaults for any option you do not pass, as `--yes` does. It still stops with an error when a choice has no safe default, such as a non-empty target directory without `--overwrite`.
+When there is no terminal to answer the prompts, as when an AI coding agent or an automated build runs the command, the creator takes the defaults for any option you do not pass, as `--yes` does. It still stops with an error when a choice has no safe default, such as a non-empty target directory without `--keep` or `--overwrite`.
 
 | Option | Shorthand | Purpose |
 | --- | --- | --- |
@@ -599,6 +599,7 @@ When there is no terminal to answer the prompts, as when an AI coding agent or a
 | `--starter <name>` | `-s` | Choose one of the starters above. |
 | `--yes` | `-y` | Accept the default Engine and Spinning Cube choices. |
 | `--no-skills` | | Omit the PlayCanvas Skills included by default. |
+| `--keep` | | Add the project to a non-empty target directory without replacing its files. |
 | `--overwrite` | | Replace files in a non-empty target directory. |
 | `--help` | `-h` | Show the current command options. |
 
@@ -607,6 +608,8 @@ When there is no terminal to answer the prompts, as when an AI coding agent or a
 `--overwrite` removes existing files from the target directory. Use a new directory unless you intend to replace its contents.
 
 :::
+
+`--keep` adds the project to a directory that already holds files, such as a brief or assets, and replaces none of them. Where the project has a file of the same name, yours stays and the creator lists it. It stops with an error if the directory already has a `package.json`.
 
 ## Included PlayCanvas Skills
 
