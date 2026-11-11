@@ -199,7 +199,7 @@ const toByte = (c: number) => Math.max(0, Math.min(255, Math.round(c * k * 127 +
 // means_l.a = toByte(x), means_u.a = toByte(y), scales.a = toByte(z)
 ```
 
-Because `|p| <= 1`, every encoded byte is at least 1, so these alpha channels are never fully transparent. Decoding always yields a unit quaternion, so byte combinations with `|p| > 1` (which a conforming encoder never produces) still decode to a valid rotation.
+Before rounding `|p| <= 1`, so every encoded byte is at least 1 and these alpha channels are never fully transparent. Rounding each component to a byte can take `|p|` slightly above 1, by less than 0.007: `(0, 1/√2, 1/√2, 0)` encodes as `(218, 218, 128)`, which decodes to `|p|` ≈ 1.0022. Readers **must** accept any byte combination. Decoding always yields a unit quaternion, so `|p| > 1` still decodes to a valid rotation.
 
 Over uniformly random rotations this encoding has a maximum error of about 1.2° and an RMS error of about 0.6°.
 
@@ -426,7 +426,7 @@ Each entry of `meta.blind` describes one RGBA8 texture. Its `fields` are **packe
 * Field names **must** be unique across all blind textures, and **must** stay unique and non-empty after conversion to a shader identifier: characters other than `A–Z`, `a–z`, `0–9` and `_` become `_`, runs of `_` collapse to one, and a leading or trailing `_` is dropped. (The PlayCanvas engine exposes field `name` to shaders as `getBlind_<identifier>()`, defining `SOG_BLIND_<identifier>`.)
 * When converting to PLY, a tool **should** use each name as the property name: a `uint` property for the integer types and a `float` property for the others.
 * Bytes after the last field are unused. Writers **should** set an unused R, G or B to 0 and an unused A to 255 (so the image stays opaque), and readers **must** ignore them.
-* Each blind texture is one more texture a renderer samples. Writers **should** keep to 10 blind textures or fewer, which every WebGL2 device can bind, packing narrow fields into shared textures.
+* Each blind texture is one more texture a renderer samples. WebGL2 guarantees 16 textures per shader: a SOG with SH already uses 6 (`means_l`, `means_u`, `scales`, `sh0`, `shN_centroids` and `shN_labels`), and a renderer may bind textures of its own as well (the PlayCanvas engine adds a codebook lookup texture). Writers **should** keep to 9 blind textures or fewer, packing narrow fields into shared textures.
 
 ```ts
 // field j of texture t, for the gaussian at texel (u, v)
