@@ -305,7 +305,7 @@ function StartBuilding() {
               </h3>
               <p className={styles.laneDescription}>
                 <Translate id="homepage.start.code.description">
-                  Scaffold a Vite and TypeScript project for the Engine, React or Web Components from one of 12 runnable starters.
+                  Scaffold a Vite and TypeScript project for the Engine, React or Web Components from a runnable starter.
                 </Translate>
               </p>
             </div>

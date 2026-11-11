@@ -464,7 +464,7 @@
     "message": "コードで作る"
   },
   "homepage.start.code.description": {
-    "message": "12個の実行可能なスターターから選んで、Engine、React、Web Components用のViteとTypeScriptのプロジェクトを作成できます。"
+    "message": "実行可能なスターターから選んで、Engine、React、Web Components用のViteとTypeScriptのプロジェクトを作成できます。"
   },
   "homepage.start.code.action": {
     "message": "最初のプロジェクトを作成"

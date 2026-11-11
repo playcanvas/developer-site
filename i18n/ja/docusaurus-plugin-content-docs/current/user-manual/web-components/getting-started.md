@@ -13,7 +13,7 @@ ViteとTypeScriptを使用するプロジェクトでは、[`create-playcanvas`]
 npm create playcanvas@latest my-app -- -f web-components
 ```
 
-生成されたプロジェクトには、12個の実行可能なスターターのうち1つと、対応するAIコーディングエージェント向けの[PlayCanvas Skills](/user-manual/getting-started/use-playcanvas-skills/)が含まれます。Web Componentsを手動で統合する場合は、以下のCDNまたはnpmセットアップを使用してください。
+生成されたプロジェクトには、実行可能なスターターのうち1つと、対応するAIコーディングエージェント向けの[PlayCanvas Skills](/user-manual/getting-started/use-playcanvas-skills/)が含まれます。Web Componentsを手動で統合する場合は、以下のCDNまたはnpmセットアップを使用してください。
 
 :::
 
