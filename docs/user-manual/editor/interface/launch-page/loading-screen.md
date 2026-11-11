@@ -92,6 +92,27 @@ pc.script.createLoadingScreen((app) => {
 });
 ```
 
+### Keeping the Loading Screen During Shader Precompilation
+
+With [shader precompilation](/user-manual/optimization/shader-precompilation/), the application renders nothing until its shaders have compiled. To keep the loading screen visible until then, start the precompile when the app starts, and hide the loading screen when it ends. This replaces the `start` handler in the example above:
+
+```javascript
+    // Precompile the shaders of the scene, and show their progress
+    app.once('start', () => {
+        progressFiller.style.width = '0%';
+        app.on('precompile:progress', (value) => {
+            progressFiller.style.width = (value * 100) + '%';
+        });
+        app.precompile();
+    });
+
+    // Hide the loading screen once the shaders have compiled
+    app.once('precompile:end', () => {
+        app.off('precompile:progress');
+        document.body.removeChild(div);
+    });
+```
+
 ### Adding Images
 
 A custom loading screen is normal DOM content, so you can add images with standard HTML and CSS. For branding images that should appear as soon as the loading screen is shown, the recommended approach is to embed the image as a Base64 data URI in the loading screen script.
