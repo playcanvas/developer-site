@@ -12,7 +12,7 @@ import TabItem from '@theme/TabItem';
 npm create playcanvas@latest my-app -- -f react
 ```
 
-プロンプトで12個の実行可能なスターターから1つを選択します。生成されたTypeScriptプロジェクトには、Vite、開発用とプロダクション用のスクリプト、対応するAIコーディングエージェント向けの[PlayCanvas Skills](/user-manual/getting-started/use-playcanvas-skills/)が含まれます。
+プロンプトで実行可能なスターターから1つを選択します。生成されたTypeScriptプロジェクトには、Vite、開発用とプロダクション用のスクリプト、対応するAIコーディングエージェント向けの[PlayCanvas Skills](/user-manual/getting-started/use-playcanvas-skills/)が含まれます。
 
 最初のプロジェクトを構築するには [このガイド](../../building-a-scene) に従うことをお勧めします。
 

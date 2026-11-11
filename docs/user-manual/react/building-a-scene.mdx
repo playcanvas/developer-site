@@ -48,14 +48,14 @@ If you've not already done so, **follow the [Installation Guide](../getting-star
 create a new PlayCanvas React project.
 
 ```bash
-npm create playcanvas@latest my-first-3d-app -t react-ts
+npm create playcanvas@latest my-first-3d-app -- -f react
 ```
 
 Before we get to anything more complex, let's create a simple example that displays a box. Any PlayCanvas scene starts with an **Application**, a **Scene** and a **Camera** so we can see something.
 
-In your `/src/App.jsx` file, you can delete everything and replace it with the following code.
+In your `/src/App.tsx` file, you can delete everything and replace it with the following code.
 
-<CodeExample label="Rendering a simple box" filename="/src/App.jsx" code={CreateASceneSource}>
+<CodeExample label="Rendering a simple box" filename="/src/App.tsx" code={CreateASceneSource}>
     <CreateAScene />
 </CodeExample>
 
@@ -79,7 +79,7 @@ Finally we've added a `Camera` component to the `Entity`. When you attach a `Cam
 
 This is a great start, but we don't have any lights in the scene. You can add lighting to the scene by either adding an `Environment` or `Light` component. There are various types of lights in PlayCanvas, so check the [docs](/user-manual/graphics/lighting/lights) for a broader overview. For now, we'll use environmental lighting (which provides a more naturally lit scene) and a simple directional light which we'll use later to help ground the scene.
 
-<CodeExample label="Adding lights to the scene" filename="/src/App.jsx" code={AddALightSource} showDemo>
+<CodeExample label="Adding lights to the scene" filename="/src/App.tsx" code={AddALightSource} showDemo>
     <AddALight />
 </CodeExample>
 
@@ -103,7 +103,7 @@ We do this by loading an environment atlas and passing it to the `Environment` c
 
 Ok, so we have some lighting. Let's add some interactivity by adding a `Script` component so you can rotate the cube with the mouse. We'll use the `CameraControls` script to allow the camera to be rotated with the mouse. We've also added a `Camera` component to the `Entity` to set the clear color and field of view.
 
-<CodeExample label="Adding interactivity to the scene" filename="/src/App.jsx" code={AddInteractivitySource} showDemo>
+<CodeExample label="Adding interactivity to the scene" filename="/src/App.tsx" code={AddInteractivitySource} showDemo>
     <AddInteractivity />
 </CodeExample>
 
@@ -125,7 +125,7 @@ Now when you run it, you should be able to rotate the cube with the mouse. You c
 
 Ok, so we have a camera and a rotating box. Let's make it more interesting by adding a 3D model to the scene. You can use any 3D model format that PlayCanvas supports. [Fab](https://www.fab.com/) is a great resource for free 3D models.
 
-<CodeExample label="Adding a 3D model to the scene" filename="/src/App.jsx" code={AddModelSource} showDemo>
+<CodeExample label="Adding a 3D model to the scene" filename="/src/App.tsx" code={AddModelSource} showDemo>
     <AddModel />
 </CodeExample>
 
@@ -135,7 +135,7 @@ You should now see the Lamborghini model in the scene. We've removed the box pri
 
 We've now got a basic 3D scene with a camera, a rotating model, and some environment lighting. Let's add a ground plane and some shadows to stage the scene a little better. We can use the `ShadowCatcher` and `Grid` components to help with this.
 
-<CodeExample label="Staging the scene" filename="/src/App.jsx" code={StagingTheSceneSource} showDemo>
+<CodeExample label="Staging the scene" filename="/src/App.tsx" code={StagingTheSceneSource} showDemo>
     <StagingTheScene />
 </CodeExample>
 
@@ -143,7 +143,7 @@ We've now got a basic 3D scene with a camera, a rotating model, and some environ
 
 We now have a complete 3D scene with a camera, a rotating model, and some environment lighting. You can now start adding your own assets and creating your own scenes. Check out the [loading assets guide](../guide/loading-assets) to learn how to load your own assets and add interactivity with scripts.
 
-```jsx title="src/App.jsx" live noInline
+```jsx title="src/App.tsx" live noInline
 const Scene = () => {
   // load the assets
   const { asset: envAtlas } = useEnvAtlas('/assets/environment.png');
