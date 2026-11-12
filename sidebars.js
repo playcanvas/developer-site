@@ -105,6 +105,7 @@ const sidebars = {
       items: [
         'user-manual/engine/supported-browsers',
         'user-manual/engine/standalone',
+        'user-manual/engine/bundle-size',
         'user-manual/engine/running-in-node',
         'user-manual/engine/versioning',
         'user-manual/engine/migrations',
