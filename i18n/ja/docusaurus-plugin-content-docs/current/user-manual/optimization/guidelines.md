@@ -15,7 +15,7 @@ PlayCanvasアプリで最適なパフォーマンスを得るためのヒント�
 * [バッチング](/user-manual/graphics/advanced-rendering/batching)を使用してドローコールを減らします。Project でBatch Groupを作成し、それらを Render、Model、Element コンポーネントに割り当てることで、エンジンは可能な限り少数のメッシュインスタンスにマージし、ドローコールを減らしてパフォーマンスを向上させます。
 * アプリで生成されるシェーダーの数をできるだけ少なくするようにしてください。シェーダーは必要に応じてコンパイルおよびリンクされる必要があり、これは高コストであり、アプリの起動に遅延を引き起こし、フレームレートに欠陥を引き起こします。もし、マテリアルのAがEmissiveマップを持つのに対し、マテリアルBが持たない場合に2つのシェーダーが生成されます。マテリアルBに黒いEmissiveマップを設定すると、マテリアルは同じシェーダーを共有できます。シーン内のマテリアルの数を減らすことで、生成されるシェーダーの数も減らすことができます。残ったシェーダーを事前に並列でコンパイルするには、[シェーダーのプリコンパイル](/user-manual/optimization/shader-precompilation/)を参照してください。
 * スキニングされたメッシュの場合、カメラのフラスタムカリングで必要な正確なバウンディングボックスがエンジンによって毎フレーム生成されます。この操作にはある程度のコストがかかり、キャラクターがビューフラスタムから完全に外れている場合でも実行されます。このコストを避けるためには、[`Render`](https://api.playcanvas.com/engine/classes/RenderComponent.html#customaabb)または[`Model`](https://api.playcanvas.com/engine/classes/ModelComponent.html#customaabb) コンポーネントのプロパティであるカスタム AABB をキャラクターに設定することを検討してください。
-* アニメーションするキャラクターは、表示されていないときでも毎フレームアニメーションを更新します。カメラに映っていないキャラクターのこの処理を省くには、Animコンポーネントの`offscreenUpdate`プロパティを設定してください。詳しくは[画面外のキャラクター](/user-manual/animation/playing-animations/#characters-off-screen)を参照してください。
+* アニメーションするキャラクターは、表示されていないときでも毎フレームアニメーションを更新します。カメラに映っていないキャラクターのこの処理を省くには、Animコンポーネントの`offscreenUpdate`プロパティを設定してください。詳しくは[画面外のキャラクター](/user-manual/animation/playing-animations/#characters-off-screen)を参照してください。表示されていても画面上で小さい遠くのキャラクターには、`evaluationInterval`プロパティを設定してアニメーションの評価頻度を下げてください。詳しくは[遠くのキャラクター](/user-manual/animation/playing-animations/#distant-characters)を参照してください。
 * Cameraコンポーネントでフラスタムカリングを有効にする場合は、計算するコストを上回る可能性がある場合に限り、パフォーマンスを節約できる場合にのみ有効にしてください。すべてのメッシュインスタンスが常に表示される場面をレンダリングしている場合、このオプションを無効にしてください。
 
 ## グラフィックス - GPU
