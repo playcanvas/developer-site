@@ -469,8 +469,8 @@ The samples create the application in two steps:
 
 As your application grows, register what it needs:
 
-* **Components**: Each component type needs its component system. For example, add `pc.ScriptComponentSystem` to use the `script` component. The [`Application` constructor](https://api.playcanvas.com/engine/classes/Application.html#constructor) lists every component type with its system. If a system is missing, `addComponent` returns `null`, and the debug build of the Engine logs an error.
-* **Assets**: Each asset type needs its resource handler. The samples register `pc.TextureHandler` for textures and `pc.ContainerHandler` for GLB models.
+* **Components**: Each component type needs its component system. For example, add `pc.ScriptComponentSystem` to use the `script` component. [Bundle Size and Tree Shaking](https://developer.playcanvas.com/user-manual/engine/bundle-size.md) lists every component type with its system. If a system is missing, `addComponent` returns `null`, and the debug build of the Engine logs an error.
+* **Assets**: Each asset type needs its resource handler. The samples register `pc.TextureHandler` for textures and `pc.ContainerHandler` for GLB models. [Bundle Size and Tree Shaking](https://developer.playcanvas.com/user-manual/engine/bundle-size.md#resource-handlers) lists every asset type with its handler.
 * **Other features**: Sound, batching, lightmapping and XR are enabled with further `AppOptions` properties. For example, the `sound` component also needs `options.soundManager = new pc.SoundManager()`.
 
 :::note

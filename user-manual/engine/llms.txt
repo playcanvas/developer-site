@@ -25,6 +25,7 @@ Use this index to write code against the engine directly. React, Web Components 
 ## Setting up
 
 - [Using the Engine Standalone](https://developer.playcanvas.com/user-manual/engine/standalone.md): Setting up an `AppBase` project with Vite and npm, or without a build step using an import map and the CDN build, and registering the component systems and resource handlers it uses.
+- [Bundle Size and Tree Shaking](https://developer.playcanvas.com/user-manual/engine/bundle-size.md): Every component system, resource handler and other `AppOptions` property, what each one is for and what else it needs, so that a build tool bundles only what the application registers.
 - [Start with create-playcanvas](https://developer.playcanvas.com/user-manual/getting-started/start-with-create-playcanvas.md): `npm create playcanvas@latest my-app -- -f engine` creates a runnable Vite and TypeScript project, with PlayCanvas Skills for coding agents.
 - [Snapchat Web Lens starter](https://developer.playcanvas.com/user-manual/getting-started/start-with-create-playcanvas.md#snapchat-web-lens-starter): A portrait game set up for Snapchat Web Lenses, with the Web Lens API wired up and `npm run package` to check and zip the build.
 - [Developing with AI](https://developer.playcanvas.com/user-manual/engine/developing-with-ai.md): Setting up a coding agent on an Engine project and verifying its changes in a browser.
@@ -247,7 +248,7 @@ Use this index to write code against the engine directly. React, Web Components 
 
 ## Optional
 
-- [All pages of this index in one file](https://developer.playcanvas.com/user-manual/engine/llms-full.txt): 244 pages (1717 KB), for downloading and searching rather than reading into context.
+- [All pages of this index in one file](https://developer.playcanvas.com/user-manual/engine/llms-full.txt): 245 pages (1727 KB), for downloading and searching rather than reading into context.
 - [PlayCanvas Engine](https://developer.playcanvas.com/user-manual/engine.md)
 - [Versioning and Releases](https://developer.playcanvas.com/user-manual/engine/versioning.md)
 - [Assets](https://developer.playcanvas.com/user-manual/assets.md)
