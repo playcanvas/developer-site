@@ -359,6 +359,31 @@ const finished = layer.activeStateCurrentTime >= layer.activeStateDuration;
 
 This works for a clip that plays forwards once. In a looping state, `activeStateCurrentTime` keeps growing rather than wrapping back to 0, and a clip played backwards counts down from 0. Avoid `activeStateProgress` for this: with a state speed other than 1, it applies the speed a second time.
 
+## Characters Off-Screen {#characters-off-screen}
+
+Animating a character costs CPU time every frame, whether or not it is visible. With many characters, such as a crowd, most of that time can go to characters the camera does not see. The component's `offscreenUpdate` property decides how a character updates while it is not visible:
+
+| Value | While not visible |
+| --- | --- |
+| `OFFSCREENUPDATE_FULL` | Updates fully, as when visible. This is the default. |
+| `OFFSCREENUPDATE_STATE` | The state graph, its transitions and [events](/user-manual/animation/events/) keep updating, and the clips keep playing, but the pose is not calculated, so the bones keep their last pose. |
+| `OFFSCREENUPDATE_NONE` | Does not update at all. The clips stop, no events fire, and the animation continues where it stopped once the character is visible again. |
+
+```javascript
+character.anim.offscreenUpdate = OFFSCREENUPDATE_STATE;
+```
+
+Use `OFFSCREENUPDATE_STATE` when the game reacts to a character's state or events, such as footstep sounds or a transition that ends an attack, and `OFFSCREENUPDATE_NONE` for characters which only matter when seen. The property has no Editor UI yet, so set it from a script, and in React and Web Components on the engine component.
+
+A character is visible when a skinned or morphed mesh below the component's root (its entity, or its **Root Bone** when set) was rendered in the previous frame, by any camera. Rendering into a shadow map counts too, so a character whose shadow is in view keeps animating. An anim component which animates entities without skinned or morphed meshes, such as the parts of a machine, is never visible, so leave it at `OFFSCREENUPDATE_FULL`.
+
+Keep in mind:
+
+- **The first visible frame shows the previous pose.** Visibility comes from the previous frame, so when a character comes into view it renders its last pose for one frame, and is updated from the next. To avoid this, predict which characters come into view before the animation updates, for example by testing their bounds against the camera frustum in a script's `update`, and set `OFFSCREENUPDATE_FULL` on them. The animation update runs after the `update` of scripts and before their `postUpdate`, so the prediction needs to run in `update`, after the camera moved.
+- **Scripts see the last pose.** A script reading the bones of a character which is not visible, for example to attach an object to its hand, gets the pose from the last time it was updated.
+
+The [Crowd example](https://playcanvas.github.io/#/animation/crowd) animates a crowd of characters with `OFFSCREENUPDATE_STATE`, and predicts the characters coming into view with a script testing their custom AABB against the camera frustum.
+
 ## See Also
 
 - [Animation Clips](/user-manual/animation/clips/) - Where clips come from and how they bind
