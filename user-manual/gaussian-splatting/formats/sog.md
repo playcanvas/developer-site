@@ -13,9 +13,10 @@ A SOG dataset is a set of images plus a metadata file:
 | File                 | Purpose                                               | Channels (8-bit) |
 | -------------------- | ----------------------------------------------------- | ---------------- |
 | `meta.json`          | Scene metadata and filenames                          | —                |
-| `means_l.webp`       | Positions – lower 8 bits (RGB) + rotation byte 0 (A)  | R,G,B,A          |
-| `means_u.webp`       | Positions – upper 8 bits (RGB) + rotation byte 1 (A)  | R,G,B,A          |
-| `scales.webp`        | Per-axis sizes via codebook (RGB) + rotation byte 2 (A) | R,G,B,A        |
+| `means_l.webp`       | Positions – lower 8 bits                              | R,G,B            |
+| `means_u.webp`       | Positions – upper 8 bits                              | R,G,B            |
+| `scales.webp`        | Per-axis sizes via codebook                           | R,G,B            |
+| `quats.webp`         | Orientation (24-bit exponential map)                  | R,G,B            |
 | `sh0.webp`           | Base color (DC) + opacity                             | R,G,B,A          |
 | `shN_centroids.webp` | SH palette coefficients (optional)                    | R,G,B            |
 | `shN_labels.webp`    | Indices into SH palette (optional)                    | R,G,B            |
@@ -26,7 +27,9 @@ A SOG dataset is a set of images plus a metadata file:
 * By default, images **should** be **lossless WebP** to preserve quantized values exactly.
 * Each property in `meta.json` names its file, so other 8-bit RGBA-capable formats **may** be used.
 * Do not use lossy encodings for these assets as lossy compression will corrupt values and can produce visible/structural artifacts.
-* Many lossless WebP encoders discard the RGB values of fully transparent pixels (alpha = 0) unless told to keep them (libwebp's `exact` option). Rotation bytes are never 0 (§3.2), but a blind texture whose fields use the A byte (§3.7) can contain alpha 0, so it **must** be encoded with RGB preserved under zero alpha.
+* Images whose table entry lists only R,G,B **should** be written with A = 255, and readers **must** ignore their A channel.
+* Many lossless WebP encoders discard the RGB values of fully transparent pixels (alpha = 0) unless told to keep them (libwebp's `exact` option). A blind texture whose fields use the A byte (§3.7) can contain alpha 0, so it **must** be encoded with RGB preserved under zero alpha.
+* Some browsers premultiply decoded images by their alpha even when asked not to (WebKit does under WebGPU), which loses RGB precision wherever A < 255 and destroys RGB where A = 0. This is why only `sh0` (§3.4) and blind textures (§3.7) carry data in A. On those browsers, the base color of translucent gaussians, and blind fields that share a texel with a non-opaque A byte, lose precision.
 
 :::
 
@@ -77,12 +80,16 @@ interface Meta {
     // Ranges for decoding *log-transformed* positions (see §3.1).
     mins: [number, number, number];   // min of nx,ny,nz (log-domain)
     maxs: [number, number, number];   // max of nx,ny,nz (log-domain)
-    files: ["means_l.webp", "means_u.webp"]; // alpha channels: rotation bytes 0 and 1 (§3.2)
+    files: ["means_l.webp", "means_u.webp"];
   };
 
   scales: {
     codebook: number[];    // 256 floats (log-domain); see §3.3
-    files: ["scales.webp"]; // alpha channel: rotation byte 2 (§3.2)
+    files: ["scales.webp"];
+  };
+
+  quats: {
+    files: ["quats.webp"]; // 24-bit exponential map (§3.2)
   };
 
   sh0: {
@@ -161,23 +168,21 @@ const p = {
 };
 ```
 
-The alpha channels of both images carry rotation bytes (§3.2).
-
 ### 3.2 Orientation
 
-> `means_l.a`, `means_u.a`, `scales.a` (24-bit exponential map)
+> `quats.webp` (RGB, 24-bit exponential map)
 
 Quaternion components are ordered **(w, x, y, z)** throughout.
 
 A rotation is stored as a point `p` in the unit ball, the quaternion's **exponential map** scaled so that a half-turn (180°) lies on the unit sphere, with one byte per component:
 
-* `means_l.a` stores `p.x`, `means_u.a` stores `p.y` and `scales.a` stores `p.z`.
+* `quats.r` stores `p.x`, `quats.g` stores `p.y` and `quats.b` stores `p.z`.
 * Each byte `b` maps to `(b − 128) / 127`. This lattice has a level at exactly 0, so the identity rotation (bytes 128, 128, 128) is exact.
 
 ```ts
-const px = (means_l.a - 128) / 127;
-const py = (means_u.a - 128) / 127;
-const pz = (scales.a - 128) / 127;
+const px = (quats.r - 128) / 127;
+const py = (quats.g - 128) / 127;
+const pz = (quats.b - 128) / 127;
 
 const r = Math.hypot(px, py, pz);        // 0..1
 const theta = (Math.PI / 2) * r;         // half the rotation angle
@@ -192,10 +197,10 @@ Encoding (informative): normalize `q`, negate it if `w < 0` (`q` and `−q` are 
 const v = Math.hypot(x, y, z);
 const k = v > 0 ? Math.atan2(v, w) / v / (Math.PI / 2) : 2 / Math.PI;
 const toByte = (c: number) => Math.max(0, Math.min(255, Math.round(c * k * 127 + 128)));
-// means_l.a = toByte(x), means_u.a = toByte(y), scales.a = toByte(z)
+// quats.r = toByte(x), quats.g = toByte(y), quats.b = toByte(z), quats.a = 255
 ```
 
-Before rounding `|p| <= 1`, so every encoded byte is at least 1 and these alpha channels are never fully transparent. Rounding each component to a byte can take `|p|` slightly above 1, by less than 0.007: `(0, 1/√2, 1/√2, 0)` encodes as `(218, 218, 128)`, which decodes to `|p|` ≈ 1.0022. Readers **must** accept any byte combination. Decoding always yields a unit quaternion, so `|p| > 1` still decodes to a valid rotation.
+Before rounding `|p| <= 1`. Rounding each component to a byte can take `|p|` slightly above 1, by less than 0.007: `(0, 1/√2, 1/√2, 0)` encodes as `(218, 218, 128)`, which decodes to `|p|` ≈ 1.0022. Readers **must** accept any byte combination. Decoding always yields a unit quaternion, so `|p| > 1` still decodes to a valid rotation.
 
 Over uniformly random rotations this encoding has a maximum error of about 1.2° and an RMS error of about 0.6°.
 
@@ -213,8 +218,6 @@ const sz = Math.exp(meta.scales.codebook[scales.b]);
 
 Interpretation (e.g., principal axis standard deviations vs. full extents) follows the source training setup; decoded (post-`exp`) values are in **scene units**.
 
-The alpha channel carries a rotation byte (§3.2).
-
 ### 3.4 Base color + opacity (DC)
 
 > `sh0.webp` (RGBA)
@@ -223,6 +226,8 @@ The alpha channel carries a rotation byte (§3.2).
 
 * **R,G,B** are 0..255 indices into `sh0.codebook`.
 * **A** is the opacity byte. Opacity values above 1 are allowed (§3.6).
+
+On browsers that premultiply decoded images (§1), the R,G,B bytes of translucent gaussians lose precision.
 
 To convert the DC coefficient to **gamma-space RGB** color:
 
@@ -422,7 +427,8 @@ Each entry of `meta.blind` describes one RGBA8 texture. Its `fields` are **packe
 * Field names **must** be unique across all blind textures, and **must** stay unique and non-empty after conversion to a shader identifier: characters other than `A–Z`, `a–z`, `0–9` and `_` become `_`, runs of `_` collapse to one, and a leading or trailing `_` is dropped. (The PlayCanvas engine exposes field `name` to shaders as `getBlind_<identifier>()`, defining `SOG_BLIND_<identifier>`.)
 * When converting to PLY, a tool **should** use each name as the property name: a `uint` property for the integer types and a `float` property for the others.
 * Bytes after the last field are unused. Writers **should** set an unused R, G or B to 0 and an unused A to 255 (so the image stays opaque), and readers **must** ignore them.
-* Each blind texture is one more texture a renderer samples. WebGL2 guarantees 16 textures per shader: a SOG with SH already uses 6 (`means_l`, `means_u`, `scales`, `sh0`, `shN_centroids` and `shN_labels`), and a renderer may bind textures of its own as well (the PlayCanvas engine adds a codebook lookup texture). Writers **should** keep to 9 blind textures or fewer, packing narrow fields into shared textures.
+* Each blind texture is one more texture a renderer samples. WebGL2 guarantees 16 textures per shader: a SOG with SH already uses 7 (`means_l`, `means_u`, `scales`, `quats`, `sh0`, `shN_centroids` and `shN_labels`), and a renderer may bind textures of its own as well (the PlayCanvas engine adds a codebook lookup texture). Writers **should** keep to 8 blind textures or fewer, packing narrow fields into shared textures.
+* On browsers that premultiply decoded images (§1), a texture whose A byte holds data loses precision in its R, G and B bytes. Writers **should** leave the A byte unused where the fields fit in 3 bytes.
 
 ```ts
 // field j of texture t, for the gaussian at texel (u, v)
@@ -487,6 +493,9 @@ In PlayCanvas, shaders read blind fields while splats are copied to the work buf
     "codebook": [/* 256 floats */],
     "files": ["scales.webp"]
   },
+  "quats": {
+    "files": ["quats.webp"]
+  },
   "sh0": {
     "codebook": [/* 256 floats */],
     "files": ["sh0.webp"]
@@ -529,7 +538,7 @@ In PlayCanvas, shaders read blind fields while splats are copied to the work buf
 
 | Area | Version 2 | Version 3 |
 |---|---|---|
-| Rotation | `quats.webp`: 26-bit smallest-three | 24-bit exponential map in the alpha channels of `means_l`, `means_u`, `scales` (§3.2); `quats.webp` and `meta.quats` removed |
+| Rotation | `quats.webp`: 26-bit smallest-three | `quats.webp`: 24-bit exponential map in R,G,B (§3.2) |
 | Opacity | `sh0.a / 255`, at most 1 | `(sh0.a / 204)²`, up to 1.5625; `meta.opacity.max` when above 1 (§3.4, §3.6) |
 | SH bands | 1–3 | 1–4 (§3.5) |
 | SH palette | up to 65536 entries, 16-bit labels | up to 2^24 entries, 24-bit labels (§3.5) |
