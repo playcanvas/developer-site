@@ -359,6 +359,68 @@ const finished = layer.activeStateCurrentTime >= layer.activeStateDuration;
 
 This works for a clip that plays forwards once. In a looping state, `activeStateCurrentTime` keeps growing rather than wrapping back to 0, and a clip played backwards counts down from 0. Avoid `activeStateProgress` for this: with a state speed other than 1, it applies the speed a second time.
 
+## Characters Off-Screen {#characters-off-screen}
+
+Animating a character costs CPU time every frame, whether or not it is visible. With many characters, such as a crowd, most of that time can go to characters the camera does not see. The component's `offscreenUpdate` property decides how a character updates while it is not visible:
+
+| Value | While not visible |
+| --- | --- |
+| `OFFSCREENUPDATE_FULL` | Updates fully, as when visible. This is the default. |
+| `OFFSCREENUPDATE_STATE` | The state graph, its transitions and [events](/user-manual/animation/events/) keep updating, and the clips keep playing, but the animation is not evaluated or applied, so the animated entities and properties keep their last values. |
+| `OFFSCREENUPDATE_NONE` | Does not update at all. The clips stop, no events fire, and the animation continues where it stopped once the character is visible again. |
+
+```javascript
+character.anim.offscreenUpdate = OFFSCREENUPDATE_STATE;
+```
+
+Use `OFFSCREENUPDATE_STATE` when the game reacts to a character's state or events, such as footstep sounds or a transition that ends an attack, and `OFFSCREENUPDATE_NONE` for characters which only matter when seen. The property has no Editor UI yet, so set it from a script, and in React and Web Components on the engine component.
+
+A character is visible when a skinned or morphed mesh below the component's root (its entity, or its **Root Bone** when set) was rendered in the previous frame, by any camera. Rendering into a shadow map counts too, so a character whose shadow is in view keeps animating. An anim component which animates entities without skinned or morphed meshes, such as the parts of a machine, is never visible, so leave it at `OFFSCREENUPDATE_FULL`.
+
+Keep in mind:
+
+- **The first visible frame shows the character as it was last animated.** Visibility comes from the previous frame, so when a character comes into view it renders as it was last animated for one frame, and is updated from the next. To avoid this, predict which characters come into view before the animation updates, for example by testing their bounds against the camera frustum in a script's `update`, and set `OFFSCREENUPDATE_FULL` on them. The animation update runs after the `update` of scripts and before their `postUpdate`, so the prediction needs to run in `update`, after the camera moved.
+- **Scripts see the last animated values.** A script reading the bones of a character which is not visible, for example to attach an object to its hand, gets their transforms from the last time the animation was evaluated.
+
+The [`AnimUpdateOptimizer` script](#using-the-animupdateoptimizer-script) does this prediction for you.
+
+## Distant Characters {#distant-characters}
+
+Characters far from the camera, or small on the screen, can be animated at a lower rate without it being noticeable. The component's `evaluationInterval` property sets how often the animation is evaluated and applied, in frames. With the default value of 1, this happens every frame. With a value of 2, it happens every other frame, and so on:
+
+```javascript
+character.anim.evaluationInterval = 3;
+```
+
+Between evaluations, the animated entities and properties keep their last values, while the state graph, its transitions and [events](/user-manual/animation/events/) still update every frame, so gameplay that depends on them is not affected. Characters with the same interval are spread over the frames, so they are not all evaluated in the same frame, and a character which comes into view while using `offscreenUpdate` is evaluated immediately.
+
+A script can set the interval of each character from its distance to the camera every frame, for example evaluating characters within 12 units every frame, characters up to twice as far every other frame, and so on, up to an interval of 4. The `AnimUpdateOptimizer` script below does this.
+
+## Using the AnimUpdateOptimizer Script {#using-the-animupdateoptimizer-script}
+
+The engine comes with the [`AnimUpdateOptimizer`](https://api.playcanvas.com/scripts/classes/AnimUpdateOptimizer.html) script, which sets both of these options for a character. Add it to each entity with an anim component, and give it the camera:
+
+```javascript
+import { AnimUpdateOptimizer } from 'playcanvas/scripts/esm/anim/anim-update-optimizer.mjs';
+
+character.addComponent('script');
+character.script.create(AnimUpdateOptimizer, {
+    properties: {
+        camera: cameraEntity,
+        lodDistance: 12
+    }
+});
+```
+
+Every frame, the script:
+
+- Tests the custom AABB of the character's render components, enlarged by its `margin`, against the camera frustum. A character likely to be visible gets `OFFSCREENUPDATE_FULL`, so it is up to date when it comes into view, and any other character gets the script's `offscreenUpdate` mode, `OFFSCREENUPDATE_STATE` by default.
+- Sets `evaluationInterval` from the distance to the camera, one step per `lodDistance` up to `maxEvaluationInterval`. A `lodDistance` of 0, the default, evaluates the character every frame.
+
+The frustum of the camera is built once per frame and shared by all the characters. For the prediction to use the camera's position in the current frame, the scripts that move the camera need to update first, for example by creating the camera before the characters. Set a custom AABB on the characters' render components: without one, the script uses the bounds of the mesh instances, which are expensive for skinned meshes, and logs a warning.
+
+The [Crowd example](https://playcanvas.github.io/#/animation/crowd) uses the script on a crowd of characters, and shows how many are evaluated, off-screen and skipped by the interval.
+
 ## See Also
 
 - [Animation Clips](/user-manual/animation/clips/) - Where clips come from and how they bind

@@ -1292,6 +1292,7 @@ const sidebars = {
             'user-manual/optimization/texture-compression',
             'user-manual/optimization/runtime-devicepixelratio',
             'user-manual/optimization/load-time',
+            'user-manual/optimization/shader-precompilation',
             'user-manual/optimization/optimizing-scene-format',
             'user-manual/optimization/troubleshooting-performance',
           ],
