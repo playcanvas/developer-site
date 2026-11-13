@@ -492,8 +492,8 @@ import * as pc from 'playcanvas';
 
 アプリケーションの機能を増やすときは、必要なものを登録します。
 
-* **コンポーネント**: コンポーネントの種類ごとに、そのコンポーネントシステムが必要です。たとえば、`script`コンポーネントを使用するには`pc.ScriptComponentSystem`を追加します。[`Application`のコンストラクター](https://api.playcanvas.com/engine/classes/Application.html#constructor)に、すべてのコンポーネントの種類とそのシステムが記載されています。システムが登録されていない場合、`addComponent`は`null`を返し、Engineのデバッグビルドはエラーをログに出力します。
-* **アセット**: アセットの種類ごとに、そのリソースハンドラーが必要です。サンプルでは、テクスチャ用の`pc.TextureHandler`とGLBモデル用の`pc.ContainerHandler`を登録しています。
+* **コンポーネント**: コンポーネントの種類ごとに、そのコンポーネントシステムが必要です。たとえば、`script`コンポーネントを使用するには`pc.ScriptComponentSystem`を追加します。[バンドルサイズとツリーシェイキング](/user-manual/engine/bundle-size/)に、すべてのコンポーネントの種類とそのシステムが記載されています。システムが登録されていない場合、`addComponent`は`null`を返し、Engineのデバッグビルドはエラーをログに出力します。
+* **アセット**: アセットの種類ごとに、そのリソースハンドラーが必要です。サンプルでは、テクスチャ用の`pc.TextureHandler`とGLBモデル用の`pc.ContainerHandler`を登録しています。[バンドルサイズとツリーシェイキング](/user-manual/engine/bundle-size/#resource-handlers)に、すべてのアセットの種類とそのハンドラーが記載されています。
 * **その他の機能**: サウンド、バッチ処理、ライトマップ、XRは、`AppOptions`の他のプロパティで有効にします。たとえば、`sound`コンポーネントには`options.soundManager = new pc.SoundManager()`も必要です。
 
 :::note
