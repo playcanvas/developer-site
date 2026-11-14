@@ -47,7 +47,7 @@ Webブラウザには、未使用のJavaScriptオブジェクトを自動的に�
 
 ### プロファイリングツール
 
-PlayCanvasには、組み込みの[プロファイラツール](/user-manual/optimization/profiler/)が付属しています。Editorでは、Launch menuでProfilerオプションを有効にして、プロファイリングを有効にした状態でアプリケーションを実行できます。
+[Inspector の Performance タブ](/user-manual/optimization/inspector-performance/)は、アプリケーションのフレームを記録します。Editorでは、Launch menuでProfilerオプションを有効にすると、アプリケーションの起動から記録した状態で開きます。
 
 ### 一般的な最適化のヒント
 

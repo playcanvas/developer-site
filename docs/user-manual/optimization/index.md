@@ -15,7 +15,7 @@ This section covers the tools for looking inside a running PlayCanvas applicatio
 | What your code computes in the scene, such as bounds, directions or the content of a render target | [Debug Drawing](/user-manual/graphics/debug-drawing/) |
 | Whether the application keeps its frame rate as you use it | [MiniStats](/user-manual/optimization/mini-stats/) |
 | Which frames are slow, and what holds them back: the CPU, the GPU, scripts or loading | The [Performance tab of the Inspector](/user-manual/optimization/inspector-performance/) |
-| How long the application takes to start, and what loads when | The [Performance tab of the Inspector](/user-manual/optimization/inspector-performance/#recording-the-start-of-the-application), or the [Editor Profiler](/user-manual/optimization/profiler/) |
+| How long the application takes to start, and what loads when | The [Performance tab of the Inspector](/user-manual/optimization/inspector-performance/#recording-the-start-of-the-application), opened by the Profiler option of the Editor's Launch menu |
 | The statistics of the engine from code, for dashboards and automated comparisons | [Profiling with AppStats](/user-manual/optimization/app-stats/) |
 | What the GPU does within a frame, in detail | [GPU Profiling](/user-manual/optimization/gpu-profiling/) with the native GPU tools |
 

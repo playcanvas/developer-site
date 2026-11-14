@@ -52,7 +52,7 @@ Unityはゲームをエディターの中で再生します。PlayCanvasは新�
 
 スクリプトがエディターのビューポートで実行されることはないため、Unityの`[ExecuteInEditMode]`に相当するものはありません。スクリプトが作成したり変更したりするものは、起動したアプリにしか現れません。
 
-Launchボタンのメニューには、テスト用のオプションがあります。グラフィックスAPIを選んだり、[プロファイラー](/user-manual/optimization/profiler/)、[MiniStats](/user-manual/optimization/mini-stats/)、[Inspector](/user-manual/debugging/inspector/)を開いたりできます。**Debug** にチェックを入れると、エンジンの警告とエラーがコンソールに記録されます。
+Launchボタンのメニューには、テスト用のオプションがあります。グラフィックスAPIを選んだり、[プロファイラー](/user-manual/optimization/inspector-performance/#recording-the-start-of-the-application)、[MiniStats](/user-manual/optimization/mini-stats/)、[Inspector](/user-manual/debugging/inspector/)を開いたりできます。**Debug** にチェックを入れると、エンジンの警告とエラーがコンソールに記録されます。
 
 ### ビューポートの操作 {#navigating-the-viewport}
 
@@ -644,7 +644,7 @@ Unityはプラットフォームごとにプレイヤーをビルドします。
 | Consoleウィンドウ | 開発者ツールの **Console** タブ。[コンソールロギング](/user-manual/debugging/console-logging/)を参照してください。 |
 | Visual StudioやRiderのアタッチ | 開発者ツールの **Sources** タブで設定するブレークポイント。[ブラウザ開発ツール](/user-manual/debugging/browser-dev-tools/)を参照してください。 |
 | `Debug.Break()` | 開発者ツールを開いているときにアプリを一時停止する`debugger;`文 |
-| Profiler | Launchボタンのメニューから使う[プロファイラー](/user-manual/optimization/profiler/)と[MiniStats](/user-manual/optimization/mini-stats/)、および開発者ツールの **Performance** タブ |
+| Profiler | Launchボタンのメニューから使う[Inspector の Performance タブ](/user-manual/optimization/inspector-performance/)と[MiniStats](/user-manual/optimization/mini-stats/)、および開発者ツールの **Performance** タブ |
 | Frame Debugger | 同じくLaunchボタンのメニューから使え、各フレームのレンダーパスとドローコールを表示する[Inspector](/user-manual/debugging/inspector/)と、[ネイティブのGPUプロファイラー](/user-manual/optimization/gpu-profiling/) |
 | `Debug.DrawLine`とGizmos | `this.app.drawLine()`と、球やボックスなどの形状を描く[`WireRenderer`](/user-manual/graphics/debug-drawing/) |
 

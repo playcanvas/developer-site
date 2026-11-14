@@ -52,7 +52,7 @@ The Launch Page stays connected to the Editor. Changes to entities, components, 
 
 Scripts never run in the Editor's viewport, so there is nothing like Unity's `[ExecuteInEditMode]`: anything a script creates or changes appears only in the launched app.
 
-The Launch button's menu has options for testing: choose the graphics API, open the [Profiler](/user-manual/optimization/profiler/), [MiniStats](/user-manual/optimization/mini-stats/) or [Inspector](/user-manual/debugging/inspector/), and tick **Debug** to log the engine's warnings and errors to the console.
+The Launch button's menu has options for testing: choose the graphics API, open the [Profiler](/user-manual/optimization/inspector-performance/#recording-the-start-of-the-application), [MiniStats](/user-manual/optimization/mini-stats/) or [Inspector](/user-manual/debugging/inspector/), and tick **Debug** to log the engine's warnings and errors to the console.
 
 ### Navigating the Viewport {#navigating-the-viewport}
 
@@ -644,7 +644,7 @@ Your app runs in the browser, so you debug it with the browser's developer tools
 | Console window | The **Console** tab of the developer tools. See [Console Logging](/user-manual/debugging/console-logging/). |
 | Attaching Visual Studio or Rider | Breakpoints in the **Sources** tab of the developer tools. See [Browser Dev Tools](/user-manual/debugging/browser-dev-tools/). |
 | `Debug.Break()` | A `debugger;` statement, which pauses the app while the developer tools are open |
-| Profiler | The [Profiler](/user-manual/optimization/profiler/) and [MiniStats](/user-manual/optimization/mini-stats/), from the Launch button's menu, and the **Performance** tab of the developer tools |
+| Profiler | The [Performance tab of the Inspector](/user-manual/optimization/inspector-performance/) and [MiniStats](/user-manual/optimization/mini-stats/), from the Launch button's menu, and the **Performance** tab of the developer tools |
 | Frame Debugger | The [Inspector](/user-manual/debugging/inspector/), also from the Launch button's menu, which shows the render passes and draw calls of each frame, and [native GPU profilers](/user-manual/optimization/gpu-profiling/) |
 | `Debug.DrawLine` and Gizmos | `this.app.drawLine()`, and [`WireRenderer`](/user-manual/graphics/debug-drawing/) for spheres, boxes and other shapes |
 

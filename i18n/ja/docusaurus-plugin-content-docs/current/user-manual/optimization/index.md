@@ -15,7 +15,7 @@ description: PlayCanvas アプリケーションのバグやパフォーマン�
 | コードがシーン内で計算するもの（バウンディング、方向、レンダーターゲットの内容など） | [デバッグ描画](/user-manual/graphics/debug-drawing/) |
 | 操作中にアプリケーションがフレームレートを保てているか | [MiniStats](/user-manual/optimization/mini-stats/) |
 | どのフレームが遅く、何がそれを遅らせているか：CPU、GPU、スクリプト、ロード | [Inspector の Performance タブ](/user-manual/optimization/inspector-performance/) |
-| アプリケーションの起動にかかる時間と、何がいつロードされるか | [Inspector の Performance タブ](/user-manual/optimization/inspector-performance/#recording-the-start-of-the-application)、または [Editor Profiler](/user-manual/optimization/profiler/) |
+| アプリケーションの起動にかかる時間と、何がいつロードされるか | [Inspector の Performance タブ](/user-manual/optimization/inspector-performance/#recording-the-start-of-the-application)。Editor の Launch メニューの Profiler オプションで開きます |
 | ダッシュボードや自動比較のための、コードからのエンジンの統計 | [AppStatsによるプロファイリング](/user-manual/optimization/app-stats/) |
 | フレーム内で GPU が行う処理の詳細 | ネイティブ GPU ツールによる [GPUプロファイリング](/user-manual/optimization/gpu-profiling/) |
 
