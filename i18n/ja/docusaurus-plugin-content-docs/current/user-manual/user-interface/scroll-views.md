@@ -103,7 +103,7 @@ scrollView.addComponent('scrollview', {
 });
 ```
 
-アプリケーションを作成するときに、`pc.ScrollViewComponentSystem`と`pc.ScrollbarComponentSystem`を登録し、マウスでドラッグできるように`pc.Mouse`も渡します。コードから作成したスクロールビューには、デフォルトの設定がありません。`horizontal`か`vertical`を設定するまではどちらの軸にもスクロールせず、`scrollMode`、`bounceAmount`、`friction`がないと警告をログに出力し、跳ね返らず、離した瞬間にぴたりと止まります。ここでのように、追加するときにすべてを渡してください。
+アプリケーションを作成するときに、`ScrollViewComponentSystem`と`ScrollbarComponentSystem`を登録し、マウスでドラッグできるように`Mouse`も渡します。コードから作成したスクロールビューには、デフォルトの設定がありません。`horizontal`か`vertical`を設定するまではどちらの軸にもスクロールせず、`scrollMode`、`bounceAmount`、`friction`がないと警告をログに出力し、跳ね返らず、離した瞬間にぴたりと止まります。ここでのように、追加するときにすべてを渡してください。
 
 </TabItem>
 <TabItem value="editor" label="Editor">
@@ -228,8 +228,8 @@ export function ItemList({ items }) {
 
 スクロールバーは、トラックとなるイメージエレメントで、Scrollbarコンポーネントと子のハンドルを持ちます。スクロールビューは、コンテンツのどれだけが見えているかを示すようにハンドルのサイズを設定し、スクロール位置を示すようにハンドルの位置を設定します。ハンドルをドラッグするとコンテンツがスクロールします。**Visibility**（`horizontalScrollbarVisibility`と`verticalScrollbarVisibility`）を使うと、コンテンツがビューポートに収まるときにスクロールバーを隠せます。
 
-- `pc.SCROLLBAR_VISIBILITY_SHOW_ALWAYS`は、スクロールバーを常に表示します。これがデフォルトです。
-- `pc.SCROLLBAR_VISIBILITY_SHOW_WHEN_REQUIRED`は、コンテンツがビューポートより大きくないときにスクロールバーを隠します。
+- `SCROLLBAR_VISIBILITY_SHOW_ALWAYS`は、スクロールバーを常に表示します。これがデフォルトです。
+- `SCROLLBAR_VISIBILITY_SHOW_WHEN_REQUIRED`は、コンテンツがビューポートより大きくないときにスクロールバーを隠します。
 
 スクロールバーは単独でスライダーとしても使えます。[スライダー](/user-manual/user-interface/common-widgets/#sliders)を参照してください。
 
@@ -254,7 +254,7 @@ content.layoutgroup.on('reflow', ({ bounds }) => {
 
 ## コードからのスクロール {#scrolling-from-code}
 
-`scroll`はスクロール位置で、各軸の値が0から1の範囲をとる`pc.Vec2`です。垂直軸では、0がコンテンツの上端、1が下端です。
+`scroll`はスクロール位置で、各軸の値が0から1の範囲をとる`Vec2`です。垂直軸では、0がコンテンツの上端、1が下端です。
 
 ```javascript
 // チャットログの最後までスクロールする

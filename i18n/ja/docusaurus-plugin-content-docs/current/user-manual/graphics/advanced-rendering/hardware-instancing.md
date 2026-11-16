@@ -60,7 +60,7 @@ for (let i = 0; i < instanceCount; i++) {
 
 ### ステップ2: 頂点バッファの作成とインスタンシングの有効化
 
-[`pc.VertexFormat.getDefaultInstancingFormat`](https://api.playcanvas.com/engine/classes/VertexFormat.html#getdefaultinstancingformat)を使用してVertexBufferを作成し、MeshInstanceでインスタンシングを有効にします：
+[`VertexFormat.getDefaultInstancingFormat`](https://api.playcanvas.com/engine/classes/VertexFormat.html#getdefaultinstancingformat)を使用してVertexBufferを作成し、MeshInstanceでインスタンシングを有効にします：
 
 ```javascript
 const vbFormat = pc.VertexFormat.getDefaultInstancingFormat(app.graphicsDevice);

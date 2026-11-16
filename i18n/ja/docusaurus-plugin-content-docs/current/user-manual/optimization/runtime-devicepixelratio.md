@@ -17,7 +17,7 @@ Device pixel ratioは、ハードウェア画面上の物理ピクセルと論�
 
 理想的には、ハイエンドデバイスのユーザーは最高品質でレンダリングし、ローエンドデバイスのユーザーはプレイ可能なフレームレートを維持するために比率を減らす、という両方の良いとこ取りをしたいと考えています。
 
-Device pixel ratioは、プロパティ[`pc.GraphicsDevice#maxPixelRatio`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#maxpixelratio)を介して実行時に変更できます。
+Device pixel ratioは、プロパティ[`GraphicsDevice#maxPixelRatio`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#maxpixelratio)を介して実行時に変更できます。
 
 ```javascript
 const device = pc.Application.getApplication().graphicsDevice;
@@ -35,7 +35,7 @@ if (highTierDevice) {
 * アプリケーションの開始時に何らかのベンチマークを実行し、フレームレートを観察する
 * WebGLレンダラーデータを照会してGPUの名前を取得し、既知のパフォーマンストティアリストと照合する
 
-GPUに関する情報を取得するには、プロパティ`pc.GraphicsDevice#unmaskedRenderer`を使用します。これにより、情報を含む文字列、またはブラウザがプロパティをサポートしていない場合は空の文字列が含まれます。
+GPUに関する情報を取得するには、プロパティ`GraphicsDevice#unmaskedRenderer`を使用します。これにより、情報を含む文字列、またはブラウザがプロパティをサポートしていない場合は空の文字列が含まれます。
 
 文字列は以下のようなものになります。
 

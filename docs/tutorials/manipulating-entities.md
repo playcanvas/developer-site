@@ -9,7 +9,7 @@ In this tutorial we'll show you how you can change an Entity's position, orienta
 
 Entities form the basis of most applications built using the PlayCanvas framework. An Entity can represent anything from the player character, a bullet, an enemy or just simply be a point in space.
 
-Entities are a special form of graph node, they inherit a lot of their behavior from `pc.GraphNode`. All the manipulations we apply below can also be applied to graph nodes.
+Entities are a special form of graph node, they inherit a lot of their behavior from [`GraphNode`](https://api.playcanvas.com/engine/classes/GraphNode.html). All the manipulations we apply below can also be applied to graph nodes.
 
 One of the most common operations you will need to perform on Entities is to change its transform matrix. The local transform property of the Entity determines the position, orientation and scale of the Entity and affects all child Entities as well. Learning how to manipulate the transform is critical to making interesting and interactive applications.
 
@@ -37,7 +37,7 @@ var lp = entity.getLocalPosition();
 var wp = entity.getPosition();
 ```
 
-These methods both return a `pc.Vec3` (a vector quantity in the array form [x,y,z]).
+These methods both return a [`Vec3`](https://api.playcanvas.com/engine/classes/Vec3.html) (a vector quantity in the array form [x,y,z]).
 
 Setting the position of an entity is just as straightforward.
 

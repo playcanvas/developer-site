@@ -15,10 +15,10 @@ description: "ルームスケールと着座体験向けのVR参照空間: XRSPA
 
 ルームスケールVRは、Meta Quest、Apple Vision Pro、HTC Viveなどの多くのデバイスでサポートされています。ルームスケール体験は、シーンの原点位置から少量または大量の移動を可能にするように設計されています。
 
-適切な参照空間：`pc.XRSPACE_LOCALFLOOR`、`pc.XRSPACE_BOUNDEDFLOOR`、`pc.XRSPACE_UNBOUNDED`。
+適切な参照空間：`XRSPACE_LOCALFLOOR`、`XRSPACE_BOUNDEDFLOOR`、`XRSPACE_UNBOUNDED`。
 
 ## 着座型VR
 
 着座型VRまたは3DoF（3自由度）は、Google Cardboard、Samsung Gear VR、Oculus Riftなどのデバイスでサポートされています。これらの体験は、ユーザーがほぼ静止したままであることを前提としています。場合によっては、位置データが利用できず（例：Google Cardboard）、ヘッドセットの向きのみが使用されます。
 
-適切な参照空間：`pc.XRSPACE_LOCAL`、`pc.XRSPACE_LOCALFLOOR`。
+適切な参照空間：`XRSPACE_LOCAL`、`XRSPACE_LOCALFLOOR`。

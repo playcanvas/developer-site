@@ -94,7 +94,7 @@ character.anim.assignAnimation('Walk', walk);
 You can build a clip from keyframes yourself, to animate entities that came from no model, or properties that no model animates. A clip is made of three kinds of object:
 
 - [`AnimData`](https://api.playcanvas.com/engine/classes/AnimData.html) holds keyframe data: a flat array of numbers, with the number of components in each value. Times have one component, positions three, and rotations, as quaternions, four.
-- [`AnimCurve`](https://api.playcanvas.com/engine/classes/AnimCurve.html) links one set of times to one set of values, names the properties they drive, and sets the interpolation between keyframes: `pc.INTERPOLATION_STEP`, `pc.INTERPOLATION_LINEAR` or `pc.INTERPOLATION_CUBIC`.
+- [`AnimCurve`](https://api.playcanvas.com/engine/classes/AnimCurve.html) links one set of times to one set of values, names the properties they drive, and sets the interpolation between keyframes: `INTERPOLATION_STEP`, `INTERPOLATION_LINEAR` or `INTERPOLATION_CUBIC`.
 - [`AnimTrack`](https://api.playcanvas.com/engine/classes/AnimTrack.html) is the clip: a name, a duration, the times and values, and the curves.
 
 A curve's path has three parts. `entityPath` is the names of the entities from the anim component's entity down to the target, starting with the component's own entity. `component` is `graph` for the target's transform, or the name of one of its components. `propertyPath` names the property: `localPosition`, `localRotation` or `localScale` for a transform, or a property of the component, such as a light's `intensity` or `color`.
@@ -182,7 +182,7 @@ Some things to try:
 
 - Make the cube sink below the floor by changing the first and last heights from `0.4` to `-0.5`.
 - Add a keyframe: put `2` at the end of the times, three more numbers at the end of the positions and one more intensity, and raise the track's duration to `2`.
-- Swap `pc.INTERPOLATION_LINEAR` for `pc.INTERPOLATION_STEP`, and the values jump from keyframe to keyframe instead of moving between them.
+- Swap `INTERPOLATION_LINEAR` for `INTERPOLATION_STEP`, and the values jump from keyframe to keyframe instead of moving between them.
 
 The Component Properties example builds two clips in code that animate the color and rotation of two spot lights. In the Examples Browser, press Flash in the controls panel to cross-fade from the steady green clip to the flashing red one, and press it again to go back:
 

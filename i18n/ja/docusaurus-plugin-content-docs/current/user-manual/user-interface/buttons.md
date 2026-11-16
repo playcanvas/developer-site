@@ -52,7 +52,7 @@ button.button.on('click', () => {
 });
 ```
 
-アプリケーションを作成するときに`pc.ButtonComponentSystem`を登録します。
+アプリケーションを作成するときに`ButtonComponentSystem`を登録します。
 
 </TabItem>
 <TabItem value="editor" label="Editor">
@@ -131,7 +131,7 @@ button.button.on('click', () => {
 
 Sprite Changeモードでは、各状態が専用のスプライトアセットとフレームを表示します。`hoverSpriteAsset`と`hoverSpriteFrame`、`pressedSpriteAsset`と`pressedSpriteFrame`、`inactiveSpriteAsset`と`inactiveSpriteFrame`です。デフォルトの状態では、イメージ自身のスプライトを表示します。1つのスプライトの異なるフレームを使えば、1枚のテクスチャアトラスからボタンの状態一式を作れます。
 
-エンジンでは`transitionMode`を`pc.BUTTON_TRANSITION_MODE_SPRITE_CHANGE`に、エディターでは**Transition Mode**を**Sprite Change**に設定し、`<pc-button>`では`transition-mode="sprite"`を指定します。
+エンジンでは`transitionMode`を`BUTTON_TRANSITION_MODE_SPRITE_CHANGE`に、エディターでは**Transition Mode**を**Sprite Change**に設定し、`<pc-button>`では`transition-mode="sprite"`を指定します。
 
 ## イベント {#events}
 

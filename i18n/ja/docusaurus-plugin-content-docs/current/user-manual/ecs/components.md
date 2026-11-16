@@ -342,7 +342,7 @@ import { Script } from '@playcanvas/react/components';
 app.systems.rigidbody.gravity = new pc.Vec3(0, -1.62, 0);
 ```
 
-アプリケーションが追加できるのは、システムを登録したコンポーネントだけです。[`pc.Application`](https://api.playcanvas.com/engine/classes/Application.html)は組み込みのシステムをすべて登録し、エディター、React、Web Componentsも同様です。[`pc.AppBase`](https://api.playcanvas.com/engine/classes/AppBase.html)は列挙したシステムだけを登録するので、バンドラーはそれ以外をビルドから除外できます。
+アプリケーションが追加できるのは、システムを登録したコンポーネントだけです。[`Application`](https://api.playcanvas.com/engine/classes/Application.html)は組み込みのシステムをすべて登録し、エディター、React、Web Componentsも同様です。[`AppBase`](https://api.playcanvas.com/engine/classes/AppBase.html)は列挙したシステムだけを登録するので、バンドラーはそれ以外をビルドから除外できます。
 
 ```javascript
 const options = new pc.AppOptions();

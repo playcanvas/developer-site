@@ -272,7 +272,7 @@ entity.rigidbody.group = pc.BODYGROUP_USER_1;
 entity.rigidbody.mask = pc.BODYMASK_ALL ^ pc.BODYGROUP_USER_1;
 ```
 
-`pc.BODYGROUP_USER_1`から`pc.BODYGROUP_USER_8`までの8つのユーザーグループを自由に使用できます。同じグループとマスクで[レイキャスト](/user-manual/physics/ray-casting/#filtering-ray-casts)をフィルタリングすることもできます。
+`BODYGROUP_USER_1`から`BODYGROUP_USER_8`までの8つのユーザーグループを自由に使用できます。同じグループとマスクで[レイキャスト](/user-manual/physics/ray-casting/#filtering-ray-casts)をフィルタリングすることもできます。
 
 ## 関連情報 {#see-also}
 

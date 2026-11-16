@@ -12,7 +12,7 @@ import TabItem from '@theme/TabItem';
 
 `color`はイメージにティントを適用します。テクスチャの色にはこの色が乗算されるため、白やグレースケールのテクスチャを任意の色で描画でき、テクスチャのないイメージはその色の矩形になります。`opacity`は、イメージの透明度を0から1の範囲で設定します。`color`のアルファは無視されるため、代わりに`opacity`を使ってください。
 
-コードから変更するには、新しい`pc.Color`を代入します。
+コードから変更するには、新しい`Color`を代入します。
 
 ```javascript
 panel.element.color = new pc.Color(0.23, 0.55, 1);
@@ -41,7 +41,7 @@ icon.addComponent('element', {
 screen.addChild(icon);
 ```
 
-`iconTexture`は、`app.assets`に追加して読み込んだテクスチャアセットです。代わりに`pc.Texture`オブジェクトを使うには、`texture`を設定します。
+`iconTexture`は、`app.assets`に追加して読み込んだテクスチャアセットです。代わりに`Texture`オブジェクトを使うには、`texture`を設定します。
 
 </TabItem>
 <TabItem value="editor" label="Editor">
@@ -100,7 +100,7 @@ export function Icon() {
 | **Contain** | エレメントの内側に収まるようにスケーリングされ、左右または上下に余白が残ります |
 | **Cover** | エレメントを覆うようにスケーリングされ、左右または上下がはみ出します。はみ出した部分は[マスク](/user-manual/user-interface/masks/)で切り取ります |
 
-ContainやCoverで表示したテクスチャは、エレメントのピボットの位置に配置されます。ピボットが中央にあれば中央に配置され、角にあればその角に揃えられます。エンジンでは`fitMode`を`pc.FITMODE_STRETCH`、`pc.FITMODE_CONTAIN`、`pc.FITMODE_COVER`のいずれかに設定し、Reactでは`fitMode`プロパティ、Web Componentsでは`fit-mode`属性を使います。
+ContainやCoverで表示したテクスチャは、エレメントのピボットの位置に配置されます。ピボットが中央にあれば中央に配置され、角にあればその角に揃えられます。エンジンでは`fitMode`を`FITMODE_STRETCH`、`FITMODE_CONTAIN`、`FITMODE_COVER`のいずれかに設定し、Reactでは`fitMode`プロパティ、Web Componentsでは`fit-mode`属性を使います。
 
 ### テクスチャの一部 {#rect}
 
@@ -273,7 +273,7 @@ model.render.layers = [previewLayer.id];
 portrait.element.texture = previewTexture;
 ```
 
-カメラの`priority`を-1にすると、優先度が0のメインカメラより先にレンダリングされるため、インターフェースを描画する時点でテクスチャの準備ができています。クリアカラーが透明なので、イメージの背景は透明のままです。テクスチャはsRGB形式の`pc.PIXELFORMAT_SRGBA8`のままにしてください。`pc.PIXELFORMAT_RGBA8`にすると、イメージが明るくなりすぎます。`origin`を`pc.RENDERTARGET_ORIGIN_TOP`にすると、画像テクスチャと同じく一番上の行から順に格納されるので、WebGL2でもWebGPUでも正しい向きになります。指定しないと、WebGL2では上下が逆になります。`origin`オプションはエンジン2.22から使えます。
+カメラの`priority`を-1にすると、優先度が0のメインカメラより先にレンダリングされるため、インターフェースを描画する時点でテクスチャの準備ができています。クリアカラーが透明なので、イメージの背景は透明のままです。テクスチャはsRGB形式の`PIXELFORMAT_SRGBA8`のままにしてください。`PIXELFORMAT_RGBA8`にすると、イメージが明るくなりすぎます。`origin`を`RENDERTARGET_ORIGIN_TOP`にすると、画像テクスチャと同じく一番上の行から順に格納されるので、WebGL2でもWebGPUでも正しい向きになります。指定しないと、WebGL2では上下が逆になります。`origin`オプションはエンジン2.22から使えます。
 
 <EngineExample id="user-interface/render-to-image" title="Render to Image" />
 

@@ -84,8 +84,8 @@ upperBody.assignAnimation('Aim', tracks.aim);
 
 A layer's weight runs from 0, where it has no effect, to 1. What it does at the weights in between depends on the layer's blend type:
 
-- An **Overwrite** layer (`pc.ANIM_LAYER_OVERWRITE`), the default, blends from the result of the layers below it towards its own pose, by its weight. At 1, it replaces them; at 0.5, the result is halfway between. The base layer blends with the model's original pose in the same way, so a base layer with a weight of 0.5 plays its clips at half strength.
-- An **Additive** layer (`pc.ANIM_LAYER_ADDITIVE`) adds its clips' difference from the model's original pose to the result of the layers below, scaled by its weight. Use it to add a motion on top of another, such as a recoil on top of an aim, or breathing on top of any pose.
+- An **Overwrite** layer (`ANIM_LAYER_OVERWRITE`), the default, blends from the result of the layers below it towards its own pose, by its weight. At 1, it replaces them; at 0.5, the result is halfway between. The base layer blends with the model's original pose in the same way, so a base layer with a weight of 0.5 plays its clips at half strength.
+- An **Additive** layer (`ANIM_LAYER_ADDITIVE`) adds its clips' difference from the model's original pose to the result of the layers below, scaled by its weight. Use it to add a motion on top of another, such as a recoil on top of an aim, or breathing on top of any pose.
 
 Change a weight at any time with the layer's `weight`. To fade a layer in or out smoothly, `blendToWeight()` moves its weight to a value over a time in seconds:
 
@@ -248,7 +248,7 @@ Some things to try:
 
 - Move the mask up the arm, to `'arm_base/arm_column/arm_upper'`, and the layer takes over the upper arm and forearm as well.
 - Replace the mask with `null`, and the whole arm inspects when the layer is in.
-- Change `pc.ANIM_LAYER_OVERWRITE` to `pc.ANIM_LAYER_ADDITIVE`, and the wrist adds the inspect motion to its idling instead of replacing it.
+- Change `ANIM_LAYER_OVERWRITE` to `ANIM_LAYER_ADDITIVE`, and the wrist adds the inspect motion to its idling instead of replacing it.
 
 The Layer Masks example plays an upper-body layer over a character's full-body layer. In the Examples Browser, use the controls panel to switch each layer's state, change the upper-body layer's blend type, turn its mask on and off, and set how much each layer contributes:
 

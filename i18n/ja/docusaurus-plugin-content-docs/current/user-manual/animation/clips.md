@@ -94,7 +94,7 @@ character.anim.assignAnimation('Walk', walk);
 モデルに由来しないエンティティや、どのモデルもアニメーションさせないプロパティをアニメーションさせるために、キーフレームからクリップを自分で構築することもできます。クリップは、3種類のオブジェクトで構成されます。
 
 - [`AnimData`](https://api.playcanvas.com/engine/classes/AnimData.html)は、キーフレームのデータを保持します。数値のフラットな配列と、各値の成分数です。時刻は1成分、位置は3成分、回転はクォータニオンとして4成分です。
-- [`AnimCurve`](https://api.playcanvas.com/engine/classes/AnimCurve.html)は、1組の時刻を1組の値に結び付け、それらが動かすプロパティを指定し、キーフレーム間の補間を設定します。補間は`pc.INTERPOLATION_STEP`、`pc.INTERPOLATION_LINEAR`、`pc.INTERPOLATION_CUBIC`のいずれかです。
+- [`AnimCurve`](https://api.playcanvas.com/engine/classes/AnimCurve.html)は、1組の時刻を1組の値に結び付け、それらが動かすプロパティを指定し、キーフレーム間の補間を設定します。補間は`INTERPOLATION_STEP`、`INTERPOLATION_LINEAR`、`INTERPOLATION_CUBIC`のいずれかです。
 - [`AnimTrack`](https://api.playcanvas.com/engine/classes/AnimTrack.html)はクリップそのもので、名前、長さ、時刻と値、そしてカーブを持ちます。
 
 カーブのパスは、3つの部分からなります。`entityPath`は、Animコンポーネントのエンティティから対象までのエンティティの名前で、コンポーネント自身のエンティティから始まります。`component`は、対象のトランスフォームなら`graph`、そうでなければ対象のコンポーネントのいずれかの名前です。`propertyPath`はプロパティを指定します。トランスフォームなら`localPosition`、`localRotation`、`localScale`のいずれか、コンポーネントならライトの`intensity`や`color`のような、そのコンポーネントのプロパティです。
@@ -182,7 +182,7 @@ beacon.anim.assignAnimation('bob', track);
 
 - 最初と最後の高さを`0.4`から`-0.5`に変えて、キューブを床の下に沈ませます。
 - キーフレームを追加します。時刻の末尾に`2`を、位置の末尾にさらに3つの数値を、強度の末尾にもう1つの値を加え、トラックの長さを`2`に増やします。
-- `pc.INTERPOLATION_LINEAR`を`pc.INTERPOLATION_STEP`に置き換えると、値はキーフレームの間を移動するのではなく、キーフレームからキーフレームへ飛ぶようになります。
+- `INTERPOLATION_LINEAR`を`INTERPOLATION_STEP`に置き換えると、値はキーフレームの間を移動するのではなく、キーフレームからキーフレームへ飛ぶようになります。
 
 Component Propertiesのサンプルは、2つのスポットライトの色と回転をアニメーションさせる2つのクリップをコードで作ります。サンプルブラウザでコントロールパネルのFlashを押すと、緑に点灯し続けるクリップから赤く点滅するクリップへクロスフェードし、もう一度押すと元に戻ります。
 

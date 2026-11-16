@@ -342,7 +342,7 @@ For each type of component, the application has one component system, which crea
 app.systems.rigidbody.gravity = new pc.Vec3(0, -1.62, 0);
 ```
 
-An application can only add components whose system it has registered. [`pc.Application`](https://api.playcanvas.com/engine/classes/Application.html) registers every built-in system, as do the Editor, React and Web Components. [`pc.AppBase`](https://api.playcanvas.com/engine/classes/AppBase.html) registers only the systems you list, so that a bundler can leave the others out of your build:
+An application can only add components whose system it has registered. [`Application`](https://api.playcanvas.com/engine/classes/Application.html) registers every built-in system, as do the Editor, React and Web Components. [`AppBase`](https://api.playcanvas.com/engine/classes/AppBase.html) registers only the systems you list, so that a bundler can leave the others out of your build:
 
 ```javascript
 const options = new pc.AppOptions();

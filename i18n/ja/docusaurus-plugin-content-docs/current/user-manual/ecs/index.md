@@ -28,7 +28,7 @@ PlayCanvasのシーンにあるものは、すべて**エンティティ**です
 
 コンポーネントのタイプごとに、システムが1つあります。これは、そのタイプのすべてのコンポーネントを作成、更新、破棄し、それらが共有する設定を保持する[`ComponentSystem`](https://api.playcanvas.com/engine/classes/ComponentSystem.html)です。システムを直接扱う必要はほとんどありません。例外の1つが共有の設定で、たとえば`app.systems.rigidbody.gravity`は、すべてのRigidBodyを引っ張る重力です。
 
-アプリケーションが実行するのは、登録されたシステムだけです。[`pc.AppBase`](https://api.playcanvas.com/engine/classes/AppBase.html)は1つも登録されていない状態で始まるので、使うシステムを列挙します。そうすれば、バンドラーは残りをビルドから除外できます。[`pc.Application`](https://api.playcanvas.com/engine/classes/Application.html)は組み込みのシステムをすべて登録し、エディター、React、Web Componentsも同様です。[コンポーネントシステム](/user-manual/ecs/components/#component-systems)を参照してください。
+アプリケーションが実行するのは、登録されたシステムだけです。[`AppBase`](https://api.playcanvas.com/engine/classes/AppBase.html)は1つも登録されていない状態で始まるので、使うシステムを列挙します。そうすれば、バンドラーは残りをビルドから除外できます。[`Application`](https://api.playcanvas.com/engine/classes/Application.html)は組み込みのシステムをすべて登録し、エディター、React、Web Componentsも同様です。[コンポーネントシステム](/user-manual/ecs/components/#component-systems)を参照してください。
 
 :::note
 
@@ -143,7 +143,7 @@ export default function App() {
 
 | | Engine | Editor | React | Web Components |
 | --- | --- | --- | --- | --- |
-| エンティティ | `new pc.Entity('box')` | ヒエラルキーの項目 | `<Entity name="box">` | `<pc-entity name="box">` |
+| エンティティ | `new Entity('box')` | ヒエラルキーの項目 | `<Entity name="box">` | `<pc-entity name="box">` |
 | ツリー内の位置 | `parent.addChild(box)` | ヒエラルキーで親の上にドラッグ | 親の`<Entity>`の中に入れ子にする | 親の`<pc-entity>`の中に入れ子にする |
 | コンポーネント | `box.addComponent('render', { type: 'box' })` | インスペクターの**Add Component** | `<Entity>`の中の`<Render type="box" />` | `<pc-entity>`の中の`<pc-render type="box">` |
 | プロパティ | `box.render.castShadows = false` | インスペクターのフィールド | `castShadows={false}` | `cast-shadows="false"` |

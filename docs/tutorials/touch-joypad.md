@@ -50,7 +50,7 @@ The joystick is made of three Entities:
 
 The input area will listen for touch and mouse (for debugging purposes) events and also stops the propagation of the event.
 
-This means that any UI Elements under this and any [pc.Mouse](https://api.playcanvas.com/engine/classes/Mouse.html) or [pc.Touch](https://api.playcanvas.com/engine/classes/Touch.html) events will not be fired if this area is interacted with first.
+This means that any UI Elements under this and any [Mouse](https://api.playcanvas.com/engine/classes/Mouse.html) or [Touch](https://api.playcanvas.com/engine/classes/Touch.html) events will not be fired if this area is interacted with first.
 
 As the input area is an UI Element, it can be positioned, sized and anchored specifically for your needs via the [UI system layout](/user-manual/user-interface/elements/).
 

@@ -9,7 +9,7 @@ description: Mesh API でハイトマップの地形メッシュを構築し、�
     <iframe src="https://playcanv.as/p/CmcIlmPb/" title="Terrain Generation from Heightmap" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
-このプロジェクトでは[`pc.Mesh`](https://api.playcanvas.com/engine/classes/Mesh.html) API を使用して、ハイトマップ (Height) テクスチャから地形を手続き的に生成し、テクスチャを施しました。
+このプロジェクトでは[`Mesh`](https://api.playcanvas.com/engine/classes/Mesh.html) API を使用して、ハイトマップ (Height) テクスチャから地形を手続き的に生成し、テクスチャを施しました。
 
 [チュートリアルプロジェクト](https://playcanvas.com/project/406046)のエディターからお試しください。
 

@@ -112,7 +112,7 @@ screen.addComponent('screen', {
 app.root.addChild(screen);
 ```
 
-後から基準解像度を変更するには、`referenceResolution`に新しい`pc.Vec2`を代入します。
+後から基準解像度を変更するには、`referenceResolution`に新しい`Vec2`を代入します。
 
 </TabItem>
 <TabItem value="editor" label="Editor">
@@ -197,7 +197,7 @@ app.graphicsDevice.on('resizecanvas', fitReference);
 
 ### ピクセルパーフェクトな画像 {#pixel-perfect-images}
 
-Scale ModeがNoneの場合、テクスチャと同じサイズのイメージエレメントは各テクセルを描画バッファの1ピクセルとして描画するため、ピクセルアートや小さなアイコンがくっきりと表示されます。このようなエレメントは、整数ピクセルの位置に保ちます。幅や高さが奇数のキャンバスでは中央が2つのピクセルの間に来るため、中央ではなく角にアンカーし、奇数の幅と中央のピボットの組み合わせのように、辺がピクセルの中間に来るサイズは避けます。ピクセルアートをぼかさずに2倍や3倍のサイズで描画するには、テクスチャの`minFilter`と`magFilter`を`pc.FILTER_NEAREST`に設定します。
+Scale ModeがNoneの場合、テクスチャと同じサイズのイメージエレメントは各テクセルを描画バッファの1ピクセルとして描画するため、ピクセルアートや小さなアイコンがくっきりと表示されます。このようなエレメントは、整数ピクセルの位置に保ちます。幅や高さが奇数のキャンバスでは中央が2つのピクセルの間に来るため、中央ではなく角にアンカーし、奇数の幅と中央のピボットの組み合わせのように、辺がピクセルの中間に来るサイズは避けます。ピクセルアートをぼかさずに2倍や3倍のサイズで描画するには、テクスチャの`minFilter`と`magFilter`を`FILTER_NEAREST`に設定します。
 
 ## レスポンシブレイアウト {#responsive-layouts}
 
@@ -205,7 +205,7 @@ Scale ModeがNoneの場合、テクスチャと同じサイズのイメージエ
 
 | 環境 | キャンバスのサイズを決めるもの |
 | --- | --- |
-| エンジン | アプリケーションのフィルモード。`pc.FILLMODE_FILL_WINDOW`はウィンドウ全体を埋め、`pc.FILLMODE_KEEP_ASPECT`はキャンバスのアスペクト比が許す範囲でウィンドウを埋め、`pc.FILLMODE_NONE`はサイズをCSSに任せます。ウィンドウのサイズが変わったら`app.resizeCanvas()`を呼び出します |
+| エンジン | アプリケーションのフィルモード。`FILLMODE_FILL_WINDOW`はウィンドウ全体を埋め、`FILLMODE_KEEP_ASPECT`はキャンバスのアスペクト比が許す範囲でウィンドウを埋め、`FILLMODE_NONE`はサイズをCSSに任せます。ウィンドウのサイズが変わったら`app.resizeCanvas()`を呼び出します |
 | エディター | レンダリング設定の**Fill Mode**と**Resolution Mode** |
 | React | `<Application>`を含む要素。デフォルトでキャンバスがその要素を埋めるためです |
 | Web Components | ページのCSS。CSSは`<pc-app>`を`<video>`要素と同じようにサイズ設定します。キャンバスは常にその中を埋めます |

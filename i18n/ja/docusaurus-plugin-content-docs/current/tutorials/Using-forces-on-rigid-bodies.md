@@ -60,7 +60,7 @@ this.entity.rigidbody.applyTorqueImpulse(x, y, z)
 
 RigidyBodyを移動するには、上記のメソッドを使用して線形力と回転力(トルク)を適用します。オブジェクトが衝突する場合、直接位置や速度を変更することは避けるべきであり、これによりシミュレーションが上書きされ、特にオブジェクトが衝突する場合に奇妙な効果が生じる可能性があります。
 
-ただし、必要な場合は、`entity.rigidbody.linearVelocity`または`entity.rigidbody.angularVelocity`に新しい '[pc.Vec3](https://api.playcanvas.com/engine/classes/Vec3.html)'の値を直接割り当てることで、速度を上書きできます。
+ただし、必要な場合は、`entity.rigidbody.linearVelocity`または`entity.rigidbody.angularVelocity`に新しい '[Vec3](https://api.playcanvas.com/engine/classes/Vec3.html)'の値を直接割り当てることで、速度を上書きできます。
 
 RigidBodyの詳細については、[CollisionのAPIページ](https://api.playcanvas.com/engine/classes/CollisionComponent.html)、[pcの名前空間ページ](https://api.playcanvas.com/engine/)、[一人称視点の移動](/tutorials/first-person-movement/)、[Collisionのチュートリアル](/tutorials/collision-and-triggers/)を参照してください。
 
@@ -76,7 +76,7 @@ RigidBodyの詳細については、[CollisionのAPIページ](https://api.playc
 
 ## RigidBodyのテレポート
 
-RigidBodyを瞬時に新しい位置にテレポートするには、pc.Entity APIのsetPosition関数を使用できません。これは、物理エンジンがまだボディが古い位置にあると思っているためです。代わりに、RigidBodyコンポーネントのteleport関数を使用する必要があります。
+RigidBodyを瞬時に新しい位置にテレポートするには、Entity APIのsetPosition関数を使用できません。これは、物理エンジンがまだボディが古い位置にあると思っているためです。代わりに、RigidBodyコンポーネントのteleport関数を使用する必要があります。
 
 ```javascript
 //code within the update function

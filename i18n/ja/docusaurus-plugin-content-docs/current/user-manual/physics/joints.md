@@ -64,7 +64,7 @@ hinge.addComponent('joint', {
 app.root.addChild(hinge);
 ```
 
-`pc.Application`はJointコンポーネントシステムを登録します。`pc.AppBase`から構築する場合は、CollisionとRigidBodyのシステムと共に`pc.JointComponentSystem`を`AppOptions.componentSystems`に追加してください。
+`Application`はJointコンポーネントシステムを登録します。`AppBase`から構築する場合は、CollisionとRigidBodyのシステムと共に`JointComponentSystem`を`AppOptions.componentSystems`に追加してください。
 
 </TabItem>
 <TabItem value="editor" label="Editor">

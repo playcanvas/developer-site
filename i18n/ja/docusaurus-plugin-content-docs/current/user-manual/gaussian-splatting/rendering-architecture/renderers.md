@@ -35,9 +35,9 @@ app.scene.gsplat.renderer = pc.GSPLAT_RENDERER_RASTER_GPU_SORT;
 
 利用可能なオプション：
 
-- `pc.GSPLAT_RENDERER_AUTO` — *(デフォルト)* 現在のデバイスに最適なレンダラーを自動的に選択します：WebGPUではGPUソート、WebGLではCPUソート。
-- `pc.GSPLAT_RENDERER_RASTER_CPU_SORT` — CPUソートによるラスタライズ。
-- `pc.GSPLAT_RENDERER_RASTER_GPU_SORT` — GPUソートによるラスタライズ（WebGPU専用）。
+- `GSPLAT_RENDERER_AUTO` — *(デフォルト)* 現在のデバイスに最適なレンダラーを自動的に選択します：WebGPUではGPUソート、WebGLではCPUソート。
+- `GSPLAT_RENDERER_RASTER_CPU_SORT` — CPUソートによるラスタライズ。
+- `GSPLAT_RENDERER_RASTER_GPU_SORT` — GPUソートによるラスタライズ（WebGPU専用）。
 
 WebGPUを必要とするレンダラーは、WebGLデバイスではCPUソートにフォールバックします。このフォールバック後に実際に有効なレンダラーを確認するには、`currentRenderer`を読み取ります：
 

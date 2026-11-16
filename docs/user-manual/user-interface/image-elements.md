@@ -12,7 +12,7 @@ An image element draws a rectangle: a solid color, a texture, or a frame of a sp
 
 `color` tints the image. The colors of a texture are multiplied by it, so a white or grayscale texture can be drawn in any color, and an image without a texture is a rectangle of that color. `opacity` sets how transparent the image is, from 0 to 1. The alpha of `color` is ignored, so use `opacity` instead.
 
-To change them from code, assign a new `pc.Color`:
+To change them from code, assign a new `Color`:
 
 ```javascript
 panel.element.color = new pc.Color(0.23, 0.55, 1);
@@ -41,7 +41,7 @@ icon.addComponent('element', {
 screen.addChild(icon);
 ```
 
-`iconTexture` is a texture asset that you have added to `app.assets` and loaded. To use a `pc.Texture` object instead, set `texture`.
+`iconTexture` is a texture asset that you have added to `app.assets` and loaded. To use a `Texture` object instead, set `texture`.
 
 </TabItem>
 <TabItem value="editor" label="Editor">
@@ -100,7 +100,7 @@ A texture fills its element, stretched to the element's shape. **Fit Mode** keep
 | **Contain** | Scaled to fit inside the element, leaving space at its sides or above and below it |
 | **Cover** | Scaled to cover the element, overflowing its sides or its top and bottom. Crop the overflow with a [mask](/user-manual/user-interface/masks/) |
 
-A contained or covering texture is placed at the element's pivot: a centered pivot centers it, and a pivot in a corner aligns it to that corner. Set `fitMode` to `pc.FITMODE_STRETCH`, `pc.FITMODE_CONTAIN` or `pc.FITMODE_COVER` in the Engine, use the `fitMode` prop in React, and the `fit-mode` attribute in Web Components.
+A contained or covering texture is placed at the element's pivot: a centered pivot centers it, and a pivot in a corner aligns it to that corner. Set `fitMode` to `FITMODE_STRETCH`, `FITMODE_CONTAIN` or `FITMODE_COVER` in the Engine, use the `fitMode` prop in React, and the `fit-mode` attribute in Web Components.
 
 ### Part of a Texture {#rect}
 
@@ -273,7 +273,7 @@ model.render.layers = [previewLayer.id];
 portrait.element.texture = previewTexture;
 ```
 
-The camera's `priority` of -1 renders it before the main camera, which has a priority of 0, so the texture is ready when the interface is drawn. The transparent clear color leaves the background of the image transparent. Keep the texture's sRGB format, `pc.PIXELFORMAT_SRGBA8`: with `pc.PIXELFORMAT_RGBA8`, the image comes out too light. An `origin` of `pc.RENDERTARGET_ORIGIN_TOP` stores the image top row first, as image textures are, so that it is the right way up on both WebGL2 and WebGPU. Without it, the image is upside down on WebGL2. The `origin` option is available from engine 2.22.
+The camera's `priority` of -1 renders it before the main camera, which has a priority of 0, so the texture is ready when the interface is drawn. The transparent clear color leaves the background of the image transparent. Keep the texture's sRGB format, `PIXELFORMAT_SRGBA8`: with `PIXELFORMAT_RGBA8`, the image comes out too light. An `origin` of `RENDERTARGET_ORIGIN_TOP` stores the image top row first, as image textures are, so that it is the right way up on both WebGL2 and WebGPU. Without it, the image is upside down on WebGL2. The `origin` option is available from engine 2.22.
 
 <EngineExample id="user-interface/render-to-image" title="Render to Image" />
 

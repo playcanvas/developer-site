@@ -32,7 +32,7 @@ await new Promise((resolve) => {
 const app = new pc.Application(canvas);
 ```
 
-アプリケーションの開始時にRigidBodyシステムが`Ammo`グローバルを見つけ、ammo.jsバックエンドをインストールします。`pc.Application`はすべてのコンポーネントシステムを登録します。代わりに`pc.AppBase`と`pc.AppOptions`から構築する場合は、`pc.CollisionComponentSystem`と`pc.RigidBodyComponentSystem`（[ジョイント](/user-manual/physics/joints/)を使うなら`pc.JointComponentSystem`も）を`componentSystems`に追加してください。[Falling Shapes](https://playcanvas.github.io/#/physics/falling-shapes)の例に完全な手順があります。
+アプリケーションの開始時にRigidBodyシステムが`Ammo`グローバルを見つけ、ammo.jsバックエンドをインストールします。`Application`はすべてのコンポーネントシステムを登録します。代わりに`AppBase`と`AppOptions`から構築する場合は、`CollisionComponentSystem`と`RigidBodyComponentSystem`（[ジョイント](/user-manual/physics/joints/)を使うなら`JointComponentSystem`も）を`componentSystems`に追加してください。[Falling Shapes](https://playcanvas.github.io/#/physics/falling-shapes)の例に完全な手順があります。
 
 </TabItem>
 <TabItem value="editor" label="Editor">

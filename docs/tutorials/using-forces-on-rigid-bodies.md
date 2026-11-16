@@ -61,7 +61,7 @@ Instantaneous changes in angular velocity are applied via [`applyTorqueImpulse(x
 
 In order to move rigidbodies, you apply linear forces and rotational forces (torque) using the methods above. Usually you should try to avoid directly modifying the position or velocity of a rigidbody as this will override the simulation and it can lead to odd effects, especially when objects collide.
 
-However, if you need to, you can override the velocity by assigning a new '[pc.Vec3](https://api.playcanvas.com/engine/classes/Vec3.html)' set of values directly to `entity.rigidbody.linearVelocity` or `entity.rigidbody.angularVelocity`.
+However, if you need to, you can override the velocity by assigning a new '[Vec3](https://api.playcanvas.com/engine/classes/Vec3.html)' set of values directly to `entity.rigidbody.linearVelocity` or `entity.rigidbody.angularVelocity`.
 
 For more information on rigidbody types, see [the collision API page](https://api.playcanvas.com/engine/classes/CollisionComponent.html), [the pc namespace page](https://api.playcanvas.com/engine/), [the fps-controller tutorial](/tutorials/first-person-movement/) and [the collision tutorial](/tutorials/collision-and-triggers/).
 
@@ -77,7 +77,7 @@ Some Editor settings were set to prevent the constant application of unbalanced 
 
 ## Teleporting a Body
 
-To instantly teleport a body to a new position, you can't use the setPosition function from the pc.Entity API. This is because the physics engine would still think the body is in the old location. Instead, you have to use the rigidbody component's teleport function:
+To instantly teleport a body to a new position, you can't use the setPosition function from the Entity API. This is because the physics engine would still think the body is in the old location. Instead, you have to use the rigidbody component's teleport function:
 
 ```javascript
 //code within the update function
