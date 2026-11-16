@@ -21,7 +21,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 <Tabs defaultValue="esm" groupId='script-code'>
-<TabItem  value="esm" label="ESM">
+<TabItem value="esm" label="ESM">
 
 ```javascript
 import { Script } from 'playcanvas';
@@ -128,7 +128,7 @@ Display.prototype.initialize = function () {
 `player:move` イベントの発動。
 
 <Tabs defaultValue="esm" groupId='script-code'>
-<TabItem  value="esm" label="ESM">
+<TabItem value="esm" label="ESM">
 
 ```javascript
 import { Script } from 'playcanvas';

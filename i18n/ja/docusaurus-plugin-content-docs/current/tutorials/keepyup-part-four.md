@@ -5,6 +5,9 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406
 description: 物理、コリジョン、オーディオのフックを備えたサッカーボールの Entity を深掘りし、コアとなるインタラクティブオブジェクトとします。
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 <div className="iframe-container">
     <iframe src="https://playcanv.as/p/KH37bnOk/?overlay=false" title="Making a Simple Game - Part 4" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
@@ -16,6 +19,179 @@ description: 物理、コリジョン、オーディオのフックを備えた�
 Keepy Upゲームはサッカーボールを使用します。プレイヤーの入力や環境(つまり重力)に反応し、音声を再生します。ゲームの最も複雑な部分です。可能な限りシンプルに説明します。
 
 ## ball.js
+
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
+
+```javascript
+import { Script, Vec3 } from 'playcanvas';
+
+export class Ball extends Script {
+    static scriptName = "ball";
+
+    /**
+     * The value of gravity to use.
+     * 
+     * @attribute
+     * @title Gravity
+     * @type {number}
+     */
+    gravity = -9.8;
+
+    /**
+     * Speed to set the ball to when it is tapped.
+     * 
+     * @attribute
+     * @title Default Tap
+     * @type {number}
+     */
+    defaultTap = 5;
+
+    /**
+     * The particle effect to trigger when the ball is tapped.
+     * 
+     * @attribute
+     * @title Impact Effect
+     * @type {Entity}
+     */
+    impactEffect = null;
+
+    /**
+     * When ball goes below minimum y value, game over is triggered.
+     * 
+     * @attribute
+     * @title Ball Minimum
+     * @type {number}
+     */
+    ballMinimum = -6;
+
+    /**
+     * Multiplier to apply to X speed when tap is off center.
+     * 
+     * @attribute
+     * @title Speed Mult
+     * @type {number}
+     */
+    speedMult = 4;
+
+    /**
+     * Multiplier to apply to angular speed when tap is off center.
+     * 
+     * @attribute
+     * @title Ang Mult
+     * @type {number}
+     */
+    angMult = -6;
+
+    static tmp = new Vec3();
+
+    // initialize code called once per entity
+    initialize() {
+        this.paused = true;
+
+        // Get the "Game" Entity and start listening for events
+        this.game = this.app.root.findByName("Game");
+
+        this.app.on("game:start", this.unpause, this);
+        this.app.on("game:gameover", this.pause, this);
+        this.app.on("game:reset", this.reset, this);
+
+        // Initialize properties
+        this._vel = new Vec3(0, 0, 0);
+        this._acc = new Vec3(0, this.gravity, 0);
+        this._angSpeed = 0;
+
+        // Store the initial position and rotation for reseting
+        this._origin = this.entity.getLocalPosition().clone();
+        this._rotation = this.entity.getLocalRotation().clone();
+    }
+
+    // update code called every frame
+    update(dt) {
+        // Don't update when paused
+        if (this.paused) {
+            this.entity.rotate(0, 30 * dt, 0);
+            return;
+        }
+
+        let p = this.entity.getLocalPosition();
+        let tmp = Ball.tmp;
+
+        // integrate the velocity in a temporary variable
+        tmp.copy(this._acc).scale(dt);
+        this._vel.add(tmp);
+
+        // integrate the position in a temporary variable
+        tmp.copy(this._vel).scale(dt);
+        p.add(tmp);
+
+        // update position
+        this.entity.setLocalPosition(p);
+
+        // rotate by angular speed
+        this.entity.rotate(0, 0, this._angSpeed);
+
+        // check for game over condition
+        if (p.y < this.ballMinimum) {
+            this.game.script.game.gameOver();
+        }
+    }
+
+    /*
+     * Called by the input handler to tap the ball up in the air
+     * dx is the tap distance from centre of ball in x
+     * dy is the tap distance from centre of ball in y
+     */
+    tap(dx, dy) {
+        // Update velocity and spin based on position of tap
+        this._vel.set(this.speedMult * dx, this.defaultTap, 0);
+        this._angSpeed += this.angMult * dx;
+
+        // calculate the position of the tap in world space
+        let tmp = Ball.tmp;
+        tmp.copy(this.entity.getLocalPosition());
+        tmp.x -= dx;
+        tmp.y -= dy;
+
+        // trigger particle effect to tap position, facing away from the center of the ball
+        this.impactEffect.setLocalPosition(tmp);
+        this.impactEffect.particlesystem.reset();
+        this.impactEffect.particlesystem.play();
+        this.impactEffect.lookAt(this.entity.getPosition());
+
+        // play audio
+        this.entity.sound.play("bounce");
+
+        // increment the score by 1
+        this.game.script.game.addScore(1);
+    }
+
+    // Pause the ball update when not playing the game
+    unpause() {
+        this.paused = false;
+
+        // start game with a tap
+        this.tap(0, 0);
+    }
+
+    // Resume ball updating
+    pause() {
+        this.paused = true;
+    }
+
+    // Reset the ball to initial values
+    reset() {
+        this.entity.setLocalPosition(this._origin);
+        this.entity.setLocalRotation(this._rotation);
+        this._vel.set(0, 0, 0);
+        this._acc.set(0, this.gravity, 0);
+        this._angSpeed = 0;
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
 
 ```javascript
 var Ball = pc.createScript('ball');
@@ -160,6 +336,9 @@ Ball.prototype.reset = function () {
     this._angSpeed = 0;
 };
 ```
+
+</TabItem>
+</Tabs>
 
 ### スクリプト属性 (Script Attributes)
 

@@ -16,11 +16,11 @@ import TabItem from '@theme/TabItem';
 <TabItem value="engine" label="Engine">
 
 ```javascript
-const player = new pc.Entity('player');
+const player = new Entity('player');
 app.root.addChild(player);
 
 // playerの子
-const hat = new pc.Entity('hat');
+const hat = new Entity('hat');
 player.addChild(hat);
 ```
 
@@ -80,7 +80,7 @@ document.querySelector('pc-entity[name="player"]').appendChild(hat);
 <TabItem value="engine" label="Engine">
 
 ```javascript
-const enemy = new pc.Entity('goblin');
+const enemy = new Entity('goblin');
 enemy.tags.add('enemy', 'melee');
 
 enemy.name = 'goblin chief';
@@ -319,66 +319,83 @@ enemy.parentElement.appendChild(copy);
 このEngineアプリは、このページの内容をすべて使います。キューブを放り上げ、見えないところまで落ちたら破棄するスクリプトを持つキューブを1つ作り、そのキューブをテンプレートとしてシーンの外に置いておきます。そして毎フレーム、テンプレートのコピーを`fountain`エンティティに追加します。キャンバスをクリックしてfountainを無効にすると、その中のすべてのキューブが消えて止まります。エンティティを無効にすると、その子孫もオフになるからです。もう一度クリックすると、キューブは止まったところから動き出します。
 
 ```js live-example
-import * as pc from 'playcanvas';
+import {
+    AppBase,
+    AppOptions,
+    CameraComponentSystem,
+    Color,
+    createGraphicsDevice,
+    DEVICETYPE_WEBGPU,
+    Entity,
+    FILLMODE_FILL_WINDOW,
+    LightComponentSystem,
+    math,
+    RenderComponentSystem,
+    RESOLUTION_AUTO,
+    Script,
+    ScriptComponentSystem,
+    StandardMaterial,
+    Vec3
+} from 'playcanvas';
 
 // 使用するコンポーネントシステムを指定してアプリケーションを作成します
 const canvas = document.getElementById('application');
-const device = await pc.createGraphicsDevice(canvas, {
-    deviceTypes: [pc.DEVICETYPE_WEBGPU]
+const device = await createGraphicsDevice(canvas, {
+    deviceTypes: [DEVICETYPE_WEBGPU]
 });
 device.maxPixelRatio = Math.min(window.devicePixelRatio, 2);
 
-const options = new pc.AppOptions();
+const options = new AppOptions();
 options.graphicsDevice = device;
 options.componentSystems = [
-    pc.RenderComponentSystem,
-    pc.CameraComponentSystem,
-    pc.LightComponentSystem,
-    pc.ScriptComponentSystem
+    RenderComponentSystem,
+    CameraComponentSystem,
+    LightComponentSystem,
+    ScriptComponentSystem
 ];
 
-const app = new pc.AppBase(canvas);
+const app = new AppBase(canvas);
 app.init(options);
-app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
-app.setCanvasResolution(pc.RESOLUTION_AUTO);
+app.setCanvasFillMode(FILLMODE_FILL_WINDOW);
+app.setCanvasResolution(RESOLUTION_AUTO);
 window.addEventListener('resize', () => app.resizeCanvas());
 app.start();
 
-app.scene.ambientLight = new pc.Color(0.3, 0.3, 0.35);
+app.scene.ambientLight = new Color(0.3, 0.3, 0.35);
 
-const camera = new pc.Entity('camera');
+const camera = new Entity('camera');
 camera.addComponent('camera', {
-    clearColor: new pc.Color(0.11, 0.12, 0.17)
+    clearColor: new Color(0.11, 0.12, 0.17)
 });
 camera.setPosition(0, 3, 14);
 camera.lookAt(0, 3, 0);
 app.root.addChild(camera);
 
-const light = new pc.Entity('light');
+const light = new Entity('light');
 light.addComponent('light');
 light.setEulerAngles(45, 30, 0);
 app.root.addChild(light);
 
 // キューブが選ぶ3つのマテリアル
 const materials = [
-    new pc.Color(1, 0.55, 0.2),
-    new pc.Color(0.4, 0.2, 1),
-    new pc.Color(0.2, 0.8, 0.6)
+    new Color(1, 0.55, 0.2),
+    new Color(0.4, 0.2, 1),
+    new Color(0.2, 0.8, 0.6)
 ].map((color) => {
-    const material = new pc.StandardMaterial();
+    const material = new StandardMaterial();
     material.diffuse = color;
     material.update();
     return material;
 });
 
 // エンティティを放り上げ、見えないところまで落ちたら破棄するスクリプト
-class Fall extends pc.Script {
+class Fall extends Script {
     static scriptName = 'fall';
 
-    velocity = new pc.Vec3();
+    velocity = new Vec3();
 
     initialize() {
-        this.velocity.set(pc.math.random(-2, 2), pc.math.random(8, 11), pc.math.random(-2, 2));
+        this.velocity.set(math.random(-2, 2), math.random(8, 11), math.random(-2, 2));
         this.entity.render.material = materials[Math.floor(Math.random() * materials.length)];
     }
 
@@ -396,14 +413,14 @@ class Fall extends pc.Script {
 app.scripts.add(Fall);
 
 // テンプレートはシーンに追加しないので、描画されることもスクリプトが実行されることもありません
-const template = new pc.Entity('cube');
+const template = new Entity('cube');
 template.addComponent('render', { type: 'box' });
 template.addComponent('script');
 template.script.create(Fall);
 template.setLocalScale(0.3, 0.3, 0.3);
 
 // fountainがすべてのキューブを持つので、fountainを無効にするとすべてが無効になります
-const fountain = new pc.Entity('fountain');
+const fountain = new Entity('fountain');
 app.root.addChild(fountain);
 
 const label = document.createElement('div');

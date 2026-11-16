@@ -3,6 +3,9 @@ title: Webページとの通信
 description: iframe かファーストパーティの HTML シェルかにかかわらず、親ページの Script が PlayCanvas とやり取りするためのパターンです。
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 PlayCanvasとWebGLを使う最大の利点の一つは、アプリケーションと周囲のWebページとの間に直接的にやり取りできることです。このページでは、PlayCanvasアプリケーションとWebページまたはWebアプリケーションを接続する一般的な方法について説明します。
 
 PlayCanvasアプリケーションが周囲のWebページと通信する方法には2つあります。1つ目は、ページ内のiframeにアプリケーションを埋め込む方法です。2つ目は、独自のHTMLページを提供し、PlayCanvasページを読み込む方法です。これら2つの方法には、Webページとアプリケーション間で通信するために異なる方法が必要です。
@@ -12,6 +15,49 @@ PlayCanvasアプリケーションが周囲のWebページと通信する方法�
 両方のホスティング方法に共通することは、PlayCanvasアプリケーションでウェブページに公開する必要のある機能を考えることです。ボタンクリックやスライダーに基づいて何かの色を変更する必要があるかもしれません。または、アプリケーションにレンダリングされるテキスト入力を送信する必要があるかもしれません。公開する必要がある機能を事前に決定し、PlayCanvasアプリケーションに明示的なAPIまたは関数群を書いて、ウェブページから呼び出される唯一の関数を作成します。
 
 次に、PlayCanvasアプリケーションでAPIまたは関数を公開する一例を示します。
+
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
+
+```javascript
+import { Script, Application } from 'playcanvas';
+
+// Define a global function to set the score
+window.setScore = function(score) {
+    const app = Application.getApplication();
+    const entity = app.root.findByName("Score Keeper");
+    if (entity && entity.script && entity.script.scoreKeeper) {
+        entity.script.scoreKeeper.setScore(score);
+    }
+};
+
+export class ScoreKeeper extends Script {
+    static scriptName = "scoreKeeper";
+
+    initialize() {
+        // Define an application event to set the score
+        this.app.on("score:set", (score) => {
+            this.setScore(score);
+        }, this);
+    }
+
+    setScore(score) {
+        // Do the score setting here.
+    }
+}
+
+// How to use the API:
+
+// Method one:
+window.setScore(10);
+
+// Method two:
+const app = Application.getApplication();
+app.fire("score:set", 10);
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
 
 ```javascript
 // method one: define a global function to set the score
@@ -45,6 +91,9 @@ app.fire("score:set", 10);
 
 ```
 
+</TabItem>
+</Tabs>
+
 方法1は、アプリケーションにアクセスするために、ページ内のどこでも呼び出すことができるグローバルな関数を定義します。方法2は、ページから発射することができるアプリケーションイベントを定義します。アプリケーションはこのイベントをリッスンし、イベントに応じてアクションを実行します。どちらもアプリケーションでAPIを定義する有効な方法です。
 
 ### iframeに埋め込まれている場合
@@ -69,6 +118,29 @@ iframe.contentWindow.postMessage({
 
 アプリケーションで次のようにします。
 
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
+
+```javascript
+import { Application } from 'playcanvas';
+
+window.addEventListener("message", (event) => {
+    if (event.origin === "http:// example.com") { // always check message came from your website
+        const score = event.data.score;
+
+        // call API method one:
+        window.setScore(score);
+
+        // call API method two:
+        const app = Application.getApplication();
+        app.fire("score:set", score);
+    }
+}, false);
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
+
 ```javascript
 window.addEventListener("message", function (event) {
     if (event.origin === "http://example.com") { // always check message came from your website
@@ -83,6 +155,9 @@ window.addEventListener("message", function (event) {
     }
 }, false);
 ```
+
+</TabItem>
+</Tabs>
 
 ### 独自のHTMLを提供する
 

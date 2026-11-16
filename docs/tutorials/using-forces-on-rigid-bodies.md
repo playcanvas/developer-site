@@ -22,7 +22,7 @@ In this tutorial we will show you how to use forces to control a dynamic rigidbo
 ### Applying a Constant Force
 
 ```javascript
-if (app.keyboard.isPressed(pc.KEY_F) ) {
+if (app.keyboard.isPressed(KEY_F) ) {
     this.entity.rigidbody.applyForce(0, 9.8, 0);
 }
 ```
@@ -32,7 +32,7 @@ Here a force along the global y-axis is applied to the accessed entity when the 
 ### Impulses
 
 ```javascript
-if (app.keyboard.isPressed(pc.KEY_LEFT) ) {
+if (app.keyboard.isPressed(KEY_LEFT) ) {
     this.entity.rigidbody.applyImpulse(-1, 0, 0);
 }
 ```
@@ -42,7 +42,7 @@ The cube is given an x-axis impulse to impart an instant change of velocity via 
 ### Torques
 
 ```javascript
-if (app.keyboard.isPressed(pc.KEY_W) ) {
+if (app.keyboard.isPressed(KEY_W) ) {
     this.entity.rigidbody.applyTorque(-this.torque, 0, 0);
 }
 ```
@@ -97,7 +97,7 @@ If the cube moves beyond the viewable area in the x-direction, the teleport func
 ## Reset cube code
 
 ```javascript
-if (app.keyboard.wasPressed(pc.KEY_R)) {
+if (app.keyboard.wasPressed(KEY_R)) {
     this.reset();
 }
 ```
@@ -105,8 +105,8 @@ if (app.keyboard.wasPressed(pc.KEY_R)) {
 ```javascript
 reset: function () {
     this.entity.rigidbody.teleport(0, 2, 0);
-    this.entity.rigidbody.linearVelocity = pc.Vec3.ZERO;
-    this.entity.rigidbody.angularVelocity = pc.Vec3.ZERO;
+    this.entity.rigidbody.linearVelocity = Vec3.ZERO;
+    this.entity.rigidbody.angularVelocity = Vec3.ZERO;
 }
 ```
 
@@ -117,8 +117,8 @@ We include a reset function that brings the cube to its original position and, a
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-<Tabs defaultValue="classic" groupId='script-code'>
-<TabItem  value="esm" label="ESM">
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
 
 ```javascript
 import {

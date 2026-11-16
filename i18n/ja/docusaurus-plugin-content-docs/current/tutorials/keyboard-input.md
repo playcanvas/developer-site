@@ -5,6 +5,9 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405
 description: Keyboard API でキー押下と長押しを検出し、ゲームプレイの操作や簡単なインタラクションに使います。
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 <div className="iframe-container">
     <iframe src="https://playcanv.as/p/rFZGQWCi/?overlay=false" title="Basic Keyboard Input" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
@@ -14,6 +17,101 @@ description: Keyboard API でキー押下と長押しを検出し、ゲームプ
 PlayCanvasエンジンでのキーボード操作は`Keyboard`オブジェクトで提供されます。Keyboardオブジェクトは、キーが押されているかどうかを確認するなど、一般的なキーボード操作のための単純なインタフェースを提供します。また、キーコードや文字コードの処理に関するさまざまなクロスブラウザー問題を解決します。
 
 [チュートリアルプロジェクト](https://playcanvas.com/project/405804/overview/tutorial-basic-keyboard-input)のキーボード入力シーンをご確認ください。チュートリアルのコードはこちらです。
+
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
+
+```javascript
+import { Script, KEY_LEFT, KEY_RIGHT, KEY_SPACE, KEY_A } from 'playcanvas';
+
+export class KeyboardHandler extends Script {
+    static scriptName = "keyboardHandler";
+
+    /**
+     * @attribute
+     * @title Red Material
+     * @type {Asset}
+     * @resource material
+     */
+    redMaterial = null;
+
+    /**
+     * @attribute
+     * @title White Material
+     * @type {Asset}
+     * @resource material
+     */
+    whiteMaterial = null;
+
+    // initialize code called once per entity
+    initialize() {
+        // キーボードデバイスでいろいろなイベントを監視するためにon()を使います。
+        // 引数は以下の通りです。
+        // 1)監視するイベント名
+        // 2)イベントが呼び出された際に呼び出されるコールバック関数
+        // 3)(オプション)コールバック関数で使用する 'this' の値
+
+        this.app.keyboard.on("keydown", this.onKeyDown, this);
+        this.app.keyboard.on("keyup", this.onKeyUp, this);
+    }
+
+    // update code called every frame
+    update(dt) {
+        /*
+         * Notice in the demo that pressing and holding the arrow keys doesn't
+         * make the block spin. wasPressed() is used to detect a
+         * keypress that occurred since the last frame and will only be
+         * called once even if the key is held down.
+         */
+        var angle = 0;
+        if (this.app.keyboard.wasPressed(KEY_LEFT)) {
+            angle = -5;
+        } else if (this.app.keyboard.wasPressed(KEY_RIGHT)) {
+            angle = 5;
+        }
+
+        /*
+         * Notice that pressing and holding the space bar makes the block
+         * continuously spin. isPressed() is used to detected if a
+         * key is down right now. So it will be true every frame as long as
+         * the key is still pressed.
+         */
+        if (this.app.keyboard.isPressed(KEY_SPACE)) {
+            angle = 1;
+        }
+
+        // 回転する立方体の更新
+        this.entity.rotateLocal(0, angle, 0);
+    }
+
+    /*
+     * Event handler called when key is pressed
+     */
+    onKeyDown(event) {
+        // event.keyには押されたキーに対する識別子が入っています。
+        if (event.key === KEY_A && this.redMaterial) {
+            this.entity.render.meshInstances[0].material = this.redMaterial.resource;
+        }
+
+        // スペースバーを押すと、ウィンドウがスクロールします。
+        // preventDefault()をオリジナルのブラウザイベントに呼び出すことで、これが停止します。
+        event.event.preventDefault();
+    }
+
+    /*
+     * Event handler called when key is released
+     */
+    onKeyUp(event) {
+        // event.keyには押されたキーに対する識別子が入っています。
+        if (event.key === KEY_A && this.whiteMaterial) {
+            this.entity.render.meshInstances[0].material = this.whiteMaterial.resource;
+        }
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
 
 ```javascript
 var KeyboardHandler = pc.createScript('keyboardHandler');
@@ -95,6 +193,9 @@ KeyboardHandler.prototype.onKeyUp = function (event) {
     }
 };
 ```
+
+</TabItem>
+</Tabs>
 
 キーボード入力を検出する方法には2つの方法があります。1つ目は、スクリプトのupdateメソッドで行います。 `isPressed()`と`wasPressed()`を使用して、キーが現在押されているか、または押されたばかりかどうかを確認します。 2番目の方法は、イベントを使用してキーが押されたときまたは放されたときに応答することです。
 

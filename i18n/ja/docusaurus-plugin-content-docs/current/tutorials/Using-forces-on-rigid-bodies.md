@@ -5,6 +5,9 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405
 description: 動的なRigidbodyに力、インパルス、トルクを適用し、減衰と質量を調整して応答性の高い物理駆動の動きにします。
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 <div className='iframe-container'>
     <iframe src="https://playcanv.as/p/8LTSuf4F/" title="Forces and Impulses" />
 </div>
@@ -21,7 +24,7 @@ description: 動的なRigidbodyに力、インパルス、トルクを適用し�
 ### 一定の力を適用
 
 ```javascript
-if (app.keyboard.isPressed(pc.KEY_F) ) {
+if (app.keyboard.isPressed(KEY_F) ) {
     this.entity.rigidbody.applyForce(0, 9.8, 0);
 }
 ```
@@ -31,7 +34,7 @@ if (app.keyboard.isPressed(pc.KEY_F) ) {
 ### インパルス (Impulses)
 
 ```javascript
-if (app.keyboard.isPressed(pc.KEY_LEFT) ) {
+if (app.keyboard.isPressed(KEY_LEFT) ) {
     this.entity.rigidbody.applyImpulse(-1, 0, 0);
 }
 ```
@@ -41,7 +44,7 @@ if (app.keyboard.isPressed(pc.KEY_LEFT) ) {
 ### トルク (Torques)
 
 ```javascript
-if (app.keyboard.isPressed(pc.KEY_W) ) {
+if (app.keyboard.isPressed(KEY_W) ) {
     this.entity.rigidbody.applyTorque(-this.torque, 0, 0);
 }
 ```
@@ -96,7 +99,7 @@ if (this.playerPos.x > 9.0) {
 ## キューブのコードをリセット
 
 ```javascript
-if (app.keyboard.wasPressed(pc.KEY_R)) {
+if (app.keyboard.wasPressed(KEY_R)) {
     this.reset();
 }
 ```
@@ -104,14 +107,98 @@ if (app.keyboard.wasPressed(pc.KEY_R)) {
 ```javascript
 reset: function () {
     this.entity.rigidbody.teleport(0, 2, 0);
-    this.entity.rigidbody.linearVelocity = pc.Vec3.ZERO;
-    this.entity.rigidbody.angularVelocity = pc.Vec3.ZERO;
+    this.entity.rigidbody.linearVelocity = Vec3.ZERO;
+    this.entity.rigidbody.angularVelocity = Vec3.ZERO;
 }
 ```
 
 上記に加えて、キューブを元の位置に戻すリセット機能が含まれています。上記のように、RigidBodyの場所をテレポートされたエンティティの場所に同期させます。リセット関数の最後の2行は、RigidBodyの線形および角速度をゼロにリセットします。オブジェクトの向きもリセットできますが、このコードでは実行されていません。
 
 ## 完全なコードリスト
+
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
+
+```javascript
+import {
+    Script, Vec3,
+    EVENT_KEYDOWN, KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_A, KEY_D, KEY_W, KEY_S, KEY_F, KEY_R
+} from 'playcanvas';
+
+export class Movement extends Script {
+    static scriptName = "movement";
+        
+    // initialize code called once per entity
+    initialize() {
+        this.torque = 7;
+        this.app.keyboard.on(EVENT_KEYDOWN, this.onKeyDown, this);
+
+        this.on('destroy', function() {
+            this.app.keyboard.off(EVENT_KEYDOWN, this.onKeyDown, this);
+        }, this);
+    }
+
+    onKeyDown(event) {
+        event.event.preventDefault();
+    }
+
+    // update code called every frame
+    update(dt) {
+        // update player's position
+        this.playerPos = this.entity.getLocalPosition();
+
+        const app = this.app;
+
+        // keyboard controls and applying forces and moments.
+        if (app.keyboard.isPressed(KEY_LEFT) ) {
+            this.entity.rigidbody.applyImpulse(-1, 0, 0);
+        }
+        if (app.keyboard.isPressed(KEY_RIGHT) ) {
+            this.entity.rigidbody.applyImpulse(1, 0, 0);
+        }
+        if (app.keyboard.isPressed(KEY_UP) ) {
+            this.entity.rigidbody.applyImpulse(0, 1, 0);
+        }
+        if (app.keyboard.isPressed(KEY_A) ) {
+            this.entity.rigidbody.applyTorque(0, this.torque, 0);
+        }
+        if (app.keyboard.isPressed(KEY_D) ) {
+            this.entity.rigidbody.applyTorque(0, -this.torque, 0);
+        }
+        if (app.keyboard.isPressed(KEY_W) ) {
+            this.entity.rigidbody.applyTorque(-this.torque, 0, 0);
+        }
+        if (app.keyboard.isPressed(KEY_S) ) {
+            this.entity.rigidbody.applyTorque(this.torque, 0, 0);
+        }
+        if (app.keyboard.isPressed(KEY_F) ) {
+            this.entity.rigidbody.applyForce(0, 9.8, 0);
+        }
+
+        // Keeping the cube on screen - cube moves off of one screen edge then appears from the opposite edge.
+        if (this.playerPos.x < -9.0) {
+            this.entity.rigidbody.teleport(8.8, this.playerPos.y, this.playerPos.z);
+        }
+        if (this.playerPos.x > 9.0) {
+            this.entity.rigidbody.teleport(-8.8, this.playerPos.y, this.playerPos.z);
+        }
+
+        // cube reset control
+        if (app.keyboard.wasPressed(KEY_R) ) {
+            this.reset();
+        }
+    }
+
+    reset() {
+        this.entity.rigidbody.teleport(0, 2, 0);
+        this.entity.rigidbody.linearVelocity = Vec3.ZERO;
+        this.entity.rigidbody.angularVelocity = Vec3.ZERO;
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
 
 ```javascript
 var DynamicBody = pc.createScript('dynamicBody');
@@ -183,3 +270,6 @@ DynamicBody.prototype.reset = function () {
     this.entity.rigidbody.angularVelocity = pc.Vec3.ZERO;
 };
 ```
+
+</TabItem>
+</Tabs>

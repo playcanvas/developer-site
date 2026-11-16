@@ -22,11 +22,19 @@ Take a look at the [tutorial project](https://playcanvas.com/project/405819/over
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-<Tabs defaultValue="classic" groupId='script-code'>
-<TabItem  value="esm" label="ESM">
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
 
 ```javascript
-import { Script, Vec3, MOUSEBUTTON_LEFT, MOUSEBUTTON_MIDDLE, MOUSEBUTTON_RIGHT } from 'playcanvas';
+import {
+    Script,
+    Vec3,
+    MOUSEBUTTON_LEFT,
+    MOUSEBUTTON_MIDDLE,
+    MOUSEBUTTON_RIGHT,
+    EVENT_MOUSEMOVE,
+    EVENT_MOUSEDOWN
+} from 'playcanvas';
 
 export class Mouse extends Script {
     static scriptName = "mouse";
@@ -66,8 +74,8 @@ export class Mouse extends Script {
         // Use the on() method to attach event handlers.
         // The mouse object supports events on move, button down and
         // up, and scroll wheel.
-        this.app.mouse.on(pc.EVENT_MOUSEMOVE, this.onMouseMove, this);
-        this.app.mouse.on(pc.EVENT_MOUSEDOWN, this.onMouseDown, this);
+        this.app.mouse.on(EVENT_MOUSEMOVE, this.onMouseMove, this);
+        this.app.mouse.on(EVENT_MOUSEDOWN, this.onMouseDown, this);
     }
 
     onMouseMove(event) {
@@ -191,8 +199,8 @@ The `Mouse` object allows you to listen to different events corresponding to mou
 Notice how we also pass `this` into the on() method for binding to events. This third argument is the object that is used as `this` in the event callback.
 
 ```javascript
-this.app.mouse.on(pc.EVENT_MOUSEMOVE, this.onMouseMove, this);
-this.app.mouse.on(pc.EVENT_MOUSEDOWN, this.onMouseDown, this);
+this.app.mouse.on(EVENT_MOUSEMOVE, this.onMouseMove, this);
+this.app.mouse.on(EVENT_MOUSEDOWN, this.onMouseDown, this);
 ```
 
 Events available on `Mouse` are:

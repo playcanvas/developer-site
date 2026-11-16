@@ -14,7 +14,7 @@ Usually you will be creating Entities via the PlayCanvas Editor, building up col
 ## Creating an Entity
 
 ```javascript
-var entity = new pc.Entity(); // Create an Entity
+var entity = new Entity(); // Create an Entity
 
 // Add it to the Entity hierarchy
 this.app.root.addChild(entity);
@@ -26,7 +26,7 @@ First you need to create an Entity. This is straightforward, but it is important
 
 ```javascript
 // Create a new Entity
-var entity = new pc.Entity();
+var entity = new Entity();
 
 // Add a new Camera Component with default values
 entity.addComponent("camera");
@@ -47,7 +47,7 @@ Each Component type has different properties that can be passed in on the data o
 ## Removing Components
 
 ```javascript
-var entity = new pc.Entity();
+var entity = new Entity();
 
 // Attach Camera Component with default values
 entity.addComponent("camera");
@@ -62,7 +62,7 @@ Components can be deleted individually from an Entity by calling the `removeComp
 
 ```javascript
 // Create a new Entity
-var entity = new pc.Entity();
+var entity = new Entity();
 
 // Create a new Camera Component with default values
 entity.addComponent("camera");
@@ -86,8 +86,8 @@ When you are finished with an Entity you call the `destroy` method on the Entity
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-<Tabs defaultValue="classic" groupId='script-code'>
-<TabItem  value="esm" label="ESM">
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
 
 ```javascript
 import { Script, Entity, math } from 'playcanvas';

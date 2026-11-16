@@ -5,6 +5,9 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405
 description: Mouse API で移動、ボタン押下、ブラウザ間で一貫したスクリーン座標を読み取り、インタラクティブな操作に使います。
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 <div className="iframe-container">
     <iframe src="https://playcanv.as/p/MHIdZgaj/?overlay=false" title="Basic Mouse Input" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
@@ -18,6 +21,95 @@ description: Mouse API で移動、ボタン押下、ブラウザ間で一貫し
 PlayCanvasのエンジンでは、`Mouse`オブジェクトが提供されており、マウスが移動したときやマウスボタンが押されたときに検出するためのシンプルなインターフェイスを提供します。また、マウス座標の処理におけるブラウザ間での一貫性の問題を解決することができます。
 
 [tutorial project](https://playcanvas.com/project/405819/overview/tutorial-basic-mouse-input)を見てみましょう。次に、mouse.jsのコードを示します。
+
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
+
+```javascript
+import {
+    Script,
+    Vec3,
+    MOUSEBUTTON_LEFT,
+    MOUSEBUTTON_MIDDLE,
+    MOUSEBUTTON_RIGHT,
+    EVENT_MOUSEMOVE,
+    EVENT_MOUSEDOWN
+} from 'playcanvas';
+
+export class Mouse extends Script {
+    static scriptName = "mouse";
+
+    /**
+     * @attribute
+     * @title Red Material
+     * @type {Asset}
+     * @resource material
+     */
+    redMaterial = null;
+
+    /**
+     * @attribute
+     * @title Green Material
+     * @type {Asset}
+     * @resource material
+     */
+    greenMaterial = null;
+
+    /**
+     * @attribute
+     * @title Blue Material
+     * @type {Asset}
+     * @resource material
+     */
+    blueMaterial = null;
+
+    // initialize code called once per entity
+    initialize() {
+        this.pos = new Vec3();
+
+        // Disabling the context menu stops the browser displaying a menu when
+        // you right-click the page
+        this.app.mouse.disableContextMenu();
+
+        // Use the on() method to attach event handlers.
+        // The mouse object supports events on move, button down and
+        // up, and scroll wheel.
+        this.app.mouse.on(EVENT_MOUSEMOVE, this.onMouseMove, this);
+        this.app.mouse.on(EVENT_MOUSEDOWN, this.onMouseDown, this);
+    }
+
+    onMouseMove(event) {
+        // Use the camera component's screenToWorld function to convert the
+        // position of the mouse into a position in 3D space
+        var depth = 10;
+        var cameraEntity = this.app.root.findByName('Camera');
+        cameraEntity.camera.screenToWorld(event.x, event.y, depth, this.pos);
+
+        // Finally update the cube's world-space position
+        this.entity.setPosition(this.pos);
+    }
+
+    onMouseDown(event) {
+        // If the left mouse button is pressed, change the cube color to red
+        if (event.button === MOUSEBUTTON_LEFT) {
+            this.entity.model.meshInstances[0].material = this.redMaterial.resource;
+        }
+        
+        // If the middle mouse button is pressed, change the cube color to green
+        if (event.button === MOUSEBUTTON_MIDDLE) {
+            this.entity.model.meshInstances[0].material = this.greenMaterial.resource;
+        }
+        
+        // If the right mouse button is pressed, change the cube color to blue
+        if (event.button === MOUSEBUTTON_RIGHT) {
+            this.entity.model.meshInstances[0].material = this.blueMaterial.resource;
+        }
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
 
 ```javascript
 var Mouse = pc.createScript('mouse');
@@ -81,6 +173,9 @@ Mouse.prototype.onMouseDown = function (event) {
 };
 ```
 
+</TabItem>
+</Tabs>
+
 ### マウスにアクセスする
 
 マウスの制御は`Mouse`オブジェクトによって管理されます。[フレームワーク](/user-manual/glossary#framework)は、[application app](/user-manual/glossary#application)上でこれのインスタンスを提供します。このインスタンスは、すべてのスクリプトオブジェクトで次のように利用できます：
@@ -104,8 +199,8 @@ this.app.mouse.disableContextMenu();
 私たちがイベントにバインドするためにon()メソッドに`this`を渡すことにも注目してください。この3つ目の引数は、イベントコールバック内で`this`として使われるオブジェクトです。
 
 ```javascript
-this.app.mouse.on(pc.EVENT_MOUSEMOVE, this.onMouseMove, this);
-this.app.mouse.on(pc.EVENT_MOUSEDOWN, this.onMouseDown, this);
+this.app.mouse.on(EVENT_MOUSEMOVE, this.onMouseMove, this);
+this.app.mouse.on(EVENT_MOUSEDOWN, this.onMouseDown, this);
 ```
 
 `Mouse` で利用可能なイベントは以下の通りです。

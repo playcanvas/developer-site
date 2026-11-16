@@ -5,6 +5,9 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/501
 description: Screen上のElementとButtonコンポーネントでクリック可能なボタンを作り、ホバー、押下、ナビゲーション状態のイベントを接続します。
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 <div className="iframe-container">
     <iframe src="https://playcanv.as/p/jpRiV53D/" title="User Interface - Buttons" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
@@ -113,6 +116,42 @@ ElementのタイプはImageで、画面の下部にアンカーが設定され�
 
 プロジェクトには、ボタンをクリックしたときにテキストを更新するスクリプトがあります。
 
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
+
+```javascript
+import { Script } from 'playcanvas';
+
+export class ButtonLogic extends Script {
+    static scriptName = "buttonLogic";
+
+    /**
+     * The entity that we want to update when the button is clicked.
+     * 
+     * @attribute
+     * @title Text Entity
+     * @type {Entity}
+     */
+    textEntity = null;
+
+    /**
+     * @attribute
+     * @title Description
+     * @type {string}
+     */
+    description = null;
+
+    initialize() {
+        this.entity.button.on('click', (event) => {
+            this.textEntity.element.text = this.description;
+        });
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
+
 ```javascript
 var ButtonLogic = pc.createScript('buttonLogic');
 ButtonLogic.attributes.add('textEntity', {
@@ -128,6 +167,9 @@ ButtonLogic.prototype.initialize = function() {
     }, this);
 };
 ```
+
+</TabItem>
+</Tabs>
 
 このスクリプトは、シーン内のボタンエンティティにアタッチされています。
 

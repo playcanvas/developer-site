@@ -93,8 +93,8 @@ Now, you'll create a script to apply the shaders to your scene. Create a new scr
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-<Tabs defaultValue="classic" groupId='script-code'>
-<TabItem  value="esm" label="ESM">
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
 
 ```javascript
 import { Script, PostEffect, Shader, SEMANTIC_POSITION, drawFullscreenQuad } from 'playcanvas';

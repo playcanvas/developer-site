@@ -5,6 +5,9 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405
 description: 旧 Model と Animation のチュートリアルです。キャラクターサイクル間の滑らかな遷移には Anim State Graph のブレンドを推奨します。
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 :::warning
 
 このチュートリアルでは非推奨のModelおよびAnimationコンポーネントが使用されています。代わりに[アニメーションステートグラフのブレンディング](/tutorials/anim-blending/)を参照してください。
@@ -40,6 +43,55 @@ Animationコンポーネントをインスペクターで見ることができ�
 * キーのリリースでアイドルに戻す
 
 このような機能は、単純なanimationコンポーネントの機能を超えています。この追加の動作をクックアップするには、スクリプトコンポーネントが必要です。エディターのスキンキャラクターエンティティのスクリプトコンポーネントを上のスクリーンショットで確認でき、animation_blending.jsという名前のJSファイルを参照しています。このファイルの内容は以下の通りです。
+
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
+
+```javascript
+import { Script, KEY_P } from 'playcanvas';
+
+export class AnimationBlending extends Script {
+    static scriptName = 'animationBlending';
+
+    static states = {
+        idle: {
+            animation: 'male.json'
+        },
+        punch: {
+            animation: 'male_uppercut_jab.json'
+        }
+    }
+
+    // initialize code called once per entity
+    initialize() {
+        this.blendTime = 0.2;
+
+        this.setState('idle');
+    };
+
+    update(dt) {
+        if (this.app.keyboard.wasPressed(KEY_P)) {
+            this.setState('punch');
+        }
+
+        if (this.app.keyboard.wasReleased(KEY_P)) {
+            this.setState('idle');
+        }
+    };
+
+    setState(state) {
+        const states = AnimationBlending.states;
+
+        this.state = state;
+        // 現在のアニメーションを設定し、0.2秒かけてからブレンドします。
+        // 現在のアニメーションの状態を、ターゲットのアニメーションの開始位置まで移動させる。
+        this.entity.animation.play(states[state].animation, this.blendTime);
+    };
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
 
 ```javascript
 var AnimationBlending = pc.createScript('animationBlending');
@@ -79,6 +131,9 @@ AnimationBlending.prototype.setState = function (state) {
     this.entity.animation.play(states[state].animation, this.blendTime);
 };
 ```
+
+</TabItem>
+</Tabs>
 
 ここから、Animationコンポーネントにさらに多くのアニメーションを追加し、より複雑なアニメーションステートチャートをスクリプト化できます。
 

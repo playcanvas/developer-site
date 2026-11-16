@@ -20,8 +20,8 @@ Take a look at the keyboard input Scene in the [tutorials project](https://playc
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-<Tabs defaultValue="classic" groupId='script-code'>
-<TabItem  value="esm" label="ESM">
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
 
 ```javascript
 import { Script, KEY_LEFT, KEY_RIGHT, KEY_SPACE, KEY_A } from 'playcanvas';
@@ -97,7 +97,7 @@ export class KeyboardHandler extends Script {
 
         // When the space bar is pressed this scrolls the window.
         // Calling preventDefault() on the original browser event stops this.
-        event.preventDefault();
+        event.event.preventDefault();
     }
 
     /*
@@ -180,7 +180,7 @@ KeyboardHandler.prototype.onKeyDown = function (event) {
 
     // When the space bar is pressed this scrolls the window.
     // Calling preventDefault() on the original browser event stops this.
-    event.preventDefault();
+    event.event.preventDefault();
 };
 
 /*

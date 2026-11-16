@@ -18,8 +18,8 @@ The script below performs the terrain generation.
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-<Tabs defaultValue="classic" groupId='script-code'>
-<TabItem  value="esm" label="ESM">
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
 
 ```javascript
 import { Script, Vec3, Mesh, MeshInstance, GraphNode, Model, calculateNormals } from 'playcanvas';

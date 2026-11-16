@@ -5,6 +5,9 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406
 description: Script から Entity をインスタンス化し Scene のルートに親子付けし、Component を付けてエディタなしでオブジェクトを構築します。
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 <div className="iframe-container">
     <iframe src="https://playcanv.as/p/1VjdIY7v/" title="Programmatically Creating Entities" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
@@ -14,7 +17,7 @@ description: Script から Entity をインスタンス化し Scene のルート
 ## エンティティの作成
 
 ```javascript
-var entity = new pc.Entity(); // エンティティを作成
+var entity = new Entity(); // エンティティを作成
 
 // エンティティ階層に追加する
 this.app.root.addChild(entity);
@@ -26,7 +29,7 @@ this.app.root.addChild(entity);
 
 ```javascript
 // 新しいエンティティを作成する
-var entity = new pc.Entity();
+var entity = new Entity();
 
 // デフォルトの値で新しいCameraコンポーネントを追加する
 entity.addComponent("camera");
@@ -47,7 +50,7 @@ this.app.root.addChild(entity);
 ## コンポーネントの削除
 
 ```javascript
-var entity = new pc.Entity();
+var entity = new Entity();
 
 // デフォルトの値でCameraコンポーネントを追加する
 entity.addComponent("camera");
@@ -62,7 +65,7 @@ entity.removeComponent("camera");
 
 ```javascript
 // 新しいエンティティを作成する
-var entity = new pc.Entity();
+var entity = new Entity();
 
 // デフォルトの値で新しいCameraコンポーネントを追加する
 entity.addComponent("camera");
@@ -82,6 +85,102 @@ entity.destroy();
 エンティティを使い終わったら、エンティティ上の `destroy` メソッドを呼び出します。これにより、すべてのコンポーネントが削除され、エンティティが階層から削除されます。子エンティティも同じように削除されます。
 
 ## 実践
+
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
+
+```javascript
+import { Script, Entity, math } from 'playcanvas';
+
+export class EntityCreator extends Script {
+    static scriptName = "entityCreator";
+
+    /**
+     * @attribute
+     * @title Material
+     * @type {Asset}
+     * @resource material
+     */
+    material = null;
+
+    /**
+     * @attribute
+     * @title Box Dimensions
+     * @type {number}
+     */
+    boxDimensions = 10;
+
+    /**
+     * @attribute
+     * @title Lifetime
+     * @type {number}
+     */
+    lifetime = 5;
+
+    /**
+     * @attribute
+     * @title Max Cubes
+     * @type {number}
+     */
+    maxCubes = 10;
+
+    // 初期化コード(エンティティごとに一度呼び出される)
+    initialize() {
+        this.entities = [];
+    }
+
+    // 更新コード(フレーム毎に呼び出される)
+    update(dt) {
+        // maxCubes 未満ならば新しいキューブを作成する
+        while (this.entities.length < this.maxCubes) {
+            this.spawnCube();
+        }
+
+        // エンティティをループして、その時間が過ぎたら削除する
+        for (let i = 0; i < this.entities.length; i++) {
+            this.entities[i].timer -= dt;
+            if (this.entities[i].timer < 0) {
+                // entity.destroy() はすべてのコンポーネントを削除し、エンティティを階層から削除する
+                this.entities[i].entity.destroy();
+
+                // ローカルリストから削除する
+                this.entities.splice(i, 1);
+            }
+        }
+    }
+
+    spawnCube() {
+        const entity = new Entity();
+
+        // 新しいModelコンポーネントを作成してエンティティに追加する
+        entity.addComponent("render", {
+            type: 'box'
+        });
+
+        // マテリアルを設定する
+        entity.render.material = this.material.resource;
+
+        // ランダムな位置に移動する
+        entity.setLocalPosition(
+            math.random(-this.boxDimensions, this.boxDimensions),
+            math.random(-this.boxDimensions, this.boxDimensions),
+            math.random(-this.boxDimensions, this.boxDimensions)
+        );
+
+        // 階層に追加する
+        this.app.root.addChild(entity);
+
+        // 削除するまでのランダムな期間をローカルリストに格納する
+        this.entities.push({
+            entity: entity,
+            timer: math.random(0, this.lifetime)
+        });
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
 
 ```javascript
 var EntityCreator = pc.createScript('entityCreator');
@@ -159,6 +258,9 @@ EntityCreator.prototype.spawnCube = function () {
     });
 };
 ```
+
+</TabItem>
+</Tabs>
 
 これは完全なエンティティスクリプトであり、チュートリアルの先頭で動作を確認できます。それは常に、Model Component が添付された新しいエンティティを作成および破棄します。
 

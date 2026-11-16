@@ -5,6 +5,9 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405
 description: Script で Camera Component の FOV、位置、アクティブなカメラをランタイムで変更し、ズーム、カット、マルチカメラ構成に使います。
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 <div className="iframe-container">
     <iframe src="https://playcanv.as/p/5yUf1fvg/" title="More Cameras" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
@@ -16,6 +19,46 @@ description: Script で Camera Component の FOV、位置、アクティブな�
 ## 属性の変更
 
 ランタイム中にカメラを変更する最初の方法は、Cameraコンポーネントの属性値を変更することです。これは、任意のコンポーネントの属性を設定する方法と同じ方法で行います。つまり、ComponentSystemの `set()` および `get()` メソッドを使用します。
+
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
+
+```javascript
+import { Script, KEY_SPACE } from 'playcanvas';
+
+export class Zoom extends Script {
+    static scriptName = "zoom";
+
+    // initialize code called once per entity
+    initialize() {
+        this.targetFov = 45;
+    }
+
+    // update code called every frame
+    update(dt) {
+        if (this.app.keyboard.wasPressed(KEY_SPACE)) {
+            this.targetFov = this.targetFov === 10 ? 45 : 10;
+        }
+
+        let fov = this.entity.camera.fov;
+        if (fov < this.targetFov) {
+            fov += 10 * dt;
+            if (fov > this.targetFov) {
+                fov = this.targetFov;
+            }
+        } else if (fov > this.targetFov) {
+            fov -= 10 * dt;
+            if (fov < this.targetFov) {
+                fov = this.targetFov;
+            }
+        }
+        this.entity.camera.fov = fov;
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
 
 ```javascript
 var Zoom = pc.createScript('zoom');
@@ -55,6 +98,9 @@ Zoom.prototype.update = function(dt) {
 
 ```
 
+</TabItem>
+</Tabs>
+
 このサンプルでは、スペースバーを押すと、視野角が変わります。 `var fov = this.entity.camera.fov` で、このスクリプトがアタッチされているエンティティのCameraコンポーネントから `fov` の値を `get()` します。
 
 `this.app.keyboard.wasPressed()` でキー操作を検出し、ターゲットfovの値を切り替えます。
@@ -68,6 +114,55 @@ Zoom.prototype.update = function(dt) {
 ## 現在のカメラ
 
 カメラの相互作用を作成する別の方法は、複数のカメラエンティティ間の切り替えです。これは、複数のカメラエンティティをシーンに追加し、必ず1つを有効にし、スクリプトで現在のカメラをランタイムで変更することによって実現できます。
+
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
+
+```javascript
+import { Script, KEY_SPACE, KEY_LEFT, KEY_RIGHT } from 'playcanvas';
+
+export class CameraManager extends Script {
+    static scriptName = "cameraManager";
+
+    // initialize code called once per entity
+    initialize() {
+        this.activeCamera = this.entity.findByName('Center');
+        this.app.keyboard.on("keydown", this.onKeyDown, this);
+
+        this.on('destroy', () => {
+            this.app.keyboard.off("keydown", this.onKeyDown, this);
+        });
+    }
+
+    // prevents default browser actions, such as scrolling when pressing cursor keys
+    onKeyDown(event) {
+        event.event.preventDefault();
+    }
+
+    setCamera(cameraName) {
+        // Disable the currently active camera
+        this.activeCamera.enabled = false;
+
+        // Enable the newly specified camera
+        this.activeCamera = this.entity.findByName(cameraName);
+        this.activeCamera.enabled = true;
+    }
+
+    // update code called every frame
+    update(dt) {
+        if (this.app.keyboard.wasPressed(KEY_SPACE)) {
+            this.setCamera('Center');
+        } else if (this.app.keyboard.wasPressed(KEY_LEFT)) {
+            this.setCamera('Left');
+        } else if (this.app.keyboard.wasPressed(KEY_RIGHT)) {
+            this.setCamera('Right');
+        }
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
 
 ```javascript
 var CameraManager = pc.createScript('cameraManager');
@@ -109,6 +204,9 @@ CameraManager.prototype.update = function(dt) {
     }
 };
 ```
+
+</TabItem>
+</Tabs>
 
 このサンプルでは、矢印キーを押すと現在のカメラが左側または右側のカメラエンティティ（現在ロードされているシーンのエンティティから）に設定され、スペースキーを押すと中央のカメラがアクティブになります。
 

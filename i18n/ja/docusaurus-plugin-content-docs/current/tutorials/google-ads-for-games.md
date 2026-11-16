@@ -5,6 +5,9 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/889
 description: Google H5 Games の interstitial 広告と rewarded 広告を PlayCanvas のタイトルに統合し、モバイル Web で収益化します。
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 このチュートリアルのリンク
 
 - [Flappy Bird Demo](https://playcanvas.com/project/877568/overview/google-h5-ads-demo)
@@ -47,6 +50,37 @@ Google H5 Games Adsを使用するには、[Google Adsenseアカウント](https
 
 これは、`ui-controller.js`スクリプトに広告を表示するためのボタンクリックコールバックを追加する準備が整ったシンプルなプロジェクトです。
 
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
+
+```javascript
+// ...
+// initialize code called once per entity
+initialize() {
+    this.rewardedGivenPanelEntity.enabled = false;
+    this.rewardedAdButtonEntity.button.active = false;
+
+    const onRefresh = () => {}
+
+    this.refreshButtonEntity.button.on('click', onRefresh)
+
+    this.interstitialAdButtonEntity.button.on('click', (e) => {
+
+    });
+
+    this.rewardedAdButtonEntity.button.on('click', (e) => {
+
+    });
+
+    this.okRewardButtonEntity.button.on('click', (e) => {
+        
+    });
+};
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
+
 ```javascript
 // ...
 // initialize code called once per entity
@@ -75,6 +109,9 @@ UiController.prototype.initialize = function() {
     }, this);
 };
 ```
+
+</TabItem>
+</Tabs>
 
 まず、Google SDKの統合ファイルを追加していきます。これは、[Flappy Birdプロジェクト](https://playcanvas.com/project/877568/overview/google-h5-ads-demo)から「Google H5 Games Ads」フォルダをコピーして、チュートリアルプロジェクトのフォークに貼り付けることで行います。
 
@@ -368,6 +405,117 @@ this.rewardedAdButtonEntity.button.on('click', function (e) {
 
 完了した `ui-controller.js` ファイルは次のようになるはずです。
 
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
+
+```javascript
+import { Script } from 'playcanvas';
+
+export class UiController extends Script {
+    static scriptName = "uiController";
+
+    /**
+     * @attribute
+     * @title Refresh Button Entity
+     * @type {Entity}
+     */
+    refreshButtonEntity = null;
+
+    /**
+     * @attribute
+     * @title Interstitial Ad Button Entity
+     * @type {Entity}
+     */
+    interstitialAdButtonEntity = null;
+
+    /**
+     * @attribute
+     * @title Rewarded Ad Button Entity
+     * @type {Entity}
+     */
+    rewardedAdButtonEntity = null;
+
+    /**
+     * @attribute
+     * @title OK Rewarded Button Entity
+     * @type {Entity}
+     */
+    okRewardButtonEntity = null;
+
+    /**
+     * @attribute
+     * @title Rewarded Given Entity
+     * @type {Entity}
+     */
+    rewardedGivenPanelEntity = null;
+
+    // initialize code called once per entity
+    initialize() {
+        this._showRewardAdFn = null;
+
+        this.rewardedGivenPanelEntity.enabled = false;
+        this.rewardedAdButtonEntity.button.active = false;
+
+        const onRefresh = () => {
+            this.rewardedAdButtonEntity.button.active = false;
+
+            // Check if rewarded ad is available to view
+            if (afg.ready) {
+                afg.adBreak({
+                    type: 'reward',
+                    name: 'test-reward',
+                    beforeReward: function(showAdFn) {
+                        this._showRewardAdFn = showAdFn;
+                        this.rewardedAdButtonEntity.button.active = true;
+                    }.bind(this),
+                    adViewed: () => {
+                        afg.onAfterAd();
+                        this.rewardedGivenPanelEntity.enabled = true;
+                        this.rewardedAdButtonEntity.button.active = false;
+                        this._showRewardAdFn = null;
+                    },
+                    adDismissed: () => {
+                        afg.onAfterAd();
+                        this.rewardedAdButtonEntity.button.active = false;
+                        this._showRewardAdFn = null;
+                    },
+                    adBreakDone: function(placementInfo) { }.bind(this)
+                });
+            }
+        };
+
+        this.refreshButtonEntity.button.on('click', (e) => {
+            onRefresh();
+        }, this);
+
+        this.interstitialAdButtonEntity.button.on('click', (e) => {
+            if (afg.ready) {
+                afg.adBreak({
+                    type: 'start',
+                    name: 'test-interstitial',
+                    beforeAd: () => { afg.onBeforeAd(); },
+                    adBreakDone: () => { afg.onAfterAd(); onRefresh(); }
+                });
+            }
+        }, this);
+
+        this.rewardedAdButtonEntity.button.on('click', (e) => {
+            if (this._showRewardAdFn) {
+                afg.onBeforeAd();
+                this._showRewardAdFn();
+            }
+        }, this);
+
+        this.okRewardButtonEntity.button.on('click', (e) => {
+            this.rewardedGivenPanelEntity.enabled = false;
+        }, this);
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
+
 ```javascript
 var UiController = pc.createScript('uiController');
 UiController.attributes.add('refreshButtonEntity', {type: 'entity', title: 'Refresh Button Entity'});
@@ -439,6 +587,9 @@ UiController.prototype.initialize = function() {
     }, this);
 };
 ```
+
+</TabItem>
+</Tabs>
 
 ## まとめ
 

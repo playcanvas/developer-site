@@ -5,6 +5,9 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/501
 description: プラスとマイナスボタンをプログレス表示と組み合わせ、ステータスを増やしUIでリアルタイムの数値を表示します。
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 <div className="iframe-container">
     <iframe src="https://playcanv.as/p/XVLr9TWc/" title="User Interface - Stats Counter" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
@@ -62,6 +65,51 @@ Boostカウンターを開きます - 他のエンティティも同じ構成で
 
 各統計値のやり取りを処理するメインスクリプトは`uiStats`です。
 
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
+
+```javascript
+import { Script, math } from 'playcanvas';
+
+export class UiStats extends Script {
+    static scriptName = "uiStats";
+
+    initialize() {
+        // find our widgets
+        this.btnPlus = this.entity.findByName('btn-plus');
+        this.btnMinus = this.entity.findByName('btn-minus');
+        this.progressBar = this.entity.findByName('progress-bar');
+        this.progressText = this.progressBar.findByName('text');
+
+        // initialize value to 0
+        this.setValue(0);
+
+        // increase value with plus button
+        this.btnPlus.element.on('click', (evt) => {
+            this.setValue(this.value + 1);
+        });
+
+        // decrease value with minus button
+        this.btnMinus.element.on('click', (evt) => {
+            this.setValue(this.value - 1);
+        });
+    }
+
+    // Sets the stat value
+    setValue(value) {
+        // clamp between min and max
+        this.value = math.clamp(value, 0, 10);
+        // set progress
+        this.progressBar.script.progressBar.setProgress(this.value / 10);
+        // update progress text
+        this.progressText.element.text = this.value + ' / ' + 10;
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
+
 ```javascript
 var UiStats = pc.createScript('uiStats');
 
@@ -96,5 +144,8 @@ UiStats.prototype.setValue = function (value) {
     this.progressText.element.text = this.value + ' / ' + 10;
 };
 ```
+
+</TabItem>
+</Tabs>
 
 このスクリプトでは、子要素を検索し、プラスまたはマイナスボタンがクリックされたときに統計値を増減させ、プログレスバーとそのテキストを更新するようになります。

@@ -18,7 +18,7 @@ It is also important to be aware of the different limits for differing light pro
 ## The lighting commands
 
 ```javascript
-if (app.keyboard.wasPressed(pc.KEY_1)) {
+if (app.keyboard.wasPressed(KEY_1)) {
     this.spot.light.enabled = !this.spot.light.enabled;
 }
 ```
@@ -26,7 +26,7 @@ if (app.keyboard.wasPressed(pc.KEY_1)) {
 This line toggles on and off the light component of the 'spot' entity.
 
 ```javascript
-this.color1 = new pc.Color(1, 1, 1);
+this.color1 = new Color(1, 1, 1);
 ```
 
 A new color array is declared, the first three values affect red, green and blue values respectively.
@@ -58,8 +58,8 @@ The full code used for the above PlayCanvas app is as follows.
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-<Tabs defaultValue="classic" groupId='script-code'>
-<TabItem  value="esm" label="ESM">
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
 
 ```javascript
 import { Script, KEY_1, KEY_2, KEY_3, Color } from 'playcanvas';

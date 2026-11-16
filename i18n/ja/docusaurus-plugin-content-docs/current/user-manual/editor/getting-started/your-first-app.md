@@ -3,6 +3,9 @@ title: 初めてのアプリ
 description: 新しい Scene からマテリアル、Script、移動、公開まで、シンプルな 3D の PlayCanvas Editor プロジェクトの作り方を順に説明します。
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 PlayCanvas Editorでアプリケーションを開発するのは簡単で楽しいです。基本を学ぶのに数分費やしましょう。以下のシンプルな3Dアプリを再現します。
 
 <div className="iframe-container">
@@ -69,6 +72,28 @@ Enterを押すと、スクリプトが作成されます。
 
 次に、EDITをクリックしてコードエディターを開きます。以下のデフォルトのスクリプトが表示されます。
 
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
+
+```javascript
+import { Script } from 'playcanvas';
+
+export class Movement extends Script {
+    static scriptName = "movement";
+
+    initialize() {
+        // initialize code called once per entity
+    }
+
+    update(dt) {
+        // update code called every frame
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
+
 ```javascript
 var Movement = pc.createScript('movement');
 
@@ -83,7 +108,52 @@ Movement.prototype.update = function(dt) {
 };
 ```
 
+</TabItem>
+</Tabs>
+
 スフィアを操作可能にするために、`update`関数にいくつかのコードを追加しましょう。以下のコードをコピーして貼り付けてください。
+
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
+
+```javascript
+import { Script, KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_DOWN } from 'playcanvas';
+
+export class Movement extends Script {
+    static scriptName = "movement";
+
+    initialize() {
+        // initialize code called once per entity
+    }
+
+    update(dt) {
+        // get which keys are pressed
+        var keyboard = this.app.keyboard;
+        var left  = keyboard.isPressed(KEY_LEFT);
+        var right = keyboard.isPressed(KEY_RIGHT);
+        var up    = keyboard.isPressed(KEY_UP);
+        var down  = keyboard.isPressed(KEY_DOWN);
+
+        // move this entity based on which keys are pressed
+        // dt is the time in seconds since the last frame and stands for 'delta time'
+        if (left) {
+            this.entity.translate(-dt, 0, 0);
+        }
+        if (right) {
+            this.entity.translate(dt, 0, 0);
+        }
+        if (up) {
+            this.entity.translate(0, 0, -dt);
+        }
+        if (down) {
+            this.entity.translate(0, 0, dt);
+        }
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
 
 ```javascript
 var Movement = pc.createScript('movement');
@@ -118,6 +188,9 @@ Movement.prototype.update = function(dt) {
     }
 };
 ```
+
+</TabItem>
+</Tabs>
 
 コードが更新されたら、CTRL+S（またはMacではCMD+S）を使用してスクリプトを保存し、コードエディターのタブを閉じてください。
 
