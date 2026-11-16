@@ -14,7 +14,7 @@ This can be problematic on devices such as low or mid-tier mobile devices where 
 
 Ideally, we want the best of both worlds where users on high-tier devices will render at the highest quality but users on lower-tier devices will reduce the ratio to maintain a playable frame rate.
 
-The Device pixel ratio can be changed at runtime via the property [`pc.GraphicsDevice#maxPixelRatio`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#maxpixelratio):
+The Device pixel ratio can be changed at runtime via the property [`GraphicsDevice#maxPixelRatio`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#maxpixelratio):
 
 ```javascript
 const device = pc.Application.getApplication().graphicsDevice;
@@ -32,7 +32,7 @@ The challenge is working out the performance capabilities of the device and this
 * Using some form of benchmark on the start of the application and observing the frame rate
 * Querying the WebGL renderer data to get the name of the GPU and checking against a known list performance tiers
 
-To get information about the GPU, use the property `pc.GraphicsDevice#unmaskedRenderer`. This will contain a string with the information or an empty string if the browser does not support the property.
+To get information about the GPU, use the property `GraphicsDevice#unmaskedRenderer`. This will contain a string with the information or an empty string if the browser does not support the property.
 
 The string will have something similar to the following:
 

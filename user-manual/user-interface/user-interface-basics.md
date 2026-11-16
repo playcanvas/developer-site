@@ -47,7 +47,7 @@ app.start();
 window.addEventListener('resize', () => app.resizeCanvas());
 ```
 
-Add the systems of the other UI components as you use them: `pc.ScrollViewComponentSystem`, `pc.ScrollbarComponentSystem`, `pc.LayoutGroupComponentSystem` and `pc.LayoutChildComponentSystem`, plus `pc.SpriteHandler` and `pc.TextureAtlasHandler` for sprites. [`pc.Application`](https://api.playcanvas.com/engine/classes/Application.html) registers every system and handler for you, but it does not create an `ElementInput` either, so pass one in its options. See [Using the Engine Standalone](https://developer.playcanvas.com/user-manual/engine/standalone.md#configuring-the-application) for the rest of the setup.
+Add the systems of the other UI components as you use them: `ScrollViewComponentSystem`, `ScrollbarComponentSystem`, `LayoutGroupComponentSystem` and `LayoutChildComponentSystem`, plus `SpriteHandler` and `TextureAtlasHandler` for sprites. [`Application`](https://api.playcanvas.com/engine/classes/Application.html) registers every system and handler for you, but it does not create an `ElementInput` either, so pass one in its options. See [Using the Engine Standalone](https://developer.playcanvas.com/user-manual/engine/standalone.md#configuring-the-application) for the rest of the setup.
 
 **Editor**
 
@@ -336,7 +336,7 @@ Every surface drives the same components, so a property has one name in four spe
 
 | Surface | Style | Example |
 | --- | --- | --- |
-| Engine | camelCase properties. Vectors and colors are `pc.Vec2`, `pc.Vec4` and `pc.Color` objects, or arrays when you pass them to `addComponent` | `fontSize: 36`, `anchor: [0.5, 1, 0.5, 1]` |
+| Engine | camelCase properties. Vectors and colors are `Vec2`, `Vec4` and `Color` objects, or arrays when you pass them to `addComponent` | `fontSize: 36`, `anchor: [0.5, 1, 0.5, 1]` |
 | Editor | Title Case inspector fields | **Font Size**, **Anchor** |
 | React | camelCase props. Vectors are arrays and colors are CSS color strings | `fontSize={36}`, `anchor={[0.5, 1, 0.5, 1]}`, `color="#ff8c33"` |
 | Web Components | kebab-case attributes. Vectors are space-separated numbers | `font-size="36"`, `anchor="0.5 1 0.5 1"` |

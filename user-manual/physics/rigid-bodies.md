@@ -238,7 +238,7 @@ entity.rigidbody.group = pc.BODYGROUP_USER_1;
 entity.rigidbody.mask = pc.BODYMASK_ALL ^ pc.BODYGROUP_USER_1;
 ```
 
-Eight user groups, `pc.BODYGROUP_USER_1` to `pc.BODYGROUP_USER_8`, are free for your own use. The same groups and masks filter [ray casts](https://developer.playcanvas.com/user-manual/physics/ray-casting.md#filtering-ray-casts).
+Eight user groups, `BODYGROUP_USER_1` to `BODYGROUP_USER_8`, are free for your own use. The same groups and masks filter [ray casts](https://developer.playcanvas.com/user-manual/physics/ray-casting.md#filtering-ray-casts).
 
 ## See Also
 

@@ -26,7 +26,7 @@ The anim component is the same everywhere, but the surfaces expose different amo
 | State graphs and parameters | `entity.anim.loadStateGraph()` | The Anim State Graph asset editor | The engine API | The engine API |
 | Blend trees | In the state graph data | From a script only | The engine API | The engine API |
 | Layers and masks | `entity.anim.addLayer()` | Layers in the graph, masks in the Anim component | The engine API | The engine API |
-| Events | `new pc.AnimEvents()` on a clip | Events on the animation asset | The engine API | The engine API |
+| Events | `new AnimEvents()` on a clip | Events on the animation asset | The engine API | The engine API |
 
 :::note
 

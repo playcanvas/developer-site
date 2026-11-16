@@ -63,7 +63,7 @@ app.assets.load(english);
 app.assets.load(french);
 ```
 
-Register `pc.JsonHandler` when you create the application. To use data you already have, pass it to `app.i18n.addData()` instead.
+Register `JsonHandler` when you create the application. To use data you already have, pass it to `app.i18n.addData()` instead.
 
 **Editor**
 

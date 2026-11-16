@@ -89,7 +89,7 @@ if (pc.CameraFrame.isSplatSceneDepthSupported(app.graphicsDevice)) {
 
 - No MSAA on the CameraFrame (`rendering.samples = 1`); TAA can still be used.
 - A camera that clears its whole render target.
-- No depth prepass required for in-scene depth sampling. In particular, `rendering.sceneDepthMap = true` and `ssao.type = pc.SSAOTYPE_LIGHTING` prevent this path. Use `pc.SSAOTYPE_COMBINE` if SSAO is needed alongside splat scene depth.
+- No depth prepass required for in-scene depth sampling. In particular, `rendering.sceneDepthMap = true` and `ssao.type = SSAOTYPE_LIGHTING` prevent this path. Use `SSAOTYPE_COMBINE` if SSAO is needed alongside splat scene depth.
 
 Unsupported configurations fall back to depth that excludes splats, and a debug build warns when requested splat depth cannot be produced. If the scene relies on splat depth, disable fog and DoF when it is unavailable, or provide suitable depth geometry. Use the [depth debug view](https://developer.playcanvas.com/user-manual/graphics/posteffects/cameraframe.md#debug-views) to inspect the result.
 

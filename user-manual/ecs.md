@@ -22,7 +22,7 @@ The engine has around twenty types of component, covering cameras, lights, rende
 
 Each type of component has a system, a [`ComponentSystem`](https://api.playcanvas.com/engine/classes/ComponentSystem.html) that creates, updates and destroys every component of that type and holds the settings they share. You rarely need a system directly. One exception is shared settings: `app.systems.rigidbody.gravity` is the gravity that pulls on every rigid body, for example.
 
-An application runs only the systems registered with it. [`pc.AppBase`](https://api.playcanvas.com/engine/classes/AppBase.html) starts with none, so you list the ones you use and a bundler can leave the rest out of your build. [`pc.Application`](https://api.playcanvas.com/engine/classes/Application.html) registers every built-in system, and so do the Editor, React and Web Components. See [Component Systems](https://developer.playcanvas.com/user-manual/ecs/components.md#component-systems).
+An application runs only the systems registered with it. [`AppBase`](https://api.playcanvas.com/engine/classes/AppBase.html) starts with none, so you list the ones you use and a bundler can leave the rest out of your build. [`Application`](https://api.playcanvas.com/engine/classes/Application.html) registers every built-in system, and so do the Editor, React and Web Components. See [Component Systems](https://developer.playcanvas.com/user-manual/ecs/components.md#component-systems).
 
 :::note
 
@@ -130,7 +130,7 @@ Whichever way you build, the result is the same tree of entities under `app.root
 
 | | Engine | Editor | React | Web Components |
 | --- | --- | --- | --- | --- |
-| An entity | `new pc.Entity('box')` | An item in the Hierarchy | `<Entity name="box">` | `<pc-entity name="box">` |
+| An entity | `new Entity('box')` | An item in the Hierarchy | `<Entity name="box">` | `<pc-entity name="box">` |
 | Its place in the tree | `parent.addChild(box)` | Drag it onto its parent in the Hierarchy | Nest it inside its parent's `<Entity>` | Nest it inside its parent's `<pc-entity>` |
 | A component | `box.addComponent('render', { type: 'box' })` | **Add Component** in the Inspector | `<Render type="box" />` inside the `<Entity>` | `<pc-render type="box">` inside the `<pc-entity>` |
 | A property | `box.render.castShadows = false` | A field in the Inspector | `castShadows={false}` | `cast-shadows="false"` |

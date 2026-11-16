@@ -57,7 +57,7 @@ for (let i = 0; i < instanceCount; i++) {
 
 ### Step 2: Create Vertex Buffer and Enable Instancing
 
-Create a VertexBuffer using [`pc.VertexFormat.getDefaultInstancingFormat`](https://api.playcanvas.com/engine/classes/VertexFormat.html#getdefaultinstancingformat) and enable instancing on a MeshInstance:
+Create a VertexBuffer using [`VertexFormat.getDefaultInstancingFormat`](https://api.playcanvas.com/engine/classes/VertexFormat.html#getdefaultinstancingformat) and enable instancing on a MeshInstance:
 
 ```javascript
 const vbFormat = pc.VertexFormat.getDefaultInstancingFormat(app.graphicsDevice);

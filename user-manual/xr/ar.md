@@ -38,7 +38,7 @@ app.xr.end();
 
 Augmented Reality allows blending of the real world with virtual imagery, either by composing a rendered buffer over the camera feed or with a special projection of a rendered buffer on see-through glasses. Usually, it is provided with spatial tracking relative to the real-world environment.
 
-Suitable reference space: `pc.XRSPACE_LOCALFLOOR`.
+Suitable reference space: `XRSPACE_LOCALFLOOR`.
 
 ## Starter Kits
 

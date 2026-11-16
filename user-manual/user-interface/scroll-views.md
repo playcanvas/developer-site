@@ -96,7 +96,7 @@ scrollView.addComponent('scrollview', {
 });
 ```
 
-Register `pc.ScrollViewComponentSystem` and `pc.ScrollbarComponentSystem` when you create the application, and give it a `pc.Mouse` for dragging with the mouse. A scroll view created from code has no settings of its own: it doesn't scroll on either axis until you set `horizontal` or `vertical`, and without a `scrollMode`, `bounceAmount` and `friction` it logs warnings, doesn't bounce back and stops dead when released. Pass all of them when you add it, as here.
+Register `ScrollViewComponentSystem` and `ScrollbarComponentSystem` when you create the application, and give it a `Mouse` for dragging with the mouse. A scroll view created from code has no settings of its own: it doesn't scroll on either axis until you set `horizontal` or `vertical`, and without a `scrollMode`, `bounceAmount` and `friction` it logs warnings, doesn't bounce back and stops dead when released. Pass all of them when you add it, as here.
 
 **Editor**
 
@@ -215,8 +215,8 @@ The content follows the pointer as soon as a drag starts. Once it has moved furt
 
 A scrollbar is an image element, the track, with a scrollbar component and a handle child. The scroll view sets the size of the handle to show how much of the content is visible, and its position to show the scroll position, and dragging the handle scrolls the content. Its **Visibility** (`horizontalScrollbarVisibility` and `verticalScrollbarVisibility`) can hide it when the content fits the viewport:
 
-- `pc.SCROLLBAR_VISIBILITY_SHOW_ALWAYS` shows the scrollbar all the time. This is the default.
-- `pc.SCROLLBAR_VISIBILITY_SHOW_WHEN_REQUIRED` hides it when the content isn't larger than the viewport.
+- `SCROLLBAR_VISIBILITY_SHOW_ALWAYS` shows the scrollbar all the time. This is the default.
+- `SCROLLBAR_VISIBILITY_SHOW_WHEN_REQUIRED` hides it when the content isn't larger than the viewport.
 
 A scrollbar also works on its own, as a slider. See [Sliders](https://developer.playcanvas.com/user-manual/user-interface/common-widgets.md#sliders).
 
@@ -241,7 +241,7 @@ With the content anchored to the top of the viewport and a top pivot, as above, 
 
 ## Scrolling from Code
 
-`scroll` is the scroll position, a `pc.Vec2` whose values go from 0 to 1 on each axis. On the vertical axis, 0 is the top of the content and 1 is the bottom:
+`scroll` is the scroll position, a `Vec2` whose values go from 0 to 1 on each axis. On the vertical axis, 0 is the top of the content and 1 is the bottom:
 
 ```javascript
 // Scroll to the end of a chat log

@@ -38,7 +38,7 @@ for (let i = 0; i < 5; i++) {
 }
 ```
 
-Register `pc.LayoutGroupComponentSystem` and `pc.LayoutChildComponentSystem` when you create the application. A layout group needs the layout child system even when no child uses it.
+Register `LayoutGroupComponentSystem` and `LayoutChildComponentSystem` when you create the application. A layout group needs the layout child system even when no child uses it.
 
 **Editor**
 
@@ -162,7 +162,7 @@ list.layoutgroup.on('reflow', ({ bounds }) => {
 | **Shrink** | Shrunk to fit the group when they are larger than it, down to any minimum size |
 | **Both** | Stretched or shrunk, whichever fits |
 
-Along the direction of the layout, such as the width of a row, the free space or the overflow is shared between the children, equally unless [layout children](https://developer.playcanvas.com/user-manual/user-interface/layout-groups.md#layout-children) give them different proportions. Across the layout, each child is stretched or shrunk to the height of its row, or the width of its column, on its own. The Engine constants are `pc.FITTING_NONE`, `pc.FITTING_STRETCH`, `pc.FITTING_SHRINK` and `pc.FITTING_BOTH`.
+Along the direction of the layout, such as the width of a row, the free space or the overflow is shared between the children, equally unless [layout children](https://developer.playcanvas.com/user-manual/user-interface/layout-groups.md#layout-children) give them different proportions. Across the layout, each child is stretched or shrunk to the height of its row, or the width of its column, on its own. The Engine constants are `FITTING_NONE`, `FITTING_STRETCH`, `FITTING_SHRINK` and `FITTING_BOTH`.
 
 ### Wrap
 

@@ -110,7 +110,7 @@ With **Justify** on, wrapped lines are stretched to the full width of the elemen
 | Property | Effect |
 | --- | --- |
 | `outlineColor` and `outlineThickness` | An outline around the characters. The thickness goes from 0, no outline, to 1 |
-| `shadowColor` and `shadowOffset` | A shadow below the characters. The offset is a `pc.Vec2`, and each of its values goes from -1 to 1 |
+| `shadowColor` and `shadowOffset` | A shadow below the characters. The offset is a `Vec2`, and each of its values goes from -1 to 1 |
 
 Outlines and shadows are drawn by the shader of the font, and work with the MSDF font assets that the Editor and font-tools create.
 

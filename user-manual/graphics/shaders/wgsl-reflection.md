@@ -140,13 +140,13 @@ let four = textureGather(0, srcDepth, srcDepthSampler, uv);
 
 :::note
 
-When pairing `uff` with a sampler, the `pc.Texture` you bind must have a **non-filtering** sampler configuration (typically `minFilter: FILTER_NEAREST`, `magFilter: FILTER_NEAREST`, and a `*_NEAREST` mip filter). Filtering samplers are only valid against filterable-float textures, and WebGPU will reject the bind group at draw time if you pair a filtering sampler with an unfilterable-float texture.
+When pairing `uff` with a sampler, the `Texture` you bind must have a **non-filtering** sampler configuration (typically `minFilter: FILTER_NEAREST`, `magFilter: FILTER_NEAREST`, and a `*_NEAREST` mip filter). Filtering samplers are only valid against filterable-float textures, and WebGPU will reject the bind group at draw time if you pair a filtering sampler with an unfilterable-float texture.
 
 :::
 
 ##### Choosing how to bind a depth texture
 
-Depth textures (any `pc.PIXELFORMAT_DEPTH*` format) cannot be sampled as plain `texture_2d<f32>` on WebGPU unless the device exposes the optional `float32-filterable` feature. Pick the right declaration based on what you need to do:
+Depth textures (any `PIXELFORMAT_DEPTH*` format) cannot be sampled as plain `texture_2d<f32>` on WebGPU unless the device exposes the optional `float32-filterable` feature. Pick the right declaration based on what you need to do:
 
 | Use case                                                       | WGSL declaration    | Sampler                                                                  |
 | -------------------------------------------------------------- | ------------------- | ------------------------------------------------------------------------ |

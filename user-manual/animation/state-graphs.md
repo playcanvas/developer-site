@@ -56,7 +56,7 @@ entity.anim.setBoolean('crouching', true);
 entity.anim.setTrigger('jump');
 ```
 
-A condition compares a parameter with a value, using one of the operators `==`, `!=`, `<`, `<=`, `>` and `>=`. In data, these are `pc.ANIM_EQUAL_TO`, `pc.ANIM_NOT_EQUAL_TO`, `pc.ANIM_LESS_THAN`, `pc.ANIM_LESS_THAN_EQUAL_TO`, `pc.ANIM_GREATER_THAN` and `pc.ANIM_GREATER_THAN_EQUAL_TO`.
+A condition compares a parameter with a value, using one of the operators `==`, `!=`, `<`, `<=`, `>` and `>=`. In data, these are `ANIM_EQUAL_TO`, `ANIM_NOT_EQUAL_TO`, `ANIM_LESS_THAN`, `ANIM_LESS_THAN_EQUAL_TO`, `ANIM_GREATER_THAN` and `ANIM_GREATER_THAN_EQUAL_TO`.
 
 ## Building a State Graph
 

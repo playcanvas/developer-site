@@ -4,7 +4,7 @@
 
 Index: https://developer.playcanvas.com/user-manual/engine/llms.txt
 Total Documents: 245
-Generated: 2026-11-13
+Generated: 2026-11-16
 
 ================================================================================
 
@@ -482,9 +482,9 @@ The samples create the application in two steps:
 
 As your application grows, register what it needs:
 
-* **Components**: Each component type needs its component system. For example, add `pc.ScriptComponentSystem` to use the `script` component. [Bundle Size and Tree Shaking](https://developer.playcanvas.com/user-manual/engine/bundle-size.md) lists every component type with its system. If a system is missing, `addComponent` returns `null`, and the debug build of the Engine logs an error.
-* **Assets**: Each asset type needs its resource handler. The samples register `pc.TextureHandler` for textures and `pc.ContainerHandler` for GLB models. [Bundle Size and Tree Shaking](https://developer.playcanvas.com/user-manual/engine/bundle-size.md#resource-handlers) lists every asset type with its handler.
-* **Other features**: Sound, batching, lightmapping and XR are enabled with further `AppOptions` properties. For example, the `sound` component also needs `options.soundManager = new pc.SoundManager()`.
+* **Components**: Each component type needs its component system. For example, add `ScriptComponentSystem` to use the `script` component. [Bundle Size and Tree Shaking](https://developer.playcanvas.com/user-manual/engine/bundle-size.md) lists every component type with its system. If a system is missing, `addComponent` returns `null`, and the debug build of the Engine logs an error.
+* **Assets**: Each asset type needs its resource handler. The samples register `TextureHandler` for textures and `ContainerHandler` for GLB models. [Bundle Size and Tree Shaking](https://developer.playcanvas.com/user-manual/engine/bundle-size.md#resource-handlers) lists every asset type with its handler.
+* **Other features**: Sound, batching, lightmapping and XR are enabled with further `AppOptions` properties. For example, the `sound` component also needs `options.soundManager = new SoundManager()`.
 
 :::note
 
@@ -1727,7 +1727,7 @@ The engine has around twenty types of component, covering cameras, lights, rende
 
 Each type of component has a system, a [`ComponentSystem`](https://api.playcanvas.com/engine/classes/ComponentSystem.html) that creates, updates and destroys every component of that type and holds the settings they share. You rarely need a system directly. One exception is shared settings: `app.systems.rigidbody.gravity` is the gravity that pulls on every rigid body, for example.
 
-An application runs only the systems registered with it. [`pc.AppBase`](https://api.playcanvas.com/engine/classes/AppBase.html) starts with none, so you list the ones you use and a bundler can leave the rest out of your build. [`pc.Application`](https://api.playcanvas.com/engine/classes/Application.html) registers every built-in system, and so do the Editor, React and Web Components. See [Component Systems](https://developer.playcanvas.com/user-manual/ecs/components.md#component-systems).
+An application runs only the systems registered with it. [`AppBase`](https://api.playcanvas.com/engine/classes/AppBase.html) starts with none, so you list the ones you use and a bundler can leave the rest out of your build. [`Application`](https://api.playcanvas.com/engine/classes/Application.html) registers every built-in system, and so do the Editor, React and Web Components. See [Component Systems](https://developer.playcanvas.com/user-manual/ecs/components.md#component-systems).
 
 :::note
 
@@ -1835,7 +1835,7 @@ Whichever way you build, the result is the same tree of entities under `app.root
 
 | | Engine | Editor | React | Web Components |
 | --- | --- | --- | --- | --- |
-| An entity | `new pc.Entity('box')` | An item in the Hierarchy | `<Entity name="box">` | `<pc-entity name="box">` |
+| An entity | `new Entity('box')` | An item in the Hierarchy | `<Entity name="box">` | `<pc-entity name="box">` |
 | Its place in the tree | `parent.addChild(box)` | Drag it onto its parent in the Hierarchy | Nest it inside its parent's `<Entity>` | Nest it inside its parent's `<pc-entity>` |
 | A component | `box.addComponent('render', { type: 'box' })` | **Add Component** in the Inspector | `<Render type="box" />` inside the `<Entity>` | `<pc-render type="box">` inside the `<pc-entity>` |
 | A property | `box.render.castShadows = false` | A field in the Inspector | `castShadows={false}` | `cast-shadows="false"` |
@@ -2577,7 +2577,7 @@ For each type of component, the application has one component system, which crea
 app.systems.rigidbody.gravity = new pc.Vec3(0, -1.62, 0);
 ```
 
-An application can only add components whose system it has registered. [`pc.Application`](https://api.playcanvas.com/engine/classes/Application.html) registers every built-in system, as do the Editor, React and Web Components. [`pc.AppBase`](https://api.playcanvas.com/engine/classes/AppBase.html) registers only the systems you list, so that a bundler can leave the others out of your build:
+An application can only add components whose system it has registered. [`Application`](https://api.playcanvas.com/engine/classes/Application.html) registers every built-in system, as do the Editor, React and Web Components. [`AppBase`](https://api.playcanvas.com/engine/classes/AppBase.html) registers only the systems you list, so that a bundler can leave the others out of your build:
 
 ```javascript
 const options = new pc.AppOptions();
@@ -5584,7 +5584,7 @@ Most format-bearing handlers participate in the parser registry: `model`, `textu
 
 - **texture** — parsers implement the extended `open(url, data, device, textureOptions)` shown above. The built-in browser image parser is a catch-all, so unknown extensions fall back to it unless your parser claims them.
 - **material** — the handler's asset binding (assigning texture assets referenced by the material data) applies to `StandardMaterial` produced by the built-in JSON parser; materials produced by custom parsers manage their own asset references.
-- **audio** — the sound manager is available to parsers as `this.handler.manager`; a custom parser can decode to an `AudioBuffer` and return it wrapped in a `pc.Sound`.
+- **audio** — the sound manager is available to parsers as `this.handler.manager`; a custom parser can decode to an `AudioBuffer` and return it wrapped in a `Sound`.
 - Handlers that compose other assets rather than parse file formats (`cubemap`, `font`, `sprite`, `textureatlas`) and special-purpose handlers (`bundle`, `script`, `folder`) do not consult registered parsers.
 
 ## See Also
@@ -11279,7 +11279,7 @@ Each camera also has a list of layers set up on it, which controls which layers 
 
 ### Layer Composition
 
-Next is order of layers in the application. Each application contains a `pc.LayerComposition` object which is available in your application as `this.app.scene.layers`. The layer composition determines the order of all sub-layers. The ordering is based on the sub-layer not on the layer so that you can, for example, render all the opaque sub-layers first, then all the transparent sub-layers afterwards.
+Next is order of layers in the application. Each application contains a `LayerComposition` object which is available in your application as `this.app.scene.layers`. The layer composition determines the order of all sub-layers. The ordering is based on the sub-layer not on the layer so that you can, for example, render all the opaque sub-layers first, then all the transparent sub-layers afterwards.
 
 **Note**: Putting a model component inside a layer that is rendered after the world layer **will not** make the model render on top of everything in the world layer! The Standard Material used to render models has a property called `depthTest`. When this is true (the default) before each pixel of the model is rendered the GPU will test to see if there is something else in front if this pixel. Even if that pixel was drawn in an earlier layer depth test ensures that only visible pixels are drawn. If you wish to ignore the distance from the camera when rendering a mesh, disable `depthTest` in your material.
 
@@ -11287,13 +11287,13 @@ Next is order of layers in the application. Each application contains a `pc.Laye
 
 Each sub-layer has a sort mode. Every frame the meshes in a sub-layer are sorted according to its sort mode. This determines the order that the meshes are rendered in when the sub-layer is rendered.
 
-* **Material / Mesh** (`pc.SORTMODE_MATERIALMESH`) - This is the default mode for opaque sub-layers. Mesh instances are sorted to minimize switching between materials and meshes to improve rendering performance.
-* **Back-to-front** (`pc.SORTMODE_BACK2FRONT`) - This is the default mode for transparent sub-layers. Mesh instances are sorted back to front. This is the way to properly render many semi-transparent objects on different depth, one is blended on top of another.
-* **Front-to-back** (`pc.SORTMODE_FRONT2BACK`) - Mesh instances are sorted front to back. Depending on GPU and the scene, this option may give better performance than `pc.SORTMODE_MATERIALMESH` due to reduced overdraw.
-* **Manual** (`pc.SORTMODE_MANUAL`) - This is the default mode for UI or 2D layers. Mesh instances are sorted based on the `MeshInstance.drawOrder` property. The Element Component and Sprite Component should be placed in layers using this sort mode.
-* **None** (`pc.SORTMODE_NONE`) - No sorting is applied. Mesh instances are rendered in the same order they were added to a layer.
+* **Material / Mesh** (`SORTMODE_MATERIALMESH`) - This is the default mode for opaque sub-layers. Mesh instances are sorted to minimize switching between materials and meshes to improve rendering performance.
+* **Back-to-front** (`SORTMODE_BACK2FRONT`) - This is the default mode for transparent sub-layers. Mesh instances are sorted back to front. This is the way to properly render many semi-transparent objects on different depth, one is blended on top of another.
+* **Front-to-back** (`SORTMODE_FRONT2BACK`) - Mesh instances are sorted front to back. Depending on GPU and the scene, this option may give better performance than `SORTMODE_MATERIALMESH` due to reduced overdraw.
+* **Manual** (`SORTMODE_MANUAL`) - This is the default mode for UI or 2D layers. Mesh instances are sorted based on the `MeshInstance.drawOrder` property. The Element Component and Sprite Component should be placed in layers using this sort mode.
+* **None** (`SORTMODE_NONE`) - No sorting is applied. Mesh instances are rendered in the same order they were added to a layer.
 
-In addition to these sort modes, the `MeshInstance.drawBucket` property provides an additional, coarser level of sorting of `MeshInstances` within a layer. This integer value, ranging from 0 to 255 (default 127), serves as the primary sort key for mesh rendering. Meshes are sorted in ascending order by `drawBucket` (lower values rendered first), and then further sorted within each bucket according to the layer's selected sort mode. Note that the `drawBucket` setting is only effective when mesh instances are added to a sub-layer with its sort mode set to `pc.SORTMODE_BACK2FRONT`, `pc.SORTMODE_FRONT2BACK`, or `pc.SORTMODE_MATERIALMESH`. This allows you to group meshes into distinct rendering buckets, forcing certain groups to render before or after others, regardless of their material or depth, offering fine-grained control over the overall rendering order within those specific sort modes.
+In addition to these sort modes, the `MeshInstance.drawBucket` property provides an additional, coarser level of sorting of `MeshInstances` within a layer. This integer value, ranging from 0 to 255 (default 127), serves as the primary sort key for mesh rendering. Meshes are sorted in ascending order by `drawBucket` (lower values rendered first), and then further sorted within each bucket according to the layer's selected sort mode. Note that the `drawBucket` setting is only effective when mesh instances are added to a sub-layer with its sort mode set to `SORTMODE_BACK2FRONT`, `SORTMODE_FRONT2BACK`, or `SORTMODE_MATERIALMESH`. This allows you to group meshes into distinct rendering buckets, forcing certain groups to render before or after others, regardless of their material or depth, offering fine-grained control over the overall rendering order within those specific sort modes.
 
 ## Default Layers
 
@@ -11829,7 +11829,7 @@ for (let i = 0; i < instanceCount; i++) {
 
 ### Step 2: Create Vertex Buffer and Enable Instancing
 
-Create a VertexBuffer using [`pc.VertexFormat.getDefaultInstancingFormat`](https://api.playcanvas.com/engine/classes/VertexFormat.html#getdefaultinstancingformat) and enable instancing on a MeshInstance:
+Create a VertexBuffer using [`VertexFormat.getDefaultInstancingFormat`](https://api.playcanvas.com/engine/classes/VertexFormat.html#getdefaultinstancingformat) and enable instancing on a MeshInstance:
 
 ```javascript
 const vbFormat = pc.VertexFormat.getDefaultInstancingFormat(app.graphicsDevice);
@@ -14175,7 +14175,7 @@ await new Promise((resolve) => {
 const app = new pc.Application(canvas);
 ```
 
-The rigid body system finds the `Ammo` global as the application starts and installs the ammo.js backend. `pc.Application` registers every component system for you; if you build from `pc.AppBase` and `pc.AppOptions` instead, add `pc.CollisionComponentSystem` and `pc.RigidBodyComponentSystem` (and `pc.JointComponentSystem` for [joints](https://developer.playcanvas.com/user-manual/physics/joints.md)) to `componentSystems`. The [Falling Shapes](https://playcanvas.github.io/#/physics/falling-shapes) example shows the complete sequence.
+The rigid body system finds the `Ammo` global as the application starts and installs the ammo.js backend. `Application` registers every component system for you; if you build from `AppBase` and `AppOptions` instead, add `CollisionComponentSystem` and `RigidBodyComponentSystem` (and `JointComponentSystem` for [joints](https://developer.playcanvas.com/user-manual/physics/joints.md)) to `componentSystems`. The [Falling Shapes](https://playcanvas.github.io/#/physics/falling-shapes) example shows the complete sequence.
 
 **Editor**
 
@@ -14621,7 +14621,7 @@ entity.rigidbody.group = pc.BODYGROUP_USER_1;
 entity.rigidbody.mask = pc.BODYMASK_ALL ^ pc.BODYGROUP_USER_1;
 ```
 
-Eight user groups, `pc.BODYGROUP_USER_1` to `pc.BODYGROUP_USER_8`, are free for your own use. The same groups and masks filter [ray casts](https://developer.playcanvas.com/user-manual/physics/ray-casting.md#filtering-ray-casts).
+Eight user groups, `BODYGROUP_USER_1` to `BODYGROUP_USER_8`, are free for your own use. The same groups and masks filter [ray casts](https://developer.playcanvas.com/user-manual/physics/ray-casting.md#filtering-ray-casts).
 
 ## See Also
 
@@ -15477,7 +15477,7 @@ hinge.addComponent('joint', {
 app.root.addChild(hinge);
 ```
 
-`pc.Application` registers the joint component system for you. If you build from `pc.AppBase`, add `pc.JointComponentSystem` to `AppOptions.componentSystems` alongside the collision and rigid body systems.
+`Application` registers the joint component system for you. If you build from `AppBase`, add `JointComponentSystem` to `AppOptions.componentSystems` alongside the collision and rigid body systems.
 
 **Editor**
 
@@ -15643,7 +15643,7 @@ The anim component is the same everywhere, but the surfaces expose different amo
 | State graphs and parameters | `entity.anim.loadStateGraph()` | The Anim State Graph asset editor | The engine API | The engine API |
 | Blend trees | In the state graph data | From a script only | The engine API | The engine API |
 | Layers and masks | `entity.anim.addLayer()` | Layers in the graph, masks in the Anim component | The engine API | The engine API |
-| Events | `new pc.AnimEvents()` on a clip | Events on the animation asset | The engine API | The engine API |
+| Events | `new AnimEvents()` on a clip | Events on the animation asset | The engine API | The engine API |
 
 :::note
 
@@ -16103,7 +16103,7 @@ character.anim.assignAnimation('Walk', walk);
 You can build a clip from keyframes yourself, to animate entities that came from no model, or properties that no model animates. A clip is made of three kinds of object:
 
 - [`AnimData`](https://api.playcanvas.com/engine/classes/AnimData.html) holds keyframe data: a flat array of numbers, with the number of components in each value. Times have one component, positions three, and rotations, as quaternions, four.
-- [`AnimCurve`](https://api.playcanvas.com/engine/classes/AnimCurve.html) links one set of times to one set of values, names the properties they drive, and sets the interpolation between keyframes: `pc.INTERPOLATION_STEP`, `pc.INTERPOLATION_LINEAR` or `pc.INTERPOLATION_CUBIC`.
+- [`AnimCurve`](https://api.playcanvas.com/engine/classes/AnimCurve.html) links one set of times to one set of values, names the properties they drive, and sets the interpolation between keyframes: `INTERPOLATION_STEP`, `INTERPOLATION_LINEAR` or `INTERPOLATION_CUBIC`.
 - [`AnimTrack`](https://api.playcanvas.com/engine/classes/AnimTrack.html) is the clip: a name, a duration, the times and values, and the curves.
 
 A curve's path has three parts. `entityPath` is the names of the entities from the anim component's entity down to the target, starting with the component's own entity. `component` is `graph` for the target's transform, or the name of one of its components. `propertyPath` names the property: `localPosition`, `localRotation` or `localScale` for a transform, or a property of the component, such as a light's `intensity` or `color`.
@@ -16191,7 +16191,7 @@ Some things to try:
 
 - Make the cube sink below the floor by changing the first and last heights from `0.4` to `-0.5`.
 - Add a keyframe: put `2` at the end of the times, three more numbers at the end of the positions and one more intensity, and raise the track's duration to `2`.
-- Swap `pc.INTERPOLATION_LINEAR` for `pc.INTERPOLATION_STEP`, and the values jump from keyframe to keyframe instead of moving between them.
+- Swap `INTERPOLATION_LINEAR` for `INTERPOLATION_STEP`, and the values jump from keyframe to keyframe instead of moving between them.
 
 The Component Properties example builds two clips in code that animate the color and rotation of two spot lights. In the Examples Browser, press Flash in the controls panel to cross-fade from the steady green clip to the flashing red one, and press it again to go back:
 
@@ -16268,7 +16268,7 @@ entity.anim.setBoolean('crouching', true);
 entity.anim.setTrigger('jump');
 ```
 
-A condition compares a parameter with a value, using one of the operators `==`, `!=`, `<`, `<=`, `>` and `>=`. In data, these are `pc.ANIM_EQUAL_TO`, `pc.ANIM_NOT_EQUAL_TO`, `pc.ANIM_LESS_THAN`, `pc.ANIM_LESS_THAN_EQUAL_TO`, `pc.ANIM_GREATER_THAN` and `pc.ANIM_GREATER_THAN_EQUAL_TO`.
+A condition compares a parameter with a value, using one of the operators `==`, `!=`, `<`, `<=`, `>` and `>=`. In data, these are `ANIM_EQUAL_TO`, `ANIM_NOT_EQUAL_TO`, `ANIM_LESS_THAN`, `ANIM_LESS_THAN_EQUAL_TO`, `ANIM_GREATER_THAN` and `ANIM_GREATER_THAN_EQUAL_TO`.
 
 ## Building a State Graph
 
@@ -16599,10 +16599,10 @@ A tree's `type` decides how many parameters it reads, and how its points are com
 
 | Type | Parameters | Points | Use it for |
 | --- | --- | --- | --- |
-| `pc.ANIM_BLEND_1D` | One, as `parameter` | Numbers | One value, such as walking speed. Between two points, the two children on either side are blended in proportion. Keep the value between the lowest and highest points: outside them, no child has any weight. |
-| `pc.ANIM_BLEND_2D_CARTESIAN` | Two, as `parameters` | `[x, y]` | Two independent values, such as how happy and how energetic a character is. |
-| `pc.ANIM_BLEND_2D_DIRECTIONAL` | Two, as `parameters` | `[x, y]` | A direction, such as a movement vector. Points are directions from `[0, 0]`, compared by angle and length, so a walk and a run in the same direction blend properly. Put the idle at `[0, 0]`. |
-| `pc.ANIM_BLEND_DIRECT` | One per child, as `parameters` | None | Mixing clips by hand. Each child's weight is its parameter's value, divided by the sum of them all. Negative values count as 0. |
+| `ANIM_BLEND_1D` | One, as `parameter` | Numbers | One value, such as walking speed. Between two points, the two children on either side are blended in proportion. Keep the value between the lowest and highest points: outside them, no child has any weight. |
+| `ANIM_BLEND_2D_CARTESIAN` | Two, as `parameters` | `[x, y]` | Two independent values, such as how happy and how energetic a character is. |
+| `ANIM_BLEND_2D_DIRECTIONAL` | Two, as `parameters` | `[x, y]` | A direction, such as a movement vector. Points are directions from `[0, 0]`, compared by angle and length, so a walk and a run in the same direction blend properly. Put the idle at `[0, 0]`. |
+| `ANIM_BLEND_DIRECT` | One per child, as `parameters` | None | Mixing clips by hand. Each child's weight is its parameter's value, divided by the sum of them all. Negative values count as 0. |
 
 Children are blended only with the other children of their tree. A child cannot be a blend tree of its own.
 
@@ -16884,7 +16884,7 @@ Some things to try:
 
 - Add `{ name: 'Pick', point: 2 }` to the children, link it with `arm.anim.baseLayer.assignAnimation('Blend.Pick', tracks.pick);`, and change `range` to `2`.
 - Add `syncAnimations: false` to the blend tree, and watch the two clips drift apart as you blend them.
-- Change the type to `pc.ANIM_BLEND_DIRECT`, replace `parameter: 'look'` with `parameters: ['still', 'look']`, add a `still` parameter with a value of 1, and remove the points.
+- Change the type to `ANIM_BLEND_DIRECT`, replace `parameter: 'look'` with `parameters: ['still', 'look']`, add a `still` parameter with a value of 1, and remove the points.
 
 These Engine examples blend a character's clips with 2D trees. In the Examples Browser, drag across the pad in the controls panel to move the blend point, and the circle around each clip's point grows with its weight:
 
@@ -16976,8 +16976,8 @@ upperBody.assignAnimation('Aim', tracks.aim);
 
 A layer's weight runs from 0, where it has no effect, to 1. What it does at the weights in between depends on the layer's blend type:
 
-- An **Overwrite** layer (`pc.ANIM_LAYER_OVERWRITE`), the default, blends from the result of the layers below it towards its own pose, by its weight. At 1, it replaces them; at 0.5, the result is halfway between. The base layer blends with the model's original pose in the same way, so a base layer with a weight of 0.5 plays its clips at half strength.
-- An **Additive** layer (`pc.ANIM_LAYER_ADDITIVE`) adds its clips' difference from the model's original pose to the result of the layers below, scaled by its weight. Use it to add a motion on top of another, such as a recoil on top of an aim, or breathing on top of any pose.
+- An **Overwrite** layer (`ANIM_LAYER_OVERWRITE`), the default, blends from the result of the layers below it towards its own pose, by its weight. At 1, it replaces them; at 0.5, the result is halfway between. The base layer blends with the model's original pose in the same way, so a base layer with a weight of 0.5 plays its clips at half strength.
+- An **Additive** layer (`ANIM_LAYER_ADDITIVE`) adds its clips' difference from the model's original pose to the result of the layers below, scaled by its weight. Use it to add a motion on top of another, such as a recoil on top of an aim, or breathing on top of any pose.
 
 Change a weight at any time with the layer's `weight`. To fade a layer in or out smoothly, `blendToWeight()` moves its weight to a value over a time in seconds:
 
@@ -17133,7 +17133,7 @@ Some things to try:
 
 - Move the mask up the arm, to `'arm_base/arm_column/arm_upper'`, and the layer takes over the upper arm and forearm as well.
 - Replace the mask with `null`, and the whole arm inspects when the layer is in.
-- Change `pc.ANIM_LAYER_OVERWRITE` to `pc.ANIM_LAYER_ADDITIVE`, and the wrist adds the inspect motion to its idling instead of replacing it.
+- Change `ANIM_LAYER_OVERWRITE` to `ANIM_LAYER_ADDITIVE`, and the wrist adds the inspect motion to its idling instead of replacing it.
 
 The Layer Masks example plays an upper-body layer over a character's full-body layer. In the Examples Browser, use the controls panel to switch each layer's state, change the upper-body layer's blend type, turn its mask on and off, and set how much each layer contributes:
 
@@ -17541,7 +17541,7 @@ app.start();
 window.addEventListener('resize', () => app.resizeCanvas());
 ```
 
-Add the systems of the other UI components as you use them: `pc.ScrollViewComponentSystem`, `pc.ScrollbarComponentSystem`, `pc.LayoutGroupComponentSystem` and `pc.LayoutChildComponentSystem`, plus `pc.SpriteHandler` and `pc.TextureAtlasHandler` for sprites. [`pc.Application`](https://api.playcanvas.com/engine/classes/Application.html) registers every system and handler for you, but it does not create an `ElementInput` either, so pass one in its options. See [Using the Engine Standalone](https://developer.playcanvas.com/user-manual/engine/standalone.md#configuring-the-application) for the rest of the setup.
+Add the systems of the other UI components as you use them: `ScrollViewComponentSystem`, `ScrollbarComponentSystem`, `LayoutGroupComponentSystem` and `LayoutChildComponentSystem`, plus `SpriteHandler` and `TextureAtlasHandler` for sprites. [`Application`](https://api.playcanvas.com/engine/classes/Application.html) registers every system and handler for you, but it does not create an `ElementInput` either, so pass one in its options. See [Using the Engine Standalone](https://developer.playcanvas.com/user-manual/engine/standalone.md#configuring-the-application) for the rest of the setup.
 
 **Editor**
 
@@ -17830,7 +17830,7 @@ Every surface drives the same components, so a property has one name in four spe
 
 | Surface | Style | Example |
 | --- | --- | --- |
-| Engine | camelCase properties. Vectors and colors are `pc.Vec2`, `pc.Vec4` and `pc.Color` objects, or arrays when you pass them to `addComponent` | `fontSize: 36`, `anchor: [0.5, 1, 0.5, 1]` |
+| Engine | camelCase properties. Vectors and colors are `Vec2`, `Vec4` and `Color` objects, or arrays when you pass them to `addComponent` | `fontSize: 36`, `anchor: [0.5, 1, 0.5, 1]` |
 | Editor | Title Case inspector fields | **Font Size**, **Anchor** |
 | React | camelCase props. Vectors are arrays and colors are CSS color strings | `fontSize={36}`, `anchor={[0.5, 1, 0.5, 1]}`, `color="#ff8c33"` |
 | Web Components | kebab-case attributes. Vectors are space-separated numbers | `font-size="36"`, `anchor="0.5 1 0.5 1"` |
@@ -17963,7 +17963,7 @@ screen.addComponent('screen', {
 app.root.addChild(screen);
 ```
 
-To change the reference resolution later, assign a new `pc.Vec2` to `referenceResolution`.
+To change the reference resolution later, assign a new `Vec2` to `referenceResolution`.
 
 **Editor**
 
@@ -18042,7 +18042,7 @@ The pixel ratio affects the two scale modes differently:
 
 ### Pixel-Perfect Images
 
-With Scale Mode None, an image element the size of its texture draws each texel as one pixel of the drawing buffer, which keeps pixel art and small icons crisp. Keep such elements on whole pixels: anchor them to a corner rather than a center, which falls between two pixels on a canvas with an odd width or height, and avoid sizes that put an edge halfway between pixels, such as an odd width with a centered pivot. To draw pixel art at two or three times its size without blurring, set the texture's `minFilter` and `magFilter` to `pc.FILTER_NEAREST`.
+With Scale Mode None, an image element the size of its texture draws each texel as one pixel of the drawing buffer, which keeps pixel art and small icons crisp. Keep such elements on whole pixels: anchor them to a corner rather than a center, which falls between two pixels on a canvas with an odd width or height, and avoid sizes that put an edge halfway between pixels, such as an odd width with a centered pivot. To draw pixel art at two or three times its size without blurring, set the texture's `minFilter` and `magFilter` to `FILTER_NEAREST`.
 
 ## Responsive Layouts
 
@@ -18050,7 +18050,7 @@ A screen-space interface follows the canvas, and the canvas is sized outside the
 
 | Surface | The canvas is sized by |
 | --- | --- |
-| Engine | The application's fill mode. `pc.FILLMODE_FILL_WINDOW` fills the window, `pc.FILLMODE_KEEP_ASPECT` fills as much of it as the canvas's aspect ratio allows, and `pc.FILLMODE_NONE` leaves the size to your CSS. Call `app.resizeCanvas()` when the window changes size |
+| Engine | The application's fill mode. `FILLMODE_FILL_WINDOW` fills the window, `FILLMODE_KEEP_ASPECT` fills as much of it as the canvas's aspect ratio allows, and `FILLMODE_NONE` leaves the size to your CSS. Call `app.resizeCanvas()` when the window changes size |
 | Editor | **Fill Mode** and **Resolution Mode** in the Rendering settings |
 | React | The element that contains `<Application>`, as the canvas fills it by default |
 | Web Components | The page's CSS, which sizes `<pc-app>` as it would a `<video>` element. The canvas always fills it |
@@ -18099,9 +18099,9 @@ The `type` of an element decides what it draws:
 
 | Type | Draws | Used for |
 | --- | --- | --- |
-| **Group** (`pc.ELEMENTTYPE_GROUP`) | Nothing | Containers, [layout groups](https://developer.playcanvas.com/user-manual/user-interface/layout-groups.md) and invisible input areas. See [Group Elements](https://developer.playcanvas.com/user-manual/user-interface/elements.md#group-elements) |
-| **Image** (`pc.ELEMENTTYPE_IMAGE`) | A solid color, a texture or a sprite | Panels, icons, buttons and [masks](https://developer.playcanvas.com/user-manual/user-interface/masks.md). See [Image Elements](https://developer.playcanvas.com/user-manual/user-interface/image-elements.md) |
-| **Text** (`pc.ELEMENTTYPE_TEXT`) | A string, in a font asset | Labels and any other text. See [Text Elements](https://developer.playcanvas.com/user-manual/user-interface/text-elements.md) |
+| **Group** (`ELEMENTTYPE_GROUP`) | Nothing | Containers, [layout groups](https://developer.playcanvas.com/user-manual/user-interface/layout-groups.md) and invisible input areas. See [Group Elements](https://developer.playcanvas.com/user-manual/user-interface/elements.md#group-elements) |
+| **Image** (`ELEMENTTYPE_IMAGE`) | A solid color, a texture or a sprite | Panels, icons, buttons and [masks](https://developer.playcanvas.com/user-manual/user-interface/masks.md). See [Image Elements](https://developer.playcanvas.com/user-manual/user-interface/image-elements.md) |
+| **Text** (`ELEMENTTYPE_TEXT`) | A string, in a font asset | Labels and any other text. See [Text Elements](https://developer.playcanvas.com/user-manual/user-interface/text-elements.md) |
 
 ## Anchor
 
@@ -18233,7 +18233,7 @@ Set **Preset** to **Stretch** and each **Margin** value to 20. The inspector onl
 </pc-entity>
 ```
 
-The `left`, `bottom`, `right` and `top` properties read and write the four margins one at a time. To set all four at once from code, assign a new `pc.Vec4`, as the `margin` setter copies from one:
+The `left`, `bottom`, `right` and `top` properties read and write the four margins one at a time. To set all four at once from code, assign a new `Vec4`, as the `margin` setter copies from one:
 
 ```javascript
 background.element.left = 40;
@@ -18343,7 +18343,7 @@ for (let i = 0; i < 5; i++) {
 }
 ```
 
-Register `pc.LayoutGroupComponentSystem` and `pc.LayoutChildComponentSystem` when you create the application. A layout group needs the layout child system even when no child uses it.
+Register `LayoutGroupComponentSystem` and `LayoutChildComponentSystem` when you create the application. A layout group needs the layout child system even when no child uses it.
 
 **Editor**
 
@@ -18467,7 +18467,7 @@ list.layoutgroup.on('reflow', ({ bounds }) => {
 | **Shrink** | Shrunk to fit the group when they are larger than it, down to any minimum size |
 | **Both** | Stretched or shrunk, whichever fits |
 
-Along the direction of the layout, such as the width of a row, the free space or the overflow is shared between the children, equally unless [layout children](https://developer.playcanvas.com/user-manual/user-interface/layout-groups.md#layout-children) give them different proportions. Across the layout, each child is stretched or shrunk to the height of its row, or the width of its column, on its own. The Engine constants are `pc.FITTING_NONE`, `pc.FITTING_STRETCH`, `pc.FITTING_SHRINK` and `pc.FITTING_BOTH`.
+Along the direction of the layout, such as the width of a row, the free space or the overflow is shared between the children, equally unless [layout children](https://developer.playcanvas.com/user-manual/user-interface/layout-groups.md#layout-children) give them different proportions. Across the layout, each child is stretched or shrunk to the height of its row, or the width of its column, on its own. The Engine constants are `FITTING_NONE`, `FITTING_STRETCH`, `FITTING_SHRINK` and `FITTING_BOTH`.
 
 ### Wrap
 
@@ -18821,7 +18821,7 @@ An image element draws a rectangle: a solid color, a texture, or a frame of a sp
 
 `color` tints the image. The colors of a texture are multiplied by it, so a white or grayscale texture can be drawn in any color, and an image without a texture is a rectangle of that color. `opacity` sets how transparent the image is, from 0 to 1. The alpha of `color` is ignored, so use `opacity` instead.
 
-To change them from code, assign a new `pc.Color`:
+To change them from code, assign a new `Color`:
 
 ```javascript
 panel.element.color = new pc.Color(0.23, 0.55, 1);
@@ -18849,7 +18849,7 @@ icon.addComponent('element', {
 screen.addChild(icon);
 ```
 
-`iconTexture` is a texture asset that you have added to `app.assets` and loaded. To use a `pc.Texture` object instead, set `texture`.
+`iconTexture` is a texture asset that you have added to `app.assets` and loaded. To use a `Texture` object instead, set `texture`.
 
 **Editor**
 
@@ -18902,7 +18902,7 @@ A texture fills its element, stretched to the element's shape. **Fit Mode** keep
 | **Contain** | Scaled to fit inside the element, leaving space at its sides or above and below it |
 | **Cover** | Scaled to cover the element, overflowing its sides or its top and bottom. Crop the overflow with a [mask](https://developer.playcanvas.com/user-manual/user-interface/masks.md) |
 
-A contained or covering texture is placed at the element's pivot: a centered pivot centers it, and a pivot in a corner aligns it to that corner. Set `fitMode` to `pc.FITMODE_STRETCH`, `pc.FITMODE_CONTAIN` or `pc.FITMODE_COVER` in the Engine, use the `fitMode` prop in React, and the `fit-mode` attribute in Web Components.
+A contained or covering texture is placed at the element's pivot: a centered pivot centers it, and a pivot in a corner aligns it to that corner. Set `fitMode` to `FITMODE_STRETCH`, `FITMODE_CONTAIN` or `FITMODE_COVER` in the Engine, use the `fitMode` prop in React, and the `fit-mode` attribute in Web Components.
 
 ### Part of a Texture
 
@@ -19068,7 +19068,7 @@ model.render.layers = [previewLayer.id];
 portrait.element.texture = previewTexture;
 ```
 
-The camera's `priority` of -1 renders it before the main camera, which has a priority of 0, so the texture is ready when the interface is drawn. The transparent clear color leaves the background of the image transparent. Keep the texture's sRGB format, `pc.PIXELFORMAT_SRGBA8`: with `pc.PIXELFORMAT_RGBA8`, the image comes out too light. An `origin` of `pc.RENDERTARGET_ORIGIN_TOP` stores the image top row first, as image textures are, so that it is the right way up on both WebGL2 and WebGPU. Without it, the image is upside down on WebGL2. The `origin` option is available from engine 2.22.
+The camera's `priority` of -1 renders it before the main camera, which has a priority of 0, so the texture is ready when the interface is drawn. The transparent clear color leaves the background of the image transparent. Keep the texture's sRGB format, `PIXELFORMAT_SRGBA8`: with `PIXELFORMAT_RGBA8`, the image comes out too light. An `origin` of `RENDERTARGET_ORIGIN_TOP` stores the image top row first, as image textures are, so that it is the right way up on both WebGL2 and WebGPU. Without it, the image is upside down on WebGL2. The `origin` option is available from engine 2.22.
 
 [Live example: Render to Image](https://playcanvas.com/examples/#/user-interface/render-to-image) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/render-to-image/example.mjs))
 
@@ -19326,7 +19326,7 @@ With **Justify** on, wrapped lines are stretched to the full width of the elemen
 | Property | Effect |
 | --- | --- |
 | `outlineColor` and `outlineThickness` | An outline around the characters. The thickness goes from 0, no outline, to 1 |
-| `shadowColor` and `shadowOffset` | A shadow below the characters. The offset is a `pc.Vec2`, and each of its values goes from -1 to 1 |
+| `shadowColor` and `shadowOffset` | A shadow below the characters. The offset is a `Vec2`, and each of its values goes from -1 to 1 |
 
 Outlines and shadows are drawn by the shader of the font, and work with the MSDF font assets that the Editor and font-tools create.
 
@@ -19460,7 +19460,7 @@ label.addComponent('element', {
 screen.addChild(label);
 ```
 
-Register `pc.FontHandler` when you create the application, so that it can load font assets.
+Register `FontHandler` when you create the application, so that it can load font assets.
 
 **Editor**
 
@@ -19514,7 +19514,7 @@ Declare the asset with `type="font"`, as a `.json` file would otherwise be loade
 
 ## Emoji
 
-MSDF glyphs have a single color, so a font asset can't draw color emoji. `pc.CanvasFont`, which is not yet in the API reference, draws characters with the browser's own fonts into textures instead, emoji included. It is a bitmap font: create it at a size at least as large as the text you draw with it, and add the characters you need before you use them:
+MSDF glyphs have a single color, so a font asset can't draw color emoji. `CanvasFont`, which is not yet in the API reference, draws characters with the browser's own fonts into textures instead, emoji included. It is a bitmap font: create it at a size at least as large as the text you draw with it, and add the characters you need before you use them:
 
 ```javascript
 const emojiFont = new pc.CanvasFont(app, {
@@ -19619,7 +19619,7 @@ app.assets.load(english);
 app.assets.load(french);
 ```
 
-Register `pc.JsonHandler` when you create the application. To use data you already have, pass it to `app.i18n.addData()` instead.
+Register `JsonHandler` when you create the application. To use data you already have, pass it to `app.i18n.addData()` instead.
 
 **Editor**
 
@@ -20131,7 +20131,7 @@ button.button.on('click', () => {
 });
 ```
 
-Register `pc.ButtonComponentSystem` when you create the application.
+Register `ButtonComponentSystem` when you create the application.
 
 **Editor**
 
@@ -20204,7 +20204,7 @@ A tint replaces the image's color, rather than multiplying it, so the default gr
 
 In Sprite Change mode, each state shows a sprite asset and frame of its own: `hoverSpriteAsset` and `hoverSpriteFrame`, `pressedSpriteAsset` and `pressedSpriteFrame`, and `inactiveSpriteAsset` and `inactiveSpriteFrame`. The default state shows the image's own sprite. Different frames of one sprite make a set of button states from a single texture atlas.
 
-Set `transitionMode` to `pc.BUTTON_TRANSITION_MODE_SPRITE_CHANGE` in the Engine, **Transition Mode** to **Sprite Change** in the Editor, and `transition-mode="sprite"` on `<pc-button>`.
+Set `transitionMode` to `BUTTON_TRANSITION_MODE_SPRITE_CHANGE` in the Engine, **Transition Mode** to **Sprite Change** in the Editor, and `transition-mode="sprite"` on `<pc-button>`.
 
 ## Events
 
@@ -20377,7 +20377,7 @@ scrollView.addComponent('scrollview', {
 });
 ```
 
-Register `pc.ScrollViewComponentSystem` and `pc.ScrollbarComponentSystem` when you create the application, and give it a `pc.Mouse` for dragging with the mouse. A scroll view created from code has no settings of its own: it doesn't scroll on either axis until you set `horizontal` or `vertical`, and without a `scrollMode`, `bounceAmount` and `friction` it logs warnings, doesn't bounce back and stops dead when released. Pass all of them when you add it, as here.
+Register `ScrollViewComponentSystem` and `ScrollbarComponentSystem` when you create the application, and give it a `Mouse` for dragging with the mouse. A scroll view created from code has no settings of its own: it doesn't scroll on either axis until you set `horizontal` or `vertical`, and without a `scrollMode`, `bounceAmount` and `friction` it logs warnings, doesn't bounce back and stops dead when released. Pass all of them when you add it, as here.
 
 **Editor**
 
@@ -20496,8 +20496,8 @@ The content follows the pointer as soon as a drag starts. Once it has moved furt
 
 A scrollbar is an image element, the track, with a scrollbar component and a handle child. The scroll view sets the size of the handle to show how much of the content is visible, and its position to show the scroll position, and dragging the handle scrolls the content. Its **Visibility** (`horizontalScrollbarVisibility` and `verticalScrollbarVisibility`) can hide it when the content fits the viewport:
 
-- `pc.SCROLLBAR_VISIBILITY_SHOW_ALWAYS` shows the scrollbar all the time. This is the default.
-- `pc.SCROLLBAR_VISIBILITY_SHOW_WHEN_REQUIRED` hides it when the content isn't larger than the viewport.
+- `SCROLLBAR_VISIBILITY_SHOW_ALWAYS` shows the scrollbar all the time. This is the default.
+- `SCROLLBAR_VISIBILITY_SHOW_WHEN_REQUIRED` hides it when the content isn't larger than the viewport.
 
 A scrollbar also works on its own, as a slider. See [Sliders](https://developer.playcanvas.com/user-manual/user-interface/common-widgets.md#sliders).
 
@@ -20522,7 +20522,7 @@ With the content anchored to the top of the viewport and a top pivot, as above, 
 
 ## Scrolling from Code
 
-`scroll` is the scroll position, a `pc.Vec2` whose values go from 0 to 1 on each axis. On the vertical axis, 0 is the top of the content and 1 is the bottom:
+`scroll` is the scroll position, a `Vec2` whose values go from 0 to 1 on each axis. On the vertical axis, 0 is the top of the content and 1 is the bottom:
 
 ```javascript
 // Scroll to the end of a chat log
@@ -20570,7 +20570,7 @@ function setHealth(value) {
 setHealth(0.7);
 ```
 
-This squashes a textured fill. To crop the texture instead, anchor the fill to the track's left edge, with its pivot there too, and set its `width` and its `rect` together: `fill.element.width = value * 292`, the width of the track, and `fill.element.rect = new pc.Vec4(0, 0, value, 1)`. See the [progress bar](https://developer.playcanvas.com/tutorials/ui-elements-progress/) and [loading circle](https://developer.playcanvas.com/tutorials/loading-circle-ui/) tutorials for more.
+This squashes a textured fill. To crop the texture instead, anchor the fill to the track's left edge, with its pivot there too, and set its `width` and its `rect` together: `fill.element.width = value * 292`, the width of the track, and `fill.element.rect = new Vec4(0, 0, value, 1)`. See the [progress bar](https://developer.playcanvas.com/tutorials/ui-elements-progress/) and [loading circle](https://developer.playcanvas.com/tutorials/loading-circle-ui/) tutorials for more.
 
 ## Sliders
 
@@ -21050,7 +21050,7 @@ Where the panel lives decides how it moves:
 
 ## Pointing and Selecting
 
-XR input goes through the application's XR manager, `app.xr`. The Editor, React and Web Components create it for you. An application created with `pc.AppBase` has one only if you add `options.xr = pc.XrManager` to its `AppOptions`.
+XR input goes through the application's XR manager, `app.xr`. The Editor, React and Web Components create it for you. An application created with `AppBase` has one only if you add `options.xr = XrManager` to its `AppOptions`.
 
 While a session runs, the [`ElementInput`](https://developer.playcanvas.com/user-manual/user-interface/input.md#enabling-ui-input) casts the ray of every XR input source, each controller or hand, at the elements that have input enabled, every frame. It fires these events on the elements:
 
@@ -21566,7 +21566,7 @@ Each section below starts from what you see, lists the usual causes, most likely
 
 ### Text Doesn't Appear
 
-- **No font.** A text element draws nothing without a loaded [font asset](https://developer.playcanvas.com/user-manual/user-interface/fonts.md#using-a-font-asset). In the Engine, the application needs `pc.FontHandler`, and the font must have finished loading.
+- **No font.** A text element draws nothing without a loaded [font asset](https://developer.playcanvas.com/user-manual/user-interface/fonts.md#using-a-font-asset). In the Engine, the application needs `FontHandler`, and the font must have finished loading.
 - **Missing characters.** Characters that aren't in the font are drawn as spaces, and the console warns about each one. Add them to the font. See [Choosing Characters](https://developer.playcanvas.com/user-manual/user-interface/fonts.md#choosing-characters).
 - **Its color or opacity.** Text of the same color as the panel behind it, or with an `opacity` of 0, is there but can't be seen.
 - **Outside the screen.** An element created without an anchor sits at the bottom-left corner of its parent, and can be off the visible area. See [Anchor](https://developer.playcanvas.com/user-manual/user-interface/elements.md#anchor).
@@ -21635,7 +21635,7 @@ The camera has a `rect` that covers only part of the canvas, which squashes scre
 - **The content has no input.** The content element needs **Use Input** on to be dragged by its empty areas.
 - **The content isn't larger than the viewport.** A scroll view never sizes its content. See [Sizing the Content](https://developer.playcanvas.com/user-manual/user-interface/scroll-views.md#sizing-the-content).
 - **No axis, scroll mode or friction.** A scroll view created in code has none of them until you set them. See [Creating a Scroll View](https://developer.playcanvas.com/user-manual/user-interface/scroll-views.md#creating-a-scroll-view).
-- **No mouse device.** In the Engine, dragging with the mouse needs a `pc.Mouse`.
+- **No mouse device.** In the Engine, dragging with the mouse needs a `Mouse`.
 
 ### Part of the Scrolled Content Is Out of View
 
@@ -21929,7 +21929,7 @@ Each input source has a ray which has an **origin** where it points from and a *
 - **Controllers** (e.g. Meta Quest Touch), will have a ray originating from the tip of the handheld device and the direction is based on the rotation of the device.
 - **Hands** have a ray that originates from a point between the thumb and index tips and points forward. If the underlying system does not provide a ray for hands, the PlayCanvas engine will emulate it. So all hands should have a ray.
 - **Screen**-based input. This might be available on mobile devices (mono screen) in AR session types, where the user can interact with the virtual world via a touch screen.
-- **Gaze**-based input, such as a mobile phone is inserted into a Google Cardboard style device. It will have an input source with `targetRayMode` set to `pc.XRTARGETRAY_GAZE`, and will originate from the viewer's position and point straight where the user is facing.
+- **Gaze**-based input, such as a mobile phone is inserted into a Google Cardboard style device. It will have an input source with `targetRayMode` set to `XRTARGETRAY_GAZE`, and will originate from the viewer's position and point straight where the user is facing.
 
 [Image: A Ray from a Controller]
 
@@ -22485,7 +22485,7 @@ Here are some tips and hints on how to achieve good performance in your PlayCanv
 
 ## Graphics - CPU and GPU
 
-* For applications where there is little visual change over a period such as product configurators, there is a special property to reduce CPU and GPU usage. [`pc.Application#autoRender`](https://api.playcanvas.com/engine/classes/AppBase.html#autorender) can be set to `false` so that frames are rendered on demand via [`pc.Application#renderNextFrame`](https://api.playcanvas.com/engine/classes/AppBase.html#rendernextframe) when there is a visual change such as the user moving the camera or adding a part to the product.
+* For applications where there is little visual change over a period such as product configurators, there is a special property to reduce CPU and GPU usage. [`Application#autoRender`](https://api.playcanvas.com/engine/classes/AppBase.html#autorender) can be set to `false` so that frames are rendered on demand via [`Application#renderNextFrame`](https://api.playcanvas.com/engine/classes/AppBase.html#rendernextframe) when there is a visual change such as the user moving the camera or adding a part to the product.
 * Enabling shadow casting on dynamic lights is expensive. Omni light shadows are particularly expensive. For each omni light that casts shadow, the scene must be rendered 6 times into a shadow map.
 * Keep the number of blended mesh instances in your scene to a minimum. Blended meshes are deferred until all opaque mesh instances have been dispatched and are then submitted in back to front camera depth order. This results in pixels being filled multiple times and can result in a lot of render state changes since blended meshes cannot be sorted by material.
 
@@ -22980,7 +22980,7 @@ This can be problematic on devices such as low or mid-tier mobile devices where 
 
 Ideally, we want the best of both worlds where users on high-tier devices will render at the highest quality but users on lower-tier devices will reduce the ratio to maintain a playable frame rate.
 
-The Device pixel ratio can be changed at runtime via the property [`pc.GraphicsDevice#maxPixelRatio`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#maxpixelratio):
+The Device pixel ratio can be changed at runtime via the property [`GraphicsDevice#maxPixelRatio`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#maxpixelratio):
 
 ```javascript
 const device = pc.Application.getApplication().graphicsDevice;
@@ -22998,7 +22998,7 @@ The challenge is working out the performance capabilities of the device and this
 * Using some form of benchmark on the start of the application and observing the frame rate
 * Querying the WebGL renderer data to get the name of the GPU and checking against a known list performance tiers
 
-To get information about the GPU, use the property `pc.GraphicsDevice#unmaskedRenderer`. This will contain a string with the information or an empty string if the browser does not support the property.
+To get information about the GPU, use the property `GraphicsDevice#unmaskedRenderer`. This will contain a string with the information or an empty string if the browser does not support the property.
 
 The string will have something similar to the following:
 
@@ -23905,7 +23905,7 @@ MyScript.attributes.add('textures', { type: 'asset', assetType: 'texture', array
 
 The Asset attribute lets you reference a project asset in your script. The asset attribute also supports the `assetType` property which limits the attribute to assets of a particular type, e.g. 'texture', 'material', 'model'.
 
-The runtime type of an Asset attribute is `pc.Asset`. You can reference the resource of an Asset attribute at runtime like so:
+The runtime type of an Asset attribute is `Asset`. You can reference the resource of an Asset attribute at runtime like so:
 
 ```javascript
 MyScript.attributes.add('texture', {type: 'asset', assetType: 'texture'});
@@ -25190,13 +25190,13 @@ let four = textureGather(0, srcDepth, srcDepthSampler, uv);
 
 :::note
 
-When pairing `uff` with a sampler, the `pc.Texture` you bind must have a **non-filtering** sampler configuration (typically `minFilter: FILTER_NEAREST`, `magFilter: FILTER_NEAREST`, and a `*_NEAREST` mip filter). Filtering samplers are only valid against filterable-float textures, and WebGPU will reject the bind group at draw time if you pair a filtering sampler with an unfilterable-float texture.
+When pairing `uff` with a sampler, the `Texture` you bind must have a **non-filtering** sampler configuration (typically `minFilter: FILTER_NEAREST`, `magFilter: FILTER_NEAREST`, and a `*_NEAREST` mip filter). Filtering samplers are only valid against filterable-float textures, and WebGPU will reject the bind group at draw time if you pair a filtering sampler with an unfilterable-float texture.
 
 :::
 
 ##### Choosing how to bind a depth texture
 
-Depth textures (any `pc.PIXELFORMAT_DEPTH*` format) cannot be sampled as plain `texture_2d<f32>` on WebGPU unless the device exposes the optional `float32-filterable` feature. Pick the right declaration based on what you need to do:
+Depth textures (any `PIXELFORMAT_DEPTH*` format) cannot be sampled as plain `texture_2d<f32>` on WebGPU unless the device exposes the optional `float32-filterable` feature. Pick the right declaration based on what you need to do:
 
 | Use case                                                       | WGSL declaration    | Sampler                                                                  |
 | -------------------------------------------------------------- | ------------------- | ------------------------------------------------------------------------ |
@@ -26071,7 +26071,7 @@ if (pc.CameraFrame.isSplatSceneDepthSupported(app.graphicsDevice)) {
 
 - No MSAA on the CameraFrame (`rendering.samples = 1`); TAA can still be used.
 - A camera that clears its whole render target.
-- No depth prepass required for in-scene depth sampling. In particular, `rendering.sceneDepthMap = true` and `ssao.type = pc.SSAOTYPE_LIGHTING` prevent this path. Use `pc.SSAOTYPE_COMBINE` if SSAO is needed alongside splat scene depth.
+- No depth prepass required for in-scene depth sampling. In particular, `rendering.sceneDepthMap = true` and `ssao.type = SSAOTYPE_LIGHTING` prevent this path. Use `SSAOTYPE_COMBINE` if SSAO is needed alongside splat scene depth.
 
 Unsupported configurations fall back to depth that excludes splats, and a debug build warns when requested splat depth cannot be produced. If the scene relies on splat depth, disable fog and DoF when it is unavailable, or provide suitable depth geometry. Use the [depth debug view](https://developer.playcanvas.com/user-manual/graphics/posteffects/cameraframe.md#debug-views) to inspect the result.
 
@@ -31203,9 +31203,9 @@ app.scene.gsplat.renderer = pc.GSPLAT_RENDERER_RASTER_GPU_SORT;
 
 The available options are:
 
-- `pc.GSPLAT_RENDERER_AUTO` — *(default)* automatically selects the best renderer for the current device: GPU sorting on WebGPU, CPU sorting on WebGL.
-- `pc.GSPLAT_RENDERER_RASTER_CPU_SORT` — raster with CPU sorting.
-- `pc.GSPLAT_RENDERER_RASTER_GPU_SORT` — raster with GPU sorting (WebGPU only).
+- `GSPLAT_RENDERER_AUTO` — *(default)* automatically selects the best renderer for the current device: GPU sorting on WebGPU, CPU sorting on WebGL.
+- `GSPLAT_RENDERER_RASTER_CPU_SORT` — raster with CPU sorting.
+- `GSPLAT_RENDERER_RASTER_GPU_SORT` — raster with GPU sorting (WebGPU only).
 
 A renderer that requires WebGPU falls back to CPU sorting on WebGL devices. To find out which renderer is actually in effect after this fallback, read `currentRenderer`:
 
@@ -33170,7 +33170,7 @@ app.xr.end();
 
 Augmented Reality allows blending of the real world with virtual imagery, either by composing a rendered buffer over the camera feed or with a special projection of a rendered buffer on see-through glasses. Usually, it is provided with spatial tracking relative to the real-world environment.
 
-Suitable reference space: `pc.XRSPACE_LOCALFLOOR`.
+Suitable reference space: `XRSPACE_LOCALFLOOR`.
 
 ## Starter Kits
 
@@ -34171,13 +34171,13 @@ Different types of VR experiences can have different reference spaces. Reference
 
 Room Scale VR is supported by devices such as the Meta Quest, Apple Vision Pro, HTC Vive and many others. Room scale experiences are designed to allow a small or large amount of movement away from the origin position of the scene.
 
-Suitable reference spaces: `pc.XRSPACE_LOCALFLOOR`, `pc.XRSPACE_BOUNDEDFLOOR`, `pc.XRSPACE_UNBOUNDED`.
+Suitable reference spaces: `XRSPACE_LOCALFLOOR`, `XRSPACE_BOUNDEDFLOOR`, `XRSPACE_UNBOUNDED`.
 
 ## Seated VR
 
 Seated VR or 3DoF (3 degrees of freedom) is supported by devices such as Google Cardboard, Samsung Gear VR and Oculus Rift. These experiences are based around the user remaining roughly stationary. In some cases, there is no positional data available (e.g. Google Cardboard) and only the orientation of the headset is used.
 
-Suitable reference spaces: `pc.XRSPACE_LOCAL`, `pc.XRSPACE_LOCALFLOOR`.
+Suitable reference spaces: `XRSPACE_LOCAL`, `XRSPACE_LOCALFLOOR`.
 
 --------------------------------------------------------------------------------
 

@@ -12,10 +12,10 @@ A tree's `type` decides how many parameters it reads, and how its points are com
 
 | Type | Parameters | Points | Use it for |
 | --- | --- | --- | --- |
-| `pc.ANIM_BLEND_1D` | One, as `parameter` | Numbers | One value, such as walking speed. Between two points, the two children on either side are blended in proportion. Keep the value between the lowest and highest points: outside them, no child has any weight. |
-| `pc.ANIM_BLEND_2D_CARTESIAN` | Two, as `parameters` | `[x, y]` | Two independent values, such as how happy and how energetic a character is. |
-| `pc.ANIM_BLEND_2D_DIRECTIONAL` | Two, as `parameters` | `[x, y]` | A direction, such as a movement vector. Points are directions from `[0, 0]`, compared by angle and length, so a walk and a run in the same direction blend properly. Put the idle at `[0, 0]`. |
-| `pc.ANIM_BLEND_DIRECT` | One per child, as `parameters` | None | Mixing clips by hand. Each child's weight is its parameter's value, divided by the sum of them all. Negative values count as 0. |
+| `ANIM_BLEND_1D` | One, as `parameter` | Numbers | One value, such as walking speed. Between two points, the two children on either side are blended in proportion. Keep the value between the lowest and highest points: outside them, no child has any weight. |
+| `ANIM_BLEND_2D_CARTESIAN` | Two, as `parameters` | `[x, y]` | Two independent values, such as how happy and how energetic a character is. |
+| `ANIM_BLEND_2D_DIRECTIONAL` | Two, as `parameters` | `[x, y]` | A direction, such as a movement vector. Points are directions from `[0, 0]`, compared by angle and length, so a walk and a run in the same direction blend properly. Put the idle at `[0, 0]`. |
+| `ANIM_BLEND_DIRECT` | One per child, as `parameters` | None | Mixing clips by hand. Each child's weight is its parameter's value, divided by the sum of them all. Negative values count as 0. |
 
 Children are blended only with the other children of their tree. A child cannot be a blend tree of its own.
 
@@ -297,7 +297,7 @@ Some things to try:
 
 - Add `{ name: 'Pick', point: 2 }` to the children, link it with `arm.anim.baseLayer.assignAnimation('Blend.Pick', tracks.pick);`, and change `range` to `2`.
 - Add `syncAnimations: false` to the blend tree, and watch the two clips drift apart as you blend them.
-- Change the type to `pc.ANIM_BLEND_DIRECT`, replace `parameter: 'look'` with `parameters: ['still', 'look']`, add a `still` parameter with a value of 1, and remove the points.
+- Change the type to `ANIM_BLEND_DIRECT`, replace `parameter: 'look'` with `parameters: ['still', 'look']`, add a `still` parameter with a value of 1, and remove the points.
 
 These Engine examples blend a character's clips with 2D trees. In the Examples Browser, drag across the pad in the controls panel to move the blend point, and the circle around each clip's point grows with its weight:
 

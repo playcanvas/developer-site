@@ -21,7 +21,7 @@ function setHealth(value) {
 setHealth(0.7);
 ```
 
-This squashes a textured fill. To crop the texture instead, anchor the fill to the track's left edge, with its pivot there too, and set its `width` and its `rect` together: `fill.element.width = value * 292`, the width of the track, and `fill.element.rect = new pc.Vec4(0, 0, value, 1)`. See the [progress bar](https://developer.playcanvas.com/tutorials/ui-elements-progress/) and [loading circle](https://developer.playcanvas.com/tutorials/loading-circle-ui/) tutorials for more.
+This squashes a textured fill. To crop the texture instead, anchor the fill to the track's left edge, with its pivot there too, and set its `width` and its `rect` together: `fill.element.width = value * 292`, the width of the track, and `fill.element.rect = new Vec4(0, 0, value, 1)`. See the [progress bar](https://developer.playcanvas.com/tutorials/ui-elements-progress/) and [loading circle](https://developer.playcanvas.com/tutorials/loading-circle-ui/) tutorials for more.
 
 ## Sliders
 

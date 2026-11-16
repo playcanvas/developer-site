@@ -25,7 +25,7 @@ await new Promise((resolve) => {
 const app = new pc.Application(canvas);
 ```
 
-The rigid body system finds the `Ammo` global as the application starts and installs the ammo.js backend. `pc.Application` registers every component system for you; if you build from `pc.AppBase` and `pc.AppOptions` instead, add `pc.CollisionComponentSystem` and `pc.RigidBodyComponentSystem` (and `pc.JointComponentSystem` for [joints](https://developer.playcanvas.com/user-manual/physics/joints.md)) to `componentSystems`. The [Falling Shapes](https://playcanvas.github.io/#/physics/falling-shapes) example shows the complete sequence.
+The rigid body system finds the `Ammo` global as the application starts and installs the ammo.js backend. `Application` registers every component system for you; if you build from `AppBase` and `AppOptions` instead, add `CollisionComponentSystem` and `RigidBodyComponentSystem` (and `JointComponentSystem` for [joints](https://developer.playcanvas.com/user-manual/physics/joints.md)) to `componentSystems`. The [Falling Shapes](https://playcanvas.github.io/#/physics/falling-shapes) example shows the complete sequence.
 
 **Editor**
 
