@@ -11,28 +11,28 @@ A layout group is a component on an entity that also has an element, usually a [
 **Engine**
 
 ```javascript
-const list = new pc.Entity('list');
+const list = new Entity('list');
 list.addComponent('element', {
-    type: pc.ELEMENTTYPE_GROUP,
+    type: ELEMENTTYPE_GROUP,
     anchor: [0.5, 0.5, 0.5, 0.5],
     pivot: [0.5, 0.5],
     width: 300,
     height: 400
 });
 list.addComponent('layoutgroup', {
-    orientation: pc.ORIENTATION_VERTICAL,
+    orientation: ORIENTATION_VERTICAL,
     spacing: [0, 10],
     padding: [10, 10, 10, 10],
-    widthFitting: pc.FITTING_STRETCH
+    widthFitting: FITTING_STRETCH
 });
 screen.addChild(list);
 
 for (let i = 0; i < 5; i++) {
-    const row = new pc.Entity(`row ${i}`);
+    const row = new Entity(`row ${i}`);
     row.addComponent('element', {
-        type: pc.ELEMENTTYPE_IMAGE,
+        type: ELEMENTTYPE_IMAGE,
         height: 60,
-        color: new pc.Color(0.23, 0.55, 1)
+        color: new Color(0.23, 0.55, 1)
     });
     list.addChild(row);
 }
@@ -247,17 +247,17 @@ The layouts in the image at the top of this page use these properties:
 Changing a property of a layout group lays its children out again. Properties that hold vectors need a new vector object:
 
 ```javascript
-list.layoutgroup.spacing = new pc.Vec2(0, 20);
-list.layoutgroup.padding = new pc.Vec4(20, 20, 20, 20);
+list.layoutgroup.spacing = new Vec2(0, 20);
+list.layoutgroup.padding = new Vec4(20, 20, 20, 20);
 list.layoutgroup.wrap = true;
 ```
 
 Adding, removing, enabling or disabling a child also lays the group out again, so a list grows as you add rows to it:
 
 ```javascript
-const row = new pc.Entity('row');
+const row = new Entity('row');
 row.addComponent('element', {
-    type: pc.ELEMENTTYPE_IMAGE,
+    type: ELEMENTTYPE_IMAGE,
     height: 60
 });
 list.addChild(row);

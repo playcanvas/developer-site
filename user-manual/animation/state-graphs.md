@@ -76,15 +76,15 @@ const stateGraph = {
         ],
         transitions: [
             { from: 'START', to: 'Idle' },
-            { from: 'Idle', to: 'Walk', time: 0.2, conditions: [{ parameterName: 'speed', predicate: pc.ANIM_GREATER_THAN, value: 0.5 }] },
-            { from: 'Walk', to: 'Idle', time: 0.2, conditions: [{ parameterName: 'speed', predicate: pc.ANIM_LESS_THAN_EQUAL_TO, value: 0.5 }] },
-            { from: 'ANY', to: 'Jump', time: 0.1, conditions: [{ parameterName: 'jump', predicate: pc.ANIM_EQUAL_TO, value: true }] },
+            { from: 'Idle', to: 'Walk', time: 0.2, conditions: [{ parameterName: 'speed', predicate: ANIM_GREATER_THAN, value: 0.5 }] },
+            { from: 'Walk', to: 'Idle', time: 0.2, conditions: [{ parameterName: 'speed', predicate: ANIM_LESS_THAN_EQUAL_TO, value: 0.5 }] },
+            { from: 'ANY', to: 'Jump', time: 0.1, conditions: [{ parameterName: 'jump', predicate: ANIM_EQUAL_TO, value: true }] },
             { from: 'Jump', to: 'END', time: 0.2, exitTime: 1 }
         ]
     }],
     parameters: {
-        speed: { name: 'speed', type: pc.ANIM_PARAMETER_FLOAT, value: 0 },
-        jump: { name: 'jump', type: pc.ANIM_PARAMETER_TRIGGER, value: false }
+        speed: { name: 'speed', type: ANIM_PARAMETER_FLOAT, value: 0 },
+        jump: { name: 'jump', type: ANIM_PARAMETER_TRIGGER, value: false }
     }
 };
 ```
@@ -179,7 +179,7 @@ app.on('update', () => {
     character.anim.setFloat('speed', velocity.length());
 });
 app.keyboard.on('keydown', (event) => {
-    if (event.key === pc.KEY_SPACE) character.anim.setTrigger('jump');
+    if (event.key === KEY_SPACE) character.anim.setTrigger('jump');
 });
 ```
 
@@ -239,36 +239,55 @@ For complex graphs, ask an AI assistant through the **[Editor MCP Server](https:
 This Engine app gives a robot arm a state graph. The arm idles until a `work` trigger is set. Then it picks something up and places it, and returns to idling. Each step of the cycle is a state that does not loop, left by a transition with an exit time of 1. Click the canvas to set the trigger.
 
 ```js live-example
-import * as pc from 'playcanvas';
+import {
+    ANIM_EQUAL_TO,
+    ANIM_PARAMETER_TRIGGER,
+    AnimComponentSystem,
+    AppBase,
+    AppOptions,
+    Asset,
+    CameraComponentSystem,
+    Color,
+    ContainerHandler,
+    createGraphicsDevice,
+    DEVICETYPE_WEBGPU,
+    Entity,
+    FILLMODE_FILL_WINDOW,
+    LightComponentSystem,
+    RenderComponentSystem,
+    RESOLUTION_AUTO,
+    StandardMaterial,
+    TextureHandler
+} from 'playcanvas';
 
 // create the application with the component systems and resource handlers it uses
 const canvas = document.getElementById('application');
-const device = await pc.createGraphicsDevice(canvas, {
-    deviceTypes: [pc.DEVICETYPE_WEBGPU]
+const device = await createGraphicsDevice(canvas, {
+    deviceTypes: [DEVICETYPE_WEBGPU]
 });
 device.maxPixelRatio = Math.min(window.devicePixelRatio, 2);
 
-const options = new pc.AppOptions();
+const options = new AppOptions();
 options.graphicsDevice = device;
 options.componentSystems = [
-    pc.RenderComponentSystem,
-    pc.CameraComponentSystem,
-    pc.LightComponentSystem,
-    pc.AnimComponentSystem
+    RenderComponentSystem,
+    CameraComponentSystem,
+    LightComponentSystem,
+    AnimComponentSystem
 ];
-options.resourceHandlers = [pc.ContainerHandler, pc.TextureHandler];
+options.resourceHandlers = [ContainerHandler, TextureHandler];
 
-const app = new pc.AppBase(canvas);
+const app = new AppBase(canvas);
 app.init(options);
-app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
-app.setCanvasResolution(pc.RESOLUTION_AUTO);
+app.setCanvasFillMode(FILLMODE_FILL_WINDOW);
+app.setCanvasResolution(RESOLUTION_AUTO);
 window.addEventListener('resize', () => app.resizeCanvas());
 app.start();
 
-app.scene.ambientLight = new pc.Color(0.35, 0.35, 0.4);
+app.scene.ambientLight = new Color(0.35, 0.35, 0.4);
 
 // load the robot arm, a GLB with five animations
-const asset = new pc.Asset('robot-arm', 'container', {
+const asset = new Asset('robot-arm', 'container', {
     url: 'https://developer.playcanvas.com/assets/robot-arm.glb'
 });
 await new Promise((resolve) => {
@@ -277,15 +296,15 @@ await new Promise((resolve) => {
     app.assets.load(asset);
 });
 
-const camera = new pc.Entity('camera');
+const camera = new Entity('camera');
 camera.addComponent('camera', {
-    clearColor: new pc.Color(0.11, 0.12, 0.17)
+    clearColor: new Color(0.11, 0.12, 0.17)
 });
 camera.setPosition(1.75, 1.4, 2.15);
 camera.lookAt(0, 0.75, 0);
 app.root.addChild(camera);
 
-const light = new pc.Entity('light');
+const light = new Entity('light');
 light.addComponent('light', {
     castShadows: true,
     shadowBias: 0.2,
@@ -294,9 +313,9 @@ light.addComponent('light', {
 light.setEulerAngles(48, 38, 0);
 app.root.addChild(light);
 
-const floor = new pc.Entity('floor');
-const floorMaterial = new pc.StandardMaterial();
-floorMaterial.diffuse = new pc.Color(0.24, 0.26, 0.31);
+const floor = new Entity('floor');
+const floorMaterial = new StandardMaterial();
+floorMaterial.diffuse = new Color(0.24, 0.26, 0.31);
 floorMaterial.update();
 floor.addComponent('render', { type: 'plane', material: floorMaterial });
 floor.setLocalScale(20, 1, 20);
@@ -320,14 +339,14 @@ arm.anim.loadStateGraph({
         transitions: [
             { from: 'START', to: 'Idle' },
             // the work trigger starts a cycle, and is reset when this transition uses it
-            { from: 'Idle', to: 'Pick', time: 0.4, conditions: [{ parameterName: 'work', predicate: pc.ANIM_EQUAL_TO, value: true }] },
+            { from: 'Idle', to: 'Pick', time: 0.4, conditions: [{ parameterName: 'work', predicate: ANIM_EQUAL_TO, value: true }] },
             // once a clip has played through, cross-fade to the next one
             { from: 'Pick', to: 'Place', time: 0.4, exitTime: 1 },
             { from: 'Place', to: 'Idle', time: 0.4, exitTime: 1 }
         ]
     }],
     parameters: {
-        work: { name: 'work', type: pc.ANIM_PARAMETER_TRIGGER, value: false }
+        work: { name: 'work', type: ANIM_PARAMETER_TRIGGER, value: false }
     }
 });
 

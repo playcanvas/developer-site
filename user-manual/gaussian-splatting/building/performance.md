@@ -50,7 +50,7 @@ Within the budget, each gsplat component sets how its detail steps down with dis
 ```javascript
 entity.gsplat.lodBaseDistance = 10; // LOD 0 out to 10 units
 entity.gsplat.lodMultiplier = 4; // then LOD 1 to 40 units, LOD 2 to 160, ...
-app.scene.gsplat.splatBudgetMode = pc.GSPLAT_BUDGET_LIMIT;
+app.scene.gsplat.splatBudgetMode = GSPLAT_BUDGET_LIMIT;
 ```
 
 See [Controlling LOD Behavior](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/lod-streaming.md#controlling-lod-behavior) for details. LOD distances are also automatically compensated for the camera's field of view — a wider FOV makes objects appear smaller on screen, so it switches to coarser levels sooner.

@@ -108,11 +108,11 @@ player.addComponent('collision', {
     type: 'capsule',
     radius: 0.5,
     height: 2,
-    linearOffset: new pc.Vec3(0, 1, 0)
+    linearOffset: new Vec3(0, 1, 0)
 });
 
 // Tilt a box by 45 degrees about the entity's Y axis
-crate.collision.angularOffset = new pc.Quat().setFromEulerAngles(0, 45, 0);
+crate.collision.angularOffset = new Quat().setFromEulerAngles(0, 45, 0);
 ```
 
 **Editor**
@@ -143,13 +143,13 @@ The parent carries a collision component of type **Compound** together with the 
 
 ```javascript
 // The parent owns the body and combines the children's shapes
-const chair = new pc.Entity('chair');
+const chair = new Entity('chair');
 chair.addComponent('collision', { type: 'compound' });
-chair.addComponent('rigidbody', { type: pc.BODYTYPE_DYNAMIC, mass: 5 });
+chair.addComponent('rigidbody', { type: BODYTYPE_DYNAMIC, mass: 5 });
 
 // Children carry the shapes, positioned relative to the parent, and need no rigidbody
-const seat = new pc.Entity('seat');
-seat.addComponent('collision', { type: 'box', halfExtents: new pc.Vec3(0.25, 0.025, 0.25) });
+const seat = new Entity('seat');
+seat.addComponent('collision', { type: 'box', halfExtents: new Vec3(0.25, 0.025, 0.25) });
 seat.setLocalPosition(0, 0.45, 0);
 chair.addChild(seat);
 ```
@@ -202,7 +202,7 @@ To resize a primitive, change those properties. The engine rebuilds the shape an
 
 ```javascript
 // Double the size of a one unit box collider
-entity.collision.halfExtents = new pc.Vec3(1, 1, 1);
+entity.collision.halfExtents = new Vec3(1, 1, 1);
 ```
 
 Mesh shapes are the exception, because their geometry comes from a mesh that is drawn at the entity's scale. They are built at the world scale of their entity, including any scale on the model nodes inside it. They are rebuilt at the start of the next physics step whenever the entity's world scale changes, whether you scale the entity itself or one of its parents. Scaling a model node alone does not rebuild the shape. Each rebuild recreates the body, so avoid changing the scale of a mesh collider every frame.

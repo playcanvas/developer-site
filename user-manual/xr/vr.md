@@ -15,9 +15,9 @@ To start a VR session, device support and availability should be checked first. 
 ```javascript
 button.element.on('click', () => {
     // check if XR is supported and VR is available
-    if (app.xr.supported && app.xr.isAvailable(pc.XRTYPE_VR)) {
+    if (app.xr.supported && app.xr.isAvailable(XRTYPE_VR)) {
         // start AR using a camera component
-        entity.camera.startXr(pc.XRTYPE_VR, pc.XRSPACE_LOCALFLOOR);
+        entity.camera.startXr(XRTYPE_VR, XRSPACE_LOCALFLOOR);
     }
 });
 ```

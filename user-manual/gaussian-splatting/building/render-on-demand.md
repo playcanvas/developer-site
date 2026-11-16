@@ -35,8 +35,8 @@ app.systems.gsplat.on('frame:request', () => {
 For anything in the "render it yourself" rows, set `app.renderNextFrame = true` when you make the change. For example, to keep a fly/orbit camera interactive, render whenever it has moved:
 
 ```javascript
-const lastPos = new pc.Vec3();
-const lastRot = new pc.Quat();
+const lastPos = new Vec3();
+const lastRot = new Quat();
 
 app.on('update', () => {
     const pos = camera.getPosition();

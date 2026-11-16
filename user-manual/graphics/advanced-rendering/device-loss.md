@@ -104,7 +104,7 @@ Remove recovery listeners when their owner is destroyed. Explicitly destroy reso
 In locally built engine examples using a debug build, paste this into the browser console:
 
 ```javascript
-pc.AppBase.getApplication().graphicsDevice.debugLoseContext(1000);
+AppBase.getApplication().graphicsDevice.debugLoseContext(1000);
 ```
 
 This **internal testing helper is not a public API**. It triggers actual WebGL context loss or WebGPU device destruction, then attempts recovery after a 1,000 ms delay. The delay is not a guarantee of when recovery finishes. Its implementation is stripped from non-debug builds; do not use it in production application logic.

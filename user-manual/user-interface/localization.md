@@ -53,8 +53,8 @@ Any other language uses the English rules.
 **Engine**
 
 ```javascript
-const english = new pc.Asset('en-US', 'json', { url: 'localization/en-US.json' });
-const french = new pc.Asset('fr-FR', 'json', { url: 'localization/fr-FR.json' });
+const english = new Asset('en-US', 'json', { url: 'localization/en-US.json' });
+const french = new Asset('fr-FR', 'json', { url: 'localization/fr-FR.json' });
 app.assets.add(english);
 app.assets.add(french);
 
@@ -145,9 +145,9 @@ A text element with a `key` shows the message for that key in the current locale
 **Engine**
 
 ```javascript
-const heading = new pc.Entity('heading');
+const heading = new Entity('heading');
 heading.addComponent('element', {
-    type: pc.ELEMENTTYPE_TEXT,
+    type: ELEMENTTYPE_TEXT,
     fontAsset: font.id,
     key: 'title',
     anchor: [0.5, 1, 0.5, 1],

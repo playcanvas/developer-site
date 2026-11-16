@@ -9,7 +9,7 @@ An image element draws a rectangle: a solid color, a texture, or a frame of a sp
 To change them from code, assign a new `Color`:
 
 ```javascript
-panel.element.color = new pc.Color(0.23, 0.55, 1);
+panel.element.color = new Color(0.23, 0.55, 1);
 panel.element.opacity = 0.8;
 ```
 
@@ -22,9 +22,9 @@ Give an image element a texture asset to draw an image:
 **Engine**
 
 ```javascript
-const icon = new pc.Entity('icon');
+const icon = new Entity('icon');
 icon.addComponent('element', {
-    type: pc.ELEMENTTYPE_IMAGE,
+    type: ELEMENTTYPE_IMAGE,
     anchor: [0.5, 0.5, 0.5, 0.5],
     pivot: [0.5, 0.5],
     width: 128,
@@ -95,7 +95,7 @@ A contained or covering texture is placed at the element's pivot: a centered piv
 
 ```javascript
 // The top-left quarter of the texture
-icon.element.rect = new pc.Vec4(0, 0.5, 0.5, 0.5);
+icon.element.rect = new Vec4(0, 0.5, 0.5, 0.5);
 ```
 
 For many images packed into one texture, a texture atlas and sprites are easier to manage.
@@ -118,25 +118,25 @@ A border of `b` pixels is `b / pixelsPerUnit` screen units wide. **Pixels Per Un
 
 ```javascript
 // A texture atlas with one 64 x 64 frame, whose 16 pixel borders keep their size
-const atlas = new pc.TextureAtlas();
+const atlas = new TextureAtlas();
 atlas.texture = panelTexture.resource;
 atlas.frames = {
     panel: {
-        rect: new pc.Vec4(0, 0, 64, 64),
-        pivot: new pc.Vec2(0.5, 0.5),
-        border: new pc.Vec4(16, 16, 16, 16)
+        rect: new Vec4(0, 0, 64, 64),
+        pivot: new Vec2(0.5, 0.5),
+        border: new Vec4(16, 16, 16, 16)
     }
 };
-const sprite = new pc.Sprite(app.graphicsDevice, {
+const sprite = new Sprite(app.graphicsDevice, {
     atlas,
     frameKeys: ['panel'],
     pixelsPerUnit: 1,
-    renderMode: pc.SPRITE_RENDERMODE_SLICED
+    renderMode: SPRITE_RENDERMODE_SLICED
 });
 
-const dialog = new pc.Entity('dialog');
+const dialog = new Entity('dialog');
 dialog.addComponent('element', {
-    type: pc.ELEMENTTYPE_IMAGE,
+    type: ELEMENTTYPE_IMAGE,
     anchor: [0.5, 0.5, 0.5, 0.5],
     pivot: [0.5, 0.5],
     width: 400,
@@ -221,28 +221,28 @@ A camera can render into a texture that an image element shows, for character po
 
 ```javascript
 // The texture to render into
-const previewTexture = new pc.Texture(app.graphicsDevice, {
+const previewTexture = new Texture(app.graphicsDevice, {
     width: 512,
     height: 512,
-    format: pc.PIXELFORMAT_SRGBA8,
+    format: PIXELFORMAT_SRGBA8,
     mipmaps: false
 });
-const renderTarget = new pc.RenderTarget({
+const renderTarget = new RenderTarget({
     colorBuffer: previewTexture,
     depth: true,
-    origin: pc.RENDERTARGET_ORIGIN_TOP
+    origin: RENDERTARGET_ORIGIN_TOP
 });
 
 // A layer for what the preview camera sees, which the main camera does not render
-const previewLayer = new pc.Layer({ name: 'Preview' });
+const previewLayer = new Layer({ name: 'Preview' });
 app.scene.layers.push(previewLayer);
 
-const previewCamera = new pc.Entity('preview camera');
+const previewCamera = new Entity('preview camera');
 previewCamera.addComponent('camera', {
     layers: [previewLayer.id],
     renderTarget,
     priority: -1,
-    clearColor: new pc.Color(0, 0, 0, 0)
+    clearColor: new Color(0, 0, 0, 0)
 });
 previewCamera.setPosition(0, 0.5, 3);
 previewCamera.lookAt(model.getPosition());
@@ -264,10 +264,10 @@ An image element draws with a default material that uses its color, opacity and 
 The UI layer draws only transparent materials, so a material must blend to show up there:
 
 ```javascript
-const material = new pc.StandardMaterial();
+const material = new StandardMaterial();
 material.useLighting = false;
-material.emissive = new pc.Color(1, 0.55, 0.2);
-material.blendType = pc.BLEND_NORMAL;
+material.emissive = new Color(1, 0.55, 0.2);
+material.blendType = BLEND_NORMAL;
 material.depthWrite = false;
 material.update();
 

@@ -24,7 +24,7 @@ It is a per-pixel effect on the [Standard Material](https://developer.playcanvas
 | `PARALLAX_OCCLUSION` | Marches the view ray through the height field until it passes below the surface. Deep relief reads as real depth, at the cost of more taps. |
 
 ```javascript
-material.parallaxMode = pc.PARALLAX_OCCLUSION;
+material.parallaxMode = PARALLAX_OCCLUSION;
 material.heightMapFactor = 0.5;
 material.update();
 ```
@@ -55,7 +55,7 @@ The taps are only spent in the forward pass, so shadow and depth passes are unaf
 `StandardMaterial#parallaxShadowSamples` makes the relief shadow itself: the shader marches the height field towards the light from the point the view ray hit, so a raised brick darkens the mortar beside it. It defaults to 0, which disables it.
 
 ```javascript
-material.parallaxMode = pc.PARALLAX_OCCLUSION;
+material.parallaxMode = PARALLAX_OCCLUSION;
 material.parallaxShadowSamples = 8;
 material.update();
 ```

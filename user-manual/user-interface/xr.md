@@ -35,7 +35,7 @@ Two properties of an input source control its interaction with the interface:
 ```javascript
 app.xr.input.on('add', (inputSource) => {
     // Let only the right-hand controller or hand point at the interface
-    if (inputSource.handedness !== pc.XRHAND_RIGHT) {
+    if (inputSource.handedness !== XRHAND_RIGHT) {
         inputSource.elementInput = false;
     }
 });
@@ -66,7 +66,7 @@ The engine's `XrMenu` script builds a menu of buttons from a list, and shows it 
 ```javascript
 import { XrMenu } from 'playcanvas/scripts/esm/xr/xr-menu.mjs';
 
-const menu = new pc.Entity('menu');
+const menu = new Entity('menu');
 menu.addComponent('script');
 menu.script.create(XrMenu, {
     properties: {

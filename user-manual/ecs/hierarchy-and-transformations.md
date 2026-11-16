@@ -17,35 +17,48 @@ earthOrbit          at the center, spinning slowly
 No code ever moves the earth or the moon. Each frame, the app only turns the two orbit entities around their own Y axes. The earth sits at a fixed position relative to `earthOrbit`, so as that entity turns, it carries the earth around the sun. The moon is two levels further down, so it is carried around the earth by `moonOrbit`, and around the sun by `earthOrbit` as well.
 
 ```js live-example
-import * as pc from 'playcanvas';
+import {
+    AppBase,
+    AppOptions,
+    CameraComponentSystem,
+    Color,
+    createGraphicsDevice,
+    DEVICETYPE_WEBGPU,
+    Entity,
+    FILLMODE_FILL_WINDOW,
+    LightComponentSystem,
+    RenderComponentSystem,
+    RESOLUTION_AUTO,
+    StandardMaterial
+} from 'playcanvas';
 
 // create the application with the component systems it uses
 const canvas = document.getElementById('application');
-const device = await pc.createGraphicsDevice(canvas, {
-    deviceTypes: [pc.DEVICETYPE_WEBGPU]
+const device = await createGraphicsDevice(canvas, {
+    deviceTypes: [DEVICETYPE_WEBGPU]
 });
 device.maxPixelRatio = Math.min(window.devicePixelRatio, 2);
 
-const options = new pc.AppOptions();
+const options = new AppOptions();
 options.graphicsDevice = device;
 options.componentSystems = [
-    pc.RenderComponentSystem,
-    pc.CameraComponentSystem,
-    pc.LightComponentSystem
+    RenderComponentSystem,
+    CameraComponentSystem,
+    LightComponentSystem
 ];
 
-const app = new pc.AppBase(canvas);
+const app = new AppBase(canvas);
 app.init(options);
-app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
-app.setCanvasResolution(pc.RESOLUTION_AUTO);
+app.setCanvasFillMode(FILLMODE_FILL_WINDOW);
+app.setCanvasResolution(RESOLUTION_AUTO);
 window.addEventListener('resize', () => app.resizeCanvas());
 app.start();
 
-app.scene.ambientLight = new pc.Color(0.1, 0.1, 0.12);
+app.scene.ambientLight = new Color(0.1, 0.1, 0.12);
 
-const camera = new pc.Entity('camera');
+const camera = new Entity('camera');
 camera.addComponent('camera', {
-    clearColor: new pc.Color(0.03, 0.04, 0.07)
+    clearColor: new Color(0.03, 0.04, 0.07)
 });
 camera.setPosition(0, 7, 12);
 camera.lookAt(0, 0, 0);
@@ -53,39 +66,39 @@ app.root.addChild(camera);
 
 // a sphere with a material of the given color, which glows if emissive is true
 const createSphere = (name, color, emissive = false) => {
-    const material = new pc.StandardMaterial();
+    const material = new StandardMaterial();
     if (emissive) {
-        material.diffuse = new pc.Color(0, 0, 0);
+        material.diffuse = new Color(0, 0, 0);
         material.emissive = color;
     } else {
         material.diffuse = color;
     }
     material.update();
 
-    const entity = new pc.Entity(name);
+    const entity = new Entity(name);
     entity.addComponent('render', { type: 'sphere', material: material });
     return entity;
 };
 
 // the sun glows, and lights the planets with an omni light
-const sun = createSphere('sun', new pc.Color(1, 0.75, 0.3), true);
+const sun = createSphere('sun', new Color(1, 0.75, 0.3), true);
 sun.addComponent('light', { type: 'omni', range: 30, intensity: 2 });
 sun.setLocalScale(2, 2, 2);
 app.root.addChild(sun);
 
 // the earth is a child of an orbit entity at the center
-const earthOrbit = new pc.Entity('earthOrbit');
+const earthOrbit = new Entity('earthOrbit');
 app.root.addChild(earthOrbit);
 
-const earth = createSphere('earth', new pc.Color(0.2, 0.45, 1));
+const earth = createSphere('earth', new Color(0.2, 0.45, 1));
 earth.setLocalPosition(6, 0, 0);
 earthOrbit.addChild(earth);
 
 // the moon is set up the same way, one level further down
-const moonOrbit = new pc.Entity('moonOrbit');
+const moonOrbit = new Entity('moonOrbit');
 earth.addChild(moonOrbit);
 
-const moon = createSphere('moon', new pc.Color(0.75, 0.75, 0.75));
+const moon = createSphere('moon', new Color(0.75, 0.75, 0.75));
 moon.setLocalPosition(1.5, 0, 0);
 moon.setLocalScale(0.35, 0.35, 0.35);
 moonOrbit.addChild(moon);
@@ -132,11 +145,11 @@ The vectors and quaternions that the `get` methods return belong to the entity, 
 **Engine**
 
 ```javascript
-const car = new pc.Entity('car');
+const car = new Entity('car');
 car.setPosition(10, 0, 0);
 app.root.addChild(car);
 
-const wheel = new pc.Entity('wheel');
+const wheel = new Entity('wheel');
 car.addChild(wheel);
 wheel.setLocalPosition(1, 0, 2); // relative to the car
 

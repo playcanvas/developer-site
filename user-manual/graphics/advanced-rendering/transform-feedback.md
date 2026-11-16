@@ -63,10 +63,10 @@ Note the state is packed into a single `vec4` because interleaved capture writes
 ### Step 2: Create the Shader and the Helper
 
 ```javascript
-const shader = pc.TransformFeedback.createShader(device, vertexCode, 'moveParticles');
+const shader = TransformFeedback.createShader(device, vertexCode, 'moveParticles');
 
 // creates a matching output buffer internally
-const tf = new pc.TransformFeedback(mesh.vertexBuffer);
+const tf = new TransformFeedback(mesh.vertexBuffer);
 ```
 
 Create the input buffer with `BUFFER_GPUDYNAMIC` usage, which signals that the GPU writes it repeatedly.
@@ -87,10 +87,10 @@ app.on('update', (dt) => {
 Passing `TRANSFORM_FEEDBACK_SEPARATE` when creating the shader writes each captured varying into its own buffer:
 
 ```javascript
-const shader = pc.TransformFeedback.createShader(
+const shader = TransformFeedback.createShader(
     device, vertexCode, 'flockSim',
     ['out_position', 'out_velocity', 'out_instance'],   // order matches the output buffers
-    pc.TRANSFORM_FEEDBACK_SEPARATE
+    TRANSFORM_FEEDBACK_SEPARATE
 );
 ```
 
@@ -103,7 +103,7 @@ Separating them lets each buffer take the role it actually needs, rather than ev
 Describe each buffer with an entry in an array. An entry may specify an `input`, an `output`, or both:
 
 ```javascript
-const tf = new pc.TransformFeedback([
+const tf = new TransformFeedback([
     { input: positions, output: positionsOut },   // read and written, swapped each step
     { input: velocities, output: velocitiesOut }, // read and written, swapped each step
     { input: constants },                         // read only, never modified
@@ -127,7 +127,7 @@ Writing the render data to its own buffer, which the simulation never reads back
 
 ```javascript
 // written by transform feedback, consumed only by the instanced draw
-material.setAttribute('aInstPosition', pc.SEMANTIC_ATTR12);
+material.setAttribute('aInstPosition', SEMANTIC_ATTR12);
 meshInstance.setInstancing(instances);
 ```
 
@@ -144,13 +144,13 @@ attribute vec4 aConstants;   // ATTR2
 ```
 
 ```javascript
-const format = semantic => new pc.VertexFormat(device, [
-    { semantic: semantic, components: 4, type: pc.TYPE_FLOAT32 }
+const format = semantic => new VertexFormat(device, [
+    { semantic: semantic, components: 4, type: TYPE_FLOAT32 }
 ]);
 
-const positions = new pc.VertexBuffer(device, format(pc.SEMANTIC_ATTR0), count, options);
-const velocities = new pc.VertexBuffer(device, format(pc.SEMANTIC_ATTR1), count, options);
-const constants = new pc.VertexBuffer(device, format(pc.SEMANTIC_ATTR2), count, options);
+const positions = new VertexBuffer(device, format(SEMANTIC_ATTR0), count, options);
+const velocities = new VertexBuffer(device, format(SEMANTIC_ATTR1), count, options);
+const constants = new VertexBuffer(device, format(SEMANTIC_ATTR2), count, options);
 ```
 
 :::warning

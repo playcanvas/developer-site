@@ -38,9 +38,9 @@ For example, this score sits in the top-right corner of the screen, 20 units in 
 **Engine**
 
 ```javascript
-const score = new pc.Entity('score');
+const score = new Entity('score');
 score.addComponent('element', {
-    type: pc.ELEMENTTYPE_TEXT,
+    type: ELEMENTTYPE_TEXT,
     fontAsset: font.id,
     text: '1250',
     anchor: [1, 1, 1, 1],
@@ -82,7 +82,7 @@ The pivot is also the point an element rotates and scales around:
 
 ```javascript
 // Spin an icon about its center
-icon.element.pivot = new pc.Vec2(0.5, 0.5);
+icon.element.pivot = new Vec2(0.5, 0.5);
 icon.setLocalEulerAngles(0, 0, 20);
 ```
 
@@ -94,8 +94,8 @@ A bar across the top of the screen, for example, is split horizontally and keeps
 
 ```javascript
 // Attach the bar's left and right edges to the left and right of its parent, at the top
-bar.element.anchor = new pc.Vec4(0, 1, 1, 1);
-bar.element.pivot = new pc.Vec2(0.5, 1);
+bar.element.anchor = new Vec4(0, 1, 1, 1);
+bar.element.pivot = new Vec2(0.5, 1);
 bar.element.left = 0;
 bar.element.right = 0;
 bar.element.height = 80;
@@ -112,12 +112,12 @@ The margin is the distance of each edge of the element from its anchor, on the a
 **Engine**
 
 ```javascript
-const background = new pc.Entity('background');
+const background = new Entity('background');
 background.addComponent('element', {
-    type: pc.ELEMENTTYPE_IMAGE,
+    type: ELEMENTTYPE_IMAGE,
     anchor: [0, 0, 1, 1],
     margin: [20, 20, 20, 20],
-    color: new pc.Color(0.16, 0.18, 0.23)
+    color: new Color(0.16, 0.18, 0.23)
 });
 panel.addChild(background);
 ```
@@ -146,7 +146,7 @@ The `left`, `bottom`, `right` and `top` properties read and write the four margi
 
 ```javascript
 background.element.left = 40;
-background.element.margin = new pc.Vec4(10, 10, 10, 10);
+background.element.margin = new Vec4(10, 10, 10, 10);
 ```
 
 [Live example: Anchors](https://playcanvas.com/examples/#/user-interface/anchors) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/anchors/example.mjs))

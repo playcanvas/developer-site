@@ -40,10 +40,10 @@ You add a component to an entity with the settings it should start with. Any set
 **Engine**
 
 ```javascript
-const lamp = new pc.Entity('lamp');
+const lamp = new Entity('lamp');
 lamp.addComponent('light', {
     type: 'omni',
-    color: new pc.Color(1, 0.8, 0.6),
+    color: new Color(1, 0.8, 0.6),
     range: 10
 });
 app.root.addChild(lamp);
@@ -137,7 +137,7 @@ A component's settings are properties that you can read and change at any time, 
 
 ```javascript
 lamp.light.intensity = 2;
-lamp.light.color = new pc.Color(1, 0, 0);
+lamp.light.color = new Color(1, 0, 0);
 
 console.log(lamp.light.range); // 10
 ```
@@ -300,22 +300,22 @@ For each type of component, the application has one component system, which crea
 
 ```javascript
 // the gravity that pulls on every rigid body
-app.systems.rigidbody.gravity = new pc.Vec3(0, -1.62, 0);
+app.systems.rigidbody.gravity = new Vec3(0, -1.62, 0);
 ```
 
 An application can only add components whose system it has registered. [`Application`](https://api.playcanvas.com/engine/classes/Application.html) registers every built-in system, as do the Editor, React and Web Components. [`AppBase`](https://api.playcanvas.com/engine/classes/AppBase.html) registers only the systems you list, so that a bundler can leave the others out of your build:
 
 ```javascript
-const options = new pc.AppOptions();
+const options = new AppOptions();
 options.graphicsDevice = device;
 options.componentSystems = [
-    pc.RenderComponentSystem,
-    pc.CameraComponentSystem,
-    pc.LightComponentSystem,
-    pc.ScriptComponentSystem
+    RenderComponentSystem,
+    CameraComponentSystem,
+    LightComponentSystem,
+    ScriptComponentSystem
 ];
 
-const app = new pc.AppBase(canvas);
+const app = new AppBase(canvas);
 app.init(options);
 ```
 

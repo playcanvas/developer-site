@@ -69,52 +69,66 @@ First, select whether you prefer to develop in JavaScript or TypeScript:
 4. Create a `main.js` and paste this:
 
     ```javascript title="main.js"
-    import * as pc from 'playcanvas';
+    import {
+        AppBase,
+        AppOptions,
+        CameraComponentSystem,
+        Color,
+        ContainerHandler,
+        createGraphicsDevice,
+        DEVICETYPE_WEBGPU,
+        Entity,
+        FILLMODE_FILL_WINDOW,
+        LightComponentSystem,
+        RenderComponentSystem,
+        RESOLUTION_AUTO,
+        TextureHandler
+    } from 'playcanvas';
 
     // create a graphics device, preferring WebGPU over WebGL 2.0
     const canvas = document.getElementById('application');
-    const device = await pc.createGraphicsDevice(canvas, {
-        deviceTypes: [pc.DEVICETYPE_WEBGPU]
+    const device = await createGraphicsDevice(canvas, {
+        deviceTypes: [DEVICETYPE_WEBGPU]
     });
 
     // create an application with the systems and handlers it uses
-    const options = new pc.AppOptions();
+    const options = new AppOptions();
     options.graphicsDevice = device;
     options.componentSystems = [
-        pc.RenderComponentSystem,
-        pc.CameraComponentSystem,
-        pc.LightComponentSystem
+        RenderComponentSystem,
+        CameraComponentSystem,
+        LightComponentSystem
     ];
     options.resourceHandlers = [
-        pc.TextureHandler,
-        pc.ContainerHandler
+        TextureHandler,
+        ContainerHandler
     ];
 
-    const app = new pc.AppBase(canvas);
+    const app = new AppBase(canvas);
     app.init(options);
-    app.setCanvasResolution(pc.RESOLUTION_AUTO);
-    app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
+    app.setCanvasResolution(RESOLUTION_AUTO);
+    app.setCanvasFillMode(FILLMODE_FILL_WINDOW);
     app.start();
 
     // resize the canvas when the window is resized
     window.addEventListener('resize', () => app.resizeCanvas());
 
     // create a camera
-    const camera = new pc.Entity();
+    const camera = new Entity();
     camera.addComponent('camera', {
-        clearColor: new pc.Color(0.3, 0.3, 0.7)
+        clearColor: new Color(0.3, 0.3, 0.7)
     });
     camera.setPosition(0, 0, 3);
     app.root.addChild(camera);
 
     // create a light
-    const light = new pc.Entity();
+    const light = new Entity();
     light.addComponent('light');
     light.setEulerAngles(45, 45, 0);
     app.root.addChild(light);
 
     // create a box
-    const box = new pc.Entity();
+    const box = new Entity();
     box.addComponent('render', {
         type: 'box'
     });
@@ -173,52 +187,66 @@ First, select whether you prefer to develop in JavaScript or TypeScript:
 4. Create a `main.ts` and paste this:
 
     ```typescript title="main.ts"
-    import * as pc from 'playcanvas';
+    import {
+        AppBase,
+        AppOptions,
+        CameraComponentSystem,
+        Color,
+        ContainerHandler,
+        createGraphicsDevice,
+        DEVICETYPE_WEBGPU,
+        Entity,
+        FILLMODE_FILL_WINDOW,
+        LightComponentSystem,
+        RenderComponentSystem,
+        RESOLUTION_AUTO,
+        TextureHandler
+    } from 'playcanvas';
 
     // create a graphics device, preferring WebGPU over WebGL 2.0
     const canvas = document.getElementById('application') as HTMLCanvasElement;
-    const device = await pc.createGraphicsDevice(canvas, {
-        deviceTypes: [pc.DEVICETYPE_WEBGPU]
+    const device = await createGraphicsDevice(canvas, {
+        deviceTypes: [DEVICETYPE_WEBGPU]
     });
 
     // create an application with the systems and handlers it uses
-    const options = new pc.AppOptions();
+    const options = new AppOptions();
     options.graphicsDevice = device;
     options.componentSystems = [
-        pc.RenderComponentSystem,
-        pc.CameraComponentSystem,
-        pc.LightComponentSystem
+        RenderComponentSystem,
+        CameraComponentSystem,
+        LightComponentSystem
     ];
     options.resourceHandlers = [
-        pc.TextureHandler,
-        pc.ContainerHandler
+        TextureHandler,
+        ContainerHandler
     ];
 
-    const app = new pc.AppBase(canvas);
+    const app = new AppBase(canvas);
     app.init(options);
-    app.setCanvasResolution(pc.RESOLUTION_AUTO);
-    app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
+    app.setCanvasResolution(RESOLUTION_AUTO);
+    app.setCanvasFillMode(FILLMODE_FILL_WINDOW);
     app.start();
 
     // resize the canvas when the window is resized
     window.addEventListener('resize', () => app.resizeCanvas());
 
     // create a camera
-    const camera = new pc.Entity();
+    const camera = new Entity();
     camera.addComponent('camera', {
-        clearColor: new pc.Color(0.3, 0.3, 0.7)
+        clearColor: new Color(0.3, 0.3, 0.7)
     });
     camera.setPosition(0, 0, 3);
     app.root.addChild(camera);
 
     // create a light
-    const light = new pc.Entity();
+    const light = new Entity();
     light.addComponent('light');
     light.setEulerAngles(45, 45, 0);
     app.root.addChild(light);
 
     // create a box
-    const box = new pc.Entity();
+    const box = new Entity();
     box.addComponent('render', {
         type: 'box'
     });
@@ -287,52 +315,66 @@ First, select whether you prefer to develop in JavaScript or TypeScript:
 3. Create a `main.js` and paste this:
 
     ```javascript title="main.js"
-    import * as pc from 'playcanvas';
+    import {
+        AppBase,
+        AppOptions,
+        CameraComponentSystem,
+        Color,
+        ContainerHandler,
+        createGraphicsDevice,
+        DEVICETYPE_WEBGPU,
+        Entity,
+        FILLMODE_FILL_WINDOW,
+        LightComponentSystem,
+        RenderComponentSystem,
+        RESOLUTION_AUTO,
+        TextureHandler
+    } from 'playcanvas';
 
     // create a graphics device, preferring WebGPU over WebGL 2.0
     const canvas = document.getElementById('application');
-    const device = await pc.createGraphicsDevice(canvas, {
-        deviceTypes: [pc.DEVICETYPE_WEBGPU]
+    const device = await createGraphicsDevice(canvas, {
+        deviceTypes: [DEVICETYPE_WEBGPU]
     });
 
     // create an application with the systems and handlers it uses
-    const options = new pc.AppOptions();
+    const options = new AppOptions();
     options.graphicsDevice = device;
     options.componentSystems = [
-        pc.RenderComponentSystem,
-        pc.CameraComponentSystem,
-        pc.LightComponentSystem
+        RenderComponentSystem,
+        CameraComponentSystem,
+        LightComponentSystem
     ];
     options.resourceHandlers = [
-        pc.TextureHandler,
-        pc.ContainerHandler
+        TextureHandler,
+        ContainerHandler
     ];
 
-    const app = new pc.AppBase(canvas);
+    const app = new AppBase(canvas);
     app.init(options);
-    app.setCanvasResolution(pc.RESOLUTION_AUTO);
-    app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
+    app.setCanvasResolution(RESOLUTION_AUTO);
+    app.setCanvasFillMode(FILLMODE_FILL_WINDOW);
     app.start();
 
     // resize the canvas when the window is resized
     window.addEventListener('resize', () => app.resizeCanvas());
 
     // create a camera
-    const camera = new pc.Entity();
+    const camera = new Entity();
     camera.addComponent('camera', {
-        clearColor: new pc.Color(0.3, 0.3, 0.7)
+        clearColor: new Color(0.3, 0.3, 0.7)
     });
     camera.setPosition(0, 0, 3);
     app.root.addChild(camera);
 
     // create a light
-    const light = new pc.Entity();
+    const light = new Entity();
     light.addComponent('light');
     light.setEulerAngles(45, 45, 0);
     app.root.addChild(light);
 
     // create a box
-    const box = new pc.Entity();
+    const box = new Entity();
     box.addComponent('render', {
         type: 'box'
     });
@@ -383,52 +425,66 @@ First, select whether you prefer to develop in JavaScript or TypeScript:
 3. Create a `main.ts` and paste this:
 
     ```typescript title="main.ts"
-    import * as pc from 'playcanvas';
+    import {
+        AppBase,
+        AppOptions,
+        CameraComponentSystem,
+        Color,
+        ContainerHandler,
+        createGraphicsDevice,
+        DEVICETYPE_WEBGPU,
+        Entity,
+        FILLMODE_FILL_WINDOW,
+        LightComponentSystem,
+        RenderComponentSystem,
+        RESOLUTION_AUTO,
+        TextureHandler
+    } from 'playcanvas';
 
     // create a graphics device, preferring WebGPU over WebGL 2.0
     const canvas = document.getElementById('application') as HTMLCanvasElement;
-    const device = await pc.createGraphicsDevice(canvas, {
-        deviceTypes: [pc.DEVICETYPE_WEBGPU]
+    const device = await createGraphicsDevice(canvas, {
+        deviceTypes: [DEVICETYPE_WEBGPU]
     });
 
     // create an application with the systems and handlers it uses
-    const options = new pc.AppOptions();
+    const options = new AppOptions();
     options.graphicsDevice = device;
     options.componentSystems = [
-        pc.RenderComponentSystem,
-        pc.CameraComponentSystem,
-        pc.LightComponentSystem
+        RenderComponentSystem,
+        CameraComponentSystem,
+        LightComponentSystem
     ];
     options.resourceHandlers = [
-        pc.TextureHandler,
-        pc.ContainerHandler
+        TextureHandler,
+        ContainerHandler
     ];
 
-    const app = new pc.AppBase(canvas);
+    const app = new AppBase(canvas);
     app.init(options);
-    app.setCanvasResolution(pc.RESOLUTION_AUTO);
-    app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
+    app.setCanvasResolution(RESOLUTION_AUTO);
+    app.setCanvasFillMode(FILLMODE_FILL_WINDOW);
     app.start();
 
     // resize the canvas when the window is resized
     window.addEventListener('resize', () => app.resizeCanvas());
 
     // create a camera
-    const camera = new pc.Entity();
+    const camera = new Entity();
     camera.addComponent('camera', {
-        clearColor: new pc.Color(0.3, 0.3, 0.7)
+        clearColor: new Color(0.3, 0.3, 0.7)
     });
     camera.setPosition(0, 0, 3);
     app.root.addChild(camera);
 
     // create a light
-    const light = new pc.Entity();
+    const light = new Entity();
     light.addComponent('light');
     light.setEulerAngles(45, 45, 0);
     app.root.addChild(light);
 
     // create a box
-    const box = new pc.Entity();
+    const box = new Entity();
     box.addComponent('render', {
         type: 'box'
     });

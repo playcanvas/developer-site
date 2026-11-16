@@ -58,7 +58,7 @@ How these distances combine with the scene-wide [splat budget](https://developer
 [`splatBudgetMode`](https://api.playcanvas.com/engine/classes/GSplatParams.html#splatbudgetmode) on `app.scene.gsplat` selects between two modes:
 
 ```javascript
-app.scene.gsplat.splatBudgetMode = pc.GSPLAT_BUDGET_LIMIT;
+app.scene.gsplat.splatBudgetMode = GSPLAT_BUDGET_LIMIT;
 ```
 
 - `GSPLAT_BUDGET_TARGET` (default): detail is raised until the budget is used up, wherever the camera is. The engine moves the LOD distances of every splat outward or inward by one shared factor until the scene fills the budget, so the distances you set only shape how detail falls off with distance and how it divides between splats, not how much of it there is.

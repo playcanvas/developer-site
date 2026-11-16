@@ -12,7 +12,7 @@ A world-space screen is placed by its entity's transform. Its `resolution` is it
 
 ```javascript
 // A 400 × 240 unit panel, scaled to 1.6 × 0.96 meters, two meters up
-const sign = new pc.Entity('sign');
+const sign = new Entity('sign');
 sign.addComponent('screen', {
     screenSpace: false,
     resolution: [400, 240]
@@ -21,18 +21,18 @@ sign.setLocalScale(0.004, 0.004, 0.004);
 sign.setPosition(0, 2, -3);
 app.root.addChild(sign);
 
-const background = new pc.Entity('background');
+const background = new Entity('background');
 background.addComponent('element', {
-    type: pc.ELEMENTTYPE_IMAGE,
+    type: ELEMENTTYPE_IMAGE,
     anchor: [0, 0, 1, 1],
     margin: [0, 0, 0, 0],
-    color: new pc.Color(0.16, 0.18, 0.23)
+    color: new Color(0.16, 0.18, 0.23)
 });
 sign.addChild(background);
 
-const title = new pc.Entity('title');
+const title = new Entity('title');
 title.addComponent('element', {
-    type: pc.ELEMENTTYPE_TEXT,
+    type: ELEMENTTYPE_TEXT,
     fontAsset: font.id,
     text: 'Exit',
     fontSize: 96,
@@ -122,10 +122,10 @@ A world-space screen is a child of the character entity, positioned over its hea
 
 ```javascript
 // The label is on a screen-space screen, anchored to its bottom-left corner: anchor 0, 0, 0, 0
-const head = new pc.Vec3();
-const onCanvas = new pc.Vec3();
-const inView = new pc.Vec3();
-const overHead = new pc.Vec3(0, 2.2, 0);
+const head = new Vec3();
+const onCanvas = new Vec3();
+const inView = new Vec3();
+const overHead = new Vec3(0, 2.2, 0);
 
 app.on('update', () => {
     head.add2(character.getPosition(), overHead);

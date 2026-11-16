@@ -1261,45 +1261,58 @@ The PlayCanvas Engine is an open-source 3D engine for the web. It renders with W
 This is a complete Engine app. It is running right here in the page, and you can edit it: the preview reruns as you type.
 
 ```js live-example
-import * as pc from 'playcanvas';
+import {
+    AppBase,
+    AppOptions,
+    CameraComponentSystem,
+    Color,
+    createGraphicsDevice,
+    DEVICETYPE_WEBGPU,
+    Entity,
+    FILLMODE_FILL_WINDOW,
+    LightComponentSystem,
+    RenderComponentSystem,
+    RESOLUTION_AUTO,
+    StandardMaterial
+} from 'playcanvas';
 
 // create a graphics device, preferring WebGPU over WebGL 2
 const canvas = document.getElementById('application');
-const device = await pc.createGraphicsDevice(canvas, {
-    deviceTypes: [pc.DEVICETYPE_WEBGPU]
+const device = await createGraphicsDevice(canvas, {
+    deviceTypes: [DEVICETYPE_WEBGPU]
 });
 device.maxPixelRatio = Math.min(window.devicePixelRatio, 2);
 
 // create an application with the component systems it uses
-const options = new pc.AppOptions();
+const options = new AppOptions();
 options.graphicsDevice = device;
 options.componentSystems = [
-    pc.RenderComponentSystem,
-    pc.CameraComponentSystem,
-    pc.LightComponentSystem
+    RenderComponentSystem,
+    CameraComponentSystem,
+    LightComponentSystem
 ];
 
-const app = new pc.AppBase(canvas);
+const app = new AppBase(canvas);
 app.init(options);
-app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
-app.setCanvasResolution(pc.RESOLUTION_AUTO);
+app.setCanvasFillMode(FILLMODE_FILL_WINDOW);
+app.setCanvasResolution(RESOLUTION_AUTO);
 window.addEventListener('resize', () => app.resizeCanvas());
 app.start();
 
 // light the scene softly from all around
-app.scene.ambientLight = new pc.Color(0.3, 0.3, 0.35);
+app.scene.ambientLight = new Color(0.3, 0.3, 0.35);
 
 // create a camera looking down at the middle of the grid
-const camera = new pc.Entity('camera');
+const camera = new Entity('camera');
 camera.addComponent('camera', {
-    clearColor: new pc.Color(0.12, 0.14, 0.17)
+    clearColor: new Color(0.12, 0.14, 0.17)
 });
 camera.setPosition(0, 7, 17);
 camera.lookAt(0, 0, 0);
 app.root.addChild(camera);
 
 // create a sun that casts shadows
-const light = new pc.Entity('light');
+const light = new Entity('light');
 light.addComponent('light', {
     castShadows: true,
     shadowDistance: 40,
@@ -1311,16 +1324,16 @@ app.root.addChild(light);
 
 // create a grid of boxes, shading from orange in the middle to purple at the edges
 const size = 10;
-const orange = new pc.Color(1, 0.4, 0.1);
-const purple = new pc.Color(0.4, 0.2, 1);
+const orange = new Color(1, 0.4, 0.1);
+const purple = new Color(0.4, 0.2, 1);
 const boxes = [];
 for (let x = -size; x <= size; x++) {
     for (let z = -size; z <= size; z++) {
-        const material = new pc.StandardMaterial();
+        const material = new StandardMaterial();
         material.diffuse.lerp(orange, purple, Math.hypot(x, z) / (size * 1.5));
         material.update();
 
-        const box = new pc.Entity();
+        const box = new Entity();
         box.addComponent('render', { type: 'box', material: material });
         box.setPosition(x, 0, z);
         app.root.addChild(box);
@@ -1541,52 +1554,66 @@ First, select whether you prefer to develop in JavaScript or TypeScript:
 4. Create a `main.js` and paste this:
 
     ```javascript title="main.js"
-    import * as pc from 'playcanvas';
+    import {
+        AppBase,
+        AppOptions,
+        CameraComponentSystem,
+        Color,
+        ContainerHandler,
+        createGraphicsDevice,
+        DEVICETYPE_WEBGPU,
+        Entity,
+        FILLMODE_FILL_WINDOW,
+        LightComponentSystem,
+        RenderComponentSystem,
+        RESOLUTION_AUTO,
+        TextureHandler
+    } from 'playcanvas';
 
     // create a graphics device, preferring WebGPU over WebGL 2.0
     const canvas = document.getElementById('application');
-    const device = await pc.createGraphicsDevice(canvas, {
-        deviceTypes: [pc.DEVICETYPE_WEBGPU]
+    const device = await createGraphicsDevice(canvas, {
+        deviceTypes: [DEVICETYPE_WEBGPU]
     });
 
     // create an application with the systems and handlers it uses
-    const options = new pc.AppOptions();
+    const options = new AppOptions();
     options.graphicsDevice = device;
     options.componentSystems = [
-        pc.RenderComponentSystem,
-        pc.CameraComponentSystem,
-        pc.LightComponentSystem
+        RenderComponentSystem,
+        CameraComponentSystem,
+        LightComponentSystem
     ];
     options.resourceHandlers = [
-        pc.TextureHandler,
-        pc.ContainerHandler
+        TextureHandler,
+        ContainerHandler
     ];
 
-    const app = new pc.AppBase(canvas);
+    const app = new AppBase(canvas);
     app.init(options);
-    app.setCanvasResolution(pc.RESOLUTION_AUTO);
-    app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
+    app.setCanvasResolution(RESOLUTION_AUTO);
+    app.setCanvasFillMode(FILLMODE_FILL_WINDOW);
     app.start();
 
     // resize the canvas when the window is resized
     window.addEventListener('resize', () => app.resizeCanvas());
 
     // create a camera
-    const camera = new pc.Entity();
+    const camera = new Entity();
     camera.addComponent('camera', {
-        clearColor: new pc.Color(0.3, 0.3, 0.7)
+        clearColor: new Color(0.3, 0.3, 0.7)
     });
     camera.setPosition(0, 0, 3);
     app.root.addChild(camera);
 
     // create a light
-    const light = new pc.Entity();
+    const light = new Entity();
     light.addComponent('light');
     light.setEulerAngles(45, 45, 0);
     app.root.addChild(light);
 
     // create a box
-    const box = new pc.Entity();
+    const box = new Entity();
     box.addComponent('render', {
         type: 'box'
     });
@@ -1645,52 +1672,66 @@ First, select whether you prefer to develop in JavaScript or TypeScript:
 4. Create a `main.ts` and paste this:
 
     ```typescript title="main.ts"
-    import * as pc from 'playcanvas';
+    import {
+        AppBase,
+        AppOptions,
+        CameraComponentSystem,
+        Color,
+        ContainerHandler,
+        createGraphicsDevice,
+        DEVICETYPE_WEBGPU,
+        Entity,
+        FILLMODE_FILL_WINDOW,
+        LightComponentSystem,
+        RenderComponentSystem,
+        RESOLUTION_AUTO,
+        TextureHandler
+    } from 'playcanvas';
 
     // create a graphics device, preferring WebGPU over WebGL 2.0
     const canvas = document.getElementById('application') as HTMLCanvasElement;
-    const device = await pc.createGraphicsDevice(canvas, {
-        deviceTypes: [pc.DEVICETYPE_WEBGPU]
+    const device = await createGraphicsDevice(canvas, {
+        deviceTypes: [DEVICETYPE_WEBGPU]
     });
 
     // create an application with the systems and handlers it uses
-    const options = new pc.AppOptions();
+    const options = new AppOptions();
     options.graphicsDevice = device;
     options.componentSystems = [
-        pc.RenderComponentSystem,
-        pc.CameraComponentSystem,
-        pc.LightComponentSystem
+        RenderComponentSystem,
+        CameraComponentSystem,
+        LightComponentSystem
     ];
     options.resourceHandlers = [
-        pc.TextureHandler,
-        pc.ContainerHandler
+        TextureHandler,
+        ContainerHandler
     ];
 
-    const app = new pc.AppBase(canvas);
+    const app = new AppBase(canvas);
     app.init(options);
-    app.setCanvasResolution(pc.RESOLUTION_AUTO);
-    app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
+    app.setCanvasResolution(RESOLUTION_AUTO);
+    app.setCanvasFillMode(FILLMODE_FILL_WINDOW);
     app.start();
 
     // resize the canvas when the window is resized
     window.addEventListener('resize', () => app.resizeCanvas());
 
     // create a camera
-    const camera = new pc.Entity();
+    const camera = new Entity();
     camera.addComponent('camera', {
-        clearColor: new pc.Color(0.3, 0.3, 0.7)
+        clearColor: new Color(0.3, 0.3, 0.7)
     });
     camera.setPosition(0, 0, 3);
     app.root.addChild(camera);
 
     // create a light
-    const light = new pc.Entity();
+    const light = new Entity();
     light.addComponent('light');
     light.setEulerAngles(45, 45, 0);
     app.root.addChild(light);
 
     // create a box
-    const box = new pc.Entity();
+    const box = new Entity();
     box.addComponent('render', {
         type: 'box'
     });
@@ -1759,52 +1800,66 @@ First, select whether you prefer to develop in JavaScript or TypeScript:
 3. Create a `main.js` and paste this:
 
     ```javascript title="main.js"
-    import * as pc from 'playcanvas';
+    import {
+        AppBase,
+        AppOptions,
+        CameraComponentSystem,
+        Color,
+        ContainerHandler,
+        createGraphicsDevice,
+        DEVICETYPE_WEBGPU,
+        Entity,
+        FILLMODE_FILL_WINDOW,
+        LightComponentSystem,
+        RenderComponentSystem,
+        RESOLUTION_AUTO,
+        TextureHandler
+    } from 'playcanvas';
 
     // create a graphics device, preferring WebGPU over WebGL 2.0
     const canvas = document.getElementById('application');
-    const device = await pc.createGraphicsDevice(canvas, {
-        deviceTypes: [pc.DEVICETYPE_WEBGPU]
+    const device = await createGraphicsDevice(canvas, {
+        deviceTypes: [DEVICETYPE_WEBGPU]
     });
 
     // create an application with the systems and handlers it uses
-    const options = new pc.AppOptions();
+    const options = new AppOptions();
     options.graphicsDevice = device;
     options.componentSystems = [
-        pc.RenderComponentSystem,
-        pc.CameraComponentSystem,
-        pc.LightComponentSystem
+        RenderComponentSystem,
+        CameraComponentSystem,
+        LightComponentSystem
     ];
     options.resourceHandlers = [
-        pc.TextureHandler,
-        pc.ContainerHandler
+        TextureHandler,
+        ContainerHandler
     ];
 
-    const app = new pc.AppBase(canvas);
+    const app = new AppBase(canvas);
     app.init(options);
-    app.setCanvasResolution(pc.RESOLUTION_AUTO);
-    app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
+    app.setCanvasResolution(RESOLUTION_AUTO);
+    app.setCanvasFillMode(FILLMODE_FILL_WINDOW);
     app.start();
 
     // resize the canvas when the window is resized
     window.addEventListener('resize', () => app.resizeCanvas());
 
     // create a camera
-    const camera = new pc.Entity();
+    const camera = new Entity();
     camera.addComponent('camera', {
-        clearColor: new pc.Color(0.3, 0.3, 0.7)
+        clearColor: new Color(0.3, 0.3, 0.7)
     });
     camera.setPosition(0, 0, 3);
     app.root.addChild(camera);
 
     // create a light
-    const light = new pc.Entity();
+    const light = new Entity();
     light.addComponent('light');
     light.setEulerAngles(45, 45, 0);
     app.root.addChild(light);
 
     // create a box
-    const box = new pc.Entity();
+    const box = new Entity();
     box.addComponent('render', {
         type: 'box'
     });
@@ -1855,52 +1910,66 @@ First, select whether you prefer to develop in JavaScript or TypeScript:
 3. Create a `main.ts` and paste this:
 
     ```typescript title="main.ts"
-    import * as pc from 'playcanvas';
+    import {
+        AppBase,
+        AppOptions,
+        CameraComponentSystem,
+        Color,
+        ContainerHandler,
+        createGraphicsDevice,
+        DEVICETYPE_WEBGPU,
+        Entity,
+        FILLMODE_FILL_WINDOW,
+        LightComponentSystem,
+        RenderComponentSystem,
+        RESOLUTION_AUTO,
+        TextureHandler
+    } from 'playcanvas';
 
     // create a graphics device, preferring WebGPU over WebGL 2.0
     const canvas = document.getElementById('application') as HTMLCanvasElement;
-    const device = await pc.createGraphicsDevice(canvas, {
-        deviceTypes: [pc.DEVICETYPE_WEBGPU]
+    const device = await createGraphicsDevice(canvas, {
+        deviceTypes: [DEVICETYPE_WEBGPU]
     });
 
     // create an application with the systems and handlers it uses
-    const options = new pc.AppOptions();
+    const options = new AppOptions();
     options.graphicsDevice = device;
     options.componentSystems = [
-        pc.RenderComponentSystem,
-        pc.CameraComponentSystem,
-        pc.LightComponentSystem
+        RenderComponentSystem,
+        CameraComponentSystem,
+        LightComponentSystem
     ];
     options.resourceHandlers = [
-        pc.TextureHandler,
-        pc.ContainerHandler
+        TextureHandler,
+        ContainerHandler
     ];
 
-    const app = new pc.AppBase(canvas);
+    const app = new AppBase(canvas);
     app.init(options);
-    app.setCanvasResolution(pc.RESOLUTION_AUTO);
-    app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
+    app.setCanvasResolution(RESOLUTION_AUTO);
+    app.setCanvasFillMode(FILLMODE_FILL_WINDOW);
     app.start();
 
     // resize the canvas when the window is resized
     window.addEventListener('resize', () => app.resizeCanvas());
 
     // create a camera
-    const camera = new pc.Entity();
+    const camera = new Entity();
     camera.addComponent('camera', {
-        clearColor: new pc.Color(0.3, 0.3, 0.7)
+        clearColor: new Color(0.3, 0.3, 0.7)
     });
     camera.setPosition(0, 0, 3);
     app.root.addChild(camera);
 
     // create a light
-    const light = new pc.Entity();
+    const light = new Entity();
     light.addComponent('light');
     light.setEulerAngles(45, 45, 0);
     app.root.addChild(light);
 
     // create a box
-    const box = new pc.Entity();
+    const box = new Entity();
     box.addComponent('render', {
         type: 'box'
     });
@@ -28365,24 +28434,24 @@ Here is a scene with three entities: a camera, a light and an orange box. The ca
 With an application set up as in [Using the Engine Standalone](https://developer.playcanvas.com/user-manual/engine/standalone.md), and the render, camera and light component systems registered:
 
 ```javascript
-const camera = new pc.Entity('camera');
+const camera = new Entity('camera');
 camera.addComponent('camera', {
-    clearColor: new pc.Color(0.11, 0.12, 0.17)
+    clearColor: new Color(0.11, 0.12, 0.17)
 });
 camera.setPosition(0, 1.1, 3.2);
 camera.setEulerAngles(-20, 0, 0);
 app.root.addChild(camera);
 
-const light = new pc.Entity('light');
+const light = new Entity('light');
 light.addComponent('light');
 light.setEulerAngles(45, -30, 0);
 app.root.addChild(light);
 
-const material = new pc.StandardMaterial();
-material.diffuse = new pc.Color(1, 0.55, 0.2);
+const material = new StandardMaterial();
+material.diffuse = new Color(1, 0.55, 0.2);
 material.update();
 
-const box = new pc.Entity('box');
+const box = new Entity('box');
 box.addComponent('render', { type: 'box', material: material });
 box.setEulerAngles(0, 35, 0);
 app.root.addChild(box);
@@ -28933,10 +29002,10 @@ You add a component to an entity with the settings it should start with. Any set
 **Engine**
 
 ```javascript
-const lamp = new pc.Entity('lamp');
+const lamp = new Entity('lamp');
 lamp.addComponent('light', {
     type: 'omni',
-    color: new pc.Color(1, 0.8, 0.6),
+    color: new Color(1, 0.8, 0.6),
     range: 10
 });
 app.root.addChild(lamp);
@@ -29030,7 +29099,7 @@ A component's settings are properties that you can read and change at any time, 
 
 ```javascript
 lamp.light.intensity = 2;
-lamp.light.color = new pc.Color(1, 0, 0);
+lamp.light.color = new Color(1, 0, 0);
 
 console.log(lamp.light.range); // 10
 ```
@@ -29193,22 +29262,22 @@ For each type of component, the application has one component system, which crea
 
 ```javascript
 // the gravity that pulls on every rigid body
-app.systems.rigidbody.gravity = new pc.Vec3(0, -1.62, 0);
+app.systems.rigidbody.gravity = new Vec3(0, -1.62, 0);
 ```
 
 An application can only add components whose system it has registered. [`Application`](https://api.playcanvas.com/engine/classes/Application.html) registers every built-in system, as do the Editor, React and Web Components. [`AppBase`](https://api.playcanvas.com/engine/classes/AppBase.html) registers only the systems you list, so that a bundler can leave the others out of your build:
 
 ```javascript
-const options = new pc.AppOptions();
+const options = new AppOptions();
 options.graphicsDevice = device;
 options.componentSystems = [
-    pc.RenderComponentSystem,
-    pc.CameraComponentSystem,
-    pc.LightComponentSystem,
-    pc.ScriptComponentSystem
+    RenderComponentSystem,
+    CameraComponentSystem,
+    LightComponentSystem,
+    ScriptComponentSystem
 ];
 
-const app = new pc.AppBase(canvas);
+const app = new AppBase(canvas);
 app.init(options);
 ```
 
@@ -29246,35 +29315,48 @@ earthOrbit          at the center, spinning slowly
 No code ever moves the earth or the moon. Each frame, the app only turns the two orbit entities around their own Y axes. The earth sits at a fixed position relative to `earthOrbit`, so as that entity turns, it carries the earth around the sun. The moon is two levels further down, so it is carried around the earth by `moonOrbit`, and around the sun by `earthOrbit` as well.
 
 ```js live-example
-import * as pc from 'playcanvas';
+import {
+    AppBase,
+    AppOptions,
+    CameraComponentSystem,
+    Color,
+    createGraphicsDevice,
+    DEVICETYPE_WEBGPU,
+    Entity,
+    FILLMODE_FILL_WINDOW,
+    LightComponentSystem,
+    RenderComponentSystem,
+    RESOLUTION_AUTO,
+    StandardMaterial
+} from 'playcanvas';
 
 // create the application with the component systems it uses
 const canvas = document.getElementById('application');
-const device = await pc.createGraphicsDevice(canvas, {
-    deviceTypes: [pc.DEVICETYPE_WEBGPU]
+const device = await createGraphicsDevice(canvas, {
+    deviceTypes: [DEVICETYPE_WEBGPU]
 });
 device.maxPixelRatio = Math.min(window.devicePixelRatio, 2);
 
-const options = new pc.AppOptions();
+const options = new AppOptions();
 options.graphicsDevice = device;
 options.componentSystems = [
-    pc.RenderComponentSystem,
-    pc.CameraComponentSystem,
-    pc.LightComponentSystem
+    RenderComponentSystem,
+    CameraComponentSystem,
+    LightComponentSystem
 ];
 
-const app = new pc.AppBase(canvas);
+const app = new AppBase(canvas);
 app.init(options);
-app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
-app.setCanvasResolution(pc.RESOLUTION_AUTO);
+app.setCanvasFillMode(FILLMODE_FILL_WINDOW);
+app.setCanvasResolution(RESOLUTION_AUTO);
 window.addEventListener('resize', () => app.resizeCanvas());
 app.start();
 
-app.scene.ambientLight = new pc.Color(0.1, 0.1, 0.12);
+app.scene.ambientLight = new Color(0.1, 0.1, 0.12);
 
-const camera = new pc.Entity('camera');
+const camera = new Entity('camera');
 camera.addComponent('camera', {
-    clearColor: new pc.Color(0.03, 0.04, 0.07)
+    clearColor: new Color(0.03, 0.04, 0.07)
 });
 camera.setPosition(0, 7, 12);
 camera.lookAt(0, 0, 0);
@@ -29282,39 +29364,39 @@ app.root.addChild(camera);
 
 // a sphere with a material of the given color, which glows if emissive is true
 const createSphere = (name, color, emissive = false) => {
-    const material = new pc.StandardMaterial();
+    const material = new StandardMaterial();
     if (emissive) {
-        material.diffuse = new pc.Color(0, 0, 0);
+        material.diffuse = new Color(0, 0, 0);
         material.emissive = color;
     } else {
         material.diffuse = color;
     }
     material.update();
 
-    const entity = new pc.Entity(name);
+    const entity = new Entity(name);
     entity.addComponent('render', { type: 'sphere', material: material });
     return entity;
 };
 
 // the sun glows, and lights the planets with an omni light
-const sun = createSphere('sun', new pc.Color(1, 0.75, 0.3), true);
+const sun = createSphere('sun', new Color(1, 0.75, 0.3), true);
 sun.addComponent('light', { type: 'omni', range: 30, intensity: 2 });
 sun.setLocalScale(2, 2, 2);
 app.root.addChild(sun);
 
 // the earth is a child of an orbit entity at the center
-const earthOrbit = new pc.Entity('earthOrbit');
+const earthOrbit = new Entity('earthOrbit');
 app.root.addChild(earthOrbit);
 
-const earth = createSphere('earth', new pc.Color(0.2, 0.45, 1));
+const earth = createSphere('earth', new Color(0.2, 0.45, 1));
 earth.setLocalPosition(6, 0, 0);
 earthOrbit.addChild(earth);
 
 // the moon is set up the same way, one level further down
-const moonOrbit = new pc.Entity('moonOrbit');
+const moonOrbit = new Entity('moonOrbit');
 earth.addChild(moonOrbit);
 
-const moon = createSphere('moon', new pc.Color(0.75, 0.75, 0.75));
+const moon = createSphere('moon', new Color(0.75, 0.75, 0.75));
 moon.setLocalPosition(1.5, 0, 0);
 moon.setLocalScale(0.35, 0.35, 0.35);
 moonOrbit.addChild(moon);
@@ -29361,11 +29443,11 @@ The vectors and quaternions that the `get` methods return belong to the entity, 
 **Engine**
 
 ```javascript
-const car = new pc.Entity('car');
+const car = new Entity('car');
 car.setPosition(10, 0, 0);
 app.root.addChild(car);
 
-const wheel = new pc.Entity('wheel');
+const wheel = new Entity('wheel');
 car.addChild(wheel);
 wheel.setLocalPosition(1, 0, 2); // relative to the car
 
@@ -29948,7 +30030,7 @@ this.app.assets.load(asset);
 You can create and add new assets to the registry at runtime:
 
 ```javascript
-const asset = new pc.Asset('New Texture', 'texture', {
+const asset = new Asset('New Texture', 'texture', {
     url: 'path/to/texture.png'
 });
 
@@ -30444,7 +30526,7 @@ class MyParser {
 
     // fetch the resource and deliver its raw data via callback(err, data)
     load(url, callback, asset) {
-        this.handler.fetch(url, pc.Http.ResponseType.ARRAY_BUFFER, callback, asset);
+        this.handler.fetch(url, Http.ResponseType.ARRAY_BUFFER, callback, asset);
     }
 
     // optional: convert the loaded data into the runtime resource
@@ -30489,7 +30571,7 @@ class TgaParser {
     }
 
     load(url, callback, asset) {
-        this.handler.fetch(url, pc.Http.ResponseType.ARRAY_BUFFER, callback, asset);
+        this.handler.fetch(url, Http.ResponseType.ARRAY_BUFFER, callback, asset);
     }
 
     // texture parsers use an extended open signature: the handler passes the graphics
@@ -30498,11 +30580,11 @@ class TgaParser {
         // decode the TGA file into RGBA8 pixels (using your decoder of choice)
         const { width, height, pixels } = decodeTga(data);
 
-        const texture = new pc.Texture(device, {
+        const texture = new Texture(device, {
             name: url,
             width: width,
             height: height,
-            format: pc.PIXELFORMAT_RGBA8,
+            format: PIXELFORMAT_RGBA8,
             levels: [pixels],
 
             // spread the asset-derived options last, so that asset settings
@@ -30522,7 +30604,7 @@ app.loader.getHandler('texture').addParser(new TgaParser());
 With the parser registered, `.tga` files load like any other texture:
 
 ```javascript
-const asset = new pc.Asset('picture', 'texture', { url: 'images/picture.tga' }, { srgb: true });
+const asset = new Asset('picture', 'texture', { url: 'images/picture.tga' }, { srgb: true });
 app.assets.add(asset);
 app.assets.load(asset);
 ```
@@ -31161,7 +31243,7 @@ registerScript(Rotator, undefined, app);
 The registry uses the class's static `scriptName` as its key. Once registered, you can add the script to any entity by that name — including procedurally, when cloning, or when instantiating templates:
 
 ```javascript
-const entity = new pc.Entity();
+const entity = new Entity();
 entity.addComponent('script');
 
 // attach the script by its registered name
@@ -33076,9 +33158,9 @@ You need at least one enabled camera in your scene to see anything. Beyond that 
 
 ```javascript
 // Create an entity with a camera component
-const camera = new pc.Entity('Camera');
+const camera = new Entity('Camera');
 camera.addComponent('camera', {
-    clearColor: new pc.Color(0.3, 0.3, 0.7)
+    clearColor: new Color(0.3, 0.3, 0.7)
 });
 app.root.addChild(camera);
 
@@ -33164,8 +33246,8 @@ Set the projection type as follows:
 **Engine**
 
 ```javascript
-// pc.PROJECTION_PERSPECTIVE (default) | pc.PROJECTION_ORTHOGRAPHIC
-camera.camera.projection = pc.PROJECTION_ORTHOGRAPHIC;
+// PROJECTION_PERSPECTIVE (default) | PROJECTION_ORTHOGRAPHIC
+camera.camera.projection = PROJECTION_ORTHOGRAPHIC;
 camera.camera.orthoHeight = 5; // half-height of the view in world units
 ```
 
@@ -33231,7 +33313,7 @@ Markdown: https://developer.playcanvas.com/user-manual/graphics/cameras/clearing
 Before a camera renders the scene, it clears its render target — the screen, unless a [render target](https://developer.playcanvas.com/user-manual/graphics/cameras/multiple-cameras.md#render-targets) is assigned. You can control what gets cleared and to what color:
 
 ```javascript
-camera.camera.clearColor = new pc.Color(0, 0, 0);
+camera.camera.clearColor = new Color(0, 0, 0);
 
 camera.camera.clearColorBuffer = true;   // clear the color buffer (default: true)
 camera.camera.clearDepthBuffer = true;   // clear the depth buffer (default: true)
@@ -33246,7 +33328,7 @@ The clear color has an alpha channel, and the application's canvas supports tran
 
 ```javascript
 // The web page shows through wherever nothing is drawn
-camera.camera.clearColor = new pc.Color(0, 0, 0, 0);
+camera.camera.clearColor = new Color(0, 0, 0, 0);
 ```
 
 ## Disabling Clearing
@@ -33278,7 +33360,7 @@ For physically based scenes with HDR lighting, `TONEMAP_ACES` or `TONEMAP_NEUTRA
 **Engine**
 
 ```javascript
-camera.camera.toneMapping = pc.TONEMAP_ACES;
+camera.camera.toneMapping = TONEMAP_ACES;
 ```
 
 **Editor**
@@ -33366,10 +33448,10 @@ For 2-player horizontal split-screen, two cameras each take half the screen:
 
 ```javascript
 // Player 1: left half of the screen
-camera1.camera.rect = new pc.Vec4(0, 0, 0.5, 1);
+camera1.camera.rect = new Vec4(0, 0, 0.5, 1);
 
 // Player 2: right half of the screen, rendered after camera1
-camera2.camera.rect = new pc.Vec4(0.5, 0, 0.5, 1);
+camera2.camera.rect = new Vec4(0.5, 0, 0.5, 1);
 camera2.camera.priority = 1;
 ```
 
@@ -33416,7 +33498,7 @@ When one camera renders on top of another — a picture-in-picture overlay, or a
 ```javascript
 // Render an overlay camera on top of the main view, in the bottom-right corner
 overlay.camera.priority = 1;
-overlay.camera.rect = new pc.Vec4(0.7, 0, 0.3, 0.3);
+overlay.camera.rect = new Vec4(0.7, 0, 0.3, 0.3);
 overlay.camera.clearColorBuffer = true;  // overlay has its own background
 overlay.camera.clearDepthBuffer = true;  // don't depth-test against the main view
 
@@ -33674,7 +33756,7 @@ The Picker class provides a way to select mesh instances from screen coordinates
 To create a picker, instantiate it with your application, desired resolution, and optionally enable depth picking:
 
 ```javascript
-const picker = new pc.Picker(app, width, height, depth);
+const picker = new Picker(app, width, height, depth);
 ```
 
 The basic workflow involves three steps:
@@ -33692,7 +33774,7 @@ For complete API documentation, see the [Picker API reference](https://api.playc
 By default, the picker only captures mesh instance IDs. However, you can enable depth picking by passing `true` as the fourth constructor parameter:
 
 ```javascript
-const picker = new pc.Picker(app, width, height, true);
+const picker = new Picker(app, width, height, true);
 ```
 
 When depth picking is enabled, the picker captures depth values along with mesh IDs. This additional information enables calculating the exact 3D world position of clicked points on object surfaces, which is useful for placing objects, measuring distances, or creating editor tools.
@@ -33723,7 +33805,7 @@ The picker's performance can be optimized in several ways:
 
 ```javascript
 const pickerScale = 0.25;
-const picker = new pc.Picker(
+const picker = new Picker(
     app,
     canvas.width * pickerScale,
     canvas.height * pickerScale,
@@ -35374,7 +35456,7 @@ It is a per-pixel effect on the [Standard Material](https://developer.playcanvas
 | `PARALLAX_OCCLUSION` | Marches the view ray through the height field until it passes below the surface. Deep relief reads as real depth, at the cost of more taps. |
 
 ```javascript
-material.parallaxMode = pc.PARALLAX_OCCLUSION;
+material.parallaxMode = PARALLAX_OCCLUSION;
 material.heightMapFactor = 0.5;
 material.update();
 ```
@@ -35405,7 +35487,7 @@ The taps are only spent in the forward pass, so shadow and depth passes are unaf
 `StandardMaterial#parallaxShadowSamples` makes the relief shadow itself: the shader marches the height field towards the light from the point the view ray hit, so a raised brick darkens the mortar beside it. It defaults to 0, which disables it.
 
 ```javascript
-material.parallaxMode = pc.PARALLAX_OCCLUSION;
+material.parallaxMode = PARALLAX_OCCLUSION;
 material.parallaxShadowSamples = 8;
 material.update();
 ```
@@ -35886,7 +35968,7 @@ All of them are driven by the material's opacity, which comes from [`StandardMat
 Setting [`blendType`](https://api.playcanvas.com/engine/classes/Material.html#blendtype) to a blending mode such as `BLEND_NORMAL` mixes the surface with whatever is already in the frame buffer.
 
 ```javascript
-material.blendType = pc.BLEND_NORMAL;
+material.blendType = BLEND_NORMAL;
 material.opacity = 0.5;
 material.update();
 ```
@@ -35899,9 +35981,9 @@ This gives the smoothest result and supports any opacity value, but it is order 
 
 ```javascript
 // equivalent to BLEND_NORMAL, written out in full
-material.blendState = new pc.BlendState(
+material.blendState = new BlendState(
     true,
-    pc.BLENDEQUATION_ADD, pc.BLENDMODE_SRC_ALPHA, pc.BLENDMODE_ONE_MINUS_SRC_ALPHA
+    BLENDEQUATION_ADD, BLENDMODE_SRC_ALPHA, BLENDMODE_ONE_MINUS_SRC_ALPHA
 );
 material.update();
 ```
@@ -35951,9 +36033,9 @@ The result is binary - a fragment is either fully opaque or gone - so there is n
 [`opacityDither`](https://api.playcanvas.com/engine/classes/StandardMaterial.html#opacitydither) converts opacity into a screen-space dither pattern, discarding a proportion of fragments instead of blending them.
 
 ```javascript
-material.blendType = pc.BLEND_NONE;
+material.blendType = BLEND_NONE;
 material.opacity = 0.5;
-material.opacityDither = pc.DITHER_BAYER8;
+material.opacityDither = DITHER_BAYER8;
 material.update();
 ```
 
@@ -35964,7 +36046,7 @@ Available patterns are `DITHER_BAYER2`, `DITHER_BAYER4`, `DITHER_BAYER8`, `DITHE
 [`alphaToCoverage`](https://api.playcanvas.com/engine/classes/Material.html#alphatocoverage) uses the fragment's alpha to build an MSAA sample coverage mask. Instead of blending, the hardware keeps a proportion of the multi-sample coverage matching the alpha value.
 
 ```javascript
-material.blendType = pc.BLEND_NONE;
+material.blendType = BLEND_NONE;
 material.opacity = 0.5;
 material.alphaToCoverage = true;
 material.update();
@@ -35979,7 +36061,7 @@ Quality is bounded by the sample count of the render target. With 4x MSAA, opaci
 Alpha to coverage requires a multi-sampled render target and is **silently ignored** when rendering into a single-sampled one. Nothing is logged in release builds and no error is raised - the surface simply renders as fully opaque. If you enable the flag and see no change, check that antialiasing is actually on:
 
 ```javascript
-const device = await pc.createGraphicsDevice(canvas, {
+const device = await createGraphicsDevice(canvas, {
     deviceTypes: [deviceType],
     antialias: true
 });
@@ -35988,7 +36070,7 @@ const device = await pc.createGraphicsDevice(canvas, {
 On WebGPU there is an additional requirement: the first color attachment of the render target must use a blendable format that has an alpha channel. This matters in practice because [`CameraFrame`](https://api.playcanvas.com/engine/classes/CameraFrame.html) prefers `PIXELFORMAT_RG11B10F` for its HDR render target, and that format has no alpha channel. Alpha to coverage is therefore ignored for geometry rendered through `CameraFrame` with its default formats, and a warning is logged in debug builds. Requesting a format with an alpha channel resolves it:
 
 ```javascript
-cameraFrame.rendering.renderFormats = [pc.PIXELFORMAT_RGBA16F];
+cameraFrame.rendering.renderFormats = [PIXELFORMAT_RGBA16F];
 cameraFrame.update();
 ```
 
@@ -36054,7 +36136,7 @@ Textures that represent colors, such as Diffuse, Emissive, Specular, and Sheen, 
 When loading a texture asset that represents colors in sRGB space, it is important to specify sRGB encoding. The following example demonstrates how to create an asset with sRGB encoding:  
 
 ```javascript
-new pc.Asset(
+new Asset(
     'color',
     'texture',
     { url: 'heart.png' },
@@ -36075,11 +36157,11 @@ When creating a procedural texture or rendering to a texture that represents col
 The following example demonstrates how to create an sRGB render target texture:  
 
 ```javascript
-const texture = new pc.Texture(app.graphicsDevice, {
+const texture = new Texture(app.graphicsDevice, {
     name: 'color-texture',
     width: 512,
     height: 512,
-    format: pc.PIXELFORMAT_SRGBA8
+    format: PIXELFORMAT_SRGBA8
 });
 ```
 
@@ -36155,8 +36237,8 @@ See [Modern Post Processing](https://developer.playcanvas.com/user-manual/graphi
 ### Configuring CameraFrame on a Camera
 
 ```javascript
-const cameraFrame = new pc.CameraFrame(app, cameraEntity.camera);
-cameraFrame.rendering.toneMapping = pc.TONEMAP_NEUTRAL;
+const cameraFrame = new CameraFrame(app, cameraEntity.camera);
+cameraFrame.rendering.toneMapping = TONEMAP_NEUTRAL;
 cameraFrame.rendering.samples = 4;
 cameraFrame.bloom.intensity = 0.01;
 cameraFrame.update();
@@ -36167,7 +36249,7 @@ On the engine `CameraFrame`, a positive `bloom.intensity` enables bloom; set it 
 For HDR bloom to be effective, the scene should include bright light sources. This is typically achieved using emissive materials with high intensity. For example:
 
 ```javascript
-material.emissive = pc.Color.YELLOW;
+material.emissive = Color.YELLOW;
 material.emissiveIntensity = 50;
 ```
 
@@ -36192,7 +36274,7 @@ The LUT texture must be loaded with the following settings — LUTs are authored
 - `minfilter: 'linear'`, `magfilter: 'linear'` — bilinear filtering between LUT entries prevents banding
 
 ```javascript
-const lutAsset = new pc.Asset(
+const lutAsset = new Asset(
     'colorLut',
     'texture',
     { url: 'path/to/lut.png' },
@@ -36299,8 +36381,8 @@ const shaderDesc = {
             // write your fragment shader source code in WGSL language
         `,
         attributes: {
-            aPosition: pc.SEMANTIC_POSITION,
-            aUv0: pc.SEMANTIC_TEXCOORD0
+            aPosition: SEMANTIC_POSITION,
+            aUv0: SEMANTIC_TEXCOORD0
         }
     };
 
@@ -36309,7 +36391,7 @@ const shaderDesc = {
 Then create instances of your material, which you can use for rendering:
 
 ```javascript
-const material = new pc.ShaderMaterial(shaderDesc);
+const material = new ShaderMaterial(shaderDesc);
 ```
 
 The shader source code can be written in GLSL if you're targeting the WebGL2 or WebGPU platforms, or in WGSL if you're targeting WebGPU only, or both.
@@ -36687,7 +36769,7 @@ fn fragmentMain(input: FragmentInput) -> FragmentOutput
 If you have a need to inspect the generated shaders, you can add this to your script
 
 ```javascript
-pc.Tracing.set(pc.TRACEID_SHADER_ALLOC, true);
+Tracing.set(TRACEID_SHADER_ALLOC, true);
 ```
 
 And Each created shader will be logged in the browser console, where you can inspect its source code, for example:
@@ -36802,8 +36884,8 @@ The recommended way to add custom includes is by registering them with `ShaderCh
 
 ```javascript
 // Get the shader chunks for each language
-const chunksGLSL = pc.ShaderChunks.get(device, pc.SHADERLANGUAGE_GLSL);
-const chunksWGSL = pc.ShaderChunks.get(device, pc.SHADERLANGUAGE_WGSL);
+const chunksGLSL = ShaderChunks.get(device, SHADERLANGUAGE_GLSL);
+const chunksWGSL = ShaderChunks.get(device, SHADERLANGUAGE_WGSL);
 
 // Register your custom chunk in both languages
 chunksGLSL.set('myUtilsPS', `
@@ -36918,7 +37000,7 @@ When creating shaders programmatically (rather than using `ShaderMaterial`), you
 Use `ShaderUtils.createShader()` to create vertex/fragment shaders with defines:
 
 ```javascript
-const shader = pc.ShaderUtils.createShader(device, {
+const shader = ShaderUtils.createShader(device, {
     uniqueName: 'MyShader',
     vertexGLSL: vertexCodeGLSL,
     vertexWGSL: vertexCodeWGSL,
@@ -36934,9 +37016,9 @@ const shader = pc.ShaderUtils.createShader(device, {
 Compute shaders are created directly using the `Shader` class:
 
 ```javascript
-const shader = new pc.Shader(device, {
+const shader = new Shader(device, {
     name: 'MyComputeShader',
-    shaderLanguage: pc.SHADERLANGUAGE_WGSL,
+    shaderLanguage: SHADERLANGUAGE_WGSL,
     cshader: computeCode,
     cincludes: includesMap,  // Custom includes for compute shader
     cdefines: definesMap     // Defines for compute shader
@@ -36957,7 +37039,7 @@ const includesMap = new Map([
 You can also use engine-provided chunks:
 
 ```javascript
-cincludes: pc.ShaderChunks.get(device, pc.SHADERLANGUAGE_WGSL)
+cincludes: ShaderChunks.get(device, SHADERLANGUAGE_WGSL)
 ```
 
 ### Defines Map
@@ -38024,9 +38106,9 @@ A compute shader is created using the `Shader` class with a WGSL `cshader` sourc
 ### Basic Shader Definition
 
 ```javascript
-const shader = new pc.Shader(device, {
+const shader = new Shader(device, {
     name: 'MyComputeShader',
-    shaderLanguage: pc.SHADERLANGUAGE_WGSL,
+    shaderLanguage: SHADERLANGUAGE_WGSL,
     cshader: `
         // resources declared with the simplified syntax are reflected automatically -
         // no computeBindGroupFormat required
@@ -38067,16 +38149,16 @@ const shaderSource = `
 `;
 
 // Create separate shaders from the same source, each using a different entry point
-const initShader = new pc.Shader(device, {
+const initShader = new Shader(device, {
     name: 'InitParticles',
-    shaderLanguage: pc.SHADERLANGUAGE_WGSL,
+    shaderLanguage: SHADERLANGUAGE_WGSL,
     cshader: shaderSource,
     computeEntryPoint: 'initParticles'
 });
 
-const updateShader = new pc.Shader(device, {
+const updateShader = new Shader(device, {
     name: 'UpdateParticles',
-    shaderLanguage: pc.SHADERLANGUAGE_WGSL,
+    shaderLanguage: SHADERLANGUAGE_WGSL,
     cshader: shaderSource,
     computeEntryPoint: 'updateParticles'
 });
@@ -38087,7 +38169,7 @@ const updateShader = new pc.Shader(device, {
 The `Compute` class represents an executable instance of a compute shader with its associated parameters:
 
 ```javascript
-const compute = new pc.Compute(device, shader, 'MyComputeInstance');
+const compute = new Compute(device, shader, 'MyComputeInstance');
 ```
 
 ## Setting Parameters
@@ -38113,11 +38195,11 @@ Every uniform and resource the compute shader declares has to be given a value o
 Storage buffers hold data that compute shaders can read from and write to:
 
 ```javascript
-const storageBuffer = new pc.StorageBuffer(
+const storageBuffer = new StorageBuffer(
     device,
     bufferSizeInBytes,
-    pc.BUFFERUSAGE_COPY_SRC |  // Enable reading back to CPU
-    pc.BUFFERUSAGE_COPY_DST    // Enable writing from CPU
+    BUFFERUSAGE_COPY_SRC |  // Enable reading back to CPU
+    BUFFERUSAGE_COPY_DST    // Enable writing from CPU
 );
 
 // Write initial data
@@ -38133,14 +38215,14 @@ storageBuffer.clear();
 Storage textures are created with the `storage: true` option:
 
 ```javascript
-const storageTexture = new pc.Texture(device, {
+const storageTexture = new Texture(device, {
     name: 'StorageTexture',
     width: 512,
     height: 512,
-    format: pc.PIXELFORMAT_RGBA8,
+    format: PIXELFORMAT_RGBA8,
     mipmaps: false,
-    minFilter: pc.FILTER_LINEAR,
-    magFilter: pc.FILTER_LINEAR,
+    minFilter: FILTER_LINEAR,
+    magFilter: FILTER_LINEAR,
     storage: true  // Enable as storage texture
 });
 ```
@@ -38175,7 +38257,7 @@ A compute instance is dispatched at most once in a frame. To dispatch a compute 
 
 ```javascript
 const computes = [0.25, 0.5].map((strength) => {
-    const compute = new pc.Compute(device, shader, `Blur-${strength}`);
+    const compute = new Compute(device, shader, `Blur-${strength}`);
     compute.setParameter('strength', strength);
     compute.setupDispatch(width, height);
     return compute;
@@ -38310,7 +38392,7 @@ For advanced use cases like complex scheduling outside of rendering frames, you 
 
 ```javascript
 // Create a custom buffer for indirect dispatch
-const customBuffer = new pc.StorageBuffer(device, 3 * 4, pc.BUFFERUSAGE_INDIRECT);
+const customBuffer = new StorageBuffer(device, 3 * 4, BUFFERUSAGE_INDIRECT);
 
 // Use custom buffer for indirect dispatch
 compute.setupIndirectDispatch(0, customBuffer);
@@ -38463,9 +38545,9 @@ fn main(@builtin(global_invocation_id) global_id: vec3u) {
 Use `cdefines` to pass defines and `cincludes` to provide include content:
 
 ```javascript
-const shader = new pc.Shader(device, {
+const shader = new Shader(device, {
     name: 'ComputeShader',
-    shaderLanguage: pc.SHADERLANGUAGE_WGSL,
+    shaderLanguage: SHADERLANGUAGE_WGSL,
     cshader: `
         #include "myHelper"
 
@@ -38478,7 +38560,7 @@ const shader = new pc.Shader(device, {
     cdefines: new Map([
         ['{WORKGROUP_SIZE}', '64']
     ]),
-    cincludes: pc.ShaderChunks.get(device, pc.SHADERLANGUAGE_WGSL)
+    cincludes: ShaderChunks.get(device, SHADERLANGUAGE_WGSL)
 });
 ```
 
@@ -38546,11 +38628,11 @@ Manual bind groups are not deprecated. If you have existing compute shaders that
 The `computeBindGroupFormat` defines what resources are available to the compute shader. When you supply it, write explicit `@group`/`@binding` indices in the WGSL to match. You can bind various types of resources:
 
 ```javascript
-const shader = new pc.Shader(device, {
+const shader = new Shader(device, {
     name: 'MyComputeShader',
-    shaderLanguage: pc.SHADERLANGUAGE_WGSL,
+    shaderLanguage: SHADERLANGUAGE_WGSL,
     cshader: shaderCode,
-    computeBindGroupFormat: new pc.BindGroupFormat(device, [
+    computeBindGroupFormat: new BindGroupFormat(device, [
         // Resource bindings go here
     ])
 });
@@ -38562,10 +38644,10 @@ Storage buffers allow read/write access to large amounts of data:
 
 ```javascript
 // Read-write storage buffer
-new pc.BindStorageBufferFormat('particles', pc.SHADERSTAGE_COMPUTE)
+new BindStorageBufferFormat('particles', SHADERSTAGE_COMPUTE)
 
 // Read-only storage buffer
-new pc.BindStorageBufferFormat('spheres', pc.SHADERSTAGE_COMPUTE, true)
+new BindStorageBufferFormat('spheres', SHADERSTAGE_COMPUTE, true)
 ```
 
 In WGSL, access storage buffers like this:
@@ -38580,7 +38662,7 @@ In WGSL, access storage buffers like this:
 Storage textures allow the compute shader to write directly to a texture:
 
 ```javascript
-new pc.BindStorageTextureFormat('outTexture', pc.PIXELFORMAT_RGBA8, pc.TEXTUREDIMENSION_2D)
+new BindStorageTextureFormat('outTexture', PIXELFORMAT_RGBA8, TEXTUREDIMENSION_2D)
 ```
 
 In WGSL:
@@ -38598,10 +38680,10 @@ Input textures provide read-only texture data. The last parameter controls wheth
 
 ```javascript
 // Texture without sampler (for textureLoad)
-new pc.BindTextureFormat('inputTexture', pc.SHADERSTAGE_COMPUTE, undefined, undefined, false)
+new BindTextureFormat('inputTexture', SHADERSTAGE_COMPUTE, undefined, undefined, false)
 
 // Texture with sampler (for textureSampleLevel)
-new pc.BindTextureFormat('inputTexture', pc.SHADERSTAGE_COMPUTE, undefined, undefined, true)
+new BindTextureFormat('inputTexture', SHADERSTAGE_COMPUTE, undefined, undefined, true)
 ```
 
 In WGSL, when a sampler is included, it uses the texture name with a `_sampler` suffix:
@@ -38628,19 +38710,19 @@ In compute shaders, use `textureSampleLevel` instead of `textureSample` because 
 For passing uniform data to compute shaders, first define the uniform buffer format:
 
 ```javascript
-const uniformBufferFormat = new pc.UniformBufferFormat(device, [
-    new pc.UniformFormat('tint', pc.UNIFORMTYPE_VEC4),
-    new pc.UniformFormat('time', pc.UNIFORMTYPE_FLOAT),
-    new pc.UniformFormat('count', pc.UNIFORMTYPE_UINT)
+const uniformBufferFormat = new UniformBufferFormat(device, [
+    new UniformFormat('tint', UNIFORMTYPE_VEC4),
+    new UniformFormat('time', UNIFORMTYPE_FLOAT),
+    new UniformFormat('count', UNIFORMTYPE_UINT)
 ]);
 ```
 
 Then include it in the shader definition along with the bind group:
 
 ```javascript
-const shader = new pc.Shader(device, {
+const shader = new Shader(device, {
     name: 'ComputeShader',
-    shaderLanguage: pc.SHADERLANGUAGE_WGSL,
+    shaderLanguage: SHADERLANGUAGE_WGSL,
     cshader: shaderCode,
 
     // Assign the uniform buffer format
@@ -38649,8 +38731,8 @@ const shader = new pc.Shader(device, {
     },
 
     // Include uniform buffer in bind group
-    computeBindGroupFormat: new pc.BindGroupFormat(device, [
-        new pc.BindUniformBufferFormat('ub', pc.SHADERSTAGE_COMPUTE),
+    computeBindGroupFormat: new BindGroupFormat(device, [
+        new BindUniformBufferFormat('ub', SHADERSTAGE_COMPUTE),
         // ... other bindings
     ])
 });
@@ -38718,7 +38800,7 @@ The debug version of the Engine will report any API changes to the runtime conso
 Once an application's chunks have been updated to the latest API they must be flagged as such. For example, after updating a material's custom chunks to the latest engine release (say v2.8), specify this in the chunks object as follows:
 
 ```javascript
-const materialChunksGLSL = material.getShaderChunks(pc.SHADERLANGUAGE_GLSL);
+const materialChunksGLSL = material.getShaderChunks(SHADERLANGUAGE_GLSL);
 materialChunksGLSL.set('diffusePS', '...');
 material.shaderChunksVersion = '2.8';
 ```
@@ -39615,8 +39697,8 @@ Use a perspective camera. Assign a directional light component to `volumetricFog
 The following example assumes `cameraEntity` has a camera component and `sunEntity` has a directional light component:
 
 ```javascript
-const cameraFrame = new pc.CameraFrame(app, cameraEntity.camera);
-cameraFrame.rendering.toneMapping = pc.TONEMAP_NEUTRAL;
+const cameraFrame = new CameraFrame(app, cameraEntity.camera);
+cameraFrame.rendering.toneMapping = TONEMAP_NEUTRAL;
 cameraFrame.taa.enabled = true;
 
 sunEntity.light.castShadows = true;
@@ -39684,7 +39766,7 @@ Local-light cost grows with the number of contributing lights, their screen cove
 Fog and depth of field need Gaussian splats to contribute to scene depth to respect the splats' surfaces. This is disabled by default because it costs an extra full-screen render target. Enable it through [`GSplatParams.sceneDepthWrite`](https://api.playcanvas.com/engine/classes/GSplatParams.html#scenedepthwrite):
 
 ```javascript
-if (pc.CameraFrame.isSplatSceneDepthSupported(app.graphicsDevice)) {
+if (CameraFrame.isSplatSceneDepthSupported(app.graphicsDevice)) {
     app.scene.gsplat.sceneDepthWrite = true;
     cameraFrame.rendering.samples = 1;
     cameraFrame.update();
@@ -41510,10 +41592,10 @@ Store matrices for individual instances into a Float32Array:
 // store matrices for individual instances into array
 const instanceCount = 1000;
 const matrices = new Float32Array(instanceCount * 16);
-const matrix = new pc.Mat4();
-const pos = new pc.Vec3();
-const rot = new pc.Quat();
-const scl = new pc.Vec3();
+const matrix = new Mat4();
+const pos = new Vec3();
+const rot = new Quat();
+const scl = new Vec3();
 
 for (let i = 0; i < instanceCount; i++) {
     // set up position, rotation, scale for each instance
@@ -41534,8 +41616,8 @@ for (let i = 0; i < instanceCount; i++) {
 Create a VertexBuffer using [`VertexFormat.getDefaultInstancingFormat`](https://api.playcanvas.com/engine/classes/VertexFormat.html#getdefaultinstancingformat) and enable instancing on a MeshInstance:
 
 ```javascript
-const vbFormat = pc.VertexFormat.getDefaultInstancingFormat(app.graphicsDevice);
-const vertexBuffer = new pc.VertexBuffer(app.graphicsDevice, vbFormat, instanceCount, {
+const vbFormat = VertexFormat.getDefaultInstancingFormat(app.graphicsDevice);
+const vertexBuffer = new VertexBuffer(app.graphicsDevice, vbFormat, instanceCount, {
     data: matrices
 });
 
@@ -41550,8 +41632,8 @@ For dynamic instancing where positions change each frame, create a dynamic verte
 
 ```javascript
 // create dynamic vertex buffer (no initial data)
-const vertexBuffer = new pc.VertexBuffer(app.graphicsDevice, vbFormat, instanceCount, {
-    usage: pc.BUFFER_DYNAMIC
+const vertexBuffer = new VertexBuffer(app.graphicsDevice, vbFormat, instanceCount, {
+    usage: BUFFER_DYNAMIC
 });
 
 // update per frame
@@ -41567,9 +41649,9 @@ For more efficient instancing or custom per-instance data, you can define a cust
 This format stores only position (3 floats) and uniform scale (1 float) per instance, reducing memory from 64 bytes to 16 bytes per instance:
 
 ```javascript
-const vbFormat = new pc.VertexFormat(app.graphicsDevice, [
-    { semantic: pc.SEMANTIC_ATTR12, components: 3, type: pc.TYPE_FLOAT32 }, // position
-    { semantic: pc.SEMANTIC_ATTR13, components: 1, type: pc.TYPE_FLOAT32 }  // scale
+const vbFormat = new VertexFormat(app.graphicsDevice, [
+    { semantic: SEMANTIC_ATTR12, components: 3, type: TYPE_FLOAT32 }, // position
+    { semantic: SEMANTIC_ATTR13, components: 1, type: TYPE_FLOAT32 }  // scale
 ]);
 
 // store data for individual instances, 4 floats each
@@ -41584,7 +41666,7 @@ for (let i = 0; i < instanceCount; i++) {
     data[offset + 3] = 0.1 + Math.random() * 0.1; // scale
 }
 
-const vertexBuffer = new pc.VertexBuffer(app.graphicsDevice, vbFormat, instanceCount, {
+const vertexBuffer = new VertexBuffer(app.graphicsDevice, vbFormat, instanceCount, {
     data: data
 });
 ```
@@ -41600,9 +41682,9 @@ When using StandardMaterial with a custom instancing format, you can override th
 Tell the material which semantics map to which attribute names:
 
 ```javascript
-const material = new pc.StandardMaterial();
-material.setAttribute('aInstPosition', pc.SEMANTIC_ATTR12);
-material.setAttribute('aInstScale', pc.SEMANTIC_ATTR13);
+const material = new StandardMaterial();
+material.setAttribute('aInstPosition', SEMANTIC_ATTR12);
+material.setAttribute('aInstScale', SEMANTIC_ATTR13);
 ```
 
 ### Step 2: Override the Instancing Shader Chunk
@@ -41610,7 +41692,7 @@ material.setAttribute('aInstScale', pc.SEMANTIC_ATTR13);
 Provide custom shader code for both GLSL (WebGL) and WGSL (WebGPU):
 
 ```javascript
-material.getShaderChunks(pc.SHADERLANGUAGE_GLSL).set('transformInstancingVS', `
+material.getShaderChunks(SHADERLANGUAGE_GLSL).set('transformInstancingVS', `
     attribute vec3 aInstPosition;
     attribute float aInstScale;
 
@@ -41624,7 +41706,7 @@ material.getShaderChunks(pc.SHADERLANGUAGE_GLSL).set('transformInstancingVS', `
     }
 `);
 
-material.getShaderChunks(pc.SHADERLANGUAGE_WGSL).set('transformInstancingVS', `
+material.getShaderChunks(SHADERLANGUAGE_WGSL).set('transformInstancingVS', `
     attribute aInstPosition: vec3f;
     attribute aInstScale: f32;
 
@@ -41829,7 +41911,7 @@ for (const geometry of geometries) {
 }
 
 // Create the combined mesh
-const mesh = new pc.Mesh(app.graphicsDevice);
+const mesh = new Mesh(app.graphicsDevice);
 mesh.setPositions(positions);
 mesh.setIndices(indices);
 mesh.update();
@@ -41840,7 +41922,7 @@ mesh.update();
 Use `MeshInstance.setMultiDraw()` to allocate draw commands and populate them:
 
 ```javascript
-const meshInst = new pc.MeshInstance(mesh, material);
+const meshInst = new MeshInstance(mesh, material);
 
 // Allocate multi-draw with max number of sub-draws
 const cmd = meshInst.setMultiDraw(null, subDraws.length);
@@ -41895,8 +41977,8 @@ const matrices = new Float32Array(totalInstances * 16);
 // ... populate matrices ...
 
 // Create instancing vertex buffer
-const vbFormat = pc.VertexFormat.getDefaultInstancingFormat(app.graphicsDevice);
-const vb = new pc.VertexBuffer(app.graphicsDevice, vbFormat, totalInstances, {
+const vbFormat = VertexFormat.getDefaultInstancingFormat(app.graphicsDevice);
+const vb = new VertexBuffer(app.graphicsDevice, vbFormat, totalInstances, {
     data: matrices
 });
 meshInst.setInstancing(vb);
@@ -41918,26 +42000,26 @@ WebGL2 does not support `firstInstance`. To achieve the same result on both plat
 ```javascript
 if (app.graphicsDevice.isWebGL2 && app.graphicsDevice.supportsMultiDraw) {
     // Store matrices in a texture
-    const matricesTexture = new pc.Texture(app.graphicsDevice, {
+    const matricesTexture = new Texture(app.graphicsDevice, {
         width: totalInstances * 4,  // 4 vec4s per matrix
         height: 1,
-        format: pc.PIXELFORMAT_RGBA32F,
-        minFilter: pc.FILTER_NEAREST,
-        magFilter: pc.FILTER_NEAREST,
+        format: PIXELFORMAT_RGBA32F,
+        minFilter: FILTER_NEAREST,
+        magFilter: FILTER_NEAREST,
         mipmaps: false,
         levels: [matrices]
     });
 
     // Use custom vertex format with instance ID
-    const vbFormat = new pc.VertexFormat(app.graphicsDevice, [{
-        semantic: pc.SEMANTIC_ATTR11,
+    const vbFormat = new VertexFormat(app.graphicsDevice, [{
+        semantic: SEMANTIC_ATTR11,
         components: 1,
-        type: pc.TYPE_INT32,
+        type: TYPE_INT32,
         asInt: true
     }]);
 
     // Override the instancing shader chunk
-    material.setAttribute('aInstanceId', pc.SEMANTIC_ATTR11);
+    material.setAttribute('aInstanceId', SEMANTIC_ATTR11);
     material.setParameter('uDrawOffsets[0]', drawOffsets);
     material.setParameter('uInstanceMatrices', matricesTexture);
     material.shaderChunks.glsl.set('transformInstancingVS', customShaderCode);
@@ -42371,15 +42453,15 @@ Multiple render targets have the following restrictions:
 Create the textures you want to render into:
 
 ```javascript
-const createTexture = name => new pc.Texture(app.graphicsDevice, {
+const createTexture = name => new Texture(app.graphicsDevice, {
     name,
     width: 512,
     height: 512,
-    format: pc.PIXELFORMAT_RGBA8,
-    minFilter: pc.FILTER_LINEAR,
-    magFilter: pc.FILTER_LINEAR,
-    addressU: pc.ADDRESS_CLAMP_TO_EDGE,
-    addressV: pc.ADDRESS_CLAMP_TO_EDGE
+    format: PIXELFORMAT_RGBA8,
+    minFilter: FILTER_LINEAR,
+    magFilter: FILTER_LINEAR,
+    addressU: ADDRESS_CLAMP_TO_EDGE,
+    addressV: ADDRESS_CLAMP_TO_EDGE
 });
 
 const texture0 = createTexture('RT-texture-0');
@@ -42390,11 +42472,11 @@ const texture2 = createTexture('RT-texture-2');
 Wrap them in a render target:
 
 ```javascript
-const renderTarget = new pc.RenderTarget({
+const renderTarget = new RenderTarget({
     name: 'MRT',
     colorBuffers: [texture0, texture1, texture2],
     depth: true,
-    origin: pc.RENDERTARGET_ORIGIN_TOP,
+    origin: RENDERTARGET_ORIGIN_TOP,
     samples: 2
 });
 ```
@@ -42402,7 +42484,7 @@ const renderTarget = new pc.RenderTarget({
 Create a camera entity which will be used to render to MRT:
 
 ```javascript
-const entity = new pc.Entity('MRTCamera');
+const entity = new Entity('MRTCamera');
 entity.addComponent('camera', {
     // negative priority => rendered before the main camera each frame
     priority: -1,
@@ -42421,8 +42503,8 @@ At the start of the camera's rendering, every color attachment is cleared to the
 ```javascript
 // attachment 0 keeps clearing to entity.camera.clearColor
 // clear the normals attachment to a neutral normal, and the gloss attachment to black
-entity.camera.setClearColor(1, new pc.Color(0.5, 0.5, 1, 1));
-entity.camera.setClearColor(2, new pc.Color(0, 0, 0, 1));
+entity.camera.setClearColor(1, new Color(0.5, 0.5, 1, 1));
+entity.camera.setClearColor(2, new Color(0, 0, 0, 1));
 ```
 
 Pass `null` to remove the clear color of an attachment, so that it clears to `clearColor` again, and use [`CameraComponent.getClearColor`](https://api.playcanvas.com/engine/classes/CameraComponent.html#getclearcolor) to read the color an attachment clears to.
@@ -42461,8 +42543,8 @@ const renders = targetEntity.findComponents('render');
 renders.forEach((render) => {
     render.meshInstances.forEach((meshInstance) => {
         const material = meshInstance.material;
-        material.getShaderChunks(pc.SHADERLANGUAGE_GLSL).set('outputPS', glslChunk);
-        material.getShaderChunks(pc.SHADERLANGUAGE_WGSL).set('outputPS', wgslChunk);
+        material.getShaderChunks(SHADERLANGUAGE_GLSL).set('outputPS', glslChunk);
+        material.getShaderChunks(SHADERLANGUAGE_WGSL).set('outputPS', wgslChunk);
         material.shaderChunksVersion = '2.8';
     });
 });
@@ -43287,16 +43369,16 @@ Dual-source blending is enabled automatically when a material's [`BlendState`](h
 First, override the `outputPS` chunk to write the primary and secondary fragment outputs. Supply both GLSL and WGSL versions when supporting both graphics backends:
 
 ```javascript
-const material = new pc.StandardMaterial();
+const material = new StandardMaterial();
 material.useLighting = false;
 material.useTonemap = false;
 
-material.getShaderChunks(pc.SHADERLANGUAGE_GLSL).set('outputPS', `
+material.getShaderChunks(SHADERLANGUAGE_GLSL).set('outputPS', `
     gl_FragColor = vec4(0.45, 0.02, 0.02, 0.0);
     pcFragColorSecondary = vec4(0.0, 0.85, 0.18, 1.0);
 `);
 
-material.getShaderChunks(pc.SHADERLANGUAGE_WGSL).set('outputPS', `
+material.getShaderChunks(SHADERLANGUAGE_WGSL).set('outputPS', `
     output.color = vec4f(0.45, 0.02, 0.02, 0.0);
     output.colorSecondary = vec4f(0.0, 0.85, 0.18, 1.0);
 `);
@@ -43305,14 +43387,14 @@ material.getShaderChunks(pc.SHADERLANGUAGE_WGSL).set('outputPS', `
 Then configure the blend state. This example calculates `source0 + destination * source1` for RGB:
 
 ```javascript
-material.blendState = new pc.BlendState(
+material.blendState = new BlendState(
     true,
-    pc.BLENDEQUATION_ADD,
-    pc.BLENDMODE_ONE,
-    pc.BLENDMODE_SRC1_COLOR,
-    pc.BLENDEQUATION_ADD,
-    pc.BLENDMODE_ZERO,
-    pc.BLENDMODE_ONE
+    BLENDEQUATION_ADD,
+    BLENDMODE_ONE,
+    BLENDMODE_SRC1_COLOR,
+    BLENDEQUATION_ADD,
+    BLENDMODE_ZERO,
+    BLENDMODE_ONE
 );
 
 material.update();
@@ -43399,7 +43481,7 @@ Indirect drawing is most powerful when combined with compute shaders that genera
 const meshMetaData = meshInstance.getIndirectMetaData();
 
 // Create compute shader to control rendering parameters
-const compute = new pc.Compute(device, shader, 'IndirectDrawCompute');
+const compute = new Compute(device, shader, 'IndirectDrawCompute');
 compute.setParameter('indirectMetaData', meshMetaData);
 compute.setParameter('indirectDrawBuffer', app.graphicsDevice.indirectDrawBuffer);
 compute.setParameter('indirectSlot', indirectSlot);
@@ -43494,10 +43576,10 @@ Note the state is packed into a single `vec4` because interleaved capture writes
 ### Step 2: Create the Shader and the Helper
 
 ```javascript
-const shader = pc.TransformFeedback.createShader(device, vertexCode, 'moveParticles');
+const shader = TransformFeedback.createShader(device, vertexCode, 'moveParticles');
 
 // creates a matching output buffer internally
-const tf = new pc.TransformFeedback(mesh.vertexBuffer);
+const tf = new TransformFeedback(mesh.vertexBuffer);
 ```
 
 Create the input buffer with `BUFFER_GPUDYNAMIC` usage, which signals that the GPU writes it repeatedly.
@@ -43518,10 +43600,10 @@ app.on('update', (dt) => {
 Passing `TRANSFORM_FEEDBACK_SEPARATE` when creating the shader writes each captured varying into its own buffer:
 
 ```javascript
-const shader = pc.TransformFeedback.createShader(
+const shader = TransformFeedback.createShader(
     device, vertexCode, 'flockSim',
     ['out_position', 'out_velocity', 'out_instance'],   // order matches the output buffers
-    pc.TRANSFORM_FEEDBACK_SEPARATE
+    TRANSFORM_FEEDBACK_SEPARATE
 );
 ```
 
@@ -43534,7 +43616,7 @@ Separating them lets each buffer take the role it actually needs, rather than ev
 Describe each buffer with an entry in an array. An entry may specify an `input`, an `output`, or both:
 
 ```javascript
-const tf = new pc.TransformFeedback([
+const tf = new TransformFeedback([
     { input: positions, output: positionsOut },   // read and written, swapped each step
     { input: velocities, output: velocitiesOut }, // read and written, swapped each step
     { input: constants },                         // read only, never modified
@@ -43558,7 +43640,7 @@ Writing the render data to its own buffer, which the simulation never reads back
 
 ```javascript
 // written by transform feedback, consumed only by the instanced draw
-material.setAttribute('aInstPosition', pc.SEMANTIC_ATTR12);
+material.setAttribute('aInstPosition', SEMANTIC_ATTR12);
 meshInstance.setInstancing(instances);
 ```
 
@@ -43575,13 +43657,13 @@ attribute vec4 aConstants;   // ATTR2
 ```
 
 ```javascript
-const format = semantic => new pc.VertexFormat(device, [
-    { semantic: semantic, components: 4, type: pc.TYPE_FLOAT32 }
+const format = semantic => new VertexFormat(device, [
+    { semantic: semantic, components: 4, type: TYPE_FLOAT32 }
 ]);
 
-const positions = new pc.VertexBuffer(device, format(pc.SEMANTIC_ATTR0), count, options);
-const velocities = new pc.VertexBuffer(device, format(pc.SEMANTIC_ATTR1), count, options);
-const constants = new pc.VertexBuffer(device, format(pc.SEMANTIC_ATTR2), count, options);
+const positions = new VertexBuffer(device, format(SEMANTIC_ATTR0), count, options);
+const velocities = new VertexBuffer(device, format(SEMANTIC_ATTR1), count, options);
+const constants = new VertexBuffer(device, format(SEMANTIC_ATTR2), count, options);
 ```
 
 :::warning
@@ -43848,7 +43930,7 @@ Remove recovery listeners when their owner is destroyed. Explicitly destroy reso
 In locally built engine examples using a debug build, paste this into the browser console:
 
 ```javascript
-pc.AppBase.getApplication().graphicsDevice.debugLoseContext(1000);
+AppBase.getApplication().graphicsDevice.debugLoseContext(1000);
 ```
 
 This **internal testing helper is not a public API**. It triggers actual WebGL context loss or WebGPU device destruction, then attempts recovery after a 1,000 ms delay. The delay is not a guarantee of when recovery finishes. Its implementation is stripped from non-debug builds; do not use it in production application logic.
@@ -45317,7 +45399,7 @@ splat-transform scene.ply scene.glb
 Splat GLB files load as **container** assets (like any other glTF content), not as `gsplat` assets:
 
 ```javascript
-const asset = new pc.Asset('scene', 'container', { url: 'scene.glb' });
+const asset = new Asset('scene', 'container', { url: 'scene.glb' });
 app.assets.add(asset);
 app.assets.load(asset);
 
@@ -45377,7 +45459,7 @@ The attribute streams of SPZ version 4 files are ZSTD compressed, so the parser 
 import { SpzParser } from 'playcanvas/scripts/esm/parsers/spz-parser.mjs';
 
 // version 4 attribute streams are ZSTD compressed - register a decoder module
-pc.WasmModule.setConfig('ZstdDecoderModule', {
+WasmModule.setConfig('ZstdDecoderModule', {
     glueUrl: 'zstd.wasm.js',
     wasmUrl: 'zstd.wasm.wasm'
 });
@@ -45386,7 +45468,7 @@ pc.WasmModule.setConfig('ZstdDecoderModule', {
 app.loader.getHandler('gsplat').addParser(new SpzParser(app));
 
 // spz files then load as regular gsplat assets
-const asset = new pc.Asset('scene', 'gsplat', { url: 'scene.spz' });
+const asset = new Asset('scene', 'gsplat', { url: 'scene.spz' });
 app.assets.add(asset);
 app.assets.load(asset);
 ```
@@ -46225,7 +46307,7 @@ Use `GSPLAT_STREAM_RESOURCE` (or omit `storage`) when the data is the same for a
 ```javascript
 // Add a stream shared across all instances
 resource.format.addExtraStreams([
-    { name: 'customData', format: pc.PIXELFORMAT_RGBA8 }
+    { name: 'customData', format: PIXELFORMAT_RGBA8 }
 ]);
 
 // Access the shared texture
@@ -46239,7 +46321,7 @@ Use `GSPLAT_STREAM_INSTANCE` when each component instance needs its own texture 
 ```javascript
 // Add a per-instance stream
 resource.format.addExtraStreams([
-    { name: 'instanceTint', format: pc.PIXELFORMAT_RGBA8, storage: pc.GSPLAT_STREAM_INSTANCE }
+    { name: 'instanceTint', format: PIXELFORMAT_RGBA8, storage: GSPLAT_STREAM_INSTANCE }
 ]);
 
 // Access the instance texture via the component
@@ -46388,7 +46470,7 @@ By default, the work buffer contains standard splat data (position, color, rotat
 ```javascript
 // Add a stream to store component IDs (R32U = unsigned int)
 app.scene.gsplat.format.addExtraStreams([
-    { name: 'splatId', format: pc.PIXELFORMAT_R32U }
+    { name: 'splatId', format: PIXELFORMAT_R32U }
 ]);
 ```
 
@@ -46715,10 +46797,10 @@ Use `setParameter()` on the scene's gsplat material to pass uniform values:
 
 ```javascript
 // Create a color lookup texture
-const colorTexture = new pc.Texture(device, {
+const colorTexture = new Texture(device, {
     width: 256,
     height: 1,
-    format: pc.PIXELFORMAT_RGBA32F,
+    format: PIXELFORMAT_RGBA32F,
     // ... other options
 });
 
@@ -46809,7 +46891,7 @@ This is useful for:
 Create a processor by specifying the source (where to read splat data from), destination (which streams to write to), and the shader code that processes each splat:
 
 ```javascript
-const processor = new pc.GSplatProcessor(
+const processor = new GSplatProcessor(
     app.graphicsDevice,
     { component: entity.gsplat },                           // source
     { component: entity.gsplat, streams: ['customColor'] }, // destination
@@ -46862,7 +46944,7 @@ processor.process();
 ## Constructor
 
 ```javascript
-new pc.GSplatProcessor(device, source, destination, options)
+new GSplatProcessor(device, source, destination, options)
 ```
 
 **Parameters:**
@@ -47005,7 +47087,7 @@ Releases all GPU resources. Call when done with the processor.
 Property for setting blend state (useful for accumulative effects like additive painting):
 
 ```javascript
-processor.blendState = pc.BlendState.ADDBLEND;
+processor.blendState = BlendState.ADDBLEND;
 ```
 
 ## Use Cases
@@ -47103,7 +47185,7 @@ The renderer is selected through the scene-wide GSplat settings on `app.scene.gs
 
 ```javascript
 // Request the GPU sorting renderer (WebGPU only; falls back to CPU sorting on WebGL)
-app.scene.gsplat.renderer = pc.GSPLAT_RENDERER_RASTER_GPU_SORT;
+app.scene.gsplat.renderer = GSPLAT_RENDERER_RASTER_GPU_SORT;
 ```
 
 The available options are:
@@ -47115,7 +47197,7 @@ The available options are:
 A renderer that requires WebGPU falls back to CPU sorting on WebGL devices. To find out which renderer is actually in effect after this fallback, read `currentRenderer`:
 
 ```javascript
-if (app.scene.gsplat.currentRenderer === pc.GSPLAT_RENDERER_RASTER_GPU_SORT) {
+if (app.scene.gsplat.currentRenderer === GSPLAT_RENDERER_RASTER_GPU_SORT) {
     // GPU sorting is active on this device
 }
 ```
@@ -47887,7 +47969,7 @@ How these distances combine with the scene-wide [splat budget](https://developer
 [`splatBudgetMode`](https://api.playcanvas.com/engine/classes/GSplatParams.html#splatbudgetmode) on `app.scene.gsplat` selects between two modes:
 
 ```javascript
-app.scene.gsplat.splatBudgetMode = pc.GSPLAT_BUDGET_LIMIT;
+app.scene.gsplat.splatBudgetMode = GSPLAT_BUDGET_LIMIT;
 ```
 
 - `GSPLAT_BUDGET_TARGET` (default): detail is raised until the budget is used up, wherever the camera is. The engine moves the LOD distances of every splat outward or inward by one shared factor until the scene fills the budget, so the distances you set only shape how detail falls off with distance and how it divides between splats, not how much of it there is.
@@ -48006,7 +48088,7 @@ To pick splats, create a Picker instance with depth enabled (third parameter set
 
 ```javascript
 // Create a picker with depth buffer support for world position detection
-const picker = new pc.Picker(app, 1, 1, true);
+const picker = new Picker(app, 1, 1, true);
 ```
 
 The depth buffer is required if you want to retrieve the 3D world position of the picked point, not just identify which object was clicked.
@@ -48077,14 +48159,14 @@ Here's a typical picking workflow:
 app.scene.gsplat.enableIds = true;
 
 // Create a splat entity
-const splat = new pc.Entity('splat');
+const splat = new Entity('splat');
 splat.addComponent('gsplat', {
     asset: splatAsset
 });
 app.root.addChild(splat);
 
 // Create picker with depth support
-const picker = new pc.Picker(app, 1, 1, true);
+const picker = new Picker(app, 1, 1, true);
 
 const handlePick = async (mouseX, mouseY) => {
     // Use lower resolution for performance
@@ -48125,12 +48207,12 @@ const handlePick = async (mouseX, mouseY) => {
 };
 
 // Handle mouse clicks
-app.mouse.on(pc.EVENT_MOUSEDOWN, (event) => {
+app.mouse.on(EVENT_MOUSEDOWN, (event) => {
     handlePick(event.x, event.y);
 });
 
 // Handle touch events
-app.touch.on(pc.EVENT_TOUCHSTART, (event) => {
+app.touch.on(EVENT_TOUCHSTART, (event) => {
     const touch = event.touches[0];
     handlePick(touch.x, touch.y);
 });
@@ -48756,7 +48838,7 @@ Streams are managed via [`app.scene.gsplat.varyings`](https://api.playcanvas.com
 
 ```javascript
 app.scene.gsplat.varyings.add([
-    { name: 'clipState', type: pc.TYPE_UINT32, components: 1 }
+    { name: 'clipState', type: TYPE_UINT32, components: 1 }
 ]);
 
 // later, to remove
@@ -48956,8 +49038,8 @@ const relighting = camera.script.create(GsplatRelighting, {
 Place the proxy mesh on the relighting layer, with a material configured to write the coverage mask:
 
 ```javascript
-const meshMaterial = new pc.StandardMaterial();
-meshMaterial.diffuse = new pc.Color(0.5, 0.5, 0.5);
+const meshMaterial = new StandardMaterial();
+meshMaterial.diffuse = new Color(0.5, 0.5, 0.5);
 relighting.configureMaterial(meshMaterial);
 
 const meshEntity = meshAsset.resource.instantiateRenderEntity();
@@ -48973,7 +49055,7 @@ app.root.addChild(meshEntity);
 Then add lights to the same layer — any standard lights work, including image based lighting, shadow-casting directional and omni lights:
 
 ```javascript
-const light = new pc.Entity('sun');
+const light = new Entity('sun');
 light.addComponent('light', {
     type: 'directional',
     layers: [relighting.layer.id],
@@ -49049,7 +49131,7 @@ Unlike loaded resources where the format is automatic, procedural splats require
 | `dataRotation` | RGBA16F | Rotation quaternion (x, y, z, w) as half floats |
 
 ```javascript
-const format = pc.GSplatFormat.createDefaultFormat(device);
+const format = GSplatFormat.createDefaultFormat(device);
 ```
 
 #### Simple Format
@@ -49062,7 +49144,7 @@ const format = pc.GSplatFormat.createDefaultFormat(device);
 | `dataColor` | RGBA16F | Color (r, g, b, a) as half floats |
 
 ```javascript
-const format = pc.GSplatFormat.createSimpleFormat(device);
+const format = GSplatFormat.createSimpleFormat(device);
 ```
 
 This format is ideal for the [helper scripts](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/procedural-splats.md#helper-scripts) like `GsplatMesh`, `GsplatImage`, and `GsplatLines`.
@@ -49074,7 +49156,7 @@ For advanced use cases, you can create custom formats with your own streams and 
 #### Constructor
 
 ```javascript
-const format = new pc.GSplatFormat(device, streams, options);
+const format = new GSplatFormat(device, streams, options);
 ```
 
 **Parameters:**
@@ -49106,8 +49188,8 @@ For each stream, the format generates a load function named `load{StreamName}()`
 This example creates a format with a single RGBA8 texture and custom uniforms for per-instance color gradients:
 
 ```javascript
-const format = new pc.GSplatFormat(device, [
-    { name: 'data', format: pc.PIXELFORMAT_RGBA8 }
+const format = new GSplatFormat(device, [
+    { name: 'data', format: PIXELFORMAT_RGBA8 }
 ], {
     readGLSL: `
         uniform vec3 uTint;
@@ -49158,17 +49240,17 @@ Use a built-in format or create a custom one:
 
 ```javascript
 // Simple format for uniform-scale splats (no rotation)
-const format = pc.GSplatFormat.createSimpleFormat(device);
+const format = GSplatFormat.createSimpleFormat(device);
 
 // Or default format with full splat data
-const format = pc.GSplatFormat.createDefaultFormat(device);
+const format = GSplatFormat.createDefaultFormat(device);
 ```
 
 ### 2. Create the Container
 
 ```javascript
 const maxSplats = 1000;
-const container = new pc.GSplatContainer(device, maxSplats, format);
+const container = new GSplatContainer(device, maxSplats, format);
 ```
 
 ### 3. Fill Texture Data
@@ -49193,10 +49275,10 @@ for (let i = 0; i < numSplats; i++) {
     centerData[i * 4 + 3] = size;
 
     // Color as half-floats (use FloatPacking helper)
-    colorData[i * 4 + 0] = pc.FloatPacking.float2Half(r);
-    colorData[i * 4 + 1] = pc.FloatPacking.float2Half(g);
-    colorData[i * 4 + 2] = pc.FloatPacking.float2Half(b);
-    colorData[i * 4 + 3] = pc.FloatPacking.float2Half(a);
+    colorData[i * 4 + 0] = FloatPacking.float2Half(r);
+    colorData[i * 4 + 1] = FloatPacking.float2Half(g);
+    colorData[i * 4 + 2] = FloatPacking.float2Half(b);
+    colorData[i * 4 + 3] = FloatPacking.float2Half(a);
 }
 
 // Unlock when done
@@ -49218,9 +49300,9 @@ for (let i = 0; i < numSplats; i++) {
 }
 
 // Set bounding box
-container.aabb = new pc.BoundingBox(
-    new pc.Vec3(centerX, centerY, centerZ),
-    new pc.Vec3(halfExtentX, halfExtentY, halfExtentZ)
+container.aabb = new BoundingBox(
+    new Vec3(centerX, centerY, centerZ),
+    new Vec3(halfExtentX, halfExtentY, halfExtentZ)
 );
 ```
 
@@ -49563,10 +49645,10 @@ const lines = entity.script.create(GsplatLines);
 
 // Add primitives
 const lineHandle = lines.addLine(
-    new pc.Vec3(0, 0, 0),
-    new pc.Vec3(1, 1, 1),
-    new pc.Color(1, 0, 0),  // Start color (red)
-    new pc.Color(0, 0, 1),  // End color (blue)
+    new Vec3(0, 0, 0),
+    new Vec3(1, 1, 1),
+    new Color(1, 0, 0),  // Start color (red)
+    new Color(0, 0, 1),  // End color (blue)
     0.05                     // Thickness
 );
 
@@ -49582,10 +49664,10 @@ Adds a line with gradient color from start to end.
 
 ```javascript
 const handle = lines.addLine(
-    new pc.Vec3(0, 0, 0),
-    new pc.Vec3(1, 0, 0),
-    new pc.Color(1, 0, 0),
-    new pc.Color(0, 1, 0),
+    new Vec3(0, 0, 0),
+    new Vec3(1, 0, 0),
+    new Color(1, 0, 0),
+    new Color(0, 1, 0),
     0.02
 );
 ```
@@ -49596,9 +49678,9 @@ Adds a line with a single color.
 
 ```javascript
 const handle = lines.addLineSimple(
-    new pc.Vec3(0, 0, 0),
-    new pc.Vec3(1, 0, 0),
-    new pc.Color(1, 1, 0),
+    new Vec3(0, 0, 0),
+    new Vec3(1, 0, 0),
+    new Color(1, 1, 0),
     0.02
 );
 ```
@@ -49609,9 +49691,9 @@ Adds an arrow with a pyramid-shaped head.
 
 ```javascript
 const handle = lines.addArrow(
-    new pc.Vec3(0, 0, 0),
-    new pc.Vec3(0, 1, 0),
-    new pc.Color(0, 1, 0),
+    new Vec3(0, 0, 0),
+    new Vec3(0, 1, 0),
+    new Color(0, 1, 0),
     0.02,
     0.1  // Optional head size (default: thickness * 9)
 );
@@ -49623,9 +49705,9 @@ Adds an axis-aligned bounding box as a wireframe.
 
 ```javascript
 const handle = lines.addAABB(
-    new pc.Vec3(-1, -1, -1),
-    new pc.Vec3(1, 1, 1),
-    new pc.Color(1, 1, 0),
+    new Vec3(-1, -1, -1),
+    new Vec3(1, 1, 1),
+    new Color(1, 1, 0),
     0.01
 );
 ```
@@ -49884,7 +49966,7 @@ Within the budget, each gsplat component sets how its detail steps down with dis
 ```javascript
 entity.gsplat.lodBaseDistance = 10; // LOD 0 out to 10 units
 entity.gsplat.lodMultiplier = 4; // then LOD 1 to 40 units, LOD 2 to 160, ...
-app.scene.gsplat.splatBudgetMode = pc.GSPLAT_BUDGET_LIMIT;
+app.scene.gsplat.splatBudgetMode = GSPLAT_BUDGET_LIMIT;
 ```
 
 See [Controlling LOD Behavior](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/lod-streaming.md#controlling-lod-behavior) for details. LOD distances are also automatically compensated for the camera's field of view — a wider FOV makes objects appear smaller on screen, so it switches to coarser levels sooner.
@@ -49994,8 +50076,8 @@ app.systems.gsplat.on('frame:request', () => {
 For anything in the "render it yourself" rows, set `app.renderNextFrame = true` when you make the change. For example, to keep a fly/orbit camera interactive, render whenever it has moved:
 
 ```javascript
-const lastPos = new pc.Vec3();
-const lastRot = new pc.Quat();
+const lastPos = new Vec3();
+const lastRot = new Quat();
 
 app.on('update', () => {
     const pos = camera.getPosition();
@@ -50129,7 +50211,7 @@ Add the anim component to the root of the hierarchy that the clips animate, usua
 Load the GLB as a container asset, create its entities, and add the component to their root. Register the anim component system and the container handler with your application:
 
 ```javascript
-const asset = new pc.Asset('robot-arm', 'container', {
+const asset = new Asset('robot-arm', 'container', {
     url: 'https://developer.playcanvas.com/assets/robot-arm.glb'
 });
 asset.ready(() => {
@@ -50319,36 +50401,53 @@ The element's `play()` and `transition()` methods cut or cross-fade for a single
 This Engine app loads a robot arm with five animations, gives each one a state, and cross-fades to the next one each time you click the canvas.
 
 ```js live-example
-import * as pc from 'playcanvas';
+import {
+    AnimComponentSystem,
+    AppBase,
+    AppOptions,
+    Asset,
+    CameraComponentSystem,
+    Color,
+    ContainerHandler,
+    createGraphicsDevice,
+    DEVICETYPE_WEBGPU,
+    Entity,
+    FILLMODE_FILL_WINDOW,
+    LightComponentSystem,
+    RenderComponentSystem,
+    RESOLUTION_AUTO,
+    StandardMaterial,
+    TextureHandler
+} from 'playcanvas';
 
 // create the application with the component systems and resource handlers it uses
 const canvas = document.getElementById('application');
-const device = await pc.createGraphicsDevice(canvas, {
-    deviceTypes: [pc.DEVICETYPE_WEBGPU]
+const device = await createGraphicsDevice(canvas, {
+    deviceTypes: [DEVICETYPE_WEBGPU]
 });
 device.maxPixelRatio = Math.min(window.devicePixelRatio, 2);
 
-const options = new pc.AppOptions();
+const options = new AppOptions();
 options.graphicsDevice = device;
 options.componentSystems = [
-    pc.RenderComponentSystem,
-    pc.CameraComponentSystem,
-    pc.LightComponentSystem,
-    pc.AnimComponentSystem
+    RenderComponentSystem,
+    CameraComponentSystem,
+    LightComponentSystem,
+    AnimComponentSystem
 ];
-options.resourceHandlers = [pc.ContainerHandler, pc.TextureHandler];
+options.resourceHandlers = [ContainerHandler, TextureHandler];
 
-const app = new pc.AppBase(canvas);
+const app = new AppBase(canvas);
 app.init(options);
-app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
-app.setCanvasResolution(pc.RESOLUTION_AUTO);
+app.setCanvasFillMode(FILLMODE_FILL_WINDOW);
+app.setCanvasResolution(RESOLUTION_AUTO);
 window.addEventListener('resize', () => app.resizeCanvas());
 app.start();
 
-app.scene.ambientLight = new pc.Color(0.35, 0.35, 0.4);
+app.scene.ambientLight = new Color(0.35, 0.35, 0.4);
 
 // load the robot arm, a GLB with five animations
-const asset = new pc.Asset('robot-arm', 'container', {
+const asset = new Asset('robot-arm', 'container', {
     url: 'https://developer.playcanvas.com/assets/robot-arm.glb'
 });
 await new Promise((resolve) => {
@@ -50357,15 +50456,15 @@ await new Promise((resolve) => {
     app.assets.load(asset);
 });
 
-const camera = new pc.Entity('camera');
+const camera = new Entity('camera');
 camera.addComponent('camera', {
-    clearColor: new pc.Color(0.11, 0.12, 0.17)
+    clearColor: new Color(0.11, 0.12, 0.17)
 });
 camera.setPosition(1.75, 1.4, 2.15);
 camera.lookAt(0, 0.75, 0);
 app.root.addChild(camera);
 
-const light = new pc.Entity('light');
+const light = new Entity('light');
 light.addComponent('light', {
     castShadows: true,
     shadowBias: 0.2,
@@ -50374,9 +50473,9 @@ light.addComponent('light', {
 light.setEulerAngles(48, 38, 0);
 app.root.addChild(light);
 
-const floor = new pc.Entity('floor');
-const floorMaterial = new pc.StandardMaterial();
-floorMaterial.diffuse = new pc.Color(0.24, 0.26, 0.31);
+const floor = new Entity('floor');
+const floorMaterial = new StandardMaterial();
+floorMaterial.diffuse = new Color(0.24, 0.26, 0.31);
 floorMaterial.update();
 floor.addComponent('render', { type: 'plane', material: floorMaterial });
 floor.setLocalScale(20, 1, 20);
@@ -50476,7 +50575,7 @@ Most clips come with a model. A GLB or glTF file can contain any number of anima
 Load the file as a `container` asset. Its resource has an `animations` array of animation assets, and each asset's resource is a clip named after the animation:
 
 ```javascript
-const asset = new pc.Asset('robot-arm', 'container', {
+const asset = new Asset('robot-arm', 'container', {
     url: 'https://developer.playcanvas.com/assets/robot-arm.glb'
 });
 asset.ready(() => {
@@ -50552,78 +50651,96 @@ You can build a clip from keyframes yourself, to animate entities that came from
 A curve's path has three parts. `entityPath` is the names of the entities from the anim component's entity down to the target, starting with the component's own entity. `component` is `graph` for the target's transform, or the name of one of its components. `propertyPath` names the property: `localPosition`, `localRotation` or `localScale` for a transform, or a property of the component, such as a light's `intensity` or `color`.
 
 ```js live-example
-import * as pc from 'playcanvas';
+import {
+    AnimComponentSystem,
+    AnimCurve,
+    AnimData,
+    AnimTrack,
+    AppBase,
+    AppOptions,
+    CameraComponentSystem,
+    Color,
+    createGraphicsDevice,
+    DEVICETYPE_WEBGPU,
+    Entity,
+    FILLMODE_FILL_WINDOW,
+    INTERPOLATION_LINEAR,
+    LightComponentSystem,
+    RenderComponentSystem,
+    RESOLUTION_AUTO,
+    StandardMaterial
+} from 'playcanvas';
 
 // create the application with the component systems it uses
 const canvas = document.getElementById('application');
-const device = await pc.createGraphicsDevice(canvas, {
-    deviceTypes: [pc.DEVICETYPE_WEBGPU]
+const device = await createGraphicsDevice(canvas, {
+    deviceTypes: [DEVICETYPE_WEBGPU]
 });
 device.maxPixelRatio = Math.min(window.devicePixelRatio, 2);
 
-const options = new pc.AppOptions();
+const options = new AppOptions();
 options.graphicsDevice = device;
 options.componentSystems = [
-    pc.RenderComponentSystem,
-    pc.CameraComponentSystem,
-    pc.LightComponentSystem,
-    pc.AnimComponentSystem
+    RenderComponentSystem,
+    CameraComponentSystem,
+    LightComponentSystem,
+    AnimComponentSystem
 ];
 
-const app = new pc.AppBase(canvas);
+const app = new AppBase(canvas);
 app.init(options);
-app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
-app.setCanvasResolution(pc.RESOLUTION_AUTO);
+app.setCanvasFillMode(FILLMODE_FILL_WINDOW);
+app.setCanvasResolution(RESOLUTION_AUTO);
 window.addEventListener('resize', () => app.resizeCanvas());
 app.start();
 
-app.scene.ambientLight = new pc.Color(0.1, 0.1, 0.12);
+app.scene.ambientLight = new Color(0.1, 0.1, 0.12);
 
-const camera = new pc.Entity('camera');
+const camera = new Entity('camera');
 camera.addComponent('camera', {
-    clearColor: new pc.Color(0.05, 0.06, 0.09)
+    clearColor: new Color(0.05, 0.06, 0.09)
 });
 camera.setPosition(0, 2, 5);
 camera.lookAt(0, 0.8, 0);
 app.root.addChild(camera);
 
-const floorMaterial = new pc.StandardMaterial();
-floorMaterial.diffuse = new pc.Color(0.5, 0.5, 0.55);
+const floorMaterial = new StandardMaterial();
+floorMaterial.diffuse = new Color(0.5, 0.5, 0.55);
 floorMaterial.update();
 
-const floor = new pc.Entity('floor');
+const floor = new Entity('floor');
 floor.addComponent('render', { type: 'plane', material: floorMaterial });
 floor.setLocalScale(20, 1, 20);
 app.root.addChild(floor);
 
 // the beacon is the root of the hierarchy that the clip animates: a glowing cube,
 // with an omni light inside it
-const beacon = new pc.Entity('beacon');
+const beacon = new Entity('beacon');
 app.root.addChild(beacon);
 
-const glow = new pc.StandardMaterial();
-glow.emissive = new pc.Color(1, 0.55, 0.2);
+const glow = new StandardMaterial();
+glow.emissive = new Color(1, 0.55, 0.2);
 glow.update();
 
-const cube = new pc.Entity('cube');
+const cube = new Entity('cube');
 cube.addComponent('render', { type: 'box', material: glow, castShadows: false });
 beacon.addChild(cube);
 
-const lamp = new pc.Entity('lamp');
-lamp.addComponent('light', { type: 'omni', color: new pc.Color(1, 0.55, 0.2), range: 6 });
+const lamp = new Entity('lamp');
+lamp.addComponent('light', { type: 'omni', color: new Color(1, 0.55, 0.2), range: 6 });
 cube.addChild(lamp);
 
 // the keyframe times, in seconds, and two sets of values at those times
-const times = new pc.AnimData(1, [0, 0.5, 1]);
-const positions = new pc.AnimData(3, [0, 0.4, 0, 0, 1.6, 0, 0, 0.4, 0]);
-const intensities = new pc.AnimData(1, [0.5, 3, 0.5]);
+const times = new AnimData(1, [0, 0.5, 1]);
+const positions = new AnimData(3, [0, 0.4, 0, 0, 1.6, 0, 0, 0.4, 0]);
+const intensities = new AnimData(1, [0.5, 3, 0.5]);
 
 // each curve links the times to one set of values, and names the property it drives
 const curves = [
-    new pc.AnimCurve([{ entityPath: ['beacon', 'cube'], component: 'graph', propertyPath: ['localPosition'] }], 0, 0, pc.INTERPOLATION_LINEAR),
-    new pc.AnimCurve([{ entityPath: ['beacon', 'cube', 'lamp'], component: 'light', propertyPath: ['intensity'] }], 0, 1, pc.INTERPOLATION_LINEAR)
+    new AnimCurve([{ entityPath: ['beacon', 'cube'], component: 'graph', propertyPath: ['localPosition'] }], 0, 0, INTERPOLATION_LINEAR),
+    new AnimCurve([{ entityPath: ['beacon', 'cube', 'lamp'], component: 'light', propertyPath: ['intensity'] }], 0, 1, INTERPOLATION_LINEAR)
 ];
-const track = new pc.AnimTrack('bob', 1, [times], [positions, intensities], curves);
+const track = new AnimTrack('bob', 1, [times], [positions, intensities], curves);
 
 // play the clip on the beacon
 beacon.addComponent('anim', { activate: true });
@@ -50731,15 +50848,15 @@ const stateGraph = {
         ],
         transitions: [
             { from: 'START', to: 'Idle' },
-            { from: 'Idle', to: 'Walk', time: 0.2, conditions: [{ parameterName: 'speed', predicate: pc.ANIM_GREATER_THAN, value: 0.5 }] },
-            { from: 'Walk', to: 'Idle', time: 0.2, conditions: [{ parameterName: 'speed', predicate: pc.ANIM_LESS_THAN_EQUAL_TO, value: 0.5 }] },
-            { from: 'ANY', to: 'Jump', time: 0.1, conditions: [{ parameterName: 'jump', predicate: pc.ANIM_EQUAL_TO, value: true }] },
+            { from: 'Idle', to: 'Walk', time: 0.2, conditions: [{ parameterName: 'speed', predicate: ANIM_GREATER_THAN, value: 0.5 }] },
+            { from: 'Walk', to: 'Idle', time: 0.2, conditions: [{ parameterName: 'speed', predicate: ANIM_LESS_THAN_EQUAL_TO, value: 0.5 }] },
+            { from: 'ANY', to: 'Jump', time: 0.1, conditions: [{ parameterName: 'jump', predicate: ANIM_EQUAL_TO, value: true }] },
             { from: 'Jump', to: 'END', time: 0.2, exitTime: 1 }
         ]
     }],
     parameters: {
-        speed: { name: 'speed', type: pc.ANIM_PARAMETER_FLOAT, value: 0 },
-        jump: { name: 'jump', type: pc.ANIM_PARAMETER_TRIGGER, value: false }
+        speed: { name: 'speed', type: ANIM_PARAMETER_FLOAT, value: 0 },
+        jump: { name: 'jump', type: ANIM_PARAMETER_TRIGGER, value: false }
     }
 };
 ```
@@ -50834,7 +50951,7 @@ app.on('update', () => {
     character.anim.setFloat('speed', velocity.length());
 });
 app.keyboard.on('keydown', (event) => {
-    if (event.key === pc.KEY_SPACE) character.anim.setTrigger('jump');
+    if (event.key === KEY_SPACE) character.anim.setTrigger('jump');
 });
 ```
 
@@ -50894,36 +51011,55 @@ For complex graphs, ask an AI assistant through the **[Editor MCP Server](https:
 This Engine app gives a robot arm a state graph. The arm idles until a `work` trigger is set. Then it picks something up and places it, and returns to idling. Each step of the cycle is a state that does not loop, left by a transition with an exit time of 1. Click the canvas to set the trigger.
 
 ```js live-example
-import * as pc from 'playcanvas';
+import {
+    ANIM_EQUAL_TO,
+    ANIM_PARAMETER_TRIGGER,
+    AnimComponentSystem,
+    AppBase,
+    AppOptions,
+    Asset,
+    CameraComponentSystem,
+    Color,
+    ContainerHandler,
+    createGraphicsDevice,
+    DEVICETYPE_WEBGPU,
+    Entity,
+    FILLMODE_FILL_WINDOW,
+    LightComponentSystem,
+    RenderComponentSystem,
+    RESOLUTION_AUTO,
+    StandardMaterial,
+    TextureHandler
+} from 'playcanvas';
 
 // create the application with the component systems and resource handlers it uses
 const canvas = document.getElementById('application');
-const device = await pc.createGraphicsDevice(canvas, {
-    deviceTypes: [pc.DEVICETYPE_WEBGPU]
+const device = await createGraphicsDevice(canvas, {
+    deviceTypes: [DEVICETYPE_WEBGPU]
 });
 device.maxPixelRatio = Math.min(window.devicePixelRatio, 2);
 
-const options = new pc.AppOptions();
+const options = new AppOptions();
 options.graphicsDevice = device;
 options.componentSystems = [
-    pc.RenderComponentSystem,
-    pc.CameraComponentSystem,
-    pc.LightComponentSystem,
-    pc.AnimComponentSystem
+    RenderComponentSystem,
+    CameraComponentSystem,
+    LightComponentSystem,
+    AnimComponentSystem
 ];
-options.resourceHandlers = [pc.ContainerHandler, pc.TextureHandler];
+options.resourceHandlers = [ContainerHandler, TextureHandler];
 
-const app = new pc.AppBase(canvas);
+const app = new AppBase(canvas);
 app.init(options);
-app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
-app.setCanvasResolution(pc.RESOLUTION_AUTO);
+app.setCanvasFillMode(FILLMODE_FILL_WINDOW);
+app.setCanvasResolution(RESOLUTION_AUTO);
 window.addEventListener('resize', () => app.resizeCanvas());
 app.start();
 
-app.scene.ambientLight = new pc.Color(0.35, 0.35, 0.4);
+app.scene.ambientLight = new Color(0.35, 0.35, 0.4);
 
 // load the robot arm, a GLB with five animations
-const asset = new pc.Asset('robot-arm', 'container', {
+const asset = new Asset('robot-arm', 'container', {
     url: 'https://developer.playcanvas.com/assets/robot-arm.glb'
 });
 await new Promise((resolve) => {
@@ -50932,15 +51068,15 @@ await new Promise((resolve) => {
     app.assets.load(asset);
 });
 
-const camera = new pc.Entity('camera');
+const camera = new Entity('camera');
 camera.addComponent('camera', {
-    clearColor: new pc.Color(0.11, 0.12, 0.17)
+    clearColor: new Color(0.11, 0.12, 0.17)
 });
 camera.setPosition(1.75, 1.4, 2.15);
 camera.lookAt(0, 0.75, 0);
 app.root.addChild(camera);
 
-const light = new pc.Entity('light');
+const light = new Entity('light');
 light.addComponent('light', {
     castShadows: true,
     shadowBias: 0.2,
@@ -50949,9 +51085,9 @@ light.addComponent('light', {
 light.setEulerAngles(48, 38, 0);
 app.root.addChild(light);
 
-const floor = new pc.Entity('floor');
-const floorMaterial = new pc.StandardMaterial();
-floorMaterial.diffuse = new pc.Color(0.24, 0.26, 0.31);
+const floor = new Entity('floor');
+const floorMaterial = new StandardMaterial();
+floorMaterial.diffuse = new Color(0.24, 0.26, 0.31);
 floorMaterial.update();
 floor.addComponent('render', { type: 'plane', material: floorMaterial });
 floor.setLocalScale(20, 1, 20);
@@ -50975,14 +51111,14 @@ arm.anim.loadStateGraph({
         transitions: [
             { from: 'START', to: 'Idle' },
             // the work trigger starts a cycle, and is reset when this transition uses it
-            { from: 'Idle', to: 'Pick', time: 0.4, conditions: [{ parameterName: 'work', predicate: pc.ANIM_EQUAL_TO, value: true }] },
+            { from: 'Idle', to: 'Pick', time: 0.4, conditions: [{ parameterName: 'work', predicate: ANIM_EQUAL_TO, value: true }] },
             // once a clip has played through, cross-fade to the next one
             { from: 'Pick', to: 'Place', time: 0.4, exitTime: 1 },
             { from: 'Place', to: 'Idle', time: 0.4, exitTime: 1 }
         ]
     }],
     parameters: {
-        work: { name: 'work', type: pc.ANIM_PARAMETER_TRIGGER, value: false }
+        work: { name: 'work', type: ANIM_PARAMETER_TRIGGER, value: false }
     }
 });
 
@@ -51063,7 +51199,7 @@ const stateGraph = {
                 name: 'Movement',
                 loop: true,
                 blendTree: {
-                    type: pc.ANIM_BLEND_1D,
+                    type: ANIM_BLEND_1D,
                     parameter: 'speed',
                     children: [
                         { name: 'Idle', point: 0 },
@@ -51076,7 +51212,7 @@ const stateGraph = {
         transitions: [{ from: 'START', to: 'Movement' }]
     }],
     parameters: {
-        speed: { name: 'speed', type: pc.ANIM_PARAMETER_FLOAT, value: 0 }
+        speed: { name: 'speed', type: ANIM_PARAMETER_FLOAT, value: 0 }
     }
 };
 ```
@@ -51085,7 +51221,7 @@ A 2D tree takes two parameter names instead, and its children's points are pairs
 
 ```javascript
 blendTree: {
-    type: pc.ANIM_BLEND_2D_DIRECTIONAL,
+    type: ANIM_BLEND_2D_DIRECTIONAL,
     parameters: ['moveX', 'moveZ'],
     children: [
         { name: 'Idle', point: [0, 0] },
@@ -51210,36 +51346,56 @@ For clips that are not cycles of the same motion, set `syncAnimations: false` on
 This Engine app blends two of the robot arm's clips, idling and inspecting, with a 1D blend tree. Moving the pointer from the left of the canvas to the right sets the tree's `look` parameter from 0 to 1.
 
 ```js live-example
-import * as pc from 'playcanvas';
+import {
+    ANIM_BLEND_1D,
+    ANIM_PARAMETER_FLOAT,
+    AnimComponentSystem,
+    AppBase,
+    AppOptions,
+    Asset,
+    CameraComponentSystem,
+    Color,
+    ContainerHandler,
+    createGraphicsDevice,
+    DEVICETYPE_WEBGPU,
+    Entity,
+    FILLMODE_FILL_WINDOW,
+    LightComponentSystem,
+    math,
+    RenderComponentSystem,
+    RESOLUTION_AUTO,
+    StandardMaterial,
+    TextureHandler
+} from 'playcanvas';
 
 // create the application with the component systems and resource handlers it uses
 const canvas = document.getElementById('application');
-const device = await pc.createGraphicsDevice(canvas, {
-    deviceTypes: [pc.DEVICETYPE_WEBGPU]
+const device = await createGraphicsDevice(canvas, {
+    deviceTypes: [DEVICETYPE_WEBGPU]
 });
 device.maxPixelRatio = Math.min(window.devicePixelRatio, 2);
 
-const options = new pc.AppOptions();
+const options = new AppOptions();
 options.graphicsDevice = device;
 options.componentSystems = [
-    pc.RenderComponentSystem,
-    pc.CameraComponentSystem,
-    pc.LightComponentSystem,
-    pc.AnimComponentSystem
+    RenderComponentSystem,
+    CameraComponentSystem,
+    LightComponentSystem,
+    AnimComponentSystem
 ];
-options.resourceHandlers = [pc.ContainerHandler, pc.TextureHandler];
+options.resourceHandlers = [ContainerHandler, TextureHandler];
 
-const app = new pc.AppBase(canvas);
+const app = new AppBase(canvas);
 app.init(options);
-app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
-app.setCanvasResolution(pc.RESOLUTION_AUTO);
+app.setCanvasFillMode(FILLMODE_FILL_WINDOW);
+app.setCanvasResolution(RESOLUTION_AUTO);
 window.addEventListener('resize', () => app.resizeCanvas());
 app.start();
 
-app.scene.ambientLight = new pc.Color(0.35, 0.35, 0.4);
+app.scene.ambientLight = new Color(0.35, 0.35, 0.4);
 
 // load the robot arm, a GLB with five animations
-const asset = new pc.Asset('robot-arm', 'container', {
+const asset = new Asset('robot-arm', 'container', {
     url: 'https://developer.playcanvas.com/assets/robot-arm.glb'
 });
 await new Promise((resolve) => {
@@ -51248,15 +51404,15 @@ await new Promise((resolve) => {
     app.assets.load(asset);
 });
 
-const camera = new pc.Entity('camera');
+const camera = new Entity('camera');
 camera.addComponent('camera', {
-    clearColor: new pc.Color(0.11, 0.12, 0.17)
+    clearColor: new Color(0.11, 0.12, 0.17)
 });
 camera.setPosition(1.75, 1.4, 2.15);
 camera.lookAt(0, 0.75, 0);
 app.root.addChild(camera);
 
-const light = new pc.Entity('light');
+const light = new Entity('light');
 light.addComponent('light', {
     castShadows: true,
     shadowBias: 0.2,
@@ -51265,9 +51421,9 @@ light.addComponent('light', {
 light.setEulerAngles(48, 38, 0);
 app.root.addChild(light);
 
-const floor = new pc.Entity('floor');
-const floorMaterial = new pc.StandardMaterial();
-floorMaterial.diffuse = new pc.Color(0.24, 0.26, 0.31);
+const floor = new Entity('floor');
+const floorMaterial = new StandardMaterial();
+floorMaterial.diffuse = new Color(0.24, 0.26, 0.31);
 floorMaterial.update();
 floor.addComponent('render', { type: 'plane', material: floorMaterial });
 floor.setLocalScale(20, 1, 20);
@@ -51288,7 +51444,7 @@ arm.anim.loadStateGraph({
                 name: 'Blend',
                 loop: true,
                 blendTree: {
-                    type: pc.ANIM_BLEND_1D,
+                    type: ANIM_BLEND_1D,
                     parameter: 'look',
                     children: [
                         { name: 'Idle', point: 0 },
@@ -51300,7 +51456,7 @@ arm.anim.loadStateGraph({
         transitions: [{ from: 'START', to: 'Blend' }]
     }],
     parameters: {
-        look: { name: 'look', type: pc.ANIM_PARAMETER_FLOAT, value: 0 }
+        look: { name: 'look', type: ANIM_PARAMETER_FLOAT, value: 0 }
     }
 });
 
@@ -51312,7 +51468,7 @@ arm.anim.baseLayer.assignAnimation('Blend.Inspect', tracks.inspect);
 // move the pointer across the canvas to set look from 0 at the left to range at the right
 const range = 1;
 canvas.addEventListener('pointermove', (event) => {
-    arm.anim.setFloat('look', range * pc.math.clamp(event.offsetX / canvas.clientWidth, 0, 1));
+    arm.anim.setFloat('look', range * math.clamp(event.offsetX / canvas.clientWidth, 0, 1));
 });
 
 const label = document.createElement('div');
@@ -51359,7 +51515,7 @@ Every component has a **base layer**, the first, and the layers are applied in o
 [`addLayer()`](https://api.playcanvas.com/engine/classes/AnimComponent.html#addlayer) adds a layer, with its weight, mask and blend type, and returns it. Give the layer states with its own `assignAnimation()`:
 
 ```javascript
-const upperBody = character.anim.addLayer('UpperBody', 1, upperBodyMask, pc.ANIM_LAYER_OVERWRITE);
+const upperBody = character.anim.addLayer('UpperBody', 1, upperBodyMask, ANIM_LAYER_OVERWRITE);
 upperBody.assignAnimation('Aim', aimTrack);
 upperBody.assignAnimation('Shoot', shootTrack, 1, false);
 ```
@@ -51369,7 +51525,7 @@ A state graph's data can also hold several layers. Each entry of `layers` takes 
 ```javascript
 layers: [
     { name: 'Base', states: [/* ... */], transitions: [/* ... */] },
-    { name: 'UpperBody', weight: 1, blendType: pc.ANIM_LAYER_OVERWRITE, states: [/* ... */], transitions: [/* ... */] }
+    { name: 'UpperBody', weight: 1, blendType: ANIM_LAYER_OVERWRITE, states: [/* ... */], transitions: [/* ... */] }
 ]
 ```
 
@@ -51478,36 +51634,54 @@ Pass the mask to `addLayer()`, or set the layer's `mask`, on the component you a
 This Engine app idles a robot arm on its base layer, and adds a second layer that plays the arm's inspect clip. The second layer's mask holds only the wrist and the joints below it, so the rest of the arm keeps idling. Click the canvas to fade the layer in or out with `blendToWeight()`.
 
 ```js live-example
-import * as pc from 'playcanvas';
+import {
+    ANIM_LAYER_OVERWRITE,
+    AnimComponentSystem,
+    AppBase,
+    AppOptions,
+    Asset,
+    CameraComponentSystem,
+    Color,
+    ContainerHandler,
+    createGraphicsDevice,
+    DEVICETYPE_WEBGPU,
+    Entity,
+    FILLMODE_FILL_WINDOW,
+    LightComponentSystem,
+    RenderComponentSystem,
+    RESOLUTION_AUTO,
+    StandardMaterial,
+    TextureHandler
+} from 'playcanvas';
 
 // create the application with the component systems and resource handlers it uses
 const canvas = document.getElementById('application');
-const device = await pc.createGraphicsDevice(canvas, {
-    deviceTypes: [pc.DEVICETYPE_WEBGPU]
+const device = await createGraphicsDevice(canvas, {
+    deviceTypes: [DEVICETYPE_WEBGPU]
 });
 device.maxPixelRatio = Math.min(window.devicePixelRatio, 2);
 
-const options = new pc.AppOptions();
+const options = new AppOptions();
 options.graphicsDevice = device;
 options.componentSystems = [
-    pc.RenderComponentSystem,
-    pc.CameraComponentSystem,
-    pc.LightComponentSystem,
-    pc.AnimComponentSystem
+    RenderComponentSystem,
+    CameraComponentSystem,
+    LightComponentSystem,
+    AnimComponentSystem
 ];
-options.resourceHandlers = [pc.ContainerHandler, pc.TextureHandler];
+options.resourceHandlers = [ContainerHandler, TextureHandler];
 
-const app = new pc.AppBase(canvas);
+const app = new AppBase(canvas);
 app.init(options);
-app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
-app.setCanvasResolution(pc.RESOLUTION_AUTO);
+app.setCanvasFillMode(FILLMODE_FILL_WINDOW);
+app.setCanvasResolution(RESOLUTION_AUTO);
 window.addEventListener('resize', () => app.resizeCanvas());
 app.start();
 
-app.scene.ambientLight = new pc.Color(0.35, 0.35, 0.4);
+app.scene.ambientLight = new Color(0.35, 0.35, 0.4);
 
 // load the robot arm, a GLB with five animations
-const asset = new pc.Asset('robot-arm', 'container', {
+const asset = new Asset('robot-arm', 'container', {
     url: 'https://developer.playcanvas.com/assets/robot-arm.glb'
 });
 await new Promise((resolve) => {
@@ -51516,15 +51690,15 @@ await new Promise((resolve) => {
     app.assets.load(asset);
 });
 
-const camera = new pc.Entity('camera');
+const camera = new Entity('camera');
 camera.addComponent('camera', {
-    clearColor: new pc.Color(0.11, 0.12, 0.17)
+    clearColor: new Color(0.11, 0.12, 0.17)
 });
 camera.setPosition(1.75, 1.4, 2.15);
 camera.lookAt(0, 0.75, 0);
 app.root.addChild(camera);
 
-const light = new pc.Entity('light');
+const light = new Entity('light');
 light.addComponent('light', {
     castShadows: true,
     shadowBias: 0.2,
@@ -51533,9 +51707,9 @@ light.addComponent('light', {
 light.setEulerAngles(48, 38, 0);
 app.root.addChild(light);
 
-const floor = new pc.Entity('floor');
-const floorMaterial = new pc.StandardMaterial();
-floorMaterial.diffuse = new pc.Color(0.24, 0.26, 0.31);
+const floor = new Entity('floor');
+const floorMaterial = new StandardMaterial();
+floorMaterial.diffuse = new Color(0.24, 0.26, 0.31);
 floorMaterial.update();
 floor.addComponent('render', { type: 'plane', material: floorMaterial });
 floor.setLocalScale(20, 1, 20);
@@ -51554,7 +51728,7 @@ arm.anim.assignAnimation('Idle', tracks.idle);
 // a second layer, masked to the wrist and everything below it, plays inspect at a weight of 0
 const wrist = arm.anim.addLayer('Wrist', 0, {
     'arm_base/arm_column/arm_upper/arm_forearm/arm_wrist_roll': { children: true }
-}, pc.ANIM_LAYER_OVERWRITE);
+}, ANIM_LAYER_OVERWRITE);
 wrist.assignAnimation('Inspect', tracks.inspect);
 
 // click to blend the wrist layer in or out over half a second
@@ -51606,7 +51780,7 @@ Events belong to a clip, so every anim component that plays the clip fires them.
 Set a clip's `events` to an [`AnimEvents`](https://api.playcanvas.com/engine/classes/AnimEvents.html) holding all of its events. The events can be listed in any order:
 
 ```javascript
-walkTrack.events = new pc.AnimEvents([
+walkTrack.events = new AnimEvents([
     { time: 0.2, name: 'footstep', foot: 'left' },
     { time: 0.7, name: 'footstep', foot: 'right' }
 ]);
@@ -51744,36 +51918,54 @@ When one effect spans several animations, ask an AI assistant through the **[Edi
 This Engine app plays the robot arm's pick clip on a loop, and adds two events to the clip: one when its jaws have closed, and one when they have opened again. A listener makes the jaws glow while they are closed, and shows the last event.
 
 ```js live-example
-import * as pc from 'playcanvas';
+import {
+    AnimComponentSystem,
+    AnimEvents,
+    AppBase,
+    AppOptions,
+    Asset,
+    CameraComponentSystem,
+    Color,
+    ContainerHandler,
+    createGraphicsDevice,
+    DEVICETYPE_WEBGPU,
+    Entity,
+    FILLMODE_FILL_WINDOW,
+    LightComponentSystem,
+    RenderComponentSystem,
+    RESOLUTION_AUTO,
+    StandardMaterial,
+    TextureHandler
+} from 'playcanvas';
 
 // create the application with the component systems and resource handlers it uses
 const canvas = document.getElementById('application');
-const device = await pc.createGraphicsDevice(canvas, {
-    deviceTypes: [pc.DEVICETYPE_WEBGPU]
+const device = await createGraphicsDevice(canvas, {
+    deviceTypes: [DEVICETYPE_WEBGPU]
 });
 device.maxPixelRatio = Math.min(window.devicePixelRatio, 2);
 
-const options = new pc.AppOptions();
+const options = new AppOptions();
 options.graphicsDevice = device;
 options.componentSystems = [
-    pc.RenderComponentSystem,
-    pc.CameraComponentSystem,
-    pc.LightComponentSystem,
-    pc.AnimComponentSystem
+    RenderComponentSystem,
+    CameraComponentSystem,
+    LightComponentSystem,
+    AnimComponentSystem
 ];
-options.resourceHandlers = [pc.ContainerHandler, pc.TextureHandler];
+options.resourceHandlers = [ContainerHandler, TextureHandler];
 
-const app = new pc.AppBase(canvas);
+const app = new AppBase(canvas);
 app.init(options);
-app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
-app.setCanvasResolution(pc.RESOLUTION_AUTO);
+app.setCanvasFillMode(FILLMODE_FILL_WINDOW);
+app.setCanvasResolution(RESOLUTION_AUTO);
 window.addEventListener('resize', () => app.resizeCanvas());
 app.start();
 
-app.scene.ambientLight = new pc.Color(0.35, 0.35, 0.4);
+app.scene.ambientLight = new Color(0.35, 0.35, 0.4);
 
 // load the robot arm, a GLB with five animations
-const asset = new pc.Asset('robot-arm', 'container', {
+const asset = new Asset('robot-arm', 'container', {
     url: 'https://developer.playcanvas.com/assets/robot-arm.glb'
 });
 await new Promise((resolve) => {
@@ -51782,15 +51974,15 @@ await new Promise((resolve) => {
     app.assets.load(asset);
 });
 
-const camera = new pc.Entity('camera');
+const camera = new Entity('camera');
 camera.addComponent('camera', {
-    clearColor: new pc.Color(0.11, 0.12, 0.17)
+    clearColor: new Color(0.11, 0.12, 0.17)
 });
 camera.setPosition(1.75, 1.4, 2.15);
 camera.lookAt(0, 0.75, 0);
 app.root.addChild(camera);
 
-const light = new pc.Entity('light');
+const light = new Entity('light');
 light.addComponent('light', {
     castShadows: true,
     shadowBias: 0.2,
@@ -51799,9 +51991,9 @@ light.addComponent('light', {
 light.setEulerAngles(48, 38, 0);
 app.root.addChild(light);
 
-const floor = new pc.Entity('floor');
-const floorMaterial = new pc.StandardMaterial();
-floorMaterial.diffuse = new pc.Color(0.24, 0.26, 0.31);
+const floor = new Entity('floor');
+const floorMaterial = new StandardMaterial();
+floorMaterial.diffuse = new Color(0.24, 0.26, 0.31);
 floorMaterial.update();
 floor.addComponent('render', { type: 'plane', material: floorMaterial });
 floor.setLocalScale(20, 1, 20);
@@ -51821,7 +52013,7 @@ jaws.forEach((meshInstance) => {
 
 // add two events to the pick clip: the jaws are closed at 2.3 seconds, and open again at 4.6
 const pick = asset.resource.animations.find(animation => animation.resource.name === 'pick').resource;
-pick.events = new pc.AnimEvents([
+pick.events = new AnimEvents([
     { time: 2.3, name: 'jaws', string: 'closed' },
     { time: 4.6, name: 'jaws', string: 'open' }
 ]);
@@ -51833,7 +52025,7 @@ label.style.cssText = 'position: absolute; left: 12px; bottom: 10px; color: #ccc
 label.textContent = 'Waiting for an event...';
 document.body.appendChild(label);
 arm.anim.on('jaws', (event) => {
-    jawMaterial.emissive = event.string === 'closed' ? new pc.Color(0.2, 1, 0.3) : pc.Color.BLACK;
+    jawMaterial.emissive = event.string === 'closed' ? new Color(0.2, 1, 0.3) : Color.BLACK;
     jawMaterial.update();
     label.textContent = `Event: ${event.name}, ${event.string}, at ${event.time} seconds into ${event.track.name}`;
 });
@@ -51907,7 +52099,7 @@ Physics is opt-in. ammo.js weighs in at several hundred kilobytes, so nothing lo
 Load the module before creating the application. The three files ship with the engine repository under `examples/assets/wasm/ammo/` and in the [sync-ammo](https://www.npmjs.com/package/sync-ammo) npm package.
 
 ```javascript
-pc.WasmModule.setConfig('Ammo', {
+WasmModule.setConfig('Ammo', {
     glueUrl: 'ammo/ammo.wasm.js',
     wasmUrl: 'ammo/ammo.wasm.wasm',
     fallbackUrl: 'ammo/ammo.js'
@@ -51915,10 +52107,10 @@ pc.WasmModule.setConfig('Ammo', {
 
 // Wait for the module, then create the application as usual
 await new Promise((resolve) => {
-    pc.WasmModule.getInstance('Ammo', () => resolve());
+    WasmModule.getInstance('Ammo', () => resolve());
 });
 
-const app = new pc.Application(canvas);
+const app = new Application(canvas);
 ```
 
 The rigid body system finds the `Ammo` global as the application starts and installs the ammo.js backend. `Application` registers every component system for you; if you build from `AppBase` and `AppOptions` instead, add `CollisionComponentSystem` and `RigidBodyComponentSystem` (and `JointComponentSystem` for [joints](https://developer.playcanvas.com/user-manual/physics/joints.md)) to `componentSystems`. The [Falling Shapes](https://playcanvas.github.io/#/physics/falling-shapes) example shows the complete sequence.
@@ -51981,7 +52173,7 @@ Gravity is a constant acceleration applied to every dynamic rigid body. The defa
 
 ```javascript
 // Lunar gravity. The older setGravity() method is deprecated in favor of this property.
-app.systems.rigidbody.gravity = new pc.Vec3(0, -1.62, 0);
+app.systems.rigidbody.gravity = new Vec3(0, -1.62, 0);
 ```
 
 **Editor**
@@ -52144,10 +52336,10 @@ Here is a one meter dynamic box that will fall onto whatever is below it:
 **Engine**
 
 ```javascript
-const box = new pc.Entity('box');
+const box = new Entity('box');
 box.addComponent('render', { type: 'box' });
 box.addComponent('collision', { type: 'box' });
-box.addComponent('rigidbody', { type: pc.BODYTYPE_DYNAMIC, mass: 2 });
+box.addComponent('rigidbody', { type: BODYTYPE_DYNAMIC, mass: 2 });
 box.setPosition(0, 5, 0);
 app.root.addChild(box);
 ```
@@ -52232,10 +52424,10 @@ entity.rigidbody.linearDamping = 0.2;
 entity.rigidbody.angularDamping = 0.2;
 
 // Keep a character upright: no rotation about any axis
-entity.rigidbody.angularFactor = new pc.Vec3(0, 0, 0);
+entity.rigidbody.angularFactor = new Vec3(0, 0, 0);
 
 // Confine a body to the XY plane of a 2D game
-entity.rigidbody.linearFactor = new pc.Vec3(1, 1, 0);
+entity.rigidbody.linearFactor = new Vec3(1, 1, 0);
 ```
 
 **Editor**
@@ -52320,11 +52512,11 @@ The physics engine owns the position and rotation of a dynamic body. To move one
 entity.rigidbody.teleport(0, 10, 0);
 
 // Move and rotate, with the rotation given as Euler angles in degrees
-entity.rigidbody.teleport(new pc.Vec3(0, 10, 0), new pc.Vec3(0, 90, 0));
+entity.rigidbody.teleport(new Vec3(0, 10, 0), new Vec3(0, 90, 0));
 
 // Respawn at rest: clear the old motion, then move and rotate with a quaternion
-entity.rigidbody.linearVelocity = pc.Vec3.ZERO;
-entity.rigidbody.angularVelocity = pc.Vec3.ZERO;
+entity.rigidbody.linearVelocity = Vec3.ZERO;
+entity.rigidbody.angularVelocity = Vec3.ZERO;
 entity.rigidbody.teleport(spawn.getPosition(), spawn.getRotation());
 ```
 
@@ -52363,8 +52555,8 @@ Every body belongs to a collision **group** and carries a **mask** of the groups
 ```javascript
 // Put the body in a user group and stop it colliding with other members of that group.
 // Set these after the type, because changing the type resets them.
-entity.rigidbody.group = pc.BODYGROUP_USER_1;
-entity.rigidbody.mask = pc.BODYMASK_ALL ^ pc.BODYGROUP_USER_1;
+entity.rigidbody.group = BODYGROUP_USER_1;
+entity.rigidbody.mask = BODYMASK_ALL ^ BODYGROUP_USER_1;
 ```
 
 Eight user groups, `BODYGROUP_USER_1` to `BODYGROUP_USER_8`, are free for your own use. The same groups and masks filter [ray casts](https://developer.playcanvas.com/user-manual/physics/ray-casting.md#filtering-ray-casts).
@@ -52492,11 +52684,11 @@ player.addComponent('collision', {
     type: 'capsule',
     radius: 0.5,
     height: 2,
-    linearOffset: new pc.Vec3(0, 1, 0)
+    linearOffset: new Vec3(0, 1, 0)
 });
 
 // Tilt a box by 45 degrees about the entity's Y axis
-crate.collision.angularOffset = new pc.Quat().setFromEulerAngles(0, 45, 0);
+crate.collision.angularOffset = new Quat().setFromEulerAngles(0, 45, 0);
 ```
 
 **Editor**
@@ -52527,13 +52719,13 @@ The parent carries a collision component of type **Compound** together with the 
 
 ```javascript
 // The parent owns the body and combines the children's shapes
-const chair = new pc.Entity('chair');
+const chair = new Entity('chair');
 chair.addComponent('collision', { type: 'compound' });
-chair.addComponent('rigidbody', { type: pc.BODYTYPE_DYNAMIC, mass: 5 });
+chair.addComponent('rigidbody', { type: BODYTYPE_DYNAMIC, mass: 5 });
 
 // Children carry the shapes, positioned relative to the parent, and need no rigidbody
-const seat = new pc.Entity('seat');
-seat.addComponent('collision', { type: 'box', halfExtents: new pc.Vec3(0.25, 0.025, 0.25) });
+const seat = new Entity('seat');
+seat.addComponent('collision', { type: 'box', halfExtents: new Vec3(0.25, 0.025, 0.25) });
 seat.setLocalPosition(0, 0.45, 0);
 chair.addChild(seat);
 ```
@@ -52586,7 +52778,7 @@ To resize a primitive, change those properties. The engine rebuilds the shape an
 
 ```javascript
 // Double the size of a one unit box collider
-entity.collision.halfExtents = new pc.Vec3(1, 1, 1);
+entity.collision.halfExtents = new Vec3(1, 1, 1);
 ```
 
 Mesh shapes are the exception, because their geometry comes from a mesh that is drawn at the entity's scale. They are built at the world scale of their entity, including any scale on the model nodes inside it. They are rebuilt at the start of the next physics step whenever the entity's world scale changes, whether you scale the entity itself or one of its parents. Scaling a model node alone does not rebuild the shape. Each rebuild recreates the body, so avoid changing the scale of a mesh collider every frame.
@@ -52633,7 +52825,7 @@ Subscribe to the application's `update` event, or attach a Script to the entity 
 ```javascript
 app.on('update', (dt) => {
     // While the right arrow key is held, push the box along the world X axis
-    if (app.keyboard.isPressed(pc.KEY_RIGHT)) {
+    if (app.keyboard.isPressed(KEY_RIGHT)) {
         box.rigidbody.applyForce(10, 0, 0);
     }
 });
@@ -52741,12 +52933,12 @@ By default a force or impulse acts through the body's center of mass, so it chan
 ```javascript
 // Impulse: the point is in the entity's local space, so this pushes up on the
 // point 1 unit along the entity's local Z axis and makes the body tip over
-entity.rigidbody.applyImpulse(new pc.Vec3(0, 10, 0), new pc.Vec3(0, 0, 1));
+entity.rigidbody.applyImpulse(new Vec3(0, 10, 0), new Vec3(0, 0, 1));
 
 // Force: the point is a world space offset from the body, so transform the
 // same local point into world space first
-const offset = entity.getWorldTransform().transformVector(new pc.Vec3(0, 0, 1));
-entity.rigidbody.applyForce(new pc.Vec3(0, 10, 0), offset);
+const offset = entity.getWorldTransform().transformVector(new Vec3(0, 0, 1));
+entity.rigidbody.applyForce(new Vec3(0, 10, 0), offset);
 ```
 
 Both methods can also be called with six numbers, the force or impulse followed by the point.
@@ -52770,11 +52962,11 @@ Sometimes you want a body to move at an exact speed regardless of its mass, for 
 ```javascript
 // Move at 5 units per second along the world X axis, keeping the current vertical speed
 const velocity = entity.rigidbody.linearVelocity;
-entity.rigidbody.linearVelocity = new pc.Vec3(5, velocity.y, 0);
+entity.rigidbody.linearVelocity = new Vec3(5, velocity.y, 0);
 
 // Stop all motion
-entity.rigidbody.linearVelocity = pc.Vec3.ZERO;
-entity.rigidbody.angularVelocity = pc.Vec3.ZERO;
+entity.rigidbody.linearVelocity = Vec3.ZERO;
+entity.rigidbody.angularVelocity = Vec3.ZERO;
 ```
 
 The velocity getters return read-only snapshots, so modifying the returned vector in place has no effect. Always assign a new value. For a complete character driven this way, see the engine's [first-person](https://github.com/playcanvas/engine/blob/main/scripts/esm/first-person-controller.mjs) and [third-person](https://github.com/playcanvas/engine/blob/main/scripts/esm/third-person-controller.mjs) controller scripts.
@@ -52984,10 +53176,10 @@ A trigger is simply a [collision](https://developer.playcanvas.com/user-manual/e
 **Engine**
 
 ```javascript
-const goal = new pc.Entity('goal');
+const goal = new Entity('goal');
 goal.addComponent('collision', {
     type: 'box',
-    halfExtents: new pc.Vec3(2, 1, 0.5)
+    halfExtents: new Vec3(2, 1, 0.5)
 });
 goal.setPosition(0, 1, -10);
 app.root.addChild(goal);
@@ -53085,8 +53277,8 @@ function pick(screenX, screenY) {
     }
 }
 
-app.mouse.on(pc.EVENT_MOUSEDOWN, (event) => pick(event.x, event.y));
-app.touch?.on(pc.EVENT_TOUCHSTART, (event) => pick(event.touches[0].x, event.touches[0].y));
+app.mouse.on(EVENT_MOUSEDOWN, (event) => pick(event.x, event.y));
+app.touch?.on(EVENT_TOUCHSTART, (event) => pick(event.touches[0].x, event.touches[0].y));
 ```
 
 In the Editor this lives in a script on the camera entity, where `this.app` and `this.entity` stand in for `app` and `cameraEntity`; the [Entity picking using physics](https://developer.playcanvas.com/tutorials/entity-picking-using-physics/) tutorial has the complete script. In React, `useApp()` returns the application; in Web Components, `whenReady('pc-app')` does. See [Moving Bodies](https://developer.playcanvas.com/user-manual/physics/forces-and-impulses.md#running-physics-code) for those patterns.
@@ -53145,7 +53337,7 @@ Ray casting has other applications too. An entity can probe its surroundings by 
 
 ```javascript
 const from = player.getPosition();
-const to = new pc.Vec3(from.x, from.y - 1.1, from.z);
+const to = new Vec3(from.x, from.y - 1.1, from.z);
 const hit = app.systems.rigidbody.raycastFirst(from, to, {
     filterCallback: (entity) => entity !== player
 });
@@ -53210,15 +53402,15 @@ This door hinge constrains a dynamic door to a static frame. The joint entity si
 **Engine**
 
 ```javascript
-const hinge = new pc.Entity('hinge');
+const hinge = new Entity('hinge');
 hinge.setPosition(1, 1, 0);
 hinge.setEulerAngles(0, 0, 90); // the local X axis now points up
 hinge.addComponent('joint', {
-    type: pc.JOINTTYPE_HINGE,
+    type: JOINTTYPE_HINGE,
     entityA: door,
     entityB: doorFrame,
     enableLimits: true,
-    limits: new pc.Vec2(0, 110)
+    limits: new Vec2(0, 110)
 });
 app.root.addChild(hinge);
 ```
@@ -53794,34 +53986,34 @@ Register the UI component systems, the font and texture handlers, and an `Elemen
 
 ```javascript
 const canvas = document.getElementById('application');
-const device = await pc.createGraphicsDevice(canvas, {
-    deviceTypes: [pc.DEVICETYPE_WEBGPU]
+const device = await createGraphicsDevice(canvas, {
+    deviceTypes: [DEVICETYPE_WEBGPU]
 });
 
-const options = new pc.AppOptions();
+const options = new AppOptions();
 options.graphicsDevice = device;
 
 // Create the ElementInput before the mouse and touch devices, so that calling
 // stopPropagation() in a UI event handler also hides the event from them
-options.elementInput = new pc.ElementInput(canvas);
-options.mouse = new pc.Mouse(canvas);
-options.touch = new pc.TouchDevice(canvas);
+options.elementInput = new ElementInput(canvas);
+options.mouse = new Mouse(canvas);
+options.touch = new TouchDevice(canvas);
 
 options.componentSystems = [
-    pc.CameraComponentSystem,
-    pc.ScreenComponentSystem,
-    pc.ElementComponentSystem,
-    pc.ButtonComponentSystem
+    CameraComponentSystem,
+    ScreenComponentSystem,
+    ElementComponentSystem,
+    ButtonComponentSystem
 ];
 options.resourceHandlers = [
-    pc.FontHandler,
-    pc.TextureHandler
+    FontHandler,
+    TextureHandler
 ];
 
-const app = new pc.AppBase(canvas);
+const app = new AppBase(canvas);
 app.init(options);
-app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
-app.setCanvasResolution(pc.RESOLUTION_AUTO);
+app.setCanvasFillMode(FILLMODE_FILL_WINDOW);
+app.setCanvasResolution(RESOLUTION_AUTO);
 app.start();
 
 window.addEventListener('resize', () => app.resizeCanvas());
@@ -53853,44 +54045,44 @@ With the application set up as above:
 
 ```javascript
 // Load a font for the text
-const font = new pc.Asset('arial', 'font', { url: 'fonts/arial.json' });
+const font = new Asset('arial', 'font', { url: 'fonts/arial.json' });
 app.assets.add(font);
 await new Promise((resolve) => {
     font.ready(resolve);
     app.assets.load(font);
 });
 
-const camera = new pc.Entity('camera');
-camera.addComponent('camera', { clearColor: new pc.Color(0.1, 0.11, 0.13) });
+const camera = new Entity('camera');
+camera.addComponent('camera', { clearColor: new Color(0.1, 0.11, 0.13) });
 app.root.addChild(camera);
 
 // A screen-space screen that scales with the canvas
-const screen = new pc.Entity('screen');
+const screen = new Entity('screen');
 screen.addComponent('screen', {
     screenSpace: true,
     referenceResolution: [1280, 720],
-    scaleMode: pc.SCALEMODE_BLEND,
+    scaleMode: SCALEMODE_BLEND,
     scaleBlend: 0.5
 });
 app.root.addChild(screen);
 
 // A panel in the middle of the screen
-const panel = new pc.Entity('panel');
+const panel = new Entity('panel');
 panel.addComponent('element', {
-    type: pc.ELEMENTTYPE_IMAGE,
+    type: ELEMENTTYPE_IMAGE,
     anchor: [0.5, 0.5, 0.5, 0.5],
     pivot: [0.5, 0.5],
     width: 420,
     height: 240,
-    color: new pc.Color(0.16, 0.18, 0.23),
+    color: new Color(0.16, 0.18, 0.23),
     opacity: 0.9
 });
 screen.addChild(panel);
 
 // A label near the top of the panel
-const label = new pc.Entity('label');
+const label = new Entity('label');
 label.addComponent('element', {
-    type: pc.ELEMENTTYPE_TEXT,
+    type: ELEMENTTYPE_TEXT,
     fontAsset: font.id,
     text: 'Hello, PlayCanvas!',
     fontSize: 36,
@@ -53902,31 +54094,31 @@ panel.addChild(label);
 
 // A button near the bottom: an image element that receives input, and a
 // button component that tints the image when it is hovered and pressed
-const button = new pc.Entity('button');
+const button = new Entity('button');
 button.addComponent('element', {
-    type: pc.ELEMENTTYPE_IMAGE,
+    type: ELEMENTTYPE_IMAGE,
     anchor: [0.5, 0, 0.5, 0],
     pivot: [0.5, 0],
     width: 200,
     height: 60,
-    color: new pc.Color(1, 0.55, 0.2),
+    color: new Color(1, 0.55, 0.2),
     useInput: true
 });
 button.addComponent('button', {
     imageEntity: button,
-    hoverTint: new pc.Color(1, 0.7, 0.45),
-    pressedTint: new pc.Color(0.8, 0.4, 0.1)
+    hoverTint: new Color(1, 0.7, 0.45),
+    pressedTint: new Color(0.8, 0.4, 0.1)
 });
 button.setLocalPosition(0, 40, 0);
 panel.addChild(button);
 
-const buttonText = new pc.Entity('text');
+const buttonText = new Entity('text');
 buttonText.addComponent('element', {
-    type: pc.ELEMENTTYPE_TEXT,
+    type: ELEMENTTYPE_TEXT,
     fontAsset: font.id,
     text: 'Click me',
     fontSize: 28,
-    color: new pc.Color(0.1, 0.1, 0.1),
+    color: new Color(0.1, 0.1, 0.1),
     anchor: [0.5, 0.5, 0.5, 0.5],
     pivot: [0.5, 0.5]
 });
@@ -54165,16 +54357,16 @@ A **world-space** screen is placed in the scene by its entity's transform and dr
 
 ```javascript
 // Drawn over the camera's view, the size of the canvas
-const hud = new pc.Entity('hud');
+const hud = new Entity('hud');
 hud.addComponent('screen', {
     screenSpace: true,
-    scaleMode: pc.SCALEMODE_BLEND,
+    scaleMode: SCALEMODE_BLEND,
     referenceResolution: [1280, 720]
 });
 app.root.addChild(hud);
 
 // Placed in the scene: 640 × 320 units, scaled to 6.4 × 3.2 meters
-const sign = new pc.Entity('sign');
+const sign = new Entity('sign');
 sign.addComponent('screen', {
     screenSpace: false,
     resolution: [640, 320]
@@ -54239,10 +54431,10 @@ With **Scale Mode** set to **None**, an interface is built in pixels and keeps i
 **Engine**
 
 ```javascript
-const screen = new pc.Entity('screen');
+const screen = new Entity('screen');
 screen.addComponent('screen', {
     screenSpace: true,
-    scaleMode: pc.SCALEMODE_BLEND,
+    scaleMode: SCALEMODE_BLEND,
     referenceResolution: [1280, 720],
     scaleBlend: 0.5
 });
@@ -54415,9 +54607,9 @@ For example, this score sits in the top-right corner of the screen, 20 units in 
 **Engine**
 
 ```javascript
-const score = new pc.Entity('score');
+const score = new Entity('score');
 score.addComponent('element', {
-    type: pc.ELEMENTTYPE_TEXT,
+    type: ELEMENTTYPE_TEXT,
     fontAsset: font.id,
     text: '1250',
     anchor: [1, 1, 1, 1],
@@ -54459,7 +54651,7 @@ The pivot is also the point an element rotates and scales around:
 
 ```javascript
 // Spin an icon about its center
-icon.element.pivot = new pc.Vec2(0.5, 0.5);
+icon.element.pivot = new Vec2(0.5, 0.5);
 icon.setLocalEulerAngles(0, 0, 20);
 ```
 
@@ -54471,8 +54663,8 @@ A bar across the top of the screen, for example, is split horizontally and keeps
 
 ```javascript
 // Attach the bar's left and right edges to the left and right of its parent, at the top
-bar.element.anchor = new pc.Vec4(0, 1, 1, 1);
-bar.element.pivot = new pc.Vec2(0.5, 1);
+bar.element.anchor = new Vec4(0, 1, 1, 1);
+bar.element.pivot = new Vec2(0.5, 1);
 bar.element.left = 0;
 bar.element.right = 0;
 bar.element.height = 80;
@@ -54489,12 +54681,12 @@ The margin is the distance of each edge of the element from its anchor, on the a
 **Engine**
 
 ```javascript
-const background = new pc.Entity('background');
+const background = new Entity('background');
 background.addComponent('element', {
-    type: pc.ELEMENTTYPE_IMAGE,
+    type: ELEMENTTYPE_IMAGE,
     anchor: [0, 0, 1, 1],
     margin: [20, 20, 20, 20],
-    color: new pc.Color(0.16, 0.18, 0.23)
+    color: new Color(0.16, 0.18, 0.23)
 });
 panel.addChild(background);
 ```
@@ -54523,7 +54715,7 @@ The `left`, `bottom`, `right` and `top` properties read and write the four margi
 
 ```javascript
 background.element.left = 40;
-background.element.margin = new pc.Vec4(10, 10, 10, 10);
+background.element.margin = new Vec4(10, 10, 10, 10);
 ```
 
 [Live example: Anchors](https://playcanvas.com/examples/#/user-interface/anchors) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/user-interface/anchors/example.mjs))
@@ -54602,28 +54794,28 @@ A layout group is a component on an entity that also has an element, usually a [
 **Engine**
 
 ```javascript
-const list = new pc.Entity('list');
+const list = new Entity('list');
 list.addComponent('element', {
-    type: pc.ELEMENTTYPE_GROUP,
+    type: ELEMENTTYPE_GROUP,
     anchor: [0.5, 0.5, 0.5, 0.5],
     pivot: [0.5, 0.5],
     width: 300,
     height: 400
 });
 list.addComponent('layoutgroup', {
-    orientation: pc.ORIENTATION_VERTICAL,
+    orientation: ORIENTATION_VERTICAL,
     spacing: [0, 10],
     padding: [10, 10, 10, 10],
-    widthFitting: pc.FITTING_STRETCH
+    widthFitting: FITTING_STRETCH
 });
 screen.addChild(list);
 
 for (let i = 0; i < 5; i++) {
-    const row = new pc.Entity(`row ${i}`);
+    const row = new Entity(`row ${i}`);
     row.addComponent('element', {
-        type: pc.ELEMENTTYPE_IMAGE,
+        type: ELEMENTTYPE_IMAGE,
         height: 60,
-        color: new pc.Color(0.23, 0.55, 1)
+        color: new Color(0.23, 0.55, 1)
     });
     list.addChild(row);
 }
@@ -54838,17 +55030,17 @@ The layouts in the image at the top of this page use these properties:
 Changing a property of a layout group lays its children out again. Properties that hold vectors need a new vector object:
 
 ```javascript
-list.layoutgroup.spacing = new pc.Vec2(0, 20);
-list.layoutgroup.padding = new pc.Vec4(20, 20, 20, 20);
+list.layoutgroup.spacing = new Vec2(0, 20);
+list.layoutgroup.padding = new Vec4(20, 20, 20, 20);
 list.layoutgroup.wrap = true;
 ```
 
 Adding, removing, enabling or disabling a child also lays the group out again, so a list grows as you add rows to it:
 
 ```javascript
-const row = new pc.Entity('row');
+const row = new Entity('row');
 row.addComponent('element', {
-    type: pc.ELEMENTTYPE_IMAGE,
+    type: ELEMENTTYPE_IMAGE,
     height: 60
 });
 list.addChild(row);
@@ -54919,18 +55111,18 @@ The insets are in CSS pixels, and margins are in screen units. On a screen-space
 
 ```javascript
 // A group that fills the screen, for everything that must stay in the safe area
-const safeArea = new pc.Entity('safe area');
+const safeArea = new Entity('safe area');
 safeArea.addComponent('element', {
-    type: pc.ELEMENTTYPE_GROUP,
+    type: ELEMENTTYPE_GROUP,
     anchor: [0, 0, 1, 1],
     margin: [0, 0, 0, 0]
 });
 screen.addChild(safeArea);
 
 // Anchored to the group, the pause button stays inside the safe area
-const pauseButton = new pc.Entity('pause button');
+const pauseButton = new Entity('pause button');
 pauseButton.addComponent('element', {
-    type: pc.ELEMENTTYPE_IMAGE,
+    type: ELEMENTTYPE_IMAGE,
     anchor: [1, 1, 1, 1],
     pivot: [1, 1],
     width: 80,
@@ -54944,7 +55136,7 @@ const applySafeArea = () => {
     const insets = readSafeAreaInsets();
     const canvas = app.graphicsDevice.canvas;
     const units = (canvas.width / canvas.clientWidth) / screen.screen.scale;
-    safeArea.element.margin = new pc.Vec4(
+    safeArea.element.margin = new Vec4(
         insets.left * units,
         insets.bottom * units,
         insets.right * units,
@@ -55110,7 +55302,7 @@ An image element draws a rectangle: a solid color, a texture, or a frame of a sp
 To change them from code, assign a new `Color`:
 
 ```javascript
-panel.element.color = new pc.Color(0.23, 0.55, 1);
+panel.element.color = new Color(0.23, 0.55, 1);
 panel.element.opacity = 0.8;
 ```
 
@@ -55123,9 +55315,9 @@ Give an image element a texture asset to draw an image:
 **Engine**
 
 ```javascript
-const icon = new pc.Entity('icon');
+const icon = new Entity('icon');
 icon.addComponent('element', {
-    type: pc.ELEMENTTYPE_IMAGE,
+    type: ELEMENTTYPE_IMAGE,
     anchor: [0.5, 0.5, 0.5, 0.5],
     pivot: [0.5, 0.5],
     width: 128,
@@ -55196,7 +55388,7 @@ A contained or covering texture is placed at the element's pivot: a centered piv
 
 ```javascript
 // The top-left quarter of the texture
-icon.element.rect = new pc.Vec4(0, 0.5, 0.5, 0.5);
+icon.element.rect = new Vec4(0, 0.5, 0.5, 0.5);
 ```
 
 For many images packed into one texture, a texture atlas and sprites are easier to manage.
@@ -55219,25 +55411,25 @@ A border of `b` pixels is `b / pixelsPerUnit` screen units wide. **Pixels Per Un
 
 ```javascript
 // A texture atlas with one 64 x 64 frame, whose 16 pixel borders keep their size
-const atlas = new pc.TextureAtlas();
+const atlas = new TextureAtlas();
 atlas.texture = panelTexture.resource;
 atlas.frames = {
     panel: {
-        rect: new pc.Vec4(0, 0, 64, 64),
-        pivot: new pc.Vec2(0.5, 0.5),
-        border: new pc.Vec4(16, 16, 16, 16)
+        rect: new Vec4(0, 0, 64, 64),
+        pivot: new Vec2(0.5, 0.5),
+        border: new Vec4(16, 16, 16, 16)
     }
 };
-const sprite = new pc.Sprite(app.graphicsDevice, {
+const sprite = new Sprite(app.graphicsDevice, {
     atlas,
     frameKeys: ['panel'],
     pixelsPerUnit: 1,
-    renderMode: pc.SPRITE_RENDERMODE_SLICED
+    renderMode: SPRITE_RENDERMODE_SLICED
 });
 
-const dialog = new pc.Entity('dialog');
+const dialog = new Entity('dialog');
 dialog.addComponent('element', {
-    type: pc.ELEMENTTYPE_IMAGE,
+    type: ELEMENTTYPE_IMAGE,
     anchor: [0.5, 0.5, 0.5, 0.5],
     pivot: [0.5, 0.5],
     width: 400,
@@ -55322,28 +55514,28 @@ A camera can render into a texture that an image element shows, for character po
 
 ```javascript
 // The texture to render into
-const previewTexture = new pc.Texture(app.graphicsDevice, {
+const previewTexture = new Texture(app.graphicsDevice, {
     width: 512,
     height: 512,
-    format: pc.PIXELFORMAT_SRGBA8,
+    format: PIXELFORMAT_SRGBA8,
     mipmaps: false
 });
-const renderTarget = new pc.RenderTarget({
+const renderTarget = new RenderTarget({
     colorBuffer: previewTexture,
     depth: true,
-    origin: pc.RENDERTARGET_ORIGIN_TOP
+    origin: RENDERTARGET_ORIGIN_TOP
 });
 
 // A layer for what the preview camera sees, which the main camera does not render
-const previewLayer = new pc.Layer({ name: 'Preview' });
+const previewLayer = new Layer({ name: 'Preview' });
 app.scene.layers.push(previewLayer);
 
-const previewCamera = new pc.Entity('preview camera');
+const previewCamera = new Entity('preview camera');
 previewCamera.addComponent('camera', {
     layers: [previewLayer.id],
     renderTarget,
     priority: -1,
-    clearColor: new pc.Color(0, 0, 0, 0)
+    clearColor: new Color(0, 0, 0, 0)
 });
 previewCamera.setPosition(0, 0.5, 3);
 previewCamera.lookAt(model.getPosition());
@@ -55365,10 +55557,10 @@ An image element draws with a default material that uses its color, opacity and 
 The UI layer draws only transparent materials, so a material must blend to show up there:
 
 ```javascript
-const material = new pc.StandardMaterial();
+const material = new StandardMaterial();
 material.useLighting = false;
-material.emissive = new pc.Color(1, 0.55, 0.2);
-material.blendType = pc.BLEND_NORMAL;
+material.emissive = new Color(1, 0.55, 0.2);
+material.blendType = BLEND_NORMAL;
 material.depthWrite = false;
 material.update();
 
@@ -55410,9 +55602,9 @@ Any image element can be a mask. Turn on its `mask` property, and put the elemen
 **Engine**
 
 ```javascript
-const viewport = new pc.Entity('viewport');
+const viewport = new Entity('viewport');
 viewport.addComponent('element', {
-    type: pc.ELEMENTTYPE_IMAGE,
+    type: ELEMENTTYPE_IMAGE,
     anchor: [0.5, 0.5, 0.5, 0.5],
     pivot: [0.5, 0.5],
     width: 300,
@@ -55422,14 +55614,14 @@ viewport.addComponent('element', {
 screen.addChild(viewport);
 
 // A 400 × 400 image below the viewport is drawn only inside its 300 × 200 rectangle
-const content = new pc.Entity('content');
+const content = new Entity('content');
 content.addComponent('element', {
-    type: pc.ELEMENTTYPE_IMAGE,
+    type: ELEMENTTYPE_IMAGE,
     anchor: [0.5, 0.5, 0.5, 0.5],
     pivot: [0.5, 0.5],
     width: 400,
     height: 400,
-    color: new pc.Color(0.23, 0.55, 1)
+    color: new Color(0.23, 0.55, 1)
 });
 viewport.addChild(content);
 ```
@@ -55511,13 +55703,13 @@ A text element draws a string with a [font asset](https://developer.playcanvas.c
 **Engine**
 
 ```javascript
-const title = new pc.Entity('title');
+const title = new Entity('title');
 title.addComponent('element', {
-    type: pc.ELEMENTTYPE_TEXT,
+    type: ELEMENTTYPE_TEXT,
     fontAsset: font.id,
     text: 'Game Over',
     fontSize: 64,
-    color: new pc.Color(1, 0.55, 0.2),
+    color: new Color(1, 0.55, 0.2),
     anchor: [0.5, 0.5, 0.5, 0.5],
     pivot: [0.5, 0.5]
 });
@@ -55576,7 +55768,7 @@ Text wraps onto new lines when **Wrap Lines** is on and the element has a width 
 paragraph.element.autoWidth = false;
 paragraph.element.width = 400;
 paragraph.element.wrapLines = true;
-paragraph.element.pivot = new pc.Vec2(0.5, 1);
+paragraph.element.pivot = new Vec2(0.5, 1);
 ```
 
 `maxLines` limits the number of lines. The text beyond the limit is not cut off: it continues on the last line, past the edge of the element, so combine a line limit with [shrinking to fit](https://developer.playcanvas.com/user-manual/user-interface/text-elements.md#shrinking-to-fit), or crop the overflow with a [mask](https://developer.playcanvas.com/user-manual/user-interface/masks.md). After the text is laid out, `lines` holds it as an array with one string per line.
@@ -55728,16 +55920,16 @@ Keep the `.json` file and its `.png` pages together, with the same base name. Th
 
 ```javascript
 // Loading myfont.json also loads myfont.png, and any further pages
-const font = new pc.Asset('myfont', 'font', { url: 'fonts/myfont.json' });
+const font = new Asset('myfont', 'font', { url: 'fonts/myfont.json' });
 app.assets.add(font);
 await new Promise((resolve) => {
     font.ready(resolve);
     app.assets.load(font);
 });
 
-const label = new pc.Entity('label');
+const label = new Entity('label');
 label.addComponent('element', {
-    type: pc.ELEMENTTYPE_TEXT,
+    type: ELEMENTTYPE_TEXT,
     fontAsset: font.id,
     text: 'Hello, World!',
     anchor: [0.5, 0.5, 0.5, 0.5],
@@ -55803,18 +55995,18 @@ Declare the asset with `type="font"`, as a `.json` file would otherwise be loade
 MSDF glyphs have a single color, so a font asset can't draw color emoji. `CanvasFont`, which is not yet in the API reference, draws characters with the browser's own fonts into textures instead, emoji included. It is a bitmap font: create it at a size at least as large as the text you draw with it, and add the characters you need before you use them:
 
 ```javascript
-const emojiFont = new pc.CanvasFont(app, {
+const emojiFont = new CanvasFont(app, {
     fontName: 'Arial',
     fontSize: 64,
-    color: new pc.Color(1, 1, 1),
+    color: new Color(1, 1, 1),
     width: 256,
     height: 256
 });
 emojiFont.createTextures('Well done! 🎉');
 
-const message = new pc.Entity('message');
+const message = new Entity('message');
 message.addComponent('element', {
-    type: pc.ELEMENTTYPE_TEXT,
+    type: ELEMENTTYPE_TEXT,
     text: 'Well done! 🎉',
     fontSize: 32,
     anchor: [0.5, 0.5, 0.5, 0.5],
@@ -55895,8 +56087,8 @@ Any other language uses the English rules.
 **Engine**
 
 ```javascript
-const english = new pc.Asset('en-US', 'json', { url: 'localization/en-US.json' });
-const french = new pc.Asset('fr-FR', 'json', { url: 'localization/fr-FR.json' });
+const english = new Asset('en-US', 'json', { url: 'localization/en-US.json' });
+const french = new Asset('fr-FR', 'json', { url: 'localization/fr-FR.json' });
 app.assets.add(english);
 app.assets.add(french);
 
@@ -55987,9 +56179,9 @@ A text element with a `key` shows the message for that key in the current locale
 **Engine**
 
 ```javascript
-const heading = new pc.Entity('heading');
+const heading = new Entity('heading');
 heading.addComponent('element', {
-    type: pc.ELEMENTTYPE_TEXT,
+    type: ELEMENTTYPE_TEXT,
     fontAsset: font.id,
     key: 'title',
     anchor: [0.5, 1, 0.5, 1],
@@ -56383,30 +56575,30 @@ A button component turns an element into a button. It reacts to input on its ent
 **Engine**
 
 ```javascript
-const button = new pc.Entity('button');
+const button = new Entity('button');
 button.addComponent('element', {
-    type: pc.ELEMENTTYPE_IMAGE,
+    type: ELEMENTTYPE_IMAGE,
     anchor: [0.5, 0.5, 0.5, 0.5],
     pivot: [0.5, 0.5],
     width: 200,
     height: 60,
-    color: new pc.Color(1, 0.55, 0.2),
+    color: new Color(1, 0.55, 0.2),
     useInput: true
 });
 button.addComponent('button', {
     imageEntity: button,
-    hoverTint: new pc.Color(1, 0.7, 0.45),
-    pressedTint: new pc.Color(0.8, 0.4, 0.1)
+    hoverTint: new Color(1, 0.7, 0.45),
+    pressedTint: new Color(0.8, 0.4, 0.1)
 });
 screen.addChild(button);
 
 // The label is a child text element without input, so clicks on it go to the button
-const buttonText = new pc.Entity('text');
+const buttonText = new Entity('text');
 buttonText.addComponent('element', {
-    type: pc.ELEMENTTYPE_TEXT,
+    type: ELEMENTTYPE_TEXT,
     fontAsset: font.id,
     text: 'Play',
-    color: new pc.Color(0.1, 0.1, 0.1),
+    color: new Color(0.1, 0.1, 0.1),
     anchor: [0.5, 0.5, 0.5, 0.5],
     pivot: [0.5, 0.5]
 });
@@ -56524,7 +56716,7 @@ Moving the pointer off a pressed button ends its press, and releasing it there d
 
 ```javascript
 // Make a 32 × 32 close button react 16 units around it
-closeButton.button.hitPadding = new pc.Vec4(16, 16, 16, 16);
+closeButton.button.hitPadding = new Vec4(16, 16, 16, 16);
 ```
 
 ## Disabling a Button
@@ -56592,9 +56784,9 @@ This 300 × 400 scroll view scrolls a taller column vertically, with a scrollbar
 
 ```javascript
 // The scroll view, 300 × 400 in the middle of the screen
-const scrollView = new pc.Entity('scroll view');
+const scrollView = new Entity('scroll view');
 scrollView.addComponent('element', {
-    type: pc.ELEMENTTYPE_GROUP,
+    type: ELEMENTTYPE_GROUP,
     anchor: [0.5, 0.5, 0.5, 0.5],
     pivot: [0.5, 0.5],
     width: 300,
@@ -56603,9 +56795,9 @@ scrollView.addComponent('element', {
 screen.addChild(scrollView);
 
 // The viewport fills the scroll view, apart from 20 units on the right for the scrollbar
-const viewport = new pc.Entity('viewport');
+const viewport = new Entity('viewport');
 viewport.addComponent('element', {
-    type: pc.ELEMENTTYPE_IMAGE,
+    type: ELEMENTTYPE_IMAGE,
     anchor: [0, 0, 1, 1],
     margin: [0, 0, 20, 0],
     mask: true
@@ -56613,9 +56805,9 @@ viewport.addComponent('element', {
 scrollView.addChild(viewport);
 
 // The content hangs from the top-left corner of the viewport
-const content = new pc.Entity('content');
+const content = new Entity('content');
 content.addComponent('element', {
-    type: pc.ELEMENTTYPE_GROUP,
+    type: ELEMENTTYPE_GROUP,
     anchor: [0, 1, 0, 1],
     pivot: [0, 1],
     width: 280,
@@ -56625,29 +56817,29 @@ content.addComponent('element', {
 viewport.addChild(content);
 
 // A scrollbar along the right edge, and its handle
-const scrollbar = new pc.Entity('scrollbar');
+const scrollbar = new Entity('scrollbar');
 scrollbar.addComponent('element', {
-    type: pc.ELEMENTTYPE_IMAGE,
+    type: ELEMENTTYPE_IMAGE,
     anchor: [1, 0, 1, 1],
     pivot: [1, 1],
     margin: [0, 0, 0, 0],
     width: 20,
-    color: new pc.Color(0.16, 0.18, 0.23)
+    color: new Color(0.16, 0.18, 0.23)
 });
 scrollView.addChild(scrollbar);
 
-const handle = new pc.Entity('handle');
+const handle = new Entity('handle');
 handle.addComponent('element', {
-    type: pc.ELEMENTTYPE_IMAGE,
+    type: ELEMENTTYPE_IMAGE,
     anchor: [0, 1, 1, 1],
     pivot: [1, 1],
     margin: [0, 0, 0, 0],
-    color: new pc.Color(0.5, 0.55, 0.65),
+    color: new Color(0.5, 0.55, 0.65),
     useInput: true
 });
 scrollbar.addChild(handle);
 scrollbar.addComponent('scrollbar', {
-    orientation: pc.ORIENTATION_VERTICAL,
+    orientation: ORIENTATION_VERTICAL,
     handleEntity: handle
 });
 
@@ -56657,7 +56849,7 @@ scrollView.addComponent('scrollview', {
     verticalScrollbarEntity: scrollbar,
     horizontal: false,
     vertical: true,
-    scrollMode: pc.SCROLL_MODE_BOUNCE,
+    scrollMode: SCROLL_MODE_BOUNCE,
     bounceAmount: 0.1,
     friction: 0.05
 });
@@ -56793,10 +56985,10 @@ The content's size decides how far it can scroll, and a scroll view never change
 
 ```javascript
 content.addComponent('layoutgroup', {
-    orientation: pc.ORIENTATION_VERTICAL,
+    orientation: ORIENTATION_VERTICAL,
     spacing: [0, 10],
     padding: [10, 10, 10, 10],
-    widthFitting: pc.FITTING_STRETCH
+    widthFitting: FITTING_STRETCH
 });
 content.layoutgroup.on('reflow', ({ bounds }) => {
     // Make the content as tall as its rows, plus the top and bottom padding
@@ -56812,7 +57004,7 @@ With the content anchored to the top of the viewport and a top pivot, as above, 
 
 ```javascript
 // Scroll to the end of a chat log
-scrollView.scrollview.scroll = new pc.Vec2(0, 1);
+scrollView.scrollview.scroll = new Vec2(0, 1);
 
 // React to the user scrolling
 scrollView.scrollview.on('set:scroll', (scroll) => {
@@ -56851,7 +57043,7 @@ The fill's right anchor follows the value, from 0 to 1, so the fill takes that s
 
 ```javascript
 function setHealth(value) {
-    fill.element.anchor = new pc.Vec4(0, 0, value, 1);
+    fill.element.anchor = new Vec4(0, 0, value, 1);
 }
 setHealth(0.7);
 ```
@@ -56963,9 +57155,9 @@ function showScores(scores) {
         row.destroy();
     }
     for (const { name, score } of scores) {
-        const row = new pc.Entity(name);
+        const row = new Entity(name);
         row.addComponent('element', {
-            type: pc.ELEMENTTYPE_TEXT,
+            type: ELEMENTTYPE_TEXT,
             fontAsset: font.id,
             text: `${name}   ${score}`,
             fontSize: 28
@@ -57068,7 +57260,7 @@ function showScores(scores) {
 [`ElementDragHelper`](https://api.playcanvas.com/engine/classes/ElementDragHelper.html) makes an element follow the pointer while it is dragged. The element needs input enabled, and the application a mouse or touch device:
 
 ```javascript
-const drag = new pc.ElementDragHelper(card.element);
+const drag = new ElementDragHelper(card.element);
 const home = card.getLocalPosition().clone();
 
 // The bounds of an element, in CSS pixels from the top-left of the canvas
@@ -57108,7 +57300,7 @@ let t = 0;
 const handle = app.on('update', (dt) => {
     t = Math.min(t + dt / 0.5, 1);
     const eased = 1 - Math.pow(1 - t, 3);
-    panel.setLocalPosition(pc.math.lerp(-600, 0, eased), 0, 0);
+    panel.setLocalPosition(math.lerp(-600, 0, eased), 0, 0);
     if (t === 1) handle.off();
 });
 ```
@@ -57117,7 +57309,7 @@ Opacity doesn't cascade to children, so to fade a panel, fade every element belo
 
 ```javascript
 function setOpacity(entity, opacity) {
-    if (entity.element && entity.element.type !== pc.ELEMENTTYPE_GROUP) {
+    if (entity.element && entity.element.type !== ELEMENTTYPE_GROUP) {
         entity.element.opacity = opacity;
     }
     for (const child of entity.children) {
@@ -57163,7 +57355,7 @@ A world-space screen is placed by its entity's transform. Its `resolution` is it
 
 ```javascript
 // A 400 × 240 unit panel, scaled to 1.6 × 0.96 meters, two meters up
-const sign = new pc.Entity('sign');
+const sign = new Entity('sign');
 sign.addComponent('screen', {
     screenSpace: false,
     resolution: [400, 240]
@@ -57172,18 +57364,18 @@ sign.setLocalScale(0.004, 0.004, 0.004);
 sign.setPosition(0, 2, -3);
 app.root.addChild(sign);
 
-const background = new pc.Entity('background');
+const background = new Entity('background');
 background.addComponent('element', {
-    type: pc.ELEMENTTYPE_IMAGE,
+    type: ELEMENTTYPE_IMAGE,
     anchor: [0, 0, 1, 1],
     margin: [0, 0, 0, 0],
-    color: new pc.Color(0.16, 0.18, 0.23)
+    color: new Color(0.16, 0.18, 0.23)
 });
 sign.addChild(background);
 
-const title = new pc.Entity('title');
+const title = new Entity('title');
 title.addComponent('element', {
-    type: pc.ELEMENTTYPE_TEXT,
+    type: ELEMENTTYPE_TEXT,
     fontAsset: font.id,
     text: 'Exit',
     fontSize: 96,
@@ -57273,10 +57465,10 @@ A world-space screen is a child of the character entity, positioned over its hea
 
 ```javascript
 // The label is on a screen-space screen, anchored to its bottom-left corner: anchor 0, 0, 0, 0
-const head = new pc.Vec3();
-const onCanvas = new pc.Vec3();
-const inView = new pc.Vec3();
-const overHead = new pc.Vec3(0, 2.2, 0);
+const head = new Vec3();
+const onCanvas = new Vec3();
+const inView = new Vec3();
+const overHead = new Vec3(0, 2.2, 0);
 
 app.on('update', () => {
     head.add2(character.getPosition(), overHead);
@@ -57355,7 +57547,7 @@ Two properties of an input source control its interaction with the interface:
 ```javascript
 app.xr.input.on('add', (inputSource) => {
     // Let only the right-hand controller or hand point at the interface
-    if (inputSource.handedness !== pc.XRHAND_RIGHT) {
+    if (inputSource.handedness !== XRHAND_RIGHT) {
         inputSource.elementInput = false;
     }
 });
@@ -57386,7 +57578,7 @@ The engine's `XrMenu` script builds a menu of buttons from a list, and shows it 
 ```javascript
 import { XrMenu } from 'playcanvas/scripts/esm/xr/xr-menu.mjs';
 
-const menu = new pc.Entity('menu');
+const menu = new Entity('menu');
 menu.addComponent('script');
 menu.script.create(XrMenu, {
     properties: {
@@ -57633,7 +57825,7 @@ Events on the overlay's empty areas pass through to the canvas as usual, as `poi
 The camera's `worldToScreen()` returns CSS pixels from the canvas's top-left corner, the coordinates HTML needs:
 
 ```javascript
-const onCanvas = new pc.Vec3();
+const onCanvas = new Vec3();
 app.on('update', () => {
     camera.camera.worldToScreen(character.getPosition(), onCanvas);
     // Hide the tag when the point is behind the camera
@@ -57769,7 +57961,7 @@ To move elements to another layer, assign a new array to their `layers`. Changin
 A 3D model can be drawn over an interface in two ways. Render it into a texture that an image element shows, which keeps it in the interface's draw order and masks. See [Rendering 3D into an Image](https://developer.playcanvas.com/user-manual/user-interface/image-elements.md#render-to-texture). Or put it on a layer after the UI layer that clears the depth buffer, so that the scene doesn't hide it:
 
 ```javascript
-const overUi = new pc.Layer({ name: 'Over UI', clearDepthBuffer: true });
+const overUi = new Layer({ name: 'Over UI', clearDepthBuffer: true });
 app.scene.layers.push(overUi);
 camera.camera.layers = [...camera.camera.layers, overUi.id];
 
@@ -57783,7 +57975,7 @@ World-space elements on the UI layer are drawn after the scene, and are depth-te
 ```javascript
 // A layer for world-space UI, drawn with the scene and in the hierarchy's order
 const worldLayer = app.scene.layers.getLayerByName('World');
-const worldUi = new pc.Layer({ name: 'World UI', transparentSortMode: pc.SORTMODE_MANUAL });
+const worldUi = new Layer({ name: 'World UI', transparentSortMode: SORTMODE_MANUAL });
 app.scene.layers.insertTransparent(worldUi, app.scene.layers.getTransparentIndex(worldLayer) + 1);
 camera.camera.layers = [...camera.camera.layers, worldUi.id];
 
@@ -58032,9 +58224,9 @@ To start an XR session, support and availability should be checked first. Then, 
 ```javascript
 button.element.on('click', () => {
     // check if XR is supported and VR is available
-    if (app.xr.supported && app.xr.isAvailable(pc.XRTYPE_VR)) {
+    if (app.xr.supported && app.xr.isAvailable(XRTYPE_VR)) {
         // start VR session providing a camera component
-        app.xr.start(entity.camera, pc.XRTYPE_VR, pc.XRSPACE_LOCALFLOOR);
+        app.xr.start(entity.camera, XRTYPE_VR, XRSPACE_LOCALFLOOR);
     }
 });
 ```
@@ -58061,7 +58253,7 @@ if (app.xr.supported) {
 To start XR session, you can use method on the Camera Component or [XrManager](https://api.playcanvas.com/engine/classes/XrManager.html) on the Application. To start an XR session, you need to provide CameraComponent and provide the type of XR session, reference space, and optional object with additional arguments:
 
 ```javascript
-app.xr.start(entity.camera, pc.XRTYPE_VR, pc.XRSPACE_LOCALFLOOR);
+app.xr.start(entity.camera, XRTYPE_VR, XRSPACE_LOCALFLOOR);
 ```
 
 It is an asynchronous operation and is only possible to start on a user interaction, such as a button click, mouse click, or touch:
@@ -58083,7 +58275,7 @@ app.xr.on('start', () => {
 Session type or reference space might not be available on a particular platform, so it will fail to start the session, providing an error in a callback and firing the `error` event on XrManager:
 
 ```javascript
-entity.camera.startXr(pc.XRTYPE_VR, pc.XRSPACE_UNBOUNDED, {
+entity.camera.startXr(XRTYPE_VR, XRSPACE_UNBOUNDED, {
     callback: (err) => {
         if (err) {
             // failed to start session
@@ -58118,7 +58310,7 @@ Each platform can support different types of sessions. These are:
 The availability of a session type can change during an application's lifetime, based on devices being plugged in or features on devices being enabled. To check if a session type is available do:
 
 ```javascript
-if (app.xr.isAvailable(pc.XRTYPE_VR)) {
+if (app.xr.isAvailable(XRTYPE_VR)) {
     // VR is available
 }
 ```
@@ -58131,7 +58323,7 @@ app.xr.on('available', (type, available) => {
 });
 
 // or specific session type
-app.xr.on('available:' + pc.XRTYPE_VR, (available) => {
+app.xr.on('available:' + XRTYPE_VR, (available) => {
     console.log('XR session VR type is now', available ? 'available' : 'unavailable');
 });
 ```
@@ -58213,7 +58405,7 @@ Accessing internal, undocumented APIs is subject to engine changes that are not 
 Here is an example of enabling the experimental API for [WebXR Layers](https://developer.playcanvas.com/user-manual/xr/input-sources.md):
 
 ```javascript
-app.xr.start(cameraComponent, pc.XRTYPE_VR, pc.XRSPACE_LOCAL, {
+app.xr.start(cameraComponent, XRTYPE_VR, XRSPACE_LOCAL, {
     optionalFeatures: [ 'layers' ],
     callback: (err) => {
         if (err) {
@@ -58303,13 +58495,13 @@ You can check the type of the target ray:
 
 ```javascript
 switch (inputSource.targetRayMode) {
-    case pc.XRTARGETRAY_SCREEN:
+    case XRTARGETRAY_SCREEN:
         // screen-based interaction, such as touch-screen on mobile in AR mode
         break;
-    case pc.XRTARGETRAY_POINTER:
+    case XRTARGETRAY_POINTER:
         // pointer-based, such as hand-held controllers or hands
         break;
-    case pc.XRTARGETRAY_GAZE:
+    case XRTARGETRAY_GAZE:
         // gaze-based, that is based on viewer device orientation and position
         break;
 }
@@ -58396,7 +58588,7 @@ const hand = inputSource.hand;
 
 if (hand) {
     for (let i = 0; i < hand.joints.length; i++) {
-        const entity = new pc.Entity();
+        const entity = new Entity();
         entity.joint = hand.joints[i];
         entity.addComponent('render', { type: 'box' });
         parent.addChild(entity);
@@ -58460,9 +58652,9 @@ To start an AR session, device support and availability should also be checked f
 ```javascript
 button.element.on('click', () => {
     // check if XR is supported and AR is available
-    if (app.xr.supported && app.xr.isAvailable(pc.XRTYPE_AR)) {
+    if (app.xr.supported && app.xr.isAvailable(XRTYPE_AR)) {
         // start AR using a camera component
-        entity.camera.startXr(pc.XRTYPE_AR, pc.XRSPACE_LOCALFLOOR);
+        entity.camera.startXr(XRTYPE_AR, XRSPACE_LOCALFLOOR);
     }
 });
 ```
@@ -58497,7 +58689,7 @@ Each anchor is represented as a position and orientation and can be created from
 To start using anchors, when a session is requested, a flag should be provided to the session:
 
 ```javascript
-app.xr.start(camera, pc.XRTYPE_AR, pc.XRSPACE_LOCALFLOOR, {
+app.xr.start(camera, XRTYPE_AR, XRSPACE_LOCALFLOOR, {
     anchors: true
 });
 ```
@@ -58540,7 +58732,7 @@ Anchors can be added and removed dynamically during the session:
 
 ```javascript
 app.xr.anchors.on('add', (anchor) => {
-    const entity = new pc.Entity();
+    const entity = new Entity();
 
     // add a cone for an anchor
     entity.addComponent('render', { type: 'cone' });
@@ -58623,7 +58815,7 @@ In AR, the rendered image is projected over the reconstructed camera texture on 
 To request access to the camera color, the session should be started with an extra flag:
 
 ```javascript
-app.xr.start(camera, pc.XRTYPE_AR, pc.XRSPACE_LOCALFLOOR, {
+app.xr.start(camera, XRTYPE_AR, XRSPACE_LOCALFLOOR, {
     cameraColor: true
 });
 ```
@@ -58655,7 +58847,7 @@ For a monoscopic device, we can access its view and its texture:
 ```javascript
 app.xr.on('start', () => {
     app.xr.views.on('add', (view) => {
-        if (view.eye === pc.XREYE_NONE) { // monoscopic view
+        if (view.eye === XREYE_NONE) { // monoscopic view
             if (view.textureColor) {
                 // camera color texture is available
             }
@@ -58682,10 +58874,10 @@ Platforms might implement either path: CPU or GPU, or even both.
 To request access to camera depth, the session should be started as follows:
 
 ```javascript
-app.xr.start(camera, pc.XRTYPE_AR, pc.XRSPACE_LOCALFLOOR, {
+app.xr.start(camera, XRTYPE_AR, XRSPACE_LOCALFLOOR, {
     depthSensing: { // request access to camera depth
-        usagePreference: pc.XRDEPTHSENSINGUSAGE_GPU, // prefer GPU implementation
-        dataFormatPreference: pc.XRDEPTHSENSINGFORMAT_F32 // prefer data as Float 32 array/texture
+        usagePreference: XRDEPTHSENSINGUSAGE_GPU, // prefer GPU implementation
+        dataFormatPreference: XRDEPTHSENSINGFORMAT_F32 // prefer data as Float 32 array/texture
     }
 });
 ```
@@ -58720,7 +58912,7 @@ WebXR supports it only for the CPU-path. Using Depth Sensing, you can measure th
 
 ```javascript
 // get monoscopic view (mobile screens)
-const view = app.xr.views.get(pc.XREYE_NONE);
+const view = app.xr.views.get(XREYE_NONE);
 if (view) {
     // get distance from the middle of a screen
     const distance = view.getDepth(0.5, 0.5);
@@ -58757,7 +58949,7 @@ When using the depth texture in the shader, depending on a monoscopic or stereos
 
 ```javascript
 const view = app.xr.views.list[0];
-if (view && view.eye !== pc.XREYE_NONE) {
+if (view && view.eye !== XREYE_NONE) {
     // add define for stereo views
     fragShader = '#define XRDEPTH_ARRAY\n' + fragShader;
 }
@@ -58770,7 +58962,7 @@ WebXR can provide depth sensing data in two formats: F32 (array of 32-bit floats
 We can use shader branching to unpack depth values from a texture depending on the format:
 
 ```javascript
-if (app.xr.views.depthPixelFormat === pc.PIXELFORMAT_R32F) {
+if (app.xr.views.depthPixelFormat === PIXELFORMAT_R32F) {
     fragShader = '#define XRDEPTH_FLOAT\n' + fragShader;
 }
 ```
@@ -58858,7 +59050,7 @@ Before starting the AR session, you need to provide an element as a root to the 
 
 ```javascript
 app.xr.domOverlay.root = element;
-app.xr.start(camera, pc.XRTYPE_AR, pc.XRSPACE_LOCALFLOOR);
+app.xr.start(camera, XRTYPE_AR, XRSPACE_LOCALFLOOR);
 ```
 
 ## Support
@@ -58925,7 +59117,7 @@ The most basic way is to start probing straight from the viewer forward vector:
 ```javascript
 // start a hit test
 app.xr.hitTest.start({
-    spaceType: pc.XRSPACE_VIEWER, // from a viewer space
+    spaceType: XRSPACE_VIEWER, // from a viewer space
     callback: (err, hitTestSource) => {
         if (err) return;
         // subscribe to hit test results
@@ -58983,13 +59175,13 @@ inputSource.hitTestStart({
 It is also possible to start a hit testing using a custom ray with the origin point and a direction:
 
 ```javascript
-const ray = new pc.Ray();
+const ray = new Ray();
 
 ray.origin.set(0, 1, 0); // start 1 meter above the origin
 ray.direction.set(0, -1, 0); // point downwards
 
 app.xr.hitTest.start({
-    spaceType: pc.XRSPACE_LOCALFLOOR,
+    spaceType: XRSPACE_LOCALFLOOR,
     offsetRay: ray,
     callback: (err, hitTestSource) => {
         // hit test source that will sample real world geometry
@@ -59267,7 +59459,7 @@ app.xr.on('start', () => {
 A feature flag needs to be added to the session start:
 
 ```javascript
-app.xr.start(camera, pc.XRTYPE_AR, pc.XRSPACE_LOCALFLOOR, {
+app.xr.start(camera, XRTYPE_AR, XRSPACE_LOCALFLOOR, {
     meshDetection: true
 });
 ```
@@ -59309,17 +59501,17 @@ Each XrMesh has its vertices and indices (in local-space), that can be used to c
 ```javascript
 app.xr.meshDetection.on('add', (xrMesh) => {
     // geometry data
-    const mesh = new pc.Mesh(app.graphicsDevice);
+    const mesh = new Mesh(app.graphicsDevice);
     mesh.clear(true, true); // ensure that mesh is created with dynamic buffers
     mesh.setPositions(xrMesh.vertices); // set vertices
-    mesh.setNormals(pc.calculateNormals(xrMesh.vertices, xrMesh.indices)); // calculate normals
+    mesh.setNormals(calculateNormals(xrMesh.vertices, xrMesh.indices)); // calculate normals
     mesh.setIndices(xrMesh.indices); // set indices
-    mesh.update(pc.PRIMITIVE_TRIANGLES); // update buffers
+    mesh.update(PRIMITIVE_TRIANGLES); // update buffers
 
-    const material = new pc.StandardMaterial();
-    const meshInstance = new pc.MeshInstance(mesh, material);
+    const material = new StandardMaterial();
+    const meshInstance = new MeshInstance(mesh, material);
 
-    const entity = new pc.Entity();
+    const entity = new Entity();
 
     // add render component
     entity.addComponent('render', {
@@ -59386,7 +59578,7 @@ app.xr.on('start', () => {
 A feature flag needs to be added to the session start:
 
 ```javascript
-app.xr.start(camera, pc.XRTYPE_AR, pc.XRSPACE_LOCALFLOOR, {
+app.xr.start(camera, XRTYPE_AR, XRSPACE_LOCALFLOOR, {
     planeDetection: true
 });
 ```
@@ -59432,7 +59624,7 @@ An example below creates a visual mesh for each XrPlane and adds it to the scene
 ```javascript
 app.xr.planeDetection.on('add', (xrPlane) => {
     // geometry data
-    const mesh = new pc.Mesh(app.graphicsDevice);
+    const mesh = new Mesh(app.graphicsDevice);
     mesh.clear(true, true); // ensure that mesh is created with dynamic buffers
 
     // create a list of vertices
@@ -59457,14 +59649,14 @@ app.xr.planeDetection.on('add', (xrPlane) => {
     }
 
     mesh.setPositions(vertices); // set vertices
-    mesh.setNormals(pc.calculateNormals(vertices, indices)); // calculate normals
+    mesh.setNormals(calculateNormals(vertices, indices)); // calculate normals
     mesh.setIndices(indices); // set indices
-    mesh.update(pc.PRIMITIVE_TRIANGLES); // update buffers
+    mesh.update(PRIMITIVE_TRIANGLES); // update buffers
 
-    const material = new pc.StandardMaterial();
-    const meshInstance = new pc.MeshInstance(mesh, material);
+    const material = new StandardMaterial();
+    const meshInstance = new MeshInstance(mesh, material);
 
-    const entity = new pc.Entity(xrPlane.label);
+    const entity = new Entity(xrPlane.label);
 
     // add render component
     entity.addComponent('render', {
@@ -59563,9 +59755,9 @@ To start a VR session, device support and availability should be checked first. 
 ```javascript
 button.element.on('click', () => {
     // check if XR is supported and VR is available
-    if (app.xr.supported && app.xr.isAvailable(pc.XRTYPE_VR)) {
+    if (app.xr.supported && app.xr.isAvailable(XRTYPE_VR)) {
         // start AR using a camera component
-        entity.camera.startXr(pc.XRTYPE_VR, pc.XRSPACE_LOCALFLOOR);
+        entity.camera.startXr(XRTYPE_VR, XRSPACE_LOCALFLOOR);
     }
 });
 ```
@@ -60875,7 +61067,7 @@ Ideally, we want the best of both worlds where users on high-tier devices will r
 The Device pixel ratio can be changed at runtime via the property [`GraphicsDevice#maxPixelRatio`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#maxpixelratio):
 
 ```javascript
-const device = pc.Application.getApplication().graphicsDevice;
+const device = Application.getApplication().graphicsDevice;
 if (highTierDevice) {
     // Use the default device pixel ratio of the device
     device.maxPixelRatio = window.devicePixelRatio;
@@ -60904,10 +61096,10 @@ An example for mobile can be found below (correct at time of writing Thu 30 Jul 
 
 ```javascript
 function isLowQualityGPU() {
-    const renderer = pc.Application.getApplication().graphicsDevice.unmaskedRenderer;
+    const renderer = Application.getApplication().graphicsDevice.unmaskedRenderer;
 
     // Only check the GPU if we are on mobile
-    if (renderer && pc.platform.mobile) {
+    if (renderer && platform.mobile) {
         // low level GPU's
         if(renderer.search(/Adreno\D*3/) !== -1 ||
            renderer.search(/Adreno\D*4/) !== -1 ||

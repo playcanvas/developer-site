@@ -37,7 +37,7 @@ Unlike loaded resources where the format is automatic, procedural splats require
 | `dataRotation` | RGBA16F | Rotation quaternion (x, y, z, w) as half floats |
 
 ```javascript
-const format = pc.GSplatFormat.createDefaultFormat(device);
+const format = GSplatFormat.createDefaultFormat(device);
 ```
 
 #### Simple Format
@@ -50,7 +50,7 @@ const format = pc.GSplatFormat.createDefaultFormat(device);
 | `dataColor` | RGBA16F | Color (r, g, b, a) as half floats |
 
 ```javascript
-const format = pc.GSplatFormat.createSimpleFormat(device);
+const format = GSplatFormat.createSimpleFormat(device);
 ```
 
 This format is ideal for the [helper scripts](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/procedural-splats.md#helper-scripts) like `GsplatMesh`, `GsplatImage`, and `GsplatLines`.
@@ -62,7 +62,7 @@ For advanced use cases, you can create custom formats with your own streams and 
 #### Constructor
 
 ```javascript
-const format = new pc.GSplatFormat(device, streams, options);
+const format = new GSplatFormat(device, streams, options);
 ```
 
 **Parameters:**
@@ -94,8 +94,8 @@ For each stream, the format generates a load function named `load{StreamName}()`
 This example creates a format with a single RGBA8 texture and custom uniforms for per-instance color gradients:
 
 ```javascript
-const format = new pc.GSplatFormat(device, [
-    { name: 'data', format: pc.PIXELFORMAT_RGBA8 }
+const format = new GSplatFormat(device, [
+    { name: 'data', format: PIXELFORMAT_RGBA8 }
 ], {
     readGLSL: `
         uniform vec3 uTint;
@@ -146,17 +146,17 @@ Use a built-in format or create a custom one:
 
 ```javascript
 // Simple format for uniform-scale splats (no rotation)
-const format = pc.GSplatFormat.createSimpleFormat(device);
+const format = GSplatFormat.createSimpleFormat(device);
 
 // Or default format with full splat data
-const format = pc.GSplatFormat.createDefaultFormat(device);
+const format = GSplatFormat.createDefaultFormat(device);
 ```
 
 ### 2. Create the Container
 
 ```javascript
 const maxSplats = 1000;
-const container = new pc.GSplatContainer(device, maxSplats, format);
+const container = new GSplatContainer(device, maxSplats, format);
 ```
 
 ### 3. Fill Texture Data
@@ -181,10 +181,10 @@ for (let i = 0; i < numSplats; i++) {
     centerData[i * 4 + 3] = size;
 
     // Color as half-floats (use FloatPacking helper)
-    colorData[i * 4 + 0] = pc.FloatPacking.float2Half(r);
-    colorData[i * 4 + 1] = pc.FloatPacking.float2Half(g);
-    colorData[i * 4 + 2] = pc.FloatPacking.float2Half(b);
-    colorData[i * 4 + 3] = pc.FloatPacking.float2Half(a);
+    colorData[i * 4 + 0] = FloatPacking.float2Half(r);
+    colorData[i * 4 + 1] = FloatPacking.float2Half(g);
+    colorData[i * 4 + 2] = FloatPacking.float2Half(b);
+    colorData[i * 4 + 3] = FloatPacking.float2Half(a);
 }
 
 // Unlock when done
@@ -206,9 +206,9 @@ for (let i = 0; i < numSplats; i++) {
 }
 
 // Set bounding box
-container.aabb = new pc.BoundingBox(
-    new pc.Vec3(centerX, centerY, centerZ),
-    new pc.Vec3(halfExtentX, halfExtentY, halfExtentZ)
+container.aabb = new BoundingBox(
+    new Vec3(centerX, centerY, centerZ),
+    new Vec3(halfExtentX, halfExtentY, halfExtentZ)
 );
 ```
 

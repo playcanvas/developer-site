@@ -92,7 +92,7 @@ registerScript(Rotator, undefined, app);
 The registry uses the class's static `scriptName` as its key. Once registered, you can add the script to any entity by that name — including procedurally, when cloning, or when instantiating templates:
 
 ```javascript
-const entity = new pc.Entity();
+const entity = new Entity();
 entity.addComponent('script');
 
 // attach the script by its registered name

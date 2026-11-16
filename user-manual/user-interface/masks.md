@@ -11,9 +11,9 @@ Any image element can be a mask. Turn on its `mask` property, and put the elemen
 **Engine**
 
 ```javascript
-const viewport = new pc.Entity('viewport');
+const viewport = new Entity('viewport');
 viewport.addComponent('element', {
-    type: pc.ELEMENTTYPE_IMAGE,
+    type: ELEMENTTYPE_IMAGE,
     anchor: [0.5, 0.5, 0.5, 0.5],
     pivot: [0.5, 0.5],
     width: 300,
@@ -23,14 +23,14 @@ viewport.addComponent('element', {
 screen.addChild(viewport);
 
 // A 400 × 400 image below the viewport is drawn only inside its 300 × 200 rectangle
-const content = new pc.Entity('content');
+const content = new Entity('content');
 content.addComponent('element', {
-    type: pc.ELEMENTTYPE_IMAGE,
+    type: ELEMENTTYPE_IMAGE,
     anchor: [0.5, 0.5, 0.5, 0.5],
     pivot: [0.5, 0.5],
     width: 400,
     height: 400,
-    color: new pc.Color(0.23, 0.55, 1)
+    color: new Color(0.23, 0.55, 1)
 });
 viewport.addChild(content);
 ```

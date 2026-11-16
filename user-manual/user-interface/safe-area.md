@@ -49,18 +49,18 @@ The insets are in CSS pixels, and margins are in screen units. On a screen-space
 
 ```javascript
 // A group that fills the screen, for everything that must stay in the safe area
-const safeArea = new pc.Entity('safe area');
+const safeArea = new Entity('safe area');
 safeArea.addComponent('element', {
-    type: pc.ELEMENTTYPE_GROUP,
+    type: ELEMENTTYPE_GROUP,
     anchor: [0, 0, 1, 1],
     margin: [0, 0, 0, 0]
 });
 screen.addChild(safeArea);
 
 // Anchored to the group, the pause button stays inside the safe area
-const pauseButton = new pc.Entity('pause button');
+const pauseButton = new Entity('pause button');
 pauseButton.addComponent('element', {
-    type: pc.ELEMENTTYPE_IMAGE,
+    type: ELEMENTTYPE_IMAGE,
     anchor: [1, 1, 1, 1],
     pivot: [1, 1],
     width: 80,
@@ -74,7 +74,7 @@ const applySafeArea = () => {
     const insets = readSafeAreaInsets();
     const canvas = app.graphicsDevice.canvas;
     const units = (canvas.width / canvas.clientWidth) / screen.screen.scale;
-    safeArea.element.margin = new pc.Vec4(
+    safeArea.element.margin = new Vec4(
         insets.left * units,
         insets.bottom * units,
         insets.right * units,

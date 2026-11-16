@@ -23,9 +23,9 @@ To start an AR session, device support and availability should also be checked f
 ```javascript
 button.element.on('click', () => {
     // check if XR is supported and AR is available
-    if (app.xr.supported && app.xr.isAvailable(pc.XRTYPE_AR)) {
+    if (app.xr.supported && app.xr.isAvailable(XRTYPE_AR)) {
         // start AR using a camera component
-        entity.camera.startXr(pc.XRTYPE_AR, pc.XRSPACE_LOCALFLOOR);
+        entity.camera.startXr(XRTYPE_AR, XRSPACE_LOCALFLOOR);
     }
 });
 ```

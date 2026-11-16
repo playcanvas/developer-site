@@ -44,15 +44,15 @@ This door hinge constrains a dynamic door to a static frame. The joint entity si
 **Engine**
 
 ```javascript
-const hinge = new pc.Entity('hinge');
+const hinge = new Entity('hinge');
 hinge.setPosition(1, 1, 0);
 hinge.setEulerAngles(0, 0, 90); // the local X axis now points up
 hinge.addComponent('joint', {
-    type: pc.JOINTTYPE_HINGE,
+    type: JOINTTYPE_HINGE,
     entityA: door,
     entityB: doorFrame,
     enableLimits: true,
-    limits: new pc.Vec2(0, 110)
+    limits: new Vec2(0, 110)
 });
 app.root.addChild(hinge);
 ```

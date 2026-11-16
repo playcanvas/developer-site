@@ -31,7 +31,7 @@ app.xr.on('start', () => {
 A feature flag needs to be added to the session start:
 
 ```javascript
-app.xr.start(camera, pc.XRTYPE_AR, pc.XRSPACE_LOCALFLOOR, {
+app.xr.start(camera, XRTYPE_AR, XRSPACE_LOCALFLOOR, {
     meshDetection: true
 });
 ```
@@ -73,17 +73,17 @@ Each XrMesh has its vertices and indices (in local-space), that can be used to c
 ```javascript
 app.xr.meshDetection.on('add', (xrMesh) => {
     // geometry data
-    const mesh = new pc.Mesh(app.graphicsDevice);
+    const mesh = new Mesh(app.graphicsDevice);
     mesh.clear(true, true); // ensure that mesh is created with dynamic buffers
     mesh.setPositions(xrMesh.vertices); // set vertices
-    mesh.setNormals(pc.calculateNormals(xrMesh.vertices, xrMesh.indices)); // calculate normals
+    mesh.setNormals(calculateNormals(xrMesh.vertices, xrMesh.indices)); // calculate normals
     mesh.setIndices(xrMesh.indices); // set indices
-    mesh.update(pc.PRIMITIVE_TRIANGLES); // update buffers
+    mesh.update(PRIMITIVE_TRIANGLES); // update buffers
 
-    const material = new pc.StandardMaterial();
-    const meshInstance = new pc.MeshInstance(mesh, material);
+    const material = new StandardMaterial();
+    const meshInstance = new MeshInstance(mesh, material);
 
-    const entity = new pc.Entity();
+    const entity = new Entity();
 
     // add render component
     entity.addComponent('render', {

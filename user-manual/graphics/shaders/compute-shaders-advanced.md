@@ -19,11 +19,11 @@ Manual bind groups are not deprecated. If you have existing compute shaders that
 The `computeBindGroupFormat` defines what resources are available to the compute shader. When you supply it, write explicit `@group`/`@binding` indices in the WGSL to match. You can bind various types of resources:
 
 ```javascript
-const shader = new pc.Shader(device, {
+const shader = new Shader(device, {
     name: 'MyComputeShader',
-    shaderLanguage: pc.SHADERLANGUAGE_WGSL,
+    shaderLanguage: SHADERLANGUAGE_WGSL,
     cshader: shaderCode,
-    computeBindGroupFormat: new pc.BindGroupFormat(device, [
+    computeBindGroupFormat: new BindGroupFormat(device, [
         // Resource bindings go here
     ])
 });
@@ -35,10 +35,10 @@ Storage buffers allow read/write access to large amounts of data:
 
 ```javascript
 // Read-write storage buffer
-new pc.BindStorageBufferFormat('particles', pc.SHADERSTAGE_COMPUTE)
+new BindStorageBufferFormat('particles', SHADERSTAGE_COMPUTE)
 
 // Read-only storage buffer
-new pc.BindStorageBufferFormat('spheres', pc.SHADERSTAGE_COMPUTE, true)
+new BindStorageBufferFormat('spheres', SHADERSTAGE_COMPUTE, true)
 ```
 
 In WGSL, access storage buffers like this:
@@ -53,7 +53,7 @@ In WGSL, access storage buffers like this:
 Storage textures allow the compute shader to write directly to a texture:
 
 ```javascript
-new pc.BindStorageTextureFormat('outTexture', pc.PIXELFORMAT_RGBA8, pc.TEXTUREDIMENSION_2D)
+new BindStorageTextureFormat('outTexture', PIXELFORMAT_RGBA8, TEXTUREDIMENSION_2D)
 ```
 
 In WGSL:
@@ -71,10 +71,10 @@ Input textures provide read-only texture data. The last parameter controls wheth
 
 ```javascript
 // Texture without sampler (for textureLoad)
-new pc.BindTextureFormat('inputTexture', pc.SHADERSTAGE_COMPUTE, undefined, undefined, false)
+new BindTextureFormat('inputTexture', SHADERSTAGE_COMPUTE, undefined, undefined, false)
 
 // Texture with sampler (for textureSampleLevel)
-new pc.BindTextureFormat('inputTexture', pc.SHADERSTAGE_COMPUTE, undefined, undefined, true)
+new BindTextureFormat('inputTexture', SHADERSTAGE_COMPUTE, undefined, undefined, true)
 ```
 
 In WGSL, when a sampler is included, it uses the texture name with a `_sampler` suffix:
@@ -101,19 +101,19 @@ In compute shaders, use `textureSampleLevel` instead of `textureSample` because 
 For passing uniform data to compute shaders, first define the uniform buffer format:
 
 ```javascript
-const uniformBufferFormat = new pc.UniformBufferFormat(device, [
-    new pc.UniformFormat('tint', pc.UNIFORMTYPE_VEC4),
-    new pc.UniformFormat('time', pc.UNIFORMTYPE_FLOAT),
-    new pc.UniformFormat('count', pc.UNIFORMTYPE_UINT)
+const uniformBufferFormat = new UniformBufferFormat(device, [
+    new UniformFormat('tint', UNIFORMTYPE_VEC4),
+    new UniformFormat('time', UNIFORMTYPE_FLOAT),
+    new UniformFormat('count', UNIFORMTYPE_UINT)
 ]);
 ```
 
 Then include it in the shader definition along with the bind group:
 
 ```javascript
-const shader = new pc.Shader(device, {
+const shader = new Shader(device, {
     name: 'ComputeShader',
-    shaderLanguage: pc.SHADERLANGUAGE_WGSL,
+    shaderLanguage: SHADERLANGUAGE_WGSL,
     cshader: shaderCode,
 
     // Assign the uniform buffer format
@@ -122,8 +122,8 @@ const shader = new pc.Shader(device, {
     },
 
     // Include uniform buffer in bind group
-    computeBindGroupFormat: new pc.BindGroupFormat(device, [
-        new pc.BindUniformBufferFormat('ub', pc.SHADERSTAGE_COMPUTE),
+    computeBindGroupFormat: new BindGroupFormat(device, [
+        new BindUniformBufferFormat('ub', SHADERSTAGE_COMPUTE),
         // ... other bindings
     ])
 });

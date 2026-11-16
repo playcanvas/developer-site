@@ -29,10 +29,10 @@ const lines = entity.script.create(GsplatLines);
 
 // Add primitives
 const lineHandle = lines.addLine(
-    new pc.Vec3(0, 0, 0),
-    new pc.Vec3(1, 1, 1),
-    new pc.Color(1, 0, 0),  // Start color (red)
-    new pc.Color(0, 0, 1),  // End color (blue)
+    new Vec3(0, 0, 0),
+    new Vec3(1, 1, 1),
+    new Color(1, 0, 0),  // Start color (red)
+    new Color(0, 0, 1),  // End color (blue)
     0.05                     // Thickness
 );
 
@@ -48,10 +48,10 @@ Adds a line with gradient color from start to end.
 
 ```javascript
 const handle = lines.addLine(
-    new pc.Vec3(0, 0, 0),
-    new pc.Vec3(1, 0, 0),
-    new pc.Color(1, 0, 0),
-    new pc.Color(0, 1, 0),
+    new Vec3(0, 0, 0),
+    new Vec3(1, 0, 0),
+    new Color(1, 0, 0),
+    new Color(0, 1, 0),
     0.02
 );
 ```
@@ -62,9 +62,9 @@ Adds a line with a single color.
 
 ```javascript
 const handle = lines.addLineSimple(
-    new pc.Vec3(0, 0, 0),
-    new pc.Vec3(1, 0, 0),
-    new pc.Color(1, 1, 0),
+    new Vec3(0, 0, 0),
+    new Vec3(1, 0, 0),
+    new Color(1, 1, 0),
     0.02
 );
 ```
@@ -75,9 +75,9 @@ Adds an arrow with a pyramid-shaped head.
 
 ```javascript
 const handle = lines.addArrow(
-    new pc.Vec3(0, 0, 0),
-    new pc.Vec3(0, 1, 0),
-    new pc.Color(0, 1, 0),
+    new Vec3(0, 0, 0),
+    new Vec3(0, 1, 0),
+    new Color(0, 1, 0),
     0.02,
     0.1  // Optional head size (default: thickness * 9)
 );
@@ -89,9 +89,9 @@ Adds an axis-aligned bounding box as a wireframe.
 
 ```javascript
 const handle = lines.addAABB(
-    new pc.Vec3(-1, -1, -1),
-    new pc.Vec3(1, 1, 1),
-    new pc.Color(1, 1, 0),
+    new Vec3(-1, -1, -1),
+    new Vec3(1, 1, 1),
+    new Color(1, 1, 0),
     0.01
 );
 ```

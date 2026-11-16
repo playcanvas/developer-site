@@ -5,7 +5,7 @@ In AR, the rendered image is projected over the reconstructed camera texture on 
 To request access to the camera color, the session should be started with an extra flag:
 
 ```javascript
-app.xr.start(camera, pc.XRTYPE_AR, pc.XRSPACE_LOCALFLOOR, {
+app.xr.start(camera, XRTYPE_AR, XRSPACE_LOCALFLOOR, {
     cameraColor: true
 });
 ```
@@ -37,7 +37,7 @@ For a monoscopic device, we can access its view and its texture:
 ```javascript
 app.xr.on('start', () => {
     app.xr.views.on('add', (view) => {
-        if (view.eye === pc.XREYE_NONE) { // monoscopic view
+        if (view.eye === XREYE_NONE) { // monoscopic view
             if (view.textureColor) {
                 // camera color texture is available
             }

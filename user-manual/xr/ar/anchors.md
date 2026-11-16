@@ -9,7 +9,7 @@ Each anchor is represented as a position and orientation and can be created from
 To start using anchors, when a session is requested, a flag should be provided to the session:
 
 ```javascript
-app.xr.start(camera, pc.XRTYPE_AR, pc.XRSPACE_LOCALFLOOR, {
+app.xr.start(camera, XRTYPE_AR, XRSPACE_LOCALFLOOR, {
     anchors: true
 });
 ```
@@ -52,7 +52,7 @@ Anchors can be added and removed dynamically during the session:
 
 ```javascript
 app.xr.anchors.on('add', (anchor) => {
-    const entity = new pc.Entity();
+    const entity = new Entity();
 
     // add a cone for an anchor
     entity.addComponent('render', { type: 'cone' });

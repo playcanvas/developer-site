@@ -88,7 +88,7 @@ for (const geometry of geometries) {
 }
 
 // Create the combined mesh
-const mesh = new pc.Mesh(app.graphicsDevice);
+const mesh = new Mesh(app.graphicsDevice);
 mesh.setPositions(positions);
 mesh.setIndices(indices);
 mesh.update();
@@ -99,7 +99,7 @@ mesh.update();
 Use `MeshInstance.setMultiDraw()` to allocate draw commands and populate them:
 
 ```javascript
-const meshInst = new pc.MeshInstance(mesh, material);
+const meshInst = new MeshInstance(mesh, material);
 
 // Allocate multi-draw with max number of sub-draws
 const cmd = meshInst.setMultiDraw(null, subDraws.length);
@@ -154,8 +154,8 @@ const matrices = new Float32Array(totalInstances * 16);
 // ... populate matrices ...
 
 // Create instancing vertex buffer
-const vbFormat = pc.VertexFormat.getDefaultInstancingFormat(app.graphicsDevice);
-const vb = new pc.VertexBuffer(app.graphicsDevice, vbFormat, totalInstances, {
+const vbFormat = VertexFormat.getDefaultInstancingFormat(app.graphicsDevice);
+const vb = new VertexBuffer(app.graphicsDevice, vbFormat, totalInstances, {
     data: matrices
 });
 meshInst.setInstancing(vb);
@@ -177,26 +177,26 @@ WebGL2 does not support `firstInstance`. To achieve the same result on both plat
 ```javascript
 if (app.graphicsDevice.isWebGL2 && app.graphicsDevice.supportsMultiDraw) {
     // Store matrices in a texture
-    const matricesTexture = new pc.Texture(app.graphicsDevice, {
+    const matricesTexture = new Texture(app.graphicsDevice, {
         width: totalInstances * 4,  // 4 vec4s per matrix
         height: 1,
-        format: pc.PIXELFORMAT_RGBA32F,
-        minFilter: pc.FILTER_NEAREST,
-        magFilter: pc.FILTER_NEAREST,
+        format: PIXELFORMAT_RGBA32F,
+        minFilter: FILTER_NEAREST,
+        magFilter: FILTER_NEAREST,
         mipmaps: false,
         levels: [matrices]
     });
 
     // Use custom vertex format with instance ID
-    const vbFormat = new pc.VertexFormat(app.graphicsDevice, [{
-        semantic: pc.SEMANTIC_ATTR11,
+    const vbFormat = new VertexFormat(app.graphicsDevice, [{
+        semantic: SEMANTIC_ATTR11,
         components: 1,
-        type: pc.TYPE_INT32,
+        type: TYPE_INT32,
         asInt: true
     }]);
 
     // Override the instancing shader chunk
-    material.setAttribute('aInstanceId', pc.SEMANTIC_ATTR11);
+    material.setAttribute('aInstanceId', SEMANTIC_ATTR11);
     material.setParameter('uDrawOffsets[0]', drawOffsets);
     material.setParameter('uInstanceMatrices', matricesTexture);
     material.shaderChunks.glsl.set('transformInstancingVS', customShaderCode);

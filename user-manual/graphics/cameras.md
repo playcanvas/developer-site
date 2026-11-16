@@ -10,9 +10,9 @@ You need at least one enabled camera in your scene to see anything. Beyond that 
 
 ```javascript
 // Create an entity with a camera component
-const camera = new pc.Entity('Camera');
+const camera = new Entity('Camera');
 camera.addComponent('camera', {
-    clearColor: new pc.Color(0.3, 0.3, 0.7)
+    clearColor: new Color(0.3, 0.3, 0.7)
 });
 app.root.addChild(camera);
 

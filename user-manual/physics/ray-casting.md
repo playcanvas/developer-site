@@ -25,8 +25,8 @@ function pick(screenX, screenY) {
     }
 }
 
-app.mouse.on(pc.EVENT_MOUSEDOWN, (event) => pick(event.x, event.y));
-app.touch?.on(pc.EVENT_TOUCHSTART, (event) => pick(event.touches[0].x, event.touches[0].y));
+app.mouse.on(EVENT_MOUSEDOWN, (event) => pick(event.x, event.y));
+app.touch?.on(EVENT_TOUCHSTART, (event) => pick(event.touches[0].x, event.touches[0].y));
 ```
 
 In the Editor this lives in a script on the camera entity, where `this.app` and `this.entity` stand in for `app` and `cameraEntity`; the [Entity picking using physics](https://developer.playcanvas.com/tutorials/entity-picking-using-physics/) tutorial has the complete script. In React, `useApp()` returns the application; in Web Components, `whenReady('pc-app')` does. See [Moving Bodies](https://developer.playcanvas.com/user-manual/physics/forces-and-impulses.md#running-physics-code) for those patterns.
@@ -85,7 +85,7 @@ Ray casting has other applications too. An entity can probe its surroundings by 
 
 ```javascript
 const from = player.getPosition();
-const to = new pc.Vec3(from.x, from.y - 1.1, from.z);
+const to = new Vec3(from.x, from.y - 1.1, from.z);
 const hit = app.systems.rigidbody.raycastFirst(from, to, {
     filterCallback: (entity) => entity !== player
 });

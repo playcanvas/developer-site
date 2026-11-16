@@ -6,7 +6,7 @@ Before starting the AR session, you need to provide an element as a root to the 
 
 ```javascript
 app.xr.domOverlay.root = element;
-app.xr.start(camera, pc.XRTYPE_AR, pc.XRSPACE_LOCALFLOOR);
+app.xr.start(camera, XRTYPE_AR, XRSPACE_LOCALFLOOR);
 ```
 
 ## Support

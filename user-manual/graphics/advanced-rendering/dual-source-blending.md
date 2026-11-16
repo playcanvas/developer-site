@@ -41,16 +41,16 @@ Dual-source blending is enabled automatically when a material's [`BlendState`](h
 First, override the `outputPS` chunk to write the primary and secondary fragment outputs. Supply both GLSL and WGSL versions when supporting both graphics backends:
 
 ```javascript
-const material = new pc.StandardMaterial();
+const material = new StandardMaterial();
 material.useLighting = false;
 material.useTonemap = false;
 
-material.getShaderChunks(pc.SHADERLANGUAGE_GLSL).set('outputPS', `
+material.getShaderChunks(SHADERLANGUAGE_GLSL).set('outputPS', `
     gl_FragColor = vec4(0.45, 0.02, 0.02, 0.0);
     pcFragColorSecondary = vec4(0.0, 0.85, 0.18, 1.0);
 `);
 
-material.getShaderChunks(pc.SHADERLANGUAGE_WGSL).set('outputPS', `
+material.getShaderChunks(SHADERLANGUAGE_WGSL).set('outputPS', `
     output.color = vec4f(0.45, 0.02, 0.02, 0.0);
     output.colorSecondary = vec4f(0.0, 0.85, 0.18, 1.0);
 `);
@@ -59,14 +59,14 @@ material.getShaderChunks(pc.SHADERLANGUAGE_WGSL).set('outputPS', `
 Then configure the blend state. This example calculates `source0 + destination * source1` for RGB:
 
 ```javascript
-material.blendState = new pc.BlendState(
+material.blendState = new BlendState(
     true,
-    pc.BLENDEQUATION_ADD,
-    pc.BLENDMODE_ONE,
-    pc.BLENDMODE_SRC1_COLOR,
-    pc.BLENDEQUATION_ADD,
-    pc.BLENDMODE_ZERO,
-    pc.BLENDMODE_ONE
+    BLENDEQUATION_ADD,
+    BLENDMODE_ONE,
+    BLENDMODE_SRC1_COLOR,
+    BLENDEQUATION_ADD,
+    BLENDMODE_ZERO,
+    BLENDMODE_ONE
 );
 
 material.update();

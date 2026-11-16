@@ -27,7 +27,7 @@ The renderer is selected through the scene-wide GSplat settings on `app.scene.gs
 
 ```javascript
 // Request the GPU sorting renderer (WebGPU only; falls back to CPU sorting on WebGL)
-app.scene.gsplat.renderer = pc.GSPLAT_RENDERER_RASTER_GPU_SORT;
+app.scene.gsplat.renderer = GSPLAT_RENDERER_RASTER_GPU_SORT;
 ```
 
 The available options are:
@@ -39,7 +39,7 @@ The available options are:
 A renderer that requires WebGPU falls back to CPU sorting on WebGL devices. To find out which renderer is actually in effect after this fallback, read `currentRenderer`:
 
 ```javascript
-if (app.scene.gsplat.currentRenderer === pc.GSPLAT_RENDERER_RASTER_GPU_SORT) {
+if (app.scene.gsplat.currentRenderer === GSPLAT_RENDERER_RASTER_GPU_SORT) {
     // GPU sorting is active on this device
 }
 ```

@@ -17,7 +17,7 @@ Ideally, we want the best of both worlds where users on high-tier devices will r
 The Device pixel ratio can be changed at runtime via the property [`GraphicsDevice#maxPixelRatio`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#maxpixelratio):
 
 ```javascript
-const device = pc.Application.getApplication().graphicsDevice;
+const device = Application.getApplication().graphicsDevice;
 if (highTierDevice) {
     // Use the default device pixel ratio of the device
     device.maxPixelRatio = window.devicePixelRatio;
@@ -46,10 +46,10 @@ An example for mobile can be found below (correct at time of writing Thu 30 Jul 
 
 ```javascript
 function isLowQualityGPU() {
-    const renderer = pc.Application.getApplication().graphicsDevice.unmaskedRenderer;
+    const renderer = Application.getApplication().graphicsDevice.unmaskedRenderer;
 
     // Only check the GPU if we are on mobile
-    if (renderer && pc.platform.mobile) {
+    if (renderer && platform.mobile) {
         // low level GPU's
         if(renderer.search(/Adreno\D*3/) !== -1 ||
            renderer.search(/Adreno\D*4/) !== -1 ||
