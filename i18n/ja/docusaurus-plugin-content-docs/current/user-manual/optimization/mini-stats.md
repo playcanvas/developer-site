@@ -175,17 +175,16 @@ options.stats.push({
     watermark: 1000 / 60
 });
 
-// Primitive counts are available only in debug and profiler builds.
-if (app.stats.primitiveCount !== undefined) {
-    options.stats.push({
-        name: 'Primitives',
-        stats: ['primitiveCount'],
-        decimalPlaces: 1,
-        multiplier: 1 / 1000,
-        unitsName: 'k',
-        watermark: 500
-    });
-}
+// Primitive counts are collected only in debug builds; other builds show 0.
+// プリミティブ数はdebugビルドでのみ収集されます。他のビルドでは0と表示されます。
+options.stats.push({
+    name: 'Primitives',
+    stats: ['primitiveCount'],
+    decimalPlaces: 1,
+    multiplier: 1 / 1000,
+    unitsName: 'k',
+    watermark: 500
+});
 ```
 
 `miniStats.enabled = false`でオーバーレイを非表示にしてカウンターのサンプリングを停止するか、`miniStats.destroy()`でリソースを解放します。GPUプロファイリングはデバイス側の設定であり、オーバーレイを非表示または破棄しても無効にはなりません。他にGPU時間を必要とするものがなければ、プロファイラーが存在することを確認したうえで、`app.graphicsDevice.gpuProfiler.enabled = false`で別途無効にしてください。

@@ -47,9 +47,9 @@ The map reference is read-only, but its entries are writable. Each application h
 | Animation and physics | `cpuAnimationTime`, `cpuPhysicsTime` | All |
 | GPU frame | `gpuFrameTime` | All, when supported and enabled |
 | GPU resource memory | [GPU memory getters](#gpu-resource-memory) | All |
-| Primitives | `primitiveCount` | Debug and profiler only; `undefined` in release and minified builds |
+| Primitives | `primitiveCount` | Debug only; `0` in release, profiler and minified builds |
 
-For npm applications, use `playcanvas/debug` or `playcanvas/profiler` when you need primitive counting. Import the application and other engine classes consistently from the chosen build. CPU timings, draw calls, memory and supported GPU timings do not require switching away from a release build.
+For npm applications, use `playcanvas/debug` when you need primitive counting. Import the application and other engine classes consistently from the chosen build. CPU timings, draw calls, memory and supported GPU timings do not require switching away from a release build.
 
 `drawCallCount` counts draw commands submitted in the previous frame. `primitiveCount` counts submitted triangles, lines and points across all passes. Primitive counting includes instances and CPU-authored multi-draw commands, before GPU clipping and culling. It is an estimate from draw parameters: GPU-generated indirect draws are excluded, and primitive-restart indices in indexed strips are not inspected. It does not perform GPU readback. Use the API reference for each getter's exact scope.
 
@@ -130,7 +130,7 @@ const report = {
     cpuRenderAvgMs: 0,
     drawCallsAvg: 0,
     gpuLatestMs: null,
-    primitivesLatest: null,
+    primitivesLatest: 0,
     vramLatestMiB: 0
 };
 let elapsed = 0;
@@ -158,7 +158,7 @@ function sampleStats() {
     report.cpuRenderAvgMs = renderTotal / samples;
     report.drawCallsAvg = drawCallsTotal / samples;
     report.gpuLatestMs = stats.gpuFrameTime ?? null;
-    report.primitivesLatest = stats.primitiveCount ?? null;
+    report.primitivesLatest = stats.primitiveCount;
     report.vramLatestMiB = stats.vramTotalBytes / (1024 * 1024);
 
     // Serialize only when publishing; console output is optional instrumentation.
@@ -178,7 +178,7 @@ app.on('frameend', sampleStats);
 // app.off('frameend', sampleStats);
 ```
 
-The sampling path reuses its state without creating arrays or objects each frame. Serialization happens only when publishing. An unavailable GPU or primitive measurement is reported as `null`. The GPU value is not averaged here because repeated reads can refer to the same resolved GPU frame.
+The sampling path reuses its state without creating arrays or objects each frame. Serialization happens only when publishing. An unavailable GPU measurement is reported as `null`. The primitive count reads `0` outside debug builds. The GPU value is not averaged here because repeated reads can refer to the same resolved GPU frame.
 
 For a dashboard or agent integration, replace the console output with your own report consumer. If it retains reports, copy or serialize at publication time because the report object is reused. Keep instrumentation identical across runs; logging, rendering overlays and GPU queries can affect the measurements.
 

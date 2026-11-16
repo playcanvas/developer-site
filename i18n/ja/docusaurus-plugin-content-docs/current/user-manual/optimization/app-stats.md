@@ -47,9 +47,9 @@ Mapへの参照は読み取り専用ですが、エントリーは変更でき�
 | アニメーションと物理 | `cpuAnimationTime`、`cpuPhysicsTime` | すべて |
 | GPUフレーム | `gpuFrameTime` | サポートされ、有効になっている場合はすべて |
 | GPUリソースメモリ | [GPUメモリのgetter](#gpu-resource-memory) | すべて |
-| プリミティブ | `primitiveCount` | debugとprofilerのみ。releaseとminifiedでは`undefined` |
+| プリミティブ | `primitiveCount` | debugのみ。release、profiler、minifiedでは`0` |
 
-npmアプリケーションでプリミティブ数が必要な場合は、`playcanvas/debug`または`playcanvas/profiler`を使用します。アプリケーションとその他のエンジンクラスは、選択したビルドから一貫してインポートしてください。CPU時間、ドローコール、メモリ、サポートされているGPU時間の取得には、releaseビルドから切り替える必要はありません。
+npmアプリケーションでプリミティブ数が必要な場合は、`playcanvas/debug`を使用します。アプリケーションとその他のエンジンクラスは、選択したビルドから一貫してインポートしてください。CPU時間、ドローコール、メモリ、サポートされているGPU時間の取得には、releaseビルドから切り替える必要はありません。
 
 `drawCallCount`は、前のフレームで送信された描画コマンドを数えます。`primitiveCount`は、すべてのパスで送信された三角形、線、点を数えます。プリミティブ数には、GPUのクリッピングとカリングより前の、インスタンスとCPUで作成されたmulti-drawコマンドが含まれます。これは描画パラメーターからの推定値です。GPUが生成する間接描画は対象外であり、インデックス付きストリップのprimitive-restartインデックスは調べません。GPUからのリードバックも行いません。各getterの正確な対象範囲はAPIリファレンスを参照してください。
 
@@ -130,7 +130,7 @@ const report = {
     cpuRenderAvgMs: 0,
     drawCallsAvg: 0,
     gpuLatestMs: null,
-    primitivesLatest: null,
+    primitivesLatest: 0,
     vramLatestMiB: 0
 };
 let elapsed = 0;
@@ -158,7 +158,7 @@ function sampleStats() {
     report.cpuRenderAvgMs = renderTotal / samples;
     report.drawCallsAvg = drawCallsTotal / samples;
     report.gpuLatestMs = stats.gpuFrameTime ?? null;
-    report.primitivesLatest = stats.primitiveCount ?? null;
+    report.primitivesLatest = stats.primitiveCount;
     report.vramLatestMiB = stats.vramTotalBytes / (1024 * 1024);
 
     // Serialize only when publishing; console output is optional instrumentation.
@@ -178,7 +178,7 @@ app.on('frameend', sampleStats);
 // app.off('frameend', sampleStats);
 ```
 
-サンプリング処理は状態を再利用し、フレームごとに配列やオブジェクトを作成しません。シリアライズは出力時のみ行います。取得できないGPUまたはプリミティブの測定値は`null`で報告されます。同じ取得済みGPUフレームを繰り返し読み取る場合があるため、この例ではGPU値を平均しません。
+サンプリング処理は状態を再利用し、フレームごとに配列やオブジェクトを作成しません。シリアライズは出力時のみ行います。取得できないGPUの測定値は`null`で報告されます。プリミティブ数はdebugビルド以外では`0`になります。同じ取得済みGPUフレームを繰り返し読み取る場合があるため、この例ではGPU値を平均しません。
 
 ダッシュボードやエージェントに統合する場合は、コンソール出力を独自のレポート処理に置き換えてください。レポートオブジェクトは再利用されるため、受け手が保持する場合は出力時にコピーまたはシリアライズします。ログ、オーバーレイの描画、GPUクエリは測定値に影響するため、各実行で同じ計測条件を維持してください。
 

@@ -175,17 +175,15 @@ options.stats.push({
     watermark: 1000 / 60
 });
 
-// Primitive counts are available only in debug and profiler builds.
-if (app.stats.primitiveCount !== undefined) {
-    options.stats.push({
-        name: 'Primitives',
-        stats: ['primitiveCount'],
-        decimalPlaces: 1,
-        multiplier: 1 / 1000,
-        unitsName: 'k',
-        watermark: 500
-    });
-}
+// Primitive counts are collected only in debug builds; other builds show 0.
+options.stats.push({
+    name: 'Primitives',
+    stats: ['primitiveCount'],
+    decimalPlaces: 1,
+    multiplier: 1 / 1000,
+    unitsName: 'k',
+    watermark: 500
+});
 ```
 
 Set `miniStats.enabled = false` to hide the overlay and stop its counter sampling, or call `miniStats.destroy()` to release it. GPU profiling is a device setting: hiding or destroying the overlay does not turn it off. If nothing else needs GPU timings, disable it separately with `app.graphicsDevice.gpuProfiler.enabled = false` when that profiler exists.
