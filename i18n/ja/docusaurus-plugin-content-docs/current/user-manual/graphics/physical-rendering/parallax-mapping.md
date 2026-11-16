@@ -27,7 +27,7 @@ description: "高さマップで表面の凹凸を擬似的に表現する：off
 | `PARALLAX_OCCLUSION` | 視線レイを高さフィールドに沿って進め、表面より下に出る位置を求めます。深い凹凸が実際の深さとして見えますが、その分サンプル数が増えます。 |
 
 ```javascript
-material.parallaxMode = pc.PARALLAX_OCCLUSION;
+material.parallaxMode = PARALLAX_OCCLUSION;
 material.heightMapFactor = 0.5;
 material.update();
 ```
@@ -58,7 +58,7 @@ occlusion モードでは、`StandardMaterial#parallaxSamples` が視線レイ�
 `StandardMaterial#parallaxShadowSamples` は凹凸自身に影を落とします。シェーダーが視線レイの交点からライトの方向へ高さフィールドを進めるため、盛り上がったレンガがその横の目地を暗くします。デフォルトは 0 で、この場合は無効です。
 
 ```javascript
-material.parallaxMode = pc.PARALLAX_OCCLUSION;
+material.parallaxMode = PARALLAX_OCCLUSION;
 material.parallaxShadowSamples = 8;
 material.update();
 ```

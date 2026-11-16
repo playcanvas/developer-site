@@ -20,7 +20,7 @@ Varying ストリームは、スプラットごとのカスタムデータを[�
 
 ```javascript
 app.scene.gsplat.varyings.add([
-    { name: 'clipState', type: pc.TYPE_UINT32, components: 1 }
+    { name: 'clipState', type: TYPE_UINT32, components: 1 }
 ]);
 
 // later, to remove

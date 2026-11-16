@@ -76,7 +76,7 @@ To move elements to another layer, assign a new array to their `layers`. Changin
 A 3D model can be drawn over an interface in two ways. Render it into a texture that an image element shows, which keeps it in the interface's draw order and masks. See [Rendering 3D into an Image](/user-manual/user-interface/image-elements/#render-to-texture). Or put it on a layer after the UI layer that clears the depth buffer, so that the scene doesn't hide it:
 
 ```javascript
-const overUi = new pc.Layer({ name: 'Over UI', clearDepthBuffer: true });
+const overUi = new Layer({ name: 'Over UI', clearDepthBuffer: true });
 app.scene.layers.push(overUi);
 camera.camera.layers = [...camera.camera.layers, overUi.id];
 
@@ -90,7 +90,7 @@ World-space elements on the UI layer are drawn after the scene, and are depth-te
 ```javascript
 // A layer for world-space UI, drawn with the scene and in the hierarchy's order
 const worldLayer = app.scene.layers.getLayerByName('World');
-const worldUi = new pc.Layer({ name: 'World UI', transparentSortMode: pc.SORTMODE_MANUAL });
+const worldUi = new Layer({ name: 'World UI', transparentSortMode: SORTMODE_MANUAL });
 app.scene.layers.insertTransparent(worldUi, app.scene.layers.getTransparentIndex(worldLayer) + 1);
 camera.camera.layers = [...camera.camera.layers, worldUi.id];
 

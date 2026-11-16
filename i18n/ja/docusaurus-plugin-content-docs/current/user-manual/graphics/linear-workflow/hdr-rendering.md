@@ -61,8 +61,8 @@ PlayCanvas Engine は、High Dynamic Range (HDR) レンダリング、ブルー�
 ### カメラでの CameraFrame の設定
 
 ```javascript
-const cameraFrame = new pc.CameraFrame(app, cameraEntity.camera);
-cameraFrame.rendering.toneMapping = pc.TONEMAP_NEUTRAL;
+const cameraFrame = new CameraFrame(app, cameraEntity.camera);
+cameraFrame.rendering.toneMapping = TONEMAP_NEUTRAL;
 cameraFrame.rendering.samples = 4;
 cameraFrame.bloom.intensity = 0.01;
 cameraFrame.update();
@@ -73,7 +73,7 @@ cameraFrame.update();
 HDR bloomが効果的であるためには、シーンに明るい光源を含める必要があります。これは通常、高輝度の放射マテリアルを使用することで実現されます。例：
 
 ```javascript
-material.emissive = pc.Color.YELLOW;
+material.emissive = Color.YELLOW;
 material.emissiveIntensity = 50;
 ```
 
@@ -98,7 +98,7 @@ LUT テクスチャは以下の設定で読み込む必要があります。LUT 
 - `minfilter: 'linear'`、`magfilter: 'linear'` — LUT エントリ間のバイリニアフィルタリングによるバンディングの防止
 
 ```javascript
-const lutAsset = new pc.Asset(
+const lutAsset = new Asset(
     'colorLut',
     'texture',
     { url: 'path/to/lut.png' },

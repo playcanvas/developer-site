@@ -18,7 +18,7 @@ PlayCanvasの物理演算は、オープンソースのBullet物理エンジン�
 アプリケーションを作成する前にモジュールを読み込みます。3つのファイルは、エンジンリポジトリの`examples/assets/wasm/ammo/`と[sync-ammo](https://www.npmjs.com/package/sync-ammo) npmパッケージに同梱されています。
 
 ```javascript
-pc.WasmModule.setConfig('Ammo', {
+WasmModule.setConfig('Ammo', {
     glueUrl: 'ammo/ammo.wasm.js',
     wasmUrl: 'ammo/ammo.wasm.wasm',
     fallbackUrl: 'ammo/ammo.js'
@@ -26,10 +26,10 @@ pc.WasmModule.setConfig('Ammo', {
 
 // モジュールを待ってから、通常どおりアプリケーションを作成する
 await new Promise((resolve) => {
-    pc.WasmModule.getInstance('Ammo', () => resolve());
+    WasmModule.getInstance('Ammo', () => resolve());
 });
 
-const app = new pc.Application(canvas);
+const app = new Application(canvas);
 ```
 
 アプリケーションの開始時にRigidBodyシステムが`Ammo`グローバルを見つけ、ammo.jsバックエンドをインストールします。`Application`はすべてのコンポーネントシステムを登録します。代わりに`AppBase`と`AppOptions`から構築する場合は、`CollisionComponentSystem`と`RigidBodyComponentSystem`（[ジョイント](/user-manual/physics/joints/)を使うなら`JointComponentSystem`も）を`componentSystems`に追加してください。[Falling Shapes](https://playcanvas.github.io/#/physics/falling-shapes)の例に完全な手順があります。
@@ -99,7 +99,7 @@ import { Application } from '@playcanvas/react';
 
 ```javascript
 // 月の重力。古い setGravity() メソッドは非推奨で、このプロパティに置き換えられている。
-app.systems.rigidbody.gravity = new pc.Vec3(0, -1.62, 0);
+app.systems.rigidbody.gravity = new Vec3(0, -1.62, 0);
 ```
 
 </TabItem>

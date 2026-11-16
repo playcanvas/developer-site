@@ -59,7 +59,7 @@ app.graphicsDevice.maxIndirectDrawCount = 2048;
 const meshMetaData = meshInstance.getIndirectMetaData();
 
 // レンダリングパラメーターを制御するコンピュートシェーダーを作成
-const compute = new pc.Compute(device, shader, 'IndirectDrawCompute');
+const compute = new Compute(device, shader, 'IndirectDrawCompute');
 compute.setParameter('indirectMetaData', meshMetaData);
 compute.setParameter('indirectDrawBuffer', app.graphicsDevice.indirectDrawBuffer);
 compute.setParameter('indirectSlot', indirectSlot);

@@ -60,8 +60,8 @@ import TabItem from '@theme/TabItem';
 <TabItem value="engine" label="Engine">
 
 ```javascript
-const english = new pc.Asset('en-US', 'json', { url: 'localization/en-US.json' });
-const french = new pc.Asset('fr-FR', 'json', { url: 'localization/fr-FR.json' });
+const english = new Asset('en-US', 'json', { url: 'localization/en-US.json' });
+const french = new Asset('fr-FR', 'json', { url: 'localization/fr-FR.json' });
 app.assets.add(english);
 app.assets.add(french);
 
@@ -159,9 +159,9 @@ app.i18n.on('change', (locale, previous) => {
 <TabItem value="engine" label="Engine">
 
 ```javascript
-const heading = new pc.Entity('heading');
+const heading = new Entity('heading');
 heading.addComponent('element', {
-    type: pc.ELEMENTTYPE_TEXT,
+    type: ELEMENTTYPE_TEXT,
     fontAsset: font.id,
     key: 'title',
     anchor: [0.5, 1, 0.5, 1],

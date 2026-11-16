@@ -102,8 +102,8 @@ description: コンパイル前に GLSL、WGSL、コンピュートシェーダ�
 
 ```javascript
 // Get the shader chunks for each language
-const chunksGLSL = pc.ShaderChunks.get(device, pc.SHADERLANGUAGE_GLSL);
-const chunksWGSL = pc.ShaderChunks.get(device, pc.SHADERLANGUAGE_WGSL);
+const chunksGLSL = ShaderChunks.get(device, SHADERLANGUAGE_GLSL);
+const chunksWGSL = ShaderChunks.get(device, SHADERLANGUAGE_WGSL);
 
 // Register your custom chunk in both languages
 chunksGLSL.set('myUtilsPS', `
@@ -218,7 +218,7 @@ material.setDefine('MAX_LIGHTS', '4');
 `ShaderUtils.createShader()` で、define 付きの頂点／フラグメントシェーダーを作成します。
 
 ```javascript
-const shader = pc.ShaderUtils.createShader(device, {
+const shader = ShaderUtils.createShader(device, {
     uniqueName: 'MyShader',
     vertexGLSL: vertexCodeGLSL,
     vertexWGSL: vertexCodeWGSL,
@@ -234,9 +234,9 @@ const shader = pc.ShaderUtils.createShader(device, {
 コンピュートシェーダーは `Shader` クラスで直接作成します。
 
 ```javascript
-const shader = new pc.Shader(device, {
+const shader = new Shader(device, {
     name: 'MyComputeShader',
-    shaderLanguage: pc.SHADERLANGUAGE_WGSL,
+    shaderLanguage: SHADERLANGUAGE_WGSL,
     cshader: computeCode,
     cincludes: includesMap,  // Custom includes for compute shader
     cdefines: definesMap     // Defines for compute shader
@@ -257,7 +257,7 @@ const includesMap = new Map([
 Engine が提供するチャンクも使えます。
 
 ```javascript
-cincludes: pc.ShaderChunks.get(device, pc.SHADERLANGUAGE_WGSL)
+cincludes: ShaderChunks.get(device, SHADERLANGUAGE_WGSL)
 ```
 
 ### defines マップ

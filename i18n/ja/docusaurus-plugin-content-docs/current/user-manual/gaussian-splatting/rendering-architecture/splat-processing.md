@@ -35,7 +35,7 @@ Gaussian Splatsは、スプラットごとの属性（位置、回転、スケ�
 ソース（スプラットデータの読み取り元）、宛先（書き込み先のストリーム）、各スプラットを処理するシェーダーコードを指定してプロセッサを作成します：
 
 ```javascript
-const processor = new pc.GSplatProcessor(
+const processor = new GSplatProcessor(
     app.graphicsDevice,
     { component: entity.gsplat },                           // ソース
     { component: entity.gsplat, streams: ['customColor'] }, // 宛先
@@ -88,7 +88,7 @@ processor.process();
 ## コンストラクタ
 
 ```javascript
-new pc.GSplatProcessor(device, source, destination, options)
+new GSplatProcessor(device, source, destination, options)
 ```
 
 **パラメータ：**
@@ -231,7 +231,7 @@ processor.setParameter('uBrushTex', brushTexture);
 ブレンドステートを設定するためのプロパティ（加算ペイントのような累積エフェクトに便利）：
 
 ```javascript
-processor.blendState = pc.BlendState.ADDBLEND;
+processor.blendState = BlendState.ADDBLEND;
 ```
 
 ## ユースケース

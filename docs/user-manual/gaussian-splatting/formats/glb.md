@@ -40,7 +40,7 @@ splat-transform scene.ply scene.glb
 Splat GLB files load as **container** assets (like any other glTF content), not as `gsplat` assets:
 
 ```javascript
-const asset = new pc.Asset('scene', 'container', { url: 'scene.glb' });
+const asset = new Asset('scene', 'container', { url: 'scene.glb' });
 app.assets.add(asset);
 app.assets.load(asset);
 

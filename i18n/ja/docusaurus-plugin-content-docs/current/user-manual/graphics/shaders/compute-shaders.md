@@ -32,9 +32,9 @@ if (device.supportsCompute) {
 ### 基本的なシェーダー定義
 
 ```javascript
-const shader = new pc.Shader(device, {
+const shader = new Shader(device, {
     name: 'MyComputeShader',
-    shaderLanguage: pc.SHADERLANGUAGE_WGSL,
+    shaderLanguage: SHADERLANGUAGE_WGSL,
     cshader: `
         // 簡略化された構文で宣言されたリソースは自動的に反映されます -
         // computeBindGroupFormat は不要です
@@ -75,16 +75,16 @@ const shaderSource = `
 `;
 
 // 同じソースから、それぞれ異なるエントリポイントを使用して別々のシェーダーを作成
-const initShader = new pc.Shader(device, {
+const initShader = new Shader(device, {
     name: 'InitParticles',
-    shaderLanguage: pc.SHADERLANGUAGE_WGSL,
+    shaderLanguage: SHADERLANGUAGE_WGSL,
     cshader: shaderSource,
     computeEntryPoint: 'initParticles'
 });
 
-const updateShader = new pc.Shader(device, {
+const updateShader = new Shader(device, {
     name: 'UpdateParticles',
-    shaderLanguage: pc.SHADERLANGUAGE_WGSL,
+    shaderLanguage: SHADERLANGUAGE_WGSL,
     cshader: shaderSource,
     computeEntryPoint: 'updateParticles'
 });
@@ -95,7 +95,7 @@ const updateShader = new pc.Shader(device, {
 `Compute`クラスは、関連するパラメータを持つコンピュートシェーダーの実行可能なインスタンスを表します：
 
 ```javascript
-const compute = new pc.Compute(device, shader, 'MyComputeInstance');
+const compute = new Compute(device, shader, 'MyComputeInstance');
 ```
 
 ## パラメータの設定 {#setting-parameters}
@@ -121,11 +121,11 @@ compute.setParameter('tint', [1.0, 0.5, 0.0, 1.0]);
 ストレージバッファは、コンピュートシェーダーが読み書きできるデータを保持します：
 
 ```javascript
-const storageBuffer = new pc.StorageBuffer(
+const storageBuffer = new StorageBuffer(
     device,
     bufferSizeInBytes,
-    pc.BUFFERUSAGE_COPY_SRC |  // CPUへの読み戻しを有効化
-    pc.BUFFERUSAGE_COPY_DST    // CPUからの書き込みを有効化
+    BUFFERUSAGE_COPY_SRC |  // CPUへの読み戻しを有効化
+    BUFFERUSAGE_COPY_DST    // CPUからの書き込みを有効化
 );
 
 // 初期データを書き込み
@@ -141,14 +141,14 @@ storageBuffer.clear();
 ストレージテクスチャは`storage: true`オプションで作成されます：
 
 ```javascript
-const storageTexture = new pc.Texture(device, {
+const storageTexture = new Texture(device, {
     name: 'StorageTexture',
     width: 512,
     height: 512,
-    format: pc.PIXELFORMAT_RGBA8,
+    format: PIXELFORMAT_RGBA8,
     mipmaps: false,
-    minFilter: pc.FILTER_LINEAR,
-    magFilter: pc.FILTER_LINEAR,
+    minFilter: FILTER_LINEAR,
+    magFilter: FILTER_LINEAR,
     storage: true  // ストレージテクスチャとして有効化
 });
 ```
@@ -183,7 +183,7 @@ device.computeDispatch([compute1, compute2], 'BatchedDispatch');
 
 ```javascript
 const computes = [0.25, 0.5].map((strength) => {
-    const compute = new pc.Compute(device, shader, `Blur-${strength}`);
+    const compute = new Compute(device, shader, `Blur-${strength}`);
     compute.setParameter('strength', strength);
     compute.setupDispatch(width, height);
     return compute;
@@ -318,7 +318,7 @@ device.computeDispatch([processCompute]);
 
 ```javascript
 // 間接ディスパッチ用のカスタムバッファを作成
-const customBuffer = new pc.StorageBuffer(device, 3 * 4, pc.BUFFERUSAGE_INDIRECT);
+const customBuffer = new StorageBuffer(device, 3 * 4, BUFFERUSAGE_INDIRECT);
 
 // 間接ディスパッチにカスタムバッファを使用
 compute.setupIndirectDispatch(0, customBuffer);
@@ -471,9 +471,9 @@ fn main(@builtin(global_invocation_id) global_id: vec3u) {
 `cdefines`を使用して定義を渡し、`cincludes`を使用してインクルードコンテンツを提供します：
 
 ```javascript
-const shader = new pc.Shader(device, {
+const shader = new Shader(device, {
     name: 'ComputeShader',
-    shaderLanguage: pc.SHADERLANGUAGE_WGSL,
+    shaderLanguage: SHADERLANGUAGE_WGSL,
     cshader: `
         #include "myHelper"
 
@@ -486,7 +486,7 @@ const shader = new pc.Shader(device, {
     cdefines: new Map([
         ['{WORKGROUP_SIZE}', '64']
     ]),
-    cincludes: pc.ShaderChunks.get(device, pc.SHADERLANGUAGE_WGSL)
+    cincludes: ShaderChunks.get(device, SHADERLANGUAGE_WGSL)
 });
 ```
 

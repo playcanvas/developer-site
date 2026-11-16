@@ -12,7 +12,7 @@ description: "PlayCanvasでのWebXRアンカー: 安定したワールド固定�
 アンカーの使用を開始するには、セッションがリクエストされた際に、そのセッションにフラグを提供する必要があります。
 
 ```javascript
-app.xr.start(camera, pc.XRTYPE_AR, pc.XRSPACE_LOCALFLOOR, {
+app.xr.start(camera, XRTYPE_AR, XRSPACE_LOCALFLOOR, {
     anchors: true
 });
 ```
@@ -55,7 +55,7 @@ app.xr.anchors.create(position, rotation, (err, anchor) => {
 
 ```javascript
 app.xr.anchors.on('add', (anchor) => {
-    const entity = new pc.Entity();
+    const entity = new Entity();
 
     // アンカー用にコーンを追加
     entity.addComponent('render', { type: 'cone' });

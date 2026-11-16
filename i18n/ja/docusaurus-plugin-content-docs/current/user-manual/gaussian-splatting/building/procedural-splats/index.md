@@ -40,7 +40,7 @@ description: "GSplatContainerのプロシージャルスプラット：CPUとGPU
 | `dataRotation` | RGBA16F | 回転クォータニオン（x, y, z, w）をhalf floatとして |
 
 ```javascript
-const format = pc.GSplatFormat.createDefaultFormat(device);
+const format = GSplatFormat.createDefaultFormat(device);
 ```
 
 #### シンプルフォーマット
@@ -53,7 +53,7 @@ const format = pc.GSplatFormat.createDefaultFormat(device);
 | `dataColor` | RGBA16F | 色（r, g, b, a）をhalf floatとして |
 
 ```javascript
-const format = pc.GSplatFormat.createSimpleFormat(device);
+const format = GSplatFormat.createSimpleFormat(device);
 ```
 
 このフォーマットは、`GsplatMesh`、`GsplatImage`、`GsplatLines`などの[ヘルパースクリプト](#ヘルパースクリプト)に最適です。
@@ -65,7 +65,7 @@ const format = pc.GSplatFormat.createSimpleFormat(device);
 #### コンストラクタ
 
 ```javascript
-const format = new pc.GSplatFormat(device, streams, options);
+const format = new GSplatFormat(device, streams, options);
 ```
 
 **パラメータ：**
@@ -97,8 +97,8 @@ const format = new pc.GSplatFormat(device, streams, options);
 この例では、単一のRGBA8テクスチャとインスタンスごとのカラーグラデーション用のカスタムユニフォームを持つフォーマットを作成します：
 
 ```javascript
-const format = new pc.GSplatFormat(device, [
-    { name: 'data', format: pc.PIXELFORMAT_RGBA8 }
+const format = new GSplatFormat(device, [
+    { name: 'data', format: PIXELFORMAT_RGBA8 }
 ], {
     readGLSL: `
         uniform vec3 uTint;
@@ -149,17 +149,17 @@ const format = new pc.GSplatFormat(device, [
 
 ```javascript
 // 均一スケールスプラット用のシンプルフォーマット（回転なし）
-const format = pc.GSplatFormat.createSimpleFormat(device);
+const format = GSplatFormat.createSimpleFormat(device);
 
 // または完全なスプラットデータを持つデフォルトフォーマット
-const format = pc.GSplatFormat.createDefaultFormat(device);
+const format = GSplatFormat.createDefaultFormat(device);
 ```
 
 ### 2. コンテナの作成
 
 ```javascript
 const maxSplats = 1000;
-const container = new pc.GSplatContainer(device, maxSplats, format);
+const container = new GSplatContainer(device, maxSplats, format);
 ```
 
 ### 3. テクスチャデータの入力
@@ -184,10 +184,10 @@ for (let i = 0; i < numSplats; i++) {
     centerData[i * 4 + 3] = size;
 
     // half-floatとしての色（FloatPackingヘルパーを使用）
-    colorData[i * 4 + 0] = pc.FloatPacking.float2Half(r);
-    colorData[i * 4 + 1] = pc.FloatPacking.float2Half(g);
-    colorData[i * 4 + 2] = pc.FloatPacking.float2Half(b);
-    colorData[i * 4 + 3] = pc.FloatPacking.float2Half(a);
+    colorData[i * 4 + 0] = FloatPacking.float2Half(r);
+    colorData[i * 4 + 1] = FloatPacking.float2Half(g);
+    colorData[i * 4 + 2] = FloatPacking.float2Half(b);
+    colorData[i * 4 + 3] = FloatPacking.float2Half(a);
 }
 
 // 完了したらアンロック
@@ -209,9 +209,9 @@ for (let i = 0; i < numSplats; i++) {
 }
 
 // バウンディングボックスを設定
-container.aabb = new pc.BoundingBox(
-    new pc.Vec3(centerX, centerY, centerZ),
-    new pc.Vec3(halfExtentX, halfExtentY, halfExtentZ)
+container.aabb = new BoundingBox(
+    new Vec3(centerX, centerY, centerZ),
+    new Vec3(halfExtentX, halfExtentY, halfExtentZ)
 );
 ```
 

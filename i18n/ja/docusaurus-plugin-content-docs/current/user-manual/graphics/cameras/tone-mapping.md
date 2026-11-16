@@ -25,7 +25,7 @@ HDRライティングを使用する物理ベースのシーンでは、通常 `
 <TabItem value="engine" label="Engine">
 
 ```javascript
-camera.camera.toneMapping = pc.TONEMAP_ACES;
+camera.camera.toneMapping = TONEMAP_ACES;
 ```
 
 </TabItem>

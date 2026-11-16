@@ -10,7 +10,7 @@ import { visit } from 'unist-util-visit';
  * ```
  *
  * ```js live-example
- * import * as pc from 'playcanvas';
+ * import { AppBase, Entity } from 'playcanvas';
  * ...
  * ```
  *

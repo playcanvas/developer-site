@@ -25,9 +25,9 @@ Every WebXR experience on PlayCanvas will always have these two elements in some
 ```javascript
 button.element.on('click', function() {
     // check support for VR
-    if (app.xr.isAvailable(pc.XRTYPE_VR)) {
+    if (app.xr.isAvailable(XRTYPE_VR)) {
         // start VR session
-        cameraEntity.camera.startXr(pc.XRTYPE_VR, pc.XRSPACE_LOCALFLOOR);
+        cameraEntity.camera.startXr(XRTYPE_VR, XRSPACE_LOCALFLOOR);
     }
 });
 ```

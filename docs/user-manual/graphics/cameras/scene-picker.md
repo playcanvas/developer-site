@@ -10,7 +10,7 @@ The Picker class provides a way to select mesh instances from screen coordinates
 To create a picker, instantiate it with your application, desired resolution, and optionally enable depth picking:
 
 ```javascript
-const picker = new pc.Picker(app, width, height, depth);
+const picker = new Picker(app, width, height, depth);
 ```
 
 The basic workflow involves three steps:
@@ -28,7 +28,7 @@ For complete API documentation, see the [Picker API reference](https://api.playc
 By default, the picker only captures mesh instance IDs. However, you can enable depth picking by passing `true` as the fourth constructor parameter:
 
 ```javascript
-const picker = new pc.Picker(app, width, height, true);
+const picker = new Picker(app, width, height, true);
 ```
 
 When depth picking is enabled, the picker captures depth values along with mesh IDs. This additional information enables calculating the exact 3D world position of clicked points on object surfaces, which is useful for placing objects, measuring distances, or creating editor tools.
@@ -59,7 +59,7 @@ The picker's performance can be optimized in several ways:
 
 ```javascript
 const pickerScale = 0.25;
-const picker = new pc.Picker(
+const picker = new Picker(
     app,
     canvas.width * pickerScale,
     canvas.height * pickerScale,

@@ -113,7 +113,7 @@ const format = entity.gsplat.resource.format;
 ```javascript
 // すべてのインスタンス間で共有されるストリームを追加
 resource.format.addExtraStreams([
-    { name: 'customData', format: pc.PIXELFORMAT_RGBA8 }
+    { name: 'customData', format: PIXELFORMAT_RGBA8 }
 ]);
 
 // 共有テクスチャにアクセス
@@ -127,7 +127,7 @@ const texture = resource.streams.getTexture('customData');
 ```javascript
 // インスタンスごとのストリームを追加
 resource.format.addExtraStreams([
-    { name: 'instanceTint', format: pc.PIXELFORMAT_RGBA8, storage: pc.GSPLAT_STREAM_INSTANCE }
+    { name: 'instanceTint', format: PIXELFORMAT_RGBA8, storage: GSPLAT_STREAM_INSTANCE }
 ]);
 
 // コンポーネント経由でインスタンステクスチャにアクセス

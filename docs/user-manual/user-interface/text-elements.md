@@ -16,13 +16,13 @@ A text element draws a string with a [font asset](/user-manual/user-interface/fo
 <TabItem value="engine" label="Engine">
 
 ```javascript
-const title = new pc.Entity('title');
+const title = new Entity('title');
 title.addComponent('element', {
-    type: pc.ELEMENTTYPE_TEXT,
+    type: ELEMENTTYPE_TEXT,
     fontAsset: font.id,
     text: 'Game Over',
     fontSize: 64,
-    color: new pc.Color(1, 0.55, 0.2),
+    color: new Color(1, 0.55, 0.2),
     anchor: [0.5, 0.5, 0.5, 0.5],
     pivot: [0.5, 0.5]
 });
@@ -87,7 +87,7 @@ Text wraps onto new lines when **Wrap Lines** is on and the element has a width 
 paragraph.element.autoWidth = false;
 paragraph.element.width = 400;
 paragraph.element.wrapLines = true;
-paragraph.element.pivot = new pc.Vec2(0.5, 1);
+paragraph.element.pivot = new Vec2(0.5, 1);
 ```
 
 `maxLines` limits the number of lines. The text beyond the limit is not cut off: it continues on the last line, past the edge of the element, so combine a line limit with [shrinking to fit](#shrinking-to-fit), or crop the overflow with a [mask](/user-manual/user-interface/masks/). After the text is laid out, `lines` holds it as an array with one string per line.

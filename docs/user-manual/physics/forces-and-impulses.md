@@ -22,7 +22,7 @@ Subscribe to the application's `update` event, or attach a Script to the entity 
 ```javascript
 app.on('update', (dt) => {
     // While the right arrow key is held, push the box along the world X axis
-    if (app.keyboard.isPressed(pc.KEY_RIGHT)) {
+    if (app.keyboard.isPressed(KEY_RIGHT)) {
         box.rigidbody.applyForce(10, 0, 0);
     }
 });
@@ -136,12 +136,12 @@ By default a force or impulse acts through the body's center of mass, so it chan
 ```javascript
 // Impulse: the point is in the entity's local space, so this pushes up on the
 // point 1 unit along the entity's local Z axis and makes the body tip over
-entity.rigidbody.applyImpulse(new pc.Vec3(0, 10, 0), new pc.Vec3(0, 0, 1));
+entity.rigidbody.applyImpulse(new Vec3(0, 10, 0), new Vec3(0, 0, 1));
 
 // Force: the point is a world space offset from the body, so transform the
 // same local point into world space first
-const offset = entity.getWorldTransform().transformVector(new pc.Vec3(0, 0, 1));
-entity.rigidbody.applyForce(new pc.Vec3(0, 10, 0), offset);
+const offset = entity.getWorldTransform().transformVector(new Vec3(0, 0, 1));
+entity.rigidbody.applyForce(new Vec3(0, 10, 0), offset);
 ```
 
 Both methods can also be called with six numbers, the force or impulse followed by the point.
@@ -165,11 +165,11 @@ Sometimes you want a body to move at an exact speed regardless of its mass, for 
 ```javascript
 // Move at 5 units per second along the world X axis, keeping the current vertical speed
 const velocity = entity.rigidbody.linearVelocity;
-entity.rigidbody.linearVelocity = new pc.Vec3(5, velocity.y, 0);
+entity.rigidbody.linearVelocity = new Vec3(5, velocity.y, 0);
 
 // Stop all motion
-entity.rigidbody.linearVelocity = pc.Vec3.ZERO;
-entity.rigidbody.angularVelocity = pc.Vec3.ZERO;
+entity.rigidbody.linearVelocity = Vec3.ZERO;
+entity.rigidbody.angularVelocity = Vec3.ZERO;
 ```
 
 The velocity getters return read-only snapshots, so modifying the returned vector in place has no effect. Always assign a new value. For a complete character driven this way, see the engine's [first-person](https://github.com/playcanvas/engine/blob/main/scripts/esm/first-person-controller.mjs) and [third-person](https://github.com/playcanvas/engine/blob/main/scripts/esm/third-person-controller.mjs) controller scripts.

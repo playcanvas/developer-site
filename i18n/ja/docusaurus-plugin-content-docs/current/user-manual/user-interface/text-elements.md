@@ -16,13 +16,13 @@ import TabItem from '@theme/TabItem';
 <TabItem value="engine" label="Engine">
 
 ```javascript
-const title = new pc.Entity('title');
+const title = new Entity('title');
 title.addComponent('element', {
-    type: pc.ELEMENTTYPE_TEXT,
+    type: ELEMENTTYPE_TEXT,
     fontAsset: font.id,
     text: 'Game Over',
     fontSize: 64,
-    color: new pc.Color(1, 0.55, 0.2),
+    color: new Color(1, 0.55, 0.2),
     anchor: [0.5, 0.5, 0.5, 0.5],
     pivot: [0.5, 0.5]
 });
@@ -87,7 +87,7 @@ screen.addChild(title);
 paragraph.element.autoWidth = false;
 paragraph.element.width = 400;
 paragraph.element.wrapLines = true;
-paragraph.element.pivot = new pc.Vec2(0.5, 1);
+paragraph.element.pivot = new Vec2(0.5, 1);
 ```
 
 `maxLines`は行数を制限します。制限を超えたテキストは切り捨てられず、最後の行でエレメントの端を越えて続くため、行数の制限は[縮小して収める](#shrinking-to-fit)機能と組み合わせるか、はみ出した部分を[マスク](/user-manual/user-interface/masks/)で切り取ってください。テキストのレイアウト後は、`lines`に、1行につき1つの文字列を持つ配列としてテキストが格納されます。

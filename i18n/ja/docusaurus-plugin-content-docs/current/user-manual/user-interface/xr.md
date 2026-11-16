@@ -41,7 +41,7 @@ XRの入力は、アプリケーションのXRマネージャーである`app.xr
 ```javascript
 app.xr.input.on('add', (inputSource) => {
     // 右手のコントローラーまたは手だけがインターフェースを指せるようにする
-    if (inputSource.handedness !== pc.XRHAND_RIGHT) {
+    if (inputSource.handedness !== XRHAND_RIGHT) {
         inputSource.elementInput = false;
     }
 });
@@ -73,7 +73,7 @@ XRの入力がどのエレメントにも届かないようにするには、`us
 ```javascript
 import { XrMenu } from 'playcanvas/scripts/esm/xr/xr-menu.mjs';
 
-const menu = new pc.Entity('menu');
+const menu = new Entity('menu');
 menu.addComponent('script');
 menu.script.create(XrMenu, {
     properties: {

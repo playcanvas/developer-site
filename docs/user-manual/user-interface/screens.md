@@ -21,16 +21,16 @@ A **world-space** screen is placed in the scene by its entity's transform and dr
 
 ```javascript
 // Drawn over the camera's view, the size of the canvas
-const hud = new pc.Entity('hud');
+const hud = new Entity('hud');
 hud.addComponent('screen', {
     screenSpace: true,
-    scaleMode: pc.SCALEMODE_BLEND,
+    scaleMode: SCALEMODE_BLEND,
     referenceResolution: [1280, 720]
 });
 app.root.addChild(hud);
 
 // Placed in the scene: 640 × 320 units, scaled to 6.4 × 3.2 meters
-const sign = new pc.Entity('sign');
+const sign = new Entity('sign');
 sign.addComponent('screen', {
     screenSpace: false,
     resolution: [640, 320]
@@ -102,10 +102,10 @@ With **Scale Mode** set to **None**, an interface is built in pixels and keeps i
 <TabItem value="engine" label="Engine">
 
 ```javascript
-const screen = new pc.Entity('screen');
+const screen = new Entity('screen');
 screen.addComponent('screen', {
     screenSpace: true,
-    scaleMode: pc.SCALEMODE_BLEND,
+    scaleMode: SCALEMODE_BLEND,
     referenceResolution: [1280, 720],
     scaleBlend: 0.5
 });

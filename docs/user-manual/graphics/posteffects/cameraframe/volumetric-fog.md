@@ -12,8 +12,8 @@ Use a perspective camera. Assign a directional light component to `volumetricFog
 The following example assumes `cameraEntity` has a camera component and `sunEntity` has a directional light component:
 
 ```javascript
-const cameraFrame = new pc.CameraFrame(app, cameraEntity.camera);
-cameraFrame.rendering.toneMapping = pc.TONEMAP_NEUTRAL;
+const cameraFrame = new CameraFrame(app, cameraEntity.camera);
+cameraFrame.rendering.toneMapping = TONEMAP_NEUTRAL;
 cameraFrame.taa.enabled = true;
 
 sunEntity.light.castShadows = true;
@@ -81,7 +81,7 @@ Local-light cost grows with the number of contributing lights, their screen cove
 Fog and depth of field need Gaussian splats to contribute to scene depth to respect the splats' surfaces. This is disabled by default because it costs an extra full-screen render target. Enable it through [`GSplatParams.sceneDepthWrite`](https://api.playcanvas.com/engine/classes/GSplatParams.html#scenedepthwrite):
 
 ```javascript
-if (pc.CameraFrame.isSplatSceneDepthSupported(app.graphicsDevice)) {
+if (CameraFrame.isSplatSceneDepthSupported(app.graphicsDevice)) {
     app.scene.gsplat.sceneDepthWrite = true;
     cameraFrame.rendering.samples = 1;
     cameraFrame.update();

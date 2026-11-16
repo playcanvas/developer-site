@@ -22,10 +22,10 @@ Here is a one meter dynamic box that will fall onto whatever is below it:
 <TabItem value="engine" label="Engine">
 
 ```javascript
-const box = new pc.Entity('box');
+const box = new Entity('box');
 box.addComponent('render', { type: 'box' });
 box.addComponent('collision', { type: 'box' });
-box.addComponent('rigidbody', { type: pc.BODYTYPE_DYNAMIC, mass: 2 });
+box.addComponent('rigidbody', { type: BODYTYPE_DYNAMIC, mass: 2 });
 box.setPosition(0, 5, 0);
 app.root.addChild(box);
 ```
@@ -124,10 +124,10 @@ entity.rigidbody.linearDamping = 0.2;
 entity.rigidbody.angularDamping = 0.2;
 
 // Keep a character upright: no rotation about any axis
-entity.rigidbody.angularFactor = new pc.Vec3(0, 0, 0);
+entity.rigidbody.angularFactor = new Vec3(0, 0, 0);
 
 // Confine a body to the XY plane of a 2D game
-entity.rigidbody.linearFactor = new pc.Vec3(1, 1, 0);
+entity.rigidbody.linearFactor = new Vec3(1, 1, 0);
 ```
 
 </TabItem>
@@ -225,11 +225,11 @@ The physics engine owns the position and rotation of a dynamic body. To move one
 entity.rigidbody.teleport(0, 10, 0);
 
 // Move and rotate, with the rotation given as Euler angles in degrees
-entity.rigidbody.teleport(new pc.Vec3(0, 10, 0), new pc.Vec3(0, 90, 0));
+entity.rigidbody.teleport(new Vec3(0, 10, 0), new Vec3(0, 90, 0));
 
 // Respawn at rest: clear the old motion, then move and rotate with a quaternion
-entity.rigidbody.linearVelocity = pc.Vec3.ZERO;
-entity.rigidbody.angularVelocity = pc.Vec3.ZERO;
+entity.rigidbody.linearVelocity = Vec3.ZERO;
+entity.rigidbody.angularVelocity = Vec3.ZERO;
 entity.rigidbody.teleport(spawn.getPosition(), spawn.getRotation());
 ```
 
@@ -268,8 +268,8 @@ Every body belongs to a collision **group** and carries a **mask** of the groups
 ```javascript
 // Put the body in a user group and stop it colliding with other members of that group.
 // Set these after the type, because changing the type resets them.
-entity.rigidbody.group = pc.BODYGROUP_USER_1;
-entity.rigidbody.mask = pc.BODYMASK_ALL ^ pc.BODYGROUP_USER_1;
+entity.rigidbody.group = BODYGROUP_USER_1;
+entity.rigidbody.mask = BODYMASK_ALL ^ BODYGROUP_USER_1;
 ```
 
 Eight user groups, `BODYGROUP_USER_1` to `BODYGROUP_USER_8`, are free for your own use. The same groups and masks filter [ray casts](/user-manual/physics/ray-casting/#filtering-ray-casts).

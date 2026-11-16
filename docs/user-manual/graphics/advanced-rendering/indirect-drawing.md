@@ -59,7 +59,7 @@ Indirect drawing is most powerful when combined with compute shaders that genera
 const meshMetaData = meshInstance.getIndirectMetaData();
 
 // Create compute shader to control rendering parameters
-const compute = new pc.Compute(device, shader, 'IndirectDrawCompute');
+const compute = new Compute(device, shader, 'IndirectDrawCompute');
 compute.setParameter('indirectMetaData', meshMetaData);
 compute.setParameter('indirectDrawBuffer', app.graphicsDevice.indirectDrawBuffer);
 compute.setParameter('indirectSlot', indirectSlot);

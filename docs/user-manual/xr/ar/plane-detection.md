@@ -28,7 +28,7 @@ app.xr.on('start', () => {
 A feature flag needs to be added to the session start:
 
 ```javascript
-app.xr.start(camera, pc.XRTYPE_AR, pc.XRSPACE_LOCALFLOOR, {
+app.xr.start(camera, XRTYPE_AR, XRSPACE_LOCALFLOOR, {
     planeDetection: true
 });
 ```
@@ -74,7 +74,7 @@ An example below creates a visual mesh for each XrPlane and adds it to the scene
 ```javascript
 app.xr.planeDetection.on('add', (xrPlane) => {
     // geometry data
-    const mesh = new pc.Mesh(app.graphicsDevice);
+    const mesh = new Mesh(app.graphicsDevice);
     mesh.clear(true, true); // ensure that mesh is created with dynamic buffers
 
     // create a list of vertices
@@ -99,14 +99,14 @@ app.xr.planeDetection.on('add', (xrPlane) => {
     }
 
     mesh.setPositions(vertices); // set vertices
-    mesh.setNormals(pc.calculateNormals(vertices, indices)); // calculate normals
+    mesh.setNormals(calculateNormals(vertices, indices)); // calculate normals
     mesh.setIndices(indices); // set indices
-    mesh.update(pc.PRIMITIVE_TRIANGLES); // update buffers
+    mesh.update(PRIMITIVE_TRIANGLES); // update buffers
 
-    const material = new pc.StandardMaterial();
-    const meshInstance = new pc.MeshInstance(mesh, material);
+    const material = new StandardMaterial();
+    const meshInstance = new MeshInstance(mesh, material);
 
-    const entity = new pc.Entity(xrPlane.label);
+    const entity = new Entity(xrPlane.label);
 
     // add render component
     entity.addComponent('render', {

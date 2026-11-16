@@ -18,9 +18,9 @@ VRセッションを開始するには、まずデバイスのサポートと利
 ```javascript
 button.element.on('click', () => {
     // XRがサポートされ、VRが利用可能かを確認
-    if (app.xr.supported && app.xr.isAvailable(pc.XRTYPE_VR)) {
+    if (app.xr.supported && app.xr.isAvailable(XRTYPE_VR)) {
         // カメラコンポーネントを使用してARを開始
-        entity.camera.startXr(pc.XRTYPE_VR, pc.XRSPACE_LOCALFLOOR);
+        entity.camera.startXr(XRTYPE_VR, XRSPACE_LOCALFLOOR);
     }
 });
 ```

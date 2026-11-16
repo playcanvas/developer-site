@@ -19,15 +19,15 @@ MRTは、PlayCanvasが動作するすべてのデバイス（WebGL2およびWebG
 レンダリング先となるテクスチャを作成します。
 
 ```javascript
-const createTexture = name => new pc.Texture(app.graphicsDevice, {
+const createTexture = name => new Texture(app.graphicsDevice, {
     name,
     width: 512,
     height: 512,
-    format: pc.PIXELFORMAT_RGBA8,
-    minFilter: pc.FILTER_LINEAR,
-    magFilter: pc.FILTER_LINEAR,
-    addressU: pc.ADDRESS_CLAMP_TO_EDGE,
-    addressV: pc.ADDRESS_CLAMP_TO_EDGE
+    format: PIXELFORMAT_RGBA8,
+    minFilter: FILTER_LINEAR,
+    magFilter: FILTER_LINEAR,
+    addressU: ADDRESS_CLAMP_TO_EDGE,
+    addressV: ADDRESS_CLAMP_TO_EDGE
 });
 
 const texture0 = createTexture('RT-texture-0');
@@ -38,11 +38,11 @@ const texture2 = createTexture('RT-texture-2');
 それらをレンダーターゲットでラップします。
 
 ```javascript
-const renderTarget = new pc.RenderTarget({
+const renderTarget = new RenderTarget({
     name: 'MRT',
     colorBuffers: [texture0, texture1, texture2],
     depth: true,
-    origin: pc.RENDERTARGET_ORIGIN_TOP,
+    origin: RENDERTARGET_ORIGIN_TOP,
     samples: 2
 });
 ```
@@ -50,7 +50,7 @@ const renderTarget = new pc.RenderTarget({
 MRTにレンダリングするために使用するカメラエンティティを作成します。
 
 ```javascript
-const entity = new pc.Entity('MRTCamera');
+const entity = new Entity('MRTCamera');
 entity.addComponent('camera', {
     // 負の優先度 => メインカメラより前にレンダリングされます
     priority: -1,
@@ -69,8 +69,8 @@ entity.camera.setShaderPass('MyMRT');
 ```javascript
 // アタッチメント0は引き続きentity.camera.clearColorにクリアされます
 // 法線アタッチメントを中立な法線に、グロスアタッチメントを黒にクリアします
-entity.camera.setClearColor(1, new pc.Color(0.5, 0.5, 1, 1));
-entity.camera.setClearColor(2, new pc.Color(0, 0, 0, 1));
+entity.camera.setClearColor(1, new Color(0.5, 0.5, 1, 1));
+entity.camera.setClearColor(2, new Color(0, 0, 0, 1));
 ```
 
 `null`を渡すとアタッチメントのクリアカラーが削除され、再び`clearColor`にクリアされます。アタッチメントがクリアされる色は[`CameraComponent.getClearColor`](https://api.playcanvas.com/engine/classes/CameraComponent.html#getclearcolor)で取得できます。
@@ -109,8 +109,8 @@ const renders = targetEntity.findComponents('render');
 renders.forEach((render) => {
     render.meshInstances.forEach((meshInstance) => {
         const material = meshInstance.material;
-        material.getShaderChunks(pc.SHADERLANGUAGE_GLSL).set('outputPS', glslChunk);
-        material.getShaderChunks(pc.SHADERLANGUAGE_WGSL).set('outputPS', wgslChunk);
+        material.getShaderChunks(SHADERLANGUAGE_GLSL).set('outputPS', glslChunk);
+        material.getShaderChunks(SHADERLANGUAGE_WGSL).set('outputPS', wgslChunk);
         material.shaderChunksVersion = '2.8';
     });
 });

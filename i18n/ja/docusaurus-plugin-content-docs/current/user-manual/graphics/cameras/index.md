@@ -17,9 +17,9 @@ import TabItem from '@theme/TabItem';
 
 ```javascript
 // Cameraコンポーネントを持つエンティティを作成する
-const camera = new pc.Entity('Camera');
+const camera = new Entity('Camera');
 camera.addComponent('camera', {
-    clearColor: new pc.Color(0.3, 0.3, 0.7)
+    clearColor: new Color(0.3, 0.3, 0.7)
 });
 app.root.addChild(camera);
 

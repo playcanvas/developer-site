@@ -22,10 +22,10 @@ RigidBodyの`type`は、誰がそれを動かすかを決めます。
 <TabItem value="engine" label="Engine">
 
 ```javascript
-const box = new pc.Entity('box');
+const box = new Entity('box');
 box.addComponent('render', { type: 'box' });
 box.addComponent('collision', { type: 'box' });
-box.addComponent('rigidbody', { type: pc.BODYTYPE_DYNAMIC, mass: 2 });
+box.addComponent('rigidbody', { type: BODYTYPE_DYNAMIC, mass: 2 });
 box.setPosition(0, 5, 0);
 app.root.addChild(box);
 ```
@@ -124,10 +124,10 @@ entity.rigidbody.linearDamping = 0.2;
 entity.rigidbody.angularDamping = 0.2;
 
 // キャラクターを直立させる：どの軸でも回転しない
-entity.rigidbody.angularFactor = new pc.Vec3(0, 0, 0);
+entity.rigidbody.angularFactor = new Vec3(0, 0, 0);
 
 // 2DゲームのXY平面にボディを閉じ込める
-entity.rigidbody.linearFactor = new pc.Vec3(1, 1, 0);
+entity.rigidbody.linearFactor = new Vec3(1, 1, 0);
 ```
 
 </TabItem>
@@ -225,11 +225,11 @@ Dynamicなボディの位置と回転は物理エンジンが所有します。�
 entity.rigidbody.teleport(0, 10, 0);
 
 // 移動と回転。回転はオイラー角（度）で指定
-entity.rigidbody.teleport(new pc.Vec3(0, 10, 0), new pc.Vec3(0, 90, 0));
+entity.rigidbody.teleport(new Vec3(0, 10, 0), new Vec3(0, 90, 0));
 
 // 静止した状態でリスポーンする：以前の動きをクリアし、クォータニオンで移動と回転を行う
-entity.rigidbody.linearVelocity = pc.Vec3.ZERO;
-entity.rigidbody.angularVelocity = pc.Vec3.ZERO;
+entity.rigidbody.linearVelocity = Vec3.ZERO;
+entity.rigidbody.angularVelocity = Vec3.ZERO;
 entity.rigidbody.teleport(spawn.getPosition(), spawn.getRotation());
 ```
 
@@ -268,8 +268,8 @@ RigidBodyには位置と回転はありますが、スケールはありませ�
 ```javascript
 // ボディをユーザーグループに入れ、同じグループの他のメンバーと衝突しないようにする。
 // タイプを変更するとリセットされるため、タイプの後に設定する。
-entity.rigidbody.group = pc.BODYGROUP_USER_1;
-entity.rigidbody.mask = pc.BODYMASK_ALL ^ pc.BODYGROUP_USER_1;
+entity.rigidbody.group = BODYGROUP_USER_1;
+entity.rigidbody.mask = BODYMASK_ALL ^ BODYGROUP_USER_1;
 ```
 
 `BODYGROUP_USER_1`から`BODYGROUP_USER_8`までの8つのユーザーグループを自由に使用できます。同じグループとマスクで[レイキャスト](/user-manual/physics/ray-casting/#filtering-ray-casts)をフィルタリングすることもできます。

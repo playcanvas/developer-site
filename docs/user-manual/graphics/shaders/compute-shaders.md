@@ -32,9 +32,9 @@ A compute shader is created using the `Shader` class with a WGSL `cshader` sourc
 ### Basic Shader Definition
 
 ```javascript
-const shader = new pc.Shader(device, {
+const shader = new Shader(device, {
     name: 'MyComputeShader',
-    shaderLanguage: pc.SHADERLANGUAGE_WGSL,
+    shaderLanguage: SHADERLANGUAGE_WGSL,
     cshader: `
         // resources declared with the simplified syntax are reflected automatically -
         // no computeBindGroupFormat required
@@ -75,16 +75,16 @@ const shaderSource = `
 `;
 
 // Create separate shaders from the same source, each using a different entry point
-const initShader = new pc.Shader(device, {
+const initShader = new Shader(device, {
     name: 'InitParticles',
-    shaderLanguage: pc.SHADERLANGUAGE_WGSL,
+    shaderLanguage: SHADERLANGUAGE_WGSL,
     cshader: shaderSource,
     computeEntryPoint: 'initParticles'
 });
 
-const updateShader = new pc.Shader(device, {
+const updateShader = new Shader(device, {
     name: 'UpdateParticles',
-    shaderLanguage: pc.SHADERLANGUAGE_WGSL,
+    shaderLanguage: SHADERLANGUAGE_WGSL,
     cshader: shaderSource,
     computeEntryPoint: 'updateParticles'
 });
@@ -95,7 +95,7 @@ const updateShader = new pc.Shader(device, {
 The `Compute` class represents an executable instance of a compute shader with its associated parameters:
 
 ```javascript
-const compute = new pc.Compute(device, shader, 'MyComputeInstance');
+const compute = new Compute(device, shader, 'MyComputeInstance');
 ```
 
 ## Setting Parameters
@@ -121,11 +121,11 @@ Every uniform and resource the compute shader declares has to be given a value o
 Storage buffers hold data that compute shaders can read from and write to:
 
 ```javascript
-const storageBuffer = new pc.StorageBuffer(
+const storageBuffer = new StorageBuffer(
     device,
     bufferSizeInBytes,
-    pc.BUFFERUSAGE_COPY_SRC |  // Enable reading back to CPU
-    pc.BUFFERUSAGE_COPY_DST    // Enable writing from CPU
+    BUFFERUSAGE_COPY_SRC |  // Enable reading back to CPU
+    BUFFERUSAGE_COPY_DST    // Enable writing from CPU
 );
 
 // Write initial data
@@ -141,14 +141,14 @@ storageBuffer.clear();
 Storage textures are created with the `storage: true` option:
 
 ```javascript
-const storageTexture = new pc.Texture(device, {
+const storageTexture = new Texture(device, {
     name: 'StorageTexture',
     width: 512,
     height: 512,
-    format: pc.PIXELFORMAT_RGBA8,
+    format: PIXELFORMAT_RGBA8,
     mipmaps: false,
-    minFilter: pc.FILTER_LINEAR,
-    magFilter: pc.FILTER_LINEAR,
+    minFilter: FILTER_LINEAR,
+    magFilter: FILTER_LINEAR,
     storage: true  // Enable as storage texture
 });
 ```
@@ -183,7 +183,7 @@ A compute instance is dispatched at most once in a frame. To dispatch a compute 
 
 ```javascript
 const computes = [0.25, 0.5].map((strength) => {
-    const compute = new pc.Compute(device, shader, `Blur-${strength}`);
+    const compute = new Compute(device, shader, `Blur-${strength}`);
     compute.setParameter('strength', strength);
     compute.setupDispatch(width, height);
     return compute;
@@ -318,7 +318,7 @@ For advanced use cases like complex scheduling outside of rendering frames, you 
 
 ```javascript
 // Create a custom buffer for indirect dispatch
-const customBuffer = new pc.StorageBuffer(device, 3 * 4, pc.BUFFERUSAGE_INDIRECT);
+const customBuffer = new StorageBuffer(device, 3 * 4, BUFFERUSAGE_INDIRECT);
 
 // Use custom buffer for indirect dispatch
 compute.setupIndirectDispatch(0, customBuffer);
@@ -471,9 +471,9 @@ fn main(@builtin(global_invocation_id) global_id: vec3u) {
 Use `cdefines` to pass defines and `cincludes` to provide include content:
 
 ```javascript
-const shader = new pc.Shader(device, {
+const shader = new Shader(device, {
     name: 'ComputeShader',
-    shaderLanguage: pc.SHADERLANGUAGE_WGSL,
+    shaderLanguage: SHADERLANGUAGE_WGSL,
     cshader: `
         #include "myHelper"
 
@@ -486,7 +486,7 @@ const shader = new pc.Shader(device, {
     cdefines: new Map([
         ['{WORKGROUP_SIZE}', '64']
     ]),
-    cincludes: pc.ShaderChunks.get(device, pc.SHADERLANGUAGE_WGSL)
+    cincludes: ShaderChunks.get(device, SHADERLANGUAGE_WGSL)
 });
 ```
 

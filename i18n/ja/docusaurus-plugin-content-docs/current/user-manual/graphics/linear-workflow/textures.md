@@ -12,7 +12,7 @@ Diffuse、Emissive、Specular、Sheen などの色を表すテクスチャは、
 sRGB スペースで色を表すテクスチャアセットをロードする際、sRGB エンコーディングを指定することが重要です。次の例は、sRGB エンコーディングでアセットを作成する方法を示しています。
 
 ```javascript
-new pc.Asset(
+new Asset(
     'color',
     'texture',
     { url: 'heart.png' },
@@ -33,10 +33,10 @@ Editor で作業する際は、カラーテクスチャがインスペクター�
 次の例は、sRGB レンダーターゲットテクスチャを作成する方法を示しています。
 
 ```javascript
-const texture = new pc.Texture(app.graphicsDevice, {
+const texture = new Texture(app.graphicsDevice, {
     name: 'color-texture',
     width: 512,
     height: 512,
-    format: pc.PIXELFORMAT_SRGBA8
+    format: PIXELFORMAT_SRGBA8
 });
 ```

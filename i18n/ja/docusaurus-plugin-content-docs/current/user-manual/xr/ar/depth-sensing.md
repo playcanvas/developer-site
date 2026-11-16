@@ -14,10 +14,10 @@ WebXR Depth Sensingは、各ビューの深度情報へのアクセスを提供�
 カメラ深度へのアクセスを要求するには、セッションを次のように開始する必要があります。
 
 ```javascript
-app.xr.start(camera, pc.XRTYPE_AR, pc.XRSPACE_LOCALFLOOR, {
+app.xr.start(camera, XRTYPE_AR, XRSPACE_LOCALFLOOR, {
     depthSensing: { // カメラ深度へのアクセスを要求
-        usagePreference: pc.XRDEPTHSENSINGUSAGE_GPU, // GPU実装を優先
-        dataFormatPreference: pc.XRDEPTHSENSINGFORMAT_F32 // データをFloat 32配列/テクスチャとして優先
+        usagePreference: XRDEPTHSENSINGUSAGE_GPU, // GPU実装を優先
+        dataFormatPreference: XRDEPTHSENSINGFORMAT_F32 // データをFloat 32配列/テクスチャとして優先
     }
 });
 ```
@@ -52,7 +52,7 @@ WebXRはCPUパスのみをサポートしています。Depth Sensingを使用�
 
 ```javascript
 // モノスコープビュー（モバイル画面）を取得
-const view = app.xr.views.get(pc.XREYE_NONE);
+const view = app.xr.views.get(XREYE_NONE);
 if (view) {
     // 画面中央からの距離を取得
     const distance = view.getDepth(0.5, 0.5);
@@ -89,7 +89,7 @@ if (view) {
 
 ```javascript
 const view = app.xr.views.list[0];
-if (view && view.eye !== pc.XREYE_NONE) {
+if (view && view.eye !== XREYE_NONE) {
     // ステレオビューのdefineを追加
     fragShader = '#define XRDEPTH_ARRAY\n' + fragShader;
 }
@@ -102,7 +102,7 @@ WebXRは、深度センシングデータを2つの形式で提供できます�
 フォーマットに応じてテクスチャから深度値をアンパックするために、シェーダーブランチを使用できます。
 
 ```javascript
-if (app.xr.views.depthPixelFormat === pc.PIXELFORMAT_R32F) {
+if (app.xr.views.depthPixelFormat === PIXELFORMAT_R32F) {
     fragShader = '#define XRDEPTH_FLOAT\n' + fragShader;
 }
 ```

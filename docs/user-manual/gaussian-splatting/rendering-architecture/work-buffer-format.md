@@ -96,7 +96,7 @@ By default, the work buffer contains standard splat data (position, color, rotat
 ```javascript
 // Add a stream to store component IDs (R32U = unsigned int)
 app.scene.gsplat.format.addExtraStreams([
-    { name: 'splatId', format: pc.PIXELFORMAT_R32U }
+    { name: 'splatId', format: PIXELFORMAT_R32U }
 ]);
 ```
 

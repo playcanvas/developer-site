@@ -19,7 +19,7 @@ import TabItem from '@theme/TabItem';
 
 ```javascript
 // 400 × 240単位のパネルを1.6 × 0.96メートルにスケールし、2メートルの高さに置く
-const sign = new pc.Entity('sign');
+const sign = new Entity('sign');
 sign.addComponent('screen', {
     screenSpace: false,
     resolution: [400, 240]
@@ -28,18 +28,18 @@ sign.setLocalScale(0.004, 0.004, 0.004);
 sign.setPosition(0, 2, -3);
 app.root.addChild(sign);
 
-const background = new pc.Entity('background');
+const background = new Entity('background');
 background.addComponent('element', {
-    type: pc.ELEMENTTYPE_IMAGE,
+    type: ELEMENTTYPE_IMAGE,
     anchor: [0, 0, 1, 1],
     margin: [0, 0, 0, 0],
-    color: new pc.Color(0.16, 0.18, 0.23)
+    color: new Color(0.16, 0.18, 0.23)
 });
 sign.addChild(background);
 
-const title = new pc.Entity('title');
+const title = new Entity('title');
 title.addComponent('element', {
-    type: pc.ELEMENTTYPE_TEXT,
+    type: ELEMENTTYPE_TEXT,
     fontAsset: font.id,
     text: 'Exit',
     fontSize: 96,
@@ -135,10 +135,10 @@ app.on('update', () => {
 
 ```javascript
 // ラベルはスクリーン空間のスクリーン上にあり、その左下隅にアンカーされている（アンカーは0, 0, 0, 0）
-const head = new pc.Vec3();
-const onCanvas = new pc.Vec3();
-const inView = new pc.Vec3();
-const overHead = new pc.Vec3(0, 2.2, 0);
+const head = new Vec3();
+const onCanvas = new Vec3();
+const inView = new Vec3();
+const overHead = new Vec3(0, 2.2, 0);
 
 app.on('update', () => {
     head.add2(character.getPosition(), overHead);

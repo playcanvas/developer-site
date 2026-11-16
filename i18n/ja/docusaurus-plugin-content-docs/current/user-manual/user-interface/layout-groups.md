@@ -18,28 +18,28 @@ import TabItem from '@theme/TabItem';
 <TabItem value="engine" label="Engine">
 
 ```javascript
-const list = new pc.Entity('list');
+const list = new Entity('list');
 list.addComponent('element', {
-    type: pc.ELEMENTTYPE_GROUP,
+    type: ELEMENTTYPE_GROUP,
     anchor: [0.5, 0.5, 0.5, 0.5],
     pivot: [0.5, 0.5],
     width: 300,
     height: 400
 });
 list.addComponent('layoutgroup', {
-    orientation: pc.ORIENTATION_VERTICAL,
+    orientation: ORIENTATION_VERTICAL,
     spacing: [0, 10],
     padding: [10, 10, 10, 10],
-    widthFitting: pc.FITTING_STRETCH
+    widthFitting: FITTING_STRETCH
 });
 screen.addChild(list);
 
 for (let i = 0; i < 5; i++) {
-    const row = new pc.Entity(`row ${i}`);
+    const row = new Entity(`row ${i}`);
     row.addComponent('element', {
-        type: pc.ELEMENTTYPE_IMAGE,
+        type: ELEMENTTYPE_IMAGE,
         height: 60,
-        color: new pc.Color(0.23, 0.55, 1)
+        color: new Color(0.23, 0.55, 1)
     });
     list.addChild(row);
 }
@@ -267,17 +267,17 @@ function LayoutChild(options) {
 レイアウトグループのプロパティを変更すると、子が再びレイアウトされます。ベクトルを保持するプロパティには、新しいベクトルオブジェクトを代入する必要があります。
 
 ```javascript
-list.layoutgroup.spacing = new pc.Vec2(0, 20);
-list.layoutgroup.padding = new pc.Vec4(20, 20, 20, 20);
+list.layoutgroup.spacing = new Vec2(0, 20);
+list.layoutgroup.padding = new Vec4(20, 20, 20, 20);
 list.layoutgroup.wrap = true;
 ```
 
 子を追加、削除、有効化、無効化したときもグループが再びレイアウトされるため、リストは行を追加するにつれて伸びていきます。
 
 ```javascript
-const row = new pc.Entity('row');
+const row = new Entity('row');
 row.addComponent('element', {
-    type: pc.ELEMENTTYPE_IMAGE,
+    type: ELEMENTTYPE_IMAGE,
     height: 60
 });
 list.addChild(row);

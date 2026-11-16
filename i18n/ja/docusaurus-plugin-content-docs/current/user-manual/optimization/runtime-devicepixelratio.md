@@ -20,7 +20,7 @@ Device pixel ratioは、ハードウェア画面上の物理ピクセルと論�
 Device pixel ratioは、プロパティ[`GraphicsDevice#maxPixelRatio`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#maxpixelratio)を介して実行時に変更できます。
 
 ```javascript
-const device = pc.Application.getApplication().graphicsDevice;
+const device = Application.getApplication().graphicsDevice;
 if (highTierDevice) {
     // デバイスのデフォルトのデバイスピクセル比を使用
     device.maxPixelRatio = window.devicePixelRatio;
@@ -49,10 +49,10 @@ ANGLE (NVIDIA GeForce GTX 1050 Direct3D11 vs_5_0 ps_5_0)
 
 ```javascript
 function isLowQualityGPU() {
-    const renderer = pc.Application.getApplication().graphicsDevice.unmaskedRenderer;
+    const renderer = Application.getApplication().graphicsDevice.unmaskedRenderer;
 
     // モバイルの場合のみGPUをチェック
-    if (renderer && pc.platform.mobile) {
+    if (renderer && platform.mobile) {
         // 低レベルGPU
         if(renderer.search(/Adreno\D*3/) !== -1 ||
            renderer.search(/Adreno\D*4/) !== -1 ||

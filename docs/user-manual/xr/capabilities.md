@@ -37,7 +37,7 @@ Accessing internal, undocumented APIs is subject to engine changes that are not 
 Here is an example of enabling the experimental API for [WebXR Layers](/user-manual/xr/input-sources/):
 
 ```javascript
-app.xr.start(cameraComponent, pc.XRTYPE_VR, pc.XRSPACE_LOCAL, {
+app.xr.start(cameraComponent, XRTYPE_VR, XRSPACE_LOCAL, {
     optionalFeatures: [ 'layers' ],
     callback: (err) => {
         if (err) {

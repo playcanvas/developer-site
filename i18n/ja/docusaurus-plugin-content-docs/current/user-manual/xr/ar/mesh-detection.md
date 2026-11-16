@@ -34,7 +34,7 @@ app.xr.on('start', () => {
 セッション開始時に機能フラグを追加する必要があります。
 
 ```javascript
-app.xr.start(camera, pc.XRTYPE_AR, pc.XRSPACE_LOCALFLOOR, {
+app.xr.start(camera, XRTYPE_AR, XRSPACE_LOCALFLOOR, {
     meshDetection: true
 });
 ```
@@ -76,17 +76,17 @@ entity.setRotation(xrMesh.getRotation());
 ```javascript
 app.xr.meshDetection.on('add', (xrMesh) => {
     // ジオメトリデータ
-    const mesh = new pc.Mesh(app.graphicsDevice);
+    const mesh = new Mesh(app.graphicsDevice);
     mesh.clear(true, true); // メッシュが動的バッファで作成されることを確認
     mesh.setPositions(xrMesh.vertices); // 頂点を設定
-    mesh.setNormals(pc.calculateNormals(xrMesh.vertices, xrMesh.indices)); // 法線を計算
+    mesh.setNormals(calculateNormals(xrMesh.vertices, xrMesh.indices)); // 法線を計算
     mesh.setIndices(xrMesh.indices); // インデックスを設定
-    mesh.update(pc.PRIMITIVE_TRIANGLES); // バッファを更新
+    mesh.update(PRIMITIVE_TRIANGLES); // バッファを更新
 
-    const material = new pc.StandardMaterial();
-    const meshInstance = new pc.MeshInstance(mesh, material);
+    const material = new StandardMaterial();
+    const meshInstance = new MeshInstance(mesh, material);
 
-    const entity = new pc.Entity();
+    const entity = new Entity();
 
     // レンダリングコンポーネントを追加
     entity.addComponent('render', {

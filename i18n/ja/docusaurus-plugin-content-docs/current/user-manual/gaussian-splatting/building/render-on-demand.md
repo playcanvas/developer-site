@@ -38,8 +38,8 @@ app.systems.gsplat.on('frame:request', () => {
 「自分でレンダリングします」の行に該当するものは、変更を行うときに`app.renderNextFrame = true`を設定してください。例えば、フライ／オービットカメラをインタラクティブに保つには、カメラが移動したときにレンダリングします：
 
 ```javascript
-const lastPos = new pc.Vec3();
-const lastRot = new pc.Quat();
+const lastPos = new Vec3();
+const lastRot = new Quat();
 
 app.on('update', () => {
     const pos = camera.getPosition();

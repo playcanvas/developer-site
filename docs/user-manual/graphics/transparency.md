@@ -12,7 +12,7 @@ All of them are driven by the material's opacity, which comes from [`StandardMat
 Setting [`blendType`](https://api.playcanvas.com/engine/classes/Material.html#blendtype) to a blending mode such as `BLEND_NORMAL` mixes the surface with whatever is already in the frame buffer.
 
 ```javascript
-material.blendType = pc.BLEND_NORMAL;
+material.blendType = BLEND_NORMAL;
 material.opacity = 0.5;
 material.update();
 ```
@@ -25,9 +25,9 @@ This gives the smoothest result and supports any opacity value, but it is order 
 
 ```javascript
 // equivalent to BLEND_NORMAL, written out in full
-material.blendState = new pc.BlendState(
+material.blendState = new BlendState(
     true,
-    pc.BLENDEQUATION_ADD, pc.BLENDMODE_SRC_ALPHA, pc.BLENDMODE_ONE_MINUS_SRC_ALPHA
+    BLENDEQUATION_ADD, BLENDMODE_SRC_ALPHA, BLENDMODE_ONE_MINUS_SRC_ALPHA
 );
 material.update();
 ```
@@ -77,9 +77,9 @@ The result is binary - a fragment is either fully opaque or gone - so there is n
 [`opacityDither`](https://api.playcanvas.com/engine/classes/StandardMaterial.html#opacitydither) converts opacity into a screen-space dither pattern, discarding a proportion of fragments instead of blending them.
 
 ```javascript
-material.blendType = pc.BLEND_NONE;
+material.blendType = BLEND_NONE;
 material.opacity = 0.5;
-material.opacityDither = pc.DITHER_BAYER8;
+material.opacityDither = DITHER_BAYER8;
 material.update();
 ```
 
@@ -90,7 +90,7 @@ Available patterns are `DITHER_BAYER2`, `DITHER_BAYER4`, `DITHER_BAYER8`, `DITHE
 [`alphaToCoverage`](https://api.playcanvas.com/engine/classes/Material.html#alphatocoverage) uses the fragment's alpha to build an MSAA sample coverage mask. Instead of blending, the hardware keeps a proportion of the multi-sample coverage matching the alpha value.
 
 ```javascript
-material.blendType = pc.BLEND_NONE;
+material.blendType = BLEND_NONE;
 material.opacity = 0.5;
 material.alphaToCoverage = true;
 material.update();
@@ -105,7 +105,7 @@ Quality is bounded by the sample count of the render target. With 4x MSAA, opaci
 Alpha to coverage requires a multi-sampled render target and is **silently ignored** when rendering into a single-sampled one. Nothing is logged in release builds and no error is raised - the surface simply renders as fully opaque. If you enable the flag and see no change, check that antialiasing is actually on:
 
 ```javascript
-const device = await pc.createGraphicsDevice(canvas, {
+const device = await createGraphicsDevice(canvas, {
     deviceTypes: [deviceType],
     antialias: true
 });
@@ -114,7 +114,7 @@ const device = await pc.createGraphicsDevice(canvas, {
 On WebGPU there is an additional requirement: the first color attachment of the render target must use a blendable format that has an alpha channel. This matters in practice because [`CameraFrame`](https://api.playcanvas.com/engine/classes/CameraFrame.html) prefers `PIXELFORMAT_RG11B10F` for its HDR render target, and that format has no alpha channel. Alpha to coverage is therefore ignored for geometry rendered through `CameraFrame` with its default formats, and a warning is logged in debug builds. Requesting a format with an alpha channel resolves it:
 
 ```javascript
-cameraFrame.rendering.renderFormats = [pc.PIXELFORMAT_RGBA16F];
+cameraFrame.rendering.renderFormats = [PIXELFORMAT_RGBA16F];
 cameraFrame.update();
 ```
 

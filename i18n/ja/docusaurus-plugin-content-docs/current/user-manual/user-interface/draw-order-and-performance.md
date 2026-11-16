@@ -76,7 +76,7 @@ minimapCamera.camera.layers = minimapCamera.camera.layers.filter(id => id !== ui
 3Dモデルをインターフェースの上に描画する方法は2つあります。1つは、イメージエレメントが表示するテクスチャにモデルをレンダリングする方法で、モデルはインターフェースの描画順とマスクに従います。[3Dをイメージにレンダリングする](/user-manual/user-interface/image-elements/#render-to-texture)を参照してください。もう1つは、深度バッファをクリアするレイヤーをUIレイヤーの後に用意してモデルをそこに置き、シーンにモデルが隠されないようにする方法です。
 
 ```javascript
-const overUi = new pc.Layer({ name: 'Over UI', clearDepthBuffer: true });
+const overUi = new Layer({ name: 'Over UI', clearDepthBuffer: true });
 app.scene.layers.push(overUi);
 camera.camera.layers = [...camera.camera.layers, overUi.id];
 
@@ -90,7 +90,7 @@ UIレイヤー上のワールド空間のエレメントは、シーンの後に
 ```javascript
 // ワールド空間UI用のレイヤー。シーンと一緒に、ヒエラルキーの順に描画される
 const worldLayer = app.scene.layers.getLayerByName('World');
-const worldUi = new pc.Layer({ name: 'World UI', transparentSortMode: pc.SORTMODE_MANUAL });
+const worldUi = new Layer({ name: 'World UI', transparentSortMode: SORTMODE_MANUAL });
 app.scene.layers.insertTransparent(worldUi, app.scene.layers.getTransparentIndex(worldLayer) + 1);
 camera.camera.layers = [...camera.camera.layers, worldUi.id];
 

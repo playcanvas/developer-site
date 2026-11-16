@@ -30,7 +30,7 @@ if (app.xr.hitTest.supported) {
 ```javascript
 // ヒットテストを開始
 app.xr.hitTest.start({
-    spaceType: pc.XRSPACE_VIEWER, // ビューア空間から
+    spaceType: XRSPACE_VIEWER, // ビューア空間から
     callback: (err, hitTestSource) => {
         if (err) return;
         // ヒットテスト結果を購読
@@ -88,13 +88,13 @@ inputSource.hitTestStart({
 原点と方向を持つカスタムレイを使用してヒットテスティングを開始することも可能です。
 
 ```javascript
-const ray = new pc.Ray();
+const ray = new Ray();
 
 ray.origin.set(0, 1, 0); // 原点から1メートル上から開始
 ray.direction.set(0, -1, 0); // 下方向を指す
 
 app.xr.hitTest.start({
-    spaceType: pc.XRSPACE_LOCALFLOOR,
+    spaceType: XRSPACE_LOCALFLOOR,
     offsetRay: ray,
     callback: (err, hitTestSource) => {
         // 現実世界のジオメトリをサンプリングするヒットテストソース

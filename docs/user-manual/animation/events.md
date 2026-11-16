@@ -18,7 +18,7 @@ Events belong to a clip, so every anim component that plays the clip fires them.
 Set a clip's `events` to an [`AnimEvents`](https://api.playcanvas.com/engine/classes/AnimEvents.html) holding all of its events. The events can be listed in any order:
 
 ```javascript
-walkTrack.events = new pc.AnimEvents([
+walkTrack.events = new AnimEvents([
     { time: 0.2, name: 'footstep', foot: 'left' },
     { time: 0.7, name: 'footstep', foot: 'right' }
 ]);
@@ -169,36 +169,54 @@ When one effect spans several animations, ask an AI assistant through the **[Edi
 This Engine app plays the robot arm's pick clip on a loop, and adds two events to the clip: one when its jaws have closed, and one when they have opened again. A listener makes the jaws glow while they are closed, and shows the last event.
 
 ```js live-example
-import * as pc from 'playcanvas';
+import {
+    AnimComponentSystem,
+    AnimEvents,
+    AppBase,
+    AppOptions,
+    Asset,
+    CameraComponentSystem,
+    Color,
+    ContainerHandler,
+    createGraphicsDevice,
+    DEVICETYPE_WEBGPU,
+    Entity,
+    FILLMODE_FILL_WINDOW,
+    LightComponentSystem,
+    RenderComponentSystem,
+    RESOLUTION_AUTO,
+    StandardMaterial,
+    TextureHandler
+} from 'playcanvas';
 
 // create the application with the component systems and resource handlers it uses
 const canvas = document.getElementById('application');
-const device = await pc.createGraphicsDevice(canvas, {
-    deviceTypes: [pc.DEVICETYPE_WEBGPU]
+const device = await createGraphicsDevice(canvas, {
+    deviceTypes: [DEVICETYPE_WEBGPU]
 });
 device.maxPixelRatio = Math.min(window.devicePixelRatio, 2);
 
-const options = new pc.AppOptions();
+const options = new AppOptions();
 options.graphicsDevice = device;
 options.componentSystems = [
-    pc.RenderComponentSystem,
-    pc.CameraComponentSystem,
-    pc.LightComponentSystem,
-    pc.AnimComponentSystem
+    RenderComponentSystem,
+    CameraComponentSystem,
+    LightComponentSystem,
+    AnimComponentSystem
 ];
-options.resourceHandlers = [pc.ContainerHandler, pc.TextureHandler];
+options.resourceHandlers = [ContainerHandler, TextureHandler];
 
-const app = new pc.AppBase(canvas);
+const app = new AppBase(canvas);
 app.init(options);
-app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
-app.setCanvasResolution(pc.RESOLUTION_AUTO);
+app.setCanvasFillMode(FILLMODE_FILL_WINDOW);
+app.setCanvasResolution(RESOLUTION_AUTO);
 window.addEventListener('resize', () => app.resizeCanvas());
 app.start();
 
-app.scene.ambientLight = new pc.Color(0.35, 0.35, 0.4);
+app.scene.ambientLight = new Color(0.35, 0.35, 0.4);
 
 // load the robot arm, a GLB with five animations
-const asset = new pc.Asset('robot-arm', 'container', {
+const asset = new Asset('robot-arm', 'container', {
     url: 'https://developer.playcanvas.com/assets/robot-arm.glb'
 });
 await new Promise((resolve) => {
@@ -207,15 +225,15 @@ await new Promise((resolve) => {
     app.assets.load(asset);
 });
 
-const camera = new pc.Entity('camera');
+const camera = new Entity('camera');
 camera.addComponent('camera', {
-    clearColor: new pc.Color(0.11, 0.12, 0.17)
+    clearColor: new Color(0.11, 0.12, 0.17)
 });
 camera.setPosition(1.75, 1.4, 2.15);
 camera.lookAt(0, 0.75, 0);
 app.root.addChild(camera);
 
-const light = new pc.Entity('light');
+const light = new Entity('light');
 light.addComponent('light', {
     castShadows: true,
     shadowBias: 0.2,
@@ -224,9 +242,9 @@ light.addComponent('light', {
 light.setEulerAngles(48, 38, 0);
 app.root.addChild(light);
 
-const floor = new pc.Entity('floor');
-const floorMaterial = new pc.StandardMaterial();
-floorMaterial.diffuse = new pc.Color(0.24, 0.26, 0.31);
+const floor = new Entity('floor');
+const floorMaterial = new StandardMaterial();
+floorMaterial.diffuse = new Color(0.24, 0.26, 0.31);
 floorMaterial.update();
 floor.addComponent('render', { type: 'plane', material: floorMaterial });
 floor.setLocalScale(20, 1, 20);
@@ -246,7 +264,7 @@ jaws.forEach((meshInstance) => {
 
 // add two events to the pick clip: the jaws are closed at 2.3 seconds, and open again at 4.6
 const pick = asset.resource.animations.find(animation => animation.resource.name === 'pick').resource;
-pick.events = new pc.AnimEvents([
+pick.events = new AnimEvents([
     { time: 2.3, name: 'jaws', string: 'closed' },
     { time: 4.6, name: 'jaws', string: 'open' }
 ]);
@@ -258,7 +276,7 @@ label.style.cssText = 'position: absolute; left: 12px; bottom: 10px; color: #ccc
 label.textContent = 'Waiting for an event...';
 document.body.appendChild(label);
 arm.anim.on('jaws', (event) => {
-    jawMaterial.emissive = event.string === 'closed' ? new pc.Color(0.2, 1, 0.3) : pc.Color.BLACK;
+    jawMaterial.emissive = event.string === 'closed' ? new Color(0.2, 1, 0.3) : Color.BLACK;
     jawMaterial.update();
     label.textContent = `Event: ${event.name}, ${event.string}, at ${event.time} seconds into ${event.track.name}`;
 });

@@ -68,8 +68,8 @@ See [Modern Post Processing](/user-manual/graphics/posteffects/cameraframe/) for
 ### Configuring CameraFrame on a Camera
 
 ```javascript
-const cameraFrame = new pc.CameraFrame(app, cameraEntity.camera);
-cameraFrame.rendering.toneMapping = pc.TONEMAP_NEUTRAL;
+const cameraFrame = new CameraFrame(app, cameraEntity.camera);
+cameraFrame.rendering.toneMapping = TONEMAP_NEUTRAL;
 cameraFrame.rendering.samples = 4;
 cameraFrame.bloom.intensity = 0.01;
 cameraFrame.update();
@@ -80,7 +80,7 @@ On the engine `CameraFrame`, a positive `bloom.intensity` enables bloom; set it 
 For HDR bloom to be effective, the scene should include bright light sources. This is typically achieved using emissive materials with high intensity. For example:
 
 ```javascript
-material.emissive = pc.Color.YELLOW;
+material.emissive = Color.YELLOW;
 material.emissiveIntensity = 50;
 ```
 
@@ -105,7 +105,7 @@ The LUT texture must be loaded with the following settings — LUTs are authored
 - `minfilter: 'linear'`, `magfilter: 'linear'` — bilinear filtering between LUT entries prevents banding
 
 ```javascript
-const lutAsset = new pc.Asset(
+const lutAsset = new Asset(
     'colorLut',
     'texture',
     { url: 'path/to/lut.png' },

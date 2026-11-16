@@ -15,7 +15,7 @@ To pick splats, create a Picker instance with depth enabled (third parameter set
 
 ```javascript
 // Create a picker with depth buffer support for world position detection
-const picker = new pc.Picker(app, 1, 1, true);
+const picker = new Picker(app, 1, 1, true);
 ```
 
 The depth buffer is required if you want to retrieve the 3D world position of the picked point, not just identify which object was clicked.
@@ -86,14 +86,14 @@ Here's a typical picking workflow:
 app.scene.gsplat.enableIds = true;
 
 // Create a splat entity
-const splat = new pc.Entity('splat');
+const splat = new Entity('splat');
 splat.addComponent('gsplat', {
     asset: splatAsset
 });
 app.root.addChild(splat);
 
 // Create picker with depth support
-const picker = new pc.Picker(app, 1, 1, true);
+const picker = new Picker(app, 1, 1, true);
 
 const handlePick = async (mouseX, mouseY) => {
     // Use lower resolution for performance
@@ -134,12 +134,12 @@ const handlePick = async (mouseX, mouseY) => {
 };
 
 // Handle mouse clicks
-app.mouse.on(pc.EVENT_MOUSEDOWN, (event) => {
+app.mouse.on(EVENT_MOUSEDOWN, (event) => {
     handlePick(event.x, event.y);
 });
 
 // Handle touch events
-app.touch.on(pc.EVENT_TOUCHSTART, (event) => {
+app.touch.on(EVENT_TOUCHSTART, (event) => {
     const touch = event.touches[0];
     handlePick(touch.x, touch.y);
 });

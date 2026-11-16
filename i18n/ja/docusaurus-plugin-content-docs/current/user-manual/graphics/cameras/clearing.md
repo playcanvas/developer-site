@@ -6,7 +6,7 @@ description: カメラがレンダーターゲットをクリアする方法を�
 カメラはシーンをレンダリングする前に、レンダーターゲットをクリアします。レンダーターゲットは、[レンダーターゲット](multiple-cameras.md#render-targets)が割り当てられていない限り、画面です。何をどの色でクリアするかは制御できます:
 
 ```javascript
-camera.camera.clearColor = new pc.Color(0, 0, 0);
+camera.camera.clearColor = new Color(0, 0, 0);
 
 camera.camera.clearColorBuffer = true;   // カラーバッファをクリア（デフォルト: true）
 camera.camera.clearDepthBuffer = true;   // 深度バッファをクリア（デフォルト: true）
@@ -21,7 +21,7 @@ camera.camera.clearStencilBuffer = true; // ステンシルバッファをクリ
 
 ```javascript
 // 何も描画されていない部分にはWebページが透けて見える
-camera.camera.clearColor = new pc.Color(0, 0, 0, 0);
+camera.camera.clearColor = new Color(0, 0, 0, 0);
 ```
 
 ## クリアの無効化 {#disabling-clearing}

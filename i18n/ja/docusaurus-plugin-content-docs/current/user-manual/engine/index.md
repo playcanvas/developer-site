@@ -22,45 +22,58 @@ PlayCanvas Engineは、ウェブ向けのオープンソース3Dエンジンで�
 これは完全なEngineアプリです。このページ上で実際に動いていて、編集することもできます。入力するとプレビューが再実行されます。
 
 ```js live-example
-import * as pc from 'playcanvas';
+import {
+    AppBase,
+    AppOptions,
+    CameraComponentSystem,
+    Color,
+    createGraphicsDevice,
+    DEVICETYPE_WEBGPU,
+    Entity,
+    FILLMODE_FILL_WINDOW,
+    LightComponentSystem,
+    RenderComponentSystem,
+    RESOLUTION_AUTO,
+    StandardMaterial
+} from 'playcanvas';
 
 // WebGL 2よりWebGPUを優先してグラフィックスデバイスを作成します
 const canvas = document.getElementById('application');
-const device = await pc.createGraphicsDevice(canvas, {
-    deviceTypes: [pc.DEVICETYPE_WEBGPU]
+const device = await createGraphicsDevice(canvas, {
+    deviceTypes: [DEVICETYPE_WEBGPU]
 });
 device.maxPixelRatio = Math.min(window.devicePixelRatio, 2);
 
 // 使用するコンポーネントシステムを指定してアプリケーションを作成します
-const options = new pc.AppOptions();
+const options = new AppOptions();
 options.graphicsDevice = device;
 options.componentSystems = [
-    pc.RenderComponentSystem,
-    pc.CameraComponentSystem,
-    pc.LightComponentSystem
+    RenderComponentSystem,
+    CameraComponentSystem,
+    LightComponentSystem
 ];
 
-const app = new pc.AppBase(canvas);
+const app = new AppBase(canvas);
 app.init(options);
-app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
-app.setCanvasResolution(pc.RESOLUTION_AUTO);
+app.setCanvasFillMode(FILLMODE_FILL_WINDOW);
+app.setCanvasResolution(RESOLUTION_AUTO);
 window.addEventListener('resize', () => app.resizeCanvas());
 app.start();
 
 // シーン全体をやわらかく照らします
-app.scene.ambientLight = new pc.Color(0.3, 0.3, 0.35);
+app.scene.ambientLight = new Color(0.3, 0.3, 0.35);
 
 // グリッドの中央を見下ろすカメラを作成します
-const camera = new pc.Entity('camera');
+const camera = new Entity('camera');
 camera.addComponent('camera', {
-    clearColor: new pc.Color(0.12, 0.14, 0.17)
+    clearColor: new Color(0.12, 0.14, 0.17)
 });
 camera.setPosition(0, 7, 17);
 camera.lookAt(0, 0, 0);
 app.root.addChild(camera);
 
 // 影を落とす太陽を作成します
-const light = new pc.Entity('light');
+const light = new Entity('light');
 light.addComponent('light', {
     castShadows: true,
     shadowDistance: 40,
@@ -72,16 +85,16 @@ app.root.addChild(light);
 
 // 中央のオレンジから端の紫へと色が変わるボックスのグリッドを作成します
 const size = 10;
-const orange = new pc.Color(1, 0.4, 0.1);
-const purple = new pc.Color(0.4, 0.2, 1);
+const orange = new Color(1, 0.4, 0.1);
+const purple = new Color(0.4, 0.2, 1);
 const boxes = [];
 for (let x = -size; x <= size; x++) {
     for (let z = -size; z <= size; z++) {
-        const material = new pc.StandardMaterial();
+        const material = new StandardMaterial();
         material.diffuse.lerp(orange, purple, Math.hypot(x, z) / (size * 1.5));
         material.update();
 
-        const box = new pc.Entity();
+        const box = new Entity();
         box.addComponent('render', { type: 'box', material: material });
         box.setPosition(x, 0, z);
         app.root.addChild(box);

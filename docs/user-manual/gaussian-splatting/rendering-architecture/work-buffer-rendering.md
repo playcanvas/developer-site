@@ -154,10 +154,10 @@ Use `setParameter()` on the scene's gsplat material to pass uniform values:
 
 ```javascript
 // Create a color lookup texture
-const colorTexture = new pc.Texture(device, {
+const colorTexture = new Texture(device, {
     width: 256,
     height: 1,
-    format: pc.PIXELFORMAT_RGBA32F,
+    format: PIXELFORMAT_RGBA32F,
     // ... other options
 });
 

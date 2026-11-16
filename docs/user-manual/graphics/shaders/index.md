@@ -30,8 +30,8 @@ const shaderDesc = {
             // write your fragment shader source code in WGSL language
         `,
         attributes: {
-            aPosition: pc.SEMANTIC_POSITION,
-            aUv0: pc.SEMANTIC_TEXCOORD0
+            aPosition: SEMANTIC_POSITION,
+            aUv0: SEMANTIC_TEXCOORD0
         }
     };
 
@@ -40,7 +40,7 @@ const shaderDesc = {
 Then create instances of your material, which you can use for rendering:
 
 ```javascript
-const material = new pc.ShaderMaterial(shaderDesc);
+const material = new ShaderMaterial(shaderDesc);
 ```
 
 The shader source code can be written in GLSL if you're targeting the WebGL2 or WebGPU platforms, or in WGSL if you're targeting WebGPU only, or both.
@@ -438,7 +438,7 @@ fn fragmentMain(input: FragmentInput) -> FragmentOutput
 If you have a need to inspect the generated shaders, you can add this to your script
 
 ```javascript
-pc.Tracing.set(pc.TRACEID_SHADER_ALLOC, true);
+Tracing.set(TRACEID_SHADER_ALLOC, true);
 ```
 
 And Each created shader will be logged in the browser console, where you can inspect its source code, for example:

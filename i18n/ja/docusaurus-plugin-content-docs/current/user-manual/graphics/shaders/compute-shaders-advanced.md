@@ -22,11 +22,11 @@ description: "WebGPU コンピュートシェーダーのバインドグルー�
 `computeBindGroupFormat`は、コンピュートシェーダーで利用可能なリソースを定義します。これを指定する場合は、一致するように WGSL に明示的な `@group`/`@binding` インデックスを記述します。様々なタイプのリソースをバインドできます：
 
 ```javascript
-const shader = new pc.Shader(device, {
+const shader = new Shader(device, {
     name: 'MyComputeShader',
-    shaderLanguage: pc.SHADERLANGUAGE_WGSL,
+    shaderLanguage: SHADERLANGUAGE_WGSL,
     cshader: shaderCode,
-    computeBindGroupFormat: new pc.BindGroupFormat(device, [
+    computeBindGroupFormat: new BindGroupFormat(device, [
         // リソースバインディングをここに記述
     ])
 });
@@ -38,10 +38,10 @@ const shader = new pc.Shader(device, {
 
 ```javascript
 // 読み書き可能なストレージバッファ
-new pc.BindStorageBufferFormat('particles', pc.SHADERSTAGE_COMPUTE)
+new BindStorageBufferFormat('particles', SHADERSTAGE_COMPUTE)
 
 // 読み取り専用のストレージバッファ
-new pc.BindStorageBufferFormat('spheres', pc.SHADERSTAGE_COMPUTE, true)
+new BindStorageBufferFormat('spheres', SHADERSTAGE_COMPUTE, true)
 ```
 
 WGSLでは、ストレージバッファに以下のようにアクセスします：
@@ -56,7 +56,7 @@ WGSLでは、ストレージバッファに以下のようにアクセスしま�
 ストレージテクスチャは、コンピュートシェーダーがテクスチャに直接書き込むことを可能にします：
 
 ```javascript
-new pc.BindStorageTextureFormat('outTexture', pc.PIXELFORMAT_RGBA8, pc.TEXTUREDIMENSION_2D)
+new BindStorageTextureFormat('outTexture', PIXELFORMAT_RGBA8, TEXTUREDIMENSION_2D)
 ```
 
 WGSLでは：
@@ -74,10 +74,10 @@ textureStore(outputTexture, vec2i(global_id.xy), color);
 
 ```javascript
 // サンプラーなしのテクスチャ（textureLoad用）
-new pc.BindTextureFormat('inputTexture', pc.SHADERSTAGE_COMPUTE, undefined, undefined, false)
+new BindTextureFormat('inputTexture', SHADERSTAGE_COMPUTE, undefined, undefined, false)
 
 // サンプラー付きのテクスチャ（textureSampleLevel用）
-new pc.BindTextureFormat('inputTexture', pc.SHADERSTAGE_COMPUTE, undefined, undefined, true)
+new BindTextureFormat('inputTexture', SHADERSTAGE_COMPUTE, undefined, undefined, true)
 ```
 
 WGSLでは、サンプラーが含まれている場合、テクスチャ名に`_sampler`サフィックスを付けて使用します：
@@ -104,19 +104,19 @@ let color = textureSampleLevel(inputTexture, inputTexture_sampler, uv, 0.0);
 コンピュートシェーダーにユニフォームデータを渡すには、まずユニフォームバッファフォーマットを定義します：
 
 ```javascript
-const uniformBufferFormat = new pc.UniformBufferFormat(device, [
-    new pc.UniformFormat('tint', pc.UNIFORMTYPE_VEC4),
-    new pc.UniformFormat('time', pc.UNIFORMTYPE_FLOAT),
-    new pc.UniformFormat('count', pc.UNIFORMTYPE_UINT)
+const uniformBufferFormat = new UniformBufferFormat(device, [
+    new UniformFormat('tint', UNIFORMTYPE_VEC4),
+    new UniformFormat('time', UNIFORMTYPE_FLOAT),
+    new UniformFormat('count', UNIFORMTYPE_UINT)
 ]);
 ```
 
 次に、バインドグループとともにシェーダー定義に含めます：
 
 ```javascript
-const shader = new pc.Shader(device, {
+const shader = new Shader(device, {
     name: 'ComputeShader',
-    shaderLanguage: pc.SHADERLANGUAGE_WGSL,
+    shaderLanguage: SHADERLANGUAGE_WGSL,
     cshader: shaderCode,
 
     // ユニフォームバッファフォーマットを割り当て
@@ -125,8 +125,8 @@ const shader = new pc.Shader(device, {
     },
 
     // バインドグループにユニフォームバッファを含める
-    computeBindGroupFormat: new pc.BindGroupFormat(device, [
-        new pc.BindUniformBufferFormat('ub', pc.SHADERSTAGE_COMPUTE),
+    computeBindGroupFormat: new BindGroupFormat(device, [
+        new BindUniformBufferFormat('ub', SHADERSTAGE_COMPUTE),
         // ... その他のバインディング
     ])
 });

@@ -14,10 +14,10 @@ Platforms might implement either path: CPU or GPU, or even both.
 To request access to camera depth, the session should be started as follows:
 
 ```javascript
-app.xr.start(camera, pc.XRTYPE_AR, pc.XRSPACE_LOCALFLOOR, {
+app.xr.start(camera, XRTYPE_AR, XRSPACE_LOCALFLOOR, {
     depthSensing: { // request access to camera depth
-        usagePreference: pc.XRDEPTHSENSINGUSAGE_GPU, // prefer GPU implementation
-        dataFormatPreference: pc.XRDEPTHSENSINGFORMAT_F32 // prefer data as Float 32 array/texture
+        usagePreference: XRDEPTHSENSINGUSAGE_GPU, // prefer GPU implementation
+        dataFormatPreference: XRDEPTHSENSINGFORMAT_F32 // prefer data as Float 32 array/texture
     }
 });
 ```
@@ -52,7 +52,7 @@ WebXR supports it only for the CPU-path. Using Depth Sensing, you can measure th
 
 ```javascript
 // get monoscopic view (mobile screens)
-const view = app.xr.views.get(pc.XREYE_NONE);
+const view = app.xr.views.get(XREYE_NONE);
 if (view) {
     // get distance from the middle of a screen
     const distance = view.getDepth(0.5, 0.5);
@@ -89,7 +89,7 @@ When using the depth texture in the shader, depending on a monoscopic or stereos
 
 ```javascript
 const view = app.xr.views.list[0];
-if (view && view.eye !== pc.XREYE_NONE) {
+if (view && view.eye !== XREYE_NONE) {
     // add define for stereo views
     fragShader = '#define XRDEPTH_ARRAY\n' + fragShader;
 }
@@ -102,7 +102,7 @@ WebXR can provide depth sensing data in two formats: F32 (array of 32-bit floats
 We can use shader branching to unpack depth values from a texture depending on the format:
 
 ```javascript
-if (app.xr.views.depthPixelFormat === pc.PIXELFORMAT_R32F) {
+if (app.xr.views.depthPixelFormat === PIXELFORMAT_R32F) {
     fragShader = '#define XRDEPTH_FLOAT\n' + fragShader;
 }
 ```

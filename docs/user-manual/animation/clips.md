@@ -18,7 +18,7 @@ Most clips come with a model. A GLB or glTF file can contain any number of anima
 Load the file as a `container` asset. Its resource has an `animations` array of animation assets, and each asset's resource is a clip named after the animation:
 
 ```javascript
-const asset = new pc.Asset('robot-arm', 'container', {
+const asset = new Asset('robot-arm', 'container', {
     url: 'https://developer.playcanvas.com/assets/robot-arm.glb'
 });
 asset.ready(() => {
@@ -100,78 +100,96 @@ You can build a clip from keyframes yourself, to animate entities that came from
 A curve's path has three parts. `entityPath` is the names of the entities from the anim component's entity down to the target, starting with the component's own entity. `component` is `graph` for the target's transform, or the name of one of its components. `propertyPath` names the property: `localPosition`, `localRotation` or `localScale` for a transform, or a property of the component, such as a light's `intensity` or `color`.
 
 ```js live-example
-import * as pc from 'playcanvas';
+import {
+    AnimComponentSystem,
+    AnimCurve,
+    AnimData,
+    AnimTrack,
+    AppBase,
+    AppOptions,
+    CameraComponentSystem,
+    Color,
+    createGraphicsDevice,
+    DEVICETYPE_WEBGPU,
+    Entity,
+    FILLMODE_FILL_WINDOW,
+    INTERPOLATION_LINEAR,
+    LightComponentSystem,
+    RenderComponentSystem,
+    RESOLUTION_AUTO,
+    StandardMaterial
+} from 'playcanvas';
 
 // create the application with the component systems it uses
 const canvas = document.getElementById('application');
-const device = await pc.createGraphicsDevice(canvas, {
-    deviceTypes: [pc.DEVICETYPE_WEBGPU]
+const device = await createGraphicsDevice(canvas, {
+    deviceTypes: [DEVICETYPE_WEBGPU]
 });
 device.maxPixelRatio = Math.min(window.devicePixelRatio, 2);
 
-const options = new pc.AppOptions();
+const options = new AppOptions();
 options.graphicsDevice = device;
 options.componentSystems = [
-    pc.RenderComponentSystem,
-    pc.CameraComponentSystem,
-    pc.LightComponentSystem,
-    pc.AnimComponentSystem
+    RenderComponentSystem,
+    CameraComponentSystem,
+    LightComponentSystem,
+    AnimComponentSystem
 ];
 
-const app = new pc.AppBase(canvas);
+const app = new AppBase(canvas);
 app.init(options);
-app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
-app.setCanvasResolution(pc.RESOLUTION_AUTO);
+app.setCanvasFillMode(FILLMODE_FILL_WINDOW);
+app.setCanvasResolution(RESOLUTION_AUTO);
 window.addEventListener('resize', () => app.resizeCanvas());
 app.start();
 
-app.scene.ambientLight = new pc.Color(0.1, 0.1, 0.12);
+app.scene.ambientLight = new Color(0.1, 0.1, 0.12);
 
-const camera = new pc.Entity('camera');
+const camera = new Entity('camera');
 camera.addComponent('camera', {
-    clearColor: new pc.Color(0.05, 0.06, 0.09)
+    clearColor: new Color(0.05, 0.06, 0.09)
 });
 camera.setPosition(0, 2, 5);
 camera.lookAt(0, 0.8, 0);
 app.root.addChild(camera);
 
-const floorMaterial = new pc.StandardMaterial();
-floorMaterial.diffuse = new pc.Color(0.5, 0.5, 0.55);
+const floorMaterial = new StandardMaterial();
+floorMaterial.diffuse = new Color(0.5, 0.5, 0.55);
 floorMaterial.update();
 
-const floor = new pc.Entity('floor');
+const floor = new Entity('floor');
 floor.addComponent('render', { type: 'plane', material: floorMaterial });
 floor.setLocalScale(20, 1, 20);
 app.root.addChild(floor);
 
 // the beacon is the root of the hierarchy that the clip animates: a glowing cube,
 // with an omni light inside it
-const beacon = new pc.Entity('beacon');
+const beacon = new Entity('beacon');
 app.root.addChild(beacon);
 
-const glow = new pc.StandardMaterial();
-glow.emissive = new pc.Color(1, 0.55, 0.2);
+const glow = new StandardMaterial();
+glow.emissive = new Color(1, 0.55, 0.2);
 glow.update();
 
-const cube = new pc.Entity('cube');
+const cube = new Entity('cube');
 cube.addComponent('render', { type: 'box', material: glow, castShadows: false });
 beacon.addChild(cube);
 
-const lamp = new pc.Entity('lamp');
-lamp.addComponent('light', { type: 'omni', color: new pc.Color(1, 0.55, 0.2), range: 6 });
+const lamp = new Entity('lamp');
+lamp.addComponent('light', { type: 'omni', color: new Color(1, 0.55, 0.2), range: 6 });
 cube.addChild(lamp);
 
 // the keyframe times, in seconds, and two sets of values at those times
-const times = new pc.AnimData(1, [0, 0.5, 1]);
-const positions = new pc.AnimData(3, [0, 0.4, 0, 0, 1.6, 0, 0, 0.4, 0]);
-const intensities = new pc.AnimData(1, [0.5, 3, 0.5]);
+const times = new AnimData(1, [0, 0.5, 1]);
+const positions = new AnimData(3, [0, 0.4, 0, 0, 1.6, 0, 0, 0.4, 0]);
+const intensities = new AnimData(1, [0.5, 3, 0.5]);
 
 // each curve links the times to one set of values, and names the property it drives
 const curves = [
-    new pc.AnimCurve([{ entityPath: ['beacon', 'cube'], component: 'graph', propertyPath: ['localPosition'] }], 0, 0, pc.INTERPOLATION_LINEAR),
-    new pc.AnimCurve([{ entityPath: ['beacon', 'cube', 'lamp'], component: 'light', propertyPath: ['intensity'] }], 0, 1, pc.INTERPOLATION_LINEAR)
+    new AnimCurve([{ entityPath: ['beacon', 'cube'], component: 'graph', propertyPath: ['localPosition'] }], 0, 0, INTERPOLATION_LINEAR),
+    new AnimCurve([{ entityPath: ['beacon', 'cube', 'lamp'], component: 'light', propertyPath: ['intensity'] }], 0, 1, INTERPOLATION_LINEAR)
 ];
-const track = new pc.AnimTrack('bob', 1, [times], [positions, intensities], curves);
+const track = new AnimTrack('bob', 1, [times], [positions, intensities], curves);
 
 // play the clip on the beacon
 beacon.addComponent('anim', { activate: true });

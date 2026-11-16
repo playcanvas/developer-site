@@ -91,7 +91,7 @@ for (const geometry of geometries) {
 }
 
 // 結合メッシュを作成
-const mesh = new pc.Mesh(app.graphicsDevice);
+const mesh = new Mesh(app.graphicsDevice);
 mesh.setPositions(positions);
 mesh.setIndices(indices);
 mesh.update();
@@ -102,7 +102,7 @@ mesh.update();
 `MeshInstance.setMultiDraw()`を使用してドローコマンドを割り当て、それらを設定します：
 
 ```javascript
-const meshInst = new pc.MeshInstance(mesh, material);
+const meshInst = new MeshInstance(mesh, material);
 
 // 最大サブドロー数でマルチドローを割り当て
 const cmd = meshInst.setMultiDraw(null, subDraws.length);
@@ -157,8 +157,8 @@ const matrices = new Float32Array(totalInstances * 16);
 // ... 行列を設定 ...
 
 // インスタンシング頂点バッファを作成
-const vbFormat = pc.VertexFormat.getDefaultInstancingFormat(app.graphicsDevice);
-const vb = new pc.VertexBuffer(app.graphicsDevice, vbFormat, totalInstances, {
+const vbFormat = VertexFormat.getDefaultInstancingFormat(app.graphicsDevice);
+const vb = new VertexBuffer(app.graphicsDevice, vbFormat, totalInstances, {
     data: matrices
 });
 meshInst.setInstancing(vb);
@@ -180,26 +180,26 @@ WebGL2は`firstInstance`をサポートしていません。両方のプラッ�
 ```javascript
 if (app.graphicsDevice.isWebGL2 && app.graphicsDevice.supportsMultiDraw) {
     // 行列をテクスチャに保存
-    const matricesTexture = new pc.Texture(app.graphicsDevice, {
+    const matricesTexture = new Texture(app.graphicsDevice, {
         width: totalInstances * 4,  // 行列ごとに4つのvec4
         height: 1,
-        format: pc.PIXELFORMAT_RGBA32F,
-        minFilter: pc.FILTER_NEAREST,
-        magFilter: pc.FILTER_NEAREST,
+        format: PIXELFORMAT_RGBA32F,
+        minFilter: FILTER_NEAREST,
+        magFilter: FILTER_NEAREST,
         mipmaps: false,
         levels: [matrices]
     });
 
     // インスタンスIDを持つカスタム頂点フォーマットを使用
-    const vbFormat = new pc.VertexFormat(app.graphicsDevice, [{
-        semantic: pc.SEMANTIC_ATTR11,
+    const vbFormat = new VertexFormat(app.graphicsDevice, [{
+        semantic: SEMANTIC_ATTR11,
         components: 1,
-        type: pc.TYPE_INT32,
+        type: TYPE_INT32,
         asInt: true
     }]);
 
     // インスタンシングシェーダーチャンクをオーバーライド
-    material.setAttribute('aInstanceId', pc.SEMANTIC_ATTR11);
+    material.setAttribute('aInstanceId', SEMANTIC_ATTR11);
     material.setParameter('uDrawOffsets[0]', drawOffsets);
     material.setParameter('uInstanceMatrices', matricesTexture);
     material.shaderChunks.glsl.set('transformInstancingVS', customShaderCode);

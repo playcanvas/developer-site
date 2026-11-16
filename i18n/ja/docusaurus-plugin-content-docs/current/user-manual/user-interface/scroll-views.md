@@ -32,9 +32,9 @@ scroll view              グループエレメントとScrollViewコンポーネ
 
 ```javascript
 // スクロールビュー。スクリーンの中央に300 × 400で配置する
-const scrollView = new pc.Entity('scroll view');
+const scrollView = new Entity('scroll view');
 scrollView.addComponent('element', {
-    type: pc.ELEMENTTYPE_GROUP,
+    type: ELEMENTTYPE_GROUP,
     anchor: [0.5, 0.5, 0.5, 0.5],
     pivot: [0.5, 0.5],
     width: 300,
@@ -43,9 +43,9 @@ scrollView.addComponent('element', {
 screen.addChild(scrollView);
 
 // ビューポートは、右側のスクロールバー用の20単位を除いてスクロールビューを埋める
-const viewport = new pc.Entity('viewport');
+const viewport = new Entity('viewport');
 viewport.addComponent('element', {
-    type: pc.ELEMENTTYPE_IMAGE,
+    type: ELEMENTTYPE_IMAGE,
     anchor: [0, 0, 1, 1],
     margin: [0, 0, 20, 0],
     mask: true
@@ -53,9 +53,9 @@ viewport.addComponent('element', {
 scrollView.addChild(viewport);
 
 // コンテンツはビューポートの左上隅からぶら下がる
-const content = new pc.Entity('content');
+const content = new Entity('content');
 content.addComponent('element', {
-    type: pc.ELEMENTTYPE_GROUP,
+    type: ELEMENTTYPE_GROUP,
     anchor: [0, 1, 0, 1],
     pivot: [0, 1],
     width: 280,
@@ -65,29 +65,29 @@ content.addComponent('element', {
 viewport.addChild(content);
 
 // 右端に沿ったスクロールバーと、そのハンドル
-const scrollbar = new pc.Entity('scrollbar');
+const scrollbar = new Entity('scrollbar');
 scrollbar.addComponent('element', {
-    type: pc.ELEMENTTYPE_IMAGE,
+    type: ELEMENTTYPE_IMAGE,
     anchor: [1, 0, 1, 1],
     pivot: [1, 1],
     margin: [0, 0, 0, 0],
     width: 20,
-    color: new pc.Color(0.16, 0.18, 0.23)
+    color: new Color(0.16, 0.18, 0.23)
 });
 scrollView.addChild(scrollbar);
 
-const handle = new pc.Entity('handle');
+const handle = new Entity('handle');
 handle.addComponent('element', {
-    type: pc.ELEMENTTYPE_IMAGE,
+    type: ELEMENTTYPE_IMAGE,
     anchor: [0, 1, 1, 1],
     pivot: [1, 1],
     margin: [0, 0, 0, 0],
-    color: new pc.Color(0.5, 0.55, 0.65),
+    color: new Color(0.5, 0.55, 0.65),
     useInput: true
 });
 scrollbar.addChild(handle);
 scrollbar.addComponent('scrollbar', {
-    orientation: pc.ORIENTATION_VERTICAL,
+    orientation: ORIENTATION_VERTICAL,
     handleEntity: handle
 });
 
@@ -97,7 +97,7 @@ scrollView.addComponent('scrollview', {
     verticalScrollbarEntity: scrollbar,
     horizontal: false,
     vertical: true,
-    scrollMode: pc.SCROLL_MODE_BOUNCE,
+    scrollMode: SCROLL_MODE_BOUNCE,
     bounceAmount: 0.1,
     friction: 0.05
 });
@@ -239,10 +239,10 @@ export function ItemList({ items }) {
 
 ```javascript
 content.addComponent('layoutgroup', {
-    orientation: pc.ORIENTATION_VERTICAL,
+    orientation: ORIENTATION_VERTICAL,
     spacing: [0, 10],
     padding: [10, 10, 10, 10],
-    widthFitting: pc.FITTING_STRETCH
+    widthFitting: FITTING_STRETCH
 });
 content.layoutgroup.on('reflow', ({ bounds }) => {
     // コンテンツの高さを、行の高さに上下のパディングを加えたものにする
@@ -258,7 +258,7 @@ content.layoutgroup.on('reflow', ({ bounds }) => {
 
 ```javascript
 // チャットログの最後までスクロールする
-scrollView.scrollview.scroll = new pc.Vec2(0, 1);
+scrollView.scrollview.scroll = new Vec2(0, 1);
 
 // ユーザーのスクロールに反応する
 scrollView.scrollview.on('set:scroll', (scroll) => {

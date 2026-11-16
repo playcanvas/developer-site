@@ -57,16 +57,16 @@ Keep the `.json` file and its `.png` pages together, with the same base name. Th
 
 ```javascript
 // Loading myfont.json also loads myfont.png, and any further pages
-const font = new pc.Asset('myfont', 'font', { url: 'fonts/myfont.json' });
+const font = new Asset('myfont', 'font', { url: 'fonts/myfont.json' });
 app.assets.add(font);
 await new Promise((resolve) => {
     font.ready(resolve);
     app.assets.load(font);
 });
 
-const label = new pc.Entity('label');
+const label = new Entity('label');
 label.addComponent('element', {
-    type: pc.ELEMENTTYPE_TEXT,
+    type: ELEMENTTYPE_TEXT,
     fontAsset: font.id,
     text: 'Hello, World!',
     anchor: [0.5, 0.5, 0.5, 0.5],
@@ -138,18 +138,18 @@ Declare the asset with `type="font"`, as a `.json` file would otherwise be loade
 MSDF glyphs have a single color, so a font asset can't draw color emoji. `CanvasFont`, which is not yet in the API reference, draws characters with the browser's own fonts into textures instead, emoji included. It is a bitmap font: create it at a size at least as large as the text you draw with it, and add the characters you need before you use them:
 
 ```javascript
-const emojiFont = new pc.CanvasFont(app, {
+const emojiFont = new CanvasFont(app, {
     fontName: 'Arial',
     fontSize: 64,
-    color: new pc.Color(1, 1, 1),
+    color: new Color(1, 1, 1),
     width: 256,
     height: 256
 });
 emojiFont.createTextures('Well done! 🎉');
 
-const message = new pc.Entity('message');
+const message = new Entity('message');
 message.addComponent('element', {
-    type: pc.ELEMENTTYPE_TEXT,
+    type: ELEMENTTYPE_TEXT,
     text: 'Well done! 🎉',
     fontSize: 32,
     anchor: [0.5, 0.5, 0.5, 0.5],

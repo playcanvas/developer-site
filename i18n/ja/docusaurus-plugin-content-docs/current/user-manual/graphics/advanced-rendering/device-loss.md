@@ -107,7 +107,7 @@ async function readValues() {
 デバッグビルドを使うローカルビルドのエンジンサンプルで、ブラウザーのコンソールに次のコードを貼り付けます。
 
 ```javascript
-pc.AppBase.getApplication().graphicsDevice.debugLoseContext(1000);
+AppBase.getApplication().graphicsDevice.debugLoseContext(1000);
 ```
 
 この**内部テスト用ヘルパーは公開APIではありません**。実際にWebGLコンテキストロストまたはWebGPUデバイスの破棄を発生させ、1,000ミリ秒の待機後に復旧を試みます。この待機時間は復旧完了までの時間を保証するものではありません。実装は非デバッグビルドから除去されるため、本番アプリケーションのロジックには使用しないでください。
