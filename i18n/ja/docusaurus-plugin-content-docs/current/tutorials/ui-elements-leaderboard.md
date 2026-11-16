@@ -5,6 +5,9 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/501
 description: JSONデータからスクロールするリーダーボードを埋め、Elementのテキスト行とスクリプトのソートでスコア表示を行います。
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 <div className="iframe-container">
     <iframe src="https://playcanv.as/p/nbMbtAGH/" title="User Interface - Leaderboard" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
@@ -85,6 +88,87 @@ Group Elementには分割された水平アンカーがあることに注意し�
 
 JSONアセットを読み取り、リーダーボードにデータを埋め込む`leaderboard`スクリプトは次のようになります。
 
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
+
+```javascript
+import { Script } from 'playcanvas';
+
+export class Leaderboard extends Script {
+    static scriptName = "leaderBoard";
+
+    /**
+     * @attribute
+     * @title Template
+     * @type {Entity}
+     */
+    template = null;
+
+    /**
+     * @attribute
+     * @title Personal
+     * @type {Entity}
+     */
+    personal = null;
+
+    /**
+     * @attribute
+     * @title Leaderboard
+     * @type {Entity}
+     */
+    leaderboard = null;
+
+    initialize() {
+        this.entries = [];
+
+        this.load((data) => {
+            this.clear();
+
+            // add the personal entry
+            let y = -75;
+            this.addEntry(this.personal, y, data.personal.position, data.personal.name, data.personal.score);
+
+            // add the top ten
+            y = -60;
+            for (let i = 0; i < Math.min(data.leaderboard.length, 10); i++) {
+                this.addEntry(this.leaderboard, y, i + 1, data.leaderboard[i].name, data.leaderboard[i].score);
+                y -= 99; // offset each entry
+            }
+        });
+    }
+
+    clear() {
+        this.entries.forEach(entry => entry.destroy());
+        this.entries = [];
+    }
+
+    addEntry(parent, y, position, name, score) {
+        const entry = this.template.clone();
+        entry.enabled = true;
+
+        entry.findByName("Position").element.text = position.toString();
+        entry.findByName("Name").element.text = name.toUpperCase();
+        entry.findByName("Score").element.text = score.toString();
+
+        this.entries.push(entry);
+
+        parent.addChild(entry);
+        entry.translateLocal(0, y, 0);
+    }
+
+    load(callback) {
+        const asset = this.app.assets.find("leaderboard-data.json");
+        asset.ready(() => {
+            callback(asset.resource);
+        });
+        this.app.assets.load(asset);
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
+
 ```javascript
 var Leaderboard = pc.createScript('leaderboard');
 
@@ -150,3 +234,6 @@ Leaderboard.prototype.load = function (callback) {
     this.app.assets.load(asset);
 };
 ```
+
+</TabItem>
+</Tabs>

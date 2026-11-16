@@ -5,6 +5,9 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406
 description: Node.js の Socket.io サーバーを立ち上げ、ブラウザ間でプレイヤーの transform を同期し、ホスト型 SDK なしでカスタムマルチプレイを実現します。
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 :::note
 
 このチュートリアルでは、ゼロから自分自身のマルチプレイヤーを作成する方法について説明します。ホストされたマルチプレイヤーサービスを使用する場合は、[Colyseus](/tutorials/real-time-multiplayer-colyseus)および[Photon](/tutorials/real-time-multiplayer-photon)のチュートリアルがあります。
@@ -125,6 +128,70 @@ socket.on('playerJoined', function (name) {
 
 プレイヤーにスクリプトコンポーネントを追加し、 `Movement.js` という新しいスクリプトをアタッチします。
 
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
+
+```javascript
+import { Script, Vec3, KEY_A, KEY_D, KEY_W, KEY_S } from 'playcanvas';
+
+export class Movement extends Script {
+    static scriptName = "movement";
+
+    /**
+     * @attribute
+     * @title Player Speed
+     * @type {number}
+     */
+    playerSpeed = 30;
+
+    // initialize code called once per entity
+    initialize() {
+        this.force = new Vec3();
+    }
+
+    // update code called every frame
+    update(dt) {
+        const forward = this.entity.forward;
+        const right = this.entity.right;
+        const app = this.app;
+
+        let x = 0;
+        let z = 0;
+
+        if (app.keyboard.isPressed(KEY_A)) {
+            x -= right.x;
+            z -= right.z;
+        }
+
+        if (app.keyboard.isPressed(KEY_D)) {
+            x += right.x;
+            z += right.z;
+        }
+
+        if (app.keyboard.isPressed(KEY_W)) {
+            x += forward.x;
+            z += forward.z;
+        }
+
+        if (app.keyboard.isPressed(KEY_S)) {
+            x -= forward.x;
+            z -= forward.z;
+        }
+
+        if (x !== 0 || z !== 0) {
+            x *= dt;
+            z *= dt;
+
+            this.force.set(x, 0, z).normalize().scale(this.playerSpeed);
+            this.entity.rigidbody.applyForce(this.force);
+        }
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
+
 ```javascript
 var Movement = pc.createScript('movement');
 
@@ -177,6 +244,9 @@ Movement.prototype.update = function(dt) {
     }
 };
 ```
+
+</TabItem>
+</Tabs>
 
 When you launch the game you should be able to use WASD to move your player around. If not, you’ve missed a step or did not set the correct settings for the entity. Try changing the speed attribute on the movement script.
 
@@ -264,6 +334,49 @@ socket.on('playerJoined', function (data) {
 
 そして、Network.js 内に以下の新しい関数を宣言します。
 
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
+
+```javascript
+    initializePlayers (data) {
+        this.players = data.players;
+        Network.id = data.id;
+
+        for (let id in this.players) {
+            if (id != Network.id) {
+                this.players[id].entity = this.createPlayerEntity(this.players[id]);
+            }
+        }
+
+        this.initialized = true;
+        console.log('initialized');
+    };
+
+    createPlayerEntity (data) {
+        // Create a new player entity
+        const newPlayer = this.other.clone();
+        newPlayer.enabled = true;
+
+        // Add the entity to the entity hierarchy
+        this.other.getParent().addChild(newPlayer);
+
+        // If a location was given, teleport the new entity to the position of the connected player
+        if (data)
+            newPlayer.rigidbody.teleport(data.x, data.y, data.z);
+
+        return newPlayer;
+    };
+
+    addPlayer (data) {
+        this.players[data.id] = data;
+        this.players[data.id].entity = this.createPlayerEntity(data);
+    };
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
+
 ```javascript
 Network.prototype.initializePlayers = function (data) {
     this.players = data.players;
@@ -300,6 +413,9 @@ Network.prototype.addPlayer = function (data) {
 };
 ```
 
+</TabItem>
+</Tabs>
+
 ここでゲームに参加すると、クライアントがサーバーに接続したことを伝え、サーバーからプレイヤーのリストとその位置を受信します。その後、接続されている各プレイヤーに対して新しいエンティティを作成し、現在の位置に移動します。唯一の問題は、サーバーがすべてのプレイヤーの位置を把握していないことです。現在位置を1フレームごとにサーバーに送信する必要があります。
 
 これらのコードを Network.js の `initialize` に追加します。
@@ -320,6 +436,26 @@ Network.prototype.update = function (dt) {
 
 そして、Network.js 内に以下の新しい関数を宣言します。
 
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
+
+```javascript
+movePlayer(data) {
+    if (this.initialized)
+        this.players[data.id].entity.rigidbody.teleport (data.x, data.y, data.z);
+}
+
+updatePosition() {
+    if (this.initialized) {
+        const pos = this.player.getPosition();
+        this.socket.emit ('positionUpdate', {id: this.id, x: pos.x, y: pos.y, z: pos.z});
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
+
 ```javascript
 Network.prototype.movePlayer = function (data) {
     if (this.initialized && !this.players[data.id].deleted) {
@@ -334,6 +470,9 @@ Network.prototype.updatePosition = function () {
     }
 };
 ```
+
+</TabItem>
+</Tabs>
 
 サーバーに戻り、プレイヤーが自分の位置を送信した場合にどうなるかを考慮する必要があります。サーバーで新しいイベントを追加する必要があります。
 

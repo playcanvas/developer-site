@@ -5,6 +5,9 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405
 description: Web Audio の analyser の周波数データを PlayCanvas の Script に流し込み、再生中の音楽にリアルタイムで反応するバーやグラフをアニメーションします。
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 <div className="iframe-container">
     <iframe src="https://playcanv.as/p/BqhCi6oy/" title="Creating a Music Visualizer" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
@@ -16,6 +19,49 @@ description: Web Audio の analyser の周波数データを PlayCanvas の Scri
 オーディオビジュアライザは2つのスクリプトで構成されています。アナライザは、オーディオを再生し、アナライザノードを介してデータを抽出します。これは最新のブラウザに組み込まれているWeb Audio APIの一部です。ビジュアライザは、アナライザからデータを取得してグラフとして画面上にそれをレンダリングします。
 
 ## アナライザー (Analyser)
+
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
+
+```javascript
+import { Script } from 'playcanvas';
+
+export class Analyser extends Script {
+    static scriptName = "analyser";
+
+    /**
+     * @attribute
+     * @title Fftsize
+     * @type {number}
+     */
+    fftsize = null;
+
+    // initialize code called once per entity
+    initialize() {
+        const context = this.app.systems.sound.context;
+
+        // アナライザーノードを作成して設定する
+        this.analyser = context.createAnalyser();
+        this.analyser.smoothingTimeConstant = 0.6;
+        this.analyser.fftSize = this.fftsize;
+
+        this.freqData = new Float32Array(this.analyser.frequencyBinCount);
+        this.timeData = new Float32Array(this.analyser.fftSize);
+
+        const slot = this.entity.sound.slot("track");
+        slot.setExternalNodes(this.analyser);
+    }
+
+    // update code called every frame
+    update(dt) {
+        this.analyser.getFloatFrequencyData(this.freqData);
+        this.analyser.getFloatTimeDomainData(this.timeData);
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
 
 ```javascript
 var Analyser = pc.createScript('analyser');
@@ -47,6 +93,9 @@ Analyser.prototype.update = function(dt) {
 };
 ```
 
+</TabItem>
+</Tabs>
+
 ここでコードを詳しく見てみましょう。
 
 まず、`context`を取得します。これは[`AudioContext`](https://developer.mozilla.org/en/docs/Web/API/AudioContext)のアプリケーションインスタンスです。これは、最新ブラウザの標準であるWeb Audio APIに含まれる[`AnalyserNode`](https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode) を新規で作成するために使用します。`AnalyserNode`により、フレーム毎にオーディオの生のデータに値の配列としてアクセスすることが可能になります。いくつかの`smoothingTimeConstant`プロパティにより、データサンプリングが時間と共に平滑化されるかどうかを決定します。`0`の場合は平滑化されません。`1`は非常に滑らかになります。`fftSize`は、アナライザノードが生成するサンプル数を定義します。これは2の累乗である必要があります。高いく設定するほど綿密になり、CPUに負荷がかかります。
@@ -58,6 +107,85 @@ Analyser.prototype.update = function(dt) {
 次に、私たちの更新ループでは、`AnalyserNode`ニョードメソッド`getFloatFrequencyData`と`getFloatTimeDomainData`を使用して、配列にデータを記録します。このデータをビジュアライザースクリプトで使用します。
 
 ## ビジュアライザー
+
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
+
+```javascript
+import { Script, Vec3 } from 'playcanvas';
+
+export class Visualizer extends Script {
+    static scriptName = "visualizer";
+
+    /**
+     * @attribute
+     * @title Analyser
+     * @type {Entity}
+     */
+    analyser = null;
+
+    /**
+     * @attribute
+     * @title Freqcolor
+     * @type {Color}
+     */
+    freqcolor = null;
+
+    /**
+     * @attribute
+     * @title Timecolor
+     * @type {Color}
+     */
+    timecolor = null;
+
+    /**
+     * @attribute
+     * @title Height Scale
+     * @type {number}
+     */
+    heightScale = 1;
+
+    // initialize code called once per entity
+    initialize() {
+        this.lines = [];
+        const count = this.analyser.script.analyser.fftsize;
+        for (let i = 0; i < count; i++) {
+            this.lines.push(new Vec3(), new Vec3()); // 線分ごとに2つずつ追加する
+        }
+
+        this.xScale = 0.10 * 2048 / count;
+        this.minDb = this.analyser.script.analyser.analyser.minDecibels;
+        this.maxDb = this.analyser.script.analyser.analyser.maxDecibels;
+        this.freqScale = 1 / (this.maxDb - this.minDb);
+        this.freqOffset = this.minDb;
+    }
+
+    // update code called every frame
+    update(dt) {
+        this.renderData(this.analyser.script.analyser.freqData, this.freqcolor, this.freqScale, this.freqOffset);
+        this.renderData(this.analyser.script.analyser.timeData, this.timecolor, 0.5, 0);
+    }
+
+    renderData(data, color, scale, offset) {
+        let lineIndex = 0;
+        for (let i = 0; i < data.length - 1; i++) {
+            if (lineIndex < this.lines.length - 1) {
+                const h1 = scale * (data[i] - offset);
+                const h2 = scale * (data[i + 1] - offset);
+
+                this.lines[lineIndex].set(i * this.xScale, this.heightScale * h1, 0);
+                this.lines[lineIndex + 1].set((i + 1) * this.xScale, this.heightScale * h2, 0);
+
+                lineIndex += 2;
+            }
+        }
+        this.app.renderLines(this.lines, color);
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
 
 ```javascript
 var Visualizer = pc.createScript('visualizer');
@@ -122,6 +250,9 @@ Visualizer.prototype.renderData = function (data, color, scale, offset) {
     this.app.renderLines(this.lines, color);
 };
 ```
+
+</TabItem>
+</Tabs>
 
 ビジュアライザースクリプトは、すべてのアナライザーからのデータを取得し、[`this.app.renderLines`](https://api.playcanvas.com/engine/classes/AppBase.html#renderlines) APIを使用して直線グラフとしてレンダリングします。
 

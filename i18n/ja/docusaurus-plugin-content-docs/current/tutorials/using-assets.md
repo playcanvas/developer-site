@@ -5,6 +5,9 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406
 description: レジストリから実行時にAssetを検索、参照、ストリーミングし、すべてのファイルをエディターのプリロードだけに頼りません。
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 <div className="iframe-container">
     <iframe src="https://playcanv.as/p/QwDM4qaF/" title="Using the Asset Registry" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
@@ -41,7 +44,7 @@ description: レジストリから実行時にAssetを検索、参照、スト�
 ## プリロードされたアセットの使用
 
 ```javascript
-    if (app.keyboard.isPressed(pc.KEY_SPACE)) {
+    if (app.keyboard.isPressed(KEY_SPACE)) {
         if (this.entity.render.asset !== this.b.id) {
             // 新しいRenderアセットにRenderコンポーネントを更新する
             console.log('Changed to B Render Asset');
@@ -67,7 +70,7 @@ description: レジストリから実行時にAssetを検索、参照、スト�
 ## ランタイムでアセットをロードする
 
 ```javascript
-if (app.keyboard.isPressed(pc.KEY_C)) {
+if (app.keyboard.isPressed(KEY_C)) {
     if (this.c.loaded) {
         if (this.entity.render.asset !== this.c.id) {
             console.log('Changed to C Render Asset');
@@ -88,7 +91,7 @@ if (app.keyboard.isPressed(pc.KEY_C)) {
 <img loading="lazy" src="/img/tutorials/using_assets/using-assets-c-preload.png" width="360" />
 
 ```javascript
-if (this.app.keyboard.isPressed(pc.KEY_L)) {
+if (this.app.keyboard.isPressed(KEY_L)) {
     this.app.assets.load(this.c);
 }
 ```
@@ -98,6 +101,81 @@ if (this.app.keyboard.isPressed(pc.KEY_L)) {
 アセットがロードされたら、`asset.resource`は`Render`インスタンスになり、`C`キーを押してRenderコンポーネントにアセットを割り当てることができます。
 
 ## 完成したスクリプト
+
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
+
+```javascript
+import { Script, KEY_SPACE, KEY_C, KEY_L } from 'playcanvas';
+
+export class UpdateAsset extends Script {
+    static scriptName = "updateAsset";
+
+    /**
+     * @attribute
+     * @title A
+     * @type {Asset}
+     * @resource render
+     */
+    a = null;
+
+    /**
+     * @attribute
+     * @title B
+     * @type {Asset}
+     * @resource render
+     */
+    b = null;
+
+    /**
+     * @attribute
+     * @title C
+     * @type {Asset}
+     * @resource render
+     */
+    c = null;
+
+    // initialize code called once per entity
+    initialize() {
+        this.app.keyboard.preventDefault = true;
+    }
+
+    // update code called every frame
+    update(dt) {
+        var app = this.app;
+
+        if (app.keyboard.isPressed(KEY_SPACE)) {
+            if (this.entity.render.asset !== this.b.id) {
+                // Renderアセットを新しいRenderアセットに更新する
+                console.log('Changed to B Render Asset');
+                this.entity.render.asset = this.b;
+            }
+        } else {
+            if (app.keyboard.isPressed(KEY_C)) {
+                if (this.c.loaded) {
+                    if (this.entity.render.asset !== this.c.id) {
+                        console.log('Changed to C Render Asset');
+                        this.entity.render.asset = this.c;
+                    }
+                }
+            } else {
+                if (this.entity.render.asset !== this.a.id) {
+                    // オリジナルのRenderアセットに戻す
+                    console.log('Changed to A Render Asset');
+                    this.entity.render.asset = this.a;
+                }
+            }
+        }
+
+        if (app.keyboard.isPressed(KEY_L)) {
+            app.assets.load(this.c);
+        }
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
 
 ```javascript
 var UpdateAsset = pc.createScript('updateAsset');
@@ -154,6 +232,9 @@ UpdateAsset.prototype.update = function(dt) {
     }
 };
 ```
+
+</TabItem>
+</Tabs>
 
 ## AssetRegistryイベント
 

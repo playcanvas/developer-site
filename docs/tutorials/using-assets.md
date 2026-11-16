@@ -41,7 +41,7 @@ In this case we've declared three script attributes `a`, `b` and `c` which are a
 ## Using preloaded assets
 
 ```javascript
-    if (app.keyboard.isPressed(pc.KEY_SPACE)) {
+    if (app.keyboard.isPressed(KEY_SPACE)) {
         if (this.entity.render.asset !== this.b.id) {
             // update the render component to the new Render Asset
             console.log('Changed to B Render Asset');
@@ -67,7 +67,7 @@ So, the `A` and `B` models are preloaded, which means we know they will be ready
 ## Loading assets at runtime
 
 ```javascript
-if (app.keyboard.isPressed(pc.KEY_C)) {
+if (app.keyboard.isPressed(KEY_C)) {
     if (this.c.loaded) {
         if (this.entity.render.asset !== this.c.id) {
             console.log('Changed to C Render Asset');
@@ -88,7 +88,7 @@ The **C** render asset is not marked as *preload*, so in the code above, you can
 <img loading="lazy" src="/img/tutorials/using_assets/using-assets-c-preload.png" width="360" />
 
 ```javascript
-if (this.app.keyboard.isPressed(pc.KEY_L)) {
+if (this.app.keyboard.isPressed(KEY_L)) {
     this.app.assets.load(this.c);
 }
 ```
@@ -102,8 +102,8 @@ Once the asset is loaded `asset.resource` will be a `Render` instance and we can
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-<Tabs defaultValue="classic" groupId='script-code'>
-<TabItem  value="esm" label="ESM">
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
 
 ```javascript
 import { Script, KEY_SPACE, KEY_C, KEY_L } from 'playcanvas';

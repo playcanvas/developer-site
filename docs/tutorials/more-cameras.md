@@ -21,8 +21,8 @@ methods on the ComponentSystem.
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-<Tabs defaultValue="classic" groupId='script-code'>
-<TabItem  value="esm" label="ESM">
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
 
 ```javascript
 import { Script, KEY_SPACE } from 'playcanvas';
@@ -116,8 +116,8 @@ top and bottom sides of the camera [frustum](https://en.wikipedia.org/wiki/Frust
 
 Another way you might want to create interactivity with cameras is by switching between multiple cameras. You can achieve this by adding several camera Entities to your Scene; ensure that only one is activated; and then alter which is the current camera at runtime in your script.
 
-<Tabs defaultValue="classic" groupId='script-code'>
-<TabItem  value="esm" label="ESM">
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
 
 ```javascript
 import { Script, KEY_SPACE, KEY_LEFT, KEY_RIGHT } from 'playcanvas';

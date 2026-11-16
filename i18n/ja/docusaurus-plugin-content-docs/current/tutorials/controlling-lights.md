@@ -5,6 +5,9 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405
 description: Script からライトのオンオフや色・強度を調整し、Scene で簡単なランタイムのライティング変更を行います。
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 <div className="iframe-container">
     <iframe src="https://playcanv.as/p/tiKpka9M/" title="Controlling Lights" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
@@ -18,7 +21,7 @@ description: Script からライトのオンオフや色・強度を調整し、
 ## 照明のコマンド
 
 ```javascript
-if (app.keyboard.wasPressed(pc.KEY_1)) {
+if (app.keyboard.wasPressed(KEY_1)) {
     this.spot.light.enabled = !this.spot.light.enabled;
 }
 ```
@@ -26,7 +29,7 @@ if (app.keyboard.wasPressed(pc.KEY_1)) {
 この行は、'spot'エンティティのLightコンポーネントのON/OFFを切り替えます。
 
 ```javascript
-this.color1 = new pc.Color(1, 1, 1);
+this.color1 = new Color(1, 1, 1);
 ```
 
 新しい色の配列が宣言され、最初の3つの値はそれぞれ赤、緑、青の値に影響します。
@@ -54,6 +57,87 @@ this.spot.light.intensity = 10*s;
 私たちはスポットライト(基本的なトーチモデルの親アセンブリに添付)、球体モデルに添付されたオムニライトに加えて、新しいSceneが作成された際に自動的に作成されるデフォルトのディレクショナルライトを追加しました。制御スクリプトはルートエンティティにアタッチされました。球体とトーチは、シーンの中心に存在する空のエンティティの子になっているため、簡単に回転できます。フルエディターシーンとスクリプトは、'controllingLights'シーンで[ここからアクセスできます](https://playcanvas.com/project/405812/overview/tutorial-controlling-lights)。
 
 上記のPlayCanvasアプリで使用される完全なコードは次のとおりです。
+
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
+
+```javascript
+import { Script, KEY_1, KEY_2, KEY_3, Color } from 'playcanvas';
+
+export class LightHandler extends Script {
+    static scriptName = "lightHandler";
+        
+    // initialize code called once per entity
+    initialize() {
+        const app = this.app;
+
+        this.spot = app.root.findByName("SpotLight");
+        this.point = app.root.findByName("PointLight");
+        this.directional = app.root.findByName("DirectionalLight");
+        this.pivot1 = app.root.findByName("Pivot1");
+        this.pivot2 = app.root.findByName("Pivot2");
+        this.timer = 0;
+        this.color1 = new Color(1, 1, 1);
+        this.color2 = new Color(1, 1, 1);
+        this.color3 = new Color(1, 1, 1);
+    };
+
+    // update code called every frame
+    update(dt) {
+        var app = this.app;
+
+        this.pivot();
+
+        if (app.keyboard.wasPressed(KEY_1)) {
+            this.spot.light.enabled = !this.spot.light.enabled;
+        }
+        if (app.keyboard.wasPressed(KEY_2)) {
+            this.point.light.enabled = !this.point.light.enabled;
+        }
+        if (app.keyboard.wasPressed(KEY_3)) {
+            this.directional.light.enabled = !this.directional.light.enabled;
+        }
+
+        // a counter that is used as input to sin the functions determining light properties for all lights.
+        this.timer += dt;
+
+        // these 3 code blocks assign color and intensity values that vary according to a sin function
+        // all sin inputs are in radians
+        var s = Math.abs(Math.sin(1 + this.timer));
+        var r = 1-s/2;
+        var g = s-0.2;
+        var b = 0.55+s/2;
+        this.color1.set(r, g, b);
+        this.spot.light.color = this.color1;
+        this.spot.light.intensity = 10*s;
+
+        s = Math.abs(Math.sin(2 + this.timer));
+        r = s/2;
+        g = 0.25+s/2;
+        b = 1.0-s;
+        this.color2.set(r, g, b);
+        this.point.light.color = this.color2;
+        this.point.light.intensity = 10*s;
+
+        s = Math.abs(Math.sin(3 + this.timer));
+        r = 0.25+s/2;
+        g = 0.75-s/2;
+        b = 0.25+s/2;
+        this.color3.set(r, g, b);
+        this.directional.light.color = this.color3;
+        this.directional.light.intensity = 3*(1-s);
+    }
+
+    // this function rotates all three lights about their parent entities (all at the centre of the scene) to easily create circular motion.
+    pivot() {
+        this.pivot1.rotate(0, 2, 0);
+        this.pivot2.rotate(0, -3, 0);
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
 
 ```javascript
 var LightHandler = pc.createScript('lightHandler');
@@ -125,3 +209,6 @@ LightHandler.prototype.pivot = function () {
     this.pivot2.rotate(0, -3, 0);
 };
 ```
+
+</TabItem>
+</Tabs>

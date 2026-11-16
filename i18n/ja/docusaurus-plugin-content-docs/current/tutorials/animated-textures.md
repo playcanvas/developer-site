@@ -5,6 +5,9 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405
 description: 毎フレームマテリアルの UV オフセットをスクロールし、流れる水やコンベアなど動く表面を表現します。
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 <div className='iframe-container'>
     <iframe src="https://playcanv.as/p/BM93v05L/" title="Animated Textures" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
@@ -16,6 +19,32 @@ description: 毎フレームマテリアルの UV オフセットをスクロー
 ## マップオフセットでマテリアルをスクロール
 
 例の四角形平面では、スクリプト `scrolling-texture.js` を使用してUVオフセットをフレームごとに常に移動させています。これは、流れる水をシミュレートするために使用することができます。以下に更新ループが表示されます。
+
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
+
+```javascript
+update(dt) {
+    const velocity = ScrollingTexture.tmpVec2;
+    const offset = ScrollingTexture.tmpOffset;
+
+    // テクスチャのオフセット量を計算する
+    // Speed * dt
+    velocity.set(this.speed.x, this.speed.y);
+    velocity.scale(dt);
+
+    // 現在のdiffuseおよびnormalマップのオフセット値を更新する
+    offset.copy(this.material.diffuseMapOffset);
+    offset.add(velocity);
+
+    this.material.diffuseMapOffset = offset;
+    this.material.normalMapOffset = offset;
+    this.material.update();
+};
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
 
 ```javascript
 ScrollingTexture.prototype.update = function(dt) {
@@ -36,6 +65,9 @@ ScrollingTexture.prototype.update = function(dt) {
     this.material.update();
 };
 ```
+
+</TabItem>
+</Tabs>
 
 オフセットを一時的なベクトル `tmp` に計算します。これは単純に `speed * timeStep` です。次に、このオフセットをDiffuseマップとNormalマップのoffsetプロパティに追加します。これは `diffuseMapOffset` と `normalMapOffset` プロパティを変更することによって行います。これらの値は `Vec2` であり、テクスチャを表面にマッピングするために使用されるUV座標をシフトします。他のマップ（例：Emissive）を使用している場合は、これらのオフセットプロパティも更新する必要があります。最後に、変更をシェーダーに反映させるために `material.update()` を呼び出します。
 

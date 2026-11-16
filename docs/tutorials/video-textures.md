@@ -23,11 +23,18 @@ This script performs the following functions:
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-<Tabs defaultValue="classic" groupId='script-code'>
-<TabItem  value="esm" label="ESM">
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
 
 ```javascript
-import { Script } from 'playcanvas';
+import {
+    Script,
+    Texture,
+    PIXELFORMAT_RGB8,
+    FILTER_LINEAR_MIPMAP_LINEAR,
+    FILTER_LINEAR,
+    ADDRESS_CLAMP_TO_EDGE
+} from 'playcanvas';
 
 export class VideoTexture extends Script {
     static scriptName = "videoTexture";
@@ -93,7 +100,7 @@ export class VideoTexture extends Script {
 
         // Create a texture to hold the video frame data
         this.videoTexture = new Texture(app.graphicsDevice, {
-            format: PIXELFORMAT_R8_G8_B8,
+            format: PIXELFORMAT_RGB8,
             minFilter: FILTER_LINEAR_MIPMAP_LINEAR,
             magFilter: FILTER_LINEAR,
             addressU: ADDRESS_CLAMP_TO_EDGE,
@@ -186,7 +193,7 @@ VideoTexture.prototype.initialize = function() {
 
     // Create a texture to hold the video frame data
     this.videoTexture = new pc.Texture(app.graphicsDevice, {
-        format: pc.PIXELFORMAT_R8_G8_B8,
+        format: pc.PIXELFORMAT_RGB8,
         minFilter: pc.FILTER_LINEAR_MIPMAP_LINEAR,
         magFilter: pc.FILTER_LINEAR,
         addressU: pc.ADDRESS_CLAMP_TO_EDGE,

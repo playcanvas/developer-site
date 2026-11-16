@@ -5,6 +5,9 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405
 description: 毎ティックでHTMLビデオのフレームを動的テクスチャに流し込み、メッシュにマッピングしてワールド内の画面やアニメーションするビルボードにします。
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 <div className="iframe-container">
     <iframe src="https://playcanv.as/p/6wt5T87E/" title="Video Textures" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
@@ -19,6 +22,120 @@ description: 毎ティックでHTMLビデオのフレームを動的テクスチ
 * HTMLのビデオ要素を作成して再生する
 * TVモデルのマテリアルに新しいテクスチャを適用する
 * ビデオデータをフレームごとにテクスチャに更新する
+
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
+
+```javascript
+import {
+    Script,
+    Texture,
+    PIXELFORMAT_RGB8,
+    FILTER_LINEAR_MIPMAP_LINEAR,
+    FILTER_LINEAR,
+    ADDRESS_CLAMP_TO_EDGE
+} from 'playcanvas';
+
+export class VideoTexture extends Script {
+    static scriptName = "videoTexture";
+
+    /**
+     * このビデオテクスチャで再生するMP4ビデオアセットです。
+     * 
+     * @attribute
+     * @title ビデオアセット
+     * @type {Asset}
+     */
+    videoAsset = null;
+
+    /**
+     * ビデオアセットが選択されていない場合に使用するURLです。
+     * 
+     * @attribute
+     * @title ビデオURL
+     * @type {string}
+     */
+    videoUrl = null;
+
+    /**
+     * ビデオテクスチャが再生可能になったら発生するイベントです。
+     * 
+     * @attribute
+     * @title 再生イベント
+     * @type {string}
+     */
+    playEvent = '';
+
+    // initialize code called once per entity
+    initialize() {
+        const app = this.app;
+
+        // Create HTML Video Element to play the video
+        const video = document.createElement('video');
+        video.loop = true;
+
+        // muted attribute is required for videos to autoplay
+        video.muted = true;
+
+        // critical for iOS or the video won't initially play, and will go fullscreen when playing
+        video.playsInline = true;
+
+        // needed because the video is being hosted on a different server url
+        video.crossOrigin = "anonymous";
+
+        // autoplay the video
+        video.autoplay = true;
+
+        // iOS video texture playback requires that you add the video to the DOMParser
+        // with at least 1x1 as the video's dimensions
+        const style = video.style;
+        style.width = '1px';
+        style.height = '1px';
+        style.position = 'absolute';
+        style.opacity = '0';
+        style.zIndex = '-1000';
+        style.pointerEvents = 'none';
+
+        document.body.appendChild(video);
+
+        // Create a texture to hold the video frame data
+        this.videoTexture = new Texture(app.graphicsDevice, {
+            format: PIXELFORMAT_RGB8,
+            minFilter: FILTER_LINEAR_MIPMAP_LINEAR,
+            magFilter: FILTER_LINEAR,
+            addressU: ADDRESS_CLAMP_TO_EDGE,
+            addressV: ADDRESS_CLAMP_TO_EDGE,
+            mipmaps: true
+        });
+        this.videoTexture.setSource(video);
+
+        video.addEventListener('canplaythrough', (e) => {
+            app.fire(this.playEvent, this.videoTexture);
+            video.play();
+        });
+
+        // set video source
+        video.src = this.videoAsset ? this.videoAsset.getFileUrl() : this.videoUrl;
+
+        document.body.appendChild(video);
+        video.load();
+
+        this.on('destroy', () => {
+            this.videoTexture.destroy();
+            video.remove();
+        });
+    }
+
+    // update code called every frame
+    update(dt) {
+        // Transfer the latest video frame to the video texture
+        this.videoTexture.upload();
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
 
 ```javascript
 var VideoTexture = pc.createScript('videoTexture');
@@ -76,7 +193,7 @@ VideoTexture.prototype.initialize = function() {
 
     // Create a texture to hold the video frame data
     this.videoTexture = new pc.Texture(app.graphicsDevice, {
-        format: pc.PIXELFORMAT_R8_G8_B8,
+        format: pc.PIXELFORMAT_RGB8,
         minFilter: pc.FILTER_LINEAR_MIPMAP_LINEAR,
         magFilter: pc.FILTER_LINEAR,
         addressU: pc.ADDRESS_CLAMP_TO_EDGE,
@@ -108,3 +225,6 @@ VideoTexture.prototype.update = function(dt) {
     this.videoTexture.upload();
 };
 ```
+
+</TabItem>
+</Tabs>

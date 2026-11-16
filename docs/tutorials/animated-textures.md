@@ -20,13 +20,13 @@ It can be very useful to animate a material that has been applied to a surface. 
 
 The square plane in the example uses the script `scrolling-texture.js` to constantly move the UV offset every frame. For example, this can be used to simulate flowing water. The update loop is displayed below.
 
-<Tabs defaultValue="classic" groupId='script-code'>
-<TabItem value="classic" label="Classic">
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
 
 ```javascript
-ScrollingTexture.prototype.update = function(dt) {
-    var velocity = ScrollingTexture.tmpVec2;
-    var offset = ScrollingTexture.tmpOffset;
+update(dt) {
+    const velocity = ScrollingTexture.tmpVec2;
+    const offset = ScrollingTexture.tmpOffset;
 
     // Calculate how much to offset the texture
     // Speed * dt
@@ -44,12 +44,12 @@ ScrollingTexture.prototype.update = function(dt) {
 ```
 
 </TabItem>
-<TabItem  value="esm" label="ESM">
+<TabItem value="classic" label="Classic">
 
 ```javascript
-update(dt) {
-    const velocity = ScrollingTexture.tmpVec2;
-    const offset = ScrollingTexture.tmpOffset;
+ScrollingTexture.prototype.update = function(dt) {
+    var velocity = ScrollingTexture.tmpVec2;
+    var offset = ScrollingTexture.tmpOffset;
 
     // Calculate how much to offset the texture
     // Speed * dt

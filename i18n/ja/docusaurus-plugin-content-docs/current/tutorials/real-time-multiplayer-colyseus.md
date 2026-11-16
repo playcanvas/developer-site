@@ -5,6 +5,9 @@ thumb: "https://avatars.githubusercontent.com/u/28384334?s=300&v=4"
 description: PlayCanvas を Colyseus サーバーに接続し、シンプルなクリック移動デモでルーム状態の同期、メッセージング、マッチメイキングを行います。
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 <div className="iframe-container">
   <iframe src="https://playcanv.as/p/1QoAsx7r/" title="Real-time Multiplayer with Colyseus" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
@@ -93,6 +96,34 @@ Now, from a new PlayCanvas Script, let's instantiate our `Colyseus.Client` insta
 
 このスクリプトは、「NetworkManager」という新しい空のエンティティにアタッチできます。
 
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
+
+```javascript
+import { Script } from 'playcanvas';
+
+export class NetworkManager extends Script {
+    static scriptName = "networkManager";
+
+    async initialize() {
+        //
+        // SDKをインスタンス化します
+        // (接続はまだ確立されていません)
+        //
+        this.app.colyseus = new Colyseus.Client("ws://localhost:2567");
+
+        //
+        // ルーム「my_room」を作成または参加するようにリクエストします
+        // (サーバーとの接続を確立します)
+        //
+        this.room = await this.app.colyseus.joinOrCreate("my_room");
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
+
 ```javascript
 var NetworkManager = pc.createScript('networkManager');
 
@@ -110,6 +141,9 @@ NetworkManager.prototype.initialize = async function () {
   this.room = await this.app.colyseus.joinOrCreate("my_room");
 }
 ```
+
+</TabItem>
+</Tabs>
 
 > ここで、ローカルの `ws://localhost:2567` エンドポイントを使用しています。他の人とオンラインでプレイするには、 [サーバーをデプロイ](https://docs.colyseus.io/deployment/)して、公共のインターネットを使用する必要があります。[Glitch](https://glitch.com/edit/#!/tutorial-playcanvas-server)を使ってサーバーを公開することもできます。
 
@@ -316,14 +350,14 @@ $(this.room.state).players.onRemove((player, sessionId) => {
 
 ```typescript
 // ...
-this.app.mouse.on(pc.EVENT_MOUSEDOWN, (event) => {
+this.app.mouse.on(EVENT_MOUSEDOWN, (event) => {
   // 床の「バウンディングボックス」を作成します
-  const boundingBox = new pc.BoundingBox(new pc.Vec3(0, 0, 0), new pc.Vec3(4, 0.001, 4));;
+  const boundingBox = new BoundingBox(new Vec3(0, 0, 0), new Vec3(4, 0.001, 4));;
 
   // rayを初期化し、rayの方向を決定します
   // スクリーン位置からのrayの方向を決定します
-  const ray = new pc.Ray();
-  const targetPosition = new pc.Vec3();
+  const ray = new Ray();
+  const targetPosition = new Vec3();
 
   const cameraEntity = this.app.root.findByName("Camera");
   cameraEntity.camera.screenToWorld(event.x, event.y, cameraEntity.camera.farClip, ray.direction);

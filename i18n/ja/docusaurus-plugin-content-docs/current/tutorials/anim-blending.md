@@ -5,6 +5,9 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405
 description: Anim State Graph でアニメーションクリップをブレンドし、idle、walk、punch などのサイクルを滑らかに遷移させます。
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 <div className='iframe-container'>
     <iframe src="https://playcanv.as/p/HI8kniOx/" title="Anim State Graph Blending" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
@@ -76,6 +79,36 @@ animstategraphアセットを作成すると、エディタが表示されます
 
 以前に設定した `punch` というパラメータを覚えていますか？このスクリプトは、簡単に言えば、現在「P」キーが押されているかどうかと、キャラクターが現在パンチしているかどうかに応じて、そのパラメータをオンとオフに切り替える役割を担います。
 
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
+
+```javascript
+import { Script, EVENT_KEYDOWN, EVENT_KEYUP, KEY_P } from 'playcanvas';
+
+export class KeyboardControls extends Script {
+    static scriptName = 'keyboardControls';
+
+    // initialize code called once per entity
+    initialize() {
+        this.app.keyboard.on(EVENT_KEYDOWN, this.keyDown, this);
+        this.app.keyboard.on(EVENT_KEYUP, this.keyUp, this);
+    }
+
+    update(dt) {
+        if (this.app.keyboard.wasPressed(KEY_P) && (this.entity.anim.baseLayer.activeState !== 'Punch')) {
+            this.entity.anim.setBoolean('punch', true);
+        }
+
+        if (this.app.keyboard.wasReleased(KEY_P) && (this.entity.anim.baseLayer.activeState === 'Punch')) {
+            this.entity.anim.setBoolean('punch', false);
+        }
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
+
 ```javascript
 var KeyboardControls = pc.createScript('keyboardControls');
 
@@ -95,6 +128,9 @@ KeyboardControls.prototype.update = function(dt) {
     }
 };
 ```
+
+</TabItem>
+</Tabs>
 
 これ以降は、animstategraph アセットにさらに多くのアニメーションを追加し、複雑なアニメーション ステートグラフを構築することができます！
 

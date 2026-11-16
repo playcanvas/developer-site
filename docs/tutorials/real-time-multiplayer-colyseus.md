@@ -96,8 +96,8 @@ You can attach this script to a new empty entity called "NetworkManager".
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-<Tabs defaultValue="classic" groupId='script-code'>
-<TabItem  value="esm" label="ESM">
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
 
 ```javascript
 import { Script } from 'playcanvas';
@@ -350,14 +350,14 @@ We are going to allow the "mouse down" event; use [ray cast](/user-manual/physic
 
 ```typescript
 // ...
-this.app.mouse.on(pc.EVENT_MOUSEDOWN, (event) => {
+this.app.mouse.on(EVENT_MOUSEDOWN, (event) => {
   // Create the "bounding box" for the floor
-  const boundingBox = new pc.BoundingBox(new pc.Vec3(0, 0, 0), new pc.Vec3(4, 0.001, 4));;
+  const boundingBox = new BoundingBox(new Vec3(0, 0, 0), new Vec3(4, 0.001, 4));;
 
   // Initialize the ray and work out the direction of the ray
   // from the a screen position
-  const ray = new pc.Ray();
-  const targetPosition = new pc.Vec3();
+  const ray = new Ray();
+  const targetPosition = new Vec3();
 
   const cameraEntity = this.app.root.findByName("Camera");
   cameraEntity.camera.screenToWorld(event.x, event.y, cameraEntity.camera.farClip, ray.direction);

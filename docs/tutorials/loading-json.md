@@ -15,8 +15,8 @@ import TabItem from '@theme/TabItem';
 
 ## Loading JSON from an asset
 
-<Tabs defaultValue="classic" groupId='script-code'>
-<TabItem  value="esm" label="ESM">
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
 
 ```javascript
 
@@ -91,8 +91,8 @@ Once you have the javascript object you can access the data as normal. For examp
 
 ## Loading JSON from a remote server
 
-<Tabs defaultValue="classic" groupId='script-code'>
-<TabItem  value="esm" label="ESM">
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
 
 ```javascript
 async function loadJsonFromRemote(url, callback) {
@@ -145,8 +145,8 @@ Note, that the call to `loadJsonFromRemote` is **asynchronous**.
 
 Here is the full code listing:
 
-<Tabs defaultValue="classic" groupId='script-code'>
-<TabItem  value="esm" label="ESM">
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
 
 ```javascript
 import { Script, createStyle } from 'playcanvas';

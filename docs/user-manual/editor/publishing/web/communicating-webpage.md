@@ -16,8 +16,8 @@ Here is a simple example where we show a couple of different ways of exposing an
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-<Tabs defaultValue="classic" groupId='script-code'>
-<TabItem  value="esm" label="ESM">
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
 
 ```javascript
 import { Script, Application } from 'playcanvas';
@@ -117,8 +117,8 @@ iframe.contentWindow.postMessage({
 
 In your application
 
-<Tabs defaultValue="classic" groupId='script-code'>
-<TabItem  value="esm" label="ESM">
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
 
 ```javascript
 import { Application } from 'playcanvas';

@@ -5,6 +5,9 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405
 description: コリジョンピッキングとフレームバッファピッキングを比較し、ユーザーが Scene をクリックしたときに 3D Entity を選択します。
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 Collision Picking - クリックしてシェイプを選択する
 
 <div className="iframe-container">
@@ -28,6 +31,40 @@ Frame Buffer Picking - クリックしてグレーのシェイプを選択する
 ## コリジョンピッキング
 
 コリジョンベースのピッキングでは、ピックする必要がある各エンティティに対して、Collisionコンポーネントにシェイプを追加します。次に、マウスクリック位置から画面内にレイを発射し、[raycastFirst()](https://api.playcanvas.com/engine/classes/RigidBodyComponentSystem.html#raycastfirst) メソッドを使用して、コリジョンコンポーネントに当たるかどうかを確認します。もし当たれば、そのエンティティが「選択された」とします。
+
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
+
+```javascript
+import { Script, EVENT_MOUSEDOWN } from 'playcanvas';
+
+export class PickerRaycast extends Script {
+    static scriptName = "pickerRayCast";
+
+    // initialize code called once per entity
+    initialize() {
+        this.app.mouse.on(EVENT_MOUSEDOWN, this.onSelect, this);
+
+        this.on('destroy', () => {
+            this.app.mouse.off(EVENT_MOUSEDOWN, this.onSelect, this);
+        });
+    }
+
+    onSelect (e) {
+        const from = this.entity.camera.screenToWorld(e.x, e.y, this.entity.camera.nearClip);
+        const to = this.entity.camera.screenToWorld(e.x, e.y, this.entity.camera.farClip);
+
+        const result = this.app.systems.rigidbody.raycastFirst(from, to);
+        if (result) {
+            var pickedEntity = result.entity;
+            pickedEntity.script.pulse.pulse();
+        }
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
 
 ```javascript
 var PickerRaycast = pc.createScript('pickerRaycast');
@@ -53,6 +90,9 @@ PickerRaycast.prototype.onSelect = function (e) {
 };
 ```
 
+</TabItem>
+</Tabs>
+
 ## フレームバッファーピッキング
 
 フレームバッファーベースのピックは[Picker](https://api.playcanvas.com/engine/classes/Picker.html)を使用してシーンを内部バッファーにレンダリングします。マウスがクリックされた場合、マウスの位置のバッファーの色が使用され、どのメッシュインスタンスが選択されたかが決定されます。これは、コリジョンベースの方法と比べていくつかの利点と欠点があります。
@@ -67,6 +107,94 @@ PickerRaycast.prototype.onSelect = function (e) {
 バッファーのサイズを小さくして、パフォーマンスを向上させることができ、コストをかけずに精度を低下させます。下の例のスクリプトでは、属性`pickAreaScale`を使用して、数値が小さいほどピッカーが高速になりますが、精度が低下するため、最も正確で低速な1よりも0.01が最適です。0.25がデフォルトです。
 
 また、`layerNames`配列を使用してピックするレイヤーを制限することもできます。ピックするレイヤーの名前を追加することができます。これにより、必要なものだけを内部バッファーにレンダリングしてパフォーマンスを向上させることができます。
+
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
+
+```javascript
+import { Script, Picker, Vec3, Entity, EVENT_MOUSEDOWN } from 'playcanvas';
+
+export class PickerFramebuffer extends Script {
+    static scriptName = "pickerFrameBuffer";
+
+    /**
+     * 1 is more accurate but worse performance. 0.01 is best performance but least accurate. 0.25 is the default.
+     * 
+     * @attribute
+     * @title Pick Area Scale
+     * @type {number}
+     * @range [0.01, 1]
+     */
+    pickAreaScale = 0.25;
+
+    /**
+     * Layer names from which objects will be picked from.
+     * 
+     * @attribute
+     * @title Layers Names
+     * @type {string[]}
+     */
+    layerNames = ['World'];
+
+    initialize() {
+        // Create a frame buffer picker with a scaled resolution
+        const canvas = this.app.graphicsDevice.canvas;
+        const canvasWidth = parseInt(canvas.clientWidth, 10);
+        const canvasHeight = parseInt(canvas.clientHeight, 10);
+
+        this.picker = new Picker(this.app, canvasWidth * this.pickAreaScale, canvasHeight * this.pickAreaScale);
+        this.layers = [];
+        for (let i = 0; i < this.layerNames.length; ++i) {
+            const layer = this.app.scene.layers.getLayerByName(this.layerNames[i]);
+            if (layer) {
+                this.layers.push(layer);
+            }
+        }
+
+        this.app.mouse.on(EVENT_MOUSEDOWN, this.onSelect, this);
+
+        this.on('destroy', () => {
+            this.app.mouse.off(EVENT_MOUSEDOWN, this.onSelect, this);
+        });
+    }
+
+    onSelect(event) {
+        const canvas = this.app.graphicsDevice.canvas;
+        const canvasWidth = parseInt(canvas.clientWidth, 10);
+        const canvasHeight = parseInt(canvas.clientHeight, 10);
+
+        const camera = this.entity.camera.camera;
+        const scene = this.app.scene;
+        const picker = this.picker;
+
+        picker.resize(canvasWidth * this.pickAreaScale, canvasHeight * this.pickAreaScale);
+        picker.prepare(camera, scene, this.layers);
+
+        // Map the mouse coordinates into picker coordinates and
+        // query the selection
+        const selected = picker.getSelection({
+            x: Math.floor(event.x * (picker.width / canvasWidth)),
+            y: picker.height - Math.floor(event.y * (picker.height / canvasHeight))
+        });
+
+        if (selected.length > 0) {
+            // Get the graph node used by the selected mesh instance
+            let entity = selected[0].node;
+
+            // Bubble up the hierarchy until we find an actual Entity
+            while (entity !== null && !(entity instanceof Entity) && (entity.script && entity.script.pulse)) {
+                entity = entity.getParent();
+            }
+            if (entity) {
+                entity.script.pulse.pulse();
+            }
+        }
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
 
 ```javascript
 var PickerFramebuffer = pc.createScript('pickerFramebuffer');
@@ -145,3 +273,6 @@ PickerFramebuffer.prototype.onSelect = function (event) {
     }
 };
 ```
+
+</TabItem>
+</Tabs>

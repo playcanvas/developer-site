@@ -5,6 +5,9 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405
 description: エディタで作ったタイルの Entity をグリッド上にランダム選択で複製し、ランタイムでシンプルなプロシージャルレベルを組み立てます。
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 <div className="iframe-container">
     <iframe src="https://playcanv.as/p/smskdMrk/" title="Procedural Levels" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
@@ -14,6 +17,63 @@ description: エディタで作ったタイルの Entity をグリッド上に�
 [チュートリアルプロジェクト](https://playcanvas.com/project/405864)のエディターからお試しください。
 
 以下のスクリプトは非常にシンプルなステージ（レベル）生成プログラムです。エディタで設定された2つのエンティティ、「Grass（草）」と「House（家）」をタイルとして使用し、グリッドベースのレベルを作成します。レベルは、タイルの中からランダムに1つ選択し、そのタイルを複製して新しいエンティティを作成し、新しいエンティティを正しいグリッド位置に配置することで作成されます。
+
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
+
+```javascript
+import { Script } from 'playcanvas';
+
+export class Generate extends Script {
+    static scriptName = "generate";
+
+    /**
+     * @attribute
+     * @title Num Tiles X
+     * @type {number}
+     */
+    numTilesX = 10;
+
+    /**
+     * @attribute
+     * @title Num Tiles Y
+     * @type {number}
+     */
+    numTilesY = 10;
+
+    // initialize code called once per entity
+    initialize() {
+        // ワールドタイルとして使用する2つのテンプレートを作成しました
+        // エディターの階層では、テンプレートを無効にしています。
+        // テンプレート自体は表示せず、生成した
+        // ワールドだけを表示したいからです
+        const templates = this.app.root.findByName('Templates');
+        const grass = templates.findByName('Grass');
+        const house = templates.findByName('House');
+
+        for (let y = 0; y < this.numTilesY; y++) {
+            for (let x = 0; x < this.numTilesX; x++) {
+                // ランダムにタイルを選択します (家より草の方が選ばれやすい)
+                var tile = (Math.random() > 0.8) ? house : grass;
+
+                // タイルをクローン
+                var e = tile.clone();
+
+                // クローンしたタイルのワールド座標を設定します。タイルは
+                // X,Z 方向に 10x10 のサイズなので、
+                // 座標を 10 倍する必要があることに注意してください
+                e.setPosition((x - this.numTilesX / 2) * 10, 0, (y - this.numTilesX / 2) * 10);
+
+                // シーンの階層にタイルを追加します。
+                this.app.root.addChild(e);
+            }
+        }
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
 
 ```javascript
 var Generate = pc.createScript('generate');
@@ -55,3 +115,6 @@ Generate.prototype.initialize = function() {
     }
 };
 ```
+
+</TabItem>
+</Tabs>

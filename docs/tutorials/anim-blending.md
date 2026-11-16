@@ -79,8 +79,8 @@ Remember that parameter `punch` that we set up before? This script will simply t
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-<Tabs defaultValue="classic" groupId='script-code'>
-<TabItem  value="esm" label="ESM">
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
 
 ```javascript
 import { Script, EVENT_KEYDOWN, EVENT_KEYUP, KEY_P } from 'playcanvas';

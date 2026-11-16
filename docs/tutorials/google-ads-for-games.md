@@ -50,7 +50,35 @@ Go to the [Google H5 Ad Tutorial (Start)](https://playcanvas.com/project/889095/
 
 This is a simple project where it's ready for us to add the button click callbacks to show the ads in the `ui-controller.js` script:
 
-<Tabs defaultValue="classic" groupId='script-code'>
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
+
+```javascript
+// ...
+// initialize code called once per entity
+initialize() {
+    this.rewardedGivenPanelEntity.enabled = false;
+    this.rewardedAdButtonEntity.button.active = false;
+
+    const onRefresh = () => {}
+
+    this.refreshButtonEntity.button.on('click', onRefresh)
+
+    this.interstitialAdButtonEntity.button.on('click', (e) => {
+
+    });
+
+    this.rewardedAdButtonEntity.button.on('click', (e) => {
+
+    });
+
+    this.okRewardButtonEntity.button.on('click', (e) => {
+        
+    });
+};
+```
+
+</TabItem>
 <TabItem value="classic" label="Classic">
 
 ```javascript
@@ -79,34 +107,6 @@ UiController.prototype.initialize = function() {
     this.okRewardButtonEntity.button.on('click', function (e) {
         this.rewardedGivenPanelEntity.enabled = false;
     }, this);
-};
-```
-
-</TabItem>
-<TabItem  value="esm" label="ESM">
-
-```javascript
-// ...
-// initialize code called once per entity
-initialize() {
-    this.rewardedGivenPanelEntity.enabled = false;
-    this.rewardedAdButtonEntity.button.active = false;
-
-    const onRefresh = () => {}
-
-    this.refreshButtonEntity.button.on('click', onRefresh)
-
-    this.interstitialAdButtonEntity.button.on('click', (e) => {
-
-    });
-
-    this.rewardedAdButtonEntity.button.on('click', (e) => {
-
-    });
-
-    this.okRewardButtonEntity.button.on('click', (e) => {
-        
-    });
 };
 ```
 
@@ -411,8 +411,8 @@ Let's see it in action:
 
 The completed `ui-controller.js` file should look like this:
 
-<Tabs defaultValue="classic" groupId='script-code'>
-<TabItem  value="esm" label="ESM">
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
 
 ```javascript
 import { Script } from 'playcanvas';

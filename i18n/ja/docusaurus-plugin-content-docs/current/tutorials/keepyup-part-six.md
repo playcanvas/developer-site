@@ -5,6 +5,9 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406
 description: Screen と Element Component と状態切り替えで、メニュー、ゲーム中、ゲームオーバー UI を構築します。
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 <div className="iframe-container">
     <iframe src="https://playcanv.as/p/KH37bnOk/?overlay=false" title="Making a Simple Game - Part 6" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
@@ -34,6 +37,58 @@ PlayCanvasではユーザインタフェースは[Screen Component](/user-manual
 ### ユーザーインターフェースのスクリプト
 
 メインメニューのスクリプトを見てみましょう。
+
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
+
+```javascript
+import { Script } from 'playcanvas';
+
+export class UiMenu extends Script {
+    static scriptName = "uiMenu";
+
+    /**
+     * @attribute
+     * @title Overlay
+     * @type {Entity}
+     */
+    overlay = null;
+
+    // initialize code called once per entity
+    initialize() {
+        this.on('enable', this.onEnable, this);
+        this.on('disable', this.onDisable, this);
+
+        this.onEnable();
+    }
+
+    onEnable() {
+        // Listen for clicks on the background
+
+        this.overlay.enabled = true;
+        this.overlay.element.on("click", this.start, this);
+
+        if (this.ball) {
+            this.ball.model.meshInstances[0].material.depthTest = false;
+        }
+    }
+
+    onDisable() {
+        this.overlay.enabled = false;
+        // Stop listening to events
+        this.overlay.element.off("click", this.start, this);
+    }
+
+    start(e) {
+        this.app.fire("ui:start");
+        // prevent touch and mouse events
+        e.stopPropagation();
+    }
+}
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
 
 ```javascript
 var UiMenu = pc.createScript('uiMenu');
@@ -71,6 +126,9 @@ UiMenu.prototype.start = function (e) {
     e.stopPropagation();
 };
 ```
+
+</TabItem>
+</Tabs>
 
 最初に、オーバーレイエレメントへの参照を持つ属性を設定しました。オーバーレイエレメントは画面全体を覆い、画面を緑色に色付けするために使用されます。また、ユーザーが画面全体をクリックしたことを検出するためにも使用されます。
 
