@@ -75,7 +75,7 @@ label.addComponent('element', {
 screen.addChild(label);
 ```
 
-Register `pc.FontHandler` when you create the application, so that it can load font assets.
+Register `FontHandler` when you create the application, so that it can load font assets.
 
 </TabItem>
 <TabItem value="editor" label="Editor">
@@ -135,7 +135,7 @@ Declare the asset with `type="font"`, as a `.json` file would otherwise be loade
 
 ## Emoji {#emoji}
 
-MSDF glyphs have a single color, so a font asset can't draw color emoji. `pc.CanvasFont`, which is not yet in the API reference, draws characters with the browser's own fonts into textures instead, emoji included. It is a bitmap font: create it at a size at least as large as the text you draw with it, and add the characters you need before you use them:
+MSDF glyphs have a single color, so a font asset can't draw color emoji. `CanvasFont`, which is not yet in the API reference, draws characters with the browser's own fonts into textures instead, emoji included. It is a bitmap font: create it at a size at least as large as the text you draw with it, and add the characters you need before you use them:
 
 ```javascript
 const emojiFont = new pc.CanvasFont(app, {

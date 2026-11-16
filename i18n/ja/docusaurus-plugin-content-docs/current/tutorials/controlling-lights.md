@@ -45,7 +45,7 @@ this.spot.light.intensity = 10*s;
 
 :::note
 
-光の色の赤の値をアクセスして変更するために`entity.light.color.r`を使用することはできません。光のプロパティ`color`の変更のみが検出されるため、プロパティに完全な`pc.Color`を割り当てる必要があります。例: `entity.light.color = new pc.Color(1, 1, 1);`。
+光の色の赤の値をアクセスして変更するために`entity.light.color.r`を使用することはできません。光のプロパティ`color`の変更のみが検出されるため、プロパティに完全な`Color`を割り当てる必要があります。例: `entity.light.color = new Color(1, 1, 1);`。
 
 :::
 

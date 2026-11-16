@@ -95,7 +95,7 @@ MyScript.attributes.add('textures', { type: 'asset', assetType: 'texture', array
 
 アセット属性を使用すると、スクリプト内でプロジェクトアセットを参照できます。アセット属性は`assetType`プロパティもサポートしており、これにより属性を特定のタイプ（例: 'texture'、'material'、'model'）のアセットに限定できます。
 
-アセット属性の実行時型は`pc.Asset`です。アセット属性のリソースは、実行時に以下のように参照できます。
+アセット属性の実行時型は`Asset`です。アセット属性のリソースは、実行時に以下のように参照できます。
 
 ```javascript
 MyScript.attributes.add('texture', {type: 'asset', assetType: 'texture'});

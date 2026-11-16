@@ -7,7 +7,7 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/7335
 
 import Link from '@docusaurus/Link';
 
-A rainbow trail using the pc.Mesh API
+A rainbow trail using the Mesh API
 
 <div className="iframe-container">
     <iframe src="https://playcanv.as/p/jGeaTg6B/" title="Rainbow Trail with Mesh API" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>

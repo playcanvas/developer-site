@@ -22,7 +22,7 @@ Where the panel lives decides how it moves:
 
 ## Pointing and Selecting {#pointing-and-selecting}
 
-XR input goes through the application's XR manager, `app.xr`. The Editor, React and Web Components create it for you. An application created with `pc.AppBase` has one only if you add `options.xr = pc.XrManager` to its `AppOptions`.
+XR input goes through the application's XR manager, `app.xr`. The Editor, React and Web Components create it for you. An application created with `AppBase` has one only if you add `options.xr = XrManager` to its `AppOptions`.
 
 While a session runs, the [`ElementInput`](/user-manual/user-interface/input/#enabling-ui-input) casts the ray of every XR input source, each controller or hand, at the elements that have input enabled, every frame. It fires these events on the elements:
 

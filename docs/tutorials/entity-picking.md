@@ -95,7 +95,7 @@ PickerRaycast.prototype.onSelect = function (e) {
 
 ## Frame Buffer Picking
 
-Frame buffer based picking uses the [pc.Picker](https://api.playcanvas.com/engine/classes/Picker.html) class to render the scene to a internal buffer. When the mouse is clicked the color of the buffer at the mouse location is used to determine which mesh instance was selected. This has some advantages and disadvantages over the collision based method.
+Frame buffer based picking uses the [Picker](https://api.playcanvas.com/engine/classes/Picker.html) class to render the scene to a internal buffer. When the mouse is clicked the color of the buffer at the mouse location is used to determine which mesh instance was selected. This has some advantages and disadvantages over the collision based method.
 
 Advantages include:
 

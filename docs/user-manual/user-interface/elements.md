@@ -14,9 +14,9 @@ The `type` of an element decides what it draws:
 
 | Type | Draws | Used for |
 | --- | --- | --- |
-| **Group** (`pc.ELEMENTTYPE_GROUP`) | Nothing | Containers, [layout groups](/user-manual/user-interface/layout-groups/) and invisible input areas. See [Group Elements](#group-elements) |
-| **Image** (`pc.ELEMENTTYPE_IMAGE`) | A solid color, a texture or a sprite | Panels, icons, buttons and [masks](/user-manual/user-interface/masks/). See [Image Elements](/user-manual/user-interface/image-elements/) |
-| **Text** (`pc.ELEMENTTYPE_TEXT`) | A string, in a font asset | Labels and any other text. See [Text Elements](/user-manual/user-interface/text-elements/) |
+| **Group** (`ELEMENTTYPE_GROUP`) | Nothing | Containers, [layout groups](/user-manual/user-interface/layout-groups/) and invisible input areas. See [Group Elements](#group-elements) |
+| **Image** (`ELEMENTTYPE_IMAGE`) | A solid color, a texture or a sprite | Panels, icons, buttons and [masks](/user-manual/user-interface/masks/). See [Image Elements](/user-manual/user-interface/image-elements/) |
+| **Text** (`ELEMENTTYPE_TEXT`) | A string, in a font asset | Labels and any other text. See [Text Elements](/user-manual/user-interface/text-elements/) |
 
 ## Anchor {#anchor}
 
@@ -162,7 +162,7 @@ Set **Preset** to **Stretch** and each **Margin** value to 20. The inspector onl
 </TabItem>
 </Tabs>
 
-The `left`, `bottom`, `right` and `top` properties read and write the four margins one at a time. To set all four at once from code, assign a new `pc.Vec4`, as the `margin` setter copies from one:
+The `left`, `bottom`, `right` and `top` properties read and write the four margins one at a time. To set all four at once from code, assign a new `Vec4`, as the `margin` setter copies from one:
 
 ```javascript
 background.element.left = 40;

@@ -22,7 +22,7 @@ import TabItem from '@theme/TabItem';
 
 ## ポインティングとセレクト {#pointing-and-selecting}
 
-XRの入力は、アプリケーションのXRマネージャーである`app.xr`を通して処理されます。エディター、React、Web Componentsでは、XRマネージャーが自動的に作成されます。`pc.AppBase`で作成したアプリケーションにXRマネージャーがあるのは、その`AppOptions`に`options.xr = pc.XrManager`を追加した場合だけです。
+XRの入力は、アプリケーションのXRマネージャーである`app.xr`を通して処理されます。エディター、React、Web Componentsでは、XRマネージャーが自動的に作成されます。`AppBase`で作成したアプリケーションにXRマネージャーがあるのは、その`AppOptions`に`options.xr = XrManager`を追加した場合だけです。
 
 セッションの実行中、[`ElementInput`](/user-manual/user-interface/input/#enabling-ui-input)は毎フレーム、すべてのXR入力ソース（各コントローラーや手）のレイで、入力が有効なエレメントに対するレイキャストを行います。そして、エレメントで次のイベントを発火します。
 

@@ -45,7 +45,7 @@ for (let i = 0; i < 5; i++) {
 }
 ```
 
-アプリケーションを作成するときに、`pc.LayoutGroupComponentSystem`と`pc.LayoutChildComponentSystem`を登録してください。LayoutChildコンポーネントを使う子がなくても、レイアウトグループにはLayoutChildのコンポーネントシステムが必要です。
+アプリケーションを作成するときに、`LayoutGroupComponentSystem`と`LayoutChildComponentSystem`を登録してください。LayoutChildコンポーネントを使う子がなくても、レイアウトグループにはLayoutChildのコンポーネントシステムが必要です。
 
 </TabItem>
 <TabItem value="editor" label="Editor">
@@ -175,7 +175,7 @@ list.layoutgroup.on('reflow', ({ bounds }) => {
 | **Shrink** | グループより大きい場合、グループに収まるように縮小されます。最小サイズがあれば、それが下限です |
 | **Both** | 収まるように、拡大または縮小のどちらかが行われます |
 
-行の幅のように、レイアウトの方向に沿ったサイズでは、余ったスペースまたははみ出した分が子の間で配分されます。[レイアウトチャイルド](#layout-children)で異なる比率を与えない限り、配分は均等です。レイアウトと直交する方向では、各子が個別に、行の高さまたは列の幅に合わせて拡大または縮小されます。エンジンの定数は`pc.FITTING_NONE`、`pc.FITTING_STRETCH`、`pc.FITTING_SHRINK`、`pc.FITTING_BOTH`です。
+行の幅のように、レイアウトの方向に沿ったサイズでは、余ったスペースまたははみ出した分が子の間で配分されます。[レイアウトチャイルド](#layout-children)で異なる比率を与えない限り、配分は均等です。レイアウトと直交する方向では、各子が個別に、行の高さまたは列の幅に合わせて拡大または縮小されます。エンジンの定数は`FITTING_NONE`、`FITTING_STRETCH`、`FITTING_SHRINK`、`FITTING_BOTH`です。
 
 ### 折り返し {#wrap}
 

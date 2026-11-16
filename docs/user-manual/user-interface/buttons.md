@@ -52,7 +52,7 @@ button.button.on('click', () => {
 });
 ```
 
-Register `pc.ButtonComponentSystem` when you create the application.
+Register `ButtonComponentSystem` when you create the application.
 
 </TabItem>
 <TabItem value="editor" label="Editor">
@@ -131,7 +131,7 @@ A tint replaces the image's color, rather than multiplying it, so the default gr
 
 In Sprite Change mode, each state shows a sprite asset and frame of its own: `hoverSpriteAsset` and `hoverSpriteFrame`, `pressedSpriteAsset` and `pressedSpriteFrame`, and `inactiveSpriteAsset` and `inactiveSpriteFrame`. The default state shows the image's own sprite. Different frames of one sprite make a set of button states from a single texture atlas.
 
-Set `transitionMode` to `pc.BUTTON_TRANSITION_MODE_SPRITE_CHANGE` in the Engine, **Transition Mode** to **Sprite Change** in the Editor, and `transition-mode="sprite"` on `<pc-button>`.
+Set `transitionMode` to `BUTTON_TRANSITION_MODE_SPRITE_CHANGE` in the Engine, **Transition Mode** to **Sprite Change** in the Editor, and `transition-mode="sprite"` on `<pc-button>`.
 
 ## Events {#events}
 

@@ -35,9 +35,9 @@ app.scene.gsplat.renderer = pc.GSPLAT_RENDERER_RASTER_GPU_SORT;
 
 The available options are:
 
-- `pc.GSPLAT_RENDERER_AUTO` — *(default)* automatically selects the best renderer for the current device: GPU sorting on WebGPU, CPU sorting on WebGL.
-- `pc.GSPLAT_RENDERER_RASTER_CPU_SORT` — raster with CPU sorting.
-- `pc.GSPLAT_RENDERER_RASTER_GPU_SORT` — raster with GPU sorting (WebGPU only).
+- `GSPLAT_RENDERER_AUTO` — *(default)* automatically selects the best renderer for the current device: GPU sorting on WebGPU, CPU sorting on WebGL.
+- `GSPLAT_RENDERER_RASTER_CPU_SORT` — raster with CPU sorting.
+- `GSPLAT_RENDERER_RASTER_GPU_SORT` — raster with GPU sorting (WebGPU only).
 
 A renderer that requires WebGPU falls back to CPU sorting on WebGL devices. To find out which renderer is actually in effect after this fallback, read `currentRenderer`:
 

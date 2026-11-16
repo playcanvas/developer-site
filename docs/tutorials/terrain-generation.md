@@ -9,7 +9,7 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/4060
     <iframe src="https://playcanv.as/p/CmcIlmPb/" title="Terrain Generation from Heightmap" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
-This project uses the [`pc.Mesh`](https://api.playcanvas.com/engine/classes/Mesh.html) API to procedurally generate and texture a rolling hillside from a heightmap texture.
+This project uses the [`Mesh`](https://api.playcanvas.com/engine/classes/Mesh.html) API to procedurally generate and texture a rolling hillside from a heightmap texture.
 
 Try it from the Editor in the [tutorial project.](https://playcanvas.com/project/406046)
 

@@ -112,7 +112,7 @@ screen.addComponent('screen', {
 app.root.addChild(screen);
 ```
 
-To change the reference resolution later, assign a new `pc.Vec2` to `referenceResolution`.
+To change the reference resolution later, assign a new `Vec2` to `referenceResolution`.
 
 </TabItem>
 <TabItem value="editor" label="Editor">
@@ -197,7 +197,7 @@ The pixel ratio affects the two scale modes differently:
 
 ### Pixel-Perfect Images {#pixel-perfect-images}
 
-With Scale Mode None, an image element the size of its texture draws each texel as one pixel of the drawing buffer, which keeps pixel art and small icons crisp. Keep such elements on whole pixels: anchor them to a corner rather than a center, which falls between two pixels on a canvas with an odd width or height, and avoid sizes that put an edge halfway between pixels, such as an odd width with a centered pivot. To draw pixel art at two or three times its size without blurring, set the texture's `minFilter` and `magFilter` to `pc.FILTER_NEAREST`.
+With Scale Mode None, an image element the size of its texture draws each texel as one pixel of the drawing buffer, which keeps pixel art and small icons crisp. Keep such elements on whole pixels: anchor them to a corner rather than a center, which falls between two pixels on a canvas with an odd width or height, and avoid sizes that put an edge halfway between pixels, such as an odd width with a centered pivot. To draw pixel art at two or three times its size without blurring, set the texture's `minFilter` and `magFilter` to `FILTER_NEAREST`.
 
 ## Responsive Layouts {#responsive-layouts}
 
@@ -205,7 +205,7 @@ A screen-space interface follows the canvas, and the canvas is sized outside the
 
 | Surface | The canvas is sized by |
 | --- | --- |
-| Engine | The application's fill mode. `pc.FILLMODE_FILL_WINDOW` fills the window, `pc.FILLMODE_KEEP_ASPECT` fills as much of it as the canvas's aspect ratio allows, and `pc.FILLMODE_NONE` leaves the size to your CSS. Call `app.resizeCanvas()` when the window changes size |
+| Engine | The application's fill mode. `FILLMODE_FILL_WINDOW` fills the window, `FILLMODE_KEEP_ASPECT` fills as much of it as the canvas's aspect ratio allows, and `FILLMODE_NONE` leaves the size to your CSS. Call `app.resizeCanvas()` when the window changes size |
 | Editor | **Fill Mode** and **Resolution Mode** in the Rendering settings |
 | React | The element that contains `<Application>`, as the canvas fills it by default |
 | Web Components | The page's CSS, which sizes `<pc-app>` as it would a `<video>` element. The canvas always fills it |

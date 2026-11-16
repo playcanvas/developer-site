@@ -7,7 +7,7 @@ description: Mesh API でメッシュの頂点と色を更新し、動的な GPU
 
 import Link from '@docusaurus/Link';
 
-pc.Mesh APIを使用したレインボートレイル
+Mesh APIを使用したレインボートレイル
 
 <div className="iframe-container">
     <iframe src="https://playcanv.as/p/jGeaTg6B/" title="Rainbow Trail with Mesh API" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>

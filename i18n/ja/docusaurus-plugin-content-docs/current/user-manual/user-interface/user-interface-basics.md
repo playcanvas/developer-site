@@ -54,7 +54,7 @@ app.start();
 window.addEventListener('resize', () => app.resizeCanvas());
 ```
 
-他のUIコンポーネントを使う場合は、そのシステムも追加します。`pc.ScrollViewComponentSystem`、`pc.ScrollbarComponentSystem`、`pc.LayoutGroupComponentSystem`、`pc.LayoutChildComponentSystem`、さらにスプライトには`pc.SpriteHandler`と`pc.TextureAtlasHandler`が必要です。[`pc.Application`](https://api.playcanvas.com/engine/classes/Application.html)はすべてのシステムとハンドラーを自動的に登録しますが、こちらも`ElementInput`は作成しないため、オプションで渡してください。その他のセットアップについては[エンジンをスタンドアロンで使用する](/user-manual/engine/standalone/#configuring-the-application)を参照してください。
+他のUIコンポーネントを使う場合は、そのシステムも追加します。`ScrollViewComponentSystem`、`ScrollbarComponentSystem`、`LayoutGroupComponentSystem`、`LayoutChildComponentSystem`、さらにスプライトには`SpriteHandler`と`TextureAtlasHandler`が必要です。[`Application`](https://api.playcanvas.com/engine/classes/Application.html)はすべてのシステムとハンドラーを自動的に登録しますが、こちらも`ElementInput`は作成しないため、オプションで渡してください。その他のセットアップについては[エンジンをスタンドアロンで使用する](/user-manual/engine/standalone/#configuring-the-application)を参照してください。
 
 </TabItem>
 <TabItem value="editor" label="Editor">
@@ -356,7 +356,7 @@ screen          Screenコンポーネント：インターフェースの空間�
 
 | 環境 | 表記 | 例 |
 | --- | --- | --- |
-| Engine | キャメルケースのプロパティ。ベクトルと色は`pc.Vec2`、`pc.Vec4`、`pc.Color`のオブジェクトで、`addComponent`に渡す場合は配列も使える | `fontSize: 36`, `anchor: [0.5, 1, 0.5, 1]` |
+| Engine | キャメルケースのプロパティ。ベクトルと色は`Vec2`、`Vec4`、`Color`のオブジェクトで、`addComponent`に渡す場合は配列も使える | `fontSize: 36`, `anchor: [0.5, 1, 0.5, 1]` |
 | Editor | 各単語の先頭が大文字（Title Case）のインスペクターのフィールド | **Font Size**, **Anchor** |
 | React | キャメルケースのprops。ベクトルは配列、色はCSSの色文字列 | `fontSize={36}`, `anchor={[0.5, 1, 0.5, 1]}`, `color="#ff8c33"` |
 | Web Components | ケバブケースの属性。ベクトルはスペース区切りの数値 | `font-size="36"`, `anchor="0.5 1 0.5 1"` |

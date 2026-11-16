@@ -28,7 +28,7 @@ Here are some tips and hints on how to achieve good performance in your PlayCanv
 
 ## Graphics - CPU and GPU
 
-* For applications where there is little visual change over a period such as product configurators, there is a special property to reduce CPU and GPU usage. [`pc.Application#autoRender`](https://api.playcanvas.com/engine/classes/AppBase.html#autorender) can be set to `false` so that frames are rendered on demand via [`pc.Application#renderNextFrame`](https://api.playcanvas.com/engine/classes/AppBase.html#rendernextframe) when there is a visual change such as the user moving the camera or adding a part to the product.
+* For applications where there is little visual change over a period such as product configurators, there is a special property to reduce CPU and GPU usage. [`Application#autoRender`](https://api.playcanvas.com/engine/classes/AppBase.html#autorender) can be set to `false` so that frames are rendered on demand via [`Application#renderNextFrame`](https://api.playcanvas.com/engine/classes/AppBase.html#rendernextframe) when there is a visual change such as the user moving the camera or adding a part to the product.
 * Enabling shadow casting on dynamic lights is expensive. Omni light shadows are particularly expensive. For each omni light that casts shadow, the scene must be rendered 6 times into a shadow map.
 * Keep the number of blended mesh instances in your scene to a minimum. Blended meshes are deferred until all opaque mesh instances have been dispatched and are then submitted in back to front camera depth order. This results in pixels being filled multiple times and can result in a lot of render state changes since blended meshes cannot be sorted by material.
 

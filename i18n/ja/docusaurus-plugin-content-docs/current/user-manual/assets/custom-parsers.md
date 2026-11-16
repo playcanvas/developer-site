@@ -126,7 +126,7 @@ app.assets.load(asset);
 
 - **texture** — パーサーは上記の拡張された `open(url, data, device, textureOptions)` を実装します。組み込みのブラウザ画像パーサーはキャッチオールであるため、カスタムパーサーが処理しない未知の拡張子はそこにフォールバックします。
 - **material** — ハンドラーのアセットバインディング（マテリアルデータが参照するテクスチャアセットの割り当て）は、組み込みの JSON パーサーが生成する `StandardMaterial` に適用されます。カスタムパーサーが生成するマテリアルは、自身でアセット参照を管理します。
-- **audio** — サウンドマネージャーはパーサーから `this.handler.manager` として利用できます。カスタムパーサーは `AudioBuffer` にデコードし、`pc.Sound` でラップして返すことができます。
+- **audio** — サウンドマネージャーはパーサーから `this.handler.manager` として利用できます。カスタムパーサーは `AudioBuffer` にデコードし、`Sound` でラップして返すことができます。
 - ファイルフォーマットを解析するのではなく他のアセットを構成するハンドラー（`cubemap`、`font`、`sprite`、`textureatlas`）と、特殊用途のハンドラー（`bundle`、`script`、`folder`）は、登録されたパーサーを参照しません。
 
 ## 関連項目

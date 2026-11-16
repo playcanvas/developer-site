@@ -50,7 +50,7 @@ Open your project, right click in the assets panel and click on 'Paste'
 
 入力領域は、タッチおよびマウス(デバッグ目的)イベントをリッスンし、イベントの伝播を停止します。
 
-つまり、この領域よりも下にあるUIエレメントおよび[pc.Mouse](https://api.playcanvas.com/engine/classes/Mouse.html)または[pc.Touch](https://api.playcanvas.com/engine/classes/Touch.html)イベントは、最初にこのエリアが操作された場合には発生しなくなります。
+つまり、この領域よりも下にあるUIエレメントおよび[Mouse](https://api.playcanvas.com/engine/classes/Mouse.html)または[Touch](https://api.playcanvas.com/engine/classes/Touch.html)イベントは、最初にこのエリアが操作された場合には発生しなくなります。
 
 入力領域はUIエレメントであるため、[UIシステムレイアウト](/user-manual/user-interface/elements/)を使用して、必要に応じて位置、サイズ、およびアンカーを特定することができます。
 

@@ -126,7 +126,7 @@ Most format-bearing handlers participate in the parser registry: `model`, `textu
 
 - **texture** — parsers implement the extended `open(url, data, device, textureOptions)` shown above. The built-in browser image parser is a catch-all, so unknown extensions fall back to it unless your parser claims them.
 - **material** — the handler's asset binding (assigning texture assets referenced by the material data) applies to `StandardMaterial` produced by the built-in JSON parser; materials produced by custom parsers manage their own asset references.
-- **audio** — the sound manager is available to parsers as `this.handler.manager`; a custom parser can decode to an `AudioBuffer` and return it wrapped in a `pc.Sound`.
+- **audio** — the sound manager is available to parsers as `this.handler.manager`; a custom parser can decode to an `AudioBuffer` and return it wrapped in a `Sound`.
 - Handlers that compose other assets rather than parse file formats (`cubemap`, `font`, `sprite`, `textureatlas`) and special-purpose handlers (`bundle`, `script`, `folder`) do not consult registered parsers.
 
 ## See Also

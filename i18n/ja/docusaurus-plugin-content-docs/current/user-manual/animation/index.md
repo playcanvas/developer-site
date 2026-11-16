@@ -29,7 +29,7 @@ Animコンポーネントはどこでも同じですが、環境によって公�
 | ステートグラフとパラメーター | `entity.anim.loadStateGraph()` | Anim State Graphアセットのエディター | エンジンAPI | エンジンAPI |
 | ブレンドツリー | ステートグラフのデータ内 | スクリプトからのみ | エンジンAPI | エンジンAPI |
 | レイヤーとマスク | `entity.anim.addLayer()` | レイヤーはグラフで、マスクはAnimコンポーネントで | エンジンAPI | エンジンAPI |
-| イベント | クリップに`new pc.AnimEvents()` | アニメーションアセットのイベント | エンジンAPI | エンジンAPI |
+| イベント | クリップに`new AnimEvents()` | アニメーションアセットのイベント | エンジンAPI | エンジンAPI |
 
 :::note
 

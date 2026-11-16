@@ -28,7 +28,7 @@ PlayCanvasアプリで最適なパフォーマンスを得るためのヒント�
 
 ## グラフィックス - CPUとGPU
 
-* コンフィギュレーターなどビジュアルにあまり変化がないアプリケーションでは、CPU および GPU の使用を削減する特別なプロパティがあります。[`pc.Application#autoRender`](https://api.playcanvas.com/engine/classes/AppBase.html#autorender)を `false` に設定することで、ユーザーがカメラを移動したり製品にパーツを追加するなど、視覚的に変化があった場合にのみ[`pc.Application#renderNextFrame`](https://api.playcanvas.com/engine/classes/AppBase.html#rendernextframe)を介してフレームをレンダリングします。
+* コンフィギュレーターなどビジュアルにあまり変化がないアプリケーションでは、CPU および GPU の使用を削減する特別なプロパティがあります。[`Application#autoRender`](https://api.playcanvas.com/engine/classes/AppBase.html#autorender)を `false` に設定することで、ユーザーがカメラを移動したり製品にパーツを追加するなど、視覚的に変化があった場合にのみ[`Application#renderNextFrame`](https://api.playcanvas.com/engine/classes/AppBase.html#rendernextframe)を介してフレームをレンダリングします。
 * ダイナミックライトでシャドウキャストを有効にすることは高価です。オムニライトのシャドウは特に高価です。各オムニライトが影を投影する場合、シーンをシャドウマップに6回レンダリングする必要があります。
 * シーン内のブレンドされたメッシュインスタンスの数を最小限に抑えてください。ブレンドされたメッシュは、不透明なメッシュインスタンスがすべてディスパッチされた後に、後方から前方のカメラ深度順に提出されます。これにより、ピクセルが複数回塗りつぶされるため、多数のレンダーステート変更が必要になります。ブレンドされたメッシュはマテリアルによってソートできないためです。
 

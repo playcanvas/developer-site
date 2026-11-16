@@ -34,7 +34,7 @@ description: レジストリから実行時にAssetを検索、参照、スト�
 
 ## アセットレジストリ
 
-[`pc.AssetRegistry`](https://api.playcanvas.com/engine/classes/AssetRegistry.html)はすべてのスクリプトで`this.app.assets`として利用できます。レジストリには、ロードされたかどうかに関係なく、プロジェクトに追加されたすべての実行時アセットの詳細が格納されます。アセットレジストリを使用して、アプリケーションで必要なアセットを検索します。
+[`AssetRegistry`](https://api.playcanvas.com/engine/classes/AssetRegistry.html)はすべてのスクリプトで`this.app.assets`として利用できます。レジストリには、ロードされたかどうかに関係なく、プロジェクトに追加されたすべての実行時アセットの詳細が格納されます。アセットレジストリを使用して、アプリケーションで必要なアセットを検索します。
 
 この場合、スクリプト属性`a`、`b`、`c`を宣言して、エディターでアセットに割り当てます。それらは自動的にスクリプトで利用可能になります。
 
@@ -62,7 +62,7 @@ description: レジストリから実行時にAssetを検索、参照、スト�
 
 <img loading="lazy" src="/img/tutorials/using_assets/using-assets-a-preload.png" width="360" />
 
-ですから、`A`と`B`のモデルはプリロードされ、実行されるとすぐに使用できることがわかっています。このコードは、スペースバーが押されている場合は、Renderコンポーネントのレンダーアセットをリソースプロパティに変更します。この場合、`asset.resource`は`pc.Render`オブジェクトになります。各異なったアセットタイプ(オーディオ、テクスチャなど)について、`asset.resource`プロパティは関連するタイプになります。
+ですから、`A`と`B`のモデルはプリロードされ、実行されるとすぐに使用できることがわかっています。このコードは、スペースバーが押されている場合は、Renderコンポーネントのレンダーアセットをリソースプロパティに変更します。この場合、`asset.resource`は`Render`オブジェクトになります。各異なったアセットタイプ(オーディオ、テクスチャなど)について、`asset.resource`プロパティは関連するタイプになります。
 
 ## ランタイムでアセットをロードする
 
@@ -83,7 +83,7 @@ if (app.keyboard.isPressed(pc.KEY_C)) {
 }
 ```
 
-**C** のレンダーアセットは *プリロード* されていないため、上記のコードでリソースがロードされてから使用するかどうかを確認しています。 `asset.loaded` がfalseであれば、リソースはロードされていません。 **C** のレンダーアセットがロードされている場合、 `this.c.resource` は `pc.Render` プロパティになり、 `asset.loaded` がtrueになります。そして私たちはそれを割り当てることができます。
+**C** のレンダーアセットは *プリロード* されていないため、上記のコードでリソースがロードされてから使用するかどうかを確認しています。 `asset.loaded` がfalseであれば、リソースはロードされていません。 **C** のレンダーアセットがロードされている場合、 `this.c.resource` は `Render` プロパティになり、 `asset.loaded` がtrueになります。そして私たちはそれを割り当てることができます。
 
 <img loading="lazy" src="/img/tutorials/using_assets/using-assets-c-preload.png" width="360" />
 
@@ -95,7 +95,7 @@ if (this.app.keyboard.isPressed(pc.KEY_L)) {
 
 `L`を押すと、**C**モデルをロードします。これを行うには、ロードされていないアセットを`this.app.assets.load()`に渡します。アセットがすでにロードされている場合、このメソッドは何もしません。
 
-アセットがロードされたら、`asset.resource`は`pc.Render`インスタンスになり、`C`キーを押してRenderコンポーネントにアセットを割り当てることができます。
+アセットがロードされたら、`asset.resource`は`Render`インスタンスになり、`C`キーを押してRenderコンポーネントにアセットを割り当てることができます。
 
 ## 完成したスクリプト
 
@@ -157,7 +157,7 @@ UpdateAsset.prototype.update = function(dt) {
 
 ## AssetRegistryイベント
 
-この例では、アセットがロードされたときにどのように知るかを示していません。これを行うには、 `pc.AssetRegistry` イベント、 `"load"` イベントなどを使用します。以下はサンプルコードです。
+この例では、アセットがロードされたときにどのように知るかを示していません。これを行うには、 `AssetRegistry` イベント、 `"load"` イベントなどを使用します。以下はサンプルコードです。
 
 ```javascript
 // レジストリ内の名前でアセットを検索

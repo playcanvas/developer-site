@@ -92,7 +92,7 @@ if (pc.CameraFrame.isSplatSceneDepthSupported(app.graphicsDevice)) {
 
 - CameraFrame の MSAA を無効にすること（`rendering.samples = 1`）。TAA は使用できます。
 - カメラがレンダーターゲット全体をクリアすること。
-- シーンの描画中に深度をサンプリングするための深度プリパスが不要であること。特に `rendering.sceneDepthMap = true` と `ssao.type = pc.SSAOTYPE_LIGHTING` はこの経路を無効にします。スプラットのシーン深度と SSAO を併用する場合は `pc.SSAOTYPE_COMBINE` を使用してください。
+- シーンの描画中に深度をサンプリングするための深度プリパスが不要であること。特に `rendering.sceneDepthMap = true` と `ssao.type = SSAOTYPE_LIGHTING` はこの経路を無効にします。スプラットのシーン深度と SSAO を併用する場合は `SSAOTYPE_COMBINE` を使用してください。
 
 非対応の設定ではスプラットを含まない深度にフォールバックし、要求されたスプラット深度を生成できない場合はデバッグビルドが警告します。シーンがスプラット深度に依存する場合、利用できないときはフォグと DoF を無効にするか、適切な深度用ジオメトリを用意してください。[深度のデバッグ表示](index.md#debug-views)で結果を確認できます。
 

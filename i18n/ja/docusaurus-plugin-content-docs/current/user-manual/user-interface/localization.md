@@ -70,7 +70,7 @@ app.assets.load(english);
 app.assets.load(french);
 ```
 
-アプリケーションを作成するときに、`pc.JsonHandler`を登録してください。すでに手元にあるデータを使う場合は、代わりにそれを`app.i18n.addData()`に渡します。
+アプリケーションを作成するときに、`JsonHandler`を登録してください。すでに手元にあるデータを使う場合は、代わりにそれを`app.i18n.addData()`に渡します。
 
 </TabItem>
 <TabItem value="editor" label="Editor">

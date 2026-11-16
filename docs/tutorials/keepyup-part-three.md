@@ -477,7 +477,7 @@ this.camera.camera.screenToWorld(x, y, camPos.z - p.z, worldPos);
 
 In detail, this function takes the screen co-ordinates (x, y) and asks the camera to convert them into a position in 3D space under that point on the screen. To do this, we need to supply a depth, as in how far away from the screen do you want the 3D point. In this case we get the 3D point at the same depth as the ball is.
 
-We also pass in a vector `Input.worldPos`. It's important in PlayCanvas applications to avoid creating new objects, like calling `new pc.Vec3()` to create a new vector, in your update loops. The more memory allocations you do (by calling `new`) the more Garbage Collection the browser will have to do to clear up your allocations. Garbage Collection is a (comparatively slow) operation and will cause your game or application to stutter if it happens often.
+We also pass in a vector `Input.worldPos`. It's important in PlayCanvas applications to avoid creating new objects, like calling `new Vec3()` to create a new vector, in your update loops. The more memory allocations you do (by calling `new`) the more Garbage Collection the browser will have to do to clear up your allocations. Garbage Collection is a (comparatively slow) operation and will cause your game or application to stutter if it happens often.
 
 In most cases, PlayCanvas will provide an option to pass in vector or similar option so that you can pre-allocate and re-use objects.
 

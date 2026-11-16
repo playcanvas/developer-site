@@ -123,7 +123,7 @@ badge.element.minFontSize = 12;
 | プロパティ | 効果 |
 | --- | --- |
 | `outlineColor`と`outlineThickness` | 文字の周囲のアウトライン。太さは0（アウトラインなし）から1までです |
-| `shadowColor`と`shadowOffset` | 文字の下に描かれるシャドウ。オフセットは`pc.Vec2`で、各値の範囲は-1から1です |
+| `shadowColor`と`shadowOffset` | 文字の下に描かれるシャドウ。オフセットは`Vec2`で、各値の範囲は-1から1です |
 
 アウトラインとシャドウはフォントのシェーダーで描画され、エディターとfont-toolsが作成するMSDFフォントアセットで機能します。
 

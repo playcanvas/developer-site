@@ -45,7 +45,7 @@ These lines assign values to r, g and b variables based on a sin wave and then a
 
 :::note
 
-Using `entity.light.color.r` to access and change the red value of a light's color will not work. Only changes to the light property `color` are detected, so you must assign a complete `pc.Color` to the property e.g. `entity.light.color = new pc.Color(1, 1, 1);`.
+Using `entity.light.color.r` to access and change the red value of a light's color will not work. Only changes to the light property `color` are detected, so you must assign a complete `Color` to the property e.g. `entity.light.color = new Color(1, 1, 1);`.
 
 :::
 

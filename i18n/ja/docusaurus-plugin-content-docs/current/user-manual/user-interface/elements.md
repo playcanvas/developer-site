@@ -14,9 +14,9 @@ import TabItem from '@theme/TabItem';
 
 | タイプ | 描画するもの | 用途 |
 | --- | --- | --- |
-| **Group**（`pc.ELEMENTTYPE_GROUP`） | なし | コンテナ、[レイアウトグループ](/user-manual/user-interface/layout-groups/)、不可視の入力領域。[グループエレメント](#group-elements)を参照してください |
-| **Image**（`pc.ELEMENTTYPE_IMAGE`） | 単色、テクスチャ、またはスプライト | パネル、アイコン、ボタン、[マスク](/user-manual/user-interface/masks/)。[イメージエレメント](/user-manual/user-interface/image-elements/)を参照してください |
-| **Text**（`pc.ELEMENTTYPE_TEXT`） | フォントアセットで描画する文字列 | ラベルやその他のテキスト。[テキストエレメント](/user-manual/user-interface/text-elements/)を参照してください |
+| **Group**（`ELEMENTTYPE_GROUP`） | なし | コンテナ、[レイアウトグループ](/user-manual/user-interface/layout-groups/)、不可視の入力領域。[グループエレメント](#group-elements)を参照してください |
+| **Image**（`ELEMENTTYPE_IMAGE`） | 単色、テクスチャ、またはスプライト | パネル、アイコン、ボタン、[マスク](/user-manual/user-interface/masks/)。[イメージエレメント](/user-manual/user-interface/image-elements/)を参照してください |
+| **Text**（`ELEMENTTYPE_TEXT`） | フォントアセットで描画する文字列 | ラベルやその他のテキスト。[テキストエレメント](/user-manual/user-interface/text-elements/)を参照してください |
 
 ## アンカー {#anchor}
 
@@ -162,7 +162,7 @@ panel.addChild(background);
 </TabItem>
 </Tabs>
 
-`left`、`bottom`、`right`、`top`プロパティは、4つのマージンを1つずつ読み書きします。コードから4つすべてを一度に設定するには、新しい`pc.Vec4`を代入します。`margin`のセッターは、代入されたベクトルから値をコピーするためです。
+`left`、`bottom`、`right`、`top`プロパティは、4つのマージンを1つずつ読み書きします。コードから4つすべてを一度に設定するには、新しい`Vec4`を代入します。`margin`のセッターは、代入されたベクトルから値をコピーするためです。
 
 ```javascript
 background.element.left = 40;

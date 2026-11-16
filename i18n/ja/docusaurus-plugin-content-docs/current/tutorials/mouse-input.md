@@ -15,7 +15,7 @@ description: Mouse API で移動、ボタン押下、ブラウザ間で一貫し
 
 :::
 
-PlayCanvasのエンジンでは、`pc.Mouse`オブジェクトが提供されており、マウスが移動したときやマウスボタンが押されたときに検出するためのシンプルなインターフェイスを提供します。また、マウス座標の処理におけるブラウザ間での一貫性の問題を解決することができます。
+PlayCanvasのエンジンでは、`Mouse`オブジェクトが提供されており、マウスが移動したときやマウスボタンが押されたときに検出するためのシンプルなインターフェイスを提供します。また、マウス座標の処理におけるブラウザ間での一貫性の問題を解決することができます。
 
 [tutorial project](https://playcanvas.com/project/405819/overview/tutorial-basic-mouse-input)を見てみましょう。次に、mouse.jsのコードを示します。
 
@@ -83,7 +83,7 @@ Mouse.prototype.onMouseDown = function (event) {
 
 ### マウスにアクセスする
 
-マウスの制御は`pc.Mouse`オブジェクトによって管理されます。[フレームワーク](/user-manual/glossary#framework)は、[application app](/user-manual/glossary#application)上でこれのインスタンスを提供します。このインスタンスは、すべてのスクリプトオブジェクトで次のように利用できます：
+マウスの制御は`Mouse`オブジェクトによって管理されます。[フレームワーク](/user-manual/glossary#framework)は、[application app](/user-manual/glossary#application)上でこれのインスタンスを提供します。このインスタンスは、すべてのスクリプトオブジェクトで次のように利用できます：
 
 ```javascript
 this.app.mouse
@@ -99,7 +99,7 @@ this.app.mouse.disableContextMenu();
 
 ### イベントへのバインド
 
-`pc.Mouse`オブジェクトでは、マウスアクションに対応する異なるイベントをリッスンすることができます。チュートリアルでは、`onMouseMove`メソッドを移動イベントにバインドし、`onMouseDown`メソッドをボタンダウンイベントにバインドしています。
+`Mouse`オブジェクトでは、マウスアクションに対応する異なるイベントをリッスンすることができます。チュートリアルでは、`onMouseMove`メソッドを移動イベントにバインドし、`onMouseDown`メソッドをボタンダウンイベントにバインドしています。
 
 私たちがイベントにバインドするためにon()メソッドに`this`を渡すことにも注目してください。この3つ目の引数は、イベントコールバック内で`this`として使われるオブジェクトです。
 
@@ -108,14 +108,14 @@ this.app.mouse.on(pc.EVENT_MOUSEMOVE, this.onMouseMove, this);
 this.app.mouse.on(pc.EVENT_MOUSEDOWN, this.onMouseDown, this);
 ```
 
-`pc.Mouse` で利用可能なイベントは以下の通りです。
+`Mouse` で利用可能なイベントは以下の通りです。
 
-* `pc.EVENT_MOUSEUP` - マウスボタンが離されたときに発火します。
-* `pc.EVENT_MOUSEDOWN` - マウスボタンが押されたときに発火します。
-* `pc.EVENT_MOUSEMOVE` - マウスが動かされたときに発火します。
-* `pc.EVENT_MOUSEMOVE` - マウスが動いたときに発生する
+* `EVENT_MOUSEUP` - マウスボタンが離されたときに発火します。
+* `EVENT_MOUSEDOWN` - マウスボタンが押されたときに発火します。
+* `EVENT_MOUSEMOVE` - マウスが動かされたときに発火します。
+* `EVENT_MOUSEMOVE` - マウスが動いたときに発生する
 
-ブラウザでのマウス入力は、通常、ページのDOM内の要素に対する[DOM](/user-manual/glossary#dom)イベントをリスニングすることで実装されます。問題は、異なるブラウザがイベントを微妙に異なる方法で実装し、異なる値を提供することです。コードの記述を簡略化するために、PlayCanvasエンジンでは、イベントハンドラをDOM要素ではなくPlayCanvasのマウスハンドラにバインドすることができます。エンジンは、イベントが発火するときに、すべてのブラウザで一貫性のある`pc.MouseEvent`オブジェクトを提供します。もし元のDOMイベントが必要な場合は、`pc.MouseEvent`の`event`プロパティとして利用可能です。
+ブラウザでのマウス入力は、通常、ページのDOM内の要素に対する[DOM](/user-manual/glossary#dom)イベントをリスニングすることで実装されます。問題は、異なるブラウザがイベントを微妙に異なる方法で実装し、異なる値を提供することです。コードの記述を簡略化するために、PlayCanvasエンジンでは、イベントハンドラをDOM要素ではなくPlayCanvasのマウスハンドラにバインドすることができます。エンジンは、イベントが発火するときに、すべてのブラウザで一貫性のある`MouseEvent`オブジェクトを提供します。もし元のDOMイベントが必要な場合は、`MouseEvent`の`event`プロパティとして利用可能です。
 
 ### マウスの移動
 
@@ -125,10 +125,10 @@ this.app.mouse.on(pc.EVENT_MOUSEDOWN, this.onMouseDown, this);
 
 2つ目のイベントハンドラは`onMouseDown`です。これはマウスの三つのボタンのいずれかがクリックされるたびに発火します。`EVENT_MOUSEDOWN`と`EVENT_MOUSEUP`イベントでは、`MouseEvent`オブジェクトは押された/解放されたボタンを含む`button`プロパティを持ちます。次のいずれかの値になります。
 
-* `pc.MOUSEBUTTON_NONE`
-* `pc.MOUSEBUTTON_LEFT`
-* `pc.MOUSEBUTTON_MIDDLE`
-* `pc.MOUSEBUTTON_RIGHT`
+* `MOUSEBUTTON_NONE`
+* `MOUSEBUTTON_LEFT`
+* `MOUSEBUTTON_MIDDLE`
+* `MOUSEBUTTON_RIGHT`
 
 私たちのチュートリアルでは、押されたマウスボタンに応じてキューブの色を変更しています。
 

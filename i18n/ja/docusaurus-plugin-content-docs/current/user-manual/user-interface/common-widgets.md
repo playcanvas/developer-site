@@ -27,7 +27,7 @@ function setHealth(value) {
 setHealth(0.7);
 ```
 
-この方法では、テクスチャを使ったフィルは押しつぶされます。代わりにテクスチャを切り取るには、フィルをトラックの左端にアンカーし、ピボットも左端に置いて、`width`と`rect`を一緒に設定します（トラックの幅を使った`fill.element.width = value * 292`と、`fill.element.rect = new pc.Vec4(0, 0, value, 1)`）。詳しくは、[プログレスバー](/tutorials/ui-elements-progress/)と[ローディングサークル](/tutorials/loading-circle-ui/)のチュートリアルを参照してください。
+この方法では、テクスチャを使ったフィルは押しつぶされます。代わりにテクスチャを切り取るには、フィルをトラックの左端にアンカーし、ピボットも左端に置いて、`width`と`rect`を一緒に設定します（トラックの幅を使った`fill.element.width = value * 292`と、`fill.element.rect = new Vec4(0, 0, value, 1)`）。詳しくは、[プログレスバー](/tutorials/ui-elements-progress/)と[ローディングサークル](/tutorials/loading-circle-ui/)のチュートリアルを参照してください。
 
 ## スライダー {#sliders}
 

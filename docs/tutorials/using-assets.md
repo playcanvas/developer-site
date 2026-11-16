@@ -34,7 +34,7 @@ Download the [A model](pathname:///downloads/tutorials/A.dae), [B model](pathnam
 
 ## The AssetRegistry
 
-The [`pc.AssetRegistry`](https://api.playcanvas.com/engine/classes/AssetRegistry.html) is available in all scripts as `this.app.assets`. The registry is populated with the details of all the runtime assets added to your project whether they are loaded or not. Use the Asset Registry to find the assets you need in your application.
+The [`AssetRegistry`](https://api.playcanvas.com/engine/classes/AssetRegistry.html) is available in all scripts as `this.app.assets`. The registry is populated with the details of all the runtime assets added to your project whether they are loaded or not. Use the Asset Registry to find the assets you need in your application.
 
 In this case we've declared three script attributes `a`, `b` and `c` which are assigned to assets in the Editor. Then they are automatically available in our script.
 
@@ -62,7 +62,7 @@ The **A** and **B** assets are marked as **preload** in this project. This means
 
 <img loading="lazy" src="/img/tutorials/using_assets/using-assets-a-preload.png" width="360" />
 
-So, the `A` and `B` models are preloaded, which means we know they will be ready when we are running the application. This code checks if the space bar is pressed, and if so we change the render asset on the render component to be the resource property of the asset. In this case `asset.resource` will be a `pc.Render` object. For each different asset type (audio, texture, etc), the `asset.resource` property will be the relevant type.
+So, the `A` and `B` models are preloaded, which means we know they will be ready when we are running the application. This code checks if the space bar is pressed, and if so we change the render asset on the render component to be the resource property of the asset. In this case `asset.resource` will be a `Render` object. For each different asset type (audio, texture, etc), the `asset.resource` property will be the relevant type.
 
 ## Loading assets at runtime
 
@@ -83,7 +83,7 @@ if (app.keyboard.isPressed(pc.KEY_C)) {
 }
 ```
 
-The **C** render asset is not marked as *preload*, so in the code above, you can see that we check if the resource is loaded before we use it. if `asset.loaded` is false, then the resource isn't loaded and we can't change the render component. If the **C** render asset is loaded then `this.c.resource` will be the `pc.Render` property and `asset.loaded` will be true, we'll be then able to assign it.
+The **C** render asset is not marked as *preload*, so in the code above, you can see that we check if the resource is loaded before we use it. if `asset.loaded` is false, then the resource isn't loaded and we can't change the render component. If the **C** render asset is loaded then `this.c.resource` will be the `Render` property and `asset.loaded` will be true, we'll be then able to assign it.
 
 <img loading="lazy" src="/img/tutorials/using_assets/using-assets-c-preload.png" width="360" />
 
@@ -95,7 +95,7 @@ if (this.app.keyboard.isPressed(pc.KEY_L)) {
 
 When you press the `L` key we load the **C** model. To do this we pass the unloaded asset into `this.app.assets.load()`. If the asset is already loaded, this method will do nothing.
 
-Once the asset is loaded `asset.resource` will be a `pc.Render` instance and we can assign the asset to the render component by pressing the `C` key.
+Once the asset is loaded `asset.resource` will be a `Render` instance and we can assign the asset to the render component by pressing the `C` key.
 
 ## The complete script
 
@@ -238,7 +238,7 @@ UpdateAsset.prototype.update = function(dt) {
 
 ## AssetRegistry events
 
-One thing we don't demonstrate in this example is how to know when an asset is loaded. To do this we use `pc.AssetRegistry` events like the `"load"` event. Here's some sample code:
+One thing we don't demonstrate in this example is how to know when an asset is loaded. To do this we use `AssetRegistry` events like the `"load"` event. Here's some sample code:
 
 ```javascript
 // find the asset by name in the registry

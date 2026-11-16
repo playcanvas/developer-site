@@ -62,7 +62,7 @@ entity.anim.setBoolean('crouching', true);
 entity.anim.setTrigger('jump');
 ```
 
-条件は、`==`、`!=`、`<`、`<=`、`>`、`>=`のいずれかの演算子を使って、パラメーターを値と比較します。データでは、これらは`pc.ANIM_EQUAL_TO`、`pc.ANIM_NOT_EQUAL_TO`、`pc.ANIM_LESS_THAN`、`pc.ANIM_LESS_THAN_EQUAL_TO`、`pc.ANIM_GREATER_THAN`、`pc.ANIM_GREATER_THAN_EQUAL_TO`です。
+条件は、`==`、`!=`、`<`、`<=`、`>`、`>=`のいずれかの演算子を使って、パラメーターを値と比較します。データでは、これらは`ANIM_EQUAL_TO`、`ANIM_NOT_EQUAL_TO`、`ANIM_LESS_THAN`、`ANIM_LESS_THAN_EQUAL_TO`、`ANIM_GREATER_THAN`、`ANIM_GREATER_THAN_EQUAL_TO`です。
 
 ## ステートグラフの構築 {#building-a-state-graph}
 

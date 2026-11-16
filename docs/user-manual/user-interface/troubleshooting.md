@@ -9,7 +9,7 @@ Each section below starts from what you see, lists the usual causes, most likely
 
 ### Text Doesn't Appear {#text-doesnt-appear}
 
-- **No font.** A text element draws nothing without a loaded [font asset](/user-manual/user-interface/fonts/#using-a-font-asset). In the Engine, the application needs `pc.FontHandler`, and the font must have finished loading.
+- **No font.** A text element draws nothing without a loaded [font asset](/user-manual/user-interface/fonts/#using-a-font-asset). In the Engine, the application needs `FontHandler`, and the font must have finished loading.
 - **Missing characters.** Characters that aren't in the font are drawn as spaces, and the console warns about each one. Add them to the font. See [Choosing Characters](/user-manual/user-interface/fonts/#choosing-characters).
 - **Its color or opacity.** Text of the same color as the panel behind it, or with an `opacity` of 0, is there but can't be seen.
 - **Outside the screen.** An element created without an anchor sits at the bottom-left corner of its parent, and can be off the visible area. See [Anchor](/user-manual/user-interface/elements/#anchor).
@@ -78,7 +78,7 @@ The camera has a `rect` that covers only part of the canvas, which squashes scre
 - **The content has no input.** The content element needs **Use Input** on to be dragged by its empty areas.
 - **The content isn't larger than the viewport.** A scroll view never sizes its content. See [Sizing the Content](/user-manual/user-interface/scroll-views/#sizing-the-content).
 - **No axis, scroll mode or friction.** A scroll view created in code has none of them until you set them. See [Creating a Scroll View](/user-manual/user-interface/scroll-views/#creating-a-scroll-view).
-- **No mouse device.** In the Engine, dragging with the mouse needs a `pc.Mouse`.
+- **No mouse device.** In the Engine, dragging with the mouse needs a `Mouse`.
 
 ### Part of the Scrolled Content Is Out of View {#scroll-content-out-of-view}
 
