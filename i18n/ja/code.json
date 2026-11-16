@@ -572,6 +572,12 @@
   "homepage.topics.physics.description": {
     "message": "剛体、衝突、トリガー、ジョイント、レイキャスト。"
   },
+  "homepage.topics.audio.title": {
+    "message": "オーディオ"
+  },
+  "homepage.topics.audio.description": {
+    "message": "効果音、音楽、ポジショナルオーディオ、エフェクト。"
+  },
   "homepage.topics.userInterface.title": {
     "message": "ユーザーインターフェース"
   },

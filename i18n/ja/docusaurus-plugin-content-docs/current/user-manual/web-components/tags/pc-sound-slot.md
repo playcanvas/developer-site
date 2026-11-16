@@ -79,6 +79,7 @@ description: "pc-sound-slot要素のリファレンス: pc-soundの名前付き�
 
 ## 関連項目 {#see-also}
 
+* [サウンドの再生](/user-manual/audio/playing-sounds/) — スロットでできることと、その再生方法
 * [`<pc-sound>`](../pc-sound) — スロットが属するコンポーネント
 * [`<pc-asset>`](../pc-asset) — スロットが再生するオーディオアセット
 * [`<pc-audio-listener>`](../pc-audio-listener) — 位置サウンドを聴く地点

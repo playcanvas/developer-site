@@ -166,5 +166,6 @@ app.systems.rigidbody.on('contact', (result) => {
 
 - [トリガーボリューム](/user-manual/physics/trigger-volumes/) - 動きを遮らない領域の重なりイベント
 - [衝突とトリガー](/tutorials/collision-and-triggers/) - 衝突時にサウンドを再生するチュートリアル
+- [サウンドの再生](/user-manual/audio/playing-sounds/) - 衝突音に使える、ワンショットサウンドのオーバーラップとピッチの変化
 - [イベント](/user-manual/scripting/events/) - スクリプティングのイベントシステムの仕組み
 - [CollisionComponent](https://api.playcanvas.com/engine/classes/CollisionComponent.html)と[RigidBodyComponent](https://api.playcanvas.com/engine/classes/RigidBodyComponent.html) - 各コンポーネントのイベントのAPIリファレンス

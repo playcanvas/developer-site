@@ -9,6 +9,7 @@ The Audio Listener Component specifies the listener's position in 3D space. All 
 
 ## See Also
 
+- [Positional Audio](/user-manual/audio/positional-audio/) - Which listener is used, and how sounds fade with distance
 - [Sound Component](sound.md) - Play audio in 3D space
 - [Audio Assets](/user-manual/editor/assets/inspectors/audio) - Learn more about audio assets
 

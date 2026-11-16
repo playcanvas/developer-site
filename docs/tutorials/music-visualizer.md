@@ -11,6 +11,8 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/4058
 
 *Find out more by forking the [full project](https://playcanvas.com/project/405891).*
 
+For more on reading sound with an analyser, see [Effects and Analysis](/user-manual/audio/effects/#analysing-sound) in the User Manual.
+
 This tutorial teaches you how to create a Music Visualizer application in WebGL using PlayCanvas. We're going to take an audio stream extra frequency data and then render that data into a PlayCanvas canvas.
 
 Our music visualizer consists of two scripts. The analyser, plays the audio and extracts the data via an Analyser Node. Which is part of the Web Audio API built into modern browsers. The visualizer, takes the data from the analyser and renders it onto screen as a funky graph.

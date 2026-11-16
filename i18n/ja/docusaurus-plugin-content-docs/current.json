@@ -315,6 +315,10 @@
     "message": "物理演算",
     "description": "The label for category Physics in sidebar userManualSidebar"
   },
+  "sidebar.userManualSidebar.category.Audio": {
+    "message": "オーディオ",
+    "description": "The label for category Audio in sidebar userManualSidebar"
+  },
   "sidebar.userManualSidebar.category.User Interface": {
     "message": "ユーザーインターフェース",
     "description": "The label for category User Interface in sidebar userManualSidebar"

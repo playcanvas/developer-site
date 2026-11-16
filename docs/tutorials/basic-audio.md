@@ -11,6 +11,8 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/4058
 
 *The tank is moving around the robot. You can shoot by clicking anywhere on the game.*
 
+For a full guide to sound in PlayCanvas, see the [Audio](/user-manual/audio/) section of the User Manual.
+
 ## Sound sources and Listeners
 
 In this tutorial we have placed a robot in the middle of the scene with a tank rotating around the robot. The sound playing from the tank's engine is heard relative to the ears of the robot. As the tank moves around the robot we can hear the sound shifting position from left to back to right to front.

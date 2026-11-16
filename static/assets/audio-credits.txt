@@ -1,0 +1,31 @@
+Audio for the live examples in the Audio section of the PlayCanvas User Manual
+==============================================================================
+
+bell.mp3, sfx.mp3 and music.mp3 were generated for these examples with ElevenLabs
+(https://elevenlabs.io) on 2026-11-16, then trimmed, normalized and encoded with ffmpeg.
+
+bell.mp3
+    Tool:    ElevenLabs Sound Effects (eleven_text_to_sound_v2)
+    Prompt:  "A single clear ding of a small brass reception desk call bell, struck once,
+             dry and close, no reverb, no background noise"
+    Changes: mono, trimmed to 1.4 s with a fade out, normalized, 96 kbps MP3.
+
+sfx.mp3
+    An audio sprite of four sounds, each generated on its own and laid end to end
+    with silence between them.
+    Tool:    ElevenLabs Sound Effects (eleven_text_to_sound_v2)
+    Sounds:  coin       0.0 s, 0.7 s long  "Retro video game coin pickup, a bright two-note chime, short and clean"
+             jump       1.0 s, 0.8 s long  "Retro video game jump sound, a quick rising synth whoop, short and clean"
+             laser      2.0 s, 0.7 s long  "Sci-fi laser blaster firing a single shot, a short pew, clean"
+             explosion  3.0 s, 1.3 s long  "Short punchy retro video game explosion, a low boom with a brief noise tail"
+    Changes: mono, each sound trimmed, faded out and normalized, 96 kbps MP3.
+
+music.mp3
+    Tool:    ElevenLabs Music (music_v2_5), instrumental
+    Prompt:  "Bright, relaxed instrumental background music for a casual puzzle video game.
+             Marimba, soft synth pads and light percussion at a steady 100 BPM. Cheerful and
+             unobtrusive, with constant energy throughout and no intro or outro."
+    Changes: the first 8 bars (19.2 s at 100 BPM) cut into a seamless loop, with the
+             0.6 s after the loop crossfaded into its start, 128 kbps stereo MP3.
+
+footsteps.mp3 and drop.mp3 come from the PlayCanvas engine and web-components examples.

@@ -79,6 +79,7 @@ The attributes are mirrored as properties. The engine [SoundSlot](https://api.pl
 
 ## See Also
 
+* [Playing Sounds](/user-manual/audio/playing-sounds/) — what a slot can do, and how to play it
 * [`<pc-sound>`](../pc-sound) — the component a slot belongs to
 * [`<pc-asset>`](../pc-asset) — the audio asset a slot plays
 * [`<pc-audio-listener>`](../pc-audio-listener) — where positional sounds are heard from

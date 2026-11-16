@@ -84,6 +84,7 @@ The `component` property is the engine [AudioListenerComponent](https://api.play
 
 ## See Also
 
+* [Positional Audio](/user-manual/audio/positional-audio/) — the listener, distance models and panning
 * [`<pc-sound>`](../pc-sound) — the positional sound sources the listener hears
 * [`<pc-sound-slot>`](../pc-sound-slot) — the clips those sources play
 * [`<pc-camera>`](../pc-camera) — the listener usually rides on the camera entity

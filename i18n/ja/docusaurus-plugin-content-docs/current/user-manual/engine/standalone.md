@@ -550,7 +550,7 @@ import * as pc from 'playcanvas';
 
 * **コンポーネント**: コンポーネントの種類ごとに、そのコンポーネントシステムが必要です。たとえば、`script`コンポーネントを使用するには`ScriptComponentSystem`を追加します。[バンドルサイズとツリーシェイキング](/user-manual/engine/bundle-size/)に、すべてのコンポーネントの種類とそのシステムが記載されています。システムが登録されていない場合、`addComponent`は`null`を返し、Engineのデバッグビルドはエラーをログに出力します。
 * **アセット**: アセットの種類ごとに、そのリソースハンドラーが必要です。サンプルでは、テクスチャ用の`TextureHandler`とGLBモデル用の`ContainerHandler`を登録しています。[バンドルサイズとツリーシェイキング](/user-manual/engine/bundle-size/#resource-handlers)に、すべてのアセットの種類とそのハンドラーが記載されています。
-* **その他の機能**: サウンド、バッチ処理、ライトマップ、XRは、`AppOptions`の他のプロパティで有効にします。たとえば、`sound`コンポーネントには`options.soundManager = new SoundManager()`も必要です。
+* **その他の機能**: サウンド、バッチ処理、ライトマップ、XRは、`AppOptions`の他のプロパティで有効にします。たとえば、[オーディオ](/user-manual/audio/getting-started/#setting-up-the-application)で説明しているように、`sound`コンポーネントには`options.soundManager = new SoundManager()`も必要です。
 
 :::note
 
