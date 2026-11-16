@@ -10,7 +10,7 @@ description: Picker API で画面座標からメッシュとスプラットを�
 Picker を作成するには、Application、希望する解像度、および任意で深度ピッキングの有効化を指定してインスタンス化します。
 
 ```javascript
-const picker = new pc.Picker(app, width, height, depth);
+const picker = new Picker(app, width, height, depth);
 ```
 
 基本的なワークフローは次の 3 ステップです。
@@ -28,7 +28,7 @@ API の詳細は [Picker API リファレンス](https://api.playcanvas.com/engi
 既定では、Picker はメッシュインスタンス ID のみを取得します。ただし、コンストラクタの第 4 引数に `true` を渡すと深度ピッキングを有効にできます。
 
 ```javascript
-const picker = new pc.Picker(app, width, height, true);
+const picker = new Picker(app, width, height, true);
 ```
 
 深度ピッキングが有効な場合、Picker はメッシュ ID とともに深度値を取得します。この追加情報により、オブジェクト表面のクリック位置の正確な 3D ワールド座標を計算でき、オブジェクトの配置、距離の計測、エディタツールの作成などに役立ちます。
@@ -59,7 +59,7 @@ Picker のパフォーマンスは、次のように最適化できます。
 
 ```javascript
 const pickerScale = 0.25;
-const picker = new pc.Picker(
+const picker = new Picker(
     app,
     canvas.width * pickerScale,
     canvas.height * pickerScale,

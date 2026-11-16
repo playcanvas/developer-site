@@ -18,7 +18,7 @@ if (app.xr.supported) {
 To start XR session, you can use method on the Camera Component or [XrManager](https://api.playcanvas.com/engine/classes/XrManager.html) on the Application. To start an XR session, you need to provide CameraComponent and provide the type of XR session, reference space, and optional object with additional arguments:
 
 ```javascript
-app.xr.start(entity.camera, pc.XRTYPE_VR, pc.XRSPACE_LOCALFLOOR);
+app.xr.start(entity.camera, XRTYPE_VR, XRSPACE_LOCALFLOOR);
 ```
 
 It is an asynchronous operation and is only possible to start on a user interaction, such as a button click, mouse click, or touch:
@@ -40,7 +40,7 @@ app.xr.on('start', () => {
 Session type or reference space might not be available on a particular platform, so it will fail to start the session, providing an error in a callback and firing the `error` event on XrManager:
 
 ```javascript
-entity.camera.startXr(pc.XRTYPE_VR, pc.XRSPACE_UNBOUNDED, {
+entity.camera.startXr(XRTYPE_VR, XRSPACE_UNBOUNDED, {
     callback: (err) => {
         if (err) {
             // failed to start session
@@ -75,7 +75,7 @@ Each platform can support different types of sessions. These are:
 The availability of a session type can change during an application's lifetime, based on devices being plugged in or features on devices being enabled. To check if a session type is available do:
 
 ```javascript
-if (app.xr.isAvailable(pc.XRTYPE_VR)) {
+if (app.xr.isAvailable(XRTYPE_VR)) {
     // VR is available
 }
 ```
@@ -88,7 +88,7 @@ app.xr.on('available', (type, available) => {
 });
 
 // or specific session type
-app.xr.on('available:' + pc.XRTYPE_VR, (available) => {
+app.xr.on('available:' + XRTYPE_VR, (available) => {
     console.log('XR session VR type is now', available ? 'available' : 'unavailable');
 });
 ```

@@ -35,7 +35,7 @@ class MyParser {
 
     // fetch the resource and deliver its raw data via callback(err, data)
     load(url, callback, asset) {
-        this.handler.fetch(url, pc.Http.ResponseType.ARRAY_BUFFER, callback, asset);
+        this.handler.fetch(url, Http.ResponseType.ARRAY_BUFFER, callback, asset);
     }
 
     // optional: convert the loaded data into the runtime resource
@@ -80,7 +80,7 @@ class TgaParser {
     }
 
     load(url, callback, asset) {
-        this.handler.fetch(url, pc.Http.ResponseType.ARRAY_BUFFER, callback, asset);
+        this.handler.fetch(url, Http.ResponseType.ARRAY_BUFFER, callback, asset);
     }
 
     // texture parsers use an extended open signature: the handler passes the graphics
@@ -89,11 +89,11 @@ class TgaParser {
         // decode the TGA file into RGBA8 pixels (using your decoder of choice)
         const { width, height, pixels } = decodeTga(data);
 
-        const texture = new pc.Texture(device, {
+        const texture = new Texture(device, {
             name: url,
             width: width,
             height: height,
-            format: pc.PIXELFORMAT_RGBA8,
+            format: PIXELFORMAT_RGBA8,
             levels: [pixels],
 
             // spread the asset-derived options last, so that asset settings
@@ -113,7 +113,7 @@ app.loader.getHandler('texture').addParser(new TgaParser());
 With the parser registered, `.tga` files load like any other texture:
 
 ```javascript
-const asset = new pc.Asset('picture', 'texture', { url: 'images/picture.tga' }, { srgb: true });
+const asset = new Asset('picture', 'texture', { url: 'images/picture.tga' }, { srgb: true });
 app.assets.add(asset);
 app.assets.load(asset);
 ```

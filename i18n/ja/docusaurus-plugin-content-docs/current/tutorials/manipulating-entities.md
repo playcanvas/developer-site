@@ -95,7 +95,7 @@ entity.setEulerAngles(30、45、60);
 
 ```javascript
 // 単位回転クォータニオンを作成
-var q = new pc.Quat();
+var q = new Quat();
 // 親エンティティと同じ回転を持つようにエンティティを設定します。-等しい
 // 開始時エンティティ.setLocalEulerAngles(0、0、0)
 entity.setLocalRotation(q);

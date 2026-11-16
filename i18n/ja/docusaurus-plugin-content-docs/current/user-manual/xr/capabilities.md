@@ -37,7 +37,7 @@ WebXR APIは常に進化しており、XR機能セットを拡張する追加の
 以下は、[WebXR Layers](/user-manual/xr/input-sources/)の実験的なAPIを有効にする例です。
 
 ```javascript
-app.xr.start(cameraComponent, pc.XRTYPE_VR, pc.XRSPACE_LOCAL, {
+app.xr.start(cameraComponent, XRTYPE_VR, XRSPACE_LOCAL, {
     optionalFeatures: [ 'layers' ],
     callback: (err) => {
         if (err) {

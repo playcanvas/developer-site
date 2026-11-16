@@ -18,7 +18,7 @@ import TabItem from '@theme/TabItem';
 ファイルを`container`アセットとして読み込みます。そのリソースはアニメーションアセットの配列`animations`を持ち、各アセットのリソースは、アニメーションと同じ名前のクリップです。
 
 ```javascript
-const asset = new pc.Asset('robot-arm', 'container', {
+const asset = new Asset('robot-arm', 'container', {
     url: 'https://developer.playcanvas.com/assets/robot-arm.glb'
 });
 asset.ready(() => {
@@ -100,78 +100,96 @@ character.anim.assignAnimation('Walk', walk);
 カーブのパスは、3つの部分からなります。`entityPath`は、Animコンポーネントのエンティティから対象までのエンティティの名前で、コンポーネント自身のエンティティから始まります。`component`は、対象のトランスフォームなら`graph`、そうでなければ対象のコンポーネントのいずれかの名前です。`propertyPath`はプロパティを指定します。トランスフォームなら`localPosition`、`localRotation`、`localScale`のいずれか、コンポーネントならライトの`intensity`や`color`のような、そのコンポーネントのプロパティです。
 
 ```js live-example
-import * as pc from 'playcanvas';
+import {
+    AnimComponentSystem,
+    AnimCurve,
+    AnimData,
+    AnimTrack,
+    AppBase,
+    AppOptions,
+    CameraComponentSystem,
+    Color,
+    createGraphicsDevice,
+    DEVICETYPE_WEBGPU,
+    Entity,
+    FILLMODE_FILL_WINDOW,
+    INTERPOLATION_LINEAR,
+    LightComponentSystem,
+    RenderComponentSystem,
+    RESOLUTION_AUTO,
+    StandardMaterial
+} from 'playcanvas';
 
 // 使用するコンポーネントシステムを指定してアプリケーションを作成します
 const canvas = document.getElementById('application');
-const device = await pc.createGraphicsDevice(canvas, {
-    deviceTypes: [pc.DEVICETYPE_WEBGPU]
+const device = await createGraphicsDevice(canvas, {
+    deviceTypes: [DEVICETYPE_WEBGPU]
 });
 device.maxPixelRatio = Math.min(window.devicePixelRatio, 2);
 
-const options = new pc.AppOptions();
+const options = new AppOptions();
 options.graphicsDevice = device;
 options.componentSystems = [
-    pc.RenderComponentSystem,
-    pc.CameraComponentSystem,
-    pc.LightComponentSystem,
-    pc.AnimComponentSystem
+    RenderComponentSystem,
+    CameraComponentSystem,
+    LightComponentSystem,
+    AnimComponentSystem
 ];
 
-const app = new pc.AppBase(canvas);
+const app = new AppBase(canvas);
 app.init(options);
-app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
-app.setCanvasResolution(pc.RESOLUTION_AUTO);
+app.setCanvasFillMode(FILLMODE_FILL_WINDOW);
+app.setCanvasResolution(RESOLUTION_AUTO);
 window.addEventListener('resize', () => app.resizeCanvas());
 app.start();
 
-app.scene.ambientLight = new pc.Color(0.1, 0.1, 0.12);
+app.scene.ambientLight = new Color(0.1, 0.1, 0.12);
 
-const camera = new pc.Entity('camera');
+const camera = new Entity('camera');
 camera.addComponent('camera', {
-    clearColor: new pc.Color(0.05, 0.06, 0.09)
+    clearColor: new Color(0.05, 0.06, 0.09)
 });
 camera.setPosition(0, 2, 5);
 camera.lookAt(0, 0.8, 0);
 app.root.addChild(camera);
 
-const floorMaterial = new pc.StandardMaterial();
-floorMaterial.diffuse = new pc.Color(0.5, 0.5, 0.55);
+const floorMaterial = new StandardMaterial();
+floorMaterial.diffuse = new Color(0.5, 0.5, 0.55);
 floorMaterial.update();
 
-const floor = new pc.Entity('floor');
+const floor = new Entity('floor');
 floor.addComponent('render', { type: 'plane', material: floorMaterial });
 floor.setLocalScale(20, 1, 20);
 app.root.addChild(floor);
 
 // beaconは、クリップがアニメーションさせる階層のルートです。光るキューブで、
 // その中にオムニライトがあります
-const beacon = new pc.Entity('beacon');
+const beacon = new Entity('beacon');
 app.root.addChild(beacon);
 
-const glow = new pc.StandardMaterial();
-glow.emissive = new pc.Color(1, 0.55, 0.2);
+const glow = new StandardMaterial();
+glow.emissive = new Color(1, 0.55, 0.2);
 glow.update();
 
-const cube = new pc.Entity('cube');
+const cube = new Entity('cube');
 cube.addComponent('render', { type: 'box', material: glow, castShadows: false });
 beacon.addChild(cube);
 
-const lamp = new pc.Entity('lamp');
-lamp.addComponent('light', { type: 'omni', color: new pc.Color(1, 0.55, 0.2), range: 6 });
+const lamp = new Entity('lamp');
+lamp.addComponent('light', { type: 'omni', color: new Color(1, 0.55, 0.2), range: 6 });
 cube.addChild(lamp);
 
 // キーフレームの時刻（秒）と、それらの時刻における2組の値
-const times = new pc.AnimData(1, [0, 0.5, 1]);
-const positions = new pc.AnimData(3, [0, 0.4, 0, 0, 1.6, 0, 0, 0.4, 0]);
-const intensities = new pc.AnimData(1, [0.5, 3, 0.5]);
+const times = new AnimData(1, [0, 0.5, 1]);
+const positions = new AnimData(3, [0, 0.4, 0, 0, 1.6, 0, 0, 0.4, 0]);
+const intensities = new AnimData(1, [0.5, 3, 0.5]);
 
 // 各カーブは、時刻を1組の値に結び付け、自身が動かすプロパティを指定します
 const curves = [
-    new pc.AnimCurve([{ entityPath: ['beacon', 'cube'], component: 'graph', propertyPath: ['localPosition'] }], 0, 0, pc.INTERPOLATION_LINEAR),
-    new pc.AnimCurve([{ entityPath: ['beacon', 'cube', 'lamp'], component: 'light', propertyPath: ['intensity'] }], 0, 1, pc.INTERPOLATION_LINEAR)
+    new AnimCurve([{ entityPath: ['beacon', 'cube'], component: 'graph', propertyPath: ['localPosition'] }], 0, 0, INTERPOLATION_LINEAR),
+    new AnimCurve([{ entityPath: ['beacon', 'cube', 'lamp'], component: 'light', propertyPath: ['intensity'] }], 0, 1, INTERPOLATION_LINEAR)
 ];
-const track = new pc.AnimTrack('bob', 1, [times], [positions, intensities], curves);
+const track = new AnimTrack('bob', 1, [times], [positions, intensities], curves);
 
 // beaconでクリップを再生します
 beacon.addComponent('anim', { activate: true });

@@ -8,7 +8,7 @@ ARでは、レンダリングされた画像は、パススルーデバイスタ
 カメラの色へのアクセスを要求するには、セッションを以下の追加フラグ付きで開始する必要があります。
 
 ```javascript
-app.xr.start(camera, pc.XRTYPE_AR, pc.XRSPACE_LOCALFLOOR, {
+app.xr.start(camera, XRTYPE_AR, XRSPACE_LOCALFLOOR, {
     cameraColor: true
 });
 ```
@@ -40,7 +40,7 @@ Viewsはセッション開始時には利用できず、セッションの有効
 ```javascript
 app.xr.on('start', () => {
     app.xr.views.on('add', (view) => {
-        if (view.eye === pc.XREYE_NONE) { // 単眼ビュー
+        if (view.eye === XREYE_NONE) { // 単眼ビュー
             if (view.textureColor) {
                 // カメラの色テクスチャが利用可能です
             }

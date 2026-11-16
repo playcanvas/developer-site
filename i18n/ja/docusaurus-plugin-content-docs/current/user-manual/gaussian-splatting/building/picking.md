@@ -15,7 +15,7 @@ PlayCanvas Engine は、指定されたピクセルでレンダリングされ�
 
 ```javascript
 // ワールド位置検出のために深度バッファをサポートしたピッカーを作成
-const picker = new pc.Picker(app, 1, 1, true);
+const picker = new Picker(app, 1, 1, true);
 ```
 
 深度バッファは、クリックされたオブジェクトを識別するだけでなく、ピッキングされたポイントの3Dワールド位置を取得する場合に必要です。
@@ -86,14 +86,14 @@ if (worldPoint) {
 app.scene.gsplat.enableIds = true;
 
 // スプラットエンティティを作成
-const splat = new pc.Entity('splat');
+const splat = new Entity('splat');
 splat.addComponent('gsplat', {
     asset: splatAsset
 });
 app.root.addChild(splat);
 
 // 深度サポート付きでピッカーを作成
-const picker = new pc.Picker(app, 1, 1, true);
+const picker = new Picker(app, 1, 1, true);
 
 const handlePick = async (mouseX, mouseY) => {
     // パフォーマンスのために低解像度を使用
@@ -134,12 +134,12 @@ const handlePick = async (mouseX, mouseY) => {
 };
 
 // マウスクリックを処理
-app.mouse.on(pc.EVENT_MOUSEDOWN, (event) => {
+app.mouse.on(EVENT_MOUSEDOWN, (event) => {
     handlePick(event.x, event.y);
 });
 
 // タッチイベントを処理
-app.touch.on(pc.EVENT_TOUCHSTART, (event) => {
+app.touch.on(EVENT_TOUCHSTART, (event) => {
     const touch = event.touches[0];
     handlePick(touch.x, touch.y);
 });

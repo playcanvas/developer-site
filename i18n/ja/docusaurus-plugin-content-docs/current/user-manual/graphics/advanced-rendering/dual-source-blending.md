@@ -44,16 +44,16 @@ if (!device.supportsDualSourceBlending) {
 最初に、`outputPS` チャンクをオーバーライドして、1 つ目と 2 つ目のフラグメント出力を書き込みます。両方のグラフィックスバックエンドをサポートする場合は、GLSL 版と WGSL 版の両方を指定します。
 
 ```javascript
-const material = new pc.StandardMaterial();
+const material = new StandardMaterial();
 material.useLighting = false;
 material.useTonemap = false;
 
-material.getShaderChunks(pc.SHADERLANGUAGE_GLSL).set('outputPS', `
+material.getShaderChunks(SHADERLANGUAGE_GLSL).set('outputPS', `
     gl_FragColor = vec4(0.45, 0.02, 0.02, 0.0);
     pcFragColorSecondary = vec4(0.0, 0.85, 0.18, 1.0);
 `);
 
-material.getShaderChunks(pc.SHADERLANGUAGE_WGSL).set('outputPS', `
+material.getShaderChunks(SHADERLANGUAGE_WGSL).set('outputPS', `
     output.color = vec4f(0.45, 0.02, 0.02, 0.0);
     output.colorSecondary = vec4f(0.0, 0.85, 0.18, 1.0);
 `);
@@ -62,14 +62,14 @@ material.getShaderChunks(pc.SHADERLANGUAGE_WGSL).set('outputPS', `
 次に、ブレンドステートを設定します。この例では、RGB に対して `source0 + destination * source1` を計算します。
 
 ```javascript
-material.blendState = new pc.BlendState(
+material.blendState = new BlendState(
     true,
-    pc.BLENDEQUATION_ADD,
-    pc.BLENDMODE_ONE,
-    pc.BLENDMODE_SRC1_COLOR,
-    pc.BLENDEQUATION_ADD,
-    pc.BLENDMODE_ZERO,
-    pc.BLENDMODE_ONE
+    BLENDEQUATION_ADD,
+    BLENDMODE_ONE,
+    BLENDMODE_SRC1_COLOR,
+    BLENDEQUATION_ADD,
+    BLENDMODE_ZERO,
+    BLENDMODE_ONE
 );
 
 material.update();

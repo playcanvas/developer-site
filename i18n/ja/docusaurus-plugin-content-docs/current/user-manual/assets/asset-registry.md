@@ -137,7 +137,7 @@ this.app.assets.load(asset);
 実行時に新しいアセットを作成してレジストリに追加することができます。
 
 ```javascript
-const asset = new pc.Asset('New Texture', 'texture', {
+const asset = new Asset('New Texture', 'texture', {
     url: 'path/to/texture.png'
 });
 

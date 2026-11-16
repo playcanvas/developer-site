@@ -96,7 +96,7 @@ entity.gsplat.setWorkBufferModifier({
 ```javascript
 // コンポーネントIDを格納するストリームを追加（R32U = unsigned int）
 app.scene.gsplat.format.addExtraStreams([
-    { name: 'splatId', format: pc.PIXELFORMAT_R32U }
+    { name: 'splatId', format: PIXELFORMAT_R32U }
 ]);
 ```
 

@@ -22,7 +22,7 @@ DynamicなRigidBodyは、力とインパルスに応答して移動します。�
 ```javascript
 app.on('update', (dt) => {
     // 右矢印キーが押されている間、ワールドX軸に沿って箱を押す
-    if (app.keyboard.isPressed(pc.KEY_RIGHT)) {
+    if (app.keyboard.isPressed(KEY_RIGHT)) {
         box.rigidbody.applyForce(10, 0, 0);
     }
 });
@@ -136,12 +136,12 @@ entity.rigidbody.applyImpulse(impulse);
 ```javascript
 // インパルス：作用点はエンティティのローカル空間なので、エンティティのローカルZ軸に沿って
 // 1ユニット離れた点を上に押し上げ、ボディを倒す
-entity.rigidbody.applyImpulse(new pc.Vec3(0, 10, 0), new pc.Vec3(0, 0, 1));
+entity.rigidbody.applyImpulse(new Vec3(0, 10, 0), new Vec3(0, 0, 1));
 
 // 力：作用点はボディからのワールド空間でのオフセットなので、
 // 同じローカルの点を先にワールド空間に変換する
-const offset = entity.getWorldTransform().transformVector(new pc.Vec3(0, 0, 1));
-entity.rigidbody.applyForce(new pc.Vec3(0, 10, 0), offset);
+const offset = entity.getWorldTransform().transformVector(new Vec3(0, 0, 1));
+entity.rigidbody.applyForce(new Vec3(0, 10, 0), offset);
 ```
 
 どちらのメソッドも、力またはインパルスに続けて作用点を並べた6つの数値でも呼び出せます。
@@ -165,11 +165,11 @@ entity.rigidbody.applyTorqueImpulse(2, 0, 0);
 ```javascript
 // 現在の垂直方向の速度を保ちながら、ワールドX軸に沿って毎秒5ユニットで移動する
 const velocity = entity.rigidbody.linearVelocity;
-entity.rigidbody.linearVelocity = new pc.Vec3(5, velocity.y, 0);
+entity.rigidbody.linearVelocity = new Vec3(5, velocity.y, 0);
 
 // すべての動きを止める
-entity.rigidbody.linearVelocity = pc.Vec3.ZERO;
-entity.rigidbody.angularVelocity = pc.Vec3.ZERO;
+entity.rigidbody.linearVelocity = Vec3.ZERO;
+entity.rigidbody.angularVelocity = Vec3.ZERO;
 ```
 
 速度のゲッターは読み取り専用のスナップショットを返すため、返されたベクトルをその場で変更しても効果はありません。必ず新しい値を代入してください。この方法で操作する完全なキャラクターの例は、エンジンの[一人称](https://github.com/playcanvas/engine/blob/main/scripts/esm/first-person-controller.mjs)および[三人称](https://github.com/playcanvas/engine/blob/main/scripts/esm/third-person-controller.mjs)コントローラースクリプトを参照してください。

@@ -16,10 +16,10 @@ A trigger is simply a [collision](/user-manual/editor/scenes/components/collisio
 <TabItem value="engine" label="Engine">
 
 ```javascript
-const goal = new pc.Entity('goal');
+const goal = new Entity('goal');
 goal.addComponent('collision', {
     type: 'box',
-    halfExtents: new pc.Vec3(2, 1, 0.5)
+    halfExtents: new Vec3(2, 1, 0.5)
 });
 goal.setPosition(0, 1, -10);
 app.root.addChild(goal);

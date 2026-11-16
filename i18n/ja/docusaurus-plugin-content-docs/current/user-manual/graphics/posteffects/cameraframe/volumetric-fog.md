@@ -12,8 +12,8 @@ description: CameraFrame の高さに応じたフォグと光の筋を設定し�
 次の例では、`cameraEntity` に Camera コンポーネント、`sunEntity` にディレクショナルの Light コンポーネントがあることを前提とします。
 
 ```javascript
-const cameraFrame = new pc.CameraFrame(app, cameraEntity.camera);
-cameraFrame.rendering.toneMapping = pc.TONEMAP_NEUTRAL;
+const cameraFrame = new CameraFrame(app, cameraEntity.camera);
+cameraFrame.rendering.toneMapping = TONEMAP_NEUTRAL;
 cameraFrame.taa.enabled = true;
 
 sunEntity.light.castShadows = true;
@@ -81,7 +81,7 @@ spotEntity.light.volumetricScattering = 2;
 フォグと被写界深度が Gaussian Splat のサーフェスを考慮するには、スプラットがシーン深度に寄与する必要があります。追加のフルスクリーンレンダーターゲットが必要なため、デフォルトでは無効です。[`GSplatParams.sceneDepthWrite`](https://api.playcanvas.com/engine/classes/GSplatParams.html#scenedepthwrite) で有効にします。
 
 ```javascript
-if (pc.CameraFrame.isSplatSceneDepthSupported(app.graphicsDevice)) {
+if (CameraFrame.isSplatSceneDepthSupported(app.graphicsDevice)) {
     app.scene.gsplat.sceneDepthWrite = true;
     cameraFrame.rendering.samples = 1;
     cameraFrame.update();

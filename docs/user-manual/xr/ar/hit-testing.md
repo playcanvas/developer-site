@@ -30,7 +30,7 @@ The most basic way is to start probing straight from the viewer forward vector:
 ```javascript
 // start a hit test
 app.xr.hitTest.start({
-    spaceType: pc.XRSPACE_VIEWER, // from a viewer space
+    spaceType: XRSPACE_VIEWER, // from a viewer space
     callback: (err, hitTestSource) => {
         if (err) return;
         // subscribe to hit test results
@@ -88,13 +88,13 @@ inputSource.hitTestStart({
 It is also possible to start a hit testing using a custom ray with the origin point and a direction:
 
 ```javascript
-const ray = new pc.Ray();
+const ray = new Ray();
 
 ray.origin.set(0, 1, 0); // start 1 meter above the origin
 ray.direction.set(0, -1, 0); // point downwards
 
 app.xr.hitTest.start({
-    spaceType: pc.XRSPACE_LOCALFLOOR,
+    spaceType: XRSPACE_LOCALFLOOR,
     offsetRay: ray,
     callback: (err, hitTestSource) => {
         // hit test source that will sample real world geometry

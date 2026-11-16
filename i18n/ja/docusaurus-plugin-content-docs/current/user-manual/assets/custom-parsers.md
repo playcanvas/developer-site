@@ -35,7 +35,7 @@ class MyParser {
 
     // リソースを取得し、callback(err, data) で生データを渡します
     load(url, callback, asset) {
-        this.handler.fetch(url, pc.Http.ResponseType.ARRAY_BUFFER, callback, asset);
+        this.handler.fetch(url, Http.ResponseType.ARRAY_BUFFER, callback, asset);
     }
 
     // オプション: 読み込んだデータをランタイムリソースに変換します
@@ -80,7 +80,7 @@ class TgaParser {
     }
 
     load(url, callback, asset) {
-        this.handler.fetch(url, pc.Http.ResponseType.ARRAY_BUFFER, callback, asset);
+        this.handler.fetch(url, Http.ResponseType.ARRAY_BUFFER, callback, asset);
     }
 
     // テクスチャパーサーは拡張された open シグネチャを使用します。ハンドラーがグラフィックス
@@ -89,11 +89,11 @@ class TgaParser {
         // TGA ファイルを RGBA8 ピクセルにデコードします（任意のデコーダーを使用）
         const { width, height, pixels } = decodeTga(data);
 
-        const texture = new pc.Texture(device, {
+        const texture = new Texture(device, {
             name: url,
             width: width,
             height: height,
-            format: pc.PIXELFORMAT_RGBA8,
+            format: PIXELFORMAT_RGBA8,
             levels: [pixels],
 
             // アセット由来のオプションを最後にスプレッドすることで、アセットの設定
@@ -113,7 +113,7 @@ app.loader.getHandler('texture').addParser(new TgaParser());
 パーサーを登録すれば、`.tga` ファイルは他のテクスチャと同様に読み込まれます:
 
 ```javascript
-const asset = new pc.Asset('picture', 'texture', { url: 'images/picture.tga' }, { srgb: true });
+const asset = new Asset('picture', 'texture', { url: 'images/picture.tga' }, { srgb: true });
 app.assets.add(asset);
 app.assets.load(asset);
 ```

@@ -39,10 +39,10 @@ PlayCanvasはWebGL2以上を必要とするため、インスタンシングは�
 // store matrices for individual instances into array
 const instanceCount = 1000;
 const matrices = new Float32Array(instanceCount * 16);
-const matrix = new pc.Mat4();
-const pos = new pc.Vec3();
-const rot = new pc.Quat();
-const scl = new pc.Vec3();
+const matrix = new Mat4();
+const pos = new Vec3();
+const rot = new Quat();
+const scl = new Vec3();
 
 for (let i = 0; i < instanceCount; i++) {
     // set up position, rotation, scale for each instance
@@ -63,8 +63,8 @@ for (let i = 0; i < instanceCount; i++) {
 [`VertexFormat.getDefaultInstancingFormat`](https://api.playcanvas.com/engine/classes/VertexFormat.html#getdefaultinstancingformat)を使用してVertexBufferを作成し、MeshInstanceでインスタンシングを有効にします：
 
 ```javascript
-const vbFormat = pc.VertexFormat.getDefaultInstancingFormat(app.graphicsDevice);
-const vertexBuffer = new pc.VertexBuffer(app.graphicsDevice, vbFormat, instanceCount, {
+const vbFormat = VertexFormat.getDefaultInstancingFormat(app.graphicsDevice);
+const vertexBuffer = new VertexBuffer(app.graphicsDevice, vbFormat, instanceCount, {
     data: matrices
 });
 
@@ -79,8 +79,8 @@ meshInst.setInstancing(vertexBuffer);
 
 ```javascript
 // create dynamic vertex buffer (no initial data)
-const vertexBuffer = new pc.VertexBuffer(app.graphicsDevice, vbFormat, instanceCount, {
-    usage: pc.BUFFER_DYNAMIC
+const vertexBuffer = new VertexBuffer(app.graphicsDevice, vbFormat, instanceCount, {
+    usage: BUFFER_DYNAMIC
 });
 
 // update per frame
@@ -96,9 +96,9 @@ vertexBuffer.setData(matrices);
 このフォーマットは、インスタンスごとに位置（3つのfloat）と均一スケール（1つのfloat）のみを格納し、インスタンスあたりのメモリを64バイトから16バイトに削減します：
 
 ```javascript
-const vbFormat = new pc.VertexFormat(app.graphicsDevice, [
-    { semantic: pc.SEMANTIC_ATTR12, components: 3, type: pc.TYPE_FLOAT32 }, // position
-    { semantic: pc.SEMANTIC_ATTR13, components: 1, type: pc.TYPE_FLOAT32 }  // scale
+const vbFormat = new VertexFormat(app.graphicsDevice, [
+    { semantic: SEMANTIC_ATTR12, components: 3, type: TYPE_FLOAT32 }, // position
+    { semantic: SEMANTIC_ATTR13, components: 1, type: TYPE_FLOAT32 }  // scale
 ]);
 
 // store data for individual instances, 4 floats each
@@ -113,7 +113,7 @@ for (let i = 0; i < instanceCount; i++) {
     data[offset + 3] = 0.1 + Math.random() * 0.1; // scale
 }
 
-const vertexBuffer = new pc.VertexBuffer(app.graphicsDevice, vbFormat, instanceCount, {
+const vertexBuffer = new VertexBuffer(app.graphicsDevice, vbFormat, instanceCount, {
     data: data
 });
 ```
@@ -129,9 +129,9 @@ const vertexBuffer = new pc.VertexBuffer(app.graphicsDevice, vbFormat, instanceC
 どのセマンティクスがどの属性名にマップされるかをマテリアルに伝えます：
 
 ```javascript
-const material = new pc.StandardMaterial();
-material.setAttribute('aInstPosition', pc.SEMANTIC_ATTR12);
-material.setAttribute('aInstScale', pc.SEMANTIC_ATTR13);
+const material = new StandardMaterial();
+material.setAttribute('aInstPosition', SEMANTIC_ATTR12);
+material.setAttribute('aInstScale', SEMANTIC_ATTR13);
 ```
 
 ### ステップ2: インスタンシングシェーダーチャンクのオーバーライド
@@ -139,7 +139,7 @@ material.setAttribute('aInstScale', pc.SEMANTIC_ATTR13);
 GLSL（WebGL）とWGSL（WebGPU）の両方にカスタムシェーダーコードを提供します：
 
 ```javascript
-material.getShaderChunks(pc.SHADERLANGUAGE_GLSL).set('transformInstancingVS', `
+material.getShaderChunks(SHADERLANGUAGE_GLSL).set('transformInstancingVS', `
     attribute vec3 aInstPosition;
     attribute float aInstScale;
 
@@ -153,7 +153,7 @@ material.getShaderChunks(pc.SHADERLANGUAGE_GLSL).set('transformInstancingVS', `
     }
 `);
 
-material.getShaderChunks(pc.SHADERLANGUAGE_WGSL).set('transformInstancingVS', `
+material.getShaderChunks(SHADERLANGUAGE_WGSL).set('transformInstancingVS', `
     attribute aInstPosition: vec3f;
     attribute aInstScale: f32;
 

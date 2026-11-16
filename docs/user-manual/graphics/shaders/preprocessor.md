@@ -102,8 +102,8 @@ The recommended way to add custom includes is by registering them with `ShaderCh
 
 ```javascript
 // Get the shader chunks for each language
-const chunksGLSL = pc.ShaderChunks.get(device, pc.SHADERLANGUAGE_GLSL);
-const chunksWGSL = pc.ShaderChunks.get(device, pc.SHADERLANGUAGE_WGSL);
+const chunksGLSL = ShaderChunks.get(device, SHADERLANGUAGE_GLSL);
+const chunksWGSL = ShaderChunks.get(device, SHADERLANGUAGE_WGSL);
 
 // Register your custom chunk in both languages
 chunksGLSL.set('myUtilsPS', `
@@ -218,7 +218,7 @@ When creating shaders programmatically (rather than using `ShaderMaterial`), you
 Use `ShaderUtils.createShader()` to create vertex/fragment shaders with defines:
 
 ```javascript
-const shader = pc.ShaderUtils.createShader(device, {
+const shader = ShaderUtils.createShader(device, {
     uniqueName: 'MyShader',
     vertexGLSL: vertexCodeGLSL,
     vertexWGSL: vertexCodeWGSL,
@@ -234,9 +234,9 @@ const shader = pc.ShaderUtils.createShader(device, {
 Compute shaders are created directly using the `Shader` class:
 
 ```javascript
-const shader = new pc.Shader(device, {
+const shader = new Shader(device, {
     name: 'MyComputeShader',
-    shaderLanguage: pc.SHADERLANGUAGE_WGSL,
+    shaderLanguage: SHADERLANGUAGE_WGSL,
     cshader: computeCode,
     cincludes: includesMap,  // Custom includes for compute shader
     cdefines: definesMap     // Defines for compute shader
@@ -257,7 +257,7 @@ const includesMap = new Map([
 You can also use engine-provided chunks:
 
 ```javascript
-cincludes: pc.ShaderChunks.get(device, pc.SHADERLANGUAGE_WGSL)
+cincludes: ShaderChunks.get(device, SHADERLANGUAGE_WGSL)
 ```
 
 ### Defines Map

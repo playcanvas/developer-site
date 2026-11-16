@@ -137,7 +137,7 @@ this.app.assets.load(asset);
 You can create and add new assets to the registry at runtime:
 
 ```javascript
-const asset = new pc.Asset('New Texture', 'texture', {
+const asset = new Asset('New Texture', 'texture', {
     url: 'path/to/texture.png'
 });
 

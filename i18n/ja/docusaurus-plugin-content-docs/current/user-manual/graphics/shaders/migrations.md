@@ -19,7 +19,7 @@ PlayCanvas エンジンのマテリアルシェーダチャンクシステムは
 
 ```javascript
 material.chunks.diffusePS = '...';
-material.chunks.APIVersion = pc.CHUNKAPI_1_55;
+material.chunks.APIVersion = CHUNKAPI_1_55;
 ```
 
 このようにすることで、コンソールに警告メッセージが表示されなくなります。

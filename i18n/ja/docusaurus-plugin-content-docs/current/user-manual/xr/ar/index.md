@@ -26,9 +26,9 @@ ARセッションを開始するには、まずデバイスのサポートと利
 ```javascript
 button.element.on('click', () => {
     // XRがサポートされ、ARが利用可能かを確認
-    if (app.xr.supported && app.xr.isAvailable(pc.XRTYPE_AR)) {
+    if (app.xr.supported && app.xr.isAvailable(XRTYPE_AR)) {
         // カメラコンポーネントを使用してARを開始
-        entity.camera.startXr(pc.XRTYPE_AR, pc.XRSPACE_LOCALFLOOR);
+        entity.camera.startXr(XRTYPE_AR, XRSPACE_LOCALFLOOR);
     }
 });
 ```

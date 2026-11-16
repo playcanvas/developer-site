@@ -113,7 +113,7 @@ Use `GSPLAT_STREAM_RESOURCE` (or omit `storage`) when the data is the same for a
 ```javascript
 // Add a stream shared across all instances
 resource.format.addExtraStreams([
-    { name: 'customData', format: pc.PIXELFORMAT_RGBA8 }
+    { name: 'customData', format: PIXELFORMAT_RGBA8 }
 ]);
 
 // Access the shared texture
@@ -127,7 +127,7 @@ Use `GSPLAT_STREAM_INSTANCE` when each component instance needs its own texture 
 ```javascript
 // Add a per-instance stream
 resource.format.addExtraStreams([
-    { name: 'instanceTint', format: pc.PIXELFORMAT_RGBA8, storage: pc.GSPLAT_STREAM_INSTANCE }
+    { name: 'instanceTint', format: PIXELFORMAT_RGBA8, storage: GSPLAT_STREAM_INSTANCE }
 ]);
 
 // Access the instance texture via the component

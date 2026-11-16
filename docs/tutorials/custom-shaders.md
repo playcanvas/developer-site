@@ -206,7 +206,7 @@ Uniforms are set using the [`setParameter()`](https://api.playcanvas.com/engine/
  * 
  * @attribute
  * @title GLSL Vertex Shader
- * @type {pc.Asset}
+ * @type {Asset}
  */
 vertexGLSL;
 
@@ -215,7 +215,7 @@ vertexGLSL;
  * 
  * @attribute
  * @title GLSL Fragment Shader
- * @type {pc.Asset}
+ * @type {Asset}
  */
 fragmentGLSL;
 
@@ -224,7 +224,7 @@ fragmentGLSL;
  * 
  * @attribute
  * @title WGSL Vertex Shader
- * @type {pc.Asset}
+ * @type {Asset}
  */
 vertexWGSL;
 
@@ -233,7 +233,7 @@ vertexWGSL;
  * 
  * @attribute
  * @title WGSL Fragment Shader
- * @type {pc.Asset}
+ * @type {Asset}
  */
 fragmentWGSL;
 
@@ -242,7 +242,7 @@ fragmentWGSL;
  * 
  * @attribute
  * @title Diffuse Map
- * @type {pc.Asset}
+ * @type {Asset}
  */
 diffuseMap;
 
@@ -251,7 +251,7 @@ diffuseMap;
  * 
  * @attribute
  * @title Height Map
- * @type {pc.Asset}
+ * @type {Asset}
  */
 heightMap;
 ```
@@ -277,7 +277,13 @@ To achieve the dissolving effect, we use the height map value as a threshold tha
 ## Complete Script
 
 ```javascript
-import { Script, ShaderMaterial, SEMANTIC_POSITION, SEMANTIC_TEXCOORD0 } from 'playcanvas';
+import {
+    Script,
+    ShaderMaterial,
+    SEMANTIC_POSITION,
+    SEMANTIC_TEXCOORD0,
+    Asset
+} from 'playcanvas';
 
 /**
  * Apply a dissolve shader material to an entity's render components.
@@ -290,7 +296,7 @@ export class CustomShader extends Script {
      * 
      * @attribute
      * @title GLSL Vertex Shader
-     * @type {pc.Asset}
+     * @type {Asset}
      */
     vertexGLSL;
 
@@ -299,7 +305,7 @@ export class CustomShader extends Script {
      * 
      * @attribute
      * @title GLSL Fragment Shader
-     * @type {pc.Asset}
+     * @type {Asset}
      */
     fragmentGLSL;
 
@@ -308,7 +314,7 @@ export class CustomShader extends Script {
      * 
      * @attribute
      * @title WGSL Vertex Shader
-     * @type {pc.Asset}
+     * @type {Asset}
      */
     vertexWGSL;
 
@@ -317,7 +323,7 @@ export class CustomShader extends Script {
      * 
      * @attribute
      * @title WGSL Fragment Shader
-     * @type {pc.Asset}
+     * @type {Asset}
      */
     fragmentWGSL;
 
@@ -326,7 +332,7 @@ export class CustomShader extends Script {
      * 
      * @attribute
      * @title Diffuse Map
-     * @type {pc.Asset}
+     * @type {Asset}
      */
     diffuseMap;
 
@@ -335,7 +341,7 @@ export class CustomShader extends Script {
      * 
      * @attribute
      * @title Height Map
-     * @type {pc.Asset}
+     * @type {Asset}
      */
     heightMap;
 

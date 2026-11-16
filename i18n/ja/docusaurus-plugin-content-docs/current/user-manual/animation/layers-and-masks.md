@@ -18,7 +18,7 @@ Animコンポーネントは、**レイヤー**ごとに1つずつ、複数の�
 [`addLayer()`](https://api.playcanvas.com/engine/classes/AnimComponent.html#addlayer)は、ウェイト、マスク、ブレンドタイプを指定してレイヤーを追加し、そのレイヤーを返します。レイヤー自身の`assignAnimation()`で、レイヤーにステートを与えます。
 
 ```javascript
-const upperBody = character.anim.addLayer('UpperBody', 1, upperBodyMask, pc.ANIM_LAYER_OVERWRITE);
+const upperBody = character.anim.addLayer('UpperBody', 1, upperBodyMask, ANIM_LAYER_OVERWRITE);
 upperBody.assignAnimation('Aim', aimTrack);
 upperBody.assignAnimation('Shoot', shootTrack, 1, false);
 ```
@@ -28,7 +28,7 @@ upperBody.assignAnimation('Shoot', shootTrack, 1, false);
 ```javascript
 layers: [
     { name: 'Base', states: [/* ... */], transitions: [/* ... */] },
-    { name: 'UpperBody', weight: 1, blendType: pc.ANIM_LAYER_OVERWRITE, states: [/* ... */], transitions: [/* ... */] }
+    { name: 'UpperBody', weight: 1, blendType: ANIM_LAYER_OVERWRITE, states: [/* ... */], transitions: [/* ... */] }
 ]
 ```
 
@@ -150,36 +150,54 @@ Engineタブと同じように、コードから追加したコンポーネン�
 このエンジンアプリは、ベースレイヤーでロボットアームに待機の動作をさせ、アームの点検のクリップを再生する2つ目のレイヤーを追加します。2つ目のレイヤーのマスクには手首とその下の関節だけが含まれるため、アームの残りの部分は待機を続けます。キャンバスをクリックすると、`blendToWeight()`でレイヤーがフェードインまたはフェードアウトします。
 
 ```js live-example
-import * as pc from 'playcanvas';
+import {
+    ANIM_LAYER_OVERWRITE,
+    AnimComponentSystem,
+    AppBase,
+    AppOptions,
+    Asset,
+    CameraComponentSystem,
+    Color,
+    ContainerHandler,
+    createGraphicsDevice,
+    DEVICETYPE_WEBGPU,
+    Entity,
+    FILLMODE_FILL_WINDOW,
+    LightComponentSystem,
+    RenderComponentSystem,
+    RESOLUTION_AUTO,
+    StandardMaterial,
+    TextureHandler
+} from 'playcanvas';
 
 // 使用するコンポーネントシステムとリソースハンドラーを指定してアプリケーションを作成します
 const canvas = document.getElementById('application');
-const device = await pc.createGraphicsDevice(canvas, {
-    deviceTypes: [pc.DEVICETYPE_WEBGPU]
+const device = await createGraphicsDevice(canvas, {
+    deviceTypes: [DEVICETYPE_WEBGPU]
 });
 device.maxPixelRatio = Math.min(window.devicePixelRatio, 2);
 
-const options = new pc.AppOptions();
+const options = new AppOptions();
 options.graphicsDevice = device;
 options.componentSystems = [
-    pc.RenderComponentSystem,
-    pc.CameraComponentSystem,
-    pc.LightComponentSystem,
-    pc.AnimComponentSystem
+    RenderComponentSystem,
+    CameraComponentSystem,
+    LightComponentSystem,
+    AnimComponentSystem
 ];
-options.resourceHandlers = [pc.ContainerHandler, pc.TextureHandler];
+options.resourceHandlers = [ContainerHandler, TextureHandler];
 
-const app = new pc.AppBase(canvas);
+const app = new AppBase(canvas);
 app.init(options);
-app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
-app.setCanvasResolution(pc.RESOLUTION_AUTO);
+app.setCanvasFillMode(FILLMODE_FILL_WINDOW);
+app.setCanvasResolution(RESOLUTION_AUTO);
 window.addEventListener('resize', () => app.resizeCanvas());
 app.start();
 
-app.scene.ambientLight = new pc.Color(0.35, 0.35, 0.4);
+app.scene.ambientLight = new Color(0.35, 0.35, 0.4);
 
 // 5つのアニメーションを持つGLBである、ロボットアームを読み込みます
-const asset = new pc.Asset('robot-arm', 'container', {
+const asset = new Asset('robot-arm', 'container', {
     url: 'https://developer.playcanvas.com/assets/robot-arm.glb'
 });
 await new Promise((resolve) => {
@@ -188,15 +206,15 @@ await new Promise((resolve) => {
     app.assets.load(asset);
 });
 
-const camera = new pc.Entity('camera');
+const camera = new Entity('camera');
 camera.addComponent('camera', {
-    clearColor: new pc.Color(0.11, 0.12, 0.17)
+    clearColor: new Color(0.11, 0.12, 0.17)
 });
 camera.setPosition(1.75, 1.4, 2.15);
 camera.lookAt(0, 0.75, 0);
 app.root.addChild(camera);
 
-const light = new pc.Entity('light');
+const light = new Entity('light');
 light.addComponent('light', {
     castShadows: true,
     shadowBias: 0.2,
@@ -205,9 +223,9 @@ light.addComponent('light', {
 light.setEulerAngles(48, 38, 0);
 app.root.addChild(light);
 
-const floor = new pc.Entity('floor');
-const floorMaterial = new pc.StandardMaterial();
-floorMaterial.diffuse = new pc.Color(0.24, 0.26, 0.31);
+const floor = new Entity('floor');
+const floorMaterial = new StandardMaterial();
+floorMaterial.diffuse = new Color(0.24, 0.26, 0.31);
 floorMaterial.update();
 floor.addComponent('render', { type: 'plane', material: floorMaterial });
 floor.setLocalScale(20, 1, 20);
@@ -226,7 +244,7 @@ arm.anim.assignAnimation('Idle', tracks.idle);
 // 手首とその下のすべてにマスクした2つ目のレイヤーで、ウェイト0でinspectを再生します
 const wrist = arm.anim.addLayer('Wrist', 0, {
     'arm_base/arm_column/arm_upper/arm_forearm/arm_wrist_roll': { children: true }
-}, pc.ANIM_LAYER_OVERWRITE);
+}, ANIM_LAYER_OVERWRITE);
 wrist.assignAnimation('Inspect', tracks.inspect);
 
 // クリックすると、0.5秒かけて手首のレイヤーをフェードインまたはフェードアウトします

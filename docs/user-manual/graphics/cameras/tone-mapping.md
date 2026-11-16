@@ -25,7 +25,7 @@ For physically based scenes with HDR lighting, `TONEMAP_ACES` or `TONEMAP_NEUTRA
 <TabItem value="engine" label="Engine">
 
 ```javascript
-camera.camera.toneMapping = pc.TONEMAP_ACES;
+camera.camera.toneMapping = TONEMAP_ACES;
 ```
 
 </TabItem>

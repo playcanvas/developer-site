@@ -18,30 +18,30 @@ Buttonコンポーネントは、エレメントをボタンにします。エ�
 <TabItem value="engine" label="Engine">
 
 ```javascript
-const button = new pc.Entity('button');
+const button = new Entity('button');
 button.addComponent('element', {
-    type: pc.ELEMENTTYPE_IMAGE,
+    type: ELEMENTTYPE_IMAGE,
     anchor: [0.5, 0.5, 0.5, 0.5],
     pivot: [0.5, 0.5],
     width: 200,
     height: 60,
-    color: new pc.Color(1, 0.55, 0.2),
+    color: new Color(1, 0.55, 0.2),
     useInput: true
 });
 button.addComponent('button', {
     imageEntity: button,
-    hoverTint: new pc.Color(1, 0.7, 0.45),
-    pressedTint: new pc.Color(0.8, 0.4, 0.1)
+    hoverTint: new Color(1, 0.7, 0.45),
+    pressedTint: new Color(0.8, 0.4, 0.1)
 });
 screen.addChild(button);
 
 // ラベルは入力を持たない子のテキストエレメントなので、ラベルへのクリックはボタンに届く
-const buttonText = new pc.Entity('text');
+const buttonText = new Entity('text');
 buttonText.addComponent('element', {
-    type: pc.ELEMENTTYPE_TEXT,
+    type: ELEMENTTYPE_TEXT,
     fontAsset: font.id,
     text: 'Play',
-    color: new pc.Color(0.1, 0.1, 0.1),
+    color: new Color(0.1, 0.1, 0.1),
     anchor: [0.5, 0.5, 0.5, 0.5],
     pivot: [0.5, 0.5]
 });
@@ -165,7 +165,7 @@ button.button.on('pressedend', () => {
 
 ```javascript
 // 32 × 32の閉じるボタンが、その周囲16単位でも反応するようにする
-closeButton.button.hitPadding = new pc.Vec4(16, 16, 16, 16);
+closeButton.button.hitPadding = new Vec4(16, 16, 16, 16);
 ```
 
 ## ボタンの無効化 {#disabling-a-button}

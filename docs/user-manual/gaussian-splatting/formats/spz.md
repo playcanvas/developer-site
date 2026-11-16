@@ -28,7 +28,7 @@ The attribute streams of SPZ version 4 files are ZSTD compressed, so the parser 
 import { SpzParser } from 'playcanvas/scripts/esm/parsers/spz-parser.mjs';
 
 // version 4 attribute streams are ZSTD compressed - register a decoder module
-pc.WasmModule.setConfig('ZstdDecoderModule', {
+WasmModule.setConfig('ZstdDecoderModule', {
     glueUrl: 'zstd.wasm.js',
     wasmUrl: 'zstd.wasm.wasm'
 });
@@ -37,7 +37,7 @@ pc.WasmModule.setConfig('ZstdDecoderModule', {
 app.loader.getHandler('gsplat').addParser(new SpzParser(app));
 
 // spz files then load as regular gsplat assets
-const asset = new pc.Asset('scene', 'gsplat', { url: 'scene.spz' });
+const asset = new Asset('scene', 'gsplat', { url: 'scene.spz' });
 app.assets.add(asset);
 app.assets.load(asset);
 ```

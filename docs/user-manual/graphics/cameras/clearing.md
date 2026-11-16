@@ -6,7 +6,7 @@ description: Control how a camera clears its render target — set the backgroun
 Before a camera renders the scene, it clears its render target — the screen, unless a [render target](multiple-cameras.md#render-targets) is assigned. You can control what gets cleared and to what color:
 
 ```javascript
-camera.camera.clearColor = new pc.Color(0, 0, 0);
+camera.camera.clearColor = new Color(0, 0, 0);
 
 camera.camera.clearColorBuffer = true;   // clear the color buffer (default: true)
 camera.camera.clearDepthBuffer = true;   // clear the depth buffer (default: true)
@@ -21,7 +21,7 @@ The clear color has an alpha channel, and the application's canvas supports tran
 
 ```javascript
 // The web page shows through wherever nothing is drawn
-camera.camera.clearColor = new pc.Color(0, 0, 0, 0);
+camera.camera.clearColor = new Color(0, 0, 0, 0);
 ```
 
 ## Disabling Clearing {#disabling-clearing}

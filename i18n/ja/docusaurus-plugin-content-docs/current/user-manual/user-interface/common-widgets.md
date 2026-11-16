@@ -22,7 +22,7 @@ health bar       イメージエレメント：背景、300 × 30
 
 ```javascript
 function setHealth(value) {
-    fill.element.anchor = new pc.Vec4(0, 0, value, 1);
+    fill.element.anchor = new Vec4(0, 0, value, 1);
 }
 setHealth(0.7);
 ```
@@ -135,9 +135,9 @@ function showScores(scores) {
         row.destroy();
     }
     for (const { name, score } of scores) {
-        const row = new pc.Entity(name);
+        const row = new Entity(name);
         row.addComponent('element', {
-            type: pc.ELEMENTTYPE_TEXT,
+            type: ELEMENTTYPE_TEXT,
             fontAsset: font.id,
             text: `${name}   ${score}`,
             fontSize: 28
@@ -246,7 +246,7 @@ function showScores(scores) {
 [`ElementDragHelper`](https://api.playcanvas.com/engine/classes/ElementDragHelper.html)は、ドラッグされている間、エレメントをポインターに追従させます。エレメントの入力が有効になっている必要があり、アプリケーションにはマウスまたはタッチのデバイスが必要です。
 
 ```javascript
-const drag = new pc.ElementDragHelper(card.element);
+const drag = new ElementDragHelper(card.element);
 const home = card.getLocalPosition().clone();
 
 // エレメントの境界。キャンバスの左上からのCSSピクセル
@@ -286,7 +286,7 @@ let t = 0;
 const handle = app.on('update', (dt) => {
     t = Math.min(t + dt / 0.5, 1);
     const eased = 1 - Math.pow(1 - t, 3);
-    panel.setLocalPosition(pc.math.lerp(-600, 0, eased), 0, 0);
+    panel.setLocalPosition(math.lerp(-600, 0, eased), 0, 0);
     if (t === 1) handle.off();
 });
 ```
@@ -295,7 +295,7 @@ const handle = app.on('update', (dt) => {
 
 ```javascript
 function setOpacity(entity, opacity) {
-    if (entity.element && entity.element.type !== pc.ELEMENTTYPE_GROUP) {
+    if (entity.element && entity.element.type !== ELEMENTTYPE_GROUP) {
         entity.element.opacity = opacity;
     }
     for (const child of entity.children) {

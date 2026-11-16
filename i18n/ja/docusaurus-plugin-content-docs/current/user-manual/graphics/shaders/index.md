@@ -17,7 +17,7 @@ import TabItem from '@theme/TabItem';
 ```javascript
 const shaderDesc = {
     uniqueName: 'MyShader',
-    shaderLanguage: pc.SHADERLANGUAGE_GLSL,
+    shaderLanguage: SHADERLANGUAGE_GLSL,
     vertexCode: `
         // 頂点シェーダーのソースコードを記述します
     `,
@@ -25,8 +25,8 @@ const shaderDesc = {
         // フラグメントシェーダーのソースコードを記述します
     `,
     attributes: {
-        aPosition: pc.SEMANTIC_POSITION,
-        aUv0: pc.SEMANTIC_TEXCOORD0
+        aPosition: SEMANTIC_POSITION,
+        aUv0: SEMANTIC_TEXCOORD0
     }
 };
 ```
@@ -34,7 +34,7 @@ const shaderDesc = {
 次に、レンダリングに使用できるマテリアルのインスタンスを作成します。
 
 ```javascript
-const material = new pc.ShaderMaterial(shaderDesc);
+const material = new ShaderMaterial(shaderDesc);
 ```
 
 シェーダーのソースコードは、WebGL2またはWebGPUプラットフォームをターゲットにする場合はGLSLで、WebGPUのみをターゲットにする場合はWGSLで記述できます。
@@ -430,7 +430,7 @@ fn fragmentMain(input: FragmentInput) -> FragmentOutput
 生成されたシェーダーを検査する必要がある場合は、これをスクリプトに追加できます
 
 ```javascript
-pc.Tracing.set(pc.TRACEID_SHADER_ALLOC, true);
+Tracing.set(TRACEID_SHADER_ALLOC, true);
 ```
 
 作成された各シェーダーはブラウザのコンソールにログとして記録され、そのソースコードを検査できます。例：

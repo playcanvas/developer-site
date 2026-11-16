@@ -28,8 +28,8 @@ function pick(screenX, screenY) {
     }
 }
 
-app.mouse.on(pc.EVENT_MOUSEDOWN, (event) => pick(event.x, event.y));
-app.touch?.on(pc.EVENT_TOUCHSTART, (event) => pick(event.touches[0].x, event.touches[0].y));
+app.mouse.on(EVENT_MOUSEDOWN, (event) => pick(event.x, event.y));
+app.touch?.on(EVENT_TOUCHSTART, (event) => pick(event.touches[0].x, event.touches[0].y));
 ```
 
 エディターでは、このコードはカメラのエンティティに付けたスクリプトの中に置き、`app`と`cameraEntity`の代わりに`this.app`と`this.entity`を使います。完全なスクリプトは[物理演算によるエンティティのピッキング](/tutorials/entity-picking-using-physics/)チュートリアルにあります。Reactでは`useApp()`が、Web Componentsでは`whenReady('pc-app')`がアプリケーションを返します。これらのパターンは[ボディを動かす](/user-manual/physics/forces-and-impulses/#running-physics-code)を参照してください。
@@ -88,7 +88,7 @@ const result = app.systems.rigidbody.raycastFirst(from, to, {
 
 ```javascript
 const from = player.getPosition();
-const to = new pc.Vec3(from.x, from.y - 1.1, from.z);
+const to = new Vec3(from.x, from.y - 1.1, from.z);
 const hit = app.systems.rigidbody.raycastFirst(from, to, {
     filterCallback: (entity) => entity !== player
 });

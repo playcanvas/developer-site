@@ -30,8 +30,8 @@ Set the projection type as follows:
 <TabItem value="engine" label="Engine">
 
 ```javascript
-// pc.PROJECTION_PERSPECTIVE (default) | pc.PROJECTION_ORTHOGRAPHIC
-camera.camera.projection = pc.PROJECTION_ORTHOGRAPHIC;
+// PROJECTION_PERSPECTIVE (default) | PROJECTION_ORTHOGRAPHIC
+camera.camera.projection = PROJECTION_ORTHOGRAPHIC;
 camera.camera.orthoHeight = 5; // half-height of the view in world units
 ```
 

@@ -40,7 +40,7 @@ splat-transform scene.ply scene.glb
 スプラットのGLBファイルは、(他のglTFコンテンツと同様に) `gsplat`アセットではなく**コンテナ**アセットとして読み込みます。
 
 ```javascript
-const asset = new pc.Asset('scene', 'container', { url: 'scene.glb' });
+const asset = new Asset('scene', 'container', { url: 'scene.glb' });
 app.assets.add(asset);
 app.assets.load(asset);
 

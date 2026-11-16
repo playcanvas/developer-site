@@ -18,7 +18,7 @@ Physics is opt-in. ammo.js weighs in at several hundred kilobytes, so nothing lo
 Load the module before creating the application. The three files ship with the engine repository under `examples/assets/wasm/ammo/` and in the [sync-ammo](https://www.npmjs.com/package/sync-ammo) npm package.
 
 ```javascript
-pc.WasmModule.setConfig('Ammo', {
+WasmModule.setConfig('Ammo', {
     glueUrl: 'ammo/ammo.wasm.js',
     wasmUrl: 'ammo/ammo.wasm.wasm',
     fallbackUrl: 'ammo/ammo.js'
@@ -26,10 +26,10 @@ pc.WasmModule.setConfig('Ammo', {
 
 // Wait for the module, then create the application as usual
 await new Promise((resolve) => {
-    pc.WasmModule.getInstance('Ammo', () => resolve());
+    WasmModule.getInstance('Ammo', () => resolve());
 });
 
-const app = new pc.Application(canvas);
+const app = new Application(canvas);
 ```
 
 The rigid body system finds the `Ammo` global as the application starts and installs the ammo.js backend. `Application` registers every component system for you; if you build from `AppBase` and `AppOptions` instead, add `CollisionComponentSystem` and `RigidBodyComponentSystem` (and `JointComponentSystem` for [joints](/user-manual/physics/joints/)) to `componentSystems`. The [Falling Shapes](https://playcanvas.github.io/#/physics/falling-shapes) example shows the complete sequence.
@@ -99,7 +99,7 @@ Gravity is a constant acceleration applied to every dynamic rigid body. The defa
 
 ```javascript
 // Lunar gravity. The older setGravity() method is deprecated in favor of this property.
-app.systems.rigidbody.gravity = new pc.Vec3(0, -1.62, 0);
+app.systems.rigidbody.gravity = new Vec3(0, -1.62, 0);
 ```
 
 </TabItem>

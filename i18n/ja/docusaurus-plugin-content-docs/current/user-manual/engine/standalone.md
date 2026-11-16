@@ -76,33 +76,47 @@ npm create playcanvas@latest my-app -- -f engine
 4. `main.js`を作成し、これを貼り付けます。
 
     ```javascript title="main.js"
-    import * as pc from 'playcanvas';
+    import {
+        AppBase,
+        AppOptions,
+        CameraComponentSystem,
+        Color,
+        ContainerHandler,
+        createGraphicsDevice,
+        DEVICETYPE_WEBGPU,
+        Entity,
+        FILLMODE_FILL_WINDOW,
+        LightComponentSystem,
+        RenderComponentSystem,
+        RESOLUTION_AUTO,
+        TextureHandler
+    } from 'playcanvas';
 
     // create a graphics device, preferring WebGPU over WebGL 2.0
     // WebGPUを優先してグラフィックスデバイスを作成します
     const canvas = document.getElementById('application');
-    const device = await pc.createGraphicsDevice(canvas, {
-        deviceTypes: [pc.DEVICETYPE_WEBGPU]
+    const device = await createGraphicsDevice(canvas, {
+        deviceTypes: [DEVICETYPE_WEBGPU]
     });
 
     // create an application with the systems and handlers it uses
     // 使用するシステムとハンドラーを指定してアプリケーションを作成します
-    const options = new pc.AppOptions();
+    const options = new AppOptions();
     options.graphicsDevice = device;
     options.componentSystems = [
-        pc.RenderComponentSystem,
-        pc.CameraComponentSystem,
-        pc.LightComponentSystem
+        RenderComponentSystem,
+        CameraComponentSystem,
+        LightComponentSystem
     ];
     options.resourceHandlers = [
-        pc.TextureHandler,
-        pc.ContainerHandler
+        TextureHandler,
+        ContainerHandler
     ];
 
-    const app = new pc.AppBase(canvas);
+    const app = new AppBase(canvas);
     app.init(options);
-    app.setCanvasResolution(pc.RESOLUTION_AUTO);
-    app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
+    app.setCanvasResolution(RESOLUTION_AUTO);
+    app.setCanvasFillMode(FILLMODE_FILL_WINDOW);
     app.start();
 
     // resize the canvas when the window is resized
@@ -111,23 +125,23 @@ npm create playcanvas@latest my-app -- -f engine
 
     // create a camera
     // カメラを作成します
-    const camera = new pc.Entity();
+    const camera = new Entity();
     camera.addComponent('camera', {
-        clearColor: new pc.Color(0.3, 0.3, 0.7)
+        clearColor: new Color(0.3, 0.3, 0.7)
     });
     camera.setPosition(0, 0, 3);
     app.root.addChild(camera);
 
     // create a light
     // ライトを作成します
-    const light = new pc.Entity();
+    const light = new Entity();
     light.addComponent('light');
     light.setEulerAngles(45, 45, 0);
     app.root.addChild(light);
 
     // create a box
     // ボックスを作成します
-    const box = new pc.Entity();
+    const box = new Entity();
     box.addComponent('render', {
         type: 'box'
     });
@@ -188,52 +202,66 @@ npm create playcanvas@latest my-app -- -f engine
 4. `main.ts`を作成し、以下を貼り付けます。
 
     ```typescript title="main.ts"
-    import * as pc from 'playcanvas';
+    import {
+        AppBase,
+        AppOptions,
+        CameraComponentSystem,
+        Color,
+        ContainerHandler,
+        createGraphicsDevice,
+        DEVICETYPE_WEBGPU,
+        Entity,
+        FILLMODE_FILL_WINDOW,
+        LightComponentSystem,
+        RenderComponentSystem,
+        RESOLUTION_AUTO,
+        TextureHandler
+    } from 'playcanvas';
 
     // WebGPUを優先してグラフィックスデバイスを作成
     const canvas = document.getElementById('application') as HTMLCanvasElement;
-    const device = await pc.createGraphicsDevice(canvas, {
-        deviceTypes: [pc.DEVICETYPE_WEBGPU]
+    const device = await createGraphicsDevice(canvas, {
+        deviceTypes: [DEVICETYPE_WEBGPU]
     });
 
     // 使用するシステムとハンドラーを指定してアプリケーションを作成
-    const options = new pc.AppOptions();
+    const options = new AppOptions();
     options.graphicsDevice = device;
     options.componentSystems = [
-        pc.RenderComponentSystem,
-        pc.CameraComponentSystem,
-        pc.LightComponentSystem
+        RenderComponentSystem,
+        CameraComponentSystem,
+        LightComponentSystem
     ];
     options.resourceHandlers = [
-        pc.TextureHandler,
-        pc.ContainerHandler
+        TextureHandler,
+        ContainerHandler
     ];
 
-    const app = new pc.AppBase(canvas);
+    const app = new AppBase(canvas);
     app.init(options);
-    app.setCanvasResolution(pc.RESOLUTION_AUTO);
-    app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
+    app.setCanvasResolution(RESOLUTION_AUTO);
+    app.setCanvasFillMode(FILLMODE_FILL_WINDOW);
     app.start();
 
     // ウィンドウのサイズが変わったらキャンバスのサイズを変更
     window.addEventListener('resize', () => app.resizeCanvas());
 
     // カメラを作成
-    const camera = new pc.Entity();
+    const camera = new Entity();
     camera.addComponent('camera', {
-        clearColor: new pc.Color(0.3, 0.3, 0.7)
+        clearColor: new Color(0.3, 0.3, 0.7)
     });
     camera.setPosition(0, 0, 3);
     app.root.addChild(camera);
 
     // ライトを作成
-    const light = new pc.Entity();
+    const light = new Entity();
     light.addComponent('light');
     light.setEulerAngles(45, 45, 0);
     app.root.addChild(light);
 
     // ボックスを作成
-    const box = new pc.Entity();
+    const box = new Entity();
     box.addComponent('render', {
         type: 'box'
     });
@@ -306,52 +334,66 @@ import * as pc from 'playcanvas';
 3. `main.js`を作成し、以下を貼り付けます。
 
     ```javascript title="main.js"
-    import * as pc from 'playcanvas';
+    import {
+        AppBase,
+        AppOptions,
+        CameraComponentSystem,
+        Color,
+        ContainerHandler,
+        createGraphicsDevice,
+        DEVICETYPE_WEBGPU,
+        Entity,
+        FILLMODE_FILL_WINDOW,
+        LightComponentSystem,
+        RenderComponentSystem,
+        RESOLUTION_AUTO,
+        TextureHandler
+    } from 'playcanvas';
 
     // WebGPUを優先してグラフィックスデバイスを作成
     const canvas = document.getElementById('application');
-    const device = await pc.createGraphicsDevice(canvas, {
-        deviceTypes: [pc.DEVICETYPE_WEBGPU]
+    const device = await createGraphicsDevice(canvas, {
+        deviceTypes: [DEVICETYPE_WEBGPU]
     });
 
     // 使用するシステムとハンドラーを指定してアプリケーションを作成
-    const options = new pc.AppOptions();
+    const options = new AppOptions();
     options.graphicsDevice = device;
     options.componentSystems = [
-        pc.RenderComponentSystem,
-        pc.CameraComponentSystem,
-        pc.LightComponentSystem
+        RenderComponentSystem,
+        CameraComponentSystem,
+        LightComponentSystem
     ];
     options.resourceHandlers = [
-        pc.TextureHandler,
-        pc.ContainerHandler
+        TextureHandler,
+        ContainerHandler
     ];
 
-    const app = new pc.AppBase(canvas);
+    const app = new AppBase(canvas);
     app.init(options);
-    app.setCanvasResolution(pc.RESOLUTION_AUTO);
-    app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
+    app.setCanvasResolution(RESOLUTION_AUTO);
+    app.setCanvasFillMode(FILLMODE_FILL_WINDOW);
     app.start();
 
     // ウィンドウのサイズが変わったらキャンバスのサイズを変更
     window.addEventListener('resize', () => app.resizeCanvas());
 
     // カメラを作成
-    const camera = new pc.Entity();
+    const camera = new Entity();
     camera.addComponent('camera', {
-        clearColor: new pc.Color(0.3, 0.3, 0.7)
+        clearColor: new Color(0.3, 0.3, 0.7)
     });
     camera.setPosition(0, 0, 3);
     app.root.addChild(camera);
 
     // ライトを作成
-    const light = new pc.Entity();
+    const light = new Entity();
     light.addComponent('light');
     light.setEulerAngles(45, 45, 0);
     app.root.addChild(light);
 
     // ボックスを作成
-    const box = new pc.Entity();
+    const box = new Entity();
     box.addComponent('render', {
         type: 'box'
     });
@@ -403,52 +445,66 @@ import * as pc from 'playcanvas';
 3. `main.ts` を作成し、これを貼り付けます:
 
     ```typescript title="main.ts"
-    import * as pc from 'playcanvas';
+    import {
+        AppBase,
+        AppOptions,
+        CameraComponentSystem,
+        Color,
+        ContainerHandler,
+        createGraphicsDevice,
+        DEVICETYPE_WEBGPU,
+        Entity,
+        FILLMODE_FILL_WINDOW,
+        LightComponentSystem,
+        RenderComponentSystem,
+        RESOLUTION_AUTO,
+        TextureHandler
+    } from 'playcanvas';
 
     // WebGPUを優先してグラフィックスデバイスを作成します
     const canvas = document.getElementById('application') as HTMLCanvasElement;
-    const device = await pc.createGraphicsDevice(canvas, {
-        deviceTypes: [pc.DEVICETYPE_WEBGPU]
+    const device = await createGraphicsDevice(canvas, {
+        deviceTypes: [DEVICETYPE_WEBGPU]
     });
 
     // 使用するシステムとハンドラーを指定してアプリケーションを作成します
-    const options = new pc.AppOptions();
+    const options = new AppOptions();
     options.graphicsDevice = device;
     options.componentSystems = [
-        pc.RenderComponentSystem,
-        pc.CameraComponentSystem,
-        pc.LightComponentSystem
+        RenderComponentSystem,
+        CameraComponentSystem,
+        LightComponentSystem
     ];
     options.resourceHandlers = [
-        pc.TextureHandler,
-        pc.ContainerHandler
+        TextureHandler,
+        ContainerHandler
     ];
 
-    const app = new pc.AppBase(canvas);
+    const app = new AppBase(canvas);
     app.init(options);
-    app.setCanvasResolution(pc.RESOLUTION_AUTO);
-    app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
+    app.setCanvasResolution(RESOLUTION_AUTO);
+    app.setCanvasFillMode(FILLMODE_FILL_WINDOW);
     app.start();
 
     // ウィンドウのサイズが変わったらキャンバスのサイズを変更します
     window.addEventListener('resize', () => app.resizeCanvas());
 
     // カメラを作成します
-    const camera = new pc.Entity();
+    const camera = new Entity();
     camera.addComponent('camera', {
-        clearColor: new pc.Color(0.3, 0.3, 0.7)
+        clearColor: new Color(0.3, 0.3, 0.7)
     });
     camera.setPosition(0, 0, 3);
     app.root.addChild(camera);
 
     // ライトを作成します
-    const light = new pc.Entity();
+    const light = new Entity();
     light.addComponent('light');
     light.setEulerAngles(45, 45, 0);
     app.root.addChild(light);
 
     // ボックスを作成します
-    const box = new pc.Entity();
+    const box = new Entity();
     box.addComponent('render', {
         type: 'box'
     });

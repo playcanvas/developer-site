@@ -172,7 +172,7 @@ Events on the overlay's empty areas pass through to the canvas as usual, as `poi
 The camera's `worldToScreen()` returns CSS pixels from the canvas's top-left corner, the coordinates HTML needs:
 
 ```javascript
-const onCanvas = new pc.Vec3();
+const onCanvas = new Vec3();
 app.on('update', () => {
     camera.camera.worldToScreen(character.getPosition(), onCanvas);
     // Hide the tag when the point is behind the camera

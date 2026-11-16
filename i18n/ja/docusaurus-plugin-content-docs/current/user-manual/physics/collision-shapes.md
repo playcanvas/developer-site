@@ -129,11 +129,11 @@ player.addComponent('collision', {
     type: 'capsule',
     radius: 0.5,
     height: 2,
-    linearOffset: new pc.Vec3(0, 1, 0)
+    linearOffset: new Vec3(0, 1, 0)
 });
 
 // エンティティのY軸を中心にボックスを45度傾ける
-crate.collision.angularOffset = new pc.Quat().setFromEulerAngles(0, 45, 0);
+crate.collision.angularOffset = new Quat().setFromEulerAngles(0, 45, 0);
 ```
 
 </TabItem>
@@ -171,13 +171,13 @@ crate.collision.angularOffset = new pc.Quat().setFromEulerAngles(0, 45, 0);
 
 ```javascript
 // 親がボディを所有し、子の形状を組み合わせる
-const chair = new pc.Entity('chair');
+const chair = new Entity('chair');
 chair.addComponent('collision', { type: 'compound' });
-chair.addComponent('rigidbody', { type: pc.BODYTYPE_DYNAMIC, mass: 5 });
+chair.addComponent('rigidbody', { type: BODYTYPE_DYNAMIC, mass: 5 });
 
 // 子が形状を持ち、親に対する相対位置に配置される。rigidbodyは不要
-const seat = new pc.Entity('seat');
-seat.addComponent('collision', { type: 'box', halfExtents: new pc.Vec3(0.25, 0.025, 0.25) });
+const seat = new Entity('seat');
+seat.addComponent('collision', { type: 'box', halfExtents: new Vec3(0.25, 0.025, 0.25) });
 seat.setLocalPosition(0, 0.45, 0);
 chair.addChild(seat);
 ```
@@ -236,7 +236,7 @@ DynamicまたはKinematicな複合形状の子エンティティは実行時に�
 
 ```javascript
 // 1ユニットのボックスコライダーのサイズを2倍にする
-entity.collision.halfExtents = new pc.Vec3(1, 1, 1);
+entity.collision.halfExtents = new Vec3(1, 1, 1);
 ```
 
 メッシュ形状は例外です。そのジオメトリは、エンティティのスケールで描画されるメッシュから得られるためです。メッシュ形状は、内部のモデルノードのスケールも含めた、エンティティのワールドスケールで構築されます。エンティティ自体またはその親をスケールしてエンティティのワールドスケールが変わると、次の物理ステップの開始時に再構築されます。モデルノードだけをスケールしても形状は再構築されません。再構築のたびにボディが作り直されるため、メッシュコライダーのスケールを毎フレーム変更するのは避けてください。

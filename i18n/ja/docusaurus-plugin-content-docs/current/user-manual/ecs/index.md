@@ -48,24 +48,24 @@ Unityから移行する場合、エンティティはゲームオブジェクト
 [Engineをスタンドアロンで使用する](/user-manual/engine/standalone/)のとおりにアプリケーションを設定し、render、camera、lightのコンポーネントシステムを登録した状態で、次のようにします。
 
 ```javascript
-const camera = new pc.Entity('camera');
+const camera = new Entity('camera');
 camera.addComponent('camera', {
-    clearColor: new pc.Color(0.11, 0.12, 0.17)
+    clearColor: new Color(0.11, 0.12, 0.17)
 });
 camera.setPosition(0, 1.1, 3.2);
 camera.setEulerAngles(-20, 0, 0);
 app.root.addChild(camera);
 
-const light = new pc.Entity('light');
+const light = new Entity('light');
 light.addComponent('light');
 light.setEulerAngles(45, -30, 0);
 app.root.addChild(light);
 
-const material = new pc.StandardMaterial();
-material.diffuse = new pc.Color(1, 0.55, 0.2);
+const material = new StandardMaterial();
+material.diffuse = new Color(1, 0.55, 0.2);
 material.update();
 
-const box = new pc.Entity('box');
+const box = new Entity('box');
 box.addComponent('render', { type: 'box', material: material });
 box.setEulerAngles(0, 35, 0);
 app.root.addChild(box);

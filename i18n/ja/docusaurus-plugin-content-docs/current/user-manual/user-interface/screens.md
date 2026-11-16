@@ -21,16 +21,16 @@ import TabItem from '@theme/TabItem';
 
 ```javascript
 // カメラのビューの上に、キャンバスと同じサイズで描画される
-const hud = new pc.Entity('hud');
+const hud = new Entity('hud');
 hud.addComponent('screen', {
     screenSpace: true,
-    scaleMode: pc.SCALEMODE_BLEND,
+    scaleMode: SCALEMODE_BLEND,
     referenceResolution: [1280, 720]
 });
 app.root.addChild(hud);
 
 // シーン内に配置される：640 × 320単位を6.4 × 3.2メートルにスケーリング
-const sign = new pc.Entity('sign');
+const sign = new Entity('sign');
 sign.addComponent('screen', {
     screenSpace: false,
     resolution: [640, 320]
@@ -102,10 +102,10 @@ app.root.addChild(sign);
 <TabItem value="engine" label="Engine">
 
 ```javascript
-const screen = new pc.Entity('screen');
+const screen = new Entity('screen');
 screen.addComponent('screen', {
     screenSpace: true,
-    scaleMode: pc.SCALEMODE_BLEND,
+    scaleMode: SCALEMODE_BLEND,
     referenceResolution: [1280, 720],
     scaleBlend: 0.5
 });

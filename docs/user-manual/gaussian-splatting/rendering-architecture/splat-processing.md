@@ -35,7 +35,7 @@ This is useful for:
 Create a processor by specifying the source (where to read splat data from), destination (which streams to write to), and the shader code that processes each splat:
 
 ```javascript
-const processor = new pc.GSplatProcessor(
+const processor = new GSplatProcessor(
     app.graphicsDevice,
     { component: entity.gsplat },                           // source
     { component: entity.gsplat, streams: ['customColor'] }, // destination
@@ -88,7 +88,7 @@ processor.process();
 ## Constructor
 
 ```javascript
-new pc.GSplatProcessor(device, source, destination, options)
+new GSplatProcessor(device, source, destination, options)
 ```
 
 **Parameters:**
@@ -231,7 +231,7 @@ Releases all GPU resources. Call when done with the processor.
 Property for setting blend state (useful for accumulative effects like additive painting):
 
 ```javascript
-processor.blendState = pc.BlendState.ADDBLEND;
+processor.blendState = BlendState.ADDBLEND;
 ```
 
 ## Use Cases

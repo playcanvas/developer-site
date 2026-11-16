@@ -18,7 +18,7 @@ if (app.xr.supported) {
 XRセッションを開始するには、Camera Component のメソッド、またはアプリケーションの [XrManager](https://api.playcanvas.com/engine/classes/XrManager.html) を使用できます。XRセッションを開始するには、CameraComponent を指定し、XRセッションのタイプ、参照空間、および追加の引数を持つオプションのオブジェクトを提供する必要があります：
 
 ```javascript
-app.xr.start(entity.camera, pc.XRTYPE_VR, pc.XRSPACE_LOCALFLOOR);
+app.xr.start(entity.camera, XRTYPE_VR, XRSPACE_LOCALFLOOR);
 ```
 
 これは非同期操作であり、ボタンクリック、マウスクリック、タッチなどのユーザー操作でのみ開始できます：
@@ -40,7 +40,7 @@ app.xr.on('start', () => {
 セッションのタイプまたは参照空間は、特定のプラットフォームで利用できない場合があります。その場合、セッションの開始に失敗し、コールバックでエラーを提供し、XrManager で `error` イベントが発生します：
 
 ```javascript
-entity.camera.startXr(pc.XRTYPE_VR, pc.XRSPACE_UNBOUNDED, {
+entity.camera.startXr(XRTYPE_VR, XRSPACE_UNBOUNDED, {
     callback: (err) => {
         if (err) {
             // セッションの開始に失敗しました
@@ -75,7 +75,7 @@ app.xr.on('end', () => {
 セッションタイプの可用性は、デバイスが接続されたり、デバイスの機能が有効になったりすることに基づいて、アプリケーションのライフタイム中に変化する可能性があります。セッションタイプが利用可能かどうかを確認するには、次のようにします：
 
 ```javascript
-if (app.xr.isAvailable(pc.XRTYPE_VR)) {
+if (app.xr.isAvailable(XRTYPE_VR)) {
     // VRは利用可能です
 }
 ```
@@ -88,7 +88,7 @@ app.xr.on('available', (type, available) => {
 });
 
 // または特定のセッションタイプ
-app.xr.on('available:' + pc.XRTYPE_VR, (available) => {
+app.xr.on('available:' + XRTYPE_VR, (available) => {
     console.log('XR session VR type is now', available ? 'available' : 'unavailable');
 });
 ```

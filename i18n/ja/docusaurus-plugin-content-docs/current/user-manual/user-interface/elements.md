@@ -45,9 +45,9 @@ import TabItem from '@theme/TabItem';
 <TabItem value="engine" label="Engine">
 
 ```javascript
-const score = new pc.Entity('score');
+const score = new Entity('score');
 score.addComponent('element', {
-    type: pc.ELEMENTTYPE_TEXT,
+    type: ELEMENTTYPE_TEXT,
     fontAsset: font.id,
     text: '1250',
     anchor: [1, 1, 1, 1],
@@ -95,7 +95,7 @@ screen.addChild(score);
 
 ```javascript
 // アイコンを中心の周りに回転させる
-icon.element.pivot = new pc.Vec2(0.5, 0.5);
+icon.element.pivot = new Vec2(0.5, 0.5);
 icon.setLocalEulerAngles(0, 0, 20);
 ```
 
@@ -107,8 +107,8 @@ icon.setLocalEulerAngles(0, 0, 20);
 
 ```javascript
 // バーの左右の辺を、親の上端の左右に取り付ける
-bar.element.anchor = new pc.Vec4(0, 1, 1, 1);
-bar.element.pivot = new pc.Vec2(0.5, 1);
+bar.element.anchor = new Vec4(0, 1, 1, 1);
+bar.element.pivot = new Vec2(0.5, 1);
 bar.element.left = 0;
 bar.element.right = 0;
 bar.element.height = 80;
@@ -126,12 +126,12 @@ bar.element.height = 80;
 <TabItem value="engine" label="Engine">
 
 ```javascript
-const background = new pc.Entity('background');
+const background = new Entity('background');
 background.addComponent('element', {
-    type: pc.ELEMENTTYPE_IMAGE,
+    type: ELEMENTTYPE_IMAGE,
     anchor: [0, 0, 1, 1],
     margin: [20, 20, 20, 20],
-    color: new pc.Color(0.16, 0.18, 0.23)
+    color: new Color(0.16, 0.18, 0.23)
 });
 panel.addChild(background);
 ```
@@ -166,7 +166,7 @@ panel.addChild(background);
 
 ```javascript
 background.element.left = 40;
-background.element.margin = new pc.Vec4(10, 10, 10, 10);
+background.element.margin = new Vec4(10, 10, 10, 10);
 ```
 
 <EngineExample id="user-interface/anchors" title="Anchors" />

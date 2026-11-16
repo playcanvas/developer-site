@@ -30,8 +30,8 @@ import TabItem from '@theme/TabItem';
 <TabItem value="engine" label="Engine">
 
 ```javascript
-// pc.PROJECTION_PERSPECTIVE（デフォルト） | pc.PROJECTION_ORTHOGRAPHIC
-camera.camera.projection = pc.PROJECTION_ORTHOGRAPHIC;
+// PROJECTION_PERSPECTIVE（デフォルト） | PROJECTION_ORTHOGRAPHIC
+camera.camera.projection = PROJECTION_ORTHOGRAPHIC;
 camera.camera.orthoHeight = 5; // ワールド単位でのビューの高さの半分
 ```
 

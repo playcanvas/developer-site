@@ -47,10 +47,10 @@ ReactとWeb Componentsは、ほとんどのアプリケーションが使うコ�
 <TabItem value="engine" label="Engine">
 
 ```javascript
-const lamp = new pc.Entity('lamp');
+const lamp = new Entity('lamp');
 lamp.addComponent('light', {
     type: 'omni',
-    color: new pc.Color(1, 0.8, 0.6),
+    color: new Color(1, 0.8, 0.6),
     range: 10
 });
 app.root.addChild(lamp);
@@ -156,7 +156,7 @@ function AudioListener() {
 
 ```javascript
 lamp.light.intensity = 2;
-lamp.light.color = new pc.Color(1, 0, 0);
+lamp.light.color = new Color(1, 0, 0);
 
 console.log(lamp.light.range); // 10
 ```
@@ -339,22 +339,22 @@ import { Script } from '@playcanvas/react/components';
 
 ```javascript
 // すべてのRigidBodyを引っ張る重力
-app.systems.rigidbody.gravity = new pc.Vec3(0, -1.62, 0);
+app.systems.rigidbody.gravity = new Vec3(0, -1.62, 0);
 ```
 
 アプリケーションが追加できるのは、システムを登録したコンポーネントだけです。[`Application`](https://api.playcanvas.com/engine/classes/Application.html)は組み込みのシステムをすべて登録し、エディター、React、Web Componentsも同様です。[`AppBase`](https://api.playcanvas.com/engine/classes/AppBase.html)は列挙したシステムだけを登録するので、バンドラーはそれ以外をビルドから除外できます。
 
 ```javascript
-const options = new pc.AppOptions();
+const options = new AppOptions();
 options.graphicsDevice = device;
 options.componentSystems = [
-    pc.RenderComponentSystem,
-    pc.CameraComponentSystem,
-    pc.LightComponentSystem,
-    pc.ScriptComponentSystem
+    RenderComponentSystem,
+    CameraComponentSystem,
+    LightComponentSystem,
+    ScriptComponentSystem
 ];
 
-const app = new pc.AppBase(canvas);
+const app = new AppBase(canvas);
 app.init(options);
 ```
 

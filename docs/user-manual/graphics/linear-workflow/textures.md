@@ -12,7 +12,7 @@ Textures that represent colors, such as Diffuse, Emissive, Specular, and Sheen, 
 When loading a texture asset that represents colors in sRGB space, it is important to specify sRGB encoding. The following example demonstrates how to create an asset with sRGB encoding:  
 
 ```javascript
-new pc.Asset(
+new Asset(
     'color',
     'texture',
     { url: 'heart.png' },
@@ -33,10 +33,10 @@ When creating a procedural texture or rendering to a texture that represents col
 The following example demonstrates how to create an sRGB render target texture:  
 
 ```javascript
-const texture = new pc.Texture(app.graphicsDevice, {
+const texture = new Texture(app.graphicsDevice, {
     name: 'color-texture',
     width: 512,
     height: 512,
-    format: pc.PIXELFORMAT_SRGBA8
+    format: PIXELFORMAT_SRGBA8
 });
 ```

@@ -172,7 +172,7 @@ for (const type of ['mousedown', 'mouseup', 'wheel', 'keydown', 'keyup']) {
 カメラの`worldToScreen()`は、キャンバスの左上隅からのCSSピクセルを返します。これはHTMLが必要とする座標です。
 
 ```javascript
-const onCanvas = new pc.Vec3();
+const onCanvas = new Vec3();
 app.on('update', () => {
     camera.camera.worldToScreen(character.getPosition(), onCanvas);
     // 点がカメラの後ろにあるときはタグを隠す

@@ -36,8 +36,8 @@ const relighting = camera.script.create(GsplatRelighting, {
 Place the proxy mesh on the relighting layer, with a material configured to write the coverage mask:
 
 ```javascript
-const meshMaterial = new pc.StandardMaterial();
-meshMaterial.diffuse = new pc.Color(0.5, 0.5, 0.5);
+const meshMaterial = new StandardMaterial();
+meshMaterial.diffuse = new Color(0.5, 0.5, 0.5);
 relighting.configureMaterial(meshMaterial);
 
 const meshEntity = meshAsset.resource.instantiateRenderEntity();
@@ -53,7 +53,7 @@ app.root.addChild(meshEntity);
 Then add lights to the same layer — any standard lights work, including image based lighting, shadow-casting directional and omni lights:
 
 ```javascript
-const light = new pc.Entity('sun');
+const light = new Entity('sun');
 light.addComponent('light', {
     type: 'directional',
     layers: [relighting.layer.id],

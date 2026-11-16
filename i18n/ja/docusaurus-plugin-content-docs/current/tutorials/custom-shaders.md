@@ -206,7 +206,7 @@ Uniform は、通常の Materials と同じように動作する[`setParameter()
  * 
  * @attribute
  * @title GLSL 頂点シェーダー
- * @type {pc.Asset}
+ * @type {Asset}
  */
 vertexGLSL;
 
@@ -215,7 +215,7 @@ vertexGLSL;
  * 
  * @attribute
  * @title GLSL フラグメントシェーダー
- * @type {pc.Asset}
+ * @type {Asset}
  */
 fragmentGLSL;
 
@@ -224,7 +224,7 @@ fragmentGLSL;
  * 
  * @attribute
  * @title WGSL 頂点シェーダー
- * @type {pc.Asset}
+ * @type {Asset}
  */
 vertexWGSL;
 
@@ -233,7 +233,7 @@ vertexWGSL;
  * 
  * @attribute
  * @title WGSL フラグメントシェーダー
- * @type {pc.Asset}
+ * @type {Asset}
  */
 fragmentWGSL;
 
@@ -242,7 +242,7 @@ fragmentWGSL;
  * 
  * @attribute
  * @title ディフューズマップ
- * @type {pc.Asset}
+ * @type {Asset}
  */
 diffuseMap;
 
@@ -251,7 +251,7 @@ diffuseMap;
  * 
  * @attribute
  * @title ハイトマップ
- * @type {pc.Asset}
+ * @type {Asset}
  */
 heightMap;
 ```
@@ -277,7 +277,13 @@ update(dt) {
 ## 完全なスクリプト
 
 ```javascript
-import { Script, ShaderMaterial, SEMANTIC_POSITION, SEMANTIC_TEXCOORD0 } from 'playcanvas';
+import {
+    Script,
+    ShaderMaterial,
+    SEMANTIC_POSITION,
+    SEMANTIC_TEXCOORD0,
+    Asset
+} from 'playcanvas';
 
 /**
  * エンティティのレンダーコンポーネントにディゾルブシェーダーマテリアルを適用します。
@@ -290,7 +296,7 @@ export class CustomShader extends Script {
      * 
      * @attribute
      * @title GLSL 頂点シェーダー
-     * @type {pc.Asset}
+     * @type {Asset}
      */
     vertexGLSL;
 
@@ -299,7 +305,7 @@ export class CustomShader extends Script {
      * 
      * @attribute
      * @title GLSL フラグメントシェーダー
-     * @type {pc.Asset}
+     * @type {Asset}
      */
     fragmentGLSL;
 
@@ -308,7 +314,7 @@ export class CustomShader extends Script {
      * 
      * @attribute
      * @title WGSL 頂点シェーダー
-     * @type {pc.Asset}
+     * @type {Asset}
      */
     vertexWGSL;
 
@@ -317,7 +323,7 @@ export class CustomShader extends Script {
      * 
      * @attribute
      * @title WGSL フラグメントシェーダー
-     * @type {pc.Asset}
+     * @type {Asset}
      */
     fragmentWGSL;
 
@@ -326,7 +332,7 @@ export class CustomShader extends Script {
      * 
      * @attribute
      * @title ディフューズマップ
-     * @type {pc.Asset}
+     * @type {Asset}
      */
     diffuseMap;
 
@@ -335,7 +341,7 @@ export class CustomShader extends Script {
      * 
      * @attribute
      * @title ハイトマップ
-     * @type {pc.Asset}
+     * @type {Asset}
      */
     heightMap;
 

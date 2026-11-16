@@ -9,7 +9,7 @@ ARセッションを開始する前に、DOM Overlayのルートとして要素�
 
 ```javascript
 app.xr.domOverlay.root = element;
-app.xr.start(camera, pc.XRTYPE_AR, pc.XRSPACE_LOCALFLOOR);
+app.xr.start(camera, XRTYPE_AR, XRSPACE_LOCALFLOOR);
 ```
 
 ## サポート

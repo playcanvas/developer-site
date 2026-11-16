@@ -152,10 +152,10 @@ vec4 otherData = loadCustomData();
 
 ```javascript
 // カラールックアップテクスチャを作成
-const colorTexture = new pc.Texture(device, {
+const colorTexture = new Texture(device, {
     width: 256,
     height: 1,
-    format: pc.PIXELFORMAT_RGBA32F,
+    format: PIXELFORMAT_RGBA32F,
     // ... その他のオプション
 });
 

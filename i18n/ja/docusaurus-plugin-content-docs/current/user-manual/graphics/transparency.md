@@ -12,7 +12,7 @@ PlayCanvasには、完全に不透明ではないサーフェスをレンダリ�
 [`blendType`](https://api.playcanvas.com/engine/classes/Material.html#blendtype)に`BLEND_NORMAL`などのブレンドモードを設定すると、サーフェスはフレームバッファに既に存在する内容と混合されます。
 
 ```javascript
-material.blendType = pc.BLEND_NORMAL;
+material.blendType = BLEND_NORMAL;
 material.opacity = 0.5;
 material.update();
 ```
@@ -25,9 +25,9 @@ material.update();
 
 ```javascript
 // BLEND_NORMAL と同等の設定を明示的に記述したもの
-material.blendState = new pc.BlendState(
+material.blendState = new BlendState(
     true,
-    pc.BLENDEQUATION_ADD, pc.BLENDMODE_SRC_ALPHA, pc.BLENDMODE_ONE_MINUS_SRC_ALPHA
+    BLENDEQUATION_ADD, BLENDMODE_SRC_ALPHA, BLENDMODE_ONE_MINUS_SRC_ALPHA
 );
 material.update();
 ```
@@ -77,9 +77,9 @@ material.update();
 [`opacityDither`](https://api.playcanvas.com/engine/classes/StandardMaterial.html#opacitydither)は、不透明度をブレンドする代わりに、一定の割合のフラグメントを破棄するスクリーンスペースのディザパターンに変換します。
 
 ```javascript
-material.blendType = pc.BLEND_NONE;
+material.blendType = BLEND_NONE;
 material.opacity = 0.5;
-material.opacityDither = pc.DITHER_BAYER8;
+material.opacityDither = DITHER_BAYER8;
 material.update();
 ```
 
@@ -90,7 +90,7 @@ material.update();
 [`alphaToCoverage`](https://api.playcanvas.com/engine/classes/Material.html#alphatocoverage)は、フラグメントのアルファ値を使用してMSAAのサンプルカバレッジマスクを構築します。ブレンドの代わりに、ハードウェアがアルファ値に応じた割合のマルチサンプルカバレッジを保持します。
 
 ```javascript
-material.blendType = pc.BLEND_NONE;
+material.blendType = BLEND_NONE;
 material.opacity = 0.5;
 material.alphaToCoverage = true;
 material.update();
@@ -105,7 +105,7 @@ material.update();
 アルファトゥカバレッジにはマルチサンプルのレンダーターゲットが必要で、シングルサンプルのレンダーターゲットにレンダリングする場合は**何も通知されずに無視されます**。リリースビルドではログも出力されず、エラーも発生せず、サーフェスは単に完全に不透明としてレンダリングされます。このフラグを有効にしても変化が見られない場合は、アンチエイリアシングが実際に有効になっているか確認してください。
 
 ```javascript
-const device = await pc.createGraphicsDevice(canvas, {
+const device = await createGraphicsDevice(canvas, {
     deviceTypes: [deviceType],
     antialias: true
 });
@@ -114,7 +114,7 @@ const device = await pc.createGraphicsDevice(canvas, {
 WebGPUではさらに要件があります。レンダーターゲットの最初のカラーアタッチメントが、アルファチャンネルを持つブレンド可能なフォーマットを使用している必要があります。これは実際に問題になります。[`CameraFrame`](https://api.playcanvas.com/engine/classes/CameraFrame.html)はHDRレンダーターゲットに`PIXELFORMAT_RG11B10F`を優先しますが、このフォーマットにはアルファチャンネルがありません。そのため、デフォルトのフォーマットの`CameraFrame`を通してレンダリングされるジオメトリではアルファトゥカバレッジは無視され、デバッグビルドでは警告が出力されます。アルファチャンネルを持つフォーマットを要求すれば解決します。
 
 ```javascript
-cameraFrame.rendering.renderFormats = [pc.PIXELFORMAT_RGBA16F];
+cameraFrame.rendering.renderFormats = [PIXELFORMAT_RGBA16F];
 cameraFrame.update();
 ```
 

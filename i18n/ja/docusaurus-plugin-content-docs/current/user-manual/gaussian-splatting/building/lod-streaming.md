@@ -61,7 +61,7 @@ entity.gsplat.lodMultiplier = 4; // その後40単位まではLOD 1、160単位�
 `app.scene.gsplat`の[`splatBudgetMode`](https://api.playcanvas.com/engine/classes/GSplatParams.html#splatbudgetmode)で、2つのモードを切り替えられます：
 
 ```javascript
-app.scene.gsplat.splatBudgetMode = pc.GSPLAT_BUDGET_LIMIT;
+app.scene.gsplat.splatBudgetMode = GSPLAT_BUDGET_LIMIT;
 ```
 
 - `GSPLAT_BUDGET_TARGET`（デフォルト）：カメラがどこにあっても、予算を使い切るまで詳細を引き上げます。エンジンは、シーンが予算を満たすまで、すべてのスプラットのLOD距離を共通の1つの係数で外側または内側へ動かします。そのため、設定した距離は、詳細が距離に応じてどのように低下し、スプラット間でどのように配分されるかを形作るだけで、詳細の総量は決めません。

@@ -17,7 +17,7 @@ const hand = inputSource.hand;
 
 if (hand) {
     for (let i = 0; i < hand.joints.length; i++) {
-        const entity = new pc.Entity();
+        const entity = new Entity();
         entity.joint = hand.joints[i];
         entity.addComponent('render', { type: 'box' });
         parent.addChild(entity);

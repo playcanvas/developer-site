@@ -32,10 +32,10 @@ const lines = entity.script.create(GsplatLines);
 
 // プリミティブを追加
 const lineHandle = lines.addLine(
-    new pc.Vec3(0, 0, 0),
-    new pc.Vec3(1, 1, 1),
-    new pc.Color(1, 0, 0),  // 開始色（赤）
-    new pc.Color(0, 0, 1),  // 終了色（青）
+    new Vec3(0, 0, 0),
+    new Vec3(1, 1, 1),
+    new Color(1, 0, 0),  // 開始色（赤）
+    new Color(0, 0, 1),  // 終了色（青）
     0.05                     // 太さ
 );
 
@@ -51,10 +51,10 @@ lines.removePrimitive(lineHandle);
 
 ```javascript
 const handle = lines.addLine(
-    new pc.Vec3(0, 0, 0),
-    new pc.Vec3(1, 0, 0),
-    new pc.Color(1, 0, 0),
-    new pc.Color(0, 1, 0),
+    new Vec3(0, 0, 0),
+    new Vec3(1, 0, 0),
+    new Color(1, 0, 0),
+    new Color(0, 1, 0),
     0.02
 );
 ```
@@ -65,9 +65,9 @@ const handle = lines.addLine(
 
 ```javascript
 const handle = lines.addLineSimple(
-    new pc.Vec3(0, 0, 0),
-    new pc.Vec3(1, 0, 0),
-    new pc.Color(1, 1, 0),
+    new Vec3(0, 0, 0),
+    new Vec3(1, 0, 0),
+    new Color(1, 1, 0),
     0.02
 );
 ```
@@ -78,9 +78,9 @@ const handle = lines.addLineSimple(
 
 ```javascript
 const handle = lines.addArrow(
-    new pc.Vec3(0, 0, 0),
-    new pc.Vec3(0, 1, 0),
-    new pc.Color(0, 1, 0),
+    new Vec3(0, 0, 0),
+    new Vec3(0, 1, 0),
+    new Color(0, 1, 0),
     0.02,
     0.1  // オプションのヘッドサイズ（デフォルト：thickness * 9）
 );
@@ -92,9 +92,9 @@ const handle = lines.addArrow(
 
 ```javascript
 const handle = lines.addAABB(
-    new pc.Vec3(-1, -1, -1),
-    new pc.Vec3(1, 1, 1),
-    new pc.Color(1, 1, 0),
+    new Vec3(-1, -1, -1),
+    new Vec3(1, 1, 1),
+    new Color(1, 1, 0),
     0.01
 );
 ```

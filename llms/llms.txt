@@ -19,9 +19,10 @@ This is the entry point for AI agents. Each product below has its own index: rea
 
     In an existing project, `package.json` usually settles it: `@playcanvas/react` means React, `@playcanvas/web-components` means Web Components, and `playcanvas` on its own means Engine. Scripts synced from an Editor project, for example by the VS Code extension, belong to the Editor.
 2. **Write new scripts as ESM scripts.** An ESM script is an exported class that extends `Script`, has a `static scriptName`, and declares attributes as class fields tagged `/** @attribute */`. In the Editor, the file must use the `.mjs` extension. Classic scripts (`pc.createScript` and `attributes.add`) are legacy but still supported: keep an existing classic script classic, and never mix the two formats in one file.
-3. **Engine 2 is current.** Code written for Engine 1 often no longer works, so check [Engine Migrations](/user-manual/engine/migrations/) before relying on an API from memory.
-4. **Prefer the installed version to memory.** If `node_modules/playcanvas` exists, `build/playcanvas.d.ts` is the exact API of the installed engine, and `scripts/esm/` holds production scripts to reuse, such as camera controls, character controllers and XR helpers.
-5. **Run the app to verify.** Rendering, input and physics can only be confirmed in a browser.
+3. **Import engine names from `playcanvas`.** Write `import { Entity, Vec3 } from 'playcanvas'` and use the names directly: `new Vec3(0, 1, 0)`, not `new pc.Vec3(0, 1, 0)`. Use the `pc.` global only in classic scripts and in pages that load the engine with a `<script>` tag.
+4. **Engine 2 is current.** Code written for Engine 1 often no longer works, so check [Engine Migrations](/user-manual/engine/migrations/) before relying on an API from memory.
+5. **Prefer the installed version to memory.** If `node_modules/playcanvas` exists, `build/playcanvas.d.ts` is the exact API of the installed engine, and `scripts/esm/` holds production scripts to reuse, such as camera controls, character controllers and XR helpers.
+6. **Run the app to verify.** Rendering, input and physics can only be confirmed in a browser.
 
 ## Products
 

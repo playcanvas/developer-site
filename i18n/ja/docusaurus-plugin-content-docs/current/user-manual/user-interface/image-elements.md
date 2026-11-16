@@ -15,7 +15,7 @@ import TabItem from '@theme/TabItem';
 コードから変更するには、新しい`Color`を代入します。
 
 ```javascript
-panel.element.color = new pc.Color(0.23, 0.55, 1);
+panel.element.color = new Color(0.23, 0.55, 1);
 panel.element.opacity = 0.8;
 ```
 
@@ -29,9 +29,9 @@ panel.element.opacity = 0.8;
 <TabItem value="engine" label="Engine">
 
 ```javascript
-const icon = new pc.Entity('icon');
+const icon = new Entity('icon');
 icon.addComponent('element', {
-    type: pc.ELEMENTTYPE_IMAGE,
+    type: ELEMENTTYPE_IMAGE,
     anchor: [0.5, 0.5, 0.5, 0.5],
     pivot: [0.5, 0.5],
     width: 128,
@@ -108,7 +108,7 @@ ContainやCoverで表示したテクスチャは、エレメントのピボッ�
 
 ```javascript
 // テクスチャの左上の4分の1
-icon.element.rect = new pc.Vec4(0, 0.5, 0.5, 0.5);
+icon.element.rect = new Vec4(0, 0.5, 0.5, 0.5);
 ```
 
 多くの画像を1つのテクスチャにまとめる場合は、テクスチャアトラスとスプライトを使うほうが管理しやすくなります。
@@ -132,25 +132,25 @@ icon.element.rect = new pc.Vec4(0, 0.5, 0.5, 0.5);
 
 ```javascript
 // 64 x 64のフレームを1つ持つテクスチャアトラス。フレームの16ピクセルのボーダーはサイズが保たれる
-const atlas = new pc.TextureAtlas();
+const atlas = new TextureAtlas();
 atlas.texture = panelTexture.resource;
 atlas.frames = {
     panel: {
-        rect: new pc.Vec4(0, 0, 64, 64),
-        pivot: new pc.Vec2(0.5, 0.5),
-        border: new pc.Vec4(16, 16, 16, 16)
+        rect: new Vec4(0, 0, 64, 64),
+        pivot: new Vec2(0.5, 0.5),
+        border: new Vec4(16, 16, 16, 16)
     }
 };
-const sprite = new pc.Sprite(app.graphicsDevice, {
+const sprite = new Sprite(app.graphicsDevice, {
     atlas,
     frameKeys: ['panel'],
     pixelsPerUnit: 1,
-    renderMode: pc.SPRITE_RENDERMODE_SLICED
+    renderMode: SPRITE_RENDERMODE_SLICED
 });
 
-const dialog = new pc.Entity('dialog');
+const dialog = new Entity('dialog');
 dialog.addComponent('element', {
-    type: pc.ELEMENTTYPE_IMAGE,
+    type: ELEMENTTYPE_IMAGE,
     anchor: [0.5, 0.5, 0.5, 0.5],
     pivot: [0.5, 0.5],
     width: 400,
@@ -241,28 +241,28 @@ export function Dialog() {
 
 ```javascript
 // レンダリング先のテクスチャ
-const previewTexture = new pc.Texture(app.graphicsDevice, {
+const previewTexture = new Texture(app.graphicsDevice, {
     width: 512,
     height: 512,
-    format: pc.PIXELFORMAT_SRGBA8,
+    format: PIXELFORMAT_SRGBA8,
     mipmaps: false
 });
-const renderTarget = new pc.RenderTarget({
+const renderTarget = new RenderTarget({
     colorBuffer: previewTexture,
     depth: true,
-    origin: pc.RENDERTARGET_ORIGIN_TOP
+    origin: RENDERTARGET_ORIGIN_TOP
 });
 
 // プレビューカメラが映すもののためのレイヤー。メインカメラはこのレイヤーをレンダリングしない
-const previewLayer = new pc.Layer({ name: 'Preview' });
+const previewLayer = new Layer({ name: 'Preview' });
 app.scene.layers.push(previewLayer);
 
-const previewCamera = new pc.Entity('preview camera');
+const previewCamera = new Entity('preview camera');
 previewCamera.addComponent('camera', {
     layers: [previewLayer.id],
     renderTarget,
     priority: -1,
-    clearColor: new pc.Color(0, 0, 0, 0)
+    clearColor: new Color(0, 0, 0, 0)
 });
 previewCamera.setPosition(0, 0.5, 3);
 previewCamera.lookAt(model.getPosition());
@@ -284,10 +284,10 @@ portrait.element.texture = previewTexture;
 UIレイヤーは透明なマテリアルしか描画しないため、そこに表示するにはマテリアルがブレンドを使う必要があります。
 
 ```javascript
-const material = new pc.StandardMaterial();
+const material = new StandardMaterial();
 material.useLighting = false;
-material.emissive = new pc.Color(1, 0.55, 0.2);
-material.blendType = pc.BLEND_NORMAL;
+material.emissive = new Color(1, 0.55, 0.2);
+material.blendType = BLEND_NORMAL;
 material.depthWrite = false;
 material.update();
 

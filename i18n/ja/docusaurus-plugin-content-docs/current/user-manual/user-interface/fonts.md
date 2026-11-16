@@ -57,16 +57,16 @@ font-toolsはデフォルトでフォントのカーニングペアを読み取�
 
 ```javascript
 // myfont.jsonを読み込むと、myfont.pngと追加のページもすべて読み込まれる
-const font = new pc.Asset('myfont', 'font', { url: 'fonts/myfont.json' });
+const font = new Asset('myfont', 'font', { url: 'fonts/myfont.json' });
 app.assets.add(font);
 await new Promise((resolve) => {
     font.ready(resolve);
     app.assets.load(font);
 });
 
-const label = new pc.Entity('label');
+const label = new Entity('label');
 label.addComponent('element', {
-    type: pc.ELEMENTTYPE_TEXT,
+    type: ELEMENTTYPE_TEXT,
     fontAsset: font.id,
     text: 'Hello, World!',
     anchor: [0.5, 0.5, 0.5, 0.5],
@@ -138,18 +138,18 @@ export function Label() {
 MSDFのグリフは単色なので、フォントアセットではカラー絵文字を描画できません。まだAPIリファレンスに載っていない`CanvasFont`は、代わりにブラウザ自身のフォントを使って、絵文字も含めた文字をテクスチャに描画します。これはビットマップフォントなので、それを使って描画するテキスト以上のサイズで作成し、必要な文字は使う前に追加しておきます。
 
 ```javascript
-const emojiFont = new pc.CanvasFont(app, {
+const emojiFont = new CanvasFont(app, {
     fontName: 'Arial',
     fontSize: 64,
-    color: new pc.Color(1, 1, 1),
+    color: new Color(1, 1, 1),
     width: 256,
     height: 256
 });
 emojiFont.createTextures('Well done! 🎉');
 
-const message = new pc.Entity('message');
+const message = new Entity('message');
 message.addComponent('element', {
-    type: pc.ELEMENTTYPE_TEXT,
+    type: ELEMENTTYPE_TEXT,
     text: 'Well done! 🎉',
     fontSize: 32,
     anchor: [0.5, 0.5, 0.5, 0.5],

@@ -21,34 +21,34 @@ Register the UI component systems, the font and texture handlers, and an `Elemen
 
 ```javascript
 const canvas = document.getElementById('application');
-const device = await pc.createGraphicsDevice(canvas, {
-    deviceTypes: [pc.DEVICETYPE_WEBGPU]
+const device = await createGraphicsDevice(canvas, {
+    deviceTypes: [DEVICETYPE_WEBGPU]
 });
 
-const options = new pc.AppOptions();
+const options = new AppOptions();
 options.graphicsDevice = device;
 
 // Create the ElementInput before the mouse and touch devices, so that calling
 // stopPropagation() in a UI event handler also hides the event from them
-options.elementInput = new pc.ElementInput(canvas);
-options.mouse = new pc.Mouse(canvas);
-options.touch = new pc.TouchDevice(canvas);
+options.elementInput = new ElementInput(canvas);
+options.mouse = new Mouse(canvas);
+options.touch = new TouchDevice(canvas);
 
 options.componentSystems = [
-    pc.CameraComponentSystem,
-    pc.ScreenComponentSystem,
-    pc.ElementComponentSystem,
-    pc.ButtonComponentSystem
+    CameraComponentSystem,
+    ScreenComponentSystem,
+    ElementComponentSystem,
+    ButtonComponentSystem
 ];
 options.resourceHandlers = [
-    pc.FontHandler,
-    pc.TextureHandler
+    FontHandler,
+    TextureHandler
 ];
 
-const app = new pc.AppBase(canvas);
+const app = new AppBase(canvas);
 app.init(options);
-app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
-app.setCanvasResolution(pc.RESOLUTION_AUTO);
+app.setCanvasFillMode(FILLMODE_FILL_WINDOW);
+app.setCanvasResolution(RESOLUTION_AUTO);
 app.start();
 
 window.addEventListener('resize', () => app.resizeCanvas());
@@ -87,44 +87,44 @@ With the application set up as above:
 
 ```javascript
 // Load a font for the text
-const font = new pc.Asset('arial', 'font', { url: 'fonts/arial.json' });
+const font = new Asset('arial', 'font', { url: 'fonts/arial.json' });
 app.assets.add(font);
 await new Promise((resolve) => {
     font.ready(resolve);
     app.assets.load(font);
 });
 
-const camera = new pc.Entity('camera');
-camera.addComponent('camera', { clearColor: new pc.Color(0.1, 0.11, 0.13) });
+const camera = new Entity('camera');
+camera.addComponent('camera', { clearColor: new Color(0.1, 0.11, 0.13) });
 app.root.addChild(camera);
 
 // A screen-space screen that scales with the canvas
-const screen = new pc.Entity('screen');
+const screen = new Entity('screen');
 screen.addComponent('screen', {
     screenSpace: true,
     referenceResolution: [1280, 720],
-    scaleMode: pc.SCALEMODE_BLEND,
+    scaleMode: SCALEMODE_BLEND,
     scaleBlend: 0.5
 });
 app.root.addChild(screen);
 
 // A panel in the middle of the screen
-const panel = new pc.Entity('panel');
+const panel = new Entity('panel');
 panel.addComponent('element', {
-    type: pc.ELEMENTTYPE_IMAGE,
+    type: ELEMENTTYPE_IMAGE,
     anchor: [0.5, 0.5, 0.5, 0.5],
     pivot: [0.5, 0.5],
     width: 420,
     height: 240,
-    color: new pc.Color(0.16, 0.18, 0.23),
+    color: new Color(0.16, 0.18, 0.23),
     opacity: 0.9
 });
 screen.addChild(panel);
 
 // A label near the top of the panel
-const label = new pc.Entity('label');
+const label = new Entity('label');
 label.addComponent('element', {
-    type: pc.ELEMENTTYPE_TEXT,
+    type: ELEMENTTYPE_TEXT,
     fontAsset: font.id,
     text: 'Hello, PlayCanvas!',
     fontSize: 36,
@@ -136,31 +136,31 @@ panel.addChild(label);
 
 // A button near the bottom: an image element that receives input, and a
 // button component that tints the image when it is hovered and pressed
-const button = new pc.Entity('button');
+const button = new Entity('button');
 button.addComponent('element', {
-    type: pc.ELEMENTTYPE_IMAGE,
+    type: ELEMENTTYPE_IMAGE,
     anchor: [0.5, 0, 0.5, 0],
     pivot: [0.5, 0],
     width: 200,
     height: 60,
-    color: new pc.Color(1, 0.55, 0.2),
+    color: new Color(1, 0.55, 0.2),
     useInput: true
 });
 button.addComponent('button', {
     imageEntity: button,
-    hoverTint: new pc.Color(1, 0.7, 0.45),
-    pressedTint: new pc.Color(0.8, 0.4, 0.1)
+    hoverTint: new Color(1, 0.7, 0.45),
+    pressedTint: new Color(0.8, 0.4, 0.1)
 });
 button.setLocalPosition(0, 40, 0);
 panel.addChild(button);
 
-const buttonText = new pc.Entity('text');
+const buttonText = new Entity('text');
 buttonText.addComponent('element', {
-    type: pc.ELEMENTTYPE_TEXT,
+    type: ELEMENTTYPE_TEXT,
     fontAsset: font.id,
     text: 'Click me',
     fontSize: 28,
-    color: new pc.Color(0.1, 0.1, 0.1),
+    color: new Color(0.1, 0.1, 0.1),
     anchor: [0.5, 0.5, 0.5, 0.5],
     pivot: [0.5, 0.5]
 });

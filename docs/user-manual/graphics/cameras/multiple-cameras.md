@@ -25,10 +25,10 @@ For 2-player horizontal split-screen, two cameras each take half the screen:
 
 ```javascript
 // Player 1: left half of the screen
-camera1.camera.rect = new pc.Vec4(0, 0, 0.5, 1);
+camera1.camera.rect = new Vec4(0, 0, 0.5, 1);
 
 // Player 2: right half of the screen, rendered after camera1
-camera2.camera.rect = new pc.Vec4(0.5, 0, 0.5, 1);
+camera2.camera.rect = new Vec4(0.5, 0, 0.5, 1);
 camera2.camera.priority = 1;
 ```
 
@@ -81,7 +81,7 @@ When one camera renders on top of another — a picture-in-picture overlay, or a
 ```javascript
 // Render an overlay camera on top of the main view, in the bottom-right corner
 overlay.camera.priority = 1;
-overlay.camera.rect = new pc.Vec4(0.7, 0, 0.3, 0.3);
+overlay.camera.rect = new Vec4(0.7, 0, 0.3, 0.3);
 overlay.camera.clearColorBuffer = true;  // overlay has its own background
 overlay.camera.clearDepthBuffer = true;  // don't depth-test against the main view
 

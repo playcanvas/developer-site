@@ -28,7 +28,7 @@ app.xr.on('start', () => {
 セッションの開始時に機能フラグを追加する必要があります。
 
 ```javascript
-app.xr.start(camera, pc.XRTYPE_AR, pc.XRSPACE_LOCALFLOOR, {
+app.xr.start(camera, XRTYPE_AR, XRSPACE_LOCALFLOOR, {
     planeDetection: true
 });
 ```
@@ -74,7 +74,7 @@ entity.setRotation(xrPlane.getRotation());
 ```javascript
 app.xr.planeDetection.on('add', (xrPlane) => {
     // ジオメトリデータ
-    const mesh = new pc.Mesh(app.graphicsDevice);
+    const mesh = new Mesh(app.graphicsDevice);
     mesh.clear(true, true); // メッシュが動的バッファで作成されていることを確認
 
     // 頂点リストを作成
@@ -99,14 +99,14 @@ app.xr.planeDetection.on('add', (xrPlane) => {
     }
 
     mesh.setPositions(vertices); // 頂点を設定
-    mesh.setNormals(pc.calculateNormals(vertices, indices)); // 法線を計算
+    mesh.setNormals(calculateNormals(vertices, indices)); // 法線を計算
     mesh.setIndices(indices); // インデックスを設定
-    mesh.update(pc.PRIMITIVE_TRIANGLES); // バッファを更新
+    mesh.update(PRIMITIVE_TRIANGLES); // バッファを更新
 
-    const material = new pc.StandardMaterial();
-    const meshInstance = new pc.MeshInstance(mesh, material);
+    const material = new StandardMaterial();
+    const meshInstance = new MeshInstance(mesh, material);
 
-    const entity = new pc.Entity(xrPlane.label);
+    const entity = new Entity(xrPlane.label);
 
     // レンダーコンポーネントを追加
     entity.addComponent('render', {

@@ -42,9 +42,9 @@ XRセッションを開始するには、まずサポートと利用可能性を
 ```javascript
 button.element.on('click', () => {
     // XRがサポートされ、VRが利用可能か確認します
-    if (app.xr.supported && app.xr.isAvailable(pc.XRTYPE_VR)) {
+    if (app.xr.supported && app.xr.isAvailable(XRTYPE_VR)) {
         // カメラコンポーネントを提供してVRセッションを開始します
-        app.xr.start(entity.camera, pc.XRTYPE_VR, pc.XRSPACE_LOCALFLOOR);
+        app.xr.start(entity.camera, XRTYPE_VR, XRSPACE_LOCALFLOOR);
     }
 });
 ```

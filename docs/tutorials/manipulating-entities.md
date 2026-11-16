@@ -95,7 +95,7 @@ However, if you do want to set an Entity's rotation in quaternion form, you can 
 
 ```javascript
 // Create an identity rotation
-var q = new pc.Quat();
+var q = new Quat();
 // Set the entity to have the same rotation as its parent - equivalent to
 // entity.setLocalEulerAngles(0, 0, 0)
 entity.setLocalRotation(q);

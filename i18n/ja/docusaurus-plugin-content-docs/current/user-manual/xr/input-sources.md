@@ -71,13 +71,13 @@ app.xr.input.on('select', (inputSource) => {
 
 ```javascript
 switch (inputSource.targetRayMode) {
-    case pc.XRTARGETRAY_SCREEN:
+    case XRTARGETRAY_SCREEN:
         // ARモードのモバイルにおけるタッチスクリーンなどのスクリーンベースの操作
         break;
-    case pc.XRTARGETRAY_POINTER:
+    case XRTARGETRAY_POINTER:
         // ハンドヘルドコントローラーや手などのポインターベース
         break;
-    case pc.XRTARGETRAY_GAZE:
+    case XRTARGETRAY_GAZE:
         // 視聴デバイスの向きと位置に基づく視線ベース
         break;
 }

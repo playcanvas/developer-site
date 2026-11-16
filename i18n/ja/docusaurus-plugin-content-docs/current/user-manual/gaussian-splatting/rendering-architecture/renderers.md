@@ -30,7 +30,7 @@ PlayCanvasは、Gaussianスプラット用に複数のレンダリングパイ�
 
 ```javascript
 // GPUソートレンダラーを要求（WebGPU専用。WebGLではCPUソートにフォールバック）
-app.scene.gsplat.renderer = pc.GSPLAT_RENDERER_RASTER_GPU_SORT;
+app.scene.gsplat.renderer = GSPLAT_RENDERER_RASTER_GPU_SORT;
 ```
 
 利用可能なオプション：
@@ -42,7 +42,7 @@ app.scene.gsplat.renderer = pc.GSPLAT_RENDERER_RASTER_GPU_SORT;
 WebGPUを必要とするレンダラーは、WebGLデバイスではCPUソートにフォールバックします。このフォールバック後に実際に有効なレンダラーを確認するには、`currentRenderer`を読み取ります：
 
 ```javascript
-if (app.scene.gsplat.currentRenderer === pc.GSPLAT_RENDERER_RASTER_GPU_SORT) {
+if (app.scene.gsplat.currentRenderer === GSPLAT_RENDERER_RASTER_GPU_SORT) {
     // このデバイスではGPUソートが有効
 }
 ```

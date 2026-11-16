@@ -53,7 +53,7 @@ app.scene.gsplat.splatBudget = 4000000; // 400万スプラット
 ```javascript
 entity.gsplat.lodBaseDistance = 10; // 10単位まではLOD 0
 entity.gsplat.lodMultiplier = 4; // その後40単位まではLOD 1、160単位まではLOD 2、...
-app.scene.gsplat.splatBudgetMode = pc.GSPLAT_BUDGET_LIMIT;
+app.scene.gsplat.splatBudgetMode = GSPLAT_BUDGET_LIMIT;
 ```
 
 詳細は[LOD動作の制御](/user-manual/gaussian-splatting/building/lod-streaming#controlling-lod-behavior)を参照してください。LOD距離はカメラの視野角（FOV）に応じて自動的に補正されます。視野角が広いほどオブジェクトは画面上で小さく見えるため、より早く粗いレベルに切り替わります。

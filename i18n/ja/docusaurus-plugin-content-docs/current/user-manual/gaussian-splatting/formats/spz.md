@@ -28,7 +28,7 @@ SPZバージョン4ファイルの属性ストリームはZSTDで圧縮されて
 import { SpzParser } from 'playcanvas/scripts/esm/parsers/spz-parser.mjs';
 
 // バージョン4の属性ストリームはZSTD圧縮されているため、デコーダーモジュールを登録します
-pc.WasmModule.setConfig('ZstdDecoderModule', {
+WasmModule.setConfig('ZstdDecoderModule', {
     glueUrl: 'zstd.wasm.js',
     wasmUrl: 'zstd.wasm.wasm'
 });
@@ -37,7 +37,7 @@ pc.WasmModule.setConfig('ZstdDecoderModule', {
 app.loader.getHandler('gsplat').addParser(new SpzParser(app));
 
 // spzファイルは通常のgsplatアセットとして読み込めます
-const asset = new pc.Asset('scene', 'gsplat', { url: 'scene.spz' });
+const asset = new Asset('scene', 'gsplat', { url: 'scene.spz' });
 app.assets.add(asset);
 app.assets.load(asset);
 ```

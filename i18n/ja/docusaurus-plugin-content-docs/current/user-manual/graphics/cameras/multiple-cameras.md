@@ -25,10 +25,10 @@ import TabItem from '@theme/TabItem';
 
 ```javascript
 // プレイヤー1: 画面の左半分
-camera1.camera.rect = new pc.Vec4(0, 0, 0.5, 1);
+camera1.camera.rect = new Vec4(0, 0, 0.5, 1);
 
 // プレイヤー2: 画面の右半分。camera1 の後にレンダリング
-camera2.camera.rect = new pc.Vec4(0.5, 0, 0.5, 1);
+camera2.camera.rect = new Vec4(0.5, 0, 0.5, 1);
 camera2.camera.priority = 1;
 ```
 
@@ -81,7 +81,7 @@ Hierarchyで各カメラを選択し、[Cameraコンポーネント](/user-manua
 ```javascript
 // メインビューの上、右下隅にオーバーレイカメラをレンダリングする
 overlay.camera.priority = 1;
-overlay.camera.rect = new pc.Vec4(0.7, 0, 0.3, 0.3);
+overlay.camera.rect = new Vec4(0.7, 0, 0.3, 0.3);
 overlay.camera.clearColorBuffer = true;  // オーバーレイは独自の背景を持つ
 overlay.camera.clearDepthBuffer = true;  // メインビューと深度テストしない
 
