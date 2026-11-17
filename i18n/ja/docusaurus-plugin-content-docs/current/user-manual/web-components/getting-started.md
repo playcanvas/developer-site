@@ -78,6 +78,8 @@ npm install playcanvas @playcanvas/web-components
 import '@playcanvas/web-components';
 ```
 
+このパッケージはESモジュールのみで、CommonJSビルドはありません。テストなどブラウザー外のNode.jsコードでは、`import`で読み込むか、Node.js 22.12以降であれば`require()`で読み込めます（このバージョンから`require()`でESモジュールを読み込めます）。デフォルトのJestのように、モジュールをCommonJSとして読み込むテストランナーは、そのままではこのパッケージを読み込めません。
+
 **バンドラーを使わない場合**、つまりファイルをそのまま配信する場合は、インポートマップをインストール済みのパッケージに向け、同じパスからライブラリを読み込みます。
 
 ```html

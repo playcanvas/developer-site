@@ -336,9 +336,9 @@ const anim = await whenReady('pc-anim');
 console.log(anim.clips); // ['Animation']
 ```
 
-Track names are worth a look, because the engine reserves `.` in clip names for blend tree paths. An empty `<pc-anim>` skips any track whose name contains one, and says so in the console. That catches plenty of real files: the walking robot among the Web Components examples' models has a single track called `Armature|mixamo.com|Layer0`, the name animations from Mixamo typically arrive with.
+Track names are worth a look, because the engine reserves `.` in clip names for blend tree paths. An empty `<pc-anim>` turns each `.` in a track name into `_`, so a clip you select with `clip` may not be called quite what the file calls its track. The walking robot among the Web Components examples' models has a single track called `Armature|mixamo.com|Layer0`, the name animations from Mixamo typically arrive with, and it plays as `Armature|mixamo_com|Layer0`.
 
-Declaring a clip yourself gets around it. A [`<pc-anim-clip>`](tags/pc-anim-clip.md) names the clip it declares, and a file holding a single track supplies it under whatever name you choose:
+Declaring a clip yourself gives it a name of your choosing. A [`<pc-anim-clip>`](tags/pc-anim-clip.md) names the clip it declares, and a file holding a single track supplies it under whatever name you choose:
 
 ```html
 <pc-model asset="robot">
@@ -348,7 +348,7 @@ Declaring a clip yourself gets around it. A [`<pc-anim-clip>`](tags/pc-anim-clip
 </pc-model>
 ```
 
-Declared clips are also where per-clip speed and looping live, and how clips from other files get mixed in. In a file with several tracks, each clip's `name` has to match its track exactly, case included:
+Declared clips are also where per-clip speed and looping live, and how clips from other files get mixed in. In a file with several tracks, each clip's `name` has to match its track exactly, case included — so a track with `.` in its name cannot be picked out this way, since a clip name may not contain one:
 
 ```html
 <pc-model asset="hero">
