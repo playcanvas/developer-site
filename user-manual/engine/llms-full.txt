@@ -3,8 +3,8 @@
 > The PlayCanvas Engine is an open-source JavaScript 3D engine that renders with WebGL2 or WebGPU. It is published as `playcanvas` on npm, with TypeScript declarations, and runs every PlayCanvas product. This index describes Engine 2.23.3.
 
 Index: https://developer.playcanvas.com/user-manual/engine/llms.txt
-Total Documents: 245
-Generated: 2026-11-16
+Total Documents: 255
+Generated: 2026-11-17
 
 ================================================================================
 
@@ -540,7 +540,7 @@ As your application grows, register what it needs:
 
 * **Components**: Each component type needs its component system. For example, add `ScriptComponentSystem` to use the `script` component. [Bundle Size and Tree Shaking](https://developer.playcanvas.com/user-manual/engine/bundle-size.md) lists every component type with its system. If a system is missing, `addComponent` returns `null`, and the debug build of the Engine logs an error.
 * **Assets**: Each asset type needs its resource handler. The samples register `TextureHandler` for textures and `ContainerHandler` for GLB models. [Bundle Size and Tree Shaking](https://developer.playcanvas.com/user-manual/engine/bundle-size.md#resource-handlers) lists every asset type with its handler.
-* **Other features**: Sound, batching, lightmapping and XR are enabled with further `AppOptions` properties. For example, the `sound` component also needs `options.soundManager = new SoundManager()`.
+* **Other features**: Sound, batching, lightmapping and XR are enabled with further `AppOptions` properties. For example, the `sound` component also needs `options.soundManager = new SoundManager()`, as [Audio](https://developer.playcanvas.com/user-manual/audio/getting-started.md#setting-up-the-application) describes.
 
 :::note
 
@@ -5474,13 +5474,13 @@ For optimized delivery, textures can be compressed to GPU-native formats:
 | Format | Extension | Notes |
 |--------|-----------|-------|
 | MP3 | `.mp3` | Widely supported, good compression |
-| OGG Vorbis | `.ogg` | Open format, good quality |
+| OGG Vorbis | `.ogg` | Open format, good quality. Safari 18.4 and later |
 | WAV | `.wav` | Uncompressed, large files |
 | M4A | `.m4a` | AAC audio |
 
 :::note
 
-For best browser compatibility, provide both MP3 and OGG versions of audio files. PlayCanvas will use the format supported by the user's browser.
+PlayCanvas loads the file you give it and leaves the decoding to the browser, so use a format that every browser you target can decode. MP3 is the safest choice. See [Audio Assets](https://developer.playcanvas.com/user-manual/audio/audio-assets.md).
 
 :::
 
@@ -15305,6 +15305,7 @@ app.systems.rigidbody.on('contact', (result) => {
 
 - [Trigger Volumes](https://developer.playcanvas.com/user-manual/physics/trigger-volumes.md) - Overlap events for regions that do not block movement
 - [Collision and Triggers](https://developer.playcanvas.com/tutorials/collision-and-triggers/) - Tutorial that plays a sound on impact
+- [Playing Sounds](https://developer.playcanvas.com/user-manual/audio/playing-sounds.md) - Overlapping one-shot sounds and pitch variation, for impact sounds
 - [Events](https://developer.playcanvas.com/user-manual/scripting/events.md) - How the scripting event system works
 - [CollisionComponent](https://api.playcanvas.com/engine/classes/CollisionComponent.html) and [RigidBodyComponent](https://api.playcanvas.com/engine/classes/RigidBodyComponent.html) - API reference for the events on each component
 
@@ -17605,6 +17606,2685 @@ Some things to try:
 - [Animation Clips](https://developer.playcanvas.com/user-manual/animation/clips.md) - The clips that events belong to
 - [Animation Asset](https://developer.playcanvas.com/user-manual/editor/assets/inspectors/animation.md) - The Editor's animation asset inspector
 - [AnimEvents](https://api.playcanvas.com/engine/classes/AnimEvents.html) and [AnimComponent](https://api.playcanvas.com/engine/classes/AnimComponent.html) - The engine API reference
+
+--------------------------------------------------------------------------------
+
+## Audio
+
+URL: https://developer.playcanvas.com/user-manual/audio/
+Markdown: https://developer.playcanvas.com/user-manual/audio.md
+
+PlayCanvas plays audio through the browser's [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API). An entity with a **sound component** is a sound source: it holds the sounds the entity can make, and plays them from where the entity is. An entity with an **audio listener** component is the ears of the scene, usually the camera.
+
+[Live example: Positional Sound](https://playcanvas.com/examples/#/sound/positional) ([source](https://github.com/playcanvas/engine/blob/main/examples/src/examples/sound/positional/example.mjs))
+
+Load the example above, then click inside it: browsers keep audio off until you interact with a page. The robot's footsteps come from the robot, so they move from one ear to the other and fade as it walks around the camera. [On Each Surface](https://developer.playcanvas.com/user-manual/audio.md#on-each-surface) compares how each surface sets up the same thing.
+
+## How Audio Works
+
+- **[Audio assets](https://developer.playcanvas.com/user-manual/audio/audio-assets.md)** hold the sounds. An audio file is decoded in full when it loads, so it plays the instant you ask for it.
+- **[The sound component](https://developer.playcanvas.com/user-manual/audio/getting-started.md)** makes an entity a sound source. Its volume and pitch apply to everything the entity plays.
+- **[Sound slots](https://developer.playcanvas.com/user-manual/audio/playing-sounds.md)** are the named sounds of a sound component. Each slot plays one audio asset, or part of one, with a volume and pitch of its own, and can loop or play automatically.
+- **[Sound instances](https://developer.playcanvas.com/user-manual/audio/controlling-playback.md)** are sounds that are playing. Each time a slot plays, it creates an instance that you can pause, seek, fade and listen to for events.
+- **[Positional audio](https://developer.playcanvas.com/user-manual/audio/positional-audio.md)** pans a sound between the speakers and fades it with distance, by where its entity is relative to the audio listener.
+- **[Master volume](https://developer.playcanvas.com/user-manual/audio/volume-and-mixing.md)** scales every sound in the application, and **[effects](https://developer.playcanvas.com/user-manual/audio/effects.md)** such as filters and reverb come from Web Audio nodes that you add to a slot's output.
+
+One rule shapes every audio feature on the web: a page cannot make a sound until the user has interacted with it. PlayCanvas starts its audio on the first click or tap. [Autoplay and User Gestures](https://developer.playcanvas.com/user-manual/audio/autoplay.md) explains what that means for music and for sounds that play on load.
+
+## On Each Surface
+
+The sound component is the same everywhere, but the surfaces expose different amounts of it. Anything a surface has no markup or UI for, you can reach through the engine component from code.
+
+| | Engine | Editor | React | Web Components |
+| --- | --- | --- | --- | --- |
+| Load a sound | An `audio` asset | Upload an audio file | An `audio` asset, from code | [`<pc-asset>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset.md) |
+| Make an entity a sound source | `entity.addComponent('sound')` | A Sound component | The engine API | [`<pc-sound>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sound.md) |
+| Give it a sound | `entity.sound.addSlot()` | A slot in the Sound component | The engine API | [`<pc-sound-slot>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sound-slot.md) |
+| Play, pause and stop | `entity.sound.play()` | From a script | The engine API | The engine API |
+| Place the listener | `entity.addComponent('audiolistener')` | An Audio Listener component | The engine API | [`<pc-audio-listener>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-audio-listener.md) |
+| Master volume and effects | `app.systems.sound` | From a script | The engine API | The engine API |
+
+:::note
+
+PlayCanvas React has no sound components of its own yet. Its `<Application>` includes the engine's sound systems, so you add the sound component to an entity from a small component of your own. Each page in this section shows how.
+
+:::
+
+## In This Section
+
+- [Getting Started](https://developer.playcanvas.com/user-manual/audio/getting-started.md) - Loading a sound, adding a sound component and playing your first sound.
+- [Audio Assets](https://developer.playcanvas.com/user-manual/audio/audio-assets.md) - Formats, how much memory a sound uses, loops, long music and audio sprites.
+- [Playing Sounds](https://developer.playcanvas.com/user-manual/audio/playing-sounds.md) - Slots, looping, overlapping one-shots, playing part of a file, and volume and pitch.
+- [Controlling Playback](https://developer.playcanvas.com/user-manual/audio/controlling-playback.md) - Sound instances, pausing, seeking, events, fades and crossfades.
+- [Positional Audio](https://developer.playcanvas.com/user-manual/audio/positional-audio.md) - The audio listener, distance models and panning.
+- [Volume and Mixing](https://developer.playcanvas.com/user-manual/audio/volume-and-mixing.md) - Master volume, muting, mixing music against effects, and ducking.
+- [Effects and Analysis](https://developer.playcanvas.com/user-manual/audio/effects.md) - Filters, echo and reverb with Web Audio nodes, and reading the sound for visualizers.
+- [Autoplay and User Gestures](https://developer.playcanvas.com/user-manual/audio/autoplay.md) - Why audio waits for a click, and how to design around it.
+- [Troubleshooting](https://developer.playcanvas.com/user-manual/audio/troubleshooting.md) - What to check when you hear nothing, or something unexpected.
+
+## See Also
+
+- [Sound Component](https://developer.playcanvas.com/user-manual/editor/scenes/components/sound.md) and [Audio Listener Component](https://developer.playcanvas.com/user-manual/editor/scenes/components/audiolistener.md) - The Editor references for the components
+- [Audio Asset](https://developer.playcanvas.com/user-manual/editor/assets/inspectors/audio.md) - Previewing audio assets in the Editor
+- [`<pc-sound>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sound.md), [`<pc-sound-slot>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sound-slot.md) and [`<pc-audio-listener>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-audio-listener.md) - The Web Components references
+- [Basic Audio](https://developer.playcanvas.com/tutorials/basic-audio/) - Tutorial that sets up sounds and a listener in the Editor
+- [SoundComponent](https://api.playcanvas.com/engine/classes/SoundComponent.html), [SoundSlot](https://api.playcanvas.com/engine/classes/SoundSlot.html) and [SoundInstance](https://api.playcanvas.com/engine/classes/SoundInstance.html) - The engine API reference
+
+--------------------------------------------------------------------------------
+
+## Getting Started
+
+URL: https://developer.playcanvas.com/user-manual/audio/getting-started/
+Markdown: https://developer.playcanvas.com/user-manual/audio/getting-started.md
+
+Playing a sound takes three things: an **audio asset** that holds the sound, a **sound component** that makes an entity a sound source, and a **slot** on that component that names the sound and plays the asset. This page sets up all three and plays a bell.
+
+## Setting Up the Application
+
+In the Editor, React and Web Components, sound is ready to use. An Engine app that you build from `AppBase` only includes the features you register, so give it a sound manager, the sound component system and the handler that loads audio files:
+
+```javascript
+const options = new AppOptions();
+options.soundManager = new SoundManager();
+options.componentSystems = [SoundComponentSystem, AudioListenerComponentSystem];
+options.resourceHandlers = [AudioHandler];
+```
+
+`AudioListenerComponentSystem` is only needed for [positional audio](https://developer.playcanvas.com/user-manual/audio/positional-audio.md). See [Bundle Size and Tree Shaking](https://developer.playcanvas.com/user-manual/engine/bundle-size.md) for the full list of systems and handlers.
+
+## Playing a Sound
+
+**Engine**
+
+Load the file as an `audio` asset, add a sound component to an entity, add a slot that plays the asset, and play the slot by name:
+
+```javascript
+// load the audio file
+const asset = new Asset('bell', 'audio', {
+    url: 'https://developer.playcanvas.com/assets/bell.mp3'
+});
+app.assets.add(asset);
+app.assets.load(asset);
+
+// make an entity a sound source, with a slot that plays the asset
+const bell = new Entity('bell');
+bell.addComponent('sound', { positional: false });
+bell.sound.addSlot('ring', { asset: asset.id });
+app.root.addChild(bell);
+
+// play the slot
+bell.sound.play('ring');
+```
+
+You do not have to wait for the asset. A slot that is played before its asset has loaded starts as soon as the asset arrives.
+
+**Editor**
+
+1. Drag an audio file into the Assets panel to upload it.
+2. Select an entity, click **Add Component** and choose **Sound**.
+3. Click **ADD SLOT** in the Sound component. Give the slot a **Name**, such as `ring`, and choose the audio asset as its **Asset**.
+4. Turn off **Positional** on the component, so that the sound plays at the same volume wherever the entity is.
+
+To play the sound as soon as the scene launches, turn on the slot's **Auto Play**. To play it when something happens, call the component from a script on the same entity:
+
+```javascript
+import { Script } from 'playcanvas';
+
+export class Bell extends Script {
+    static scriptName = 'bell';
+
+    initialize() {
+        this.app.mouse.on('mousedown', this.ring, this);
+        this.on('destroy', () => this.app.mouse.off('mousedown', this.ring, this));
+    }
+
+    ring() {
+        this.entity.sound.play('ring');
+    }
+}
+```
+
+**React**
+
+PlayCanvas React has no sound component of its own, so add the engine's from a small component. This `<Sound>` loads an audio file and adds a slot for it to the enclosing `<Entity>`. Any other props are passed to the slot, such as `loop` and `volume`:
+
+```jsx
+import { useEffect } from 'react';
+import { Asset } from 'playcanvas';
+import { useApp, useParent } from '@playcanvas/react/hooks';
+
+function Sound({ name, src, positional = false, ...slot }) {
+  const app = useApp();
+  const entity = useParent();
+
+  useEffect(() => {
+    const asset = new Asset(name, 'audio', { url: src });
+    app.assets.add(asset);
+    app.assets.load(asset);
+
+    if (!entity.sound) {
+      entity.addComponent('sound', { positional });
+    }
+    entity.sound.addSlot(name, { asset: asset.id, ...slot });
+
+    return () => {
+      entity.sound?.removeSlot(name);
+      app.assets.remove(asset);
+      asset.unload();
+    };
+  }, [app, entity, name, src]);
+
+  return null;
+}
+```
+
+A `ref` on an `<Entity>` is its engine entity, so you can play the slot from anywhere in your app:
+
+```jsx
+import { useRef } from 'react';
+import { Application, Entity } from '@playcanvas/react';
+
+function App() {
+  const bell = useRef(null);
+
+  return (
+    <>
+      <button onClick={() => bell.current?.sound?.play('ring')}>Ring</button>
+      <Application>
+        <Entity name="bell" ref={bell}>
+          <Sound name="ring" src="https://developer.playcanvas.com/assets/bell.mp3" />
+        </Entity>
+      </Application>
+    </>
+  );
+}
+```
+
+The `?.` checks cover a click that comes before the application has started, when the entity and its sound component do not exist yet.
+
+The other pages in this section use this `<Sound>` component in their React examples.
+
+**Web Components**
+
+Declare the file with a [`<pc-asset>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset.md), and put a [`<pc-sound>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sound.md) with a [`<pc-sound-slot>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sound-slot.md) inside an entity. The element's `component` property is the engine's sound component:
+
+```html
+<pc-app>
+    <pc-asset id="bell" src="https://developer.playcanvas.com/assets/bell.mp3"></pc-asset>
+    <pc-scene>
+        <pc-entity name="bell">
+            <pc-sound positional="false">
+                <pc-sound-slot name="ring" asset="bell"></pc-sound-slot>
+            </pc-sound>
+        </pc-entity>
+    </pc-scene>
+</pc-app>
+
+<script type="module">
+    import { whenReady } from '@playcanvas/web-components';
+
+    const sound = await whenReady('pc-sound');
+    document.addEventListener('click', () => sound.component.play('ring'));
+</script>
+```
+
+To play the sound as soon as the page allows it, add `auto-play` to the slot instead.
+
+A sound component is **positional** by default: it plays its sounds from where its entity is, and fades them with distance from the [audio listener](https://developer.playcanvas.com/user-manual/audio/positional-audio.md). The examples on this page turn that off, which is what you want for music, interface sounds and anything else that should sound the same wherever the camera is.
+
+## The First Click
+
+Browsers do not let a page make a sound until the user has interacted with it. Until then, the audio system is locked, and anything you play is held back. PlayCanvas unlocks audio on the first click, tap or mouse press anywhere in the page.
+
+A sound that you play in response to a click is not affected, because the click itself unlocks the audio. A sound that plays on load, such as background music, starts at the first click instead. [Autoplay and User Gestures](https://developer.playcanvas.com/user-manual/audio/autoplay.md) covers this in detail.
+
+## Example
+
+This Engine app loads a bell sound, gives a sphere a sound component with one slot, and rings the bell each time you click the canvas.
+
+```js live-example
+import {
+    AppBase,
+    AppOptions,
+    Asset,
+    AudioHandler,
+    CameraComponentSystem,
+    Color,
+    createGraphicsDevice,
+    DEVICETYPE_WEBGPU,
+    Entity,
+    FILLMODE_FILL_WINDOW,
+    LightComponentSystem,
+    RenderComponentSystem,
+    RESOLUTION_AUTO,
+    SoundComponentSystem,
+    SoundManager,
+    StandardMaterial
+} from 'playcanvas';
+
+// create the application with the component systems and resource handlers it uses
+const canvas = document.getElementById('application');
+const device = await createGraphicsDevice(canvas, {
+    deviceTypes: [DEVICETYPE_WEBGPU]
+});
+device.maxPixelRatio = Math.min(window.devicePixelRatio, 2);
+
+const options = new AppOptions();
+options.graphicsDevice = device;
+options.soundManager = new SoundManager();
+options.componentSystems = [
+    RenderComponentSystem,
+    CameraComponentSystem,
+    LightComponentSystem,
+    SoundComponentSystem
+];
+options.resourceHandlers = [AudioHandler];
+
+const app = new AppBase(canvas);
+app.init(options);
+app.setCanvasFillMode(FILLMODE_FILL_WINDOW);
+app.setCanvasResolution(RESOLUTION_AUTO);
+window.addEventListener('resize', () => app.resizeCanvas());
+app.start();
+
+app.scene.ambientLight = new Color(0.35, 0.35, 0.4);
+
+// load the bell, an audio asset
+const asset = new Asset('bell', 'audio', {
+    url: 'https://developer.playcanvas.com/assets/bell.mp3'
+});
+await new Promise((resolve) => {
+    asset.ready(resolve);
+    app.assets.add(asset);
+    app.assets.load(asset);
+});
+
+const camera = new Entity('camera');
+camera.addComponent('camera', {
+    clearColor: new Color(0.11, 0.12, 0.17)
+});
+camera.setPosition(0, 0, 4);
+app.root.addChild(camera);
+
+const light = new Entity('light');
+light.addComponent('light');
+light.setEulerAngles(48, 38, 0);
+app.root.addChild(light);
+
+// the bell is a sphere with a sound component, and one slot that plays the asset
+const material = new StandardMaterial();
+material.diffuse = new Color(0.95, 0.7, 0.2);
+material.update();
+
+const bell = new Entity('bell');
+bell.addComponent('render', { type: 'sphere', material });
+bell.addComponent('sound', { positional: false });
+bell.sound.addSlot('ring', { asset: asset.id });
+app.root.addChild(bell);
+
+// click to ring the bell, and swell the sphere to show the ring
+let swell = 0;
+canvas.addEventListener('click', () => {
+    bell.sound.play('ring');
+    swell = 1;
+});
+app.on('update', (dt) => {
+    swell = Math.max(0, swell - dt * 3);
+    bell.setLocalScale(1 + swell * 0.3, 1 + swell * 0.3, 1 + swell * 0.3);
+});
+
+const label = document.createElement('div');
+label.style.cssText = 'position: absolute; left: 12px; bottom: 10px; color: #ccc; font: 14px sans-serif; pointer-events: none;';
+label.textContent = 'Click to ring the bell.';
+document.body.appendChild(label);
+```
+
+Some things to try:
+
+- Add `pitch: 0.5` to the slot's options to ring a bell an octave lower.
+- Click quickly. Each click cuts the last ring short, because a slot plays one sound at a time unless it is set to overlap. Add `overlap: true` to the slot's options to let the rings pile up. See [Playing Sounds](https://developer.playcanvas.com/user-manual/audio/playing-sounds.md#overlapping-sounds).
+- Remove `positional: false`. Nothing changes yet: an application without an audio listener hears from the world origin, and that is where the bell is. Then move the bell with `bell.setPosition(3, 0, 0)` to hear it from the right.
+
+## See Also
+
+- [Audio Assets](https://developer.playcanvas.com/user-manual/audio/audio-assets.md) - Formats, memory and loading
+- [Playing Sounds](https://developer.playcanvas.com/user-manual/audio/playing-sounds.md) - What a slot can do
+- [Sound Component](https://developer.playcanvas.com/user-manual/editor/scenes/components/sound.md) - The Editor reference for the component
+- [`<pc-sound>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sound.md) and [`<pc-sound-slot>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sound-slot.md) - The Web Components references
+- [SoundComponent](https://api.playcanvas.com/engine/classes/SoundComponent.html) - The engine API reference
+
+--------------------------------------------------------------------------------
+
+## Audio Assets
+
+URL: https://developer.playcanvas.com/user-manual/audio/audio-assets/
+Markdown: https://developer.playcanvas.com/user-manual/audio/audio-assets.md
+
+An **audio asset** is a sound file that a [sound slot](https://developer.playcanvas.com/user-manual/audio/playing-sounds.md) can play. PlayCanvas does not process audio when you import it or when you build your app. The file is downloaded as it is and decoded by the browser, which has two consequences that this page covers: the formats you can use are the formats browsers can decode, and a sound takes far more memory once it is loaded than its file size suggests.
+
+## Supported Formats
+
+PlayCanvas hands the file to the browser's decoder, so any format the browser can decode will load.
+
+| Format | Extension | Notes |
+| --- | --- | --- |
+| MP3 | `.mp3` | Decodes in every browser. A good default for sound effects and music |
+| AAC | `.m4a` | Decodes in every browser. Slightly smaller than MP3 at the same quality |
+| WAV | `.wav` | Decodes in every browser. Uncompressed, so files are large, but nothing is lost |
+| Ogg Vorbis | `.ogg` | Open format. Safari has only decoded it since version 18.4 |
+
+Other formats, such as Opus and FLAC, load in the browsers that support them. [MDN's guide to media container formats](https://developer.mozilla.org/en-US/docs/Web/Media/Guides/Formats/Containers) lists what each browser plays.
+
+:::tip
+
+Use MP3 unless you have a reason not to. The engine loads the one file you give it and does not choose between formats for you, so a format that some browsers cannot decode means silence in those browsers.
+
+:::
+
+## Loading Audio
+
+**Engine**
+
+Create an asset of type `audio`. Its resource is a [`Sound`](https://api.playcanvas.com/engine/classes/Sound.html), which holds the decoded audio in its `buffer` and tells you its length:
+
+```javascript
+const asset = new Asset('music', 'audio', {
+    url: 'https://developer.playcanvas.com/assets/music.mp3'
+});
+asset.ready(() => {
+    console.log(asset.resource.duration); // 19.2 seconds
+});
+app.assets.add(asset);
+app.assets.load(asset);
+```
+
+The URL does not need a file extension. If the browser cannot decode the file, the asset fires `error` with the message `Unable to decode audio data`.
+
+**Editor**
+
+Drag audio files into the Assets panel. The file is stored as you uploaded it, and the [asset inspector](https://developer.playcanvas.com/user-manual/editor/assets/inspectors/audio.md) shows its duration and lets you play it. To use an audio asset from a script, declare an [asset attribute](https://developer.playcanvas.com/user-manual/scripting/script-attributes/esm.md#asset-attribute) with `@resource audio`.
+
+**React**
+
+The `useAsset` hook does not load audio. Create the asset with the engine API, as the [`<Sound>` component](https://developer.playcanvas.com/user-manual/audio/getting-started.md#playing-a-sound) on the Getting Started page does:
+
+```jsx
+const app = useApp();
+
+useEffect(() => {
+  const asset = new Asset('music', 'audio', { url: src });
+  app.assets.add(asset);
+  app.assets.load(asset);
+
+  return () => {
+    app.assets.remove(asset);
+    asset.unload();
+  };
+}, [app, src]);
+```
+
+**Web Components**
+
+Declare the file with a [`<pc-asset>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset.md). The element works out the asset type from the file extension for `.mp3` files only, so give any other format a `type`:
+
+```html
+<pc-asset id="music" src="https://developer.playcanvas.com/assets/music.mp3"></pc-asset>
+<pc-asset id="wind" src="assets/wind.ogg" type="audio"></pc-asset>
+```
+
+## Memory
+
+A loaded sound is held in memory fully decoded, as 32-bit samples at the sample rate of the audio output, whatever the format and sample rate of the file. Its size depends only on its length and its number of channels:
+
+```text
+bytes = seconds × sample rate × channels × 4
+```
+
+At the usual output rate of 48,000 samples a second, that is about 11 MB for each minute of mono audio, and twice that for stereo. The music loop in this section's examples is a 301 KB MP3 that lasts 19.2 seconds, and it takes 7 MB once loaded. You can measure any loaded sound:
+
+```javascript
+const buffer = asset.resource.buffer; // an AudioBuffer
+const bytes = buffer.length * buffer.numberOfChannels * 4;
+console.log(`${(bytes / 1024 / 1024).toFixed(1)} MB`);
+```
+
+To use less memory:
+
+- **Use mono for sound effects.** A mono file takes half the memory of a stereo one. [Positional sounds](https://developer.playcanvas.com/user-manual/audio/positional-audio.md) are placed between the speakers by the engine, so they gain nothing from a stereo file.
+- **Keep sounds short.** Trim silence from the ends, and loop a short section rather than loading a long recording.
+- **Unload what you have finished with.** `asset.unload()` frees the decoded audio. A slot that plays an unloaded asset loads it again.
+
+Lowering the bitrate or the sample rate of a file makes the download smaller, but not the loaded sound: the browser converts every file to the output's sample rate as it decodes it.
+
+## When Audio Loads
+
+A sound has to be downloaded and decoded before it can play. A slot that is played before its asset is ready starts once the asset arrives, so nothing breaks, but the sound is late the first time.
+
+- **Preloaded assets** load before the application starts. In the Editor, that is every asset with **Preload** turned on, which is the default. See [Preloading](https://developer.playcanvas.com/user-manual/assets/preloading.md).
+- **Other assets** load when a sound component that uses them is enabled, or the first time one of their slots is played.
+
+For sounds that must be on time, such as interface clicks and weapon fire, load the asset before you need it. For large files that are only needed later, such as the music for another level, turn preloading off and load them when the level starts.
+
+## Seamless Loops
+
+A slot with `loop` turned on repeats its sound with no gap, sample to sample. Whether the loop sounds seamless is down to the file:
+
+- **Cut the loop on a musical boundary.** A loop of a whole number of bars joins up in time. To hide the join, crossfade the end of the loop into its start in your audio editor.
+- **Watch for encoder padding.** MP3 and AAC encoders add a few milliseconds of silence to each end of a file. Browsers remove it when they decode the file, but if you hear a gap or a click at the loop point, use WAV or Ogg Vorbis, which have no padding, or loop a section inside the file with the slot's [start time and duration](https://developer.playcanvas.com/user-manual/audio/playing-sounds.md#playing-part-of-a-file).
+
+## Long Music
+
+The sound component does not stream. A three-minute stereo track takes about 66 MB once decoded, and none of it can play until all of it has downloaded. For music, prefer a loop of 10 to 30 seconds.
+
+When you do need a long track, play it with an HTML audio element, which streams the file and uses very little memory:
+
+```javascript
+const music = new Audio('https://developer.playcanvas.com/assets/music.mp3');
+music.loop = true;
+music.volume = 0.5;
+
+// like all audio, it can only start after a user gesture
+window.addEventListener('click', () => music.play(), { once: true });
+```
+
+An audio element is not part of the PlayCanvas sound system. The [master volume](https://developer.playcanvas.com/user-manual/audio/volume-and-mixing.md) does not apply to it, so set its `volume` yourself, and its `loop` can leave a small gap at the loop point.
+
+## Audio Sprites
+
+An **audio sprite** is one file that holds several sounds, one after another. Each sound gets a slot that plays its part of the file, set by the slot's `startTime` and `duration` in seconds. One file means one download and one decode for a whole set of effects.
+
+```javascript
+// where each sound is in the file, in seconds
+const sprites = {
+    coin: { start: 0, duration: 0.7 },
+    jump: { start: 1, duration: 0.8 },
+    laser: { start: 2, duration: 0.7 },
+    explosion: { start: 3, duration: 1.3 }
+};
+
+for (const [name, { start, duration }] of Object.entries(sprites)) {
+    entity.sound.addSlot(name, {
+        asset: asset.id,
+        startTime: start,
+        duration: duration,
+        overlap: true
+    });
+}
+
+entity.sound.play('laser');
+```
+
+Leave a short silence between the sounds in the file, 100 milliseconds or more, so that the end of one never leaks into the start of the next. The [example on the Playing Sounds page](https://developer.playcanvas.com/user-manual/audio/playing-sounds.md#example) plays this file.
+
+## See Also
+
+- [Playing Sounds](https://developer.playcanvas.com/user-manual/audio/playing-sounds.md) - Slots, and playing part of a file
+- [Assets](https://developer.playcanvas.com/user-manual/assets.md) - How the asset registry loads and unloads assets
+- [Supported Formats](https://developer.playcanvas.com/user-manual/assets/supported-formats.md) - Every asset format PlayCanvas loads
+- [Audio Asset](https://developer.playcanvas.com/user-manual/editor/assets/inspectors/audio.md) - The Editor's audio asset inspector
+- [Sound](https://api.playcanvas.com/engine/classes/Sound.html) - The engine API reference for the loaded resource
+
+--------------------------------------------------------------------------------
+
+## Playing Sounds
+
+URL: https://developer.playcanvas.com/user-manual/audio/playing-sounds/
+Markdown: https://developer.playcanvas.com/user-manual/audio/playing-sounds.md
+
+A [sound component](https://developer.playcanvas.com/user-manual/editor/scenes/components/sound.md) holds the sounds of one entity in named **slots**. A slot is one sound the entity can make: a footstep, an engine hum, a line of dialogue. It says which audio asset to play and how to play it, and you play it by name.
+
+## Slots
+
+Each slot has these properties. The names in brackets are what the Editor calls them.
+
+| Property | Default | Description |
+| --- | --- | --- |
+| `name` (Name) | | The name you play the slot by. It must be unique within the component |
+| `asset` (Asset) | | The [audio asset](https://developer.playcanvas.com/user-manual/audio/audio-assets.md) the slot plays |
+| `volume` (Volume) | `1` | The volume of the sound, from 0 to 1 |
+| `pitch` (Pitch) | `1` | The speed the sound plays at. 2 is twice as fast and an octave higher |
+| `loop` (Loop) | `false` | Whether the sound repeats until it is stopped |
+| `overlap` (Overlap) | `false` | Whether playing the slot again adds another copy of the sound, or restarts it |
+| `autoPlay` (Auto Play) | `false` | Whether the slot plays as soon as its component is enabled |
+| `startTime` (Start Time) | `0` | Where in the asset the sound starts, in seconds |
+| `duration` (Duration) | | How much of the asset to play, in seconds. Leave it unset to play to the end |
+
+**Engine**
+
+[`addSlot()`](https://api.playcanvas.com/engine/classes/SoundComponent.html#addslot) creates a slot and returns it. A component's slots are in its `slots` object, and `slot()` finds one by name:
+
+```javascript
+entity.addComponent('sound', { positional: false });
+
+entity.sound.addSlot('footsteps', {
+    asset: footstepsAsset.id,
+    loop: true,
+    volume: 0.6
+});
+
+const slot = entity.sound.slot('footsteps');
+slot.pitch = 1.2;
+
+entity.sound.removeSlot('footsteps');
+```
+
+**Editor**
+
+Click **ADD SLOT** in the Sound component to add a slot, and click the bin icon in the slot's header to remove it. Each slot is a panel with the properties in the table above. From a script, reach a slot with `this.entity.sound.slot('footsteps')`.
+
+**React**
+
+With the [`<Sound>` component](https://developer.playcanvas.com/user-manual/audio/getting-started.md#playing-a-sound) from the Getting Started page, each `<Sound>` is a slot, and its props are the slot's properties:
+
+```jsx
+<Entity name="player" ref={player}>
+  <Sound name="footsteps" src="https://developer.playcanvas.com/assets/footsteps.mp3" loop volume={0.6} />
+  <Sound name="drop" src="https://developer.playcanvas.com/assets/drop.mp3" overlap />
+</Entity>
+```
+
+The props are read once, when the slot is created. To change a slot afterwards, set it on the engine component, such as `player.current.sound.slot('footsteps').pitch = 1.2`.
+
+**Web Components**
+
+Each [`<pc-sound-slot>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sound-slot.md) inside a [`<pc-sound>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sound.md) is a slot. Its attributes are the slot's properties, and they stay live: change one and the slot changes with it.
+
+```html
+<pc-sound positional="false">
+    <pc-sound-slot name="footsteps" asset="footsteps" loop volume="0.6"></pc-sound-slot>
+    <pc-sound-slot name="drop" asset="drop" overlap></pc-sound-slot>
+</pc-sound>
+```
+
+The element's `soundSlot` property is the engine slot.
+
+## Playing, Pausing and Stopping
+
+The component plays its slots by name. These are engine methods, and they are the same on every surface: reach the component as `this.entity.sound` in a script, through an `<Entity>` ref in React, and through the `component` property of a `<pc-sound>` element.
+
+```javascript
+entity.sound.play('footsteps');   // start the slot from the beginning
+entity.sound.pause('footsteps');  // hold it where it is
+entity.sound.resume('footsteps'); // carry on from there
+entity.sound.stop('footsteps');   // stop it
+
+entity.sound.pause();  // with no name: pause every slot
+entity.sound.resume(); // and resume every slot
+entity.sound.stop();   // or stop them all
+```
+
+To ask what a slot is doing, use `isPlaying()`, `isPaused()`, `isStopped()` and `isLoaded()` on the component, each with the slot's name. A slot has the same four as properties, and its own `play()`, `pause()`, `resume()` and `stop()`:
+
+```javascript
+const slot = entity.sound.slot('footsteps');
+if (slot.isPlaying) {
+    slot.stop();
+} else {
+    slot.play();
+}
+```
+
+`play()` returns the [sound instance](https://developer.playcanvas.com/user-manual/audio/controlling-playback.md) it started, which is how you control one particular playing sound. It returns `null` when the component has no slot of that name, or when the component or its entity is disabled.
+
+## Looping
+
+A slot with `loop` set repeats until you stop it. Without it, the slot plays once and stops by itself. You can change `loop` while the slot is playing: turn it off and the sound finishes its current pass and stops.
+
+## Overlapping Sounds
+
+By default, a slot plays one sound at a time. Playing it while it is already playing stops the sound and starts it again from the beginning. That is right for a sound that there should only be one of, such as music or an engine, but it cuts off rapid one-shot sounds: every gunshot would silence the one before.
+
+Set `overlap` and each `play()` starts another copy of the sound, alongside the ones still playing:
+
+```javascript
+entity.sound.addSlot('shot', { asset: shotAsset.id, overlap: true });
+
+entity.sound.play('shot');
+entity.sound.play('shot'); // a second shot, while the first rings on
+```
+
+An overlapping slot behaves differently in three ways:
+
+- **Its properties apply to the next play.** Changing `volume`, `pitch`, `startTime` or `duration` on a slot that does not overlap changes the sound that is playing. On an overlapping slot, the sounds already playing keep the values they started with, and changes to the `volume` and `pitch` of the sound component do not reach them either. `loop` is the exception, and always applies to every playing sound.
+- **Its sounds outlive the entity.** When an entity is destroyed or its sound component is removed, overlapping sounds play to the end, so a destroyed enemy can still be heard exploding. Sounds in other slots stop at once.
+- **Its sounds are not paused when the component is disabled.** They play to the end.
+
+The sounds a slot is playing are in its `instances` array. An overlapping slot can build up a lot of them if you play it many times a second, and each one costs processing time, so cap how often you trigger rapid sounds.
+
+## Volume and Pitch
+
+A sound's volume is the slot's `volume` multiplied by the component's `volume`, and its pitch is the slot's `pitch` multiplied by the component's `pitch`. Use the component's values to turn the whole entity up or down, and the slot's to balance its sounds against each other.
+
+```javascript
+entity.sound.volume = 0.5; // everything this entity plays, at half volume
+entity.sound.slot('footsteps').volume = 0.6; // footsteps at 0.5 × 0.6 = 0.3
+```
+
+Volume is limited to between 0 and 1. Pitch is a playback speed, so it changes the length of a sound as well as its tone: a pitch of 2 plays in half the time. It cannot go below 0.01.
+
+Repeated sounds are less monotonous with a little variation. For a one-shot sound, set a random pitch before each play:
+
+```javascript
+const slot = entity.sound.slot('shot');
+slot.pitch = 0.9 + Math.random() * 0.2;
+slot.play();
+```
+
+See [Volume and Mixing](https://developer.playcanvas.com/user-manual/audio/volume-and-mixing.md) for the master volume, which applies on top of these.
+
+## Playing Part of a File
+
+`startTime` and `duration` limit a slot to a section of its asset, in seconds. With both set, the slot plays from `startTime` for `duration` seconds, and if it loops, it loops that section. This is how several sounds can share one file, as an [audio sprite](https://developer.playcanvas.com/user-manual/audio/audio-assets.md#audio-sprites), and how you can loop the body of a sound while skipping its start.
+
+```javascript
+entity.sound.addSlot('explosion', {
+    asset: sfxAsset.id,
+    startTime: 3,
+    duration: 1.3
+});
+```
+
+## Auto Play
+
+A slot with `autoPlay` set plays when its component is enabled: when the scene starts, when the entity is enabled later, or when the slot is added to a component that is already enabled. It is the simplest way to play background music and ambient loops, with no code.
+
+Browsers hold audio back until the user interacts with the page, so an auto-played sound is not heard until the first click or tap. See [Autoplay and User Gestures](https://developer.playcanvas.com/user-manual/audio/autoplay.md).
+
+## Enabling and Disabling
+
+Disabling a sound component, or its entity, pauses the slots that are playing. Enabling it again resumes them, and plays any `autoPlay` slot that is not yet playing. While the component is disabled, `play()` does nothing and returns `null`.
+
+## Example
+
+This Engine app cuts four sounds from one file, as an audio sprite, and gives each a slot. The buttons play the slots, and each box jumps when its slot plays.
+
+```js live-example
+import {
+    AppBase,
+    AppOptions,
+    Asset,
+    AudioHandler,
+    CameraComponentSystem,
+    Color,
+    createGraphicsDevice,
+    DEVICETYPE_WEBGPU,
+    Entity,
+    FILLMODE_FILL_WINDOW,
+    LightComponentSystem,
+    RenderComponentSystem,
+    RESOLUTION_AUTO,
+    SoundComponentSystem,
+    SoundManager,
+    StandardMaterial
+} from 'playcanvas';
+
+// create the application with the component systems and resource handlers it uses
+const canvas = document.getElementById('application');
+const device = await createGraphicsDevice(canvas, {
+    deviceTypes: [DEVICETYPE_WEBGPU]
+});
+device.maxPixelRatio = Math.min(window.devicePixelRatio, 2);
+
+const options = new AppOptions();
+options.graphicsDevice = device;
+options.soundManager = new SoundManager();
+options.componentSystems = [
+    RenderComponentSystem,
+    CameraComponentSystem,
+    LightComponentSystem,
+    SoundComponentSystem
+];
+options.resourceHandlers = [AudioHandler];
+
+const app = new AppBase(canvas);
+app.init(options);
+app.setCanvasFillMode(FILLMODE_FILL_WINDOW);
+app.setCanvasResolution(RESOLUTION_AUTO);
+window.addEventListener('resize', () => app.resizeCanvas());
+app.start();
+
+app.scene.ambientLight = new Color(0.35, 0.35, 0.4);
+
+// load one file that holds four sounds
+const asset = new Asset('sfx', 'audio', {
+    url: 'https://developer.playcanvas.com/assets/sfx.mp3'
+});
+await new Promise((resolve) => {
+    asset.ready(resolve);
+    app.assets.add(asset);
+    app.assets.load(asset);
+});
+
+const camera = new Entity('camera');
+camera.addComponent('camera', {
+    clearColor: new Color(0.11, 0.12, 0.17)
+});
+camera.setPosition(0, 0.5, 7);
+app.root.addChild(camera);
+
+const light = new Entity('light');
+light.addComponent('light');
+light.setEulerAngles(48, 38, 0);
+app.root.addChild(light);
+
+// where each sound is in the file, in seconds, and a color for its box
+const sprites = {
+    coin: { start: 0, duration: 0.7, color: new Color(0.95, 0.75, 0.2) },
+    jump: { start: 1, duration: 0.8, color: new Color(0.3, 0.75, 0.45) },
+    laser: { start: 2, duration: 0.7, color: new Color(0.9, 0.3, 0.35) },
+    explosion: { start: 3, duration: 1.3, color: new Color(0.45, 0.5, 0.9) }
+};
+const names = Object.keys(sprites);
+
+// one sound component, with a slot for each sound
+const source = new Entity('source');
+source.addComponent('sound', { positional: false });
+for (const name of names) {
+    source.sound.addSlot(name, {
+        asset: asset.id,
+        startTime: sprites[name].start,
+        duration: sprites[name].duration
+    });
+}
+app.root.addChild(source);
+
+// a box for each slot
+const boxes = {};
+const hop = {};
+names.forEach((name, i) => {
+    const material = new StandardMaterial();
+    material.diffuse = sprites[name].color;
+    material.update();
+
+    const box = new Entity(name);
+    box.addComponent('render', { type: 'box', material });
+    box.setPosition((i - 1.5) * 1.8, 0, 0);
+    app.root.addChild(box);
+    boxes[name] = box;
+    hop[name] = 0;
+});
+
+// the component fires 'play' with the slot each time one of its slots plays
+source.sound.on('play', (slot) => {
+    hop[slot.name] = 1;
+});
+
+const status = document.createElement('div');
+status.style.cssText = 'position: absolute; left: 12px; bottom: 10px; color: #ccc; font: 14px sans-serif;';
+document.body.appendChild(status);
+
+app.on('update', (dt) => {
+    let playing = 0;
+    for (const name of names) {
+        hop[name] = Math.max(0, hop[name] - dt * 3);
+        boxes[name].setPosition(boxes[name].getPosition().x, hop[name] * 0.6, 0);
+        playing += source.sound.slot(name).instances.length;
+    }
+    status.textContent = `Sounds playing: ${playing}`;
+});
+
+// buttons and options
+const panel = document.createElement('div');
+panel.style.cssText = 'position: absolute; left: 12px; top: 12px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; color: #ccc; font: 14px sans-serif;';
+document.body.appendChild(panel);
+
+let varyPitch = false;
+for (const name of names) {
+    const button = document.createElement('button');
+    button.textContent = name;
+    button.onclick = () => {
+        const slot = source.sound.slot(name);
+        slot.pitch = varyPitch ? 0.8 + Math.random() * 0.4 : 1;
+        slot.play();
+    };
+    panel.appendChild(button);
+}
+
+const addCheckbox = (text, onChange) => {
+    const label = document.createElement('label');
+    const input = document.createElement('input');
+    input.type = 'checkbox';
+    input.onchange = () => onChange(input.checked);
+    label.append(input, ` ${text}`);
+    panel.appendChild(label);
+};
+addCheckbox('Overlap', (checked) => {
+    for (const name of names) {
+        source.sound.slot(name).overlap = checked;
+    }
+});
+addCheckbox('Vary pitch', (checked) => {
+    varyPitch = checked;
+});
+```
+
+Some things to try:
+
+- Click **explosion** several times quickly. Each click restarts the sound. Turn on **Overlap** and do it again: the explosions pile up, and the count of playing sounds rises.
+- Turn on **Vary pitch** and click **coin** repeatedly to hear how a small random pitch keeps a repeated sound from grating.
+- Change the `duration` of `jump` to `2`. The slot now plays on past the end of its own sound and into the laser, which follows it in the file.
+
+## See Also
+
+- [Controlling Playback](https://developer.playcanvas.com/user-manual/audio/controlling-playback.md) - Working with the sound instance that `play()` returns
+- [Audio Assets](https://developer.playcanvas.com/user-manual/audio/audio-assets.md) - Audio sprites, loops and memory
+- [Sound Component](https://developer.playcanvas.com/user-manual/editor/scenes/components/sound.md) - The Editor reference for the component and its slots
+- [`<pc-sound-slot>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sound-slot.md) - The Web Components reference
+- [SoundComponent](https://api.playcanvas.com/engine/classes/SoundComponent.html) and [SoundSlot](https://api.playcanvas.com/engine/classes/SoundSlot.html) - The engine API reference
+
+--------------------------------------------------------------------------------
+
+## Controlling Playback
+
+URL: https://developer.playcanvas.com/user-manual/audio/controlling-playback/
+Markdown: https://developer.playcanvas.com/user-manual/audio/controlling-playback.md
+
+Each time a [slot](https://developer.playcanvas.com/user-manual/audio/playing-sounds.md) plays, it creates a **sound instance**: one playing copy of the sound. The slot is the recipe and the instance is the sound you hear. Most of the time you can work with slots alone, but the instance is what you need to seek within a sound, to follow its progress, to fade it, or to change one sound among several that a slot is playing.
+
+Everything on this page is engine API, and it is the same on every surface. Reach the sound component as `this.entity.sound` in a script, through an `<Entity>` ref in React, and through the `component` property of a [`<pc-sound>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sound.md) element.
+
+## Sound Instances
+
+`play()` returns the instance it starts, both on the component and on a slot. A slot's `instances` array holds the ones that are playing or paused:
+
+```javascript
+const instance = entity.sound.play('music');
+
+const slot = entity.sound.slot('music');
+console.log(slot.instances[0] === instance); // true
+```
+
+An instance lasts for one play. When its sound ends or is stopped, the slot lets go of it, and the next `play()` returns a new one. So do not keep an instance to replay later: keep the slot, and take the new instance each time you play. An instance of a [positional](https://developer.playcanvas.com/user-manual/audio/positional-audio.md) sound is a [`SoundInstance3d`](https://api.playcanvas.com/engine/classes/SoundInstance3d.html), which adds the position and distance settings of the sound.
+
+An instance has the same controls as a slot, for that one sound:
+
+```javascript
+instance.pause();
+instance.resume();
+instance.stop();
+
+console.log(instance.isPlaying, instance.isPaused, instance.isStopped);
+```
+
+## Volume and Pitch
+
+An instance starts with the volume and pitch of its slot, multiplied by those of its component. Setting `volume` or `pitch` on the instance changes that one sound and leaves the slot alone:
+
+```javascript
+const instance = entity.sound.play('shot');
+instance.volume = 0.3;
+instance.pitch = 1.5;
+```
+
+The value you set replaces the combined slot and component value. It lasts until you change the volume or pitch of the slot or of its component: on a slot that does not [overlap](https://developer.playcanvas.com/user-manual/audio/playing-sounds.md#overlapping-sounds), that sets every playing instance again.
+
+## Seeking
+
+`currentTime` is how far into the sound the instance is, in seconds. Read it to show progress, and set it to jump to another point:
+
+```javascript
+const progress = instance.currentTime / instance.duration; // 0 to 1
+
+instance.currentTime = 10; // jump to 10 seconds in
+```
+
+- It measures position in the sound, not time on the clock. At a pitch of 2, it advances two seconds every second.
+- It is relative to the slot's [start time](https://developer.playcanvas.com/user-manual/audio/playing-sounds.md#playing-part-of-a-file). For a slot that plays part of a file, 0 is the start of that part.
+- In a looping sound, it wraps back to 0 at each repeat.
+- Setting it while the instance is paused takes effect when the instance resumes.
+
+## Events
+
+An instance fires an event each time its state changes. The slot and the component fire the same events, so you can listen wherever is convenient.
+
+| Event | Fired when |
+| --- | --- |
+| `play` | The sound starts |
+| `pause` | The sound is paused |
+| `resume` | The sound resumes after a pause |
+| `stop` | The sound stops, for any reason |
+| `end` | The sound reaches its end without being stopped. A `stop` event follows it |
+
+A looping sound never fires `end`. A slot also fires `load` when its asset has loaded.
+
+The handler's arguments depend on where you listen. An instance passes none, a slot passes the instance, and the component passes the slot and then the instance:
+
+```javascript
+instance.on('end', () => console.log('finished'));
+
+slot.on('play', (instance) => console.log('started', instance.duration));
+
+entity.sound.on('end', (slot, instance) => console.log(`${slot.name} finished`));
+```
+
+Listening on the component is the easiest way to act when any of an entity's sounds ends, for example to play the next track of a playlist:
+
+```javascript
+const playlist = ['intro', 'verse', 'chorus'];
+
+entity.sound.on('end', (slot) => {
+    const next = playlist[playlist.indexOf(slot.name) + 1];
+    if (next) {
+        entity.sound.play(next);
+    }
+});
+
+entity.sound.play(playlist[0]);
+```
+
+## Fading
+
+The engine has no fade of its own. Move an instance's `volume` a little each frame instead. This function fades an instance to a volume over a number of seconds, and stops it if it fades to silence:
+
+```javascript
+function fade(instance, to, seconds) {
+    const from = instance.volume;
+    let t = 0;
+
+    const step = (dt) => {
+        t = Math.min(t + dt / seconds, 1);
+        instance.volume = from + (to - from) * t;
+        if (t === 1) {
+            app.off('update', step);
+            if (to === 0) {
+                instance.stop();
+            }
+        }
+    };
+    app.on('update', step);
+}
+
+fade(entity.sound.play('music'), 0, 2); // fade out over 2 seconds
+```
+
+To fade a sound in, start it silent and fade up:
+
+```javascript
+const instance = entity.sound.play('music');
+instance.volume = 0;
+fade(instance, 1, 2);
+```
+
+## Crossfading
+
+A crossfade fades one sound out while another fades in. Give each sound its own slot, so that both can play at once:
+
+```javascript
+function crossfade(from, to, seconds) {
+    const next = entity.sound.play(to);
+    next.volume = 0;
+    fade(next, 1, seconds);
+
+    for (const instance of entity.sound.slot(from).instances) {
+        fade(instance, 0, seconds);
+    }
+}
+
+crossfade('explore', 'combat', 1.5);
+```
+
+For two tracks that should stay in time with each other, such as layers of the same piece of music, play both from the start and crossfade their volumes without stopping either.
+
+## Example
+
+This Engine app plays a music loop with the controls of a media player. The record turns with the sound's `currentTime`, and the events that the slot fires are listed at the bottom.
+
+```js live-example
+import {
+    AppBase,
+    AppOptions,
+    Asset,
+    AudioHandler,
+    CameraComponentSystem,
+    Color,
+    createGraphicsDevice,
+    DEVICETYPE_WEBGPU,
+    Entity,
+    FILLMODE_FILL_WINDOW,
+    LightComponentSystem,
+    RenderComponentSystem,
+    RESOLUTION_AUTO,
+    SoundComponentSystem,
+    SoundManager,
+    StandardMaterial
+} from 'playcanvas';
+
+// create the application with the component systems and resource handlers it uses
+const canvas = document.getElementById('application');
+const device = await createGraphicsDevice(canvas, {
+    deviceTypes: [DEVICETYPE_WEBGPU]
+});
+device.maxPixelRatio = Math.min(window.devicePixelRatio, 2);
+
+const options = new AppOptions();
+options.graphicsDevice = device;
+options.soundManager = new SoundManager();
+options.componentSystems = [
+    RenderComponentSystem,
+    CameraComponentSystem,
+    LightComponentSystem,
+    SoundComponentSystem
+];
+options.resourceHandlers = [AudioHandler];
+
+const app = new AppBase(canvas);
+app.init(options);
+app.setCanvasFillMode(FILLMODE_FILL_WINDOW);
+app.setCanvasResolution(RESOLUTION_AUTO);
+window.addEventListener('resize', () => app.resizeCanvas());
+app.start();
+
+app.scene.ambientLight = new Color(0.35, 0.35, 0.4);
+
+// load the music, a loop of 19.2 seconds
+const asset = new Asset('music', 'audio', {
+    url: 'https://developer.playcanvas.com/assets/music.mp3'
+});
+await new Promise((resolve) => {
+    asset.ready(resolve);
+    app.assets.add(asset);
+    app.assets.load(asset);
+});
+
+const camera = new Entity('camera');
+camera.addComponent('camera', {
+    clearColor: new Color(0.11, 0.12, 0.17)
+});
+camera.setPosition(0, 2.2, 3.2);
+camera.lookAt(0, 0, 0);
+app.root.addChild(camera);
+
+const light = new Entity('light');
+light.addComponent('light');
+light.setEulerAngles(48, 38, 0);
+app.root.addChild(light);
+
+// a record with a label, to show the sound's position
+const createMaterial = (color) => {
+    const material = new StandardMaterial();
+    material.diffuse = color;
+    material.update();
+    return material;
+};
+const record = new Entity('record');
+record.addComponent('render', { type: 'cylinder', material: createMaterial(new Color(0.08, 0.08, 0.1)) });
+record.setLocalScale(2.4, 0.05, 2.4);
+app.root.addChild(record);
+
+const label = new Entity('label');
+label.addComponent('render', { type: 'box', material: createMaterial(new Color(0.95, 0.7, 0.2)) });
+label.setLocalPosition(0.25, 0.6, 0);
+label.setLocalScale(0.3, 1, 0.12);
+record.addChild(label);
+
+// the sound source: one slot that plays the music
+const music = new Entity('music');
+music.addComponent('sound', { positional: false });
+const slot = music.sound.addSlot('music', { asset: asset.id, loop: true });
+app.root.addChild(music);
+
+// controls
+const panel = document.createElement('div');
+panel.style.cssText = 'position: absolute; left: 12px; top: 12px; right: 12px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; color: #ccc; font: 14px sans-serif;';
+document.body.appendChild(panel);
+
+const add = (tag, props) => {
+    const element = Object.assign(document.createElement(tag), props);
+    panel.appendChild(element);
+    return element;
+};
+
+// the instance that is playing or paused, if there is one
+let instance = null;
+
+const playButton = add('button', { textContent: 'Play' });
+playButton.onclick = () => {
+    if (slot.isPlaying) {
+        slot.pause();
+    } else if (slot.isPaused) {
+        slot.resume();
+    } else {
+        instance = slot.play();
+    }
+};
+add('button', { textContent: 'Stop' }).onclick = () => slot.stop();
+
+// seek by setting the instance's currentTime
+const seek = add('input', { type: 'range', min: 0, max: 1, step: 0.001, value: 0, ariaLabel: 'Seek' });
+seek.style.flex = '1 1 120px';
+seek.oninput = () => {
+    if (!slot.isStopped) {
+        instance.currentTime = seek.value * instance.duration;
+    }
+};
+
+// leave the seek bar where it is while a pointer holds it
+let seeking = false;
+seek.onpointerdown = () => {
+    seeking = true;
+};
+for (const name of ['pointerup', 'pointercancel']) {
+    window.addEventListener(name, () => {
+        seeking = false;
+    });
+}
+const time = add('span', { textContent: '0.0 / 0.0' });
+
+const speed = add('label', { textContent: 'Speed ' });
+const speedInput = Object.assign(document.createElement('input'), { type: 'range', min: 0.5, max: 1.5, step: 0.05, value: 1 });
+speedInput.oninput = () => {
+    slot.pitch = Number(speedInput.value);
+};
+speed.append(speedInput);
+
+const loop = add('label', {});
+const loopInput = Object.assign(document.createElement('input'), { type: 'checkbox', checked: true });
+loopInput.onchange = () => {
+    slot.loop = loopInput.checked;
+};
+loop.append(loopInput, ' Loop');
+
+// list the events the slot fires
+const log = document.createElement('div');
+log.style.cssText = 'position: absolute; left: 12px; bottom: 10px; color: #ccc; font: 14px sans-serif;';
+document.body.appendChild(log);
+
+const events = [];
+for (const name of ['play', 'pause', 'resume', 'stop', 'end']) {
+    slot.on(name, () => {
+        events.push(name);
+        log.textContent = `Events: ${events.slice(-6).join(', ')}`;
+    });
+}
+slot.on('stop', () => {
+    instance = null;
+});
+
+app.on('update', () => {
+    const position = instance ? instance.currentTime : 0;
+    const duration = asset.resource.duration;
+
+    playButton.textContent = slot.isPlaying ? 'Pause' : 'Play';
+    time.textContent = `${position.toFixed(1)} / ${duration.toFixed(1)}`;
+    if (!seeking) {
+        seek.value = position / duration;
+    }
+
+    // one turn of the record every 2.4 seconds of music, which is one bar
+    record.setLocalEulerAngles(0, -position / 2.4 * 360, 0);
+});
+```
+
+Some things to try:
+
+- Drag the seek bar while the music plays, and while it is paused. The record follows `currentTime` either way.
+- Drag **Speed** down. The slot's `pitch` slows the music and lowers its tone together, and `currentTime` advances more slowly.
+- Turn off **Loop** and let the music reach its end. The slot fires `end` and then `stop`. With **Loop** on, it fires neither.
+
+## See Also
+
+- [Playing Sounds](https://developer.playcanvas.com/user-manual/audio/playing-sounds.md) - Slots and their properties
+- [Volume and Mixing](https://developer.playcanvas.com/user-manual/audio/volume-and-mixing.md) - Master volume and balancing groups of sounds
+- [SoundInstance](https://api.playcanvas.com/engine/classes/SoundInstance.html) and [SoundInstance3d](https://api.playcanvas.com/engine/classes/SoundInstance3d.html) - The engine API reference
+
+--------------------------------------------------------------------------------
+
+## Positional Audio
+
+URL: https://developer.playcanvas.com/user-manual/audio/positional-audio/
+Markdown: https://developer.playcanvas.com/user-manual/audio/positional-audio.md
+
+A **positional** sound is heard from where its entity is. As the entity moves relative to the **audio listener**, the sound moves between the speakers and fades with distance. This is the default for every sound component, so an entity with a sound component is already a point in space that makes noise. This page covers where sounds are heard from, how they fade, and when to turn positioning off.
+
+## Positional and Non-Positional Sounds
+
+The sound component's `positional` property is `true` by default. It applies to every slot of the component.
+
+- **Positional sounds** suit anything that is somewhere in the world: footsteps, engines, voices, a waterfall.
+- **Non-positional sounds** play at the same volume in both speakers, wherever the entity and the listener are. Turn `positional` off for music, interface sounds and narration.
+
+A component is one or the other. For an entity that needs both, such as a player with footsteps in the world and a heartbeat in the head, put the non-positional sounds on a second sound component, on a child entity.
+
+## The Audio Listener
+
+Positional sounds are heard from the entity that has the **audio listener** component: its position is where the ears are, and its rotation is which way they face. Put it on the camera, and sounds match what you see.
+
+**Engine**
+
+Register `AudioListenerComponentSystem` with your application, then add the component to the camera. It has no settings:
+
+```javascript
+camera.addComponent('audiolistener');
+```
+
+**Editor**
+
+Select the camera entity, click **Add Component** and choose **Audio Listener**. The component has no settings.
+
+**React**
+
+Add the engine component from a small component of your own, inside the camera's `<Entity>`:
+
+```jsx
+import { useEffect } from 'react';
+import { useParent } from '@playcanvas/react/hooks';
+
+function AudioListener() {
+  const entity = useParent();
+
+  useEffect(() => {
+    entity.addComponent('audiolistener');
+    return () => entity.removeComponent('audiolistener');
+  }, [entity]);
+
+  return null;
+}
+```
+
+```jsx
+<Entity name="camera" position={[0, 2, 8]}>
+  <Camera />
+  <AudioListener />
+</Entity>
+```
+
+**Web Components**
+
+Put a [`<pc-audio-listener>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-audio-listener.md) inside the camera's entity:
+
+```html
+<pc-entity name="camera" position="0 2 8">
+    <pc-camera></pc-camera>
+    <pc-audio-listener></pc-audio-listener>
+</pc-entity>
+```
+
+Only one listener is in use at a time:
+
+- **The listener that was enabled most recently is the one in use.** Adding a second listener takes over from the first.
+- **Disabling the listener in use does not hand over to another one.** Sounds go on being heard from where it last was, until a listener is enabled again. To switch between two listeners, disable one and then enable the other, in that order.
+- **With no listener at all, sounds are heard from the world origin**, facing down the negative Z axis.
+
+### The Camera or the Character
+
+In a first-person game, the camera is the character, and the listener belongs on it. In a third-person game, you have a choice. A listener on the camera matches the picture: a sound on the left of the screen is on the left. A listener on the character matches the game: the footsteps of an enemy creeping up behind the character are loud, however far away the camera is. A common compromise is to put the listener on an entity that takes its position from the character and its rotation from the camera.
+
+## Distance
+
+Four properties of the sound component set how a positional sound fades with its distance from the listener. They apply to every slot of the component.
+
+| Property | Default | Description |
+| --- | --- | --- |
+| `distanceModel` | `DISTANCE_LINEAR` | The shape of the fade: `DISTANCE_LINEAR`, `DISTANCE_INVERSE` or `DISTANCE_EXPONENTIAL` |
+| `refDistance` | `1` | The distance within which the sound plays at full volume. The fade starts here |
+| `maxDistance` | `10000` | With the linear model, the distance at which the fade ends. The other models ignore it |
+| `rollOffFactor` | `1` | How steep the fade is. Higher values fade the sound over a shorter distance |
+
+[Image: The volume of a sound against its distance from the listener, for each of the three distance models]
+
+The chart shows each model with a `refDistance` of 1, and the linear model with a `maxDistance` of 10.
+
+The three models fade a sound in different ways:
+
+- **Linear** fades evenly from full volume at `refDistance` to silence at `maxDistance`. It is the easiest to reason about, and the only model with a hard edge beyond which a sound is silent. A `rollOffFactor` below 1 stops the fade short of silence: at 0.5, the sound falls to half volume at `maxDistance` and stays there.
+- **Inverse** fades the way sound does in open air. With a `rollOffFactor` of 1, the volume halves each time the distance from the listener doubles, so a sound is loud close by, falls away quickly, and then lingers in the distance without ever reaching silence.
+- **Exponential** is the same as inverse with a `rollOffFactor` of 1, but steeper as `rollOffFactor` rises. With a `rollOffFactor` of 2, the volume falls to a quarter each time the distance doubles.
+
+:::warning
+
+The defaults do not suit most scenes. A linear fade over 10,000 units is so gradual that a sound 100 units away still plays at 99% of its volume: sounds move between the speakers, but never seem to get quieter. Set `maxDistance` to the distance at which the sound should be silent, or choose the inverse model.
+
+:::
+
+**Engine**
+
+```javascript
+entity.addComponent('sound', {
+    distanceModel: DISTANCE_LINEAR,
+    refDistance: 1,
+    maxDistance: 20
+});
+
+// or change them at any time, while sounds play
+entity.sound.distanceModel = DISTANCE_INVERSE;
+entity.sound.refDistance = 2;
+```
+
+**Editor**
+
+With **Positional** turned on, the Sound component shows **Ref Distance**, **Max Distance**, **Distance Model** and **Roll-off Factor**.
+
+**React**
+
+The `<Sound>` component from the [Getting Started](https://developer.playcanvas.com/user-manual/audio/getting-started.md#playing-a-sound) page adds a sound component with default settings. To choose the settings, add the component first, from a wrapper that passes its props to the engine component:
+
+```jsx
+import { useEffect, useState } from 'react';
+import { useParent } from '@playcanvas/react/hooks';
+
+function SoundSource({ children, ...settings }) {
+  const entity = useParent();
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    entity.addComponent('sound', settings);
+    setReady(true);
+    return () => {
+      entity.removeComponent('sound');
+      setReady(false);
+    };
+  }, [entity]);
+
+  return ready ? children : null;
+}
+```
+
+```jsx
+<Entity name="radio" position={[4, 0, 0]}>
+  <SoundSource positional distanceModel="linear" maxDistance={20}>
+    <Sound name="music" src="https://developer.playcanvas.com/assets/music.mp3" loop autoPlay />
+  </SoundSource>
+</Entity>
+```
+
+**Web Components**
+
+```html
+<pc-entity name="radio" position="4 0 0">
+    <pc-sound distance-model="linear" ref-distance="1" max-distance="20">
+        <pc-sound-slot name="music" asset="music" loop auto-play></pc-sound-slot>
+    </pc-sound>
+</pc-entity>
+```
+
+## Panning
+
+The direction of a sound from the listener decides how it is shared between the left and right speakers. A sound straight ahead plays equally in both, and a sound directly to one side plays in that speaker only.
+
+Panning is left and right only. A sound behind the listener sounds the same as one in front, and height makes no difference. The engine does not simulate the Doppler effect either: a sound keeps its pitch however fast it moves.
+
+Positions are updated every frame, so sounds follow moving entities and a moving listener with no work from you.
+
+## Example
+
+This Engine app plays music from a red sphere that circles a listener, the yellow capsule. The inner ring is the `refDistance` and the outer ring is the `maxDistance`. Click **Play**, and put headphones on to hear the panning.
+
+```js live-example
+import {
+    AppBase,
+    AppOptions,
+    Asset,
+    AudioHandler,
+    AudioListenerComponentSystem,
+    CameraComponentSystem,
+    Color,
+    createGraphicsDevice,
+    DEVICETYPE_WEBGPU,
+    Entity,
+    FILLMODE_FILL_WINDOW,
+    LightComponentSystem,
+    RenderComponentSystem,
+    RESOLUTION_AUTO,
+    SoundComponentSystem,
+    SoundManager,
+    StandardMaterial,
+    Vec3
+} from 'playcanvas';
+
+// create the application with the component systems and resource handlers it uses
+const canvas = document.getElementById('application');
+const device = await createGraphicsDevice(canvas, {
+    deviceTypes: [DEVICETYPE_WEBGPU]
+});
+device.maxPixelRatio = Math.min(window.devicePixelRatio, 2);
+
+const options = new AppOptions();
+options.graphicsDevice = device;
+options.soundManager = new SoundManager();
+options.componentSystems = [
+    RenderComponentSystem,
+    CameraComponentSystem,
+    LightComponentSystem,
+    SoundComponentSystem,
+    AudioListenerComponentSystem
+];
+options.resourceHandlers = [AudioHandler];
+
+const app = new AppBase(canvas);
+app.init(options);
+app.setCanvasFillMode(FILLMODE_FILL_WINDOW);
+app.setCanvasResolution(RESOLUTION_AUTO);
+window.addEventListener('resize', () => app.resizeCanvas());
+app.start();
+
+app.scene.ambientLight = new Color(0.35, 0.35, 0.4);
+
+const asset = new Asset('music', 'audio', {
+    url: 'https://developer.playcanvas.com/assets/music.mp3'
+});
+await new Promise((resolve) => {
+    asset.ready(resolve);
+    app.assets.add(asset);
+    app.assets.load(asset);
+});
+
+const createMaterial = (color) => {
+    const material = new StandardMaterial();
+    material.diffuse = color;
+    material.update();
+    return material;
+};
+
+// the camera looks down on the scene, so it is not where the sound is heard from
+const camera = new Entity('camera');
+camera.addComponent('camera', {
+    clearColor: new Color(0.11, 0.12, 0.17)
+});
+camera.setPosition(0, 20, 11);
+camera.lookAt(0, 0, 1.5);
+app.root.addChild(camera);
+
+const light = new Entity('light');
+light.addComponent('light');
+light.setEulerAngles(48, 38, 0);
+app.root.addChild(light);
+
+const floor = new Entity('floor');
+floor.addComponent('render', { type: 'plane', material: createMaterial(new Color(0.24, 0.26, 0.31)) });
+floor.setLocalScale(40, 1, 40);
+app.root.addChild(floor);
+
+// the listener: sounds are heard from here, facing away from the camera
+const listener = new Entity('listener');
+listener.addComponent('render', { type: 'capsule', material: createMaterial(new Color(0.95, 0.75, 0.2)) });
+listener.addComponent('audiolistener');
+listener.setPosition(0, 1, 0);
+app.root.addChild(listener);
+
+// the sound source: a positional sound component
+const radio = new Entity('radio');
+radio.addComponent('render', { type: 'sphere', material: createMaterial(new Color(0.9, 0.3, 0.35)) });
+radio.addComponent('sound', {
+    positional: true,
+    distanceModel: 'linear',
+    refDistance: 1,
+    maxDistance: 10,
+    rollOffFactor: 1
+});
+radio.sound.addSlot('music', { asset: asset.id, loop: true });
+app.root.addChild(radio);
+
+// the volume that each distance model gives at a distance
+const volumeAt = (distance) => {
+    const { distanceModel, refDistance, maxDistance, rollOffFactor } = radio.sound;
+    const d = Math.max(distance, refDistance);
+    if (distanceModel === 'linear') {
+        const rollOff = Math.min(rollOffFactor, 1);
+        return 1 - rollOff * (Math.min(d, maxDistance) - refDistance) / (maxDistance - refDistance);
+    }
+    if (distanceModel === 'inverse') {
+        return refDistance / (refDistance + rollOffFactor * (d - refDistance));
+    }
+    return Math.pow(d / refDistance, -rollOffFactor);
+};
+
+// controls
+const panel = document.createElement('div');
+panel.style.cssText = 'position: absolute; left: 12px; top: 12px; right: 12px; display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; color: #ccc; font: 14px sans-serif;';
+document.body.appendChild(panel);
+
+const playButton = document.createElement('button');
+playButton.textContent = 'Play';
+playButton.onclick = () => {
+    const slot = radio.sound.slot('music');
+    if (slot.isPlaying) {
+        slot.stop();
+    } else {
+        slot.play();
+    }
+    playButton.textContent = slot.isPlaying ? 'Stop' : 'Play';
+};
+panel.appendChild(playButton);
+
+const modelLabel = document.createElement('label');
+const model = document.createElement('select');
+for (const name of ['linear', 'inverse', 'exponential']) {
+    model.add(new Option(name));
+}
+model.onchange = () => {
+    radio.sound.distanceModel = model.value;
+};
+modelLabel.append('Model ', model);
+panel.appendChild(modelLabel);
+
+const addSlider = (text, property, min, max) => {
+    const label = document.createElement('label');
+    const input = document.createElement('input');
+    Object.assign(input, { type: 'range', min, max, step: 0.5, value: radio.sound[property] });
+    input.style.width = '90px';
+    input.oninput = () => {
+        radio.sound[property] = Number(input.value);
+    };
+    label.append(`${text} `, input);
+    panel.appendChild(label);
+};
+addSlider('Ref', 'refDistance', 0.5, 5);
+addSlider('Max', 'maxDistance', 6, 12);
+addSlider('Roll-off', 'rollOffFactor', 0, 3);
+
+const status = document.createElement('div');
+status.style.cssText = 'position: absolute; left: 12px; bottom: 10px; color: #ccc; font: 14px sans-serif;';
+document.body.appendChild(status);
+
+// draw a ring on the floor around the listener
+const drawRing = (radius, color) => {
+    const center = listener.getPosition();
+    const steps = 64;
+    for (let i = 0; i < steps; i++) {
+        const a = (i / steps) * Math.PI * 2;
+        const b = ((i + 1) / steps) * Math.PI * 2;
+        app.drawLine(
+            new Vec3(center.x + Math.cos(a) * radius, 0.02, center.z + Math.sin(a) * radius),
+            new Vec3(center.x + Math.cos(b) * radius, 0.02, center.z + Math.sin(b) * radius),
+            color
+        );
+    }
+};
+
+let angle = 0;
+app.on('update', (dt) => {
+    // carry the radio around the listener, passing close by on one side
+    angle += dt * 0.5;
+    radio.setPosition(Math.cos(angle) * 7 + 3, 0.5, Math.sin(angle) * 5);
+
+    drawRing(radio.sound.refDistance, Color.WHITE);
+    drawRing(radio.sound.maxDistance, Color.GRAY);
+
+    const distance = radio.getPosition().distance(listener.getPosition());
+    status.textContent = `Distance: ${distance.toFixed(1)}   Volume: ${Math.round(volumeAt(distance) * 100)}%`;
+});
+```
+
+Some things to try:
+
+- Switch the model to **inverse**. The outer ring no longer means anything: the sound is audible everywhere, and quickly gets louder as the radio comes close.
+- Drag **Roll-off** to 0 to switch the fade off, and to 3 with the **exponential** model to make the sound drop away steeply.
+- Delete the line `listener.addComponent('audiolistener');`. Nothing seems to change, because the sound is now heard from the world origin, and that is where the capsule stands. Then move the capsule with `listener.setPosition(8, 1, 0)`: the rings move with it, but the sound is still heard from the origin.
+
+## See Also
+
+- [Getting Started](https://developer.playcanvas.com/user-manual/audio/getting-started.md) - Adding a sound component and playing a sound
+- [Audio Listener Component](https://developer.playcanvas.com/user-manual/editor/scenes/components/audiolistener.md) and [Sound Component](https://developer.playcanvas.com/user-manual/editor/scenes/components/sound.md) - The Editor references
+- [`<pc-audio-listener>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-audio-listener.md) and [`<pc-sound>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sound.md) - The Web Components references
+- [Positional Sound](https://playcanvas.github.io/web-components/examples/#positional-sound.html) and [Clock Tower](https://playcanvas.github.io/web-components/examples/#clock-tower.html) - Web Components examples of positional audio
+- [AudioListenerComponent](https://api.playcanvas.com/engine/classes/AudioListenerComponent.html) and [SoundComponent](https://api.playcanvas.com/engine/classes/SoundComponent.html) - The engine API reference
+
+--------------------------------------------------------------------------------
+
+## Volume and Mixing
+
+URL: https://developer.playcanvas.com/user-manual/audio/volume-and-mixing/
+Markdown: https://developer.playcanvas.com/user-manual/audio/volume-and-mixing.md
+
+How loud a sound is depends on three volumes, multiplied together: the slot's, the sound component's, and the application's **master volume**. This page covers the master volume and how to build the controls that players expect on top of the three: a mute button, separate levels for music and effects, and music that dips under speech.
+
+## The Volume Chain
+
+| Volume | Set with | Applies to |
+| --- | --- | --- |
+| Slot | `slot.volume` | One sound of an entity |
+| Component | `entity.sound.volume` | Every sound of an entity |
+| Master | `app.systems.sound.volume` | Every sound in the application |
+
+Each is a value from 0 to 1, and the volume you hear is the three multiplied together. A slot at 0.5, on a component at 0.5, with the master volume at 0.5, plays at 0.125. For a [positional](https://developer.playcanvas.com/user-manual/audio/positional-audio.md) sound, the fade for distance is applied on top.
+
+Setting the volume of one [sound instance](https://developer.playcanvas.com/user-manual/audio/controlling-playback.md#volume-and-pitch) replaces the slot and component part of the chain for that sound. The master volume still applies.
+
+## Master Volume
+
+The master volume belongs to the sound system, which every surface reaches through the application. It takes effect at once, on sounds that are already playing as well as new ones.
+
+**Engine**
+
+```javascript
+app.systems.sound.volume = 0.5;
+```
+
+**Editor**
+
+Set it from a script, where the application is `this.app`:
+
+```javascript
+import { Script } from 'playcanvas';
+
+export class MasterVolume extends Script {
+    static scriptName = 'masterVolume';
+
+    /**
+     * @attribute
+     * @range [0, 1]
+     */
+    volume = 1;
+
+    initialize() {
+        this.app.systems.sound.volume = this.volume;
+    }
+}
+```
+
+**React**
+
+`useApp()` returns the application. This component sets the master volume from a prop, so it follows your app's state:
+
+```jsx
+import { useEffect } from 'react';
+import { useApp } from '@playcanvas/react/hooks';
+
+function MasterVolume({ volume }) {
+  const app = useApp();
+
+  useEffect(() => {
+    app.systems.sound.volume = volume;
+  }, [app, volume]);
+
+  return null;
+}
+```
+
+```jsx
+<Application>
+  <MasterVolume volume={muted ? 0 : 1} />
+</Application>
+```
+
+**Web Components**
+
+The application is the `app` property of the [`<pc-app>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-app.md) element:
+
+```html
+<script type="module">
+    import { whenReady } from '@playcanvas/web-components';
+
+    const { app } = await whenReady('pc-app');
+    app.systems.sound.volume = 0.5;
+</script>
+```
+
+## Muting
+
+To mute, set the master volume to 0, and set it back to unmute. Sounds keep playing while they are muted, so music is where it should be when the sound comes back. Players expect a mute setting to be remembered, so save it:
+
+```javascript
+let muted = localStorage.getItem('muted') === 'true';
+
+function applyMute() {
+    app.systems.sound.volume = muted ? 0 : 1;
+}
+
+function toggleMute() {
+    muted = !muted;
+    localStorage.setItem('muted', muted);
+    applyMute();
+}
+
+applyMute();
+```
+
+## Mixing Groups
+
+Players usually want to set music and sound effects apart. PlayCanvas has no mixer of its own, but two simple patterns give you groups of sounds with a volume each.
+
+**Use the component's volume.** When each kind of sound has its own entity, each component's `volume` is the level of a group. This suits non-positional sound: one entity for music, one for interface sounds, one for speech.
+
+```javascript
+music.sound.volume = 0.6;
+interfaceSounds.sound.volume = 0.9;
+```
+
+A component's `volume` changes the sounds that are already playing, with one exception: sounds on an [overlapping](https://developer.playcanvas.com/user-manual/audio/playing-sounds.md#overlapping-sounds) slot keep the volume they started with, and the new volume applies from the next play. For overlapping sounds that must follow a volume control at once, use a gain node.
+
+**Route slots through a shared gain node.** Sound effects are often spread over many entities, each with a sound component of its own. To give them one volume, create a Web Audio [`GainNode`](https://developer.mozilla.org/en-US/docs/Web/API/GainNode) and make it the output of every slot in the group:
+
+```javascript
+const effectsGroup = app.systems.sound.context.createGain();
+
+// for each slot in the group
+slot.setExternalNodes(effectsGroup);
+
+// then one value sets the level of them all
+effectsGroup.gain.value = 0.5;
+```
+
+The node stays in place for every sound the slots play from then on. Do not call `clearExternalNodes()` on a slot that shares a node with others. See [Sharing Effects](https://developer.playcanvas.com/user-manual/audio/effects.md#sharing-effects) for why.
+
+## Ducking
+
+**Ducking** turns one group down while something more important plays: the music dips under a line of speech, then comes back. The [events](https://developer.playcanvas.com/user-manual/audio/controlling-playback.md#events) of the sound component tell you when to dip and when to recover, and moving the volume over a few frames avoids a sudden jump:
+
+```javascript
+let target = 1;
+voice.sound.on('play', () => {
+    target = 0.25;
+});
+voice.sound.on('stop', () => {
+    target = 1;
+});
+
+app.on('update', (dt) => {
+    // move the music a little of the way to its target each frame
+    const volume = music.sound.volume;
+    music.sound.volume = volume + (target - volume) * Math.min(dt * 6, 1);
+});
+```
+
+`stop` fires however the sound finishes, so the music recovers whether the speech ends or is cut off.
+
+## Pausing All Audio
+
+When the browser tab is hidden, PlayCanvas suspends audio and pauses every sound. When the tab is shown again, they carry on from where they were. You do not need to do anything.
+
+To pause the sounds of your own accord, for a pause menu, pause the sound components. `pause()` and `resume()` with no slot name act on every slot of a component:
+
+```javascript
+const sources = app.root.findComponents('sound');
+
+for (const source of sources) {
+    source.pause();
+}
+
+// later
+for (const source of sources) {
+    source.resume();
+}
+```
+
+Setting `app.timeScale` to 0 freezes the simulation but not the audio, so pause the sounds as well.
+
+## Example
+
+This Engine app plays music, a stream of sound effects and a bell, each from its own sound component. The three bars show the volume of each group once the master volume is applied: green for the music, red for the effects and yellow for the bell. Ring the bell to hear the music duck under it.
+
+```js live-example
+import {
+    AppBase,
+    AppOptions,
+    Asset,
+    AudioHandler,
+    CameraComponentSystem,
+    Color,
+    createGraphicsDevice,
+    DEVICETYPE_WEBGPU,
+    Entity,
+    FILLMODE_FILL_WINDOW,
+    LightComponentSystem,
+    RenderComponentSystem,
+    RESOLUTION_AUTO,
+    SoundComponentSystem,
+    SoundManager,
+    StandardMaterial
+} from 'playcanvas';
+
+// create the application with the component systems and resource handlers it uses
+const canvas = document.getElementById('application');
+const device = await createGraphicsDevice(canvas, {
+    deviceTypes: [DEVICETYPE_WEBGPU]
+});
+device.maxPixelRatio = Math.min(window.devicePixelRatio, 2);
+
+const options = new AppOptions();
+options.graphicsDevice = device;
+options.soundManager = new SoundManager();
+options.componentSystems = [
+    RenderComponentSystem,
+    CameraComponentSystem,
+    LightComponentSystem,
+    SoundComponentSystem
+];
+options.resourceHandlers = [AudioHandler];
+
+const app = new AppBase(canvas);
+app.init(options);
+app.setCanvasFillMode(FILLMODE_FILL_WINDOW);
+app.setCanvasResolution(RESOLUTION_AUTO);
+window.addEventListener('resize', () => app.resizeCanvas());
+app.start();
+
+app.scene.ambientLight = new Color(0.35, 0.35, 0.4);
+
+const load = (name) => {
+    const asset = new Asset(name, 'audio', {
+        url: `https://developer.playcanvas.com/assets/${name}.mp3`
+    });
+    return new Promise((resolve) => {
+        asset.ready(() => resolve(asset));
+        app.assets.add(asset);
+        app.assets.load(asset);
+    });
+};
+const [musicAsset, sfxAsset, bellAsset] = await Promise.all([load('music'), load('sfx'), load('bell')]);
+
+const camera = new Entity('camera');
+camera.addComponent('camera', {
+    clearColor: new Color(0.11, 0.12, 0.17)
+});
+camera.setPosition(0, 1.2, 7);
+app.root.addChild(camera);
+
+const light = new Entity('light');
+light.addComponent('light');
+light.setEulerAngles(48, 38, 0);
+app.root.addChild(light);
+
+// a group is an entity with a sound component, and a bar that shows its volume
+const createGroup = (name, x, color) => {
+    const material = new StandardMaterial();
+    material.diffuse = color;
+    material.update();
+
+    const group = new Entity(name);
+    group.addComponent('sound', { positional: false });
+    app.root.addChild(group);
+
+    const bar = new Entity(`${name}-bar`);
+    bar.addComponent('render', { type: 'box', material });
+    bar.setPosition(x, 0, 0);
+    app.root.addChild(bar);
+
+    return { group, bar };
+};
+const music = createGroup('music', -2, new Color(0.3, 0.75, 0.45));
+const effects = createGroup('effects', 0, new Color(0.9, 0.3, 0.35));
+const voice = createGroup('voice', 2, new Color(0.95, 0.75, 0.2));
+
+music.group.sound.addSlot('loop', { asset: musicAsset.id, loop: true });
+voice.group.sound.addSlot('bell', { asset: bellAsset.id });
+
+// the effects are an audio sprite: four sounds in one file
+const sprites = [[0, 0.7], [1, 0.8], [2, 0.7], [3, 1.3]];
+sprites.forEach(([startTime, duration], i) => {
+    effects.group.sound.addSlot(`effect${i}`, { asset: sfxAsset.id, startTime, duration });
+});
+
+// the mix: a level for each group, and the master volume
+const mix = { master: 1, music: 0.8, effects: 0.8, voice: 1, muted: false };
+
+// duck the music while the bell rings
+let duck = 1;
+let duckTarget = 1;
+voice.group.sound.on('play', () => {
+    duckTarget = 0.25;
+});
+voice.group.sound.on('stop', () => {
+    duckTarget = 1;
+});
+
+// controls
+const panel = document.createElement('div');
+panel.style.cssText = 'position: absolute; left: 12px; top: 12px; right: 12px; display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; color: #ccc; font: 14px sans-serif;';
+document.body.appendChild(panel);
+
+let running = false;
+const startButton = document.createElement('button');
+startButton.textContent = 'Start';
+startButton.onclick = () => {
+    running = !running;
+    startButton.textContent = running ? 'Stop' : 'Start';
+    if (running) {
+        music.group.sound.play('loop');
+    } else {
+        music.group.sound.stop();
+    }
+};
+panel.appendChild(startButton);
+
+const addSlider = (text, key) => {
+    const label = document.createElement('label');
+    const input = document.createElement('input');
+    Object.assign(input, { type: 'range', min: 0, max: 1, step: 0.01, value: mix[key] });
+    input.style.width = '80px';
+    input.oninput = () => {
+        mix[key] = Number(input.value);
+    };
+    label.append(`${text} `, input);
+    panel.appendChild(label);
+};
+addSlider('Master', 'master');
+addSlider('Music', 'music');
+addSlider('Effects', 'effects');
+
+const muteLabel = document.createElement('label');
+const muteInput = document.createElement('input');
+muteInput.type = 'checkbox';
+muteInput.onchange = () => {
+    mix.muted = muteInput.checked;
+};
+muteLabel.append(muteInput, ' Mute');
+panel.appendChild(muteLabel);
+
+const bellButton = document.createElement('button');
+bellButton.textContent = 'Ring bell';
+bellButton.onclick = () => voice.group.sound.play('bell');
+panel.appendChild(bellButton);
+
+let timer = 0;
+let next = 0;
+app.on('update', (dt) => {
+    // play the next effect every 1.2 seconds
+    timer += dt;
+    if (running && timer > 1.2) {
+        timer = 0;
+        effects.group.sound.play(`effect${next++ % sprites.length}`);
+    }
+
+    // apply the mix: the master volume, then a volume for each group
+    duck += (duckTarget - duck) * Math.min(dt * 6, 1);
+    app.systems.sound.volume = mix.muted ? 0 : mix.master;
+    music.group.sound.volume = mix.music * duck;
+    effects.group.sound.volume = mix.effects;
+    voice.group.sound.volume = mix.voice;
+
+    // each bar shows what its group plays at: the master volume × the group's volume
+    for (const { group, bar } of [music, effects, voice]) {
+        const height = Math.max(app.systems.sound.volume * group.sound.volume * 3, 0.02);
+        bar.setLocalScale(1, height, 1);
+        bar.setPosition(bar.getPosition().x, height / 2 - 1, 0);
+    }
+});
+```
+
+Some things to try:
+
+- Click **Start**, then drag **Master** down. Every bar falls together. Drag **Music** and **Effects** to change the balance between them.
+- Click **Ring bell**. The music bar dips while the bell rings and recovers when it stops. Change `0.25` to `0` to cut the music out altogether.
+- Tick **Mute**, wait a few seconds, and untick it. The music has moved on: muted sounds keep playing.
+
+## See Also
+
+- [Playing Sounds](https://developer.playcanvas.com/user-manual/audio/playing-sounds.md#volume-and-pitch) - The volume and pitch of slots and components
+- [Controlling Playback](https://developer.playcanvas.com/user-manual/audio/controlling-playback.md#fading) - Fading one sound in or out
+- [Effects and Analysis](https://developer.playcanvas.com/user-manual/audio/effects.md) - Routing sounds through Web Audio nodes
+- [SoundComponentSystem](https://api.playcanvas.com/engine/classes/SoundComponentSystem.html) - The engine API reference for `app.systems.sound`
+
+--------------------------------------------------------------------------------
+
+## Effects and Analysis
+
+URL: https://developer.playcanvas.com/user-manual/audio/effects/
+Markdown: https://developer.playcanvas.com/user-manual/audio/effects.md
+
+PlayCanvas plays sound through the browser's [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API), which processes audio with a chain of **nodes**: one that filters, one that delays, one that measures. The engine has no effects of its own. Instead, a slot lets you put Web Audio nodes of your own between its sound and the speakers, which gives you every effect the browser has.
+
+Everything on this page is engine and browser API, and it is the same on every surface. Reach the application as `this.app` in a script, with `useApp()` in React, and as the `app` property of the `<pc-app>` element in Web Components.
+
+## The Audio Context
+
+Web Audio nodes are created by an [`AudioContext`](https://developer.mozilla.org/en-US/docs/Web/API/AudioContext). The engine has one, which every sound plays through, and nodes only work with sounds from the context that created them. So create your nodes from the engine's context:
+
+```javascript
+const context = app.systems.sound.context;
+```
+
+## Adding an Effect
+
+[`setExternalNodes()`](https://api.playcanvas.com/engine/classes/SoundSlot.html#setexternalnodes) puts a node on a slot's output. This muffles a slot with a low-pass filter, as if it were heard through a wall:
+
+```javascript
+const filter = context.createBiquadFilter();
+filter.type = 'lowpass';
+filter.frequency.value = 600;
+
+slot.setExternalNodes(filter);
+```
+
+The node stays on the slot. It applies to the sound that is playing, and to every sound the slot plays from then on. `clearExternalNodes()` takes it off again, and `getExternalNodes()` returns what is set.
+
+For an effect made of several nodes, connect them to each other yourself, and pass the first and the last. The engine sends the sound into the first node, and connects the last one to the speakers:
+
+```javascript
+slot.setExternalNodes(firstNode, lastNode);
+```
+
+```text
+sound → panner (positional sounds) → volume → first node → your connections → last node → speakers
+```
+
+Your nodes come after the sound's volume and, for a [positional](https://developer.playcanvas.com/user-manual/audio/positional-audio.md) sound, after its panning and its fade with distance. So a distant sound sends a quiet signal into your effect, and a sound that has been turned down to silence sends nothing.
+
+## Common Effects
+
+### Echo
+
+An echo is a [`DelayNode`](https://developer.mozilla.org/en-US/docs/Web/API/DelayNode) whose output is fed back into its input through a gain, so that each repeat is quieter than the last. The delayed sound is mixed in beside the direct sound:
+
+```javascript
+const input = context.createGain();
+const output = context.createGain();
+
+const delay = context.createDelay();
+delay.delayTime.value = 0.3; // seconds between repeats
+const feedback = context.createGain();
+feedback.gain.value = 0.4;   // how much of each repeat goes round again
+
+input.connect(output);   // the direct sound
+input.connect(delay);    // and the echo beside it
+delay.connect(feedback);
+feedback.connect(delay);
+delay.connect(output);
+
+slot.setExternalNodes(input, output);
+```
+
+### Reverb
+
+A [`ConvolverNode`](https://developer.mozilla.org/en-US/docs/Web/API/ConvolverNode) gives a sound the reverberation of a space. It needs an **impulse response**: a recording of the space answering a sharp sound. You can load one as an audio asset and use its `resource.buffer`, or generate a simple one, as a burst of noise that dies away:
+
+```javascript
+function createReverb(context, seconds = 2) {
+    const length = context.sampleRate * seconds;
+    const impulse = context.createBuffer(2, length, context.sampleRate);
+    for (let channel = 0; channel < 2; channel++) {
+        const data = impulse.getChannelData(channel);
+        for (let i = 0; i < length; i++) {
+            data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / length, 3);
+        }
+    }
+
+    const convolver = context.createConvolver();
+    convolver.buffer = impulse;
+    return convolver;
+}
+
+const input = context.createGain();
+const output = context.createGain();
+const reverb = createReverb(context);
+const wet = context.createGain();
+wet.gain.value = 0.4; // how much reverb to mix in
+
+input.connect(output);   // the direct sound
+input.connect(reverb);   // and the reverb beside it
+reverb.connect(wet);
+wet.connect(output);
+
+slot.setExternalNodes(input, output);
+```
+
+A reverb or echo goes on ringing after its sound has stopped, because the tail is already inside your nodes.
+
+### Compression
+
+A [`DynamicsCompressorNode`](https://developer.mozilla.org/en-US/docs/Web/API/DynamicsCompressorNode) turns loud passages down. On a group of sounds, it keeps a burst of overlapping sound effects from distorting:
+
+```javascript
+const compressor = context.createDynamicsCompressor();
+slot.setExternalNodes(compressor);
+```
+
+## Sharing Effects
+
+You can set the same nodes on as many slots as you like, and their sounds are mixed together as they pass through. This is how you give a group of sounds one effect or one [volume](https://developer.playcanvas.com/user-manual/audio/volume-and-mixing.md#mixing-groups), and it costs far less than an effect for each slot.
+
+:::warning
+
+Do not call `clearExternalNodes()` on a slot that shares its nodes with other slots. Clearing one slot disconnects the shared last node from the speakers, which silences the other slots, and clearing a second slot then throws an error. To switch a shared effect off, turn it off inside your nodes instead: set a wet gain to 0, or open a filter all the way.
+
+:::
+
+Two more things to know:
+
+- **On a slot that [overlaps](https://developer.playcanvas.com/user-manual/audio/playing-sounds.md#overlapping-sounds), nodes apply to the next play.** Sounds that are already playing keep the routing they started with, so set the nodes before you play.
+- **One sound can have nodes of its own.** A [sound instance](https://developer.playcanvas.com/user-manual/audio/controlling-playback.md) has the same three methods as a slot, for that one sound.
+
+## Analysing Sound
+
+An [`AnalyserNode`](https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode) passes sound through unchanged, and lets you read it as it goes by. Set one on a slot, and read it every frame to drive a level meter or a visualizer.
+
+For the loudness of the sound, read its waveform and take the average:
+
+```javascript
+const analyser = context.createAnalyser();
+analyser.fftSize = 256;
+slot.setExternalNodes(analyser);
+
+const samples = new Float32Array(analyser.fftSize);
+
+app.on('update', () => {
+    analyser.getFloatTimeDomainData(samples);
+
+    let sum = 0;
+    for (const sample of samples) {
+        sum += sample * sample;
+    }
+    const level = Math.sqrt(sum / samples.length); // 0 is silence
+});
+```
+
+For a spectrum, read how much of the sound is at each frequency. `getByteFrequencyData()` fills an array with a value from 0 to 255 for each band, from low frequencies to high:
+
+```javascript
+const bands = new Uint8Array(analyser.frequencyBinCount);
+
+app.on('update', () => {
+    analyser.getByteFrequencyData(bands);
+});
+```
+
+Like any other node, an analyser reads the sound after its volume has been applied. A muted sound reads as silence.
+
+## Example
+
+This Engine app plays music through a filter, an echo and an analyser. The bars show the spectrum of what you hear, so they change as you switch the effects on.
+
+```js live-example
+import {
+    AppBase,
+    AppOptions,
+    Asset,
+    AudioHandler,
+    CameraComponentSystem,
+    Color,
+    createGraphicsDevice,
+    DEVICETYPE_WEBGPU,
+    Entity,
+    FILLMODE_FILL_WINDOW,
+    LightComponentSystem,
+    RenderComponentSystem,
+    RESOLUTION_AUTO,
+    SoundComponentSystem,
+    SoundManager,
+    StandardMaterial
+} from 'playcanvas';
+
+// create the application with the component systems and resource handlers it uses
+const canvas = document.getElementById('application');
+const device = await createGraphicsDevice(canvas, {
+    deviceTypes: [DEVICETYPE_WEBGPU]
+});
+device.maxPixelRatio = Math.min(window.devicePixelRatio, 2);
+
+const options = new AppOptions();
+options.graphicsDevice = device;
+options.soundManager = new SoundManager();
+options.componentSystems = [
+    RenderComponentSystem,
+    CameraComponentSystem,
+    LightComponentSystem,
+    SoundComponentSystem
+];
+options.resourceHandlers = [AudioHandler];
+
+const app = new AppBase(canvas);
+app.init(options);
+app.setCanvasFillMode(FILLMODE_FILL_WINDOW);
+app.setCanvasResolution(RESOLUTION_AUTO);
+window.addEventListener('resize', () => app.resizeCanvas());
+app.start();
+
+app.scene.ambientLight = new Color(0.35, 0.35, 0.4);
+
+const asset = new Asset('music', 'audio', {
+    url: 'https://developer.playcanvas.com/assets/music.mp3'
+});
+await new Promise((resolve) => {
+    asset.ready(resolve);
+    app.assets.add(asset);
+    app.assets.load(asset);
+});
+
+const camera = new Entity('camera');
+camera.addComponent('camera', {
+    clearColor: new Color(0.11, 0.12, 0.17)
+});
+camera.setPosition(0, 1.5, 9);
+app.root.addChild(camera);
+
+const light = new Entity('light');
+light.addComponent('light');
+light.setEulerAngles(48, 38, 0);
+app.root.addChild(light);
+
+const music = new Entity('music');
+music.addComponent('sound', { positional: false });
+const slot = music.sound.addSlot('music', { asset: asset.id, loop: true });
+app.root.addChild(music);
+
+// create the effect nodes from the engine's audio context
+const context = app.systems.sound.context;
+
+// a low-pass filter, which starts wide open and so lets everything through
+const filter = context.createBiquadFilter();
+filter.type = 'lowpass';
+filter.frequency.value = 20000;
+
+// an echo, which starts silent: a delay that feeds back into itself
+const delay = context.createDelay();
+delay.delayTime.value = 0.3;
+const feedback = context.createGain();
+feedback.gain.value = 0.4;
+const echo = context.createGain();
+echo.gain.value = 0;
+
+// an analyser, which reports the spectrum of whatever passes through it
+const analyser = context.createAnalyser();
+analyser.fftSize = 256;
+const bands = new Uint8Array(analyser.frequencyBinCount);
+
+// filter → analyser, and filter → delay → echo → analyser
+filter.connect(analyser);
+filter.connect(delay);
+delay.connect(feedback);
+feedback.connect(delay);
+delay.connect(echo);
+echo.connect(analyser);
+
+// the slot's sound goes into the filter, and the analyser goes to the speakers
+slot.setExternalNodes(filter, analyser);
+
+// a bar for each of the lowest 24 frequency bands
+const material = new StandardMaterial();
+material.diffuse = new Color(0.3, 0.75, 0.45);
+material.update();
+
+const bars = [];
+for (let i = 0; i < 24; i++) {
+    const bar = new Entity(`bar${i}`);
+    bar.addComponent('render', { type: 'box', material });
+    app.root.addChild(bar);
+    bars.push(bar);
+}
+
+app.on('update', () => {
+    analyser.getByteFrequencyData(bands);
+    bars.forEach((bar, i) => {
+        const height = Math.max(bands[i] / 255 * 4, 0.02);
+        bar.setLocalScale(0.3, height, 0.3);
+        bar.setPosition((i - 11.5) * 0.4, height / 2 - 0.5, 0);
+    });
+});
+
+// controls
+const panel = document.createElement('div');
+panel.style.cssText = 'position: absolute; left: 12px; top: 12px; display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; color: #ccc; font: 14px sans-serif;';
+document.body.appendChild(panel);
+
+const playButton = document.createElement('button');
+playButton.textContent = 'Play';
+playButton.onclick = () => {
+    if (slot.isPlaying) {
+        slot.stop();
+    } else {
+        slot.play();
+    }
+    playButton.textContent = slot.isPlaying ? 'Stop' : 'Play';
+};
+panel.appendChild(playButton);
+
+const addCheckbox = (text, onChange) => {
+    const label = document.createElement('label');
+    const input = document.createElement('input');
+    input.type = 'checkbox';
+    input.onchange = () => onChange(input.checked);
+    label.append(input, ` ${text}`);
+    panel.appendChild(label);
+};
+addCheckbox('Muffle', (checked) => {
+    // glide the filter to its new frequency, to avoid a click
+    filter.frequency.setTargetAtTime(checked ? 500 : 20000, context.currentTime, 0.05);
+});
+addCheckbox('Echo', (checked) => {
+    echo.gain.value = checked ? 0.6 : 0;
+});
+```
+
+Some things to try:
+
+- Click **Play**, then tick **Muffle**. The high notes go, and the bars on the right fall away with them.
+- Tick **Echo**, then click **Stop**. The echo rings on after the music has stopped, and the bars show it dying away.
+- Change `filter.type` to `'highpass'` and the frequency for **Muffle** from `500` to `2000`, for the sound of a small radio.
+
+## See Also
+
+- [Volume and Mixing](https://developer.playcanvas.com/user-manual/audio/volume-and-mixing.md) - Using a shared gain node as a volume for a group of sounds
+- [Audio Effects](https://developer.playcanvas.com/tutorials/audio-effects/) and [Creating a Music Visualizer](https://developer.playcanvas.com/tutorials/music-visualizer/) - Tutorials that build effects and a visualizer in the Editor
+- [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API) - MDN's guide to the nodes you can use
+- [SoundSlot](https://api.playcanvas.com/engine/classes/SoundSlot.html) and [SoundComponentSystem](https://api.playcanvas.com/engine/classes/SoundComponentSystem.html) - The engine API reference
+
+--------------------------------------------------------------------------------
+
+## Autoplay and User Gestures
+
+URL: https://developer.playcanvas.com/user-manual/audio/autoplay/
+Markdown: https://developer.playcanvas.com/user-manual/audio/autoplay.md
+
+Browsers do not let a page make a sound until the user has interacted with it. Every web app lives with this rule, and it shapes how audio starts in yours: music cannot play the moment the page opens, and a sound played too early is not heard when you expect. This page explains what PlayCanvas does about it and how to design for it.
+
+The rule belongs to the browser, so it applies in the same way to the Engine, the Editor, React and Web Components.
+
+## Why Audio Starts Locked
+
+Browsers block audio that the user has not asked for, to stop pages making noise the moment they open. A page's audio system starts out suspended, or **locked**, and the browser unlocks it once the user has made a deliberate gesture on the page, such as a click, a tap or a key press. Scrolling and moving the mouse do not count.
+
+Once audio is unlocked, it stays unlocked for as long as the page is open.
+
+## What PlayCanvas Does
+
+PlayCanvas listens for the first click, tap or mouse press anywhere in the page, and unlocks audio when it happens. You do not need to write any code for this, and most apps are unlocked without the user noticing, by the first thing they click.
+
+Key presses are the exception. A key press is a gesture that browsers accept, but PlayCanvas does not listen for it, so an app that is driven by the keyboard alone stays silent until the first click. See [Keyboard Controls](https://developer.playcanvas.com/user-manual/audio/autoplay.md#keyboard-controls) for the fix.
+
+## Sounds Played While Locked
+
+Playing a sound while audio is locked is not an error. The sound is held at its start, and begins when audio is unlocked:
+
+- **Music and other loops start at the unlock.** A slot with [Auto Play](https://developer.playcanvas.com/user-manual/audio/playing-sounds.md#auto-play) reports that it is playing straight away, but its `currentTime` stays at 0. At the first click, it is heard from its beginning. This is usually what you want.
+- **One-shot sounds pile up.** Every sound played on an [overlapping](https://developer.playcanvas.com/user-manual/audio/playing-sounds.md#overlapping-sounds) slot while audio is locked is held at its start, and they all play together at the unlock: the collisions and footsteps of the last few seconds, in one burst.
+
+To avoid the burst, skip one-shot sounds while audio is locked:
+
+```javascript
+if (app.systems.sound.context.state === 'running') {
+    entity.sound.play('impact');
+}
+```
+
+## Checking Whether Audio Is Locked
+
+The engine's [`AudioContext`](https://developer.mozilla.org/en-US/docs/Web/API/AudioContext) has a `state`, which is `'suspended'` while audio is locked and `'running'` once it is unlocked. It fires `statechange` when the state changes:
+
+```javascript
+const context = app.systems.sound.context;
+
+console.log(context.state); // 'suspended' until the first click
+
+context.addEventListener('statechange', () => {
+    if (context.state === 'running') {
+        console.log('Audio is unlocked');
+    }
+});
+```
+
+The state is also `'suspended'` while the [browser tab is hidden](https://developer.playcanvas.com/user-manual/audio/volume-and-mixing.md#pausing-all-audio), because PlayCanvas suspends audio then.
+
+## Designing for the Lock
+
+You cannot remove the lock, but you can make sure that the user's first gesture comes before the first sound that matters.
+
+- **Start with a click.** A title screen with a **Play** button, or a "Click to start" message, puts a click before everything else. The game's music then starts on time, with the game. This is the most reliable design, and the reason that so many web games open this way.
+- **Show that sound is waiting.** If your app starts without a click, show a speaker icon or a "Tap for sound" hint while audio is locked, and hide it on `statechange`. Any click unlocks audio, so the hint needs no handler of its own.
+- **Let it happen.** In an app where sound is a detail, such as a product viewer with a few interface sounds, do nothing. The first click that could make a sound is also the click that unlocks audio.
+
+### Keyboard Controls
+
+If your app can be started or played with the keyboard alone, resume the audio context on a key press yourself:
+
+```javascript
+const context = app.systems.sound.context;
+
+window.addEventListener('keydown', () => {
+    if (context.state !== 'running') {
+        context.resume();
+    }
+});
+```
+
+`resume()` only succeeds when it is called from a gesture that the browser accepts, so calling it at any other time does not unlock audio.
+
+## Embedded Apps
+
+An app that another site embeds in an `<iframe>` is locked until the user clicks inside the iframe itself. A click elsewhere on the embedding page does not count, unless the iframe is given permission to use the page's gesture:
+
+```html
+<iframe src="https://example.com/my-app/" allow="autoplay"></iframe>
+```
+
+## Phones and Tablets
+
+A tap unlocks audio in the same way as a click. One more thing catches people out on iPhones: by default, Web Audio is silent while the phone's ring/silent switch is set to silent, as if it were a ringtone. If your players report that an app has no sound on an iPhone, this is the first thing to ask about.
+
+Where Safari supports the [Audio Session API](https://developer.mozilla.org/en-US/docs/Web/API/AudioSession), an app can ask to be treated as media playback, which plays whatever the switch is set to:
+
+```javascript
+if (navigator.audioSession) {
+    navigator.audioSession.type = 'playback';
+}
+```
+
+## Example
+
+This Engine app plays music from a slot with Auto Play, behind a start screen that shows whenever audio is locked. The status line shows the state of the audio context and the position of the music.
+
+If you have already clicked on this page, audio is unlocked, and the music starts as soon as the example loads. Click **Lock audio** to suspend the audio context and see the locked state.
+
+```js live-example
+import {
+    AppBase,
+    AppOptions,
+    Asset,
+    AudioHandler,
+    CameraComponentSystem,
+    Color,
+    createGraphicsDevice,
+    DEVICETYPE_WEBGPU,
+    Entity,
+    FILLMODE_FILL_WINDOW,
+    LightComponentSystem,
+    RenderComponentSystem,
+    RESOLUTION_AUTO,
+    SoundComponentSystem,
+    SoundManager,
+    StandardMaterial
+} from 'playcanvas';
+
+// create the application with the component systems and resource handlers it uses
+const canvas = document.getElementById('application');
+const device = await createGraphicsDevice(canvas, {
+    deviceTypes: [DEVICETYPE_WEBGPU]
+});
+device.maxPixelRatio = Math.min(window.devicePixelRatio, 2);
+
+const options = new AppOptions();
+options.graphicsDevice = device;
+options.soundManager = new SoundManager();
+options.componentSystems = [
+    RenderComponentSystem,
+    CameraComponentSystem,
+    LightComponentSystem,
+    SoundComponentSystem
+];
+options.resourceHandlers = [AudioHandler];
+
+const app = new AppBase(canvas);
+app.init(options);
+app.setCanvasFillMode(FILLMODE_FILL_WINDOW);
+app.setCanvasResolution(RESOLUTION_AUTO);
+window.addEventListener('resize', () => app.resizeCanvas());
+app.start();
+
+app.scene.ambientLight = new Color(0.35, 0.35, 0.4);
+
+const asset = new Asset('music', 'audio', {
+    url: 'https://developer.playcanvas.com/assets/music.mp3'
+});
+await new Promise((resolve) => {
+    asset.ready(resolve);
+    app.assets.add(asset);
+    app.assets.load(asset);
+});
+
+const camera = new Entity('camera');
+camera.addComponent('camera', {
+    clearColor: new Color(0.11, 0.12, 0.17)
+});
+camera.setPosition(0, 0, 4);
+app.root.addChild(camera);
+
+const light = new Entity('light');
+light.addComponent('light');
+light.setEulerAngles(48, 38, 0);
+app.root.addChild(light);
+
+// a box that turns all the time, to show that the app runs while audio is locked
+const material = new StandardMaterial();
+material.diffuse = new Color(0.3, 0.75, 0.45);
+material.update();
+
+const box = new Entity('box');
+box.addComponent('render', { type: 'box', material });
+app.root.addChild(box);
+
+// music that plays as soon as its component is enabled
+const music = new Entity('music');
+music.addComponent('sound', { positional: false, volume: 0.5 });
+const slot = music.sound.addSlot('music', { asset: asset.id, loop: true, autoPlay: true });
+app.root.addChild(music);
+
+const context = app.systems.sound.context;
+
+// a start screen, shown while audio is locked. Its click unlocks audio, and as a button it works from the keyboard too
+const startScreen = document.createElement('button');
+startScreen.style.cssText = 'position: absolute; left: 0; top: 0; width: 100%; height: 100%; border: 0; background: rgba(0, 0, 0, 0.65); color: #fff; font: 24px sans-serif; cursor: pointer;';
+startScreen.textContent = 'Click to start';
+startScreen.onclick = () => context.resume();
+document.body.appendChild(startScreen);
+
+const showStartScreen = () => {
+    startScreen.hidden = context.state === 'running';
+};
+context.addEventListener('statechange', showStartScreen);
+showStartScreen();
+
+// suspend the audio context, to see the locked state again
+const lockButton = document.createElement('button');
+lockButton.textContent = 'Lock audio';
+lockButton.style.cssText = 'position: absolute; left: 12px; top: 12px;';
+lockButton.onclick = () => context.suspend();
+document.body.appendChild(lockButton);
+
+const status = document.createElement('div');
+status.style.cssText = 'position: absolute; left: 12px; bottom: 10px; color: #ccc; font: 14px sans-serif;';
+document.body.appendChild(status);
+
+app.on('update', (dt) => {
+    box.rotate(10 * dt, 20 * dt, 0);
+
+    const instance = slot.instances[0];
+    const position = instance ? instance.currentTime.toFixed(1) : '0.0';
+    status.textContent = `Audio context: ${context.state}. Slot playing: ${slot.isPlaying}. Music position: ${position}`;
+});
+```
+
+Some things to try:
+
+- Click **Lock audio**. The start screen comes back, and the music's position stops, although the slot still reports that it is playing.
+- Reload the page and scroll here without clicking anything. The example starts locked, with the music held at 0.
+- Remove `autoPlay: true`, and start the music from the start screen's click instead, with `slot.play()`.
+
+## See Also
+
+- [Getting Started](https://developer.playcanvas.com/user-manual/audio/getting-started.md#the-first-click) - The short version of this page
+- [Playing Sounds](https://developer.playcanvas.com/user-manual/audio/playing-sounds.md#auto-play) - Slots that play automatically
+- [Troubleshooting](https://developer.playcanvas.com/user-manual/audio/troubleshooting.md) - Other reasons for silence
+- [Autoplay guide for media and Web Audio APIs](https://developer.mozilla.org/en-US/docs/Web/Media/Guides/Autoplay) - MDN's account of the browser rules
+
+--------------------------------------------------------------------------------
+
+## Troubleshooting
+
+URL: https://developer.playcanvas.com/user-manual/audio/troubleshooting/
+Markdown: https://developer.playcanvas.com/user-manual/audio/troubleshooting.md
+
+Each section below starts from what you hear, lists the usual causes, most likely first, and links to the page that explains each one.
+
+## No Sound
+
+### Nothing Plays at All
+
+- **Audio is locked.** Browsers keep audio off until the user clicks or taps the page. Sounds played before then start at the first click, and a key press does not count. See [Autoplay and User Gestures](https://developer.playcanvas.com/user-manual/audio/autoplay.md).
+- **The application has no sound system.** An Engine app built from `AppBase` needs a `SoundManager`, `SoundComponentSystem` and `AudioHandler`. Without the system, `addComponent('sound')` returns `null` and `entity.sound` is undefined. Without the handler, the asset fails with `No resource handler for asset type: 'audio'`. Without the sound manager, it fails with `Audio manager has no audio context`. See [Setting Up the Application](https://developer.playcanvas.com/user-manual/audio/getting-started.md#setting-up-the-application).
+- **The volume is 0.** Check the [master volume](https://developer.playcanvas.com/user-manual/audio/volume-and-mixing.md#master-volume), and the volume of the component and of the slot. A saved mute setting is easy to forget.
+- **The phone is set to silent.** On an iPhone, Web Audio is silent while the ring/silent switch is set to silent. See [Phones and Tablets](https://developer.playcanvas.com/user-manual/audio/autoplay.md#phones-and-tablets).
+
+### One Sound Doesn't Play
+
+- **The slot name is wrong.** `play()` returns `null` for a name the component does not have. Names are case sensitive.
+- **The component or its entity is disabled.** `play()` does nothing and returns `null`. See [Enabling and Disabling](https://developer.playcanvas.com/user-manual/audio/playing-sounds.md#enabling-and-disabling).
+- **The slot has no asset**, or its asset failed to load. Listen for the asset's `error` event. A file that the browser cannot decode fails with `Unable to decode audio data`.
+- **The browser cannot decode the format.** A sound that plays in one browser and not in another is usually in a format that the second one does not support. See [Supported Formats](https://developer.playcanvas.com/user-manual/audio/audio-assets.md#supported-formats).
+- **The asset type was not recognized.** In Web Components, `<pc-asset>` only recognizes `.mp3` files as audio by their extension. Give other formats `type="audio"`.
+- **It is too far away.** A positional sound beyond its `maxDistance` is silent with the linear distance model. See the next section.
+
+## Positional Sounds
+
+### A Sound Is Silent or Too Quiet
+
+- **The sound is positional, and should not be.** Sound components are positional by default. Music or an interface sound on a positional component fades as the camera moves away from its entity. Turn **Positional** off. See [Positional and Non-Positional Sounds](https://developer.playcanvas.com/user-manual/audio/positional-audio.md#positional-and-non-positional-sounds).
+- **The listener is not where you think.** With no audio listener, sounds are heard from the world origin, not from the camera. With several, only the one enabled most recently is used. A disabled listener goes on being heard from where it last was. See [The Audio Listener](https://developer.playcanvas.com/user-manual/audio/positional-audio.md#the-audio-listener).
+- **The source is beyond `maxDistance`.** With the linear model, a sound is silent from `maxDistance` outwards.
+
+### A Sound Doesn't Fade with Distance
+
+The default `maxDistance` is 10,000, which fades a sound so gradually that it seems not to fade at all. Set `maxDistance` to the distance at which the sound should be silent, or use the inverse distance model. See [Distance](https://developer.playcanvas.com/user-manual/audio/positional-audio.md#distance).
+
+### A Sound Doesn't Move Between the Speakers
+
+- **The component is not positional.** Only positional sounds are panned.
+- **The listener is on the sound's own entity**, or on one that moves with it. A sound at the listener's position is always in the middle.
+- **The sound is in front or behind.** Sounds are panned left and right only, so a sound that crosses from front to back does not change. See [Panning](https://developer.playcanvas.com/user-manual/audio/positional-audio.md#panning).
+
+## Playback
+
+### Sounds Cut Each Other Off
+
+A slot plays one sound at a time, so playing it again restarts it. Turn **Overlap** on for sounds that should pile up, such as gunshots and footsteps. See [Overlapping Sounds](https://developer.playcanvas.com/user-manual/audio/playing-sounds.md#overlapping-sounds).
+
+### A Sound Goes On After Its Entity Is Destroyed
+
+Sounds on an overlapping slot play to their end, even when the entity is destroyed or disabled. Stop the slot before you destroy the entity, or turn **Overlap** off.
+
+### Changing Volume or Pitch Does Nothing
+
+On an overlapping slot, changes to `volume`, `pitch`, `startTime` and `duration` apply to the next play, not to sounds that are already playing. The same is true of the `volume` and `pitch` of the sound component. To change a sound that is playing, set the property on its [sound instance](https://developer.playcanvas.com/user-manual/audio/controlling-playback.md#volume-and-pitch).
+
+### A Burst of Sound at the First Click
+
+One-shot sounds that were played while audio was locked all start together when it unlocks. Skip them while the audio context is not running. See [Sounds Played While Locked](https://developer.playcanvas.com/user-manual/audio/autoplay.md#sounds-played-while-locked).
+
+### A Sound Is Late the First Time
+
+The asset had not loaded. A slot that is played before its asset is ready plays once the file has downloaded and decoded. Preload the asset, or load it before it is needed. See [When Audio Loads](https://developer.playcanvas.com/user-manual/audio/audio-assets.md#when-audio-loads).
+
+### A Loop Has a Gap or a Click
+
+The engine loops without a gap, so the gap is in the file: silence at its ends, or a loop that is not cut on a musical boundary. See [Seamless Loops](https://developer.playcanvas.com/user-manual/audio/audio-assets.md#seamless-loops).
+
+### The `end` Event Never Fires
+
+- **The sound loops.** A looping sound never reaches its end.
+- **The sound was stopped.** A sound that is stopped fires `stop`, not `end`. Listen for `stop` to act either way.
+- **You listened on an old instance.** Each play creates a new [sound instance](https://developer.playcanvas.com/user-manual/audio/controlling-playback.md#sound-instances). Listen on the slot or the component instead, which fire for every play.
+
+## Effects
+
+### An Error When Clearing Effects
+
+`clearExternalNodes()` throws an `InvalidAccessError` when the slot shares its nodes with a slot that has already been cleared. Do not clear slots that share nodes. See [Sharing Effects](https://developer.playcanvas.com/user-manual/audio/effects.md#sharing-effects).
+
+### An Effect Does Nothing
+
+- **The nodes are not connected to each other.** With two nodes passed to `setExternalNodes()`, the engine connects the sound to the first and the last to the speakers. The connections between them are yours to make.
+- **The nodes came from another audio context.** Create them from `app.systems.sound.context`.
+- **The slot overlaps.** Nodes set on an overlapping slot apply to the next play.
+
+## Memory
+
+### Audio Uses a Lot of Memory
+
+Every loaded sound is held in memory decoded, at about 11 MB for each minute of mono audio, however small its file is. Use mono for sound effects, loop short sections of music rather than loading long tracks, and unload assets you have finished with. See [Memory](https://developer.playcanvas.com/user-manual/audio/audio-assets.md#memory).
+
+## See Also
+
+- [Autoplay and User Gestures](https://developer.playcanvas.com/user-manual/audio/autoplay.md) - Why audio waits for a click
+- [Audio Assets](https://developer.playcanvas.com/user-manual/audio/audio-assets.md) - Formats, loading and memory
+- [Positional Audio](https://developer.playcanvas.com/user-manual/audio/positional-audio.md) - The listener and distance models
 
 --------------------------------------------------------------------------------
 
@@ -20452,7 +23132,7 @@ buyButton.button.active = coins >= price;
 
 ## Sound and Cursor
 
-Buttons have no sound or cursor of their own. Play a sound from the `click` event, for example from a [sound component](https://developer.playcanvas.com/user-manual/editor/scenes/components/sound.md) on the button, and change the cursor on hover:
+Buttons have no sound or cursor of their own. Play a sound from the `click` event, for example from a [sound component](https://developer.playcanvas.com/user-manual/audio/getting-started.md) on the button, and change the cursor on hover:
 
 ```javascript
 button.button.on('hoverstart', () => {

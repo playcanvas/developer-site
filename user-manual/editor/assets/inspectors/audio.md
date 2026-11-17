@@ -2,7 +2,7 @@
 
 Audio assets are sound files which can be played back using the [Sound Component](https://developer.playcanvas.com/user-manual/editor/scenes/components/sound.md).
 
-Any audio format that is supported by the web browser is supported by PlayCanvas. No processing is done to the audio file on import.
+Any audio format that is supported by the web browser is supported by PlayCanvas. No processing is done to the audio file on import. See [Audio Assets](https://developer.playcanvas.com/user-manual/audio/audio-assets.md) for the formats to choose, and for how much memory a loaded sound uses.
 
 Common formats like MP3, AAC, Ogg Vorbis, and WAV are supported across all modern browsers.
 

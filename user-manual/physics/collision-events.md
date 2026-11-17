@@ -153,5 +153,6 @@ app.systems.rigidbody.on('contact', (result) => {
 
 - [Trigger Volumes](https://developer.playcanvas.com/user-manual/physics/trigger-volumes.md) - Overlap events for regions that do not block movement
 - [Collision and Triggers](https://developer.playcanvas.com/tutorials/collision-and-triggers/) - Tutorial that plays a sound on impact
+- [Playing Sounds](https://developer.playcanvas.com/user-manual/audio/playing-sounds.md) - Overlapping one-shot sounds and pitch variation, for impact sounds
 - [Events](https://developer.playcanvas.com/user-manual/scripting/events.md) - How the scripting event system works
 - [CollisionComponent](https://api.playcanvas.com/engine/classes/CollisionComponent.html) and [RigidBodyComponent](https://api.playcanvas.com/engine/classes/RigidBodyComponent.html) - API reference for the events on each component

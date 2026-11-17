@@ -81,6 +81,7 @@ The `component` property is the engine [SoundComponent](https://api.playcanvas.c
 
 ## See Also
 
+* [Audio](https://developer.playcanvas.com/user-manual/audio.md) — how to load, play, position and mix sounds
 * [`<pc-sound-slot>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sound-slot.md) — each clip the component plays
 * [`<pc-audio-listener>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-audio-listener.md) — where positional sounds are heard from
 * [`<pc-asset>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset.md) — audio assets

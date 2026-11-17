@@ -527,7 +527,7 @@ As your application grows, register what it needs:
 
 * **Components**: Each component type needs its component system. For example, add `ScriptComponentSystem` to use the `script` component. [Bundle Size and Tree Shaking](https://developer.playcanvas.com/user-manual/engine/bundle-size.md) lists every component type with its system. If a system is missing, `addComponent` returns `null`, and the debug build of the Engine logs an error.
 * **Assets**: Each asset type needs its resource handler. The samples register `TextureHandler` for textures and `ContainerHandler` for GLB models. [Bundle Size and Tree Shaking](https://developer.playcanvas.com/user-manual/engine/bundle-size.md#resource-handlers) lists every asset type with its handler.
-* **Other features**: Sound, batching, lightmapping and XR are enabled with further `AppOptions` properties. For example, the `sound` component also needs `options.soundManager = new SoundManager()`.
+* **Other features**: Sound, batching, lightmapping and XR are enabled with further `AppOptions` properties. For example, the `sound` component also needs `options.soundManager = new SoundManager()`, as [Audio](https://developer.playcanvas.com/user-manual/audio/getting-started.md#setting-up-the-application) describes.
 
 :::note
 

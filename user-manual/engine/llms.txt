@@ -168,6 +168,19 @@ Use this index to write code against the engine directly. React, Web Components 
 - [Layers and Masks](https://developer.playcanvas.com/user-manual/animation/layers-and-masks.md): Several state machines on one model, overwrite and additive blending by weight, blendToWeight, normalizeWeights, and masks that limit a layer to part of a hierarchy.
 - [Animation Events](https://developer.playcanvas.com/user-manual/animation/events.md): Adding named events to clips in the Editor or with AnimEvents, listening for them on the anim component, and when they fire.
 
+## Audio
+
+- [Audio](https://developer.playcanvas.com/user-manual/audio.md): How sound works: audio assets, the sound component and its slots, sound instances, the audio listener and master volume, on every surface.
+- [Getting Started](https://developer.playcanvas.com/user-manual/audio/getting-started.md): The `SoundManager`, systems and handler an `AppBase` app needs, and loading and playing a first sound.
+- [Audio Assets](https://developer.playcanvas.com/user-manual/audio/audio-assets.md): Formats, the memory a decoded sound uses, when audio loads, seamless loops, long music and audio sprites.
+- [Playing Sounds](https://developer.playcanvas.com/user-manual/audio/playing-sounds.md): Slots: `play`, `pause`, `resume` and `stop`, looping, `overlap` for one-shots, `startTime` and `duration`, volume, pitch and `autoPlay`.
+- [Controlling Playback](https://developer.playcanvas.com/user-manual/audio/controlling-playback.md): The `SoundInstance` that `play()` returns: seeking with `currentTime`, the `play`, `pause`, `resume`, `stop` and `end` events, fades and crossfades.
+- [Positional Audio](https://developer.playcanvas.com/user-manual/audio/positional-audio.md): The `positional` setting, the `audiolistener` component and which one is used, the linear, inverse and exponential distance models, and panning.
+- [Volume and Mixing](https://developer.playcanvas.com/user-manual/audio/volume-and-mixing.md): Master volume with `app.systems.sound.volume`, muting, groups of sounds, ducking and pausing all audio.
+- [Effects and Analysis](https://developer.playcanvas.com/user-manual/audio/effects.md): Web Audio nodes on a slot with `setExternalNodes`: filters, echo, reverb, compression, and an `AnalyserNode` for visualizers.
+- [Autoplay and User Gestures](https://developer.playcanvas.com/user-manual/audio/autoplay.md): Why audio is locked until the first click, what happens to sounds played before it, and start screens and keyboard unlocks.
+- [Troubleshooting](https://developer.playcanvas.com/user-manual/audio/troubleshooting.md): Causes of silence, sounds that do not fade or pan, sounds that cut each other off, late or gapped playback, and memory use.
+
 ## User interface
 
 - [User Interface](https://developer.playcanvas.com/user-manual/user-interface.md): Choosing between in-canvas UI, built from screen and element components, and HTML and CSS, and the components that interfaces are built from.
@@ -248,7 +261,7 @@ Use this index to write code against the engine directly. React, Web Components 
 
 ## Optional
 
-- [All pages of this index in one file](https://developer.playcanvas.com/user-manual/engine/llms-full.txt): 245 pages (1728 KB), for downloading and searching rather than reading into context.
+- [All pages of this index in one file](https://developer.playcanvas.com/user-manual/engine/llms-full.txt): 255 pages (1844 KB), for downloading and searching rather than reading into context.
 - [PlayCanvas Engine](https://developer.playcanvas.com/user-manual/engine.md)
 - [Versioning and Releases](https://developer.playcanvas.com/user-manual/engine/versioning.md)
 - [Assets](https://developer.playcanvas.com/user-manual/assets.md)

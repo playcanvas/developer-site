@@ -4,7 +4,7 @@
 
 Index: https://developer.playcanvas.com/user-manual/web-components/llms.txt
 Total Documents: 43
-Generated: 2026-11-16
+Generated: 2026-11-17
 
 ================================================================================
 
@@ -5274,6 +5274,7 @@ The `component` property is the engine [SoundComponent](https://api.playcanvas.c
 
 ## See Also
 
+* [Audio](https://developer.playcanvas.com/user-manual/audio.md) — how to load, play, position and mix sounds
 * [`<pc-sound-slot>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sound-slot.md) — each clip the component plays
 * [`<pc-audio-listener>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-audio-listener.md) — where positional sounds are heard from
 * [`<pc-asset>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset.md) — audio assets
@@ -5359,6 +5360,7 @@ The attributes are mirrored as properties. The engine [SoundSlot](https://api.pl
 
 ## See Also
 
+* [Playing Sounds](https://developer.playcanvas.com/user-manual/audio/playing-sounds.md) — what a slot can do, and how to play it
 * [`<pc-sound>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sound.md) — the component a slot belongs to
 * [`<pc-asset>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset.md) — the audio asset a slot plays
 * [`<pc-audio-listener>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-audio-listener.md) — where positional sounds are heard from
@@ -5449,6 +5451,7 @@ The `component` property is the engine [AudioListenerComponent](https://api.play
 
 ## See Also
 
+* [Positional Audio](https://developer.playcanvas.com/user-manual/audio/positional-audio.md) — the listener, distance models and panning
 * [`<pc-sound>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sound.md) — the positional sound sources the listener hears
 * [`<pc-sound-slot>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sound-slot.md) — the clips those sources play
 * [`<pc-camera>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-camera.md) — the listener usually rides on the camera entity

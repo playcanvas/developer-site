@@ -6,6 +6,7 @@ The Audio Listener Component specifies the listener's position in 3D space. All 
 
 ## See Also
 
+- [Positional Audio](https://developer.playcanvas.com/user-manual/audio/positional-audio.md) - Which listener is used, and how sounds fade with distance
 - [Sound Component](https://developer.playcanvas.com/user-manual/editor/scenes/components/sound.md) - Play audio in 3D space
 - [Audio Assets](https://developer.playcanvas.com/user-manual/editor/assets/inspectors/audio.md) - Learn more about audio assets
 

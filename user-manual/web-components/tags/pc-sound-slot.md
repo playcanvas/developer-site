@@ -72,6 +72,7 @@ The attributes are mirrored as properties. The engine [SoundSlot](https://api.pl
 
 ## See Also
 
+* [Playing Sounds](https://developer.playcanvas.com/user-manual/audio/playing-sounds.md) — what a slot can do, and how to play it
 * [`<pc-sound>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sound.md) — the component a slot belongs to
 * [`<pc-asset>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-asset.md) — the audio asset a slot plays
 * [`<pc-audio-listener>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-audio-listener.md) — where positional sounds are heard from

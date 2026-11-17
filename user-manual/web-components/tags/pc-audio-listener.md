@@ -77,6 +77,7 @@ The `component` property is the engine [AudioListenerComponent](https://api.play
 
 ## See Also
 
+* [Positional Audio](https://developer.playcanvas.com/user-manual/audio/positional-audio.md) — the listener, distance models and panning
 * [`<pc-sound>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sound.md) — the positional sound sources the listener hears
 * [`<pc-sound-slot>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-sound-slot.md) — the clips those sources play
 * [`<pc-camera>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-camera.md) — the listener usually rides on the camera entity

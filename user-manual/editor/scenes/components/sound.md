@@ -16,7 +16,7 @@ You can add a new Slot by clicking on the "ADD SLOT" button. You can remove a Sl
 | Volume          | The volume that will be multiplied with the volume of each Slot when playing an audio asset (0 to 1). |
 | Pitch           | The pitch that will be multiplied with the pitch of each Slot when playing an audio asset. A value of 1 means the audio is played back at the original pitch. |
 | Ref Distance    | Positional only. The reference distance for reducing volume as the sound source moves further from the listener. |
-| Max Distance    | Positional only. The maximum distance from the listener at which audio falloff stops. Note the volume of the audio is not necessarily 0 after this distance, but just doesn't fall off anymore. |
+| Max Distance    | Positional only. With the Linear distance model, the distance from the listener at which the sound has faded out. With the default Roll-off Factor of 1, the sound is silent from this distance. The Inverse and Exponential models ignore it. |
 | Distance Model  | Positional only. Determines which algorithm to use to reduce the volume of the sound as it moves away from the listener. Options: Linear, Exponential, Inverse. |
 | Roll-off Factor | Positional only. The rate at which volume fall-off occurs. |
 
@@ -36,6 +36,7 @@ You can add a new Slot by clicking on the "ADD SLOT" button. You can remove a Sl
 
 ## See Also
 
+- [Audio](https://developer.playcanvas.com/user-manual/audio.md) - How to load, play, position and mix sounds
 - [Audio Listener Component](https://developer.playcanvas.com/user-manual/editor/scenes/components/audiolistener.md) - Set the listener position for 3D audio
 - [Audio Assets](https://developer.playcanvas.com/user-manual/editor/assets/inspectors/audio.md) - Learn more about audio assets
 
