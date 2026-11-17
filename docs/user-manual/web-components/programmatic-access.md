@@ -129,6 +129,8 @@ const material = MaterialElement.get('gold'); // the material declared by <pc-ma
 
 `AssetElement.get` returns the registered [`Asset`](https://api.playcanvas.com/engine/classes/Asset.html), which may not have finished loading yet — check `asset.loaded`, or subscribe to its `load` event, before using `asset.resource`. A failed load also sets `loaded`, with no `resource`. Looking a `lazy` asset up this way does not start its load, so call `app.assets.load(asset)` if nothing else will.
 
+Called with just an `id`, both search the document, and return `undefined` when nothing matches or the object has not been created yet. Pass the element that refers to the resource as a second argument to resolve the id the way the library's own elements do: in that element's `<pc-app>` first, then in its tree (see [Asset and Material IDs](attributes.md#asset-and-material-ids)). Use that form when two applications on one page use the same ids, or when the application sits inside a shadow root, which a document search cannot see into.
+
 [`<pc-wasm>`](./tags/pc-wasm.md) initializes asynchronously like the elements above — it becomes ready once its module has loaded or failed to load, so `whenReady('pc-wasm')` awaits the load. (`Basis` is the exception: it is ready as soon as its transcoder starts loading.) Readiness does not mean success: a module that fails also fires an [`error` event](./tags/pc-wasm.md#events). You will rarely need it: `<pc-app>` waits for every `<pc-wasm>` among its children to settle before it creates its graphics device, so by the time the app is ready each module has loaded or reported its failure. Awaiting the app is how you wait for Ammo:
 
 ```javascript

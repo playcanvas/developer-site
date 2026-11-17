@@ -38,7 +38,7 @@ description: "pc-anim要素のリファレンス: エンティティ階層上で
 
 宣言されたクリップが優先されます。モデルのアニメーションを割り当てていた要素に`<pc-anim-clip>`の子を追加すると、宣言されたクリップの側に切り替わります。どちらの場合も最初のクリップは自動的に再生を始めます。これを止めるには`activate="false"`を指定します。
 
-エンジンが扱えない名前のトラックは、それぞれを名指しする警告とともにスキップされます。`.`を含む名前（ブレンドツリーのパス用に予約されています）と、先行するトラックがすでに使った名前です。
+エンジンはクリップ名の`.`をブレンドツリーのパス用に予約しているため、トラック名の`.`はクリップ名では`_`になります。Mixamoの`Armature|mixamo.com|Layer0`というトラックは、`Armature|mixamo_com|Layer0`というクリップとして再生されます。先行するトラックがすでに使ったクリップ名になるトラックは、それを名指しする警告とともにスキップされます。
 
 [`<pc-model>`](../pc-model)の内側にある`<pc-anim>`は、そのモデル自身のホストエンティティに取り付けられます。したがってラッパーとなるエンティティは不要で、追加すべきでもありません。モデルのコンテンツは同じホストの下に置かれるため、これによりクリップが階層に届きます。またホストは`asset`の変更を越えて存続するので、モデルのGLBを差し替えてもコンポーネントは残り、新しいコンテナに対してクリップが再解決されます。
 
@@ -109,7 +109,7 @@ const done = baseLayer.activeStateCurrentTime >= baseLayer.activeStateDuration;
 
 ```html live-example
 <pc-app>
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.24.0/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.24.1/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset src="https://developer.playcanvas.com/assets/t-rex.glb" id="t-rex"></pc-asset>
     <pc-material id="floor" diffuse="#3a3f4b"></pc-material>
     <pc-scene>
