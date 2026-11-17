@@ -39,4 +39,4 @@ To verify your browser supports WebGL 2.0, visit [webglreport.com](https://webgl
 
 ## Build Target
 
-The PlayCanvas Engine is built targeting ES2020 JavaScript, and its release and profiler ES module builds also use class fields from ES2022. These language features, rather than WebGL 2.0, set the minimum versions of Chrome, Edge, Firefox and Opera above. Older versions of these browsers support WebGL 2.0, but can't run the Engine.
+The PlayCanvas Engine is built targeting ES2020 JavaScript, and its release ES module builds also use class fields from ES2022. These language features, rather than WebGL 2.0, set the minimum versions of Chrome, Edge, Firefox and Opera above. Older versions of these browsers support WebGL 2.0, but can't run the Engine.

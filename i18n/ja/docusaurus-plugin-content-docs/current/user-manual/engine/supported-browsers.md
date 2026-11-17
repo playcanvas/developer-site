@@ -39,4 +39,4 @@ WebGPUのサポートは現在も拡大しているため、最新の対応状�
 
 ## ビルドターゲット {#build-target}
 
-PlayCanvas EngineはES2020 JavaScriptをターゲットとしてビルドされており、リリース版とプロファイラー版のESモジュールビルドではES2022のクラスフィールドも使用しています。上記のChrome、Edge、Firefox、Operaの最小バージョンは、WebGL 2.0ではなく、これらの言語機能によって決まります。これより古いバージョンのブラウザは、WebGL 2.0をサポートしていてもEngineを実行できません。
+PlayCanvas EngineはES2020 JavaScriptをターゲットとしてビルドされており、リリース版のESモジュールビルドではES2022のクラスフィールドも使用しています。上記のChrome、Edge、Firefox、Operaの最小バージョンは、WebGL 2.0ではなく、これらの言語機能によって決まります。これより古いバージョンのブラウザは、WebGL 2.0をサポートしていてもEngineを実行できません。

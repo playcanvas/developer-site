@@ -138,7 +138,7 @@ GPU結果は非同期に届くため、数フレーム前の値になること�
 
 オーバーレイを有効にしても、デバイスにない機能は追加されません。MiniStatsでは取得できないGPU測定値がゼロとして表示されることがありますが、GPU描画のコストがゼロという意味ではありません。有効な測定値がない場合、[`app.stats.gpuFrameTime`](/user-manual/optimization/app-stats/#enabling-gpu-timing)は`undefined`を返します。
 
-既定のCPU時間、ドローコール数、メモリ推定値は、リリース版やminified版を含むすべてのエンジンビルドで動作します。一部の追加カウンターにはdebugまたはprofilerビルドが必要です。[対応表](/user-manual/optimization/app-stats/#metrics-and-build-availability)を参照してください。
+既定のCPU時間、ドローコール数、メモリ推定値は、リリース版やminified版を含むすべてのエンジンビルドで動作します。プリミティブ数にはdebugビルドが必要です。[対応表](/user-manual/optimization/app-stats/#metrics-and-build-availability)を参照してください。
 
 ## オーバーレイのカスタマイズ {#customizing-the-overlay}
 
