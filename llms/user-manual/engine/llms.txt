@@ -1,5 +1,5 @@
 ---
-covers: [engine, ecs, scripting, assets, graphics, gaussian-splatting, physics, animation, user-interface, xr, debugging, optimization, 2D]
+covers: [engine, ecs, scripting, assets, graphics, gaussian-splatting, physics, animation, audio, user-interface, xr, debugging, optimization, 2D]
 ---
 # PlayCanvas Engine
 
@@ -170,6 +170,19 @@ Use this index to write code against the engine directly. React, Web Components 
 - [Blend Trees](/user-manual/animation/blend-trees/): 1D, 2D Cartesian, 2D Directional and Direct blend trees, State.Child clip paths, and keeping clips in step with syncAnimations.
 - [Layers and Masks](/user-manual/animation/layers-and-masks/): Several state machines on one model, overwrite and additive blending by weight, blendToWeight, normalizeWeights, and masks that limit a layer to part of a hierarchy.
 - [Animation Events](/user-manual/animation/events/): Adding named events to clips in the Editor or with AnimEvents, listening for them on the anim component, and when they fire.
+
+## Audio
+
+- [Audio](/user-manual/audio/): How sound works: audio assets, the sound component and its slots, sound instances, the audio listener and master volume, on every surface.
+- [Getting Started](/user-manual/audio/getting-started/): The `SoundManager`, systems and handler an `AppBase` app needs, and loading and playing a first sound.
+- [Audio Assets](/user-manual/audio/audio-assets/): Formats, the memory a decoded sound uses, when audio loads, seamless loops, long music and audio sprites.
+- [Playing Sounds](/user-manual/audio/playing-sounds/): Slots: `play`, `pause`, `resume` and `stop`, looping, `overlap` for one-shots, `startTime` and `duration`, volume, pitch and `autoPlay`.
+- [Controlling Playback](/user-manual/audio/controlling-playback/): The `SoundInstance` that `play()` returns: seeking with `currentTime`, the `play`, `pause`, `resume`, `stop` and `end` events, fades and crossfades.
+- [Positional Audio](/user-manual/audio/positional-audio/): The `positional` setting, the `audiolistener` component and which one is used, the linear, inverse and exponential distance models, and panning.
+- [Volume and Mixing](/user-manual/audio/volume-and-mixing/): Master volume with `app.systems.sound.volume`, muting, groups of sounds, ducking and pausing all audio.
+- [Effects and Analysis](/user-manual/audio/effects/): Web Audio nodes on a slot with `setExternalNodes`: filters, echo, reverb, compression, and an `AnalyserNode` for visualizers.
+- [Autoplay and User Gestures](/user-manual/audio/autoplay/): Why audio is locked until the first click, what happens to sounds played before it, and start screens and keyboard unlocks.
+- [Troubleshooting](/user-manual/audio/troubleshooting/): Causes of silence, sounds that do not fade or pan, sounds that cut each other off, late or gapped playback, and memory use.
 
 ## User interface
 

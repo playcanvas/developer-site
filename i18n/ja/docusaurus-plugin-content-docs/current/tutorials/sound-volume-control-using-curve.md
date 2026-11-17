@@ -7,7 +7,7 @@ description: サンプルしたカーブデータでサウンドスロットの�
 
 import Link from '@docusaurus/Link';
 
-カーブデータを使用してサウンドスロットの音量を制御する方法を示すサンプル。シーンをクリックしてオーディオを開始します。
+カーブデータを使用してサウンドスロットの音量を制御する方法を示すサンプル。シーンをクリックしてオーディオを開始します。音量の詳細については、ユーザーマニュアルの[音量とミキシング](/user-manual/audio/volume-and-mixing/)を参照してください。
 
 <div className="iframe-container">
     <iframe src="https://playcanv.as/p/hmRciuNn/" title="Sound volume control using curve" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>

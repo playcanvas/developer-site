@@ -183,7 +183,7 @@ buyButton.button.active = coins >= price;
 
 ## サウンドとカーソル {#sound-and-cursor}
 
-ボタンには独自のサウンドやカーソルはありません。`click`イベントでサウンドを再生し（例えば、ボタンに付けた[Soundコンポーネント](/user-manual/editor/scenes/components/sound/)から）、ホバー時にカーソルを変更します。
+ボタンには独自のサウンドやカーソルはありません。`click`イベントでサウンドを再生し（例えば、ボタンに付けた[Soundコンポーネント](/user-manual/audio/getting-started/)から）、ホバー時にカーソルを変更します。
 
 ```javascript
 button.button.on('hoverstart', () => {

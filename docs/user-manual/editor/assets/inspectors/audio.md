@@ -5,7 +5,7 @@ description: Audio asset inspector for browser-supported sound formats with dura
 
 Audio assets are sound files which can be played back using the [Sound Component](/user-manual/editor/scenes/components/sound/).
 
-Any audio format that is supported by the web browser is supported by PlayCanvas. No processing is done to the audio file on import.
+Any audio format that is supported by the web browser is supported by PlayCanvas. No processing is done to the audio file on import. See [Audio Assets](/user-manual/audio/audio-assets/) for the formats to choose, and for how much memory a loaded sound uses.
 
 Common formats like MP3, AAC, Ogg Vorbis, and WAV are supported across all modern browsers.
 

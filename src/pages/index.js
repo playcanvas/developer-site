@@ -541,6 +541,11 @@ function Concepts() {
       description: translate({ id: 'homepage.topics.physics.description', message: 'Rigid bodies, collisions, triggers, joints and ray casts.' })
     },
     {
+      to: '/user-manual/audio/',
+      title: translate({ id: 'homepage.topics.audio.title', message: 'Audio' }),
+      description: translate({ id: 'homepage.topics.audio.description', message: 'Sound effects, music, positional audio and effects.' })
+    },
+    {
       to: '/user-manual/user-interface/',
       title: translate({ id: 'homepage.topics.userInterface.title', message: 'User Interface' }),
       description: translate({ id: 'homepage.topics.userInterface.description', message: 'Screens, elements, text, buttons and scroll views.' })

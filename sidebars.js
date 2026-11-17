@@ -1129,6 +1129,25 @@ const sidebars = {
     },
     {
       type: 'category',
+      label: 'Audio',
+      link: {
+        type: 'doc',
+        id: 'user-manual/audio/index',
+      },
+      items: [
+        'user-manual/audio/getting-started',
+        'user-manual/audio/audio-assets',
+        'user-manual/audio/playing-sounds',
+        'user-manual/audio/controlling-playback',
+        'user-manual/audio/positional-audio',
+        'user-manual/audio/volume-and-mixing',
+        'user-manual/audio/effects',
+        'user-manual/audio/autoplay',
+        'user-manual/audio/troubleshooting',
+      ],
+    },
+    {
+      type: 'category',
       label: '2D',
       link: {
         type: 'doc',

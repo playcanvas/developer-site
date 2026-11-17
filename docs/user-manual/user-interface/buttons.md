@@ -183,7 +183,7 @@ buyButton.button.active = coins >= price;
 
 ## Sound and Cursor {#sound-and-cursor}
 
-Buttons have no sound or cursor of their own. Play a sound from the `click` event, for example from a [sound component](/user-manual/editor/scenes/components/sound/) on the button, and change the cursor on hover:
+Buttons have no sound or cursor of their own. Play a sound from the `click` event, for example from a [sound component](/user-manual/audio/getting-started/) on the button, and change the cursor on hover:
 
 ```javascript
 button.button.on('hoverstart', () => {

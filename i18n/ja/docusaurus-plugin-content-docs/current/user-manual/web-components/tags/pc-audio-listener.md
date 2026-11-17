@@ -84,6 +84,7 @@ description: "pc-audio-listener要素のリファレンス: 位置サウンド�
 
 ## 関連項目 {#see-also}
 
+* [ポジショナルオーディオ](/user-manual/audio/positional-audio/) — リスナー、距離モデル、パンニング
 * [`<pc-sound>`](../pc-sound) — リスナーが聴く位置音源
 * [`<pc-sound-slot>`](../pc-sound-slot) — それらの音源が再生するクリップ
 * [`<pc-camera>`](../pc-camera) — リスナーは通常カメラのエンティティに載せます

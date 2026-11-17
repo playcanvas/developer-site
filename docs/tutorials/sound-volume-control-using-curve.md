@@ -7,7 +7,7 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/4361
 
 import Link from '@docusaurus/Link';
 
-Sample showing how to control the volume of a sound slot using curve data. Click on the scene to start the audio.
+Sample showing how to control the volume of a sound slot using curve data. Click on the scene to start the audio. For more on volume, see [Volume and Mixing](/user-manual/audio/volume-and-mixing/) in the User Manual.
 
 <div className="iframe-container">
     <iframe src="https://playcanv.as/p/hmRciuNn/" title="Sound volume control using curve" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>

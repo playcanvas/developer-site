@@ -55,13 +55,13 @@ For optimized delivery, textures can be compressed to GPU-native formats:
 | Format | Extension | Notes |
 |--------|-----------|-------|
 | MP3 | `.mp3` | Widely supported, good compression |
-| OGG Vorbis | `.ogg` | Open format, good quality |
+| OGG Vorbis | `.ogg` | Open format, good quality. Safari 18.4 and later |
 | WAV | `.wav` | Uncompressed, large files |
 | M4A | `.m4a` | AAC audio |
 
 :::note
 
-For best browser compatibility, provide both MP3 and OGG versions of audio files. PlayCanvas will use the format supported by the user's browser.
+PlayCanvas loads the file you give it and leaves the decoding to the browser, so use a format that every browser you target can decode. MP3 is the safest choice. See [Audio Assets](/user-manual/audio/audio-assets/).
 
 :::
 

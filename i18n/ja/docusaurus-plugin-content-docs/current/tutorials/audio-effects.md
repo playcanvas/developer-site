@@ -11,6 +11,8 @@ description: PlayCanvas で Web Audio ノードをチェーンし、エンジン
 
 *それぞれのボタンをクリックしてサウンドエフェクトを試してください。*
 
+エフェクトの詳細については、ユーザーマニュアルの[エフェクトと解析](/user-manual/audio/effects/)を参照してください。
+
 :::note
 
 このチュートリアルには、Web Audio APIが必要です。

@@ -88,6 +88,7 @@ description: "pc-sound要素のリファレンス: pc-sound-slotスロットと�
 
 ## 関連項目 {#see-also}
 
+* [オーディオ](/user-manual/audio/) — サウンドの読み込み、再生、配置、ミキシングの方法
 * [`<pc-sound-slot>`](../pc-sound-slot) — コンポーネントが再生する各クリップ
 * [`<pc-audio-listener>`](../pc-audio-listener) — 位置サウンドを聴く地点
 * [`<pc-asset>`](../pc-asset) — オーディオアセット

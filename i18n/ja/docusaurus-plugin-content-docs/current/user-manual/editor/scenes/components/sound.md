@@ -19,7 +19,7 @@ Soundコンポーネントには、サウンドの再生を担当する「スロ
 | Volume          | オーディオアセットを再生するときに各スロットの音量に乗算される音量（0〜1）。 |
 | Pitch           | オーディオアセットを再生するときに各スロットのピッチに乗算されるピッチ。値が1の場合、オーディオは元のピッチで再生されます。 |
 | Ref Distance    | Positionalのみ。サウンドソースがリスナーから遠ざかるにつれて音量を減らすための基準距離。 |
-| Max Distance    | Positionalのみ。オーディオ減衰が停止するリスナーからの最大距離。この距離でオーディオの音量が必ずしも0になるわけではなく、減衰が停止するだけです。 |
+| Max Distance    | Positionalのみ。Linear距離モデルでは、サウンドが完全に減衰するリスナーからの距離。Roll-off Factorがデフォルトの1の場合、サウンドはこの距離以遠で無音になります。InverseモデルとExponentialモデルでは無視されます。 |
 | Distance Model  | Positionalのみ。リスナーから遠ざかるにつれて音量を減らすアルゴリズムを決定します。オプション: Linear、Exponential、Inverse。 |
 | Roll-off Factor | Positionalのみ。音量減衰が発生する速度。 |
 
@@ -39,6 +39,7 @@ Soundコンポーネントには、サウンドの再生を担当する「スロ
 
 ## 関連項目
 
+- [オーディオ](/user-manual/audio/) - サウンドの読み込み、再生、配置、ミキシングの方法
 - [Audio Listenerコンポーネント](audiolistener.md) - 3Dオーディオのリスナー位置を設定
 - [オーディオアセット](/user-manual/editor/assets/inspectors/audio) - オーディオアセットについて詳しく学ぶ
 

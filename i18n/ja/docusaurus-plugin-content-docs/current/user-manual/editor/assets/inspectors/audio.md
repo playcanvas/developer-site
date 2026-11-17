@@ -5,7 +5,7 @@ description: ブラウザがサポートする音声形式向けのオーディ�
 
 Audioアセットは、[Sound Component](/user-manual/editor/scenes/components/sound/)を使用して再生できる音声ファイルです。
 
-Webブラウザでサポートされているすべてのオーディオ形式は、PlayCanvasでサポートされています。インポート時にオーディオファイルに対して処理は行われません。
+Webブラウザでサポートされているすべてのオーディオ形式は、PlayCanvasでサポートされています。インポート時にオーディオファイルに対して処理は行われません。選ぶべき形式と、読み込んだサウンドが使用するメモリの量については、[オーディオアセット](/user-manual/audio/audio-assets/)を参照してください。
 
 MP3、AAC、Ogg Vorbis、WAVなどの一般的な形式は、すべてのモダンブラウザでサポートされています。
 

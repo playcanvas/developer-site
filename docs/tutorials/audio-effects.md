@@ -11,6 +11,8 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/4060
 
 *Click on the various buttons to try out different sound effects.*
 
+For more on effects, see [Effects and Analysis](/user-manual/audio/effects/) in the User Manual.
+
 :::note
 
 This tutorial requires Web Audio API support.
