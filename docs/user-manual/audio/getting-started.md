@@ -121,7 +121,7 @@ function App() {
 
   return (
     <>
-      <button onClick={() => bell.current.sound.play('ring')}>Ring</button>
+      <button onClick={() => bell.current?.sound?.play('ring')}>Ring</button>
       <Application>
         <Entity name="bell" ref={bell}>
           <Sound name="ring" src="https://developer.playcanvas.com/assets/bell.mp3" />
@@ -131,6 +131,8 @@ function App() {
   );
 }
 ```
+
+The `?.` checks cover a click that comes before the application has started, when the entity and its sound component do not exist yet.
 
 The other pages in this section use this `<Sound>` component in their React examples.
 

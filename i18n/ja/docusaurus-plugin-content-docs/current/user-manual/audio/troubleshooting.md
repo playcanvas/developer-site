@@ -53,7 +53,7 @@ description: "音が出ない、サウンドが小さすぎる、距離によっ
 
 ### 音量やピッチを変更しても何も変わらない {#changing-volume-or-pitch-does-nothing}
 
-オーバーラップするスロットでは、`volume`、`pitch`、`startTime`、`duration`の変更は、すでに再生中のサウンドではなく、次の再生から適用されます。再生中のサウンドを変更するには、その[サウンドインスタンス](/user-manual/audio/controlling-playback/#volume-and-pitch)でプロパティを設定します。
+オーバーラップするスロットでは、`volume`、`pitch`、`startTime`、`duration`の変更は、すでに再生中のサウンドではなく、次の再生から適用されます。Soundコンポーネントの`volume`と`pitch`も同じです。再生中のサウンドを変更するには、その[サウンドインスタンス](/user-manual/audio/controlling-playback/#volume-and-pitch)でプロパティを設定します。
 
 ### 最初のクリックでサウンドが一斉に鳴る {#a-burst-of-sound-at-the-first-click}
 

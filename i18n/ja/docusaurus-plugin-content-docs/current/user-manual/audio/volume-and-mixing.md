@@ -128,6 +128,8 @@ music.sound.volume = 0.6;
 interfaceSounds.sound.volume = 0.9;
 ```
 
+コンポーネントの`volume`は、すでに再生中のサウンドにも反映されます。ただし例外が1つあります。[オーバーラップする](/user-manual/audio/playing-sounds/#overlapping-sounds)スロットのサウンドは開始時の音量を保ち、新しい音量は次の再生から適用されます。オーバーラップするサウンドを音量の操作にすぐ追従させたい場合は、ゲインノードを使います。
+
 **スロットを共有のゲインノードに通す。** 効果音は多くの場合、それぞれ独自のSoundコンポーネントを持つ多数のエンティティに分散しています。これらに1つの音量を与えるには、Web Audioの[`GainNode`](https://developer.mozilla.org/en-US/docs/Web/API/GainNode)を作成し、グループ内のすべてのスロットの出力にします。
 
 ```javascript
@@ -287,7 +289,7 @@ voice.group.sound.addSlot('bell', { asset: bellAsset.id });
 // 効果音はオーディオスプライトです。1つのファイルに4つのサウンドが入っています
 const sprites = [[0, 0.7], [1, 0.8], [2, 0.7], [3, 1.3]];
 sprites.forEach(([startTime, duration], i) => {
-    effects.group.sound.addSlot(`effect${i}`, { asset: sfxAsset.id, startTime, duration, overlap: true });
+    effects.group.sound.addSlot(`effect${i}`, { asset: sfxAsset.id, startTime, duration });
 });
 
 // ミックスです。各グループのレベルと、マスター音量を持ちます

@@ -53,7 +53,7 @@ Sounds on an overlapping slot play to their end, even when the entity is destroy
 
 ### Changing Volume or Pitch Does Nothing {#changing-volume-or-pitch-does-nothing}
 
-On an overlapping slot, changes to `volume`, `pitch`, `startTime` and `duration` apply to the next play, not to sounds that are already playing. To change a sound that is playing, set the property on its [sound instance](/user-manual/audio/controlling-playback/#volume-and-pitch).
+On an overlapping slot, changes to `volume`, `pitch`, `startTime` and `duration` apply to the next play, not to sounds that are already playing. The same is true of the `volume` and `pitch` of the sound component. To change a sound that is playing, set the property on its [sound instance](/user-manual/audio/controlling-playback/#volume-and-pitch).
 
 ### A Burst of Sound at the First Click {#a-burst-of-sound-at-the-first-click}
 

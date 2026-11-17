@@ -127,7 +127,7 @@ entity.sound.play('shot'); // a second shot, while the first rings on
 
 An overlapping slot behaves differently in three ways:
 
-- **Its properties apply to the next play.** Changing `volume`, `pitch`, `startTime` or `duration` on a slot that does not overlap changes the sound that is playing. On an overlapping slot, the sounds already playing keep the values they started with. `loop` is the exception, and always applies to every playing sound.
+- **Its properties apply to the next play.** Changing `volume`, `pitch`, `startTime` or `duration` on a slot that does not overlap changes the sound that is playing. On an overlapping slot, the sounds already playing keep the values they started with, and changes to the `volume` and `pitch` of the sound component do not reach them either. `loop` is the exception, and always applies to every playing sound.
 - **Its sounds outlive the entity.** When an entity is destroyed or its sound component is removed, overlapping sounds play to the end, so a destroyed enemy can still be heard exploding. Sounds in other slots stop at once.
 - **Its sounds are not paused when the component is disabled.** They play to the end.
 

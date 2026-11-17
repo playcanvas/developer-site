@@ -274,26 +274,32 @@ playButton.onclick = () => {
 add('button', { textContent: 'Stop' }).onclick = () => slot.stop();
 
 // seek by setting the instance's currentTime
-let seeking = false;
-const seek = add('input', { type: 'range', min: 0, max: 1, step: 0.001, value: 0 });
+const seek = add('input', { type: 'range', min: 0, max: 1, step: 0.001, value: 0, ariaLabel: 'Seek' });
 seek.style.flex = '1 1 120px';
-seek.onpointerdown = () => {
-    seeking = true;
-};
-seek.onchange = () => {
-    seeking = false;
-};
 seek.oninput = () => {
     if (!slot.isStopped) {
         instance.currentTime = seek.value * instance.duration;
     }
 };
+
+// leave the seek bar where it is while a pointer holds it
+let seeking = false;
+seek.onpointerdown = () => {
+    seeking = true;
+};
+for (const name of ['pointerup', 'pointercancel']) {
+    window.addEventListener(name, () => {
+        seeking = false;
+    });
+}
 const time = add('span', { textContent: '0.0 / 0.0' });
 
-add('span', { textContent: 'Speed' });
-add('input', { type: 'range', min: 0.5, max: 1.5, step: 0.05, value: 1 }).oninput = (event) => {
-    slot.pitch = Number(event.target.value);
+const speed = add('label', { textContent: 'Speed ' });
+const speedInput = Object.assign(document.createElement('input'), { type: 'range', min: 0.5, max: 1.5, step: 0.05, value: 1 });
+speedInput.oninput = () => {
+    slot.pitch = Number(speedInput.value);
 };
+speed.append(speedInput);
 
 const loop = add('label', {});
 const loopInput = Object.assign(document.createElement('input'), { type: 'checkbox', checked: true });

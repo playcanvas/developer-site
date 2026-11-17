@@ -187,15 +187,15 @@ app.root.addChild(music);
 
 const context = app.systems.sound.context;
 
-// オーディオがロックされている間に表示するスタート画面です。クリックするとオーディオのロックが解除されます
-const startScreen = document.createElement('div');
-startScreen.style.cssText = 'position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0, 0, 0, 0.65); color: #fff; font: 24px sans-serif; cursor: pointer;';
+// オーディオがロックされている間に表示するスタート画面です。クリックするとオーディオのロックが解除されます。ボタンなので、キーボードでも操作できます
+const startScreen = document.createElement('button');
+startScreen.style.cssText = 'position: absolute; left: 0; top: 0; width: 100%; height: 100%; border: 0; background: rgba(0, 0, 0, 0.65); color: #fff; font: 24px sans-serif; cursor: pointer;';
 startScreen.textContent = 'Click to start';
 startScreen.onclick = () => context.resume();
 document.body.appendChild(startScreen);
 
 const showStartScreen = () => {
-    startScreen.style.display = context.state === 'running' ? 'none' : 'flex';
+    startScreen.hidden = context.state === 'running';
 };
 context.addEventListener('statechange', showStartScreen);
 showStartScreen();

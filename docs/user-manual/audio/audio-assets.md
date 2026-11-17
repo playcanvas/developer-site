@@ -137,7 +137,7 @@ music.loop = true;
 music.volume = 0.5;
 
 // like all audio, it can only start after a user gesture
-window.addEventListener('pointerdown', () => music.play(), { once: true });
+window.addEventListener('click', () => music.play(), { once: true });
 ```
 
 An audio element is not part of the PlayCanvas sound system. The [master volume](/user-manual/audio/volume-and-mixing/) does not apply to it, so set its `volume` yourself, and its `loop` can leave a small gap at the loop point.

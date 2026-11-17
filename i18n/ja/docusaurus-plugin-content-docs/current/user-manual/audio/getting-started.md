@@ -121,7 +121,7 @@ function App() {
 
   return (
     <>
-      <button onClick={() => bell.current.sound.play('ring')}>Ring</button>
+      <button onClick={() => bell.current?.sound?.play('ring')}>Ring</button>
       <Application>
         <Entity name="bell" ref={bell}>
           <Sound name="ring" src="https://developer.playcanvas.com/assets/bell.mp3" />
@@ -131,6 +131,8 @@ function App() {
   );
 }
 ```
+
+`?.`は、アプリケーションが起動する前のクリックに備えたものです。その時点では、エンティティもそのSoundコンポーネントもまだ存在しません。
 
 このセクションのほかのページでは、Reactの例にこの`<Sound>`コンポーネントを使います。
 

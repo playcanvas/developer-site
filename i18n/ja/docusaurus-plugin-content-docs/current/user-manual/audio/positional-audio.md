@@ -332,6 +332,7 @@ playButton.onclick = () => {
 };
 panel.appendChild(playButton);
 
+const modelLabel = document.createElement('label');
 const model = document.createElement('select');
 for (const name of ['linear', 'inverse', 'exponential']) {
     model.add(new Option(name));
@@ -339,7 +340,8 @@ for (const name of ['linear', 'inverse', 'exponential']) {
 model.onchange = () => {
     radio.sound.distanceModel = model.value;
 };
-panel.appendChild(model);
+modelLabel.append('Model ', model);
+panel.appendChild(modelLabel);
 
 const addSlider = (text, property, min, max) => {
     const label = document.createElement('label');

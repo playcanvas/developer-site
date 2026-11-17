@@ -137,7 +137,7 @@ music.loop = true;
 music.volume = 0.5;
 
 // すべてのオーディオと同じく、ユーザー操作の後でなければ開始できません
-window.addEventListener('pointerdown', () => music.play(), { once: true });
+window.addEventListener('click', () => music.play(), { once: true });
 ```
 
 audio要素は、PlayCanvasのサウンドシステムの一部ではありません。[マスター音量](/user-manual/audio/volume-and-mixing/)は適用されないので、`volume`は自分で設定してください。また、`loop`では、ループ地点にわずかな途切れが生じることがあります。

@@ -128,6 +128,8 @@ music.sound.volume = 0.6;
 interfaceSounds.sound.volume = 0.9;
 ```
 
+A component's `volume` changes the sounds that are already playing, with one exception: sounds on an [overlapping](/user-manual/audio/playing-sounds/#overlapping-sounds) slot keep the volume they started with, and the new volume applies from the next play. For overlapping sounds that must follow a volume control at once, use a gain node.
+
 **Route slots through a shared gain node.** Sound effects are often spread over many entities, each with a sound component of its own. To give them one volume, create a Web Audio [`GainNode`](https://developer.mozilla.org/en-US/docs/Web/API/GainNode) and make it the output of every slot in the group:
 
 ```javascript
@@ -287,7 +289,7 @@ voice.group.sound.addSlot('bell', { asset: bellAsset.id });
 // the effects are an audio sprite: four sounds in one file
 const sprites = [[0, 0.7], [1, 0.8], [2, 0.7], [3, 1.3]];
 sprites.forEach(([startTime, duration], i) => {
-    effects.group.sound.addSlot(`effect${i}`, { asset: sfxAsset.id, startTime, duration, overlap: true });
+    effects.group.sound.addSlot(`effect${i}`, { asset: sfxAsset.id, startTime, duration });
 });
 
 // the mix: a level for each group, and the master volume
