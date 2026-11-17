@@ -70,6 +70,8 @@ How you load it from there depends on whether a bundler builds your pages.
 import '@playcanvas/web-components';
 ```
 
+The package is an ES module only, with no CommonJS build. Outside the browser, in tests or other Node.js code, `import` it — or `require()` it on Node.js 22.12 or later, which loads ES modules that way. A test runner that loads modules as CommonJS, such as Jest in its default mode, cannot load it as it stands.
+
 **Without a bundler**, when your files are served as they are, point an import map at the installed packages and load the library from the same path:
 
 ```html

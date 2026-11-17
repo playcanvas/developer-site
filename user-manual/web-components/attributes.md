@@ -115,7 +115,9 @@ Resources are declared once, as direct children of [`<pc-app>`](https://develope
 <pc-render type="plane" material="floor"></pc-render>
 ```
 
-The value is the element's own `id`, written bare — no `#`, because it is a lookup in the application's registry rather than a CSS selector. Each attribute's description says which asset type it accepts.
+The value is the element's own `id`, written bare — no `#`, because it names a resource rather than being a CSS selector. Each attribute's description says which asset type it accepts.
+
+An `id` is looked for among the direct children of the referring element's own `<pc-app>` first, then in the rest of the tree that element is in: the document, or the shadow root of a component that renders the application inside one. So two applications on one page can each declare an asset called `tiles` and each gets its own, and an application inside a shadow root resolves the ids declared there.
 
 An `id` that matches no declared resource usually changes nothing, and silently: the element keeps what it had. [`<pc-model>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-model.md) is the exception, because its content comes from the asset: it clears that content, warns that it could not find the asset, and never becomes ready. `<pc-app>`'s `area-light-luts`, a sprite `<pc-asset>`'s `atlas`, `<pc-node>`'s `material-overrides` and script `asset:` values also warn when their `id` matches nothing.
 

@@ -35,7 +35,7 @@ There are two ways to end up with clips, and the element picks between them for 
 
 Declared clips win: adding a `<pc-anim-clip>` child to an element that had been assigning a model's animations switches it over to the declared set. Either way the first clip starts playing on its own — opt out with `activate="false"`.
 
-Tracks whose names the engine cannot host are skipped with a warning naming each: a name containing `.` (reserved for blend tree paths), or one a previous track already took.
+The engine reserves `.` in clip names for blend tree paths, so a `.` in a track name becomes `_` in its clip name: a Mixamo track called `Armature|mixamo.com|Layer0` plays as the clip `Armature|mixamo_com|Layer0`. A track whose clip name an earlier track already took is skipped with a warning naming it.
 
 A `<pc-anim>` inside a [`<pc-model>`](https://developer.playcanvas.com/user-manual/web-components/tags/pc-model.md) attaches to that model's own host entity, so no wrapper entity is needed and none should be added. The model's content sits below the same host, which is what lets the clips reach it, and the host survives a change of `asset` — so swapping a model's GLB keeps the component and re-resolves its clips against the new container.
 
@@ -102,7 +102,7 @@ A GLB with a single walk cycle, declared twice: `walk` at its authored speed and
 
 ```html live-example
 <pc-app>
-    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.24.0/scripts/esm/camera-controls.mjs"></pc-asset>
+    <pc-asset src="https://cdn.jsdelivr.net/npm/playcanvas@2.24.1/scripts/esm/camera-controls.mjs"></pc-asset>
     <pc-asset src="https://developer.playcanvas.com/assets/t-rex.glb" id="t-rex"></pc-asset>
     <pc-material id="floor" diffuse="#3a3f4b"></pc-material>
     <pc-scene>
