@@ -138,7 +138,7 @@ These are resource estimates for the graphics device, which may be shared by app
 
 Enabling the overlay cannot add missing device support. An unavailable GPU measurement can appear as zero in MiniStats; do not interpret that as free GPU rendering. [`app.stats.gpuFrameTime`](/user-manual/optimization/app-stats/#enabling-gpu-timing) returns `undefined` when no valid measurement is available.
 
-The default CPU timings, draw call count and memory estimates work in all engine builds, including release and minified builds. Some additional counters require a debug or profiler build; see the [availability table](/user-manual/optimization/app-stats/#metrics-and-build-availability).
+The default CPU timings, draw call count and memory estimates work in all engine builds, including release and minified builds. The primitive count requires a debug build; see the [availability table](/user-manual/optimization/app-stats/#metrics-and-build-availability).
 
 ## Customizing the Overlay
 

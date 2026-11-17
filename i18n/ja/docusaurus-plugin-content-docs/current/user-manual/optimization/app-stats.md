@@ -47,7 +47,7 @@ Mapへの参照は読み取り専用ですが、エントリーは変更でき�
 | アニメーションと物理 | `cpuAnimationTime`、`cpuPhysicsTime` | すべて |
 | GPUフレーム | `gpuFrameTime` | サポートされ、有効になっている場合はすべて |
 | GPUリソースメモリ | [GPUメモリのgetter](#gpu-resource-memory) | すべて |
-| プリミティブ | `primitiveCount` | debugのみ。release、profiler、minifiedでは`0` |
+| プリミティブ | `primitiveCount` | debugのみ。releaseとminifiedでは`0` |
 
 npmアプリケーションでプリミティブ数が必要な場合は、`playcanvas/debug`を使用します。アプリケーションとその他のエンジンクラスは、選択したビルドから一貫してインポートしてください。CPU時間、ドローコール、メモリ、サポートされているGPU時間の取得には、releaseビルドから切り替える必要はありません。
 

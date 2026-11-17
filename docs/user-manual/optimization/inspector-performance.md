@@ -122,7 +122,7 @@ app.stats.user.set('enemies', app.stats.user.get('enemies') + 1);
 
 ## Engine Builds
 
-The release build of the engine times the update and the render as a whole. The profiler and debug builds add the phases of the render, the batcher's updating and creating of batches among them, the breakdown of the draw calls, the shader compiles and the lightmap bakes.
+Every build of the engine times the update and the render, along with the phases of the render, the batcher's updating and creating of batches among them, the breakdown of the draw calls, the shader compiles and the lightmap bakes.
 
 The Inspector runs inside the application's update, so its own time is shown apart, as Inspector. Turn off **Inspector time** to leave it out of the CPU chart, which then scales to the application's own time.
 

@@ -47,7 +47,7 @@ The map reference is read-only, but its entries are writable. Each application h
 | Animation and physics | `cpuAnimationTime`, `cpuPhysicsTime` | All |
 | GPU frame | `gpuFrameTime` | All, when supported and enabled |
 | GPU resource memory | [GPU memory getters](#gpu-resource-memory) | All |
-| Primitives | `primitiveCount` | Debug only; `0` in release, profiler and minified builds |
+| Primitives | `primitiveCount` | Debug only; `0` in release and minified builds |
 
 For npm applications, use `playcanvas/debug` when you need primitive counting. Import the application and other engine classes consistently from the chosen build. CPU timings, draw calls, memory and supported GPU timings do not require switching away from a release build.
 
