@@ -4,7 +4,7 @@
 
 Index: https://developer.playcanvas.com/llms.txt
 Total Documents: 563
-Generated: 2026-11-17
+Generated: 2026-11-18
 
 ================================================================================
 
@@ -4845,9 +4845,15 @@ Markdown: https://developer.playcanvas.com/user-manual/editor/interface/launch-p
 
 By default, when you launch your PlayCanvas app from the Editor, it will use the latest stable build of the engine. Sometimes, there may be a reason why you may want to run your app with a different build of the engine. For example:
 
-* To test your project against the latest dev build of the engine to test a new feature or bug fix, or detect any potential regressions before an upcoming engine release.
+* To test your project against a pre-release build of the engine to test a new feature or bug fix, or detect any potential regressions before an upcoming engine release.
 * To temporarily step back to a previous stable engine version to mitigate a regression in the current stable build.
 * To develop and debug against your own fork of the [engine repo on GitHub](https://github.com/playcanvas/engine).
+
+:::warning[New engine builds are only published to npm]
+
+From 2.24.0, engine builds are no longer uploaded to `code.playcanvas.com`, so `use_local_engine` URLs pointing there only work for earlier versions. To launch with any published engine version, use the `version` or `tag` launch parameters described below instead.
+
+:::
 
 :::important[Loading the Correct Engine: Module vs UMD]
 
@@ -4860,7 +4866,7 @@ When loading a custom engine build, it's important to choose the correct format 
 
 Now, let's look at how you handle each of these situations:
 
-### Launch with the Dev Engine
+### Launch with a Pre-release Engine
 
 When you launch your app from the Editor, a new tab is opened called the launch page. The URL of this page is of the form:
 
@@ -4868,49 +4874,33 @@ When you launch your app from the Editor, a new tab is opened called the launch 
     https://launch.playcanvas.com/<scene_id>
 ```
 
-Simply edit the launch page's URL by adding the following string to the end:
+Pre-release engine builds are published to npm. To launch with the latest beta build, add the `tag` parameter to the launch page's URL:
 
 ```none
-    https://launch.playcanvas.com/<scene_id>?use_local_engine=https://code.playcanvas.com/playcanvas-latest.js
+    https://launch.playcanvas.com/<scene_id>?tag=beta
 ```
 
-To launch with the minified build, use:
+To launch with the latest preview build, use:
 
 ```none
-    https://launch.playcanvas.com/<scene_id>?use_local_engine=https://code.playcanvas.com/playcanvas-latest.min.js
+    https://launch.playcanvas.com/<scene_id>?tag=preview
 ```
 
-To launch with Debug mode enabled, use:
+To launch with Debug mode enabled, add `debug=true`:
 
 ```none
-    https://launch.playcanvas.com/<scene_id>?debug=true&use_local_engine=https://code.playcanvas.com/playcanvas-latest.dbg.js
+    https://launch.playcanvas.com/<scene_id>?tag=beta&debug=true
 ```
 
 ### Launch with a Previous Stable Engine
 
-Previous stable builds of the PlayCanvas engine are archived on code.playcanvas.com. You can find all of the previous releases on [GitHub](https://github.com/playcanvas/engine/releases). The engine is named with the following convention:
+Every engine release published to npm can be loaded with the `version` parameter. You can find all of the previous releases on [GitHub](https://github.com/playcanvas/engine/releases). For example, to launch with engine 2.23.3, use the following launch URL:
 
 ```none
-    playcanvas-<major>.<minor>.<patch>.js
+    https://launch.playcanvas.com/<scene_id>?version=2.23.3
 ```
 
-So, for example:
-
-```none
-    playcanvas-0.225.0.js
-```
-
-To launch with this specific build of the engine, use the following launch URL:
-
-```none
-    https://launch.playcanvas.com/<scene_id>?use_local_engine=https://code.playcanvas.com/playcanvas-0.225.0.js
-```
-
-To launch with the minified build, use:
-
-```none
-    https://launch.playcanvas.com/<scene_id>?use_local_engine=https://code.playcanvas.com/playcanvas-0.225.0.min.js
-```
+The launch page picks the module or UMD build to match your project's scripts. Add `debug=true` to load the debug build.
 
 :::tip
 
