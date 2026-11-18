@@ -5,9 +5,15 @@ description: 開発用、安定版、過去版、フォークビルド向けの�
 
 デフォルトでは、PlayCanvasアプリをエディターから起動すると、最新の安定版のエンジンが使用されます。しかし、以下のような理由で、アプリを異なるエンジンビルドで実行したい場合があります。
 
-* 新しい機能やバグ修正をテストするために、最新の開発ビルドのエンジンでプロジェクトをテストし、次のエンジンリリース前に潜在的なリグレッションを検出するため。
+* 新しい機能やバグ修正をテストするために、プレリリースビルドのエンジンでプロジェクトをテストし、次のエンジンリリース前に潜在的なリグレッションを検出するため。
 * 現在の安定ビルドに見つかったリグレッションを緩和するために、一時的に以前の安定エンジンバージョンに戻るため。
 * [GitHub](https://github.com/playcanvas/engine)上のエンジンリポジトリの自分自身のフォークで開発およびデバッグするため。
+
+:::warning[新しいエンジンビルドは npm にのみ公開されます]
+
+2.24.0 以降、エンジンビルドは `code.playcanvas.com` にアップロードされなくなりました。そのため、ここを指す `use_local_engine` の URL はそれ以前のバージョンでのみ動作します。公開されている任意のエンジンバージョンで起動するには、代わりに以下で説明する `version` または `tag` 起動パラメーターを使用してください。
+
+:::
 
 :::important[正しいエンジンのロード: モジュール vs UMD]
 
@@ -20,7 +26,7 @@ description: 開発用、安定版、過去版、フォークビルド向けの�
 
 それぞれの状況に対処する方法を見ていきましょう。
 
-### 開発用エンジンで起動
+### プレリリースエンジンで起動
 
 エディターからアプリを起動すると、launchページと呼ばれる新しいタブが開きます。このページのURLは以下の形式です。
 
@@ -28,49 +34,33 @@ description: 開発用、安定版、過去版、フォークビルド向けの�
     https://launch.playcanvas.com/<scene_id>
 ```
 
-launchページのURLを編集して、次の文字列を末尾に追加します。
+プレリリースのエンジンビルドは npm に公開されています。最新の beta ビルドで起動するには、launchページのURLに `tag` パラメーターを追加します。
 
 ```none
-    https://launch.playcanvas.com/<scene_id>?use_local_engine=https://code.playcanvas.com/playcanvas-latest.js
+    https://launch.playcanvas.com/<scene_id>?tag=beta
 ```
 
-このビルドでローンチする場合は、次を使用してください。
+最新の preview ビルドで起動する場合は、次を使用してください。
 
 ```none
-    https://launch.playcanvas.com/<scene_id>?use_local_engine=https://code.playcanvas.com/playcanvas-latest.min.js
+    https://launch.playcanvas.com/<scene_id>?tag=preview
 ```
 
-デバッグモードを有効にして起動する場合は、次のようにしてください。
+デバッグモードを有効にして起動する場合は、`debug=true` を追加してください。
 
 ```none
-    https://launch.playcanvas.com/<scene_id>?debug=true&use_local_engine=https://code.playcanvas.com/playcanvas-latest.dbg.js
+    https://launch.playcanvas.com/<scene_id>?tag=beta&debug=true
 ```
 
 ### 以前の安定エンジンで起動
 
-PlayCanvasエンジンの前の安定したビルドはcode.playcanvas.comにアーカイブされています。過去のすべてのリリースは[GitHub](https://github.com/playcanvas/engine/releases)で見つけることができます。エンジンは次の規則に従って命名されています。
+npm に公開されているすべてのエンジンリリースは、`version` パラメーターで読み込めます。過去のすべてのリリースは[GitHub](https://github.com/playcanvas/engine/releases)で見つけることができます。例えば、エンジン 2.23.3 で起動するには、次のローンチURLを使用してください。
 
 ```none
-    playcanvas-<major>.<minor>.<patch>.js
+    https://launch.playcanvas.com/<scene_id>?version=2.23.3
 ```
 
-例：
-
-```none
-    playcanvas-0.225.0.js
-```
-
-この特定のエンジンビルドで起動するには、次のローンチURLを使用してください。
-
-```none
-    https://launch.playcanvas.com/<scene_id>?use_local_engine=https://code.playcanvas.com/playcanvas-0.225.0.js
-```
-
-このビルドでローンチする場合は、次を使用してください。
-
-```none
-    https://launch.playcanvas.com/<scene_id>?use_local_engine=https://code.playcanvas.com/playcanvas-0.225.0.min.js
-```
+launchページはプロジェクトのスクリプトに合わせてモジュールビルドまたは UMD ビルドを自動的に選択します。デバッグビルドを読み込むには、`debug=true` を追加してください。
 
 :::tip
 
