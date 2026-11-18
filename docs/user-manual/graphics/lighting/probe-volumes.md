@@ -4,7 +4,7 @@ description: Bake indirect lighting into a grid of probes at runtime, light stat
 ---
 
 ![Probe volume at night](/img/user-manual/graphics/lighting/probe-volumes/night.webp)
-*At night, the only light sources in this scene are emissive meshes. Their light reaches the surfaces around them through the probes*
+*At night, this scene is lit by dim moonlight, a directional light with shadows, and by emissive meshes, whose light reaches the surfaces around them through the probes*
 
 A probe volume is a grid of light probes filling a box in the scene. Each probe stores the indirect light arriving at its position from all directions, as spherical harmonics. Surfaces inside the box take their ambient lighting from the probes around them instead of from the environment, so light bounces off walls and floors, rooms are darker than the open sky, and glowing emissive surfaces light their surroundings.
 
@@ -114,6 +114,9 @@ The lightings share the captured geometry, so the geometry is only captured once
 ## Reducing Light Leaks {#reducing-light-leaks}
 
 A surface is lit by the eight probes around it, which can be on the other side of a wall. Several features reduce the light leaking through walls:
+
+![Probes shown in the Probe Volume example](/img/user-manual/graphics/lighting/probe-volumes/probes.webp)
+*The probes of the scene, shown by the Probe Volume example. Each sphere shows the lighting stored in its probe, from each direction. The red probe is inside geometry and excluded, and the yellow lines connect the probes moved out of geometry to their grid positions*
 
 - **Validity**: probes inside geometry, which see the back faces of the surfaces around them, are excluded from the lighting. Enabled by the `validity` option of `captureGeometry`.
 - **Virtual offset**: probes inside geometry are captured at a position moved out of it. Enabled by the `virtualOffset` option of `captureGeometry`.
