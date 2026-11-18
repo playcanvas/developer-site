@@ -5,7 +5,7 @@ description: Invites collaborators sets read write admin permissions and manages
 
 Effective team management is crucial for collaborative development in PlayCanvas. This section covers how to add team members, manage permissions, and coordinate with your development team.
 
-## Adding Team Members
+## Adding Team Members {#adding-team-members}
 
 To add team members to your project:
 
@@ -52,32 +52,38 @@ When you remove a team member, they will lose all access to the project immediat
 
 :::
 
-## Organization Team Management
+## Organization Projects {#organization-projects}
 
-### Organization Projects
+If a project belongs to an [Organization](/user-manual/account-management/organizations/), the Organization's owner and administrators can manage it too, and the people on its private projects take the Organization's seats.
 
-If your project belongs to an organization, team management works slightly differently:
+### Organization Administrators {#organization-administrators}
 
-#### Organization Administrators
+The Organization's owner and administrators can:
 
-- Can add themselves to any organization project
-- Can manage project teams across the organization
-- Can access billing and seat management
+- Add themselves as an admin to any of the Organization's projects. See [Adding Yourself to an Organization Project](#adding-organization-members).
+- Manage the team of any project they're an admin of, as described above.
+- Add and remove the Organization's administrators, and see who takes a seat, on the **People** tab of its account settings. See [Managing Organizations](/user-manual/account-management/organizations/managing/#people).
 
-#### Seat Management
+Only the owner can see the Organization's billing, change its plan or change its number of seats.
 
-For organization accounts with seat limits:
+### Seat Management {#seat-management}
 
-- Each team member on a private project occupies a seat
-- Public projects don't require seats
-- Organization owners can manage seat allocation
-- Removing users from projects frees up seats
+On the Organization plan:
 
-### Adding Organization Members
+- Each person on one of the Organization's private projects takes a seat. One seat covers them on all of its projects.
+- Public projects don't need seats.
+- The owner doesn't need a seat if they aren't working on the projects.
+- Removing someone from all of the Organization's private projects frees their seat. To do it in one step, select **Remove** next to them under **Seats** on the Organization's **People** tab.
+- The owner changes the number of seats from the Organization's **Billing** tab. See [Adding and Removing Seats](/user-manual/account-management/organizations/managing/#adding-and-removing-seats).
 
-Organization administrators can add themselves to projects:
+See [Seats](/user-manual/account-management/organizations/managing/#seats) for more.
 
-1. Go to the organization account page
-2. Find the project in the projects list
-3. Click the dropdown arrow
-4. Select "Add me as admin"
+### Adding Yourself to an Organization Project {#adding-organization-members}
+
+Organization administrators add themselves to projects from the Project Dashboard:
+
+1. On the [Project Dashboard](/user-manual/editor/projects/dashboard/), select the Organization under **Organizations** in the sidebar.
+2. Select the project's card to open its settings. If you aren't on the project yet, its settings show only **Team**, with a message that you aren't an admin for the project.
+3. Select **ADD ME AS ADMIN**.
+
+The project's full settings open, with you as an admin. You can then [add other team members](#adding-team-members) as usual. See [Project Settings](/user-manual/editor/projects/dashboard/#project-settings).

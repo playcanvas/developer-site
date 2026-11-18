@@ -11,31 +11,48 @@ description: "PlayCanvas REST APIの概要: ベータ状態、HTTPSとベアラ�
 
 ## 認証 {#authorization}
 
-REST APIにはhttps経由でのみアクセスできます。REST APIにアクセスするには、アクセストークンを使用する必要があります。アクセストークンは、アカウントページに移動して生成できます。
+REST APIにはHTTPS経由でのみアクセスでき、すべてのリクエストにAPIトークン（アクセストークンとも呼びます）が必要です。トークンは、[アカウント設定](/user-manual/account-management/user-accounts/settings/#api-tokens)の**Security**タブで作成します。
 
-![Account Tab](/img/user-manual/api/account-tab.png)
+APIトークンはユーザーアカウントに属します。Organizationには独自のトークンがないため、OrganizationのプロジェクトでAPIを呼び出すには、そのプロジェクトに参加しているユーザーアカウントのトークンを使用してください。
 
-APIトークンのセクションで、トークンを生成するをクリックします。
+### トークンの生成 {#generating-a-token}
 
-![Generate Token](/img/user-manual/api/generate-token.png)
+1. [playcanvas.com/account/security](https://playcanvas.com/account/security)に移動します。または、[プロジェクトダッシュボード](/user-manual/editor/projects/dashboard/)でサイドバー下部の自分の名前を選択し、**Account settings**を選んで**Security**タブを選択します。
+2. **API tokens**で**Generate token**を選択します。
+3. `CI publish`のように、トークンの用途がわかる**Name**を入力し、**Generate**を選択します。
+4. **Your new token**にトークンが表示されます。**Copy**を選択してCIシステムのシークレットなどの安全な場所に保存し、**Done**を選択します。トークンを再び表示することはできません。
 
-トークンに名前を付け、新しいトークンを作成するボタンをクリックします。新しいアクセストークンが表示されます。
+:::warning
 
-このウィンドウを閉じると、トークンを見ることはできなくなるので、必ず控えてください。このトークンは秘密に保つ必要があるため、チーム以外の第三者に共有しないでください（たとえば、フォーラムに投稿しないでください）。
+トークンはREST APIであなたとして動作するため、秘密にしてください。ソース管理にコミットしたり、クライアント側のコードに含めたり、フォーラムに投稿したりしないでください。トークンが漏れた場合は、取り消して新しいトークンを生成してください。
 
-![New Token](/img/user-manual/api/new-token.png)
+:::
 
-また、アカウントページから、生成したトークンをすべて取り消すことも、特定のトークンの名前を編集することもできます。
+### トークンの管理 {#managing-your-tokens}
 
-![Remove Token](/img/user-manual/api/remove-token.png)
+**API tokens**には、トークンがそれぞれの作成日とともに一覧表示されます。
 
-APIを呼び出すときは、HTTPリクエストの 'Authorization' ヘッダに次の値を設定する必要があります。
+- **Rename**でトークンの名前を変更します。
+- **Revoke**でそのトークンを取り消します。
+- **Revoke all**ですべてのトークンを取り消します。
+
+どちらの取り消しも、実行前に確認を求められます。取り消したトークンを使用しているスクリプトやツールは、すぐに動作しなくなります。
+
+:::note
+
+2026年11月5日より前に作成されたトークンは、2026年11月19日に使用できなくなります。スクリプトやツールで古いトークンを使用している場合は、新しいトークンを生成して置き換えてください。[フォーラムのお知らせ](https://forum.playcanvas.com/t/api-tokens-generate-a-new-one-by-19-november/42758)を参照してください。
+
+:::
+
+### トークンの使用 {#using-a-token}
+
+すべてのリクエストで、`Authorization`ヘッダーに次の値を設定します。
 
 ```none
 Bearer [access_token]
 ```
 
-`[access_token]`をaccountページで生成したアクセストークンに置き換えてください。
+`[access_token]`をAPIトークンに置き換えてください。
 
 以下に例を示します。
 
