@@ -31,23 +31,30 @@ Use this index to edit, publish, present or embed splats. To render splats in yo
 - [SuperSplat Editor](/user-manual/supersplat/editor/): The open-source browser-based editor for cleaning, optimizing and animating splats.
 - [Interface Overview](/user-manual/supersplat/editor/interface/): The menus, scene manager, viewport, toolbars and panels.
 - [Import and Export](/user-manual/supersplat/editor/import-export/): The formats it reads and writes, such as PLY, SOG, SPLAT, KSPLAT, SPZ and LCC, camera poses, and standalone viewers.
+- [Managing Projects](/user-manual/supersplat/editor/managing-projects/): Saving edits as `.ssproj` project files.
+- [Managing Splats](/user-manual/supersplat/editor/scene-management/): Working with several splats in one scene.
 - [Selection and Cleanup](/user-manual/supersplat/editor/editing-splats/): Selecting, deleting, restoring and separating Gaussians to remove floaters and crop splats.
 - [Transform, Measure and Align](/user-manual/supersplat/editor/transform-measure-align/): Moving, rotating, scaling, measuring, aligning and merging splats.
-- [Managing Splats](/user-manual/supersplat/editor/scene-management/): Working with several splats in one scene.
 - [Color and Appearance](/user-manual/supersplat/editor/color-and-appearance/): Grading colors, and how Gaussians and selections are drawn.
 - [Data Panel](/user-manual/supersplat/editor/data-panel/): Inspecting splat attributes, filtering by value and finding outliers.
 - [Timeline](/user-manual/supersplat/editor/timeline/): Camera keyframes, COLMAP pose import, and animated camera paths published with a splat.
 - [Rendering Media](/user-manual/supersplat/editor/rendering/): Rendering images and videos, including 360° output.
-- [Managing Projects](/user-manual/supersplat/editor/managing-projects/): Saving edits as `.ssproj` project files.
-- [Publishing](/user-manual/supersplat/editor/publishing/): Publishing a splat from the Editor to superspl.at.
 - [AI Agents (WebMCP)](/user-manual/supersplat/editor/webmcp/): Letting an AI agent inspect and edit the open Editor scene through the browser's experimental WebMCP API.
 - [Troubleshooting](/user-manual/supersplat/editor/troubleshooting/): Fixing common problems with imports, selection, exports, performance and publishing.
 
-## Publishing and Studio
+## Convert
 
+- [Convert](/user-manual/supersplat/convert/): Converting and transforming splats in the browser at superspl.at/convert.
+
+## Publishing
+
+- [Publishing from the Editor](/user-manual/supersplat/editor/publishing/): Publishing a splat from the Editor to superspl.at.
 - [Direct Upload](/user-manual/supersplat/upload/): Uploading a finished splat file to superspl.at without the Editor.
 - [Manage](/user-manual/supersplat/manage/): Listing, editing, sharing and deleting your published splats.
 - [Streaming & Performance](/user-manual/supersplat/streaming/): How published splats are compressed and streamed, the Gaussian budget, and the Viewer's Quality and Performance Mode settings.
+
+## Studio
+
 - [SuperSplat Studio](/user-manual/supersplat/studio/): Curating a published splat's viewing experience.
 - [Look & Tone](/user-manual/supersplat/studio/look-and-tone/): The background color, skybox, tone mapping, high-precision rendering and anti-aliasing.
 - [Cameras](/user-manual/supersplat/studio/cameras/): The starting camera and field of view.
@@ -55,20 +62,22 @@ Use this index to edit, publish, present or embed splats. To render splats in yo
 - [Collision](/user-manual/supersplat/studio/collision/): Voxel collision so visitors can walk through a scene.
 - [Post Effects](/user-manual/supersplat/studio/post-effects/): Sharpness, bloom, color grading, vignette and chromatic fringing.
 - [Annotations](/user-manual/supersplat/studio/annotations/): Clickable 3D hotspots that guide visitors through a scene.
-- [Experience Settings](/user-manual/supersplat/studio/experience-settings/): The JSON schema of Studio's settings, as the Viewer reads them.
+
+## Viewing scenes
+
 - [Scene Page](/user-manual/supersplat/scene-page/): The public page of a published splat: viewer, sharing, embedding, downloads and comments.
-
-## Viewer and API
-
-- [SuperSplat Viewer](/user-manual/supersplat/viewer/): The open-source viewer behind scene pages.
 - [Viewer Controls](/user-manual/supersplat/viewer/controls/): Navigating a scene in the Viewer: toolbar, orbit, fly and walk, the Controls, Settings and Info panels, shortcuts, touch and annotations.
 - [Viewing in VR and AR](/user-manual/supersplat/viewer/xr/): VR and AR sessions in the Viewer: teleporting, grabbing and scaling, AR placement and the hand menu.
+
+## Developers
+
+- [SuperSplat Viewer](/user-manual/supersplat/viewer/): The open-source viewer behind scene pages.
 - [Embedding the Viewer](/user-manual/supersplat/viewer/embedding/): Hosting the prebuilt viewer with URL parameters, or rendering a page with `renderViewerHtml`.
 - [Viewer API](/user-manual/supersplat/viewer/api/): Creating and controlling viewer instances in your own app with `createViewer`.
 - [Self-Hosting the Viewer](/user-manual/supersplat/viewer/self-hosting/): Exporting a splat as a self-contained HTML viewer to host anywhere.
+- [Experience Settings](/user-manual/supersplat/studio/experience-settings/): The JSON schema of Studio's settings, as the Viewer reads them.
 - [API & Integrations](/user-manual/supersplat/api-integrations/): Publishing splats and listing a user's scenes from capture tools, training pipelines and apps, and downloading scenes whose owners allow it.
 - [SuperSplat API specification](https://playcanvas.com/api/supersplat/openapi.json): The OpenAPI definition of every endpoint.
-- [Convert](/user-manual/supersplat/convert/): Converting and transforming splats in the browser at superspl.at/convert.
 
 ## Source
 

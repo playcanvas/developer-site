@@ -287,13 +287,21 @@
     "message": "エディタ",
     "description": "The label for category Editor in sidebar userManualSidebar"
   },
+  "sidebar.userManualSidebar.category.supersplat-publishing": {
+    "message": "公開",
+    "description": "The label for category Publishing (SuperSplat) in sidebar userManualSidebar"
+  },
   "sidebar.userManualSidebar.category.Studio": {
     "message": "スタジオ",
     "description": "The label for category Studio in sidebar userManualSidebar"
   },
-  "sidebar.userManualSidebar.category.Viewer": {
-    "message": "ビューア",
-    "description": "The label for category Viewer in sidebar userManualSidebar"
+  "sidebar.userManualSidebar.category.Viewing & Community": {
+    "message": "閲覧とコミュニティ",
+    "description": "The label for category Viewing & Community in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.supersplat-developers": {
+    "message": "開発者向け",
+    "description": "The label for category Developers (SuperSplat) in sidebar userManualSidebar"
   },
   "sidebar.userManualSidebar.category.API & Integrations": {
     "message": "APIと統合",
