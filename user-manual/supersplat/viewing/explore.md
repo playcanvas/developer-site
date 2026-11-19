@@ -14,7 +14,7 @@ The home page feed is split into tabs:
 |-----|---------------|
 | **Trending** (default) | Splats gaining the most traction right now. |
 | **Latest** (`?tab=latest`) | The most recently published splats. |
-| **Following** (`?tab=following`) | Public splats from the creators you follow, newest first. Only shown while you're signed in. See [Following Creators](https://developer.playcanvas.com/user-manual/supersplat/viewing/following.md). |
+| **Following** (`?tab=following`) | Public splats from the creators you follow, newest first. Only shown while you're signed in. See [Following creators](https://developer.playcanvas.com/user-manual/supersplat/viewing/user-profile.md#following). |
 
 ## The grid
 
@@ -79,7 +79,7 @@ The top-nav search bar adds a `q=` parameter that matches against splat **title*
 
 ## Creator profiles
 
-Click a card's author chip to land on that user's [profile page](https://developer.playcanvas.com/user-manual/supersplat/viewing/user-profile.md) — a grid of every Public splat that user has shared, plus their avatar, bio, and social links. From there you can [follow them](https://developer.playcanvas.com/user-manual/supersplat/viewing/following.md) to see their new splats in your Following tab.
+Click a card's author chip to land on that user's [profile page](https://developer.playcanvas.com/user-manual/supersplat/viewing/user-profile.md) — a grid of every Public splat that user has shared, plus their avatar, bio, and social links. From there you can [follow them](https://developer.playcanvas.com/user-manual/supersplat/viewing/user-profile.md#following) to see their new splats in your Following tab.
 
 ## See also
 

@@ -19,7 +19,7 @@ The viewer is the open-source [SuperSplat Viewer](https://developer.playcanvas.c
 | Field | What it shows |
 |-------|---------------|
 | **Title** | The headline you set in the [Edit Splat dialog](https://developer.playcanvas.com/user-manual/supersplat/publishing/manage.md). |
-| **Author** | A chip linking to the creator's [user profile](https://developer.playcanvas.com/user-manual/supersplat/viewing/user-profile.md), with a **Follow** button so you can [follow them](https://developer.playcanvas.com/user-manual/supersplat/viewing/following.md). |
+| **Author** | A chip linking to the creator's [user profile](https://developer.playcanvas.com/user-manual/supersplat/viewing/user-profile.md), with a **Follow** button so you can [follow them](https://developer.playcanvas.com/user-manual/supersplat/viewing/user-profile.md#following). |
 | **Views** | Total view count. |
 | **Downloads** | Total download count. Only shown if the splat is downloadable. |
 | **Visibility badge** | **Public** or **Unlisted**. |
