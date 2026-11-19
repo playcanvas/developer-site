@@ -5,7 +5,7 @@ description: "SuperSplat Studioで公開済みスプラットの背景色、ス�
 
 [Studio](/user-manual/supersplat/studio/)の**Scene**タブの最上部にある**Look & Tone**セクションでは、スプラットの周囲に何を表示するか、そして画像全体をどのようにレンダリングするかを設定します。変更はすぐにビューポートに反映されます。
 
-<!-- TODO: media — /img/user-manual/supersplat/studio/look-and-tone.png — スカイボックスをアップロードしたLook & Toneセクション -->
+<img loading="lazy" alt="Look & Toneセクション" width="368" src="/img/user-manual/supersplat/studio/look-and-tone.png" />
 
 | コントロール | 動作 |
 |---------|--------------|

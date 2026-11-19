@@ -7,7 +7,7 @@ description: "Studioは公開済みスプラットの視聴体験をキュレー
 
 Studioは出力を単一のJSONドキュメント、[Experience Settings](/user-manual/supersplat/studio/experience-settings)として書き出し、これをオープンソースの[SuperSplat Viewer](/user-manual/supersplat/viewer/)がランタイムで読み込みます。
 
-<!-- TODO: media — /img/user-manual/supersplat/studio/studio-layout.png — タイムラインを開いたStudioのレイアウト -->
+![Studioのウィンドウ：左にSceneタブ、中央にビューポート、下部に開いたタイムライン](/img/user-manual/supersplat/studio/studio-layout.webp)
 
 ## Studioの起動 {#launching-studio}
 

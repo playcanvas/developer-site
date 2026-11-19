@@ -7,7 +7,7 @@ description: "SuperSplat Studioで公開済みスプラットにシャープネ�
 
 画像全体を形作るTonemappingとHigh Precision Renderingは、[Look & Tone](/user-manual/supersplat/studio/look-and-tone)セクションにあります。
 
-<!-- TODO: media — /img/user-manual/supersplat/studio/post-effects-panel.png — いくつかのエフェクトをオンにしたPost Effectsセクション -->
+<img loading="lazy" alt="Bloom、Color Grading、VignetteをオンにしたPost Effectsセクション" width="383" src="/img/user-manual/supersplat/studio/post-effects-panel.png" />
 
 ## Sharpness
 

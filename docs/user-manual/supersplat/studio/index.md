@@ -7,7 +7,7 @@ description: "Studio curates the viewing experience for a published splat: look 
 
 Studio writes its output as a single JSON document, the [Experience Settings](/user-manual/supersplat/studio/experience-settings), which the open-source [SuperSplat Viewer](/user-manual/supersplat/viewer/) reads at runtime.
 
-<!-- TODO: media — /img/user-manual/supersplat/studio/studio-layout.png — the Studio layout with the timeline open -->
+![The Studio window: the Scene tab on the left, the viewport, and the timeline open along the bottom](/img/user-manual/supersplat/studio/studio-layout.webp)
 
 ## Launching Studio {#launching-studio}
 

@@ -5,7 +5,7 @@ description: "公開済みスプラットに3D空間配置のテキストホッ�
 
 **Annotations**は、[Studio](/user-manual/supersplat/studio/)で公開済みスプラットに配置する3D空間配置のテキストホットスポットです。ビューア側では、各注釈は訪問者がクリックできる番号付きのホットスポットとして表示されます。クリックすると、カメラがキュレーションされた姿勢に移動し、タイトルと本文が表示されます。注釈を使って、機能を説明したり、ストーリーを語ったり、シーンのセルフガイドツアーを提供したりできます。
 
-<!-- TODO: media — /img/user-manual/supersplat/studio/annotations-panel.png — 注釈のリストとビューポートで選択中の注釈があるAnnotationsパネル -->
+![3つの注釈があり、1つを選択してビューポートにカードを表示したAnnotationsタブ](/img/user-manual/supersplat/studio/annotations.webp)
 
 ## 注釈のプロパティ
 

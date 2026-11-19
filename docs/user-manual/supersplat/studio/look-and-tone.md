@@ -5,7 +5,7 @@ description: "Set the background color, skybox, tonemapping, high-precision rend
 
 The **Look & Tone** section, at the top of the **Scene** tab in [Studio](/user-manual/supersplat/studio/), sets what surrounds your splat and how the whole image is rendered. Changes show in the viewport straight away.
 
-<!-- TODO: media — /img/user-manual/supersplat/studio/look-and-tone.png — the Look & Tone section with a skybox uploaded -->
+<img loading="lazy" alt="The Look & Tone section" width="368" src="/img/user-manual/supersplat/studio/look-and-tone.png" />
 
 | Control | What it does |
 |---------|--------------|

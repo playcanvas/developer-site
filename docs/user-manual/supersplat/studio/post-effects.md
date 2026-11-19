@@ -7,7 +7,7 @@ The **Post Effects** section, at the bottom of the **Scene** tab in [Studio](/us
 
 Tonemapping and High Precision Rendering, which shape the whole image, are in the [Look & Tone](/user-manual/supersplat/studio/look-and-tone) section.
 
-<!-- TODO: media — /img/user-manual/supersplat/studio/post-effects-panel.png — the Post Effects section with several effects on -->
+<img loading="lazy" alt="The Post Effects section with Bloom, Color Grading and Vignette on" width="383" src="/img/user-manual/supersplat/studio/post-effects-panel.png" />
 
 ## Sharpness
 
