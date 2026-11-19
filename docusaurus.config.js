@@ -63,6 +63,7 @@ const config = {
 
   clientModules: [
     './src/client-modules/reveal-current-page.js',
+    './src/client-modules/copy-page-button.js',
   ],
 
   plugins: [
@@ -307,7 +308,8 @@ const config = {
     'docusaurus-plugin-sass',
     // Fail CI builds on docs the LLM files cannot represent faithfully
     [pluginLlms, { failOnError: process.env.CI === 'true' }],
-    'docusaurus-plugin-copy-page-button'
+    // Its client module is loaded after hydration by src/client-modules/copy-page-button.js
+    ['docusaurus-plugin-copy-page-button', { injectButton: false }]
   ],
 
   presets: [
