@@ -118,5 +118,5 @@ flowchart TB
 ## 最新情報を追う
 
 - [PlayCanvasブログのSuperSplat関連記事](https://blog.playcanvas.com/tags/supersplat/)
-- [Discord](https://discord.gg/RSaMRzg) — 質問や作品の共有に
+- [Discord](https://discord.gg/qcydPEtn65) — 質問や作品の共有に
 - [GitHub](https://github.com/playcanvas/supersplat) — Issueやコントリビューションに

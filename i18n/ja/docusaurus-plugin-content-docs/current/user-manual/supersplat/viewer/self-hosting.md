@@ -27,7 +27,7 @@ description: "SuperSplat Editorからスプラットを自己完結型のHTMLビ
 | **Animation** | 有効にすると、[タイムライン](/user-manual/supersplat/editor/timeline)で作成したカメラアニメーションが含まれ、ビューアの読み込み時に再生されます。タイムラインにキーフレームがある場合にのみ使用でき（その場合はデフォルトで有効）ます |
 | **Loop Mode** | 含まれたカメラアニメーションの再生方法：<br/>• **None**: 1回再生して停止<br/>• **Repeat**: 連続してループ<br/>• **Ping Pong**: 順方向と逆方向の再生を繰り返し<br/>Timelineのループトグルから初期化されます。ループが有効なら**Repeat**、そうでなければ**None**になります |
 | **Background** | ビューアの背景色。[Preferences](/user-manual/supersplat/editor/interface#preferences)ポップアップの**Colors**セクションで設定する、Editorの**Background Color**がデフォルトになります |
-| **Field of View** | ビューアのカメラの垂直視野角（度）。Editorカメラの現在の設定がデフォルトになります |
+| **Field of View** | ビューアのカメラの視野角（度）。画面の長辺方向で測ります。Editorカメラの現在の設定がデフォルトになります |
 | **SH Bands** | エクスポートされるスプラットデータに書き込む球面調和関数のバンド数（0～3）で、指定した数がそのまま書き込まれます。デフォルトはシーン内で最も多いバンド数で、[Preferences](/user-manual/supersplat/editor/interface#preferences)の**SH Bands**設定が上限になります。スプラットが持つバンドより多い数を選ぶと、足りないバンドはゼロで埋められます |
 
 エクスポートされたビューアのカメラは、エクスポートした瞬間のビューポートカメラのポーズから開始します。エクスポートする前に、お気に入りのビューでフレーミングしておきましょう。

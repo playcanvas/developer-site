@@ -168,4 +168,4 @@ const { min, max, step } = POST_EFFECT_RANGES.bloom.intensity;
 - [Viewer / embedding](/user-manual/supersplat/viewer/embedding) — Viewerに`settings.json` URLを指定する方法
 - [Viewer API](/user-manual/supersplat/viewer/api) — 自分のページで作成したビューアに設定を渡す
 - [Viewer / self-hosting](/user-manual/supersplat/viewer/self-hosting) — これらの設定のコピーを同梱した自己完結型Viewerをエクスポートする
-- [Splat Publishing API](/user-manual/api/splat-publish/) — 公開と設定更新へのプログラム的なアクセス
+- [API & Integrations](/user-manual/supersplat/api-integrations) — 独自のコードからsuperspl.atへスプラットを公開する

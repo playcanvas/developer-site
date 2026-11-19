@@ -168,4 +168,4 @@ Older `v1` settings are migrated to `v2` automatically when loaded by Studio or 
 - [Viewer / embedding](/user-manual/supersplat/viewer/embedding) — how to point a Viewer at a `settings.json` URL
 - [Viewer API](/user-manual/supersplat/viewer/api) — pass settings to a viewer you create in your own page
 - [Viewer / self-hosting](/user-manual/supersplat/viewer/self-hosting) — exporting a self-contained Viewer that bundles a copy of these settings
-- [Splat Publishing API](/user-manual/api/splat-publish/) — programmatic access to publishing and updating settings
+- [API & Integrations](/user-manual/supersplat/api-integrations) — publish splats to superspl.at from your own code

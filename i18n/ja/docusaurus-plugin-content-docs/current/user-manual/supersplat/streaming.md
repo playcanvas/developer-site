@@ -15,7 +15,7 @@ description: "SuperSplatが公開済みスプラットをSOGに圧縮し、大�
 どちらになるかは、公開方法によって決まります：
 
 - **Editorから公開する場合**は、[Publish Settings](/user-manual/supersplat/editor/publishing)ダイアログの**Generate LODs**トグルで決まります。100万ガウシアン以上で、広い範囲にわたるシーンではデフォルトでオンになります。4000万ガウシアンを超えるシーンはストリーミングが必須のため、トグルはオンになり、オフにはできません。
-- **[直接アップロード](/user-manual/supersplat/upload)の場合**は、PLYに**Auto generate LODs**チェックボックスが表示され、100万ガウシアン以上では自動的にオンになります（公開前に切り替え可能です）。事前にビルドされたLCCまたはSSOGアーカイブとしてアップロードされたスプラットは、常にストリーミングされます。
+- **[直接アップロード](/user-manual/supersplat/upload)の場合**は、PLYまたはSPZファイルに**Auto generate LODs**チェックボックスが表示され、100万ガウシアン以上では自動的にオンになります（公開前に切り替え可能ですが、4,000万ガウシアンを超える場合はオンに固定されます）。SOGファイルは単一ファイルとして公開され、事前にビルドされたLCCまたはSSOGアーカイブとしてアップロードされたスプラットは、常にストリーミングされます。
 
 ## ほぼ瞬時の読み込みとガウシアンバジェット {#near-instant-loads-and-the-gaussian-budget}
 

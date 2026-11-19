@@ -24,21 +24,22 @@ The viewer is the open-source [SuperSplat Viewer](/user-manual/supersplat/viewer
 | **Title** | The headline you set in the [Edit Splat dialog](/user-manual/supersplat/manage). |
 | **Author** | A chip linking to the creator's [user profile](/user-manual/supersplat/user-profile), with a **Follow** button so you can [follow them](/user-manual/supersplat/following). |
 | **Views** | Total view count. |
-| **Likes** | Total stars; highlighted if you've liked this splat. |
+| **Downloads** | Total download count. Only shown if the splat is downloadable. |
 | **Visibility badge** | **Public** or **Unlisted**. |
 | **Software used** | Chips for the tools you tagged in the Edit Splat dialog (capture / training tools). |
 | **Description** | The longer description you set in the Edit Splat dialog (sanitized HTML). |
 | **Format / size** | The published splat format and download size, with a tooltip. |
+| **Splat count** | The number of Gaussians in the published splat. Its tooltip lists the levels of detail of a [streamed](/user-manual/supersplat/streaming) splat, and the spherical harmonic bands. |
 | **Created** | Relative time the splat was published, with the exact date on hover. |
 
 ### Action buttons {#actions}
 
 | Button | What it does |
 |--------|--------------|
+| **Like** (thumbs-up) | Shows the splat's like count and toggles your like. Highlighted if you've liked the splat. Requires login — anonymous visitors are prompted to sign in. |
 | **Share** | Opens the [Share dialog](#share-dialog). |
 | **Embed** | Opens the [Embed dialog](#embed-dialog). |
 | **Download** | Opens the [Download dialog](#download-dialog). Only shown if the splat is downloadable. |
-| **Like** (star) | Toggles your like for the splat. Requires login — anonymous visitors are prompted to sign in. |
 
 Owners also see an **Edit in Studio** entry point that opens [Studio](/user-manual/supersplat/studio/) for this scene.
 
@@ -82,15 +83,15 @@ Some download targets are produced on demand — the dialog shows a **Preparing�
 Below the viewer is the comments section. Anyone signed in can post a comment; the splat's owner can delete any comment.
 
 - Each comment shows the commenter's avatar, username, timestamp, and sanitized HTML body.
-- Comments can be liked individually (the per-comment star icon).
+- Comments can be liked individually (the per-comment thumbs-up icon).
 - The comments list is paginated; up to **100 comments** are returned per page.
 - Comments are sorted newest-first.
 
 A PlayCanvas account is required to post — unauthenticated visitors see a prompt to sign in.
 
-## Likes (stars) {#likes}
+## Likes {#likes}
 
-The **Like** button in the action bar is a single-click toggle. Counts update immediately. Like requires a PlayCanvas account; visitors without one are prompted to sign in.
+The **Like** button (thumbs-up) in the action bar is a single-click toggle that also shows the like count. Counts update immediately. Like requires a PlayCanvas account; visitors without one are prompted to sign in.
 
 ## Suggested splats
 

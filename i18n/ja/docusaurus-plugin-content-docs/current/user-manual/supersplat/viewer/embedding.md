@@ -190,7 +190,7 @@ viewer.destroy();
 
 ## プログラム的な公開
 
-EditorやStudioのUIを経由せずにスプラットを公開し、設定を更新したい場合、[Splat Publishing API](/user-manual/api/splat-publish/)が背後のRESTエンドポイントを提供しています。
+Editorを使わずに独自のパイプラインからsuperspl.atへスプラットを公開するには、[SuperSplat API](/user-manual/supersplat/api-integrations)を使用します。この方法で公開したシーンはデフォルトの設定で始まり、その閲覧体験は[Studio](/user-manual/supersplat/studio/)で整えます。
 
 ## 関連項目
 
@@ -198,4 +198,4 @@ EditorやStudioのUIを経由せずにスプラットを公開し、設定を更
 - [ビューアAPI](/user-manual/supersplat/viewer/api) — `createViewer`とビューアハンドル
 - [Self-Hosting](/user-manual/supersplat/viewer/self-hosting) — Editorからの単一ファイルHTMLエクスポート
 - [Experience Settings](/user-manual/supersplat/studio/experience-settings) — ビューアが読むJSONコントラクト
-- [Splat Publishing API](/user-manual/api/splat-publish/) — プログラム的な公開のためのRESTエンドポイント
+- [API & Integrations](/user-manual/supersplat/api-integrations) — 独自のコードからsuperspl.atへスプラットを公開する

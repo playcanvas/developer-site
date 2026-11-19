@@ -25,22 +25,21 @@ You must be signed in with a PlayCanvas account to upload. See [Account Creation
 
 ## Supported input formats
 
-Drag and drop, or pick from your filesystem. The dialog accepts:
+Drag and drop, or pick from your filesystem. The dialog accepts these formats, each up to its own maximum size. Its **Upload Guide** summarizes them.
 
-| Format | File to upload | How it is validated |
-|--------|----------------|---------------------|
-| **PLY** | `.ply` | Starts with a PLY header and declares an ASCII or binary format. |
-| **SOG** | `.sog` | Contains one `meta.json` file and the expected SOG WebP payload files. |
-| **Streamed SOG bundle (SSOG)** | `.zip` | Contains `lod-meta.json` and one or more SOG chunk folders. See [Streaming & Performance](/user-manual/supersplat/streaming). |
-| **LCC** | `.zip` | Contains exactly one `.lcc` file with sibling `index.bin` and `data.bin` files. |
+| Format | File to upload | Maximum size | How it is validated |
+|--------|----------------|--------------|---------------------|
+| **PLY** | `.ply` | 15 GB | A PLY file containing Gaussian splat data. A PLY that holds only a mesh or a point cloud is rejected. |
+| **SPZ** | `.spz` | 5 GB | A readable SPZ file. |
+| **SOG** | `.sog` | 10 GB | Contains one `meta.json` file and the expected SOG WebP payload files. |
+| **Streamed SOG bundle (SSOG)** | `.zip` | 10 GB | Contains `lod-meta.json` and one or more SOG chunk folders. See [Streaming & Performance](/user-manual/supersplat/streaming). |
+| **LCC or LCC2** | `.zip` | 10 GB | Contains exactly one `.lcc2` file, or exactly one `.lcc` file with sibling `index.bin` and `data.bin` files. |
 
-The file contents are validated after selection. Direct Upload does not accept `.compressed.ply`, `.ksplat`, `.splat`, or `.spz` files directly; use the [Convert](/user-manual/supersplat/convert) utility or the [splat-transform CLI](/user-manual/splat-transform/) to convert those first.
+The file contents are validated after selection. Direct Upload does not accept `.compressed.ply`, `.ksplat`, or `.splat` files directly. Use the [Convert](/user-manual/supersplat/convert) utility or the [splat-transform CLI](/user-manual/splat-transform/) to convert those first, or to bring a file under its format's maximum size.
 
-:::note Maximum file size
+### Levels of detail
 
-Direct Upload accepts files up to **10 GB**. Larger files must be split or compressed first — try the [Convert](/user-manual/supersplat/convert) utility or the [splat-transform CLI](/user-manual/splat-transform/) to bring file size down before uploading.
-
-:::
+When you choose a PLY or SPZ file, the dialog shows an **Auto generate LODs** checkbox. When it is ticked, the splat is published as a progressively streamed [Streamed SOG](/user-manual/supersplat/streaming) instead of a single SOG file. It is ticked automatically for splats of 1 million Gaussians or more, and you can change it before uploading. Splats of more than 40 million Gaussians must be streamed, so for them it is ticked and locked. SOG files are always published as a single file, while SSOG and LCC archives are always streamed.
 
 ## What happens after upload
 
@@ -72,11 +71,12 @@ From the Edit Splat view, you can:
 
 | Error | Cause |
 |-------|-------|
-| **Unrecognized format** | The file does not match one of the supported structures above. |
-| **File too large** | The file exceeds the 10 GB limit. |
-| **Upload failed** | Network interruption or a server-side issue. Try again; if the problem persists, check your connection. |
+| **Unrecognized Format** | The file does not match one of the supported structures above. |
+| **No Gaussian Splat Data** | The file is a valid PLY, but it holds a mesh or a point cloud rather than a Gaussian splat. |
+| **File Too Large** | The file is larger than its format's maximum size. The message gives both sizes. |
+| **Upload Failed** | Network interruption or a server-side issue. Try again; if the problem persists, check your connection. |
 
-Every account also has a daily publishing allowance, measured in compressed output, and a limit on how many scenes can be uploading or processing at once. See [Limits](/user-manual/supersplat/api-integrations#limits).
+Every account also has a daily publishing allowance, measured in compressed output, and a limit on how many scenes can be uploading or processing at once. When you reach either, the dialog says so (**Publishing Allowance Used** or **Scenes Still Processing**) and when you can upload again. See [Limits](/user-manual/supersplat/api-integrations#limits).
 
 ## See also
 
