@@ -53,3 +53,4 @@ SuperSplat Editorのより包括的なガイドについては、この詳細な
 - [スプラットの管理](scene-management)で複数のキャプチャを扱い、[色と外観](color-and-appearance)で見た目を整える
 - [キーボードショートカット](keyboard-shortcuts)を参照し、ワークフローが期待どおりに動作しない場合は[トラブルシューティング](troubleshooting)を確認する
 - スプラットがクリーンになったら、superspl.atに[公開](publishing)し、[Manageページ](../manage)に表示し、[Studio](../studio/)で開きます
+- ブラウザの実験的な[WebMCP](webmcp)ツールを通じて、AIエージェントにシーンの確認と編集を任せる

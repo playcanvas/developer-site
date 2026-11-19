@@ -19,10 +19,9 @@ macOSでは、UndoやSelect Allなどのアプリケーションコマンドに�
 | 選択したガウシアンを削除 | `Delete`または`Backspace` | `Delete`または`Backspace` |
 | 選択範囲をロック | `H` | `H` |
 | すべてロック解除 | `Shift + H` | `Shift + H` |
-| Selection Depthを切り替え | `N` | `N` |
-| Selection Footprintを切り替え | `M` | `M` |
+| X-Rayを切り替え | `N` | `N` |
 
-Rectangle、Lasso、Polygon、Brush、Sphere Brush、Flood、Eyedropperで選択するときは、`Shift`を押すと追加、`Ctrl`を押すと削除、`Shift + Ctrl`を押すと現在の選択範囲との共通部分だけを保持します。`N`と`M`が何を変えるかは、[Selection DepthとSelection Footprint](editing-splats.md#selection-depth-and-footprint)を参照してください。
+Rectangle、Lasso、Polygon、Brush、Sphere Brush、Flood、Eyedropperで選択するときは、`Shift`を押すと追加、`Ctrl`を押すと削除、`Shift + Ctrl`を押すと現在の選択範囲との共通部分だけを保持します。`N`と`M`が何を変えるかは、[選択モードとX-Ray](editing-splats.md#selection-mode-and-x-ray)を参照してください。
 
 ## ツールと表示
 
@@ -33,13 +32,14 @@ Rectangle、Lasso、Polygon、Brush、Sphere Brush、Flood、Eyedropperで選択
 | Brush / Sphere Brush Selection | `B` / `Shift + B` |
 | Flood Selection | `O` |
 | Eyedropper Selection | `Ctrl + E`（macOSでは`Cmd + E`） |
-| ブラシサイズを縮小 / 拡大 | `[` / `]`、または`Alt + ホイール` |
+| ブラシサイズを縮小 / 拡大 | `[` / `]`、または`Alt + Wheel` |
 | ポリゴンを閉じる | `Enter` |
 | ポリゴンの最後の点を削除 | `Backspace` |
 | MeasureまたはOrientのアクティブな点を削除 | `Delete`または`Backspace` |
 | 現在のツールを終了 | `Escape` |
 | ワールド / ローカル座標を切り替え | `Shift + C` |
-| 表示オーバーレイを切り替え | `Tab` |
+| Centers / Ringsモードを切り替え | `M` |
+| マーカーを切り替え | `Tab` |
 | グリッドを切り替え | `G` |
 | カメラ情報を切り替え | `I` |
 | Splat Dataパネルを切り替え | `Ctrl + D`（macOSでは`Cmd + D`） |
@@ -67,8 +67,8 @@ Rectangle、Lasso、Polygon、Brush、Sphere Brush、Flood、Eyedropperで選択
 | 前 / 次のキーフレーム | `<` / `>`（`Shift + ,` / `Shift + .`） |
 | キーフレームを追加 | `Enter` |
 | キーフレームを削除 | `Shift + Enter` |
-| キーフレームを現在のカメラポーズで上書き | キーフレームを`Ctrl + クリック` |
-| キーフレームをコピー | キーフレームを`Shift + ドラッグ` |
+| キーフレームを現在のカメラポーズで上書き | キーフレームを`Ctrl + Click` |
+| キーフレームをコピー | キーフレームを`Shift + Drag` |
 
 ## ファイル
 

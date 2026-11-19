@@ -33,10 +33,10 @@ description: "SuperSplatで最初のスプラットを約10分で公開する：
 
 生のキャプチャの多くには**フローター**（トレーナーが判断に迷った場所に浮かんでいる不要なガウシアン）が含まれています。これを取り除くことが、品質向上のもっとも大きな一手です。
 
-1. **Selection Depth**（下ツールバー左側の2つ目のトグル、または**N**キー）をオンにして選択が可視サーフェスで止まるようにし、**Tab**を押してガウシアンの中心点を表示します。
+1. ビューポート右上のモードストリップで**X-Ray**をオフにし（または**N**キーを押し）、選択が可視サーフェスで止まるようにします。さらに**Markers**をオンにして（または**Tab**キーを押して）ガウシアンの中心点を表示します。
 2. ツールバーから選択ツールを選びます：フローターを塗るように選択する**Brush Selection**、サーフェスに沿って3Dでペイントする**Sphere Brush**、3D領域をまとめて選択する**Sphere Selection**や**Box Selection**、孤立した部分を選ぶ**Flood Selection**などです。**Shift**を押しながらで選択に追加、**Ctrl**を押しながらで選択から除外できます。
 3. <kbd>Delete</kbd>を押します。カメラを回して別の角度から確認し、繰り返します。
-4. 消しすぎてしまったら、**Edit → Undo**で戻すか、**Select → Reset**で削除したすべてのガウシアンを復元します。
+4. 消しすぎてしまった場合は**Edit → Undo**で元に戻せます。削除したすべてのガウシアンを復元するには**Select → Reset Splat**を使います。
 
 ![他のガウシアンの中心点の中でハイライトされた選択ガウシアン](/img/user-manual/supersplat/editor/display-centers.webp)
 
@@ -54,7 +54,7 @@ description: "SuperSplatで最初のスプラットを約10分で公開する：
 2. お気に入りの構図を決めます。公開されたシーンは、カメラをそのまま残した位置から始まります。
 3. **File → Publish**を選び、スプラットに**Title**と**Description**を入力して、**Publish**をクリックします。
 
-![Publishダイアログ](/img/user-manual/supersplat/editor/publish-settings.png)
+<img loading="lazy" alt="Publishダイアログ" width="400" src="/img/user-manual/supersplat/editor/publish-settings.png" />
 
 SOG形式への圧縮には少し時間がかかり、非常に大きなシーンでは数分かかることもあります。完了すると、新しい[シーンページ](scene-page.md)のURLがダイアログに表示されます。新しいスプラットは**Unlisted**（限定公開）です。リンクを知っている人は誰でも閲覧できますが、ステップ5でPublicにするまでExploreには表示されません。
 

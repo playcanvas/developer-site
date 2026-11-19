@@ -53,3 +53,4 @@ For a more comprehensive guide to using the SuperSplat Editor, check out this in
 - Work with multiple captures using [Managing Splats](scene-management), and finish their look with [Color and Appearance](color-and-appearance)
 - Keep the [Keyboard Shortcuts](keyboard-shortcuts) reference nearby, or check [Troubleshooting](troubleshooting) when a workflow does not behave as expected
 - Once your splat is clean, [Publish](publishing) it to superspl.at to land on your [Manage page](../manage) and open it in [Studio](../studio/)
+- Let an AI agent inspect and edit your scene through the browser's experimental [WebMCP](webmcp) tools

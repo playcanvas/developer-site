@@ -76,6 +76,8 @@ From the Edit Splat view, you can:
 | **File too large** | The file exceeds the 10 GB limit. |
 | **Upload failed** | Network interruption or a server-side issue. Try again; if the problem persists, check your connection. |
 
+Every account also has a daily publishing allowance, measured in compressed output, and a limit on how many scenes can be uploading or processing at once. See [Limits](/user-manual/supersplat/api-integrations#limits).
+
 ## See also
 
 - [Publishing from the Editor](/user-manual/supersplat/editor/publishing) — the alternative path that goes through the SuperSplat Editor

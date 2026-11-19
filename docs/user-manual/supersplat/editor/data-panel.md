@@ -32,7 +32,7 @@ Select a row in the property list to display its distribution. The default prope
 | Property | Description |
 |----------|-------------|
 | **Position X/Y/Z** | World-space position after applying scene and per-splat transforms. |
-| **Opacity** | Effective opacity, including any applied **Colors** transparency grade. |
+| **Opacity** | Effective opacity, including any applied **Colors** transparency grade. Usually 0 to 1; merged Gaussians, such as those in decimated scenes, and a transparency grade that increases opacity can take it above 1, up to 1.5625. |
 | **Red/Green/Blue** | Final color for the current camera direction, including spherical harmonics and any applied **Colors** grade. These histograms can change when the camera moves. |
 | **Scale X/Y/Z** | Decoded Gaussian scale along each local axis. |
 | **Quaternion W/X/Y/Z** | Components of the Gaussian's rotation quaternion. |
@@ -114,7 +114,7 @@ The panel displays decoded or derived values rather than every value exactly as 
 | Scale | Decoded Gaussian scale; logarithmic source values have already been exponentiated. |
 | Red/Green/Blue | Final color after evaluating available SH bands for the current view and applying any color grade. |
 | Hue/Saturation/Value | Calculated from the final color after clamping RGB to the `0-1` range. |
-| Opacity | Decoded opacity with any transparency grade applied. |
+| Opacity | Linear opacity (not the logit stored in standard 3DGS PLY files) with any transparency grade applied. |
 | Quaternion W/X/Y/Z | Rotation quaternion; `W` is reconstructed in its non-negative canonical form. |
 | DC and SH | Raw coefficients exposed when **All Properties** is enabled. |
 

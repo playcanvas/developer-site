@@ -3,7 +3,7 @@ title: Cameras
 description: "Set the starting camera for a published splat — frame its position and target in the viewport and set the field of view — in SuperSplat Studio."
 ---
 
-The **Cameras** section — in the **Scene** tab of [Studio](/user-manual/supersplat/studio/)'s left panel — defines the **starting camera** for your published splat: the view a visitor lands on when they open your [scene page](/user-manual/supersplat/scene-page) (unless a [camera animation track](/user-manual/supersplat/editor/timeline) or [annotation](/user-manual/supersplat/studio/annotations) drives the start pose instead). The camera has a **position**, a **target** (the point it looks at), and a **field of view**.
+The **Cameras** section — in the **Scene** tab of [Studio](/user-manual/supersplat/studio/)'s left panel — defines the **starting camera** for your published splat: the view a visitor lands on when they open your [scene page](/user-manual/supersplat/scene-page) (unless a [camera animation track](/user-manual/supersplat/editor/timeline) drives the start instead). The camera has a **position**, a **target** (the point it looks at), and a **field of view**.
 
 ![The Cameras panel with a list of cameras](/img/user-manual/supersplat/studio/cameras-panel.png)
 
@@ -56,7 +56,8 @@ Use [camera edit mode](#edit-camera-mode) to frame the viewport and click **Appl
 
 ## How cameras are used
 
-- **Initial framing** — the first camera in the list is the default starting view when a visitor opens the scene page (`startMode: 'default'`). A [camera animation track](/user-manual/supersplat/editor/timeline) or an [annotation](/user-manual/supersplat/studio/annotations) can override this via the scene's start mode.
+- **Initial framing** — the first camera in the list is the default starting view when a visitor opens the scene page (`startMode: 'default'`). From there the viewer plays a slow, looping camera motion until the visitor takes over: an orbit around the target when the camera starts outside the splat (an object), or a gentle figure-eight when it starts inside (a scene). A [camera animation track](/user-manual/supersplat/editor/timeline) replaces that motion when the scene's start mode is `animTrack`.
+- **Object or scene** — whether the camera starts outside or inside the splat's bounds also decides the viewer's starting [camera mode](/user-manual/supersplat/viewer/controls#camera-modes) (orbit for an object, walk or fly for a scene) and how the splat is presented in [VR and AR](/user-manual/supersplat/viewer/xr#scenes-and-objects).
 - **Annotation poses** — each [annotation](/user-manual/supersplat/studio/annotations) embeds its own camera pose that the viewer animates to when the annotation is selected. The annotation's pose is independent of the entries in the Cameras list.
 
 ## See also
