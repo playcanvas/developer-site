@@ -48,7 +48,12 @@ const StaticPostEffects: FC<Record<string, unknown>> = (props) => {
                 "g": 0.9333333333333333,
                 "b": 0.8666666666666667,
                 "a": 1
-            }
+            },
+            // This object replaces CameraFrame's Grading, whose postUpdate copies every
+            // field, so it needs the channel mixer (engine 2.24+) too: identity weights
+            "mixerRed": { "x": 1, "y": 0, "z": 0 },
+            "mixerGreen": { "x": 0, "y": 1, "z": 0 },
+            "mixerBlue": { "x": 0, "y": 0, "z": 1 }
         },
         "vignette": {
             "enabled": true,
