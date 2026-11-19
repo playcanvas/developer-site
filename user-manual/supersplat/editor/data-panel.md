@@ -1,6 +1,6 @@
 # Data Panel
 
-The **Splat Data** panel visualizes the attribute values of the active splat as an interactive histogram. Use it to understand how values are distributed, find outliers, and select splats whose values fall within a particular range.
+The **Splat Data** panel visualizes the attribute values of the active splat as an interactive histogram. Use it to understand how values are distributed, find outliers, and select Gaussians whose values fall within a particular range. The panel's labels, like the status bar's, call individual Gaussians _splats_.
 
 [Image: The Splat Data panel showing its filters, property list, and histogram]
 
@@ -13,13 +13,13 @@ The panel opens at the bottom of the Editor and is collapsed by default. Open or
 
 Drag the panel's top edge to change its height.
 
-## Choosing Which Splats and Property to Display
+## Choosing Which Gaussians and Property to Display
 
 The controls on the left determine which values are included in the histogram:
 
 | Control | Description |
 |---------|-------------|
-| **Visible Splats Only** | Includes only splats inside the camera's current view. Splats outside the view are excluded. This is a view-frustum filter; it does not test whether another splat is in front of them. |
+| **Visible Splats Only** | Includes only Gaussians inside the camera's current view. Gaussians outside the view are excluded. This is a view-frustum filter; it does not test whether other Gaussians are in front of them. |
 | **Log Counts** | Uses a logarithmic vertical scale so bins with small counts remain visible alongside bins with large counts. This changes only the graph's vertical display, not the underlying values or selection. |
 | **Log Bins** | Spaces the bins logarithmically along the value axis (negative values included), so groups of values spread across a large range stay distinguishable. Range selection still works on the real values. |
 | **All Properties** | Adds raw DC and spherical harmonic (SH) coefficients to the property list. The available SH entries depend on the bands contained in the active splat. |
@@ -46,22 +46,22 @@ With **All Properties** enabled, the list can also include:
 | **DC R/G/B** | Raw zeroth-order spherical harmonic color coefficients. These values do not include higher SH bands or an applied color grade. |
 | **R/G/B SH _n_** | Higher-order spherical harmonic coefficients, grouped by color channel. Only coefficients present in the source data are listed. |
 
-Locked and deleted splats are always excluded from the histogram. Enable **Visible Splats Only** to exclude off-screen splats as well.
+Locked and deleted Gaussians are always excluded from the histogram. Enable **Visible Splats Only** to exclude off-screen Gaussians as well.
 
 ## Reading the Histogram
 
-The histogram uses the Editor's unselected and selected colors to show the two populations separately. By default, unselected splats are blue and selected splats are yellow.
+The histogram uses the Editor's unselected and selected colors to show the two populations separately. By default, unselected Gaussians are blue and selected Gaussians are yellow.
 
 Move the pointer across the histogram to inspect a value. The value appears beneath the pointer, while an overlay shows:
 
-- **Splats** - The number and percentage of included splats at that value.
-- **Selected** - How many of those splats are currently selected.
+- **Splats** - The number and percentage of included Gaussians at that value.
+- **Selected** - How many of those Gaussians are currently selected.
 
 When you drag across a range, the two values beneath the histogram mark the range boundaries and the overlay reports aggregate counts for the whole range.
 
 ## Selecting a Value Range
 
-Click and drag across the histogram to select all eligible splats in a value range. A highlighted rectangle shows the range before you release the pointer. Locked and deleted splats cannot be selected through the histogram.
+Click and drag across the histogram to select all eligible Gaussians in a value range. A highlighted rectangle shows the range before you release the pointer. Locked and deleted Gaussians cannot be selected through the histogram.
 
 Hold modifier keys when releasing the pointer to control how the range is applied:
 
@@ -70,7 +70,7 @@ Hold modifier keys when releasing the pointer to control how the range is applie
 | None | **Set** | Replace the current selection with the range. |
 | **Shift** | **Add** | Add the range to the current selection. |
 | **Ctrl** | **Remove** | Remove the range from the current selection. |
-| **Shift + Ctrl** | **Intersect** | Keep only splats that are in both the current selection and the range. |
+| **Shift + Ctrl** | **Intersect** | Keep only Gaussians that are in both the current selection and the range. |
 
 The pointer displays the active Set, Add, Remove, or Intersect operation while it is over the histogram. These operations match the modifiers used by the [2D selection tools](https://developer.playcanvas.com/user-manual/supersplat/editor/editing-splats.md#selection-modifiers).
 
@@ -80,12 +80,12 @@ The status bar below the panel reports the state of the active splat independent
 
 | Statistic | Description |
 |-----------|-------------|
-| **Splats** | Total number of non-deleted splats, including locked splats. |
-| **Selected** | Number of currently selected splats. |
-| **Locked** | Number of locked splats. |
-| **Deleted** | Number of deleted splats. |
+| **Splats** | Total number of non-deleted Gaussians, including locked Gaussians. |
+| **Selected** | Number of currently selected Gaussians. |
+| **Locked** | Number of locked Gaussians. |
+| **Deleted** | Number of deleted Gaussians. |
 
-These totals update when splats are selected, deselected, locked, unlocked, deleted, or reset.
+These totals update when Gaussians are selected, deselected, locked, unlocked, deleted, or reset.
 
 ## Common Uses
 
@@ -95,7 +95,7 @@ Choose **Distance**, **Opacity**, **Volume**, or **Surface Area**, look for isol
 
 ### Selecting by Color
 
-Choose **Hue**, **Saturation**, or **Value** and select a range to isolate similarly colored splats. Because these properties use the final view-dependent color, position the camera at the viewpoint that matters before making the selection.
+Choose **Hue**, **Saturation**, or **Value** and select a range to isolate similarly colored Gaussians. Because these properties use the final view-dependent color, position the camera at the viewpoint that matters before making the selection.
 
 ### Cleaning Only the Current View
 

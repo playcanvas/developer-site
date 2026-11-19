@@ -33,7 +33,7 @@ Use this index to edit, publish, present or embed splats. To render splats in yo
 - [Selection and Cleanup](https://developer.playcanvas.com/user-manual/supersplat/editor/editing-splats.md): Selecting, deleting, restoring and separating Gaussians to remove floaters and crop splats.
 - [Transform, Measure and Align](https://developer.playcanvas.com/user-manual/supersplat/editor/transform-measure-align.md): Moving, rotating, scaling, measuring, aligning and merging splats.
 - [Color and Appearance](https://developer.playcanvas.com/user-manual/supersplat/editor/color-and-appearance.md): Grading colors, and how Gaussians and selections are drawn.
-- [Data Panel](https://developer.playcanvas.com/user-manual/supersplat/editor/data-panel.md): Inspecting splat attributes, filtering by value and finding outliers.
+- [Data Panel](https://developer.playcanvas.com/user-manual/supersplat/editor/data-panel.md): Inspecting Gaussian attributes, filtering by value and finding outliers.
 - [Timeline](https://developer.playcanvas.com/user-manual/supersplat/editor/timeline.md): Camera keyframes, COLMAP pose import, and animated camera paths published with a splat.
 - [Rendering Media](https://developer.playcanvas.com/user-manual/supersplat/editor/rendering.md): Rendering images and videos, including 360° output.
 - [AI Agents (WebMCP)](https://developer.playcanvas.com/user-manual/supersplat/editor/webmcp.md): Letting an AI agent inspect and edit the open Editor scene through the browser's experimental WebMCP API.
@@ -84,7 +84,7 @@ Use this index to edit, publish, present or embed splats. To render splats in yo
 
 ## Optional
 
-- [All pages of this index in one file](https://developer.playcanvas.com/user-manual/supersplat/llms-full.txt): 42 pages (296 KB), for downloading and searching rather than reading into context.
+- [All pages of this index in one file](https://developer.playcanvas.com/user-manual/supersplat/llms-full.txt): 42 pages (295 KB), for downloading and searching rather than reading into context.
 - [Camera Controls](https://developer.playcanvas.com/user-manual/supersplat/editor/camera-controls.md)
 - [Keyboard Shortcuts](https://developer.playcanvas.com/user-manual/supersplat/editor/keyboard-shortcuts.md)
 - [Explore](https://developer.playcanvas.com/user-manual/supersplat/viewing/explore.md)

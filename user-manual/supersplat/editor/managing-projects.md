@@ -38,11 +38,3 @@ The `.ssproj` format is actually a ZIP archive containing:
 
 * A JSON document that stores the project metadata: camera, view settings, camera poses, timeline, and the list of splats.
 * The splat data, stored once as uncompressed `.ply` files, plus a small per-splat file holding each splat's editing state (selection, locked and deleted Gaussians, transform, and color grades). Each splat appears as a row in the Scene Manager on load.
-
-## Best Practices
-
-* Save Regularly: To prevent data loss, save your project frequently.
-* Use Versioning: When working on major changes, save multiple versions of your project to avoid accidental overwrites.
-* Backup Your Files: Store backups of important `.ssproj` files in a cloud storage service or external drive.
-
-By utilizing the `.ssproj` format, SuperSplat users can efficiently manage and share their projects, enhancing workflow and collaboration.

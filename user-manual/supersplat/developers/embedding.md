@@ -68,10 +68,10 @@ Configure each page with query parameters, for example `index.html?content=./mus
 | `aa` | Force the anti-aliasing compensation for splats trained with anti-aliasing: `aa`, `aa=1`, `aa=true` or `aa=enable` turn it on for every splat, any other value turns it off. Without it, each splat file's own training mode decides. |
 | `hpr` | Override the settings' `highPrecisionRendering`: `hpr`, `hpr=1`, `hpr=true` or `hpr=enable` turn it on, any other value off. |
 | `nofx` | Turn off post effects |
-| `budget` | The splat budget, in millions, overriding every [Quality](https://developer.playcanvas.com/user-manual/supersplat/viewing/controls.md#quality) position |
+| `budget` | The Gaussian budget, in millions, overriding every [Quality](https://developer.playcanvas.com/user-manual/supersplat/viewing/controls.md#quality) position |
 | `fullload` | Load all of a streamed scene's detail before the first frame |
 | `stochastic` | Experimental. Force the stochastic splat renderer that [Performance Mode](https://developer.playcanvas.com/user-manual/supersplat/viewing/controls.md#performance-mode) uses: `stochastic` in its per-pixel mode, `stochastic=mobile` in its mode for phones and headsets, or `stochastic=off` to keep the standard renderer. Each hides the Performance Mode setting. WebGPU only. |
-| `colorize` | Color the splats by level of detail |
+| `colorize` | Color the Gaussians by level of detail |
 | `heatmap` | Draw the collision overlay as a heat map. Needs WebGPU and voxel collision; turn the overlay on with **Show Collision** or <kbd>V</kbd>. |
 | `debug` | Open the developer debug panel on load (<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>D</kbd> toggles it) |
 

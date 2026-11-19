@@ -112,7 +112,7 @@ With Gaming Controls on, **Look Around** is the captured mouse (or touch + drag)
 | **Show Annotations** | Shows or hides the [annotation](https://developer.playcanvas.com/user-manual/supersplat/viewing/controls.md#annotations) hotspots and navigator. Shown only on scenes with annotations. |
 | **Show Collision** | Draws the scene's collision geometry over the splat (<kbd>V</kbd>). Shown only when the scene's collision can be drawn: voxel collision needs WebGPU. |
 | **Gaming Controls** | Turns on [Gaming Controls](https://developer.playcanvas.com/user-manual/supersplat/viewing/controls.md#gaming-controls). Shown on touch devices; on a desktop, use <kbd>G</kbd>. |
-| **Quality** | A slider with four positions, **Performance**, **Default**, **High** and **Max**, labeled with the splat budget each gives, such as **Default · 4M**. See [Quality](https://developer.playcanvas.com/user-manual/supersplat/viewing/controls.md#quality). |
+| **Quality** | A slider with four positions, **Performance**, **Default**, **High** and **Max**, labeled with the Gaussian budget each gives, such as **Default · 4M**. See [Quality](https://developer.playcanvas.com/user-manual/supersplat/viewing/controls.md#quality). |
 | **Performance Mode** | Switches to the viewer's alternative splat renderer. See [Performance Mode](https://developer.playcanvas.com/user-manual/supersplat/viewing/controls.md#performance-mode). |
 | **Frame** | Frames the whole scene, in orbit mode. |
 | **Reset** | Resets the camera: in orbit mode to the starting view, in fly and walk mode to where you entered that mode. |
@@ -121,11 +121,11 @@ The viewer saves **Show Annotations**, **Gaming Controls**, **Quality** and **Pe
 
 ### Quality
 
-The **Quality** slider sets the splat budget, the most splats the viewer draws at once in a streamed scene, from a ladder for the device: for example 2M, 4M, 8M and 16M on a desktop. At **Performance**, the viewer also renders at half resolution. [Streaming & Performance](https://developer.playcanvas.com/user-manual/supersplat/publishing/streaming.md#near-instant-loads-and-the-gaussian-budget) lists every device's ladder and starting position, and explains how the budget works.
+The **Quality** slider sets the Gaussian budget, the most Gaussians the viewer draws at once in a streamed scene, from a ladder for the device: for example 2M, 4M, 8M and 16M on a desktop. At **Performance**, the viewer also renders at half resolution. [Streaming & Performance](https://developer.playcanvas.com/user-manual/supersplat/publishing/streaming.md#near-instant-loads-and-the-gaussian-budget) lists every device's ladder and starting position, and explains how the budget works.
 
 ### Performance Mode
 
-**Performance Mode** draws the splats with a different renderer that doesn't sort them. Its image refines over a few frames once the camera stops moving. It's off by default and offered only on WebGPU, and not in the Meta Quest or Pico browsers.
+**Performance Mode** draws the Gaussians with a different renderer that doesn't sort them. Its image refines over a few frames once the camera stops moving. It's off by default and offered only on WebGPU, and not in the Meta Quest or Pico browsers.
 
 ## The info panel
 
@@ -163,6 +163,6 @@ Hotspots that part of the scene hides are faded, once the camera stops moving. *
 ## See also
 
 - [Viewing in VR and AR](https://developer.playcanvas.com/user-manual/supersplat/viewing/xr.md) — headsets and AR on phones
-- [Streaming & Performance](https://developer.playcanvas.com/user-manual/supersplat/publishing/streaming.md) — streamed scenes and the splat budget
+- [Streaming & Performance](https://developer.playcanvas.com/user-manual/supersplat/publishing/streaming.md) — streamed scenes and the Gaussian budget
 - [Scene page](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md) — where visitors meet the viewer on superspl.at
 - [Viewer API](https://developer.playcanvas.com/user-manual/supersplat/developers/viewer-api.md) — control the same features from your own code

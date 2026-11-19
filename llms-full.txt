@@ -24303,7 +24303,7 @@ The **Preferences** popup (the gear icon in the [Right Toolbar](https://develope
 | | **Language** | Automatic | Interface language. See [Language](https://developer.playcanvas.com/user-manual/supersplat/editor/interface.md#language). |
 | Rendering | **Tone Mapping** | Linear | Viewport tone mapping curve: Linear, Neutral, ACES, ACES2, Filmic, or Hejl. |
 | | **SH Bands** | 3 | Spherical harmonic bands evaluated in the viewport (0–3). Lower values render faster and preview how a reduced-band export will look. |
-| | **Min Splat Size** | 2 | Hides splats that project smaller than this many pixels on screen (0–5), which speeds up large scenes. Lower it if small splats leave gaps; values of 1.5 or less hide nothing. This affects the Editor viewport only: exported viewers always use 2. |
+| | **Min Splat Size** | 2 | Hides Gaussians that project smaller than this many pixels on screen (0–5), which speeds up large scenes. Lower it if small Gaussians leave gaps; values of 1.5 or less hide nothing. This affects the Editor viewport only: exported viewers always use 2. |
 | | **Anti-Aliasing** | Auto | For splats trained with anti-aliasing, such as Mip-Splatting. Without it, they draw too bright. **Auto** follows the anti-aliasing tag stored in each file; **On** and **Off** override it for every splat. Unlike the other settings, this is saved with the project rather than as a preference, and a new scene starts at Auto. Exports are tagged to match what the viewport shows. |
 | | **Sort Mode** | Radial | The order in which Gaussians are blended. **Radial** sorts by distance from the camera, which stays stable when the camera turns in place. **Depth** sorts along the view direction. Orthographic views always sort by depth. |
 | | **Stochastic Alpha** | Auto | How heavy scenes are drawn while you move the camera. **Disabled** always draws depth-sorted, blended frames. **Enabled** always uses stochastic transparency, which needs no sorting and stays responsive on very large scenes at some cost in image quality. **Movement** uses stochastic frames only while the camera or a tool is moving and draws an exact sorted frame once the view settles. **Auto** keeps drawing sorted frames until one proves slow, then behaves like Movement. |
@@ -24354,7 +24354,7 @@ SuperSplat is [open source](https://github.com/playcanvas/supersplat), and its t
 URL: https://developer.playcanvas.com/user-manual/supersplat/editor/camera-controls/
 Markdown: https://developer.playcanvas.com/user-manual/supersplat/editor/camera-controls.md
 
-SuperSplat provides intuitive camera controls for navigating the 3D view, supporting mouse, touch, and keyboard inputs. There are two control modes: **Orbit** (default) and **Fly**.
+You navigate the Editor's 3D view with a mouse, touch, or the keyboard. There are two control modes: **Orbit** (default) and **Fly**.
 
 - **Orbit mode** - Camera rotates around a focal point. Best for inspecting objects from all angles.
 - **Fly mode** - Camera moves freely through the scene. Best for navigating large environments.
@@ -24437,7 +24437,7 @@ This is handy for reproducing exact viewpoints - for example, returning to a pre
 URL: https://developer.playcanvas.com/user-manual/supersplat/editor/import-export/
 Markdown: https://developer.playcanvas.com/user-manual/supersplat/editor/import-export.md
 
-SuperSplat's import and export capabilities are essential for working with Gaussian Splat data throughout your entire workflow. Import allows you to bring in splat scenes from various capture tools and formats for editing, cleanup, and optimization. Once your editing work is complete, export enables you to save your refined splats in the optimal format for your target platform - whether that's a compressed format for web deployment, a full-quality PLY for archival, or a standalone HTML viewer for easy sharing. This flexibility ensures SuperSplat can integrate seamlessly into any Gaussian Splat production pipeline.
+Import brings splats into the Editor from capture apps, trainers, and other tools. Export writes the visible splats to a file: a compressed format for the web, a full-quality PLY for archiving, or a standalone HTML viewer to host yourself.
 
 ## Supported File Formats
 
@@ -24500,7 +24500,7 @@ Click **Import** to import the ticked rows, or **Cancel** to import nothing. Pro
 
 ### Choosing a Level of Detail
 
-When a file contains multiple levels of detail, SuperSplat displays a **Load Options** dialog before allocating the splats. The dialog lists each LOD and its splat count. It initially selects the most detailed level containing fewer than 20 million splats, helping large scenes avoid excessive memory use.
+When a file contains multiple levels of detail, SuperSplat displays a **Load Options** dialog before allocating the Gaussians. The dialog lists each LOD and its Gaussian count. It initially selects the most detailed level containing fewer than 20 million Gaussians, helping large scenes avoid excessive memory use.
 
 Choose the LOD that fits your editing needs and available memory, then click **Load**. Lower-detail levels load faster and consume less memory. Click **Cancel** to stop the import without loading a level.
 
@@ -24602,14 +24602,6 @@ The `.ssproj` format is actually a ZIP archive containing:
 
 * A JSON document that stores the project metadata: camera, view settings, camera poses, timeline, and the list of splats.
 * The splat data, stored once as uncompressed `.ply` files, plus a small per-splat file holding each splat's editing state (selection, locked and deleted Gaussians, transform, and color grades). Each splat appears as a row in the Scene Manager on load.
-
-## Best Practices
-
-* Save Regularly: To prevent data loss, save your project frequently.
-* Use Versioning: When working on major changes, save multiple versions of your project to avoid accidental overwrites.
-* Backup Your Files: Store backups of important `.ssproj` files in a cloud storage service or external drive.
-
-By utilizing the `.ssproj` format, SuperSplat users can efficiently manage and share their projects, enhancing workflow and collaboration.
 
 --------------------------------------------------------------------------------
 
@@ -24973,7 +24965,7 @@ For per-Gaussian inspection and selection by color or other attributes, use the 
 URL: https://developer.playcanvas.com/user-manual/supersplat/editor/data-panel/
 Markdown: https://developer.playcanvas.com/user-manual/supersplat/editor/data-panel.md
 
-The **Splat Data** panel visualizes the attribute values of the active splat as an interactive histogram. Use it to understand how values are distributed, find outliers, and select splats whose values fall within a particular range.
+The **Splat Data** panel visualizes the attribute values of the active splat as an interactive histogram. Use it to understand how values are distributed, find outliers, and select Gaussians whose values fall within a particular range. The panel's labels, like the status bar's, call individual Gaussians _splats_.
 
 [Image: The Splat Data panel showing its filters, property list, and histogram]
 
@@ -24986,13 +24978,13 @@ The panel opens at the bottom of the Editor and is collapsed by default. Open or
 
 Drag the panel's top edge to change its height.
 
-## Choosing Which Splats and Property to Display
+## Choosing Which Gaussians and Property to Display
 
 The controls on the left determine which values are included in the histogram:
 
 | Control | Description |
 |---------|-------------|
-| **Visible Splats Only** | Includes only splats inside the camera's current view. Splats outside the view are excluded. This is a view-frustum filter; it does not test whether another splat is in front of them. |
+| **Visible Splats Only** | Includes only Gaussians inside the camera's current view. Gaussians outside the view are excluded. This is a view-frustum filter; it does not test whether other Gaussians are in front of them. |
 | **Log Counts** | Uses a logarithmic vertical scale so bins with small counts remain visible alongside bins with large counts. This changes only the graph's vertical display, not the underlying values or selection. |
 | **Log Bins** | Spaces the bins logarithmically along the value axis (negative values included), so groups of values spread across a large range stay distinguishable. Range selection still works on the real values. |
 | **All Properties** | Adds raw DC and spherical harmonic (SH) coefficients to the property list. The available SH entries depend on the bands contained in the active splat. |
@@ -25019,22 +25011,22 @@ With **All Properties** enabled, the list can also include:
 | **DC R/G/B** | Raw zeroth-order spherical harmonic color coefficients. These values do not include higher SH bands or an applied color grade. |
 | **R/G/B SH _n_** | Higher-order spherical harmonic coefficients, grouped by color channel. Only coefficients present in the source data are listed. |
 
-Locked and deleted splats are always excluded from the histogram. Enable **Visible Splats Only** to exclude off-screen splats as well.
+Locked and deleted Gaussians are always excluded from the histogram. Enable **Visible Splats Only** to exclude off-screen Gaussians as well.
 
 ## Reading the Histogram
 
-The histogram uses the Editor's unselected and selected colors to show the two populations separately. By default, unselected splats are blue and selected splats are yellow.
+The histogram uses the Editor's unselected and selected colors to show the two populations separately. By default, unselected Gaussians are blue and selected Gaussians are yellow.
 
 Move the pointer across the histogram to inspect a value. The value appears beneath the pointer, while an overlay shows:
 
-- **Splats** - The number and percentage of included splats at that value.
-- **Selected** - How many of those splats are currently selected.
+- **Splats** - The number and percentage of included Gaussians at that value.
+- **Selected** - How many of those Gaussians are currently selected.
 
 When you drag across a range, the two values beneath the histogram mark the range boundaries and the overlay reports aggregate counts for the whole range.
 
 ## Selecting a Value Range
 
-Click and drag across the histogram to select all eligible splats in a value range. A highlighted rectangle shows the range before you release the pointer. Locked and deleted splats cannot be selected through the histogram.
+Click and drag across the histogram to select all eligible Gaussians in a value range. A highlighted rectangle shows the range before you release the pointer. Locked and deleted Gaussians cannot be selected through the histogram.
 
 Hold modifier keys when releasing the pointer to control how the range is applied:
 
@@ -25043,7 +25035,7 @@ Hold modifier keys when releasing the pointer to control how the range is applie
 | None | **Set** | Replace the current selection with the range. |
 | **Shift** | **Add** | Add the range to the current selection. |
 | **Ctrl** | **Remove** | Remove the range from the current selection. |
-| **Shift + Ctrl** | **Intersect** | Keep only splats that are in both the current selection and the range. |
+| **Shift + Ctrl** | **Intersect** | Keep only Gaussians that are in both the current selection and the range. |
 
 The pointer displays the active Set, Add, Remove, or Intersect operation while it is over the histogram. These operations match the modifiers used by the [2D selection tools](https://developer.playcanvas.com/user-manual/supersplat/editor/editing-splats.md#selection-modifiers).
 
@@ -25053,12 +25045,12 @@ The status bar below the panel reports the state of the active splat independent
 
 | Statistic | Description |
 |-----------|-------------|
-| **Splats** | Total number of non-deleted splats, including locked splats. |
-| **Selected** | Number of currently selected splats. |
-| **Locked** | Number of locked splats. |
-| **Deleted** | Number of deleted splats. |
+| **Splats** | Total number of non-deleted Gaussians, including locked Gaussians. |
+| **Selected** | Number of currently selected Gaussians. |
+| **Locked** | Number of locked Gaussians. |
+| **Deleted** | Number of deleted Gaussians. |
 
-These totals update when splats are selected, deselected, locked, unlocked, deleted, or reset.
+These totals update when Gaussians are selected, deselected, locked, unlocked, deleted, or reset.
 
 ## Common Uses
 
@@ -25068,7 +25060,7 @@ Choose **Distance**, **Opacity**, **Volume**, or **Surface Area**, look for isol
 
 ### Selecting by Color
 
-Choose **Hue**, **Saturation**, or **Value** and select a range to isolate similarly colored splats. Because these properties use the final view-dependent color, position the camera at the viewpoint that matters before making the selection.
+Choose **Hue**, **Saturation**, or **Value** and select a range to isolate similarly colored Gaussians. Because these properties use the final view-dependent color, position the camera at the viewpoint that matters before making the selection.
 
 ### Cleaning Only the Current View
 
@@ -25111,7 +25103,7 @@ The Timeline panel includes the following controls:
 - **Remove Key button (`-`)** - Delete the keyframe at the current playhead position
 - **Timeline slider** - Scrub through the animation by dragging the playhead (which displays the current frame number)
 - **FPS setting** - Set the frames per second for the animation
-- **Timeline length** - Set the total duration of the animation in frames
+- **Total Frames** - Set the length of the animation in frames
 - **Smoothness** - Adjust the interpolation smoothness between keyframes (0-1)
 - **Loop toggle** - Control whether playback loops. When enabled (the default), the animation wraps smoothly from the last keyframe back to the first; when disabled, the camera comes to rest on the last keyframe and playback stops on the last frame. See [Animation Looping](https://developer.playcanvas.com/user-manual/supersplat/editor/timeline.md#animation-looping)
 
@@ -25207,9 +25199,9 @@ The FPS setting controls the playback speed of your animation. Available FPS val
 - **30 FPS** - Common video frame rate
 - **60 FPS** - Smooth, high frame rate playback
 
-### Timeline Length
+### Total Frames
 
-You can set the total duration of your animation by adjusting the timeline length setting. This defines how many frames your animation spans and determines when the animation loops back to the beginning.
+**Total Frames** sets the length of your animation. It defines how many frames your animation spans and determines when the animation loops back to the beginning.
 
 If you shorten the timeline so that existing keyframes fall past its end, SuperSplat preserves those keyframes but excludes them from playback and interpolation. Their dimmed, error-colored markers are pinned just beyond the right edge of the timeline, and a tooltip identifies each keyframe's original frame number.
 
@@ -25251,7 +25243,7 @@ For example, with a 100-frame timeline:
 - **Avoid:** Setting keyframes at frames 0, 10, 20, ... 90, 100
   - This causes a snap/jerk when looping from frame 100 back to frame 0
 
-This technique allows the camera to smoothly transition from your last keyframe back to the starting position, creating a seamless loop.
+This lets the camera ease from your last keyframe back to the starting position, so the loop has no jump.
 
 :::
 
@@ -25294,7 +25286,7 @@ See [Managing Projects](https://developer.playcanvas.com/user-manual/supersplat/
 URL: https://developer.playcanvas.com/user-manual/supersplat/editor/rendering/
 Markdown: https://developer.playcanvas.com/user-manual/supersplat/editor/rendering.md
 
-SuperSplat enables you to render high-quality images and videos directly from your 3D Gaussian Splats. Whether you want to create a single frame for social media, showcase your creations with animated videos, embed them on your website, or keep them locally, this guide will help you get started.
+The Editor renders still images of your splat from the current camera, and videos from the camera animation on the [Timeline](https://developer.playcanvas.com/user-manual/supersplat/editor/timeline.md).
 
 :::important
 
@@ -25427,15 +25419,10 @@ Some things to keep in mind when rendering 360° video:
 
 You can render 360° still images in the same way: set the `Projection` option in the [Image Settings](https://developer.playcanvas.com/user-manual/supersplat/editor/rendering.md#image-settings) dialog to `360° Equirectangular`. The panorama is captured from the current camera position and saved as a 2:1 equirectangular image in the selected PNG, JPEG, or WebP format.
 
-## Tips for Best Results
+## Tips
 
-- **For Images:** Position your camera carefully and consider the composition before rendering. Higher resolutions will provide more detail for print or web use.
-- **For Videos:** Before rendering, ensure your Timeline animations are smooth and camera movements are polished.
 - **For 360° Videos:** The camera animation drives the viewer's position through the scene. Slow, smooth camera movement is much more comfortable to watch in a VR headset than rapid motion.
-- **For Social Media:** Portrait-mode renders often yield better engagement on mobile platforms.
 - **Debug Overlays:** Enable **Show Debug Overlays** when you need to show the Gaussian structure for educational or technical presentations. Press `Tab` in the Editor first so the markers are visible, and choose and configure them on the [mode strip](https://developer.playcanvas.com/user-manual/supersplat/editor/color-and-appearance.md#appearance).
-
-Happy Rendering! 🎬📸
 
 --------------------------------------------------------------------------------
 
@@ -25652,7 +25639,7 @@ See [Managing Projects](https://developer.playcanvas.com/user-manual/supersplat/
 
 - Publishing requires you to be [signed in](https://developer.playcanvas.com/user-manual/supersplat/publishing.md#account) to superspl.at with a PlayCanvas account.
 - If `Publish` is disabled with a message in the Publish dialog, your account has reached one of its [publishing limits](https://developer.playcanvas.com/user-manual/supersplat/publishing.md#limits). The message says when you can publish again.
-- Scenes with more than 40 million splats can only be published with **Generate LODs** on. Delete unwanted Gaussians first if you want to publish a single, non-streamed file.
+- Scenes with more than 40 million Gaussians can only be published with **Generate LODs** on. Delete unwanted Gaussians first if you want to publish a single, non-streamed file.
 - Video codec support depends on the browser. The Render Video dialog disables resolutions your browser or device cannot encode with the current settings — try a lower resolution, frame rate, or bitrate, another format or codec, or update your browser or graphics driver.
 - A blocked download, private-browsing restriction, or low free memory can prevent large renders and exports from completing. In browsers without the File System Access API, renders and exports are delivered as downloads.
 
@@ -25830,7 +25817,7 @@ To publish your splat:
    | **Animation** | If enabled, the camera animation authored on the [Timeline](https://developer.playcanvas.com/user-manual/supersplat/editor/timeline.md) is baked into the scene and plays when it loads. Only available when the Timeline has keyframes (and enabled by default in that case) |
    | **Loop Mode** | How an included camera animation plays back in the viewer:<br/>• **None**: Play once and stop<br/>• **Repeat**: Loop continuously<br/>• **Ping Pong**: Play forwards, then backwards, repeatedly<br/>Initialized from the Timeline's Loop toggle - **Repeat** if looping is enabled, **None** otherwise |
    | **SH Bands** | The number of spherical harmonic bands to publish (0–3). Defaults to the highest band count in the scene, capped by the **SH Bands** setting in [Preferences](https://developer.playcanvas.com/user-manual/supersplat/editor/interface.md#preferences). Choosing more bands than the scene contains fills the missing ones with zeros |
-   | **Generate LODs** | Generate levels of detail so the published splat is streamed progressively. Automatically enabled for scenes with 1 million or more splats that span a large area. Scenes with more than 40 million splats (not counting deleted ones) must be published with LODs: the toggle is switched on and disabled, with a note saying it is required. See [Streaming & Performance](https://developer.playcanvas.com/user-manual/supersplat/publishing/streaming.md) |
+   | **Generate LODs** | Generate levels of detail so the published splat is streamed progressively. Automatically enabled for scenes with 1 million or more Gaussians that span a large area. Scenes with more than 40 million Gaussians (not counting deleted ones) must be published with LODs: the toggle is switched on and disabled, with a note saying it is required. See [Streaming & Performance](https://developer.playcanvas.com/user-manual/supersplat/publishing/streaming.md) |
 
 4. Select `Publish`.
 
@@ -25846,7 +25833,7 @@ New scenes are published **Unlisted**. To list one in [Explore](https://develope
 
 :::note
 
-It may take several minutes to compress your splat to SOG format during the publishing process, so be patient! ⏳
+Compressing a large splat to SOG can take several minutes.
 
 :::
 
@@ -26184,7 +26171,7 @@ The other header buttons work with the settings as a file:
 - **Import** replaces the current settings with a JSON file you choose, after asking for confirmation. Click **Save** to publish them.
 - **View** opens the scene page.
 
-The Experience Settings format is versioned; the current version is 2. Studio migrates older settings automatically when it loads them.
+Studio also reads settings saved in older versions of the format. See [Schema versioning](https://developer.playcanvas.com/user-manual/supersplat/developers/experience-settings.md#schema-versioning).
 
 ## AI agents
 
@@ -26829,7 +26816,7 @@ With Gaming Controls on, **Look Around** is the captured mouse (or touch + drag)
 | **Show Annotations** | Shows or hides the [annotation](https://developer.playcanvas.com/user-manual/supersplat/viewing/controls.md#annotations) hotspots and navigator. Shown only on scenes with annotations. |
 | **Show Collision** | Draws the scene's collision geometry over the splat (<kbd>V</kbd>). Shown only when the scene's collision can be drawn: voxel collision needs WebGPU. |
 | **Gaming Controls** | Turns on [Gaming Controls](https://developer.playcanvas.com/user-manual/supersplat/viewing/controls.md#gaming-controls). Shown on touch devices; on a desktop, use <kbd>G</kbd>. |
-| **Quality** | A slider with four positions, **Performance**, **Default**, **High** and **Max**, labeled with the splat budget each gives, such as **Default · 4M**. See [Quality](https://developer.playcanvas.com/user-manual/supersplat/viewing/controls.md#quality). |
+| **Quality** | A slider with four positions, **Performance**, **Default**, **High** and **Max**, labeled with the Gaussian budget each gives, such as **Default · 4M**. See [Quality](https://developer.playcanvas.com/user-manual/supersplat/viewing/controls.md#quality). |
 | **Performance Mode** | Switches to the viewer's alternative splat renderer. See [Performance Mode](https://developer.playcanvas.com/user-manual/supersplat/viewing/controls.md#performance-mode). |
 | **Frame** | Frames the whole scene, in orbit mode. |
 | **Reset** | Resets the camera: in orbit mode to the starting view, in fly and walk mode to where you entered that mode. |
@@ -26838,11 +26825,11 @@ The viewer saves **Show Annotations**, **Gaming Controls**, **Quality** and **Pe
 
 ### Quality
 
-The **Quality** slider sets the splat budget, the most splats the viewer draws at once in a streamed scene, from a ladder for the device: for example 2M, 4M, 8M and 16M on a desktop. At **Performance**, the viewer also renders at half resolution. [Streaming & Performance](https://developer.playcanvas.com/user-manual/supersplat/publishing/streaming.md#near-instant-loads-and-the-gaussian-budget) lists every device's ladder and starting position, and explains how the budget works.
+The **Quality** slider sets the Gaussian budget, the most Gaussians the viewer draws at once in a streamed scene, from a ladder for the device: for example 2M, 4M, 8M and 16M on a desktop. At **Performance**, the viewer also renders at half resolution. [Streaming & Performance](https://developer.playcanvas.com/user-manual/supersplat/publishing/streaming.md#near-instant-loads-and-the-gaussian-budget) lists every device's ladder and starting position, and explains how the budget works.
 
 ### Performance Mode
 
-**Performance Mode** draws the splats with a different renderer that doesn't sort them. Its image refines over a few frames once the camera stops moving. It's off by default and offered only on WebGPU, and not in the Meta Quest or Pico browsers.
+**Performance Mode** draws the Gaussians with a different renderer that doesn't sort them. Its image refines over a few frames once the camera stops moving. It's off by default and offered only on WebGPU, and not in the Meta Quest or Pico browsers.
 
 ## The info panel
 
@@ -26880,7 +26867,7 @@ Hotspots that part of the scene hides are faded, once the camera stops moving. *
 ## See also
 
 - [Viewing in VR and AR](https://developer.playcanvas.com/user-manual/supersplat/viewing/xr.md) — headsets and AR on phones
-- [Streaming & Performance](https://developer.playcanvas.com/user-manual/supersplat/publishing/streaming.md) — streamed scenes and the splat budget
+- [Streaming & Performance](https://developer.playcanvas.com/user-manual/supersplat/publishing/streaming.md) — streamed scenes and the Gaussian budget
 - [Scene page](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md) — where visitors meet the viewer on superspl.at
 - [Viewer API](https://developer.playcanvas.com/user-manual/supersplat/developers/viewer-api.md) — control the same features from your own code
 
@@ -26913,7 +26900,7 @@ When you host the viewer yourself, the `vr` [URL parameter](https://developer.pl
 - [Post effects](https://developer.playcanvas.com/user-manual/supersplat/studio/post-effects.md) aren't drawn. The scene's tone mapping still is.
 - In AR, the [skybox](https://developer.playcanvas.com/user-manual/supersplat/studio/look-and-tone.md#skybox) and background are hidden, so the room shows through.
 - A [streamed scene](https://developer.playcanvas.com/user-manual/supersplat/publishing/streaming.md) chooses its detail by distance alone, so turning your head doesn't stream new detail.
-- On Meta Quest and Pico headsets, sessions render with fixed foveation, target 72 Hz where the headset supports it, and use a lower splat budget (see [Streaming & Performance](https://developer.playcanvas.com/user-manual/supersplat/publishing/streaming.md#near-instant-loads-and-the-gaussian-budget)). At the **Performance** quality position they also render at 0.8× resolution.
+- On Meta Quest and Pico headsets, sessions render with fixed foveation, target 72 Hz where the headset supports it, and use a lower Gaussian budget (see [Streaming & Performance](https://developer.playcanvas.com/user-manual/supersplat/publishing/streaming.md#near-instant-loads-and-the-gaussian-budget)). At the **Performance** quality position they also render at 0.8× resolution.
 - The [collision](https://developer.playcanvas.com/user-manual/supersplat/studio/collision.md) overlay is turned off.
 
 When the session ends, the splat goes back to its authored placement and the viewer's own settings return.
@@ -27138,7 +27125,7 @@ On your own profile you'll also find:
 URL: https://developer.playcanvas.com/user-manual/supersplat/viewing/following/
 Markdown: https://developer.playcanvas.com/user-manual/supersplat/viewing/following.md
 
-Found a creator whose work you love? Follow them, and their splats show up in your **Following** feed on the [superspl.at](https://superspl.at) home page.
+Follow a creator to see their public splats in your **Following** feed on the [superspl.at](https://superspl.at) home page.
 
 ## Follow a creator
 
@@ -27290,10 +27277,10 @@ Configure each page with query parameters, for example `index.html?content=./mus
 | `aa` | Force the anti-aliasing compensation for splats trained with anti-aliasing: `aa`, `aa=1`, `aa=true` or `aa=enable` turn it on for every splat, any other value turns it off. Without it, each splat file's own training mode decides. |
 | `hpr` | Override the settings' `highPrecisionRendering`: `hpr`, `hpr=1`, `hpr=true` or `hpr=enable` turn it on, any other value off. |
 | `nofx` | Turn off post effects |
-| `budget` | The splat budget, in millions, overriding every [Quality](https://developer.playcanvas.com/user-manual/supersplat/viewing/controls.md#quality) position |
+| `budget` | The Gaussian budget, in millions, overriding every [Quality](https://developer.playcanvas.com/user-manual/supersplat/viewing/controls.md#quality) position |
 | `fullload` | Load all of a streamed scene's detail before the first frame |
 | `stochastic` | Experimental. Force the stochastic splat renderer that [Performance Mode](https://developer.playcanvas.com/user-manual/supersplat/viewing/controls.md#performance-mode) uses: `stochastic` in its per-pixel mode, `stochastic=mobile` in its mode for phones and headsets, or `stochastic=off` to keep the standard renderer. Each hides the Performance Mode setting. WebGPU only. |
-| `colorize` | Color the splats by level of detail |
+| `colorize` | Color the Gaussians by level of detail |
 | `heatmap` | Draw the collision overlay as a heat map. Needs WebGPU and voxel collision; turn the overlay on with **Show Collision** or <kbd>V</kbd>. |
 | `debug` | Open the developer debug panel on load (<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>D</kbd> toggles it) |
 

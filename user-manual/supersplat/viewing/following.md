@@ -1,6 +1,6 @@
 # Following Creators
 
-Found a creator whose work you love? Follow them, and their splats show up in your **Following** feed on the [superspl.at](https://superspl.at) home page.
+Follow a creator to see their public splats in your **Following** feed on the [superspl.at](https://superspl.at) home page.
 
 ## Follow a creator
 

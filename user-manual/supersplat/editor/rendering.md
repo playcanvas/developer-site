@@ -1,6 +1,6 @@
 # Rendering Media
 
-SuperSplat enables you to render high-quality images and videos directly from your 3D Gaussian Splats. Whether you want to create a single frame for social media, showcase your creations with animated videos, embed them on your website, or keep them locally, this guide will help you get started.
+The Editor renders still images of your splat from the current camera, and videos from the camera animation on the [Timeline](https://developer.playcanvas.com/user-manual/supersplat/editor/timeline.md).
 
 :::important
 
@@ -133,12 +133,7 @@ Some things to keep in mind when rendering 360° video:
 
 You can render 360° still images in the same way: set the `Projection` option in the [Image Settings](https://developer.playcanvas.com/user-manual/supersplat/editor/rendering.md#image-settings) dialog to `360° Equirectangular`. The panorama is captured from the current camera position and saved as a 2:1 equirectangular image in the selected PNG, JPEG, or WebP format.
 
-## Tips for Best Results
+## Tips
 
-- **For Images:** Position your camera carefully and consider the composition before rendering. Higher resolutions will provide more detail for print or web use.
-- **For Videos:** Before rendering, ensure your Timeline animations are smooth and camera movements are polished.
 - **For 360° Videos:** The camera animation drives the viewer's position through the scene. Slow, smooth camera movement is much more comfortable to watch in a VR headset than rapid motion.
-- **For Social Media:** Portrait-mode renders often yield better engagement on mobile platforms.
 - **Debug Overlays:** Enable **Show Debug Overlays** when you need to show the Gaussian structure for educational or technical presentations. Press `Tab` in the Editor first so the markers are visible, and choose and configure them on the [mode strip](https://developer.playcanvas.com/user-manual/supersplat/editor/color-and-appearance.md#appearance).
-
-Happy Rendering! 🎬📸

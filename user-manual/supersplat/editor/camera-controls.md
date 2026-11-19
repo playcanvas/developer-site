@@ -1,6 +1,6 @@
 # Camera Controls
 
-SuperSplat provides intuitive camera controls for navigating the 3D view, supporting mouse, touch, and keyboard inputs. There are two control modes: **Orbit** (default) and **Fly**.
+You navigate the Editor's 3D view with a mouse, touch, or the keyboard. There are two control modes: **Orbit** (default) and **Fly**.
 
 - **Orbit mode** - Camera rotates around a focal point. Best for inspecting objects from all angles.
 - **Fly mode** - Camera moves freely through the scene. Best for navigating large environments.
