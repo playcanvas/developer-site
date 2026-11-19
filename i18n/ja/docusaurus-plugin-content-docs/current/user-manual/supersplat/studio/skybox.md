@@ -24,6 +24,11 @@ description: "SuperSplat Studioで公開済みスプラットの背景色を設�
 - **背景色のみ** — スプラット自体に焦点を当てたいスタジオ風プレゼンテーション向け。
 - **スカイボックス** — 屋外でキャプチャしたシーンや、周囲のライティングと地平線を合わせることが重要な信憑性のある環境向け。
 
+## ビューアでの動作
+
+- **AR** — [ARセッション](/user-manual/supersplat/viewer/xr)中はスカイボックスと背景色が非表示になり、スプラットの周囲に実際の部屋が透けて見えます。VRセッションではそのまま表示されます。
+- **セルフホスティング** — ビューアはシーンの設定からスカイボックスを読み込みません。[ビューアを自分でホストする](/user-manual/supersplat/viewer/embedding#url-parameters)場合は、`skybox` URLパラメータまたは`skyboxUrl`オプションで画像を渡してください。
+
 ## 関連項目
 
 - [Post Effects](/user-manual/supersplat/studio/post-effects) — トーンマッピングがスカイボックスの見え方を形作ります

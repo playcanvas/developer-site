@@ -24,6 +24,11 @@ Before uploading, the dialog shows a 2:1 preview of the selected image so you ca
 - **Background color only** — for studio-style presentations where you want focus on the splat itself.
 - **Skybox** — for scenes captured outdoors or in believable environments where matching the surrounding lighting and horizon matters.
 
+## In the viewer
+
+- **AR** — the skybox and background color are hidden during an [AR session](/user-manual/supersplat/viewer/xr), so the room shows through around the splat. VR sessions keep them.
+- **Self-hosting** — the viewer doesn't load the skybox from the scene's settings. When you [host the viewer yourself](/user-manual/supersplat/viewer/embedding#url-parameters), pass the image with the `skybox` URL parameter or the `skyboxUrl` option.
+
 ## See also
 
 - [Post Effects](/user-manual/supersplat/studio/post-effects) — tonemapping shapes how the skybox is lit

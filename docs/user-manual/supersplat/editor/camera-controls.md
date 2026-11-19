@@ -16,8 +16,8 @@ Press **V** to toggle between modes, or use the WASD keys to automatically switc
 |--------|------------|----------|
 | Left drag | Orbit around focal point | Look around |
 | Middle click | Set focal point | — |
-| Middle drag | Orbit around focal point | Zoom |
-| Shift + middle drag | Pan | Zoom |
+| Middle drag | Orbit around focal point | Look around |
+| Shift + middle drag | Pan | Pan |
 | Ctrl + middle drag | Zoom | Zoom |
 | Right drag | Pan | Pan |
 | Right + Ctrl/Shift drag | Orbit | Look around |

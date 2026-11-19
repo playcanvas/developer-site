@@ -17,11 +17,13 @@ Only one splat can be active at a time. Selecting a row does not change its visi
 
 ## Transform and Colors
 
-Below the splat list, the **Transform** section shows the active splat's **Position**, **Rotation**, and **Scale** for precise numeric edits (see [Transform, Measure and Align](transform-measure-align.md)). The collapsible **Colors** section below it grades the color of the active splat, or of the selected Gaussians, and bakes the result with **Apply** (see [Color and Appearance](color-and-appearance.md#colors)).
+Below the splat list, the **Transform** section shows the active splat's **Position**, **Rotation**, and **Scale** for precise numeric edits (see [Transform, Measure and Align](transform-measure-align.md)). The **Colors** section below it grades the color of the active splat, or of the selected Gaussians, and bakes the result with **Apply** (see [Color and Appearance](color-and-appearance.md#colors)). Click a section's header to collapse or expand it; **Transform** starts expanded and **Colors** collapsed.
+
+Right-click a section header to copy or paste all of its values, or right-click a row to copy or paste one value. Values travel through the system clipboard as plain JSON text, which makes it easy to give several splats the same transform or color grade.
 
 ## Add Splats
 
-Use **File > Import** (or **File > Import Recent** for a file you have loaded before), the import button in the Scene Manager header, or drag supported files into the viewport. Importing adds splats to the current project; it does not replace splats that are already loaded.
+Use **File > Import** (or **File > Import Recent** for a file you have loaded before), the import button in the Scene Manager header, or drag supported files into the viewport. Importing adds splats to the current project; it does not replace splats that are already loaded. When you pick or drop a mixed set of files, the **Import Files** dialog lets you choose which of them to import (see [Importing Several Files](import-export.md#importing-several-files)).
 
 **File > New** is different: it starts a new, empty project after asking for confirmation if the current project contains data.
 

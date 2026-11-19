@@ -11,7 +11,7 @@ description: "完成済みのスプラットファイルを、SuperSplat Editor�
 - スプラットを別のツールで作成した — トレーニングパイプライン、スマートフォンスキャナ、または[Convert](/user-manual/supersplat/convert)ユーティリティや[splat-transform](/user-manual/splat-transform/) CLIなど。
 - Editorを経由せずにすばやく公開したい。
 
-![Upload Splatダイアログ — Publish to セレクタと、クリックまたはドラッグでファイルをドロップする領域](/img/user-manual/supersplat/upload.webp)
+![Upload Splatダイアログ — Publish toセレクタと、クリックまたはドラッグでファイルをドロップする領域](/img/user-manual/supersplat/upload.webp)
 
 ## Uploadダイアログの起動
 
@@ -75,6 +75,8 @@ Edit Splatビューから次のことができます：
 | **Unrecognized format** | 上記の対応構造のいずれにも合致しないファイル。 |
 | **File too large** | ファイルが10 GBの制限を超えている。 |
 | **Upload failed** | ネットワーク中断またはサーバー側の問題。再試行してください。問題が続く場合は接続を確認してください。 |
+
+また、すべてのアカウントには、圧縮後の出力サイズで計測される1日あたりの公開許容量と、同時にアップロード中または処理中にできるシーン数の上限があります。[制限](/user-manual/supersplat/api-integrations#limits)を参照してください。
 
 ## 関連項目
 

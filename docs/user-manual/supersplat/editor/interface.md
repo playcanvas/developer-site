@@ -1,6 +1,6 @@
 ---
 title: Interface Overview
-description: "Tour of the SuperSplat UI: menu bar, scene manager, viewport, view cube, toolbars, status bar, and the Appearance, Overlays, and Preferences popups."
+description: "Tour of the SuperSplat UI: menu bar, scene manager, viewport, view cube, mode strip, toolbars, status bar, and the Overlays and Preferences popups."
 ---
 
 The SuperSplat Editor's interface appears as follows:
@@ -17,13 +17,13 @@ The Menu Bar gives you access to the most commonly used functions in the SuperSp
 
 * **File Menu:** Create, open, and save `.ssproj` projects; import splats, including an **Import Recent** list; export to the supported formats and repeat the last export with **Re-export**; publish to superspl.at.
 * **Edit Menu:** Undo or redo changes, or duplicate or separate selected Gaussians into a new splat.
-* **Select Menu:** Select all, none, or the inverse; lock, unlock, delete, and restore Gaussians.
+* **Select Menu:** Select all, none, or the inverse; **Lock Selection**, **Unlock All**, **Delete Selection**, and **Reset Splat** to restore deleted Gaussians.
 * **Render Menu:** Render an image or a video of your currently loaded scene.
-* **Help Menu:** Video tutorials, this user guide, the keyboard shortcuts reference, community links, and the About dialog.
+* **Help Menu:** Video tutorials, this user guide, the keyboard shortcuts reference, community links, and **About SuperSplat**.
 
 ### Scene Manager
 
-The Scene Manager lists the imported splats in the project. Click a row to choose the active splat, use the eye icons or Solo mode to control visibility, and use the **Transform** and **Colors** sections below the list for precise transforms and color grading. See [Managing Splats](scene-management.md) for the complete workflow.
+The Scene Manager lists the imported splats in the project. Click a row to choose the active splat, use the eye icons or Solo mode to control visibility, and use the collapsible **Transform** and **Colors** sections below the list for precise transforms and color grading. Right-click a section header or row to copy or paste its values. See [Managing Splats](scene-management.md) for the complete workflow.
 
 ### Viewport
 
@@ -33,46 +33,54 @@ The 3D viewport where you can visually edit your scenes. A grid helps you orient
 
 The View Cube is a gizmo that gives added control over the viewport camera. You can click on any of the circles to switch to an orthographic view of the scene from one of six directions. This can make it easier to make accurate selections in certain circumstances.
 
+### Mode Strip {#mode-strip}
+
+<img loading="lazy" alt="The mode strip, with Centers and Rings, Markers, and X-Ray" width="184" src="/img/user-manual/supersplat/editor/mode-strip.png" />
+
+The small icon strip beside the View Cube decides what you see and what a selection hits. Its buttons have no labels; hover one for its name, shortcut, and a short description. From left to right:
+
+| Control | Shortcut | Default | Description |
+|---|---|---|---|
+| **Centers** / **Rings** | `M` | Centers | The editing mode, a two-option switch. **Centers** marks every Gaussian with a dot at its center and selects by center point. **Rings** outlines every Gaussian's footprint and selects by footprint. Switching mode also turns **Markers** on. |
+| **Markers** | `Tab` | Off | Shows the center or ring markers on the unselected Gaussians. When off, the scene renders plainly and selected Gaussians keep their indicators. |
+| **X-Ray** | `N` | On | Selects through all depths. When off, only the visible surface is selected, and markers are drawn only on the Gaussians a selection could reach from the current view. |
+
+Press and hold **Centers** or **Rings** for that marker's size and its **Splat Colors** switch, or press and hold **Markers** for **Markers Only**, **Tint Selection**, and **Outline Selection**. See [Selection Mode and X-Ray](editing-splats.md#selection-mode-and-x-ray) and [Markers and Selection Display](color-and-appearance.md#appearance).
+
 ### Right Toolbar
 
 This vertical toolbar contains, from top to bottom:
 
-* **Appearance** — opens the [Appearance](#appearance) popup, which controls how Gaussians, centers, rings, and selections are drawn.
 * **Overlays** (eye icon) — opens the [Overlays](#overlays) popup: grid, bounding box, camera poses, camera info, and diagnostics.
-* **Orbit Camera** and **Fly Camera** — switch the [camera control mode](camera-controls.md) (`V`).
+* **Orbit Camera** / **Fly Camera** — a two-option switch for the [camera control mode](camera-controls.md) (`V`).
 * **Frame Selection** (`F`) and **Reset Camera** (`Shift + F`).
 * **Preferences** (gear icon) — opens the [Preferences](#preferences) popup.
 
-Only one of the Appearance, Overlays, and Preferences popups is open at a time.
+Only one of the Overlays and Preferences popups is open at a time.
 
 ### Bottom Toolbar
 
 This horizontal toolbar contains, from left to right:
 
 * **Undo** and **Redo**.
-* The **Selection Footprint** (`M`) and **Selection Depth** (`N`) toggles, which control how every selection tool decides what it hits. See [Selection Depth and Footprint](editing-splats.md#selection-depth-and-footprint).
 * The 2D selection tools: **Rectangle**, **Brush**, **Polygon** / **Lasso**, and **Eyedropper** / **Flood**. The last two buttons each hold a pair of tools: click to use the current one, or press and hold to switch to the other.
 * The 3D selection tools: **Sphere Brush**, **Sphere Selection**, and **Box Selection**.
 * **Move**, **Rotate**, and **Scale**.
-* **Measure**, **Orient**, the **Use Local Orientation** toggle (`Shift + C`), and **Reset Pivot**.
+* **Measure** and **Orient**, followed by the **Use Local Orientation** toggle (`Shift + C`) and **Reset Pivot**.
 
-See [Selection and Cleanup](editing-splats.md) and [Transform, Measure and Align](transform-measure-align.md).
+How the selection tools decide what they hit is set on the [Mode Strip](#mode-strip). See [Selection and Cleanup](editing-splats.md) and [Transform, Measure and Align](transform-measure-align.md).
 
 ### Status Bar
 
-The bar along the bottom edge opens the **Timeline** (`Ctrl + T`) and **Splat Data** (`Ctrl + D`) panels and shows live counts of the active splat's **Splats**, **Selected**, **Locked**, and **Deleted** Gaussians. The Editor version is shown in the bottom-left corner of the viewport.
+The bar along the bottom edge opens the **Timeline** (`Ctrl + T`) and **Splat Data** (`Ctrl + D`) panels and shows live counts of the active splat's **Splats**, **Selected**, **Locked**, and **Deleted** Gaussians. The Editor version is shown in the bottom-right corner of the viewport; click it to open the **About** dialog, which also lists your GPU and the versions of the PlayCanvas Engine, Splat Transform, and PCUI that the Editor uses.
 
 ### Animation Timeline
 
-The Timeline allows you to create and delete keyframes for the viewport camera. It also allows you to play back (or scrub through) the animation you have configured.
+The Timeline allows you to create and delete keyframes for the viewport camera. It also allows you to play back (or scrub through) the animation you have configured, along with any [splat sequences](timeline.md#splat-sequences) you have imported.
 
 ### Splat Data Panel
 
 This panel visualizes the Gaussian data in the active splat as a histogram and lets you select ranges of values. See the [Splat Data panel](data-panel.md).
-
-## Appearance
-
-The **Appearance** popup (the first button in the [Right Toolbar](#right-toolbar)) controls how the viewport draws Gaussians, their centers and rings, and the selection, how strongly selected and unselected Gaussians are tinted, and the background, selection, and lock colors. Press `Tab` to toggle the display overlays on and off without changing these settings. The full reference is in [Color and Appearance](color-and-appearance.md#appearance).
 
 ## Overlays
 
@@ -95,21 +103,28 @@ Click the reset icon in the popup's header to restore the Overlays defaults.
 
 ## Preferences
 
-The **Preferences** popup (the gear icon in the [Right Toolbar](#right-toolbar)) holds application-wide settings. They are saved in your browser and restored the next time you open the Editor.
+The **Preferences** popup (the gear icon in the [Right Toolbar](#right-toolbar)) holds application-wide settings. They are saved in your browser and restored the next time you open the Editor. Hover a setting's name for a short description of what it does.
 
-![The Preferences popup](/img/user-manual/supersplat/editor/preferences-panel.png)
+<img loading="lazy" alt="The Preferences popup" width="320" src="/img/user-manual/supersplat/editor/preferences-panel.png" />
 
 | Section | Setting | Default | Description |
 |---|---|---|---|
 | | **Language** | Automatic | Interface language. See [Language](#language). |
-| Rendering | **Stochastic Alpha** | Auto | How heavy scenes are drawn while you move the camera. **Disabled** always draws depth-sorted, blended frames. **Enabled** always uses stochastic transparency, which needs no sorting and stays responsive on very large scenes at some cost in image quality. **Movement** uses stochastic frames only while the camera or a tool is moving and draws an exact sorted frame once the view settles. **Auto** keeps drawing sorted frames until one proves slow, then behaves like Movement. |
-| | **Tone Mapping** | Linear | Viewport tone mapping curve: Linear, Neutral, ACES, ACES2, Filmic, or Hejl. |
+| Rendering | **Tone Mapping** | Linear | Viewport tone mapping curve: Linear, Neutral, ACES, ACES2, Filmic, or Hejl. |
 | | **SH Bands** | 3 | Spherical harmonic bands evaluated in the viewport (0–3). Lower values render faster and preview how a reduced-band export will look. |
-| Camera | **Fly Speed** | 1 | Speed of WASD navigation in fly mode (0.1–30). |
-| | **Field of View** | 85° | Vertical field of view of the viewport camera (10°–120°). |
+| | **Min Splat Size** | 2 | Hides splats that project smaller than this many pixels on screen (0–5), which speeds up large scenes. Lower it if small splats leave gaps; values of 1.5 or less hide nothing. This affects the Editor viewport only: exported viewers always use 2. |
+| | **Anti-Aliasing** | Auto | For splats trained with anti-aliasing, such as Mip-Splatting. Without it, they draw too bright. **Auto** follows the anti-aliasing tag stored in each file; **On** and **Off** override it for every splat. Unlike the other settings, this is saved with the project rather than as a preference, and a new scene starts at Auto. Exports are tagged to match what the viewport shows. |
+| | **Sort Mode** | Radial | The order in which Gaussians are blended. **Radial** sorts by distance from the camera, which stays stable when the camera turns in place. **Depth** sorts along the view direction. Orthographic views always sort by depth. |
+| | **Stochastic Alpha** | Auto | How heavy scenes are drawn while you move the camera. **Disabled** always draws depth-sorted, blended frames. **Enabled** always uses stochastic transparency, which needs no sorting and stays responsive on very large scenes at some cost in image quality. **Movement** uses stochastic frames only while the camera or a tool is moving and draws an exact sorted frame once the view settles. **Auto** keeps drawing sorted frames until one proves slow, then behaves like Movement. |
+| Camera | **Field of View** | 85° | Vertical field of view of the viewport camera (10°–120°). |
+| | **Fly Speed** | 1 | Speed of WASD navigation in fly mode (0.1–30). |
 | | **FOV Auto Dolly** | Off | Move the camera as the field of view changes so the subject keeps its framing. See [Camera Settings](camera-controls.md#camera-settings). |
+| Colors | **Background Color** | Black | The viewport background. Also the default background of [published](publishing.md) scenes and exported viewers. |
+| | **Selected Color** | Yellow | The color of selected Gaussians' markers, the selection tint and outline, and the selected bars in the [Splat Data](data-panel.md) histogram. |
+| | **Unselected Color** | Blue | The color of unselected Gaussians' markers (unless they show **Splat Colors**) and the unselected bars in the histogram. |
+| | **Locked Color** | Black, 5% opacity | Applied to [locked](editing-splats.md#lock-delete-and-restore) Gaussians. The default leaves them dark and almost transparent. |
 
-Loading an `.ssproj` project applies the view and camera settings saved in that project for the current session without replacing your stored preferences. Selecting **File > New** reapplies your preferences. To restore the factory settings, click the reset icon in the popup's header (**Reset to Defaults**). This also returns the interface language to **Automatic**. The Appearance and Overlays popups have their own reset buttons.
+The four colors are the swatches in the **Colors** row; hover a swatch for its name. Loading an `.ssproj` project applies the view and camera settings saved in that project for the current session without replacing your stored preferences. Selecting **File > New** reapplies your preferences. To restore the factory settings, click the reset icon in the popup's header (**Reset to Defaults**). This also returns the interface language to **Automatic**. The Overlays popup has its own reset button.
 
 ### Language
 

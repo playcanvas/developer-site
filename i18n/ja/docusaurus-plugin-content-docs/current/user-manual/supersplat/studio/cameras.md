@@ -3,7 +3,7 @@ title: カメラ
 description: "SuperSplat Studioで公開済みスプラットの開始カメラを設定します — ビューポートで位置とターゲットをフレーミングし、視野角を設定します。"
 ---
 
-[Studio](/user-manual/supersplat/studio/)の左パネルの**Scene**タブにある**Cameras**セクションは、公開済みスプラットの**開始カメラ**を定義します。これは、訪問者が[シーンページ](/user-manual/supersplat/scene-page)を開いたときに最初に目にするビューです（[カメラアニメーショントラック](/user-manual/supersplat/editor/timeline)や[注釈](/user-manual/supersplat/studio/annotations)が開始姿勢を決定する場合は除きます）。カメラには、**位置**、**ターゲット**（注視点）、**視野角**があります。
+[Studio](/user-manual/supersplat/studio/)の左パネルの**Scene**タブにある**Cameras**セクションは、公開済みスプラットの**開始カメラ**を定義します。これは、訪問者が[シーンページ](/user-manual/supersplat/scene-page)を開いたときに最初に目にするビューです（[カメラアニメーショントラック](/user-manual/supersplat/editor/timeline)が代わりに開始時の動きを決める場合は除きます）。カメラには、**位置**、**ターゲット**（注視点）、**視野角**があります。
 
 ![カメラ一覧があるCamerasパネル](/img/user-manual/supersplat/studio/cameras-panel.png)
 
@@ -56,7 +56,8 @@ Studioは現在、単一のカメラのみをサポートしています。複�
 
 ## カメラの使われ方
 
-- **初期フレーミング** — リストの最初のカメラは、訪問者がシーンページを開いたときのデフォルト開始ビューです（`startMode: 'default'`）。[カメラアニメーショントラック](/user-manual/supersplat/editor/timeline)や[注釈](/user-manual/supersplat/studio/annotations)はシーンのstart modeを通じてこれを上書きできます。
+- **初期フレーミング** — リストの最初のカメラは、訪問者がシーンページを開いたときのデフォルト開始ビューです（`startMode: 'default'`）。ビューアはそこから、訪問者が操作を始めるまで、ゆっくりとループするカメラモーションを再生します。カメラがスプラットの外側から始まる場合（オブジェクト）はターゲットの周りを回るオービット、内側から始まる場合（シーン）はゆるやかな8の字の動きになります。シーンのstart modeが`animTrack`の場合は、[カメラアニメーショントラック](/user-manual/supersplat/editor/timeline)がこのモーションに置き換わります。
+- **オブジェクトかシーンか** — カメラがスプラットの範囲の外側と内側のどちらから始まるかによって、ビューアの開始時の[カメラモード](/user-manual/supersplat/viewer/controls#camera-modes)（オブジェクトではオービット、シーンではウォークまたはフライ）と、[VRとAR](/user-manual/supersplat/viewer/xr#scenes-and-objects)でのスプラットの見せ方も決まります。
 - **注釈の姿勢** — 各[注釈](/user-manual/supersplat/studio/annotations)には、注釈が選択されたときにビューアがアニメーションで移動する独自のカメラ姿勢が埋め込まれています。注釈の姿勢はCamerasリストのエントリとは独立しています。
 
 ## 関連項目

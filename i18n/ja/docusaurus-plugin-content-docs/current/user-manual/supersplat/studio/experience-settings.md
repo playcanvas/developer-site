@@ -22,7 +22,7 @@ type ExperienceSettings = {
 
     background: {
         color: [number, number, number]; // RGB, 0-1
-        skyboxUrl?: string;              // optional .webp/.jpg/.png URL
+        skyboxUrl?: string;              // optional .webp/.jpg/.png URL (see below)
     };
 
     postEffectSettings: {
@@ -33,7 +33,7 @@ type ExperienceSettings = {
         fringing:   { enabled: boolean; intensity: number };
     };
 
-    cameras: Array<{
+    cameras: Array<{                    // the viewer uses the first camera
         initial: {
             position: [number, number, number];
             target:   [number, number, number];
@@ -41,7 +41,7 @@ type ExperienceSettings = {
         };
     }>;
 
-    animTracks: Array<{
+    animTracks: Array<{                 // the viewer plays the first track
         name: string;
         duration: number;       // seconds
         frameRate: number;
@@ -49,7 +49,7 @@ type ExperienceSettings = {
         interpolation: 'step' | 'spline';
         smoothness: number;     // 0-1
         keyframes: {
-            times: number[];
+            times: number[];    // in frames, ascending
             values: {
                 position: number[]; // flat array of [x, y, z] per keyframe
                 target:   number[]; // flat array of [x, y, z] per keyframe
@@ -61,14 +61,14 @@ type ExperienceSettings = {
     annotations: Array<{
         position: [number, number, number];
         title: string;
-        text: string;                          // sanitized HTML
+        text: string;                          // shown as plain text
         camera: { initial: { position: [number, number, number]; target: [number, number, number]; fov: number } };
-        extras: Record<string, unknown>;
+        extras?: Record<string, unknown>;
     }>;
 
-    // 'default'   — start at the first camera in `cameras`
-    // 'animTrack' — start by playing the first track in `animTracks`
-    // 'annotation' — start positioned at the first annotation's camera pose
+    // 'default'    — start at the first camera in `cameras`
+    // 'animTrack'  — start by playing the first track in `animTracks`
+    // 'annotation' — accepted, but the viewer currently starts as for 'default'
     startMode: 'default' | 'animTrack' | 'annotation';
 
     hasStartPose?: boolean;
@@ -87,6 +87,64 @@ type ExperienceSettings = {
 | `annotations` | [Annotations](/user-manual/supersplat/studio/annotations) |
 | `startMode`, `hasStartPose` | エディターからの公開時に初期値が設定され、Studioのヘッダ／スタートアップ設定で調整できます |
 | コリジョンボクセルデータ | このJSONではなく、[シーンアセット](/user-manual/supersplat/studio/collision)として別に格納 |
+
+## ビューアでの解釈
+
+いくつかのフィールドは、スキーマだけではわからない動作をします：
+
+- **`background.skyboxUrl`** — ビューアは設定からスカイボックスを読み込みません。ビューアを自分でホストする場合は、`skybox` [URLパラメータ](/user-manual/supersplat/viewer/embedding#url-parameters)または`skyboxUrl`オプションで画像を渡してください。
+- **`soundUrl`** — ブラウザは自動で再生される音声をブロックするため、サウンドは訪問者がビューア内を最初にクリックしたときに再生が始まります。
+- **`cameras`と`animTracks`** — フォーマット上は複数指定できますが、ビューアは最初のカメラだけを使い、最初のトラックだけを再生します。
+- **`annotations[].text`** — プレーンテキストとして表示されるため、HTMLマークアップはレンダリングされません。
+- **`startMode: 'annotation'`** — 受け付けられますが、ビューアは`default`の場合と同じように開始します。
+
+## 作成時の制限 {#authoring-limits}
+
+ビューアはスキーマが許す値であれば何でもレンダリングしますが、設定を書き出すツールは次の範囲内に収めてください。この範囲は`validateSettings(settings, { limits: true })`でチェックされます：
+
+| フィールド | 制限 |
+|-------|-------|
+| カメラと注釈の`fov` | 10～120度 |
+| `annotations` | 最大50個。各注釈の`title`は最大60文字、`text`は最大280文字 |
+| `animTracks` | 最大10個。各トラックの`name`は最大120文字、`duration`は0.1～600秒、`frameRate`は1～120の整数、`smoothness`は0～1、キーフレームは1～1,000個で、フレーム番号は整数かつ昇順 |
+| `sharpness.amount` | 0～1 |
+| `bloom.intensity` / `bloom.blurLevel` | 0～0.1 / 1～16 |
+| `grading.brightness` / `contrast` / `saturation` | 0～3 / 0.5～1.5 / 0～2 |
+| `vignette.intensity` / `inner` / `outer` / `curvature` | 0～1 / 0～3 / 0～3 / 0.01～10 |
+| `fringing.intensity` | 0～100 |
+
+公開済みの設定の中には、古いデフォルトに由来する`bloom.intensity`の`1`のように、これらの範囲を外れるものがあります。そのため、ビューアはファイルを読み込むときにこれらの制限を適用しません。
+
+## 設定の生成と検証 {#generating-and-validating-settings}
+
+ビューアのnpmパッケージは、`/settings`エントリからスキーマの型とヘルパーをエクスポートしています。これを使えば、ビューアが受け付ける設定をパイプラインから書き出せます：
+
+```ts
+import {
+    defaultSettings,
+    importSettings,
+    validateSettings,
+    POST_EFFECT_RANGES,
+    type ExperienceSettings
+} from '@playcanvas/supersplat-viewer/settings';
+
+// 完全な設定オブジェクト。外側から被写体をフレーミングするには'object'を渡します
+const settings: ExperienceSettings = defaultSettings();
+
+// 不正な入力に対しては、問題のあるフィールド名を示して例外をスローします
+validateSettings(json);
+
+// 作成時の制限もチェックします
+validateSettings(json, { limits: true });
+
+// v1の設定をv2に移行します。引数は変更しません
+const migrated = importSettings(json);
+
+// 範囲はデータなので、エディターUIはこれを使ってスライダーを構成できます
+const { min, max, step } = POST_EFFECT_RANGES.bloom.intensity;
+```
+
+`CAMERA_FOV_RANGE`、`POST_EFFECT_RANGES`、`ANIM_TRACK_LIMITS`、`ANNOTATION_LIMITS`は、上記の制限をデータとしてエクスポートします。`defaultSettings()`はカメラの視野角を`85`度とし、位置を`[0, 2, 0]`、注視点を`[2, 2, 0]`にします。`'object'`を渡した場合は、位置が`[2, 2, -2]`、注視点が`[0, 0, 0]`になります。
 
 ## デフォルト
 
@@ -108,5 +166,6 @@ type ExperienceSettings = {
 ## 関連項目
 
 - [Viewer / embedding](/user-manual/supersplat/viewer/embedding) — Viewerに`settings.json` URLを指定する方法
+- [Viewer API](/user-manual/supersplat/viewer/api) — 自分のページで作成したビューアに設定を渡す
 - [Viewer / self-hosting](/user-manual/supersplat/viewer/self-hosting) — これらの設定のコピーを同梱した自己完結型Viewerをエクスポートする
 - [Splat Publishing API](/user-manual/api/splat-publish/) — 公開と設定更新へのプログラム的なアクセス

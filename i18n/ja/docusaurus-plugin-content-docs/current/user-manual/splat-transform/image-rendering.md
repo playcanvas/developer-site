@@ -77,7 +77,7 @@ splat-transform input.ply view.webp \
 
 ## カメラアニメーション {#camera-animations}
 
-`--camera-track` は、単一のビューの代わりに、カメラアニメーションを連番のフレームシーケンスとしてレンダリングします。トラックには、[SuperSplat](/user-manual/supersplat/)エディターのプロジェクト、`animTracks` を含む[ビューア設定](https://github.com/playcanvas/supersplat-viewer?tab=readme-ov-file#settings-schema)の `settings.json`、またはプレーンなフレームリストを使用できます。保存された `.ssproj` はZIPアーカイブなので、先に展開し、展開したディレクトリまたはその `document.json` を渡してください。フレームリストは次のようになります：
+`--camera-track` は、単一のビューの代わりに、カメラアニメーションを連番のフレームシーケンスとしてレンダリングします。トラックには、[SuperSplat](/user-manual/supersplat/)エディターのプロジェクト、`animTracks` を含む[ビューア設定](/user-manual/supersplat/studio/experience-settings/)の `settings.json`、またはプレーンなフレームリストを使用できます。保存された `.ssproj` はZIPアーカイブなので、先に展開し、展開したディレクトリまたはその `document.json` を渡してください。フレームリストは次のようになります：
 
 ```json
 {

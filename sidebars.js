@@ -623,6 +623,7 @@ const sidebars = {
             'user-manual/supersplat/editor/timeline',
             'user-manual/supersplat/editor/rendering',
             'user-manual/supersplat/editor/publishing',
+            'user-manual/supersplat/editor/webmcp',
             'user-manual/supersplat/editor/troubleshooting',
           ],
         },
@@ -657,7 +658,10 @@ const sidebars = {
             id: 'user-manual/supersplat/viewer/index',
           },
           items: [
+            'user-manual/supersplat/viewer/controls',
+            'user-manual/supersplat/viewer/xr',
             'user-manual/supersplat/viewer/embedding',
+            'user-manual/supersplat/viewer/api',
             'user-manual/supersplat/viewer/self-hosting',
           ],
         },

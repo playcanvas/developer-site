@@ -1,6 +1,6 @@
 ---
 title: Import and Export
-description: "SuperSplat import and export formats: PLY, SOG, SPLAT, KSPLAT, SPZ, LCC/LCC2, camera poses, and standalone viewers."
+description: "SuperSplat import and export formats: PLY, SOG, SPLAT, KSPLAT, SPZ, LCC/LCC2, GSAF animations, camera poses, and standalone viewers."
 ---
 
 SuperSplat's import and export capabilities are essential for working with Gaussian Splat data throughout your entire workflow. Import allows you to bring in splat scenes from various capture tools and formats for editing, cleanup, and optimization. Once your editing work is complete, export enables you to save your refined splats in the optimal format for your target platform - whether that's a compressed format for web deployment, a full-quality PLY for archival, or a standalone HTML viewer for easy sharing. This flexibility ensures SuperSplat can integrate seamlessly into any Gaussian Splat production pipeline.
@@ -20,6 +20,7 @@ SuperSplat supports several Gaussian Splat scene formats, plus COLMAP and INRIA 
 | `.ksplat` | ✅ | ❌ | KSplat compressed splat format. Import only |
 | `.spz` | ✅ | ✅ | Niantic compressed format. Exports as SPZ version 4 by default, with SPZ version 3 available for older readers |
 | `.lcc` / `.lcc2` | ✅ | ❌ | XGRIDS proprietary multi-LOD formats. SuperSplat asks which level of detail to load |
+| `.gsaf` | ✅ | ❌ | Animated Gaussian splat file. Imports as a [sequence](#ply-sequences) that plays on the Timeline, or as one splat per frame |
 | `images.txt` | ✅ | ❌ | Camera poses from a [COLMAP reconstruction](https://colmap.github.io/format.html#images-txt). Importing the file creates [Timeline keyframes](timeline.md#importing-camera-poses-as-keyframes); it does not load a splat scene |
 | Camera pose `.json` | ✅ | ❌ | Camera poses in the INRIA JSON format. Importing the file creates [Timeline keyframes](timeline.md#importing-camera-poses-as-keyframes); it does not load a splat scene |
 | `.html` | ❌ | ✅ | Self-contained viewer app with the compressed splat data embedded in one HTML file |
@@ -31,13 +32,13 @@ Only `.ply` files containing 3D Gaussian Splat data can be loaded - other PLY fi
 
 :::
 
-## Importing Splats
+## Importing Splats {#importing-splats}
 
-SuperSplat can import Gaussian Splat scenes in `.ply`, `.compressed.ply`, `.splat`, `.ksplat`, `.spz`, `.lcc`, `.lcc2`, `.sog` (bundled SOG), `meta.json` (unbundled SOG), and `lod-meta.json` (Streamed SOG) formats. It can also import COLMAP `images.txt` and INRIA camera pose `.json` files to create [camera animation keyframes](timeline.md#importing-camera-poses-as-keyframes).
+SuperSplat can import Gaussian Splat scenes in `.ply`, `.compressed.ply`, `.splat`, `.ksplat`, `.spz`, `.lcc`, `.lcc2`, `.sog` (bundled SOG), `meta.json` (unbundled SOG), and `lod-meta.json` (Streamed SOG) formats, and animated splats as PLY sequences or `.gsaf` files. It can also import COLMAP `images.txt` and INRIA camera pose `.json` files to create [camera animation keyframes](timeline.md#importing-camera-poses-as-keyframes).
 
 There are four ways to load a Gaussian Splat file:
 
-1. **Drag and drop** - Drop one or more splat files, or a whole folder, from your file system into SuperSplat's window. For multi-file formats (such as `.lcc`, `.lcc2`, unbundled SOG, or Streamed SOG), drag the parent folder containing those files.
+1. **Drag and drop** - Drop one or more splat files, or a whole folder, from your file system into SuperSplat's window. While you drag files over the window, a **Drop files to import** card lists the accepted formats. While a dialog or progress screen is open, the card does not appear and the drop is refused. For multi-file formats (such as `.lcc`, `.lcc2`, unbundled SOG, or Streamed SOG), drag the parent folder containing those files.
 2. **File menu** - Select `File` > `Import` and choose one or more splat files from your file system. `File` > `Import Recent` lists the files and folders you have imported before so you can reload them without browsing for them again; `Clear Recent` at the bottom of the list empties it.
 3. **Direct file opening** - If you have installed SuperSplat as an app from your browser's address bar, you can double-click a `.ply`, `.splat`, `.sog`, `.spz`, `.ksplat`, or `.ssproj` file in File Explorer (Windows) or Finder (macOS) to open it in the Editor.
 4. **URL loading** - Use the `load` query parameter in the form: `https://superspl.at/editor?load=<SPLAT_URL>`. For example:
@@ -46,7 +47,23 @@ There are four ways to load a Gaussian Splat file:
 
     This is particularly useful for sharing splats with others on social platforms like X and LinkedIn.
 
+    The imported splat is named after the last part of the URL path. Add a `filename` parameter to choose the name instead, for example `?load=<SPLAT_URL>&filename=garden.ply`. The file format is taken from `filename`, so it is required when a signed or extensionless URL does not end in the format's extension. Repeat `load` (and `filename`, in the same order) to import several files.
+
     URL loading also supports multi-file `.lcc`, `.lcc2`, unbundled SOG, and Streamed SOG scenes. Keep their related chunk or texture files at the relative paths referenced by the container.
+
+While a splat loads, a progress dialog shows each file as it is read, followed by the **Sorting** and **Uploading** stages.
+
+### Importing Several Files {#importing-several-files}
+
+A single file, or the files of one multi-file model (such as an unbundled SOG folder), imports straight away. Anything else you pick, drop, or reload from **Import Recent** (several splats, a PLY sequence, any `.gsaf` file, or a mix of splats, projects, and camera poses) is sorted into groups and listed in an **Import Files** dialog, one row per group:
+
+| Column | Description |
+|---|---|
+| **Files** | The file name, the main file of a multi-file model, or a sequence's frame range, such as `frame_000[1-5].ply`. |
+| **Import** | Whether to import the row. Every row is ticked by default; unsupported files are listed but cannot be imported. |
+| **As** | How the row imports: **Scene** for a splat or multi-file model, **Project** for an `.ssproj` file, **Camera poses** for COLMAP or INRIA pose files, or **Not supported**. A PLY sequence or `.gsaf` file offers a choice of **Sequence** (the default) or one scene per frame, shown with the frame count (for example **120 scenes**), which imports every frame as a separate splat. |
+
+Click **Import** to import the ticked rows, or **Cancel** to import nothing. Projects are listed first, because opening one replaces the current scene.
 
 ### Choosing a Level of Detail {#choosing-a-level-of-detail}
 
@@ -54,13 +71,13 @@ When a file contains multiple levels of detail, SuperSplat displays a **Load Opt
 
 Choose the LOD that fits your editing needs and available memory, then click **Load**. Lower-detail levels load faster and consume less memory. Click **Cancel** to stop the import without loading a level.
 
-### Importing PLY Sequences {#ply-sequences}
+### Importing PLY Sequences and GSAF Animations {#ply-sequences}
 
-SuperSplat supports importing sequences of PLY files to create splat animations. This allows you to view animated Gaussian Splats where each PLY file represents a single frame in the animation.
+SuperSplat can play animated Gaussian Splats on the [Timeline](timeline.md), where each frame of the animation is a complete splat. An animation can be a sequence of PLY files or a single `.gsaf` (animated Gaussian splat) file.
 
 To import a PLY sequence:
 
-1. Ensure your PLY files follow a naming convention with sequential frame numbers appended, such as:
+1. Ensure your PLY (or `.compressed.ply`) files share a folder and a filename prefix, followed by sequential frame numbers, such as:
    - `animation_0001.ply`
    - `animation_0002.ply`
    - `animation_0003.ply`
@@ -71,15 +88,21 @@ To import a PLY sequence:
    - **Dragging and dropping** a folder containing the PLY files onto SuperSplat
    - Using **File > Import** and selecting multiple PLY files
 
-Once loaded, SuperSplat will automatically recognize the sequence and enable the [Timeline](timeline.md) panel, allowing you to:
+3. In the [Import Files](#importing-several-files) dialog, the frames appear as a single row named by their frame range. Leave **As** set to **Sequence** and click **Import**.
+
+To import a GSAF animation, drop or import the `.gsaf` file. The **Import Files** dialog shows its frame count; choose **Sequence** to play it on the Timeline, or the scenes option to load every frame as a separate splat (named like PLY frames: `anim_000.ply`, `anim_001.ply`, and so on). A `.gsaf` file loaded with the `load` URL parameter imports directly as a sequence.
+
+Once loaded, the sequence appears as one splat in the Scene Manager and the [Timeline](timeline.md) panel drives it, allowing you to:
 
 - Step through frames using the arrow buttons
 - Play the animation using the play button
 - Scrub through the animation using the timeline slider
 
+You can import several sequences, from PLY files, GSAF files, or both, and they play together. See [Splat Sequences](timeline.md#splat-sequences).
+
 :::note
 
-PLY sequences are memory-intensive since each frame loads a complete splat scene. For optimal performance, consider the file sizes and number of frames when working with animated splats.
+Sequences are memory-intensive since each frame loads a complete splat scene. For optimal performance, consider the file sizes and number of frames when working with animated splats.
 
 :::
 
@@ -96,5 +119,9 @@ To export your currently loaded scene, open the `File` > `Export` submenu and ch
   - **SOG**: **SH Bands**, and **Iterations** (1–20, default 10), the number of clustering passes used to compress the spherical harmonic data. More iterations give slightly better quality at the cost of export time.
   - **SPZ**: **SH Bands**, and **Version**. **SPZ 4** (the latest version of the spec) is the default, while **SPZ 3** (legacy gzip container) is available for compatibility with older third-party SPZ readers.
   - **Viewer App**: the options for a standalone HTML viewer are described in [Self-Hosting the Viewer](/user-manual/supersplat/viewer/self-hosting).
+
+**SH Bands** (0–3) is the exact number of spherical harmonic bands written. It starts at the highest band count in the scene, capped by the **SH Bands** setting in [Preferences](interface.md#preferences), so a default export keeps what the viewport shows. Choosing more bands than a splat contains fills the missing coefficients with zeros. This lets you export a band-0 splat with 3 bands for tools that expect a fixed spherical harmonic layout.
+
+The suggested filename is the splat's name with its extension, in upper or lower case, replaced by the export format's: a splat loaded from `Garden.PLY` is suggested as `Garden.sog` for a SOG export.
 
 Choose `File` > `Re-export` (`Ctrl + Shift + E`) to repeat the last export with the same options to the same file. It overwrites the previous output without further prompts, which is handy while iterating on a cleanup.

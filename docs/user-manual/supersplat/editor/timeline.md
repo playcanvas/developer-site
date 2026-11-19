@@ -1,6 +1,6 @@
 ---
 title: Timeline
-description: "SuperSplat timeline: camera keyframes, playback controls, COLMAP pose import, and publishing animated camera paths that play on the scene page."
+description: "SuperSplat timeline: camera keyframes, playback controls, COLMAP pose import, splat sequence playback, and publishing animated camera paths that play on the scene page."
 ---
 
 The Timeline panel allows you to create camera animations for your Gaussian Splat scenes. You can set keyframes to define camera positions and movements, creating smooth animated transitions that can be played back in the editor.
@@ -19,7 +19,7 @@ The Timeline panel includes the following controls:
 - **FPS setting** - Set the frames per second for the animation
 - **Timeline length** - Set the total duration of the animation in frames
 - **Smoothness** - Adjust the interpolation smoothness between keyframes (0-1)
-- **Loop toggle** - Control whether the camera path loops. When enabled (the default), the animation wraps smoothly from the last keyframe back to the first; when disabled, the camera comes to rest on the last keyframe. See [Animation Looping](#animation-looping)
+- **Loop toggle** - Control whether playback loops. When enabled (the default), the animation wraps smoothly from the last keyframe back to the first; when disabled, the camera comes to rest on the last keyframe and playback stops on the last frame. See [Animation Looping](#animation-looping)
 
 ### Keyboard Shortcuts
 
@@ -144,12 +144,12 @@ Adjusting smoothness allows you to control the feel of your camera animation, fr
 
 Use the play button (or press **Space**) to preview your animation. The camera will interpolate between keyframes based on your smoothness setting, creating fluid motion. With the Loop toggle enabled (the default), the animation loops continuously, wrapping from the last keyframe back to the first.
 
-### Animation Looping
+### Animation Looping {#animation-looping}
 
 The Loop toggle on the Timeline (next to the smoothness setting) controls what happens after the camera passes the final keyframe:
 
 - **Loop enabled (default)** - The camera path forms a closed loop: after the last keyframe, the camera smoothly interpolates back to the first keyframe over the remaining frames of the timeline
-- **Loop disabled** - The camera path stays open: the camera comes to rest on the last keyframe and holds that pose
+- **Loop disabled** - The camera path stays open: the camera comes to rest on the last keyframe and holds that pose. Playback stops when it reaches the last frame of the timeline; press play again to start over from frame 0
 
 The state of the Loop toggle is saved with your project, and the camera path drawn by the **Camera Poses** overlay updates to show a closed or open curve accordingly.
 
@@ -169,6 +169,16 @@ For example, with a 100-frame timeline:
 This technique allows the camera to smoothly transition from your last keyframe back to the starting position, creating a seamless loop.
 
 :::
+
+## Splat Sequences {#splat-sequences}
+
+When you import a [PLY sequence or GSAF animation](import-export.md#ply-sequences) as a sequence, the Timeline also drives its frames. The sequence appears as one splat in the Scene Manager, and playing or scrubbing the Timeline swaps each frame into that splat, keeping its transform, visibility, and selection.
+
+- Importing a sequence sets **Total Frames** to the length of the longest sequence loaded.
+- Several sequences can be loaded at once, from PLY files, GSAF files, or both, and they play together. A shorter sequence holds its last frame until the Timeline wraps.
+- A sequence imported while the playhead is away from frame 0 starts at the playhead, in step with the sequences already loaded.
+- Removing a sequence's splat from the Scene Manager removes the sequence from the Timeline.
+- Camera keyframes work alongside sequences, so you can animate the camera around an animated splat and [render it as a video](rendering.md#video-rendering).
 
 ## Publishing and Playback on the Scene Page
 

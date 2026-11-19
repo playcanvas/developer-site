@@ -3,7 +3,7 @@
     "info": {
         "title": "SuperSplat API",
         "version": "1.0.0",
-        "description": "Use this API to upload Gaussian splat scenes and list the scenes owned by the authenticated user.\n\nTypical upload flow:\n\n1. Create a resumable upload session with a source format and optional display metadata.\n2. Request signed URLs for the part numbers you want to upload, then PUT the bytes to those URLs.\n3. Complete the upload with the uploaded part ETags. The splat is created immediately and may remain in `processing` while processing finishes."
+        "description": "Use this API to upload Gaussian splat scenes, list the scenes owned by the authenticated user, and look up and download any scene whose owner allows downloads.\n\nTypical upload flow:\n\n1. Create a resumable upload session with a source format and optional display metadata.\n2. Request signed URLs for the part numbers you want to upload, then PUT the bytes to those URLs.\n3. Complete the upload with the uploaded part ETags. The splat is created immediately and may remain in `processing` while processing finishes.\n\nTypical import flow:\n\n1. Get the splat by id. When `downloadable` is `true`, `content` describes its published files.\n2. Request a download with `POST /v1/splats/{splatId}/downloads` in a target the splat offers: `sog` for a `sog` splat, `ssog` for an `ssog` splat, or `ply` for any.\n3. Poll `GET /v1/splats/{splatId}/downloads/{target}` until its `status` is `ready`. If it is `failed`, request the download again.\n4. Get a short-lived URL with `POST /v1/splats/{splatId}/downloads/{target}/file`, then fetch it: a ZIP archive of the files and their license.\n\nA download is the only way the API gives you a splat's files."
     },
     "tags": [
         {
@@ -12,11 +12,15 @@
         },
         {
             "name": "Splats",
-            "description": "List and inspect splats owned by the authenticated user."
+            "description": "List splats owned by the authenticated user, and get any splat by id."
         },
         {
             "name": "Uploads",
             "description": "Create and complete resumable splat uploads."
+        },
+        {
+            "name": "Downloads",
+            "description": "Download the published files of splats whose owners allow downloads."
         }
     ],
     "servers": [
@@ -171,7 +175,15 @@
                                                     "viewerUrl": "https://superspl.at/scene/a1b2c3d4",
                                                     "createdAt": "2026-01-01T00:00:00.000Z",
                                                     "updatedAt": "2026-01-01T00:00:00.000Z",
-                                                    "completedAt": null
+                                                    "completedAt": null,
+                                                    "author": {
+                                                        "username": "artist",
+                                                        "displayName": "Ada Artist"
+                                                    },
+                                                    "thumbnails": null,
+                                                    "downloadable": false,
+                                                    "license": null,
+                                                    "content": null
                                                 }
                                             ],
                                             "pagination": {
@@ -245,8 +257,8 @@
         "/v1/splats/{splatId}": {
             "get": {
                 "tags": ["Splats"],
-                "summary": "Get a splat owned by the authenticated caller",
-                "description": "Returns a single splat owned by the authenticated user. Newly completed uploads may return `status: \"processing\"` until processing finishes.",
+                "summary": "Get a splat by id",
+                "description": "Returns any splat by id, whoever owns it, listed or unlisted. Newly completed uploads may return `status: \"processing\"` until processing finishes. `content` describes the published files only when `downloadable` is `true`; the owner gets no exception.",
                 "operationId": "getSplat",
                 "parameters": [
                     {
@@ -272,6 +284,69 @@
                                     "$ref": "#/components/schemas/Splat"
                                 },
                                 "examples": {
+                                    "downloadableSplat": {
+                                        "summary": "Downloadable splat",
+                                        "value": {
+                                            "id": "a1b2c3d4",
+                                            "title": "Garden scan",
+                                            "description": "",
+                                            "status": "completed",
+                                            "visibility": "listed",
+                                            "format": "ssog",
+                                            "size": 92274688,
+                                            "viewerUrl": "https://superspl.at/scene/a1b2c3d4",
+                                            "createdAt": "2026-01-01T00:00:00.000Z",
+                                            "updatedAt": "2026-01-01T00:00:00.000Z",
+                                            "completedAt": "2026-01-01T00:20:00.000Z",
+                                            "author": {
+                                                "username": "artist",
+                                                "displayName": "Ada Artist"
+                                            },
+                                            "thumbnails": {
+                                                "s": "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/splat/a1b2c3d4/v1/s.webp",
+                                                "m": "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/splat/a1b2c3d4/v1/m.webp",
+                                                "l": "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/splat/a1b2c3d4/v1/l.webp",
+                                                "xl": "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/splat/a1b2c3d4/v1/xl.webp"
+                                            },
+                                            "downloadable": true,
+                                            "license": "by",
+                                            "content": {
+                                                "format": "ssog",
+                                                "version": 1,
+                                                "splatCount": 7500000,
+                                                "lodCounts": [7500000, 3750000, 1875000, 937500, 466000]
+                                            }
+                                        }
+                                    },
+                                    "notDownloadableSplat": {
+                                        "summary": "Splat that is not downloadable",
+                                        "value": {
+                                            "id": "a1b2c3d4",
+                                            "title": "Garden scan",
+                                            "description": "",
+                                            "status": "completed",
+                                            "visibility": "listed",
+                                            "format": "ssog",
+                                            "size": 92274688,
+                                            "viewerUrl": "https://superspl.at/scene/a1b2c3d4",
+                                            "createdAt": "2026-01-01T00:00:00.000Z",
+                                            "updatedAt": "2026-01-01T00:00:00.000Z",
+                                            "completedAt": "2026-01-01T00:20:00.000Z",
+                                            "author": {
+                                                "username": "artist",
+                                                "displayName": "Ada Artist"
+                                            },
+                                            "thumbnails": {
+                                                "s": "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/splat/a1b2c3d4/v1/s.webp",
+                                                "m": "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/splat/a1b2c3d4/v1/m.webp",
+                                                "l": "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/splat/a1b2c3d4/v1/l.webp",
+                                                "xl": "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/splat/a1b2c3d4/v1/xl.webp"
+                                            },
+                                            "downloadable": false,
+                                            "license": null,
+                                            "content": null
+                                        }
+                                    },
                                     "processingSplat": {
                                         "summary": "Processing splat",
                                         "value": {
@@ -285,7 +360,15 @@
                                             "viewerUrl": "https://superspl.at/scene/a1b2c3d4",
                                             "createdAt": "2026-01-01T00:00:00.000Z",
                                             "updatedAt": "2026-01-01T00:00:00.000Z",
-                                            "completedAt": null
+                                            "completedAt": null,
+                                            "author": {
+                                                "username": "artist",
+                                                "displayName": "Ada Artist"
+                                            },
+                                            "thumbnails": null,
+                                            "downloadable": false,
+                                            "license": null,
+                                            "content": null
                                         }
                                     }
                                 }
@@ -355,6 +438,606 @@
                                 },
                                 "examples": {
                                     "error": {
+                                        "summary": "Rate limit exceeded",
+                                        "value": {
+                                            "error": "Too many requests"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/splats/{splatId}/downloads": {
+            "post": {
+                "tags": ["Downloads"],
+                "summary": "Request a splat download",
+                "description": "Prepares a download of a `downloadable` splat in `target`, whoever owns the splat, and returns its state. Downloads are shared and cached, so a splat someone downloaded recently is often `ready` at once. Otherwise poll `GET /v1/splats/{splatId}/downloads/{target}` until it is. Then get its file with `POST /v1/splats/{splatId}/downloads/{target}/file`. Requesting a download hands out no URL and uses none of the daily download allowance.\n\nThe download is a ZIP archive with its files at the root and the license (title, author, source, license and its requirements) in `license.txt`:\n\n- `sog`: the published SOG, its `meta.json` and the WebP textures it names. The archive is itself a bundled SOG, which SOG readers open despite `license.txt`, so its file is named `<title>.sog`.\n- `ssog`: `lod-meta.json` (plain JSON) and every folder it names, each a `meta.json` with its WebP textures: one per level-of-detail chunk (`<level>_<chunk>/`), and the environment SOG (usually `env/`) when it has one.\n- `ply`: `scene.ply`, converted from the published files. For `ssog` it holds the finest level of detail merged with the environment.",
+                "operationId": "createSplatDownload",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "splatId",
+                        "schema": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 100,
+                            "description": "Opaque public splat id.",
+                            "examples": ["a1b2c3d4"]
+                        },
+                        "required": true,
+                        "description": "Opaque public splat id."
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateDownloadRequest"
+                            },
+                            "examples": {
+                                "ssogDownload": {
+                                    "summary": "Download of an ssog splat's own files",
+                                    "value": {
+                                        "target": "ssog"
+                                    }
+                                },
+                                "plyDownload": {
+                                    "summary": "PLY download",
+                                    "value": {
+                                        "target": "ply"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The download already exists: queued, processing or ready",
+                        "headers": {
+                            "Location": {
+                                "description": "API URL to poll the download at.",
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "/api/supersplat/v1/splats/a1b2c3d4/downloads/ssog"
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Download"
+                                },
+                                "examples": {
+                                    "readyDownload": {
+                                        "summary": "Ready download",
+                                        "value": {
+                                            "splatId": "a1b2c3d4",
+                                            "target": "ssog",
+                                            "version": 1,
+                                            "status": "ready",
+                                            "bytes": 92536832
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "202": {
+                        "description": "Download queued for preparation",
+                        "headers": {
+                            "Location": {
+                                "description": "API URL to poll the download at.",
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "/api/supersplat/v1/splats/a1b2c3d4/downloads/ssog"
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Download"
+                                },
+                                "examples": {
+                                    "queuedDownload": {
+                                        "summary": "Queued download",
+                                        "value": {
+                                            "splatId": "a1b2c3d4",
+                                            "target": "ssog",
+                                            "version": 1,
+                                            "status": "queued",
+                                            "bytes": null
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request, or a `target` the splat does not offer",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "examples": {
+                                    "targetNotOffered": {
+                                        "summary": "Target the splat does not offer",
+                                        "value": {
+                                            "error": "target: \"sog\" is not available for this splat, whose content.format is \"ssog\". Use \"ssog\" or \"ply\"."
+                                        }
+                                    },
+                                    "invalidRequest": {
+                                        "summary": "Invalid request",
+                                        "value": {
+                                            "error": "Invalid request"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Authentication required",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "examples": {
+                                    "error": {
+                                        "summary": "Authentication required",
+                                        "value": {
+                                            "error": "Unauthorized"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "examples": {
+                                    "error": {
+                                        "summary": "Missing permission",
+                                        "value": {
+                                            "error": "Forbidden"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The splat does not exist, or is not downloadable",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "examples": {
+                                    "notDownloadable": {
+                                        "summary": "Not downloadable",
+                                        "value": {
+                                            "error": "downloadable splat not found"
+                                        }
+                                    },
+                                    "splatNotFound": {
+                                        "summary": "Splat not found",
+                                        "value": {
+                                            "error": "splat not found"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "429": {
+                        "description": "Rate limited",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "examples": {
+                                    "error": {
+                                        "summary": "Rate limit exceeded",
+                                        "value": {
+                                            "error": "Too many requests"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/splats/{splatId}/downloads/{target}": {
+            "get": {
+                "tags": ["Downloads"],
+                "summary": "Get a splat download",
+                "description": "Returns the state of the splat's current download in `target`. Polling changes nothing: it hands out no URL and uses no allowance. A preparation that stalls reads as `failed`. A download lasts while the splat stays the same. Once the splat is republished, renamed or relicensed, its author is renamed, or its downloads are switched off, this returns `404`: request the download again.",
+                "operationId": "getSplatDownload",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "splatId",
+                        "schema": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 100,
+                            "description": "Opaque public splat id.",
+                            "examples": ["a1b2c3d4"]
+                        },
+                        "required": true,
+                        "description": "Opaque public splat id."
+                    },
+                    {
+                        "in": "path",
+                        "name": "target",
+                        "schema": {
+                            "type": "string",
+                            "enum": ["ply", "sog", "ssog"],
+                            "description": "Download format. Every downloadable splat offers `ply`, a conversion to a standard PLY. A splat whose `content.format` is `sog` also offers `sog`, and one whose `content.format` is `ssog` also offers `ssog`: its published files, unchanged. A `compressed-ply` splat offers only `ply`. Each download is a ZIP archive; see the request operation for what it holds.",
+                            "examples": ["ply"]
+                        },
+                        "required": true,
+                        "description": "Download format. Every downloadable splat offers `ply`, a conversion to a standard PLY. A splat whose `content.format` is `sog` also offers `sog`, and one whose `content.format` is `ssog` also offers `ssog`: its published files, unchanged. A `compressed-ply` splat offers only `ply`. Each download is a ZIP archive; see the request operation for what it holds."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Download",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Download"
+                                },
+                                "examples": {
+                                    "processingDownload": {
+                                        "summary": "Processing download",
+                                        "value": {
+                                            "splatId": "a1b2c3d4",
+                                            "target": "ssog",
+                                            "version": 1,
+                                            "status": "processing",
+                                            "bytes": null
+                                        }
+                                    },
+                                    "readyDownload": {
+                                        "summary": "Ready download",
+                                        "value": {
+                                            "splatId": "a1b2c3d4",
+                                            "target": "ssog",
+                                            "version": 1,
+                                            "status": "ready",
+                                            "bytes": 92536832
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request, or a `target` the splat does not offer",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "examples": {
+                                    "targetNotOffered": {
+                                        "summary": "Target the splat does not offer",
+                                        "value": {
+                                            "error": "target: \"sog\" is not available for this splat, whose content.format is \"ssog\". Use \"ssog\" or \"ply\"."
+                                        }
+                                    },
+                                    "invalidRequest": {
+                                        "summary": "Invalid request",
+                                        "value": {
+                                            "error": "Invalid request"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Authentication required",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "examples": {
+                                    "error": {
+                                        "summary": "Authentication required",
+                                        "value": {
+                                            "error": "Unauthorized"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "examples": {
+                                    "error": {
+                                        "summary": "Missing permission",
+                                        "value": {
+                                            "error": "Forbidden"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The splat does not exist or is not downloadable, or no download in `target` was requested for its current version",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "examples": {
+                                    "notDownloadable": {
+                                        "summary": "Not downloadable",
+                                        "value": {
+                                            "error": "downloadable splat not found"
+                                        }
+                                    },
+                                    "splatNotFound": {
+                                        "summary": "Splat not found",
+                                        "value": {
+                                            "error": "splat not found"
+                                        }
+                                    },
+                                    "downloadNotFound": {
+                                        "summary": "Download not requested",
+                                        "value": {
+                                            "error": "download not found"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "429": {
+                        "description": "Rate limited",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "examples": {
+                                    "error": {
+                                        "summary": "Rate limit exceeded",
+                                        "value": {
+                                            "error": "Too many requests"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/splats/{splatId}/downloads/{target}/file": {
+            "post": {
+                "tags": ["Downloads"],
+                "summary": "Get the file of a splat download",
+                "description": "Returns a short-lived signed URL of a `ready` download's ZIP archive. This is the download: it counts towards the account's daily download allowance and the splat's download count. Each splat counts once per UTC day towards the allowance, whatever its target and however often its file is requested.",
+                "operationId": "createSplatDownloadFile",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "splatId",
+                        "schema": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 100,
+                            "description": "Opaque public splat id.",
+                            "examples": ["a1b2c3d4"]
+                        },
+                        "required": true,
+                        "description": "Opaque public splat id."
+                    },
+                    {
+                        "in": "path",
+                        "name": "target",
+                        "schema": {
+                            "type": "string",
+                            "enum": ["ply", "sog", "ssog"],
+                            "description": "Download format. Every downloadable splat offers `ply`, a conversion to a standard PLY. A splat whose `content.format` is `sog` also offers `sog`, and one whose `content.format` is `ssog` also offers `ssog`: its published files, unchanged. A `compressed-ply` splat offers only `ply`. Each download is a ZIP archive; see the request operation for what it holds.",
+                            "examples": ["ply"]
+                        },
+                        "required": true,
+                        "description": "Download format. Every downloadable splat offers `ply`, a conversion to a standard PLY. A splat whose `content.format` is `sog` also offers `sog`, and one whose `content.format` is `ssog` also offers `ssog`: its published files, unchanged. A `compressed-ply` splat offers only `ply`. Each download is a ZIP archive; see the request operation for what it holds."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Download file URL",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DownloadFile"
+                                },
+                                "examples": {
+                                    "downloadFile": {
+                                        "summary": "Download file URL",
+                                        "value": {
+                                            "url": "https://example-bucket.s3.amazonaws.com/download-artifacts/a1b2c3d4/v1/ssog/0123456789abcdef0123456789abcdef/archive.zip?X-Amz-Signature=...",
+                                            "urlExpiresAt": "2026-01-01T00:05:00.000Z",
+                                            "bytes": 92536832,
+                                            "version": 1
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request, or a `target` the splat does not offer",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "examples": {
+                                    "targetNotOffered": {
+                                        "summary": "Target the splat does not offer",
+                                        "value": {
+                                            "error": "target: \"sog\" is not available for this splat, whose content.format is \"ssog\". Use \"ssog\" or \"ply\"."
+                                        }
+                                    },
+                                    "invalidRequest": {
+                                        "summary": "Invalid request",
+                                        "value": {
+                                            "error": "Invalid request"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Authentication required",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "examples": {
+                                    "error": {
+                                        "summary": "Authentication required",
+                                        "value": {
+                                            "error": "Unauthorized"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "examples": {
+                                    "error": {
+                                        "summary": "Missing permission",
+                                        "value": {
+                                            "error": "Forbidden"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The splat does not exist or is not downloadable, no download in `target` was requested for its current version, or its file is gone: request the download again",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                },
+                                "examples": {
+                                    "notDownloadable": {
+                                        "summary": "Not downloadable",
+                                        "value": {
+                                            "error": "downloadable splat not found"
+                                        }
+                                    },
+                                    "splatNotFound": {
+                                        "summary": "Splat not found",
+                                        "value": {
+                                            "error": "splat not found"
+                                        }
+                                    },
+                                    "downloadNotFound": {
+                                        "summary": "Download not requested",
+                                        "value": {
+                                            "error": "download not found"
+                                        }
+                                    },
+                                    "fileGone": {
+                                        "summary": "Download file gone",
+                                        "value": {
+                                            "error": "download file not found"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "The download is not ready yet (`code: not_ready`). Poll it until it is `ready`.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DownloadNotReadyError"
+                                },
+                                "examples": {
+                                    "notReady": {
+                                        "summary": "Download not ready yet",
+                                        "value": {
+                                            "error": "download is not ready yet",
+                                            "code": "not_ready"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "429": {
+                        "description": "Rate limit exceeded, or the account has downloaded its daily number of splats (`code: daily_download_limit_reached`, with `Retry-After`).",
+                        "headers": {
+                            "Retry-After": {
+                                "description": "Seconds until the daily allowance resets. Sent with `daily_publish_limit_reached` and `daily_download_limit_reached`.",
+                                "schema": {
+                                    "type": "integer"
+                                },
+                                "example": 22320
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TooManyRequestsError"
+                                },
+                                "examples": {
+                                    "dailyDownloadLimitReached": {
+                                        "summary": "Daily download allowance used up",
+                                        "value": {
+                                            "error": "You've downloaded today's limit of 100 scenes. You can download more after 00:00 UTC (in 6 h 12 min).",
+                                            "code": "daily_download_limit_reached",
+                                            "limit": 100,
+                                            "count": 100,
+                                            "resetsAt": "2026-01-02T00:00:00.000Z"
+                                        }
+                                    },
+                                    "rateLimited": {
                                         "summary": "Rate limit exceeded",
                                         "value": {
                                             "error": "Too many requests"
@@ -548,17 +1231,20 @@
                         }
                     },
                     "413": {
-                        "description": "Upload limit exceeded",
+                        "description": "The file is larger than its source format allows (`code: file_too_large`).",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ErrorResponse"
+                                    "$ref": "#/components/schemas/FileTooLargeError"
                                 },
                                 "examples": {
-                                    "error": {
-                                        "summary": "Upload too large",
+                                    "fileTooLarge": {
+                                        "summary": "File too large",
                                         "value": {
-                                            "error": "Upload size limit exceeded"
+                                            "error": "This PLY is 16.3 GB. PLY files can be up to 15 GB.",
+                                            "code": "file_too_large",
+                                            "limitBytes": 16106127360,
+                                            "fileBytes": 17501991731
                                         }
                                     }
                                 }
@@ -566,14 +1252,43 @@
                         }
                     },
                     "429": {
-                        "description": "Rate limited",
+                        "description": "Rate limit exceeded, the daily publishing allowance is used up (`code: daily_publish_limit_reached`, with `Retry-After`), the account already has the maximum number of splats uploading or processing (`code: too_many_processing`), or another publish for the account is starting (`code: publish_in_progress`). Checked before the upload starts; completion checks again. An upload counts towards the processing limit until it completes, or until 20 minutes pass without it requesting part URLs.",
+                        "headers": {
+                            "Retry-After": {
+                                "description": "Seconds until the daily allowance resets. Sent with `daily_publish_limit_reached` and `daily_download_limit_reached`.",
+                                "schema": {
+                                    "type": "integer"
+                                },
+                                "example": 22320
+                            }
+                        },
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ErrorResponse"
+                                    "$ref": "#/components/schemas/TooManyRequestsError"
                                 },
                                 "examples": {
-                                    "error": {
+                                    "dailyPublishLimitReached": {
+                                        "summary": "Daily publishing allowance used up",
+                                        "value": {
+                                            "error": "You've used today's 10 GB publishing allowance. You can publish again after 00:00 UTC (in 6 h 12 min).",
+                                            "code": "daily_publish_limit_reached",
+                                            "limitBytes": 10737418240,
+                                            "usedBytes": 11274289152,
+                                            "resetsAt": "2026-01-02T00:00:00.000Z"
+                                        }
+                                    },
+                                    "tooManyProcessing": {
+                                        "summary": "Too many splats processing",
+                                        "value": {
+                                            "error": "You have 2 scenes uploading or processing. You can upload another when one finishes.",
+                                            "code": "too_many_processing",
+                                            "count": 2,
+                                            "limit": 2,
+                                            "uploading": 1
+                                        }
+                                    },
+                                    "rateLimited": {
                                         "summary": "Rate limit exceeded",
                                         "value": {
                                             "error": "Too many requests"
@@ -1093,17 +1808,20 @@
                         }
                     },
                     "413": {
-                        "description": "Upload limit exceeded",
+                        "description": "The file is larger than its source format allows (`code: file_too_large`).",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ErrorResponse"
+                                    "$ref": "#/components/schemas/FileTooLargeError"
                                 },
                                 "examples": {
-                                    "error": {
-                                        "summary": "Upload too large",
+                                    "fileTooLarge": {
+                                        "summary": "File too large",
                                         "value": {
-                                            "error": "Upload size limit exceeded"
+                                            "error": "This PLY is 16.3 GB. PLY files can be up to 15 GB.",
+                                            "code": "file_too_large",
+                                            "limitBytes": 16106127360,
+                                            "fileBytes": 17501991731
                                         }
                                     }
                                 }
@@ -1111,14 +1829,43 @@
                         }
                     },
                     "429": {
-                        "description": "Rate limited",
+                        "description": "Rate limit exceeded, the daily publishing allowance is used up (`code: daily_publish_limit_reached`, with `Retry-After`), the account already has the maximum number of other splats uploading or processing (`code: too_many_processing`), or another publish for the account is starting (`code: publish_in_progress`). The upload stays `processing`; retry completion later.",
+                        "headers": {
+                            "Retry-After": {
+                                "description": "Seconds until the daily allowance resets. Sent with `daily_publish_limit_reached` and `daily_download_limit_reached`.",
+                                "schema": {
+                                    "type": "integer"
+                                },
+                                "example": 22320
+                            }
+                        },
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ErrorResponse"
+                                    "$ref": "#/components/schemas/TooManyRequestsError"
                                 },
                                 "examples": {
-                                    "error": {
+                                    "dailyPublishLimitReached": {
+                                        "summary": "Daily publishing allowance used up",
+                                        "value": {
+                                            "error": "You've used today's 10 GB publishing allowance. You can publish again after 00:00 UTC (in 6 h 12 min).",
+                                            "code": "daily_publish_limit_reached",
+                                            "limitBytes": 10737418240,
+                                            "usedBytes": 11274289152,
+                                            "resetsAt": "2026-01-02T00:00:00.000Z"
+                                        }
+                                    },
+                                    "tooManyProcessing": {
+                                        "summary": "Too many splats processing",
+                                        "value": {
+                                            "error": "You have 2 scenes uploading or processing. You can upload another when one finishes.",
+                                            "code": "too_many_processing",
+                                            "count": 2,
+                                            "limit": 2,
+                                            "uploading": 1
+                                        }
+                                    },
+                                    "rateLimited": {
                                         "summary": "Rate limit exceeded",
                                         "value": {
                                             "error": "Too many requests"
@@ -1134,6 +1881,20 @@
     },
     "components": {
         "schemas": {
+            "CreateDownloadRequest": {
+                "type": "object",
+                "properties": {
+                    "target": {
+                        "type": "string",
+                        "enum": ["ply", "sog", "ssog"],
+                        "description": "Download format. Every downloadable splat offers `ply`, a conversion to a standard PLY. A splat whose `content.format` is `sog` also offers `sog`, and one whose `content.format` is `ssog` also offers `ssog`: its published files, unchanged. A `compressed-ply` splat offers only `ply`. Each download is a ZIP archive; see the request operation for what it holds.",
+                        "examples": ["ply"]
+                    }
+                },
+                "required": ["target"],
+                "additionalProperties": false,
+                "description": "Request body for requesting a splat download."
+            },
             "CreateUploadRequest": {
                 "type": "object",
                 "properties": {
@@ -1144,7 +1905,7 @@
                             {
                                 "type": "integer",
                                 "minimum": 0,
-                                "maximum": 25000000000
+                                "maximum": 16106127360
                             },
                             {
                                 "type": "null"
@@ -1153,8 +1914,8 @@
                     },
                     "sourceFormat": {
                         "type": "string",
-                        "enum": ["ply", "sog", "ssog", "lcc"],
-                        "description": "Format of the file being uploaded. Use `ply` for raw Gaussian splat PLY files, `sog` for SOG files, `ssog` for SSOG archives exported by SuperSplat, and `lcc` for LCC archives.",
+                        "enum": ["ply", "sog", "spz", "gsaf", "ssog", "lcc"],
+                        "description": "Format of the file being uploaded. Use `ply` for raw Gaussian splat PLY files, `sog` for SOG files, `spz` for SPZ files, `gsaf` for animated GSAF files, `ssog` for SSOG archives exported by SuperSplat, and `lcc` for LCC archives.",
                         "examples": ["ply"]
                     },
                     "title": {
@@ -1394,7 +2155,7 @@
                     "size": {
                         "type": "integer",
                         "minimum": 0,
-                        "maximum": 25000000000,
+                        "maximum": 16106127360,
                         "description": "Published splat size in bytes. Processing splats may report `0` until output is available.",
                         "examples": [0]
                     },
@@ -1444,6 +2205,48 @@
                         ],
                         "description": "Processing completion timestamp, or `null` while processing.",
                         "examples": [null]
+                    },
+                    "author": {
+                        "$ref": "#/components/schemas/SplatAuthor"
+                    },
+                    "thumbnails": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/SplatThumbnails"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "Thumbnail image URLs, or `null` when the splat has no thumbnails yet."
+                    },
+                    "downloadable": {
+                        "type": "boolean",
+                        "description": "Whether anyone, the owner included, may download the published files: the owner allows downloads with a license, the splat is published, and it is not GSAF. `license` and `content` are set only when `true`.",
+                        "examples": [true]
+                    },
+                    "license": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "Creative Commons license the files are offered under, when `downloadable`: currently one of `by`, `by-sa`, `by-nd`, `by-nc`, `by-nc-sa` and `by-nc-nd` (CC BY 4.0 and its variants). Not an enum, as more may be added. `null` when not downloadable.",
+                        "examples": ["by"]
+                    },
+                    "content": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/SplatContent"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "Describes the published files, when `downloadable`; download them with `POST /v1/splats/{splatId}/downloads`. `null` when not downloadable."
                     }
                 },
                 "required": [
@@ -1457,10 +2260,265 @@
                     "viewerUrl",
                     "createdAt",
                     "updatedAt",
-                    "completedAt"
+                    "completedAt",
+                    "author",
+                    "thumbnails",
+                    "downloadable",
+                    "license",
+                    "content"
                 ],
                 "additionalProperties": {},
-                "description": "Splat scene owned by the authenticated user."
+                "description": "Splat scene. Any authenticated caller can get any splat by id, listed or unlisted, as anyone with its link can open it on the web."
+            },
+            "SplatAuthor": {
+                "type": "object",
+                "properties": {
+                    "username": {
+                        "type": "string",
+                        "description": "Username of the account that published the splat.",
+                        "examples": ["artist"]
+                    },
+                    "displayName": {
+                        "type": "string",
+                        "description": "Name to credit the author by: their full name, or their username when they have none.",
+                        "examples": ["Ada Artist"]
+                    }
+                },
+                "required": ["username", "displayName"],
+                "additionalProperties": {},
+                "description": "Account that published the splat."
+            },
+            "SplatThumbnails": {
+                "type": "object",
+                "properties": {
+                    "s": {
+                        "type": "string",
+                        "description": "Small WebP thumbnail URL."
+                    },
+                    "m": {
+                        "type": "string",
+                        "description": "Medium WebP thumbnail URL."
+                    },
+                    "l": {
+                        "type": "string",
+                        "description": "Large WebP thumbnail URL."
+                    },
+                    "xl": {
+                        "type": "string",
+                        "description": "Extra large WebP thumbnail URL."
+                    }
+                },
+                "required": ["s", "m", "l", "xl"],
+                "additionalProperties": {},
+                "description": "Thumbnail image URLs."
+            },
+            "SplatContent": {
+                "type": "object",
+                "properties": {
+                    "format": {
+                        "type": "string",
+                        "enum": ["sog", "ssog", "compressed-ply"],
+                        "description": "Format of the published files: `sog`, `ssog` (streamed SOG with levels of detail) or `compressed-ply`. Download them in the target of the same name (`sog` or `ssog`), or as `ply` for any format. Treat values you do not recognize as unsupported, and request a `ply` download instead.",
+                        "examples": ["sog"]
+                    },
+                    "version": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 1000000,
+                        "description": "Published version of the files. It changes when the owner republishes the splat.",
+                        "examples": [1]
+                    },
+                    "splatCount": {
+                        "anyOf": [
+                            {
+                                "type": "integer",
+                                "minimum": 0,
+                                "maximum": 4294967296
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "Number of Gaussians, at the finest level of detail for `ssog`. `null` when not known, as for some older scenes or while the owner republishes the splat.",
+                        "examples": [7500000]
+                    },
+                    "lodCounts": {
+                        "description": "Number of Gaussians at each level of detail, finest first, for `ssog` when known (see `splatCount`). Levels are alternatives, not parts of a total.",
+                        "examples": [[7500000, 3750000, 1875000, 937500, 466000]],
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 4294967296
+                        }
+                    }
+                },
+                "required": ["format", "version", "splatCount"],
+                "additionalProperties": {},
+                "description": "What a downloadable splat's published files are. Get the files with `POST /v1/splats/{splatId}/downloads`."
+            },
+            "Download": {
+                "type": "object",
+                "properties": {
+                    "splatId": {
+                        "type": "string",
+                        "description": "Public id of the splat being downloaded.",
+                        "examples": ["a1b2c3d4"]
+                    },
+                    "target": {
+                        "type": "string",
+                        "enum": ["ply", "sog", "ssog"],
+                        "description": "Download format. Every downloadable splat offers `ply`, a conversion to a standard PLY. A splat whose `content.format` is `sog` also offers `sog`, and one whose `content.format` is `ssog` also offers `ssog`: its published files, unchanged. A `compressed-ply` splat offers only `ply`. Each download is a ZIP archive; see the request operation for what it holds.",
+                        "examples": ["ply"]
+                    },
+                    "version": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 1000000,
+                        "description": "Published version the download is for. If it differs from the splat's `content.version`, the splat was republished: request the download again.",
+                        "examples": [1]
+                    },
+                    "status": {
+                        "type": "string",
+                        "enum": ["queued", "processing", "ready", "failed"],
+                        "description": "Preparation state. When `ready`, get the file with `POST /v1/splats/{splatId}/downloads/{target}/file`. When `failed`, request the download again to retry.",
+                        "examples": ["queued"]
+                    },
+                    "bytes": {
+                        "anyOf": [
+                            {
+                                "type": "integer",
+                                "minimum": 0,
+                                "maximum": 1099511627776
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "Size of the file, in bytes, when `ready`; `null` otherwise.",
+                        "examples": [null]
+                    }
+                },
+                "required": ["splatId", "target", "version", "status", "bytes"],
+                "additionalProperties": {},
+                "description": "A splat download in one target, being prepared or ready. A splat has at most one current download per target, found by the splat id and target."
+            },
+            "DownloadFile": {
+                "type": "object",
+                "properties": {
+                    "url": {
+                        "type": "string",
+                        "description": "Short-lived signed URL of the ZIP archive. Start fetching it before `urlExpiresAt`; a fetch that has started runs to the end. For a new URL, request the file again.",
+                        "examples": [
+                            "https://example-bucket.s3.amazonaws.com/download-artifacts/a1b2c3d4/v1/ssog/0123456789abcdef0123456789abcdef/archive.zip?X-Amz-Signature=..."
+                        ]
+                    },
+                    "urlExpiresAt": {
+                        "type": "string",
+                        "format": "date-time",
+                        "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z))$",
+                        "description": "When `url` stops working for new requests.",
+                        "examples": ["2026-01-01T00:05:00.000Z"]
+                    },
+                    "bytes": {
+                        "anyOf": [
+                            {
+                                "type": "integer",
+                                "minimum": 0,
+                                "maximum": 1099511627776
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "description": "Size of the file at `url`, in bytes, when known.",
+                        "examples": [92536832]
+                    },
+                    "version": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 1000000,
+                        "description": "Published version the download is for. If it differs from the splat's `content.version`, the splat was republished: request the download again.",
+                        "examples": [1]
+                    }
+                },
+                "required": ["url", "urlExpiresAt", "bytes", "version"],
+                "additionalProperties": {},
+                "description": "A short-lived URL of a ready download."
+            },
+            "DownloadNotReadyError": {
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "type": "string",
+                        "description": "Human-readable error message."
+                    },
+                    "code": {
+                        "type": "string",
+                        "const": "not_ready",
+                        "description": "The download is still `queued` or `processing`, or it `failed`. Poll it, or request it again."
+                    }
+                },
+                "required": ["error", "code"],
+                "additionalProperties": {},
+                "description": "The download has no file yet."
+            },
+            "TooManyRequestsError": {
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "type": "string",
+                        "description": "Human-readable error message."
+                    },
+                    "code": {
+                        "description": "`daily_publish_limit_reached` when the daily publishing allowance is used up; `too_many_processing` when the account already has the maximum number of splats uploading or processing; `publish_in_progress` when another publish for the account is starting; `daily_download_limit_reached` when the account has downloaded its daily number of splats. Absent when rate limited.",
+                        "type": "string",
+                        "enum": [
+                            "daily_publish_limit_reached",
+                            "too_many_processing",
+                            "publish_in_progress",
+                            "daily_download_limit_reached"
+                        ]
+                    },
+                    "limitBytes": {
+                        "description": "Today's publishing allowance, in bytes of compressed output.",
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 1099511627776
+                    },
+                    "usedBytes": {
+                        "description": "Compressed output published today (UTC), in bytes.",
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 1099511627776
+                    },
+                    "resetsAt": {
+                        "description": "When the allowance resets (the next 00:00 UTC), as an ISO 8601 timestamp, with `daily_publish_limit_reached` and `daily_download_limit_reached`.",
+                        "examples": ["2026-01-02T00:00:00.000Z"],
+                        "type": "string"
+                    },
+                    "count": {
+                        "description": "Splats currently uploading or processing, with `too_many_processing`; splats downloaded today (UTC), whatever the target, with `daily_download_limit_reached`.",
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 10000
+                    },
+                    "limit": {
+                        "description": "Splats that may upload or process at once, with `too_many_processing`; splats that may be downloaded per UTC day, with `daily_download_limit_reached`.",
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 10000
+                    },
+                    "uploading": {
+                        "description": "Of `count`, the uploads not yet completed, with `too_many_processing`.",
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 10000
+                    }
+                },
+                "required": ["error"],
+                "additionalProperties": {},
+                "description": "Rate limit, daily publishing or download allowance, or processing limit error."
             },
             "UploadSession": {
                 "type": "object",
@@ -1481,7 +2539,7 @@
                             {
                                 "type": "integer",
                                 "minimum": 0,
-                                "maximum": 25000000000
+                                "maximum": 16106127360
                             },
                             {
                                 "type": "null"
@@ -1492,8 +2550,8 @@
                     },
                     "sourceFormat": {
                         "type": "string",
-                        "enum": ["ply", "sog", "ssog", "lcc"],
-                        "description": "Format of the file being uploaded. Use `ply` for raw Gaussian splat PLY files, `sog` for SOG files, `ssog` for SSOG archives exported by SuperSplat, and `lcc` for LCC archives.",
+                        "enum": ["ply", "sog", "spz", "gsaf", "ssog", "lcc"],
+                        "description": "Format of the file being uploaded. Use `ply` for raw Gaussian splat PLY files, `sog` for SOG files, `spz` for SPZ files, `gsaf` for animated GSAF files, `ssog` for SSOG archives exported by SuperSplat, and `lcc` for LCC archives.",
                         "examples": ["ply"]
                     },
                     "title": {
@@ -1524,7 +2582,7 @@
                     "partSize": {
                         "type": "integer",
                         "minimum": 1,
-                        "maximum": 25000000000,
+                        "maximum": 16106127360,
                         "description": "Server-chosen target size in bytes for each uploaded part. Use this to split the file into multipart upload ranges; the final part may be smaller.",
                         "examples": [67108864]
                     },
@@ -1550,7 +2608,7 @@
                                     "examples": [67108864],
                                     "type": "integer",
                                     "minimum": 0,
-                                    "maximum": 25000000000
+                                    "maximum": 16106127360
                                 }
                             },
                             "required": ["partNumber", "etag"],
@@ -1580,6 +2638,35 @@
                 "additionalProperties": {},
                 "description": "Resumable upload session state."
             },
+            "FileTooLargeError": {
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "type": "string",
+                        "description": "Human-readable error message."
+                    },
+                    "code": {
+                        "type": "string",
+                        "const": "file_too_large",
+                        "description": "The file is larger than its source format allows."
+                    },
+                    "limitBytes": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 16106127360,
+                        "description": "Largest file allowed for this source format, in bytes."
+                    },
+                    "fileBytes": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 1099511627776,
+                        "description": "Size of the file, in bytes."
+                    }
+                },
+                "required": ["error", "code", "limitBytes", "fileBytes"],
+                "additionalProperties": {},
+                "description": "Upload size limit error."
+            },
             "UploadPartUrls": {
                 "type": "object",
                 "properties": {
@@ -1591,7 +2678,7 @@
                     "partSize": {
                         "type": "integer",
                         "minimum": 1,
-                        "maximum": 25000000000,
+                        "maximum": 16106127360,
                         "description": "Server-chosen target size in bytes for each uploaded part. Matches the upload session `partSize`.",
                         "examples": [67108864]
                     },
