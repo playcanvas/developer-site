@@ -23,38 +23,40 @@ SplatTransform はファイル拡張子からフォーマットを検出しま�
 
 | フォーマット      | 入力 | 出力 | 説明                                                                                                                                              |
 | ----------------- | ---- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `.ply`            | ✅   | ✅   | 標準[PLY](/user-manual/gaussian-splatting/formats/ply)フォーマット                                                                                |
+| `.ply`            | ✅   | ✅   | 標準[PLY](/user-manual/gaussian-splatting/formats/ply)フォーマット。バイナリのリトルエンディアンとビッグエンディアンに対応（ASCII形式のPLYは読み込めません） |
 | `.sog`            | ✅   | ✅   | バンドル版超圧縮[SOG](/user-manual/gaussian-splatting/formats/sog)フォーマット（推奨）                                                            |
 | `meta.json`       | ✅   | ✅   | 非バンドル版超圧縮フォーマット（`.webp`テクスチャを伴う）。出力ファイル名は**必ず** `meta.json` である必要があります                              |
 | `lod-meta.json`   | ✅   | ✅   | マルチLOD [Streamed SOG](/user-manual/gaussian-splatting/formats/streamed-sog) バンドル（LODごとの`.sog`チャンクを伴う）。ファイル名は**必ず** `lod-meta.json` である必要があります |
 | `.compressed.ply` | ✅   | ✅   | 圧縮PLYフォーマット（読み取り時に自動検出され展開）                                                                                               |
 | `.spz`            | ✅   | ✅   | 圧縮[SPZ](/user-manual/gaussian-splatting/formats/spz)スプラットフォーマット（Niantic フォーマット、v2–4）                                        |
 | `.lcc`            | ✅   | ❌   | LCCファイルフォーマット（XGRIDS）                                                                                                                 |
-| `.lcc2`           | ✅   | ❌   | LCC2ファイルフォーマット（XGRIDS、オクツリー）                                                                                                    |
+| `.lcc2`           | ✅   | ❌   | LCC2ファイルフォーマット（XGRIDS、N分木）                                                                                                        |
 | `.ksplat`         | ✅   | ❌   | 圧縮スプラットフォーマット（mkkellogg フォーマット）                                                                                              |
 | `.splat`          | ✅   | ❌   | 圧縮スプラットフォーマット（antimatter15 フォーマット）                                                                                           |
 | `.mjs`            | ✅   | ❌   | mjs スクリプトを使用してシーンを生成（Beta）                                                                                                      |
-| `.glb`            | ❌   | ✅   | [KHR_gaussian_splatting](https://github.com/KhronosGroup/glTF/tree/main/extensions/2.0/Khronos/KHR_gaussian_splatting) 拡張機能付きバイナリ glTF。PlayCanvasエンジンで[直接読み込み可能](/user-manual/gaussian-splatting/formats/glb) |
+| `.glb`            | ✅   | ✅   | [KHR_gaussian_splatting](https://github.com/KhronosGroup/glTF/tree/main/extensions/2.0/Khronos/KHR_gaussian_splatting) 拡張機能付きバイナリ glTF。PlayCanvasエンジンで[直接読み込み可能](/user-manual/gaussian-splatting/formats/glb) |
 | `.csv`            | ❌   | ✅   | コンマ区切り値スプレッドシート                                                                                                                    |
 | `.html`           | ❌   | ✅   | SOGベースのHTMLビューアアプリ（単一ページまたは非バンドル版）                                                                                     |
 | `.voxel.json`     | ❌   | ✅   | コリジョン検出用の[スパースボクセルオクツリー](/user-manual/splat-transform/voxel-format)。[コリジョンメッシュ](/user-manual/splat-transform/collision)ガイドを参照。出力ファイル名は `.voxel.json` で終わる必要があります（接頭辞は任意、例：`room.voxel.json`） |
 | `.webp`           | ❌   | ✅   | GPUラスタライザでカメラビューからレンダリングされたロスレスWebP画像。[画像のレンダリング](/user-manual/splat-transform/image-rendering)ガイドを参照 |
 | `null`            | ❌   | ✅   | 出力を破棄（`--stats` と併用して分析専用の実行に便利）                                                                                            |
 
+GLB入力では、`ellipse` カーネルと `srgb_rec709_display` カラースペースを使う `KHR_gaussian_splatting` プリミティブを1つ、埋め込みバッファが1つだけのファイルから読み込みます。splat-transformが書き出したGLBファイルはこの条件を満たすため、そのまま読み戻せます。インデックス付きプリミティブにも対応しています。Gaussianプリミティブが複数あるファイル、インスタンス化されたGaussianメッシュ、スパースアクセサー、Gaussianノードまたはその祖先にある単位行列以外のトランスフォームを含むファイルは拒否されます。GLB出力が保持できる球面調和関数は3バンドまでのため、4番目のバンドは警告とともに破棄されます。
+
 ### アンチエイリアスおよび2DGSシーン {#antialiased-and-2dgs-scenes}
 
 アンチエイリアス（mip-splatting方式のスクリーンスペースフィルタ）付きで学習されたシーンや、2Dガウシアンサーフェル（2DGS）として学習されたシーンは読み取り時にタグ付けされ、出力フォーマットが保持できる場合はそのタグが維持されます。`--info` はこれを `model` として報告します。
 
-- **読み取り時**：PLYヘッダーコメント（Brushの `comment SplatRenderMode: default | mip | 2dgs` またはPostshotの `comment postshot.anti_aliasing=1`。複数ある場合は最後のものが優先）、SPZのアンチエイリアスヘッダービット、またはSOG `meta.json` の `model` エントリから読み取ります。`scale_0` と `scale_1` はあるが `scale_2` がないPLYは、コメントに関係なく2DGSとして読み取られ、欠けているカラムは厚さゼロのスケールで補われるため、パイプラインの残りの部分には影響しません。
-- **書き込み時**：`.ply` と `.compressed.ply` には `comment SplatRenderMode: mip | 2dgs`（読み取った形式にかかわらずBrushの表記）が、`.sog` と `meta.json` には `"model": "antialiased" | "2dgs"` が書き込まれます。`.spz` はアンチエイリアスビットを設定し、2DGSを表現できないことを警告します。2DGSのPLY出力では `scale_2` カラムが再び削除されます。その他の出力フォーマットにはタグを記録する場所がないため、タグは警告なしに破棄されます。
+- **読み取り時**：PLYヘッダーコメント（Brushの `comment SplatRenderMode: default | mip | 2dgs` またはPostshotの `comment postshot.anti_aliasing=1`。複数ある場合は最後のものが優先）、SPZのアンチエイリアスヘッダービット、またはSOG `meta.json` や `lod-meta.json` の `model` エントリから読み取ります。後者のエントリは、バンドル内のすべてのファイルに適用されます。`scale_0` と `scale_1` はあるが `scale_2` がないPLYは、コメントに関係なく2DGSとして読み取られ、欠けているカラムは厚さゼロのスケールで補われるため、パイプラインの残りの部分には影響しません。
+- **書き込み時**：`.ply` と `.compressed.ply` には `comment SplatRenderMode: mip | 2dgs`（読み取った形式にかかわらずBrushの表記）が、`.sog`、`meta.json`、`lod-meta.json`、および `.html` 出力に埋め込まれる（または横に置かれる）SOGには `"model": "antialiased" | "2dgs"` が書き込まれます。`.spz` はアンチエイリアスビットを設定し、2DGSを表現できないことを警告します。2DGSのPLY出力では `scale_2` カラムが再び削除されます。その他の出力フォーマットにはタグを記録する場所がないため、タグは警告なしに破棄されます。
 - **レンダリング時**：`.webp` 出力では、アンチエイリアス付きで学習されたシーンを、0.3 px² の膨張の代わりにその学習時のフィルター（デフォルトは 0.1 px²、`--aa-filter-size` で上書き可能）でレンダリングし、PlayCanvasエンジンと同様に、各スプラットがフィルター前の量を描画するよう不透明度をスケーリングします。
 - **マージ時**：タグが一致しない入力を結合すると警告が出され、結果はタグなしで書き込まれます。
 
-PLYのその他のヘッダーコメント（例：`Postshot v1.1.69` や `postshot.color.eotf=sRGB`）も引き継がれます。`.ply` と `.compressed.ply` はこれらを `comment` 行として書き戻し、SOGバージョン3の出力（`.sog`、`meta.json`、`lod-meta.json`）は `comments` として保存します。コメントは解釈されないため、座標を記述するコメントは変換によって更新されません。
+PLYのその他のヘッダーコメント（例：`Postshot v1.1.69`、`postshot.color.eotf=sRGB`、`Offset: 609424.34 5678598.16 264.02`）も引き継がれます。`.ply` と `.compressed.ply` はこれらを `comment` 行として書き戻し、SOGバージョン3の出力（`.sog`、`meta.json`、`lod-meta.json`）は `comments` として保存します。保存されたコメントは、そのSOGを入力にしたときに読み戻されます。モデルのタグとsplat-transform自身の `Generated by` 行は、コメントとして重複して書き込まれません。コメントは解釈されないため、座標を記述するコメントは変換によって更新されません。コメントが異なる入力を結合すると、警告が出てコメントは破棄されます。
 
 ### 1を超える不透明度 {#opacity-above-1}
 
-デシメーションはガウシアンをその量を失わずにマージするため、マージされたガウシアンの不透明度は1を超えることがあります（レンダラーは1.5625までを不透明なコアとして描画します）。PLYは不透明度を1つのプロパティとして保持します。1を超えないシーンには標準の `opacity` ロジット（最大1）を、デシメーションされたシーンや1を超える不透明度を持つSOGバージョン3の入力には `opacity` の代わりに不透明度そのものである `opacity_linear` を使用します。`opacity_linear` を認識しないツールはこれらのファイルを読み取れません。`--ply-logit-opacity` を指定すると、1を超える不透明度をクランプして標準のロジットを出力します。読み取り時は、`opacity_linear` があればそれが使用されます。SOGバージョン3は1を超える不透明度をそのまま保存し、SOGバージョン2やその他のフォーマットでは1にクランプされます。
+デシメーションはガウシアンをその量を失わずにマージするため、マージされたガウシアンの不透明度は1を超えることがあります（レンダラーは1.5625までを不透明なコアとして描画します）。PLYは不透明度を1つのプロパティとして保持します。1を超えないシーンには標準の `opacity` ロジット（最大1）を、デシメーションされたシーンや1を超える不透明度を持つSOGバージョン3の入力には `opacity` の代わりに不透明度そのものである `opacity_linear` を使用します。`opacity_linear` を認識しないツールはこれらのファイルを読み取れません。`--ply-logit-opacity` を指定すると、1を超える不透明度をクランプして標準のロジットを出力します。読み取り時は、`opacity_linear` があれば、`opacity` と併存していてもそれが使用されます。SOGバージョン3（`.html` 出力内のSOGを含む）は1を超える不透明度をそのまま保存し、SOGバージョン2やその他のフォーマットでは1にクランプされます。無限大のロジットは不透明度0または1として読み取られ、書き込み時には同じ無限大として書き戻されます。
 
 ## アクション {#actions}
 
@@ -186,7 +188,7 @@ NVIDIA GPUを搭載したサーバーでsplat-transformを実行する方法に�
                                           power of 2, at most 65536
     --max-workers      <n>              Worker threads for SOG and image-sequence encoding (0 = inline/serial). Default: 4
     --sog-version      <2|3>            SOG format version to write. 2 is for older viewers: it drops opacity
-                                          above 1, blind data and a 4th SH band. Default: 3 (.html always embeds 2)
+                                          above 1, blind data and a 4th SH band. Default: 3 (.html always embeds 3)
     --sog-blind        <field>[,...]    Store columns as per-gaussian blind data (v3): one blind texture per flag,
                                           its fields filling 4 bytes (R,G,B,A) in order. field = <col>[:<enc>]
                                           enc: u8 u16 u24 u32 (unsigned integers), f16 f32 (float bits),
@@ -248,9 +250,12 @@ NVIDIA GPUを搭載したサーバーでsplat-transformを実行する方法に�
     --lod-chunk-count  <n>              Approximate number of Gaussians per LOD chunk in K. Default: 512
     --lod-chunk-extent <n>              Approximate size of an LOD chunk in world units (m). Default: 16
     --lod-chunk-min    <n>              Gaussians in K below which a chunk is not split for extent. Default: 8
+    --lod-file-count   <n,n,...>        Gaussians in K per LOD file, per level from finest; the last repeats. Default: --lod-chunk-count
 ```
 
 チャンクは、`--lod-chunk-count` を超えるガウシアンを含む場合、または `--lod-chunk-extent` より広く、かつ `--lod-chunk-min` を超えるガウシアンを含む場合に分割されます。この最小値により、空や遠景などの疎な領域が何千もの空に近いチャンクに分割されるのを防ぎます。最小値を下回る領域は、どれほど広くても1つのチャンクのままです。密な領域には影響しません。
+
+`--lod-file-count` が変えるのは、チャンクを `.sog` ファイルにまとめる方法だけで、シーンの分割方法は変わりません。各ファイルには、指定した値（K単位）程度のガウシアンが入ります。すべてのレベルに1つの値を指定するか、最も細かいレベルから順にリストで指定します。リストの最後の値は、それより粗いレベルに繰り返し適用されます。
 
 エンドツーエンドの手順については、[Streamed SOGの生成](/user-manual/splat-transform/streamed-sog)を参照してください。
 

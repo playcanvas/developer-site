@@ -21,7 +21,7 @@ The [SuperSplat Convert page](/user-manual/supersplat/convert) at [superspl.at/c
 
 SplatTransform solves the problems developers face when working with Gaussian splats:
 
-🔄 **Broad Format Support** — convert between the common splat formats, from PLY and SPZ to SOG and Streamed SOG, and export to glTF, CSV, standalone HTML viewers and WebP images ([full list](/user-manual/splat-transform/cli-reference#supported-formats))  
+🔄 **Broad Format Support** — convert between the common splat formats, from PLY, SPZ and glTF to SOG and Streamed SOG, and export to CSV, standalone HTML viewers and WebP images ([full list](/user-manual/splat-transform/cli-reference#supported-formats))  
 🛠️ **Powerful Transformations** — translate, rotate, and scale your splats with precision  
 🧹 **Smart Filtering** — strip NaN/Inf, filter by value, box, sphere, harmonic band, or floater contribution, and keep only the connected cluster around a seed point  
 📐 **Decimation & Reordering** — simplify via memory-bounded merge-based decimation (uniform or error-adaptive) that scales to 100M+ Gaussians, and reorder by Morton code for spatial locality  
@@ -91,6 +91,10 @@ splat-transform input.splat output.ply
 
 # Convert from .ksplat format
 splat-transform input.ksplat output.ply
+
+# Convert between glTF (KHR_gaussian_splatting) and SOG
+splat-transform input.glb output.sog
+splat-transform input.sog output.glb
 
 # Convert to compressed PLY
 splat-transform input.ply output.compressed.ply
@@ -204,7 +208,7 @@ splat-transform input1.ply input2.ply output.ply -t 0,0,10 -s 0.5
 
 ### Inspecting Scenes
 
-`--info` prints a scene's structural metadata: the detected format, whether the file holds Gaussian splat data at all, Gaussian and per-LOD counts, SH bands, the [antialiased or 2DGS tag](/user-manual/splat-transform/cli-reference#antialiased-and-2dgs-scenes) if there is one, and any extra columns. `--stats` prints the same block followed by per-column statistics, for data analysis or test validation:
+`--info` prints a scene's structural metadata: the detected format, whether the file holds Gaussian splat data at all, Gaussian and per-LOD counts, SH bands, the [antialiased or 2DGS tag](/user-manual/splat-transform/cli-reference#antialiased-and-2dgs-scenes) if there is one, and any extra columns. `--stats` prints the same block followed by per-column statistics, for data analysis or test validation. When `--info` is the only action, on a single input with a `null` output, it reads just the file header where the format allows (SOG and SPZ), so it returns quickly even for very large files:
 
 ```bash
 # Check what a file contains without writing anything

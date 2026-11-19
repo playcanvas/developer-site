@@ -21,7 +21,7 @@ SplatTransform は、[MITライセンスの下でGitHubにてオープンソー�
 
 SplatTransformは、開発者がGaussian splatsを扱う際に直面する問題を解決します：
 
-🔄 **幅広いフォーマットサポート** — PLYやSPZからSOG、Streamed SOGまで一般的なスプラットフォーマット間で変換でき、glTF、CSV、スタンドアロンHTMLビューア、WebP画像にもエクスポート可能（[全一覧](/user-manual/splat-transform/cli-reference#supported-formats)）  
+🔄 **幅広いフォーマットサポート** — PLY、SPZ、glTFからSOG、Streamed SOGまで一般的なスプラットフォーマット間で変換でき、CSV、スタンドアロンHTMLビューア、WebP画像にもエクスポート可能（[全一覧](/user-manual/splat-transform/cli-reference#supported-formats)）  
 🛠️ **強力な変換機能** — スプラットを正確に平行移動、回転、拡大縮小  
 🧹 **スマートフィルタリング** — NaN/Inf の除去、値・ボックス・球・球面調和バンド・フローター寄与によるフィルタリング、シード点周辺の連結クラスタのみを保持  
 📐 **デシメーションと並べ替え** — 1億以上のガウシアンにスケールするメモリ制限付きのマージベースデシメーション（均一または誤差適応型）による単純化と、空間局所性のためのMortonコードによる並べ替え  
@@ -91,6 +91,10 @@ splat-transform input.splat output.ply
 
 # .ksplat フォーマットから変換
 splat-transform input.ksplat output.ply
+
+# glTF（KHR_gaussian_splatting）とSOGの間で変換
+splat-transform input.glb output.sog
+splat-transform input.sog output.glb
 
 # 圧縮PLYに変換
 splat-transform input.ply output.compressed.ply
@@ -204,7 +208,7 @@ splat-transform input1.ply input2.ply output.ply -t 0,0,10 -s 0.5
 
 ### シーンの検査 {#inspecting-scenes}
 
-`--info` はシーンの構造メタデータを出力します：検出されたフォーマット、ファイルがそもそもGaussian splatデータを含むかどうか、ガウシアン数とLODごとの数、SHバンド、[アンチエイリアスまたは2DGSのタグ](/user-manual/splat-transform/cli-reference#antialiased-and-2dgs-scenes)（ある場合）、追加カラムです。`--stats` は同じブロックに続けてカラムごとの統計情報を出力し、データ分析やテスト検証に使用できます：
+`--info` はシーンの構造メタデータを出力します：検出されたフォーマット、ファイルがそもそもGaussian splatデータを含むかどうか、ガウシアン数とLODごとの数、SHバンド、[アンチエイリアスまたは2DGSのタグ](/user-manual/splat-transform/cli-reference#antialiased-and-2dgs-scenes)（ある場合）、追加カラムです。`--stats` は同じブロックに続けてカラムごとの統計情報を出力し、データ分析やテスト検証に使用できます。入力が1つで出力が `null` の実行で `--info` が唯一のアクションの場合、フォーマットが対応していれば（SOGとSPZ）ファイルヘッダーだけを読み取るため、非常に大きなファイルでもすぐに結果が返ります：
 
 ```bash
 # ファイルを書き込まずに内容を確認
