@@ -4,7 +4,7 @@
 
 Index: https://developer.playcanvas.com/llms.txt
 Total Documents: 563
-Generated: 2026-11-18
+Generated: 2026-11-19
 
 ================================================================================
 
@@ -66225,130 +66225,147 @@ const graph = new Graph(schema, {
 URL: https://developer.playcanvas.com/user-manual/account-management/
 Markdown: https://developer.playcanvas.com/user-manual/account-management.md
 
-Welcome to Account Management! This section covers everything you need to know about managing your PlayCanvas account, from initial setup to advanced Organization features.
+Your PlayCanvas account signs you in to the PlayCanvas Editor and SuperSplat. This section covers creating an account and the settings that go with it, organizations for teams, and billing.
+
+## Why Create an Account?
+
+A free PlayCanvas account lets you use the [PlayCanvas Editor](https://developer.playcanvas.com/user-manual/editor.md) to build 3D apps with a visual, collaborative interface. Even if you work with the [PlayCanvas Engine](https://developer.playcanvas.com/user-manual/engine.md), [PlayCanvas Web Components](https://developer.playcanvas.com/user-manual/web-components.md) or [PlayCanvas React](https://developer.playcanvas.com/user-manual/react.md) instead, an account lets you:
+
+- **Explore and learn** - Browse the scripts and assets of thousands of public Editor projects for ideas and inspiration.
+- **Generate assets** - Use the Editor's asset processing to prepare assets for any PlayCanvas-based project.
+- **Publish Gaussian splats** - Publish splats to [SuperSplat](https://developer.playcanvas.com/user-manual/supersplat.md), and like and comment on other people's. Browsing the public [Explore](https://developer.playcanvas.com/user-manual/supersplat/explore.md) gallery and viewing public scene pages doesn't need an account.
+- **Join the community** - Star, watch and comment on other people's projects.
+- **Stay informed** - Hear about updates across the PlayCanvas platform.
 
 ## User Accounts
 
-New to PlayCanvas? Start here to create your account and get familiar with the basics:
+New to PlayCanvas? Start here:
 
-- [User Accounts Overview](https://developer.playcanvas.com/user-manual/account-management/user-accounts.md) - Learn about User Accounts
-- [Creating Your Account](https://developer.playcanvas.com/user-manual/account-management/user-accounts/account-creation.md) - Sign up, log in, and initial setup
-- [User Home](https://developer.playcanvas.com/user-manual/account-management/user-accounts/user-home.md) - Your user home page
-- [Account Settings](https://developer.playcanvas.com/user-manual/account-management/user-accounts/settings.md) - Privacy and account preferences
+- [Signing Up and Logging In](https://developer.playcanvas.com/user-manual/account-management/user-accounts/account-creation.md) - Create your account, log in and open your first project
+- [Your Profile](https://developer.playcanvas.com/user-manual/account-management/user-accounts/profile.md) - The public page that shows you and your public projects
+- [Account Settings](https://developer.playcanvas.com/user-manual/account-management/user-accounts/settings.md) - Your profile details, email notifications, password and API tokens
 
 ## Organizations
 
 For teams and businesses working together:
 
-- [Organizations Overview](https://developer.playcanvas.com/user-manual/account-management/organizations.md) - What are organizations and their benefits
-- [Creating Organizations](https://developer.playcanvas.com/user-manual/account-management/organizations/creating.md) - Set up team workspaces
-- [Managing Organizations](https://developer.playcanvas.com/user-manual/account-management/organizations/managing.md) - Administration and permissions
+- [Organizations](https://developer.playcanvas.com/user-manual/account-management/organizations.md) - What an organization is and when to use one
+- [Creating Organizations](https://developer.playcanvas.com/user-manual/account-management/organizations/creating.md) - Start a new organization, or convert a user account into one
+- [Managing Organizations](https://developer.playcanvas.com/user-manual/account-management/organizations/managing.md) - Administrators, seats, billing and deleting an organization
 
 ## Billing
 
-Understanding subscriptions and payments:
+Plans, payments and invoices:
 
-- [Billing & Subscriptions](https://developer.playcanvas.com/user-manual/account-management/billing.md) - Plans, invoices, and payment management
-
----
-
-Whether you're an individual developer or part of a large team, this section will help you make the most of your PlayCanvas account.
+- [Plans and Billing](https://developer.playcanvas.com/user-manual/account-management/plans-and-billing.md) - Compare plans and subscribe, and manage your storage, payment details, invoices and cancellation
+- [Billing FAQ](https://developer.playcanvas.com/user-manual/account-management/billing.md) - Answers to common questions about renewals, currencies, seat billing and refunds
 
 --------------------------------------------------------------------------------
 
-## User Accounts
-
-URL: https://developer.playcanvas.com/user-manual/account-management/user-accounts/
-Markdown: https://developer.playcanvas.com/user-manual/account-management/user-accounts.md
-
-Your user account is your personal space within PlayCanvas. This section covers creating, managing and configuring your account.
-
-## Why Create a PlayCanvas User Account?
-
-Creating a free PlayCanvas account opens up a world of possibilities for building 3D web applications! Once you are signed up, you can:
-
-- 🛠️ **Access the [PlayCanvas Editor](https://developer.playcanvas.com/user-manual/editor.md)** - Build 3D apps using a powerful, visual interface.
-
-But not everyone opts to use the PlayCanvas Editor - perhaps you prefer to use the [PlayCanvas Engine](https://developer.playcanvas.com/user-manual/engine.md) directly, or [PlayCanvas Web Components](https://developer.playcanvas.com/user-manual/web-components.md) or [PlayCanvas React](https://developer.playcanvas.com/user-manual/react.md) instead. Does it still make sense to create a PlayCanvas account? Absolutely! And here's why:
-
-- 🔍 **Explore and learn** - Browse scripts and assets in thousands of public Editor projects to learn and find inspiration
-- ⚙️ **Generate Assets** - Use the Editor's asset processing capabilities to generate assets for use in any PlayCanvas-based project
-- ✨ **Publish, like, and comment on Gaussian Splats** - A PlayCanvas account is required to publish splats to [SuperSplat](https://developer.playcanvas.com/user-manual/supersplat.md), like splats, and post comments. Browsing the public [Explore](https://developer.playcanvas.com/user-manual/supersplat/explore.md) gallery and viewing public scene pages is anonymous.
-- 👥 **Community participation** - Star, follow and comment on the projects of other PlayCanvas community members
-- 🔔 **Stay Informed** - Creating an account allows us to notify you of exciting updates related to the entire PlayCanvas platform
-
-So no matter how you use PlayCanvas, we strongly recommend you create an account on playcanvas.com!
-
---------------------------------------------------------------------------------
-
-## Creating Your Account
+## Signing Up and Logging In
 
 URL: https://developer.playcanvas.com/user-manual/account-management/user-accounts/account-creation/
 Markdown: https://developer.playcanvas.com/user-manual/account-management/user-accounts/account-creation.md
 
-To join the PlayCanvas community, we strongly recommend that you create a new account. Click **SIGN UP** at the top right of [https://playcanvas.com](https://playcanvas.com).
+To create a PlayCanvas account, select **SIGN UP** at the top right of [playcanvas.com](https://playcanvas.com).
 
 [Image: Sign Up]
 
-At the sign up page, you have 3 options for account creation:
+The sign-up page offers three ways to create an account:
 
-1. **Username and Password** - enter your email address and password.
-2. **Sign in with Google** - authenticate using your Google account.
-3. **Sign in with GitHub** - authenticate using your GitHub account.
+1. **Email** - Enter your email address and confirm it with a code.
+2. **Sign in with Google** - Use your Google account.
+3. **Sign in with GitHub** - Use your GitHub account.
 
 [Image: Sign Up Form]
 
-If you select the Username and Password option, you will be asked to confirm your email address:
+By signing up, you agree to the PlayCanvas [terms of use](https://playcanvas.com/terms) and [privacy policy](https://playcanvas.com/privacy).
 
-[Image: Confirm Email]
+## Sign Up with Your Email Address
 
-Head to your email inbox and click the verification link. You will be taken to this page:
+1. Enter your email address and select **Send Verification Code**. PlayCanvas emails you a 6-digit code.
+2. Enter the code and select **Verify Code**. If the email doesn't arrive, check your spam folder or select **Resend Code**.
 
-[Image: Email Verified]
+   [Image: Verification Code]
 
-On hitting continue, you'll be prompted to add some details about yourself:
+3. Once your email address is verified, complete your profile:
 
-[Image: Details Form]
+   [Image: Profile Form]
 
-- **Full Name** - A non-unique display name. We recommend setting this to your actual name.
-- **Username** - Your handle that is used to uniquely identify you on the platform. This is used to determine the URL of your PlayCanvas profile page.
-- **Skills** - Pick the skills you have related to building interactive graphics apps (options are 'Coder', 'Artist', 'Designer' and 'Musician'). These skills will be displayed on your public profile.
-- **Email Notifications** - Enable this to receive tips and news about PlayCanvas.
+   - **Username** - Your unique handle on PlayCanvas, which sets the address of [your profile](https://developer.playcanvas.com/user-manual/account-management/user-accounts/profile.md). It needs at least 3 characters, can contain letters, numbers, hyphens and underscores, and can't start with a digit.
+   - **Full Name** - The name shown on your profile and to your collaborators. It doesn't need to be unique.
+   - **Password** and **Re-Type Password** - The password you log in with, of at least 8 characters.
+   - **Coder**, **Artist**, **Designer** and **Musician** - Turn on the skills you want shown on your public profile.
+   - **Send me occasional tips and news about PlayCanvas via email** - On by default. Turn it off if you'd rather not receive PlayCanvas news.
 
-Once you have completed the form, hit **Create Account**!
+4. Select **Create Account**.
 
-You begin by being dropped straight into your first project in the PlayCanvas Editor.
+If an account already uses your email address, the page tells you so. [Log in](https://developer.playcanvas.com/user-manual/account-management/user-accounts/account-creation.md#logging-in) instead.
 
-[Image: Roll Ball]
+## Sign Up with Google or GitHub
 
-It is a clone of a simple 'Roll a Ball' game. This is your playground for getting familiar with the Editor. A set of clickable hot-spots will guide you through some of the key elements of the Editor.
+Select **Sign in with Google** or **Sign in with GitHub** and approve the request. The first time you do, PlayCanvas asks you to complete your profile with a **Username**, **Full Name** and skills. You don't need a password, because you log in with the same button.
+
+## Your First Project
+
+When your account is ready, the PlayCanvas Editor opens your first project, **My First Project**. It's a simple ball-rolling game, and the **Editor Intro** suggests where to start: finish the level by adding a platform, then design your own levels.
+
+[Image: Editor Intro]
+
+Select **LET'S GO** to start. Clickable hotspots guide you through some of the key parts of the Editor.
 
 Jump to the [Editor section](https://developer.playcanvas.com/user-manual/editor.md) to learn more about the PlayCanvas Editor.
 
+## Logging In
+
+Select **LOG IN** at the top right of [playcanvas.com](https://playcanvas.com). Enter your email address or username and your password, then select **Log in**. If you signed up with Google or GitHub, select the same button again.
+
+[Image: Log In]
+
+If you've forgotten your password, select **forgot?** in the password field.
+
+Once you're logged in, [playcanvas.com](https://playcanvas.com) takes you to your [Project Dashboard](https://developer.playcanvas.com/user-manual/editor/projects/dashboard.md), where you can find and open your projects.
+
 --------------------------------------------------------------------------------
 
-## User Home
+## Your Profile
 
-URL: https://developer.playcanvas.com/user-manual/account-management/user-accounts/user-home/
-Markdown: https://developer.playcanvas.com/user-manual/account-management/user-accounts/user-home.md
+URL: https://developer.playcanvas.com/user-manual/account-management/user-accounts/profile/
+Markdown: https://developer.playcanvas.com/user-manual/account-management/user-accounts/profile.md
 
-Once you have created your user account, you can visit your User Home page. The URL for this page will be of the form:
+Every PlayCanvas account has a public profile. Its address is:
 
 ```none
 https://playcanvas.com/user/<USERNAME>
 ```
 
+To open your own, select your name at the bottom of the [Project Dashboard](https://developer.playcanvas.com/user-manual/editor/projects/dashboard.md) sidebar and choose **View public profile**.
+
+[Image: Your Profile]
+
+Your profile shows:
+
+- Your picture, full name and username
+- When you joined PlayCanvas
+- Your skills, such as **Coder** or **Artist**
+- The total **views**, **plays** and **stars** of your public projects
+- Your **Public projects**
+
+Only your public projects are listed, so anyone can view your profile, including visitors who aren't logged in. When you view your own profile, a note at the top reminds you that this is how others see it.
+
+## Public Projects
+
+Search your public projects by name, owner or description, or narrow the list with the same filters as the [Project Dashboard](https://developer.playcanvas.com/user-manual/editor/projects/dashboard.md#finding-projects), such as `name:`. **Sort by** orders the projects by **Last edited**, **Last opened**, **Created**, **Name**, **Most viewed**, **Most played** or **Size**, **Descending** or **Ascending**. The buttons next to it switch between cards and a list.
+
+## Editing Your Profile
+
+Select **Edit profile** to open your [Account Settings](https://developer.playcanvas.com/user-manual/account-management/user-accounts/settings.md) in a new tab. There you can change your picture, username, full name and skills, and add links to your website and social accounts.
+
 :::tip
 
-Assuming you are logged in, simply visiting [https://playcanvas.com/](https://playcanvas.com/) will redirect you to your User Home page.
+Once you're logged in, [playcanvas.com](https://playcanvas.com) takes you to your [Project Dashboard](https://developer.playcanvas.com/user-manual/editor/projects/dashboard.md), which lists all of your projects, public and private.
 
 :::
-
-Here's what a new User Home page should look like:
-
-[Image: User Home Page]
-
-It defaults to showing your list of [Editor Projects](https://developer.playcanvas.com/user-manual/editor/projects.md).
 
 --------------------------------------------------------------------------------
 
@@ -66357,182 +66374,114 @@ It defaults to showing your list of [Editor Projects](https://developer.playcanv
 URL: https://developer.playcanvas.com/user-manual/account-management/user-accounts/settings/
 Markdown: https://developer.playcanvas.com/user-manual/account-management/user-accounts/settings.md
 
-Your account settings page provides access to all your personal account configuration options, from basic profile information to billing and security settings. To view your user account settings, navigate to [https://playcanvas.com/account](https://playcanvas.com/account). You should see something like this:
+Your account settings are at [playcanvas.com/account](https://playcanvas.com/account). To open them from the [Project Dashboard](https://developer.playcanvas.com/user-manual/editor/projects/dashboard.md), select your name at the bottom of the sidebar and choose **Account settings**.
+
+[Image: Account Menu]
+
+The settings are split into three tabs:
+
+- **[Profile](https://developer.playcanvas.com/user-manual/account-management/user-accounts/settings.md#profile)** - How you appear on PlayCanvas, the emails you receive, and converting or deleting your account
+- **[Security](https://developer.playcanvas.com/user-manual/account-management/user-accounts/settings.md#security)** - Your password and API tokens
+- **[Billing](https://developer.playcanvas.com/user-manual/account-management/user-accounts/settings.md#billing)** - Your plan, storage, payment details and invoices
 
 [Image: Account Settings]
 
-## Profile Picture
+The list on the left of each tab jumps to its sections. Across the top of the page:
 
-Upload and manage your profile picture that appears across PlayCanvas. Click on your current profile picture to upload a new image.
+- **Projects** takes you back to the Project Dashboard.
+- The account switcher next to it shows the account you're editing. Use it to switch between your personal account and the organizations you own or administer, or to create a new organization. See [Managing Organizations](https://developer.playcanvas.com/user-manual/account-management/organizations/managing.md).
+- The bell shows your notifications, such as when someone stars or forks one of your projects.
+- Your picture opens a menu with your public profile, account settings, billing and plans, your organizations, and **Log out**.
 
-## Account Info
+## Profile Tab
 
-### Username
+**View public profile** at the top right opens [your profile](https://developer.playcanvas.com/user-manual/account-management/user-accounts/profile.md) as others see it.
 
-Your unique PlayCanvas username that appears in URLs and identifies you across the platform. You can change your username, providing that username has not already been taken. If it has, you will see the message **Already used**.
+### Account
 
-### Your Full Name
+- **Picture** - Select the pencil to upload a PNG or JPEG image.
+- **Username** - Your unique handle, which sets the address of your profile, `playcanvas.com/user/<username>`. You can change it to any username that isn't already taken.
+- **Name** - Your full name, shown on your profile and to your collaborators.
+- **Email** - The address you log in with, and where your notifications go. To change it, select **Change email** and enter the new address. PlayCanvas sends a confirmation link to the new address and another to your current one.
 
-The display name shown on your profile and in collaborations. You can edit this whenever you choose.
+Select **Save** to keep your changes.
 
-### Email Address
+### Socials
 
-Your primary email address for account notifications and login. Click "Edit" to change your email address. If you sign in with username+password, you'll need to verify the new email address before the change takes effect.
+Add links to your **Website**, **X (formerly Twitter)**, **LinkedIn** and **YouTube**, then select **Save**. These links are public on your profile.
 
-## Password
+### Skills
 
-Update your account password for security:
+Select the skills that describe you: **Coder**, **Artist**, **Designer** and **Musician**. They're shown on your public profile. Select **Save** to keep your changes.
 
-- **Current Password** - Enter your existing password
-- **New Password** - Choose a new password of at least 8 characters
-- **Confirm Password** - Re-enter your new password to confirm
+### Email Notifications
 
-:::tip
+Choose which emails PlayCanvas sends you. Each switch saves as soon as you change it.
 
-Use a strong password with a mix of uppercase, lowercase, numbers, and special characters for better security. Consider using a password manager to make this process easier.
+[Image: Email Notifications]
 
-:::
+| Switch | Emails you when |
+| --- | --- |
+| **My projects** | Someone forks, watches or is added to a project you own |
+| **Watched projects** | A project you watch is updated |
+| **New comments** | Someone comments on your projects |
+| **New stars** | Someone stars one of your projects |
+| **My organizations** | You're added to or removed from an organization |
+| **PlayCanvas news** | There's PlayCanvas product news, an event or an offer |
 
-## Skills
+### Convert Account
 
-Tag yourself with the skills that best match your experience:
-
-- **Coder** - Programming and scripting
-- **Artist** - 3D modeling, texturing, animation
-- **Designer** - UI/UX and game design
-- **Musician** - Audio and music composition
-
-These skills are displayed in your public profile header.
-
-## Current Plan
-
-View your current subscription plan.
-
-For free accounts, this shows "Free $0 / month" with basic plan limitations.
-
-For accounts on the Personal plan, this shows "Personal $15 / month".
+**Convert to organization** turns your account into an [organization](https://developer.playcanvas.com/user-manual/account-management/organizations.md) owned by another user. Its projects move with it, and you can no longer log in to it. See [Convert a User Account into an Organization](https://developer.playcanvas.com/user-manual/account-management/organizations/creating.md#convert-a-user-account-into-an-organization).
 
 :::tip
 
-To cancel your Personal plan, click the **Cancel** link and confirm. Your account will drop back to the free tier and the end of your current billing cycle.
+You can't convert an account that owns organizations. Delete those organizations or transfer their ownership to another user first.
 
 :::
 
-## Billing Info
+### Delete Account
 
-Users on the Free plan will see "No credit card stored in your account" until a paid plan is purchased.
-
-Users on the Personal plan will see something of the form "Card ending in - 0000". Click **Edit** to update billing info:
-
-- Card details
-- Billing address
-- VAT number (if supported in your country)
-
-## Invoices
-
-Access your billing history and download invoices. By default, your 3 latest invoices are displayed. Keep clicking **Load More...** to load the next 10 invoices.
-
-## Seats
-
-View and manage team members across your projects:
-
-- Lists all users who are team members on projects you own
-- Shows which specific projects each user has access to
-
-:::tip
-
-Click the `x` icon to the right of a listed user to remove them from all of your projects that they are on the team of.
-
-:::
-
-## Usage
-
-This section tracks your account resource consumption. The usage meter shows current consumption against your plan limits.
-
-### Projects
-
-- **Public Projects** - Number created vs. limit
-- **Private Projects** - Number created vs. limit (plan-dependent)
-
-### Storage Breakdown
-
-These categories count towards your plan's storage allowance:
-
-- **Assets** - Storage used for 3D models, textures, audio. Every open branch of a project counts its own copy of the assets. See [How Version Control Affects Your Storage](https://developer.playcanvas.com/user-manual/editor/version-control.md#how-version-control-affects-your-storage).
-- **Apps** - Published application data. Deleting a published build removes its full size from your usage.
-- **Code** - Script and code storage
-- **Checkpoints** - Version history storage
-
-Your usage also shows **Splats**, the Gaussian splat data you have published to [SuperSplat](https://developer.playcanvas.com/user-manual/supersplat.md). Splats don't count towards your storage allowance. SuperSplat has its own upload limits instead.
-
-## API Tokens
-
-Manage programmatic access to your PlayCanvas account:
-
-- Generate new API tokens
-- View existing token permissions
-- Revoke access for unused tokens
-
-See the [API Documentation](https://developer.playcanvas.com/user-manual/api.md) for details on using API tokens.
-
-## Email Preferences
-
-Configure which notifications you receive:
-
-- **My Projects** - Updates about your own projects
-- **Watched Projects** - Notifications from projects you follow
-- **New Comments** - Comments on your projects or posts
-- **New Stars** - When users star your projects
-- **My Organizations** - Organization-related updates
-- **Exciting PlayCanvas Stuff** - Platform news and updates
-
-Uncheck any categories you don't want to receive emails about.
-
-## Organizations
-
-### Convert Account to Organization
-
-Transform your personal account into an [organization](https://developer.playcanvas.com/user-manual/account-management/organizations.md) account:
-
-- Allows team collaboration
-- Enables advanced permission management
-- Requires designating a new owner
-
-:::warning
-
-Converting to an organization means you can no longer log in with this account. Make sure you have another account ready to become the organization owner.
-
-:::
-
-:::tip
-
-You cannot convert a user account into an organization if it currently manages other organizations. Transfer those organizations to be owned by another user account first.
-
-:::
-
-## Delete Account
-
-Permanently remove your PlayCanvas account:
-
-- All projects and data will be deleted
-- This action cannot be undone
-- Consider downloading important projects first
+**Delete account** deletes your account and every project you own. To confirm, type `delete this account` and select **Delete**.
 
 :::danger
 
-Account deletion is permanent and irreversible. Make sure to backup any important work before proceeding.
+Deleting your account is permanent and can't be undone. [Export](https://developer.playcanvas.com/user-manual/editor/projects/backup-and-export.md) any projects you want to keep first.
 
 :::
+
+If you own any organizations, **Delete account** is turned off. Delete those organizations or [transfer their ownership](https://developer.playcanvas.com/user-manual/account-management/organizations/managing.md#administrators) first.
+
+## Security Tab
+
+[Image: Security]
+
+### Password
+
+To change your password, enter your **Current password**, then your **New password** and **Confirm new password**, and select **Change password**. If you signed up with Google or GitHub, your account has no password yet. Enter a new one and select **Set password** to log in with your email address or username as well.
 
 :::tip
 
-You can't delete a user account if it currently manages any organizations. Please delete the organizations first or transfer their ownership to another user account.
+Use a strong password, and consider a password manager to keep track of it.
 
 :::
 
----
+### API Tokens
 
-For billing-specific questions and detailed subscription management, see [Billing](https://developer.playcanvas.com/user-manual/account-management/billing.md).
+API tokens let your scripts and tools use the [REST API](https://developer.playcanvas.com/user-manual/api.md). A token acts as you, so keep it out of shared code.
+
+To create one, select **Generate token**, enter a **Name** such as `CI publish`, and select **Generate**. Copy the new token straight away, because you won't be able to see it again.
+
+Your tokens are listed in this section, where you can **Rename** or **Revoke** each one, or select **Revoke all**. A revoked token stops working straight away.
+
+:::note
+
+API tokens created before 5 November 2026 don't work from 19 November 2026. If a script or tool still uses one, generate a new token and use that instead.
+
+:::
+
+## Billing Tab
+
+The **Billing** tab shows your **Plan**, what's using your **Storage**, your payment details and your **Invoices**. **Compare plans** opens the Plans page, where you can upgrade. See [Plans and Billing](https://developer.playcanvas.com/user-manual/account-management/plans-and-billing.md).
 
 --------------------------------------------------------------------------------
 
@@ -66541,14 +66490,14 @@ For billing-specific questions and detailed subscription management, see [Billin
 URL: https://developer.playcanvas.com/user-manual/account-management/organizations/
 Markdown: https://developer.playcanvas.com/user-manual/account-management/organizations.md
 
-An **Organization** is a shared account for teams. Instead of projects living under one person's personal account, they belong to the Organization, where an owner and any number of administrators manage projects, members, and permissions together. Organizations are available on the **Free plan**, with a paid plan when you need more.
+An **Organization** is a shared account for teams. Instead of projects living under one person's personal account, they belong to the Organization, where an owner and any number of administrators manage projects, people and billing together. Organizations are available on the **Free plan**, with a paid plan when you need more.
 
 ## What is an Organization?
 
 An Organization is a team-owned workspace rather than an individual login. A few things set it apart from a personal account:
 
 - **It isn't tied to one person.** You never log in *as* the Organization. Instead, you manage it through your own user account as its **owner** or an **administrator**.
-- **It has multiple administrators.** The owner can appoint any number of administrators, who can create and delete projects and manage members. Only the owner can delete the Organization itself.
+- **It has multiple administrators.** The owner can appoint any number of administrators, who manage the Organization's projects, people and billing. Only the owner can transfer ownership or delete the Organization.
 - **Projects belong to the team.** Projects are owned by the Organization, not by an individual, so they outlast any single member's account.
 - **Ownership can be transferred.** If the owner leaves the team, ownership can be handed to another user without disrupting any projects.
 
@@ -66567,7 +66516,7 @@ The difference is about **who owns and administers the account**, not which plan
 
 Organizations work on the **Free plan**, which gives you the shared account and team administration described above, along with unlimited public projects.
 
-Upgrade to the paid **Organization plan** when your team needs **private projects**, more storage (50 GB), and per-seat billing on a single invoice. Seats cost $50 each per month, can be added or removed at any time, and are prorated on your next billing date — see the [worked example](https://developer.playcanvas.com/user-manual/account-management/billing.md#how-is-billing-for-organization-accounts-calculated) in the Billing FAQ, and the [pricing page](https://playcanvas.com/plans) for the latest details.
+Upgrade to the paid **Organization plan** when your team needs **private projects**, more storage, and per-seat billing on a single invoice. Seats cost $50 each per month (¥9,900 including tax in Japan), can be added or removed at any time, and are prorated on your next billing date — see the [worked example](https://developer.playcanvas.com/user-manual/account-management/billing.md#how-is-billing-for-organization-accounts-calculated) in the Billing FAQ. The [Plans](https://developer.playcanvas.com/user-manual/account-management/plans-and-billing.md#plans) page compares the plans in full.
 
 ## When to use an Organization
 
@@ -66580,7 +66529,7 @@ An Organization is a good fit when:
 ## Getting started
 
 1. [Create an Organization](https://developer.playcanvas.com/user-manual/account-management/organizations/creating.md) — start a new Organization or convert an existing account.
-2. [Manage your Organization](https://developer.playcanvas.com/user-manual/account-management/organizations/managing.md) — handle [roles and permissions](https://developer.playcanvas.com/user-manual/account-management/organizations/managing.md#permissions), [seats](https://developer.playcanvas.com/user-manual/account-management/organizations/managing.md#seats), and [projects](https://developer.playcanvas.com/user-manual/account-management/organizations/managing.md#projects).
+2. [Manage your Organization](https://developer.playcanvas.com/user-manual/account-management/organizations/managing.md) — handle [administrators](https://developer.playcanvas.com/user-manual/account-management/organizations/managing.md#administrators), [seats](https://developer.playcanvas.com/user-manual/account-management/organizations/managing.md#seats), [billing](https://developer.playcanvas.com/user-manual/account-management/organizations/managing.md#billing) and [projects](https://developer.playcanvas.com/user-manual/account-management/organizations/managing.md#projects).
 
 --------------------------------------------------------------------------------
 
@@ -66589,36 +66538,43 @@ An Organization is a good fit when:
 URL: https://developer.playcanvas.com/user-manual/account-management/organizations/creating/
 Markdown: https://developer.playcanvas.com/user-manual/account-management/organizations/creating.md
 
-There are two ways to create an Organization. Any Organizations you belong to appear next to your name on your profile:
+There are two ways to create an Organization: start a new one, or convert an existing user account into one. The Organizations you belong to are listed under **ORGANIZATIONS** in the [Project Dashboard](https://developer.playcanvas.com/user-manual/editor/projects/dashboard.md#organizations) sidebar:
 
-[Image: Profile Organizations]
+[Image: Organizations]
 
-## Create a new Organization
+## Create a New Organization
 
-Open the dropdown menu in the top-right corner and click **NEW ORGANIZATION**:
+You can start a new Organization from either of these places:
 
-[Image: Dropdown]
+- In the Project Dashboard, select **+** next to **ORGANIZATIONS**. See [Organizations](https://developer.playcanvas.com/user-manual/editor/projects/dashboard.md#organizations) in the Project Dashboard docs.
+- In your [account settings](https://developer.playcanvas.com/user-manual/account-management/user-accounts/settings.md), open the account switcher at the top of the page and choose **New organization**.
 
-This opens the following dialog:
+[Image: Switch Account]
+
+The account settings open the **New organization** dialog:
 
 [Image: New Organization]
 
-Enter a **name** for the Organization and an **Organization ID** (a string containing only alphanumeric characters and dashes). The email address defaults to your own, but you can change it. Click **CREATE** to finish — you'll be taken to the Organization's profile page.
+- **Name** - The Organization's name, such as your company's name.
+- **ID** - A unique ID with no spaces. It sets the address of the Organization's profile, `playcanvas.com/user/<ID>`.
+- **Email** - Where the Organization's notifications go. It defaults to your own email address, but you can change it.
 
-### Transfer existing projects into the Organization
+Select **Create** to finish. The Organization starts on the Free plan, with you as its owner, and its account settings open. To add private projects and seats, [upgrade it to the Organization plan](https://developer.playcanvas.com/user-manual/account-management/organizations/managing.md#billing).
+
+### Transfer Existing Projects into the Organization
 
 If you already have projects — for example, private projects on a Personal plan — you can move them into the new Organization:
 
 1. From your user account, [transfer ownership of the projects](https://developer.playcanvas.com/user-manual/editor/projects/ownership-transfers.md#initiating-ownership-transfers) to the Organization.
-2. From the Organization account, accept the transfer.
-3. If you're on a Personal plan, cancel it to downgrade to Free. This takes effect immediately, regardless of when you last paid.
+2. From the Organization account, [accept the transfer](https://developer.playcanvas.com/user-manual/editor/projects/ownership-transfers.md).
+3. If you're on a Personal plan and no longer need it, [cancel it](https://developer.playcanvas.com/user-manual/account-management/plans-and-billing.md#cancel-plan). If you subscribe the new Organization to the Organization plan straight after creating it, checkout offers **End my Personal plan when this starts** to do this for you.
 4. [Add yourself to the projects as an administrator](https://developer.playcanvas.com/user-manual/account-management/organizations/managing.md#projects) of the Organization.
 
 Your projects are now owned by the Organization, with your user account as an administrator on each.
 
-## Convert a user account into an Organization
+## Convert a User Account into an Organization
 
-Alternatively, you can convert an existing user account into an Organization. Click **CONVERT** on your [account settings](https://developer.playcanvas.com/user-manual/account-management/user-accounts/settings.md#convert-account-to-organization) page:
+Alternatively, you can convert an existing user account into an Organization. Log in with the account you want to convert, open the **Profile** tab of its [account settings](https://developer.playcanvas.com/user-manual/account-management/user-accounts/settings.md#convert-account-to-organization), and select **Convert to organization**:
 
 [Image: Convert Organization]
 
@@ -66626,7 +66582,7 @@ This opens the following dialog:
 
 [Image: Convert Popup]
 
-Because you can't log in *as* an Organization, converting an account means you'll no longer be able to log in with it. You must therefore nominate another user as the new **owner**.
+Because you can't log in *as* an Organization, converting an account means you'll no longer be able to log in with it, and all of its projects move to the Organization. You must therefore nominate another user as the new **owner**. Enter their username, select **Find**, and then select **Convert**.
 
 :::warning
 
@@ -66634,7 +66590,9 @@ Make sure you can log in with the new owner's account before you convert.
 
 :::
 
-If the account is on a paid plan, that plan is cancelled unless you choose to subscribe to an Organization plan in the dialog. The number of seats to purchase is calculated automatically from the number of users across your existing private projects.
+The account's private projects are locked unless you subscribe to the Organization plan. Where you can, the dialog offers **Subscribe to the Organization plan**, with the price for one seat for each user across your existing private projects. If the account is on a paid plan, that plan is cancelled.
+
+You can't convert an account that owns Organizations. Delete them or transfer their ownership first.
 
 After converting, you'll be logged out. Log back in with the new owner's account to access the Organization and all its projects.
 
@@ -66645,66 +66603,162 @@ After converting, you'll be logged out. Log back in with the new owner's account
 URL: https://developer.playcanvas.com/user-manual/account-management/organizations/managing/
 Markdown: https://developer.playcanvas.com/user-manual/account-management/organizations/managing.md
 
-You manage an Organization from its account page. This is where the owner and administrators handle roles, seats, projects, and — if necessary — deleting the Organization.
+You manage an Organization from its account settings, where its owner and administrators handle its profile, people and billing. To open them, go to your [account settings](https://developer.playcanvas.com/user-manual/account-management/user-accounts/settings.md) and choose the Organization in the account switcher at the top of the page. In the [Project Dashboard](https://developer.playcanvas.com/user-manual/editor/projects/dashboard.md#organizations), **Organization details** in an Organization's **⋮** menu opens them too.
 
-## Roles and permissions
+An Organization's settings have three tabs: **Profile**, **People** and **Billing**.
 
-[Image: permissions]
+## Profile
 
-The account page shows the Organization's **owner** and its **administrators**. From here, the owner can transfer ownership to another user and add or remove administrators.
+The **Profile** tab works like the one for your own [account settings](https://developer.playcanvas.com/user-manual/account-management/user-accounts/settings.md#profile):
 
-Administrators can do everything the owner can — including creating and deleting projects — *except* delete the Organization itself. Only the owner can do that.
+- **Account** - The Organization's picture, its username (the ID in its profile's address, `playcanvas.com/user/<ID>`), its name, and the email address its notifications go to.
+- **Socials** - Links to the Organization's website and social accounts, shown on its profile.
+- **Email notifications** - **My projects**, **New comments**, **New stars**, **PlayCanvas news**, and **Permission changes**, which emails you when someone is added to or removed from the Organization.
+- **Delete organization** - See [Deleting an Organization](https://developer.playcanvas.com/user-manual/account-management/organizations/managing.md#delete).
 
-## Seats
+## People
+
+[Image: People]
+
+### Administrators
+
+**Administrators** lists the Organization's **Owner** and its administrators. Administrators manage the Organization's projects, people and billing.
+
+- To add an administrator, enter their username or email address and select **Add administrator**.
+- To remove one, select **Remove** next to their name.
+- To hand the Organization to someone else, the owner selects **Transfer ownership**, finds the new owner by username and selects **Transfer**. The new owner takes over the Organization and its billing, and the previous owner stays an administrator.
+
+Administrators can do everything the owner can — including creating and deleting projects — *except* transfer ownership or delete the Organization itself. Only the owner can do that.
+
+### Seats
 
 A **seat** is consumed when you add a user to one of the Organization's **private** projects. Public projects don't require seats, so you can have unlimited public collaborators at no cost.
 
-[Image: seats]
+[Image: Seats]
 
-This view lists every user with access to your private projects and the seats they occupy. Removing a user here removes them from all of the Organization's projects and frees up their seat.
+**Seats** shows how many of the Organization's seats are used, and lists the people on its projects other than its administrators, with the projects each one is on. Select **Remove** next to someone to remove them from all of the Organization's projects and free up their seat.
 
 The owner doesn't need to occupy a seat if they aren't actively working on projects. We recommend giving a seat to at least one administrator, so that someone can always create and manage projects.
 
-### Adding and removing seats
+## Billing
 
-[Image: upgrade]
+An Organization has its own **Billing** tab, with its plan, storage, payment details and invoices. See [Plans and Billing](https://developer.playcanvas.com/user-manual/account-management/plans-and-billing.md#billing-tab).
 
-If you're subscribed to the Organization plan, you can increase or decrease the number of seats at any time. Seat changes are prorated on your next billing date — see the [worked example](https://developer.playcanvas.com/user-manual/account-management/billing.md#how-is-billing-for-organization-accounts-calculated) in the Billing FAQ.
+A new Organization starts on the Free plan. To give it private projects and seats, select **Change plan** on its **Billing** tab, then **Upgrade** followed by the Organization's name, and choose the number of seats at checkout.
+
+[Image: Upgrade]
+
+### Adding and Removing Seats
+
+On the Organization plan, the **Plan** section of the **Billing** tab shows how many seats are in use. To add or remove seats at any time, select **Change seats**, choose the new number of seats and select **Save seats**. Seat changes are prorated on your next billing date — see the [worked example](https://developer.playcanvas.com/user-manual/account-management/billing.md#how-is-billing-for-organization-accounts-calculated) in the Billing FAQ.
 
 ## Projects
 
-Administrators can add themselves to any project the Organization owns. On the account page, click the dropdown arrow to the right of a project and choose **Add me as admin**:
+Administrators can add themselves to any project the Organization owns. In the [Project Dashboard](https://developer.playcanvas.com/user-manual/editor/projects/dashboard.md), select the Organization in the sidebar and then the project. If you aren't on the project yet, its settings show only **Team**, where you can assign yourself as an admin. See [Project Settings](https://developer.playcanvas.com/user-manual/editor/projects/dashboard.md#project-settings).
 
-[Image: add to project]
-
-From there, you can add other users to the project as usual.
+From there, you can add other users to the project as usual. See [Team Management](https://developer.playcanvas.com/user-manual/editor/projects/team-management.md).
 
 ## Deleting an Organization
 
-[Image: delete]
+[Image: Delete]
 
-Only the owner can delete the Organization, from its account page.
+Only the owner can delete the Organization. On its **Profile** tab, select **Delete organization**, type `delete this account` to confirm, and select **Delete**.
 
 :::danger
 
-Deleting an Organization permanently erases the account and **all** of its projects. This action cannot be undone.
+Deleting an Organization from its account settings permanently erases the account and **all** of its projects. This action cannot be undone.
+
+:::
+
+To keep the Organization's projects, delete it from the [Project Dashboard](https://developer.playcanvas.com/user-manual/editor/projects/dashboard.md#organizations) instead, which transfers its projects to your account.
+
+--------------------------------------------------------------------------------
+
+## Plans and Billing
+
+URL: https://developer.playcanvas.com/user-manual/account-management/plans-and-billing/
+Markdown: https://developer.playcanvas.com/user-manual/account-management/plans-and-billing.md
+
+Your personal account and each organization have their own plan and their own billing. This page covers the **Plans** page, where you choose and subscribe to a plan, and the **Billing** tab of your [account settings](https://developer.playcanvas.com/user-manual/account-management/user-accounts/settings.md), where you manage it. For questions about renewals, currencies, refunds and how seats are billed, see the [Billing FAQ](https://developer.playcanvas.com/user-manual/account-management/billing.md).
+
+## Plans
+
+The Plans page compares the plans and lets you subscribe. Open it with **Upgrade plan** in the menu under your name in the [Project Dashboard](https://developer.playcanvas.com/user-manual/editor/projects/dashboard.md), or with **Change plan** or **Compare plans** on the [Billing tab](https://developer.playcanvas.com/user-manual/account-management/plans-and-billing.md#billing-tab).
+
+[Image: Plans]
+
+**Individual** shows the **Free** and **Personal** plans, and **Team** shows the **Organization** plan. The plans apply to the account you're viewing. An organization can only choose the Organization plan, so on your personal account, **Team** offers **Create organization** instead.
+
+To subscribe, select **Upgrade to Personal** on your personal account, or **Upgrade** followed by the organization's name on an organization. At checkout, enter your payment method and billing address, and select **Subscribe**. Prices are in US dollars, and tax is added at checkout based on your billing country. In Japan, prices are in yen and include tax — see [What payment methods and currency do you accept?](https://developer.playcanvas.com/user-manual/account-management/billing.md#what-payment-methods-and-currency-do-you-accept).
+
+If you have a promo code, enter it under **Have a promo code?** and select **Apply**.
+
+## The Billing Tab
+
+To open it, select your name at the bottom of the Project Dashboard sidebar, choose **Account settings** and select the **Billing** tab. For an organization, switch to it with the account switcher at the top of the page first.
+
+[Image: Billing]
+
+### Plan
+
+**Plan** shows the account's plan and price, and how many public and private projects it has. On a paid plan, it also shows when the plan renews, and for an organization, how many of its seats are in use. **Change plan** opens the [Plans](https://developer.playcanvas.com/user-manual/account-management/plans-and-billing.md#plans) page, and so does **Compare plans** at the top right.
+
+Organizations on the Organization plan also have **Change seats** here. See [Adding and Removing Seats](https://developer.playcanvas.com/user-manual/account-management/organizations/managing.md#adding-and-removing-seats).
+
+### Storage
+
+**Storage** shows how much of the plan's storage allowance the account is using, and what's using it:
+
+- **Assets** - 3D models, textures, audio and other assets in your projects. Every open branch of a project counts its own copy of the assets. See [How Version Control Affects Your Storage](https://developer.playcanvas.com/user-manual/editor/version-control.md#how-version-control-affects-your-storage).
+- **Checkpoints** - The version history of your projects.
+- **Apps** - Your published apps. Deleting a published build removes its full size from your usage.
+- **Code** - Your scripts and other code.
+- **Splats** - The Gaussian splats you have published to [SuperSplat](https://developer.playcanvas.com/user-manual/supersplat.md).
+
+The [Project Dashboard](https://developer.playcanvas.com/user-manual/editor/projects/dashboard.md#storage) shows the same total, broken down by project.
+
+### Payment
+
+Accounts on a paid plan have a **Payment** section with the card you pay with, your **Billing details** and your **VAT number**:
+
+- Select **Update** next to your card to change your payment method.
+- Select **Edit** next to your billing details to change the name and address shown on your invoices.
+- Select **Add** or **Edit** next to the VAT number to set one. VAT numbers are only for billing addresses in the EU, UK, Switzerland and Norway.
+
+### Invoices
+
+**Invoices** lists the account's past invoices, with a PDF of each to download. Invoices are also emailed to the account's owner on each billing date.
+
+### Cancel Plan
+
+You can cancel a paid plan at any time:
+
+1. Open the **Billing** tab of your [account settings](https://playcanvas.com/account/billing).
+2. In the **Cancel plan** section, select **Cancel plan** and confirm.
+3. If you also have organizations on the Organization plan, switch to each one with the account switcher at the top of the page and repeat the steps above on its **Billing** tab.
+
+Once your subscription is cancelled, you will not be billed again unless you resubscribe.
+
+:::note
+
+When you cancel your subscription, it will not revert to the Free plan immediately. Your plan stays active until the end of the billing period, and the **Plan** section shows when it ends. Private projects lock after that. If you change your mind before then, select **Resume plan** to continue your subscription.
 
 :::
 
 --------------------------------------------------------------------------------
 
-## Billing
+## Billing FAQ
 
 URL: https://developer.playcanvas.com/user-manual/account-management/billing/
 Markdown: https://developer.playcanvas.com/user-manual/account-management/billing.md
 
-This Billing FAQ answers common questions about your PlayCanvas subscription. For a summary of what each plan includes, see the [pricing page](https://playcanvas.com/plans); to learn how team accounts work, see [Organizations](https://developer.playcanvas.com/user-manual/account-management/organizations.md).
+This FAQ answers common questions about your PlayCanvas subscription. To choose a plan or manage your payment details, invoices and cancellation, see [Plans and Billing](https://developer.playcanvas.com/user-manual/account-management/plans-and-billing.md). To learn how team accounts work, see [Organizations](https://developer.playcanvas.com/user-manual/account-management/organizations.md).
 
 ## Plans and eligibility
 
 ### Can businesses sign up to the Personal plan?
 
-Yes, providing the annual revenue of that business is below $100,000. Otherwise, the Organization plan should be selected.
+Yes, providing the annual revenue of that business is below $100,000. Otherwise, the Organization plan should be selected. When you subscribe to the Personal plan, checkout asks you to confirm this.
 
 :::note
 
@@ -66726,25 +66780,27 @@ We don't have a formal education discount, but if you'd like to use PlayCanvas f
 
 ### Does my subscription auto-renew?
 
-Yes. Once you subscribe to the Personal or Organization plan, payment will automatically be taken on a monthly basis, on the day of the month when you first subscribed.
+Yes. Once you subscribe to the Personal or Organization plan, payment will automatically be taken on a monthly basis, on the day of the month when you first subscribed. The [Plan](https://developer.playcanvas.com/user-manual/account-management/plans-and-billing.md#plan) section of the **Billing** tab shows when your plan renews.
 
 ### What payment methods and currency do you accept?
 
-PlayCanvas subscriptions are billed in US dollars (USD). Payment is by debit or credit card only — we don't support other methods such as PayPal or bank transfer.
+PlayCanvas subscriptions are billed in US dollars (USD), with tax added at checkout based on your billing country. Payment is by debit or credit card only — we don't support other methods such as PayPal or bank transfer.
+
+Japan is the one exception. Customers in Japan are billed in Japanese yen (JPY) at prices that include tax: ¥2,200 a month for the Personal plan and ¥9,900 per seat a month for the Organization plan. They can also pay by bank transfer by emailing [support@playcanvas.jp](mailto:support@playcanvas.jp).
 
 ### Can I pay in advance for my subscription?
 
 Yes, but only for Organization plan subscriptions with a minimum term of 1 year. If you'd like to pay in advance for an Organization plan, please contact us at [billing@playcanvas.com](mailto:billing@playcanvas.com) with the following information:
 
-* Number of Organization seats required
-* Term of the upgrade
-* Business name
-* Business address
-* Contact name
-* Contact email
-* VAT number (if applicable)
+- Number of Organization seats required
+- Term of the upgrade
+- Business name
+- Business address
+- Contact name
+- Contact email
+- VAT number (if applicable)
 
-We will generate an online invoice that can be settled by debit or credit card. Once payment is received, we'll provide you with an account upgrade code that you can apply on the [upgrade page](https://playcanvas.com/upgrade).
+We will generate an online invoice that can be settled by debit or credit card. Once payment is received, we'll provide you with a code that you can enter under **Have a promo code?** on the [Plans](https://developer.playcanvas.com/user-manual/account-management/plans-and-billing.md#plans) page.
 
 Personal plan subscriptions are only available as monthly auto-renewing subscriptions.
 
@@ -66766,25 +66822,23 @@ If invoices are not reaching your inbox, please check your spam folder.
 
 ### Where can I find my billing history?
 
-Your historical invoices are available to download on [playcanvas.com](https://playcanvas.com). Visit your account page and scroll to the **Invoices** section. You should see something similar to this:
-
-[Image: Billing History]
+Your past invoices are listed in the [Invoices](https://developer.playcanvas.com/user-manual/account-management/plans-and-billing.md#invoices) section of the **Billing** tab, where you can download each one as a PDF. Remember that each organization has its own **Billing** tab.
 
 ### How do I update my details on my invoices?
 
 You may want to edit certain details that appear on your invoices, such as:
 
-* Billing Name
-* Billing Address
-* Tax ID
+- Billing Name
+- Billing Address
+- VAT number
 
-To do this, visit the account page for your subscribed account (remembering that Organizations have their own account page). Navigate to the **Billing Info** section and click **Edit**. Fill out the payment details form and click **UPDATE CARD**.
+To do this, open the **Billing** tab of the subscribed account (remembering that Organizations have their own). In the [Payment](https://developer.playcanvas.com/user-manual/account-management/plans-and-billing.md#payment) section, select **Edit** next to your billing details or your VAT number, and save your changes.
 
 ## Organization billing
 
 ### How is billing for Organization accounts calculated?
 
-In short, you're billed for your current number of seats each month (at $50 per seat), with a pro-rata adjustment on your next billing date for any seats you added or removed during the previous month.
+In short, you're billed for your current number of seats each month (at $50 per seat, or ¥9,900 in Japan), with a pro-rata adjustment on your next billing date for any seats you added or removed during the previous month.
 
 The day you subscribe to an Organization account is your monthly billing date. So if you subscribe on 10th July, you will be billed on that date with subsequent billing dates as 10th August, 10th September and so on.
 
@@ -66794,42 +66848,26 @@ The Organization plan allows you to add and remove seats at any time. When seats
 
 Imagine the following sequence of events:
 
-* A user signs up for a 1-seat Organization plan on 10th May.
-* The user then adds 1 seat on 20th June.
-* The user removes 1 seat on 20th August.
+- A user signs up for a 1-seat Organization plan on 10th May.
+- The user then adds 1 seat on 20th June.
+- The user removes 1 seat on 20th August.
 
 The billing events from May to October will be as follows:
 
-* 10th May: **$50**
-* 10th June: **$50**. The plan has 1 seat and no changes were made to the plan in the previous month.
-* 10th July: $100 + $50 x 20/30 = **$133.33**. The user has two seats on this billing date so is charged 2 x $50 for the upcoming month. One of these seats was added on 20th June and the use of that seat between 20th June and 10th July must now be accounted for. Since this period is 20 days of the 30 days between the two billing dates, $50 x 20/30 is added to the bill. In other words, seats that are added or removed are accounted for ‘pro-rata’ on the next billing date.
-* 10th August: **$100**. The plan has 2 seats and no changes were made to the plan in the previous month.
-* 10th September: $50 - $50 x 21/31 = **$16.13**. The users has one seat on this billing date so is charged $50 for the upcoming month. A seat was removed on 20th August so it was only used for 10 of the 31 days between billing dates. Since the user paid $50 for that seat on the previous billing date, they are due a refund for the unused 21 days. So $50 x 21/31 is subtracted from the bill.
-* 10th October: **$50**. The plan has 1 seat and no changes were made to the plan in the previous month.
+- 10th May: **$50**
+- 10th June: **$50**. The plan has 1 seat and no changes were made to the plan in the previous month.
+- 10th July: $100 + $50 x 20/30 = **$133.33**. The user has two seats on this billing date so is charged 2 x $50 for the upcoming month. One of these seats was added on 20th June and the use of that seat between 20th June and 10th July must now be accounted for. Since this period is 20 days of the 30 days between the two billing dates, $50 x 20/30 is added to the bill. In other words, seats that are added or removed are accounted for ‘pro-rata’ on the next billing date.
+- 10th August: **$100**. The plan has 2 seats and no changes were made to the plan in the previous month.
+- 10th September: $50 - $50 x 21/31 = **$16.13**. The users has one seat on this billing date so is charged $50 for the upcoming month. A seat was removed on 20th August so it was only used for 10 of the 31 days between billing dates. Since the user paid $50 for that seat on the previous billing date, they are due a refund for the unused 21 days. So $50 x 21/31 is subtracted from the bill.
+- 10th October: **$50**. The plan has 1 seat and no changes were made to the plan in the previous month.
 
 ## Cancelling your subscription
 
 ### How do I cancel my subscription?
 
-You can cancel your plan subscription at any time.
+You can cancel at any time. Select **Cancel plan** on the **Billing** tab of each subscribed account — your personal account and any organizations on the Organization plan. See [Cancel Plan](https://developer.playcanvas.com/user-manual/account-management/plans-and-billing.md#cancel-plan).
 
-1. Visit your [Account page](https://playcanvas.com/account).
-2. Scroll down to the **Current Plan** section.
-3. If you have **Personal** showing here, click **Cancel** to cancel it.
-4. Click **OK** in the **CANCEL PLAN** dialog.
-5. Also in the **Current Plan** section, you will see a list of your Organizations.
-6. For each Organization listed, click its icon to visit its Account page.
-7. Scroll down to the **Current Plan** section.
-8. If you have **Organization** showing here, click **Cancel** to cancel it.
-9. Click **OK** in the **CANCEL PLAN** dialog.
-
-Once your subscription is cancelled, you will not be billed again unless you resubscribe.
-
-:::note
-
-When you cancel your subscription, it will not revert to the Free plan immediately. Instead, this will happen at your next billing date. If between the time you cancel and your next billing date you decide you would like to continue your subscription, just return to your Account page and click **Resume**.
-
-:::
+Your plan stays active until the end of the billing period, and you won't be billed again unless you resubscribe. Until the plan ends, you can select **Resume plan** to keep it.
 
 ### What happens to my published apps when I cancel my subscription?
 
@@ -66837,7 +66875,7 @@ Your published apps will be completely unaffected if you cancel your subscriptio
 
 ### What happens to my private projects when I cancel my subscription?
 
-Your private projects will become locked (inaccessible) when you cancel your subscription. To unlock them, you have two options:
+Your private projects will become locked (inaccessible) when your plan ends. To unlock them, you have two options:
 
 1. Resubscribe to a plan.
 2. Make the projects public.

@@ -1,40 +1,60 @@
-# Creating Your Account
+# Signing Up and Logging In
 
-To join the PlayCanvas community, we strongly recommend that you create a new account. Click **SIGN UP** at the top right of [https://playcanvas.com](https://playcanvas.com).
+To create a PlayCanvas account, select **SIGN UP** at the top right of [playcanvas.com](https://playcanvas.com).
 
 [Image: Sign Up]
 
-At the sign up page, you have 3 options for account creation:
+The sign-up page offers three ways to create an account:
 
-1. **Username and Password** - enter your email address and password.
-2. **Sign in with Google** - authenticate using your Google account.
-3. **Sign in with GitHub** - authenticate using your GitHub account.
+1. **Email** - Enter your email address and confirm it with a code.
+2. **Sign in with Google** - Use your Google account.
+3. **Sign in with GitHub** - Use your GitHub account.
 
 [Image: Sign Up Form]
 
-If you select the Username and Password option, you will be asked to confirm your email address:
+By signing up, you agree to the PlayCanvas [terms of use](https://playcanvas.com/terms) and [privacy policy](https://playcanvas.com/privacy).
 
-[Image: Confirm Email]
+## Sign Up with Your Email Address
 
-Head to your email inbox and click the verification link. You will be taken to this page:
+1. Enter your email address and select **Send Verification Code**. PlayCanvas emails you a 6-digit code.
+2. Enter the code and select **Verify Code**. If the email doesn't arrive, check your spam folder or select **Resend Code**.
 
-[Image: Email Verified]
+   [Image: Verification Code]
 
-On hitting continue, you'll be prompted to add some details about yourself:
+3. Once your email address is verified, complete your profile:
 
-[Image: Details Form]
+   [Image: Profile Form]
 
-- **Full Name** - A non-unique display name. We recommend setting this to your actual name.
-- **Username** - Your handle that is used to uniquely identify you on the platform. This is used to determine the URL of your PlayCanvas profile page.
-- **Skills** - Pick the skills you have related to building interactive graphics apps (options are 'Coder', 'Artist', 'Designer' and 'Musician'). These skills will be displayed on your public profile.
-- **Email Notifications** - Enable this to receive tips and news about PlayCanvas.
+   - **Username** - Your unique handle on PlayCanvas, which sets the address of [your profile](https://developer.playcanvas.com/user-manual/account-management/user-accounts/profile.md). It needs at least 3 characters, can contain letters, numbers, hyphens and underscores, and can't start with a digit.
+   - **Full Name** - The name shown on your profile and to your collaborators. It doesn't need to be unique.
+   - **Password** and **Re-Type Password** - The password you log in with, of at least 8 characters.
+   - **Coder**, **Artist**, **Designer** and **Musician** - Turn on the skills you want shown on your public profile.
+   - **Send me occasional tips and news about PlayCanvas via email** - On by default. Turn it off if you'd rather not receive PlayCanvas news.
 
-Once you have completed the form, hit **Create Account**!
+4. Select **Create Account**.
 
-You begin by being dropped straight into your first project in the PlayCanvas Editor.
+If an account already uses your email address, the page tells you so. [Log in](https://developer.playcanvas.com/user-manual/account-management/user-accounts/account-creation.md#logging-in) instead.
 
-[Image: Roll Ball]
+## Sign Up with Google or GitHub
 
-It is a clone of a simple 'Roll a Ball' game. This is your playground for getting familiar with the Editor. A set of clickable hot-spots will guide you through some of the key elements of the Editor.
+Select **Sign in with Google** or **Sign in with GitHub** and approve the request. The first time you do, PlayCanvas asks you to complete your profile with a **Username**, **Full Name** and skills. You don't need a password, because you log in with the same button.
+
+## Your First Project
+
+When your account is ready, the PlayCanvas Editor opens your first project, **My First Project**. It's a simple ball-rolling game, and the **Editor Intro** suggests where to start: finish the level by adding a platform, then design your own levels.
+
+[Image: Editor Intro]
+
+Select **LET'S GO** to start. Clickable hotspots guide you through some of the key parts of the Editor.
 
 Jump to the [Editor section](https://developer.playcanvas.com/user-manual/editor.md) to learn more about the PlayCanvas Editor.
+
+## Logging In
+
+Select **LOG IN** at the top right of [playcanvas.com](https://playcanvas.com). Enter your email address or username and your password, then select **Log in**. If you signed up with Google or GitHub, select the same button again.
+
+[Image: Log In]
+
+If you've forgotten your password, select **forgot?** in the password field.
+
+Once you're logged in, [playcanvas.com](https://playcanvas.com) takes you to your [Project Dashboard](https://developer.playcanvas.com/user-manual/editor/projects/dashboard.md), where you can find and open your projects.
