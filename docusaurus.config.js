@@ -81,6 +81,10 @@ const config = {
         { from: ['/tutorials/facebook-api/'], to: '/tutorials/' },
         { from: ['/user-manual/editor/publishing/web/facebook/'], to: '/user-manual/editor/publishing/web/' },
         { from: ['/user-manual/billing/'], to: '/user-manual/account-management/billing/' },
+        // User Home became Your Profile when playcanvas.com moved home pages to the Project Dashboard
+        { from: ['/user-manual/account-management/user-accounts/user-home/'], to: '/user-manual/account-management/user-accounts/profile/' },
+        // The User Accounts landing page was folded into the Account Management index
+        { from: ['/user-manual/account-management/user-accounts/'], to: '/user-manual/account-management/' },
         { from: ['/user-manual/faq/'], to: '/user-manual/editor/faq/' },
         { from: ['/user-manual/getting-started/workflow/'], to: '/user-manual/editor/getting-started/workflow/' },
         { from: ['/user-manual/getting-started/your-first-app/'], to: '/user-manual/editor/getting-started/your-first-app/' },

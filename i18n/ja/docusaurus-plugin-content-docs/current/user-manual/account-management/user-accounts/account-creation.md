@@ -1,43 +1,63 @@
 ---
-title: アカウントの作成
-description: メール、Google、またはGitHubでPlayCanvasにサインアップし、プロフィール設定を完了します。
+title: サインアップとログイン
+description: "メールアドレス、Google、GitHubでPlayCanvasにサインアップし、プロフィールを入力して最初のプロジェクトを開き、ログインする方法を説明します。"
 ---
 
-PlayCanvasコミュニティに参加するには、新しいアカウントを作成することを強くお勧めします。[https://playcanvas.com](https://playcanvas.com)の右上にある**サインアップ**をクリックしてください。
+PlayCanvasアカウントを作成するには、[playcanvas.com](https://playcanvas.com)の右上にある**SIGN UP**を選択します。
 
 ![サインアップ](/img/user-manual/account-management/user-accounts/sign-up.png)
 
-サインアップページでは、アカウント作成のための3つのオプションがあります。
+サインアップページでは、次の3つの方法でアカウントを作成できます。
 
-1. **ユーザー名とパスワード** - メールアドレスとパスワードを入力します。
-2. **Googleでサインイン** - Googleアカウントを使用して認証します。
-3. **GitHubでサインイン** - GitHubアカウントを使用して認証します。
+1. **Email** - メールアドレスを入力し、コードで確認します。
+2. **Sign in with Google** - Googleアカウントを使用します。
+3. **Sign in with GitHub** - GitHubアカウントを使用します。
 
-![サインアップフォーム](/img/user-manual/account-management/user-accounts/sign-up-form.png)
+<img loading="lazy" alt="サインアップフォーム" width="496" src="/img/user-manual/account-management/user-accounts/sign-up-form.png" />
 
-ユーザー名とパスワードのオプションを選択した場合、メールアドレスの確認が求められます。
+サインアップすると、PlayCanvasの[利用規約](https://playcanvas.com/terms)と[プライバシーポリシー](https://playcanvas.com/privacy)に同意したことになります。
 
-![メールアドレスの確認](/img/user-manual/account-management/user-accounts/sign-up-confirm-email.png)
+## メールアドレスでサインアップする {#sign-up-with-email}
 
-受信トレイに移動し、確認リンクをクリックしてください。このページに移動します。
+1. メールアドレスを入力し、**Send Verification Code**を選択します。PlayCanvasから6桁のコードがメールで届きます。
+2. コードを入力し、**Verify Code**を選択します。メールが届かない場合は、迷惑メールフォルダを確認するか、**Resend Code**を選択します。
 
-![メールアドレス確認済み](/img/user-manual/account-management/user-accounts/sign-up-email-verified.png)
+   <img loading="lazy" alt="確認コード" width="496" src="/img/user-manual/account-management/user-accounts/sign-up-verification-code.png" />
 
-続行すると、あなたの詳細情報を追加するように求められます。
+3. メールアドレスが確認されたら、プロフィールを入力します。
 
-![詳細フォーム](/img/user-manual/account-management/user-accounts/sign-up-details-form.png)
+   <img loading="lazy" alt="プロフィールフォーム" width="496" src="/img/user-manual/account-management/user-accounts/sign-up-details-form.png" />
 
-- **氏名** - 一意ではない表示名です。ご自身の本名を設定することをお勧めします。
-- **ユーザー名** - プラットフォーム上であなたを一意に識別するために使用されるハンドルです。これはPlayCanvasプロファイルページのURLを決定するために使用されます。
-- **スキル** - インタラクティブなグラフィックスアプリの構築に関連するスキルを選択してください（オプションは「Coder」、「Artist」、「Designer」、「Musician」です）。これらのスキルは公開プロフィールに表示されます。
-- **メール通知** - PlayCanvasに関するヒントやニュースを受け取るには、これを有効にしてください。
+   - **Username** - PlayCanvas上で一意のハンドルで、[プロフィール](profile.md)のアドレスになります。3文字以上で、英字、数字、ハイフン、アンダースコアを使用でき、数字で始めることはできません。
+   - **Full Name** - プロフィールや共同作業者に表示される名前です。一意である必要はありません。
+   - **Password**と**Re-Type Password** - ログインに使用するパスワードで、8文字以上必要です。
+   - **Coder**、**Artist**、**Designer**、**Musician** - 公開プロフィールに表示したいスキルをオンにします。
+   - **Send me occasional tips and news about PlayCanvas via email** - デフォルトでオンになっています。PlayCanvasのニュースを受け取りたくない場合はオフにします。
 
-フォームへの入力が完了したら、**アカウントを作成**をクリックしてください！
+4. **Create Account**を選択します。
 
-まず、PlayCanvas Editorの最初のプロジェクトに直接移動します。
+そのメールアドレスを使用しているアカウントがすでにある場合は、その旨がページに表示されます。その場合は、代わりに[ログイン](#logging-in)してください。
 
-![ロールボール](/img/user-manual/account-management/user-accounts/sign-up-roll-ball.png)
+## GoogleまたはGitHubでサインアップする {#sign-up-with-google-or-github}
 
-これはシンプルな「Roll a Ball」ゲームのクローンです。ここはEditorに慣れるための練習場です。クリック可能なホットスポットのセットが、Editorの主要な要素のいくつかをご案内します。
+**Sign in with Google**または**Sign in with GitHub**を選択し、リクエストを承認します。初回は、**Username**、**Full Name**、スキルを入力してプロフィールを完成させるよう求められます。ログインには同じボタンを使用するため、パスワードは必要ありません。
+
+## 最初のプロジェクト {#your-first-project}
+
+アカウントの準備ができると、PlayCanvas Editorで最初のプロジェクト**My First Project**が開きます。これはシンプルなボール転がしゲームで、**Editor Intro**がどこから始めればよいかを案内します。まずプラットフォームを追加してレベルを完成させ、次に自分でレベルをデザインしてみましょう。
+
+![Editorイントロ](/img/user-manual/account-management/user-accounts/sign-up-editor-intro.png)
+
+**LET'S GO**を選択して始めます。クリック可能なホットスポットが、Editorの主要な部分をいくつか案内します。
 
 PlayCanvas Editorの詳細については、[Editorセクション](../../editor/index.md)に移動してください。
+
+## ログイン {#logging-in}
+
+[playcanvas.com](https://playcanvas.com)の右上にある**LOG IN**を選択します。メールアドレスまたはユーザー名とパスワードを入力し、**Log in**を選択します。GoogleまたはGitHubでサインアップした場合は、もう一度同じボタンを選択します。
+
+<img loading="lazy" alt="ログイン" width="496" src="/img/user-manual/account-management/user-accounts/log-in.png" />
+
+パスワードを忘れた場合は、パスワード欄にある「**forgot?**」を選択します。
+
+ログインすると、[playcanvas.com](https://playcanvas.com)から[プロジェクトダッシュボード](/user-manual/editor/projects/dashboard/)に移動し、プロジェクトを探して開くことができます。

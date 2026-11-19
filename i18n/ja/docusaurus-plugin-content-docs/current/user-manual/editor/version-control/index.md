@@ -29,7 +29,7 @@ PlayCanvasの**ブランチ**は、他のシステムのブランチと同じよ
 
 詳細については、[チェックポイント](/user-manual/editor/version-control/checkpoints)、[ブランチ](/user-manual/editor/version-control/branches)、[マージ](/user-manual/editor/version-control/merging)の個別のページをご覧ください。
 
-## バージョン管理がストレージに及ぼす影響
+## バージョン管理がストレージに及ぼす影響 {#how-version-control-affects-your-storage}
 
 バージョン管理を使用すると、チェックポイントとブランチにより、ストレージが増えることになります。
 

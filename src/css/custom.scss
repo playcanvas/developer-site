@@ -200,6 +200,14 @@ html[data-theme='dark'] .navbar--github-link:before {
   padding-bottom: 1rem;
 }
 
+/* An <img> on its own line (used to give a screenshot a width) isn't wrapped in a paragraph
+   like a Markdown image, so give it the same spacing */
+.markdown > img,
+.markdown li > img {
+  display: block;
+  margin-bottom: var(--ifm-paragraph-margin-bottom);
+}
+
 /* used by web components tag reference tables */
 .attribute-table td:nth-child(1),
 .attribute-table td:nth-child(2), 
