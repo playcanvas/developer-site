@@ -17,7 +17,7 @@ Exploreの閲覧は**匿名**で可能です — PlayCanvasアカウントは不
 |-----|---------------|
 | **Trending**（デフォルト） | 現在最も注目を集めているスプラット。 |
 | **Latest**（`?tab=latest`） | 最近公開されたスプラット。 |
-| **Following**（`?tab=following`） | フォローしているクリエイターの公開スプラットを新しい順に表示。サインイン中のみ表示されます。[クリエイターのフォロー](/user-manual/supersplat/viewing/following)を参照してください。 |
+| **Following**（`?tab=following`） | フォローしているクリエイターの公開スプラットを新しい順に表示。サインイン中のみ表示されます。[クリエイターのフォロー](/user-manual/supersplat/viewing/user-profile#following)を参照してください。 |
 
 ## グリッド
 
@@ -82,7 +82,7 @@ Trending はすでに新しさを考慮しているため、下記の**期間ウ
 
 ## クリエイタープロファイル
 
-カードの著者チップをクリックすると、そのユーザーの[プロファイルページ](/user-manual/supersplat/viewing/user-profile)に移動します — そのユーザーが共有したすべてのPublicスプラットのグリッド、加えてアバター、自己紹介、ソーシャルリンクが表示されます。そこから[フォロー](/user-manual/supersplat/viewing/following)すると、そのユーザーの新しいスプラットがFollowingタブに表示されるようになります。
+カードの著者チップをクリックすると、そのユーザーの[プロファイルページ](/user-manual/supersplat/viewing/user-profile)に移動します — そのユーザーが共有したすべてのPublicスプラットのグリッド、加えてアバター、自己紹介、ソーシャルリンクが表示されます。そこから[フォロー](/user-manual/supersplat/viewing/user-profile#following)すると、そのユーザーの新しいスプラットがFollowingタブに表示されるようになります。
 
 ## 関連項目
 

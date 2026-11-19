@@ -22,7 +22,7 @@ The viewer is the open-source [SuperSplat Viewer](/user-manual/supersplat/develo
 | Field | What it shows |
 |-------|---------------|
 | **Title** | The headline you set in the [Edit Splat dialog](/user-manual/supersplat/publishing/manage). |
-| **Author** | A chip linking to the creator's [user profile](/user-manual/supersplat/viewing/user-profile), with a **Follow** button so you can [follow them](/user-manual/supersplat/viewing/following). |
+| **Author** | A chip linking to the creator's [user profile](/user-manual/supersplat/viewing/user-profile), with a **Follow** button so you can [follow them](/user-manual/supersplat/viewing/user-profile#following). |
 | **Views** | Total view count. |
 | **Downloads** | Total download count. Only shown if the splat is downloadable. |
 | **Visibility badge** | **Public** or **Unlisted**. |

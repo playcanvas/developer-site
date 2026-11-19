@@ -22,7 +22,7 @@ description: "superspl.atに公開されたスプラットの公開ページ —
 | フィールド | 表示内容 |
 |-------|---------------|
 | **Title** | [Edit Splatダイアログ](/user-manual/supersplat/publishing/manage)で設定した見出し。 |
-| **Author** | クリエイターの[ユーザープロファイル](/user-manual/supersplat/viewing/user-profile)へのリンク付きチップ。**Follow**ボタンで[クリエイターをフォロー](/user-manual/supersplat/viewing/following)できます。 |
+| **Author** | クリエイターの[ユーザープロファイル](/user-manual/supersplat/viewing/user-profile)へのリンク付きチップ。**Follow**ボタンで[クリエイターをフォロー](/user-manual/supersplat/viewing/user-profile#following)できます。 |
 | **Views** | 総閲覧数。 |
 | **Downloads** | 総ダウンロード数。スプラットがダウンロード可能な場合にのみ表示されます。 |
 | **Visibility badge** | **Public**または**Unlisted**。 |
