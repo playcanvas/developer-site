@@ -45,6 +45,7 @@ Use this index to edit, publish, present or embed splats. To render splats in yo
 
 ## Publishing
 
+- [Publishing](https://developer.playcanvas.com/user-manual/supersplat/publishing.md): The ways to publish, the account you need, how published splats are compressed, who can see them, and the limits.
 - [Publishing from the Editor](https://developer.playcanvas.com/user-manual/supersplat/publishing/editor.md): Publishing a splat from the Editor to superspl.at.
 - [Direct Upload](https://developer.playcanvas.com/user-manual/supersplat/publishing/upload.md): Uploading a finished splat file to superspl.at without the Editor.
 - [Manage](https://developer.playcanvas.com/user-manual/supersplat/publishing/manage.md): Listing, editing, sharing and deleting your published splats.
@@ -83,7 +84,7 @@ Use this index to edit, publish, present or embed splats. To render splats in yo
 
 ## Optional
 
-- [All pages of this index in one file](https://developer.playcanvas.com/user-manual/supersplat/llms-full.txt): 41 pages (295 KB), for downloading and searching rather than reading into context.
+- [All pages of this index in one file](https://developer.playcanvas.com/user-manual/supersplat/llms-full.txt): 42 pages (296 KB), for downloading and searching rather than reading into context.
 - [Camera Controls](https://developer.playcanvas.com/user-manual/supersplat/editor/camera-controls.md)
 - [Keyboard Shortcuts](https://developer.playcanvas.com/user-manual/supersplat/editor/keyboard-shortcuts.md)
 - [Explore](https://developer.playcanvas.com/user-manual/supersplat/viewing/explore.md)

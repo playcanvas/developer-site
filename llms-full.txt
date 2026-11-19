@@ -3,7 +3,7 @@
 > The complete text of the PlayCanvas User Manual in one file, for indexing, or for downloading and searching.
 
 Index: https://developer.playcanvas.com/llms.txt
-Total Documents: 568
+Total Documents: 569
 Generated: 2026-11-19
 
 ================================================================================
@@ -23836,16 +23836,6 @@ You can skip the Editor. Hit the orange **Upload Splat** button on the [superspl
 
 :::
 
-## Your first splat in 10 minutes
-
-1. **Load.** Open [superspl.at/editor](https://superspl.at/editor) and drop in your splat file. See [Import and Export](https://developer.playcanvas.com/user-manual/supersplat/editor/import-export.md) for the supported formats.
-2. **Clean.** Select stray floaters with the brush, sphere, or box selection tools and press <kbd>Delete</kbd>. See [Selection and Cleanup](https://developer.playcanvas.com/user-manual/supersplat/editor/editing-splats.md).
-3. **Publish.** Choose **File → Publish**. Your splat lands on your [Manage page](https://developer.playcanvas.com/user-manual/supersplat/publishing/manage.md) with its own [scene page](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md). See [Publishing](https://developer.playcanvas.com/user-manual/supersplat/publishing/editor.md).
-4. **Curate.** Open it in [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md) to frame the camera, add annotations, and switch on post effects.
-5. **Share.** Copy the scene link, grab the embed snippet, or set it to **Public** so it appears in [Explore](https://developer.playcanvas.com/user-manual/supersplat/viewing/explore.md).
-
-The [Getting Started](https://developer.playcanvas.com/user-manual/supersplat/getting-started.md) guide walks through each step with screenshots.
-
 ## How the pieces fit together
 
 Some parts of SuperSplat you use as a creator, some your visitors use to view what you've made, and some are general-purpose utilities.
@@ -23885,7 +23875,7 @@ flowchart TB
 
 ## Good to know
 
-- **Everything runs in your browser.** The Editor loads splats locally and nothing is uploaded until you choose to publish. It needs a WebGPU-capable browser: current Chrome or Edge, Safari 26 or later, or Firefox with WebGPU enabled.
+- **Everything runs in your browser.** The Editor loads splats locally and nothing is uploaded until you choose to publish. It needs a [browser with WebGPU](https://developer.playcanvas.com/user-manual/supersplat/editor.md#system-requirements).
 - **Browsing is anonymous.** A free PlayCanvas account is needed to publish, like, or comment. See [Account Creation](https://developer.playcanvas.com/user-manual/account-management/user-accounts/account-creation.md).
 - **Open source at the core.** The [Editor](https://github.com/playcanvas/supersplat), the [Viewer](https://github.com/playcanvas/supersplat-viewer), and [splat-transform](https://github.com/playcanvas/splat-transform) (which powers Convert) are MIT-licensed. Studio, Manage, Explore, scene pages, and the publish API are hosted by PlayCanvas on superspl.at.
 - **Publishing optimizes for you.** Every published splat is compressed to SOG, and splats over one million Gaussians are streamed progressively so they load fast on any device. See [Streaming & Performance](https://developer.playcanvas.com/user-manual/supersplat/publishing/streaming.md).
@@ -23910,7 +23900,7 @@ This guide takes a raw splat file all the way to a published, shareable scene pa
 
 - **A splat file.** Any `.ply` produced by a Gaussian splatting trainer works, as do `.compressed.ply`, `.sog`, `.splat`, `.ksplat`, `.spz`, and XGRIDS `.lcc` files. Don't have one yet? [Creating Splats](https://developer.playcanvas.com/user-manual/gaussian-splatting/creating.md) explains how captures are made and [Recommended Tools](https://developer.playcanvas.com/user-manual/gaussian-splatting/creating/recommended-tools.md) compares the apps that produce them. Or practice on the sample biker: [open it in the Editor](https://superspl.at/editor?load=https://raw.githubusercontent.com/willeastcott/assets/main/biker.ply).
 - **A free PlayCanvas account** for step 3. Loading and editing don't need one; publishing does. See [Account Creation](https://developer.playcanvas.com/user-manual/account-management/user-accounts/account-creation.md).
-- **A current browser.** The Editor runs on WebGPU: current Chrome or Edge, Safari 26 or later, or Firefox with WebGPU enabled. There is nothing to install.
+- **A browser with WebGPU.** See the Editor's [System Requirements](https://developer.playcanvas.com/user-manual/supersplat/editor.md#system-requirements). There is nothing to install.
 
 ## 1. Load your splat in the Editor
 
@@ -23965,7 +23955,7 @@ If your file needs no editing, skip the Editor. The orange **Upload Splat** butt
 
 :::
 
-Every option in the dialog, including republishing to an existing scene, is covered in [Publishing](https://developer.playcanvas.com/user-manual/supersplat/publishing/editor.md).
+Every option in the dialog, including republishing to an existing scene, is covered in [Publishing from the Editor](https://developer.playcanvas.com/user-manual/supersplat/publishing/editor.md).
 
 ## 4. Curate it in Studio
 
@@ -24012,11 +24002,7 @@ Markdown: https://developer.playcanvas.com/user-manual/supersplat/editor.md
 
 The [SuperSplat Editor](https://superspl.at/editor) is the open-source, browser-based editor at the heart of the [SuperSplat platform](https://developer.playcanvas.com/user-manual/supersplat.md). It's the tool you use to clean up raw splat captures, trim floaters, crop scenes, retouch colors, build camera animations, and publish a finished splat ready to share. The Editor is [open source on GitHub](https://github.com/playcanvas/supersplat) under the MIT license and runs entirely in your browser — nothing is uploaded until you choose to publish.
 
-:::tip Already have a clean splat?
-
-You can skip the Editor entirely. Hit the orange **Upload Splat** button on the [superspl.at home page](https://superspl.at) (or use the [Direct Upload](https://developer.playcanvas.com/user-manual/supersplat/publishing/upload.md) flow) to publish a ready-made splat straight to your [Manage page](https://developer.playcanvas.com/user-manual/supersplat/publishing/manage.md).
-
-:::
+If your splat is already clean, you can skip the Editor and [upload it directly](https://developer.playcanvas.com/user-manual/supersplat/publishing/upload.md).
 
 [Image: SuperSplat Interface]
 
@@ -24034,15 +24020,7 @@ For a more comprehensive guide to using the SuperSplat Editor, check out this in
 
 [Video: SuperSplat In-Depth Tutorial](https://www.youtube.com/embed/J37rTieKgJ8)
 
-## Getting Started
-
-### Accessing the Editor
-
-1. **Open your browser** — Navigate to [superspl.at/editor](https://superspl.at/editor)
-2. **Load your splat file** — Drag and drop it into the window, or use **File > Import**
-3. **Begin editing** — Use the interface controls to navigate and edit
-
-### System Requirements
+## System Requirements
 
 - **A WebGPU-capable browser** — Current Chrome or Edge, Safari 26 or later, or Firefox with WebGPU enabled. If WebGPU is unavailable, the Editor shows a message at startup instead of loading.
 - **GPU acceleration** — Keep hardware acceleration enabled in your browser. A dedicated GPU helps with very large splats.
@@ -24050,6 +24028,7 @@ For a more comprehensive guide to using the SuperSplat Editor, check out this in
 
 ## What's next?
 
+- New to SuperSplat? [Getting Started](https://developer.playcanvas.com/user-manual/supersplat/getting-started.md) takes a splat from import to a published scene in about ten minutes
 - Get oriented with the [Interface Overview](https://developer.playcanvas.com/user-manual/supersplat/editor/interface.md)
 - Learn the supported [Import and Export](https://developer.playcanvas.com/user-manual/supersplat/editor/import-export.md) formats
 - Clean a capture with [Selection and Cleanup](https://developer.playcanvas.com/user-manual/supersplat/editor/editing-splats.md), then use [Transform, Measure and Align](https://developer.playcanvas.com/user-manual/supersplat/editor/transform-measure-align.md) to prepare it
@@ -24103,9 +24082,9 @@ The small icon strip beside the View Cube decides what you see and what a select
 
 | Control | Shortcut | Default | Description |
 |---|---|---|---|
-| **Centers** / **Rings** | `M` | Centers | The editing mode, a two-option switch. **Centers** marks every Gaussian with a dot at its center and selects by center point. **Rings** outlines every Gaussian's footprint and selects by footprint. Switching mode also turns **Markers** on. |
+| **Centers** / **Rings** | `M` | Centers | The editing mode: selections pick Gaussians by their center points or by their footprints. Switching mode also turns **Markers** on. |
 | **Markers** | `Tab` | Off | Shows the center or ring markers on the unselected Gaussians. When off, the scene renders plainly and selected Gaussians keep their indicators. |
-| **X-Ray** | `N` | On | Selects through all depths. When off, only the visible surface is selected, and markers are drawn only on the Gaussians a selection could reach from the current view. |
+| **X-Ray** | `N` | On | Selects through all depths. Turn it off to select only the visible surface. |
 
 Press and hold **Centers** or **Rings** for that marker's size and its **Splat Colors** switch, or press and hold **Markers** for **Markers Only**, **Tint Selection**, and **Outline Selection**. See [Selection Mode and X-Ray](https://developer.playcanvas.com/user-manual/supersplat/editor/editing-splats.md#selection-mode-and-x-ray) and [Markers and Selection Display](https://developer.playcanvas.com/user-manual/supersplat/editor/color-and-appearance.md#appearance).
 
@@ -24272,13 +24251,7 @@ Press **V** to toggle between modes, or use the WASD keys to automatically switc
 
 ## Camera Settings
 
-Access camera settings through the **Preferences** popup (the gear icon in the right toolbar):
-
-| Setting | Range | Default | Description |
-|---------|-------|---------|-------------|
-| **Field of View** | 10° - 120° | 85° | Camera viewing angle across the viewport's longer side |
-| **FOV Auto Dolly** | On / Off | Off | How Field of View changes affect the camera (see below) |
-| **Fly Speed** | 0.1 - 30 | 1 | Speed of WASD navigation |
+Three settings in the [Preferences](https://developer.playcanvas.com/user-manual/supersplat/editor/interface.md#preferences) popup (the gear icon in the right toolbar) affect the camera: **Field of View**, **FOV Auto Dolly**, and **Fly Speed**. Their ranges and defaults are listed under [Preferences](https://developer.playcanvas.com/user-manual/supersplat/editor/interface.md#preferences).
 
 The field of view spans the longer side of the viewport: horizontally when the viewport is wider than it is tall, and vertically when it is taller than it is wide. Published scenes and exported viewers apply it the same way.
 
@@ -24994,16 +24967,7 @@ The Timeline panel includes the following controls:
 
 ### Keyboard Shortcuts
 
-The timeline can also be driven from the keyboard:
-
-| Key | Action |
-| --- | ------ |
-| **Space** | Play/pause the animation |
-| `,` / `.` | Step to the previous/next frame |
-| `<` / `>` | Jump to the previous/next keyframe |
-| **Enter** | Add a keyframe at the current frame |
-| **Shift + Enter** | Remove the keyframe at the current frame |
-| **Ctrl + T** (or **Cmd + T** on Mac) | Toggle the Timeline panel |
+The timeline can also be driven from the keyboard: **Space** plays and pauses, and **Enter** adds a keyframe at the current frame. [Keyboard Shortcuts](https://developer.playcanvas.com/user-manual/supersplat/editor/keyboard-shortcuts.md#timeline) lists them all. **Ctrl + T** (**Cmd + T** on Mac) shows or hides the panel.
 
 ## Creating Keyframes
 
@@ -25472,7 +25436,7 @@ Markdown: https://developer.playcanvas.com/user-manual/supersplat/editor/trouble
 
 ## The Editor Does Not Start
 
-The Editor requires WebGPU. If the page shows "SuperSplat requires WebGPU, which this browser does not support" instead of loading, switch to a current version of Chrome or Edge, Safari 26 or later, or Firefox with WebGPU enabled, and make sure hardware acceleration is turned on in the browser's settings. On a machine with more than one GPU, the browser must be allowed to use the dedicated one.
+The Editor requires WebGPU. If the page shows "SuperSplat requires WebGPU, which this browser does not support" instead of loading, switch to a [supported browser](https://developer.playcanvas.com/user-manual/supersplat/editor.md#system-requirements) and make sure hardware acceleration is turned on in the browser's settings. On a machine with more than one GPU, the browser must be allowed to use the dedicated one.
 
 If the message is "SuperSplat failed to start", open the browser console for details and include them when you [report the problem](https://developer.playcanvas.com/user-manual/supersplat/editor/troubleshooting.md#reporting-a-problem).
 
@@ -25536,8 +25500,8 @@ See [Managing Projects](https://developer.playcanvas.com/user-manual/supersplat/
 
 ## Publishing or Rendering Fails
 
-- Publishing requires you to be signed in to superspl.at with a PlayCanvas account.
-- If `Publish` is disabled with a message in the Publish dialog, your account has used today's publishing allowance or already has the maximum number of scenes processing. The message says when you can publish again. See [Publishing](https://developer.playcanvas.com/user-manual/supersplat/publishing/editor.md).
+- Publishing requires you to be [signed in](https://developer.playcanvas.com/user-manual/supersplat/publishing.md#account) to superspl.at with a PlayCanvas account.
+- If `Publish` is disabled with a message in the Publish dialog, your account has reached one of its [publishing limits](https://developer.playcanvas.com/user-manual/supersplat/publishing.md#limits). The message says when you can publish again.
 - Scenes with more than 40 million splats can only be published with **Generate LODs** on. Delete unwanted Gaussians first if you want to publish a single, non-streamed file.
 - Video codec support depends on the browser. The Render Video dialog disables resolutions your browser or device cannot encode with the current settings — try a lower resolution, frame rate, or bitrate, another format or codec, or update your browser or graphics driver.
 - A blocked download, private-browsing restriction, or low free memory can prevent large renders and exports from completing. In browsers without the File System Access API, renders and exports are delivered as downloads.
@@ -25633,16 +25597,58 @@ When you click **Convert & Download**:
 
 ## Publishing
 
+URL: https://developer.playcanvas.com/user-manual/supersplat/publishing/
+Markdown: https://developer.playcanvas.com/user-manual/supersplat/publishing.md
+
+Publishing puts a splat on [superspl.at](https://superspl.at). Every published splat gets its own [scene page](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md) where visitors can view it, appears on your [Manage page](https://developer.playcanvas.com/user-manual/supersplat/publishing/manage.md), and can be opened in [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md) to curate how visitors see it.
+
+## Ways to publish
+
+| Path | Use it when |
+|------|-------------|
+| [From the Editor](https://developer.playcanvas.com/user-manual/supersplat/publishing/editor.md) | The splat needs cleaning up, cropping, or a camera animation first. Choose **File > Publish** in the [Editor](https://developer.playcanvas.com/user-manual/supersplat/editor.md). |
+| [Direct Upload](https://developer.playcanvas.com/user-manual/supersplat/publishing/upload.md) | The file is ready as it is. Use the orange **Upload Splat** button on the [superspl.at home page](https://superspl.at) or the Manage page. |
+| [SuperSplat API](https://developer.playcanvas.com/user-manual/supersplat/developers/api-integrations.md) | A capture app, training pipeline, or script publishes for you. |
+
+All three create the same kind of scene, which you then manage, curate, and share the same way.
+
+## You need an account
+
+Publishing needs a free PlayCanvas account, signed in at superspl.at. Browsing superspl.at and editing in the Editor don't. See [Account Creation](https://developer.playcanvas.com/user-manual/account-management/user-accounts/account-creation.md).
+
+## How your splat is compressed
+
+superspl.at compresses every published splat to [SOG](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/sog.md). By default, splats of 1 million Gaussians or more are published as Streamed SOG, which loads progressively from levels of detail, and splats of more than 40 million Gaussians must be. Compression takes a moment, or several minutes for a very large scene. [Streaming & Performance](https://developer.playcanvas.com/user-manual/supersplat/publishing/streaming.md) explains both forms and how to choose.
+
+## Who can see it
+
+New splats are **Unlisted**: anyone with the link can open the scene page, but the splat doesn't appear in [Explore](https://developer.playcanvas.com/user-manual/supersplat/viewing/explore.md), in searches, or on your [profile](https://developer.playcanvas.com/user-manual/supersplat/viewing/user-profile.md). To list it, set its **Visibility** to **Public** on the [Manage page](https://developer.playcanvas.com/user-manual/supersplat/publishing/manage.md#visibility-from-the-list).
+
+Visitors can't download the source file until you turn on **Downloadable** and choose a [license](https://developer.playcanvas.com/user-manual/supersplat/publishing/manage.md#downloadable--license).
+
+## Limits
+
+Every account has a daily publishing allowance, measured in compressed output, which resets at 00:00 UTC. There is also a limit on how many scenes can be uploading or processing at once. When you reach either, the Editor's Publish dialog or the Upload dialog says so, and tells you when you can publish again.
+
+Direct Upload also has a maximum file size for each format. See [Supported input formats](https://developer.playcanvas.com/user-manual/supersplat/publishing/upload.md#supported-input-formats). The API reports the same limits as error codes. See [API & Integrations](https://developer.playcanvas.com/user-manual/supersplat/developers/api-integrations.md#limits).
+
+## In this section
+
+- [Publishing from the Editor](https://developer.playcanvas.com/user-manual/supersplat/publishing/editor.md) — the Publish dialog, its options, and republishing to an existing scene
+- [Direct Upload](https://developer.playcanvas.com/user-manual/supersplat/publishing/upload.md) — supported formats, levels of detail, and upload errors
+- [Manage](https://developer.playcanvas.com/user-manual/supersplat/publishing/manage.md) — editing, sharing, and deleting your published splats
+- [Streaming & Performance](https://developer.playcanvas.com/user-manual/supersplat/publishing/streaming.md) — SOG, Streamed SOG, and the viewer's Gaussian budget
+
+--------------------------------------------------------------------------------
+
+## Publishing from the Editor
+
 URL: https://developer.playcanvas.com/user-manual/supersplat/publishing/editor/
 Markdown: https://developer.playcanvas.com/user-manual/supersplat/publishing/editor.md
 
 Publishing from the SuperSplat Editor uploads your edited splat to [superspl.at](https://superspl.at), where it lands on your [Manage page](https://developer.playcanvas.com/user-manual/supersplat/publishing/manage.md), gets a public [scene page](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md), and can be opened in [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md) to curate the viewing experience (cameras, camera animation, annotations, post effects, skybox, collision).
 
-:::tip Two ways to publish
-
-You can also publish without using the Editor. Hit the orange **Upload Splat** button on the [superspl.at home page](https://superspl.at) (or use the [Direct Upload](https://developer.playcanvas.com/user-manual/supersplat/publishing/upload.md) flow) to publish a ready-made splat file straight to your Manage page. Both paths land in the same place and share the same downstream tooling.
-
-:::
+To publish a finished file without opening the Editor, use [Direct Upload](https://developer.playcanvas.com/user-manual/supersplat/publishing/upload.md). [Publishing](https://developer.playcanvas.com/user-manual/supersplat/publishing.md) compares the ways to publish and explains who can see a published splat.
 
 To self-host your own copy of the published viewer instead of (or in addition to) publishing to superspl.at, see [Self-Hosting the Viewer](https://developer.playcanvas.com/user-manual/supersplat/developers/self-hosting.md).
 
@@ -25678,13 +25684,13 @@ To publish your splat:
 
 4. Select `Publish`.
 
-If your account cannot publish another model right now, the dialog says why and `Publish` is disabled. This happens when you have used today's publishing allowance (the message says when you can publish again) or when you already have the maximum number of scenes processing (you can publish again when one finishes). Updating only the animation of an existing scene is still allowed, since no model is uploaded.
+If your account cannot publish another model right now, the dialog says why and `Publish` is disabled. This happens when your account reaches one of its [publishing limits](https://developer.playcanvas.com/user-manual/supersplat/publishing.md#limits). Updating only the animation of an existing scene is still allowed, since no model is uploaded.
 
 The published scene's camera starts at the pose your viewport camera has at the moment you publish, so frame your favorite view before opening the dialog.
 
 :::note
 
-New scenes are published unlisted - they are only discoverable by people who have the link. To make a splat appear in [Explore](https://developer.playcanvas.com/user-manual/supersplat/viewing/explore.md) and in searches on superspl.at, set its **Visibility** to **Public** on your [Manage page](https://developer.playcanvas.com/user-manual/supersplat/publishing/manage.md) after publishing.
+New scenes are published **Unlisted**. To list one in [Explore](https://developer.playcanvas.com/user-manual/supersplat/viewing/explore.md), see [Who can see it](https://developer.playcanvas.com/user-manual/supersplat/publishing.md#visibility).
 
 :::
 
@@ -25793,7 +25799,7 @@ From the Edit Splat view, you can:
 | **File Too Large** | The file is larger than its format's maximum size. The message gives both sizes. |
 | **Upload Failed** | Network interruption or a server-side issue. Try again; if the problem persists, check your connection. |
 
-Every account also has a daily publishing allowance, measured in compressed output, and a limit on how many scenes can be uploading or processing at once. When you reach either, the dialog says so (**Publishing Allowance Used** or **Scenes Still Processing**) and when you can upload again. See [Limits](https://developer.playcanvas.com/user-manual/supersplat/developers/api-integrations.md#limits).
+Your account's [publishing limits](https://developer.playcanvas.com/user-manual/supersplat/publishing.md#limits) also apply. When you reach one, the dialog says so (**Publishing Allowance Used** or **Scenes Still Processing**) and when you can upload again.
 
 ## See also
 
@@ -26433,15 +26439,7 @@ Each row on the **Annotations** tab also has **Go to annotation**, which moves t
 
 ## How visitors use them
 
-On the [scene page](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md), the viewer shows each annotation as a numbered hotspot:
-
-- **Selecting a hotspot** eases the camera to the annotation's pose, and its title and text appear in a panel beside the hotspot as the camera arrives. An annotation with neither title nor text shows no panel. Visitors can orbit from there, pivoting near the annotated point, and the panel stays open.
-- **The navigator**, shown when a scene has two or more annotations, displays the current annotation's number and title, with arrows to step to the previous and next one in list order.
-- **Clicking elsewhere** in the viewer deselects the annotation and returns to free navigation. The navigator keeps the last annotation, greyed out, and clicking it selects it again.
-- **Hotspots hidden** behind part of the scene are faded once the camera stops moving.
-- **Show Annotations**, in the viewer's settings panel, lets visitors hide the hotspots and the navigator.
-
-See [Viewer Controls](https://developer.playcanvas.com/user-manual/supersplat/viewing/controls.md#annotations) for the full visitor experience.
+On the [scene page](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md), the viewer shows each annotation as a numbered hotspot. Selecting one eases the camera to the annotation's view and shows its title and text, and a navigator steps through the annotations in list order. [Viewer Controls](https://developer.playcanvas.com/user-manual/supersplat/viewing/controls.md#annotations) describes everything visitors can do with them.
 
 :::note
 
@@ -26690,9 +26688,7 @@ The viewer saves **Show Annotations**, **Gaming Controls**, **Quality** and **Pe
 
 ### Quality
 
-The **Quality** slider sets the splat budget, the most splats the viewer draws at once in a streamed scene, from a ladder for the device: for example 2M, 4M, 8M and 16M on a desktop. [Streaming & Performance](https://developer.playcanvas.com/user-manual/supersplat/publishing/streaming.md#near-instant-loads-and-the-gaussian-budget) lists every ladder. Phones and tablets start at **Performance**, other devices at **Default**. Positions the device doesn't have the memory for are disabled.
-
-At **Performance**, the viewer also renders at half resolution, unless Performance Mode is on. A scene published as a single file draws all its splats at every position.
+The **Quality** slider sets the splat budget, the most splats the viewer draws at once in a streamed scene, from a ladder for the device: for example 2M, 4M, 8M and 16M on a desktop. At **Performance**, the viewer also renders at half resolution. [Streaming & Performance](https://developer.playcanvas.com/user-manual/supersplat/publishing/streaming.md#near-instant-loads-and-the-gaussian-budget) lists every device's ladder and starting position, and explains how the budget works.
 
 ### Performance Mode
 
@@ -26725,7 +26721,7 @@ Shortcuts follow the characters your keyboard layout types. On a layout that doe
 
 Scenes with [annotations](https://developer.playcanvas.com/user-manual/supersplat/studio/annotations.md) show a numbered hotspot for each one.
 
-- **Click or tap a hotspot** to select it. The camera eases to the annotation's view, and its title and text appear in a panel beside the hotspot as the camera arrives. Orbiting from there pivots near the annotated point, and the panel stays open.
+- **Click or tap a hotspot** to select it. The camera eases to the annotation's view, and its title and text appear in a panel beside the hotspot as the camera arrives. An annotation with neither title nor text shows no panel. Orbiting from there pivots near the annotated point, and the panel stays open.
 - **Step through annotations** with the navigator's previous and next arrows, which show the annotation's number and title. The navigator appears when a scene has two or more annotations and wraps around at either end.
 - **Click elsewhere in the viewer** to deselect. A drag doesn't count, so orbiting leaves the selection alone. The navigator keeps the last annotation, greyed out; click it to select it again.
 

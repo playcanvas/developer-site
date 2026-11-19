@@ -38,9 +38,9 @@ The small icon strip beside the View Cube decides what you see and what a select
 
 | Control | Shortcut | Default | Description |
 |---|---|---|---|
-| **Centers** / **Rings** | `M` | Centers | The editing mode, a two-option switch. **Centers** marks every Gaussian with a dot at its center and selects by center point. **Rings** outlines every Gaussian's footprint and selects by footprint. Switching mode also turns **Markers** on. |
+| **Centers** / **Rings** | `M` | Centers | The editing mode: selections pick Gaussians by their center points or by their footprints. Switching mode also turns **Markers** on. |
 | **Markers** | `Tab` | Off | Shows the center or ring markers on the unselected Gaussians. When off, the scene renders plainly and selected Gaussians keep their indicators. |
-| **X-Ray** | `N` | On | Selects through all depths. When off, only the visible surface is selected, and markers are drawn only on the Gaussians a selection could reach from the current view. |
+| **X-Ray** | `N` | On | Selects through all depths. Turn it off to select only the visible surface. |
 
 Press and hold **Centers** or **Rings** for that marker's size and its **Splat Colors** switch, or press and hold **Markers** for **Markers Only**, **Tint Selection**, and **Outline Selection**. See [Selection Mode and X-Ray](https://developer.playcanvas.com/user-manual/supersplat/editor/editing-splats.md#selection-mode-and-x-ray) and [Markers and Selection Display](https://developer.playcanvas.com/user-manual/supersplat/editor/color-and-appearance.md#appearance).
 

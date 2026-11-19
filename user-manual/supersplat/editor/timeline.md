@@ -20,16 +20,7 @@ The Timeline panel includes the following controls:
 
 ### Keyboard Shortcuts
 
-The timeline can also be driven from the keyboard:
-
-| Key | Action |
-| --- | ------ |
-| **Space** | Play/pause the animation |
-| `,` / `.` | Step to the previous/next frame |
-| `<` / `>` | Jump to the previous/next keyframe |
-| **Enter** | Add a keyframe at the current frame |
-| **Shift + Enter** | Remove the keyframe at the current frame |
-| **Ctrl + T** (or **Cmd + T** on Mac) | Toggle the Timeline panel |
+The timeline can also be driven from the keyboard: **Space** plays and pauses, and **Enter** adds a keyframe at the current frame. [Keyboard Shortcuts](https://developer.playcanvas.com/user-manual/supersplat/editor/keyboard-shortcuts.md#timeline) lists them all. **Ctrl + T** (**Cmd + T** on Mac) shows or hides the panel.
 
 ## Creating Keyframes
 

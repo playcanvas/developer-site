@@ -47,13 +47,7 @@ Press **V** to toggle between modes, or use the WASD keys to automatically switc
 
 ## Camera Settings
 
-Access camera settings through the **Preferences** popup (the gear icon in the right toolbar):
-
-| Setting | Range | Default | Description |
-|---------|-------|---------|-------------|
-| **Field of View** | 10° - 120° | 85° | Camera viewing angle across the viewport's longer side |
-| **FOV Auto Dolly** | On / Off | Off | How Field of View changes affect the camera (see below) |
-| **Fly Speed** | 0.1 - 30 | 1 | Speed of WASD navigation |
+Three settings in the [Preferences](https://developer.playcanvas.com/user-manual/supersplat/editor/interface.md#preferences) popup (the gear icon in the right toolbar) affect the camera: **Field of View**, **FOV Auto Dolly**, and **Fly Speed**. Their ranges and defaults are listed under [Preferences](https://developer.playcanvas.com/user-manual/supersplat/editor/interface.md#preferences).
 
 The field of view spans the longer side of the viewport: horizontally when the viewport is wider than it is tall, and vertically when it is taller than it is wide. Published scenes and exported viewers apply it the same way.
 
