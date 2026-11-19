@@ -19,38 +19,40 @@ SplatTransform detects file format from the file extension:
 
 | Format            | Input | Output | Description                                                                                                                                          |
 | ----------------- | ----- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `.ply`            | ✅    | ✅     | Standard [PLY](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/ply.md) format                                                                                   |
+| `.ply`            | ✅    | ✅     | Standard [PLY](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/ply.md) format, binary little- or big-endian (ASCII PLY files are rejected)                       |
 | `.sog`            | ✅    | ✅     | Bundled super-compressed [SOG](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/sog.md) format (recommended)                                                     |
 | `meta.json`       | ✅    | ✅     | Unbundled super-compressed format (accompanied by `.webp` textures). Output filename **must** be `meta.json`                                         |
 | `lod-meta.json`   | ✅    | ✅     | Multi-LOD [Streamed SOG](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/streamed-sog.md) bundle (accompanied by per-LOD `.sog` chunks). Filename **must** be `lod-meta.json` |
 | `.compressed.ply` | ✅    | ✅     | Compressed PLY format (auto-detected and decompressed on read)                                                                                       |
 | `.spz`            | ✅    | ✅     | Compressed [SPZ](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/spz.md) splat format (Niantic format, v2–4)                                                    |
 | `.lcc`            | ✅    | ❌     | LCC file format (XGRIDS)                                                                                                                             |
-| `.lcc2`           | ✅    | ❌     | LCC2 file format (XGRIDS, octree)                                                                                                                    |
+| `.lcc2`           | ✅    | ❌     | LCC2 file format (XGRIDS, N-ary tree)                                                                                                                |
 | `.ksplat`         | ✅    | ❌     | Compressed splat format (mkkellogg format)                                                                                                           |
 | `.splat`          | ✅    | ❌     | Compressed splat format (antimatter15 format)                                                                                                        |
 | `.mjs`            | ✅    | ❌     | Generate a scene using an mjs script (Beta)                                                                                                          |
-| `.glb`            | ❌    | ✅     | Binary glTF with [KHR_gaussian_splatting](https://github.com/KhronosGroup/glTF/tree/main/extensions/2.0/Khronos/KHR_gaussian_splatting) extension, [loadable directly](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/glb.md) by the PlayCanvas Engine |
+| `.glb`            | ✅    | ✅     | Binary glTF with [KHR_gaussian_splatting](https://github.com/KhronosGroup/glTF/tree/main/extensions/2.0/Khronos/KHR_gaussian_splatting) extension, [loadable directly](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/glb.md) by the PlayCanvas Engine |
 | `.csv`            | ❌    | ✅     | Comma-separated values spreadsheet                                                                                                                   |
 | `.html`           | ❌    | ✅     | HTML viewer app (single-page or unbundled) based on SOG                                                                                              |
 | `.voxel.json`     | ❌    | ✅     | [Sparse voxel octree](https://developer.playcanvas.com/user-manual/splat-transform/voxel-format.md) for collision detection. See the [Collision Mesh](https://developer.playcanvas.com/user-manual/splat-transform/collision.md) guide. Output filename must end with `.voxel.json` (the prefix is up to you, e.g. `room.voxel.json`) |
 | `.webp`           | ❌    | ✅     | Lossless WebP image rendered from a camera view via GPU rasterizer. See the [Rendering Images](https://developer.playcanvas.com/user-manual/splat-transform/image-rendering.md) guide    |
 | `null`            | ❌    | ✅     | Discard output (useful with `--stats` for analysis-only runs)                                                                                        |
 
+GLB input reads one `KHR_gaussian_splatting` primitive that uses the `ellipse` kernel and the `srgb_rec709_display` color space, from a file with a single embedded buffer. GLB files written by splat-transform meet these requirements, so they read back unchanged. Indexed primitives are supported. Files with more than one Gaussian primitive, an instanced Gaussian mesh, sparse accessors, or a non-identity transform on the Gaussian node or its ancestors are rejected. GLB output holds at most three spherical harmonic bands, so a fourth band is dropped with a warning.
+
 ### Antialiased and 2DGS Scenes
 
 Scenes trained with antialiasing (a mip-splatting style screen-space filter) or as 2D Gaussian surfels (2DGS) are tagged on read, and the tag is preserved wherever the output format can hold it. `--info` reports it as `model`.
 
-- **On read:** a PLY header comment — Brush's `comment SplatRenderMode: default | mip | 2dgs` or Postshot's `comment postshot.anti_aliasing=1` (the last one wins) — the SPZ antialiased header bit, or the `model` entry of a SOG `meta.json`. A PLY with `scale_0` and `scale_1` but no `scale_2` is read as 2DGS regardless of comments, and the missing column is filled with a zero-thickness scale so the rest of the pipeline is unaffected.
-- **On write:** `.ply` and `.compressed.ply` carry `comment SplatRenderMode: mip | 2dgs` (Brush's spelling, whichever form was read); `.sog` and `meta.json` carry `"model": "antialiased" | "2dgs"`; `.spz` sets its antialiased bit, and warns that it cannot represent 2DGS. A 2DGS PLY output drops the `scale_2` column again. Other output formats have nowhere to record the tag and drop it silently.
+- **On read:** a PLY header comment — Brush's `comment SplatRenderMode: default | mip | 2dgs` or Postshot's `comment postshot.anti_aliasing=1` (the last one wins) — the SPZ antialiased header bit, or the `model` entry of a SOG `meta.json` or of a `lod-meta.json`, where it applies to every file in the bundle. A PLY with `scale_0` and `scale_1` but no `scale_2` is read as 2DGS regardless of comments, and the missing column is filled with a zero-thickness scale so the rest of the pipeline is unaffected.
+- **On write:** `.ply` and `.compressed.ply` carry `comment SplatRenderMode: mip | 2dgs` (Brush's spelling, whichever form was read); `.sog`, `meta.json`, `lod-meta.json` and the SOG embedded in or beside `.html` output carry `"model": "antialiased" | "2dgs"`; `.spz` sets its antialiased bit, and warns that it cannot represent 2DGS. A 2DGS PLY output drops the `scale_2` column again. Other output formats have nowhere to record the tag and drop it silently.
 - **Rendering:** `.webp` output renders an antialiased scene with its training filter, 0.1 px² by default (`--aa-filter-size` overrides it), instead of the 0.3 px² dilation, scaling opacity so each splat draws its unfiltered mass, as the PlayCanvas engine does.
 - **Merging:** combining inputs whose tags disagree warns and writes the result untagged.
 
-A PLY's other header comments (for example `Postshot v1.1.69` or `postshot.color.eotf=sRGB`) are carried through as well: `.ply` and `.compressed.ply` write them back as `comment` lines, and SOG version 3 output (`.sog`, `meta.json`, `lod-meta.json`) stores them as `comments`. They are not interpreted, so ones describing coordinates are not updated by transforms.
+A PLY's other header comments (for example `Postshot v1.1.69`, `postshot.color.eotf=sRGB` or `Offset: 609424.34 5678598.16 264.02`) are carried through as well: `.ply` and `.compressed.ply` write them back as `comment` lines, and SOG version 3 output (`.sog`, `meta.json`, `lod-meta.json`) stores them as `comments`, which are read back when the SOG is an input. The model tag and splat-transform's own `Generated by` line are not repeated among them. Comments are not interpreted, so ones describing coordinates are not updated by transforms. Combining inputs whose comments differ warns and drops them.
 
 ### Opacity Above 1
 
-Decimation merges Gaussians without losing their mass, so a merged Gaussian's opacity can exceed 1 (renderers draw it, up to 1.5625, as an opaque core). A PLY holds opacity as one property: the standard `opacity` logit (at most 1) for scenes that cannot exceed 1, or `opacity_linear`, the opacity itself, in place of `opacity` for decimated scenes and for SOG version 3 input that holds opacity above 1. Tools that don't know `opacity_linear` cannot read these files; `--ply-logit-opacity` writes the standard logit instead, clamping opacity above 1. On read, `opacity_linear` is used when present. SOG version 3 stores opacity above 1 directly; SOG version 2 and the other formats clamp it to 1.
+Decimation merges Gaussians without losing their mass, so a merged Gaussian's opacity can exceed 1 (renderers draw it, up to 1.5625, as an opaque core). A PLY holds opacity as one property: the standard `opacity` logit (at most 1) for scenes that cannot exceed 1, or `opacity_linear`, the opacity itself, in place of `opacity` for decimated scenes and for SOG version 3 input that holds opacity above 1. Tools that don't know `opacity_linear` cannot read these files; `--ply-logit-opacity` writes the standard logit instead, clamping opacity above 1. On read, `opacity_linear` is used when present, even alongside `opacity`. SOG version 3, including the SOG in `.html` output, stores opacity above 1 directly; SOG version 2 and the other formats clamp it to 1. An infinite logit reads as an opacity of 0 or 1 and is written back as the same infinity.
 
 ## Actions
 
@@ -182,7 +184,7 @@ Apply when writing `.sog`, `meta.json`, `lod-meta.json`, or `.html` outputs.
                                           power of 2, at most 65536
     --max-workers      <n>              Worker threads for SOG and image-sequence encoding (0 = inline/serial). Default: 4
     --sog-version      <2|3>            SOG format version to write. 2 is for older viewers: it drops opacity
-                                          above 1, blind data and a 4th SH band. Default: 3 (.html always embeds 2)
+                                          above 1, blind data and a 4th SH band. Default: 3 (.html always embeds 3)
     --sog-blind        <field>[,...]    Store columns as per-gaussian blind data (v3): one blind texture per flag,
                                           its fields filling 4 bytes (R,G,B,A) in order. field = <col>[:<enc>]
                                           enc: u8 u16 u24 u32 (unsigned integers), f16 f32 (float bits),
@@ -244,9 +246,12 @@ Apply when writing `lod-meta.json` ([Streamed SOG](https://developer.playcanvas.
     --lod-chunk-count  <n>              Approximate number of Gaussians per LOD chunk in K. Default: 512
     --lod-chunk-extent <n>              Approximate size of an LOD chunk in world units (m). Default: 16
     --lod-chunk-min    <n>              Gaussians in K below which a chunk is not split for extent. Default: 8
+    --lod-file-count   <n,n,...>        Gaussians in K per LOD file, per level from finest; the last repeats. Default: --lod-chunk-count
 ```
 
 A chunk is split when it holds more than `--lod-chunk-count` Gaussians, or when it is wider than `--lod-chunk-extent` and holds more than `--lod-chunk-min`. The minimum keeps sparse regions such as sky or distant background from being cut into thousands of near-empty chunks: below it, a region stays one chunk however wide it is. Dense regions are unaffected.
+
+`--lod-file-count` changes only how chunks are packed into `.sog` files, not how the scene is split: each file holds about that many thousand Gaussians. Give one value for every level, or a list from the finest level down, where the last value repeats for the coarser levels.
 
 See [Generating Streamed SOG](https://developer.playcanvas.com/user-manual/splat-transform/streamed-sog.md) for an end-to-end walkthrough.
 

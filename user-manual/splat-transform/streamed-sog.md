@@ -108,7 +108,8 @@ splat-transform scene/lod-meta.json --info null
 - Use `--decimate` (`-d`) to generate lower LOD levels from a single high-quality source, instead of authoring each level separately, or `--decimate-adaptive` for mixed-scale content such as skies
 - Use `--filter-nan` to remove invalid Gaussians before processing
 - Use `--filter-harmonics 0` to reduce file size if colour detail is less critical
-- Use `--lod-chunk-count` to control the number of generated SOG files containing splats
+- Use `--lod-chunk-count` to control how many Gaussians each chunk holds, and so the number of generated SOG files containing splats
+- Use `--lod-file-count` to pack more or fewer Gaussians into each SOG file, per level, without changing how the scene is chunked
 - Use `--lod-chunk-extent` to control the size of each node. Increase for very large scenes to avoid generating a huge number of nodes to manage
 - Use `--lod-chunk-min` to keep sparse regions such as sky or distant background from being cut into many near-empty chunks: a region with fewer Gaussians than this (in K, default 8) is not split for extent
 - Use `--info` to check per-LOD splat counts of a generated dataset
