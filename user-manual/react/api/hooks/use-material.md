@@ -115,6 +115,22 @@ The hooks accepts an object with the following properties that closely match tho
 | `diffuseMapUv?` | `number` | - | Main (primary) diffuse map UV channel. Valid values are 0 to 7. |
 | `diffuseVertexColor?` | `boolean` | - | Multiply diffuse by the mesh vertex colors. |
 | `diffuseVertexColorChannel?` | `string` | - | Vertex color channels to use for diffuse. Can be "r", "g", "b", "a", "rgb" or any swizzled combination. |
+| `diffuseTransmissionColorMap?` | `Texture \| null` | - | The map of the color tinting the light diffusely transmitted through the surface (default is null). If specified, it is multiplied by diffuseTransmissionColor. |
+| `diffuseTransmissionColorMapChannel?` | `string` | - | Color channels of the diffuse transmission color map to use. Can be "r", "g", "b", "a", "rgb" or any swizzled combination. |
+| `diffuseTransmissionColorMapOffset?` | `[number, number]` | - | Controls the 2D offset of the diffuse transmission color map. Each component is between 0 and 1. |
+| `diffuseTransmissionColorMapRotation?` | `number` | - | Controls the 2D rotation (in degrees) of the diffuse transmission color map. |
+| `diffuseTransmissionColorMapTiling?` | `[number, number]` | - | Controls the 2D tiling of the diffuse transmission color map. |
+| `diffuseTransmissionColorMapUv?` | `number` | - | Diffuse transmission color map UV channel. Valid values are 0 to 7. |
+| `diffuseTransmissionColorVertexColor?` | `boolean` | - | Use mesh vertex colors for the diffuse transmission color. If diffuseTransmissionColorMap is set, it'll be multiplied by vertex colors. |
+| `diffuseTransmissionColorVertexColorChannel?` | `string` | - | Vertex color channels to use for the diffuse transmission color. Can be "r", "g", "b", "a", "rgb" or any swizzled combination. |
+| `diffuseTransmissionMap?` | `Texture \| null` | - | The map of the fraction of light diffusely transmitted through the surface (default is null). If specified, it is multiplied by diffuseTransmission. |
+| `diffuseTransmissionMapChannel?` | `string` | - | Color channel of the diffuse transmission map to use. Can be "r", "g", "b" or "a" (default is "g"). |
+| `diffuseTransmissionMapOffset?` | `[number, number]` | - | Controls the 2D offset of the diffuse transmission map. Each component is between 0 and 1. |
+| `diffuseTransmissionMapRotation?` | `number` | - | Controls the 2D rotation (in degrees) of the diffuse transmission map. |
+| `diffuseTransmissionMapTiling?` | `[number, number]` | - | Controls the 2D tiling of the diffuse transmission map. |
+| `diffuseTransmissionMapUv?` | `number` | - | Diffuse transmission map UV channel. Valid values are 0 to 7. |
+| `diffuseTransmissionVertexColor?` | `boolean` | - | Use mesh vertex colors for diffuse transmission. If diffuseTransmissionMap is set, it'll be multiplied by vertex colors. |
+| `diffuseTransmissionVertexColorChannel?` | `string` | - | Vertex color channel to use for diffuse transmission. Can be "r", "g", "b" or "a". |
 | `emissiveMap?` | `Texture \| null` | - | The emissive map of the material (default is null). Can be HDR. When the emissive map is applied, the emissive color is multiplied by the texel color in the map. Since the emissive color is black by default, the emissive map won't be visible unless the emissive color is changed. |
 | `emissiveMapChannel?` | `string` | - | Color channels of the emissive map to use. Can be "r", "g", "b", "a", "rgb" or any swizzled combination. |
 | `emissiveMapOffset?` | `[number, number]` | - | Controls the 2D offset of the emissive map. Each component is between 0 and 1. |
@@ -141,6 +157,18 @@ The hooks accepts an object with the following properties that closely match tho
 | `heightMapRotation?` | `number` | - | Controls the 2D rotation (in degrees) of the height map. |
 | `heightMapTiling?` | `[number, number]` | - | Controls the 2D tiling of the height map. |
 | `heightMapUv?` | `number` | - | Height map UV channel. Valid values are 0 to 7. |
+| `iridescenceMap?` | `Texture \| null` | - | The per-pixel iridescence intensity. Only used when useIridescence is enabled. |
+| `iridescenceMapChannel?` | `string` | - | Color channels of the iridescence map to use. Can be "r", "g", "b" or "a". |
+| `iridescenceMapOffset?` | `[number, number]` | - | Controls the 2D offset of the iridescence map. Each component is between 0 and 1. |
+| `iridescenceMapRotation?` | `number` | - | Controls the 2D rotation (in degrees) of the iridescence map. |
+| `iridescenceMapTiling?` | `[number, number]` | - | Controls the 2D tiling of the iridescence map. |
+| `iridescenceMapUv?` | `number` | - | Iridescence map UV channel. Valid values are 0 to 7. |
+| `iridescenceThicknessMap?` | `Texture \| null` | - | The per-pixel iridescence thickness. Defines a gradient weight between iridescenceThicknessMin and iridescenceThicknessMax. Only used when useIridescence is enabled. |
+| `iridescenceThicknessMapChannel?` | `string` | - | Color channels of the iridescence thickness map to use. Can be "r", "g", "b" or "a". |
+| `iridescenceThicknessMapOffset?` | `[number, number]` | - | Controls the 2D offset of the iridescence thickness map. Each component is between 0 and 1. |
+| `iridescenceThicknessMapRotation?` | `number` | - | Controls the 2D rotation (in degrees) of the iridescence thickness map. |
+| `iridescenceThicknessMapTiling?` | `[number, number]` | - | Controls the 2D tiling of the iridescence thickness map. |
+| `iridescenceThicknessMapUv?` | `number` | - | Iridescence thickness map UV channel. Valid values are 0 to 7. |
 | `lightMap?` | `Texture \| null` | - | A custom lightmap of the material (default is null). Lightmaps are textures that contain pre-rendered lighting. Can be HDR. When a mesh instance rendered with this material has a lightmap of its own, baked by the Lightmapper, that lightmap is used instead of this one. |
 | `lightMapChannel?` | `string` | - | Color channels of the lightmap to use. Can be "r", "g", "b", "a", "rgb" or any swizzled combination. |
 | `lightMapOffset?` | `[number, number]` | - | Controls the 2D offset of the lightmap. Each component is between 0 and 1. |
@@ -180,7 +208,17 @@ The hooks accepts an object with the following properties that closely match tho
 | `opacityMapUv?` | `number` | - | Opacity map UV channel. Valid values are 0 to 7. |
 | `opacityVertexColor?` | `boolean` | - | Use mesh vertex colors for opacity. If opacityMap is set, it'll be multiplied by vertex colors. |
 | `opacityVertexColorChannel?` | `string` | - | Vertex color channels to use for opacity. Can be "r", "g", "b" or "a". |
+| `parallaxMode?` | `string` | - | Selects how the height map is used to offset the UV of the other maps of the material. Can be: - PARALLAX_OFFSET: A single tap of the height map, which pivots the surface around the heightMapBase level of the map. - PARALLAX_OCCLUSION: The view ray is marched through the height field, which spans heightMapFactor of depth with the geometry sitting at the heightMapBase level. This represents deeper displacement without smearing, at the cost of multiple taps per pixel. Note that the silhouette of the mesh is not affected, and the depth buffer still sees the flat surface. Defaults to PARALLAX_OFFSET. |
 | `pixelSnap?` | `boolean` | - | Align vertices to pixel coordinates when rendering. Useful for pixel perfect 2D graphics. |
+| `planarReflectionMap?` | `Texture \| null` | - | The planar reflection of the material (default is null): a texture the scene is rendered into by a camera mirrored by the plane of the surface, for example by the PlanarRenderer script. It replaces the environment reflections, while the environment keeps providing the ambient lighting. Requires planarReflectionMatrix to be set to the view projection matrix of that camera. Rougher surfaces sample the smaller mipmaps of the texture, blurring the reflection. A refraction of the material uses the scene color (see useDynamicRefraction), as the texture holds no environment to refract. |
+| `refractionMap?` | `Texture \| null` | - | The map of the refraction visibility. |
+| `refractionMapChannel?` | `string` | - | Color channels of the refraction map to use. Can be "r", "g", "b", "a", "rgb" or any swizzled combination. |
+| `refractionMapOffset?` | `[number, number]` | - | Controls the 2D offset of the refraction map. Each component is between 0 and 1. |
+| `refractionMapRotation?` | `number` | - | Controls the 2D rotation (in degrees) of the refraction map. |
+| `refractionMapTiling?` | `[number, number]` | - | Controls the 2D tiling of the refraction map. |
+| `refractionMapUv?` | `number` | - | Refraction map UV channel. Valid values are 0 to 7. |
+| `refractionVertexColor?` | `boolean` | - | Use mesh vertex colors for refraction. If refraction map is set, it will be multiplied by vertex colors. |
+| `refractionVertexColorChannel?` | `string` | - | Vertex color channel to use for refraction. Can be "r", "g", "b" or "a". |
 | `shadowCatcher?` | `boolean` | - | When enabled, the material will output accumulated directional shadow value in linear space as the color. |
 | `specularMap?` | `Texture \| null` | - | The specular map of the material (default is null). |
 | `specularMapChannel?` | `string` | - | Color channels of the specular map to use. Can be "r", "g", "b", "a", "rgb" or any swizzled combination. |
@@ -196,7 +234,18 @@ The hooks accepts an object with the following properties that closely match tho
 | `specularityFactorMapRotation?` | `number` | - | Controls the 2D rotation (in degrees) of the specularity factor map. |
 | `specularityFactorMapTiling?` | `[number, number]` | - | Controls the 2D tiling of the specularity factor map. |
 | `specularityFactorMapUv?` | `number` | - | Specularity factor map UV channel. Valid values are 0 to 7. |
+| `specularityFactorVertexColor?` | `boolean` | - | Use mesh vertex colors for specularity factor. They are multiplied by `specularityFactor`, and by `specularityFactorMap` if set. |
+| `specularityFactorVertexColorChannel?` | `string` | - | Vertex color channels to use for specularity factor. Can be "r", "g", "b", "a", "rgb" or any swizzled combination. |
 | `useSheen?` | `boolean` | - | Toggle sheen specular effect on/off. |
+| `sheenGlossInvert?` | `boolean` | - | Invert the sheen gloss component (default is false). Enabling this flag results in material treating the sheen gloss members as roughness. |
+| `sheenGlossMap?` | `Texture \| null` | - | The sheen glossiness microstructure color map of the material (default is null). |
+| `sheenGlossMapChannel?` | `string` | - | Color channels of the sheen glossiness map to use. Can be "r", "g", "b", "a", "rgb" or any swizzled combination. |
+| `sheenGlossMapOffset?` | `[number, number]` | - | Controls the 2D offset of the sheen glossiness map. Each component is between 0 and 1. |
+| `sheenGlossMapRotation?` | `number` | - | Controls the 2D rotation (in degrees) of the sheen glossiness map. |
+| `sheenGlossMapTiling?` | `[number, number]` | - | Controls the 2D tiling of the sheen glossiness map. |
+| `sheenGlossMapUv?` | `number` | - | Sheen glossiness map UV channel. Valid values are 0 to 7. |
+| `sheenGlossVertexColor?` | `boolean` | - | Use mesh vertex colors for sheen glossiness. If sheen glossiness map or sheen glossiness tint are set, they'll be multiplied by vertex colors. |
+| `sheenGlossVertexColorChannel?` | `string` | - | Vertex color channels to use for sheen glossiness. Can be "r", "g", "b" or "a". |
 | `sheenMap?` | `Texture \| null` | - | The sheen microstructure color map of the material (default is null). |
 | `sheenMapChannel?` | `string` | - | Color channels of the sheen map to use. Can be "r", "g", "b", "a", "rgb" or any swizzled combination. |
 | `sheenMapOffset?` | `[number, number]` | - | Controls the 2D offset of the sheen map. Each component is between 0 and 1. |
@@ -206,13 +255,24 @@ The hooks accepts an object with the following properties that closely match tho
 | `sheenVertexColor?` | `boolean` | - | Use mesh vertex colors for sheen. If sheen map or sheen tint are set, they'll be multiplied by vertex colors. |
 | `sheenVertexColorChannel?` | `string` | - | Vertex color channels to use for sheen. Can be "r", "g", "b", "a", "rgb" or any swizzled combination. |
 | `sphereMap?` | `Texture \| null` | - | The spherical environment map of the material (default is null). This will replace the scene lighting environment. |
+| `thicknessMap?` | `Texture \| null` | - | The per-pixel thickness of the medium, only used when useDynamicRefraction is enabled. |
+| `thicknessMapChannel?` | `string` | - | Color channels of the thickness map to use. Can be "r", "g", "b" or "a". |
+| `thicknessMapOffset?` | `[number, number]` | - | Controls the 2D offset of the thickness map. Each component is between 0 and 1. |
+| `thicknessMapRotation?` | `number` | - | Controls the 2D rotation (in degrees) of the thickness map. |
+| `thicknessMapTiling?` | `[number, number]` | - | Controls the 2D tiling of the thickness map. |
+| `thicknessMapUv?` | `number` | - | Thickness map UV channel. Valid values are 0 to 7. |
+| `thicknessVertexColor?` | `boolean` | - | Use mesh vertex colors for thickness. If thickness map is set, it will be multiplied by vertex colors. |
+| `thicknessVertexColorChannel?` | `string` | - | Vertex color channel to use for thickness. Can be "r", "g", "b" or "a". |
 | `twoSidedLighting?` | `boolean` | - | Calculate proper normals (and therefore lighting) on backfaces. |
+| `useDynamicRefraction?` | `boolean` | - | Enables higher quality refractions using the grab pass instead of pre-computed cube maps for refractions. |
 | `useFog?` | `boolean` | - | Apply fogging (as configured in scene settings) |
+| `useIridescence?` | `boolean` | - | Enable thin-film iridescence. |
 | `useTonemap?` | `boolean` | - | Apply tonemapping (as configured via CameraComponent#toneMapping ). Defaults to true. |
 | `useLighting?` | `boolean` | - | Apply lighting |
 | `useMetalness?` | `boolean` | - | Use metalness properties instead of specular. When enabled, diffuse colors also affect specular instead of the dedicated specular map. This can be used as alternative to specular color to save space. With metalness == 0, the pixel is assumed to be dielectric, and diffuse color is used as normal. With metalness == 1, the pixel is fully metallic, and diffuse color is used as specular color instead. |
 | `useMetalnessSpecularColor?` | `boolean` | - | When metalness is enabled, use the specular map to apply color tint to specular reflections. |
 | `useSkybox?` | `boolean` | - | Apply scene skybox as prefiltered environment map |
+| `vertexColorGamma?` | `boolean` | - | When set to true, the vertex shader converts vertex colors from gamma to linear space to ensure correct interpolation in the fragment shader. This flag is provided for backwards compatibility, allowing users to mark their materials to handle vertex colors in gamma space. Defaults to false, which indicates that vertex colors are stored in linear space. |
 | `diffuse?` | `string` | - | Sets the diffuse color of the material, specified in sRGB color space. This color value is 3-component (RGB), where each component is between 0 and 1. Defines basic surface color (aka albedo). Gets the diffuse color of the material. |
 | `emissive?` | `string` | - | Sets the emissive color of the material, specified in sRGB color space. This color value is 3-component (RGB), where each component is between 0 and 1. The emission is this color multiplied by StandardMaterial#emissiveIntensity , and by the emissive map when one is set. Gets the emissive color of the material. |
 | `emissiveIntensity?` | `number` | - | Sets the emissive color multiplier. Defaults to 1. Gets the emissive color multiplier. |
@@ -221,12 +281,12 @@ The hooks accepts an object with the following properties that closely match tho
 | `sheen?` | `string` | - | The specular color of the sheen (fabric) microfiber structure, specified in sRGB color space. This color value is 3-component (RGB), where each component is between 0 and 1. Gets the sheen color of the material. |
 | `attenuation?` | `string` | - | The attenuation color for refractive materials, specified in sRGB color space. Only used when useDynamicRefraction is enabled. Gets the attenuation color of the material. |
 | `specularityFactor?` | `number` | - | The factor of specular intensity, used to weight the fresnel and specularity. Default is 1.0. Gets the specularity factor of the material. |
-| `sheenGloss?` | `number` | - | The glossiness of the sheen (fabric) microfiber structure. This color value is a single value between 0 and 1. Gets the sheen glossiness of the material. |
+| `sheenGloss?` | `number` | - | The glossiness of the sheen (fabric) microfiber structure, from 0 (rough, a broad sheen) to 1 (smooth, a sheen concentrated at grazing angles). Gets the sheen glossiness of the material. |
 | `gloss?` | `number` | - | Defines the glossiness of the material from 0 (rough) to 1 (shiny). Materials imported from glTF enable StandardMaterial#glossInvert , which reverses this: on those materials gloss holds roughness, so 0 is shiny and 1 is rough. Gets the glossiness of the material. |
 | `aoIntensity?` | `number` | - | Ambient occlusion intensity. Defaults to 1. Gets the ambient occlusion intensity of the material. |
 | `heightMapBase?` | `number` | - | The height map value that sits at the level of the original geometry, in the 0 to 1 range (default is 0.5). Relief above the base appears to stand out of the surface and relief below it appears to sink in. Set it to 1 to treat the map as pure depth carved below the geometry, or to 0 to treat it as pure elevation above it. Both parallax modes honor it. Gets the height map base level of the material. |
-| `parallaxSamples?` | `number` | - | The maximum number of height map taps taken along the view ray when parallaxMode  is PARALLAX_OCCLUSION (default is 16). Fewer taps are taken as the view direction approaches the surface normal, where the ray barely moves. Has no effect in * PARALLAX_OFFSET mode. Gets the maximum number of height map taps of parallax occlusion mapping of the material. |
-| `parallaxShadowSamples?` | `number` | - | The maximum number of height map taps taken towards each directional light to shadow the relief against itself, or 0 to disable it (default is 0). The shadow is soft: the march accumulates how far the height field stands above the light ray and weights it by distance, so more taps buy a smoother penumbra rather than an earlier exit. Applies only to directional lights, and only when parallaxMode  is PARALLAX_OCCLUSION. Gets the maximum number of height map taps of the parallax self shadowing of the material. |
+| `parallaxSamples?` | `number` | - | The maximum number of height map taps taken along the view ray when parallaxMode is PARALLAX_OCCLUSION (default is 16). Fewer taps are taken as the view direction approaches the surface normal, where the ray barely moves. Has no effect in * PARALLAX_OFFSET mode. Gets the maximum number of height map taps of parallax occlusion mapping of the material. |
+| `parallaxShadowSamples?` | `number` | - | The maximum number of height map taps taken towards each directional light to shadow the relief against itself, or 0 to disable it (default is 0). The shadow is soft: the march accumulates how far the height field stands above the light ray and weights it by distance, so more taps buy a smoother penumbra rather than an earlier exit. Applies only to directional lights, and only when parallaxMode is PARALLAX_OCCLUSION. Gets the maximum number of height map taps of the parallax self shadowing of the material. |
 | `opacity?` | `number` | - | The opacity of the material. This value can be between 0 and 1, where 0 is fully transparent and 1 is fully opaque. If you want the material to be semi-transparent you also need to set the Material#blendType  to BLEND_NORMAL, BLEND_ADDITIVE or any other mode. Also note that for most semi-transparent objects you want Material#depthWrite to be false, otherwise they can fully occlude objects behind them. Gets the opacity of the material. |
 | `alphaFade?` | `number` | - | Used to fade out materials when opacityFadesSpecular is set to false. Gets the alpha fade of the material. |
 | `bumpiness?` | `number` | - | The bumpiness of the material. This value scales the assigned main (primary) normal map. It should be normally between 0 (no bump mapping) and 1 (full bump mapping), but can be set to e.g. 2 to give even more pronounced bump effect. Gets the bumpiness of the material. |
@@ -246,15 +306,18 @@ The hooks accepts an object with the following properties that closely match tho
 | `iridescenceRefractionIndex?` | `number` | - | The index of refraction of the iridescent thin-film. Affects the color phase shift as described here: https://github.com/KhronosGroup/glTF/tree/main/extensions/2.0/Khronos/KHR_materials_iridescence Gets the index of refraction of the iridescent thin-film of the material. |
 | `iridescenceThicknessMin?` | `number` | - | The minimum thickness for the iridescence layer. Only used when an iridescence thickness map is used. The unit is in nm. Gets the minimum iridescence thickness of the material. |
 | `iridescenceThicknessMax?` | `number` | - | The maximum thickness for the iridescence layer. Used as the 'base' thickness when no iridescence thickness map is defined. The unit is in nm. Gets the maximum iridescence thickness of the material. |
+| `diffuseTransmission?` | `number` | - | The fraction of the light entering the surface that is diffusely transmitted through it, from 0 to 1 (default is 0). The rest is diffusely reflected. Transmitted light passes from the side of the surface facing the light to the other side, so a thin surface such as a leaf, a sheet of paper or a lampshade glows when lit from behind. The transmission is disabled when the value is 0. If a diffuseTransmissionMap is specified, it is multiplied by this value. Gets the diffuse transmission of the material. |
+| `diffuseTransmissionColor?` | `string` | - | The color tinting the light diffusely transmitted through the surface, specified in sRGB color space (default is white). This color value is 3-component (RGB), where each component is between 0 and 1. Only used when diffuseTransmission is above 0. Gets the diffuse transmission color of the material. |
 | `anisotropyRotation?` | `number` | - | Defines the rotation (in degrees) of anisotropy. Gets the anisotropy rotation of the material. |
 | `attenuationDistance?` | `number` | - | The distance defining the absorption rate of light within the medium. Only used when useDynamicRefraction is enabled. Gets the attenuation distance of the material. |
 | `heightMapFactor?` | `number` | - | Height map multiplier (default is 1). Affects the strength of the parallax effect. A value of 1 displaces the texture by up to 5% of a UV tile, so useful values are typically in the 0 to 2 range. Gets the height map factor of the material. |
 | `alphaDither?` | `number` | - | The alpha value used by the opacity dither path, in the range [0, 1]. Independent of * opacity, which keeps driving alpha blending. Lets a material be alpha-blended and dithered at the same time with different strengths — useful for fading objects out via dither while preserving their alpha-blended look (e.g. fading glass as the camera approaches). Has no effect unless opacityDither (or opacityShadowDither) is set to a dither mode. Set to `1.0` to disable dither at runtime without changing the dither mode, or `0.0` to fully discard via dither. For backwards compatibility, a material that has never had this property assigned uses opacity as the dither alpha, matching the historical behavior where the dither pass shares the blend alpha. Gets the dither alpha of the material. |
 | `cubeMapProjectionBox?` | `BoundingBox \| null` | - | Sets the world space axis-aligned bounding box defining the box-projection used for the cubeMap property, or null for no box. Only used when cubeMapProjection is set to CUBEPROJ_BOX. The box is copied into the material. Gets the world space axis-aligned bounding box of the box-projection, or null. A change of its center or half extents is applied by StandardMaterial#update . |
+| `planarReflectionMatrix?` | `Mat4` | - | Sets the view projection matrix of the camera which renders the StandardMaterial#planarReflectionMap , which projects the surface into the texture. The matrix is copied into the material. Defaults to the identity matrix. Gets the view projection matrix of the planar reflection. |
 | `userId?` | `string` | - | A unique id the user can assign to the material. The engine internally does not use this for anything, and the user can assign a value to this id for any purpose they like. Defaults to an empty string. |
 | `id?` | `number` | - |  |
 | `parameters?` | `{}` | - |  |
-| `alphaToCoverage?` | `boolean` | - | Enables or disables alpha to coverage. When enabled, and if hardware anti-aliasing is on, limited order-independent transparency can be achieved. Quality depends on the number of MSAA samples of the current render target. It can nicely soften edges of otherwise sharp alpha cutouts, but isn't recommended for large area semi-transparent surfaces. Note, that you don't need to enable blending to make alpha to coverage work. It will work without it, just like alphaTest. This requires a multi-sampled render target, and is silently ignored when rendering to a single-sampled one. On WebGPU it additionally requires the first color attachment of the render target to use a blendable format with an alpha channel, and is silently ignored otherwise - note that PIXELFORMAT_111110F, the default HDR format used by CameraFrame, has no alpha channel. |
+| `alphaToCoverage?` | `boolean` | - | Enables or disables alpha to coverage. When enabled, and if hardware anti-aliasing is on, limited order-independent transparency can be achieved. Quality depends on the number of MSAA samples of the current render target. It can nicely soften edges of otherwise sharp alpha cutouts, but isn't recommended for large area semi-transparent surfaces. Note, that you don't need to enable blending to make alpha to coverage work. It will work without it, just like alphaTest. This requires a multi-sampled render target, and is silently ignored when rendering to a single-sampled one. On WebGPU it additionally requires the first color attachment of the render target to use a blendable format with an alpha channel, and is silently ignored otherwise - note that PIXELFORMAT_RG11B10F, the default HDR format used by CameraFrame, has no alpha channel. |
 | `cull?` | `number` | - | Controls how triangles are culled based on their face direction with respect to the viewpoint. Can be: - CULLFACE_NONE: Do not cull triangles based on face direction. - CULLFACE_BACK: Cull the back faces of triangles (do not render triangles facing away from the view point). - CULLFACE_FRONT: Cull the front faces of triangles (do not render triangles facing towards the view point). Defaults to CULLFACE_BACK. |
 | `frontFace?` | `number` | - | Controls whether polygons are front- or back-facing by setting a winding orientation. Can be: - FRONTFACE_CW: The clock-wise winding. - FRONTFACE_CCW: The counterclockwise winding. Defaults to FRONTFACE_CCW. |
 | `stencilFront?` | `StencilParameters \| null` | - | Stencil parameters for front faces (default is null). |
@@ -286,6 +349,9 @@ The hooks will return a [`StandardMaterial`](https://api.playcanvas.com/engine/c
 | `_textureSharing` | `any` | - | Which of the assigned maps share a texture, as of the last update. |
 | `_sharingCheckedVersion` | `any` | - | The texture assignment version the texture sharing was last checked for. |
 | `_mapTransforms` | `any` | - | Texture transform grouping state. |
+| `_pendingCopies` | `any` | - | The copies of this material made while it waits for texture assets to load, which receive the textures in the maps still holding placeholders as the textures load. Created and released by the material asset handler. |
+| `_pendingSource` | `any` | - | The material waiting for texture assets this material is a copy of, directly or through other copies, and whose textures it receives as they load. |
+| `_planarReflectionMatrix` | `any` | - | The view projection matrix of the planar reflection, created by StandardMaterial#reset . |
 | `onUpdateShader` | `UpdateShaderCallback \| undefined` | - | A custom function that will be called after all shader generator properties are collected and before shader code is generated. This function will receive an object with shader generator settings (based on current material and scene properties), that you can change and then return. Returned value will be used instead. This is mostly useful when rendering the same set of objects, but with different shader variations based on the same material. For example, you may wish to render a depth or normal pass using textures assigned to the material, a reflection pass with simpler shaders and so on. These properties are split into two sections, generic standard material options and lit options. Properties of the standard material options are StandardMaterialOptions and the options for the lit options are LitShaderOptions. |
 | `_assetReferences` | `{}` | - |  |
 | `_activeParams` | `Set<any>` | - |  |
@@ -350,6 +416,22 @@ The hooks will return a [`StandardMaterial`](https://api.playcanvas.com/engine/c
 | `diffuseMapUv` | `number` | - | Main (primary) diffuse map UV channel. Valid values are 0 to 7. |
 | `diffuseVertexColor` | `boolean` | - | Multiply diffuse by the mesh vertex colors. |
 | `diffuseVertexColorChannel` | `string` | - | Vertex color channels to use for diffuse. Can be "r", "g", "b", "a", "rgb" or any swizzled combination. |
+| `diffuseTransmissionColorMap` | `Texture \| null` | - | The map of the color tinting the light diffusely transmitted through the surface (default is null). If specified, it is multiplied by diffuseTransmissionColor. |
+| `diffuseTransmissionColorMapChannel` | `string` | - | Color channels of the diffuse transmission color map to use. Can be "r", "g", "b", "a", "rgb" or any swizzled combination. |
+| `diffuseTransmissionColorMapOffset` | `Vec2` | - | Controls the 2D offset of the diffuse transmission color map. Each component is between 0 and 1. |
+| `diffuseTransmissionColorMapRotation` | `number` | - | Controls the 2D rotation (in degrees) of the diffuse transmission color map. |
+| `diffuseTransmissionColorMapTiling` | `Vec2` | - | Controls the 2D tiling of the diffuse transmission color map. |
+| `diffuseTransmissionColorMapUv` | `number` | - | Diffuse transmission color map UV channel. Valid values are 0 to 7. |
+| `diffuseTransmissionColorVertexColor` | `boolean` | - | Use mesh vertex colors for the diffuse transmission color. If diffuseTransmissionColorMap is set, it'll be multiplied by vertex colors. |
+| `diffuseTransmissionColorVertexColorChannel` | `string` | - | Vertex color channels to use for the diffuse transmission color. Can be "r", "g", "b", "a", "rgb" or any swizzled combination. |
+| `diffuseTransmissionMap` | `Texture \| null` | - | The map of the fraction of light diffusely transmitted through the surface (default is null). If specified, it is multiplied by diffuseTransmission. |
+| `diffuseTransmissionMapChannel` | `string` | - | Color channel of the diffuse transmission map to use. Can be "r", "g", "b" or "a" (default is "g"). |
+| `diffuseTransmissionMapOffset` | `Vec2` | - | Controls the 2D offset of the diffuse transmission map. Each component is between 0 and 1. |
+| `diffuseTransmissionMapRotation` | `number` | - | Controls the 2D rotation (in degrees) of the diffuse transmission map. |
+| `diffuseTransmissionMapTiling` | `Vec2` | - | Controls the 2D tiling of the diffuse transmission map. |
+| `diffuseTransmissionMapUv` | `number` | - | Diffuse transmission map UV channel. Valid values are 0 to 7. |
+| `diffuseTransmissionVertexColor` | `boolean` | - | Use mesh vertex colors for diffuse transmission. If diffuseTransmissionMap is set, it'll be multiplied by vertex colors. |
+| `diffuseTransmissionVertexColorChannel` | `string` | - | Vertex color channel to use for diffuse transmission. Can be "r", "g", "b" or "a". |
 | `emissiveMap` | `Texture \| null` | - | The emissive map of the material (default is null). Can be HDR. When the emissive map is applied, the emissive color is multiplied by the texel color in the map. Since the emissive color is black by default, the emissive map won't be visible unless the emissive color is changed. |
 | `emissiveMapChannel` | `string` | - | Color channels of the emissive map to use. Can be "r", "g", "b", "a", "rgb" or any swizzled combination. |
 | `emissiveMapOffset` | `Vec2` | - | Controls the 2D offset of the emissive map. Each component is between 0 and 1. |
@@ -376,6 +458,18 @@ The hooks will return a [`StandardMaterial`](https://api.playcanvas.com/engine/c
 | `heightMapRotation` | `number` | - | Controls the 2D rotation (in degrees) of the height map. |
 | `heightMapTiling` | `Vec2` | - | Controls the 2D tiling of the height map. |
 | `heightMapUv` | `number` | - | Height map UV channel. Valid values are 0 to 7. |
+| `iridescenceMap` | `Texture \| null` | - | The per-pixel iridescence intensity. Only used when useIridescence is enabled. |
+| `iridescenceMapChannel` | `string` | - | Color channels of the iridescence map to use. Can be "r", "g", "b" or "a". |
+| `iridescenceMapOffset` | `Vec2` | - | Controls the 2D offset of the iridescence map. Each component is between 0 and 1. |
+| `iridescenceMapRotation` | `number` | - | Controls the 2D rotation (in degrees) of the iridescence map. |
+| `iridescenceMapTiling` | `Vec2` | - | Controls the 2D tiling of the iridescence map. |
+| `iridescenceMapUv` | `number` | - | Iridescence map UV channel. Valid values are 0 to 7. |
+| `iridescenceThicknessMap` | `Texture \| null` | - | The per-pixel iridescence thickness. Defines a gradient weight between iridescenceThicknessMin and iridescenceThicknessMax. Only used when useIridescence is enabled. |
+| `iridescenceThicknessMapChannel` | `string` | - | Color channels of the iridescence thickness map to use. Can be "r", "g", "b" or "a". |
+| `iridescenceThicknessMapOffset` | `Vec2` | - | Controls the 2D offset of the iridescence thickness map. Each component is between 0 and 1. |
+| `iridescenceThicknessMapRotation` | `number` | - | Controls the 2D rotation (in degrees) of the iridescence thickness map. |
+| `iridescenceThicknessMapTiling` | `Vec2` | - | Controls the 2D tiling of the iridescence thickness map. |
+| `iridescenceThicknessMapUv` | `number` | - | Iridescence thickness map UV channel. Valid values are 0 to 7. |
 | `lightMap` | `Texture \| null` | - | A custom lightmap of the material (default is null). Lightmaps are textures that contain pre-rendered lighting. Can be HDR. When a mesh instance rendered with this material has a lightmap of its own, baked by the Lightmapper, that lightmap is used instead of this one. |
 | `lightMapChannel` | `string` | - | Color channels of the lightmap to use. Can be "r", "g", "b", "a", "rgb" or any swizzled combination. |
 | `lightMapOffset` | `Vec2` | - | Controls the 2D offset of the lightmap. Each component is between 0 and 1. |
@@ -415,7 +509,17 @@ The hooks will return a [`StandardMaterial`](https://api.playcanvas.com/engine/c
 | `opacityMapUv` | `number` | - | Opacity map UV channel. Valid values are 0 to 7. |
 | `opacityVertexColor` | `boolean` | - | Use mesh vertex colors for opacity. If opacityMap is set, it'll be multiplied by vertex colors. |
 | `opacityVertexColorChannel` | `string` | - | Vertex color channels to use for opacity. Can be "r", "g", "b" or "a". |
+| `parallaxMode` | `string` | - | Selects how the height map is used to offset the UV of the other maps of the material. Can be: - PARALLAX_OFFSET: A single tap of the height map, which pivots the surface around the heightMapBase level of the map. - PARALLAX_OCCLUSION: The view ray is marched through the height field, which spans heightMapFactor of depth with the geometry sitting at the heightMapBase level. This represents deeper displacement without smearing, at the cost of multiple taps per pixel. Note that the silhouette of the mesh is not affected, and the depth buffer still sees the flat surface. Defaults to PARALLAX_OFFSET. |
 | `pixelSnap` | `boolean` | - | Align vertices to pixel coordinates when rendering. Useful for pixel perfect 2D graphics. |
+| `planarReflectionMap` | `Texture \| null` | - | The planar reflection of the material (default is null): a texture the scene is rendered into by a camera mirrored by the plane of the surface, for example by the PlanarRenderer script. It replaces the environment reflections, while the environment keeps providing the ambient lighting. Requires planarReflectionMatrix to be set to the view projection matrix of that camera. Rougher surfaces sample the smaller mipmaps of the texture, blurring the reflection. A refraction of the material uses the scene color (see useDynamicRefraction), as the texture holds no environment to refract. |
+| `refractionMap` | `Texture \| null` | - | The map of the refraction visibility. |
+| `refractionMapChannel` | `string` | - | Color channels of the refraction map to use. Can be "r", "g", "b", "a", "rgb" or any swizzled combination. |
+| `refractionMapOffset` | `Vec2` | - | Controls the 2D offset of the refraction map. Each component is between 0 and 1. |
+| `refractionMapRotation` | `number` | - | Controls the 2D rotation (in degrees) of the refraction map. |
+| `refractionMapTiling` | `Vec2` | - | Controls the 2D tiling of the refraction map. |
+| `refractionMapUv` | `number` | - | Refraction map UV channel. Valid values are 0 to 7. |
+| `refractionVertexColor` | `boolean` | - | Use mesh vertex colors for refraction. If refraction map is set, it will be multiplied by vertex colors. |
+| `refractionVertexColorChannel` | `string` | - | Vertex color channel to use for refraction. Can be "r", "g", "b" or "a". |
 | `shadowCatcher` | `boolean` | - | When enabled, the material will output accumulated directional shadow value in linear space as the color. |
 | `specularMap` | `Texture \| null` | - | The specular map of the material (default is null). |
 | `specularMapChannel` | `string` | - | Color channels of the specular map to use. Can be "r", "g", "b", "a", "rgb" or any swizzled combination. |
@@ -431,7 +535,18 @@ The hooks will return a [`StandardMaterial`](https://api.playcanvas.com/engine/c
 | `specularityFactorMapRotation` | `number` | - | Controls the 2D rotation (in degrees) of the specularity factor map. |
 | `specularityFactorMapTiling` | `Vec2` | - | Controls the 2D tiling of the specularity factor map. |
 | `specularityFactorMapUv` | `number` | - | Specularity factor map UV channel. Valid values are 0 to 7. |
+| `specularityFactorVertexColor` | `boolean` | - | Use mesh vertex colors for specularity factor. They are multiplied by `specularityFactor`, and by `specularityFactorMap` if set. |
+| `specularityFactorVertexColorChannel` | `string` | - | Vertex color channels to use for specularity factor. Can be "r", "g", "b", "a", "rgb" or any swizzled combination. |
 | `useSheen` | `boolean` | - | Toggle sheen specular effect on/off. |
+| `sheenGlossInvert` | `boolean` | - | Invert the sheen gloss component (default is false). Enabling this flag results in material treating the sheen gloss members as roughness. |
+| `sheenGlossMap` | `Texture \| null` | - | The sheen glossiness microstructure color map of the material (default is null). |
+| `sheenGlossMapChannel` | `string` | - | Color channels of the sheen glossiness map to use. Can be "r", "g", "b", "a", "rgb" or any swizzled combination. |
+| `sheenGlossMapOffset` | `Vec2` | - | Controls the 2D offset of the sheen glossiness map. Each component is between 0 and 1. |
+| `sheenGlossMapRotation` | `number` | - | Controls the 2D rotation (in degrees) of the sheen glossiness map. |
+| `sheenGlossMapTiling` | `Vec2` | - | Controls the 2D tiling of the sheen glossiness map. |
+| `sheenGlossMapUv` | `number` | - | Sheen glossiness map UV channel. Valid values are 0 to 7. |
+| `sheenGlossVertexColor` | `boolean` | - | Use mesh vertex colors for sheen glossiness. If sheen glossiness map or sheen glossiness tint are set, they'll be multiplied by vertex colors. |
+| `sheenGlossVertexColorChannel` | `string` | - | Vertex color channels to use for sheen glossiness. Can be "r", "g", "b" or "a". |
 | `sheenMap` | `Texture \| null` | - | The sheen microstructure color map of the material (default is null). |
 | `sheenMapChannel` | `string` | - | Color channels of the sheen map to use. Can be "r", "g", "b", "a", "rgb" or any swizzled combination. |
 | `sheenMapOffset` | `Vec2` | - | Controls the 2D offset of the sheen map. Each component is between 0 and 1. |
@@ -441,13 +556,24 @@ The hooks will return a [`StandardMaterial`](https://api.playcanvas.com/engine/c
 | `sheenVertexColor` | `boolean` | - | Use mesh vertex colors for sheen. If sheen map or sheen tint are set, they'll be multiplied by vertex colors. |
 | `sheenVertexColorChannel` | `string` | - | Vertex color channels to use for sheen. Can be "r", "g", "b", "a", "rgb" or any swizzled combination. |
 | `sphereMap` | `Texture \| null` | - | The spherical environment map of the material (default is null). This will replace the scene lighting environment. |
+| `thicknessMap` | `Texture \| null` | - | The per-pixel thickness of the medium, only used when useDynamicRefraction is enabled. |
+| `thicknessMapChannel` | `string` | - | Color channels of the thickness map to use. Can be "r", "g", "b" or "a". |
+| `thicknessMapOffset` | `Vec2` | - | Controls the 2D offset of the thickness map. Each component is between 0 and 1. |
+| `thicknessMapRotation` | `number` | - | Controls the 2D rotation (in degrees) of the thickness map. |
+| `thicknessMapTiling` | `Vec2` | - | Controls the 2D tiling of the thickness map. |
+| `thicknessMapUv` | `number` | - | Thickness map UV channel. Valid values are 0 to 7. |
+| `thicknessVertexColor` | `boolean` | - | Use mesh vertex colors for thickness. If thickness map is set, it will be multiplied by vertex colors. |
+| `thicknessVertexColorChannel` | `string` | - | Vertex color channel to use for thickness. Can be "r", "g", "b" or "a". |
 | `twoSidedLighting` | `boolean` | - | Calculate proper normals (and therefore lighting) on backfaces. |
+| `useDynamicRefraction` | `boolean` | - | Enables higher quality refractions using the grab pass instead of pre-computed cube maps for refractions. |
 | `useFog` | `boolean` | - | Apply fogging (as configured in scene settings) |
+| `useIridescence` | `boolean` | - | Enable thin-film iridescence. |
 | `useTonemap` | `boolean` | - | Apply tonemapping (as configured via CameraComponent#toneMapping ). Defaults to true. |
 | `useLighting` | `boolean` | - | Apply lighting |
 | `useMetalness` | `boolean` | - | Use metalness properties instead of specular. When enabled, diffuse colors also affect specular instead of the dedicated specular map. This can be used as alternative to specular color to save space. With metalness == 0, the pixel is assumed to be dielectric, and diffuse color is used as normal. With metalness == 1, the pixel is fully metallic, and diffuse color is used as specular color instead. |
 | `useMetalnessSpecularColor` | `boolean` | - | When metalness is enabled, use the specular map to apply color tint to specular reflections. |
 | `useSkybox` | `boolean` | - | Apply scene skybox as prefiltered environment map |
+| `vertexColorGamma` | `boolean` | - | When set to true, the vertex shader converts vertex colors from gamma to linear space to ensure correct interpolation in the fragment shader. This flag is provided for backwards compatibility, allowing users to mark their materials to handle vertex colors in gamma space. Defaults to false, which indicates that vertex colors are stored in linear space. |
 | `_collectUnappliedChanges` | `any` | - | Adds the names of the map properties changed without a subsequent update, for the debug warning about unapplied changes. |
 | `diffuse` | `Color` | - | Sets the diffuse color of the material, specified in sRGB color space. This color value is 3-component (RGB), where each component is between 0 and 1. Defines basic surface color (aka albedo). Gets the diffuse color of the material. |
 | `emissive` | `Color` | - | Sets the emissive color of the material, specified in sRGB color space. This color value is 3-component (RGB), where each component is between 0 and 1. The emission is this color multiplied by StandardMaterial#emissiveIntensity , and by the emissive map when one is set. Gets the emissive color of the material. |
@@ -459,7 +585,7 @@ The hooks will return a [`StandardMaterial`](https://api.playcanvas.com/engine/c
 | `attenuation` | `Color` | - | The attenuation color for refractive materials, specified in sRGB color space. Only used when useDynamicRefraction is enabled. Gets the attenuation color of the material. |
 | `specularityFactor` | `number` | - | The factor of specular intensity, used to weight the fresnel and specularity. Default is 1.0. Gets the specularity factor of the material. |
 | `_specularityFactor` | `any` | - |  |
-| `sheenGloss` | `number` | - | The glossiness of the sheen (fabric) microfiber structure. This color value is a single value between 0 and 1. Gets the sheen glossiness of the material. |
+| `sheenGloss` | `number` | - | The glossiness of the sheen (fabric) microfiber structure, from 0 (rough, a broad sheen) to 1 (smooth, a sheen concentrated at grazing angles). Gets the sheen glossiness of the material. |
 | `_sheenGloss` | `any` | - |  |
 | `gloss` | `number` | - | Defines the glossiness of the material from 0 (rough) to 1 (shiny). Materials imported from glTF enable StandardMaterial#glossInvert , which reverses this: on those materials gloss holds roughness, so 0 is shiny and 1 is rough. Gets the glossiness of the material. |
 | `_gloss` | `any` | - |  |
@@ -467,9 +593,9 @@ The hooks will return a [`StandardMaterial`](https://api.playcanvas.com/engine/c
 | `_aoIntensity` | `any` | - |  |
 | `heightMapBase` | `number` | - | The height map value that sits at the level of the original geometry, in the 0 to 1 range (default is 0.5). Relief above the base appears to stand out of the surface and relief below it appears to sink in. Set it to 1 to treat the map as pure depth carved below the geometry, or to 0 to treat it as pure elevation above it. Both parallax modes honor it. Gets the height map base level of the material. |
 | `_heightMapBase` | `any` | - |  |
-| `parallaxSamples` | `number` | - | The maximum number of height map taps taken along the view ray when parallaxMode  is PARALLAX_OCCLUSION (default is 16). Fewer taps are taken as the view direction approaches the surface normal, where the ray barely moves. Has no effect in * PARALLAX_OFFSET mode. Gets the maximum number of height map taps of parallax occlusion mapping of the material. |
+| `parallaxSamples` | `number` | - | The maximum number of height map taps taken along the view ray when parallaxMode is PARALLAX_OCCLUSION (default is 16). Fewer taps are taken as the view direction approaches the surface normal, where the ray barely moves. Has no effect in * PARALLAX_OFFSET mode. Gets the maximum number of height map taps of parallax occlusion mapping of the material. |
 | `_parallaxSamples` | `any` | - |  |
-| `parallaxShadowSamples` | `number` | - | The maximum number of height map taps taken towards each directional light to shadow the relief against itself, or 0 to disable it (default is 0). The shadow is soft: the march accumulates how far the height field stands above the light ray and weights it by distance, so more taps buy a smoother penumbra rather than an earlier exit. Applies only to directional lights, and only when parallaxMode  is PARALLAX_OCCLUSION. Gets the maximum number of height map taps of the parallax self shadowing of the material. |
+| `parallaxShadowSamples` | `number` | - | The maximum number of height map taps taken towards each directional light to shadow the relief against itself, or 0 to disable it (default is 0). The shadow is soft: the march accumulates how far the height field stands above the light ray and weights it by distance, so more taps buy a smoother penumbra rather than an earlier exit. Applies only to directional lights, and only when parallaxMode is PARALLAX_OCCLUSION. Gets the maximum number of height map taps of the parallax self shadowing of the material. |
 | `_parallaxShadowSamples` | `any` | - |  |
 | `opacity` | `number` | - | The opacity of the material. This value can be between 0 and 1, where 0 is fully transparent and 1 is fully opaque. If you want the material to be semi-transparent you also need to set the Material#blendType  to BLEND_NORMAL, BLEND_ADDITIVE or any other mode. Also note that for most semi-transparent objects you want Material#depthWrite to be false, otherwise they can fully occlude objects behind them. Gets the opacity of the material. |
 | `_opacity` | `any` | - |  |
@@ -509,6 +635,9 @@ The hooks will return a [`StandardMaterial`](https://api.playcanvas.com/engine/c
 | `_iridescenceThicknessMin` | `any` | - |  |
 | `iridescenceThicknessMax` | `number` | - | The maximum thickness for the iridescence layer. Used as the 'base' thickness when no iridescence thickness map is defined. The unit is in nm. Gets the maximum iridescence thickness of the material. |
 | `_iridescenceThicknessMax` | `any` | - |  |
+| `diffuseTransmission` | `number` | - | The fraction of the light entering the surface that is diffusely transmitted through it, from 0 to 1 (default is 0). The rest is diffusely reflected. Transmitted light passes from the side of the surface facing the light to the other side, so a thin surface such as a leaf, a sheet of paper or a lampshade glows when lit from behind. The transmission is disabled when the value is 0. If a diffuseTransmissionMap is specified, it is multiplied by this value. Gets the diffuse transmission of the material. |
+| `_diffuseTransmission` | `any` | - |  |
+| `diffuseTransmissionColor` | `Color` | - | The color tinting the light diffusely transmitted through the surface, specified in sRGB color space (default is white). This color value is 3-component (RGB), where each component is between 0 and 1. Only used when diffuseTransmission is above 0. Gets the diffuse transmission color of the material. |
 | `anisotropyRotation` | `number` | - | Defines the rotation (in degrees) of anisotropy. Gets the anisotropy rotation of the material. |
 | `_anisotropyRotation` | `any` | - |  |
 | `attenuationDistance` | `number` | - | The distance defining the absorption rate of light within the medium. Only used when useDynamicRefraction is enabled. Gets the attenuation distance of the material. |
@@ -519,6 +648,7 @@ The hooks will return a [`StandardMaterial`](https://api.playcanvas.com/engine/c
 | `_alphaDither` | `any` | - |  |
 | `cubeMapProjectionBox` | `BoundingBox \| null` | - | Sets the world space axis-aligned bounding box defining the box-projection used for the cubeMap property, or null for no box. Only used when cubeMapProjection is set to CUBEPROJ_BOX. The box is copied into the material. Gets the world space axis-aligned bounding box of the box-projection, or null. A change of its center or half extents is applied by StandardMaterial#update . |
 | `_cubeMapProjectionBox` | `BoundingBox` | - |  |
+| `planarReflectionMatrix` | `Mat4` | - | Sets the view projection matrix of the camera which renders the StandardMaterial#planarReflectionMap , which projects the surface into the texture. The matrix is copied into the material. Defaults to the identity matrix. Gets the view projection matrix of the planar reflection. |
 | `copy` | `(source: StandardMaterial) => StandardMaterial` | - | Copy a `StandardMaterial`. |
 | `_getMapTransformId` | `any` | - | Returns the transform group assigned to a texture map. |
 | `setAttribute` | `(name: string, semantic: string) => void` | - | Sets a vertex shader attribute on a material. |
@@ -533,7 +663,7 @@ The hooks will return a [`StandardMaterial`](https://api.playcanvas.com/engine/c
 | `_definesKey` | `any` | - | Cached content key for Material#defines , or null when it needs recomputing. An empty defines set caches as '', so null unambiguously means "dirty". |
 | `parameters` | `{}` | - |  |
 | `_alphaTest` | `any` | - |  |
-| `alphaToCoverage` | `boolean` | - | Enables or disables alpha to coverage. When enabled, and if hardware anti-aliasing is on, limited order-independent transparency can be achieved. Quality depends on the number of MSAA samples of the current render target. It can nicely soften edges of otherwise sharp alpha cutouts, but isn't recommended for large area semi-transparent surfaces. Note, that you don't need to enable blending to make alpha to coverage work. It will work without it, just like alphaTest. This requires a multi-sampled render target, and is silently ignored when rendering to a single-sampled one. On WebGPU it additionally requires the first color attachment of the render target to use a blendable format with an alpha channel, and is silently ignored otherwise - note that PIXELFORMAT_111110F, the default HDR format used by CameraFrame, has no alpha channel. |
+| `alphaToCoverage` | `boolean` | - | Enables or disables alpha to coverage. When enabled, and if hardware anti-aliasing is on, limited order-independent transparency can be achieved. Quality depends on the number of MSAA samples of the current render target. It can nicely soften edges of otherwise sharp alpha cutouts, but isn't recommended for large area semi-transparent surfaces. Note, that you don't need to enable blending to make alpha to coverage work. It will work without it, just like alphaTest. This requires a multi-sampled render target, and is silently ignored when rendering to a single-sampled one. On WebGPU it additionally requires the first color attachment of the render target to use a blendable format with an alpha channel, and is silently ignored otherwise - note that PIXELFORMAT_RG11B10F, the default HDR format used by CameraFrame, has no alpha channel. |
 | `_sceneTexturesWrite` | `any` | - | Explicit setting of sceneTexturesWrite, or undefined to derive it from transparency. |
 | `cull` | `number` | - | Controls how triangles are culled based on their face direction with respect to the viewpoint. Can be: - CULLFACE_NONE: Do not cull triangles based on face direction. - CULLFACE_BACK: Cull the back faces of triangles (do not render triangles facing away from the view point). - CULLFACE_FRONT: Cull the front faces of triangles (do not render triangles facing towards the view point). Defaults to CULLFACE_BACK. |
 | `frontFace` | `number` | - | Controls whether polygons are front- or back-facing by setting a winding orientation. Can be: - FRONTFACE_CW: The clock-wise winding. - FRONTFACE_CCW: The counterclockwise winding. Defaults to FRONTFACE_CCW. |
@@ -590,10 +720,10 @@ The hooks will return a [`StandardMaterial`](https://api.playcanvas.com/engine/c
 | `clearVariants` | `() => void` | - |  |
 | `getParameter` | `(name: string) => object` | - | Retrieves the specified shader parameter from a material. |
 | `_setParameterSimple` | `(name: any, data: any) => void` | - |  |
-| `setParameter` | `(name: string, data: number \| Texture \| number[] \| ArrayBufferView<ArrayBufferLike> \| StorageBuffer) => void` | - | Sets a shader parameter on a material. |
+| `setParameter` | `(name: string, data: number \| Texture \| number[] \| ArrayBufferView<ArrayBufferLike> \| TextureView \| StorageBuffer) => void` | - | Sets a shader parameter on a material. |
 | `deleteParameter` | `(name: string) => void` | - | Deletes a shader parameter on a material. |
 | `_setScopeParameter` | `any` | - |  |
-| `setDefine` | `(name: string, value: string \| boolean \| undefined) => void` | - | Adds or removes a define on the material. Defines can be used to enable or disable various parts of the shader code. |
+| `setDefine` | `(name: string, value: string \| number \| boolean \| undefined) => void` | - | Adds or removes a define on the material. Defines can be used to enable or disable various parts of the shader code. |
 | `getDefine` | `(name: string) => boolean` | - | Returns true if a define is enabled on the material, otherwise false. |
 | `destroy` | `() => void` | - | Removes this material from the scene and possibly frees up memory from its shaders (if there are no other materials using it). |
 

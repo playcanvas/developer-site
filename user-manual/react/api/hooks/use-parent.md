@@ -144,7 +144,7 @@ function MyComponent() {
 | `_callbacks` | `any` | - |  |
 | `_callbackActive` | `any` | - |  |
 | `on` | `(name: string, callback: HandleEventCallback, scope?: object \| undefined) => EventHandle` | - | Attach an event handler to an event. |
-| `once` | `(name: string, callback: HandleEventCallback, scope?: object \| undefined) => EventHandle` | - | Attach an event handler to an event. This handler will be removed after being fired once. |
+| `once` | `(name: string, callback: HandleEventCallback, scope?: object \| undefined) => EventHandle` | - | Attach an event handler to an event. The handler is removed before it is called, so it runs at most once, even if it fires the same event again or throws. |
 | `off` | `(name?: string \| undefined, callback?: HandleEventCallback \| undefined, scope?: object \| undefined) => EventHandler` | - | Detach an event handler from an event. If callback is not provided then all callbacks are unbound from the event, if scope is not provided then all events with the callback will be unbound. Use this form to remove all listeners matching a name (and optionally callback/scope). To remove a single known subscription, prefer retaining the EventHandle returned by EventHandler#on  / EventHandler#once  and calling its EventHandle#off : it removes exactly that subscription and is faster (no scan of the callback list). |
 | `fire` | `(name: string, arg1?: any, arg2?: any, arg3?: any, arg4?: any, arg5?: any, arg6?: any, arg7?: any, arg8?: any) => EventHandler` | - | Fire an event, all additional arguments are passed on to the event listener. |
 | `hasEvent` | `(name: string) => boolean` | - | Test if there are any handlers bound to an event name. |

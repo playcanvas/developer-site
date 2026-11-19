@@ -94,6 +94,7 @@ export const EnvironmentExample = () => {
 | `centerArray?` | `Float32Array<ArrayBuffer>` | - |  |
 | `projectedSkydomeCenterId?` | `ScopeId` | - |  |
 | `type?` | `string` | - | Sets the type of the sky. Can be: - SKYTYPE_INFINITE - SKYTYPE_BOX - SKYTYPE_DOME Defaults to SKYTYPE_INFINITE. Gets the type of the sky. |
+| `enabled?` | `boolean` | - | Sets whether the sky is rendered. When disabled, the sky is not rendered and its mesh and shader are not created, while the environment lighting of the scene, such as Scene#envAtlas , still lights the scene. Defaults to true. Gets whether the sky is rendered. |
 | `depthWrite?` | `boolean` | - | Sets whether depth writing is enabled for the sky. Defaults to false. Writing a depth value for the skydome is supported when its type is not SKYTYPE_INFINITE. When enabled, the depth is written to the scene depth texture during the scene pass or a depth prepass, allowing subsequent passes to apply depth-based effects, such as Depth of Field. Note: When a depth prepass is used, the Sky Layer must be ordered before the Depth layer, which is the final layer used in the prepass. Gets whether depth writing is enabled for the sky. |
 | `fisheye?` | `number` | - | Sets the fisheye projection strength for the sky. The value is in the range [0, 1]: - 0: Standard rectilinear (perspective) projection. - (0, 1]: Increasing barrel distortion, producing a wider field of view. Only supported with SKYTYPE_INFINITE. Has no effect on dome or box sky types, and has no effect with orthographic cameras. Defaults to 0. Gets the fisheye projection strength for the sky. |
 | `scale?` | `[number, number, number]` | - | The scale of the sky. |
@@ -128,5 +129,5 @@ export const EnvironmentExample = () => {
 | `skyboxMip?` | `number` | - | Sets the mip level of the skybox to be displayed. Only valid for prefiltered cubemap skyboxes. Defaults to 0 (base level). Gets the mip level of the skybox to be displayed. |
 | `skyboxHighlightMultiplier?` | `number` | - | Sets the highlight multiplier for the skybox. The HDR skybox can represent brightness levels up to a maximum of 64, with any values beyond this being clipped. This limitation prevents the accurate representation of extremely bright sources, such as the Sun, which can affect HDR bloom rendering by not producing enough bloom. The multiplier adjusts the brightness after clipping, enhancing the bloom effect for bright sources. Defaults to 1. Gets the highlight multiplied for the skybox. |
 | `skyboxRotation?` | `Readonly<Quat>` | - | Sets the rotation of the skybox to be displayed. Defaults to Quat.IDENTITY. Gets the rotation of the skybox to be displayed. Use the setter to update skybox state. |
-| `skybox?` | `Asset<string> \| null` | - | The skybox asset. Used to set the skybox of the environment. |
-| `envAtlas?` | `Asset<string> \| null` | - | The environment lighting. Used to set the lighting of the environment. |
+| `skybox?` | `Asset<string, unknown> \| null` | - | The skybox asset. Used to set the skybox of the environment. |
+| `envAtlas?` | `Asset<string, unknown> \| null` | - | The environment lighting. Used to set the lighting of the environment. |

@@ -68,7 +68,7 @@ export const App = () => <Application>
 | `_soundManager` | `any` | - |  |
 | `_visibilityChangeHandler` | `any` | - |  |
 | `renderNextFrame` | `boolean` | - | Set to true to render the scene on the next iteration of the main loop. This only has an effect if autoRender is set to false. The value of renderNextFrame is set back to false again as soon as the scene has been rendered. |
-| `timeScale` | `number` | - | Scales the global time delta. Defaults to 1. Scripts, animation and physics all receive the scaled delta, so 0 stops them together. To pause or slow down physics alone while the rest of the application keeps running, use RigidBodyComponentSystem#timeScale . |
+| `timeScale` | `number` | - | Scales the global time delta. Defaults to 1. Scripts, animation and physics all receive the scaled delta, so 0 freezes everything that advances with time. It does not pause scripts: their update and postUpdate methods are still called every frame with a dt of 0, so input handling, spawning, impulses and any other logic that is not multiplied by dt carry on. Give gameplay code its own pause check. To pause or slow down physics alone while the rest of the application keeps running, use RigidBodyComponentSystem#timeScale . |
 | `maxDeltaTime` | `number` | - | Clamps per-frame delta time to an upper bound. Useful since returning from a tab deactivation can generate huge values for dt, which can adversely affect game state. Defaults to 0.1 (seconds). |
 | `scriptsOrder` | `string[]` | - | Scripts in order of loading first. |
 | `_stats` | `any` | - |  |
@@ -124,7 +124,7 @@ export const App = () => <Application>
 | `onLibrariesLoaded` | `any` | - | Event handler called when all code libraries have been loaded. Code libraries are passed into the constructor of the Application and the application won't start running or load packs until all libraries have been loaded. |
 | `applySceneSettings` | `(settings: { physics: { gravity: number[]; }; render: { global_ambient: number[]; fog: string; fog_color: number[]; fog_density: number; fog_start: number; fog_end: number; gamma_correction: number; tonemapping: number; ... 52 more ...; gsplatEnableIds?: boolean; }; }) => void` | - | Apply scene settings to the current scene. Useful when your scene settings are parsed or generated from a non-URL source. |
 | `setAreaLightLuts` | `(ltcMat1: number[], ltcMat2: number[]) => void` | - | Sets the area light LUT tables for this app. |
-| `setSkybox` | `(asset: Asset<string>) => void` | - | Sets the skybox asset to current scene, and subscribes to asset load/change events. |
+| `setSkybox` | `(asset: Asset<string, unknown>) => void` | - | Sets the skybox asset to current scene, and subscribes to asset load/change events. |
 | `_onSkyboxRemoved` | `any` | - |  |
 | `_onSkyboxChanged` | `any` | - |  |
 | `_firstBake` | `any` | - |  |
@@ -137,14 +137,14 @@ export const App = () => <Application>
 | `drawQuad` | `() => void` | - |  |
 | `drawTexture` | `() => void` | - |  |
 | `drawDepthTexture` | `() => void` | - |  |
-| `destroy` | `() => void` | - | Destroys application and removes all event listeners at the end of the current engine frame update. However, if called outside of the engine frame update, calling destroy() will destroy the application immediately. |
+| `destroy` | `() => void` | - | Destroys application and removes all event listeners at the end of the current engine frame update. However, if called outside of the engine frame update, calling destroy() will destroy the application immediately. On WebGL, the canvas keeps its WebGL context until the canvas is garbage collected. Browsers limit the number of live WebGL contexts on a page, and beyond the limit they lose the oldest one, which can belong to another running application. A page that destroys applications whose canvases it doesn't reuse can release the context, as shown below. A released context can't be used by a new application on the same canvas. |
 | `_gsplatSortedEvt` | `EventHandle` | - |  |
 | `context` | `any` | - |  |
 | `_registerSceneImmediate` | `any` | - |  |
 | `_callbacks` | `any` | - |  |
 | `_callbackActive` | `any` | - |  |
 | `on` | `(name: string, callback: HandleEventCallback, scope?: object \| undefined) => EventHandle` | - | Attach an event handler to an event. |
-| `once` | `(name: string, callback: HandleEventCallback, scope?: object \| undefined) => EventHandle` | - | Attach an event handler to an event. This handler will be removed after being fired once. |
+| `once` | `(name: string, callback: HandleEventCallback, scope?: object \| undefined) => EventHandle` | - | Attach an event handler to an event. The handler is removed before it is called, so it runs at most once, even if it fires the same event again or throws. |
 | `off` | `(name?: string \| undefined, callback?: HandleEventCallback \| undefined, scope?: object \| undefined) => EventHandler` | - | Detach an event handler from an event. If callback is not provided then all callbacks are unbound from the event, if scope is not provided then all events with the callback will be unbound. Use this form to remove all listeners matching a name (and optionally callback/scope). To remove a single known subscription, prefer retaining the EventHandle returned by EventHandler#on  / EventHandler#once  and calling its EventHandle#off : it removes exactly that subscription and is faster (no scan of the callback list). |
 | `fire` | `(name: string, arg1?: any, arg2?: any, arg3?: any, arg4?: any, arg5?: any, arg6?: any, arg7?: any, arg8?: any) => EventHandler` | - | Fire an event, all additional arguments are passed on to the event listener. |
 | `hasEvent` | `(name: string) => boolean` | - | Test if there are any handlers bound to an event name. |
