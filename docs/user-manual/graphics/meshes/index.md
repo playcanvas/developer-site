@@ -23,6 +23,8 @@ app.root.addChild(box);
 
 A GLB loads as a container asset whose render assets hold the meshes. `asset.resource.instantiateRenderEntity()` creates an entity hierarchy with a render component for each of them. See the [Render Asset](https://playcanvas.github.io/#/graphics/render-asset) example.
 
+The geometry in a GLB can be compressed with Draco or meshopt, which needs a decoder to load. See [Compressed Meshes](compressed-meshes.md).
+
 ### Meshes Created in Code {#meshes-created-in-code}
 
 A mesh can be built from one of the geometry classes, such as `BoxGeometry`, or from your own vertex data. See [Creating Meshes](creating-meshes.md).
@@ -40,3 +42,4 @@ To change the geometry of a single object, give it a mesh of its own.
 
 - [Creating Meshes](creating-meshes.md) - Building meshes from geometry classes and vertex data, and updating them.
 - [Mesh Instances](mesh-instances.md) - Rendering meshes, and the settings that control how they render: visibility, shadows, sort order and shader parameters.
+- [Compressed Meshes](compressed-meshes.md) - Loading GLBs whose geometry is compressed with Draco or meshopt.

@@ -23,6 +23,8 @@ app.root.addChild(box);
 
 GLBはコンテナアセットとして読み込まれ、そのレンダーアセットがメッシュを保持します。`asset.resource.instantiateRenderEntity()`は、それぞれのメッシュに対してRenderコンポーネントを持つエンティティの階層を作成します。[Render Asset](https://playcanvas.github.io/#/graphics/render-asset)のサンプルを参照してください。
 
+GLBのジオメトリはDracoまたはmeshoptで圧縮できますが、読み込むにはデコーダーが必要です。[圧縮メッシュ](compressed-meshes.md)を参照してください。
+
 ### コードで作成するメッシュ {#meshes-created-in-code}
 
 メッシュは、`BoxGeometry`などのジオメトリクラスや、独自の頂点データから構築できます。[メッシュの作成](creating-meshes.md)を参照してください。
@@ -40,3 +42,4 @@ GLBはコンテナアセットとして読み込まれ、そのレンダーア�
 
 - [メッシュの作成](creating-meshes.md) - ジオメトリクラスや頂点データからメッシュを構築し、更新する方法。
 - [メッシュインスタンス](mesh-instances.md) - メッシュの描画と、描画方法を制御する設定: 表示、影、ソート順序、シェーダーパラメーター。
+- [圧縮メッシュ](compressed-meshes.md) - ジオメトリがDracoまたはmeshoptで圧縮されたGLBを読み込む方法。

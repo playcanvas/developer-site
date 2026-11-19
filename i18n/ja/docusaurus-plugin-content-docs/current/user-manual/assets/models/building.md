@@ -15,7 +15,7 @@ GLBのインポートでは、以下のglTF機能がサポートされ、非常�
 - アニメーションスケルトンとスキニングデータ (Animated skeletons and skinning data)
 - モーフターゲット (Morph targets)
 - カメラ (Cameras)
-- Draco圧縮モデル (Draco compressed models)
+- [Draco および meshopt 圧縮モデル](/user-manual/graphics/meshes/compressed-meshes) (Draco and meshopt compressed models)
 - 点光源サポート (Punctual light support)
 
 そのため、PlayCanvasを対象とする場合、特別なアートツールプラグインを使用する必要はなく、従う必要のあるPlayCanvas固有のワークフローはありません。

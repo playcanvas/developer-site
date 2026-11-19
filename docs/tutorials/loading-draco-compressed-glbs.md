@@ -13,6 +13,8 @@ See https://google.github.io/draco/ for more information on Draco 3D Data Compre
 
 See https://github.com/CesiumGS/gltf-pipeline for the tool to compress glTF models.
 
+For how to configure the Draco decoder, and how Draco compares with meshopt compression, see [Compressed Meshes](/user-manual/graphics/meshes/compressed-meshes/).
+
 <div className="iframe-container">
     <iframe src="https://playcanv.as/p/2uU2aYDh/" title="Loading Draco Compressed GLBs" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
