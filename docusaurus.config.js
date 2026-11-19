@@ -200,13 +200,15 @@ const config = {
         { from: ['/user-manual/supersplat/viewer/xr/'], to: '/user-manual/supersplat/viewing/xr/' },
         { from: ['/user-manual/supersplat/explore/'], to: '/user-manual/supersplat/viewing/explore/' },
         { from: ['/user-manual/supersplat/user-profile/'], to: '/user-manual/supersplat/viewing/user-profile/' },
-        { from: ['/user-manual/supersplat/following/'], to: '/user-manual/supersplat/viewing/following/' },
+        { from: ['/user-manual/supersplat/following/'], to: '/user-manual/supersplat/viewing/user-profile/' },
         { from: ['/user-manual/supersplat/viewer/'], to: '/user-manual/supersplat/developers/viewer/' },
         { from: ['/user-manual/supersplat/viewer/embedding/'], to: '/user-manual/supersplat/developers/embedding/' },
         { from: ['/user-manual/supersplat/viewer/api/'], to: '/user-manual/supersplat/developers/viewer-api/' },
         { from: ['/user-manual/supersplat/viewer/self-hosting/'], to: '/user-manual/supersplat/developers/self-hosting/' },
         { from: ['/user-manual/supersplat/studio/experience-settings/'], to: '/user-manual/supersplat/developers/experience-settings/' },
         { from: ['/user-manual/supersplat/api-integrations/'], to: '/user-manual/supersplat/developers/api-integrations/' },
+        // Following Creators merged into the profile page; #following-feed, #lists and #managing kept their ids
+        { from: ['/user-manual/supersplat/viewing/following/'], to: '/user-manual/supersplat/viewing/user-profile/' },
         // CameraFrame custom render passes moved to the Frame Graph section
         { from: ['/user-manual/graphics/posteffects/cameraframe/custom-passes/'], to: '/user-manual/graphics/advanced-rendering/frame-graph/camera-passes/' },
         // CameraFrame compose shader customization and FramePassCameraFrame subclassing replaced by effects

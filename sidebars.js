@@ -667,7 +667,6 @@ const sidebars = {
             'user-manual/supersplat/viewing/xr',
             'user-manual/supersplat/viewing/explore',
             'user-manual/supersplat/viewing/user-profile',
-            'user-manual/supersplat/viewing/following',
           ],
         },
         {
