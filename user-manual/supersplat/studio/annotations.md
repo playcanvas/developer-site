@@ -1,6 +1,6 @@
 # Annotations
 
-**Annotations** are 3D-positioned text hotspots you place on your published splat in [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md). On the viewer side, each annotation shows up as a marker visitors can click; clicking it fades the camera to a curated pose and surfaces a title and body of text. Use them to call out features, narrate a story, or give a self-guided tour of the scene.
+**Annotations** are 3D-positioned text hotspots you place on your published splat in [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md). On the viewer side, each annotation shows up as a numbered hotspot visitors can click; clicking it moves the camera to a curated pose and surfaces a title and body of text. Use them to call out features, narrate a story, or give a self-guided tour of the scene.
 
 ## Annotation properties
 
@@ -10,7 +10,7 @@ Each annotation has:
 |-------|-------------|
 | **Position** | World-space `[x, y, z]` where the hotspot marker sits in the scene. |
 | **Title** | Short heading shown when the annotation is selected. |
-| **Text** | Longer body of text. HTML is allowed but sanitized — no scripts or unsafe attributes. |
+| **Text** | Longer body of text, shown as plain text in the viewer. |
 | **Camera** | The [camera pose](https://developer.playcanvas.com/user-manual/supersplat/studio/cameras.md) the viewer animates to when this annotation is selected. |
 | **Extras** | Free-form metadata you can attach for custom integrations or future Studio features. |
 
@@ -23,15 +23,27 @@ The general flow is:
 3. Edit the title and body text.
 4. Repeat for as many points of interest as you'd like.
 
-You can reorder annotations in the list panel — the order controls how visitors step through them on the viewer.
+You can reorder annotations in the list panel — the order controls how visitors step through them on the viewer, and the number each hotspot shows.
+
+The [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md#authoring-limits) authoring limits allow up to 50 annotations per scene, with titles of up to 60 characters and text of up to 280.
 
 ## How visitors use them
 
-On the [scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md), the viewer shows each annotation as a marker. A floating navigator UI lets visitors step **Previous** / **Next** through the list; selecting an annotation animates the camera to its pose and surfaces the title and body text. Visitors can dismiss the annotation overlay to return to free-look navigation at any time.
+On the [scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md), the viewer shows each annotation as a numbered hotspot:
 
-## Tip: annotations as a starting point
+- **Selecting a hotspot** eases the camera to the annotation's pose, and its title and text appear in a panel beside the hotspot as the camera arrives. An annotation with neither title nor text shows no panel. Visitors can orbit from there, pivoting near the annotated point, and the panel stays open.
+- **The navigator**, shown when a scene has two or more annotations, displays the current annotation's number and title, with arrows to step to the previous and next one in list order.
+- **Clicking elsewhere** in the viewer deselects the annotation and returns to free navigation. The navigator keeps the last annotation, greyed out, and clicking it selects it again.
+- **Hotspots hidden** behind part of the scene are faded once the camera stops moving.
+- **Show Annotations**, in the viewer's settings panel, lets visitors hide the hotspots and the navigator.
 
-Set the scene's **start mode** to `annotation` if you'd like the viewer to land on the first annotation when a visitor opens the scene page — useful for a guided-tour-by-default experience.
+See [Viewer Controls](https://developer.playcanvas.com/user-manual/supersplat/viewer/controls.md#annotations) for the full visitor experience.
+
+:::note
+
+The settings format accepts `annotation` as a scene's start mode, but the viewer doesn't act on it: a scene always starts from its [starting camera](https://developer.playcanvas.com/user-manual/supersplat/studio/cameras.md) or its camera animation.
+
+:::
 
 ## See also
 

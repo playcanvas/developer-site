@@ -1,6 +1,6 @@
 # Cameras
 
-The **Cameras** section — in the **Scene** tab of [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md)'s left panel — defines the **starting camera** for your published splat: the view a visitor lands on when they open your [scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md) (unless a [camera animation track](https://developer.playcanvas.com/user-manual/supersplat/editor/timeline.md) or [annotation](https://developer.playcanvas.com/user-manual/supersplat/studio/annotations.md) drives the start pose instead). The camera has a **position**, a **target** (the point it looks at), and a **field of view**.
+The **Cameras** section — in the **Scene** tab of [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md)'s left panel — defines the **starting camera** for your published splat: the view a visitor lands on when they open your [scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md) (unless a [camera animation track](https://developer.playcanvas.com/user-manual/supersplat/editor/timeline.md) drives the start instead). The camera has a **position**, a **target** (the point it looks at), and a **field of view**.
 
 [Image: The Cameras panel with a list of cameras]
 
@@ -53,7 +53,8 @@ Use [camera edit mode](https://developer.playcanvas.com/user-manual/supersplat/s
 
 ## How cameras are used
 
-- **Initial framing** — the first camera in the list is the default starting view when a visitor opens the scene page (`startMode: 'default'`). A [camera animation track](https://developer.playcanvas.com/user-manual/supersplat/editor/timeline.md) or an [annotation](https://developer.playcanvas.com/user-manual/supersplat/studio/annotations.md) can override this via the scene's start mode.
+- **Initial framing** — the first camera in the list is the default starting view when a visitor opens the scene page (`startMode: 'default'`). From there the viewer plays a slow, looping camera motion until the visitor takes over: an orbit around the target when the camera starts outside the splat (an object), or a gentle figure-eight when it starts inside (a scene). A [camera animation track](https://developer.playcanvas.com/user-manual/supersplat/editor/timeline.md) replaces that motion when the scene's start mode is `animTrack`.
+- **Object or scene** — whether the camera starts outside or inside the splat's bounds also decides the viewer's starting [camera mode](https://developer.playcanvas.com/user-manual/supersplat/viewer/controls.md#camera-modes) (orbit for an object, walk or fly for a scene) and how the splat is presented in [VR and AR](https://developer.playcanvas.com/user-manual/supersplat/viewer/xr.md#scenes-and-objects).
 - **Annotation poses** — each [annotation](https://developer.playcanvas.com/user-manual/supersplat/studio/annotations.md) embeds its own camera pose that the viewer animates to when the annotation is selected. The annotation's pose is independent of the entries in the Cameras list.
 
 ## See also

@@ -17,7 +17,11 @@ Select the active splat, then choose a tool from the bottom toolbar:
 - **Rotate** (`2`) rotates the target.
 - **Scale** (`3`) scales the target.
 
-Drag the gizmo handles in the viewport. For precise values, edit **Position**, **Rotation**, and uniform **Scale** in the **Transform** panel below the Scene Manager. Transform operations can be undone and redone.
+Drag the gizmo handles in the viewport. For precise values, edit **Position**, **Rotation**, and uniform **Scale** in the **Transform** section below the Scene Manager's splat list (click its header to collapse or expand it). Transform operations can be undone and redone.
+
+### Copy and Paste a Transform
+
+Right-click the **Transform** header and choose **Copy** to copy the whole transform, or right-click the **Position**, **Rotation**, or **Scale** row to copy just that value. Values are copied at full precision as plain JSON text, for example `{"position":[1.5,0,-2],"rotation":[0,90,0],"scale":1}`, so they can be pasted back into the Editor, into another splat, or into any text field. **Paste** on the header accepts any subset of these keys, so `{"scale":2}` changes only the scale; **Paste** on a row accepts a bare value such as `[1.5,0,-2]` or a copied section. A paste is a single undo step. Invalid clipboard contents change nothing and briefly flash the target red.
 
 Gizmos start in the splat's local coordinate space. Press `Shift + C` (or the coordinate-space toggle in the bottom toolbar) to switch between local and world space.
 
@@ -33,18 +37,22 @@ Moving the pivot does not move the splat until you use a transform control. Pivo
 
 ## Orient a Splat to the Grid
 
-The Orient tool levels a mis-rotated splat — a Z-up import, a tilted capture, or an upside-down scan — by aligning a plane picked on its surface to the grid:
+The Orient tool levels a mis-rotated splat — a Z-up import, a tilted capture, or an upside-down scan — by aligning a plane or a vertical line picked on its surface to the grid:
 
 1. Activate **Orient** in the bottom toolbar.
-2. Click three points on a surface that should be level, such as a floor or table top.
+2. Click points on the splat:
+   - **Three points** on a surface that should be level, such as a floor or table top, define a plane.
+   - **Two points** on an edge that should be vertical, such as a door frame or column, define a line. Click the bottom point first, then the top. Use this when the capture has no usable floor.
 3. Click a placed point and use its move gizmo to refine the position. `Delete` or `Backspace` removes the active point, **Clear** removes all of them, and `F` frames the points in the viewport.
-4. Press **Align to Grid**. The whole active splat rotates and translates so the picked plane lands exactly on the grid plane, pivoting around the picked points so the clicked region stays in place.
+4. Press **Align to Grid**.
+   - With three points, the whole active splat rotates and translates so the picked plane lands exactly on the grid plane, pivoting around the picked points so the clicked region stays in place. The side of the plane facing the camera becomes up. If the result is upside down, orbit underneath the plane and press **Align to Grid** again.
+   - With two points, the whole active splat rotates about the midpoint of the line so the line points straight up from the grid, from the first point to the second. Click order sets the direction, so tilted, sideways, and upside-down captures all level in one step. The splat is not moved onto the grid, because a line does not define a floor.
 
-The side of the plane facing the camera becomes up. If the result is upside down, orbit underneath the plane and press **Align to Grid** again. When the picked plane is within 3 degrees of one of the splat's own axes, the rotation snaps to that axis, so conventional Z-up imports produce exact quarter turns.
+When the picked plane or line is within 3 degrees of one of the splat's own axes, the rotation snaps to that axis, so conventional Z-up imports produce exact quarter turns.
 
-Alignment applies to the whole active splat regardless of any Gaussian selection and is recorded as a single undoable operation. The grid is displayed while the tool is active, even if hidden. The target is the first grid plane enabled under **Planes** in the [Overlays](https://developer.playcanvas.com/user-manual/supersplat/editor/interface.md#overlays) popup: XZ by default, or XY or YZ if you have turned XZ off.
+Alignment applies to the whole active splat regardless of any Gaussian selection and is recorded as a single undoable operation. The grid is displayed while the tool is active, even if hidden. The target is the first grid plane enabled under **Planes** in the [Overlays](https://developer.playcanvas.com/user-manual/supersplat/editor/interface.md#overlays) popup: XZ by default, or XY or YZ if you have turned XZ off. With two points, "up" is the axis perpendicular to that plane: +Y for XZ, +Z for XY, and +X for YZ.
 
-With three points placed, the pivot button in the bottom toolbar changes to **Set Pivot**. Instead of moving the splat, it stores the picked plane as the splat's pivot and local frame: local-space gizmos and the **Transform** panel then work in that frame. This is useful for transforming along a surface's own axes without rotating the splat itself.
+While Orient is active, the pivot button in the bottom toolbar becomes **Set Pivot**. With three points placed, it stores the picked plane as the splat's pivot and local frame instead of moving the splat: local-space gizmos and the **Transform** section then work in that frame. This is useful for transforming along a surface's own axes without rotating the splat itself.
 
 ## Align Multiple Splats
 

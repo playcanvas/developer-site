@@ -2540,7 +2540,7 @@ Apply when writing `.html` outputs.
 
 :::note
 
-See the [SuperSplat Viewer Settings Schema](https://github.com/playcanvas/supersplat-viewer?tab=readme-ov-file#settings-schema) for details on how to pass data to the `--viewer-settings` option. The settings are validated before the page is written, so an invalid file fails the run instead of producing a viewer that renders nothing.
+See the [SuperSplat Viewer Settings Schema](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md) for details on how to pass data to the `--viewer-settings` option. The settings are validated before the page is written, so an invalid file fails the run instead of producing a viewer that renders nothing.
 
 :::
 
@@ -2727,7 +2727,7 @@ Depth of field and motion blur resolve visibility separately for each sample, th
 
 ## Camera Animations
 
-`--camera-track` renders a camera animation as a numbered frame sequence instead of a single view. The track can come from a [SuperSplat](https://developer.playcanvas.com/user-manual/supersplat.md) editor project, a [viewer settings](https://github.com/playcanvas/supersplat-viewer?tab=readme-ov-file#settings-schema) `settings.json` with `animTracks`, or a plain frame list. A saved `.ssproj` is a ZIP archive, so extract it first and pass the extracted directory or its `document.json`. A frame list looks like this:
+`--camera-track` renders a camera animation as a numbered frame sequence instead of a single view. The track can come from a [SuperSplat](https://developer.playcanvas.com/user-manual/supersplat.md) editor project, a [viewer settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md) `settings.json` with `animTracks`, or a plain frame list. A saved `.ssproj` is a ZIP archive, so extract it first and pass the extracted directory or its `document.json`. A frame list looks like this:
 
 ```json
 {

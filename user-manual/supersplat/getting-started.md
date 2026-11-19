@@ -30,10 +30,10 @@ If the scene is on its side or upside down, select it in the **Scene Manager** a
 
 Most raw captures contain **floaters**: stray Gaussians hanging in space where the trainer wasn't sure what it saw. Removing them is the single biggest quality win.
 
-1. Turn on **Selection Depth** (the second toggle at the left of the bottom toolbar, or press **N**) so selections stop at the visible surface, and press **Tab** to show the Gaussian centers.
+1. Turn off **X-Ray** on the mode strip at the top right of the viewport (or press **N**) so selections stop at the visible surface, and turn on **Markers** (or press **Tab**) to show the Gaussian centers.
 2. Pick a selection tool from the toolbar: **Brush Selection** to paint over floaters, **Sphere Brush** to paint in 3D along a surface, **Sphere Selection** or **Box Selection** to grab a 3D region, or **Flood Selection** for an isolated patch. Hold **Shift** to add to the selection and **Ctrl** to remove from it.
 3. Press <kbd>Delete</kbd>. Rotate the camera, check from another angle, and repeat.
-4. Removed too much? Use **Edit → Undo**, or **Select → Reset** to restore every deleted Gaussian.
+4. Removed too much? Use **Edit → Undo**, or **Select → Reset Splat** to restore every deleted Gaussian.
 
 [Image: Selected Gaussians highlighted among the centers of the rest]
 

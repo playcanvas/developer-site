@@ -33,13 +33,16 @@ To publish your splat:
    | **Publish to** | Select where to publish your scene. Choose **New Scene** (default) to publish a brand new scene on a new URL, or select one of your existing published scenes from the dropdown to overwrite it |
    | **Title** | A short title that will appear below your splat's thumbnail once it is published |
    | **Description** | A textual description of your splat that will be displayed under the splat on its viewer page |
-   | **Background** | The background color of the viewer. Defaults to the Editor's current background color (set in the [Appearance](https://developer.playcanvas.com/user-manual/supersplat/editor/interface.md#appearance) popup) |
+   | **Background** | The background color of the viewer. Defaults to the Editor's current background color (set in the **Colors** section of the [Preferences](https://developer.playcanvas.com/user-manual/supersplat/editor/interface.md#preferences) popup) |
    | **Field of View** | The vertical field of view of the viewer's camera in degrees. Defaults to the Editor camera's current setting |
    | **Animation** | If enabled, the camera animation authored on the [Timeline](https://developer.playcanvas.com/user-manual/supersplat/editor/timeline.md) is baked into the scene and plays when it loads. Only available when the Timeline has keyframes (and enabled by default in that case) |
    | **Loop Mode** | How an included camera animation plays back in the viewer:<br/>• **None**: Play once and stop<br/>• **Repeat**: Loop continuously<br/>• **Ping Pong**: Play forwards, then backwards, repeatedly<br/>Initialized from the Timeline's Loop toggle - **Repeat** if looping is enabled, **None** otherwise |
-   | **Generate LODs** | Generate levels of detail so the published splat is streamed progressively. Automatically enabled for scenes with 1 million or more splats that span a large area. See [Streaming & Performance](https://developer.playcanvas.com/user-manual/supersplat/streaming.md) |
+   | **SH Bands** | The number of spherical harmonic bands to publish (0–3). Defaults to the highest band count in the scene, capped by the **SH Bands** setting in [Preferences](https://developer.playcanvas.com/user-manual/supersplat/editor/interface.md#preferences). Choosing more bands than the scene contains fills the missing ones with zeros |
+   | **Generate LODs** | Generate levels of detail so the published splat is streamed progressively. Automatically enabled for scenes with 1 million or more splats that span a large area. Scenes with more than 40 million splats (not counting deleted ones) must be published with LODs: the toggle is switched on and disabled, with a note saying it is required. See [Streaming & Performance](https://developer.playcanvas.com/user-manual/supersplat/streaming.md) |
 
 4. Select `Publish`.
+
+If your account cannot publish another model right now, the dialog says why and `Publish` is disabled. This happens when you have used today's publishing allowance (the message says when you can publish again) or when you already have the maximum number of scenes processing (you can publish again when one finishes). Updating only the animation of an existing scene is still allowed, since no model is uploaded.
 
 The published scene's camera starts at the pose your viewport camera has at the moment you publish, so frame your favorite view before opening the dialog.
 
@@ -55,11 +58,11 @@ It may take several minutes to compress your splat to SOG format during the publ
 
 :::
 
-Once the publish process is complete, a modal dialog will show with the URL of your published splat. Copy it and share it with whoever you like.
+Once the publish process is complete, a modal dialog will show with the URL of your published splat. Copy it and share it with whoever you like. If publishing fails, the **Publish Failed** dialog shows the error, including the reason given by superspl.at when it refuses an upload.
 
 ## Republishing to an Existing Scene
 
-Setting **Publish to** to one of your existing scenes overwrites that scene in place, keeping its URL. In this mode, two toggles choose what gets replaced:
+Setting **Publish to** to one of your existing scenes overwrites that scene in place, keeping its URL. In this mode, two toggles choose what gets replaced (**SH Bands** and **Generate LODs** are hidden when only the animation is replaced):
 
 | Option | Description |
 |--------|-------------|

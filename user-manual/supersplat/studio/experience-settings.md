@@ -19,7 +19,7 @@ type ExperienceSettings = {
 
     background: {
         color: [number, number, number]; // RGB, 0-1
-        skyboxUrl?: string;              // optional .webp/.jpg/.png URL
+        skyboxUrl?: string;              // optional .webp/.jpg/.png URL (see below)
     };
 
     postEffectSettings: {
@@ -30,7 +30,7 @@ type ExperienceSettings = {
         fringing:   { enabled: boolean; intensity: number };
     };
 
-    cameras: Array<{
+    cameras: Array<{                    // the viewer uses the first camera
         initial: {
             position: [number, number, number];
             target:   [number, number, number];
@@ -38,7 +38,7 @@ type ExperienceSettings = {
         };
     }>;
 
-    animTracks: Array<{
+    animTracks: Array<{                 // the viewer plays the first track
         name: string;
         duration: number;       // seconds
         frameRate: number;
@@ -46,7 +46,7 @@ type ExperienceSettings = {
         interpolation: 'step' | 'spline';
         smoothness: number;     // 0-1
         keyframes: {
-            times: number[];
+            times: number[];    // in frames, ascending
             values: {
                 position: number[]; // flat array of [x, y, z] per keyframe
                 target:   number[]; // flat array of [x, y, z] per keyframe
@@ -58,14 +58,14 @@ type ExperienceSettings = {
     annotations: Array<{
         position: [number, number, number];
         title: string;
-        text: string;                          // sanitized HTML
+        text: string;                          // shown as plain text
         camera: { initial: { position: [number, number, number]; target: [number, number, number]; fov: number } };
-        extras: Record<string, unknown>;
+        extras?: Record<string, unknown>;
     }>;
 
-    // 'default'   — start at the first camera in `cameras`
-    // 'animTrack' — start by playing the first track in `animTracks`
-    // 'annotation' — start positioned at the first annotation's camera pose
+    // 'default'    — start at the first camera in `cameras`
+    // 'animTrack'  — start by playing the first track in `animTracks`
+    // 'annotation' — accepted, but the viewer currently starts as for 'default'
     startMode: 'default' | 'animTrack' | 'annotation';
 
     hasStartPose?: boolean;
@@ -84,6 +84,64 @@ Most fields are authored in a Studio panel or control; the exception is `animTra
 | `annotations` | [Annotations](https://developer.playcanvas.com/user-manual/supersplat/studio/annotations.md) |
 | `startMode`, `hasStartPose` | Initial values set when publishing from the Editor; adjustable via the Studio header / startup configuration |
 | Collision voxel data | Stored separately as a [Scene Asset](https://developer.playcanvas.com/user-manual/supersplat/studio/collision.md), not in this JSON |
+
+## How the viewer reads it
+
+A few fields behave in ways the schema alone doesn't show:
+
+- **`background.skyboxUrl`** — the viewer doesn't load the skybox from the settings. When you host the viewer yourself, pass the image with the `skybox` [URL parameter](https://developer.playcanvas.com/user-manual/supersplat/viewer/embedding.md#url-parameters) or the `skyboxUrl` option.
+- **`soundUrl`** — the sound starts on the visitor's first click in the viewer, since browsers block audio that plays on its own.
+- **`cameras` and `animTracks`** — the format allows several, but the viewer uses only the first camera and plays only the first track.
+- **`annotations[].text`** — shown as plain text, so HTML markup isn't rendered.
+- **`startMode: 'annotation'`** — accepted, but the viewer starts as it does for `default`.
+
+## Authoring limits
+
+The viewer renders whatever the schema allows, but tools that write settings should keep to these bounds, which `validateSettings(settings, { limits: true })` checks:
+
+| Field | Limit |
+|-------|-------|
+| Camera and annotation `fov` | 10 to 120 degrees |
+| `annotations` | At most 50, each with a `title` of up to 60 characters and `text` of up to 280 |
+| `animTracks` | At most 10, each with a `name` of up to 120 characters, a `duration` of 0.1 to 600 seconds, a whole `frameRate` of 1 to 120, a `smoothness` of 0 to 1, and 1 to 1,000 keyframes at whole, ascending frame numbers |
+| `sharpness.amount` | 0 to 1 |
+| `bloom.intensity` / `bloom.blurLevel` | 0 to 0.1 / 1 to 16 |
+| `grading.brightness` / `contrast` / `saturation` | 0 to 3 / 0.5 to 1.5 / 0 to 2 |
+| `vignette.intensity` / `inner` / `outer` / `curvature` | 0 to 1 / 0 to 3 / 0 to 3 / 0.01 to 10 |
+| `fringing.intensity` | 0 to 100 |
+
+Some settings already published fall outside these bounds, such as a `bloom.intensity` of `1` from older defaults, so the viewer doesn't enforce these limits when it loads a file.
+
+## Generating and validating settings
+
+The viewer's npm package exports the schema types and helpers from its `/settings` entry, so a pipeline can write settings the viewer accepts:
+
+```ts
+import {
+    defaultSettings,
+    importSettings,
+    validateSettings,
+    POST_EFFECT_RANGES,
+    type ExperienceSettings
+} from '@playcanvas/supersplat-viewer/settings';
+
+// a complete settings object; pass 'object' to frame a subject from outside
+const settings: ExperienceSettings = defaultSettings();
+
+// throws on invalid input, naming the offending field
+validateSettings(json);
+
+// also check the authoring limits
+validateSettings(json, { limits: true });
+
+// migrates v1 settings to v2, without changing its argument
+const migrated = importSettings(json);
+
+// the bounds are data, so an editor UI can drive its sliders from them
+const { min, max, step } = POST_EFFECT_RANGES.bloom.intensity;
+```
+
+`CAMERA_FOV_RANGE`, `POST_EFFECT_RANGES`, `ANIM_TRACK_LIMITS` and `ANNOTATION_LIMITS` export the limits above as data. `defaultSettings()` gives the camera an `85` degree field of view, at position `[0, 2, 0]` looking at `[2, 2, 0]`, or with `'object'`, at `[2, 2, -2]` looking at `[0, 0, 0]`.
 
 ## Defaults
 
@@ -105,5 +163,6 @@ Older `v1` settings are migrated to `v2` automatically when loaded by Studio or 
 ## See also
 
 - [Viewer / embedding](https://developer.playcanvas.com/user-manual/supersplat/viewer/embedding.md) — how to point a Viewer at a `settings.json` URL
+- [Viewer API](https://developer.playcanvas.com/user-manual/supersplat/viewer/api.md) — pass settings to a viewer you create in your own page
 - [Viewer / self-hosting](https://developer.playcanvas.com/user-manual/supersplat/viewer/self-hosting.md) — exporting a self-contained Viewer that bundles a copy of these settings
 - [Splat Publishing API](https://developer.playcanvas.com/user-manual/api/splat-publish/) — programmatic access to publishing and updating settings

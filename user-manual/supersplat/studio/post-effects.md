@@ -72,6 +72,11 @@ A dropdown that picks how the renderer maps HDR output to the display:
 
 A toggle (default **off**) that enables a more accurate rendering path. Useful when bright highlights, fine color grading, or post-effects show banding in the default path — at the cost of more GPU work per frame.
 
+## In the viewer
+
+- **VR and AR** — post effects and high precision rendering aren't applied during a [VR or AR session](https://developer.playcanvas.com/user-manual/supersplat/viewer/xr.md). The scene's tonemapping still is, and everything returns when the session ends.
+- **Self-hosting** — when you [host the viewer yourself](https://developer.playcanvas.com/user-manual/supersplat/viewer/embedding.md#url-parameters), the `nofx` URL parameter turns post effects off, and `hpr` overrides High Precision Rendering.
+
 ## See also
 
 - [Skybox](https://developer.playcanvas.com/user-manual/supersplat/studio/skybox.md) — background color and skybox image

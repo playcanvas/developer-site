@@ -16,10 +16,9 @@ On macOS, shortcuts shown with `Ctrl` use `Cmd` for application commands such as
 | Delete selected Gaussians | `Delete` or `Backspace` | `Delete` or `Backspace` |
 | Lock selection | `H` | `H` |
 | Unlock all | `Shift + H` | `Shift + H` |
-| Toggle Selection Depth | `N` | `N` |
-| Toggle Selection Footprint | `M` | `M` |
+| Toggle X-Ray | `N` | `N` |
 
-For Rectangle, Lasso, Polygon, Brush, Sphere Brush, Flood, and Eyedropper selections, hold `Shift` to add, `Ctrl` to remove, or `Shift + Ctrl` to intersect with the current selection. [Selection Depth and Footprint](https://developer.playcanvas.com/user-manual/supersplat/editor/editing-splats.md#selection-depth-and-footprint) explains what `N` and `M` change.
+For Rectangle, Lasso, Polygon, Brush, Sphere Brush, Flood, and Eyedropper selections, hold `Shift` to add, `Ctrl` to remove, or `Shift + Ctrl` to intersect with the current selection. [Selection Mode and X-Ray](https://developer.playcanvas.com/user-manual/supersplat/editor/editing-splats.md#selection-mode-and-x-ray) explains what `N` and `M` change.
 
 ## Tools and View
 
@@ -36,7 +35,8 @@ For Rectangle, Lasso, Polygon, Brush, Sphere Brush, Flood, and Eyedropper select
 | Remove the active Measure or Orient point | `Delete` or `Backspace` |
 | Deactivate current tool | `Escape` |
 | Toggle world/local coordinates | `Shift + C` |
-| Toggle display overlays | `Tab` |
+| Toggle Centers/Rings mode | `M` |
+| Toggle markers | `Tab` |
 | Toggle grid | `G` |
 | Toggle camera info | `I` |
 | Toggle Splat Data panel | `Ctrl + D` (`Cmd + D` on macOS) |

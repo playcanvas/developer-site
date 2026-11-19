@@ -2,24 +2,28 @@
 
 Select a splat in the **Scene Manager** before editing it. Gaussian selection and cleanup operations apply only to that active splat, even when several splats are visible.
 
-## Selection Depth and Footprint
+## Selection Mode and X-Ray
 
-Two toggles at the left of the bottom toolbar control how every selection tool decides which Gaussians it hits. Both are off when you first open the Editor.
+The [mode strip](https://developer.playcanvas.com/user-manual/supersplat/editor/interface.md#mode-strip) beside the View Cube controls how the 2D selection tools decide which Gaussians they hit, and shows you what a drag would select.
 
-| Toggle | Shortcut | Off (default) | On |
+| Control | Shortcut | Setting | Effect |
 |---|---|---|---|
-| **Selection Depth** | `N` | Selects through the whole scene: every Gaussian under the tool's shape is picked, regardless of what is in front of it. | Selects only the visible surface: Gaussians hidden behind others are left alone. Turn this on to clean the surface of a scene without punching through it. |
-| **Selection Footprint** | `M` | Selects by center: a Gaussian is picked when its center point falls inside the tool's shape. | Selects by footprint: a Gaussian is picked when any part of its projected ellipse falls inside the shape, so large, soft Gaussians at the edge of a selection are included. |
+| **Centers** / **Rings** | `M` | **Centers** (default) | Selects by center: a Gaussian is picked when its center point falls inside the tool's shape. A dot marks each Gaussian center. |
+| | | **Rings** | Selects by footprint: a Gaussian is picked when any part of its projected ellipse falls inside the shape, so large, soft Gaussians at the edge of a selection are included. A ring outlines each footprint. |
+| **X-Ray** | `N` | On (default) | Selects through the whole scene: every Gaussian under the tool's shape is picked, regardless of what is in front of it. |
+| | | Off | Selects only the visible surface: Gaussians hidden behind others are left alone. Turn X-Ray off to clean the surface of a scene without punching through it. |
 
-The viewport can show what the tools are testing: with Selection Footprint off, a dot marks each Gaussian center; with it on, a ring outlines each footprint. Selected Gaussians are highlighted in the selection color (yellow by default) and unselected ones in blue. These overlays are drawn according to the [Appearance](https://developer.playcanvas.com/user-manual/supersplat/editor/color-and-appearance.md#appearance) popup, where you can change their size, thickness, tint strength, and colors.
+The mode, Markers, and X-Ray settings are remembered between sessions.
 
-[Image: Gaussian centers shown while selecting by center]
+[Image: Gaussian centers shown in Centers mode]
 
-[Image: Gaussian rings shown while selecting by footprint]
+[Image: Gaussian rings shown in Rings mode]
 
-### Display Overlays
+### Markers
 
-Press `Tab` to toggle the center and ring overlays on and off. They are off when the Editor starts, so you see the plain rendered splat; press `Tab` (or turn on a Display toggle in Appearance) when you want to see the individual Gaussians while you work. Hiding the overlays does not change how selection works — Selection Depth and Footprint are independent of what is drawn — and the highlight on selected Gaussians stays visible.
+The center dots and rings are called markers. Press `Tab` (or click **Markers** on the mode strip) to show or hide them on the unselected Gaussians. Markers are off by default, so you see the plain rendered splat; switching mode turns them on. Hiding the markers does not change how selection works, and selected Gaussians keep their indicators: a dot or ring in the selection color (yellow by default).
+
+A marker's color shows its selection state. Selected markers always use the selection color. Unselected center dots use the unselected color (blue by default), while unselected rings take the colors of their Gaussians. With X-Ray off, unselected markers are drawn only on the Gaussians a selection could reach from the current view, so you can see what a drag would pick before you make it. Selected markers are always drawn. Marker size, colors, and the selection tint and outline are set from the mode strip's press-and-hold menus; see [Markers and Selection Display](https://developer.playcanvas.com/user-manual/supersplat/editor/color-and-appearance.md#appearance).
 
 Locked and deleted Gaussians cannot be selected. Fully transparent Gaussians can, which makes it possible to clean up invisible leftovers that still cost memory and rendering time.
 
@@ -60,9 +64,9 @@ The 3D volume tools (Sphere Selection and Box Selection) have **Set**, **Add**, 
 
 ## Lock, Delete, and Restore
 
-Use **Select > Lock** or press `H` to lock the selected Gaussians. Locking clears the selection and prevents those Gaussians from being selected or deleted. This is useful for protecting a finished area while you clean nearby geometry. Choose **Select > Unlock** or press `Shift + H` to unlock all locked Gaussians in the active splat.
+Use **Select > Lock Selection** or press `H` to lock the selected Gaussians. Locking clears the selection and prevents those Gaussians from being selected or deleted. This is useful for protecting a finished area while you clean nearby geometry. Choose **Select > Unlock All** or press `Shift + H` to unlock all locked Gaussians in the active splat.
 
-Delete selected Gaussians with **Select > Delete**, `Delete`, or `Backspace`. Deletion is non-destructive while you edit: use Undo to reverse the latest deletion, or choose **Select > Reset** to restore all deleted Gaussians in the active splat. Reset does not unlock locked Gaussians.
+Delete selected Gaussians with **Select > Delete Selection**, `Delete`, or `Backspace`. Deletion is non-destructive while you edit: use Undo to reverse the latest deletion, or choose **Select > Reset Splat** to restore all deleted Gaussians in the active splat. Reset Splat does not unlock locked Gaussians.
 
 Lock, unlock, delete, and reset operations are recorded in the edit history. Removing an entire row from the Scene Manager is different and cannot be undone.
 
@@ -79,7 +83,7 @@ Both operations can be undone and are useful for giving one region its own trans
 
 ### Remove Floaters
 
-1. Turn on **Selection Depth** (`N`) so selections stop at the visible surface, and press `Tab` if you want to see the Gaussian centers while you work.
+1. Turn off **X-Ray** (`N`) so selections stop at the visible surface, and press `Tab` if you want to see the markers while you work.
 2. Use Flood Selection for an isolated patch, or Lasso, Brush, Sphere Brush, Sphere, or Box Selection for a larger region.
 3. Rotate the camera and add to or remove from the selection until the intended geometry is isolated.
 4. Press `Delete` or `Backspace`.
@@ -87,7 +91,7 @@ Both operations can be undone and are useful for giving one region its own trans
 
 ### Crop a Splat
 
-1. Select the region you want to keep with Box, Sphere, Lasso, or Polygon Selection. Leave **Selection Depth** off so the selection reaches through the whole scene.
+1. Select the region you want to keep with Box, Sphere, Lasso, or Polygon Selection. Leave **X-Ray** on so the selection reaches through the whole scene.
 2. Choose **Select > Invert**.
 3. Delete the inverted selection.
 4. Export the cleaned result, or save an `.ssproj` if you want to preserve the splat and project setup.

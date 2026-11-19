@@ -42,7 +42,7 @@ When you select `Image` from the Render menu, a dialog will appear with settings
   - `WebP` - Lossless WebP output with transparency support
 - **Quality:** Only shown for `JPEG`. Set the JPEG quality from 1 to 100 (default 90).
 - **Transparent Background:** If checked, the rendered image will have a transparent background instead of the scene's background color. This is useful for creating images that can be composited over other content or used as overlays. This option is unavailable for JPEG, which does not support transparency.
-- **Show Debug Overlays:** If checked, the viewport's overlays — the grid, and the Gaussian centers or rings when the display overlays are turned on — are rendered into the image. Only available for `Standard` projection.
+- **Show Debug Overlays:** If checked, the viewport's overlays — the grid, and the center or ring markers when **Markers** is on — are rendered into the image. Only available for `Standard` projection.
 - **Level Horizon:** Only shown for `360° Equirectangular` projection. If checked (the default), the image stays level and follows only the camera's heading. If unchecked, the camera's full orientation (including pitch) is baked into the image.
 
 ### Rendering the Image
@@ -57,7 +57,7 @@ The suggested filename uses the project name when one is set, otherwise the firs
 
 ## Video Rendering
 
-Video rendering creates an animated sequence using camera animations from the Timeline.
+Video rendering creates an animated sequence using camera animations from the Timeline. Any [splat sequences](https://developer.playcanvas.com/user-manual/supersplat/editor/timeline.md#splat-sequences) advance with the Timeline, so each video frame shows the matching frame of every sequence.
 
 ### Video Settings
 
@@ -95,7 +95,7 @@ When you select `Video` from the Render menu, a dialog will appear with several 
 - **Frame Range:** Specify the start and end frames from the Timeline to include in your video. By default, the entire Timeline is rendered.
 - **Portrait Mode:** If checked, the resolution will be flipped to be vertical. This is useful if you intend your video to be viewed in portrait on mobile. Only available for `Standard` projection.
 - **Level Horizon:** Only shown for `360° Equirectangular` projection. If checked (the default), the video stays level and follows only the camera's heading, which is generally the most comfortable to watch. If unchecked, the camera's full orientation (including pitch) is baked into the video.
-- **Show Debug Overlays:** If checked, the viewport's overlays — the grid, and the Gaussian centers or rings when the display overlays are turned on — are rendered into the video. Only available for `Standard` projection.
+- **Show Debug Overlays:** If checked, the viewport's overlays — the grid, and the center or ring markers when **Markers** is on — are rendered into the video. Only available for `Standard` projection.
 
 :::note Resolution availability
 
@@ -139,6 +139,6 @@ You can render 360° still images in the same way: set the `Projection` option i
 - **For Videos:** Before rendering, ensure your Timeline animations are smooth and camera movements are polished.
 - **For 360° Videos:** The camera animation drives the viewer's position through the scene. Slow, smooth camera movement is much more comfortable to watch in a VR headset than rapid motion.
 - **For Social Media:** Portrait-mode renders often yield better engagement on mobile platforms.
-- **Debug Overlays:** Enable **Show Debug Overlays** when you need to show the Gaussian structure for educational or technical presentations. Press `Tab` in the Editor first so the centers or rings are visible, and configure them in [Appearance](https://developer.playcanvas.com/user-manual/supersplat/editor/color-and-appearance.md#appearance).
+- **Debug Overlays:** Enable **Show Debug Overlays** when you need to show the Gaussian structure for educational or technical presentations. Press `Tab` in the Editor first so the markers are visible, and choose and configure them on the [mode strip](https://developer.playcanvas.com/user-manual/supersplat/editor/color-and-appearance.md#appearance).
 
 Happy Rendering! 🎬📸

@@ -3,7 +3,7 @@
 By default, splats in the viewer have no physical presence — the camera flies right through them. The **Collision** section in [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md) attaches a **voxel** representation of the scene to your splat so the viewer can collide against it. With collision attached, your splat becomes **walkable** — visitors can navigate it on foot rather than only orbiting or flying around it. The [Explore](https://developer.playcanvas.com/user-manual/supersplat/explore.md) page also surfaces walkable scenes via its `walkable` feature filter.
 
 :::important Scale your splat to real-world units
-For walkable scenes to feel right, scale your splat so that **one unit equals one meter** before adding collision. In walk mode the camera uses a fixed head height of **1.8 m**, so if your scene isn't at real-world scale, it will feel too large or too small to move around in.
+For walkable scenes to feel right, scale your splat so that **one unit equals one meter** before adding collision. In walk mode the viewer holds the camera at an eye height of **1.5 m** above the floor, so if your scene isn't at real-world scale, it will feel too large or too small to move around in. The viewer also offers walk mode only when the scene is at least **5 m** across in both horizontal directions.
 :::
 
 ## What is voxel collision?
@@ -43,6 +43,15 @@ Uploading is the option to reach for when you want **custom collision** — for 
 3. Click **Upload Voxel Pair**. If collision already exists, the button reads **Upload Override** and replaces it.
 
 Upload happens immediately, and the scene becomes walkable on the next viewer reload.
+
+## Collision in the viewer
+
+- **Loading** — the viewer shows the scene without waiting for its collision data, which is often larger than the splat. Walk mode becomes available once the data arrives.
+- **Walk mode** — a **Walk Mode** button joins the toolbar, and walk becomes the scene's default camera mode. See [Viewer Controls](https://developer.playcanvas.com/user-manual/supersplat/viewer/controls.md#camera-modes).
+- **Show Collision** — visitors can draw the voxels over the splat with **Show Collision** in the viewer's settings panel, or by pressing <kbd>V</kbd>. The overlay needs WebGPU.
+- **VR** — in a VR session, visitors teleport onto the collision: only spots where someone could stand are valid targets. See [Viewing in VR and AR](https://developer.playcanvas.com/user-manual/supersplat/viewer/xr.md#moving-around-in-vr).
+
+When you [host the viewer yourself](https://developer.playcanvas.com/user-manual/supersplat/viewer/embedding.md#url-parameters), pass collision with the `collision` URL parameter: a `.voxel.json` file with its `.voxel.bin` beside it, or a `.glb` mesh.
 
 ## See also
 

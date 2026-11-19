@@ -8,31 +8,48 @@ The REST API is currently in beta. This means we may change certain endpoints an
 
 ## Authorization
 
-You can only access the REST API via https. In order to access the REST API you need to use an Access Token. You can generate an Access Token by going to your Organization's Account page.
+You can only access the REST API over HTTPS, and every request needs an API token (also called an access token). You create tokens on the **Security** tab of your [account settings](https://developer.playcanvas.com/user-manual/account-management/user-accounts/settings.md#api-tokens).
 
-[Image: Account Tab]
+API tokens belong to your user account. Organizations don't have tokens of their own, so to call the API on an Organization's projects, use a token from a user account that's on those projects.
 
-In the API Tokens section click on Generate Token.
+### Generating a Token
 
-[Image: Generate Token]
+1. Go to [playcanvas.com/account/security](https://playcanvas.com/account/security), or in the [Project Dashboard](https://developer.playcanvas.com/user-manual/editor/projects/dashboard.md), select your name at the bottom of the sidebar, choose **Account settings** and select the **Security** tab.
+2. Under **API tokens**, select **Generate token**.
+3. Enter a **Name** that says what the token is for, such as `CI publish`, and select **Generate**.
+4. **Your new token** shows the token. Select **Copy**, store the token somewhere safe, such as your CI system's secrets, and select **Done**. You won't be able to see the token again.
 
-Give your token a name and click the button to create your new token. A new window will appear showing you your new access token.
+:::warning
 
-Make sure you note that down because you will not be able to see the token once you close this window. This token is meant to be kept secret so do not share it with anyone other than your team (for example do not post this on forums).
+A token acts as you in the REST API, so keep it secret. Don't commit it to source control, put it in client-side code or post it on the forum. If a token leaks, revoke it and generate a new one.
 
-[Image: New Token]
+:::
 
-From your Account page you can also Revoke all the tokens you have generated or a specific one. You can also edit the name of a token.
+### Managing Your Tokens
 
-[Image: Remove Token]
+**API tokens** lists your tokens, with the date each one was created:
 
-When you make calls to the API you must set the 'Authorization' header in your HTTP request to this value:
+- **Rename** changes a token's name.
+- **Revoke** revokes that token.
+- **Revoke all** revokes all of your tokens.
+
+Both kinds of revoke ask you to confirm first. Scripts and tools that use a revoked token stop working straight away.
+
+:::note
+
+Tokens created before 5 November 2026 stop working on 19 November 2026. If your scripts and tools use an older token, generate a new one and swap it in. See the [forum announcement](https://forum.playcanvas.com/t/api-tokens-generate-a-new-one-by-19-november/42758).
+
+:::
+
+### Using a Token
+
+Set the `Authorization` header of every request to this value:
 
 ```none
 Bearer [access_token]
 ```
 
-Replace `[access_token]` with an Access Token you generated in your Account page.
+Replace `[access_token]` with your API token.
 
 For example:
 

@@ -4,7 +4,7 @@ SuperSplat supports the `.ssproj` file format, allowing you to save and reload y
 
 ## Features of `.ssproj` Files
 
-* Full Project Save: Stores every imported splat with its edits, transform, pivot, and applied color grades, plus the camera, view settings such as the grid planes, and the timeline animation.
+* Full Project Save: Stores every imported splat with its edits, transform, pivot, and applied color grades, plus the camera, view settings such as the grid planes and the [Anti-Aliasing](https://developer.playcanvas.com/user-manual/supersplat/editor/interface.md#preferences) setting, and the timeline animation.
 * Easy Reloading: Load a saved project file to restore the exact state of your work.
 * Portability: Share `.ssproj` files with others to collaborate on projects.
 
@@ -29,6 +29,8 @@ To load a previously saved `.ssproj` file:
 * If you have installed SuperSplat as an app, double-click the `.ssproj` file in File Explorer (Windows) or Finder (macOS).
 
 SuperSplat restores the project to its last saved state.
+
+If the browser blocks reading the file you picked, SuperSplat shows a **File Access Blocked** message; click **OK** and choose the file again in the browser's file dialog. A project opened this way keeps its name, but **Save** asks where to write it, as it does in browsers without the File System Access API.
 
 ## File Structure
 

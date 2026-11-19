@@ -12,7 +12,7 @@ Use this index to edit, publish, present or embed splats. To render splats in yo
     - Studio curates a published splat: its starting camera, annotations, post effects, skybox and walkable collision.
     - The SuperSplat Viewer shows scenes on superspl.at, and can be embedded in your own site or self-hosted.
     - [Convert](https://superspl.at/convert) runs SplatTransform in the browser.
-    - The SuperSplat API publishes splats from capture tools and pipelines.
+    - The SuperSplat API publishes splats from capture tools and pipelines, and downloads scenes whose owners allow it.
 - **Publish from code with the SuperSplat API**, authenticated with a PlayCanvas access token (`Authorization: Bearer <token>`). Its endpoints are in the [OpenAPI specification](https://playcanvas.com/api/supersplat/openapi.json).
 - **Embed the Viewer** from the `@playcanvas/supersplat-viewer` npm package, or export a self-contained HTML viewer from the Editor to host yourself.
 - **Published splats are compressed to SOG**, and large scenes stream as Streamed SOG within a runtime Gaussian budget.
@@ -37,13 +37,14 @@ Use this index to edit, publish, present or embed splats. To render splats in yo
 - [Rendering Media](https://developer.playcanvas.com/user-manual/supersplat/editor/rendering.md): Rendering images and videos, including 360° output.
 - [Managing Projects](https://developer.playcanvas.com/user-manual/supersplat/editor/managing-projects.md): Saving edits as `.ssproj` project files.
 - [Publishing](https://developer.playcanvas.com/user-manual/supersplat/editor/publishing.md): Publishing a splat from the Editor to superspl.at.
+- [AI Agents (WebMCP)](https://developer.playcanvas.com/user-manual/supersplat/editor/webmcp.md): Letting an AI agent inspect and edit the open Editor scene through the browser's experimental WebMCP API.
 - [Troubleshooting](https://developer.playcanvas.com/user-manual/supersplat/editor/troubleshooting.md): Fixing common problems with imports, selection, exports, performance and publishing.
 
 ## Publishing and Studio
 
 - [Direct Upload](https://developer.playcanvas.com/user-manual/supersplat/upload.md): Uploading a finished splat file to superspl.at without the Editor.
 - [Manage](https://developer.playcanvas.com/user-manual/supersplat/manage.md): Listing, editing, sharing and deleting your published splats.
-- [Streaming & Performance](https://developer.playcanvas.com/user-manual/supersplat/streaming.md): How published splats are compressed and streamed, and the Gaussian budget.
+- [Streaming & Performance](https://developer.playcanvas.com/user-manual/supersplat/streaming.md): How published splats are compressed and streamed, the Gaussian budget, and the Viewer's Quality and Performance Mode settings.
 - [SuperSplat Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md): Curating a published splat's viewing experience.
 - [Cameras](https://developer.playcanvas.com/user-manual/supersplat/studio/cameras.md): The starting camera and field of view.
 - [Annotations](https://developer.playcanvas.com/user-manual/supersplat/studio/annotations.md): Clickable 3D hotspots that guide visitors through a scene.
@@ -56,9 +57,12 @@ Use this index to edit, publish, present or embed splats. To render splats in yo
 ## Viewer and API
 
 - [SuperSplat Viewer](https://developer.playcanvas.com/user-manual/supersplat/viewer.md): The open-source viewer behind scene pages.
-- [Embedding the Viewer](https://developer.playcanvas.com/user-manual/supersplat/viewer/embedding.md): Embedding it in your own app from npm, with URL parameters or templating.
+- [Viewer Controls](https://developer.playcanvas.com/user-manual/supersplat/viewer/controls.md): Navigating a scene in the Viewer: toolbar, orbit, fly and walk, the Controls, Settings and Info panels, shortcuts, touch and annotations.
+- [Viewing in VR and AR](https://developer.playcanvas.com/user-manual/supersplat/viewer/xr.md): VR and AR sessions in the Viewer: teleporting, grabbing and scaling, AR placement and the hand menu.
+- [Embedding the Viewer](https://developer.playcanvas.com/user-manual/supersplat/viewer/embedding.md): Hosting the prebuilt viewer with URL parameters, or rendering a page with `renderViewerHtml`.
+- [Viewer API](https://developer.playcanvas.com/user-manual/supersplat/viewer/api.md): Creating and controlling viewer instances in your own app with `createViewer`.
 - [Self-Hosting the Viewer](https://developer.playcanvas.com/user-manual/supersplat/viewer/self-hosting.md): Exporting a splat as a self-contained HTML viewer to host anywhere.
-- [API & Integrations](https://developer.playcanvas.com/user-manual/supersplat/api-integrations.md): Publishing splats and listing a user's scenes from capture tools, training pipelines and apps.
+- [API & Integrations](https://developer.playcanvas.com/user-manual/supersplat/api-integrations.md): Publishing splats and listing a user's scenes from capture tools, training pipelines and apps, and downloading scenes whose owners allow it.
 - [SuperSplat API specification](https://playcanvas.com/api/supersplat/openapi.json): The OpenAPI definition of every endpoint.
 - [Convert](https://developer.playcanvas.com/user-manual/supersplat/convert.md): Converting and transforming splats in the browser at superspl.at/convert.
 
@@ -69,7 +73,7 @@ Use this index to edit, publish, present or embed splats. To render splats in yo
 
 ## Optional
 
-- [All pages of this index in one file](https://developer.playcanvas.com/user-manual/supersplat/llms-full.txt): 36 pages (202 KB), for downloading and searching rather than reading into context.
+- [All pages of this index in one file](https://developer.playcanvas.com/user-manual/supersplat/llms-full.txt): 40 pages (280 KB), for downloading and searching rather than reading into context.
 - [Camera Controls](https://developer.playcanvas.com/user-manual/supersplat/editor/camera-controls.md)
 - [Keyboard Shortcuts](https://developer.playcanvas.com/user-manual/supersplat/editor/keyboard-shortcuts.md)
 - [Explore](https://developer.playcanvas.com/user-manual/supersplat/explore.md)

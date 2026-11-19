@@ -224,7 +224,7 @@ Apply when writing `.html` outputs.
 
 :::note
 
-See the [SuperSplat Viewer Settings Schema](https://github.com/playcanvas/supersplat-viewer?tab=readme-ov-file#settings-schema) for details on how to pass data to the `--viewer-settings` option. The settings are validated before the page is written, so an invalid file fails the run instead of producing a viewer that renders nothing.
+See the [SuperSplat Viewer Settings Schema](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md) for details on how to pass data to the `--viewer-settings` option. The settings are validated before the page is written, so an invalid file fails the run instead of producing a viewer that renders nothing.
 
 :::
 
