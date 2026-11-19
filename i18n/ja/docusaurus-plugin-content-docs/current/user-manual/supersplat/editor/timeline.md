@@ -188,7 +188,7 @@ FPS設定は、アニメーションの再生速度を制御します。利用�
 
 :::note
 
-カメラアニメーショントラックは、ここエディターのタイムラインで作成します — [SuperSplat Studio](/user-manual/supersplat/studio/)では作成できません。Studioはカメラ、注釈、ポストエフェクト、スカイボックス、コリジョンのみを調整します。公開設定でアニメーションがどのように保存されるか — `animTracks`配列（各トラックの`loopMode`、`interpolation`、キーフレーム）と、シーンレベルの`startMode` — については、[Experience Settings](/user-manual/supersplat/studio/experience-settings)を参照してください。
+公開後は、[SuperSplat Studio](/user-manual/supersplat/studio/animation)でもカメラアニメーションのキーフレームを作成し、開いたときに再生するかどうかを切り替えられます。どちらも同じ公開済みのアニメーションを編集するため、最後に保存したほうが有効になります。**Override Animation**を有効にして再公開すると、Studioのアニメーションは置き換えられます。公開設定でアニメーションがどのように保存されるか — `animTracks`配列（各トラックの`loopMode`、`interpolation`、キーフレーム）と、シーンレベルの`startMode` — については、[Experience Settings](/user-manual/supersplat/studio/experience-settings)を参照してください。
 
 :::
 

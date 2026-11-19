@@ -34,7 +34,7 @@ import Link from '@docusaurus/Link';
   <div className="col col--6">
     <Link className="card path-card" to="/user-manual/supersplat/studio/">
       <div className="card__header"><h3>🎬 スプラットを公開済み</h3></div>
-      <div className="card__body"><p>Studioで仕上げましょう。最初のカメラを決め、注釈付きのホットスポットを追加し、ブルームやカラーグレーディングを調整し、スカイボックスを設定し、コリジョンでシーンを歩けるようにできます。</p></div>
+      <div className="card__body"><p>Studioで仕上げましょう。最初のカメラを決め、フライスルーのキーフレームを作成し、注釈付きのホットスポットを追加し、ブルームやカラーグレーディングを調整し、スカイボックスを設定し、コリジョンでシーンを歩けるようにできます。</p></div>
       <div className="card__footer">Studio →</div>
     </Link>
   </div>
@@ -99,7 +99,7 @@ flowchart TB
 | **[Editor](editor/)** | スプラットをクリーンアップ、クロップ、色調整、アニメーション化するブラウザベースのエディタ。superspl.atに公開できます。 | [superspl.at/editor](https://superspl.at/editor) |
 | **[Direct Upload](upload)** | Editorを開かずに、すでにクリーンなスプラットファイルを公開します。 | [superspl.at](https://superspl.at)のオレンジ色の**Upload Splat**ボタン |
 | **[Manage](manage)** | あなたのスプラットライブラリ：タイトルや説明の編集、公開範囲の変更、ダウンロード可否とライセンスの選択、削除、Studioで開く操作ができます。 | [superspl.at/manage](https://superspl.at/manage) |
-| **[Studio](studio/)** | 公開後の視聴体験をキュレーションします：カメラ、注釈、ポストエフェクト、スカイボックス、コリジョン。 | `superspl.at/scene/<hash>/studio` |
+| **[Studio](studio/)** | 公開後の視聴体験をキュレーションします：Look & Tone、スカイボックス、カメラ、カメラアニメーション、コリジョン、ポストエフェクト、注釈。 | `superspl.at/scene/<hash>/studio` |
 | **[Scene page](scene-page)** | 公開済みスプラットの公開ページ：埋め込みビューア、シェア、埋め込み、ダウンロード、コメント、いいね、おすすめスプラット。 | `superspl.at/scene/<hash>` |
 | **[Explore](explore)** | ソート、期間、特集フィルタと検索を備えた公開ギャラリー。superspl.atのホームページです。 | [superspl.at](https://superspl.at) |
 | **[User Profile](user-profile)** | クリエイターの公開ページ：アバター、自己紹介、ソーシャルリンク、公開済みスプラット。 | `superspl.at/user/<username>` |

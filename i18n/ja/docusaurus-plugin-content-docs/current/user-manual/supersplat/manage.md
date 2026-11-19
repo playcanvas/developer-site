@@ -11,7 +11,7 @@ Manageへのアクセスには、PlayCanvasアカウントでのサインイン�
 
 ## リストビュー
 
-デスクトップでは並べ替え可能なテーブルが表示され、モバイルでは各スプラットがカードとしてレンダリングされます。
+デスクトップでは並べ替え可能なテーブルが表示され、モバイルでは各スプラットがカードとしてレンダリングされます。カードの操作はメニューにまとめられ、そこからスプラットを公開（Public）や限定公開（Unlisted）にすることもできます。
 
 | 列 | 説明 |
 |--------|-------------|
@@ -21,7 +21,7 @@ Manageへのアクセスには、PlayCanvasアカウントでのサインイン�
 | **Views** | 公開シーンページでの閲覧数。 |
 | **Likes** | いいね数。 |
 | **Size** | 公開済みスプラットの人間が読めるファイルサイズ。 |
-| **Actions** | **Edit**、**Open in Studio**、**Delete**。 |
+| **Actions** | **Edit details**（鉛筆）、**Open in Studio**、**Delete**（ゴミ箱）のアイコンボタン。ボタンにマウスを乗せると名前が表示されます。 |
 
 列ヘッダをクリックして並べ替えます。並べ替え可能なフィールドは**Date**（デフォルト — 新しい順）、**Views**、**Likes**、**Size**です。リストは**1ページあたり25スプラット**でページネーションされます。
 
@@ -35,7 +35,7 @@ Manageへのアクセスには、PlayCanvasアカウントでのサインイン�
 
 ## スプラットのメタデータを編集する
 
-行の**Actions**列の**Edit**をクリックして**Edit Splat**ダイアログを開きます。
+行の**Actions**列の**Edit details**（鉛筆）をクリックして**Edit Splat**ダイアログを開きます。
 
 ![Edit Splatダイアログ](/img/user-manual/supersplat/edit.png)
 
@@ -79,7 +79,7 @@ Manageへのアクセスには、PlayCanvasアカウントでのサインイン�
 
 ## Studioでスプラットを開く
 
-行の**Actions**列の**Open in Studio**、またはダイアログのプレビューカードの**Edit in Studio**から、そのスプラットの[Studio](/user-manual/supersplat/studio/)を開けます。スプラットが処理中、または非対応フォーマットの場合は無効になります。StudioのURLは`superspl.at/scene/<hash>/studio`です。Studioを開けるのはスプラットのオーナーのみです。
+行の**Actions**列の**Open in Studio**、またはダイアログのプレビューカードの**Edit in Studio**から、そのスプラットの[Studio](/user-manual/supersplat/studio/)を開けます。スプラットが処理中、または非対応フォーマットの場合は無効になり、マウスを乗せると**Splat is not available for editing**と表示されます。StudioのURLは`superspl.at/scene/<hash>/studio`です。Studioを開けるのはスプラットのオーナーのみです。
 
 ## 関連項目
 

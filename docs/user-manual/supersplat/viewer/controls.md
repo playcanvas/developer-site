@@ -9,7 +9,7 @@ The [SuperSplat Viewer](/user-manual/supersplat/viewer/) is what visitors use on
 
 While a scene loads, the viewer shows its poster image, if it has one, and a loading bar with a percentage. A [streamed scene](/user-manual/supersplat/streaming) appears as soon as it has enough detail to render and keeps refining as more streams in. [Collision](/user-manual/supersplat/studio/collision) data keeps loading in the background, and walk mode becomes available when it arrives.
 
-The camera then starts moving. If the scene [starts with a camera animation](/user-manual/supersplat/editor/timeline), that plays; otherwise the viewer plays a slow 20-second loop from the [starting camera](/user-manual/supersplat/studio/cameras): an orbit around an object, or a gentle figure-eight inside a scene. Interacting with the scene stops it and hands the camera to the visitor.
+The camera then starts moving. If the scene [plays its camera animation on open](/user-manual/supersplat/studio/animation#playing-on-open), that plays; otherwise the viewer plays a slow 20-second loop from the [starting camera](/user-manual/supersplat/studio/cameras): an orbit around an object, or a gentle figure-eight inside a scene. Interacting with the scene stops it and hands the camera to the visitor.
 
 ## The toolbar {#the-toolbar}
 

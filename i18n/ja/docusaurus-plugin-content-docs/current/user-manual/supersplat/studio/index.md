@@ -1,66 +1,95 @@
 ---
 title: SuperSplat Studio
-description: "Studioは公開済みスプラットの視聴体験をキュレーションします：カメラ、注釈、ポストエフェクト、スカイボックス、コリジョン。"
+description: "Studioは公開済みスプラットの視聴体験をキュレーションします：Look & Tone、カメラ、カメラアニメーション、コリジョン、ポストエフェクト、注釈。"
 ---
 
-**SuperSplat Studio**は、すでに[公開](/user-manual/supersplat/editor/publishing)または[直接アップロード](/user-manual/supersplat/upload)したスプラットの視聴体験をキュレーションする場所です。公開済みシーンの上に開き、訪問者が[シーンページ](/user-manual/supersplat/scene-page)で見るものの多く — カメラフレーミング、シーン上の注釈、ポストプロセッシングエフェクト、トーンマッピング、背景またはスカイボックス、ウォーカブルシーン用のコリジョンジオメトリ — を調整できます。（カメラアニメーションは別途[エディターのタイムライン](/user-manual/supersplat/editor/timeline)で作成します。）
+**SuperSplat Studio**は、すでに[公開](/user-manual/supersplat/editor/publishing)または[直接アップロード](/user-manual/supersplat/upload)したスプラットの視聴体験をキュレーションする場所です。公開済みシーンの上に開き、訪問者が[シーンページ](/user-manual/supersplat/scene-page)で見るもの — 背景またはスカイボックス、トーンマッピング、開始カメラ、カメラアニメーション、ウォーカブルシーン用のコリジョンジオメトリ、ポストエフェクト、シーン上の注釈 — を形作ります。
 
-Studioは出力を単一のJSONドキュメント — [Experience Settings](/user-manual/supersplat/studio/experience-settings) — として書き出し、これをオープンソースの[SuperSplat Viewer](/user-manual/supersplat/viewer/)がランタイムで読み込みます。同じJSONがセルフホスト用のHTMLエクスポートにもバンドルされます。
+Studioは出力を単一のJSONドキュメント、[Experience Settings](/user-manual/supersplat/studio/experience-settings)として書き出し、これをオープンソースの[SuperSplat Viewer](/user-manual/supersplat/viewer/)がランタイムで読み込みます。
 
-<!-- TODO: media — /img/user-manual/supersplat/studio/launching-studio.png — Studioのレイアウト -->
+<!-- TODO: media — /img/user-manual/supersplat/studio/studio-layout.png — タイムラインを開いたStudioのレイアウト -->
 
 ## Studioの起動 {#launching-studio}
 
 Studioは **`https://superspl.at/scene/<hash>/studio`** で動作します。Studioを開けるのはスプラットのオーナーのみで、他のユーザーがURLにアクセスしても404になります。
 
-たどり着く方法は2つあります：
+たどり着く方法は3つあります：
 
-- [Manageページ](/user-manual/supersplat/manage)から、スプラットの**Edit Splat**ダイアログを開き、プレビューカードの**Open in Studio**をクリックします。
-- 自分のスプラットの[シーンページ](/user-manual/supersplat/scene-page)から、**Edit in Studio**エントリポイントを使用します。
+- [Manageページ](/user-manual/supersplat/manage)で、スプラットの行の**Open in Studio**をクリックします。
+- Manageページのスプラットの**Edit Splat**ダイアログで、プレビューカードの**Edit in Studio**をクリックします。
+- 自分のスプラットの[シーンページ](/user-manual/supersplat/scene-page)で、**Edit in Studio**エントリポイントを使用します。
 
 :::note デスクトップ推奨
 
-Studioはデスクトップブラウザ向けに作られています。スマートフォンやタブレットで開くと「Studio works best on desktop」という警告が表示されます。警告を閉じて続行できますが、UIの制約があります。
+Studioはキーボードとマウスを備えたデスクトップブラウザ向けに作られています。スマートフォンやタブレットで開くと「Studio works best on desktop」という警告が表示されます。続行することもできますが、UIの制約があります。
 
 :::
 
 ## レイアウト
 
-StudioはSuperSplat editorのシェルを再利用しています：
+- **ヘッダ**: **Back to manage**、シーン名、右側に**Timeline**、**Import**、**Export**、**View**、**Save**。[変更の保存](#saving-changes)を参照してください。
+- **左パネル**（2つのタブ）：
+  - **Scene**: シーンの見た目と動作を構成するセクション。上から順に：
+    - [Look & Tone](/user-manual/supersplat/studio/look-and-tone): 背景色、スカイボックス、トーンマッピング、High Precision Rendering、アンチエイリアス。
+    - [Cameras](/user-manual/supersplat/studio/cameras): 開始カメラと視野角。
+    - [Animation](/user-manual/supersplat/studio/animation#playing-on-open): シーンを開いたときにカメラアニメーションを再生するかどうか。
+    - [Collision](/user-manual/supersplat/studio/collision): シーンをウォーカブルにするボクセルジオメトリ。
+    - [Post Effects](/user-manual/supersplat/studio/post-effects): シャープネス、ブルーム、カラーグレーディング、ビネット、色収差フリンジング。
+  - **Annotations**: シーン上の[注釈](/user-manual/supersplat/studio/annotations)のリスト。
+- **ビューポート**: 訪問者がシーンをどう見るかのライブプレビュー。下部にツールバーがあります。
+- **タイムライン**: [カメラアニメーション](/user-manual/supersplat/studio/animation)のキーフレームを作成する下部のパネル。**Timeline**をクリックするか<kbd>T</kbd>を押すまで非表示です。
 
-- **ヘッダ** — 戻るボタン、シーン名、**Import** / **Export** / **View** アクション、**Save**。
-- **左パネル** — 3つのタブで構成された単一のパネル：
-  - **Scene** — *Look & Tone*（背景色、トーンマッピング、高精度レンダリング）、*Post Effects*、*Cameras* のセクションをまとめています。
-  - **Annotations** — シーン上の注釈のリスト。
-  - **Assets** — シーンアセットのアップロード：**Skybox**画像と**Collision**ジオメトリ。
-- **ビューポート** — 訪問者がシーンをどう見るかのライブプレビュー。
+### ビューポートのツールバー
 
-各ツールセクションには独自のページがあります：
+| ボタン | 動作 |
+|--------|--------------|
+| **Undo** / **Redo** | 編集を元に戻す／やり直す。 |
+| **Move** | デフォルトのツール：ナビゲーションと選択。 |
+| **Add annotation** | スプラットをクリックして[注釈](/user-manual/supersplat/studio/annotations#adding-an-annotation)を配置します（<kbd>C</kbd>）。 |
+| **Orbit mode** / **Fly mode** | ビューポートのカメラの動かし方を切り替えます。 |
+| **Frame selection** | 選択をビューポートにフレーミングします（<kbd>F</kbd>）。 |
+| **Reset camera** | ビューポートのカメラを開始ビューに戻します（<kbd>Shift</kbd>+<kbd>F</kbd>）。 |
+| **Open shortcut guide** | Studioのキーボードショートカットを一覧表示します。 |
 
-- [Cameras](/user-manual/supersplat/studio/cameras) — 1つ以上の名前付きカメラの初期姿勢、ターゲット、視野角。
-- [Annotations](/user-manual/supersplat/studio/annotations) — 訪問者が移動可能な、3D空間に配置されたテキストホットスポット。
-- [Post Effects](/user-manual/supersplat/studio/post-effects) — シャープネス、ブルーム、カラーグレーディング、ビネット、フリンジング、トーンマッピング、高精度レンダリング。
-- [Skybox](/user-manual/supersplat/studio/skybox) — 背景色またはフルのエクイレクタンギュラースカイボックス。
-- [Collision](/user-manual/supersplat/studio/collision) — シーンを「ウォーカブル」にするボクセルジオメトリ。
+### キーボードショートカット
 
-## 変更の保存
+| ショートカット | 動作 |
+|----------|--------|
+| <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> | 移動（フライモード） |
+| <kbd>Q</kbd> / <kbd>E</kbd> | 下降／上昇（フライモード） |
+| <kbd>Shift</kbd> / <kbd>Ctrl</kbd>を押し続ける | 速く／遅く移動（フライモード） |
+| ダブルクリック | オービットポイントを設定 |
+| <kbd>F</kbd> | 選択をフレーミング |
+| <kbd>Shift</kbd>+<kbd>F</kbd> | カメラをリセット |
+| <kbd>C</kbd> | 注釈を追加 |
+| <kbd>T</kbd> | タイムラインの表示／非表示 |
+| <kbd>Space</kbd> | カメラアニメーションの再生／一時停止 |
+| <kbd>Enter</kbd> | 再生ヘッドの位置にキーフレームを追加 |
+| <kbd>Ctrl</kbd>+<kbd>Z</kbd> / <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd> | 元に戻す／やり直す（macOSでは<kbd>Cmd</kbd>） |
+| <kbd>Esc</kbd> | キャンセルまたは選択解除 |
 
-編集は自動保存されません。ヘッダには、完全なExperience Settings JSONをサーバーにプッシュする**Save**アクションが表示されます。
+## 変更の保存 {#saving-changes}
 
-<!-- TODO: media — /video/user-manual/supersplat/studio/save-flow.mp4 — ダーティ状態インジケータ → Save → ビューアの再読み込み -->
+編集は自動保存されません。未保存の変更がある間は**Save**が有効になり、完全なExperience Settingsをsuperspl.atに書き込みます。それ以降にシーンページを開く訪問者には新しいバージョンが表示されます。未保存の変更がある状態でStudioを離れようとすると、変更が失われる前に確認を求められます。
 
-保存フローについて知っておくべきことがいくつかあります：
+例外はスカイボックスとコリジョンのファイルで、追加した時点で**Save**なしにアップロードされます。
 
-- **ダーティ状態の追跡** — Studioは未保存の変更を認識します。編集が未保存の状態で離脱しようとすると、失う前に警告されます。
-- **再読み込み時のキャッシュバスティング** — 保存に成功すると、キャッシュバスティングされた設定URLでビューアが再読み込みされ、編集内容がすぐに反映されます。それ以降、シーンページを読み込む訪問者には新しいバージョンが表示されます。
-- **部分保存なし** — 保存ごとに差分ではなく完全なExperience Settings JSONが書き込まれます。保存後に何かおかしく見える場合は、変更がマージされることを期待するのではなく、各パネルの値を改めて確認してください。
+ヘッダの他のボタンは、設定をファイルとして扱います：
 
-## スキーマのバージョニング
+- **Export**は、現在の設定を`settings-<hash>.json`としてダウンロードします。たとえば[自分でホストするビューア](/user-manual/supersplat/viewer/embedding)で使えます。
+- **Import**は、確認の後、現在の設定を選択したJSONファイルで置き換えます。公開するには**Save**をクリックしてください。
+- **View**はシーンページを開きます。
 
-Experience Settings JSONにはバージョン番号があり、現在のスキーマは**v2**です。古い`v1`の設定（Studioが一部の機能をサポートする前のもの）は読み込み時に自動的に`v2`に移行されます。特別な対応は必要ありません — ただし、[ビューア](/user-manual/supersplat/viewer/)をセルフホストしてsettings.jsonを直接読み込む場合は、現在のスキーマについて[Experience Settings](/user-manual/supersplat/studio/experience-settings)リファレンスを参照してください。
+Experience Settingsの形式にはバージョンがあり、現在のバージョンは2です。Studioは古い設定を読み込むときに自動的に移行します。
+
+## AIエージェント {#ai-agents}
+
+実験的な[WebMCP API](https://webmachinelearning.github.io/webmcp/)に対応したブラウザでは、Studioはツールを登録し、AIエージェントが開いているStudioタブで作業できるようにします。Editorの[AIエージェント（WebMCP）](/user-manual/supersplat/editor/webmcp)のツールと同様です。エージェントは、シーンとライブカメラの読み取り、スプラット上の点のピック、ビューポートの画像キャプチャ、カメラと注釈の作成・更新、カメラアニメーションの編集、タイムラインの再生やシークができます。エージェントの編集はあなたの元に戻す履歴を共有します。
+
+エージェントは保存できません。エージェントが行ったことを確認し、自分で**Save**をクリックしてください。
 
 ## 関連項目
 
 - [Experience Settings](/user-manual/supersplat/studio/experience-settings) — Studioが書き、Viewerが読むJSONコントラクト
-- [Viewer / embedding](/user-manual/supersplat/viewer/embedding) — 公開された設定がランタイムでどう消費されるか
+- [ビューアの操作](/user-manual/supersplat/viewer/controls) — キュレーションしたシーンを訪問者がどう操作するか
 - [シーンページ](/user-manual/supersplat/scene-page) — Studioの変更が保存された後に訪問者が見るもの

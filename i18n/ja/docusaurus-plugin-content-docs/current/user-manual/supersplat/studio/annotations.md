@@ -17,20 +17,28 @@ description: "公開済みスプラットに3D空間配置のテキストホッ�
 | **Title** | 注釈が選択されたときに表示される短い見出し。 |
 | **Text** | より長い本文。ビューアではプレーンテキストとして表示されます。 |
 | **Camera** | この注釈が選択されたときにビューアがアニメーションする[カメラ姿勢](/user-manual/supersplat/studio/cameras)。 |
-| **Extras** | カスタム統合や将来のStudio機能のために添付できる自由形式のメタデータ。 |
+| **Extras** | カスタム統合のための自由形式のメタデータ。Studioは保持しますが、編集するコントロールはありません。[インポートする設定](/user-manual/supersplat/studio/#saving-changes)で指定してください。 |
 
-## 注釈の作成
+## 注釈の追加 {#adding-an-annotation}
 
-一般的なフローは次のとおりです：
+1. 訪問者にシーンのこの部分をどう見せたいかに合わせてビューポートをフレーミングします。
+2. **Add annotation**を選びます：ビューポートのツールバーのボタン、**Annotations**タブの**Add**、または<kbd>C</kbd>。
+3. スプラット上の注釈を付けたい点をクリックします。Studioはそこにホットスポットを配置し、現在のビューを注釈のカメラとして保存します。
+4. ホットスポットの横に開くカードにタイトル（入力するまでは**Untitled**）と説明を入力し、**OK**をクリックします。
 
-1. 訪問者にシーンのこの部分をどう見せたいかに合わせてカメラをフレーミングします。
-2. 注釈を追加します。Studioはホットスポットをワールドに配置し、現在のカメラを注釈の姿勢としてキャプチャします。
-3. タイトルと本文を編集します。
-4. 関心のあるポイントの数だけ繰り返します。
+1シーンあたりの注釈は最大50個、タイトルは最大60文字、テキストは最大280文字までです。これらは[Experience Settings](/user-manual/supersplat/studio/experience-settings#authoring-limits)の作成時の制限です。
 
-リストパネルで注釈を並べ替えられます — 順序は、訪問者がビューア上で注釈をどう順に進むかと、各ホットスポットに表示される番号を決めます。
+## 注釈の編集
 
-[Experience Settings](/user-manual/supersplat/studio/experience-settings#authoring-limits)の作成時の制限では、注釈は1シーンあたり最大50個、タイトルは最大60文字、テキストは最大280文字までです。
+ホットスポットまたは**Annotations**タブの行をクリックして注釈を選択します。ビューポートの注釈のカードには3つのボタンがあります：
+
+- **Edit annotation**（鉛筆アイコン） — タイトルと説明を変更します。
+- **Set camera to current view** — 現在のビューを注釈のカメラとして保存します。
+- **Unselect annotation** — カードを閉じます。
+
+注釈を選択している間、**Annotations**タブの**Distance to camera**でホットスポットを視線方向に動かせます：<kbd>-</kbd>でカメラに近づけ、<kbd>+</kbd>で遠ざけます。<kbd>Shift</kbd>キーを押しながらだと細かく動きます。ホットスポットを表面から浮かせたり、表面に近づけたりするのに使います。
+
+**Annotations**タブの各行には、ビューポートを注釈のカメラに移動する**Go to annotation**と、**Delete annotation**もあります。行をドラッグして並べ替えられます。順序は、訪問者が注釈をどの順に進むかと、各ホットスポットに表示される番号を決めます。
 
 <!-- TODO: media — /video/user-manual/supersplat/studio/annotation-flythrough.mp4 — ホットスポット間を移動する訪問者 -->
 

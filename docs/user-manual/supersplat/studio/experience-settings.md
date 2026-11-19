@@ -75,17 +75,18 @@ type ExperienceSettings = {
 };
 ```
 
-Most fields are authored in a Studio panel or control; the exception is `animTracks`, which comes from the SuperSplat Editor Timeline and is baked in at publish time. Follow the cross-references for details.
+Most fields are authored in a Studio control. The camera animation can also come from the SuperSplat Editor's Timeline, baked in at publish time. Follow the cross-references for details.
 
 | Field | Authored in |
 |-------|-------------|
-| `tonemapping`, `highPrecisionRendering` | [Post Effects](/user-manual/supersplat/studio/post-effects) |
-| `background.color`, `background.skyboxUrl` | [Skybox & Background](/user-manual/supersplat/studio/skybox) |
+| `tonemapping`, `highPrecisionRendering` | [Look & Tone](/user-manual/supersplat/studio/look-and-tone) |
+| `background.color`, `background.skyboxUrl` | [Look & Tone](/user-manual/supersplat/studio/look-and-tone) |
 | `postEffectSettings` | [Post Effects](/user-manual/supersplat/studio/post-effects) |
 | `cameras` | [Cameras](/user-manual/supersplat/studio/cameras) |
-| `animTracks` | [Editor Timeline](/user-manual/supersplat/editor/timeline) (baked in when publishing) |
+| `animTracks` | [Camera Animation](/user-manual/supersplat/studio/animation), or the [Editor Timeline](/user-manual/supersplat/editor/timeline) (baked in when publishing). Studio saves only a track that has keyframes. |
 | `annotations` | [Annotations](/user-manual/supersplat/studio/annotations) |
-| `startMode`, `hasStartPose` | Initial values set when publishing from the Editor; adjustable via the Studio header / startup configuration |
+| `startMode` | **Play animation on open** in the [Animation](/user-manual/supersplat/studio/animation#playing-on-open) section: `animTrack` when it is on, `default` when it is off. The initial value is set when publishing from the Editor. |
+| `hasStartPose` | Set when publishing from the Editor |
 | Collision voxel data | Stored separately as a [Scene Asset](/user-manual/supersplat/studio/collision), not in this JSON |
 
 ## How the viewer reads it
@@ -97,6 +98,7 @@ A few fields behave in ways the schema alone doesn't show:
 - **`cameras` and `animTracks`** — the format allows several, but the viewer uses only the first camera and plays only the first track.
 - **`annotations[].text`** — shown as plain text, so HTML markup isn't rendered.
 - **`startMode: 'annotation'`** — accepted, but the viewer starts as it does for `default`.
+- **`antiAlias`** — not part of the schema above, but Studio adds it: its [Anti-aliasing](/user-manual/supersplat/studio/look-and-tone#anti-aliasing) switch stores `antiAlias: false` when turned off. The viewer doesn't read it. Each splat file's own anti-aliasing tag decides, and the `aa` [URL parameter](/user-manual/supersplat/viewer/embedding#url-parameters) overrides that.
 
 ## Authoring limits {#authoring-limits}
 

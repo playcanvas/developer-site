@@ -23,7 +23,7 @@ Apple Vision Proでは、SafariがVRのリクエストを保留したままに�
 
 - セッションは、ビューアのカメラの位置から、カメラが向いている方向を向いた状態で始まります。
 - [ポストエフェクト](/user-manual/supersplat/studio/post-effects)は描画されません。ただし、シーンのトーンマッピングは適用されます。
-- ARでは、[スカイボックス](/user-manual/supersplat/studio/skybox)と背景が非表示になり、部屋が透けて見えます。
+- ARでは、[スカイボックス](/user-manual/supersplat/studio/look-and-tone#skybox)と背景が非表示になり、部屋が透けて見えます。
 - [ストリーミングされるシーン](/user-manual/supersplat/streaming)は距離だけでディテールを選ぶため、頭の向きを変えても新しいディテールはストリーミングされません。
 - Meta QuestとPicoのヘッドセットでは、セッションは固定フォービエーションでレンダリングされ、ヘッドセットが対応していれば72 Hzを目標とし、より低いスプラットバジェットを使います（[ストリーミングとパフォーマンス](/user-manual/supersplat/streaming#near-instant-loads-and-the-gaussian-budget)を参照）。Qualityが**Performance**の段階では、解像度も0.8倍でレンダリングされます。
 - [コリジョン](/user-manual/supersplat/studio/collision)のオーバーレイはオフになります。

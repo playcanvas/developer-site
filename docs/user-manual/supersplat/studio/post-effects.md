@@ -1,88 +1,63 @@
 ---
 title: Post Effects
-description: "Apply sharpness, bloom, color grading, vignette, fringing, tonemapping, and high-precision rendering to a published splat in SuperSplat Studio."
+description: "Apply sharpness, bloom, color grading, vignette and chromatic fringing to a published splat in SuperSplat Studio."
 ---
 
-The **Post Effects** panel in [Studio](/user-manual/supersplat/studio/) controls the look of your scene after the splat is rendered. Effects are evaluated per-frame in the viewer; each section has an enable toggle plus its own parameters.
+The **Post Effects** section, at the bottom of the **Scene** tab in [Studio](/user-manual/supersplat/studio/), controls the look of your scene after the splat is rendered. Effects are evaluated per frame in the viewer. Each effect has a switch that turns it on and shows its parameters.
 
-The panel also contains two related global controls: a **Tonemapping** dropdown that shapes how high-dynamic-range output maps to display intensity, and a **High Precision Rendering** toggle that switches the viewer to a more accurate (but more expensive) rendering pipeline.
+Tonemapping and High Precision Rendering, which shape the whole image, are in the [Look & Tone](/user-manual/supersplat/studio/look-and-tone) section.
 
-<!-- TODO: media — /img/user-manual/supersplat/studio/post-effects-panel.png — the Post Effects panel expanded -->
+<!-- TODO: media — /img/user-manual/supersplat/studio/post-effects-panel.png — the Post Effects section with several effects on -->
 
-## Effect sections
-
-### Sharpness
+## Sharpness
 
 | Field | Description |
 |-------|-------------|
-| **Enabled** | Master toggle. |
 | **Amount** | Strength of the sharpening filter. |
 
 Good for recovering perceived detail on dense splat captures.
 
-### Bloom
+## Bloom
 
 | Field | Description |
 |-------|-------------|
-| **Enabled** | Master toggle. |
 | **Intensity** | How strong the bloom glow appears. |
-| **Blur level** | Size of the bloom kernel — larger values produce a softer, broader glow. |
+| **Blur Level** | Size of the bloom kernel. Larger values produce a softer, broader glow. |
 
-Adds a glow to bright regions of the scene.
+Adds a glow to bright regions of the scene. Bloom needs [High Precision Rendering](/user-manual/supersplat/studio/look-and-tone): while it's off, the section says **Bloom requires High Precision Rendering**, and **Enable** turns it on.
 
-### Grading
+## Color Grading
 
 Color grading applies a global transform to the image.
 
 | Field | Description |
 |-------|-------------|
-| **Enabled** | Master toggle. |
 | **Brightness** | Overall brightness lift. |
 | **Contrast** | Tone separation between dark and light. |
 | **Saturation** | Color intensity (`0` is grayscale). |
-| **Tint** | An RGB color blended into the image — useful for warm/cool grades. |
+| **Tint** | An RGB color blended into the image, useful for warm or cool grades. |
 
-### Vignette
+## Vignette
 
 | Field | Description |
 |-------|-------------|
-| **Enabled** | Master toggle. |
 | **Intensity** | Strength of the corner darkening. |
 | **Inner** | Radius at which the vignette starts. |
 | **Outer** | Radius at which the vignette reaches full strength. |
 | **Curvature** | Shape of the vignette falloff. |
 
-### Fringing
+## Chromatic Fringing
 
 | Field | Description |
 |-------|-------------|
-| **Enabled** | Master toggle. |
 | **Intensity** | Strength of the chromatic aberration effect at frame edges. |
-
-## Tonemapping
-
-A dropdown that picks how the renderer maps HDR output to the display:
-
-| Value | Notes |
-|-------|-------|
-| `linear` (default) | No tonemapping curve — output is linear. |
-| `none` | Pass-through with no scaling. |
-| `filmic` | Classic film-emulating curve. |
-| `hejl` | Hejl-Burgess-Dawson curve. |
-| `aces` | ACES filmic curve. |
-| `aces2` | ACES variant with rolled-off highlights. |
-| `neutral` | Khronos Neutral tonemap. |
-
-## High Precision Rendering
-
-A toggle (default **off**) that enables a more accurate rendering path. Useful when bright highlights, fine color grading, or post-effects show banding in the default path — at the cost of more GPU work per frame.
 
 ## In the viewer
 
-- **VR and AR** — post effects and high precision rendering aren't applied during a [VR or AR session](/user-manual/supersplat/viewer/xr). The scene's tonemapping still is, and everything returns when the session ends.
-- **Self-hosting** — when you [host the viewer yourself](/user-manual/supersplat/viewer/embedding#url-parameters), the `nofx` URL parameter turns post effects off, and `hpr` overrides High Precision Rendering.
+- **VR and AR** — post effects and High Precision Rendering aren't applied during a [VR or AR session](/user-manual/supersplat/viewer/xr). The scene's tonemapping still is, and everything returns when the session ends.
+- **Self-hosting** — when you [host the viewer yourself](/user-manual/supersplat/viewer/embedding#url-parameters), the `nofx` URL parameter turns post effects off.
 
 ## See also
 
-- [Skybox](/user-manual/supersplat/studio/skybox) — background color and skybox image
+- [Look & Tone](/user-manual/supersplat/studio/look-and-tone) — background, skybox, tonemapping and High Precision Rendering
 - [Experience Settings](/user-manual/supersplat/studio/experience-settings) — the JSON contract that stores post-effect settings

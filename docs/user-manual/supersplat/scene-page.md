@@ -15,7 +15,7 @@ The scene content is split between a central **embedded viewer** and a right-han
 
 ### The embedded viewer
 
-The viewer is the open-source [SuperSplat Viewer](/user-manual/supersplat/viewer/) rendered inside an iframe. The cameras, annotations, post effects, skybox, and collision you configured in [Studio](/user-manual/supersplat/studio/) — along with any camera [animation](/user-manual/supersplat/editor/timeline) published from the Editor — all apply here. Visitors can orbit, fly, and (if collision is set up) walk through the scene, step through annotations, play the camera animation, and enter VR or AR on devices that support it. The toolbar along the bottom of the viewer holds the camera modes and the viewer's settings, controls and info panels. See [Viewer Controls](/user-manual/supersplat/viewer/controls) and [Viewing in VR and AR](/user-manual/supersplat/viewer/xr).
+The viewer is the open-source [SuperSplat Viewer](/user-manual/supersplat/viewer/) rendered inside an iframe. The cameras, [camera animation](/user-manual/supersplat/studio/animation), annotations, post effects, skybox, and collision you configured in [Studio](/user-manual/supersplat/studio/), or published from the Editor, all apply here. Visitors can orbit, fly, and (if collision is set up) walk through the scene, step through annotations, play the camera animation, and enter VR or AR on devices that support it. The toolbar along the bottom of the viewer holds the camera modes and the viewer's settings, controls and info panels. See [Viewer Controls](/user-manual/supersplat/viewer/controls) and [Viewing in VR and AR](/user-manual/supersplat/viewer/xr).
 
 ### Sidebar metadata
 

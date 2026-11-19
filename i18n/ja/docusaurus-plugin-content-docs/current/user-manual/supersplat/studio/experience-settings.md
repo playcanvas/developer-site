@@ -75,17 +75,18 @@ type ExperienceSettings = {
 };
 ```
 
-ほとんどのフィールドはStudioのパネルやコントロールで作成しますが、`animTracks`は例外で、SuperSplatエディターのタイムラインで作成され、公開時にベイクされます。詳細はクロスリファレンスをたどってください。
+ほとんどのフィールドはStudioのコントロールで作成します。カメラアニメーションは、SuperSplatエディターのタイムラインで作成し、公開時にベイクすることもできます。詳細はクロスリファレンスをたどってください。
 
 | フィールド | 作成場所 |
 |-------|-------------|
-| `tonemapping`, `highPrecisionRendering` | [Post Effects](/user-manual/supersplat/studio/post-effects) |
-| `background.color`, `background.skyboxUrl` | [Skybox & Background](/user-manual/supersplat/studio/skybox) |
+| `tonemapping`, `highPrecisionRendering` | [Look & Tone](/user-manual/supersplat/studio/look-and-tone) |
+| `background.color`, `background.skyboxUrl` | [Look & Tone](/user-manual/supersplat/studio/look-and-tone) |
 | `postEffectSettings` | [Post Effects](/user-manual/supersplat/studio/post-effects) |
 | `cameras` | [Cameras](/user-manual/supersplat/studio/cameras) |
-| `animTracks` | [エディターのタイムライン](/user-manual/supersplat/editor/timeline)（公開時にベイクされます） |
+| `animTracks` | [カメラアニメーション](/user-manual/supersplat/studio/animation)、または[エディターのタイムライン](/user-manual/supersplat/editor/timeline)（公開時にベイクされます）。Studioはキーフレームのあるトラックだけを保存します。 |
 | `annotations` | [Annotations](/user-manual/supersplat/studio/annotations) |
-| `startMode`, `hasStartPose` | エディターからの公開時に初期値が設定され、Studioのヘッダ／スタートアップ設定で調整できます |
+| `startMode` | [Animation](/user-manual/supersplat/studio/animation#playing-on-open)セクションの**Play animation on open**：オンのときは`animTrack`、オフのときは`default`。初期値はエディターからの公開時に設定されます。 |
+| `hasStartPose` | エディターからの公開時に設定されます |
 | コリジョンボクセルデータ | このJSONではなく、[シーンアセット](/user-manual/supersplat/studio/collision)として別に格納 |
 
 ## ビューアでの解釈
@@ -97,6 +98,7 @@ type ExperienceSettings = {
 - **`cameras`と`animTracks`** — フォーマット上は複数指定できますが、ビューアは最初のカメラだけを使い、最初のトラックだけを再生します。
 - **`annotations[].text`** — プレーンテキストとして表示されるため、HTMLマークアップはレンダリングされません。
 - **`startMode: 'annotation'`** — 受け付けられますが、ビューアは`default`の場合と同じように開始します。
+- **`antiAlias`** — 上のスキーマには含まれませんが、Studioが追加します：Studioの[Anti-aliasing](/user-manual/supersplat/studio/look-and-tone#anti-aliasing)スイッチをオフにすると`antiAlias: false`が保存されます。ビューアはこれを読みません。各スプラットファイル自身のアンチエイリアスのタグで決まり、`aa` [URLパラメータ](/user-manual/supersplat/viewer/embedding#url-parameters)でそれを上書きできます。
 
 ## 作成時の制限 {#authoring-limits}
 
