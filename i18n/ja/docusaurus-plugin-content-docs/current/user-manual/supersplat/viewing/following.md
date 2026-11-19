@@ -3,7 +3,7 @@ title: クリエイターのフォロー
 description: "superspl.atでクリエイターをフォローして、最新のスプラットをFollowingフィードで見ましょう。"
 ---
 
-お気に入りのクリエイターを見つけたら、フォローしましょう。そのクリエイターのスプラットが、[superspl.at](https://superspl.at)のホームページにある**Following**フィードに表示されるようになります。
+クリエイターをフォローすると、そのクリエイターの公開スプラットが、[superspl.at](https://superspl.at)のホームページにある**Following**フィードに表示されます。
 
 ## クリエイターをフォローする
 

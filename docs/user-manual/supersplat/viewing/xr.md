@@ -25,7 +25,7 @@ When you host the viewer yourself, the `vr` [URL parameter](/user-manual/supersp
 - [Post effects](/user-manual/supersplat/studio/post-effects) aren't drawn. The scene's tone mapping still is.
 - In AR, the [skybox](/user-manual/supersplat/studio/look-and-tone#skybox) and background are hidden, so the room shows through.
 - A [streamed scene](/user-manual/supersplat/publishing/streaming) chooses its detail by distance alone, so turning your head doesn't stream new detail.
-- On Meta Quest and Pico headsets, sessions render with fixed foveation, target 72 Hz where the headset supports it, and use a lower splat budget (see [Streaming & Performance](/user-manual/supersplat/publishing/streaming#near-instant-loads-and-the-gaussian-budget)). At the **Performance** quality position they also render at 0.8× resolution.
+- On Meta Quest and Pico headsets, sessions render with fixed foveation, target 72 Hz where the headset supports it, and use a lower Gaussian budget (see [Streaming & Performance](/user-manual/supersplat/publishing/streaming#near-instant-loads-and-the-gaussian-budget)). At the **Performance** quality position they also render at 0.8× resolution.
 - The [collision](/user-manual/supersplat/studio/collision) overlay is turned off.
 
 When the session ends, the splat goes back to its authored placement and the viewer's own settings return.

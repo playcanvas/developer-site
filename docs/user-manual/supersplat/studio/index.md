@@ -80,7 +80,7 @@ The other header buttons work with the settings as a file:
 - **Import** replaces the current settings with a JSON file you choose, after asking for confirmation. Click **Save** to publish them.
 - **View** opens the scene page.
 
-The Experience Settings format is versioned; the current version is 2. Studio migrates older settings automatically when it loads them.
+Studio also reads settings saved in older versions of the format. See [Schema versioning](/user-manual/supersplat/developers/experience-settings#schema-versioning).
 
 ## AI agents {#ai-agents}
 

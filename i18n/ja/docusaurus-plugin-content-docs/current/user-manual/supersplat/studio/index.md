@@ -80,7 +80,7 @@ Studioはキーボードとマウスを備えたデスクトップブラウザ�
 - **Import**は、確認の後、現在の設定を選択したJSONファイルで置き換えます。公開するには**Save**をクリックしてください。
 - **View**はシーンページを開きます。
 
-Experience Settingsの形式にはバージョンがあり、現在のバージョンは2です。Studioは古い設定を読み込むときに自動的に移行します。
+Studioは、古いバージョンの形式で保存された設定も読み込めます。[スキーマのバージョニング](/user-manual/supersplat/developers/experience-settings#schema-versioning)を参照してください。
 
 ## AIエージェント {#ai-agents}
 

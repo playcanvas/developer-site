@@ -71,10 +71,10 @@ npm install @playcanvas/supersplat-viewer
 | `aa` | アンチエイリアシング付きでトレーニングされたスプラット向けのアンチエイリアシング補正を強制します：`aa`、`aa=1`、`aa=true`、`aa=enable`ですべてのスプラットに対してオンになり、それ以外の値ではオフになります。指定しない場合は、各スプラットファイル自体のトレーニングモードに従います。 |
 | `hpr` | 設定の`highPrecisionRendering`を上書きします：`hpr`、`hpr=1`、`hpr=true`、`hpr=enable`でオン、それ以外の値でオフになります。 |
 | `nofx` | ポストエフェクトをオフにします |
-| `budget` | スプラットバジェット（100万単位）。すべての[Quality](/user-manual/supersplat/viewing/controls#quality)段階の値を上書きします |
+| `budget` | ガウシアンバジェット（100万単位）。すべての[Quality](/user-manual/supersplat/viewing/controls#quality)段階の値を上書きします |
 | `fullload` | 最初のフレームの前に、ストリーミングシーンのディテールをすべて読み込みます |
 | `stochastic` | 実験的機能です。[Performance Mode](/user-manual/supersplat/viewing/controls#performance-mode)が使う確率的スプラットレンダラーを強制します：`stochastic`でピクセル単位のモード、`stochastic=mobile`でスマートフォンとヘッドセット向けのモードになり、`stochastic=off`では標準のレンダラーを使い続けます。いずれを指定しても、Performance Mode設定は非表示になります。WebGPUのみ対応しています。 |
-| `colorize` | レベルオブディテールごとにスプラットを色分けします |
+| `colorize` | レベルオブディテールごとにガウシアンを色分けします |
 | `heatmap` | コリジョンオーバーレイをヒートマップとして描画します。WebGPUとボクセルコリジョンが必要です。オーバーレイは**Show Collision**または<kbd>V</kbd>でオンにします。 |
 | `debug` | 読み込み時に開発者用デバッグパネルを開きます（<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>D</kbd>で切り替え） |
 
