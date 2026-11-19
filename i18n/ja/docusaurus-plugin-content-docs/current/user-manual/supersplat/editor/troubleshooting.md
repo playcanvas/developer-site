@@ -77,4 +77,4 @@ SOGとViewer Appのエクスポートでは、GPUでスプラットを圧縮し�
 
 ## 問題の報告 {#reporting-a-problem}
 
-問題が解決しない場合は、Editorで**Help > Log an Issue**を開き、Editorのバージョン、ブラウザのバージョン、OS、GPU、ソース形式、おおよそのガウシアン数、問題を再現する手順を記載してください。Editorのバージョンと使用中のGPUは、**About**ダイアログ（**Help > About SuperSplat**、またはビューポート右下隅のバージョン表示をクリック）で確認できます。[SuperSplat Discordコミュニティ](https://discord.gg/T3pnhRTTAY)で質問することもできます。
+問題が解決しない場合は、Editorで**Help > Log an Issue**を開き、Editorのバージョン、ブラウザのバージョン、OS、GPU、ソース形式、おおよそのガウシアン数、問題を再現する手順を記載してください。Editorのバージョンと使用中のGPUは、**About**ダイアログ（**Help > About SuperSplat**、またはビューポート右下隅のバージョン表示をクリック）で確認できます。[SuperSplat Discordコミュニティ](https://discord.gg/qcydPEtn65)で質問することもできます。

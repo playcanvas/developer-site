@@ -27,7 +27,7 @@ The viewer export can be configured via several options:
 | **Animation** | If enabled, the camera animation authored on the [Timeline](/user-manual/supersplat/editor/timeline) is included and plays when the viewer loads. Only available when the Timeline has keyframes (and enabled by default in that case) |
 | **Loop Mode** | How an included camera animation plays back:<br/>• **None**: Play once and stop<br/>• **Repeat**: Loop continuously<br/>• **Ping Pong**: Play forwards, then backwards, repeatedly<br/>Initialized from the Timeline's Loop toggle - **Repeat** if looping is enabled, **None** otherwise |
 | **Background** | The background color of the viewer. Defaults to the Editor's **Background Color**, set in the **Colors** section of the [Preferences](/user-manual/supersplat/editor/interface#preferences) popup |
-| **Field of View** | The vertical field of view of the viewer's camera in degrees. Defaults to the Editor camera's current setting |
+| **Field of View** | The field of view of the viewer's camera in degrees, measured across the longer side of the screen. Defaults to the Editor camera's current setting |
 | **SH Bands** | The exact number of spherical harmonics bands written to the exported splat data (0–3). Defaults to the highest band count in the scene, capped by the **SH Bands** setting in [Preferences](/user-manual/supersplat/editor/interface#preferences). Choosing more bands than a splat contains fills the missing ones with zeros |
 
 The exported viewer's camera starts at the pose your viewport camera has at the moment you export, so frame your favorite view before exporting.

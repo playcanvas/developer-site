@@ -54,9 +54,11 @@ Access camera settings through the **Preferences** popup (the gear icon in the r
 
 | Setting | Range | Default | Description |
 |---------|-------|---------|-------------|
-| **Field of View** | 10° - 120° | 85° | Vertical camera viewing angle |
+| **Field of View** | 10° - 120° | 85° | Camera viewing angle across the viewport's longer side |
 | **FOV Auto Dolly** | On / Off | Off | How Field of View changes affect the camera (see below) |
 | **Fly Speed** | 0.1 - 30 | 1 | Speed of WASD navigation |
+
+The field of view spans the longer side of the viewport: horizontally when the viewport is wider than it is tall, and vertically when it is taller than it is wide. Published scenes and exported viewers apply it the same way.
 
 By default, changing the Field of View behaves like a lens zoom: the camera stays where it is and the scene appears magnified or shrunk. Enable **FOV Auto Dolly** to have the camera dolly (move) as the FOV changes instead, preserving the subject's framing.
 

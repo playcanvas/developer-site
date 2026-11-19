@@ -25,22 +25,21 @@ Upload Splatダイアログを開く方法は3つあります：
 
 ## 対応入力フォーマット
 
-ファイルシステムからドラッグ＆ドロップするか選択します。ダイアログは以下を受け付けます：
+ファイルシステムからドラッグ＆ドロップするか選択します。ダイアログは以下のフォーマットを、それぞれの最大サイズまで受け付けます。ダイアログの**Upload Guide**にも概要がまとめられています。
 
-| フォーマット | アップロードするファイル | 検証方法 |
-|--------|----------------|---------------------|
-| **PLY** | `.ply` | PLYヘッダで始まり、ASCIIまたはバイナリのフォーマットを宣言していること。 |
-| **SOG** | `.sog` | 1つの`meta.json`ファイルと、期待されるSOGのWebPペイロードファイルを含むこと。 |
-| **Streamed SOGバンドル (SSOG)** | `.zip` | `lod-meta.json`と1つ以上のSOGチャンクフォルダを含むこと。[ストリーミングとパフォーマンス](/user-manual/supersplat/streaming)を参照してください。 |
-| **LCC** | `.zip` | 正確に1つの`.lcc`ファイルと、隣接する`index.bin`および`data.bin`ファイルを含むこと。 |
+| フォーマット | アップロードするファイル | 最大サイズ | 検証方法 |
+|--------|----------------|--------------|---------------------|
+| **PLY** | `.ply` | 15 GB | ガウシアンスプラットのデータを含むPLYファイルであること。メッシュや点群だけを含むPLYは拒否されます。 |
+| **SPZ** | `.spz` | 5 GB | 読み込み可能なSPZファイルであること。 |
+| **SOG** | `.sog` | 10 GB | 1つの`meta.json`ファイルと、期待されるSOGのWebPペイロードファイルを含むこと。 |
+| **Streamed SOGバンドル (SSOG)** | `.zip` | 10 GB | `lod-meta.json`と1つ以上のSOGチャンクフォルダを含むこと。[ストリーミングとパフォーマンス](/user-manual/supersplat/streaming)を参照してください。 |
+| **LCCまたはLCC2** | `.zip` | 10 GB | 正確に1つの`.lcc2`ファイル、または正確に1つの`.lcc`ファイルと隣接する`index.bin`および`data.bin`ファイルを含むこと。 |
 
-ファイルの内容は選択後に検証されます。Direct Uploadは`.compressed.ply`、`.ksplat`、`.splat`、`.spz`ファイルを直接受け付けません。これらは[Convert](/user-manual/supersplat/convert)ユーティリティまたは[splat-transform CLI](/user-manual/splat-transform/)で先に変換してください。
+ファイルの内容は選択後に検証されます。Direct Uploadは`.compressed.ply`、`.ksplat`、`.splat`ファイルを直接受け付けません。これらの変換や、フォーマットの最大サイズに収めるための縮小には、[Convert](/user-manual/supersplat/convert)ユーティリティまたは[splat-transform CLI](/user-manual/splat-transform/)を使用してください。
 
-:::note 最大ファイルサイズ
+### 詳細レベル
 
-Direct Uploadは**10 GB**までのファイルを受け付けます。これより大きなファイルは事前に分割または圧縮する必要があります — [Convert](/user-manual/supersplat/convert)ユーティリティや[splat-transform CLI](/user-manual/splat-transform/)を使ってアップロード前にファイルサイズを縮小してみてください。
-
-:::
+PLYまたはSPZファイルを選ぶと、ダイアログに**Auto generate LODs**チェックボックスが表示されます。オンにすると、スプラットは単一のSOGファイルではなく、段階的にストリーミングされる[Streamed SOG](/user-manual/supersplat/streaming)として公開されます。100万ガウシアン以上のスプラットでは自動的にオンになり、アップロード前に変更できます。4,000万ガウシアンを超えるスプラットはストリーミングが必須のため、オンに固定されます。SOGファイルは常に単一ファイルとして公開され、SSOGおよびLCCアーカイブは常にストリーミングされます。
 
 ## アップロード後の流れ
 
@@ -72,11 +71,12 @@ Edit Splatビューから次のことができます：
 
 | エラー | 原因 |
 |-------|-------|
-| **Unrecognized format** | 上記の対応構造のいずれにも合致しないファイル。 |
-| **File too large** | ファイルが10 GBの制限を超えている。 |
-| **Upload failed** | ネットワーク中断またはサーバー側の問題。再試行してください。問題が続く場合は接続を確認してください。 |
+| **Unrecognized Format** | 上記の対応構造のいずれにも合致しないファイル。 |
+| **No Gaussian Splat Data** | 有効なPLYファイルだが、ガウシアンスプラットではなくメッシュや点群を含んでいる。 |
+| **File Too Large** | ファイルがそのフォーマットの最大サイズを超えている。メッセージに両方のサイズが表示されます。 |
+| **Upload Failed** | ネットワーク中断またはサーバー側の問題。再試行してください。問題が続く場合は接続を確認してください。 |
 
-また、すべてのアカウントには、圧縮後の出力サイズで計測される1日あたりの公開許容量と、同時にアップロード中または処理中にできるシーン数の上限があります。[制限](/user-manual/supersplat/api-integrations#limits)を参照してください。
+また、すべてのアカウントには、圧縮後の出力サイズで計測される1日あたりの公開許容量と、同時にアップロード中または処理中にできるシーン数の上限があります。いずれかに達すると、ダイアログにその旨（**Publishing Allowance Used**または**Scenes Still Processing**）と、再びアップロードできる時期が表示されます。[制限](/user-manual/supersplat/api-integrations#limits)を参照してください。
 
 ## 関連項目
 

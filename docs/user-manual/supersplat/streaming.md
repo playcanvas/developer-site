@@ -15,7 +15,7 @@ A published splat takes one of two forms:
 Which one you get depends on how you publish:
 
 - **From the Editor**, the **Generate LODs** toggle in the [Publish Settings](/user-manual/supersplat/editor/publishing) dialog decides. It's on by default for scenes of 1 million Gaussians or more that span a large area. Scenes of more than 40 million Gaussians must be streamed, so for them the toggle is switched on and can't be turned off.
-- **With [Direct Upload](/user-manual/supersplat/upload)**, a PLY gets an **Auto generate LODs** checkbox, ticked automatically at 1 million Gaussians or more; you can override it before publishing. Splats uploaded as a pre-built LCC or SSOG archive are always streamed.
+- **With [Direct Upload](/user-manual/supersplat/upload)**, a PLY or SPZ file gets an **Auto generate LODs** checkbox, ticked automatically at 1 million Gaussians or more; you can override it before publishing, except above 40 million Gaussians, where it is locked on. A SOG file is published as a single file, and splats uploaded as a pre-built LCC or SSOG archive are always streamed.
 
 ## Near-instant loads and the Gaussian budget {#near-instant-loads-and-the-gaussian-budget}
 
