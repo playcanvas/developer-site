@@ -1,8 +1,8 @@
 # Cameras
 
-The **Cameras** section — in the **Scene** tab of [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md)'s left panel — defines the **starting camera** for your published splat: the view a visitor lands on when they open your [scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md) (unless a [camera animation track](https://developer.playcanvas.com/user-manual/supersplat/editor/timeline.md) drives the start instead). The camera has a **position**, a **target** (the point it looks at), and a **field of view**.
+The **Cameras** section — in the **Scene** tab of [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md)'s left panel — defines the **starting camera** for your published splat: the view a visitor lands on when they open your [scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md) (unless the scene [plays its camera animation on open](https://developer.playcanvas.com/user-manual/supersplat/studio/animation.md#playing-on-open) instead). The camera has a **position**, a **target** (the point it looks at), and a **field of view**.
 
-[Image: The Cameras panel with a list of cameras]
+[Image: The Cameras section with Camera 1 and its Lens settings]
 
 :::note
 
@@ -12,12 +12,13 @@ Studio currently supports a single camera. Support for multiple cameras is comin
 
 ## Setting the camera
 
-The camera is listed as **Camera 1** with two icon buttons:
+The camera is listed as **Camera 1** with three icon buttons:
 
-- **Go to** (crosshair icon) — flies the viewport to the camera's saved pose.
-- **Edit** (pencil icon) — opens [camera edit mode](https://developer.playcanvas.com/user-manual/supersplat/studio/cameras.md#edit-camera-mode) to frame a new starting view. The pencil turns yellow while edit mode is active.
+- **Go to camera** — flies the viewport to the camera's saved pose.
+- **Set camera to current view** — stores the viewport's current position, target and field of view as the starting pose in one click.
+- **Edit camera** (pencil) — opens [camera edit mode](https://developer.playcanvas.com/user-manual/supersplat/studio/cameras.md#edit-camera-mode) to frame a new starting view. The pencil turns yellow while edit mode is active.
 
-You set the camera's **position** and **target** by framing the viewport. There are no numeric position or target inputs in the Cameras panel.
+You set the camera's **position** and **target** by framing the viewport. There are no numeric position or target inputs in the Cameras section.
 
 ### Edit camera mode
 
@@ -38,9 +39,9 @@ Click **Edit** again (or press **Escape**) to exit edit mode without saving. Unl
 
 ## Lens (field of view)
 
-Below the camera list, the **Lens** control sets the **field of view** with a slider and a numeric input, in whole degrees from **10°** to **120°** (default **75°**). The value is the **full** viewing angle, not a half-angle. On a **wide** viewport the angle is measured **horizontally** (left to right); on a **tall** viewport it is measured **vertically** (top to bottom). You store one number — Studio and the published scene page apply it to whichever axis suits the screen shape.
+Below the camera list, the **Lens** control sets the **Field of view** with a slider and a numeric input, in whole degrees from **10°** to **120°** (default **75°**). The value is the **full** viewing angle, not a half-angle. On a **wide** viewport the angle is measured **horizontally** (left to right); on a **tall** viewport it is measured **vertically** (top to bottom). You store one number — Studio and the published scene page apply it to whichever axis suits the screen shape.
 
-This is a single, global setting — it applies to the start camera and all annotation cameras.
+This is a single, global setting: as its tooltip says, it applies to the start camera and all annotation cameras.
 
 ## Defaults
 
@@ -49,16 +50,16 @@ A fresh scene starts with a single camera at a **75°** field of view, with posi
 - **Environment-style** scenes — position `[0, 2, 0]`, target `[2, 2, 0]`.
 - **Object-style** scenes — position `[2, 2, -2]`, target `[0, 0, 0]`.
 
-Use [camera edit mode](https://developer.playcanvas.com/user-manual/supersplat/studio/cameras.md#edit-camera-mode) to frame the viewport and click **Apply** to capture a new pose, then adjust the **Lens** field of view so the scene looks the way you want visitors to see it on first load.
+Frame the viewport and click **Set camera to current view**, or use [camera edit mode](https://developer.playcanvas.com/user-manual/supersplat/studio/cameras.md#edit-camera-mode) and click **Apply**, to capture a new pose, then adjust the **Lens** field of view so the scene looks the way you want visitors to see it on first load.
 
 ## How cameras are used
 
-- **Initial framing** — the first camera in the list is the default starting view when a visitor opens the scene page (`startMode: 'default'`). From there the viewer plays a slow, looping camera motion until the visitor takes over: an orbit around the target when the camera starts outside the splat (an object), or a gentle figure-eight when it starts inside (a scene). A [camera animation track](https://developer.playcanvas.com/user-manual/supersplat/editor/timeline.md) replaces that motion when the scene's start mode is `animTrack`.
+- **Initial framing** — the first camera in the list is the default starting view when a visitor opens the scene page (`startMode: 'default'`). From there the viewer plays a slow, looping camera motion until the visitor takes over: an orbit around the target when the camera starts outside the splat (an object), or a gentle figure-eight when it starts inside (a scene). A [camera animation](https://developer.playcanvas.com/user-manual/supersplat/studio/animation.md) replaces that motion when **Play animation on open** is on.
 - **Object or scene** — whether the camera starts outside or inside the splat's bounds also decides the viewer's starting [camera mode](https://developer.playcanvas.com/user-manual/supersplat/viewer/controls.md#camera-modes) (orbit for an object, walk or fly for a scene) and how the splat is presented in [VR and AR](https://developer.playcanvas.com/user-manual/supersplat/viewer/xr.md#scenes-and-objects).
 - **Annotation poses** — each [annotation](https://developer.playcanvas.com/user-manual/supersplat/studio/annotations.md) embeds its own camera pose that the viewer animates to when the annotation is selected. The annotation's pose is independent of the entries in the Cameras list.
 
 ## See also
 
-- [Camera animation (Timeline)](https://developer.playcanvas.com/user-manual/supersplat/editor/timeline.md) — keyframed camera motion, authored in the SuperSplat Editor
+- [Camera Animation](https://developer.playcanvas.com/user-manual/supersplat/studio/animation.md) — keyframed camera motion on Studio's timeline
 - [Annotations](https://developer.playcanvas.com/user-manual/supersplat/studio/annotations.md) — 3D-positioned hotspots that can adopt a camera pose
 - [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md) — the JSON contract that stores the camera list

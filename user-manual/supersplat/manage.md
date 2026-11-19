@@ -8,7 +8,7 @@ You must be signed in with a PlayCanvas account to access Manage. See [Account C
 
 ## The list view
 
-On desktop the page shows a sortable table; on mobile each splat is rendered as a card.
+On desktop the page shows a sortable table; on mobile each splat is rendered as a card, with its actions in a menu that can also make the splat public or unlisted.
 
 | Column | Description |
 |--------|-------------|
@@ -18,7 +18,7 @@ On desktop the page shows a sortable table; on mobile each splat is rendered as 
 | **Views** | View count on the public scene page. |
 | **Likes** | Thumbs-up count. |
 | **Size** | Human-readable file size of the published splat. |
-| **Actions** | **Edit**, **Open in Studio**, and **Delete**. |
+| **Actions** | Icon buttons for **Edit details** (pencil), **Open in Studio**, and **Delete** (trash). Hover a button for its name. |
 
 Click a column header to sort. Sortable fields are **Date** (default — newest first), **Views**, **Likes**, and **Size**. The list paginates at **25 splats per page**.
 
@@ -32,7 +32,7 @@ The **Upload Splat** button in the page header opens the Upload dialog. See [Dir
 
 ## Editing splat metadata
 
-Click **Edit** in the row's **Actions** column to open the **Edit Splat** dialog.
+Click **Edit details** (the pencil) in the row's **Actions** column to open the **Edit Splat** dialog.
 
 [Image: The Edit Splat dialog]
 
@@ -76,7 +76,7 @@ Deleting a splat is permanent and cannot be undone.
 
 ## Opening a splat in Studio
 
-Use **Open in Studio** in the row's **Actions** column, or **Edit in Studio** on the dialog's preview card, to launch [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md) for that splat. The control is disabled while the splat is still processing or in an unsupported format. Studio's URL is `superspl.at/scene/<hash>/studio`. Only the splat's owner can open Studio for it.
+Use **Open in Studio** in the row's **Actions** column, or **Edit in Studio** on the dialog's preview card, to launch [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md) for that splat. The control is disabled while the splat is still processing or in an unsupported format, and hovering it then says **Splat is not available for editing**. Studio's URL is `superspl.at/scene/<hash>/studio`. Only the splat's owner can open Studio for it.
 
 ## See also
 

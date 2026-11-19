@@ -9,7 +9,7 @@ Use this index to edit, publish, present or embed splats. To render splats in yo
 - **Pick the part of SuperSplat for the task**:
     - The [SuperSplat Editor](https://superspl.at/editor) cleans up, crops, colors, animates and exports splats in the browser.
     - [superspl.at](https://superspl.at) hosts published splats, each on a public scene page, and lists yours on the Manage page.
-    - Studio curates a published splat: its starting camera, annotations, post effects, skybox and walkable collision.
+    - Studio curates a published splat: its look and skybox, starting camera, camera animation, walkable collision, post effects and annotations.
     - The SuperSplat Viewer shows scenes on superspl.at, and can be embedded in your own site or self-hosted.
     - [Convert](https://superspl.at/convert) runs SplatTransform in the browser.
     - The SuperSplat API publishes splats from capture tools and pipelines, and downloads scenes whose owners allow it.
@@ -33,7 +33,7 @@ Use this index to edit, publish, present or embed splats. To render splats in yo
 - [Managing Splats](https://developer.playcanvas.com/user-manual/supersplat/editor/scene-management.md): Working with several splats in one scene.
 - [Color and Appearance](https://developer.playcanvas.com/user-manual/supersplat/editor/color-and-appearance.md): Grading colors, and how Gaussians and selections are drawn.
 - [Data Panel](https://developer.playcanvas.com/user-manual/supersplat/editor/data-panel.md): Inspecting splat attributes, filtering by value and finding outliers.
-- [Timeline](https://developer.playcanvas.com/user-manual/supersplat/editor/timeline.md): Camera keyframes, COLMAP pose import, and animated camera paths.
+- [Timeline](https://developer.playcanvas.com/user-manual/supersplat/editor/timeline.md): Camera keyframes, COLMAP pose import, and animated camera paths published with a splat.
 - [Rendering Media](https://developer.playcanvas.com/user-manual/supersplat/editor/rendering.md): Rendering images and videos, including 360° output.
 - [Managing Projects](https://developer.playcanvas.com/user-manual/supersplat/editor/managing-projects.md): Saving edits as `.ssproj` project files.
 - [Publishing](https://developer.playcanvas.com/user-manual/supersplat/editor/publishing.md): Publishing a splat from the Editor to superspl.at.
@@ -46,11 +46,12 @@ Use this index to edit, publish, present or embed splats. To render splats in yo
 - [Manage](https://developer.playcanvas.com/user-manual/supersplat/manage.md): Listing, editing, sharing and deleting your published splats.
 - [Streaming & Performance](https://developer.playcanvas.com/user-manual/supersplat/streaming.md): How published splats are compressed and streamed, the Gaussian budget, and the Viewer's Quality and Performance Mode settings.
 - [SuperSplat Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md): Curating a published splat's viewing experience.
+- [Look & Tone](https://developer.playcanvas.com/user-manual/supersplat/studio/look-and-tone.md): The background color, skybox, tone mapping, high-precision rendering and anti-aliasing.
 - [Cameras](https://developer.playcanvas.com/user-manual/supersplat/studio/cameras.md): The starting camera and field of view.
-- [Annotations](https://developer.playcanvas.com/user-manual/supersplat/studio/annotations.md): Clickable 3D hotspots that guide visitors through a scene.
-- [Post Effects](https://developer.playcanvas.com/user-manual/supersplat/studio/post-effects.md): Sharpness, bloom, color grading, vignette and tone mapping.
-- [Skybox & Background](https://developer.playcanvas.com/user-manual/supersplat/studio/skybox.md): A background color or an equirectangular skybox.
+- [Camera Animation](https://developer.playcanvas.com/user-manual/supersplat/studio/animation.md): Keyframing a camera flythrough on Studio's timeline, and playing it when the scene opens.
 - [Collision](https://developer.playcanvas.com/user-manual/supersplat/studio/collision.md): Voxel collision so visitors can walk through a scene.
+- [Post Effects](https://developer.playcanvas.com/user-manual/supersplat/studio/post-effects.md): Sharpness, bloom, color grading, vignette and chromatic fringing.
+- [Annotations](https://developer.playcanvas.com/user-manual/supersplat/studio/annotations.md): Clickable 3D hotspots that guide visitors through a scene.
 - [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md): The JSON schema of Studio's settings, as the Viewer reads them.
 - [Scene Page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md): The public page of a published splat: viewer, sharing, embedding, downloads and comments.
 
@@ -73,7 +74,7 @@ Use this index to edit, publish, present or embed splats. To render splats in yo
 
 ## Optional
 
-- [All pages of this index in one file](https://developer.playcanvas.com/user-manual/supersplat/llms-full.txt): 40 pages (282 KB), for downloading and searching rather than reading into context.
+- [All pages of this index in one file](https://developer.playcanvas.com/user-manual/supersplat/llms-full.txt): 41 pages (293 KB), for downloading and searching rather than reading into context.
 - [Camera Controls](https://developer.playcanvas.com/user-manual/supersplat/editor/camera-controls.md)
 - [Keyboard Shortcuts](https://developer.playcanvas.com/user-manual/supersplat/editor/keyboard-shortcuts.md)
 - [Explore](https://developer.playcanvas.com/user-manual/supersplat/explore.md)

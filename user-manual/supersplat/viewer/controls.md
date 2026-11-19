@@ -6,7 +6,7 @@ The [SuperSplat Viewer](https://developer.playcanvas.com/user-manual/supersplat/
 
 While a scene loads, the viewer shows its poster image, if it has one, and a loading bar with a percentage. A [streamed scene](https://developer.playcanvas.com/user-manual/supersplat/streaming.md) appears as soon as it has enough detail to render and keeps refining as more streams in. [Collision](https://developer.playcanvas.com/user-manual/supersplat/studio/collision.md) data keeps loading in the background, and walk mode becomes available when it arrives.
 
-The camera then starts moving. If the scene [starts with a camera animation](https://developer.playcanvas.com/user-manual/supersplat/editor/timeline.md), that plays; otherwise the viewer plays a slow 20-second loop from the [starting camera](https://developer.playcanvas.com/user-manual/supersplat/studio/cameras.md): an orbit around an object, or a gentle figure-eight inside a scene. Interacting with the scene stops it and hands the camera to the visitor.
+The camera then starts moving. If the scene [plays its camera animation on open](https://developer.playcanvas.com/user-manual/supersplat/studio/animation.md#playing-on-open), that plays; otherwise the viewer plays a slow 20-second loop from the [starting camera](https://developer.playcanvas.com/user-manual/supersplat/studio/cameras.md): an orbit around an object, or a gentle figure-eight inside a scene. Interacting with the scene stops it and hands the camera to the visitor.
 
 ## The toolbar
 

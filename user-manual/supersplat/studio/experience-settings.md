@@ -72,17 +72,18 @@ type ExperienceSettings = {
 };
 ```
 
-Most fields are authored in a Studio panel or control; the exception is `animTracks`, which comes from the SuperSplat Editor Timeline and is baked in at publish time. Follow the cross-references for details.
+Most fields are authored in a Studio control. The camera animation can also come from the SuperSplat Editor's Timeline, baked in at publish time. Follow the cross-references for details.
 
 | Field | Authored in |
 |-------|-------------|
-| `tonemapping`, `highPrecisionRendering` | [Post Effects](https://developer.playcanvas.com/user-manual/supersplat/studio/post-effects.md) |
-| `background.color`, `background.skyboxUrl` | [Skybox & Background](https://developer.playcanvas.com/user-manual/supersplat/studio/skybox.md) |
+| `tonemapping`, `highPrecisionRendering` | [Look & Tone](https://developer.playcanvas.com/user-manual/supersplat/studio/look-and-tone.md) |
+| `background.color`, `background.skyboxUrl` | [Look & Tone](https://developer.playcanvas.com/user-manual/supersplat/studio/look-and-tone.md) |
 | `postEffectSettings` | [Post Effects](https://developer.playcanvas.com/user-manual/supersplat/studio/post-effects.md) |
 | `cameras` | [Cameras](https://developer.playcanvas.com/user-manual/supersplat/studio/cameras.md) |
-| `animTracks` | [Editor Timeline](https://developer.playcanvas.com/user-manual/supersplat/editor/timeline.md) (baked in when publishing) |
+| `animTracks` | [Camera Animation](https://developer.playcanvas.com/user-manual/supersplat/studio/animation.md), or the [Editor Timeline](https://developer.playcanvas.com/user-manual/supersplat/editor/timeline.md) (baked in when publishing). Studio saves only a track that has keyframes. |
 | `annotations` | [Annotations](https://developer.playcanvas.com/user-manual/supersplat/studio/annotations.md) |
-| `startMode`, `hasStartPose` | Initial values set when publishing from the Editor; adjustable via the Studio header / startup configuration |
+| `startMode` | **Play animation on open** in the [Animation](https://developer.playcanvas.com/user-manual/supersplat/studio/animation.md#playing-on-open) section: `animTrack` when it is on, `default` when it is off. The initial value is set when publishing from the Editor. |
+| `hasStartPose` | Set when publishing from the Editor |
 | Collision voxel data | Stored separately as a [Scene Asset](https://developer.playcanvas.com/user-manual/supersplat/studio/collision.md), not in this JSON |
 
 ## How the viewer reads it
@@ -94,6 +95,7 @@ A few fields behave in ways the schema alone doesn't show:
 - **`cameras` and `animTracks`** — the format allows several, but the viewer uses only the first camera and plays only the first track.
 - **`annotations[].text`** — shown as plain text, so HTML markup isn't rendered.
 - **`startMode: 'annotation'`** — accepted, but the viewer starts as it does for `default`.
+- **`antiAlias`** — not part of the schema above, but Studio adds it: its [Anti-aliasing](https://developer.playcanvas.com/user-manual/supersplat/studio/look-and-tone.md#anti-aliasing) switch stores `antiAlias: false` when turned off. The viewer doesn't read it. Each splat file's own anti-aliasing tag decides, and the `aa` [URL parameter](https://developer.playcanvas.com/user-manual/supersplat/viewer/embedding.md#url-parameters) overrides that.
 
 ## Authoring limits
 

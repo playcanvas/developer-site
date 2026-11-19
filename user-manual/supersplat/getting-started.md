@@ -71,9 +71,9 @@ Your splat now appears on your [Manage page](https://developer.playcanvas.com/us
 
 Three things worth doing on a first pass:
 
-- **Frame the opening shot.** In the **Scene** tab, under **Cameras**, set the initial camera position, target, and field of view so visitors start from your best angle. See [Cameras](https://developer.playcanvas.com/user-manual/supersplat/studio/cameras.md).
-- **Add a hotspot.** In the **Annotations** tab, frame a detail, add an annotation, and give it a title and some text. Visitors click through hotspots like a guided tour. See [Annotations](https://developer.playcanvas.com/user-manual/supersplat/studio/annotations.md).
-- **Add some polish.** Under **Post Effects**, try a touch of **Bloom** or a **Vignette**, or pick a **Tonemapping** curve. See [Post Effects](https://developer.playcanvas.com/user-manual/supersplat/studio/post-effects.md).
+- **Frame the opening shot.** In the **Scene** tab, under **Cameras**, frame your best angle and click **Set camera to current view** so visitors start there. See [Cameras](https://developer.playcanvas.com/user-manual/supersplat/studio/cameras.md).
+- **Add a hotspot.** Frame a detail, press <kbd>C</kbd>, click the spot you want to annotate, and give it a title and some text. Visitors click through hotspots like a guided tour. See [Annotations](https://developer.playcanvas.com/user-manual/supersplat/studio/annotations.md).
+- **Add some polish.** Pick a **Tonemapping** curve under **Look & Tone**, or try a **Vignette** or some **Color Grading** under **Post Effects**. See [Look & Tone](https://developer.playcanvas.com/user-manual/supersplat/studio/look-and-tone.md) and [Post Effects](https://developer.playcanvas.com/user-manual/supersplat/studio/post-effects.md).
 
 [Video](https://developer.playcanvas.com/video/supersplat-studio-edit-camera.mp4)
 

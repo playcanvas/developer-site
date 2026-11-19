@@ -1,6 +1,6 @@
 # Publishing
 
-Publishing from the SuperSplat Editor uploads your edited splat to [superspl.at](https://superspl.at), where it lands on your [Manage page](https://developer.playcanvas.com/user-manual/supersplat/manage.md), gets a public [scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md), and can be opened in [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md) to curate the viewing experience (cameras, annotations, post effects, skybox, collision).
+Publishing from the SuperSplat Editor uploads your edited splat to [superspl.at](https://superspl.at), where it lands on your [Manage page](https://developer.playcanvas.com/user-manual/supersplat/manage.md), gets a public [scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md), and can be opened in [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md) to curate the viewing experience (cameras, camera animation, annotations, post effects, skybox, collision).
 
 :::tip Two ways to publish
 
@@ -74,5 +74,5 @@ At least one of the two must be enabled to publish. Overriding only the animatio
 ## What's next?
 
 - Your new splat now lives on the [Manage page](https://developer.playcanvas.com/user-manual/supersplat/manage.md) where you can edit its title, description, visibility, and downloadable license.
-- Open it in [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md) to add cameras, annotations, post effects, a skybox, or collision geometry.
+- Open it in [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md) to frame its camera, animate it, or add annotations, post effects, a skybox, or collision geometry.
 - Visitors browse to its [public scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md) to view, share, embed, like, and (if you allow it) download.

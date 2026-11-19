@@ -185,7 +185,7 @@ On the [scene page](https://developer.playcanvas.com/user-manual/supersplat/scen
 
 :::note
 
-Camera animation tracks are authored here in the Editor Timeline — **not** in [SuperSplat Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md), which only curates cameras, annotations, post effects, skybox, and collision. For how animation is stored in the published settings — the `animTracks` array (each track's `loopMode`, `interpolation`, and keyframes) plus the scene-level `startMode` — see [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md).
+Once a splat is published, you can also keyframe its camera animation in [SuperSplat Studio](https://developer.playcanvas.com/user-manual/supersplat/studio/animation.md), and turn playing on open on or off there. Both edit the same published animation, so the last one saved wins: republishing with **Override Animation** replaces Studio's animation. For how animation is stored in the published settings — the `animTracks` array (each track's `loopMode`, `interpolation`, and keyframes) plus the scene-level `startMode` — see [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md).
 
 :::
 

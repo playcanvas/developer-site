@@ -16,19 +16,19 @@ You'll typically generate it once per scene and re-generate only if the underlyi
 
 ## Generating voxel collision
 
-The recommended way to add collision is to generate it directly in Studio. The **Collision** section of the **Assets** tab has a **Generate** button that runs a server-side voxelizer against your published splat — no files to prepare or upload.
+The recommended way to add collision is to generate it directly in Studio. The **Collision** section of the **Scene** tab has a **Generate** button, on its **Voxels** row, that runs a server-side voxelizer against your published splat — no files to prepare or upload.
 
 [Image: The Generate Voxel Collision dialog in Studio]
 
-1. Open the splat in [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md#launching-studio) — clicking the splat's thumbnail only *views* it, so use **Open in Studio** (from Manage) or **Edit in Studio** (from the scene page). Then select the **Assets** tab in the left panel and find the **Collision** section.
-2. Click **Generate** to open the **Generate Voxel Collision** dialog.
+1. Open the splat in [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md#launching-studio) — clicking the splat's thumbnail only *views* it, so use **Open in Studio** (from Manage) or **Edit in Studio** (from the scene page). The **Collision** section is on the **Scene** tab of the left panel, below **Animation**.
+2. Click **Generate** on the **Voxels** row to open the **Generate Voxel Collision** dialog.
 3. Choose a **Scene type** — **Indoor**, **Outdoor** (the default), or **Object**. This tunes the voxelizer for the kind of space you're reconstructing.
 4. Set the **Seed position** (**X**, **Y**, **Z**). This is the point the voxelizer flood-fills outward from to find the navigable space, so it should sit somewhere a visitor could stand. The fields are pre-filled with your current viewport camera position — frame the scene where you want before opening the dialog, or type coordinates in by hand.
 5. Click **Generate**.
 
-Generation runs on the server and usually takes a few minutes. The Collision section shows **Generation in progress. Reload to refresh status.** while it runs — Studio doesn't poll, so reload the page to pick up the result. Once it completes, the `scene.voxel.json` and `scene.voxel.bin` files appear in the section and the scene becomes walkable on the next viewer reload. If generation fails, the section shows **Generation failed.**
+Generation runs on the server and usually takes a few minutes. The Collision section shows **Generation in progress. Reload to refresh status.** while it runs — Studio doesn't poll, so reload the page to pick up the result. Once it completes, the `scene.voxel.json` and `scene.voxel.bin` files are listed in the section, with their sizes and download links, and the scene becomes walkable on the next viewer reload. If generation fails, the section shows **Generation failed.**
 
-If collision already exists, the button reads **Regenerate**, and **Delete** removes the current voxel asset.
+If collision already exists, the dialog's button reads **Regenerate**, and replaces it. The trash icon, **Delete collision**, removes the current voxel asset.
 
 :::note Voxel size
 The generator uses a default voxel size of **5 cm** (`0.05` units), which is a good fit for most scenes. To use a different voxel size, generate your collision with [splat-transform](https://developer.playcanvas.com/user-manual/splat-transform.md) and upload the result — see [Uploading custom voxel collision](https://developer.playcanvas.com/user-manual/supersplat/studio/collision.md#uploading-custom-voxel-collision) below.
@@ -38,7 +38,7 @@ The generator uses a default voxel size of **5 cm** (`0.05` units), which is a g
 
 Uploading is the option to reach for when you want **custom collision** — for example, when the **Generate** button doesn't produce exactly what you want and you've authored or tuned the voxel files yourself. You can produce a compatible pair with the [Convert](https://developer.playcanvas.com/user-manual/supersplat/convert.md) utility in the browser, or the [splat-transform](https://developer.playcanvas.com/user-manual/splat-transform.md) CLI for scripted or batch workflows.
 
-1. In the **Assets** tab, open the **Collision** section and click **Upload** to open the **Upload Voxel Collision Pair** dialog.
+1. In the **Collision** section of the **Scene** tab, click **Upload** on the **Voxels** row to open the **Upload Voxel Collision Pair** dialog.
 2. Drop in (or click to choose) the pair of files that describe the collision — a `.voxel.json` file plus its `.voxel.bin` companion. You can add them together or in two steps.
 3. Click **Upload Voxel Pair**. If collision already exists, the button reads **Upload Override** and replaces it.
 

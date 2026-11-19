@@ -20,7 +20,7 @@ When you host the viewer yourself, the `vr` [URL parameter](https://developer.pl
 
 - The session starts where the viewer's camera is, facing the way it looks.
 - [Post effects](https://developer.playcanvas.com/user-manual/supersplat/studio/post-effects.md) aren't drawn. The scene's tone mapping still is.
-- In AR, the [skybox](https://developer.playcanvas.com/user-manual/supersplat/studio/skybox.md) and background are hidden, so the room shows through.
+- In AR, the [skybox](https://developer.playcanvas.com/user-manual/supersplat/studio/look-and-tone.md#skybox) and background are hidden, so the room shows through.
 - A [streamed scene](https://developer.playcanvas.com/user-manual/supersplat/streaming.md) chooses its detail by distance alone, so turning your head doesn't stream new detail.
 - On Meta Quest and Pico headsets, sessions render with fixed foveation, target 72 Hz where the headset supports it, and use a lower splat budget (see [Streaming & Performance](https://developer.playcanvas.com/user-manual/supersplat/streaming.md#near-instant-loads-and-the-gaussian-budget)). At the **Performance** quality position they also render at 0.8× resolution.
 - The [collision](https://developer.playcanvas.com/user-manual/supersplat/studio/collision.md) overlay is turned off.

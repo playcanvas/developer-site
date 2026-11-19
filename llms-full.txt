@@ -3,7 +3,7 @@
 > The complete text of the PlayCanvas User Manual in one file, for indexing, or for downloading and searching.
 
 Index: https://developer.playcanvas.com/llms.txt
-Total Documents: 567
+Total Documents: 568
 Generated: 2026-11-19
 
 ================================================================================
@@ -23826,7 +23826,7 @@ Browse, view, clean up, publish, curate, convert, and share: the whole platform 
 ## Where do you want to start?
 
 [🧹 I have a splat file](https://developer.playcanvas.com/user-manual/supersplat/getting-started.md): Clean up floaters, crop the scene, and publish it from the browser-based Editor. Follow the quick start and you'll have a shareable scene page in about ten minutes. Getting Started →
-[🎬 I've published a splat](https://developer.playcanvas.com/user-manual/supersplat/studio.md): Make it shine in Studio: frame the opening camera, add annotated hotspots, dial in bloom and color grading, set a skybox, or make the scene walkable with collision. Studio →
+[🎬 I've published a splat](https://developer.playcanvas.com/user-manual/supersplat/studio.md): Make it shine in Studio: frame the opening camera, keyframe a flythrough, add annotated hotspots, dial in bloom and color grading, set a skybox, or make the scene walkable with collision. Studio →
 [🧩 I want splats on my own site or app](https://developer.playcanvas.com/user-manual/supersplat/viewer.md): Embed the open-source Viewer with an iframe, export a single-file HTML viewer to host yourself, or publish from your own pipeline with the API. Viewer, embedding and API →
 [📷 I don't have a splat yet](https://developer.playcanvas.com/user-manual/gaussian-splatting/creating.md): Learn how a splat is captured and trained, and pick a tool that fits you, from one-tap phone apps to desktop trainers. Then come back here with your first PLY. Creating Splats →
 
@@ -23875,7 +23875,7 @@ flowchart TB
 | **[Editor](https://developer.playcanvas.com/user-manual/supersplat/editor.md)** | Browser-based editor for cleaning, cropping, color-adjusting, and animating splats. Publishes to superspl.at. | [superspl.at/editor](https://superspl.at/editor) |
 | **[Direct Upload](https://developer.playcanvas.com/user-manual/supersplat/upload.md)** | Publish an already-clean splat file without opening the Editor. | The orange **Upload Splat** button on [superspl.at](https://superspl.at) |
 | **[Manage](https://developer.playcanvas.com/user-manual/supersplat/manage.md)** | Your splat library: edit title and description, change visibility, choose downloadable + license, delete, open in Studio. | [superspl.at/manage](https://superspl.at/manage) |
-| **[Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md)** | Curate the published viewing experience: cameras, annotations, post effects, skybox, collision. | `superspl.at/scene/<hash>/studio` |
+| **[Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md)** | Curate the published viewing experience: look and tone, skybox, cameras, camera animation, collision, post effects, annotations. | `superspl.at/scene/<hash>/studio` |
 | **[Scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md)** | Public page for a published splat: embedded viewer, share, embed, download, comments, likes, suggested splats. | `superspl.at/scene/<hash>` |
 | **[Explore](https://developer.playcanvas.com/user-manual/supersplat/explore.md)** | Public gallery with sort, time, feature filters, and search. The superspl.at home page. | [superspl.at](https://superspl.at) |
 | **[User Profile](https://developer.playcanvas.com/user-manual/supersplat/user-profile.md)** | A creator's public page: avatar, bio, social links, their published splats. | `superspl.at/user/<username>` |
@@ -23975,9 +23975,9 @@ Your splat now appears on your [Manage page](https://developer.playcanvas.com/us
 
 Three things worth doing on a first pass:
 
-- **Frame the opening shot.** In the **Scene** tab, under **Cameras**, set the initial camera position, target, and field of view so visitors start from your best angle. See [Cameras](https://developer.playcanvas.com/user-manual/supersplat/studio/cameras.md).
-- **Add a hotspot.** In the **Annotations** tab, frame a detail, add an annotation, and give it a title and some text. Visitors click through hotspots like a guided tour. See [Annotations](https://developer.playcanvas.com/user-manual/supersplat/studio/annotations.md).
-- **Add some polish.** Under **Post Effects**, try a touch of **Bloom** or a **Vignette**, or pick a **Tonemapping** curve. See [Post Effects](https://developer.playcanvas.com/user-manual/supersplat/studio/post-effects.md).
+- **Frame the opening shot.** In the **Scene** tab, under **Cameras**, frame your best angle and click **Set camera to current view** so visitors start there. See [Cameras](https://developer.playcanvas.com/user-manual/supersplat/studio/cameras.md).
+- **Add a hotspot.** Frame a detail, press <kbd>C</kbd>, click the spot you want to annotate, and give it a title and some text. Visitors click through hotspots like a guided tour. See [Annotations](https://developer.playcanvas.com/user-manual/supersplat/studio/annotations.md).
+- **Add some polish.** Pick a **Tonemapping** curve under **Look & Tone**, or try a **Vignette** or some **Color Grading** under **Post Effects**. See [Look & Tone](https://developer.playcanvas.com/user-manual/supersplat/studio/look-and-tone.md) and [Post Effects](https://developer.playcanvas.com/user-manual/supersplat/studio/post-effects.md).
 
 [Video](https://developer.playcanvas.com/video/supersplat-studio-edit-camera.mp4)
 
@@ -25241,7 +25241,7 @@ On the [scene page](https://developer.playcanvas.com/user-manual/supersplat/scen
 
 :::note
 
-Camera animation tracks are authored here in the Editor Timeline — **not** in [SuperSplat Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md), which only curates cameras, annotations, post effects, skybox, and collision. For how animation is stored in the published settings — the `animTracks` array (each track's `loopMode`, `interpolation`, and keyframes) plus the scene-level `startMode` — see [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md).
+Once a splat is published, you can also keyframe its camera animation in [SuperSplat Studio](https://developer.playcanvas.com/user-manual/supersplat/studio/animation.md), and turn playing on open on or off there. Both edit the same published animation, so the last one saved wins: republishing with **Override Animation** replaces Studio's animation. For how animation is stored in the published settings — the `animTracks` array (each track's `loopMode`, `interpolation`, and keyframes) plus the scene-level `startMode` — see [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md).
 
 :::
 
@@ -25412,7 +25412,7 @@ Happy Rendering! 🎬📸
 URL: https://developer.playcanvas.com/user-manual/supersplat/editor/publishing/
 Markdown: https://developer.playcanvas.com/user-manual/supersplat/editor/publishing.md
 
-Publishing from the SuperSplat Editor uploads your edited splat to [superspl.at](https://superspl.at), where it lands on your [Manage page](https://developer.playcanvas.com/user-manual/supersplat/manage.md), gets a public [scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md), and can be opened in [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md) to curate the viewing experience (cameras, annotations, post effects, skybox, collision).
+Publishing from the SuperSplat Editor uploads your edited splat to [superspl.at](https://superspl.at), where it lands on your [Manage page](https://developer.playcanvas.com/user-manual/supersplat/manage.md), gets a public [scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md), and can be opened in [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md) to curate the viewing experience (cameras, camera animation, annotations, post effects, skybox, collision).
 
 :::tip Two ways to publish
 
@@ -25486,7 +25486,7 @@ At least one of the two must be enabled to publish. Overriding only the animatio
 ## What's next?
 
 - Your new splat now lives on the [Manage page](https://developer.playcanvas.com/user-manual/supersplat/manage.md) where you can edit its title, description, visibility, and downloadable license.
-- Open it in [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md) to add cameras, annotations, post effects, a skybox, or collision geometry.
+- Open it in [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md) to frame its camera, animate it, or add annotations, post effects, a skybox, or collision geometry.
 - Visitors browse to its [public scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md) to view, share, embed, like, and (if you allow it) download.
 
 --------------------------------------------------------------------------------
@@ -25733,7 +25733,7 @@ You must be signed in with a PlayCanvas account to access Manage. See [Account C
 
 ## The list view
 
-On desktop the page shows a sortable table; on mobile each splat is rendered as a card.
+On desktop the page shows a sortable table; on mobile each splat is rendered as a card, with its actions in a menu that can also make the splat public or unlisted.
 
 | Column | Description |
 |--------|-------------|
@@ -25743,7 +25743,7 @@ On desktop the page shows a sortable table; on mobile each splat is rendered as 
 | **Views** | View count on the public scene page. |
 | **Likes** | Thumbs-up count. |
 | **Size** | Human-readable file size of the published splat. |
-| **Actions** | **Edit**, **Open in Studio**, and **Delete**. |
+| **Actions** | Icon buttons for **Edit details** (pencil), **Open in Studio**, and **Delete** (trash). Hover a button for its name. |
 
 Click a column header to sort. Sortable fields are **Date** (default — newest first), **Views**, **Likes**, and **Size**. The list paginates at **25 splats per page**.
 
@@ -25757,7 +25757,7 @@ The **Upload Splat** button in the page header opens the Upload dialog. See [Dir
 
 ## Editing splat metadata
 
-Click **Edit** in the row's **Actions** column to open the **Edit Splat** dialog.
+Click **Edit details** (the pencil) in the row's **Actions** column to open the **Edit Splat** dialog.
 
 [Image: The Edit Splat dialog]
 
@@ -25801,7 +25801,7 @@ Deleting a splat is permanent and cannot be undone.
 
 ## Opening a splat in Studio
 
-Use **Open in Studio** in the row's **Actions** column, or **Edit in Studio** on the dialog's preview card, to launch [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md) for that splat. The control is disabled while the splat is still processing or in an unsupported format. Studio's URL is `superspl.at/scene/<hash>/studio`. Only the splat's owner can open Studio for it.
+Use **Open in Studio** in the row's **Actions** column, or **Edit in Studio** on the dialog's preview card, to launch [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md) for that splat. The control is disabled while the splat is still processing or in an unsupported format, and hovering it then says **Splat is not available for editing**. Studio's URL is `superspl.at/scene/<hash>/studio`. Only the splat's owner can open Studio for it.
 
 ## See also
 
@@ -25816,63 +25816,160 @@ Use **Open in Studio** in the row's **Actions** column, or **Edit in Studio** on
 URL: https://developer.playcanvas.com/user-manual/supersplat/studio/
 Markdown: https://developer.playcanvas.com/user-manual/supersplat/studio.md
 
-**SuperSplat Studio** is where you curate the viewing experience of a splat you've already [published](https://developer.playcanvas.com/user-manual/supersplat/editor/publishing.md) or [directly uploaded](https://developer.playcanvas.com/user-manual/supersplat/upload.md). It opens on top of the published scene and lets you curate much of what a visitor sees on its [scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md): camera framing, on-scene annotations, post-processing effects, tonemapping, the background or skybox, and collision geometry for walkable scenes. (Camera animation is authored separately in the [Editor Timeline](https://developer.playcanvas.com/user-manual/supersplat/editor/timeline.md).)
+**SuperSplat Studio** is where you curate the viewing experience of a splat you've already [published](https://developer.playcanvas.com/user-manual/supersplat/editor/publishing.md) or [directly uploaded](https://developer.playcanvas.com/user-manual/supersplat/upload.md). It opens on top of the published scene and shapes what a visitor sees on its [scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md): the background or skybox, tonemapping, the starting camera, a camera animation, collision geometry for walkable scenes, post effects, and on-scene annotations.
 
-Studio writes its output as a single JSON document — [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md) — that the open-source [SuperSplat Viewer](https://developer.playcanvas.com/user-manual/supersplat/viewer.md) reads at runtime. That same JSON is what gets bundled into a self-hosted HTML export.
+Studio writes its output as a single JSON document, the [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md), which the open-source [SuperSplat Viewer](https://developer.playcanvas.com/user-manual/supersplat/viewer.md) reads at runtime.
+
+[Image: The Studio window: the Scene tab on the left, the viewport, and the timeline open along the bottom]
 
 ## Launching Studio
 
 Studio runs at **`https://superspl.at/scene/<hash>/studio`**. Only the splat's owner can open it; for anyone else the URL 404s.
 
-There are two ways to get there:
+There are three ways to get there:
 
-- From the [Manage page](https://developer.playcanvas.com/user-manual/supersplat/manage.md), open a splat's **Edit Splat** dialog and click **Open in Studio** in the preview card.
-- From your own splat's [scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md), use the **Edit in Studio** entry point.
+- On the [Manage page](https://developer.playcanvas.com/user-manual/supersplat/manage.md), click **Open in Studio** in the splat's row.
+- In a splat's **Edit Splat** dialog on the Manage page, click **Edit in Studio** in the preview card.
+- On your own splat's [scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md), use the **Edit in Studio** entry point.
 
 :::note Desktop recommended
 
-Studio is built for a desktop browser. On a phone or tablet you'll see a "Studio works best on desktop" warning when you open it. You can dismiss the warning and continue, but expect a constrained UI.
+Studio is built for a desktop browser with a keyboard and mouse. On a phone or tablet you'll see a "Studio works best on desktop" warning when you open it. You can continue, but expect a constrained UI.
 
 :::
 
 ## The layout
 
-Studio reuses the SuperSplat editor shell:
+- **Header**: **Back to manage**, the scene name, and on the right **Timeline**, **Import**, **Export**, **View** and **Save**. See [Saving changes](https://developer.playcanvas.com/user-manual/supersplat/studio.md#saving-changes).
+- **Left panel**, with two tabs:
+  - **Scene**: the sections that make up the scene's look and behavior, from top to bottom:
+    - [Look & Tone](https://developer.playcanvas.com/user-manual/supersplat/studio/look-and-tone.md): background color, skybox, tonemapping, High Precision Rendering and anti-aliasing.
+    - [Cameras](https://developer.playcanvas.com/user-manual/supersplat/studio/cameras.md): the starting camera and the field of view.
+    - [Animation](https://developer.playcanvas.com/user-manual/supersplat/studio/animation.md#playing-on-open): whether the camera animation plays when the scene opens.
+    - [Collision](https://developer.playcanvas.com/user-manual/supersplat/studio/collision.md): voxel geometry that makes a scene walkable.
+    - [Post Effects](https://developer.playcanvas.com/user-manual/supersplat/studio/post-effects.md): sharpness, bloom, color grading, vignette and chromatic fringing.
+  - **Annotations**: the list of on-scene [annotations](https://developer.playcanvas.com/user-manual/supersplat/studio/annotations.md).
+- **Viewport**: a live preview of how visitors will see the scene, with a toolbar along the bottom.
+- **Timeline**: a panel along the bottom for keyframing the [camera animation](https://developer.playcanvas.com/user-manual/supersplat/studio/animation.md). It is hidden until you click **Timeline** or press <kbd>T</kbd>.
 
-- **Header** — back button, scene name, **Import** / **Export** / **View** actions, and **Save**.
-- **Left panel** — a single panel organized into three tabs:
-  - **Scene** — grouped sections for *Look & Tone* (background color, tonemapping, high-precision rendering), *Post Effects*, and *Cameras*.
-  - **Annotations** — the list of on-scene annotations.
-  - **Assets** — scene-asset uploads: the **Skybox** image and **Collision** geometry.
-- **Viewport** — live preview of how visitors will see the scene.
+### The viewport toolbar
 
-Each tool section has its own page:
+| Button | What it does |
+|--------|--------------|
+| **Undo** / **Redo** | Step through your edits. |
+| **Move** | The default tool: navigate and select. |
+| **Add annotation** | Place an [annotation](https://developer.playcanvas.com/user-manual/supersplat/studio/annotations.md#adding-an-annotation) by clicking the splat (<kbd>C</kbd>). |
+| **Orbit mode** / **Fly mode** | Switch how the viewport camera moves. |
+| **Frame selection** | Frame the selection in the viewport (<kbd>F</kbd>). |
+| **Reset camera** | Return the viewport camera to its starting view (<kbd>Shift</kbd>+<kbd>F</kbd>). |
+| **Open shortcut guide** | List Studio's keyboard shortcuts. |
 
-- [Cameras](https://developer.playcanvas.com/user-manual/supersplat/studio/cameras.md) — initial pose, target, and field of view for one or more named cameras.
-- [Annotations](https://developer.playcanvas.com/user-manual/supersplat/studio/annotations.md) — 3D-positioned text hotspots that visitors can navigate between.
-- [Post Effects](https://developer.playcanvas.com/user-manual/supersplat/studio/post-effects.md) — sharpness, bloom, color grading, vignette, fringing, tonemapping, high-precision rendering.
-- [Skybox](https://developer.playcanvas.com/user-manual/supersplat/studio/skybox.md) — background color or full equirectangular skybox.
-- [Collision](https://developer.playcanvas.com/user-manual/supersplat/studio/collision.md) — voxel geometry that makes a scene "walkable."
+### Keyboard shortcuts
+
+| Shortcut | Action |
+|----------|--------|
+| <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> | Move, in fly mode |
+| <kbd>Q</kbd> / <kbd>E</kbd> | Move down / up, in fly mode |
+| Hold <kbd>Shift</kbd> / <kbd>Ctrl</kbd> | Move faster / slower, in fly mode |
+| Double-click | Set the orbit point |
+| <kbd>F</kbd> | Frame the selection |
+| <kbd>Shift</kbd>+<kbd>F</kbd> | Reset the camera |
+| <kbd>C</kbd> | Add an annotation |
+| <kbd>T</kbd> | Show or hide the timeline |
+| <kbd>Space</kbd> | Play or pause the camera animation |
+| <kbd>Enter</kbd> | Add a keyframe at the playhead |
+| <kbd>Ctrl</kbd>+<kbd>Z</kbd> / <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd> | Undo / redo (<kbd>Cmd</kbd> on macOS) |
+| <kbd>Esc</kbd> | Cancel or deselect |
 
 ## Saving changes
 
-Edits are not auto-saved. The header surfaces a **Save** action that pushes your full Experience Settings JSON to the server.
+Edits are not saved automatically. **Save** is enabled while you have unsaved changes, and it writes your complete Experience Settings to superspl.at. Visitors who open the scene page from then on see the new version. If you try to leave Studio with unsaved changes, it asks you to confirm before they're lost.
 
-A few things to know about the save flow:
+Skybox and collision files are the exception: they upload as soon as you add them, without **Save**.
 
-- **Dirty-state tracking** — Studio knows when you have unsaved changes. If you try to navigate away with edits pending, you'll be warned before losing them.
-- **Cache-busting on reload** — after a successful save, the viewer reloads with a cache-busted settings URL so it picks up your edits immediately. Visitors loading the scene page from then on see the new version.
-- **No partial saves** — every save writes the full Experience Settings JSON, not a diff. If something looks wrong after a save, double-check the value in each panel rather than expecting changes to be merged.
+The other header buttons work with the settings as a file:
 
-## Schema versioning
+- **Export** downloads the current settings as `settings-<hash>.json`, for example to use with a [viewer you host yourself](https://developer.playcanvas.com/user-manual/supersplat/viewer/embedding.md).
+- **Import** replaces the current settings with a JSON file you choose, after asking for confirmation. Click **Save** to publish them.
+- **View** opens the scene page.
 
-The Experience Settings JSON has a version number; the current schema is **v2**. Older `v1` settings (from before Studio supported some features) are migrated to `v2` automatically when loaded. You don't need to do anything special — but if you self-host the [Viewer](https://developer.playcanvas.com/user-manual/supersplat/viewer.md) and read settings.json directly, see the [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md) reference for the current schema.
+The Experience Settings format is versioned; the current version is 2. Studio migrates older settings automatically when it loads them.
+
+## AI agents
+
+In a browser that supports the experimental [WebMCP API](https://webmachinelearning.github.io/webmcp/), Studio registers tools that let an AI agent work in your open Studio tab, much like the Editor's [AI Agents (WebMCP)](https://developer.playcanvas.com/user-manual/supersplat/editor/webmcp.md) tools. An agent can read the scene and the live camera, pick points on the splat, capture the viewport as an image, create and update cameras and annotations, edit the camera animation, and play or seek the timeline. Its edits share your undo history.
+
+Agents can't save: you review what an agent did and click **Save** yourself.
 
 ## See also
 
 - [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md) — the JSON contract Studio writes and the Viewer reads
-- [Viewer / embedding](https://developer.playcanvas.com/user-manual/supersplat/viewer/embedding.md) — how the published settings are consumed at runtime
+- [Viewer Controls](https://developer.playcanvas.com/user-manual/supersplat/viewer/controls.md) — how visitors navigate the scene you curate
 - [Scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md) — what visitors see after Studio changes are saved
+
+--------------------------------------------------------------------------------
+
+## Look & Tone
+
+URL: https://developer.playcanvas.com/user-manual/supersplat/studio/look-and-tone/
+Markdown: https://developer.playcanvas.com/user-manual/supersplat/studio/look-and-tone.md
+
+The **Look & Tone** section, at the top of the **Scene** tab in [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md), sets what surrounds your splat and how the whole image is rendered. Changes show in the viewport straight away.
+
+[Image: The Look & Tone section]
+
+| Control | What it does |
+|---------|--------------|
+| **Background** | The solid color behind the splat. Click the swatch to open a color picker. |
+| **Skybox** | **Upload** an equirectangular image to surround the splat, or delete the current one. See [Skybox](https://developer.playcanvas.com/user-manual/supersplat/studio/look-and-tone.md#skybox). |
+| **Tonemapping** | How the renderer maps high-dynamic-range output to the display. See [Tonemapping](https://developer.playcanvas.com/user-manual/supersplat/studio/look-and-tone.md#tonemapping). |
+| **High Precision Rendering** | Renders with more precision, at the cost of more GPU work per frame. Use it when bright highlights, fine grading or post effects show banding. [Bloom](https://developer.playcanvas.com/user-manual/supersplat/studio/post-effects.md#bloom) needs it. Off by default. |
+| **Anti-aliasing** | Draws the splat for anti-aliased training, such as Mip-Splatting. On by default. Turn it off if small or distant Gaussians look too faint. See [Anti-aliasing](https://developer.playcanvas.com/user-manual/supersplat/studio/look-and-tone.md#anti-aliasing). |
+
+## Skybox
+
+Click **Upload** next to **Skybox** to open the **Upload Skybox** dialog. It takes one `.webp` or `.hdr` file. HDR files are converted in your browser before they upload. For best results, use an **equirectangular** image: a 2:1 panoramic projection that maps cleanly onto the surrounding sphere.
+
+Each scene can have one skybox, and uploading another replaces it. The upload happens immediately and doesn't need **Save**. The trash icon deletes the skybox.
+
+The background color still matters with a skybox: it shows anywhere the skybox doesn't cover.
+
+### When to use one or the other
+
+- **Background color only** — for studio-style presentations where you want the focus on the splat itself.
+- **Skybox** — for scenes captured outdoors or in believable environments, where matching the surrounding lighting and horizon matters.
+
+## Tonemapping
+
+| Option | Notes |
+|--------|-------|
+| **None** | Pass-through with no scaling. |
+| **Linear** | No tonemapping curve: output is linear. |
+| **Filmic** | Classic film-emulating curve. |
+| **Hejl** | Hejl-Burgess-Dawson curve. |
+| **ACES** | ACES filmic curve. |
+| **ACES 2** | ACES variant with rolled-off highlights. |
+| **Neutral** | Khronos Neutral tonemap. |
+
+## Anti-aliasing
+
+Splats trained with anti-aliasing, such as with Mip-Splatting, draw too bright without compensation. Studio's switch turns that compensation on (the default) or off for the whole scene, and saves the choice with the scene's settings.
+
+:::note
+
+The [SuperSplat Viewer](https://developer.playcanvas.com/user-manual/supersplat/viewer.md) doesn't apply this setting yet. On the scene page and in embeds, each splat file's own anti-aliasing tag decides. When you [host the viewer yourself](https://developer.playcanvas.com/user-manual/supersplat/viewer/embedding.md#url-parameters), the `aa` URL parameter overrides it.
+
+:::
+
+## In the viewer
+
+- **AR** — the skybox and background color are hidden during an [AR session](https://developer.playcanvas.com/user-manual/supersplat/viewer/xr.md), so the room shows through around the splat. VR sessions keep them.
+- **Self-hosting** — the viewer doesn't load the skybox from the scene's settings. When you [host the viewer yourself](https://developer.playcanvas.com/user-manual/supersplat/viewer/embedding.md#url-parameters), pass the image with the `skybox` URL parameter or the `skyboxUrl` option, and override High Precision Rendering with `hpr`.
+
+## See also
+
+- [Post Effects](https://developer.playcanvas.com/user-manual/supersplat/studio/post-effects.md) — sharpness, bloom, color grading, vignette and chromatic fringing
+- [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md) — the JSON contract that stores these settings
 
 --------------------------------------------------------------------------------
 
@@ -25881,9 +25978,9 @@ The Experience Settings JSON has a version number; the current schema is **v2**.
 URL: https://developer.playcanvas.com/user-manual/supersplat/studio/cameras/
 Markdown: https://developer.playcanvas.com/user-manual/supersplat/studio/cameras.md
 
-The **Cameras** section — in the **Scene** tab of [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md)'s left panel — defines the **starting camera** for your published splat: the view a visitor lands on when they open your [scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md) (unless a [camera animation track](https://developer.playcanvas.com/user-manual/supersplat/editor/timeline.md) drives the start instead). The camera has a **position**, a **target** (the point it looks at), and a **field of view**.
+The **Cameras** section — in the **Scene** tab of [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md)'s left panel — defines the **starting camera** for your published splat: the view a visitor lands on when they open your [scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md) (unless the scene [plays its camera animation on open](https://developer.playcanvas.com/user-manual/supersplat/studio/animation.md#playing-on-open) instead). The camera has a **position**, a **target** (the point it looks at), and a **field of view**.
 
-[Image: The Cameras panel with a list of cameras]
+[Image: The Cameras section with Camera 1 and its Lens settings]
 
 :::note
 
@@ -25893,12 +25990,13 @@ Studio currently supports a single camera. Support for multiple cameras is comin
 
 ## Setting the camera
 
-The camera is listed as **Camera 1** with two icon buttons:
+The camera is listed as **Camera 1** with three icon buttons:
 
-- **Go to** (crosshair icon) — flies the viewport to the camera's saved pose.
-- **Edit** (pencil icon) — opens [camera edit mode](https://developer.playcanvas.com/user-manual/supersplat/studio/cameras.md#edit-camera-mode) to frame a new starting view. The pencil turns yellow while edit mode is active.
+- **Go to camera** — flies the viewport to the camera's saved pose.
+- **Set camera to current view** — stores the viewport's current position, target and field of view as the starting pose in one click.
+- **Edit camera** (pencil) — opens [camera edit mode](https://developer.playcanvas.com/user-manual/supersplat/studio/cameras.md#edit-camera-mode) to frame a new starting view. The pencil turns yellow while edit mode is active.
 
-You set the camera's **position** and **target** by framing the viewport. There are no numeric position or target inputs in the Cameras panel.
+You set the camera's **position** and **target** by framing the viewport. There are no numeric position or target inputs in the Cameras section.
 
 ### Edit camera mode
 
@@ -25919,9 +26017,9 @@ Click **Edit** again (or press **Escape**) to exit edit mode without saving. Unl
 
 ## Lens (field of view)
 
-Below the camera list, the **Lens** control sets the **field of view** with a slider and a numeric input, in whole degrees from **10°** to **120°** (default **75°**). The value is the **full** viewing angle, not a half-angle. On a **wide** viewport the angle is measured **horizontally** (left to right); on a **tall** viewport it is measured **vertically** (top to bottom). You store one number — Studio and the published scene page apply it to whichever axis suits the screen shape.
+Below the camera list, the **Lens** control sets the **Field of view** with a slider and a numeric input, in whole degrees from **10°** to **120°** (default **75°**). The value is the **full** viewing angle, not a half-angle. On a **wide** viewport the angle is measured **horizontally** (left to right); on a **tall** viewport it is measured **vertically** (top to bottom). You store one number — Studio and the published scene page apply it to whichever axis suits the screen shape.
 
-This is a single, global setting — it applies to the start camera and all annotation cameras.
+This is a single, global setting: as its tooltip says, it applies to the start camera and all annotation cameras.
 
 ## Defaults
 
@@ -25930,202 +26028,97 @@ A fresh scene starts with a single camera at a **75°** field of view, with posi
 - **Environment-style** scenes — position `[0, 2, 0]`, target `[2, 2, 0]`.
 - **Object-style** scenes — position `[2, 2, -2]`, target `[0, 0, 0]`.
 
-Use [camera edit mode](https://developer.playcanvas.com/user-manual/supersplat/studio/cameras.md#edit-camera-mode) to frame the viewport and click **Apply** to capture a new pose, then adjust the **Lens** field of view so the scene looks the way you want visitors to see it on first load.
+Frame the viewport and click **Set camera to current view**, or use [camera edit mode](https://developer.playcanvas.com/user-manual/supersplat/studio/cameras.md#edit-camera-mode) and click **Apply**, to capture a new pose, then adjust the **Lens** field of view so the scene looks the way you want visitors to see it on first load.
 
 ## How cameras are used
 
-- **Initial framing** — the first camera in the list is the default starting view when a visitor opens the scene page (`startMode: 'default'`). From there the viewer plays a slow, looping camera motion until the visitor takes over: an orbit around the target when the camera starts outside the splat (an object), or a gentle figure-eight when it starts inside (a scene). A [camera animation track](https://developer.playcanvas.com/user-manual/supersplat/editor/timeline.md) replaces that motion when the scene's start mode is `animTrack`.
+- **Initial framing** — the first camera in the list is the default starting view when a visitor opens the scene page (`startMode: 'default'`). From there the viewer plays a slow, looping camera motion until the visitor takes over: an orbit around the target when the camera starts outside the splat (an object), or a gentle figure-eight when it starts inside (a scene). A [camera animation](https://developer.playcanvas.com/user-manual/supersplat/studio/animation.md) replaces that motion when **Play animation on open** is on.
 - **Object or scene** — whether the camera starts outside or inside the splat's bounds also decides the viewer's starting [camera mode](https://developer.playcanvas.com/user-manual/supersplat/viewer/controls.md#camera-modes) (orbit for an object, walk or fly for a scene) and how the splat is presented in [VR and AR](https://developer.playcanvas.com/user-manual/supersplat/viewer/xr.md#scenes-and-objects).
 - **Annotation poses** — each [annotation](https://developer.playcanvas.com/user-manual/supersplat/studio/annotations.md) embeds its own camera pose that the viewer animates to when the annotation is selected. The annotation's pose is independent of the entries in the Cameras list.
 
 ## See also
 
-- [Camera animation (Timeline)](https://developer.playcanvas.com/user-manual/supersplat/editor/timeline.md) — keyframed camera motion, authored in the SuperSplat Editor
+- [Camera Animation](https://developer.playcanvas.com/user-manual/supersplat/studio/animation.md) — keyframed camera motion on Studio's timeline
 - [Annotations](https://developer.playcanvas.com/user-manual/supersplat/studio/annotations.md) — 3D-positioned hotspots that can adopt a camera pose
 - [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md) — the JSON contract that stores the camera list
 
 --------------------------------------------------------------------------------
 
-## Annotations
+## Camera Animation
 
-URL: https://developer.playcanvas.com/user-manual/supersplat/studio/annotations/
-Markdown: https://developer.playcanvas.com/user-manual/supersplat/studio/annotations.md
+URL: https://developer.playcanvas.com/user-manual/supersplat/studio/animation/
+Markdown: https://developer.playcanvas.com/user-manual/supersplat/studio/animation.md
 
-**Annotations** are 3D-positioned text hotspots you place on your published splat in [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md). On the viewer side, each annotation shows up as a numbered hotspot visitors can click; clicking it moves the camera to a curated pose and surfaces a title and body of text. Use them to call out features, narrate a story, or give a self-guided tour of the scene.
+A **camera animation** moves the camera along a keyframed path, from a gentle turntable around an object to a full flythrough of a captured space. In [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md) you author it on the **Timeline** panel and control it from the **Animation** section of the **Scene** tab. Visitors watch it on the [scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md), and can pause it or take over the camera at any time.
 
-## Annotation properties
+A scene has one camera animation. If you published the splat from the Editor with an animation from its [Timeline](https://developer.playcanvas.com/user-manual/supersplat/editor/timeline.md), Studio opens with that animation, ready to edit.
 
-Each annotation has:
+[Image: The timeline panel, with one keyframe selected and the playhead on it]
 
-| Field | Description |
-|-------|-------------|
-| **Position** | World-space `[x, y, z]` where the hotspot marker sits in the scene. |
-| **Title** | Short heading shown when the annotation is selected. |
-| **Text** | Longer body of text, shown as plain text in the viewer. |
-| **Camera** | The [camera pose](https://developer.playcanvas.com/user-manual/supersplat/studio/cameras.md) the viewer animates to when this annotation is selected. |
-| **Extras** | Free-form metadata you can attach for custom integrations or future Studio features. |
+## The timeline panel
 
-## Authoring annotations
+Click **Timeline** in the header, or press <kbd>T</kbd>, to show or hide the panel along the bottom of Studio.
 
-The general flow is:
+| Control | What it does |
+|---------|--------------|
+| **Previous keyframe** / **Next keyframe** | Jump the playhead to the neighboring keyframe. |
+| **Step back one frame** / **Step forward one frame** | Move the playhead one frame. |
+| **Play** / **Pause** | Play the animation in the viewport (<kbd>Space</kbd>). Unavailable in [camera edit mode](https://developer.playcanvas.com/user-manual/supersplat/studio/cameras.md#edit-camera-mode). |
+| **Add keyframe at playhead** | Store the viewport camera as a keyframe at the playhead (<kbd>Enter</kbd>). |
+| **Delete selected keyframes** | Remove the selected keyframes. The count of selected keyframes is shown beside it. |
+| Frame readout | The playhead's frame and the total number of frames. |
+| **Duration** | Length of the animation, in seconds (0.1 to 600). |
+| **FPS** | Frames per second of the timeline (1 to 120). The animation has **Duration** × **FPS** frames. |
+| **Loop mode** | **Play once**, **Loop** (the default) or **Ping-pong**: play forwards, then backwards, repeatedly. |
+| **Smooth** | Smoothness of the path between keyframes, from `0` (straight lines) to `1` (the default, smooth curves). |
+| **Hide timeline** | Close the panel. |
 
-1. Frame the camera the way you want a visitor to see this part of the scene.
-2. Add an annotation; Studio places its hotspot in the world and captures the current camera as the annotation's pose.
-3. Edit the title and body text.
-4. Repeat for as many points of interest as you'd like.
+Below the controls, the **Camera** track shows a ruler with a keyframe marker for every keyframe. Click or drag along the ruler to move the playhead. The trash icon on the track, **Delete camera animation**, removes the animation with all its keyframes.
 
-You can reorder annotations in the list panel — the order controls how visitors step through them on the viewer, and the number each hotspot shows.
+## Creating keyframes
 
-The [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md#authoring-limits) authoring limits allow up to 50 annotations per scene, with titles of up to 60 characters and text of up to 280.
+1. Open the timeline and move the playhead to the frame you want.
+2. Frame the shot in the viewport.
+3. Click **Add keyframe at playhead**, or press <kbd>Enter</kbd>. A keyframe that already exists at that frame is replaced.
+4. Move the playhead and repeat.
 
-## How visitors use them
+Each keyframe stores the camera's position, target and field of view. Adding the first keyframe also turns on **Play animation on open**.
 
-On the [scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md), the viewer shows each annotation as a numbered hotspot:
+## Editing keyframes
 
-- **Selecting a hotspot** eases the camera to the annotation's pose, and its title and text appear in a panel beside the hotspot as the camera arrives. An annotation with neither title nor text shows no panel. Visitors can orbit from there, pivoting near the annotated point, and the panel stays open.
-- **The navigator**, shown when a scene has two or more annotations, displays the current annotation's number and title, with arrows to step to the previous and next one in list order.
-- **Clicking elsewhere** in the viewer deselects the annotation and returns to free navigation. The navigator keeps the last annotation, greyed out, and clicking it selects it again.
-- **Hotspots hidden** behind part of the scene are faded once the camera stops moving.
-- **Show Annotations**, in the viewer's settings panel, lets visitors hide the hotspots and the navigator.
+- **Select** a keyframe by clicking it. <kbd>Ctrl</kbd>-click (<kbd>Cmd</kbd>-click on macOS) adds or removes keyframes from the selection, and dragging across an empty part of the track selects every keyframe it covers.
+- **Move** keyframes by dragging the selection along the track.
+- **Copy** keyframes by holding <kbd>Shift</kbd> while you drag.
+- **Change** a keyframe by moving the playhead to it, framing the new shot and adding a keyframe again.
 
-See [Viewer Controls](https://developer.playcanvas.com/user-manual/supersplat/viewer/controls.md#annotations) for the full visitor experience.
+Every timeline edit can be undone with <kbd>Ctrl</kbd>+<kbd>Z</kbd> (<kbd>Cmd</kbd>+<kbd>Z</kbd> on macOS).
 
-:::note
+:::tip Smooth loops
 
-The settings format accepts `annotation` as a scene's start mode, but the viewer doesn't act on it: a scene always starts from its [starting camera](https://developer.playcanvas.com/user-manual/supersplat/studio/cameras.md) or its camera animation.
+With **Loop mode** set to **Loop**, the camera travels from the last keyframe back to the first over the remaining frames. Leave some frames after the last keyframe, and don't key both the first and last frame, or the loop will snap.
 
 :::
 
-## See also
+## Playing on open
 
-- [Cameras](https://developer.playcanvas.com/user-manual/supersplat/studio/cameras.md) — the camera poses annotations reference
-- [Camera animation (Timeline)](https://developer.playcanvas.com/user-manual/supersplat/editor/timeline.md) — for cinematic flythroughs that don't need visitor interaction
-- [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md) — the JSON contract that stores annotations
+The **Animation** section of the **Scene** tab has one switch, **Play animation on open**:
 
---------------------------------------------------------------------------------
+- **On**: the scene page plays the animation as soon as it opens. Visitors can pause it or take over the camera.
+- **Off**: the scene opens at the [starting camera](https://developer.playcanvas.com/user-manual/supersplat/studio/cameras.md), and the animation isn't played.
 
-## Post Effects
+If the animation has keyframes while the switch is off, the timeline shows **Viewer won't play this animation**, with a **Play on open** button that turns the switch on.
 
-URL: https://developer.playcanvas.com/user-manual/supersplat/studio/post-effects/
-Markdown: https://developer.playcanvas.com/user-manual/supersplat/studio/post-effects.md
+When you click **Save**, an animation without keyframes isn't saved, and the scene opens at the starting camera.
 
-The **Post Effects** panel in [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md) controls the look of your scene after the splat is rendered. Effects are evaluated per-frame in the viewer; each section has an enable toggle plus its own parameters.
+## Animating in the Editor or in Studio
 
-The panel also contains two related global controls: a **Tonemapping** dropdown that shapes how high-dynamic-range output maps to display intensity, and a **High Precision Rendering** toggle that switches the viewer to a more accurate (but more expensive) rendering pipeline.
-
-## Effect sections
-
-### Sharpness
-
-| Field | Description |
-|-------|-------------|
-| **Enabled** | Master toggle. |
-| **Amount** | Strength of the sharpening filter. |
-
-Good for recovering perceived detail on dense splat captures.
-
-### Bloom
-
-| Field | Description |
-|-------|-------------|
-| **Enabled** | Master toggle. |
-| **Intensity** | How strong the bloom glow appears. |
-| **Blur level** | Size of the bloom kernel — larger values produce a softer, broader glow. |
-
-Adds a glow to bright regions of the scene.
-
-### Grading
-
-Color grading applies a global transform to the image.
-
-| Field | Description |
-|-------|-------------|
-| **Enabled** | Master toggle. |
-| **Brightness** | Overall brightness lift. |
-| **Contrast** | Tone separation between dark and light. |
-| **Saturation** | Color intensity (`0` is grayscale). |
-| **Tint** | An RGB color blended into the image — useful for warm/cool grades. |
-
-### Vignette
-
-| Field | Description |
-|-------|-------------|
-| **Enabled** | Master toggle. |
-| **Intensity** | Strength of the corner darkening. |
-| **Inner** | Radius at which the vignette starts. |
-| **Outer** | Radius at which the vignette reaches full strength. |
-| **Curvature** | Shape of the vignette falloff. |
-
-### Fringing
-
-| Field | Description |
-|-------|-------------|
-| **Enabled** | Master toggle. |
-| **Intensity** | Strength of the chromatic aberration effect at frame edges. |
-
-## Tonemapping
-
-A dropdown that picks how the renderer maps HDR output to the display:
-
-| Value | Notes |
-|-------|-------|
-| `linear` (default) | No tonemapping curve — output is linear. |
-| `none` | Pass-through with no scaling. |
-| `filmic` | Classic film-emulating curve. |
-| `hejl` | Hejl-Burgess-Dawson curve. |
-| `aces` | ACES filmic curve. |
-| `aces2` | ACES variant with rolled-off highlights. |
-| `neutral` | Khronos Neutral tonemap. |
-
-## High Precision Rendering
-
-A toggle (default **off**) that enables a more accurate rendering path. Useful when bright highlights, fine color grading, or post-effects show banding in the default path — at the cost of more GPU work per frame.
-
-## In the viewer
-
-- **VR and AR** — post effects and high precision rendering aren't applied during a [VR or AR session](https://developer.playcanvas.com/user-manual/supersplat/viewer/xr.md). The scene's tonemapping still is, and everything returns when the session ends.
-- **Self-hosting** — when you [host the viewer yourself](https://developer.playcanvas.com/user-manual/supersplat/viewer/embedding.md#url-parameters), the `nofx` URL parameter turns post effects off, and `hpr` overrides High Precision Rendering.
+You can also keyframe the camera on the Editor's [Timeline](https://developer.playcanvas.com/user-manual/supersplat/editor/timeline.md) and publish the animation with the splat. Both edit the same animation, so the last one saved wins: republishing from the Editor with **Override Animation** replaces what you made in Studio. Studio is the quicker route for a splat that is already published, since you see the result in the published viewer straight away.
 
 ## See also
 
-- [Skybox](https://developer.playcanvas.com/user-manual/supersplat/studio/skybox.md) — background color and skybox image
-- [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md) — the JSON contract that stores post-effect settings
-
---------------------------------------------------------------------------------
-
-## Skybox & Background
-
-URL: https://developer.playcanvas.com/user-manual/supersplat/studio/skybox/
-Markdown: https://developer.playcanvas.com/user-manual/supersplat/studio/skybox.md
-
-The **Skybox** and **Background** controls in [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md) let you set what fills the space *around* your splat in the viewer. The simplest option is a flat background color; for environment scenes you can also upload an equirectangular skybox image.
-
-## Background color
-
-The **Background** control, in the **Scene** tab's *Look & Tone* section, takes an RGB color in the `0–1` range, applied as a solid color behind the splat. It's used whenever no skybox is uploaded, and as the clear color even when a skybox is present (it shows through anywhere the skybox isn't visible).
-
-## Skybox image
-
-In [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md#launching-studio), open the **Assets** tab in the left panel to find the Skybox controls. The upload dialog accepts a single `.webp` image. For best results the image should be **equirectangular** — a 2:1 panoramic projection that maps cleanly onto the surrounding sphere.
-
-Each scene can have one skybox. Uploading a new image replaces the previous one.
-
-Before uploading, the dialog shows a 2:1 preview of the selected image so you can check it. The upload happens immediately, and the new skybox is live on the next viewer reload. If the file isn't a `.webp`, or the upload fails, the dialog shows an error message.
-
-## When to use one or the other
-
-- **Background color only** — for studio-style presentations where you want focus on the splat itself.
-- **Skybox** — for scenes captured outdoors or in believable environments where matching the surrounding lighting and horizon matters.
-
-## In the viewer
-
-- **AR** — the skybox and background color are hidden during an [AR session](https://developer.playcanvas.com/user-manual/supersplat/viewer/xr.md), so the room shows through around the splat. VR sessions keep them.
-- **Self-hosting** — the viewer doesn't load the skybox from the scene's settings. When you [host the viewer yourself](https://developer.playcanvas.com/user-manual/supersplat/viewer/embedding.md#url-parameters), pass the image with the `skybox` URL parameter or the `skyboxUrl` option.
-
-## See also
-
-- [Post Effects](https://developer.playcanvas.com/user-manual/supersplat/studio/post-effects.md) — tonemapping shapes how the skybox is lit
-- [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md) — the JSON contract that stores background color and skybox URL
+- [Cameras](https://developer.playcanvas.com/user-manual/supersplat/studio/cameras.md) — the starting camera and field of view
+- [Viewer Controls](https://developer.playcanvas.com/user-manual/supersplat/viewer/controls.md) — how visitors play, pause and scrub an animation
+- [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md) — the `animTracks` and `startMode` fields this page edits
 
 --------------------------------------------------------------------------------
 
@@ -26150,19 +26143,19 @@ You'll typically generate it once per scene and re-generate only if the underlyi
 
 ## Generating voxel collision
 
-The recommended way to add collision is to generate it directly in Studio. The **Collision** section of the **Assets** tab has a **Generate** button that runs a server-side voxelizer against your published splat — no files to prepare or upload.
+The recommended way to add collision is to generate it directly in Studio. The **Collision** section of the **Scene** tab has a **Generate** button, on its **Voxels** row, that runs a server-side voxelizer against your published splat — no files to prepare or upload.
 
 [Image: The Generate Voxel Collision dialog in Studio]
 
-1. Open the splat in [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md#launching-studio) — clicking the splat's thumbnail only *views* it, so use **Open in Studio** (from Manage) or **Edit in Studio** (from the scene page). Then select the **Assets** tab in the left panel and find the **Collision** section.
-2. Click **Generate** to open the **Generate Voxel Collision** dialog.
+1. Open the splat in [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md#launching-studio) — clicking the splat's thumbnail only *views* it, so use **Open in Studio** (from Manage) or **Edit in Studio** (from the scene page). The **Collision** section is on the **Scene** tab of the left panel, below **Animation**.
+2. Click **Generate** on the **Voxels** row to open the **Generate Voxel Collision** dialog.
 3. Choose a **Scene type** — **Indoor**, **Outdoor** (the default), or **Object**. This tunes the voxelizer for the kind of space you're reconstructing.
 4. Set the **Seed position** (**X**, **Y**, **Z**). This is the point the voxelizer flood-fills outward from to find the navigable space, so it should sit somewhere a visitor could stand. The fields are pre-filled with your current viewport camera position — frame the scene where you want before opening the dialog, or type coordinates in by hand.
 5. Click **Generate**.
 
-Generation runs on the server and usually takes a few minutes. The Collision section shows **Generation in progress. Reload to refresh status.** while it runs — Studio doesn't poll, so reload the page to pick up the result. Once it completes, the `scene.voxel.json` and `scene.voxel.bin` files appear in the section and the scene becomes walkable on the next viewer reload. If generation fails, the section shows **Generation failed.**
+Generation runs on the server and usually takes a few minutes. The Collision section shows **Generation in progress. Reload to refresh status.** while it runs — Studio doesn't poll, so reload the page to pick up the result. Once it completes, the `scene.voxel.json` and `scene.voxel.bin` files are listed in the section, with their sizes and download links, and the scene becomes walkable on the next viewer reload. If generation fails, the section shows **Generation failed.**
 
-If collision already exists, the button reads **Regenerate**, and **Delete** removes the current voxel asset.
+If collision already exists, the dialog's button reads **Regenerate**, and replaces it. The trash icon, **Delete collision**, removes the current voxel asset.
 
 :::note Voxel size
 The generator uses a default voxel size of **5 cm** (`0.05` units), which is a good fit for most scenes. To use a different voxel size, generate your collision with [splat-transform](https://developer.playcanvas.com/user-manual/splat-transform.md) and upload the result — see [Uploading custom voxel collision](https://developer.playcanvas.com/user-manual/supersplat/studio/collision.md#uploading-custom-voxel-collision) below.
@@ -26172,7 +26165,7 @@ The generator uses a default voxel size of **5 cm** (`0.05` units), which is a g
 
 Uploading is the option to reach for when you want **custom collision** — for example, when the **Generate** button doesn't produce exactly what you want and you've authored or tuned the voxel files yourself. You can produce a compatible pair with the [Convert](https://developer.playcanvas.com/user-manual/supersplat/convert.md) utility in the browser, or the [splat-transform](https://developer.playcanvas.com/user-manual/splat-transform.md) CLI for scripted or batch workflows.
 
-1. In the **Assets** tab, open the **Collision** section and click **Upload** to open the **Upload Voxel Collision Pair** dialog.
+1. In the **Collision** section of the **Scene** tab, click **Upload** on the **Voxels** row to open the **Upload Voxel Collision Pair** dialog.
 2. Drop in (or click to choose) the pair of files that describe the collision — a `.voxel.json` file plus its `.voxel.bin` companion. You can add them together or in two steps.
 3. Click **Upload Voxel Pair**. If collision already exists, the button reads **Upload Override** and replaces it.
 
@@ -26192,6 +26185,140 @@ When you [host the viewer yourself](https://developer.playcanvas.com/user-manual
 - [Convert](https://developer.playcanvas.com/user-manual/supersplat/convert.md) — generate voxel collision in the browser
 - [splat-transform](https://developer.playcanvas.com/user-manual/splat-transform.md) — generate voxel collision in a script or build pipeline
 - [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md) — the JSON contract that stores scene-asset references
+
+--------------------------------------------------------------------------------
+
+## Post Effects
+
+URL: https://developer.playcanvas.com/user-manual/supersplat/studio/post-effects/
+Markdown: https://developer.playcanvas.com/user-manual/supersplat/studio/post-effects.md
+
+The **Post Effects** section, at the bottom of the **Scene** tab in [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md), controls the look of your scene after the splat is rendered. Effects are evaluated per frame in the viewer. Each effect has a switch that turns it on and shows its parameters.
+
+Tonemapping and High Precision Rendering, which shape the whole image, are in the [Look & Tone](https://developer.playcanvas.com/user-manual/supersplat/studio/look-and-tone.md) section.
+
+[Image: The Post Effects section with Bloom, Color Grading and Vignette on]
+
+## Sharpness
+
+| Field | Description |
+|-------|-------------|
+| **Amount** | Strength of the sharpening filter. |
+
+Good for recovering perceived detail on dense splat captures.
+
+## Bloom
+
+| Field | Description |
+|-------|-------------|
+| **Intensity** | How strong the bloom glow appears. |
+| **Blur Level** | Size of the bloom kernel. Larger values produce a softer, broader glow. |
+
+Adds a glow to bright regions of the scene. Bloom needs [High Precision Rendering](https://developer.playcanvas.com/user-manual/supersplat/studio/look-and-tone.md): while it's off, the section says **Bloom requires High Precision Rendering**, and **Enable** turns it on.
+
+## Color Grading
+
+Color grading applies a global transform to the image.
+
+| Field | Description |
+|-------|-------------|
+| **Brightness** | Overall brightness lift. |
+| **Contrast** | Tone separation between dark and light. |
+| **Saturation** | Color intensity (`0` is grayscale). |
+| **Tint** | An RGB color blended into the image, useful for warm or cool grades. |
+
+## Vignette
+
+| Field | Description |
+|-------|-------------|
+| **Intensity** | Strength of the corner darkening. |
+| **Inner** | Radius at which the vignette starts. |
+| **Outer** | Radius at which the vignette reaches full strength. |
+| **Curvature** | Shape of the vignette falloff. |
+
+## Chromatic Fringing
+
+| Field | Description |
+|-------|-------------|
+| **Intensity** | Strength of the chromatic aberration effect at frame edges. |
+
+## In the viewer
+
+- **VR and AR** — post effects and High Precision Rendering aren't applied during a [VR or AR session](https://developer.playcanvas.com/user-manual/supersplat/viewer/xr.md). The scene's tonemapping still is, and everything returns when the session ends.
+- **Self-hosting** — when you [host the viewer yourself](https://developer.playcanvas.com/user-manual/supersplat/viewer/embedding.md#url-parameters), the `nofx` URL parameter turns post effects off.
+
+## See also
+
+- [Look & Tone](https://developer.playcanvas.com/user-manual/supersplat/studio/look-and-tone.md) — background, skybox, tonemapping and High Precision Rendering
+- [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md) — the JSON contract that stores post-effect settings
+
+--------------------------------------------------------------------------------
+
+## Annotations
+
+URL: https://developer.playcanvas.com/user-manual/supersplat/studio/annotations/
+Markdown: https://developer.playcanvas.com/user-manual/supersplat/studio/annotations.md
+
+**Annotations** are 3D-positioned text hotspots you place on your published splat in [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md). On the viewer side, each annotation shows up as a numbered hotspot visitors can click; clicking it moves the camera to a curated pose and surfaces a title and body of text. Use them to call out features, narrate a story, or give a self-guided tour of the scene.
+
+[Image: The Annotations tab with three annotations, one selected and its card open in the viewport]
+
+## Annotation properties
+
+Each annotation has:
+
+| Field | Description |
+|-------|-------------|
+| **Position** | World-space `[x, y, z]` where the hotspot marker sits in the scene. |
+| **Title** | Short heading shown when the annotation is selected. |
+| **Text** | Longer body of text, shown as plain text in the viewer. |
+| **Camera** | The [camera pose](https://developer.playcanvas.com/user-manual/supersplat/studio/cameras.md) the viewer animates to when this annotation is selected. |
+| **Extras** | Free-form metadata for custom integrations. Studio keeps it but has no control for editing it; set it in [imported settings](https://developer.playcanvas.com/user-manual/supersplat/studio.md#saving-changes). |
+
+## Adding an annotation
+
+1. Frame the viewport the way you want a visitor to see this part of the scene.
+2. Choose **Add annotation**: the button in the viewport toolbar, **Add** on the **Annotations** tab, or <kbd>C</kbd>.
+3. Click the point on the splat you want to annotate. Studio places the hotspot there and stores the current view as the annotation's camera.
+4. Type a title (**Untitled** until you do) and a description in the card that opens beside the hotspot, then click **OK**.
+
+A scene can have up to 50 annotations, with titles of up to 60 characters and text of up to 280. These are the [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md#authoring-limits) authoring limits.
+
+## Editing annotations
+
+Select an annotation by clicking its hotspot or its row on the **Annotations** tab. Its card in the viewport has three buttons:
+
+- **Edit annotation** (pencil) — change the title and description.
+- **Set camera to current view** — store the current view as the annotation's camera.
+- **Unselect annotation** — close the card.
+
+While an annotation is selected, **Distance to camera** on the **Annotations** tab moves its hotspot along the view direction: <kbd>-</kbd> nudges it toward the camera and <kbd>+</kbd> away, and holding <kbd>Shift</kbd> makes finer steps. Use it to lift a hotspot off the surface or tuck it closer.
+
+Each row on the **Annotations** tab also has **Go to annotation**, which moves the viewport to the annotation's camera, and **Delete annotation**. Drag rows to reorder them: the order controls how visitors step through the annotations, and the number each hotspot shows.
+
+## How visitors use them
+
+On the [scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md), the viewer shows each annotation as a numbered hotspot:
+
+- **Selecting a hotspot** eases the camera to the annotation's pose, and its title and text appear in a panel beside the hotspot as the camera arrives. An annotation with neither title nor text shows no panel. Visitors can orbit from there, pivoting near the annotated point, and the panel stays open.
+- **The navigator**, shown when a scene has two or more annotations, displays the current annotation's number and title, with arrows to step to the previous and next one in list order.
+- **Clicking elsewhere** in the viewer deselects the annotation and returns to free navigation. The navigator keeps the last annotation, greyed out, and clicking it selects it again.
+- **Hotspots hidden** behind part of the scene are faded once the camera stops moving.
+- **Show Annotations**, in the viewer's settings panel, lets visitors hide the hotspots and the navigator.
+
+See [Viewer Controls](https://developer.playcanvas.com/user-manual/supersplat/viewer/controls.md#annotations) for the full visitor experience.
+
+:::note
+
+The settings format accepts `annotation` as a scene's start mode, but the viewer doesn't act on it: a scene always starts from its [starting camera](https://developer.playcanvas.com/user-manual/supersplat/studio/cameras.md) or its camera animation.
+
+:::
+
+## See also
+
+- [Cameras](https://developer.playcanvas.com/user-manual/supersplat/studio/cameras.md) — the camera poses annotations reference
+- [Camera animation (Timeline)](https://developer.playcanvas.com/user-manual/supersplat/editor/timeline.md) — for cinematic flythroughs that don't need visitor interaction
+- [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md) — the JSON contract that stores annotations
 
 --------------------------------------------------------------------------------
 
@@ -26272,17 +26399,18 @@ type ExperienceSettings = {
 };
 ```
 
-Most fields are authored in a Studio panel or control; the exception is `animTracks`, which comes from the SuperSplat Editor Timeline and is baked in at publish time. Follow the cross-references for details.
+Most fields are authored in a Studio control. The camera animation can also come from the SuperSplat Editor's Timeline, baked in at publish time. Follow the cross-references for details.
 
 | Field | Authored in |
 |-------|-------------|
-| `tonemapping`, `highPrecisionRendering` | [Post Effects](https://developer.playcanvas.com/user-manual/supersplat/studio/post-effects.md) |
-| `background.color`, `background.skyboxUrl` | [Skybox & Background](https://developer.playcanvas.com/user-manual/supersplat/studio/skybox.md) |
+| `tonemapping`, `highPrecisionRendering` | [Look & Tone](https://developer.playcanvas.com/user-manual/supersplat/studio/look-and-tone.md) |
+| `background.color`, `background.skyboxUrl` | [Look & Tone](https://developer.playcanvas.com/user-manual/supersplat/studio/look-and-tone.md) |
 | `postEffectSettings` | [Post Effects](https://developer.playcanvas.com/user-manual/supersplat/studio/post-effects.md) |
 | `cameras` | [Cameras](https://developer.playcanvas.com/user-manual/supersplat/studio/cameras.md) |
-| `animTracks` | [Editor Timeline](https://developer.playcanvas.com/user-manual/supersplat/editor/timeline.md) (baked in when publishing) |
+| `animTracks` | [Camera Animation](https://developer.playcanvas.com/user-manual/supersplat/studio/animation.md), or the [Editor Timeline](https://developer.playcanvas.com/user-manual/supersplat/editor/timeline.md) (baked in when publishing). Studio saves only a track that has keyframes. |
 | `annotations` | [Annotations](https://developer.playcanvas.com/user-manual/supersplat/studio/annotations.md) |
-| `startMode`, `hasStartPose` | Initial values set when publishing from the Editor; adjustable via the Studio header / startup configuration |
+| `startMode` | **Play animation on open** in the [Animation](https://developer.playcanvas.com/user-manual/supersplat/studio/animation.md#playing-on-open) section: `animTrack` when it is on, `default` when it is off. The initial value is set when publishing from the Editor. |
+| `hasStartPose` | Set when publishing from the Editor |
 | Collision voxel data | Stored separately as a [Scene Asset](https://developer.playcanvas.com/user-manual/supersplat/studio/collision.md), not in this JSON |
 
 ## How the viewer reads it
@@ -26294,6 +26422,7 @@ A few fields behave in ways the schema alone doesn't show:
 - **`cameras` and `animTracks`** — the format allows several, but the viewer uses only the first camera and plays only the first track.
 - **`annotations[].text`** — shown as plain text, so HTML markup isn't rendered.
 - **`startMode: 'annotation'`** — accepted, but the viewer starts as it does for `default`.
+- **`antiAlias`** — not part of the schema above, but Studio adds it: its [Anti-aliasing](https://developer.playcanvas.com/user-manual/supersplat/studio/look-and-tone.md#anti-aliasing) switch stores `antiAlias: false` when turned off. The viewer doesn't read it. Each splat file's own anti-aliasing tag decides, and the `aa` [URL parameter](https://developer.playcanvas.com/user-manual/supersplat/viewer/embedding.md#url-parameters) overrides that.
 
 ## Authoring limits
 
@@ -26386,7 +26515,7 @@ The scene content is split between a central **embedded viewer** and a right-han
 
 ### The embedded viewer
 
-The viewer is the open-source [SuperSplat Viewer](https://developer.playcanvas.com/user-manual/supersplat/viewer.md) rendered inside an iframe. The cameras, annotations, post effects, skybox, and collision you configured in [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md) — along with any camera [animation](https://developer.playcanvas.com/user-manual/supersplat/editor/timeline.md) published from the Editor — all apply here. Visitors can orbit, fly, and (if collision is set up) walk through the scene, step through annotations, play the camera animation, and enter VR or AR on devices that support it. The toolbar along the bottom of the viewer holds the camera modes and the viewer's settings, controls and info panels. See [Viewer Controls](https://developer.playcanvas.com/user-manual/supersplat/viewer/controls.md) and [Viewing in VR and AR](https://developer.playcanvas.com/user-manual/supersplat/viewer/xr.md).
+The viewer is the open-source [SuperSplat Viewer](https://developer.playcanvas.com/user-manual/supersplat/viewer.md) rendered inside an iframe. The cameras, [camera animation](https://developer.playcanvas.com/user-manual/supersplat/studio/animation.md), annotations, post effects, skybox, and collision you configured in [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md), or published from the Editor, all apply here. Visitors can orbit, fly, and (if collision is set up) walk through the scene, step through annotations, play the camera animation, and enter VR or AR on devices that support it. The toolbar along the bottom of the viewer holds the camera modes and the viewer's settings, controls and info panels. See [Viewer Controls](https://developer.playcanvas.com/user-manual/supersplat/viewer/controls.md) and [Viewing in VR and AR](https://developer.playcanvas.com/user-manual/supersplat/viewer/xr.md).
 
 ### Sidebar metadata
 
@@ -26759,7 +26888,7 @@ The [SuperSplat Viewer](https://developer.playcanvas.com/user-manual/supersplat/
 
 While a scene loads, the viewer shows its poster image, if it has one, and a loading bar with a percentage. A [streamed scene](https://developer.playcanvas.com/user-manual/supersplat/streaming.md) appears as soon as it has enough detail to render and keeps refining as more streams in. [Collision](https://developer.playcanvas.com/user-manual/supersplat/studio/collision.md) data keeps loading in the background, and walk mode becomes available when it arrives.
 
-The camera then starts moving. If the scene [starts with a camera animation](https://developer.playcanvas.com/user-manual/supersplat/editor/timeline.md), that plays; otherwise the viewer plays a slow 20-second loop from the [starting camera](https://developer.playcanvas.com/user-manual/supersplat/studio/cameras.md): an orbit around an object, or a gentle figure-eight inside a scene. Interacting with the scene stops it and hands the camera to the visitor.
+The camera then starts moving. If the scene [plays its camera animation on open](https://developer.playcanvas.com/user-manual/supersplat/studio/animation.md#playing-on-open), that plays; otherwise the viewer plays a slow 20-second loop from the [starting camera](https://developer.playcanvas.com/user-manual/supersplat/studio/cameras.md): an orbit around an object, or a gentle figure-eight inside a scene. Interacting with the scene stops it and hands the camera to the visitor.
 
 ## The toolbar
 
@@ -26949,7 +27078,7 @@ When you host the viewer yourself, the `vr` [URL parameter](https://developer.pl
 
 - The session starts where the viewer's camera is, facing the way it looks.
 - [Post effects](https://developer.playcanvas.com/user-manual/supersplat/studio/post-effects.md) aren't drawn. The scene's tone mapping still is.
-- In AR, the [skybox](https://developer.playcanvas.com/user-manual/supersplat/studio/skybox.md) and background are hidden, so the room shows through.
+- In AR, the [skybox](https://developer.playcanvas.com/user-manual/supersplat/studio/look-and-tone.md#skybox) and background are hidden, so the room shows through.
 - A [streamed scene](https://developer.playcanvas.com/user-manual/supersplat/streaming.md) chooses its detail by distance alone, so turning your head doesn't stream new detail.
 - On Meta Quest and Pico headsets, sessions render with fixed foveation, target 72 Hz where the headset supports it, and use a lower splat budget (see [Streaming & Performance](https://developer.playcanvas.com/user-manual/supersplat/streaming.md#near-instant-loads-and-the-gaussian-budget)). At the **Performance** quality position they also render at 0.8× resolution.
 - The [collision](https://developer.playcanvas.com/user-manual/supersplat/studio/collision.md) overlay is turned off.

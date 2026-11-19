@@ -15,7 +15,7 @@ Browse, view, clean up, publish, curate, convert, and share: the whole platform 
 ## Where do you want to start?
 
 [🧹 I have a splat file](https://developer.playcanvas.com/user-manual/supersplat/getting-started.md): Clean up floaters, crop the scene, and publish it from the browser-based Editor. Follow the quick start and you'll have a shareable scene page in about ten minutes. Getting Started →
-[🎬 I've published a splat](https://developer.playcanvas.com/user-manual/supersplat/studio.md): Make it shine in Studio: frame the opening camera, add annotated hotspots, dial in bloom and color grading, set a skybox, or make the scene walkable with collision. Studio →
+[🎬 I've published a splat](https://developer.playcanvas.com/user-manual/supersplat/studio.md): Make it shine in Studio: frame the opening camera, keyframe a flythrough, add annotated hotspots, dial in bloom and color grading, set a skybox, or make the scene walkable with collision. Studio →
 [🧩 I want splats on my own site or app](https://developer.playcanvas.com/user-manual/supersplat/viewer.md): Embed the open-source Viewer with an iframe, export a single-file HTML viewer to host yourself, or publish from your own pipeline with the API. Viewer, embedding and API →
 [📷 I don't have a splat yet](https://developer.playcanvas.com/user-manual/gaussian-splatting/creating.md): Learn how a splat is captured and trained, and pick a tool that fits you, from one-tap phone apps to desktop trainers. Then come back here with your first PLY. Creating Splats →
 
@@ -64,7 +64,7 @@ flowchart TB
 | **[Editor](https://developer.playcanvas.com/user-manual/supersplat/editor.md)** | Browser-based editor for cleaning, cropping, color-adjusting, and animating splats. Publishes to superspl.at. | [superspl.at/editor](https://superspl.at/editor) |
 | **[Direct Upload](https://developer.playcanvas.com/user-manual/supersplat/upload.md)** | Publish an already-clean splat file without opening the Editor. | The orange **Upload Splat** button on [superspl.at](https://superspl.at) |
 | **[Manage](https://developer.playcanvas.com/user-manual/supersplat/manage.md)** | Your splat library: edit title and description, change visibility, choose downloadable + license, delete, open in Studio. | [superspl.at/manage](https://superspl.at/manage) |
-| **[Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md)** | Curate the published viewing experience: cameras, annotations, post effects, skybox, collision. | `superspl.at/scene/<hash>/studio` |
+| **[Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md)** | Curate the published viewing experience: look and tone, skybox, cameras, camera animation, collision, post effects, annotations. | `superspl.at/scene/<hash>/studio` |
 | **[Scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md)** | Public page for a published splat: embedded viewer, share, embed, download, comments, likes, suggested splats. | `superspl.at/scene/<hash>` |
 | **[Explore](https://developer.playcanvas.com/user-manual/supersplat/explore.md)** | Public gallery with sort, time, feature filters, and search. The superspl.at home page. | [superspl.at](https://superspl.at) |
 | **[User Profile](https://developer.playcanvas.com/user-manual/supersplat/user-profile.md)** | A creator's public page: avatar, bio, social links, their published splats. | `superspl.at/user/<username>` |
