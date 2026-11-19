@@ -29,15 +29,14 @@ The package has these entry points:
 | `@playcanvas/supersplat-viewer/viewer` | `createViewer`, with `playcanvas` (2.24.1 or later) as a peer dependency |
 | `@playcanvas/supersplat-viewer/viewer.css` | The stylesheet `createViewer` needs |
 | `@playcanvas/supersplat-viewer/settings` | Settings types, defaults, validation and migration. See [Experience Settings](/user-manual/supersplat/studio/experience-settings#generating-and-validating-settings). |
-| `@playcanvas/supersplat-viewer/gsaf-decoder` | The `.gsaf` decoder as a `data:` URL, for single-file pages |
 
 The main entry also exports the viewer's page as the string `html`, but it is deprecated: its formatting changes between releases, so use `renderViewerHtml` instead.
 
 ## Hosting the prebuilt viewer {#hosting-the-prebuilt-viewer}
 
-The package's `public/` folder holds the standalone viewer: `index.html`, `index.js`, `index.css`, and the decoders `gsaf-decoder.wasm` and `zstd-decoder.wasm`. Copy the folder to your web server and open `index.html`. With no parameters, it loads `./settings.json` and `./scene.compressed.ply` from beside it.
+The package's `public/` folder holds the standalone viewer: `index.html`, `index.js`, `index.css`, and the WebAssembly decoders (`.wasm` files) that some formats need. Copy the folder to your web server and open `index.html`. With no parameters, it loads `./settings.json` and `./scene.compressed.ply` from beside it.
 
-The `.wasm` files are fetched only for `.gsaf` and version 4 `.spz` content. Serve them as `application/wasm`.
+The `.wasm` files are fetched only for content that needs them, such as version 4 `.spz` files. Serve them as `application/wasm`.
 
 ### URL parameters {#url-parameters}
 
@@ -90,7 +89,6 @@ The viewer picks the format from the content's file name:
 | Streamed SOG | `lod-meta.json` |
 | SPZ | `.spz` (versions 3 and 4) |
 | XGRIDS LCC2 | `.lcc2`, streamed on demand like a Streamed SOG |
-| GSAF animated splat sequence | `.gsaf`. Plays and loops on WebGPU; WebGL shows the first frame only. |
 
 SOG v3 files written by splat-transform 3.11.0 or 3.11.1 use an earlier layout that the viewer no longer reads. Convert them again with a current [splat-transform](/user-manual/splat-transform/).
 
@@ -116,7 +114,7 @@ const page = renderViewerHtml({
 
 | Option | Description |
 |--------|-------------|
-| `bootstrap` | The page's assets and settings: `settings` or `settingsUrl`, `contentUrl`, `contentFilename`, `posterUrl`, `skyboxUrl`, `collisionUrl`, `gsafDecoderUrl` and `zstdDecoderUrl` |
+| `bootstrap` | The page's assets and settings: `settings` or `settingsUrl`, `contentUrl`, `contentFilename`, `posterUrl`, `skyboxUrl`, `collisionUrl` and `zstdDecoderUrl` |
 | `baseHref` | The page's base URL, for serving the viewer from a sub-path |
 | `backgroundColor` | The page background before the first frame, as 0–1 RGB like the settings' `background.color` |
 | `headExtras` / `bodyStartExtras` | Markup added to the `<head>`, or at the start of the `<body>` |
@@ -124,24 +122,21 @@ const page = renderViewerHtml({
 
 Called with no options, it returns the page the package ships, unchanged. URL parameters on the served page still override the bootstrap's asset URLs, so each instance stays configurable, except inline `settings`, which take precedence over `?settings=`.
 
-For a single self-contained file, set both `inlineCss` and `inlineJs`, pass the settings inline, and pass the splat as a `data:` URI in `contentUrl`. A `data:` URI has no file name, so name the content with `contentFilename`, such as `scene.sog`. A single-file `.gsaf` page also needs the decoder inline:
+For a single self-contained file, set both `inlineCss` and `inlineJs`, pass the settings inline, and pass the splat as a `data:` URI in `contentUrl`. A `data:` URI has no file name, so name the content with `contentFilename`, such as `scene.sog`:
 
 ```ts
-import { gsafDecoderDataUrl } from '@playcanvas/supersplat-viewer/gsaf-decoder';
-
 const page = renderViewerHtml({
     bootstrap: {
         settings,
-        contentUrl: gsafDataUri,
-        contentFilename: 'scene.gsaf',
-        gsafDecoderUrl: gsafDecoderDataUrl
+        contentUrl: sogDataUri,
+        contentFilename: 'scene.sog'
     },
     inlineCss: true,
     inlineJs: true
 });
 ```
 
-The decoder URLs have no URL parameter, since a link could otherwise run any WebAssembly in your page's origin.
+A single-file page that loads a version 4 `.spz` file also needs the decoder inline: set `zstdDecoderUrl` to `zstd-decoder.wasm` as a `data:` URL. `zstdDecoderUrl` has no URL parameter, since a link could otherwise run any WebAssembly in your page's origin.
 
 ## Creating a viewer in your own page {#creating-a-viewer-in-your-own-page}
 

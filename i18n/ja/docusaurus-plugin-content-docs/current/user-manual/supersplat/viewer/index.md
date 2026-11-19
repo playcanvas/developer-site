@@ -3,7 +3,7 @@ title: SuperSplat Viewer
 description: "SuperSplatのシーンページを動かしているオープンソースのウェブビューア — 自分のサイトやアプリに埋め込んだり、自分でホストしたりできます。"
 ---
 
-**SuperSplat Viewer**は、superspl.atのすべての[シーンページ](/user-manual/supersplat/scene-page)をレンダリングする、オープンソースのウェブビューアです。スプラットと設定JSONドキュメントを受け取り、インタラクティブな3D体験に変換します。オービット・フライ・ウォークの各カメラモード、注釈、カメラアニメーション、アニメーションスプラットシーケンス、ポストエフェクト、ウォーカブルなシーン向けのコリジョン、WebXR対応デバイスでのVRとARに対応しています。
+**SuperSplat Viewer**は、superspl.atのすべての[シーンページ](/user-manual/supersplat/scene-page)をレンダリングする、オープンソースのウェブビューアです。スプラットと設定JSONドキュメントを受け取り、インタラクティブな3D体験に変換します。オービット・フライ・ウォークの各カメラモード、注釈、カメラアニメーション、ポストエフェクト、ウォーカブルなシーン向けのコリジョン、WebXR対応デバイスでのVRとARに対応しています。
 
 ビューアはMITライセンスの下で[GitHubでオープンソース](https://github.com/playcanvas/supersplat-viewer)であり、npmで[`@playcanvas/supersplat-viewer`](https://www.npmjs.com/package/@playcanvas/supersplat-viewer)として配布されています。
 

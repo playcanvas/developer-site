@@ -48,7 +48,7 @@ viewer.events.on('loaded:changed', () => console.log('first frame rendered'));
 | `skyboxUrl` | エクイレクタンギュラースカイボックス画像。 |
 | `collisionUrl` | ウォークモード用のコリジョンデータ：`.glb`メッシュ、またはボクセルデータ。 |
 | `contents` | すでに開始している`fetch`（`contentUrl`を取得するもの）。ビューアのコードが届く前にダウンロードを開始できます。 |
-| `gsafDecoderUrl` / `zstdDecoderUrl` | `.gsaf`とバージョン4の`.spz`のデコーダーの読み込み元。[デコーダーファイル](#decoder-files)を参照してください。 |
+| `zstdDecoderUrl` | バージョン4の`.spz`のデコーダーの読み込み元。[デコーダーファイル](#decoder-files)を参照してください。 |
 
 残りのオプションは[URLパラメータ](/user-manual/supersplat/viewer/embedding#url-parameters)をプログラムから指定するためのもので、名前も同じです。ただし、次の例外があります：
 
@@ -92,7 +92,7 @@ viewer.events.on('loaded:changed', () => console.log('first frame rendered'));
 | `hasCollision` | | コリジョンデータが読み込まれたかどうか。 |
 | `hasCollisionOverlay` | | コリジョンをオーバーレイとして描画できるかどうか。 |
 | `collisionOverlayEnabled` | ✓ | コリジョンオーバーレイを描画します。 |
-| `hasAnimation` / `hasSequence` | | 再生できるものがあるかどうかと、それがアニメーションスプラットシーケンスかどうか。 |
+| `hasAnimation` | | 再生できるカメラアニメーションがあるかどうか。 |
 | `animationPaused` | ✓ | 再生が一時停止しているかどうか。 |
 | `animationTime` / `animationDuration` | | 再生ヘッドの位置と長さ（秒）。 |
 | `selectedAnnotation` | | 選択中の注釈のインデックス、または`null`。変更するには`selectAnnotation()`を使います。 |
@@ -141,7 +141,7 @@ viewer.state.cameraMode = 'anim';
 viewer.state.animationPaused = false;
 ```
 
-`seek()`は、繰り返すトラックでは時間を折り返し、それ以外のトラックでは長さの範囲内に収めます。[アニメーションスプラットシーケンス](/user-manual/supersplat/viewer/embedding#supported-content)の場合、再生と`seek()`はシーケンスを操作します。シーケンスはどのカメラモードでも再生され、ループします。カメラ自体にはアニメーションはありません。WebGLでは、シーケンスは最初のフレームのみ表示されます。
+`seek()`は、繰り返すトラックでは時間を折り返し、それ以外のトラックでは長さの範囲内に収めます。
 
 ### カメラ
 
@@ -216,7 +216,7 @@ viewer.events.on('xrMode:changed', updateControls);
 
 ## デコーダーファイル {#decoder-files}
 
-`.gsaf`シーケンスとバージョン4の`.spz`ファイルには、WebAssemblyデコーダーの`gsaf-decoder.wasm`と`zstd-decoder.wasm`が必要です。これらはビューアのバンドルと一緒に配布され、該当するコンテンツを読み込むときにのみ取得されます。`new URL(…, import.meta.url)`を処理できるバンドラーは、これらをバンドルと一緒に出力します。そうでない場合は、バンドルと同じ場所に`application/wasm`として配信するか、`gsafDecoderUrl`と`zstdDecoderUrl`でその場所を指定してください。`.spz`デコーダーは`blob:` URLから読み込まれるため、Content-Security-Policyで`blob:`スクリプトを許可する必要があります。
+バージョン4の`.spz`ファイル（単体、または`.lcc2`シーンのチャンク）には、WebAssemblyデコーダーの`zstd-decoder.wasm`が必要です。これはビューアのバンドルと一緒に配布され、該当するコンテンツを読み込むときにのみ取得されます。`new URL(…, import.meta.url)`を処理できるバンドラーは、これをバンドルと一緒に出力します。そうでない場合は、バンドルと同じ場所に`application/wasm`として配信するか、`zstdDecoderUrl`でその場所を指定してください。このデコーダーは`blob:` URLから読み込まれるため、Content-Security-Policyで`blob:`スクリプトを許可する必要があります。
 
 ## 関連項目
 

@@ -17,7 +17,7 @@ The toolbar runs along the bottom of the viewer. From left to right:
 
 | Button | What it does |
 |--------|--------------|
-| **Play** / **Pause** | Plays or pauses the camera animation or, for an animated splat sequence, the sequence. Shown only when there is something to play. While it plays, a timeline above the toolbar shows the playhead; drag it to scrub, which pauses playback. |
+| **Play** / **Pause** | Plays or pauses the camera animation. Shown only when the scene has one. While it plays, a timeline above the toolbar shows the playhead; drag it to scrub, which pauses playback. |
 | **Orbit Camera** | Switches to [orbit mode](#camera-modes). |
 | **Fly Camera** | Switches to [fly mode](#camera-modes). |
 | **Walk Mode** | Switches to [walk mode](#camera-modes), or back to the previous mode. Shown only on scenes that can be walked. |

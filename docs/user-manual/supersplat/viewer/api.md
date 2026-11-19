@@ -48,7 +48,7 @@ viewer.events.on('loaded:changed', () => console.log('first frame rendered'));
 | `skyboxUrl` | An equirectangular skybox image. |
 | `collisionUrl` | Collision data for walk mode: a `.glb` mesh, or voxel data. |
 | `contents` | A `fetch` of `contentUrl` already in flight, so the download can start before the viewer's code arrives. |
-| `gsafDecoderUrl` / `zstdDecoderUrl` | Where to load the `.gsaf` and version 4 `.spz` decoders from. See [Decoder files](#decoder-files). |
+| `zstdDecoderUrl` | Where to load the version 4 `.spz` decoder from. See [Decoder files](#decoder-files). |
 
 The remaining options are the programmatic form of the [URL parameters](/user-manual/supersplat/viewer/embedding#url-parameters), with the same names, except:
 
@@ -92,7 +92,7 @@ Write a writable key and the change takes effect at once; the built-in UI follow
 | `hasCollision` | | Whether collision data has loaded. |
 | `hasCollisionOverlay` | | Whether the collision can be drawn as an overlay. |
 | `collisionOverlayEnabled` | ✓ | Draws the collision overlay. |
-| `hasAnimation` / `hasSequence` | | Whether there's something to play, and whether it's an animated splat sequence. |
+| `hasAnimation` | | Whether there's a camera animation to play. |
 | `animationPaused` | ✓ | Whether playback is paused. |
 | `animationTime` / `animationDuration` | | The playhead and length, in seconds. |
 | `selectedAnnotation` | | The selected annotation's index, or `null`. Use `selectAnnotation()` to change it. |
@@ -141,7 +141,7 @@ viewer.state.cameraMode = 'anim';
 viewer.state.animationPaused = false;
 ```
 
-`seek()` wraps repeating tracks and clamps the others to their duration. For an [animated splat sequence](/user-manual/supersplat/viewer/embedding#supported-content), playback and `seek()` drive the sequence, which plays in every camera mode and loops; the camera has no animation of its own. On WebGL a sequence shows its first frame only.
+`seek()` wraps repeating tracks and clamps the others to their duration.
 
 ### The camera
 
@@ -216,7 +216,7 @@ Always call `destroy()` on a viewer you no longer need. Browsers cap live WebGL 
 
 ## Decoder files {#decoder-files}
 
-`.gsaf` sequences and version 4 `.spz` files need WebAssembly decoders, `gsaf-decoder.wasm` and `zstd-decoder.wasm`, which ship beside the viewer's bundle and are fetched only when such content loads. A bundler that handles `new URL(…, import.meta.url)` emits them with your bundle; otherwise serve them beside it as `application/wasm`, or point `gsafDecoderUrl` and `zstdDecoderUrl` at them. The `.spz` decoder is loaded from a `blob:` URL, so a Content-Security-Policy must allow `blob:` scripts.
+Version 4 `.spz` files, on their own or as chunks of an `.lcc2` scene, need a WebAssembly decoder, `zstd-decoder.wasm`, which ships beside the viewer's bundle and is fetched only when such content loads. A bundler that handles `new URL(…, import.meta.url)` emits it with your bundle; otherwise serve it beside the bundle as `application/wasm`, or point `zstdDecoderUrl` at it. The decoder is loaded from a `blob:` URL, so a Content-Security-Policy must allow `blob:` scripts.
 
 ## See also
 

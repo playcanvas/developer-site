@@ -93,7 +93,6 @@ ARセッションが始まると、スプラットが目の前に薄く表示さ
 
 | 行 | 機能 |
 |-----|--------------|
-| **Play** / **Pause** | アニメーションスプラットシーケンスを再生・一時停止します。シーケンスがある場合にのみ表示されます。 |
 | **Reset Camera** | セッションを開始した位置に戻り、動かしたオブジェクトを目の前に戻します。 |
 | **Quality** | セッションで使える[Qualityの段階](/user-manual/supersplat/viewer/controls#quality)を切り替えます。行の左半分で1段階下げ、右半分で1段階上げます。 |
 | **Performance Mode** | [Performance Mode](/user-manual/supersplat/viewer/controls#performance-mode)を切り替えます。利用できる場合に表示されます。 |

@@ -172,10 +172,10 @@ This technique allows the camera to smoothly transition from your last keyframe 
 
 ## Splat Sequences {#splat-sequences}
 
-When you import a [PLY sequence or GSAF animation](import-export.md#ply-sequences) as a sequence, the Timeline also drives its frames. The sequence appears as one splat in the Scene Manager, and playing or scrubbing the Timeline swaps each frame into that splat, keeping its transform, visibility, and selection.
+When you import a [PLY sequence](import-export.md#ply-sequences) as a sequence, the Timeline also drives its frames. The sequence appears as one splat in the Scene Manager, and playing or scrubbing the Timeline swaps each frame into that splat, keeping its transform, visibility, and selection.
 
 - Importing a sequence sets **Total Frames** to the length of the longest sequence loaded.
-- Several sequences can be loaded at once, from PLY files, GSAF files, or both, and they play together. A shorter sequence holds its last frame until the Timeline wraps.
+- Several sequences can be loaded at once, and they play together. A shorter sequence holds its last frame until the Timeline wraps.
 - A sequence imported while the playhead is away from frame 0 starts at the playhead, in step with the sequences already loaded.
 - Removing a sequence's splat from the Scene Manager removes the sequence from the Timeline.
 - Camera keyframes work alongside sequences, so you can animate the camera around an animated splat and [render it as a video](rendering.md#video-rendering).

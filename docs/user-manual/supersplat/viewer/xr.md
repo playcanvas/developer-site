@@ -93,7 +93,6 @@ The menu holds the viewer's settings during a session.
 
 | Row | What it does |
 |-----|--------------|
-| **Play** / **Pause** | Plays or pauses an animated splat sequence. Shown only for one. |
 | **Reset Camera** | Returns you to where the session started, and puts a moved object back in front of you. |
 | **Quality** | Steps through the [quality positions](/user-manual/supersplat/viewer/controls#quality) the session can hold: the left half of the row steps down, the right half up. |
 | **Performance Mode** | Switches [Performance Mode](/user-manual/supersplat/viewer/controls#performance-mode). Shown where it's offered. |

@@ -3,7 +3,7 @@ title: SuperSplat Viewer
 description: "The open-source web viewer that powers SuperSplat scene pages — and that you can embed in your own site or app, or host yourself."
 ---
 
-The **SuperSplat Viewer** is the open-source web viewer that renders every [scene page](/user-manual/supersplat/scene-page) on superspl.at. It takes a splat plus a settings JSON document and turns them into an interactive 3D experience: orbit, fly and walk camera modes, annotations, camera animations, animated splat sequences, post effects, collision for walkable scenes, and VR and AR on devices that support WebXR.
+The **SuperSplat Viewer** is the open-source web viewer that renders every [scene page](/user-manual/supersplat/scene-page) on superspl.at. It takes a splat plus a settings JSON document and turns them into an interactive 3D experience: orbit, fly and walk camera modes, annotations, camera animations, post effects, collision for walkable scenes, and VR and AR on devices that support WebXR.
 
 The viewer is [open source on GitHub](https://github.com/playcanvas/supersplat-viewer) under the MIT license and is distributed on npm as [`@playcanvas/supersplat-viewer`](https://www.npmjs.com/package/@playcanvas/supersplat-viewer).
 

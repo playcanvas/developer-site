@@ -29,15 +29,14 @@ npm install @playcanvas/supersplat-viewer
 | `@playcanvas/supersplat-viewer/viewer` | `createViewer`。`playcanvas`（2.24.1以降）がピア依存関係です |
 | `@playcanvas/supersplat-viewer/viewer.css` | `createViewer`に必要なスタイルシート |
 | `@playcanvas/supersplat-viewer/settings` | 設定の型、デフォルト、検証、マイグレーション。[Experience Settings](/user-manual/supersplat/studio/experience-settings#generating-and-validating-settings)を参照してください。 |
-| `@playcanvas/supersplat-viewer/gsaf-decoder` | `.gsaf`デコーダーを`data:` URLにしたもの（単一ファイルのページ向け） |
 
 メインのエントリポイントは、ビューアのページを文字列`html`としてもエクスポートしていますが、これは非推奨です。フォーマットがリリースごとに変わるため、代わりに`renderViewerHtml`を使ってください。
 
 ## ビルド済みビューアのホスティング {#hosting-the-prebuilt-viewer}
 
-パッケージの`public/`フォルダーには、スタンドアロンのビューア（`index.html`、`index.js`、`index.css`と、デコーダーの`gsaf-decoder.wasm`、`zstd-decoder.wasm`）が入っています。このフォルダーをウェブサーバーにコピーし、`index.html`を開きます。パラメータを指定しない場合は、同じ場所にある`./settings.json`と`./scene.compressed.ply`を読み込みます。
+パッケージの`public/`フォルダーには、スタンドアロンのビューア（`index.html`、`index.js`、`index.css`と、一部の形式に必要なWebAssemblyデコーダーの`.wasm`ファイル）が入っています。このフォルダーをウェブサーバーにコピーし、`index.html`を開きます。パラメータを指定しない場合は、同じ場所にある`./settings.json`と`./scene.compressed.ply`を読み込みます。
 
-`.wasm`ファイルは、`.gsaf`とバージョン4の`.spz`のコンテンツでのみ取得されます。`application/wasm`として配信してください。
+`.wasm`ファイルは、バージョン4の`.spz`ファイルなど、それを必要とするコンテンツでのみ取得されます。`application/wasm`として配信してください。
 
 ### URLパラメータ {#url-parameters}
 
@@ -90,7 +89,6 @@ npm install @playcanvas/supersplat-viewer
 | Streamed SOG | `lod-meta.json` |
 | SPZ | `.spz`（バージョン3と4） |
 | XGRIDS LCC2 | `.lcc2`。Streamed SOGと同様に、必要に応じてストリーミングされます |
-| GSAFアニメーションスプラットシーケンス | `.gsaf`。WebGPUでは再生とループが行われ、WebGLでは最初のフレームのみ表示されます。 |
 
 splat-transform 3.11.0または3.11.1で書き出されたSOG v3ファイルは、ビューアが現在は読み込まない以前のレイアウトを使用しています。最新の[splat-transform](/user-manual/splat-transform/)で再変換してください。
 
@@ -116,7 +114,7 @@ const page = renderViewerHtml({
 
 | オプション | 説明 |
 |--------|-------------|
-| `bootstrap` | ページのアセットと設定：`settings`または`settingsUrl`、`contentUrl`、`contentFilename`、`posterUrl`、`skyboxUrl`、`collisionUrl`、`gsafDecoderUrl`、`zstdDecoderUrl` |
+| `bootstrap` | ページのアセットと設定：`settings`または`settingsUrl`、`contentUrl`、`contentFilename`、`posterUrl`、`skyboxUrl`、`collisionUrl`、`zstdDecoderUrl` |
 | `baseHref` | ページのベースURL。ビューアをサブパスから配信する場合に使います |
 | `backgroundColor` | 最初のフレームが描画されるまでのページ背景。設定の`background.color`と同じく、0～1のRGBで指定します |
 | `headExtras` / `bodyStartExtras` | `<head>`内、または`<body>`の先頭に追加するマークアップ |
@@ -124,24 +122,21 @@ const page = renderViewerHtml({
 
 オプションなしで呼び出すと、パッケージに含まれるページをそのまま返します。配信されたページのURLパラメータは引き続きbootstrapのアセットURLを上書きするため、各インスタンスは設定可能なままです。ただし、インラインの`settings`は例外で、`?settings=`よりも優先されます。
 
-自己完結した単一ファイルにするには、`inlineCss`と`inlineJs`の両方を設定し、設定をインラインで渡し、スプラットを`data:` URIとして`contentUrl`に渡します。`data:` URIにはファイル名がないため、`contentFilename`でコンテンツに名前（`scene.sog`など）を付けます。単一ファイルの`.gsaf`ページでは、デコーダーもインラインにする必要があります：
+自己完結した単一ファイルにするには、`inlineCss`と`inlineJs`の両方を設定し、設定をインラインで渡し、スプラットを`data:` URIとして`contentUrl`に渡します。`data:` URIにはファイル名がないため、`contentFilename`でコンテンツに名前（`scene.sog`など）を付けます：
 
 ```ts
-import { gsafDecoderDataUrl } from '@playcanvas/supersplat-viewer/gsaf-decoder';
-
 const page = renderViewerHtml({
     bootstrap: {
         settings,
-        contentUrl: gsafDataUri,
-        contentFilename: 'scene.gsaf',
-        gsafDecoderUrl: gsafDecoderDataUrl
+        contentUrl: sogDataUri,
+        contentFilename: 'scene.sog'
     },
     inlineCss: true,
     inlineJs: true
 });
 ```
 
-デコーダーのURLを指定するURLパラメータはありません。もしあれば、リンク1つでページのオリジン上で任意のWebAssemblyを実行できてしまうためです。
+バージョン4の`.spz`ファイルを読み込む単一ファイルのページでは、デコーダーもインラインにする必要があります。`zstdDecoderUrl`に、`zstd-decoder.wasm`を`data:` URLにしたものを設定してください。`zstdDecoderUrl`に対応するURLパラメータはありません。もしあれば、リンク1つでページのオリジン上で任意のWebAssemblyを実行できてしまうためです。
 
 ## 自分のページ内でのビューアの作成 {#creating-a-viewer-in-your-own-page}
 
