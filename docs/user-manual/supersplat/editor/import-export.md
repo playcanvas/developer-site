@@ -3,7 +3,7 @@ title: Import and Export
 description: "SuperSplat import and export formats: PLY, SOG, SPLAT, KSPLAT, SPZ, LCC/LCC2, camera poses, and standalone viewers."
 ---
 
-SuperSplat's import and export capabilities are essential for working with Gaussian Splat data throughout your entire workflow. Import allows you to bring in splat scenes from various capture tools and formats for editing, cleanup, and optimization. Once your editing work is complete, export enables you to save your refined splats in the optimal format for your target platform - whether that's a compressed format for web deployment, a full-quality PLY for archival, or a standalone HTML viewer for easy sharing. This flexibility ensures SuperSplat can integrate seamlessly into any Gaussian Splat production pipeline.
+Import brings splats into the Editor from capture apps, trainers, and other tools. Export writes the visible splats to a file: a compressed format for the web, a full-quality PLY for archiving, or a standalone HTML viewer to host yourself.
 
 ## Supported File Formats {#supported-file-formats}
 
@@ -66,7 +66,7 @@ Click **Import** to import the ticked rows, or **Cancel** to import nothing. Pro
 
 ### Choosing a Level of Detail {#choosing-a-level-of-detail}
 
-When a file contains multiple levels of detail, SuperSplat displays a **Load Options** dialog before allocating the splats. The dialog lists each LOD and its splat count. It initially selects the most detailed level containing fewer than 20 million splats, helping large scenes avoid excessive memory use.
+When a file contains multiple levels of detail, SuperSplat displays a **Load Options** dialog before allocating the Gaussians. The dialog lists each LOD and its Gaussian count. It initially selects the most detailed level containing fewer than 20 million Gaussians, helping large scenes avoid excessive memory use.
 
 Choose the LOD that fits your editing needs and available memory, then click **Load**. Lower-detail levels load faster and consume less memory. Click **Cancel** to stop the import without loading a level.
 

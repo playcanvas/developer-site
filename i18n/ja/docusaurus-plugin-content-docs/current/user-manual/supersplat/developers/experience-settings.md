@@ -161,7 +161,7 @@ const { min, max, step } = POST_EFFECT_RANGES.bloom.intensity;
 
 シーンを初めて開いたときに、Studioはこれらのデフォルトを表示します。必要に応じて調整してください。
 
-## スキーマのバージョニング
+## スキーマのバージョニング {#schema-versioning}
 
 古い`v1`の設定は、StudioやViewerが読み込むときに自動的に`v2`に移行されます — 特別な対応は必要ありません。自分で設定を生成する場合は、`v2`を書けば現在の仕様に合致します。
 

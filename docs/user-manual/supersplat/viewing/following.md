@@ -3,7 +3,7 @@ title: Following Creators
 description: "Follow creators on superspl.at and see their latest splats in your Following feed."
 ---
 
-Found a creator whose work you love? Follow them, and their splats show up in your **Following** feed on the [superspl.at](https://superspl.at) home page.
+Follow a creator to see their public splats in your **Following** feed on the [superspl.at](https://superspl.at) home page.
 
 ## Follow a creator
 

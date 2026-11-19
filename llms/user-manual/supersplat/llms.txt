@@ -36,7 +36,7 @@ Use this index to edit, publish, present or embed splats. To render splats in yo
 - [Selection and Cleanup](/user-manual/supersplat/editor/editing-splats/): Selecting, deleting, restoring and separating Gaussians to remove floaters and crop splats.
 - [Transform, Measure and Align](/user-manual/supersplat/editor/transform-measure-align/): Moving, rotating, scaling, measuring, aligning and merging splats.
 - [Color and Appearance](/user-manual/supersplat/editor/color-and-appearance/): Grading colors, and how Gaussians and selections are drawn.
-- [Data Panel](/user-manual/supersplat/editor/data-panel/): Inspecting splat attributes, filtering by value and finding outliers.
+- [Data Panel](/user-manual/supersplat/editor/data-panel/): Inspecting Gaussian attributes, filtering by value and finding outliers.
 - [Timeline](/user-manual/supersplat/editor/timeline/): Camera keyframes, COLMAP pose import, and animated camera paths published with a splat.
 - [Rendering Media](/user-manual/supersplat/editor/rendering/): Rendering images and videos, including 360° output.
 - [AI Agents (WebMCP)](/user-manual/supersplat/editor/webmcp/): Letting an AI agent inspect and edit the open Editor scene through the browser's experimental WebMCP API.

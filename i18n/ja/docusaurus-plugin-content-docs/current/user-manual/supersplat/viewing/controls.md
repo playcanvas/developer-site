@@ -115,7 +115,7 @@ Gaming Controlsがオンのときは、キャプチャされたマウス（ま�
 | **Show Annotations** | [注釈](#annotations)のホットスポットとナビゲータの表示・非表示を切り替えます。注釈のあるシーンでのみ表示されます。 |
 | **Show Collision** | シーンのコリジョンジオメトリをスプラットに重ねて描画します（<kbd>V</kbd>）。シーンのコリジョンを描画できる場合にのみ表示されます。ボクセルコリジョンの描画にはWebGPUが必要です。 |
 | **Gaming Controls** | [Gaming Controls](#gaming-controls)をオンにします。タッチデバイスで表示されます。デスクトップでは<kbd>G</kbd>を使います。 |
-| **Quality** | **Performance** / **Default** / **High** / **Max**の4段階のスライダーです。各段階には**Default · 4M**のように、その段階で得られるスプラットバジェットがラベルとして表示されます。[Quality](#quality)を参照してください。 |
+| **Quality** | **Performance** / **Default** / **High** / **Max**の4段階のスライダーです。各段階には**Default · 4M**のように、その段階で得られるガウシアンバジェットがラベルとして表示されます。[Quality](#quality)を参照してください。 |
 | **Performance Mode** | ビューアの代替スプラットレンダラーに切り替えます。[Performance Mode](#performance-mode)を参照してください。 |
 | **Frame** | オービットモードで、シーン全体をフレーミングします。 |
 | **Reset** | カメラをリセットします。オービットモードでは開始時のビューに、フライモードとウォークモードではそのモードに入った位置に戻ります。 |
@@ -124,11 +124,11 @@ Gaming Controlsがオンのときは、キャプチャされたマウス（ま�
 
 ### Quality {#quality}
 
-**Quality**スライダーは、スプラットバジェット（ストリーミングされるシーンでビューアが一度に描画するスプラットの最大数）を、デバイスごとに用意された段階から設定します。たとえばデスクトップでは2M、4M、8M、16Mです。**Performance**では、ビューアは解像度も半分にしてレンダリングします。すべてのデバイスの段階と開始位置、バジェットの仕組みは[ストリーミングとパフォーマンス](/user-manual/supersplat/publishing/streaming#near-instant-loads-and-the-gaussian-budget)で説明しています。
+**Quality**スライダーは、ガウシアンバジェット（ストリーミングされるシーンでビューアが一度に描画するガウシアンの最大数）を、デバイスごとに用意された段階から設定します。たとえばデスクトップでは2M、4M、8M、16Mです。**Performance**では、ビューアは解像度も半分にしてレンダリングします。すべてのデバイスの段階と開始位置、バジェットの仕組みは[ストリーミングとパフォーマンス](/user-manual/supersplat/publishing/streaming#near-instant-loads-and-the-gaussian-budget)で説明しています。
 
 ### Performance Mode {#performance-mode}
 
-**Performance Mode**は、スプラットをソートしない別のレンダラーで描画します。カメラが止まると、数フレームかけて画像が精細になります。デフォルトではオフで、WebGPUでのみ利用でき、Meta QuestやPicoのブラウザでは利用できません。
+**Performance Mode**は、ガウシアンをソートしない別のレンダラーで描画します。カメラが止まると、数フレームかけて画像が精細になります。デフォルトではオフで、WebGPUでのみ利用でき、Meta QuestやPicoのブラウザでは利用できません。
 
 ## 情報パネル {#the-info-panel}
 
@@ -166,6 +166,6 @@ Gaming Controlsがオンのときは、キャプチャされたマウス（ま�
 ## 関連項目
 
 - [VRとARでの表示](/user-manual/supersplat/viewing/xr) — ヘッドセットとスマートフォンでのAR
-- [ストリーミングとパフォーマンス](/user-manual/supersplat/publishing/streaming) — ストリーミングされるシーンとスプラットバジェット
+- [ストリーミングとパフォーマンス](/user-manual/supersplat/publishing/streaming) — ストリーミングされるシーンとガウシアンバジェット
 - [シーンページ](/user-manual/supersplat/viewing/scene-page) — superspl.atで訪問者がビューアに出会う場所
 - [ビューアAPI](/user-manual/supersplat/developers/viewer-api) — 同じ機能を自分のコードから制御する

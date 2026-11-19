@@ -17,7 +17,7 @@ The Timeline panel includes the following controls:
 - **Remove Key button (`-`)** - Delete the keyframe at the current playhead position
 - **Timeline slider** - Scrub through the animation by dragging the playhead (which displays the current frame number)
 - **FPS setting** - Set the frames per second for the animation
-- **Timeline length** - Set the total duration of the animation in frames
+- **Total Frames** - Set the length of the animation in frames
 - **Smoothness** - Adjust the interpolation smoothness between keyframes (0-1)
 - **Loop toggle** - Control whether playback loops. When enabled (the default), the animation wraps smoothly from the last keyframe back to the first; when disabled, the camera comes to rest on the last keyframe and playback stops on the last frame. See [Animation Looping](#animation-looping)
 
@@ -113,9 +113,9 @@ The FPS setting controls the playback speed of your animation. Available FPS val
 - **30 FPS** - Common video frame rate
 - **60 FPS** - Smooth, high frame rate playback
 
-### Timeline Length
+### Total Frames
 
-You can set the total duration of your animation by adjusting the timeline length setting. This defines how many frames your animation spans and determines when the animation loops back to the beginning.
+**Total Frames** sets the length of your animation. It defines how many frames your animation spans and determines when the animation loops back to the beginning.
 
 If you shorten the timeline so that existing keyframes fall past its end, SuperSplat preserves those keyframes but excludes them from playback and interpolation. Their dimmed, error-colored markers are pinned just beyond the right edge of the timeline, and a tooltip identifies each keyframe's original frame number.
 
@@ -157,7 +157,7 @@ For example, with a 100-frame timeline:
 - **Avoid:** Setting keyframes at frames 0, 10, 20, ... 90, 100
   - This causes a snap/jerk when looping from frame 100 back to frame 0
 
-This technique allows the camera to smoothly transition from your last keyframe back to the starting position, creating a seamless loop.
+This lets the camera ease from your last keyframe back to the starting position, so the loop has no jump.
 
 :::
 
