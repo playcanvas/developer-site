@@ -35,6 +35,8 @@ sidebar_label: GLB
 splat-transform scene.ply scene.glb
 ```
 
+SplatTransformはGLBのスプラットファイルの読み込みにも対応しているため、PLYやSOGなど他の出力形式に変換し直すこともできます。読み込めるGLBファイルについては、[CLIリファレンス](/user-manual/splat-transform/cli-reference#supported-formats)を参照してください。
+
 ## PlayCanvasでの読み込み
 
 スプラットのGLBファイルは、(他のglTFコンテンツと同様に) `gsplat`アセットではなく**コンテナ**アセットとして読み込みます。

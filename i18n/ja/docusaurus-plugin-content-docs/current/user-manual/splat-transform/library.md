@@ -70,12 +70,12 @@ DataTable 互換（セカンダリ；各エントリはシーン全体をメモ�
 
 - `UrlReadFileSystem` - URLからの読み取り（ブラウザ/Node.js）
 - `MemoryReadFileSystem` - インメモリバッファからの読み取り
-- `ZipReadFileSystem` - ZIPアーカイブからの読み取り
+- `ZipReadFileSystem` - ZIPアーカイブからの読み取り（4 GiBを超えるZIP64アーカイブを含む）
 
 **書き込み:**
 
 - `MemoryFileSystem` - インメモリバッファへの書き込み
-- `ZipFileSystem` - ZIPアーカイブへの書き込み
+- `ZipFileSystem` - ZIPアーカイブへの書き込み（4 GiBまたは65,535エントリを超える場合はZIP64レコードを使用）
 
 ## 例: 読み取りと処理
 
@@ -136,7 +136,7 @@ type ProcessAction =
     | { kind: 'scale'; value: number }
     | { kind: 'filterNaN' }
     | { kind: 'filterByValue'; columnName: string; comparator: 'lt'|'lte'|'gt'|'gte'|'eq'|'neq'; value: number }
-    | { kind: 'filterBands'; value: 0|1|2|3 }
+    | { kind: 'filterBands'; value: 0|1|2|3|4 }
     | { kind: 'filterBox'; min: Vec3; max: Vec3 }
     | { kind: 'filterSphere'; center: Vec3; radius: number }
     | { kind: 'filterFloaters'; voxelResolution?: number; opacityCutoff?: number; minContribution?: number } // GPU

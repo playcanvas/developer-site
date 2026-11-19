@@ -70,12 +70,12 @@ The library uses abstract file system interfaces for maximum flexibility:
 
 - `UrlReadFileSystem` - Read from URLs (browser/Node.js)
 - `MemoryReadFileSystem` - Read from in-memory buffers
-- `ZipReadFileSystem` - Read from ZIP archives
+- `ZipReadFileSystem` - Read from ZIP archives, including ZIP64 archives larger than 4 GiB
 
 **Writing:**
 
 - `MemoryFileSystem` - Write to in-memory buffers
-- `ZipFileSystem` - Write to ZIP archives
+- `ZipFileSystem` - Write to ZIP archives, using ZIP64 records where an archive passes 4 GiB or 65,535 entries
 
 ## Example: Reading and Processing
 
@@ -136,7 +136,7 @@ type ProcessAction =
     | { kind: 'scale'; value: number }
     | { kind: 'filterNaN' }
     | { kind: 'filterByValue'; columnName: string; comparator: 'lt'|'lte'|'gt'|'gte'|'eq'|'neq'; value: number }
-    | { kind: 'filterBands'; value: 0|1|2|3 }
+    | { kind: 'filterBands'; value: 0|1|2|3|4 }
     | { kind: 'filterBox'; min: Vec3; max: Vec3 }
     | { kind: 'filterSphere'; center: Vec3; radius: number }
     | { kind: 'filterFloaters'; voxelResolution?: number; opacityCutoff?: number; minContribution?: number } // GPU

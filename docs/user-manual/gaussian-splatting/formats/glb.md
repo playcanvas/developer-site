@@ -35,6 +35,8 @@ Convert any supported splat format using [SplatTransform](/user-manual/splat-tra
 splat-transform scene.ply scene.glb
 ```
 
+SplatTransform also reads GLB splat files, so you can convert one back to PLY, SOG or any other output format. See the [CLI Reference](/user-manual/splat-transform/cli-reference#supported-formats) for the GLB files it accepts.
+
 ## Loading in PlayCanvas
 
 Splat GLB files load as **container** assets (like any other glTF content), not as `gsplat` assets:
