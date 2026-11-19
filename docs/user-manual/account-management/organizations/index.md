@@ -3,14 +3,14 @@ title: Organizations
 description: What a PlayCanvas Organization account is, how it differs from a personal account, and when your team should use one.
 ---
 
-An **Organization** is a shared account for teams. Instead of projects living under one person's personal account, they belong to the Organization, where an owner and any number of administrators manage projects, people and billing together. Organizations are available on the **Free plan**, with a paid plan when you need more.
+An **Organization** is a shared account for teams. Instead of projects living under one person's personal account, they belong to the Organization, where an owner and any number of administrators manage projects and people together, and the owner handles billing. Organizations are available on the **Free plan**, with a paid plan when you need more.
 
 ## What is an Organization?
 
 An Organization is a team-owned workspace rather than an individual login. A few things set it apart from a personal account:
 
 - **It isn't tied to one person.** You never log in *as* the Organization. Instead, you manage it through your own user account as its **owner** or an **administrator**.
-- **It has multiple administrators.** The owner can appoint any number of administrators, who manage the Organization's projects, people and billing. Only the owner can transfer ownership or delete the Organization.
+- **It has multiple administrators.** The owner can appoint any number of administrators, who manage the Organization's projects and people. Only the owner can see its billing, change its plan, transfer ownership or delete the Organization.
 - **Projects belong to the team.** Projects are owned by the Organization, not by an individual, so they outlast any single member's account.
 - **Ownership can be transferred.** If the owner leaves the team, ownership can be handed to another user without disrupting any projects.
 
