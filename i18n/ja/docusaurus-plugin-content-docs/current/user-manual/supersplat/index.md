@@ -39,7 +39,7 @@ import Link from '@docusaurus/Link';
     </Link>
   </div>
   <div className="col col--6">
-    <Link className="card path-card" to="/user-manual/supersplat/viewer/">
+    <Link className="card path-card" to="/user-manual/supersplat/developers/viewer/">
       <div className="card__header"><h3>🧩 自分のサイトやアプリでスプラットを使いたい</h3></div>
       <div className="card__body"><p>オープンソースのViewerをiframeで埋め込む、単一HTMLファイルのビューアをエクスポートしてセルフホストする、あるいはAPIを使って自分のパイプラインから公開することができます。</p></div>
       <div className="card__footer">Viewer、埋め込み、API →</div>
@@ -56,7 +56,7 @@ import Link from '@docusaurus/Link';
 
 :::tip すでにクリーンなスプラットをお持ちですか？
 
-Editorを省略できます。[superspl.atのホームページ](https://superspl.at)にあるオレンジ色の**Upload Splat**ボタンを押すか、[Direct Upload](upload)を使って、完成済みのファイルを[Manageページ](manage)に直接公開できます。
+Editorを省略できます。[superspl.atのホームページ](https://superspl.at)にあるオレンジ色の**Upload Splat**ボタンを押すか、[Direct Upload](/user-manual/supersplat/publishing/upload/)を使って、完成済みのファイルを[Manageページ](/user-manual/supersplat/publishing/manage/)に直接公開できます。
 
 :::
 
@@ -64,9 +64,9 @@ Editorを省略できます。[superspl.atのホームページ](https://supersp
 
 1. **読み込む。** [superspl.at/editor](https://superspl.at/editor)を開き、スプラットファイルをドロップします。対応形式は[インポートとエクスポート](editor/import-export)を参照してください。
 2. **クリーンアップする。** ブラシ、スフィア、ボックスの各選択ツールで浮遊するフローターを選択し、<kbd>Delete</kbd>を押します。[選択とクリーンアップ](editor/editing-splats)を参照してください。
-3. **公開する。** **File → Publish**を選びます。スプラットは[Manageページ](manage)に追加され、専用の[シーンページ](scene-page)が作られます。[公開](editor/publishing)を参照してください。
+3. **公開する。** **File → Publish**を選びます。スプラットは[Manageページ](/user-manual/supersplat/publishing/manage/)に追加され、専用の[シーンページ](/user-manual/supersplat/viewing/scene-page/)が作られます。[公開](/user-manual/supersplat/publishing/editor/)を参照してください。
 4. **キュレーションする。** [Studio](studio/)で開き、カメラを決め、注釈を追加し、ポストエフェクトを有効にします。
-5. **共有する。** シーンのリンクをコピーする、埋め込みスニペットを取得する、または**Public**に設定して[Explore](explore)に表示させます。
+5. **共有する。** シーンのリンクをコピーする、埋め込みスニペットを取得する、または**Public**に設定して[Explore](/user-manual/supersplat/viewing/explore/)に表示させます。
 
 [はじめに](getting-started)ガイドでは、各ステップをスクリーンショット付きで解説しています。
 
@@ -97,23 +97,23 @@ flowchart TB
 | サーフェス | 概要 | 場所 |
 |---------|------------|----------------|
 | **[Editor](editor/)** | スプラットをクリーンアップ、クロップ、色調整、アニメーション化するブラウザベースのエディタ。superspl.atに公開できます。 | [superspl.at/editor](https://superspl.at/editor) |
-| **[Direct Upload](upload)** | Editorを開かずに、すでにクリーンなスプラットファイルを公開します。 | [superspl.at](https://superspl.at)のオレンジ色の**Upload Splat**ボタン |
-| **[Manage](manage)** | あなたのスプラットライブラリ：タイトルや説明の編集、公開範囲の変更、ダウンロード可否とライセンスの選択、削除、Studioで開く操作ができます。 | [superspl.at/manage](https://superspl.at/manage) |
+| **[Direct Upload](/user-manual/supersplat/publishing/upload/)** | Editorを開かずに、すでにクリーンなスプラットファイルを公開します。 | [superspl.at](https://superspl.at)のオレンジ色の**Upload Splat**ボタン |
+| **[Manage](/user-manual/supersplat/publishing/manage/)** | あなたのスプラットライブラリ：タイトルや説明の編集、公開範囲の変更、ダウンロード可否とライセンスの選択、削除、Studioで開く操作ができます。 | [superspl.at/manage](https://superspl.at/manage) |
 | **[Studio](studio/)** | 公開後の視聴体験をキュレーションします：Look & Tone、スカイボックス、カメラ、カメラアニメーション、コリジョン、ポストエフェクト、注釈。 | `superspl.at/scene/<hash>/studio` |
-| **[Scene page](scene-page)** | 公開済みスプラットの公開ページ：埋め込みビューア、シェア、埋め込み、ダウンロード、コメント、いいね、おすすめスプラット。 | `superspl.at/scene/<hash>` |
-| **[Explore](explore)** | ソート、期間、特集フィルタと検索を備えた公開ギャラリー。superspl.atのホームページです。 | [superspl.at](https://superspl.at) |
-| **[User Profile](user-profile)** | クリエイターの公開ページ：アバター、自己紹介、ソーシャルリンク、公開済みスプラット。 | `superspl.at/user/<username>` |
-| **[Viewer](viewer/)** | シーンページとEditorのHTMLエクスポートを動かしているオープンソースのウェブビューア。自分のページに埋め込むか、セルフホストできます。 | npm `@playcanvas/supersplat-viewer`、[GitHub](https://github.com/playcanvas/supersplat-viewer) |
+| **[Scene page](/user-manual/supersplat/viewing/scene-page/)** | 公開済みスプラットの公開ページ：埋め込みビューア、シェア、埋め込み、ダウンロード、コメント、いいね、おすすめスプラット。 | `superspl.at/scene/<hash>` |
+| **[Explore](/user-manual/supersplat/viewing/explore/)** | ソート、期間、特集フィルタと検索を備えた公開ギャラリー。superspl.atのホームページです。 | [superspl.at](https://superspl.at) |
+| **[User Profile](/user-manual/supersplat/viewing/user-profile/)** | クリエイターの公開ページ：アバター、自己紹介、ソーシャルリンク、公開済みスプラット。 | `superspl.at/user/<username>` |
+| **[Viewer](/user-manual/supersplat/developers/viewer/)** | シーンページとEditorのHTMLエクスポートを動かしているオープンソースのウェブビューア。自分のページに埋め込むか、セルフホストできます。 | npm `@playcanvas/supersplat-viewer`、[GitHub](https://github.com/playcanvas/supersplat-viewer) |
 | **[Convert](convert)** | [splat-transform](/user-manual/splat-transform/) CLIのウェブフロントエンド：ブラウザ上で形式変換、トランスフォーム、フィルタを実行します。 | [superspl.at/convert](https://superspl.at/convert) |
-| **[APIと統合](api-integrations)** | キャプチャツール、トレーニングパイプライン、カスタムアプリケーションからシーンを公開・確認します。 | [APIリファレンス](/user-manual/api/supersplat/) |
+| **[APIと統合](/user-manual/supersplat/developers/api-integrations/)** | キャプチャツール、トレーニングパイプライン、カスタムアプリケーションからシーンを公開・確認します。 | [APIリファレンス](/user-manual/api/supersplat/) |
 
 ## 知っておきたいこと
 
 - **すべてブラウザで動きます。** Editorはスプラットをローカルで読み込み、あなたが公開を選ぶまで何もアップロードされません。WebGPUに対応したブラウザ（最新のChromeまたはEdge、Safari 26以降、WebGPUを有効にしたFirefox）が必要です。
 - **閲覧は匿名でできます。** 公開、いいね、コメントには無料のPlayCanvasアカウントが必要です。[アカウント作成](/user-manual/account-management/user-accounts/account-creation)を参照してください。
 - **中核はオープンソースです。** [Editor](https://github.com/playcanvas/supersplat)、[Viewer](https://github.com/playcanvas/supersplat-viewer)、そしてConvertを支える[splat-transform](https://github.com/playcanvas/splat-transform)はMITライセンスです。Studio、Manage、Explore、シーンページ、公開APIはPlayCanvasがsuperspl.atでホストしています。
-- **公開時に自動で最適化されます。** 公開されたすべてのスプラットはSOG形式に圧縮され、100万ガウシアンを超えるスプラットはプログレッシブにストリーミングされるため、どのデバイスでも高速に読み込めます。[ストリーミングとパフォーマンス](streaming)を参照してください。
-- **セルフホストもできます。** Editorから単一HTMLファイルのビューアをエクスポートするか、Viewerのnpmパッケージを使います。[ビューアのセルフホスティング](viewer/self-hosting)を参照してください。
+- **公開時に自動で最適化されます。** 公開されたすべてのスプラットはSOG形式に圧縮され、100万ガウシアンを超えるスプラットはプログレッシブにストリーミングされるため、どのデバイスでも高速に読み込めます。[ストリーミングとパフォーマンス](/user-manual/supersplat/publishing/streaming/)を参照してください。
+- **セルフホストもできます。** Editorから単一HTMLファイルのビューアをエクスポートするか、Viewerのnpmパッケージを使います。[ビューアのセルフホスティング](/user-manual/supersplat/developers/self-hosting/)を参照してください。
 
 ## 最新情報を追う
 

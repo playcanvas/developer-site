@@ -7,7 +7,7 @@ description: "SuperSplat Editor：3Dガウシアンスプラットをクリー�
 
 :::tip すでにクリーンなスプラットをお持ちの場合
 
-Editorを完全にスキップできます。[superspl.atのホームページ](https://superspl.at)にあるオレンジ色の**Upload Splat**ボタン（または[Direct Upload](../upload)フロー）を使って、完成済みのスプラットを[Manageページ](../manage)に直接公開できます。
+Editorを完全にスキップできます。[superspl.atのホームページ](https://superspl.at)にあるオレンジ色の**Upload Splat**ボタン（または[Direct Upload](/user-manual/supersplat/publishing/upload/)フロー）を使って、完成済みのスプラットを[Manageページ](/user-manual/supersplat/publishing/manage/)に直接公開できます。
 
 :::
 
@@ -52,5 +52,5 @@ SuperSplat Editorのより包括的なガイドについては、この詳細な
 - [選択とクリーンアップ](editing-splats)でキャプチャを整理し、[変形、測定、位置合わせ](transform-measure-align)で仕上げる
 - [スプラットの管理](scene-management)で複数のキャプチャを扱い、[色と外観](color-and-appearance)で見た目を整える
 - [キーボードショートカット](keyboard-shortcuts)を参照し、ワークフローが期待どおりに動作しない場合は[トラブルシューティング](troubleshooting)を確認する
-- スプラットがクリーンになったら、superspl.atに[公開](publishing)し、[Manageページ](../manage)に表示し、[Studio](../studio/)で開きます
+- スプラットがクリーンになったら、superspl.atに[公開](/user-manual/supersplat/publishing/editor/)し、[Manageページ](/user-manual/supersplat/publishing/manage/)に表示し、[Studio](../studio/)で開きます
 - ブラウザの実験的な[WebMCP](webmcp)ツールを通じて、AIエージェントにシーンの確認と編集を任せる

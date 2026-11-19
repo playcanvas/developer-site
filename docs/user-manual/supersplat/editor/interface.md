@@ -119,7 +119,7 @@ The **Preferences** popup (the gear icon in the [Right Toolbar](#right-toolbar))
 | Camera | **Field of View** | 85° | Field of view of the viewport camera (10°–120°), measured across the viewport's longer side. See [Camera Settings](camera-controls.md#camera-settings). |
 | | **Fly Speed** | 1 | Speed of WASD navigation in fly mode (0.1–30). |
 | | **FOV Auto Dolly** | Off | Move the camera as the field of view changes so the subject keeps its framing. See [Camera Settings](camera-controls.md#camera-settings). |
-| Colors | **Background Color** | Black | The viewport background. Also the default background of [published](publishing.md) scenes and exported viewers. |
+| Colors | **Background Color** | Black | The viewport background. Also the default background of [published](/user-manual/supersplat/publishing/editor/) scenes and exported viewers. |
 | | **Selected Color** | Yellow | The color of selected Gaussians' markers, the selection tint and outline, and the selected bars in the [Splat Data](data-panel.md) histogram. |
 | | **Unselected Color** | Blue | The color of unselected Gaussians' markers (unless they show **Splat Colors**) and the unselected bars in the histogram. |
 | | **Locked Color** | Black, 5% opacity | Applied to [locked](editing-splats.md#lock-delete-and-restore) Gaussians. The default leaves them dark and almost transparent. |

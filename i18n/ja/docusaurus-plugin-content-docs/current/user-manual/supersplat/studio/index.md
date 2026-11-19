@@ -3,9 +3,9 @@ title: SuperSplat Studio
 description: "Studioは公開済みスプラットの視聴体験をキュレーションします：Look & Tone、カメラ、カメラアニメーション、コリジョン、ポストエフェクト、注釈。"
 ---
 
-**SuperSplat Studio**は、すでに[公開](/user-manual/supersplat/editor/publishing)または[直接アップロード](/user-manual/supersplat/upload)したスプラットの視聴体験をキュレーションする場所です。公開済みシーンの上に開き、訪問者が[シーンページ](/user-manual/supersplat/scene-page)で見るもの — 背景またはスカイボックス、トーンマッピング、開始カメラ、カメラアニメーション、ウォーカブルシーン用のコリジョンジオメトリ、ポストエフェクト、シーン上の注釈 — を形作ります。
+**SuperSplat Studio**は、すでに[公開](/user-manual/supersplat/publishing/editor)または[直接アップロード](/user-manual/supersplat/publishing/upload)したスプラットの視聴体験をキュレーションする場所です。公開済みシーンの上に開き、訪問者が[シーンページ](/user-manual/supersplat/viewing/scene-page)で見るもの — 背景またはスカイボックス、トーンマッピング、開始カメラ、カメラアニメーション、ウォーカブルシーン用のコリジョンジオメトリ、ポストエフェクト、シーン上の注釈 — を形作ります。
 
-Studioは出力を単一のJSONドキュメント、[Experience Settings](/user-manual/supersplat/studio/experience-settings)として書き出し、これをオープンソースの[SuperSplat Viewer](/user-manual/supersplat/viewer/)がランタイムで読み込みます。
+Studioは出力を単一のJSONドキュメント、[Experience Settings](/user-manual/supersplat/developers/experience-settings)として書き出し、これをオープンソースの[SuperSplat Viewer](/user-manual/supersplat/developers/viewer/)がランタイムで読み込みます。
 
 ![Studioのウィンドウ：左にSceneタブ、中央にビューポート、下部に開いたタイムライン](/img/user-manual/supersplat/studio/studio-layout.webp)
 
@@ -15,9 +15,9 @@ Studioは **`https://superspl.at/scene/<hash>/studio`** で動作します。Stu
 
 たどり着く方法は3つあります：
 
-- [Manageページ](/user-manual/supersplat/manage)で、スプラットの行の**Open in Studio**をクリックします。
+- [Manageページ](/user-manual/supersplat/publishing/manage)で、スプラットの行の**Open in Studio**をクリックします。
 - Manageページのスプラットの**Edit Splat**ダイアログで、プレビューカードの**Edit in Studio**をクリックします。
-- 自分のスプラットの[シーンページ](/user-manual/supersplat/scene-page)で、**Edit in Studio**エントリポイントを使用します。
+- 自分のスプラットの[シーンページ](/user-manual/supersplat/viewing/scene-page)で、**Edit in Studio**エントリポイントを使用します。
 
 :::note デスクトップ推奨
 
@@ -76,7 +76,7 @@ Studioはキーボードとマウスを備えたデスクトップブラウザ�
 
 ヘッダの他のボタンは、設定をファイルとして扱います：
 
-- **Export**は、現在の設定を`settings-<hash>.json`としてダウンロードします。たとえば[自分でホストするビューア](/user-manual/supersplat/viewer/embedding)で使えます。
+- **Export**は、現在の設定を`settings-<hash>.json`としてダウンロードします。たとえば[自分でホストするビューア](/user-manual/supersplat/developers/embedding)で使えます。
 - **Import**は、確認の後、現在の設定を選択したJSONファイルで置き換えます。公開するには**Save**をクリックしてください。
 - **View**はシーンページを開きます。
 
@@ -90,6 +90,6 @@ Experience Settingsの形式にはバージョンがあり、現在のバージ�
 
 ## 関連項目
 
-- [Experience Settings](/user-manual/supersplat/studio/experience-settings) — Studioが書き、Viewerが読むJSONコントラクト
-- [ビューアの操作](/user-manual/supersplat/viewer/controls) — キュレーションしたシーンを訪問者がどう操作するか
-- [シーンページ](/user-manual/supersplat/scene-page) — Studioの変更が保存された後に訪問者が見るもの
+- [Experience Settings](/user-manual/supersplat/developers/experience-settings) — Studioが書き、Viewerが読むJSONコントラクト
+- [ビューアの操作](/user-manual/supersplat/viewing/controls) — キュレーションしたシーンを訪問者がどう操作するか
+- [シーンページ](/user-manual/supersplat/viewing/scene-page) — Studioの変更が保存された後に訪問者が見るもの

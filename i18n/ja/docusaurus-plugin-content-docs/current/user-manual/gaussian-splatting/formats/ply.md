@@ -109,7 +109,7 @@ PLY フォーマットは、3DGS エコシステムの共通語として機能�
 - **トレーニングソフトウェア**：Brush、nerfstudio、Postshot
 - **エディタ**：[SuperSplat Editor](/user-manual/supersplat/editor/)
 - **コンバーター**：[SplatTransform](/user-manual/splat-transform/)、[SuperSplat Convert](/user-manual/supersplat/convert)
-- **ビューア**：[SuperSplat Viewer](/user-manual/supersplat/viewer/)、[Model Viewer](https://github.com/playcanvas/model-viewer)
+- **ビューア**：[SuperSplat Viewer](/user-manual/supersplat/developers/viewer/)、[Model Viewer](https://github.com/playcanvas/model-viewer)
 
 ### クロスプラットフォームワークフロー
 

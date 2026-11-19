@@ -11,7 +11,7 @@ A free PlayCanvas account lets you use the [PlayCanvas Editor](/user-manual/edit
 
 - **Explore and learn** - Browse the scripts and assets of thousands of public Editor projects for ideas and inspiration.
 - **Generate assets** - Use the Editor's asset processing to prepare assets for any PlayCanvas-based project.
-- **Publish Gaussian splats** - Publish splats to [SuperSplat](/user-manual/supersplat/), and like and comment on other people's. Browsing the public [Explore](/user-manual/supersplat/explore) gallery and viewing public scene pages doesn't need an account.
+- **Publish Gaussian splats** - Publish splats to [SuperSplat](/user-manual/supersplat/), and like and comment on other people's. Browsing the public [Explore](/user-manual/supersplat/viewing/explore) gallery and viewing public scene pages doesn't need an account.
 - **Join the community** - Star, watch and comment on other people's projects.
 - **Stay informed** - Hear about updates across the PlayCanvas platform.
 

@@ -77,7 +77,7 @@ Depth of field and motion blur resolve visibility separately for each sample, th
 
 ## Camera Animations
 
-`--camera-track` renders a camera animation as a numbered frame sequence instead of a single view. The track can come from a [SuperSplat](/user-manual/supersplat/) editor project, a [viewer settings](/user-manual/supersplat/studio/experience-settings/) `settings.json` with `animTracks`, or a plain frame list. A saved `.ssproj` is a ZIP archive, so extract it first and pass the extracted directory or its `document.json`. A frame list looks like this:
+`--camera-track` renders a camera animation as a numbered frame sequence instead of a single view. The track can come from a [SuperSplat](/user-manual/supersplat/) editor project, a [viewer settings](/user-manual/supersplat/developers/experience-settings/) `settings.json` with `animTracks`, or a plain frame list. A saved `.ssproj` is a ZIP archive, so extract it first and pass the extracted directory or its `document.json`. A frame list looks like this:
 
 ```json
 {

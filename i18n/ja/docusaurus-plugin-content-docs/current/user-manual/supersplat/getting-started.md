@@ -56,21 +56,21 @@ description: "SuperSplatで最初のスプラットを約10分で公開する：
 
 <img loading="lazy" alt="Publishダイアログ" width="400" src="/img/user-manual/supersplat/editor/publish-settings.png" />
 
-SOG形式への圧縮には少し時間がかかり、非常に大きなシーンでは数分かかることもあります。完了すると、新しい[シーンページ](scene-page.md)のURLがダイアログに表示されます。新しいスプラットは**Unlisted**（限定公開）です。リンクを知っている人は誰でも閲覧できますが、ステップ5でPublicにするまでExploreには表示されません。
+SOG形式への圧縮には少し時間がかかり、非常に大きなシーンでは数分かかることもあります。完了すると、新しい[シーンページ](/user-manual/supersplat/viewing/scene-page/)のURLがダイアログに表示されます。新しいスプラットは**Unlisted**（限定公開）です。リンクを知っている人は誰でも閲覧できますが、ステップ5でPublicにするまでExploreには表示されません。
 
 :::tip すでにクリーンですか？
 
-ファイルに編集が必要なければ、Editorを省略できます。superspl.atのオレンジ色の**Upload Splat**ボタンで直接公開できます。[Direct Upload](upload.md)を参照してください。
+ファイルに編集が必要なければ、Editorを省略できます。superspl.atのオレンジ色の**Upload Splat**ボタンで直接公開できます。[Direct Upload](/user-manual/supersplat/publishing/upload/)を参照してください。
 
 :::
 
-既存のシーンへの再公開を含む、ダイアログのすべてのオプションは[公開](editor/publishing.md)で解説しています。
+既存のシーンへの再公開を含む、ダイアログのすべてのオプションは[公開](/user-manual/supersplat/publishing/editor/)で解説しています。
 
 ## 4. Studioでキュレーションする
 
-スプラットは[Manageページ](manage.md)に表示されるようになりました。その行の**Open in Studio**、またはシーンページの**Edit in Studio**をクリックすると[Studio](studio/index.md)が開き、訪問者に見せる内容を作り込めます。
+スプラットは[Manageページ](/user-manual/supersplat/publishing/manage/)に表示されるようになりました。その行の**Open in Studio**、またはシーンページの**Edit in Studio**をクリックすると[Studio](studio/index.md)が開き、訪問者に見せる内容を作り込めます。
 
-![Manageページ](/img/user-manual/supersplat/manage.png)
+![Manageページ](/img/user-manual/supersplat/publishing/manage.png)
 
 最初に試す価値のある3つのこと：
 
@@ -84,14 +84,14 @@ SOG形式への圧縮には少し時間がかかり、非常に大きなシー�
 
 ## 5. 共有する
 
-`superspl.at/scene/<hash>`にある[シーンページ](scene-page.md)を開きます。
+`superspl.at/scene/<hash>`にある[シーンページ](/user-manual/supersplat/viewing/scene-page/)を開きます。
 
-![公開されたシーンページ](/img/user-manual/supersplat/scene-page.webp)
+![公開されたシーンページ](/img/user-manual/supersplat/viewing/scene-page.webp)
 
 - **Share**はリンクをコピーしたり、ソーシャルプラットフォームに投稿したりできます。
 - **Embed**は、自分のウェブサイト向けの`<iframe>`スニペットを提供します。後からStudioで変更した内容も自動的に反映されます。
-- 訪問者がスプラットをダウンロードできるようにするには、[Manageページ](manage.md)で**Downloadable**を有効にし、Creative Commonsライセンスを選択します。
-- [Explore](explore.md)や検索結果に表示させるには、Manageで**Visibility**を**Public**に切り替えます。
+- 訪問者がスプラットをダウンロードできるようにするには、[Manageページ](/user-manual/supersplat/publishing/manage/)で**Downloadable**を有効にし、Creative Commonsライセンスを選択します。
+- [Explore](/user-manual/supersplat/viewing/explore/)や検索結果に表示させるには、Manageで**Visibility**を**Public**に切り替えます。
 
 ## 次のステップ
 
@@ -99,5 +99,5 @@ SOG形式への圧縮には少し時間がかかり、非常に大きなシー�
 - [タイムライン](editor/timeline.md)でカメラをアニメーションさせ、フライスルーを公開する。
 - [コリジョン](studio/collision.md)でシーンを一人称視点で歩けるようにする。
 - [Convert](convert.md)でブラウザを離れずに形式を変換したり、スプラットを軽量化したりする。
-- [ビューアのセルフホスティング](viewer/self-hosting.md)で、どこにでもホストできる単一HTMLファイルをエクスポートする。
-- [APIと統合](api-integrations.md)で自分のパイプラインから公開する。
+- [ビューアのセルフホスティング](/user-manual/supersplat/developers/self-hosting/)で、どこにでもホストできる単一HTMLファイルをエクスポートする。
+- [APIと統合](/user-manual/supersplat/developers/api-integrations/)で自分のパイプラインから公開する。

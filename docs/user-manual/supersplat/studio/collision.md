@@ -3,7 +3,7 @@ title: Collision
 description: "Add voxel collision to a published splat so visitors can walk through it — generating it directly in Studio, or uploading custom voxel files."
 ---
 
-By default, splats in the viewer have no physical presence — the camera flies right through them. The **Collision** section in [Studio](/user-manual/supersplat/studio/) attaches a **voxel** representation of the scene to your splat so the viewer can collide against it. With collision attached, your splat becomes **walkable** — visitors can navigate it on foot rather than only orbiting or flying around it. The [Explore](/user-manual/supersplat/explore) page also surfaces walkable scenes via its `walkable` feature filter.
+By default, splats in the viewer have no physical presence — the camera flies right through them. The **Collision** section in [Studio](/user-manual/supersplat/studio/) attaches a **voxel** representation of the scene to your splat so the viewer can collide against it. With collision attached, your splat becomes **walkable** — visitors can navigate it on foot rather than only orbiting or flying around it. The [Explore](/user-manual/supersplat/viewing/explore) page also surfaces walkable scenes via its `walkable` feature filter.
 
 :::important Scale your splat to real-world units
 For walkable scenes to feel right, scale your splat so that **one unit equals one meter** before adding collision. In walk mode the viewer holds the camera at an eye height of **1.5 m** above the floor, so if your scene isn't at real-world scale, it will feel too large or too small to move around in. The viewer also offers walk mode only when the scene is at least **5 m** across in both horizontal directions.
@@ -50,14 +50,14 @@ Upload happens immediately, and the scene becomes walkable on the next viewer re
 ## Collision in the viewer
 
 - **Loading** — the viewer shows the scene without waiting for its collision data, which is often larger than the splat. Walk mode becomes available once the data arrives.
-- **Walk mode** — a **Walk Mode** button joins the toolbar, and walk becomes the scene's default camera mode. See [Viewer Controls](/user-manual/supersplat/viewer/controls#camera-modes).
+- **Walk mode** — a **Walk Mode** button joins the toolbar, and walk becomes the scene's default camera mode. See [Viewer Controls](/user-manual/supersplat/viewing/controls#camera-modes).
 - **Show Collision** — visitors can draw the voxels over the splat with **Show Collision** in the viewer's settings panel, or by pressing <kbd>V</kbd>. The overlay needs WebGPU.
-- **VR** — in a VR session, visitors teleport onto the collision: only spots where someone could stand are valid targets. See [Viewing in VR and AR](/user-manual/supersplat/viewer/xr#moving-around-in-vr).
+- **VR** — in a VR session, visitors teleport onto the collision: only spots where someone could stand are valid targets. See [Viewing in VR and AR](/user-manual/supersplat/viewing/xr#moving-around-in-vr).
 
-When you [host the viewer yourself](/user-manual/supersplat/viewer/embedding#url-parameters), pass collision with the `collision` URL parameter: a `.voxel.json` file with its `.voxel.bin` beside it, or a `.glb` mesh.
+When you [host the viewer yourself](/user-manual/supersplat/developers/embedding#url-parameters), pass collision with the `collision` URL parameter: a `.voxel.json` file with its `.voxel.bin` beside it, or a `.glb` mesh.
 
 ## See also
 
 - [Convert](/user-manual/supersplat/convert) — generate voxel collision in the browser
 - [splat-transform](/user-manual/splat-transform/) — generate voxel collision in a script or build pipeline
-- [Experience Settings](/user-manual/supersplat/studio/experience-settings) — the JSON contract that stores scene-asset references
+- [Experience Settings](/user-manual/supersplat/developers/experience-settings) — the JSON contract that stores scene-asset references

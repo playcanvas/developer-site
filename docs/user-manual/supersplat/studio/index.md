@@ -3,9 +3,9 @@ title: SuperSplat Studio
 description: "Studio curates the viewing experience for a published splat: look and tone, cameras, camera animation, collision, post effects, and annotations."
 ---
 
-**SuperSplat Studio** is where you curate the viewing experience of a splat you've already [published](/user-manual/supersplat/editor/publishing) or [directly uploaded](/user-manual/supersplat/upload). It opens on top of the published scene and shapes what a visitor sees on its [scene page](/user-manual/supersplat/scene-page): the background or skybox, tonemapping, the starting camera, a camera animation, collision geometry for walkable scenes, post effects, and on-scene annotations.
+**SuperSplat Studio** is where you curate the viewing experience of a splat you've already [published](/user-manual/supersplat/publishing/editor) or [directly uploaded](/user-manual/supersplat/publishing/upload). It opens on top of the published scene and shapes what a visitor sees on its [scene page](/user-manual/supersplat/viewing/scene-page): the background or skybox, tonemapping, the starting camera, a camera animation, collision geometry for walkable scenes, post effects, and on-scene annotations.
 
-Studio writes its output as a single JSON document, the [Experience Settings](/user-manual/supersplat/studio/experience-settings), which the open-source [SuperSplat Viewer](/user-manual/supersplat/viewer/) reads at runtime.
+Studio writes its output as a single JSON document, the [Experience Settings](/user-manual/supersplat/developers/experience-settings), which the open-source [SuperSplat Viewer](/user-manual/supersplat/developers/viewer/) reads at runtime.
 
 ![The Studio window: the Scene tab on the left, the viewport, and the timeline open along the bottom](/img/user-manual/supersplat/studio/studio-layout.webp)
 
@@ -15,9 +15,9 @@ Studio runs at **`https://superspl.at/scene/<hash>/studio`**. Only the splat's o
 
 There are three ways to get there:
 
-- On the [Manage page](/user-manual/supersplat/manage), click **Open in Studio** in the splat's row.
+- On the [Manage page](/user-manual/supersplat/publishing/manage), click **Open in Studio** in the splat's row.
 - In a splat's **Edit Splat** dialog on the Manage page, click **Edit in Studio** in the preview card.
-- On your own splat's [scene page](/user-manual/supersplat/scene-page), use the **Edit in Studio** entry point.
+- On your own splat's [scene page](/user-manual/supersplat/viewing/scene-page), use the **Edit in Studio** entry point.
 
 :::note Desktop recommended
 
@@ -76,7 +76,7 @@ Skybox and collision files are the exception: they upload as soon as you add the
 
 The other header buttons work with the settings as a file:
 
-- **Export** downloads the current settings as `settings-<hash>.json`, for example to use with a [viewer you host yourself](/user-manual/supersplat/viewer/embedding).
+- **Export** downloads the current settings as `settings-<hash>.json`, for example to use with a [viewer you host yourself](/user-manual/supersplat/developers/embedding).
 - **Import** replaces the current settings with a JSON file you choose, after asking for confirmation. Click **Save** to publish them.
 - **View** opens the scene page.
 
@@ -90,6 +90,6 @@ Agents can't save: you review what an agent did and click **Save** yourself.
 
 ## See also
 
-- [Experience Settings](/user-manual/supersplat/studio/experience-settings) — the JSON contract Studio writes and the Viewer reads
-- [Viewer Controls](/user-manual/supersplat/viewer/controls) — how visitors navigate the scene you curate
-- [Scene page](/user-manual/supersplat/scene-page) — what visitors see after Studio changes are saved
+- [Experience Settings](/user-manual/supersplat/developers/experience-settings) — the JSON contract Studio writes and the Viewer reads
+- [Viewer Controls](/user-manual/supersplat/viewing/controls) — how visitors navigate the scene you curate
+- [Scene page](/user-manual/supersplat/viewing/scene-page) — what visitors see after Studio changes are saved

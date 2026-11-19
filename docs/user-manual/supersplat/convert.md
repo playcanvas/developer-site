@@ -80,5 +80,5 @@ When you click **Convert & Download**:
 ## See also
 
 - [splat-transform CLI](/user-manual/splat-transform/) — same actions and formats, for the command line
-- [Direct Upload](/user-manual/supersplat/upload) — once you have a finished splat, publish it without leaving the browser
+- [Direct Upload](/user-manual/supersplat/publishing/upload) — once you have a finished splat, publish it without leaving the browser
 - [Studio / Collision](/user-manual/supersplat/studio/collision) — what to do with a `.voxel.zip`

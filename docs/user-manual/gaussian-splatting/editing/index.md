@@ -23,12 +23,12 @@ Generated splat files typically have several issues that need addressing:
 [SuperSplat](/user-manual/supersplat/) covers the whole lifecycle of a splat from raw capture to a polished, shareable scene:
 
 - **[Editor](/user-manual/supersplat/editor/)** — open-source, browser-based editor for cleaning, cropping, color-adjusting, and animating splats. Publishes to superspl.at.
-- **[Direct Upload](/user-manual/supersplat/upload)** — skip the Editor and publish a finished splat file directly with the orange **Upload Splat** button on the home page.
-- **[Manage](/user-manual/supersplat/manage)** — your library: edit metadata, change visibility, choose downloadable + license, delete, open in Studio.
+- **[Direct Upload](/user-manual/supersplat/publishing/upload)** — skip the Editor and publish a finished splat file directly with the orange **Upload Splat** button on the home page.
+- **[Manage](/user-manual/supersplat/publishing/manage)** — your library: edit metadata, change visibility, choose downloadable + license, delete, open in Studio.
 - **[Studio](/user-manual/supersplat/studio/)** — curate the published viewing experience: cameras, animations, annotations, post effects, skybox, collision.
-- **[Scene page](/user-manual/supersplat/scene-page)** — the public page where visitors view, share, embed, like, comment on, and (if you allow it) download your splat.
-- **[Explore](/user-manual/supersplat/explore)** — the public gallery of every shared splat, with sort, time, feature filters, and search.
-- **[Viewer](/user-manual/supersplat/viewer/)** — the open-source web viewer that powers scene pages, exportable as a single-file HTML or embeddable via the `@playcanvas/supersplat-viewer` npm package.
+- **[Scene page](/user-manual/supersplat/viewing/scene-page)** — the public page where visitors view, share, embed, like, comment on, and (if you allow it) download your splat.
+- **[Explore](/user-manual/supersplat/viewing/explore)** — the public gallery of every shared splat, with sort, time, feature filters, and search.
+- **[Viewer](/user-manual/supersplat/developers/viewer/)** — the open-source web viewer that powers scene pages, exportable as a single-file HTML or embeddable via the `@playcanvas/supersplat-viewer` npm package.
 - **[Convert](/user-manual/supersplat/convert)** — in-browser format conversion and transforms (translate / rotate / scale / filters), powered by splat-transform.
 
 ## SplatTransform CLI

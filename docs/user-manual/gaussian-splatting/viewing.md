@@ -53,8 +53,8 @@ The PlayCanvas Model Viewer is **open source** and available on [GitHub](https:/
 
 If your splat is already published on superspl.at, you have two viewer-side options that are specific to Gaussian Splats:
 
-- The **public [scene page](/user-manual/supersplat/scene-page)** at `superspl.at/scene/<hash>` — the easiest way to share a splat that's also been [curated in Studio](/user-manual/supersplat/studio/) (with cameras, animations, annotations, post effects, and collision).
-- The **[SuperSplat Viewer](/user-manual/supersplat/viewer/)** — the open-source web viewer that powers scene pages, available on npm as `@playcanvas/supersplat-viewer` for embedding in your own site or self-hosting as a single-file HTML export.
+- The **public [scene page](/user-manual/supersplat/viewing/scene-page)** at `superspl.at/scene/<hash>` — the easiest way to share a splat that's also been [curated in Studio](/user-manual/supersplat/studio/) (with cameras, animations, annotations, post effects, and collision).
+- The **[SuperSplat Viewer](/user-manual/supersplat/developers/viewer/)** — the open-source web viewer that powers scene pages, available on npm as `@playcanvas/supersplat-viewer` for embedding in your own site or self-hosting as a single-file HTML export.
 
 The PlayCanvas Model Viewer described above is still the right tool for quickly previewing arbitrary splat files (and other 3D content), before publishing or as part of a pre-flight check.
 

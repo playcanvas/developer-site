@@ -119,7 +119,7 @@ OverlaysとPreferencesのポップアップは、同時に1つだけ開きます
 | Camera | **Field of View** | 85° | ビューポートカメラの視野角（10°～120°）。ビューポートの長辺方向で測ります。[カメラ設定](camera-controls.md#camera-settings)を参照してください。 |
 | | **Fly Speed** | 1 | FlyモードでのWASDナビゲーションの速度（0.1～30）。 |
 | | **FOV Auto Dolly** | オフ | 視野角の変更に合わせてカメラを移動し、被写体のフレーミングを維持します。[カメラ設定](camera-controls.md#camera-settings)を参照してください。 |
-| Colors | **Background Color** | 黒 | ビューポートの背景。[公開](publishing.md)したシーンとエクスポートしたビューアーのデフォルトの背景にもなります。 |
+| Colors | **Background Color** | 黒 | ビューポートの背景。[公開](/user-manual/supersplat/publishing/editor/)したシーンとエクスポートしたビューアーのデフォルトの背景にもなります。 |
 | | **Selected Color** | 黄色 | 選択されたガウシアンのマーカー、選択範囲の着色とアウトライン、[Splat Data](data-panel.md)ヒストグラムの選択されたバーの色。 |
 | | **Unselected Color** | 青色 | 未選択のガウシアンのマーカー（**Splat Colors**で表示している場合を除く）と、ヒストグラムの未選択のバーの色。 |
 | | **Locked Color** | 黒（不透明度5%） | [ロック](editing-splats.md#lock-delete-and-restore)されたガウシアンに適用されます。デフォルトでは、ロックされたガウシアンは暗く、ほぼ透明になります。 |

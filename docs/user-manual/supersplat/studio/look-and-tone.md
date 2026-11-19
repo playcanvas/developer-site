@@ -46,16 +46,16 @@ Splats trained with anti-aliasing, such as with Mip-Splatting, draw too bright w
 
 :::note
 
-The [SuperSplat Viewer](/user-manual/supersplat/viewer/) doesn't apply this setting yet. On the scene page and in embeds, each splat file's own anti-aliasing tag decides. When you [host the viewer yourself](/user-manual/supersplat/viewer/embedding#url-parameters), the `aa` URL parameter overrides it.
+The [SuperSplat Viewer](/user-manual/supersplat/developers/viewer/) doesn't apply this setting yet. On the scene page and in embeds, each splat file's own anti-aliasing tag decides. When you [host the viewer yourself](/user-manual/supersplat/developers/embedding#url-parameters), the `aa` URL parameter overrides it.
 
 :::
 
 ## In the viewer
 
-- **AR** — the skybox and background color are hidden during an [AR session](/user-manual/supersplat/viewer/xr), so the room shows through around the splat. VR sessions keep them.
-- **Self-hosting** — the viewer doesn't load the skybox from the scene's settings. When you [host the viewer yourself](/user-manual/supersplat/viewer/embedding#url-parameters), pass the image with the `skybox` URL parameter or the `skyboxUrl` option, and override High Precision Rendering with `hpr`.
+- **AR** — the skybox and background color are hidden during an [AR session](/user-manual/supersplat/viewing/xr), so the room shows through around the splat. VR sessions keep them.
+- **Self-hosting** — the viewer doesn't load the skybox from the scene's settings. When you [host the viewer yourself](/user-manual/supersplat/developers/embedding#url-parameters), pass the image with the `skybox` URL parameter or the `skyboxUrl` option, and override High Precision Rendering with `hpr`.
 
 ## See also
 
 - [Post Effects](/user-manual/supersplat/studio/post-effects) — sharpness, bloom, color grading, vignette and chromatic fringing
-- [Experience Settings](/user-manual/supersplat/studio/experience-settings) — the JSON contract that stores these settings
+- [Experience Settings](/user-manual/supersplat/developers/experience-settings) — the JSON contract that stores these settings

@@ -3,7 +3,7 @@ title: カメラ
 description: "SuperSplat Studioで公開済みスプラットの開始カメラを設定します — ビューポートで位置とターゲットをフレーミングし、視野角を設定します。"
 ---
 
-[Studio](/user-manual/supersplat/studio/)の左パネルの**Scene**タブにある**Cameras**セクションは、公開済みスプラットの**開始カメラ**を定義します。これは、訪問者が[シーンページ](/user-manual/supersplat/scene-page)を開いたときに最初に目にするビューです（シーンが[開いたときにカメラアニメーションを再生する](/user-manual/supersplat/studio/animation#playing-on-open)場合は除きます）。カメラには、**位置**、**ターゲット**（注視点）、**視野角**があります。
+[Studio](/user-manual/supersplat/studio/)の左パネルの**Scene**タブにある**Cameras**セクションは、公開済みスプラットの**開始カメラ**を定義します。これは、訪問者が[シーンページ](/user-manual/supersplat/viewing/scene-page)を開いたときに最初に目にするビューです（シーンが[開いたときにカメラアニメーションを再生する](/user-manual/supersplat/studio/animation#playing-on-open)場合は除きます）。カメラには、**位置**、**ターゲット**（注視点）、**視野角**があります。
 
 <img loading="lazy" alt="Camera 1とLensの設定があるCamerasセクション" width="368" src="/img/user-manual/supersplat/studio/cameras-panel.png" />
 
@@ -58,11 +58,11 @@ Studioは現在、単一のカメラのみをサポートしています。複�
 ## カメラの使われ方
 
 - **初期フレーミング** — リストの最初のカメラは、訪問者がシーンページを開いたときのデフォルト開始ビューです（`startMode: 'default'`）。ビューアはそこから、訪問者が操作を始めるまで、ゆっくりとループするカメラモーションを再生します。カメラがスプラットの外側から始まる場合（オブジェクト）はターゲットの周りを回るオービット、内側から始まる場合（シーン）はゆるやかな8の字の動きになります。**Play animation on open**がオンの場合は、[カメラアニメーション](/user-manual/supersplat/studio/animation)がこのモーションに置き換わります。
-- **オブジェクトかシーンか** — カメラがスプラットの範囲の外側と内側のどちらから始まるかによって、ビューアの開始時の[カメラモード](/user-manual/supersplat/viewer/controls#camera-modes)（オブジェクトではオービット、シーンではウォークまたはフライ）と、[VRとAR](/user-manual/supersplat/viewer/xr#scenes-and-objects)でのスプラットの見せ方も決まります。
+- **オブジェクトかシーンか** — カメラがスプラットの範囲の外側と内側のどちらから始まるかによって、ビューアの開始時の[カメラモード](/user-manual/supersplat/viewing/controls#camera-modes)（オブジェクトではオービット、シーンではウォークまたはフライ）と、[VRとAR](/user-manual/supersplat/viewing/xr#scenes-and-objects)でのスプラットの見せ方も決まります。
 - **注釈の姿勢** — 各[注釈](/user-manual/supersplat/studio/annotations)には、注釈が選択されたときにビューアがアニメーションで移動する独自のカメラ姿勢が埋め込まれています。注釈の姿勢はCamerasリストのエントリとは独立しています。
 
 ## 関連項目
 
 - [カメラアニメーション](/user-manual/supersplat/studio/animation) — Studioのタイムラインで作成する、キーフレーム化されたカメラモーション
 - [注釈](/user-manual/supersplat/studio/annotations) — カメラ姿勢を採用できる3D配置のホットスポット
-- [Experience Settings](/user-manual/supersplat/studio/experience-settings) — カメラリストを格納するJSONコントラクト
+- [Experience Settings](/user-manual/supersplat/developers/experience-settings) — カメラリストを格納するJSONコントラクト

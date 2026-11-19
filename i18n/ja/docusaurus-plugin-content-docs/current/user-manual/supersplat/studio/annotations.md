@@ -26,7 +26,7 @@ description: "公開済みスプラットに3D空間配置のテキストホッ�
 3. スプラット上の注釈を付けたい点をクリックします。Studioはそこにホットスポットを配置し、現在のビューを注釈のカメラとして保存します。
 4. ホットスポットの横に開くカードにタイトル（入力するまでは**Untitled**）と説明を入力し、**OK**をクリックします。
 
-1シーンあたりの注釈は最大50個、タイトルは最大60文字、テキストは最大280文字までです。これらは[Experience Settings](/user-manual/supersplat/studio/experience-settings#authoring-limits)の作成時の制限です。
+1シーンあたりの注釈は最大50個、タイトルは最大60文字、テキストは最大280文字までです。これらは[Experience Settings](/user-manual/supersplat/developers/experience-settings#authoring-limits)の作成時の制限です。
 
 ## 注釈の編集
 
@@ -44,7 +44,7 @@ description: "公開済みスプラットに3D空間配置のテキストホッ�
 
 ## 訪問者の使い方
 
-[シーンページ](/user-manual/supersplat/scene-page)で、ビューアは各注釈を番号付きのホットスポットとして表示します：
+[シーンページ](/user-manual/supersplat/viewing/scene-page)で、ビューアは各注釈を番号付きのホットスポットとして表示します：
 
 - **ホットスポットを選択する**と、カメラが注釈の姿勢へなめらかに移動し、カメラが到着するとホットスポットの横のパネルにタイトルとテキストが表示されます。タイトルもテキストもない注釈ではパネルは表示されません。訪問者はそこから注釈を付けた点の近くを中心にオービットでき、その間もパネルは開いたままです。
 - **ナビゲータ**はシーンに注釈が2つ以上あるときに表示され、現在の注釈の番号とタイトルを示します。矢印を使うと、リストの順に前後の注釈へ移動できます。
@@ -52,7 +52,7 @@ description: "公開済みスプラットに3D空間配置のテキストホッ�
 - **シーンの一部の背後に隠れたホットスポット**は、カメラの動きが止まると薄く表示されます。
 - ビューアの設定パネルにある**Show Annotations**を使うと、訪問者はホットスポットとナビゲータを非表示にできます。
 
-訪問者側の操作の詳細は、[ビューアの操作](/user-manual/supersplat/viewer/controls#annotations)を参照してください。
+訪問者側の操作の詳細は、[ビューアの操作](/user-manual/supersplat/viewing/controls#annotations)を参照してください。
 
 :::note
 
@@ -64,4 +64,4 @@ description: "公開済みスプラットに3D空間配置のテキストホッ�
 
 - [Cameras](/user-manual/supersplat/studio/cameras) — 注釈が参照するカメラ姿勢
 - [カメラアニメーション（タイムライン）](/user-manual/supersplat/editor/timeline) — 訪問者の操作を必要としないシネマティックなフライスルー
-- [Experience Settings](/user-manual/supersplat/studio/experience-settings) — 注釈を格納するJSONコントラクト
+- [Experience Settings](/user-manual/supersplat/developers/experience-settings) — 注釈を格納するJSONコントラクト

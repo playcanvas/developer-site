@@ -11,7 +11,7 @@ CLI ではなく SuperSplat の Web UI を介してボクセルコリジョン�
 
 同じボクセル化パスから2つの出力が生成されます：
 
-- **`.voxel.json` / `.voxel.bin`** — レイキャストおよびブロードフェーズのコリジョンクエリ用のスパースボクセルオクツリー (SVO)。これはランタイムコリジョン検出のために [SuperSplat ビューア](/user-manual/supersplat/viewer/) で使用されるフォーマットです。ディスク上の構造は[ボクセルフォーマット](/user-manual/splat-transform/voxel-format)仕様で規定されています。
+- **`.voxel.json` / `.voxel.bin`** — レイキャストおよびブロードフェーズのコリジョンクエリ用のスパースボクセルオクツリー (SVO)。これはランタイムコリジョン検出のために [SuperSplat ビューア](/user-manual/supersplat/developers/viewer/) で使用されるフォーマットです。ディスク上の構造は[ボクセルフォーマット](/user-manual/splat-transform/voxel-format)仕様で規定されています。
 - **`.collision.glb`** — ボクセルグリッドから構築された三角形メッシュ（`--collision-mesh` を渡した場合のみ）。
 
 典型的なパイプラインは4つのステージで構成され、後者の2つはシーンタイプに応じて任意です：

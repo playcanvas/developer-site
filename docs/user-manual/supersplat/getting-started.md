@@ -56,21 +56,21 @@ Choose **File → Save** to keep an `.ssproj` project file. It preserves your ed
 
 <img loading="lazy" alt="The Publish dialog" width="400" src="/img/user-manual/supersplat/editor/publish-settings.png" />
 
-Compression to SOG takes a moment, and several minutes for very large scenes. When it finishes, a dialog shows the URL of your new [scene page](scene-page.md). New splats are **Unlisted**: anyone with the link can view them, but they won't appear in Explore until you make them Public in step 5.
+Compression to SOG takes a moment, and several minutes for very large scenes. When it finishes, a dialog shows the URL of your new [scene page](/user-manual/supersplat/viewing/scene-page/). New splats are **Unlisted**: anyone with the link can view them, but they won't appear in Explore until you make them Public in step 5.
 
 :::tip Already clean?
 
-If your file needs no editing, skip the Editor. The orange **Upload Splat** button on superspl.at publishes it directly. See [Direct Upload](upload.md).
+If your file needs no editing, skip the Editor. The orange **Upload Splat** button on superspl.at publishes it directly. See [Direct Upload](/user-manual/supersplat/publishing/upload/).
 
 :::
 
-Every option in the dialog, including republishing to an existing scene, is covered in [Publishing](editor/publishing.md).
+Every option in the dialog, including republishing to an existing scene, is covered in [Publishing](/user-manual/supersplat/publishing/editor/).
 
 ## 4. Curate it in Studio
 
-Your splat now appears on your [Manage page](manage.md). Click **Open in Studio** in its row, or **Edit in Studio** on your scene page, to open [Studio](studio/index.md), where you shape what visitors see.
+Your splat now appears on your [Manage page](/user-manual/supersplat/publishing/manage/). Click **Open in Studio** in its row, or **Edit in Studio** on your scene page, to open [Studio](studio/index.md), where you shape what visitors see.
 
-![The Manage page](/img/user-manual/supersplat/manage.png)
+![The Manage page](/img/user-manual/supersplat/publishing/manage.png)
 
 Three things worth doing on a first pass:
 
@@ -84,14 +84,14 @@ Click **Save** in the header when you're happy. Edits are not saved automaticall
 
 ## 5. Share it
 
-Open your [scene page](scene-page.md) at `superspl.at/scene/<hash>`.
+Open your [scene page](/user-manual/supersplat/viewing/scene-page/) at `superspl.at/scene/<hash>`.
 
-![A published scene page](/img/user-manual/supersplat/scene-page.webp)
+![A published scene page](/img/user-manual/supersplat/viewing/scene-page.webp)
 
 - **Share** copies the link or posts it to social platforms.
 - **Embed** gives you an `<iframe>` snippet for your own website. Later Studio changes show up there automatically.
-- To let visitors download your splat, enable **Downloadable** and pick a Creative Commons license on the [Manage page](manage.md).
-- To appear in [Explore](explore.md) and in search results, switch **Visibility** to **Public** in Manage.
+- To let visitors download your splat, enable **Downloadable** and pick a Creative Commons license on the [Manage page](/user-manual/supersplat/publishing/manage/).
+- To appear in [Explore](/user-manual/supersplat/viewing/explore/) and in search results, switch **Visibility** to **Public** in Manage.
 
 ## Where next?
 
@@ -99,5 +99,5 @@ Open your [scene page](scene-page.md) at `superspl.at/scene/<hash>`.
 - [Timeline](editor/timeline.md) to animate the camera and publish a flythrough.
 - [Collision](studio/collision.md) to make a scene walkable in first person.
 - [Convert](convert.md) to change formats or shrink a splat without leaving the browser.
-- [Self-Hosting the Viewer](viewer/self-hosting.md) to export a single HTML file you can host anywhere.
-- [API & Integrations](api-integrations.md) to publish from your own pipeline.
+- [Self-Hosting the Viewer](/user-manual/supersplat/developers/self-hosting/) to export a single HTML file you can host anywhere.
+- [API & Integrations](/user-manual/supersplat/developers/api-integrations/) to publish from your own pipeline.

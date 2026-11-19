@@ -122,4 +122,4 @@ splat-transform scene/lod-meta.json --info null
 - [Streamed SOGフォーマット](/user-manual/gaussian-splatting/formats/streamed-sog) — ディスク上のフォーマット仕様。
 - [LODストリーミング](/user-manual/gaussian-splatting/building/lod-streaming) — PlayCanvasアプリでのStreamed SOGの読み込みとレンダリング。
 - [CLIリファレンス](/user-manual/splat-transform/cli-reference#lod-input-options) — LOD入力/出力オプションを含む完全なオプションリファレンス。
-- [SuperSplatのストリーミング](/user-manual/supersplat/streaming) — SuperSplatのWeb UIを介したStreamed SOGの生成。
+- [SuperSplatのストリーミング](/user-manual/supersplat/publishing/streaming) — SuperSplatのWeb UIを介したStreamed SOGの生成。

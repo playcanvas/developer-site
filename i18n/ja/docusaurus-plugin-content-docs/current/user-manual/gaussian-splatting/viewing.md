@@ -53,8 +53,8 @@ PlayCanvas Model Viewerは**オープンソース**であり、[GitHub](https://
 
 スプラットがすでにsuperspl.atに公開されている場合、ガウシアンスプラットに特化した2つのビューア側オプションがあります：
 
-- **公開[シーンページ](/user-manual/supersplat/scene-page)**（`superspl.at/scene/<hash>`） — スプラットを最も簡単に共有する方法で、[Studio](/user-manual/supersplat/studio/)でカメラ、アニメーション、注釈、ポストエフェクト、コリジョンを含めてキュレーション済みのスプラットにも適しています。
-- **[SuperSplat Viewer](/user-manual/supersplat/viewer/)** — シーンページを動かしているオープンソースのウェブビューア。`@playcanvas/supersplat-viewer`としてnpmで利用でき、自分のサイトに埋め込んだり、単一ファイルのHTMLエクスポートとしてセルフホストできます。
+- **公開[シーンページ](/user-manual/supersplat/viewing/scene-page)**（`superspl.at/scene/<hash>`） — スプラットを最も簡単に共有する方法で、[Studio](/user-manual/supersplat/studio/)でカメラ、アニメーション、注釈、ポストエフェクト、コリジョンを含めてキュレーション済みのスプラットにも適しています。
+- **[SuperSplat Viewer](/user-manual/supersplat/developers/viewer/)** — シーンページを動かしているオープンソースのウェブビューア。`@playcanvas/supersplat-viewer`としてnpmで利用でき、自分のサイトに埋め込んだり、単一ファイルのHTMLエクスポートとしてセルフホストできます。
 
 上記のPlayCanvas Model Viewerは、任意のスプラットファイル（および他の3Dコンテンツ）を素早くプレビューしたいとき、公開前またはプリフライトチェックの一環として、依然として適切なツールです。
 

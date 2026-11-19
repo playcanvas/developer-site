@@ -23,12 +23,12 @@ description: SuperSplatプラットフォームでガウシアンスプラット
 [SuperSplat](/user-manual/supersplat/)は、生のキャプチャから洗練された共有可能なシーンまで、スプラットのライフサイクル全体をカバーします：
 
 - **[Editor](/user-manual/supersplat/editor/)** — スプラットをクリーンアップ、クロップ、色調整、アニメーション化するオープンソースのブラウザベースエディタ。superspl.atへ公開します。
-- **[Direct Upload](/user-manual/supersplat/upload)** — Editorを省略し、ホームページのオレンジ色の**Upload Splat**ボタンで完成済みスプラットファイルを直接公開します。
-- **[Manage](/user-manual/supersplat/manage)** — あなたのライブラリ：メタデータの編集、公開範囲の変更、ダウンロード可否とライセンスの選択、削除、Studioで開く。
+- **[Direct Upload](/user-manual/supersplat/publishing/upload)** — Editorを省略し、ホームページのオレンジ色の**Upload Splat**ボタンで完成済みスプラットファイルを直接公開します。
+- **[Manage](/user-manual/supersplat/publishing/manage)** — あなたのライブラリ：メタデータの編集、公開範囲の変更、ダウンロード可否とライセンスの選択、削除、Studioで開く。
 - **[Studio](/user-manual/supersplat/studio/)** — 公開後の視聴体験をキュレーション：カメラ、アニメーション、注釈、ポストエフェクト、スカイボックス、コリジョン。
-- **[シーンページ](/user-manual/supersplat/scene-page)** — 訪問者が表示、共有、埋め込み、いいね、コメント、（許可されていれば）ダウンロードを行う公開ページ。
-- **[Explore](/user-manual/supersplat/explore)** — 共有されたすべてのスプラットの公開ギャラリー。ソート、期間、特徴フィルタ、検索を備えます。
-- **[Viewer](/user-manual/supersplat/viewer/)** — シーンページを動かすオープンソースのウェブビューア。単一ファイルのHTMLとしてエクスポート可能、または`@playcanvas/supersplat-viewer` npmパッケージで埋め込めます。
+- **[シーンページ](/user-manual/supersplat/viewing/scene-page)** — 訪問者が表示、共有、埋め込み、いいね、コメント、（許可されていれば）ダウンロードを行う公開ページ。
+- **[Explore](/user-manual/supersplat/viewing/explore)** — 共有されたすべてのスプラットの公開ギャラリー。ソート、期間、特徴フィルタ、検索を備えます。
+- **[Viewer](/user-manual/supersplat/developers/viewer/)** — シーンページを動かすオープンソースのウェブビューア。単一ファイルのHTMLとしてエクスポート可能、または`@playcanvas/supersplat-viewer` npmパッケージで埋め込めます。
 - **[Convert](/user-manual/supersplat/convert)** — ブラウザ内のフォーマット変換とトランスフォーム（translate / rotate / scale / フィルタ）。splat-transformで実装されています。
 
 ## SplatTransform CLI

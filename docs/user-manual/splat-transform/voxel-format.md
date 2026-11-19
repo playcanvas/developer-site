@@ -4,7 +4,7 @@ description: "Voxel format specification: the on-disk structure of .voxel.json /
 sidebar_label: Voxel Format
 ---
 
-This document specifies version 1.1 of the **voxel** format. It describes the on-disk structure written by [splat-transform](/user-manual/splat-transform/) when the output path ends in `.voxel.json` and consumed by runtimes such as the [SuperSplat Viewer](/user-manual/supersplat/viewer/) for collision detection and raycasts.
+This document specifies version 1.1 of the **voxel** format. It describes the on-disk structure written by [splat-transform](/user-manual/splat-transform/) when the output path ends in `.voxel.json` and consumed by runtimes such as the [SuperSplat Viewer](/user-manual/supersplat/developers/viewer/) for collision detection and raycasts.
 
 The format stores a solid/empty voxelization of a Gaussian splat scene as a sparse voxel octree (SVO) in the Laine–Karras node layout: a JSON header describing the grid, plus a compact binary file holding the tree.
 
@@ -122,7 +122,7 @@ solid = bit < 32 ? (lo >>> bit) & 1 : (hi >>> (bit - 32)) & 1
 
 ### Query domain
 
-Queries outside `gridBounds` are outside the format's domain, and the appropriate convention depends on the use case. Navigation/collision consumers (e.g. the [SuperSplat Viewer](/user-manual/supersplat/viewer/)) treat out-of-grid space as **solid**; outputs produced with the nav options (exterior fill, floor fill, carve) rely on this — the writer crops away fully-solid blocks beyond the navigable region precisely because the runtime treats everything outside the grid as solid anyway.
+Queries outside `gridBounds` are outside the format's domain, and the appropriate convention depends on the use case. Navigation/collision consumers (e.g. the [SuperSplat Viewer](/user-manual/supersplat/developers/viewer/)) treat out-of-grid space as **solid**; outputs produced with the nav options (exterior fill, floor fill, carve) rely on this — the writer crops away fully-solid blocks beyond the navigable region precisely because the runtime treats everything outside the grid as solid anyway.
 
 ## Limits
 
