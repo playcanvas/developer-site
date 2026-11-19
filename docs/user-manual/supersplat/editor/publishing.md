@@ -1,6 +1,7 @@
 ---
 title: Publishing
 description: "Publish a splat from the SuperSplat Editor to superspl.at so it lands on your Manage page and can be opened in Studio."
+sidebar_label: Publishing from the Editor
 ---
 
 Publishing from the SuperSplat Editor uploads your edited splat to [superspl.at](https://superspl.at), where it lands on your [Manage page](/user-manual/supersplat/manage), gets a public [scene page](/user-manual/supersplat/scene-page), and can be opened in [Studio](/user-manual/supersplat/studio/) to curate the viewing experience (cameras, camera animation, annotations, post effects, skybox, collision).

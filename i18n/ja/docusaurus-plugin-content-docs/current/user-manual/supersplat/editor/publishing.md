@@ -1,6 +1,7 @@
 ---
 title: 公開
 description: "SuperSplat Editorからsuperspl.atへスプラットを公開して、Manageページに表示し、Studioで開けるようにします。"
+sidebar_label: Editorからの公開
 ---
 
 SuperSplat Editorからの公開では、編集したスプラットを[superspl.at](https://superspl.at)にアップロードします。アップロードされたスプラットは[Manageページ](/user-manual/supersplat/manage)に表示され、公開[シーンページ](/user-manual/supersplat/scene-page)が割り当てられ、[Studio](/user-manual/supersplat/studio/)で開いて視聴体験（カメラ、カメラアニメーション、注釈、ポストエフェクト、スカイボックス、コリジョン）をキュレーションできます。
