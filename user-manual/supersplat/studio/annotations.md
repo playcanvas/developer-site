@@ -23,7 +23,7 @@ Each annotation has:
 3. Click the point on the splat you want to annotate. Studio places the hotspot there and stores the current view as the annotation's camera.
 4. Type a title (**Untitled** until you do) and a description in the card that opens beside the hotspot, then click **OK**.
 
-A scene can have up to 50 annotations, with titles of up to 60 characters and text of up to 280. These are the [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md#authoring-limits) authoring limits.
+A scene can have up to 50 annotations, with titles of up to 60 characters and text of up to 280. These are the [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/developers/experience-settings.md#authoring-limits) authoring limits.
 
 ## Editing annotations
 
@@ -39,7 +39,7 @@ Each row on the **Annotations** tab also has **Go to annotation**, which moves t
 
 ## How visitors use them
 
-On the [scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md), the viewer shows each annotation as a numbered hotspot:
+On the [scene page](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md), the viewer shows each annotation as a numbered hotspot:
 
 - **Selecting a hotspot** eases the camera to the annotation's pose, and its title and text appear in a panel beside the hotspot as the camera arrives. An annotation with neither title nor text shows no panel. Visitors can orbit from there, pivoting near the annotated point, and the panel stays open.
 - **The navigator**, shown when a scene has two or more annotations, displays the current annotation's number and title, with arrows to step to the previous and next one in list order.
@@ -47,7 +47,7 @@ On the [scene page](https://developer.playcanvas.com/user-manual/supersplat/scen
 - **Hotspots hidden** behind part of the scene are faded once the camera stops moving.
 - **Show Annotations**, in the viewer's settings panel, lets visitors hide the hotspots and the navigator.
 
-See [Viewer Controls](https://developer.playcanvas.com/user-manual/supersplat/viewer/controls.md#annotations) for the full visitor experience.
+See [Viewer Controls](https://developer.playcanvas.com/user-manual/supersplat/viewing/controls.md#annotations) for the full visitor experience.
 
 :::note
 
@@ -59,4 +59,4 @@ The settings format accepts `annotation` as a scene's start mode, but the viewer
 
 - [Cameras](https://developer.playcanvas.com/user-manual/supersplat/studio/cameras.md) — the camera poses annotations reference
 - [Camera animation (Timeline)](https://developer.playcanvas.com/user-manual/supersplat/editor/timeline.md) — for cinematic flythroughs that don't need visitor interaction
-- [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md) — the JSON contract that stores annotations
+- [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/developers/experience-settings.md) — the JSON contract that stores annotations

@@ -4,7 +4,7 @@ The [SuperSplat Editor](https://superspl.at/editor) is the open-source, browser-
 
 :::tip Already have a clean splat?
 
-You can skip the Editor entirely. Hit the orange **Upload Splat** button on the [superspl.at home page](https://superspl.at) (or use the [Direct Upload](https://developer.playcanvas.com/user-manual/supersplat/upload.md) flow) to publish a ready-made splat straight to your [Manage page](https://developer.playcanvas.com/user-manual/supersplat/manage.md).
+You can skip the Editor entirely. Hit the orange **Upload Splat** button on the [superspl.at home page](https://superspl.at) (or use the [Direct Upload](https://developer.playcanvas.com/user-manual/supersplat/publishing/upload.md) flow) to publish a ready-made splat straight to your [Manage page](https://developer.playcanvas.com/user-manual/supersplat/publishing/manage.md).
 
 :::
 
@@ -45,5 +45,5 @@ For a more comprehensive guide to using the SuperSplat Editor, check out this in
 - Clean a capture with [Selection and Cleanup](https://developer.playcanvas.com/user-manual/supersplat/editor/editing-splats.md), then use [Transform, Measure and Align](https://developer.playcanvas.com/user-manual/supersplat/editor/transform-measure-align.md) to prepare it
 - Work with multiple captures using [Managing Splats](https://developer.playcanvas.com/user-manual/supersplat/editor/scene-management.md), and finish their look with [Color and Appearance](https://developer.playcanvas.com/user-manual/supersplat/editor/color-and-appearance.md)
 - Keep the [Keyboard Shortcuts](https://developer.playcanvas.com/user-manual/supersplat/editor/keyboard-shortcuts.md) reference nearby, or check [Troubleshooting](https://developer.playcanvas.com/user-manual/supersplat/editor/troubleshooting.md) when a workflow does not behave as expected
-- Once your splat is clean, [Publish](https://developer.playcanvas.com/user-manual/supersplat/editor/publishing.md) it to superspl.at to land on your [Manage page](https://developer.playcanvas.com/user-manual/supersplat/manage.md) and open it in [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md)
+- Once your splat is clean, [Publish](https://developer.playcanvas.com/user-manual/supersplat/publishing/editor.md) it to superspl.at to land on your [Manage page](https://developer.playcanvas.com/user-manual/supersplat/publishing/manage.md) and open it in [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md)
 - Let an AI agent inspect and edit your scene through the browser's experimental [WebMCP](https://developer.playcanvas.com/user-manual/supersplat/editor/webmcp.md) tools

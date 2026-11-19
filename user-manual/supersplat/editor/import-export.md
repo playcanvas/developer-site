@@ -12,7 +12,7 @@ SuperSplat supports several Gaussian Splat scene formats, plus COLMAP and INRIA 
 | `.compressed.ply` | ✅ | ✅ | Compressed PLY format - far smaller than uncompressed PLY, quantizes data. [Learn more](https://blog.playcanvas.com/compressing-gaussian-splats/) |
 | `.sog` | ✅ | ✅ | Bundled super-compressed format (a zip file containing `meta.json` and `.webp` textures). Recommended for runtime applications |
 | `meta.json` | ✅ | ❌ | Unbundled super-compressed format (accompanied by `.webp` textures). Use [SplatTransform](https://developer.playcanvas.com/user-manual/splat-transform.md) CLI tool to export |
-| `lod-meta.json` | ✅ | ❌ | [Streamed SOG](https://developer.playcanvas.com/user-manual/supersplat/streaming.md) bundle (accompanied by per-LOD `.sog` chunks). Use [SplatTransform](https://developer.playcanvas.com/user-manual/splat-transform.md) CLI tool to export |
+| `lod-meta.json` | ✅ | ❌ | [Streamed SOG](https://developer.playcanvas.com/user-manual/supersplat/publishing/streaming.md) bundle (accompanied by per-LOD `.sog` chunks). Use [SplatTransform](https://developer.playcanvas.com/user-manual/splat-transform.md) CLI tool to export |
 | `.splat` | ✅ | ✅ | Legacy compressed splat format (antimatter15) - less efficient than compressed PLY |
 | `.ksplat` | ✅ | ❌ | KSplat compressed splat format. Import only |
 | `.spz` | ✅ | ✅ | Niantic compressed format. Exports as SPZ version 4 by default, with SPZ version 3 available for older readers |
@@ -112,7 +112,7 @@ To export your currently loaded scene, open the `File` > `Export` submenu and ch
   - **PLY**: **Compress PLY** writes a `.compressed.ply` instead of a full-size PLY; **SH Bands** chooses how many spherical harmonic bands to include.
   - **SOG**: **SH Bands**, and **Iterations** (1–20, default 10), the number of clustering passes used to compress the spherical harmonic data. More iterations give slightly better quality at the cost of export time.
   - **SPZ**: **SH Bands**, and **Version**. **SPZ 4** (the latest version of the spec) is the default, while **SPZ 3** (legacy gzip container) is available for compatibility with older third-party SPZ readers.
-  - **Viewer App**: the options for a standalone HTML viewer are described in [Self-Hosting the Viewer](https://developer.playcanvas.com/user-manual/supersplat/viewer/self-hosting.md).
+  - **Viewer App**: the options for a standalone HTML viewer are described in [Self-Hosting the Viewer](https://developer.playcanvas.com/user-manual/supersplat/developers/self-hosting.md).
 
 **SH Bands** (0–3) is the exact number of spherical harmonic bands written. It starts at the highest band count in the scene, capped by the **SH Bands** setting in [Preferences](https://developer.playcanvas.com/user-manual/supersplat/editor/interface.md#preferences), so a default export keeps what the viewport shows. Choosing more bands than a splat contains fills the missing coefficients with zeros. This lets you export a band-0 splat with 3 bands for tools that expect a fixed spherical harmonic layout.
 

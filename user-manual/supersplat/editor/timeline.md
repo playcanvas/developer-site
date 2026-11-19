@@ -179,13 +179,13 @@ When you import a [PLY sequence](https://developer.playcanvas.com/user-manual/su
 
 ## Publishing and Playback on the Scene Page
 
-The Timeline animation lives in your SuperSplat project. To make it play for visitors, [publish](https://developer.playcanvas.com/user-manual/supersplat/editor/publishing.md) the splat with the publish dialog's **Animation** toggle enabled. This bakes the keyframed camera path into the published scene and sets it to play on load. The dialog's **Loop Mode** option is initialized from the Timeline's Loop toggle - **Repeat** if looping is enabled, **None** if not - and controls whether the published animation plays once or loops in the viewer.
+The Timeline animation lives in your SuperSplat project. To make it play for visitors, [publish](https://developer.playcanvas.com/user-manual/supersplat/publishing/editor.md) the splat with the publish dialog's **Animation** toggle enabled. This bakes the keyframed camera path into the published scene and sets it to play on load. The dialog's **Loop Mode** option is initialized from the Timeline's Loop toggle - **Repeat** if looping is enabled, **None** if not - and controls whether the published animation plays once or loops in the viewer.
 
-On the [scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md), the open-source [SuperSplat Viewer](https://developer.playcanvas.com/user-manual/supersplat/viewer.md) auto-plays the track when a visitor opens the scene. Depending on the track's loop mode it either plays once and stops or loops continuously — a `repeat` loop turns the splat into a hands-off cinematic flythrough.
+On the [scene page](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md), the open-source [SuperSplat Viewer](https://developer.playcanvas.com/user-manual/supersplat/developers/viewer.md) auto-plays the track when a visitor opens the scene. Depending on the track's loop mode it either plays once and stops or loops continuously — a `repeat` loop turns the splat into a hands-off cinematic flythrough.
 
 :::note
 
-Once a splat is published, you can also keyframe its camera animation in [SuperSplat Studio](https://developer.playcanvas.com/user-manual/supersplat/studio/animation.md), and turn playing on open on or off there. Both edit the same published animation, so the last one saved wins: republishing with **Override Animation** replaces Studio's animation. For how animation is stored in the published settings — the `animTracks` array (each track's `loopMode`, `interpolation`, and keyframes) plus the scene-level `startMode` — see [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md).
+Once a splat is published, you can also keyframe its camera animation in [SuperSplat Studio](https://developer.playcanvas.com/user-manual/supersplat/studio/animation.md), and turn playing on open on or off there. Both edit the same published animation, so the last one saved wins: republishing with **Override Animation** replaces Studio's animation. For how animation is stored in the published settings — the `animTracks` array (each track's `loopMode`, `interpolation`, and keyframes) plus the scene-level `startMode` — see [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/developers/experience-settings.md).
 
 :::
 

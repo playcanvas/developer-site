@@ -8,7 +8,7 @@ For uploading or generating voxel collision through the SuperSplat web UI instea
 
 Two outputs are produced from the same voxelization pass:
 
-- **`.voxel.json` / `.voxel.bin`** — sparse voxel octree (SVO) for raycasts and broad-phase collision queries. This is the format consumed by the [SuperSplat Viewer](https://developer.playcanvas.com/user-manual/supersplat/viewer.md) for runtime collision detection. The on-disk structure is specified in the [Voxel Format](https://developer.playcanvas.com/user-manual/splat-transform/voxel-format.md) specification.
+- **`.voxel.json` / `.voxel.bin`** — sparse voxel octree (SVO) for raycasts and broad-phase collision queries. This is the format consumed by the [SuperSplat Viewer](https://developer.playcanvas.com/user-manual/supersplat/developers/viewer.md) for runtime collision detection. The on-disk structure is specified in the [Voxel Format](https://developer.playcanvas.com/user-manual/splat-transform/voxel-format.md) specification.
 - **`.collision.glb`** — triangulated mesh built from the voxel grid (only when `--collision-mesh` is passed).
 
 A typical pipeline runs four stages, with the latter two being optional depending on the scene type:

@@ -51,10 +51,10 @@ Color grading applies a global transform to the image.
 
 ## In the viewer
 
-- **VR and AR** — post effects and High Precision Rendering aren't applied during a [VR or AR session](https://developer.playcanvas.com/user-manual/supersplat/viewer/xr.md). The scene's tonemapping still is, and everything returns when the session ends.
-- **Self-hosting** — when you [host the viewer yourself](https://developer.playcanvas.com/user-manual/supersplat/viewer/embedding.md#url-parameters), the `nofx` URL parameter turns post effects off.
+- **VR and AR** — post effects and High Precision Rendering aren't applied during a [VR or AR session](https://developer.playcanvas.com/user-manual/supersplat/viewing/xr.md). The scene's tonemapping still is, and everything returns when the session ends.
+- **Self-hosting** — when you [host the viewer yourself](https://developer.playcanvas.com/user-manual/supersplat/developers/embedding.md#url-parameters), the `nofx` URL parameter turns post effects off.
 
 ## See also
 
 - [Look & Tone](https://developer.playcanvas.com/user-manual/supersplat/studio/look-and-tone.md) — background, skybox, tonemapping and High Precision Rendering
-- [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md) — the JSON contract that stores post-effect settings
+- [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/developers/experience-settings.md) — the JSON contract that stores post-effect settings

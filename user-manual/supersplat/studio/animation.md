@@ -1,6 +1,6 @@
 # Camera Animation
 
-A **camera animation** moves the camera along a keyframed path, from a gentle turntable around an object to a full flythrough of a captured space. In [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md) you author it on the **Timeline** panel and control it from the **Animation** section of the **Scene** tab. Visitors watch it on the [scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md), and can pause it or take over the camera at any time.
+A **camera animation** moves the camera along a keyframed path, from a gentle turntable around an object to a full flythrough of a captured space. In [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md) you author it on the **Timeline** panel and control it from the **Animation** section of the **Scene** tab. Visitors watch it on the [scene page](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md), and can pause it or take over the camera at any time.
 
 A scene has one camera animation. If you published the splat from the Editor with an animation from its [Timeline](https://developer.playcanvas.com/user-manual/supersplat/editor/timeline.md), Studio opens with that animation, ready to edit.
 
@@ -68,5 +68,5 @@ You can also keyframe the camera on the Editor's [Timeline](https://developer.pl
 ## See also
 
 - [Cameras](https://developer.playcanvas.com/user-manual/supersplat/studio/cameras.md) — the starting camera and field of view
-- [Viewer Controls](https://developer.playcanvas.com/user-manual/supersplat/viewer/controls.md) — how visitors play, pause and scrub an animation
-- [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md) — the `animTracks` and `startMode` fields this page edits
+- [Viewer Controls](https://developer.playcanvas.com/user-manual/supersplat/viewing/controls.md) — how visitors play, pause and scrub an animation
+- [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/developers/experience-settings.md) — the `animTracks` and `startMode` fields this page edits

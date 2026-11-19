@@ -29,12 +29,12 @@ Browse, view, clean up, publish, curate, convert, and share: the whole platform 
 
 [🧹 I have a splat file](https://developer.playcanvas.com/user-manual/supersplat/getting-started.md): Clean up floaters, crop the scene, and publish it from the browser-based Editor. Follow the quick start and you'll have a shareable scene page in about ten minutes. Getting Started →
 [🎬 I've published a splat](https://developer.playcanvas.com/user-manual/supersplat/studio.md): Make it shine in Studio: frame the opening camera, keyframe a flythrough, add annotated hotspots, dial in bloom and color grading, set a skybox, or make the scene walkable with collision. Studio →
-[🧩 I want splats on my own site or app](https://developer.playcanvas.com/user-manual/supersplat/viewer.md): Embed the open-source Viewer with an iframe, export a single-file HTML viewer to host yourself, or publish from your own pipeline with the API. Viewer, embedding and API →
+[🧩 I want splats on my own site or app](https://developer.playcanvas.com/user-manual/supersplat/developers/viewer.md): Embed the open-source Viewer with an iframe, export a single-file HTML viewer to host yourself, or publish from your own pipeline with the API. Viewer, embedding and API →
 [📷 I don't have a splat yet](https://developer.playcanvas.com/user-manual/gaussian-splatting/creating.md): Learn how a splat is captured and trained, and pick a tool that fits you, from one-tap phone apps to desktop trainers. Then come back here with your first PLY. Creating Splats →
 
 :::tip Already have a clean splat?
 
-You can skip the Editor. Hit the orange **Upload Splat** button on the [superspl.at home page](https://superspl.at) or use [Direct Upload](https://developer.playcanvas.com/user-manual/supersplat/upload.md) to publish a ready-made file straight to your [Manage page](https://developer.playcanvas.com/user-manual/supersplat/manage.md).
+You can skip the Editor. Hit the orange **Upload Splat** button on the [superspl.at home page](https://superspl.at) or use [Direct Upload](https://developer.playcanvas.com/user-manual/supersplat/publishing/upload.md) to publish a ready-made file straight to your [Manage page](https://developer.playcanvas.com/user-manual/supersplat/publishing/manage.md).
 
 :::
 
@@ -42,9 +42,9 @@ You can skip the Editor. Hit the orange **Upload Splat** button on the [superspl
 
 1. **Load.** Open [superspl.at/editor](https://superspl.at/editor) and drop in your splat file. See [Import and Export](https://developer.playcanvas.com/user-manual/supersplat/editor/import-export.md) for the supported formats.
 2. **Clean.** Select stray floaters with the brush, sphere, or box selection tools and press <kbd>Delete</kbd>. See [Selection and Cleanup](https://developer.playcanvas.com/user-manual/supersplat/editor/editing-splats.md).
-3. **Publish.** Choose **File → Publish**. Your splat lands on your [Manage page](https://developer.playcanvas.com/user-manual/supersplat/manage.md) with its own [scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md). See [Publishing](https://developer.playcanvas.com/user-manual/supersplat/editor/publishing.md).
+3. **Publish.** Choose **File → Publish**. Your splat lands on your [Manage page](https://developer.playcanvas.com/user-manual/supersplat/publishing/manage.md) with its own [scene page](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md). See [Publishing](https://developer.playcanvas.com/user-manual/supersplat/publishing/editor.md).
 4. **Curate.** Open it in [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md) to frame the camera, add annotations, and switch on post effects.
-5. **Share.** Copy the scene link, grab the embed snippet, or set it to **Public** so it appears in [Explore](https://developer.playcanvas.com/user-manual/supersplat/explore.md).
+5. **Share.** Copy the scene link, grab the embed snippet, or set it to **Public** so it appears in [Explore](https://developer.playcanvas.com/user-manual/supersplat/viewing/explore.md).
 
 The [Getting Started](https://developer.playcanvas.com/user-manual/supersplat/getting-started.md) guide walks through each step with screenshots.
 
@@ -75,23 +75,23 @@ flowchart TB
 | Surface | What it is | Where it lives |
 |---------|------------|----------------|
 | **[Editor](https://developer.playcanvas.com/user-manual/supersplat/editor.md)** | Browser-based editor for cleaning, cropping, color-adjusting, and animating splats. Publishes to superspl.at. | [superspl.at/editor](https://superspl.at/editor) |
-| **[Direct Upload](https://developer.playcanvas.com/user-manual/supersplat/upload.md)** | Publish an already-clean splat file without opening the Editor. | The orange **Upload Splat** button on [superspl.at](https://superspl.at) |
-| **[Manage](https://developer.playcanvas.com/user-manual/supersplat/manage.md)** | Your splat library: edit title and description, change visibility, choose downloadable + license, delete, open in Studio. | [superspl.at/manage](https://superspl.at/manage) |
+| **[Direct Upload](https://developer.playcanvas.com/user-manual/supersplat/publishing/upload.md)** | Publish an already-clean splat file without opening the Editor. | The orange **Upload Splat** button on [superspl.at](https://superspl.at) |
+| **[Manage](https://developer.playcanvas.com/user-manual/supersplat/publishing/manage.md)** | Your splat library: edit title and description, change visibility, choose downloadable + license, delete, open in Studio. | [superspl.at/manage](https://superspl.at/manage) |
 | **[Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md)** | Curate the published viewing experience: look and tone, skybox, cameras, camera animation, collision, post effects, annotations. | `superspl.at/scene/<hash>/studio` |
-| **[Scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md)** | Public page for a published splat: embedded viewer, share, embed, download, comments, likes, suggested splats. | `superspl.at/scene/<hash>` |
-| **[Explore](https://developer.playcanvas.com/user-manual/supersplat/explore.md)** | Public gallery with sort, time, feature filters, and search. The superspl.at home page. | [superspl.at](https://superspl.at) |
-| **[User Profile](https://developer.playcanvas.com/user-manual/supersplat/user-profile.md)** | A creator's public page: avatar, bio, social links, their published splats. | `superspl.at/user/<username>` |
-| **[Viewer](https://developer.playcanvas.com/user-manual/supersplat/viewer.md)** | The open-source web viewer that powers scene pages and Editor HTML exports. Embed it in your own page or self-host it. | npm `@playcanvas/supersplat-viewer`, [GitHub](https://github.com/playcanvas/supersplat-viewer) |
+| **[Scene page](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md)** | Public page for a published splat: embedded viewer, share, embed, download, comments, likes, suggested splats. | `superspl.at/scene/<hash>` |
+| **[Explore](https://developer.playcanvas.com/user-manual/supersplat/viewing/explore.md)** | Public gallery with sort, time, feature filters, and search. The superspl.at home page. | [superspl.at](https://superspl.at) |
+| **[User Profile](https://developer.playcanvas.com/user-manual/supersplat/viewing/user-profile.md)** | A creator's public page: avatar, bio, social links, their published splats. | `superspl.at/user/<username>` |
+| **[Viewer](https://developer.playcanvas.com/user-manual/supersplat/developers/viewer.md)** | The open-source web viewer that powers scene pages and Editor HTML exports. Embed it in your own page or self-host it. | npm `@playcanvas/supersplat-viewer`, [GitHub](https://github.com/playcanvas/supersplat-viewer) |
 | **[Convert](https://developer.playcanvas.com/user-manual/supersplat/convert.md)** | Web frontend to the [splat-transform](https://developer.playcanvas.com/user-manual/splat-transform.md) CLI: convert formats, transform, and filter in the browser. | [superspl.at/convert](https://superspl.at/convert) |
-| **[API & Integrations](https://developer.playcanvas.com/user-manual/supersplat/api-integrations.md)** | Publish and inspect scenes from capture tools, training pipelines, and custom applications. | [API reference](https://developer.playcanvas.com/user-manual/api/supersplat/) |
+| **[API & Integrations](https://developer.playcanvas.com/user-manual/supersplat/developers/api-integrations.md)** | Publish and inspect scenes from capture tools, training pipelines, and custom applications. | [API reference](https://developer.playcanvas.com/user-manual/api/supersplat/) |
 
 ## Good to know
 
 - **Everything runs in your browser.** The Editor loads splats locally and nothing is uploaded until you choose to publish. It needs a WebGPU-capable browser: current Chrome or Edge, Safari 26 or later, or Firefox with WebGPU enabled.
 - **Browsing is anonymous.** A free PlayCanvas account is needed to publish, like, or comment. See [Account Creation](https://developer.playcanvas.com/user-manual/account-management/user-accounts/account-creation.md).
 - **Open source at the core.** The [Editor](https://github.com/playcanvas/supersplat), the [Viewer](https://github.com/playcanvas/supersplat-viewer), and [splat-transform](https://github.com/playcanvas/splat-transform) (which powers Convert) are MIT-licensed. Studio, Manage, Explore, scene pages, and the publish API are hosted by PlayCanvas on superspl.at.
-- **Publishing optimizes for you.** Every published splat is compressed to SOG, and splats over one million Gaussians are streamed progressively so they load fast on any device. See [Streaming & Performance](https://developer.playcanvas.com/user-manual/supersplat/streaming.md).
-- **You can host it yourself.** Export a single-file HTML viewer from the Editor or use the Viewer npm package. See [Self-Hosting the Viewer](https://developer.playcanvas.com/user-manual/supersplat/viewer/self-hosting.md).
+- **Publishing optimizes for you.** Every published splat is compressed to SOG, and splats over one million Gaussians are streamed progressively so they load fast on any device. See [Streaming & Performance](https://developer.playcanvas.com/user-manual/supersplat/publishing/streaming.md).
+- **You can host it yourself.** Export a single-file HTML viewer from the Editor or use the Viewer npm package. See [Self-Hosting the Viewer](https://developer.playcanvas.com/user-manual/supersplat/developers/self-hosting.md).
 
 ## Stay in the loop
 
@@ -159,19 +159,19 @@ Choose **File → Save** to keep an `.ssproj` project file. It preserves your ed
 
 [Image: The Publish dialog]
 
-Compression to SOG takes a moment, and several minutes for very large scenes. When it finishes, a dialog shows the URL of your new [scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md). New splats are **Unlisted**: anyone with the link can view them, but they won't appear in Explore until you make them Public in step 5.
+Compression to SOG takes a moment, and several minutes for very large scenes. When it finishes, a dialog shows the URL of your new [scene page](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md). New splats are **Unlisted**: anyone with the link can view them, but they won't appear in Explore until you make them Public in step 5.
 
 :::tip Already clean?
 
-If your file needs no editing, skip the Editor. The orange **Upload Splat** button on superspl.at publishes it directly. See [Direct Upload](https://developer.playcanvas.com/user-manual/supersplat/upload.md).
+If your file needs no editing, skip the Editor. The orange **Upload Splat** button on superspl.at publishes it directly. See [Direct Upload](https://developer.playcanvas.com/user-manual/supersplat/publishing/upload.md).
 
 :::
 
-Every option in the dialog, including republishing to an existing scene, is covered in [Publishing](https://developer.playcanvas.com/user-manual/supersplat/editor/publishing.md).
+Every option in the dialog, including republishing to an existing scene, is covered in [Publishing](https://developer.playcanvas.com/user-manual/supersplat/publishing/editor.md).
 
 ## 4. Curate it in Studio
 
-Your splat now appears on your [Manage page](https://developer.playcanvas.com/user-manual/supersplat/manage.md). Click **Open in Studio** in its row, or **Edit in Studio** on your scene page, to open [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md), where you shape what visitors see.
+Your splat now appears on your [Manage page](https://developer.playcanvas.com/user-manual/supersplat/publishing/manage.md). Click **Open in Studio** in its row, or **Edit in Studio** on your scene page, to open [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md), where you shape what visitors see.
 
 [Image: The Manage page]
 
@@ -187,14 +187,14 @@ Click **Save** in the header when you're happy. Edits are not saved automaticall
 
 ## 5. Share it
 
-Open your [scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md) at `superspl.at/scene/<hash>`.
+Open your [scene page](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md) at `superspl.at/scene/<hash>`.
 
 [Image: A published scene page]
 
 - **Share** copies the link or posts it to social platforms.
 - **Embed** gives you an `<iframe>` snippet for your own website. Later Studio changes show up there automatically.
-- To let visitors download your splat, enable **Downloadable** and pick a Creative Commons license on the [Manage page](https://developer.playcanvas.com/user-manual/supersplat/manage.md).
-- To appear in [Explore](https://developer.playcanvas.com/user-manual/supersplat/explore.md) and in search results, switch **Visibility** to **Public** in Manage.
+- To let visitors download your splat, enable **Downloadable** and pick a Creative Commons license on the [Manage page](https://developer.playcanvas.com/user-manual/supersplat/publishing/manage.md).
+- To appear in [Explore](https://developer.playcanvas.com/user-manual/supersplat/viewing/explore.md) and in search results, switch **Visibility** to **Public** in Manage.
 
 ## Where next?
 
@@ -202,8 +202,8 @@ Open your [scene page](https://developer.playcanvas.com/user-manual/supersplat/s
 - [Timeline](https://developer.playcanvas.com/user-manual/supersplat/editor/timeline.md) to animate the camera and publish a flythrough.
 - [Collision](https://developer.playcanvas.com/user-manual/supersplat/studio/collision.md) to make a scene walkable in first person.
 - [Convert](https://developer.playcanvas.com/user-manual/supersplat/convert.md) to change formats or shrink a splat without leaving the browser.
-- [Self-Hosting the Viewer](https://developer.playcanvas.com/user-manual/supersplat/viewer/self-hosting.md) to export a single HTML file you can host anywhere.
-- [API & Integrations](https://developer.playcanvas.com/user-manual/supersplat/api-integrations.md) to publish from your own pipeline.
+- [Self-Hosting the Viewer](https://developer.playcanvas.com/user-manual/supersplat/developers/self-hosting.md) to export a single HTML file you can host anywhere.
+- [API & Integrations](https://developer.playcanvas.com/user-manual/supersplat/developers/api-integrations.md) to publish from your own pipeline.
 
 --------------------------------------------------------------------------------
 
@@ -216,7 +216,7 @@ The [SuperSplat Editor](https://superspl.at/editor) is the open-source, browser-
 
 :::tip Already have a clean splat?
 
-You can skip the Editor entirely. Hit the orange **Upload Splat** button on the [superspl.at home page](https://superspl.at) (or use the [Direct Upload](https://developer.playcanvas.com/user-manual/supersplat/upload.md) flow) to publish a ready-made splat straight to your [Manage page](https://developer.playcanvas.com/user-manual/supersplat/manage.md).
+You can skip the Editor entirely. Hit the orange **Upload Splat** button on the [superspl.at home page](https://superspl.at) (or use the [Direct Upload](https://developer.playcanvas.com/user-manual/supersplat/publishing/upload.md) flow) to publish a ready-made splat straight to your [Manage page](https://developer.playcanvas.com/user-manual/supersplat/publishing/manage.md).
 
 :::
 
@@ -257,7 +257,7 @@ For a more comprehensive guide to using the SuperSplat Editor, check out this in
 - Clean a capture with [Selection and Cleanup](https://developer.playcanvas.com/user-manual/supersplat/editor/editing-splats.md), then use [Transform, Measure and Align](https://developer.playcanvas.com/user-manual/supersplat/editor/transform-measure-align.md) to prepare it
 - Work with multiple captures using [Managing Splats](https://developer.playcanvas.com/user-manual/supersplat/editor/scene-management.md), and finish their look with [Color and Appearance](https://developer.playcanvas.com/user-manual/supersplat/editor/color-and-appearance.md)
 - Keep the [Keyboard Shortcuts](https://developer.playcanvas.com/user-manual/supersplat/editor/keyboard-shortcuts.md) reference nearby, or check [Troubleshooting](https://developer.playcanvas.com/user-manual/supersplat/editor/troubleshooting.md) when a workflow does not behave as expected
-- Once your splat is clean, [Publish](https://developer.playcanvas.com/user-manual/supersplat/editor/publishing.md) it to superspl.at to land on your [Manage page](https://developer.playcanvas.com/user-manual/supersplat/manage.md) and open it in [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md)
+- Once your splat is clean, [Publish](https://developer.playcanvas.com/user-manual/supersplat/publishing/editor.md) it to superspl.at to land on your [Manage page](https://developer.playcanvas.com/user-manual/supersplat/publishing/manage.md) and open it in [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md)
 - Let an AI agent inspect and edit your scene through the browser's experimental [WebMCP](https://developer.playcanvas.com/user-manual/supersplat/editor/webmcp.md) tools
 
 --------------------------------------------------------------------------------
@@ -383,7 +383,7 @@ The **Preferences** popup (the gear icon in the [Right Toolbar](https://develope
 | Camera | **Field of View** | 85° | Field of view of the viewport camera (10°–120°), measured across the viewport's longer side. See [Camera Settings](https://developer.playcanvas.com/user-manual/supersplat/editor/camera-controls.md#camera-settings). |
 | | **Fly Speed** | 1 | Speed of WASD navigation in fly mode (0.1–30). |
 | | **FOV Auto Dolly** | Off | Move the camera as the field of view changes so the subject keeps its framing. See [Camera Settings](https://developer.playcanvas.com/user-manual/supersplat/editor/camera-controls.md#camera-settings). |
-| Colors | **Background Color** | Black | The viewport background. Also the default background of [published](https://developer.playcanvas.com/user-manual/supersplat/editor/publishing.md) scenes and exported viewers. |
+| Colors | **Background Color** | Black | The viewport background. Also the default background of [published](https://developer.playcanvas.com/user-manual/supersplat/publishing/editor.md) scenes and exported viewers. |
 | | **Selected Color** | Yellow | The color of selected Gaussians' markers, the selection tint and outline, and the selected bars in the [Splat Data](https://developer.playcanvas.com/user-manual/supersplat/editor/data-panel.md) histogram. |
 | | **Unselected Color** | Blue | The color of unselected Gaussians' markers (unless they show **Splat Colors**) and the unselected bars in the histogram. |
 | | **Locked Color** | Black, 5% opacity | Applied to [locked](https://developer.playcanvas.com/user-manual/supersplat/editor/editing-splats.md#lock-delete-and-restore) Gaussians. The default leaves them dark and almost transparent. |
@@ -439,7 +439,7 @@ SuperSplat supports several Gaussian Splat scene formats, plus COLMAP and INRIA 
 | `.compressed.ply` | ✅ | ✅ | Compressed PLY format - far smaller than uncompressed PLY, quantizes data. [Learn more](https://blog.playcanvas.com/compressing-gaussian-splats/) |
 | `.sog` | ✅ | ✅ | Bundled super-compressed format (a zip file containing `meta.json` and `.webp` textures). Recommended for runtime applications |
 | `meta.json` | ✅ | ❌ | Unbundled super-compressed format (accompanied by `.webp` textures). Use [SplatTransform](https://developer.playcanvas.com/user-manual/splat-transform.md) CLI tool to export |
-| `lod-meta.json` | ✅ | ❌ | [Streamed SOG](https://developer.playcanvas.com/user-manual/supersplat/streaming.md) bundle (accompanied by per-LOD `.sog` chunks). Use [SplatTransform](https://developer.playcanvas.com/user-manual/splat-transform.md) CLI tool to export |
+| `lod-meta.json` | ✅ | ❌ | [Streamed SOG](https://developer.playcanvas.com/user-manual/supersplat/publishing/streaming.md) bundle (accompanied by per-LOD `.sog` chunks). Use [SplatTransform](https://developer.playcanvas.com/user-manual/splat-transform.md) CLI tool to export |
 | `.splat` | ✅ | ✅ | Legacy compressed splat format (antimatter15) - less efficient than compressed PLY |
 | `.ksplat` | ✅ | ❌ | KSplat compressed splat format. Import only |
 | `.spz` | ✅ | ✅ | Niantic compressed format. Exports as SPZ version 4 by default, with SPZ version 3 available for older readers |
@@ -539,7 +539,7 @@ To export your currently loaded scene, open the `File` > `Export` submenu and ch
   - **PLY**: **Compress PLY** writes a `.compressed.ply` instead of a full-size PLY; **SH Bands** chooses how many spherical harmonic bands to include.
   - **SOG**: **SH Bands**, and **Iterations** (1–20, default 10), the number of clustering passes used to compress the spherical harmonic data. More iterations give slightly better quality at the cost of export time.
   - **SPZ**: **SH Bands**, and **Version**. **SPZ 4** (the latest version of the spec) is the default, while **SPZ 3** (legacy gzip container) is available for compatibility with older third-party SPZ readers.
-  - **Viewer App**: the options for a standalone HTML viewer are described in [Self-Hosting the Viewer](https://developer.playcanvas.com/user-manual/supersplat/viewer/self-hosting.md).
+  - **Viewer App**: the options for a standalone HTML viewer are described in [Self-Hosting the Viewer](https://developer.playcanvas.com/user-manual/supersplat/developers/self-hosting.md).
 
 **SH Bands** (0–3) is the exact number of spherical harmonic bands written. It starts at the highest band count in the scene, capped by the **SH Bands** setting in [Preferences](https://developer.playcanvas.com/user-manual/supersplat/editor/interface.md#preferences), so a default export keeps what the viewport shows. Choosing more bands than a splat contains fills the missing coefficients with zeros. This lets you export a band-0 splat with 3 bands for tools that expect a fixed spherical harmonic layout.
 
@@ -1266,13 +1266,13 @@ When you import a [PLY sequence](https://developer.playcanvas.com/user-manual/su
 
 ## Publishing and Playback on the Scene Page
 
-The Timeline animation lives in your SuperSplat project. To make it play for visitors, [publish](https://developer.playcanvas.com/user-manual/supersplat/editor/publishing.md) the splat with the publish dialog's **Animation** toggle enabled. This bakes the keyframed camera path into the published scene and sets it to play on load. The dialog's **Loop Mode** option is initialized from the Timeline's Loop toggle - **Repeat** if looping is enabled, **None** if not - and controls whether the published animation plays once or loops in the viewer.
+The Timeline animation lives in your SuperSplat project. To make it play for visitors, [publish](https://developer.playcanvas.com/user-manual/supersplat/publishing/editor.md) the splat with the publish dialog's **Animation** toggle enabled. This bakes the keyframed camera path into the published scene and sets it to play on load. The dialog's **Loop Mode** option is initialized from the Timeline's Loop toggle - **Repeat** if looping is enabled, **None** if not - and controls whether the published animation plays once or loops in the viewer.
 
-On the [scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md), the open-source [SuperSplat Viewer](https://developer.playcanvas.com/user-manual/supersplat/viewer.md) auto-plays the track when a visitor opens the scene. Depending on the track's loop mode it either plays once and stops or loops continuously — a `repeat` loop turns the splat into a hands-off cinematic flythrough.
+On the [scene page](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md), the open-source [SuperSplat Viewer](https://developer.playcanvas.com/user-manual/supersplat/developers/viewer.md) auto-plays the track when a visitor opens the scene. Depending on the track's loop mode it either plays once and stops or loops continuously — a `repeat` loop turns the splat into a hands-off cinematic flythrough.
 
 :::note
 
-Once a splat is published, you can also keyframe its camera animation in [SuperSplat Studio](https://developer.playcanvas.com/user-manual/supersplat/studio/animation.md), and turn playing on open on or off there. Both edit the same published animation, so the last one saved wins: republishing with **Override Animation** replaces Studio's animation. For how animation is stored in the published settings — the `animTracks` array (each track's `loopMode`, `interpolation`, and keyframes) plus the scene-level `startMode` — see [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md).
+Once a splat is published, you can also keyframe its camera animation in [SuperSplat Studio](https://developer.playcanvas.com/user-manual/supersplat/studio/animation.md), and turn playing on open on or off there. Both edit the same published animation, so the last one saved wins: republishing with **Override Animation** replaces Studio's animation. For how animation is stored in the published settings — the `animTracks` array (each track's `loopMode`, `interpolation`, and keyframes) plus the scene-level `startMode` — see [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/developers/experience-settings.md).
 
 :::
 
@@ -1568,7 +1568,7 @@ See [Managing Projects](https://developer.playcanvas.com/user-manual/supersplat/
 ## Publishing or Rendering Fails
 
 - Publishing requires you to be signed in to superspl.at with a PlayCanvas account.
-- If `Publish` is disabled with a message in the Publish dialog, your account has used today's publishing allowance or already has the maximum number of scenes processing. The message says when you can publish again. See [Publishing](https://developer.playcanvas.com/user-manual/supersplat/editor/publishing.md).
+- If `Publish` is disabled with a message in the Publish dialog, your account has used today's publishing allowance or already has the maximum number of scenes processing. The message says when you can publish again. See [Publishing](https://developer.playcanvas.com/user-manual/supersplat/publishing/editor.md).
 - Scenes with more than 40 million splats can only be published with **Generate LODs** on. Delete unwanted Gaussians first if you want to publish a single, non-streamed file.
 - Video codec support depends on the browser. The Render Video dialog disables resolutions your browser or device cannot encode with the current settings — try a lower resolution, frame rate, or bitrate, another format or codec, or update your browser or graphics driver.
 - A blocked download, private-browsing restriction, or low free memory can prevent large renders and exports from completing. In browsers without the File System Access API, renders and exports are delivered as downloads.
@@ -1657,25 +1657,25 @@ When you click **Convert & Download**:
 ## See also
 
 - [splat-transform CLI](https://developer.playcanvas.com/user-manual/splat-transform.md) — same actions and formats, for the command line
-- [Direct Upload](https://developer.playcanvas.com/user-manual/supersplat/upload.md) — once you have a finished splat, publish it without leaving the browser
+- [Direct Upload](https://developer.playcanvas.com/user-manual/supersplat/publishing/upload.md) — once you have a finished splat, publish it without leaving the browser
 - [Studio / Collision](https://developer.playcanvas.com/user-manual/supersplat/studio/collision.md) — what to do with a `.voxel.zip`
 
 --------------------------------------------------------------------------------
 
 ## Publishing
 
-URL: https://developer.playcanvas.com/user-manual/supersplat/editor/publishing/
-Markdown: https://developer.playcanvas.com/user-manual/supersplat/editor/publishing.md
+URL: https://developer.playcanvas.com/user-manual/supersplat/publishing/editor/
+Markdown: https://developer.playcanvas.com/user-manual/supersplat/publishing/editor.md
 
-Publishing from the SuperSplat Editor uploads your edited splat to [superspl.at](https://superspl.at), where it lands on your [Manage page](https://developer.playcanvas.com/user-manual/supersplat/manage.md), gets a public [scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md), and can be opened in [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md) to curate the viewing experience (cameras, camera animation, annotations, post effects, skybox, collision).
+Publishing from the SuperSplat Editor uploads your edited splat to [superspl.at](https://superspl.at), where it lands on your [Manage page](https://developer.playcanvas.com/user-manual/supersplat/publishing/manage.md), gets a public [scene page](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md), and can be opened in [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md) to curate the viewing experience (cameras, camera animation, annotations, post effects, skybox, collision).
 
 :::tip Two ways to publish
 
-You can also publish without using the Editor. Hit the orange **Upload Splat** button on the [superspl.at home page](https://superspl.at) (or use the [Direct Upload](https://developer.playcanvas.com/user-manual/supersplat/upload.md) flow) to publish a ready-made splat file straight to your Manage page. Both paths land in the same place and share the same downstream tooling.
+You can also publish without using the Editor. Hit the orange **Upload Splat** button on the [superspl.at home page](https://superspl.at) (or use the [Direct Upload](https://developer.playcanvas.com/user-manual/supersplat/publishing/upload.md) flow) to publish a ready-made splat file straight to your Manage page. Both paths land in the same place and share the same downstream tooling.
 
 :::
 
-To self-host your own copy of the published viewer instead of (or in addition to) publishing to superspl.at, see [Self-Hosting the Viewer](https://developer.playcanvas.com/user-manual/supersplat/viewer/self-hosting.md).
+To self-host your own copy of the published viewer instead of (or in addition to) publishing to superspl.at, see [Self-Hosting the Viewer](https://developer.playcanvas.com/user-manual/supersplat/developers/self-hosting.md).
 
 [Image: SuperSplat Website]
 
@@ -1705,7 +1705,7 @@ To publish your splat:
    | **Animation** | If enabled, the camera animation authored on the [Timeline](https://developer.playcanvas.com/user-manual/supersplat/editor/timeline.md) is baked into the scene and plays when it loads. Only available when the Timeline has keyframes (and enabled by default in that case) |
    | **Loop Mode** | How an included camera animation plays back in the viewer:<br/>• **None**: Play once and stop<br/>• **Repeat**: Loop continuously<br/>• **Ping Pong**: Play forwards, then backwards, repeatedly<br/>Initialized from the Timeline's Loop toggle - **Repeat** if looping is enabled, **None** otherwise |
    | **SH Bands** | The number of spherical harmonic bands to publish (0–3). Defaults to the highest band count in the scene, capped by the **SH Bands** setting in [Preferences](https://developer.playcanvas.com/user-manual/supersplat/editor/interface.md#preferences). Choosing more bands than the scene contains fills the missing ones with zeros |
-   | **Generate LODs** | Generate levels of detail so the published splat is streamed progressively. Automatically enabled for scenes with 1 million or more splats that span a large area. Scenes with more than 40 million splats (not counting deleted ones) must be published with LODs: the toggle is switched on and disabled, with a note saying it is required. See [Streaming & Performance](https://developer.playcanvas.com/user-manual/supersplat/streaming.md) |
+   | **Generate LODs** | Generate levels of detail so the published splat is streamed progressively. Automatically enabled for scenes with 1 million or more splats that span a large area. Scenes with more than 40 million splats (not counting deleted ones) must be published with LODs: the toggle is switched on and disabled, with a note saying it is required. See [Streaming & Performance](https://developer.playcanvas.com/user-manual/supersplat/publishing/streaming.md) |
 
 4. Select `Publish`.
 
@@ -1715,7 +1715,7 @@ The published scene's camera starts at the pose your viewport camera has at the 
 
 :::note
 
-New scenes are published unlisted - they are only discoverable by people who have the link. To make a splat appear in [Explore](https://developer.playcanvas.com/user-manual/supersplat/explore.md) and in searches on superspl.at, set its **Visibility** to **Public** on your [Manage page](https://developer.playcanvas.com/user-manual/supersplat/manage.md) after publishing.
+New scenes are published unlisted - they are only discoverable by people who have the link. To make a splat appear in [Explore](https://developer.playcanvas.com/user-manual/supersplat/viewing/explore.md) and in searches on superspl.at, set its **Visibility** to **Public** on your [Manage page](https://developer.playcanvas.com/user-manual/supersplat/publishing/manage.md) after publishing.
 
 :::
 
@@ -1740,18 +1740,18 @@ At least one of the two must be enabled to publish. Overriding only the animatio
 
 ## What's next?
 
-- Your new splat now lives on the [Manage page](https://developer.playcanvas.com/user-manual/supersplat/manage.md) where you can edit its title, description, visibility, and downloadable license.
+- Your new splat now lives on the [Manage page](https://developer.playcanvas.com/user-manual/supersplat/publishing/manage.md) where you can edit its title, description, visibility, and downloadable license.
 - Open it in [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md) to frame its camera, animate it, or add annotations, post effects, a skybox, or collision geometry.
-- Visitors browse to its [public scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md) to view, share, embed, like, and (if you allow it) download.
+- Visitors browse to its [public scene page](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md) to view, share, embed, like, and (if you allow it) download.
 
 --------------------------------------------------------------------------------
 
 ## Direct Upload
 
-URL: https://developer.playcanvas.com/user-manual/supersplat/upload/
-Markdown: https://developer.playcanvas.com/user-manual/supersplat/upload.md
+URL: https://developer.playcanvas.com/user-manual/supersplat/publishing/upload/
+Markdown: https://developer.playcanvas.com/user-manual/supersplat/publishing/upload.md
 
-If you already have a clean splat file, you don't need to use the [SuperSplat Editor](https://developer.playcanvas.com/user-manual/supersplat/editor.md) to publish it. The **Direct Upload** flow lets you push a finished splat straight to your [Manage page](https://developer.playcanvas.com/user-manual/supersplat/manage.md), where you can open it in [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md) or share its [scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md).
+If you already have a clean splat file, you don't need to use the [SuperSplat Editor](https://developer.playcanvas.com/user-manual/supersplat/editor.md) to publish it. The **Direct Upload** flow lets you push a finished splat straight to your [Manage page](https://developer.playcanvas.com/user-manual/supersplat/publishing/manage.md), where you can open it in [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md) or share its [scene page](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md).
 
 This is the right path when:
 
@@ -1766,7 +1766,7 @@ This is the right path when:
 There are three ways to open the Upload Splat dialog:
 
 - The orange **Upload Splat** button on the [superspl.at home page](https://superspl.at). The fastest path if you're not already logged in or in the manage view — you'll be prompted to sign in.
-- The **Upload Splat** button on the [Manage page](https://developer.playcanvas.com/user-manual/supersplat/manage.md).
+- The **Upload Splat** button on the [Manage page](https://developer.playcanvas.com/user-manual/supersplat/publishing/manage.md).
 - Navigating to [superspl.at/upload](https://superspl.at/upload), which redirects to the Manage page with the dialog open.
 
 You must be signed in with a PlayCanvas account to upload. See [Account Creation](https://developer.playcanvas.com/user-manual/account-management/user-accounts/account-creation.md).
@@ -1780,14 +1780,14 @@ Drag and drop, or pick from your filesystem. The dialog accepts these formats, e
 | **PLY** | `.ply` | 15 GB | A PLY file containing Gaussian splat data. A PLY that holds only a mesh or a point cloud is rejected. |
 | **SPZ** | `.spz` | 5 GB | A readable SPZ file. |
 | **SOG** | `.sog` | 10 GB | Contains one `meta.json` file and the expected SOG WebP payload files. |
-| **Streamed SOG bundle (SSOG)** | `.zip` | 10 GB | Contains `lod-meta.json` and one or more SOG chunk folders. See [Streaming & Performance](https://developer.playcanvas.com/user-manual/supersplat/streaming.md). |
+| **Streamed SOG bundle (SSOG)** | `.zip` | 10 GB | Contains `lod-meta.json` and one or more SOG chunk folders. See [Streaming & Performance](https://developer.playcanvas.com/user-manual/supersplat/publishing/streaming.md). |
 | **LCC or LCC2** | `.zip` | 10 GB | Contains exactly one `.lcc2` file, or exactly one `.lcc` file with sibling `index.bin` and `data.bin` files. |
 
 The file contents are validated after selection. Direct Upload does not accept `.compressed.ply`, `.ksplat`, or `.splat` files directly. Use the [Convert](https://developer.playcanvas.com/user-manual/supersplat/convert.md) utility or the [splat-transform CLI](https://developer.playcanvas.com/user-manual/splat-transform.md) to convert those first, or to bring a file under its format's maximum size.
 
 ### Levels of detail
 
-When you choose a PLY or SPZ file, the dialog shows an **Auto generate LODs** checkbox. When it is ticked, the splat is published as a progressively streamed [Streamed SOG](https://developer.playcanvas.com/user-manual/supersplat/streaming.md) instead of a single SOG file. It is ticked automatically for splats of 1 million Gaussians or more, and you can change it before uploading. Splats of more than 40 million Gaussians must be streamed, so for them it is ticked and locked. SOG files are always published as a single file, while SSOG and LCC archives are always streamed.
+When you choose a PLY or SPZ file, the dialog shows an **Auto generate LODs** checkbox. When it is ticked, the splat is published as a progressively streamed [Streamed SOG](https://developer.playcanvas.com/user-manual/supersplat/publishing/streaming.md) instead of a single SOG file. It is ticked automatically for splats of 1 million Gaussians or more, and you can change it before uploading. Splats of more than 40 million Gaussians must be streamed, so for them it is ticked and locked. SOG files are always published as a single file, while SSOG and LCC archives are always streamed.
 
 ## What happens after upload
 
@@ -1810,10 +1810,10 @@ When publishing completes, the dialog switches to the **Edit Splat** view for th
 From the Edit Splat view, you can:
 
 - Adjust **Title** and **Description**.
-- Tag the **Software Used** to capture or train the splat (visible as chips on the [scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md)).
-- Flip **Visibility** to **Public** to make the splat appear in [Explore](https://developer.playcanvas.com/user-manual/supersplat/explore.md) searches.
-- Enable **Downloadable** and pick a [Creative Commons license](https://developer.playcanvas.com/user-manual/supersplat/manage.md#downloadable--license).
-- **View** the public [scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md), or **Open in Studio** to curate the viewing experience.
+- Tag the **Software Used** to capture or train the splat (visible as chips on the [scene page](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md)).
+- Flip **Visibility** to **Public** to make the splat appear in [Explore](https://developer.playcanvas.com/user-manual/supersplat/viewing/explore.md) searches.
+- Enable **Downloadable** and pick a [Creative Commons license](https://developer.playcanvas.com/user-manual/supersplat/publishing/manage.md#downloadable--license).
+- **View** the public [scene page](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md), or **Open in Studio** to curate the viewing experience.
 
 ## Errors
 
@@ -1824,20 +1824,20 @@ From the Edit Splat view, you can:
 | **File Too Large** | The file is larger than its format's maximum size. The message gives both sizes. |
 | **Upload Failed** | Network interruption or a server-side issue. Try again; if the problem persists, check your connection. |
 
-Every account also has a daily publishing allowance, measured in compressed output, and a limit on how many scenes can be uploading or processing at once. When you reach either, the dialog says so (**Publishing Allowance Used** or **Scenes Still Processing**) and when you can upload again. See [Limits](https://developer.playcanvas.com/user-manual/supersplat/api-integrations.md#limits).
+Every account also has a daily publishing allowance, measured in compressed output, and a limit on how many scenes can be uploading or processing at once. When you reach either, the dialog says so (**Publishing Allowance Used** or **Scenes Still Processing**) and when you can upload again. See [Limits](https://developer.playcanvas.com/user-manual/supersplat/developers/api-integrations.md#limits).
 
 ## See also
 
-- [Publishing from the Editor](https://developer.playcanvas.com/user-manual/supersplat/editor/publishing.md) — the alternative path that goes through the SuperSplat Editor
-- [Manage](https://developer.playcanvas.com/user-manual/supersplat/manage.md) — what to do with your splat once it's uploaded
+- [Publishing from the Editor](https://developer.playcanvas.com/user-manual/supersplat/publishing/editor.md) — the alternative path that goes through the SuperSplat Editor
+- [Manage](https://developer.playcanvas.com/user-manual/supersplat/publishing/manage.md) — what to do with your splat once it's uploaded
 - [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md) — curate the viewing experience for a published splat
 
 --------------------------------------------------------------------------------
 
 ## Manage
 
-URL: https://developer.playcanvas.com/user-manual/supersplat/manage/
-Markdown: https://developer.playcanvas.com/user-manual/supersplat/manage.md
+URL: https://developer.playcanvas.com/user-manual/supersplat/publishing/manage/
+Markdown: https://developer.playcanvas.com/user-manual/supersplat/publishing/manage.md
 
 The [Manage page](https://superspl.at/manage) is your splat library on superspl.at. From here you can list and search your published splats, edit metadata, toggle visibility, choose whether visitors can download the source, pick a license, delete splats, and **open any splat in [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md)** to curate its viewing experience.
 
@@ -1851,7 +1851,7 @@ On desktop the page shows a sortable table; on mobile each splat is rendered as 
 
 | Column | Description |
 |--------|-------------|
-| **Splat** | Thumbnail, title, and description. Click the thumbnail to open the splat's [scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md). |
+| **Splat** | Thumbnail, title, and description. Click the thumbnail to open the splat's [scene page](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md). |
 | **Visibility** | Dropdown for **Public** (globe icon) or **Unlisted** (link icon). |
 | **Date** | Relative time the splat was uploaded; hover for the exact timestamp. |
 | **Views** | View count on the public scene page. |
@@ -1867,7 +1867,7 @@ The search bar above the table filters across **title** and **description**. The
 
 ## Uploading a new splat
 
-The **Upload Splat** button in the page header opens the Upload dialog. See [Direct Upload](https://developer.playcanvas.com/user-manual/supersplat/upload.md) for the full flow.
+The **Upload Splat** button in the page header opens the Upload dialog. See [Direct Upload](https://developer.playcanvas.com/user-manual/supersplat/publishing/upload.md) for the full flow.
 
 ## Editing splat metadata
 
@@ -1877,12 +1877,12 @@ Click **Edit details** (the pencil) in the row's **Actions** column to open the 
 
 | Field | Description |
 |-------|-------------|
-| **Title** | The headline shown on the [scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md) sidebar. |
+| **Title** | The headline shown on the [scene page](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md) sidebar. |
 | **Description** | A longer summary shown on the scene page. |
 | **Software Used** | Multi-select of the tools you used to capture or train the splat. Chosen entries appear as chips on the public scene page. |
-| **Visibility** | **Public** (appears in [Explore](https://developer.playcanvas.com/user-manual/supersplat/explore.md) listings and searches) or **Unlisted** (reachable only via the direct URL). |
+| **Visibility** | **Public** (appears in [Explore](https://developer.playcanvas.com/user-manual/supersplat/viewing/explore.md) listings and searches) or **Unlisted** (reachable only via the direct URL). |
 | **Downloadable** | Toggle that controls whether visitors can download the source splat from the scene page. Off by default. |
-| **License** | Shown when **Downloadable** is on. Pick the [Creative Commons license](https://developer.playcanvas.com/user-manual/supersplat/manage.md#downloadable--license) that applies to your splat. |
+| **License** | Shown when **Downloadable** is on. Pick the [Creative Commons license](https://developer.playcanvas.com/user-manual/supersplat/publishing/manage.md#downloadable--license) that applies to your splat. |
 
 The **Preview** card in the top right of the dialog shows the thumbnail, format, and download size. It also has **View** (opens the public scene page) and **Edit in Studio** (opens [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md) — disabled if the splat is still processing or in an unsupported format).
 
@@ -1899,11 +1899,11 @@ When you enable **Downloadable**, you must choose a Creative Commons license tha
 | `by-nc-nd` | Attribution-NonCommercial-NoDerivatives |
 | `by-nc-sa` | Attribution-NonCommercial-ShareAlike |
 
-The selected license is surfaced on the [scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md) Download dialog with an icon, summary, and a one-click **Copy credit** button for attribution.
+The selected license is surfaced on the [scene page](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md) Download dialog with an icon, summary, and a one-click **Copy credit** button for attribution.
 
 ## Visibility from the list
 
-You don't need to open the Edit dialog to change visibility — use the **Visibility** dropdown in each row. The button shows the current setting (icon and label) and a chevron; choose **Public** or **Unlisted** from the menu. Unlisted splats are excluded from [Explore](https://developer.playcanvas.com/user-manual/supersplat/explore.md) and won't appear when other users search.
+You don't need to open the Edit dialog to change visibility — use the **Visibility** dropdown in each row. The button shows the current setting (icon and label) and a chevron; choose **Public** or **Unlisted** from the menu. Unlisted splats are excluded from [Explore](https://developer.playcanvas.com/user-manual/supersplat/viewing/explore.md) and won't appear when other users search.
 
 ## Deleting a splat
 
@@ -1919,18 +1919,18 @@ Use **Open in Studio** in the row's **Actions** column, or **Edit in Studio** on
 
 ## See also
 
-- [Direct Upload](https://developer.playcanvas.com/user-manual/supersplat/upload.md) — publish a splat without going through the Editor
+- [Direct Upload](https://developer.playcanvas.com/user-manual/supersplat/publishing/upload.md) — publish a splat without going through the Editor
 - [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md) — curate the published viewing experience
-- [Scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md) — what visitors see when they open a splat
+- [Scene page](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md) — what visitors see when they open a splat
 
 --------------------------------------------------------------------------------
 
 ## Streaming & Performance
 
-URL: https://developer.playcanvas.com/user-manual/supersplat/streaming/
-Markdown: https://developer.playcanvas.com/user-manual/supersplat/streaming.md
+URL: https://developer.playcanvas.com/user-manual/supersplat/publishing/streaming/
+Markdown: https://developer.playcanvas.com/user-manual/supersplat/publishing/streaming.md
 
-When you [publish from the Editor](https://developer.playcanvas.com/user-manual/supersplat/editor/publishing.md) or [directly upload](https://developer.playcanvas.com/user-manual/supersplat/upload.md) a splat, SuperSplat compresses it to the **SOG** family of formats for fast delivery. Large splats are automatically converted to **Streamed SOG** so they load quickly and run smoothly on any device.
+When you [publish from the Editor](https://developer.playcanvas.com/user-manual/supersplat/publishing/editor.md) or [directly upload](https://developer.playcanvas.com/user-manual/supersplat/publishing/upload.md) a splat, SuperSplat compresses it to the **SOG** family of formats for fast delivery. Large splats are automatically converted to **Streamed SOG** so they load quickly and run smoothly on any device.
 
 ## How your splat is compressed
 
@@ -1941,14 +1941,14 @@ A published splat takes one of two forms:
 
 Which one you get depends on how you publish:
 
-- **From the Editor**, the **Generate LODs** toggle in the [Publish Settings](https://developer.playcanvas.com/user-manual/supersplat/editor/publishing.md) dialog decides. It's on by default for scenes of 1 million Gaussians or more that span a large area. Scenes of more than 40 million Gaussians must be streamed, so for them the toggle is switched on and can't be turned off.
-- **With [Direct Upload](https://developer.playcanvas.com/user-manual/supersplat/upload.md)**, a PLY or SPZ file gets an **Auto generate LODs** checkbox, ticked automatically at 1 million Gaussians or more; you can override it before publishing, except above 40 million Gaussians, where it is locked on. A SOG file is published as a single file, and splats uploaded as a pre-built LCC or SSOG archive are always streamed.
+- **From the Editor**, the **Generate LODs** toggle in the [Publish Settings](https://developer.playcanvas.com/user-manual/supersplat/publishing/editor.md) dialog decides. It's on by default for scenes of 1 million Gaussians or more that span a large area. Scenes of more than 40 million Gaussians must be streamed, so for them the toggle is switched on and can't be turned off.
+- **With [Direct Upload](https://developer.playcanvas.com/user-manual/supersplat/publishing/upload.md)**, a PLY or SPZ file gets an **Auto generate LODs** checkbox, ticked automatically at 1 million Gaussians or more; you can override it before publishing, except above 40 million Gaussians, where it is locked on. A SOG file is published as a single file, and splats uploaded as a pre-built LCC or SSOG archive are always streamed.
 
 ## Near-instant loads and the Gaussian budget
 
 A Streamed SOG splat loads **progressively**: the viewer shows the scene as soon as the lowest level of detail is ready, then fills in finer detail as it streams in. This gives near-instant time-to-first-frame even for very large scenes. The loading bar tracks the streamed files, and any [collision](https://developer.playcanvas.com/user-manual/supersplat/studio/collision.md) data keeps loading in the background after the scene appears.
 
-At runtime the viewer enforces a **Gaussian budget** — a cap on how many Gaussians are drawn at once — so the scene stays within a sensible amount of memory and renders at a good frame rate. Visitors choose the budget with the **Quality** slider in the viewer's [settings panel](https://developer.playcanvas.com/user-manual/supersplat/viewer/controls.md#the-settings-panel), from a ladder for their device:
+At runtime the viewer enforces a **Gaussian budget** — a cap on how many Gaussians are drawn at once — so the scene stays within a sensible amount of memory and renders at a good frame rate. Visitors choose the budget with the **Quality** slider in the viewer's [settings panel](https://developer.playcanvas.com/user-manual/supersplat/viewing/controls.md#the-settings-panel), from a ladder for their device:
 
 | Device | Performance | Default | High | Max |
 |--------|-------------|---------|------|-----|
@@ -1956,7 +1956,7 @@ At runtime the viewer enforces a **Gaussian budget** — a cap on how many Gauss
 | Phones, tablets and headsets | 1M | 2M | 4M | 8M |
 | Meta Quest and Pico, during a VR or AR session | 0.5M | 1M | 2M | — |
 
-Phones and tablets start at **Performance** and other devices at **Default**; the viewer remembers the visitor's choice. Positions the device doesn't have the memory for are disabled. At **Performance**, the viewer also renders at half resolution (0.8× in a Meta Quest or Pico session), unless **Performance Mode** is on. When you host the viewer yourself, the `budget` [URL parameter](https://developer.playcanvas.com/user-manual/supersplat/viewer/embedding.md#url-parameters) sets the budget for every position.
+Phones and tablets start at **Performance** and other devices at **Default**; the viewer remembers the visitor's choice. Positions the device doesn't have the memory for are disabled. At **Performance**, the viewer also renders at half resolution (0.8× in a Meta Quest or Pico session), unless **Performance Mode** is on. When you host the viewer yourself, the `budget` [URL parameter](https://developer.playcanvas.com/user-manual/supersplat/developers/embedding.md#url-parameters) sets the budget for every position.
 
 As the camera moves, the viewer raises and lowers the level of detail across the scene to stay within this budget — so you get consistent performance and bounded memory use on everything from a phone to a desktop. In a VR or AR session, detail is chosen by distance alone, so turning your head doesn't stream new detail.
 
@@ -1966,12 +1966,12 @@ A splat that isn't streamed is drawn in full whatever the budget; for it, the Qu
 
 Advanced users can skip the automatic step and supply a pre-built Streamed SOG bundle:
 
-- Generate one with the [splat-transform](https://developer.playcanvas.com/user-manual/splat-transform.md) CLI (use `--decimate` to build the LOD levels), then [directly upload](https://developer.playcanvas.com/user-manual/supersplat/upload.md) the resulting bundle.
+- Generate one with the [splat-transform](https://developer.playcanvas.com/user-manual/splat-transform.md) CLI (use `--decimate` to build the LOD levels), then [directly upload](https://developer.playcanvas.com/user-manual/supersplat/publishing/upload.md) the resulting bundle.
 - Or produce LOD-capable output from the [Convert](https://developer.playcanvas.com/user-manual/supersplat/convert.md) utility.
 
 ## See also
 
-- [Direct Upload](https://developer.playcanvas.com/user-manual/supersplat/upload.md) — upload a ready-made splat
+- [Direct Upload](https://developer.playcanvas.com/user-manual/supersplat/publishing/upload.md) — upload a ready-made splat
 - [splat-transform](https://developer.playcanvas.com/user-manual/splat-transform.md) — generate Streamed SOG bundles yourself
 - [Streamed SOG (developer guide)](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/lod-streaming.md) — using Streamed SOG in your own PlayCanvas apps
 
@@ -1982,9 +1982,9 @@ Advanced users can skip the automatic step and supply a pre-built Streamed SOG b
 URL: https://developer.playcanvas.com/user-manual/supersplat/studio/
 Markdown: https://developer.playcanvas.com/user-manual/supersplat/studio.md
 
-**SuperSplat Studio** is where you curate the viewing experience of a splat you've already [published](https://developer.playcanvas.com/user-manual/supersplat/editor/publishing.md) or [directly uploaded](https://developer.playcanvas.com/user-manual/supersplat/upload.md). It opens on top of the published scene and shapes what a visitor sees on its [scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md): the background or skybox, tonemapping, the starting camera, a camera animation, collision geometry for walkable scenes, post effects, and on-scene annotations.
+**SuperSplat Studio** is where you curate the viewing experience of a splat you've already [published](https://developer.playcanvas.com/user-manual/supersplat/publishing/editor.md) or [directly uploaded](https://developer.playcanvas.com/user-manual/supersplat/publishing/upload.md). It opens on top of the published scene and shapes what a visitor sees on its [scene page](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md): the background or skybox, tonemapping, the starting camera, a camera animation, collision geometry for walkable scenes, post effects, and on-scene annotations.
 
-Studio writes its output as a single JSON document, the [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md), which the open-source [SuperSplat Viewer](https://developer.playcanvas.com/user-manual/supersplat/viewer.md) reads at runtime.
+Studio writes its output as a single JSON document, the [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/developers/experience-settings.md), which the open-source [SuperSplat Viewer](https://developer.playcanvas.com/user-manual/supersplat/developers/viewer.md) reads at runtime.
 
 [Image: The Studio window: the Scene tab on the left, the viewport, and the timeline open along the bottom]
 
@@ -1994,9 +1994,9 @@ Studio runs at **`https://superspl.at/scene/<hash>/studio`**. Only the splat's o
 
 There are three ways to get there:
 
-- On the [Manage page](https://developer.playcanvas.com/user-manual/supersplat/manage.md), click **Open in Studio** in the splat's row.
+- On the [Manage page](https://developer.playcanvas.com/user-manual/supersplat/publishing/manage.md), click **Open in Studio** in the splat's row.
 - In a splat's **Edit Splat** dialog on the Manage page, click **Edit in Studio** in the preview card.
-- On your own splat's [scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md), use the **Edit in Studio** entry point.
+- On your own splat's [scene page](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md), use the **Edit in Studio** entry point.
 
 :::note Desktop recommended
 
@@ -2055,7 +2055,7 @@ Skybox and collision files are the exception: they upload as soon as you add the
 
 The other header buttons work with the settings as a file:
 
-- **Export** downloads the current settings as `settings-<hash>.json`, for example to use with a [viewer you host yourself](https://developer.playcanvas.com/user-manual/supersplat/viewer/embedding.md).
+- **Export** downloads the current settings as `settings-<hash>.json`, for example to use with a [viewer you host yourself](https://developer.playcanvas.com/user-manual/supersplat/developers/embedding.md).
 - **Import** replaces the current settings with a JSON file you choose, after asking for confirmation. Click **Save** to publish them.
 - **View** opens the scene page.
 
@@ -2069,9 +2069,9 @@ Agents can't save: you review what an agent did and click **Save** yourself.
 
 ## See also
 
-- [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md) — the JSON contract Studio writes and the Viewer reads
-- [Viewer Controls](https://developer.playcanvas.com/user-manual/supersplat/viewer/controls.md) — how visitors navigate the scene you curate
-- [Scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md) — what visitors see after Studio changes are saved
+- [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/developers/experience-settings.md) — the JSON contract Studio writes and the Viewer reads
+- [Viewer Controls](https://developer.playcanvas.com/user-manual/supersplat/viewing/controls.md) — how visitors navigate the scene you curate
+- [Scene page](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md) — what visitors see after Studio changes are saved
 
 --------------------------------------------------------------------------------
 
@@ -2123,19 +2123,19 @@ Splats trained with anti-aliasing, such as with Mip-Splatting, draw too bright w
 
 :::note
 
-The [SuperSplat Viewer](https://developer.playcanvas.com/user-manual/supersplat/viewer.md) doesn't apply this setting yet. On the scene page and in embeds, each splat file's own anti-aliasing tag decides. When you [host the viewer yourself](https://developer.playcanvas.com/user-manual/supersplat/viewer/embedding.md#url-parameters), the `aa` URL parameter overrides it.
+The [SuperSplat Viewer](https://developer.playcanvas.com/user-manual/supersplat/developers/viewer.md) doesn't apply this setting yet. On the scene page and in embeds, each splat file's own anti-aliasing tag decides. When you [host the viewer yourself](https://developer.playcanvas.com/user-manual/supersplat/developers/embedding.md#url-parameters), the `aa` URL parameter overrides it.
 
 :::
 
 ## In the viewer
 
-- **AR** — the skybox and background color are hidden during an [AR session](https://developer.playcanvas.com/user-manual/supersplat/viewer/xr.md), so the room shows through around the splat. VR sessions keep them.
-- **Self-hosting** — the viewer doesn't load the skybox from the scene's settings. When you [host the viewer yourself](https://developer.playcanvas.com/user-manual/supersplat/viewer/embedding.md#url-parameters), pass the image with the `skybox` URL parameter or the `skyboxUrl` option, and override High Precision Rendering with `hpr`.
+- **AR** — the skybox and background color are hidden during an [AR session](https://developer.playcanvas.com/user-manual/supersplat/viewing/xr.md), so the room shows through around the splat. VR sessions keep them.
+- **Self-hosting** — the viewer doesn't load the skybox from the scene's settings. When you [host the viewer yourself](https://developer.playcanvas.com/user-manual/supersplat/developers/embedding.md#url-parameters), pass the image with the `skybox` URL parameter or the `skyboxUrl` option, and override High Precision Rendering with `hpr`.
 
 ## See also
 
 - [Post Effects](https://developer.playcanvas.com/user-manual/supersplat/studio/post-effects.md) — sharpness, bloom, color grading, vignette and chromatic fringing
-- [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md) — the JSON contract that stores these settings
+- [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/developers/experience-settings.md) — the JSON contract that stores these settings
 
 --------------------------------------------------------------------------------
 
@@ -2144,7 +2144,7 @@ The [SuperSplat Viewer](https://developer.playcanvas.com/user-manual/supersplat/
 URL: https://developer.playcanvas.com/user-manual/supersplat/studio/cameras/
 Markdown: https://developer.playcanvas.com/user-manual/supersplat/studio/cameras.md
 
-The **Cameras** section — in the **Scene** tab of [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md)'s left panel — defines the **starting camera** for your published splat: the view a visitor lands on when they open your [scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md) (unless the scene [plays its camera animation on open](https://developer.playcanvas.com/user-manual/supersplat/studio/animation.md#playing-on-open) instead). The camera has a **position**, a **target** (the point it looks at), and a **field of view**.
+The **Cameras** section — in the **Scene** tab of [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md)'s left panel — defines the **starting camera** for your published splat: the view a visitor lands on when they open your [scene page](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md) (unless the scene [plays its camera animation on open](https://developer.playcanvas.com/user-manual/supersplat/studio/animation.md#playing-on-open) instead). The camera has a **position**, a **target** (the point it looks at), and a **field of view**.
 
 [Image: The Cameras section with Camera 1 and its Lens settings]
 
@@ -2199,14 +2199,14 @@ Frame the viewport and click **Set camera to current view**, or use [camera edit
 ## How cameras are used
 
 - **Initial framing** — the first camera in the list is the default starting view when a visitor opens the scene page (`startMode: 'default'`). From there the viewer plays a slow, looping camera motion until the visitor takes over: an orbit around the target when the camera starts outside the splat (an object), or a gentle figure-eight when it starts inside (a scene). A [camera animation](https://developer.playcanvas.com/user-manual/supersplat/studio/animation.md) replaces that motion when **Play animation on open** is on.
-- **Object or scene** — whether the camera starts outside or inside the splat's bounds also decides the viewer's starting [camera mode](https://developer.playcanvas.com/user-manual/supersplat/viewer/controls.md#camera-modes) (orbit for an object, walk or fly for a scene) and how the splat is presented in [VR and AR](https://developer.playcanvas.com/user-manual/supersplat/viewer/xr.md#scenes-and-objects).
+- **Object or scene** — whether the camera starts outside or inside the splat's bounds also decides the viewer's starting [camera mode](https://developer.playcanvas.com/user-manual/supersplat/viewing/controls.md#camera-modes) (orbit for an object, walk or fly for a scene) and how the splat is presented in [VR and AR](https://developer.playcanvas.com/user-manual/supersplat/viewing/xr.md#scenes-and-objects).
 - **Annotation poses** — each [annotation](https://developer.playcanvas.com/user-manual/supersplat/studio/annotations.md) embeds its own camera pose that the viewer animates to when the annotation is selected. The annotation's pose is independent of the entries in the Cameras list.
 
 ## See also
 
 - [Camera Animation](https://developer.playcanvas.com/user-manual/supersplat/studio/animation.md) — keyframed camera motion on Studio's timeline
 - [Annotations](https://developer.playcanvas.com/user-manual/supersplat/studio/annotations.md) — 3D-positioned hotspots that can adopt a camera pose
-- [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md) — the JSON contract that stores the camera list
+- [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/developers/experience-settings.md) — the JSON contract that stores the camera list
 
 --------------------------------------------------------------------------------
 
@@ -2215,7 +2215,7 @@ Frame the viewport and click **Set camera to current view**, or use [camera edit
 URL: https://developer.playcanvas.com/user-manual/supersplat/studio/animation/
 Markdown: https://developer.playcanvas.com/user-manual/supersplat/studio/animation.md
 
-A **camera animation** moves the camera along a keyframed path, from a gentle turntable around an object to a full flythrough of a captured space. In [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md) you author it on the **Timeline** panel and control it from the **Animation** section of the **Scene** tab. Visitors watch it on the [scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md), and can pause it or take over the camera at any time.
+A **camera animation** moves the camera along a keyframed path, from a gentle turntable around an object to a full flythrough of a captured space. In [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md) you author it on the **Timeline** panel and control it from the **Animation** section of the **Scene** tab. Visitors watch it on the [scene page](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md), and can pause it or take over the camera at any time.
 
 A scene has one camera animation. If you published the splat from the Editor with an animation from its [Timeline](https://developer.playcanvas.com/user-manual/supersplat/editor/timeline.md), Studio opens with that animation, ready to edit.
 
@@ -2283,8 +2283,8 @@ You can also keyframe the camera on the Editor's [Timeline](https://developer.pl
 ## See also
 
 - [Cameras](https://developer.playcanvas.com/user-manual/supersplat/studio/cameras.md) — the starting camera and field of view
-- [Viewer Controls](https://developer.playcanvas.com/user-manual/supersplat/viewer/controls.md) — how visitors play, pause and scrub an animation
-- [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md) — the `animTracks` and `startMode` fields this page edits
+- [Viewer Controls](https://developer.playcanvas.com/user-manual/supersplat/viewing/controls.md) — how visitors play, pause and scrub an animation
+- [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/developers/experience-settings.md) — the `animTracks` and `startMode` fields this page edits
 
 --------------------------------------------------------------------------------
 
@@ -2293,7 +2293,7 @@ You can also keyframe the camera on the Editor's [Timeline](https://developer.pl
 URL: https://developer.playcanvas.com/user-manual/supersplat/studio/collision/
 Markdown: https://developer.playcanvas.com/user-manual/supersplat/studio/collision.md
 
-By default, splats in the viewer have no physical presence — the camera flies right through them. The **Collision** section in [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md) attaches a **voxel** representation of the scene to your splat so the viewer can collide against it. With collision attached, your splat becomes **walkable** — visitors can navigate it on foot rather than only orbiting or flying around it. The [Explore](https://developer.playcanvas.com/user-manual/supersplat/explore.md) page also surfaces walkable scenes via its `walkable` feature filter.
+By default, splats in the viewer have no physical presence — the camera flies right through them. The **Collision** section in [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md) attaches a **voxel** representation of the scene to your splat so the viewer can collide against it. With collision attached, your splat becomes **walkable** — visitors can navigate it on foot rather than only orbiting or flying around it. The [Explore](https://developer.playcanvas.com/user-manual/supersplat/viewing/explore.md) page also surfaces walkable scenes via its `walkable` feature filter.
 
 :::important Scale your splat to real-world units
 For walkable scenes to feel right, scale your splat so that **one unit equals one meter** before adding collision. In walk mode the viewer holds the camera at an eye height of **1.5 m** above the floor, so if your scene isn't at real-world scale, it will feel too large or too small to move around in. The viewer also offers walk mode only when the scene is at least **5 m** across in both horizontal directions.
@@ -2340,17 +2340,17 @@ Upload happens immediately, and the scene becomes walkable on the next viewer re
 ## Collision in the viewer
 
 - **Loading** — the viewer shows the scene without waiting for its collision data, which is often larger than the splat. Walk mode becomes available once the data arrives.
-- **Walk mode** — a **Walk Mode** button joins the toolbar, and walk becomes the scene's default camera mode. See [Viewer Controls](https://developer.playcanvas.com/user-manual/supersplat/viewer/controls.md#camera-modes).
+- **Walk mode** — a **Walk Mode** button joins the toolbar, and walk becomes the scene's default camera mode. See [Viewer Controls](https://developer.playcanvas.com/user-manual/supersplat/viewing/controls.md#camera-modes).
 - **Show Collision** — visitors can draw the voxels over the splat with **Show Collision** in the viewer's settings panel, or by pressing <kbd>V</kbd>. The overlay needs WebGPU.
-- **VR** — in a VR session, visitors teleport onto the collision: only spots where someone could stand are valid targets. See [Viewing in VR and AR](https://developer.playcanvas.com/user-manual/supersplat/viewer/xr.md#moving-around-in-vr).
+- **VR** — in a VR session, visitors teleport onto the collision: only spots where someone could stand are valid targets. See [Viewing in VR and AR](https://developer.playcanvas.com/user-manual/supersplat/viewing/xr.md#moving-around-in-vr).
 
-When you [host the viewer yourself](https://developer.playcanvas.com/user-manual/supersplat/viewer/embedding.md#url-parameters), pass collision with the `collision` URL parameter: a `.voxel.json` file with its `.voxel.bin` beside it, or a `.glb` mesh.
+When you [host the viewer yourself](https://developer.playcanvas.com/user-manual/supersplat/developers/embedding.md#url-parameters), pass collision with the `collision` URL parameter: a `.voxel.json` file with its `.voxel.bin` beside it, or a `.glb` mesh.
 
 ## See also
 
 - [Convert](https://developer.playcanvas.com/user-manual/supersplat/convert.md) — generate voxel collision in the browser
 - [splat-transform](https://developer.playcanvas.com/user-manual/splat-transform.md) — generate voxel collision in a script or build pipeline
-- [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md) — the JSON contract that stores scene-asset references
+- [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/developers/experience-settings.md) — the JSON contract that stores scene-asset references
 
 --------------------------------------------------------------------------------
 
@@ -2410,13 +2410,13 @@ Color grading applies a global transform to the image.
 
 ## In the viewer
 
-- **VR and AR** — post effects and High Precision Rendering aren't applied during a [VR or AR session](https://developer.playcanvas.com/user-manual/supersplat/viewer/xr.md). The scene's tonemapping still is, and everything returns when the session ends.
-- **Self-hosting** — when you [host the viewer yourself](https://developer.playcanvas.com/user-manual/supersplat/viewer/embedding.md#url-parameters), the `nofx` URL parameter turns post effects off.
+- **VR and AR** — post effects and High Precision Rendering aren't applied during a [VR or AR session](https://developer.playcanvas.com/user-manual/supersplat/viewing/xr.md). The scene's tonemapping still is, and everything returns when the session ends.
+- **Self-hosting** — when you [host the viewer yourself](https://developer.playcanvas.com/user-manual/supersplat/developers/embedding.md#url-parameters), the `nofx` URL parameter turns post effects off.
 
 ## See also
 
 - [Look & Tone](https://developer.playcanvas.com/user-manual/supersplat/studio/look-and-tone.md) — background, skybox, tonemapping and High Precision Rendering
-- [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md) — the JSON contract that stores post-effect settings
+- [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/developers/experience-settings.md) — the JSON contract that stores post-effect settings
 
 --------------------------------------------------------------------------------
 
@@ -2448,7 +2448,7 @@ Each annotation has:
 3. Click the point on the splat you want to annotate. Studio places the hotspot there and stores the current view as the annotation's camera.
 4. Type a title (**Untitled** until you do) and a description in the card that opens beside the hotspot, then click **OK**.
 
-A scene can have up to 50 annotations, with titles of up to 60 characters and text of up to 280. These are the [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md#authoring-limits) authoring limits.
+A scene can have up to 50 annotations, with titles of up to 60 characters and text of up to 280. These are the [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/developers/experience-settings.md#authoring-limits) authoring limits.
 
 ## Editing annotations
 
@@ -2464,7 +2464,7 @@ Each row on the **Annotations** tab also has **Go to annotation**, which moves t
 
 ## How visitors use them
 
-On the [scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md), the viewer shows each annotation as a numbered hotspot:
+On the [scene page](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md), the viewer shows each annotation as a numbered hotspot:
 
 - **Selecting a hotspot** eases the camera to the annotation's pose, and its title and text appear in a panel beside the hotspot as the camera arrives. An annotation with neither title nor text shows no panel. Visitors can orbit from there, pivoting near the annotated point, and the panel stays open.
 - **The navigator**, shown when a scene has two or more annotations, displays the current annotation's number and title, with arrows to step to the previous and next one in list order.
@@ -2472,7 +2472,7 @@ On the [scene page](https://developer.playcanvas.com/user-manual/supersplat/scen
 - **Hotspots hidden** behind part of the scene are faded once the camera stops moving.
 - **Show Annotations**, in the viewer's settings panel, lets visitors hide the hotspots and the navigator.
 
-See [Viewer Controls](https://developer.playcanvas.com/user-manual/supersplat/viewer/controls.md#annotations) for the full visitor experience.
+See [Viewer Controls](https://developer.playcanvas.com/user-manual/supersplat/viewing/controls.md#annotations) for the full visitor experience.
 
 :::note
 
@@ -2484,14 +2484,14 @@ The settings format accepts `annotation` as a scene's start mode, but the viewer
 
 - [Cameras](https://developer.playcanvas.com/user-manual/supersplat/studio/cameras.md) — the camera poses annotations reference
 - [Camera animation (Timeline)](https://developer.playcanvas.com/user-manual/supersplat/editor/timeline.md) — for cinematic flythroughs that don't need visitor interaction
-- [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md) — the JSON contract that stores annotations
+- [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/developers/experience-settings.md) — the JSON contract that stores annotations
 
 --------------------------------------------------------------------------------
 
 ## Scene Page
 
-URL: https://developer.playcanvas.com/user-manual/supersplat/scene-page/
-Markdown: https://developer.playcanvas.com/user-manual/supersplat/scene-page.md
+URL: https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page/
+Markdown: https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md
 
 The **scene page** at `https://superspl.at/scene/<hash>` is the public face of a published splat. Whatever you authored in the [Editor](https://developer.playcanvas.com/user-manual/supersplat/editor.md) and curated in [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md) shows up here for visitors. Owners see additional controls that open Studio or take them back to Manage.
 
@@ -2505,21 +2505,21 @@ The scene content is split between a central **embedded viewer** and a right-han
 
 ### The embedded viewer
 
-The viewer is the open-source [SuperSplat Viewer](https://developer.playcanvas.com/user-manual/supersplat/viewer.md) rendered inside an iframe. The cameras, [camera animation](https://developer.playcanvas.com/user-manual/supersplat/studio/animation.md), annotations, post effects, skybox, and collision you configured in [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md), or published from the Editor, all apply here. Visitors can orbit, fly, and (if collision is set up) walk through the scene, step through annotations, play the camera animation, and enter VR or AR on devices that support it. The toolbar along the bottom of the viewer holds the camera modes and the viewer's settings, controls and info panels. See [Viewer Controls](https://developer.playcanvas.com/user-manual/supersplat/viewer/controls.md) and [Viewing in VR and AR](https://developer.playcanvas.com/user-manual/supersplat/viewer/xr.md).
+The viewer is the open-source [SuperSplat Viewer](https://developer.playcanvas.com/user-manual/supersplat/developers/viewer.md) rendered inside an iframe. The cameras, [camera animation](https://developer.playcanvas.com/user-manual/supersplat/studio/animation.md), annotations, post effects, skybox, and collision you configured in [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md), or published from the Editor, all apply here. Visitors can orbit, fly, and (if collision is set up) walk through the scene, step through annotations, play the camera animation, and enter VR or AR on devices that support it. The toolbar along the bottom of the viewer holds the camera modes and the viewer's settings, controls and info panels. See [Viewer Controls](https://developer.playcanvas.com/user-manual/supersplat/viewing/controls.md) and [Viewing in VR and AR](https://developer.playcanvas.com/user-manual/supersplat/viewing/xr.md).
 
 ### Sidebar metadata
 
 | Field | What it shows |
 |-------|---------------|
-| **Title** | The headline you set in the [Edit Splat dialog](https://developer.playcanvas.com/user-manual/supersplat/manage.md). |
-| **Author** | A chip linking to the creator's [user profile](https://developer.playcanvas.com/user-manual/supersplat/user-profile.md), with a **Follow** button so you can [follow them](https://developer.playcanvas.com/user-manual/supersplat/following.md). |
+| **Title** | The headline you set in the [Edit Splat dialog](https://developer.playcanvas.com/user-manual/supersplat/publishing/manage.md). |
+| **Author** | A chip linking to the creator's [user profile](https://developer.playcanvas.com/user-manual/supersplat/viewing/user-profile.md), with a **Follow** button so you can [follow them](https://developer.playcanvas.com/user-manual/supersplat/viewing/following.md). |
 | **Views** | Total view count. |
 | **Downloads** | Total download count. Only shown if the splat is downloadable. |
 | **Visibility badge** | **Public** or **Unlisted**. |
 | **Software used** | Chips for the tools you tagged in the Edit Splat dialog (capture / training tools). |
 | **Description** | The longer description you set in the Edit Splat dialog (sanitized HTML). |
 | **Format / size** | The published splat format and download size, with a tooltip. |
-| **Splat count** | The number of Gaussians in the published splat. Its tooltip lists the levels of detail of a [streamed](https://developer.playcanvas.com/user-manual/supersplat/streaming.md) splat, and the spherical harmonic bands. |
+| **Splat count** | The number of Gaussians in the published splat. Its tooltip lists the levels of detail of a [streamed](https://developer.playcanvas.com/user-manual/supersplat/publishing/streaming.md) splat, and the spherical harmonic bands. |
 | **Created** | Relative time the splat was published, with the exact date on hover. |
 
 ### Action buttons
@@ -2527,9 +2527,9 @@ The viewer is the open-source [SuperSplat Viewer](https://developer.playcanvas.c
 | Button | What it does |
 |--------|--------------|
 | **Like** (thumbs-up) | Shows the splat's like count and toggles your like. Highlighted if you've liked the splat. Requires login — anonymous visitors are prompted to sign in. |
-| **Share** | Opens the [Share dialog](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md#share-dialog). |
-| **Embed** | Opens the [Embed dialog](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md#embed-dialog). |
-| **Download** | Opens the [Download dialog](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md#download-dialog). Only shown if the splat is downloadable. |
+| **Share** | Opens the [Share dialog](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md#share-dialog). |
+| **Embed** | Opens the [Embed dialog](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md#embed-dialog). |
+| **Download** | Opens the [Download dialog](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md#download-dialog). Only shown if the splat is downloadable. |
 
 Owners also see an **Edit in Studio** entry point that opens [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md) for this scene.
 
@@ -2551,11 +2551,11 @@ The Embed dialog gives you an `<iframe>` snippet to drop into your own webpage. 
 | **Iframe snippet** | A copy-to-clipboard `<iframe>` tag. |
 | **Size presets** | Pick from a few common embed sizes or use a responsive layout. |
 
-If you'd rather host your own copy of the viewer and bundle the splat into a self-contained file instead of pointing back at superspl.at, see [Self-Hosting the Viewer](https://developer.playcanvas.com/user-manual/supersplat/viewer/self-hosting.md).
+If you'd rather host your own copy of the viewer and bundle the splat into a self-contained file instead of pointing back at superspl.at, see [Self-Hosting the Viewer](https://developer.playcanvas.com/user-manual/supersplat/developers/self-hosting.md).
 
 ## Download dialog
 
-The Download button is shown only when the owner has enabled **Downloadable** for the splat from the [Manage page](https://developer.playcanvas.com/user-manual/supersplat/manage.md). Click it to open the Download dialog, which offers:
+The Download button is shown only when the owner has enabled **Downloadable** for the splat from the [Manage page](https://developer.playcanvas.com/user-manual/supersplat/publishing/manage.md). Click it to open the Download dialog, which offers:
 
 | Section | Contents |
 |---------|----------|
@@ -2590,21 +2590,21 @@ A carousel near the bottom of the page recommends a handful of related splats. C
 ## See also
 
 - [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md) — owners use Studio to change what visitors see here
-- [Embedding the Viewer](https://developer.playcanvas.com/user-manual/supersplat/viewer/embedding.md) — for full programmatic control of how the splat is displayed
-- [Manage](https://developer.playcanvas.com/user-manual/supersplat/manage.md) — edit metadata, change visibility, choose downloadable + license
+- [Embedding the Viewer](https://developer.playcanvas.com/user-manual/supersplat/developers/embedding.md) — for full programmatic control of how the splat is displayed
+- [Manage](https://developer.playcanvas.com/user-manual/supersplat/publishing/manage.md) — edit metadata, change visibility, choose downloadable + license
 
 --------------------------------------------------------------------------------
 
 ## Viewer Controls
 
-URL: https://developer.playcanvas.com/user-manual/supersplat/viewer/controls/
-Markdown: https://developer.playcanvas.com/user-manual/supersplat/viewer/controls.md
+URL: https://developer.playcanvas.com/user-manual/supersplat/viewing/controls/
+Markdown: https://developer.playcanvas.com/user-manual/supersplat/viewing/controls.md
 
-The [SuperSplat Viewer](https://developer.playcanvas.com/user-manual/supersplat/viewer.md) is what visitors use on every [scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md), in every embed of one, and in viewers [exported from the Editor](https://developer.playcanvas.com/user-manual/supersplat/viewer/self-hosting.md). This page describes its built-in interface. For headsets, and AR on phones, see [Viewing in VR and AR](https://developer.playcanvas.com/user-manual/supersplat/viewer/xr.md).
+The [SuperSplat Viewer](https://developer.playcanvas.com/user-manual/supersplat/developers/viewer.md) is what visitors use on every [scene page](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md), in every embed of one, and in viewers [exported from the Editor](https://developer.playcanvas.com/user-manual/supersplat/developers/self-hosting.md). This page describes its built-in interface. For headsets, and AR on phones, see [Viewing in VR and AR](https://developer.playcanvas.com/user-manual/supersplat/viewing/xr.md).
 
 ## Loading
 
-While a scene loads, the viewer shows its poster image, if it has one, and a loading bar with a percentage. A [streamed scene](https://developer.playcanvas.com/user-manual/supersplat/streaming.md) appears as soon as it has enough detail to render and keeps refining as more streams in. [Collision](https://developer.playcanvas.com/user-manual/supersplat/studio/collision.md) data keeps loading in the background, and walk mode becomes available when it arrives.
+While a scene loads, the viewer shows its poster image, if it has one, and a loading bar with a percentage. A [streamed scene](https://developer.playcanvas.com/user-manual/supersplat/publishing/streaming.md) appears as soon as it has enough detail to render and keeps refining as more streams in. [Collision](https://developer.playcanvas.com/user-manual/supersplat/studio/collision.md) data keeps loading in the background, and walk mode becomes available when it arrives.
 
 The camera then starts moving. If the scene [plays its camera animation on open](https://developer.playcanvas.com/user-manual/supersplat/studio/animation.md#playing-on-open), that plays; otherwise the viewer plays a slow 20-second loop from the [starting camera](https://developer.playcanvas.com/user-manual/supersplat/studio/cameras.md): an orbit around an object, or a gentle figure-eight inside a scene. Interacting with the scene stops it and hands the camera to the visitor.
 
@@ -2615,13 +2615,13 @@ The toolbar runs along the bottom of the viewer. From left to right:
 | Button | What it does |
 |--------|--------------|
 | **Play** / **Pause** | Plays or pauses the camera animation. Shown only when the scene has one. While it plays, a timeline above the toolbar shows the playhead; drag it to scrub, which pauses playback. |
-| **Orbit Camera** | Switches to [orbit mode](https://developer.playcanvas.com/user-manual/supersplat/viewer/controls.md#camera-modes). |
-| **Fly Camera** | Switches to [fly mode](https://developer.playcanvas.com/user-manual/supersplat/viewer/controls.md#camera-modes). |
-| **Walk Mode** | Switches to [walk mode](https://developer.playcanvas.com/user-manual/supersplat/viewer/controls.md#camera-modes), or back to the previous mode. Shown only on scenes that can be walked. |
-| **Settings** | Opens the [settings panel](https://developer.playcanvas.com/user-manual/supersplat/viewer/controls.md#the-settings-panel). |
-| **Controls** | Opens the [controls panel](https://developer.playcanvas.com/user-manual/supersplat/viewer/controls.md#the-controls-panel). |
-| **Info** | Opens the [info panel](https://developer.playcanvas.com/user-manual/supersplat/viewer/controls.md#the-info-panel). |
-| **Enter AR** / **Enter VR** | Starts an AR or VR session. Shown only where the device and browser support one. See [Viewing in VR and AR](https://developer.playcanvas.com/user-manual/supersplat/viewer/xr.md). |
+| **Orbit Camera** | Switches to [orbit mode](https://developer.playcanvas.com/user-manual/supersplat/viewing/controls.md#camera-modes). |
+| **Fly Camera** | Switches to [fly mode](https://developer.playcanvas.com/user-manual/supersplat/viewing/controls.md#camera-modes). |
+| **Walk Mode** | Switches to [walk mode](https://developer.playcanvas.com/user-manual/supersplat/viewing/controls.md#camera-modes), or back to the previous mode. Shown only on scenes that can be walked. |
+| **Settings** | Opens the [settings panel](https://developer.playcanvas.com/user-manual/supersplat/viewing/controls.md#the-settings-panel). |
+| **Controls** | Opens the [controls panel](https://developer.playcanvas.com/user-manual/supersplat/viewing/controls.md#the-controls-panel). |
+| **Info** | Opens the [info panel](https://developer.playcanvas.com/user-manual/supersplat/viewing/controls.md#the-info-panel). |
+| **Enter AR** / **Enter VR** | Starts an AR or VR session. Shown only where the device and browser support one. See [Viewing in VR and AR](https://developer.playcanvas.com/user-manual/supersplat/viewing/xr.md). |
 | **Fullscreen** | Enters or leaves fullscreen. |
 
 Three seconds after the last interaction the toolbar dims, then hides; the next interaction brings it back. It stays up while a panel is open or the pointer is over it. In a narrow viewer the buttons shrink so that all of them, **Fullscreen** included, stay in view. On a phone or tablet, turning the device to landscape requests fullscreen and turning it back to portrait leaves it.
@@ -2709,11 +2709,11 @@ With Gaming Controls on, **Look Around** is the captured mouse (or touch + drag)
 
 | Setting | What it does |
 |---------|--------------|
-| **Show Annotations** | Shows or hides the [annotation](https://developer.playcanvas.com/user-manual/supersplat/viewer/controls.md#annotations) hotspots and navigator. Shown only on scenes with annotations. |
+| **Show Annotations** | Shows or hides the [annotation](https://developer.playcanvas.com/user-manual/supersplat/viewing/controls.md#annotations) hotspots and navigator. Shown only on scenes with annotations. |
 | **Show Collision** | Draws the scene's collision geometry over the splat (<kbd>V</kbd>). Shown only when the scene's collision can be drawn: voxel collision needs WebGPU. |
-| **Gaming Controls** | Turns on [Gaming Controls](https://developer.playcanvas.com/user-manual/supersplat/viewer/controls.md#gaming-controls). Shown on touch devices; on a desktop, use <kbd>G</kbd>. |
-| **Quality** | A slider with four positions, **Performance**, **Default**, **High** and **Max**, labeled with the splat budget each gives, such as **Default · 4M**. See [Quality](https://developer.playcanvas.com/user-manual/supersplat/viewer/controls.md#quality). |
-| **Performance Mode** | Switches to the viewer's alternative splat renderer. See [Performance Mode](https://developer.playcanvas.com/user-manual/supersplat/viewer/controls.md#performance-mode). |
+| **Gaming Controls** | Turns on [Gaming Controls](https://developer.playcanvas.com/user-manual/supersplat/viewing/controls.md#gaming-controls). Shown on touch devices; on a desktop, use <kbd>G</kbd>. |
+| **Quality** | A slider with four positions, **Performance**, **Default**, **High** and **Max**, labeled with the splat budget each gives, such as **Default · 4M**. See [Quality](https://developer.playcanvas.com/user-manual/supersplat/viewing/controls.md#quality). |
+| **Performance Mode** | Switches to the viewer's alternative splat renderer. See [Performance Mode](https://developer.playcanvas.com/user-manual/supersplat/viewing/controls.md#performance-mode). |
 | **Frame** | Frames the whole scene, in orbit mode. |
 | **Reset** | Resets the camera: in orbit mode to the starting view, in fly and walk mode to where you entered that mode. |
 
@@ -2721,7 +2721,7 @@ The viewer saves **Show Annotations**, **Gaming Controls**, **Quality** and **Pe
 
 ### Quality
 
-The **Quality** slider sets the splat budget, the most splats the viewer draws at once in a streamed scene, from a ladder for the device: for example 2M, 4M, 8M and 16M on a desktop. [Streaming & Performance](https://developer.playcanvas.com/user-manual/supersplat/streaming.md#near-instant-loads-and-the-gaussian-budget) lists every ladder. Phones and tablets start at **Performance**, other devices at **Default**. Positions the device doesn't have the memory for are disabled.
+The **Quality** slider sets the splat budget, the most splats the viewer draws at once in a streamed scene, from a ladder for the device: for example 2M, 4M, 8M and 16M on a desktop. [Streaming & Performance](https://developer.playcanvas.com/user-manual/supersplat/publishing/streaming.md#near-instant-loads-and-the-gaussian-budget) lists every ladder. Phones and tablets start at **Performance**, other devices at **Default**. Positions the device doesn't have the memory for are disabled.
 
 At **Performance**, the viewer also renders at half resolution, unless Performance Mode is on. A scene published as a single file draws all its splats at every position.
 
@@ -2764,23 +2764,23 @@ Hotspots that part of the scene hides are faded, once the camera stops moving. *
 
 ## See also
 
-- [Viewing in VR and AR](https://developer.playcanvas.com/user-manual/supersplat/viewer/xr.md) — headsets and AR on phones
-- [Streaming & Performance](https://developer.playcanvas.com/user-manual/supersplat/streaming.md) — streamed scenes and the splat budget
-- [Scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md) — where visitors meet the viewer on superspl.at
-- [Viewer API](https://developer.playcanvas.com/user-manual/supersplat/viewer/api.md) — control the same features from your own code
+- [Viewing in VR and AR](https://developer.playcanvas.com/user-manual/supersplat/viewing/xr.md) — headsets and AR on phones
+- [Streaming & Performance](https://developer.playcanvas.com/user-manual/supersplat/publishing/streaming.md) — streamed scenes and the splat budget
+- [Scene page](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md) — where visitors meet the viewer on superspl.at
+- [Viewer API](https://developer.playcanvas.com/user-manual/supersplat/developers/viewer-api.md) — control the same features from your own code
 
 --------------------------------------------------------------------------------
 
 ## Viewing in VR and AR
 
-URL: https://developer.playcanvas.com/user-manual/supersplat/viewer/xr/
-Markdown: https://developer.playcanvas.com/user-manual/supersplat/viewer/xr.md
+URL: https://developer.playcanvas.com/user-manual/supersplat/viewing/xr/
+Markdown: https://developer.playcanvas.com/user-manual/supersplat/viewing/xr.md
 
-The [SuperSplat Viewer](https://developer.playcanvas.com/user-manual/supersplat/viewer.md) supports WebXR. On a headset, or a phone whose browser supports AR, visitors can step into a splat in VR or place it in the room around them in AR. It works the same on [scene pages](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md), embeds, and [self-hosted](https://developer.playcanvas.com/user-manual/supersplat/viewer/self-hosting.md) viewers.
+The [SuperSplat Viewer](https://developer.playcanvas.com/user-manual/supersplat/developers/viewer.md) supports WebXR. On a headset, or a phone whose browser supports AR, visitors can step into a splat in VR or place it in the room around them in AR. It works the same on [scene pages](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md), embeds, and [self-hosted](https://developer.playcanvas.com/user-manual/supersplat/developers/self-hosting.md) viewers.
 
 ## Entering a session
 
-**Enter AR** and **Enter VR** appear in the [toolbar](https://developer.playcanvas.com/user-manual/supersplat/viewer/controls.md#the-toolbar) when the browser supports them, and become available once the scene has loaded. To leave, choose **Exit VR** or **Exit AR** in the [menu](https://developer.playcanvas.com/user-manual/supersplat/viewer/xr.md#the-menu), or use the browser's own controls.
+**Enter AR** and **Enter VR** appear in the [toolbar](https://developer.playcanvas.com/user-manual/supersplat/viewing/controls.md#the-toolbar) when the browser supports them, and become available once the scene has loaded. To leave, choose **Exit VR** or **Exit AR** in the [menu](https://developer.playcanvas.com/user-manual/supersplat/viewing/xr.md#the-menu), or use the browser's own controls.
 
 Some browsers can host a session with WebGL but not WebGPU. When the viewer is running on WebGPU in such a browser, the button opens a **WebGL Required** dialog instead; **OK** reloads the viewer with WebGL, adding `webgl` to the page URL.
 
@@ -2788,7 +2788,7 @@ On Apple Vision Pro, Safari can leave a VR request waiting. The viewer then show
 
 :::tip Start in VR
 
-When you host the viewer yourself, the `vr` [URL parameter](https://developer.playcanvas.com/user-manual/supersplat/viewer/embedding.md#url-parameters) shows a **Tap to enter VR** prompt while the scene loads. Tapping it starts a VR session as soon as the scene is placed, and the rest of the scene streams in during the session. The camera animation starts paused.
+When you host the viewer yourself, the `vr` [URL parameter](https://developer.playcanvas.com/user-manual/supersplat/developers/embedding.md#url-parameters) shows a **Tap to enter VR** prompt while the scene loads. Tapping it starts a VR session as soon as the scene is placed, and the rest of the scene streams in during the session. The camera animation starts paused.
 
 :::
 
@@ -2797,8 +2797,8 @@ When you host the viewer yourself, the `vr` [URL parameter](https://developer.pl
 - The session starts where the viewer's camera is, facing the way it looks.
 - [Post effects](https://developer.playcanvas.com/user-manual/supersplat/studio/post-effects.md) aren't drawn. The scene's tone mapping still is.
 - In AR, the [skybox](https://developer.playcanvas.com/user-manual/supersplat/studio/look-and-tone.md#skybox) and background are hidden, so the room shows through.
-- A [streamed scene](https://developer.playcanvas.com/user-manual/supersplat/streaming.md) chooses its detail by distance alone, so turning your head doesn't stream new detail.
-- On Meta Quest and Pico headsets, sessions render with fixed foveation, target 72 Hz where the headset supports it, and use a lower splat budget (see [Streaming & Performance](https://developer.playcanvas.com/user-manual/supersplat/streaming.md#near-instant-loads-and-the-gaussian-budget)). At the **Performance** quality position they also render at 0.8× resolution.
+- A [streamed scene](https://developer.playcanvas.com/user-manual/supersplat/publishing/streaming.md) chooses its detail by distance alone, so turning your head doesn't stream new detail.
+- On Meta Quest and Pico headsets, sessions render with fixed foveation, target 72 Hz where the headset supports it, and use a lower splat budget (see [Streaming & Performance](https://developer.playcanvas.com/user-manual/supersplat/publishing/streaming.md#near-instant-loads-and-the-gaussian-budget)). At the **Performance** quality position they also render at 0.8× resolution.
 - The [collision](https://developer.playcanvas.com/user-manual/supersplat/studio/collision.md) overlay is turned off.
 
 When the session ends, the splat goes back to its authored placement and the viewer's own settings return.
@@ -2807,8 +2807,8 @@ When the session ends, the splat goes back to its authored placement and the vie
 
 The viewer treats a splat as an **object** when its [starting camera](https://developer.playcanvas.com/user-manual/supersplat/studio/cameras.md) is outside the splat's bounds, such as a statue or a product scan, and as a **scene** when the camera starts inside it, such as a room or a landscape.
 
-- **A scene in VR** surrounds you at real size. You move through it by [teleporting](https://developer.playcanvas.com/user-manual/supersplat/viewer/xr.md#moving-around-in-vr), and grabbing it moves and scales you, so you stay on its floor.
-- **An object** is placed in front of you at about table height, up to 80 cm across and turned to show the side the starting camera showed. You handle it with [grabbing](https://developer.playcanvas.com/user-manual/supersplat/viewer/xr.md#grabbing-turning-and-scaling) rather than teleporting.
+- **A scene in VR** surrounds you at real size. You move through it by [teleporting](https://developer.playcanvas.com/user-manual/supersplat/viewing/xr.md#moving-around-in-vr), and grabbing it moves and scales you, so you stay on its floor.
+- **An object** is placed in front of you at about table height, up to 80 cm across and turned to show the side the starting camera showed. You handle it with [grabbing](https://developer.playcanvas.com/user-manual/supersplat/viewing/xr.md#grabbing-turning-and-scaling) rather than teleporting.
 - **In AR**, every splat is handled as an object. A scene becomes a miniature diorama.
 
 ## Moving around in VR
@@ -2842,7 +2842,7 @@ When an AR session starts, the splat appears in front of you, drawn faintly, wit
 | Controllers | **Hold the trigger, point at a floor or table, then let go** |
 | A phone | **Touch a floor or table to place, two fingers to resize and turn** |
 
-A ring shows where the splat will land. Only roughly level surfaces, such as a floor or a table top, take it. Once placed, the splat stands on a soft shadow; place it again the same way, or [grab it](https://developer.playcanvas.com/user-manual/supersplat/viewer/xr.md#grabbing-turning-and-scaling) to move, turn and scale it.
+A ring shows where the splat will land. Only roughly level surfaces, such as a floor or a table top, take it. Once placed, the splat stands on a soft shadow; place it again the same way, or [grab it](https://developer.playcanvas.com/user-manual/supersplat/viewing/xr.md#grabbing-turning-and-scaling) to move, turn and scale it.
 
 ## Ice-cream mode
 
@@ -2867,27 +2867,27 @@ The menu holds the viewer's settings during a session.
 | Row | What it does |
 |-----|--------------|
 | **Reset Camera** | Returns you to where the session started, and puts a moved object back in front of you. |
-| **Quality** | Steps through the [quality positions](https://developer.playcanvas.com/user-manual/supersplat/viewer/controls.md#quality) the session can hold: the left half of the row steps down, the right half up. |
-| **Performance Mode** | Switches [Performance Mode](https://developer.playcanvas.com/user-manual/supersplat/viewer/controls.md#performance-mode). Shown where it's offered. |
-| **Ice-cream mode** | Turns [ice-cream mode](https://developer.playcanvas.com/user-manual/supersplat/viewer/xr.md#ice-cream-mode) on or off. Shown with hands or controllers. |
+| **Quality** | Steps through the [quality positions](https://developer.playcanvas.com/user-manual/supersplat/viewing/controls.md#quality) the session can hold: the left half of the row steps down, the right half up. |
+| **Performance Mode** | Switches [Performance Mode](https://developer.playcanvas.com/user-manual/supersplat/viewing/controls.md#performance-mode). Shown where it's offered. |
+| **Ice-cream mode** | Turns [ice-cream mode](https://developer.playcanvas.com/user-manual/supersplat/viewing/xr.md#ice-cream-mode) on or off. Shown with hands or controllers. |
 | **Exit VR** / **Exit AR** | Ends the session. |
 
 Controllers that also report a hand, such as Steam Frame's, work as controllers.
 
 ## See also
 
-- [Viewer Controls](https://developer.playcanvas.com/user-manual/supersplat/viewer/controls.md) — the viewer's toolbar and panels outside a session
+- [Viewer Controls](https://developer.playcanvas.com/user-manual/supersplat/viewing/controls.md) — the viewer's toolbar and panels outside a session
 - [Collision](https://developer.playcanvas.com/user-manual/supersplat/studio/collision.md) — make a scene walkable, and teleportable in VR
-- [Viewer API](https://developer.playcanvas.com/user-manual/supersplat/viewer/api.md#fullscreen-and-xr) — start and end sessions from your own code
+- [Viewer API](https://developer.playcanvas.com/user-manual/supersplat/developers/viewer-api.md#fullscreen-and-xr) — start and end sessions from your own code
 
 --------------------------------------------------------------------------------
 
 ## SuperSplat Viewer
 
-URL: https://developer.playcanvas.com/user-manual/supersplat/viewer/
-Markdown: https://developer.playcanvas.com/user-manual/supersplat/viewer.md
+URL: https://developer.playcanvas.com/user-manual/supersplat/developers/viewer/
+Markdown: https://developer.playcanvas.com/user-manual/supersplat/developers/viewer.md
 
-The **SuperSplat Viewer** is the open-source web viewer that renders every [scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md) on superspl.at. It takes a splat plus a settings JSON document and turns them into an interactive 3D experience: orbit, fly and walk camera modes, annotations, camera animations, post effects, collision for walkable scenes, and VR and AR on devices that support WebXR.
+The **SuperSplat Viewer** is the open-source web viewer that renders every [scene page](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md) on superspl.at. It takes a splat plus a settings JSON document and turns them into an interactive 3D experience: orbit, fly and walk camera modes, annotations, camera animations, post effects, collision for walkable scenes, and VR and AR on devices that support WebXR.
 
 The viewer is [open source on GitHub](https://github.com/playcanvas/supersplat-viewer) under the MIT license and is distributed on npm as [`@playcanvas/supersplat-viewer`](https://www.npmjs.com/package/@playcanvas/supersplat-viewer).
 
@@ -2895,58 +2895,58 @@ The viewer is [open source on GitHub](https://github.com/playcanvas/supersplat-v
 
 Visitors see the same viewer wherever it runs: on a scene page, in an embed, or in a viewer exported from the Editor.
 
-- [Viewer Controls](https://developer.playcanvas.com/user-manual/supersplat/viewer/controls.md) — the toolbar, camera modes, the controls, settings and info panels, keyboard shortcuts and annotations
-- [Viewing in VR and AR](https://developer.playcanvas.com/user-manual/supersplat/viewer/xr.md) — entering a session, teleporting, grabbing and scaling, placing a splat in AR, and the hand menu
+- [Viewer Controls](https://developer.playcanvas.com/user-manual/supersplat/viewing/controls.md) — the toolbar, camera modes, the controls, settings and info panels, keyboard shortcuts and annotations
+- [Viewing in VR and AR](https://developer.playcanvas.com/user-manual/supersplat/viewing/xr.md) — entering a session, teleporting, grabbing and scaling, placing a splat in AR, and the hand menu
 
 ## When to use the viewer directly
 
-The published [scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md) on superspl.at is usually the easiest way to share a splat. Reach for the viewer directly when you want:
+The published [scene page](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md) on superspl.at is usually the easiest way to share a splat. Reach for the viewer directly when you want:
 
 - **A page without superspl.at chrome.** Embed the viewer in your own website, app, or product with your own surrounding UI.
 - **Full control over how the viewer is configured.** Override the settings, content, skybox, poster image or collision via URL parameters, your own `settings.json`, or code.
 - **Control from your own code.** Create viewers inside your web app, drive playback, the camera, annotations, fullscreen and XR, or replace the built-in UI with your own.
-- **A self-contained, offline-friendly bundle.** Use the [Editor's HTML export](https://developer.playcanvas.com/user-manual/supersplat/viewer/self-hosting.md) to ship a single-file viewer alongside the splat.
+- **A self-contained, offline-friendly bundle.** Use the [Editor's HTML export](https://developer.playcanvas.com/user-manual/supersplat/developers/self-hosting.md) to ship a single-file viewer alongside the splat.
 - **Independence from superspl.at.** Self-host the viewer on your own infrastructure — no requests back to PlayCanvas servers at runtime.
 
 ## Ways to use it
 
 | Form | Use when |
 |------|----------|
-| **Embed from superspl.at** | The splat is published on superspl.at and an `<iframe>` is enough. Use the [Embed dialog](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md#embed-dialog) on its scene page. |
-| **HTML export from the Editor** | You want a self-contained `.html` (or a `.zip` of the viewer plus the splat) that you can email, drop on a USB stick, or host on GitHub Pages. See [Self-Hosting the Viewer](https://developer.playcanvas.com/user-manual/supersplat/viewer/self-hosting.md). |
-| **The prebuilt viewer from npm** | You want to serve the viewer's files yourself and point each page at a splat and `settings.json` with URL parameters. See [Embedding the Viewer](https://developer.playcanvas.com/user-manual/supersplat/viewer/embedding.md#hosting-the-prebuilt-viewer). |
-| **`renderViewerHtml`** | Your server or build generates the page around the viewer, with the asset URLs and settings filled in. See [Embedding the Viewer](https://developer.playcanvas.com/user-manual/supersplat/viewer/embedding.md#generating-a-page). |
-| **`createViewer`** | Your web app owns the page and creates, controls and destroys viewers itself. See [Viewer API](https://developer.playcanvas.com/user-manual/supersplat/viewer/api.md). |
+| **Embed from superspl.at** | The splat is published on superspl.at and an `<iframe>` is enough. Use the [Embed dialog](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md#embed-dialog) on its scene page. |
+| **HTML export from the Editor** | You want a self-contained `.html` (or a `.zip` of the viewer plus the splat) that you can email, drop on a USB stick, or host on GitHub Pages. See [Self-Hosting the Viewer](https://developer.playcanvas.com/user-manual/supersplat/developers/self-hosting.md). |
+| **The prebuilt viewer from npm** | You want to serve the viewer's files yourself and point each page at a splat and `settings.json` with URL parameters. See [Embedding the Viewer](https://developer.playcanvas.com/user-manual/supersplat/developers/embedding.md#hosting-the-prebuilt-viewer). |
+| **`renderViewerHtml`** | Your server or build generates the page around the viewer, with the asset URLs and settings filled in. See [Embedding the Viewer](https://developer.playcanvas.com/user-manual/supersplat/developers/embedding.md#generating-a-page). |
+| **`createViewer`** | Your web app owns the page and creates, controls and destroys viewers itself. See [Viewer API](https://developer.playcanvas.com/user-manual/supersplat/developers/viewer-api.md). |
 
-Every form reads the same [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md) JSON, so anything you authored in [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md) carries through.
+Every form reads the same [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/developers/experience-settings.md) JSON, so anything you authored in [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md) carries through.
 
 ## See also
 
-- [Viewer Controls](https://developer.playcanvas.com/user-manual/supersplat/viewer/controls.md) — how visitors navigate a scene
-- [Viewing in VR and AR](https://developer.playcanvas.com/user-manual/supersplat/viewer/xr.md) — headsets and AR on phones
-- [Embedding](https://developer.playcanvas.com/user-manual/supersplat/viewer/embedding.md) — npm package, URL parameters, generated pages, settings.json
-- [Viewer API](https://developer.playcanvas.com/user-manual/supersplat/viewer/api.md) — `createViewer` and controlling a viewer from code
-- [Self-Hosting](https://developer.playcanvas.com/user-manual/supersplat/viewer/self-hosting.md) — exporting a single-file HTML viewer from the Editor
-- [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md) — the JSON contract that drives the viewer
+- [Viewer Controls](https://developer.playcanvas.com/user-manual/supersplat/viewing/controls.md) — how visitors navigate a scene
+- [Viewing in VR and AR](https://developer.playcanvas.com/user-manual/supersplat/viewing/xr.md) — headsets and AR on phones
+- [Embedding](https://developer.playcanvas.com/user-manual/supersplat/developers/embedding.md) — npm package, URL parameters, generated pages, settings.json
+- [Viewer API](https://developer.playcanvas.com/user-manual/supersplat/developers/viewer-api.md) — `createViewer` and controlling a viewer from code
+- [Self-Hosting](https://developer.playcanvas.com/user-manual/supersplat/developers/self-hosting.md) — exporting a single-file HTML viewer from the Editor
+- [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/developers/experience-settings.md) — the JSON contract that drives the viewer
 
 --------------------------------------------------------------------------------
 
 ## Embedding the Viewer
 
-URL: https://developer.playcanvas.com/user-manual/supersplat/viewer/embedding/
-Markdown: https://developer.playcanvas.com/user-manual/supersplat/viewer/embedding.md
+URL: https://developer.playcanvas.com/user-manual/supersplat/developers/embedding/
+Markdown: https://developer.playcanvas.com/user-manual/supersplat/developers/embedding.md
 
-The [SuperSplat Viewer](https://developer.playcanvas.com/user-manual/supersplat/viewer.md) is published on npm as [`@playcanvas/supersplat-viewer`](https://www.npmjs.com/package/@playcanvas/supersplat-viewer). You can host the prebuilt viewer and configure it with URL parameters, generate a page around it, or create viewers inside your own web app.
+The [SuperSplat Viewer](https://developer.playcanvas.com/user-manual/supersplat/developers/viewer.md) is published on npm as [`@playcanvas/supersplat-viewer`](https://www.npmjs.com/package/@playcanvas/supersplat-viewer). You can host the prebuilt viewer and configure it with URL parameters, generate a page around it, or create viewers inside your own web app.
 
-If your splat is already published on superspl.at, the simplest embed is an `<iframe>` from the [Embed dialog](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md#embed-dialog) on its scene page.
+If your splat is already published on superspl.at, the simplest embed is an `<iframe>` from the [Embed dialog](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md#embed-dialog) on its scene page.
 
 ## Choosing an approach
 
 | Approach | Use when |
 |----------|----------|
-| [Host the prebuilt viewer](https://developer.playcanvas.com/user-manual/supersplat/viewer/embedding.md#hosting-the-prebuilt-viewer) | You want to serve the viewer's static files and point them at a splat and `settings.json`, configuring each page with URL parameters. |
-| [Generate a page](https://developer.playcanvas.com/user-manual/supersplat/viewer/embedding.md#generating-a-page) with `renderViewerHtml` | Your server or build writes the HTML page, with the asset URLs and settings filled in. |
-| [Create a viewer in your page](https://developer.playcanvas.com/user-manual/supersplat/viewer/embedding.md#creating-a-viewer-in-your-own-page) with `createViewer` | Your web app owns the page, and creates, controls and destroys viewers itself. |
+| [Host the prebuilt viewer](https://developer.playcanvas.com/user-manual/supersplat/developers/embedding.md#hosting-the-prebuilt-viewer) | You want to serve the viewer's static files and point them at a splat and `settings.json`, configuring each page with URL parameters. |
+| [Generate a page](https://developer.playcanvas.com/user-manual/supersplat/developers/embedding.md#generating-a-page) with `renderViewerHtml` | Your server or build writes the HTML page, with the asset URLs and settings filled in. |
+| [Create a viewer in your page](https://developer.playcanvas.com/user-manual/supersplat/developers/embedding.md#creating-a-viewer-in-your-own-page) with `createViewer` | Your web app owns the page, and creates, controls and destroys viewers itself. |
 
 ## Installing
 
@@ -2961,7 +2961,7 @@ The package has these entry points:
 | `@playcanvas/supersplat-viewer` | `renderViewerHtml`, and the viewer's stylesheet and bundle as the strings `css` and `js` |
 | `@playcanvas/supersplat-viewer/viewer` | `createViewer`, with `playcanvas` (2.24.1 or later) as a peer dependency |
 | `@playcanvas/supersplat-viewer/viewer.css` | The stylesheet `createViewer` needs |
-| `@playcanvas/supersplat-viewer/settings` | Settings types, defaults, validation and migration. See [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md#generating-and-validating-settings). |
+| `@playcanvas/supersplat-viewer/settings` | Settings types, defaults, validation and migration. See [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/developers/experience-settings.md#generating-and-validating-settings). |
 
 The main entry also exports the viewer's page as the string `html`, but it is deprecated: its formatting changes between releases, so use `renderViewerHtml` instead.
 
@@ -2979,8 +2979,8 @@ Configure each page with query parameters, for example `index.html?content=./mus
 
 | Parameter | Description | Default |
 | --------- | ----------- | ------- |
-| `settings` | URL of the [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md) JSON file | `./settings.json` |
-| `content` | URL of the splat. See [Supported content](https://developer.playcanvas.com/user-manual/supersplat/viewer/embedding.md#supported-content). | `./scene.compressed.ply` |
+| `settings` | URL of the [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/developers/experience-settings.md) JSON file | `./settings.json` |
+| `content` | URL of the splat. See [Supported content](https://developer.playcanvas.com/user-manual/supersplat/developers/embedding.md#supported-content). | `./scene.compressed.ply` |
 | `skybox` | URL of an equirectangular skybox image | _(none)_ |
 | `poster` | URL of an image shown, blurred, while the scene loads | _(none)_ |
 | `collision` | URL of collision data for walk mode: a `.voxel.json` file (with its `.voxel.bin` beside it), or a `.glb` mesh. `voxel` is an alias. | _(none)_ |
@@ -2994,7 +2994,7 @@ Configure each page with query parameters, for example `index.html?content=./mus
 | `reticle` | Show a center reticle in fly and walk mode while the mouse is captured |
 | `ministats` | Show runtime CPU/GPU performance graphs |
 | `lang` | The UI language: `de`, `en`, `es`, `fr`, `ja`, `ko`, `pt-BR`, `ru` or `zh-CN`. By default, the browser's language. |
-| `vr` | Show a **Tap to enter VR** prompt while the scene loads, where VR is available. See [Viewing in VR and AR](https://developer.playcanvas.com/user-manual/supersplat/viewer/xr.md#entering-a-session). |
+| `vr` | Show a **Tap to enter VR** prompt while the scene loads, where VR is available. See [Viewing in VR and AR](https://developer.playcanvas.com/user-manual/supersplat/viewing/xr.md#entering-a-session). |
 
 #### Rendering
 
@@ -3004,9 +3004,9 @@ Configure each page with query parameters, for example `index.html?content=./mus
 | `aa` | Force the anti-aliasing compensation for splats trained with anti-aliasing: `aa`, `aa=1`, `aa=true` or `aa=enable` turn it on for every splat, any other value turns it off. Without it, each splat file's own training mode decides. |
 | `hpr` | Override the settings' `highPrecisionRendering`: `hpr`, `hpr=1`, `hpr=true` or `hpr=enable` turn it on, any other value off. |
 | `nofx` | Turn off post effects |
-| `budget` | The splat budget, in millions, overriding every [Quality](https://developer.playcanvas.com/user-manual/supersplat/viewer/controls.md#quality) position |
+| `budget` | The splat budget, in millions, overriding every [Quality](https://developer.playcanvas.com/user-manual/supersplat/viewing/controls.md#quality) position |
 | `fullload` | Load all of a streamed scene's detail before the first frame |
-| `stochastic` | Experimental. Force the stochastic splat renderer that [Performance Mode](https://developer.playcanvas.com/user-manual/supersplat/viewer/controls.md#performance-mode) uses: `stochastic` in its per-pixel mode, `stochastic=mobile` in its mode for phones and headsets, or `stochastic=off` to keep the standard renderer. Each hides the Performance Mode setting. WebGPU only. |
+| `stochastic` | Experimental. Force the stochastic splat renderer that [Performance Mode](https://developer.playcanvas.com/user-manual/supersplat/viewing/controls.md#performance-mode) uses: `stochastic` in its per-pixel mode, `stochastic=mobile` in its mode for phones and headsets, or `stochastic=off` to keep the standard renderer. Each hides the Performance Mode setting. WebGPU only. |
 | `colorize` | Color the splats by level of detail |
 | `heatmap` | Draw the collision overlay as a heat map. Needs WebGPU and voxel collision; turn the overlay on with **Show Collision** or <kbd>V</kbd>. |
 | `debug` | Open the developer debug panel on load (<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>D</kbd> toggles it) |
@@ -3089,11 +3089,11 @@ const viewer = await createViewer({
 viewer.destroy();
 ```
 
-The returned handle controls loading, playback, the camera, annotations, fullscreen and XR, and the built-in UI can be restyled or replaced. See [Viewer API](https://developer.playcanvas.com/user-manual/supersplat/viewer/api.md).
+The returned handle controls loading, playback, the camera, annotations, fullscreen and XR, and the built-in UI can be restyled or replaced. See [Viewer API](https://developer.playcanvas.com/user-manual/supersplat/developers/viewer-api.md).
 
 ## Settings JSON
 
-The `settings` parameter or option points at an [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md) v2 document, the same JSON format [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md) saves. This is the complete document that `defaultSettings()` from `@playcanvas/supersplat-viewer/settings` generates:
+The `settings` parameter or option points at an [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/developers/experience-settings.md) v2 document, the same JSON format [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md) saves. This is the complete document that `defaultSettings()` from `@playcanvas/supersplat-viewer/settings` generates:
 
 ```json
 {
@@ -3119,28 +3119,28 @@ The `settings` parameter or option points at an [Experience Settings](https://de
 }
 ```
 
-That camera looks across a captured space from inside it; `defaultSettings('object')` frames a subject from outside instead. For every field, the authoring limits, and the helpers for generating, validating and migrating settings, see the [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md) reference.
+That camera looks across a captured space from inside it; `defaultSettings('object')` frames a subject from outside instead. For every field, the authoring limits, and the helpers for generating, validating and migrating settings, see the [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/developers/experience-settings.md) reference.
 
 ## Programmatic publishing
 
-To publish splats to superspl.at from your own pipeline instead of the Editor, use the [SuperSplat API](https://developer.playcanvas.com/user-manual/supersplat/api-integrations.md). A scene published this way starts with the default settings, and its viewing experience is curated in [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md).
+To publish splats to superspl.at from your own pipeline instead of the Editor, use the [SuperSplat API](https://developer.playcanvas.com/user-manual/supersplat/developers/api-integrations.md). A scene published this way starts with the default settings, and its viewing experience is curated in [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md).
 
 ## See also
 
-- [SuperSplat Viewer overview](https://developer.playcanvas.com/user-manual/supersplat/viewer.md) — what the viewer is and when to reach for it
-- [Viewer API](https://developer.playcanvas.com/user-manual/supersplat/viewer/api.md) — `createViewer` and the viewer handle
-- [Self-Hosting](https://developer.playcanvas.com/user-manual/supersplat/viewer/self-hosting.md) — single-file HTML export from the Editor
-- [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md) — the JSON contract the viewer reads
-- [API & Integrations](https://developer.playcanvas.com/user-manual/supersplat/api-integrations.md) — publish splats to superspl.at from your own code
+- [SuperSplat Viewer overview](https://developer.playcanvas.com/user-manual/supersplat/developers/viewer.md) — what the viewer is and when to reach for it
+- [Viewer API](https://developer.playcanvas.com/user-manual/supersplat/developers/viewer-api.md) — `createViewer` and the viewer handle
+- [Self-Hosting](https://developer.playcanvas.com/user-manual/supersplat/developers/self-hosting.md) — single-file HTML export from the Editor
+- [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/developers/experience-settings.md) — the JSON contract the viewer reads
+- [API & Integrations](https://developer.playcanvas.com/user-manual/supersplat/developers/api-integrations.md) — publish splats to superspl.at from your own code
 
 --------------------------------------------------------------------------------
 
 ## Viewer API
 
-URL: https://developer.playcanvas.com/user-manual/supersplat/viewer/api/
-Markdown: https://developer.playcanvas.com/user-manual/supersplat/viewer/api.md
+URL: https://developer.playcanvas.com/user-manual/supersplat/developers/viewer-api/
+Markdown: https://developer.playcanvas.com/user-manual/supersplat/developers/viewer-api.md
 
-`createViewer` creates a [SuperSplat Viewer](https://developer.playcanvas.com/user-manual/supersplat/viewer.md) inside an element of your own page and returns a handle for controlling it. Use it when your web app owns the page: to mount and unmount viewers in a component, run several on one page, drive the viewer from your own controls, or replace its UI. For a page that only shows one splat, the [prebuilt viewer or `renderViewerHtml`](https://developer.playcanvas.com/user-manual/supersplat/viewer/embedding.md) is simpler.
+`createViewer` creates a [SuperSplat Viewer](https://developer.playcanvas.com/user-manual/supersplat/developers/viewer.md) inside an element of your own page and returns a handle for controlling it. Use it when your web app owns the page: to mount and unmount viewers in a component, run several on one page, drive the viewer from your own controls, or replace its UI. For a page that only shows one splat, the [prebuilt viewer or `renderViewerHtml`](https://developer.playcanvas.com/user-manual/supersplat/developers/embedding.md) is simpler.
 
 The package's [API reference](https://github.com/playcanvas/supersplat-viewer/blob/main/docs/api.md) has further detail.
 
@@ -3178,19 +3178,19 @@ viewer.events.on('loaded:changed', () => console.log('first frame rendered'));
 | Option | Description |
 |--------|-------------|
 | `container` | The element the viewer builds itself in. Required. |
-| `settings` | The [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md): a URL, an object in any supported version, or a promise of one. Required. |
-| `contentUrl` | The splat to load. Required. Any [supported format](https://developer.playcanvas.com/user-manual/supersplat/viewer/embedding.md#supported-content); a `data:` URI works too. |
+| `settings` | The [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/developers/experience-settings.md): a URL, an object in any supported version, or a promise of one. Required. |
+| `contentUrl` | The splat to load. Required. Any [supported format](https://developer.playcanvas.com/user-manual/supersplat/developers/embedding.md#supported-content); a `data:` URI works too. |
 | `contentFilename` | A name for the content, such as `scene.sog`. The format is chosen from the name's extension, so set this when `contentUrl` has no usable name, such as a `data:` URI. |
 | `posterUrl` / `poster` | An image shown, blurred, while the splat loads, as a URL or an already-created `HTMLImageElement`. |
 | `skyboxUrl` | An equirectangular skybox image. |
 | `collisionUrl` | Collision data for walk mode: a `.glb` mesh, or voxel data. |
 | `contents` | A `fetch` of `contentUrl` already in flight, so the download can start before the viewer's code arrives. |
-| `zstdDecoderUrl` | Where to load the version 4 `.spz` decoder from. See [Decoder files](https://developer.playcanvas.com/user-manual/supersplat/viewer/api.md#decoder-files). |
+| `zstdDecoderUrl` | Where to load the version 4 `.spz` decoder from. See [Decoder files](https://developer.playcanvas.com/user-manual/supersplat/developers/viewer-api.md#decoder-files). |
 
-The remaining options are the programmatic form of the [URL parameters](https://developer.playcanvas.com/user-manual/supersplat/viewer/embedding.md#url-parameters), with the same names, except:
+The remaining options are the programmatic form of the [URL parameters](https://developer.playcanvas.com/user-manual/supersplat/developers/embedding.md#url-parameters), with the same names, except:
 
 - `renderer: 'webgl'` forces WebGL, like `webgl`. The default is `'webgpu'`, which falls back to WebGL where WebGPU isn't available.
-- `ui: false` leaves out the built-in UI, like `noui`. See [Replacing the UI](https://developer.playcanvas.com/user-manual/supersplat/viewer/api.md#replacing-the-ui).
+- `ui: false` leaves out the built-in UI, like `noui`. See [Replacing the UI](https://developer.playcanvas.com/user-manual/supersplat/developers/viewer-api.md#replacing-the-ui).
 - `exposeGlobals: true` publishes the viewer's `window.app`, `window.captureFrame` and similar hooks. Leave it off when a page has more than one viewer.
 
 `createViewer` doesn't read the page's URL: pass every option yourself.
@@ -3199,7 +3199,7 @@ The remaining options are the programmatic form of the [URL parameters](https://
 
 | Member | Purpose |
 |--------|---------|
-| `state` | The viewer's [observable state](https://developer.playcanvas.com/user-manual/supersplat/viewer/api.md#state). |
+| `state` | The viewer's [observable state](https://developer.playcanvas.com/user-manual/supersplat/developers/viewer-api.md#state). |
 | `events` | Fires `<key>:changed` with `(value, previous)` for every key of `state`. |
 | `annotations` | The scene's annotations in settings order, read-only. |
 | `captureFrame(options?)` | Renders a still offscreen, supersampled, and resolves to `{ width, height, data }` with `data` in base64. Options: `time`, `width` (default 480), `height`, `supersample` (default 2). |
@@ -3234,11 +3234,11 @@ Write a writable key and the change takes effect at once; the built-in UI follow
 | `animationTime` / `animationDuration` | | The playhead and length, in seconds. |
 | `selectedAnnotation` | | The selected annotation's index, or `null`. Use `selectAnnotation()` to change it. |
 | `showAnnotations` | ✓ | Shows the built-in hotspots. Saved. |
-| `quality` | ✓ | The [Quality](https://developer.playcanvas.com/user-manual/supersplat/viewer/controls.md#quality) position: `'performance'`, `'default'`, `'high'` or `'max'`. Saved. |
+| `quality` | ✓ | The [Quality](https://developer.playcanvas.com/user-manual/supersplat/viewing/controls.md#quality) position: `'performance'`, `'default'`, `'high'` or `'max'`. Saved. |
 | `qualityAvailable` | | The positions this device can hold. |
-| `performanceMode` | ✓ | [Performance Mode](https://developer.playcanvas.com/user-manual/supersplat/viewer/controls.md#performance-mode). Saved. |
-| `gamingControls` | ✓ | [Gaming Controls](https://developer.playcanvas.com/user-manual/supersplat/viewer/controls.md#gaming-controls). Saved. |
-| `iceCream` | ✓ | [Ice-cream mode](https://developer.playcanvas.com/user-manual/supersplat/viewer/xr.md#ice-cream-mode) in XR. Saved. |
+| `performanceMode` | ✓ | [Performance Mode](https://developer.playcanvas.com/user-manual/supersplat/viewing/controls.md#performance-mode). Saved. |
+| `gamingControls` | ✓ | [Gaming Controls](https://developer.playcanvas.com/user-manual/supersplat/viewing/controls.md#gaming-controls). Saved. |
+| `iceCream` | ✓ | [Ice-cream mode](https://developer.playcanvas.com/user-manual/supersplat/viewing/xr.md#ice-cream-mode) in XR. Saved. |
 | `inputMode` | | `'desktop'` or `'touch'`: what the visitor last used. |
 | `controlsHidden` | ✓ | Hides the built-in controls. The viewer also sets it when idle. |
 | `inputEnabled` | ✓ | Whether this viewer takes keyboard and gamepad input. |
@@ -3323,7 +3323,7 @@ viewer.events.on('xrMode:changed', updateControls);
 
 Check `state.canStartAR` and `state.canStartVR`, and subscribe to their change events, since the capability checks can finish after creation. `startXR()` rejects when the current renderer can't host the session; it never reloads the page.
 
-The built-in **WebGL Required** dialog reloads the page with `?webgl` added. If your page creates the viewer and keeps the built-in UI, read that parameter and pass `renderer: 'webgl'`. See [Viewing in VR and AR](https://developer.playcanvas.com/user-manual/supersplat/viewer/xr.md) for what visitors can do in a session.
+The built-in **WebGL Required** dialog reloads the page with `?webgl` added. If your page creates the viewer and keeps the built-in UI, read that parameter and pass `renderer: 'webgl'`. See [Viewing in VR and AR](https://developer.playcanvas.com/user-manual/supersplat/viewing/xr.md) for what visitors can do in a session.
 
 ## Restyling
 
@@ -3357,18 +3357,18 @@ Version 4 `.spz` files, on their own or as chunks of an `.lcc2` scene, need a We
 
 ## See also
 
-- [Embedding the Viewer](https://developer.playcanvas.com/user-manual/supersplat/viewer/embedding.md) — the npm package, URL parameters and `renderViewerHtml`
-- [Viewer Controls](https://developer.playcanvas.com/user-manual/supersplat/viewer/controls.md) — the built-in UI the handle drives
-- [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md) — the settings JSON and the helpers for generating it
+- [Embedding the Viewer](https://developer.playcanvas.com/user-manual/supersplat/developers/embedding.md) — the npm package, URL parameters and `renderViewerHtml`
+- [Viewer Controls](https://developer.playcanvas.com/user-manual/supersplat/viewing/controls.md) — the built-in UI the handle drives
+- [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/developers/experience-settings.md) — the settings JSON and the helpers for generating it
 
 --------------------------------------------------------------------------------
 
 ## Self-Hosting the Viewer
 
-URL: https://developer.playcanvas.com/user-manual/supersplat/viewer/self-hosting/
-Markdown: https://developer.playcanvas.com/user-manual/supersplat/viewer/self-hosting.md
+URL: https://developer.playcanvas.com/user-manual/supersplat/developers/self-hosting/
+Markdown: https://developer.playcanvas.com/user-manual/supersplat/developers/self-hosting.md
 
-The [SuperSplat Viewer](https://developer.playcanvas.com/user-manual/supersplat/viewer.md) is [open source](https://github.com/playcanvas/supersplat-viewer) and can be directly exported by the [SuperSplat Editor](https://developer.playcanvas.com/user-manual/supersplat/editor.md) should you wish to self-host your splat content instead of (or in addition to) publishing to [superspl.at](https://superspl.at). The exported viewer runs in any modern web browser with the viewer's usual [controls](https://developer.playcanvas.com/user-manual/supersplat/viewer/controls.md) and supports [AR and VR](https://developer.playcanvas.com/user-manual/supersplat/viewer/xr.md) on devices that support WebXR.
+The [SuperSplat Viewer](https://developer.playcanvas.com/user-manual/supersplat/developers/viewer.md) is [open source](https://github.com/playcanvas/supersplat-viewer) and can be directly exported by the [SuperSplat Editor](https://developer.playcanvas.com/user-manual/supersplat/editor.md) should you wish to self-host your splat content instead of (or in addition to) publishing to [superspl.at](https://superspl.at). The exported viewer runs in any modern web browser with the viewer's usual [controls](https://developer.playcanvas.com/user-manual/supersplat/viewing/controls.md) and supports [AR and VR](https://developer.playcanvas.com/user-manual/supersplat/viewing/xr.md) on devices that support WebXR.
 
 ## Exporting the HTML Viewer
 
@@ -3412,25 +3412,25 @@ Once exported, you can host the HTML Viewer file somewhere to make it accessible
 
 ## Other ways to self-host
 
-The exported viewer is a copy of the viewer at the version the Editor includes, and doesn't update itself. To serve the latest viewer, or to point one copy at many splats, [host the prebuilt viewer from npm](https://developer.playcanvas.com/user-manual/supersplat/viewer/embedding.md#hosting-the-prebuilt-viewer) and configure it with URL parameters. To produce the same HTML viewer from a script, use [splat-transform](https://developer.playcanvas.com/user-manual/splat-transform.md) with an `.html` output file.
+The exported viewer is a copy of the viewer at the version the Editor includes, and doesn't update itself. To serve the latest viewer, or to point one copy at many splats, [host the prebuilt viewer from npm](https://developer.playcanvas.com/user-manual/supersplat/developers/embedding.md#hosting-the-prebuilt-viewer) and configure it with URL parameters. To produce the same HTML viewer from a script, use [splat-transform](https://developer.playcanvas.com/user-manual/splat-transform.md) with an `.html` output file.
 
 ## See also
 
-- [SuperSplat Viewer overview](https://developer.playcanvas.com/user-manual/supersplat/viewer.md) — what the open-source viewer is and when to use it
-- [Embedding](https://developer.playcanvas.com/user-manual/supersplat/viewer/embedding.md) — using the `@playcanvas/supersplat-viewer` npm package in your own web app
-- [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md) — the JSON contract Studio writes and the Viewer reads
+- [SuperSplat Viewer overview](https://developer.playcanvas.com/user-manual/supersplat/developers/viewer.md) — what the open-source viewer is and when to use it
+- [Embedding](https://developer.playcanvas.com/user-manual/supersplat/developers/embedding.md) — using the `@playcanvas/supersplat-viewer` npm package in your own web app
+- [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/developers/experience-settings.md) — the JSON contract Studio writes and the Viewer reads
 
 --------------------------------------------------------------------------------
 
 ## Experience Settings
 
-URL: https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings/
-Markdown: https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md
+URL: https://developer.playcanvas.com/user-manual/supersplat/developers/experience-settings/
+Markdown: https://developer.playcanvas.com/user-manual/supersplat/developers/experience-settings.md
 
 **Experience Settings** is the JSON document that defines a published splat's viewing experience — tonemapping, post effects, background, cameras, animations, annotations, and the scene's start mode. It's the single contract between two products:
 
 - **Writer** — [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md) saves it whenever you hit Save.
-- **Reader** — the [SuperSplat Viewer](https://developer.playcanvas.com/user-manual/supersplat/viewer.md) loads it at runtime, both on the [scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md) and when [embedded](https://developer.playcanvas.com/user-manual/supersplat/viewer/embedding.md) or [self-hosted](https://developer.playcanvas.com/user-manual/supersplat/viewer/self-hosting.md).
+- **Reader** — the [SuperSplat Viewer](https://developer.playcanvas.com/user-manual/supersplat/developers/viewer.md) loads it at runtime, both on the [scene page](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md) and when [embedded](https://developer.playcanvas.com/user-manual/supersplat/developers/embedding.md) or [self-hosted](https://developer.playcanvas.com/user-manual/supersplat/developers/self-hosting.md).
 
 You don't normally edit this JSON by hand — Studio is the supported authoring surface. But if you're embedding the Viewer in your own application, generating settings from a build pipeline, or consuming the published settings directly, the schema below is what to write against.
 
@@ -3517,12 +3517,12 @@ Most fields are authored in a Studio control. The camera animation can also come
 
 A few fields behave in ways the schema alone doesn't show:
 
-- **`background.skyboxUrl`** — the viewer doesn't load the skybox from the settings. When you host the viewer yourself, pass the image with the `skybox` [URL parameter](https://developer.playcanvas.com/user-manual/supersplat/viewer/embedding.md#url-parameters) or the `skyboxUrl` option.
+- **`background.skyboxUrl`** — the viewer doesn't load the skybox from the settings. When you host the viewer yourself, pass the image with the `skybox` [URL parameter](https://developer.playcanvas.com/user-manual/supersplat/developers/embedding.md#url-parameters) or the `skyboxUrl` option.
 - **`soundUrl`** — the sound starts on the visitor's first click in the viewer, since browsers block audio that plays on its own.
 - **`cameras` and `animTracks`** — the format allows several, but the viewer uses only the first camera and plays only the first track.
 - **`annotations[].text`** — shown as plain text, so HTML markup isn't rendered.
 - **`startMode: 'annotation'`** — accepted, but the viewer starts as it does for `default`.
-- **`antiAlias`** — not part of the schema above, but Studio adds it: its [Anti-aliasing](https://developer.playcanvas.com/user-manual/supersplat/studio/look-and-tone.md#anti-aliasing) switch stores `antiAlias: false` when turned off. The viewer doesn't read it. Each splat file's own anti-aliasing tag decides, and the `aa` [URL parameter](https://developer.playcanvas.com/user-manual/supersplat/viewer/embedding.md#url-parameters) overrides that.
+- **`antiAlias`** — not part of the schema above, but Studio adds it: its [Anti-aliasing](https://developer.playcanvas.com/user-manual/supersplat/studio/look-and-tone.md#anti-aliasing) switch stores `antiAlias: false` when turned off. The viewer doesn't read it. Each splat file's own anti-aliasing tag decides, and the `aa` [URL parameter](https://developer.playcanvas.com/user-manual/supersplat/developers/embedding.md#url-parameters) overrides that.
 
 ## Authoring limits
 
@@ -3591,21 +3591,21 @@ Older `v1` settings are migrated to `v2` automatically when loaded by Studio or 
 
 ## See also
 
-- [Viewer / embedding](https://developer.playcanvas.com/user-manual/supersplat/viewer/embedding.md) — how to point a Viewer at a `settings.json` URL
-- [Viewer API](https://developer.playcanvas.com/user-manual/supersplat/viewer/api.md) — pass settings to a viewer you create in your own page
-- [Viewer / self-hosting](https://developer.playcanvas.com/user-manual/supersplat/viewer/self-hosting.md) — exporting a self-contained Viewer that bundles a copy of these settings
-- [API & Integrations](https://developer.playcanvas.com/user-manual/supersplat/api-integrations.md) — publish splats to superspl.at from your own code
+- [Viewer / embedding](https://developer.playcanvas.com/user-manual/supersplat/developers/embedding.md) — how to point a Viewer at a `settings.json` URL
+- [Viewer API](https://developer.playcanvas.com/user-manual/supersplat/developers/viewer-api.md) — pass settings to a viewer you create in your own page
+- [Viewer / self-hosting](https://developer.playcanvas.com/user-manual/supersplat/developers/self-hosting.md) — exporting a self-contained Viewer that bundles a copy of these settings
+- [API & Integrations](https://developer.playcanvas.com/user-manual/supersplat/developers/api-integrations.md) — publish splats to superspl.at from your own code
 
 --------------------------------------------------------------------------------
 
 ## API & Integrations
 
-URL: https://developer.playcanvas.com/user-manual/supersplat/api-integrations/
-Markdown: https://developer.playcanvas.com/user-manual/supersplat/api-integrations.md
+URL: https://developer.playcanvas.com/user-manual/supersplat/developers/api-integrations/
+Markdown: https://developer.playcanvas.com/user-manual/supersplat/developers/api-integrations.md
 
 The SuperSplat API lets applications publish Gaussian splats to superspl.at, list the scenes owned by the authenticated user, look up any scene by id, and download scenes whose owners allow it. Use it to connect a capture application, training pipeline, conversion tool, or internal content workflow directly to SuperSplat.
 
-Uploaded scenes appear on the user's [Manage page](https://developer.playcanvas.com/user-manual/supersplat/manage.md), where they can be edited, opened in [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md), or shared through their public [scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md).
+Uploaded scenes appear on the user's [Manage page](https://developer.playcanvas.com/user-manual/supersplat/publishing/manage.md), where they can be edited, opened in [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md), or shared through their public [scene page](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md).
 
 :::info Complete API reference
 
@@ -3698,9 +3698,9 @@ Use `uploadClient` for the application performing the upload. Use `softwareTools
 ## See also
 
 - [SuperSplat API reference](https://developer.playcanvas.com/user-manual/api/supersplat/) — complete endpoint and schema documentation
-- [Scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md) — download a scene from its page on superspl.at
-- [Direct Upload](https://developer.playcanvas.com/user-manual/supersplat/upload.md) — publish a file through the superspl.at interface
-- [Manage](https://developer.playcanvas.com/user-manual/supersplat/manage.md) — work with uploaded scenes
+- [Scene page](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md) — download a scene from its page on superspl.at
+- [Direct Upload](https://developer.playcanvas.com/user-manual/supersplat/publishing/upload.md) — publish a file through the superspl.at interface
+- [Manage](https://developer.playcanvas.com/user-manual/supersplat/publishing/manage.md) — work with uploaded scenes
 - [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md) — curate the published viewing experience
 
 --------------------------------------------------------------------------------
@@ -3878,14 +3878,14 @@ Shortcuts are ignored while focus is in a text or numeric input. The brush size 
 
 ## Explore
 
-URL: https://developer.playcanvas.com/user-manual/supersplat/explore/
-Markdown: https://developer.playcanvas.com/user-manual/supersplat/explore.md
+URL: https://developer.playcanvas.com/user-manual/supersplat/viewing/explore/
+Markdown: https://developer.playcanvas.com/user-manual/supersplat/viewing/explore.md
 
 The [Explore page](https://superspl.at) is the public-facing home of SuperSplat — an infinite-scroll gallery of every **Public** splat published on the platform. It's where visitors discover scenes without needing an account.
 
 [Image: The SuperSplat Explore page — a grid of public splats]
 
-Browsing Explore is **anonymous** — no PlayCanvas account is required. An account becomes useful when you want to [like](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md#likes), [comment](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md#comments), or [publish your own splats](https://developer.playcanvas.com/user-manual/supersplat/upload.md).
+Browsing Explore is **anonymous** — no PlayCanvas account is required. An account becomes useful when you want to [like](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md#likes), [comment](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md#comments), or [publish your own splats](https://developer.playcanvas.com/user-manual/supersplat/publishing/upload.md).
 
 ## Feed tabs
 
@@ -3895,11 +3895,11 @@ The home page feed is split into tabs:
 |-----|---------------|
 | **Trending** (default) | Splats gaining the most traction right now. |
 | **Latest** (`?tab=latest`) | The most recently published splats. |
-| **Following** (`?tab=following`) | Public splats from the creators you follow, newest first. Only shown while you're signed in. See [Following Creators](https://developer.playcanvas.com/user-manual/supersplat/following.md). |
+| **Following** (`?tab=following`) | Public splats from the creators you follow, newest first. Only shown while you're signed in. See [Following Creators](https://developer.playcanvas.com/user-manual/supersplat/viewing/following.md). |
 
 ## The grid
 
-Splats are shown as cards with a thumbnail, title, and author. Click a card to open the splat's [scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md).
+Splats are shown as cards with a thumbnail, title, and author. Click a card to open the splat's [scene page](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md).
 
 The grid loads progressively as you scroll — the first page returns 32 splats (a 4×8 layout), and each subsequent page returns 16 (2×8). There's no "next page" button; just keep scrolling.
 
@@ -3946,7 +3946,7 @@ Comma-separated list. The available filters are:
 | Value | Splats matching |
 |-------|-----------------|
 | `walkable` | Splats with [collision](https://developer.playcanvas.com/user-manual/supersplat/studio/collision.md) — visitors can walk through them |
-| `downloadable` | Splats whose creators have enabled [downloads](https://developer.playcanvas.com/user-manual/supersplat/manage.md#downloadable--license) |
+| `downloadable` | Splats whose creators have enabled [downloads](https://developer.playcanvas.com/user-manual/supersplat/publishing/manage.md#downloadable--license) |
 
 ### Search (`?q=...`)
 
@@ -3960,24 +3960,24 @@ The top-nav search bar adds a `q=` parameter that matches against splat **title*
 
 ## Creator profiles
 
-Click a card's author chip to land on that user's [profile page](https://developer.playcanvas.com/user-manual/supersplat/user-profile.md) — a grid of every Public splat that user has shared, plus their avatar, bio, and social links. From there you can [follow them](https://developer.playcanvas.com/user-manual/supersplat/following.md) to see their new splats in your Following tab.
+Click a card's author chip to land on that user's [profile page](https://developer.playcanvas.com/user-manual/supersplat/viewing/user-profile.md) — a grid of every Public splat that user has shared, plus their avatar, bio, and social links. From there you can [follow them](https://developer.playcanvas.com/user-manual/supersplat/viewing/following.md) to see their new splats in your Following tab.
 
 ## See also
 
-- [Scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md) — what happens when you click a card
-- [User Profile](https://developer.playcanvas.com/user-manual/supersplat/user-profile.md) — browse one creator's published splats
-- [Manage](https://developer.playcanvas.com/user-manual/supersplat/manage.md) — set your splats to **Public** so they appear in Explore
+- [Scene page](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md) — what happens when you click a card
+- [User Profile](https://developer.playcanvas.com/user-manual/supersplat/viewing/user-profile.md) — browse one creator's published splats
+- [Manage](https://developer.playcanvas.com/user-manual/supersplat/publishing/manage.md) — set your splats to **Public** so they appear in Explore
 
 --------------------------------------------------------------------------------
 
 ## User Profile
 
-URL: https://developer.playcanvas.com/user-manual/supersplat/user-profile/
-Markdown: https://developer.playcanvas.com/user-manual/supersplat/user-profile.md
+URL: https://developer.playcanvas.com/user-manual/supersplat/viewing/user-profile/
+Markdown: https://developer.playcanvas.com/user-manual/supersplat/viewing/user-profile.md
 
 Each creator on SuperSplat gets a public profile at `https://superspl.at/user/<username>`. The profile shows their avatar, display name, bio, any social links they've added, their follower and following counts, and a grid of every **Public** splat they've published.
 
-Profiles are linked from the **author chip** that appears on every [scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md) and on every card in the [Explore](https://developer.playcanvas.com/user-manual/supersplat/explore.md) grid — clicking the author's name navigates to their profile.
+Profiles are linked from the **author chip** that appears on every [scene page](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md) and on every card in the [Explore](https://developer.playcanvas.com/user-manual/supersplat/viewing/explore.md) grid — clicking the author's name navigates to their profile.
 
 Browsing a profile is anonymous; no PlayCanvas account is required.
 
@@ -3991,37 +3991,37 @@ Browsing a profile is anonymous; no PlayCanvas account is required.
 | **Bio** | A short profile description the creator has written about themselves. |
 | **Social links** | Links to any external profiles the creator has added (X, LinkedIn, personal site, etc.). |
 | **Followers and following** | How many people follow the creator and how many they follow. Click either number to see who. |
-| **Follow** | Follow the creator to see their splats in your [Following feed](https://developer.playcanvas.com/user-manual/supersplat/following.md). |
-| **Splat grid** | Every **Public** splat the creator has published, using the same card UI as [Explore](https://developer.playcanvas.com/user-manual/supersplat/explore.md). Click any card to open its [scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md). |
+| **Follow** | Follow the creator to see their splats in your [Following feed](https://developer.playcanvas.com/user-manual/supersplat/viewing/following.md). |
+| **Splat grid** | Every **Public** splat the creator has published, using the same card UI as [Explore](https://developer.playcanvas.com/user-manual/supersplat/viewing/explore.md). Click any card to open its [scene page](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md). |
 
-Unlisted splats are not shown on the public profile — only the creator can see those, via the [Manage page](https://developer.playcanvas.com/user-manual/supersplat/manage.md).
+Unlisted splats are not shown on the public profile — only the creator can see those, via the [Manage page](https://developer.playcanvas.com/user-manual/supersplat/publishing/manage.md).
 
 ## Your own profile
 
 On your own profile you'll also find:
 
-- **Everyone you follow.** Click your **following** count to see the list and [unfollow](https://developer.playcanvas.com/user-manual/supersplat/following.md#managing) anyone you like.
+- **Everyone you follow.** Click your **following** count to see the list and [unfollow](https://developer.playcanvas.com/user-manual/supersplat/viewing/following.md#managing) anyone you like.
 - **A Likes tab** with every splat you've liked. Only you can see it.
 
 ## See also
 
-- [Following Creators](https://developer.playcanvas.com/user-manual/supersplat/following.md) — follow creators and see their splats in one feed
-- [Explore](https://developer.playcanvas.com/user-manual/supersplat/explore.md) — discover splats across the whole platform
-- [Scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md) — open one specific splat
+- [Following Creators](https://developer.playcanvas.com/user-manual/supersplat/viewing/following.md) — follow creators and see their splats in one feed
+- [Explore](https://developer.playcanvas.com/user-manual/supersplat/viewing/explore.md) — discover splats across the whole platform
+- [Scene page](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md) — open one specific splat
 - [Account Creation](https://developer.playcanvas.com/user-manual/account-management/user-accounts/account-creation.md) — set up your own profile
 
 --------------------------------------------------------------------------------
 
 ## Following Creators
 
-URL: https://developer.playcanvas.com/user-manual/supersplat/following/
-Markdown: https://developer.playcanvas.com/user-manual/supersplat/following.md
+URL: https://developer.playcanvas.com/user-manual/supersplat/viewing/following/
+Markdown: https://developer.playcanvas.com/user-manual/supersplat/viewing/following.md
 
 Found a creator whose work you love? Follow them, and their splats show up in your **Following** feed on the [superspl.at](https://superspl.at) home page.
 
 ## Follow a creator
 
-1. Open the creator's [profile](https://developer.playcanvas.com/user-manual/supersplat/user-profile.md), or any of their [scenes](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md).
+1. Open the creator's [profile](https://developer.playcanvas.com/user-manual/supersplat/viewing/user-profile.md), or any of their [scenes](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md).
 2. Click **Follow**.
 
 The button changes to **Following**. You'll need to be signed in with your PlayCanvas account.
@@ -4042,7 +4042,7 @@ To review everyone you follow in one place, open your own profile and click your
 
 ## See also
 
-- [User Profile](https://developer.playcanvas.com/user-manual/supersplat/user-profile.md) — what's on a creator's profile
-- [Explore](https://developer.playcanvas.com/user-manual/supersplat/explore.md) — find creators to follow
+- [User Profile](https://developer.playcanvas.com/user-manual/supersplat/viewing/user-profile.md) — what's on a creator's profile
+- [Explore](https://developer.playcanvas.com/user-manual/supersplat/viewing/explore.md) — find creators to follow
 
 --------------------------------------------------------------------------------

@@ -381,7 +381,7 @@ splat-transform scene/lod-meta.json --info null
 - [Streamed SOG format](https://developer.playcanvas.com/user-manual/gaussian-splatting/formats/streamed-sog.md) — the on-disk format specification.
 - [LOD Streaming](https://developer.playcanvas.com/user-manual/gaussian-splatting/building/lod-streaming.md) — loading and rendering Streamed SOG in a PlayCanvas app.
 - [CLI Reference](https://developer.playcanvas.com/user-manual/splat-transform/cli-reference.md#lod-input-options) — full option reference including LOD Input/Output Options.
-- [SuperSplat streaming](https://developer.playcanvas.com/user-manual/supersplat/streaming.md) — generating Streamed SOG through the SuperSplat web UI.
+- [SuperSplat streaming](https://developer.playcanvas.com/user-manual/supersplat/publishing/streaming.md) — generating Streamed SOG through the SuperSplat web UI.
 
 --------------------------------------------------------------------------------
 
@@ -398,7 +398,7 @@ For uploading or generating voxel collision through the SuperSplat web UI instea
 
 Two outputs are produced from the same voxelization pass:
 
-- **`.voxel.json` / `.voxel.bin`** — sparse voxel octree (SVO) for raycasts and broad-phase collision queries. This is the format consumed by the [SuperSplat Viewer](https://developer.playcanvas.com/user-manual/supersplat/viewer.md) for runtime collision detection. The on-disk structure is specified in the [Voxel Format](https://developer.playcanvas.com/user-manual/splat-transform/voxel-format.md) specification.
+- **`.voxel.json` / `.voxel.bin`** — sparse voxel octree (SVO) for raycasts and broad-phase collision queries. This is the format consumed by the [SuperSplat Viewer](https://developer.playcanvas.com/user-manual/supersplat/developers/viewer.md) for runtime collision detection. The on-disk structure is specified in the [Voxel Format](https://developer.playcanvas.com/user-manual/splat-transform/voxel-format.md) specification.
 - **`.collision.glb`** — triangulated mesh built from the voxel grid (only when `--collision-mesh` is passed).
 
 A typical pipeline runs four stages, with the latter two being optional depending on the scene type:
@@ -985,7 +985,7 @@ Note that `-g cpu` is incompatible with the GPU-only features (`--filter-cluster
 URL: https://developer.playcanvas.com/user-manual/splat-transform/voxel-format/
 Markdown: https://developer.playcanvas.com/user-manual/splat-transform/voxel-format.md
 
-This document specifies version 1.1 of the **voxel** format. It describes the on-disk structure written by [splat-transform](https://developer.playcanvas.com/user-manual/splat-transform.md) when the output path ends in `.voxel.json` and consumed by runtimes such as the [SuperSplat Viewer](https://developer.playcanvas.com/user-manual/supersplat/viewer.md) for collision detection and raycasts.
+This document specifies version 1.1 of the **voxel** format. It describes the on-disk structure written by [splat-transform](https://developer.playcanvas.com/user-manual/splat-transform.md) when the output path ends in `.voxel.json` and consumed by runtimes such as the [SuperSplat Viewer](https://developer.playcanvas.com/user-manual/supersplat/developers/viewer.md) for collision detection and raycasts.
 
 The format stores a solid/empty voxelization of a Gaussian splat scene as a sparse voxel octree (SVO) in the Laine–Karras node layout: a JSON header describing the grid, plus a compact binary file holding the tree.
 
@@ -1103,7 +1103,7 @@ solid = bit < 32 ? (lo >>> bit) & 1 : (hi >>> (bit - 32)) & 1
 
 ### Query domain
 
-Queries outside `gridBounds` are outside the format's domain, and the appropriate convention depends on the use case. Navigation/collision consumers (e.g. the [SuperSplat Viewer](https://developer.playcanvas.com/user-manual/supersplat/viewer.md)) treat out-of-grid space as **solid**; outputs produced with the nav options (exterior fill, floor fill, carve) rely on this — the writer crops away fully-solid blocks beyond the navigable region precisely because the runtime treats everything outside the grid as solid anyway.
+Queries outside `gridBounds` are outside the format's domain, and the appropriate convention depends on the use case. Navigation/collision consumers (e.g. the [SuperSplat Viewer](https://developer.playcanvas.com/user-manual/supersplat/developers/viewer.md)) treat out-of-grid space as **solid**; outputs produced with the nav options (exterior fill, floor fill, carve) rely on this — the writer crops away fully-solid blocks beyond the navigable region precisely because the runtime treats everything outside the grid as solid anyway.
 
 ## Limits
 
@@ -2067,7 +2067,7 @@ The PLY format serves as the lingua franca of the 3DGS ecosystem:
 - **Training Software**: Brush, nerfstudio, Postshot
 - **Editors**: [SuperSplat Editor](https://developer.playcanvas.com/user-manual/supersplat/editor.md)
 - **Converters**: [SplatTransform](https://developer.playcanvas.com/user-manual/splat-transform.md), [SuperSplat Convert](https://developer.playcanvas.com/user-manual/supersplat/convert.md)
-- **Viewers**: [SuperSplat Viewer](https://developer.playcanvas.com/user-manual/supersplat/viewer.md), [Model Viewer](https://github.com/playcanvas/model-viewer)
+- **Viewers**: [SuperSplat Viewer](https://developer.playcanvas.com/user-manual/supersplat/developers/viewer.md), [Model Viewer](https://github.com/playcanvas/model-viewer)
 
 ### Cross-Platform Workflow
 
@@ -2549,7 +2549,7 @@ Apply when writing `.html` outputs.
 
 :::note
 
-See the [SuperSplat Viewer Settings Schema](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md) for details on how to pass data to the `--viewer-settings` option. The settings are validated before the page is written, so an invalid file fails the run instead of producing a viewer that renders nothing.
+See the [SuperSplat Viewer Settings Schema](https://developer.playcanvas.com/user-manual/supersplat/developers/experience-settings.md) for details on how to pass data to the `--viewer-settings` option. The settings are validated before the page is written, so an invalid file fails the run instead of producing a viewer that renders nothing.
 
 :::
 
@@ -2739,7 +2739,7 @@ Depth of field and motion blur resolve visibility separately for each sample, th
 
 ## Camera Animations
 
-`--camera-track` renders a camera animation as a numbered frame sequence instead of a single view. The track can come from a [SuperSplat](https://developer.playcanvas.com/user-manual/supersplat.md) editor project, a [viewer settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md) `settings.json` with `animTracks`, or a plain frame list. A saved `.ssproj` is a ZIP archive, so extract it first and pass the extracted directory or its `document.json`. A frame list looks like this:
+`--camera-track` renders a camera animation as a numbered frame sequence instead of a single view. The track can come from a [SuperSplat](https://developer.playcanvas.com/user-manual/supersplat.md) editor project, a [viewer settings](https://developer.playcanvas.com/user-manual/supersplat/developers/experience-settings.md) `settings.json` with `animTracks`, or a plain frame list. A saved `.ssproj` is a ZIP archive, so extract it first and pass the extracted directory or its `document.json`. A frame list looks like this:
 
 ```json
 {

@@ -1,6 +1,6 @@
 # Cameras
 
-The **Cameras** section — in the **Scene** tab of [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md)'s left panel — defines the **starting camera** for your published splat: the view a visitor lands on when they open your [scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md) (unless the scene [plays its camera animation on open](https://developer.playcanvas.com/user-manual/supersplat/studio/animation.md#playing-on-open) instead). The camera has a **position**, a **target** (the point it looks at), and a **field of view**.
+The **Cameras** section — in the **Scene** tab of [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md)'s left panel — defines the **starting camera** for your published splat: the view a visitor lands on when they open your [scene page](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md) (unless the scene [plays its camera animation on open](https://developer.playcanvas.com/user-manual/supersplat/studio/animation.md#playing-on-open) instead). The camera has a **position**, a **target** (the point it looks at), and a **field of view**.
 
 [Image: The Cameras section with Camera 1 and its Lens settings]
 
@@ -55,11 +55,11 @@ Frame the viewport and click **Set camera to current view**, or use [camera edit
 ## How cameras are used
 
 - **Initial framing** — the first camera in the list is the default starting view when a visitor opens the scene page (`startMode: 'default'`). From there the viewer plays a slow, looping camera motion until the visitor takes over: an orbit around the target when the camera starts outside the splat (an object), or a gentle figure-eight when it starts inside (a scene). A [camera animation](https://developer.playcanvas.com/user-manual/supersplat/studio/animation.md) replaces that motion when **Play animation on open** is on.
-- **Object or scene** — whether the camera starts outside or inside the splat's bounds also decides the viewer's starting [camera mode](https://developer.playcanvas.com/user-manual/supersplat/viewer/controls.md#camera-modes) (orbit for an object, walk or fly for a scene) and how the splat is presented in [VR and AR](https://developer.playcanvas.com/user-manual/supersplat/viewer/xr.md#scenes-and-objects).
+- **Object or scene** — whether the camera starts outside or inside the splat's bounds also decides the viewer's starting [camera mode](https://developer.playcanvas.com/user-manual/supersplat/viewing/controls.md#camera-modes) (orbit for an object, walk or fly for a scene) and how the splat is presented in [VR and AR](https://developer.playcanvas.com/user-manual/supersplat/viewing/xr.md#scenes-and-objects).
 - **Annotation poses** — each [annotation](https://developer.playcanvas.com/user-manual/supersplat/studio/annotations.md) embeds its own camera pose that the viewer animates to when the annotation is selected. The annotation's pose is independent of the entries in the Cameras list.
 
 ## See also
 
 - [Camera Animation](https://developer.playcanvas.com/user-manual/supersplat/studio/animation.md) — keyframed camera motion on Studio's timeline
 - [Annotations](https://developer.playcanvas.com/user-manual/supersplat/studio/annotations.md) — 3D-positioned hotspots that can adopt a camera pose
-- [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md) — the JSON contract that stores the camera list
+- [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/developers/experience-settings.md) — the JSON contract that stores the camera list

@@ -53,19 +53,19 @@ Choose **File → Save** to keep an `.ssproj` project file. It preserves your ed
 
 [Image: The Publish dialog]
 
-Compression to SOG takes a moment, and several minutes for very large scenes. When it finishes, a dialog shows the URL of your new [scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md). New splats are **Unlisted**: anyone with the link can view them, but they won't appear in Explore until you make them Public in step 5.
+Compression to SOG takes a moment, and several minutes for very large scenes. When it finishes, a dialog shows the URL of your new [scene page](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md). New splats are **Unlisted**: anyone with the link can view them, but they won't appear in Explore until you make them Public in step 5.
 
 :::tip Already clean?
 
-If your file needs no editing, skip the Editor. The orange **Upload Splat** button on superspl.at publishes it directly. See [Direct Upload](https://developer.playcanvas.com/user-manual/supersplat/upload.md).
+If your file needs no editing, skip the Editor. The orange **Upload Splat** button on superspl.at publishes it directly. See [Direct Upload](https://developer.playcanvas.com/user-manual/supersplat/publishing/upload.md).
 
 :::
 
-Every option in the dialog, including republishing to an existing scene, is covered in [Publishing](https://developer.playcanvas.com/user-manual/supersplat/editor/publishing.md).
+Every option in the dialog, including republishing to an existing scene, is covered in [Publishing](https://developer.playcanvas.com/user-manual/supersplat/publishing/editor.md).
 
 ## 4. Curate it in Studio
 
-Your splat now appears on your [Manage page](https://developer.playcanvas.com/user-manual/supersplat/manage.md). Click **Open in Studio** in its row, or **Edit in Studio** on your scene page, to open [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md), where you shape what visitors see.
+Your splat now appears on your [Manage page](https://developer.playcanvas.com/user-manual/supersplat/publishing/manage.md). Click **Open in Studio** in its row, or **Edit in Studio** on your scene page, to open [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md), where you shape what visitors see.
 
 [Image: The Manage page]
 
@@ -81,14 +81,14 @@ Click **Save** in the header when you're happy. Edits are not saved automaticall
 
 ## 5. Share it
 
-Open your [scene page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md) at `superspl.at/scene/<hash>`.
+Open your [scene page](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md) at `superspl.at/scene/<hash>`.
 
 [Image: A published scene page]
 
 - **Share** copies the link or posts it to social platforms.
 - **Embed** gives you an `<iframe>` snippet for your own website. Later Studio changes show up there automatically.
-- To let visitors download your splat, enable **Downloadable** and pick a Creative Commons license on the [Manage page](https://developer.playcanvas.com/user-manual/supersplat/manage.md).
-- To appear in [Explore](https://developer.playcanvas.com/user-manual/supersplat/explore.md) and in search results, switch **Visibility** to **Public** in Manage.
+- To let visitors download your splat, enable **Downloadable** and pick a Creative Commons license on the [Manage page](https://developer.playcanvas.com/user-manual/supersplat/publishing/manage.md).
+- To appear in [Explore](https://developer.playcanvas.com/user-manual/supersplat/viewing/explore.md) and in search results, switch **Visibility** to **Public** in Manage.
 
 ## Where next?
 
@@ -96,5 +96,5 @@ Open your [scene page](https://developer.playcanvas.com/user-manual/supersplat/s
 - [Timeline](https://developer.playcanvas.com/user-manual/supersplat/editor/timeline.md) to animate the camera and publish a flythrough.
 - [Collision](https://developer.playcanvas.com/user-manual/supersplat/studio/collision.md) to make a scene walkable in first person.
 - [Convert](https://developer.playcanvas.com/user-manual/supersplat/convert.md) to change formats or shrink a splat without leaving the browser.
-- [Self-Hosting the Viewer](https://developer.playcanvas.com/user-manual/supersplat/viewer/self-hosting.md) to export a single HTML file you can host anywhere.
-- [API & Integrations](https://developer.playcanvas.com/user-manual/supersplat/api-integrations.md) to publish from your own pipeline.
+- [Self-Hosting the Viewer](https://developer.playcanvas.com/user-manual/supersplat/developers/self-hosting.md) to export a single HTML file you can host anywhere.
+- [API & Integrations](https://developer.playcanvas.com/user-manual/supersplat/developers/api-integrations.md) to publish from your own pipeline.

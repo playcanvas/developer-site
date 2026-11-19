@@ -43,16 +43,16 @@ Splats trained with anti-aliasing, such as with Mip-Splatting, draw too bright w
 
 :::note
 
-The [SuperSplat Viewer](https://developer.playcanvas.com/user-manual/supersplat/viewer.md) doesn't apply this setting yet. On the scene page and in embeds, each splat file's own anti-aliasing tag decides. When you [host the viewer yourself](https://developer.playcanvas.com/user-manual/supersplat/viewer/embedding.md#url-parameters), the `aa` URL parameter overrides it.
+The [SuperSplat Viewer](https://developer.playcanvas.com/user-manual/supersplat/developers/viewer.md) doesn't apply this setting yet. On the scene page and in embeds, each splat file's own anti-aliasing tag decides. When you [host the viewer yourself](https://developer.playcanvas.com/user-manual/supersplat/developers/embedding.md#url-parameters), the `aa` URL parameter overrides it.
 
 :::
 
 ## In the viewer
 
-- **AR** — the skybox and background color are hidden during an [AR session](https://developer.playcanvas.com/user-manual/supersplat/viewer/xr.md), so the room shows through around the splat. VR sessions keep them.
-- **Self-hosting** — the viewer doesn't load the skybox from the scene's settings. When you [host the viewer yourself](https://developer.playcanvas.com/user-manual/supersplat/viewer/embedding.md#url-parameters), pass the image with the `skybox` URL parameter or the `skyboxUrl` option, and override High Precision Rendering with `hpr`.
+- **AR** — the skybox and background color are hidden during an [AR session](https://developer.playcanvas.com/user-manual/supersplat/viewing/xr.md), so the room shows through around the splat. VR sessions keep them.
+- **Self-hosting** — the viewer doesn't load the skybox from the scene's settings. When you [host the viewer yourself](https://developer.playcanvas.com/user-manual/supersplat/developers/embedding.md#url-parameters), pass the image with the `skybox` URL parameter or the `skyboxUrl` option, and override High Precision Rendering with `hpr`.
 
 ## See also
 
 - [Post Effects](https://developer.playcanvas.com/user-manual/supersplat/studio/post-effects.md) — sharpness, bloom, color grading, vignette and chromatic fringing
-- [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md) — the JSON contract that stores these settings
+- [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/developers/experience-settings.md) — the JSON contract that stores these settings

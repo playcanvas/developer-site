@@ -45,10 +45,10 @@ Use this index to edit, publish, present or embed splats. To render splats in yo
 
 ## Publishing
 
-- [Publishing from the Editor](https://developer.playcanvas.com/user-manual/supersplat/editor/publishing.md): Publishing a splat from the Editor to superspl.at.
-- [Direct Upload](https://developer.playcanvas.com/user-manual/supersplat/upload.md): Uploading a finished splat file to superspl.at without the Editor.
-- [Manage](https://developer.playcanvas.com/user-manual/supersplat/manage.md): Listing, editing, sharing and deleting your published splats.
-- [Streaming & Performance](https://developer.playcanvas.com/user-manual/supersplat/streaming.md): How published splats are compressed and streamed, the Gaussian budget, and the Viewer's Quality and Performance Mode settings.
+- [Publishing from the Editor](https://developer.playcanvas.com/user-manual/supersplat/publishing/editor.md): Publishing a splat from the Editor to superspl.at.
+- [Direct Upload](https://developer.playcanvas.com/user-manual/supersplat/publishing/upload.md): Uploading a finished splat file to superspl.at without the Editor.
+- [Manage](https://developer.playcanvas.com/user-manual/supersplat/publishing/manage.md): Listing, editing, sharing and deleting your published splats.
+- [Streaming & Performance](https://developer.playcanvas.com/user-manual/supersplat/publishing/streaming.md): How published splats are compressed and streamed, the Gaussian budget, and the Viewer's Quality and Performance Mode settings.
 
 ## Studio
 
@@ -62,18 +62,18 @@ Use this index to edit, publish, present or embed splats. To render splats in yo
 
 ## Viewing scenes
 
-- [Scene Page](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md): The public page of a published splat: viewer, sharing, embedding, downloads and comments.
-- [Viewer Controls](https://developer.playcanvas.com/user-manual/supersplat/viewer/controls.md): Navigating a scene in the Viewer: toolbar, orbit, fly and walk, the Controls, Settings and Info panels, shortcuts, touch and annotations.
-- [Viewing in VR and AR](https://developer.playcanvas.com/user-manual/supersplat/viewer/xr.md): VR and AR sessions in the Viewer: teleporting, grabbing and scaling, AR placement and the hand menu.
+- [Scene Page](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md): The public page of a published splat: viewer, sharing, embedding, downloads and comments.
+- [Viewer Controls](https://developer.playcanvas.com/user-manual/supersplat/viewing/controls.md): Navigating a scene in the Viewer: toolbar, orbit, fly and walk, the Controls, Settings and Info panels, shortcuts, touch and annotations.
+- [Viewing in VR and AR](https://developer.playcanvas.com/user-manual/supersplat/viewing/xr.md): VR and AR sessions in the Viewer: teleporting, grabbing and scaling, AR placement and the hand menu.
 
 ## Developers
 
-- [SuperSplat Viewer](https://developer.playcanvas.com/user-manual/supersplat/viewer.md): The open-source viewer behind scene pages.
-- [Embedding the Viewer](https://developer.playcanvas.com/user-manual/supersplat/viewer/embedding.md): Hosting the prebuilt viewer with URL parameters, or rendering a page with `renderViewerHtml`.
-- [Viewer API](https://developer.playcanvas.com/user-manual/supersplat/viewer/api.md): Creating and controlling viewer instances in your own app with `createViewer`.
-- [Self-Hosting the Viewer](https://developer.playcanvas.com/user-manual/supersplat/viewer/self-hosting.md): Exporting a splat as a self-contained HTML viewer to host anywhere.
-- [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md): The JSON schema of Studio's settings, as the Viewer reads them.
-- [API & Integrations](https://developer.playcanvas.com/user-manual/supersplat/api-integrations.md): Publishing splats and listing a user's scenes from capture tools, training pipelines and apps, and downloading scenes whose owners allow it.
+- [SuperSplat Viewer](https://developer.playcanvas.com/user-manual/supersplat/developers/viewer.md): The open-source viewer behind scene pages.
+- [Embedding the Viewer](https://developer.playcanvas.com/user-manual/supersplat/developers/embedding.md): Hosting the prebuilt viewer with URL parameters, or rendering a page with `renderViewerHtml`.
+- [Viewer API](https://developer.playcanvas.com/user-manual/supersplat/developers/viewer-api.md): Creating and controlling viewer instances in your own app with `createViewer`.
+- [Self-Hosting the Viewer](https://developer.playcanvas.com/user-manual/supersplat/developers/self-hosting.md): Exporting a splat as a self-contained HTML viewer to host anywhere.
+- [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/developers/experience-settings.md): The JSON schema of Studio's settings, as the Viewer reads them.
+- [API & Integrations](https://developer.playcanvas.com/user-manual/supersplat/developers/api-integrations.md): Publishing splats and listing a user's scenes from capture tools, training pipelines and apps, and downloading scenes whose owners allow it.
 - [SuperSplat API specification](https://playcanvas.com/api/supersplat/openapi.json): The OpenAPI definition of every endpoint.
 
 ## Source
@@ -83,9 +83,9 @@ Use this index to edit, publish, present or embed splats. To render splats in yo
 
 ## Optional
 
-- [All pages of this index in one file](https://developer.playcanvas.com/user-manual/supersplat/llms-full.txt): 41 pages (293 KB), for downloading and searching rather than reading into context.
+- [All pages of this index in one file](https://developer.playcanvas.com/user-manual/supersplat/llms-full.txt): 41 pages (295 KB), for downloading and searching rather than reading into context.
 - [Camera Controls](https://developer.playcanvas.com/user-manual/supersplat/editor/camera-controls.md)
 - [Keyboard Shortcuts](https://developer.playcanvas.com/user-manual/supersplat/editor/keyboard-shortcuts.md)
-- [Explore](https://developer.playcanvas.com/user-manual/supersplat/explore.md)
-- [User Profile](https://developer.playcanvas.com/user-manual/supersplat/user-profile.md)
-- [Following Creators](https://developer.playcanvas.com/user-manual/supersplat/following.md)
+- [Explore](https://developer.playcanvas.com/user-manual/supersplat/viewing/explore.md)
+- [User Profile](https://developer.playcanvas.com/user-manual/supersplat/viewing/user-profile.md)
+- [Following Creators](https://developer.playcanvas.com/user-manual/supersplat/viewing/following.md)
