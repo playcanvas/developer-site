@@ -69,13 +69,9 @@ const sidebars = {
         {
           type: 'category',
           label: 'User Accounts',
-          link: {
-            type: 'doc',
-            id: 'user-manual/account-management/user-accounts/index',
-          },
           items: [
             'user-manual/account-management/user-accounts/account-creation',
-            'user-manual/account-management/user-accounts/user-home',
+            'user-manual/account-management/user-accounts/profile',
             'user-manual/account-management/user-accounts/settings',
           ],
         },
@@ -91,7 +87,8 @@ const sidebars = {
             'user-manual/account-management/organizations/managing',
           ],
         },
-        'user-manual/account-management/billing'
+        'user-manual/account-management/plans-and-billing',
+        'user-manual/account-management/billing',
       ],
     },
     sectionHeader('Core Products'),

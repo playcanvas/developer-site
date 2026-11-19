@@ -1,181 +1,113 @@
 ---
 title: Account Settings
-description: Update your PlayCanvas profile, change your password, manage email preferences, and configure privacy settings.
+description: Manage your PlayCanvas account settings, including your picture, username, email, social links, skills, email notifications, password and API tokens, and convert or delete your account.
 ---
 
-Your account settings page provides access to all your personal account configuration options, from basic profile information to billing and security settings. To view your user account settings, navigate to [https://playcanvas.com/account](https://playcanvas.com/account). You should see something like this:
+Your account settings are at [playcanvas.com/account](https://playcanvas.com/account). To open them from the [Project Dashboard](/user-manual/editor/projects/dashboard/), select your name at the bottom of the sidebar and choose **Account settings**.
+
+<img loading="lazy" alt="Account Menu" width="254" src="/img/user-manual/account-management/user-accounts/account-menu.png" />
+
+The settings are split into three tabs:
+
+- **[Profile](#profile)** - How you appear on PlayCanvas, the emails you receive, and converting or deleting your account
+- **[Security](#security)** - Your password and API tokens
+- **[Billing](#billing)** - Your plan, storage, payment details and invoices
 
 ![Account Settings](/img/user-manual/account-management/user-accounts/account-settings.png)
 
-## Profile Picture
+The list on the left of each tab jumps to its sections. Across the top of the page:
 
-Upload and manage your profile picture that appears across PlayCanvas. Click on your current profile picture to upload a new image.
+- **Projects** takes you back to the Project Dashboard.
+- The account switcher next to it shows the account you're editing. Use it to switch between your personal account and the organizations you own or administer, or to create a new organization. See [Managing Organizations](../organizations/managing.md).
+- The bell shows your notifications, such as when someone stars or forks one of your projects.
+- Your picture opens a menu with your public profile, account settings, billing and plans, your organizations, and **Log out**.
 
-## Account Info
+## Profile Tab {#profile}
 
-### Username
+**View public profile** at the top right opens [your profile](profile.md) as others see it.
 
-Your unique PlayCanvas username that appears in URLs and identifies you across the platform. You can change your username, providing that username has not already been taken. If it has, you will see the message **Already used**.
+### Account {#account}
 
-### Your Full Name
+- **Picture** - Select the pencil to upload a PNG or JPEG image.
+- **Username** - Your unique handle, which sets the address of your profile, `playcanvas.com/user/<username>`. You can change it to any username that isn't already taken.
+- **Name** - Your full name, shown on your profile and to your collaborators.
+- **Email** - The address you log in with, and where your notifications go. To change it, select **Change email** and enter the new address. PlayCanvas sends a confirmation link to the new address and another to your current one.
 
-The display name shown on your profile and in collaborations. You can edit this whenever you choose.
+Select **Save** to keep your changes.
 
-### Email Address
+### Socials {#socials}
 
-Your primary email address for account notifications and login. Click "Edit" to change your email address. If you sign in with username+password, you'll need to verify the new email address before the change takes effect.
+Add links to your **Website**, **X (formerly Twitter)**, **LinkedIn** and **YouTube**, then select **Save**. These links are public on your profile.
 
-## Password
+### Skills {#skills}
 
-Update your account password for security:
+Select the skills that describe you: **Coder**, **Artist**, **Designer** and **Musician**. They're shown on your public profile. Select **Save** to keep your changes.
 
-- **Current Password** - Enter your existing password
-- **New Password** - Choose a new password of at least 8 characters
-- **Confirm Password** - Re-enter your new password to confirm
+### Email Notifications {#email-notifications}
 
-:::tip
+Choose which emails PlayCanvas sends you. Each switch saves as soon as you change it.
 
-Use a strong password with a mix of uppercase, lowercase, numbers, and special characters for better security. Consider using a password manager to make this process easier.
+<img loading="lazy" alt="Email Notifications" width="784" src="/img/user-manual/account-management/user-accounts/email-notifications.png" />
 
-:::
+| Switch | Emails you when |
+| --- | --- |
+| **My projects** | Someone forks, watches or is added to a project you own |
+| **Watched projects** | A project you watch is updated |
+| **New comments** | Someone comments on your projects |
+| **New stars** | Someone stars one of your projects |
+| **My organizations** | You're added to or removed from an organization |
+| **PlayCanvas news** | There's PlayCanvas product news, an event or an offer |
 
-## Skills
+### Convert Account {#convert-account-to-organization}
 
-Tag yourself with the skills that best match your experience:
-
-- **Coder** - Programming and scripting
-- **Artist** - 3D modeling, texturing, animation
-- **Designer** - UI/UX and game design
-- **Musician** - Audio and music composition
-
-These skills are displayed in your public profile header.
-
-## Current Plan
-
-View your current subscription plan.
-
-For free accounts, this shows "Free $0 / month" with basic plan limitations.
-
-For accounts on the Personal plan, this shows "Personal $15 / month".
+**Convert to organization** turns your account into an [organization](../organizations/index.md) owned by another user. Its projects move with it, and you can no longer log in to it. See [Convert a User Account into an Organization](../organizations/creating.md#convert-a-user-account-into-an-organization).
 
 :::tip
 
-To cancel your Personal plan, click the **Cancel** link and confirm. Your account will drop back to the free tier and the end of your current billing cycle.
+You can't convert an account that owns organizations. Delete those organizations or transfer their ownership to another user first.
 
 :::
 
-## Billing Info
+### Delete Account {#delete-account}
 
-Users on the Free plan will see "No credit card stored in your account" until a paid plan is purchased.
-
-Users on the Personal plan will see something of the form "Card ending in - 0000". Click **Edit** to update billing info:
-
-- Card details
-- Billing address
-- VAT number (if supported in your country)
-
-## Invoices
-
-Access your billing history and download invoices. By default, your 3 latest invoices are displayed. Keep clicking **Load More...** to load the next 10 invoices.
-
-## Seats
-
-View and manage team members across your projects:
-
-- Lists all users who are team members on projects you own
-- Shows which specific projects each user has access to
-
-:::tip
-
-Click the `x` icon to the right of a listed user to remove them from all of your projects that they are on the team of.
-
-:::
-
-## Usage
-
-This section tracks your account resource consumption. The usage meter shows current consumption against your plan limits.
-
-### Projects
-
-- **Public Projects** - Number created vs. limit
-- **Private Projects** - Number created vs. limit (plan-dependent)
-
-### Storage Breakdown
-
-These categories count towards your plan's storage allowance:
-
-- **Assets** - Storage used for 3D models, textures, audio. Every open branch of a project counts its own copy of the assets. See [How Version Control Affects Your Storage](/user-manual/editor/version-control/#how-version-control-affects-your-storage).
-- **Apps** - Published application data. Deleting a published build removes its full size from your usage.
-- **Code** - Script and code storage
-- **Checkpoints** - Version history storage
-
-Your usage also shows **Splats**, the Gaussian splat data you have published to [SuperSplat](/user-manual/supersplat/). Splats don't count towards your storage allowance. SuperSplat has its own upload limits instead.
-
-## API Tokens
-
-Manage programmatic access to your PlayCanvas account:
-
-- Generate new API tokens
-- View existing token permissions
-- Revoke access for unused tokens
-
-See the [API Documentation](/user-manual/api/) for details on using API tokens.
-
-## Email Preferences
-
-Configure which notifications you receive:
-
-- **My Projects** - Updates about your own projects
-- **Watched Projects** - Notifications from projects you follow
-- **New Comments** - Comments on your projects or posts
-- **New Stars** - When users star your projects
-- **My Organizations** - Organization-related updates
-- **Exciting PlayCanvas Stuff** - Platform news and updates
-
-Uncheck any categories you don't want to receive emails about.
-
-## Organizations
-
-### Convert Account to Organization {#convert-account-to-organization}
-
-Transform your personal account into an [organization](../organizations/index.md) account:
-
-- Allows team collaboration
-- Enables advanced permission management
-- Requires designating a new owner
-
-:::warning
-
-Converting to an organization means you can no longer log in with this account. Make sure you have another account ready to become the organization owner.
-
-:::
-
-:::tip
-
-You cannot convert a user account into an organization if it currently manages other organizations. Transfer those organizations to be owned by another user account first.
-
-:::
-
-## Delete Account
-
-Permanently remove your PlayCanvas account:
-
-- All projects and data will be deleted
-- This action cannot be undone
-- Consider downloading important projects first
+**Delete account** deletes your account and every project you own. To confirm, type `delete this account` and select **Delete**.
 
 :::danger
 
-Account deletion is permanent and irreversible. Make sure to backup any important work before proceeding.
+Deleting your account is permanent and can't be undone. [Export](/user-manual/editor/projects/backup-and-export/) any projects you want to keep first.
 
 :::
+
+If you own any organizations, **Delete account** is turned off. Delete those organizations or [transfer their ownership](../organizations/managing.md#administrators) first.
+
+## Security Tab {#security}
+
+![Security](/img/user-manual/account-management/user-accounts/account-security.png)
+
+### Password {#password}
+
+To change your password, enter your **Current password**, then your **New password** and **Confirm new password**, and select **Change password**. If you signed up with Google or GitHub, your account has no password yet. Enter a new one and select **Set password** to log in with your email address or username as well.
 
 :::tip
 
-You can't delete a user account if it currently manages any organizations. Please delete the organizations first or transfer their ownership to another user account.
+Use a strong password, and consider a password manager to keep track of it.
 
 :::
 
----
+### API Tokens {#api-tokens}
 
-For billing-specific questions and detailed subscription management, see [Billing](../billing.md).
+API tokens let your scripts and tools use the [REST API](/user-manual/api/). A token acts as you, so keep it out of shared code.
+
+To create one, select **Generate token**, enter a **Name** such as `CI publish`, and select **Generate**. Copy the new token straight away, because you won't be able to see it again.
+
+Your tokens are listed in this section, where you can **Rename** or **Revoke** each one, or select **Revoke all**. A revoked token stops working straight away.
+
+:::note
+
+API tokens created before 5 November 2026 don't work from 19 November 2026. If a script or tool still uses one, generate a new token and use that instead.
+
+:::
+
+## Billing Tab {#billing}
+
+The **Billing** tab shows your **Plan**, what's using your **Storage**, your payment details and your **Invoices**. **Compare plans** opens the Plans page, where you can upgrade. See [Plans and Billing](../plans-and-billing.md).
