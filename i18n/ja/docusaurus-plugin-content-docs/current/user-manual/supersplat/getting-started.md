@@ -9,7 +9,7 @@ description: "SuperSplatで最初のスプラットを約10分で公開する：
 
 - **スプラットファイル。** ガウシアンスプラッティングのトレーナーが出力した`.ply`なら何でも使えます。`.compressed.ply`、`.sog`、`.splat`、`.ksplat`、`.spz`、XGRIDSの`.lcc`ファイルにも対応しています。まだファイルがない場合は、[スプラットの作成](/user-manual/gaussian-splatting/creating/)でキャプチャの仕組みを、[推奨ツール](/user-manual/gaussian-splatting/creating/recommended-tools)でファイルを生成するアプリの比較を確認してください。サンプルのバイカーで練習することもできます：[Editorで開く](https://superspl.at/editor?load=https://raw.githubusercontent.com/willeastcott/assets/main/biker.ply)。
 - **無料のPlayCanvasアカウント**（ステップ3で使用）。読み込みと編集にはアカウントは不要ですが、公開には必要です。[アカウント作成](/user-manual/account-management/user-accounts/account-creation)を参照してください。
-- **最新のブラウザ。** EditorはWebGPUで動作します。最新のChromeまたはEdge、Safari 26以降、あるいはWebGPUを有効にしたFirefoxをご利用ください。インストールは不要です。
+- **WebGPUに対応したブラウザ。** Editorの[システム要件](/user-manual/supersplat/editor/#system-requirements)を参照してください。インストールは不要です。
 
 ## 1. Editorでスプラットを読み込む
 
@@ -64,7 +64,7 @@ SOG形式への圧縮には少し時間がかかり、非常に大きなシー�
 
 :::
 
-既存のシーンへの再公開を含む、ダイアログのすべてのオプションは[公開](/user-manual/supersplat/publishing/editor/)で解説しています。
+既存のシーンへの再公開を含む、ダイアログのすべてのオプションは[Editorからの公開](/user-manual/supersplat/publishing/editor/)で解説しています。
 
 ## 4. Studioでキュレーションする
 

@@ -48,6 +48,7 @@ Use this index to edit, publish, present or embed splats. To render splats in yo
 
 ## Publishing
 
+- [Publishing](/user-manual/supersplat/publishing/): The ways to publish, the account you need, how published splats are compressed, who can see them, and the limits.
 - [Publishing from the Editor](/user-manual/supersplat/publishing/editor/): Publishing a splat from the Editor to superspl.at.
 - [Direct Upload](/user-manual/supersplat/publishing/upload/): Uploading a finished splat file to superspl.at without the Editor.
 - [Manage](/user-manual/supersplat/publishing/manage/): Listing, editing, sharing and deleting your published splats.

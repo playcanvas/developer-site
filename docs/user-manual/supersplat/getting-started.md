@@ -9,7 +9,7 @@ This guide takes a raw splat file all the way to a published, shareable scene pa
 
 - **A splat file.** Any `.ply` produced by a Gaussian splatting trainer works, as do `.compressed.ply`, `.sog`, `.splat`, `.ksplat`, `.spz`, and XGRIDS `.lcc` files. Don't have one yet? [Creating Splats](/user-manual/gaussian-splatting/creating/) explains how captures are made and [Recommended Tools](/user-manual/gaussian-splatting/creating/recommended-tools) compares the apps that produce them. Or practice on the sample biker: [open it in the Editor](https://superspl.at/editor?load=https://raw.githubusercontent.com/willeastcott/assets/main/biker.ply).
 - **A free PlayCanvas account** for step 3. Loading and editing don't need one; publishing does. See [Account Creation](/user-manual/account-management/user-accounts/account-creation).
-- **A current browser.** The Editor runs on WebGPU: current Chrome or Edge, Safari 26 or later, or Firefox with WebGPU enabled. There is nothing to install.
+- **A browser with WebGPU.** See the Editor's [System Requirements](/user-manual/supersplat/editor/#system-requirements). There is nothing to install.
 
 ## 1. Load your splat in the Editor
 
@@ -64,7 +64,7 @@ If your file needs no editing, skip the Editor. The orange **Upload Splat** butt
 
 :::
 
-Every option in the dialog, including republishing to an existing scene, is covered in [Publishing](/user-manual/supersplat/publishing/editor/).
+Every option in the dialog, including republishing to an existing scene, is covered in [Publishing from the Editor](/user-manual/supersplat/publishing/editor/).
 
 ## 4. Curate it in Studio
 

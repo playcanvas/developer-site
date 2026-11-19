@@ -631,6 +631,10 @@ const sidebars = {
           type: 'category',
           label: 'Publishing',
           key: 'supersplat-publishing',
+          link: {
+            type: 'doc',
+            id: 'user-manual/supersplat/publishing/index',
+          },
           items: [
             'user-manual/supersplat/publishing/editor',
             'user-manual/supersplat/publishing/upload',

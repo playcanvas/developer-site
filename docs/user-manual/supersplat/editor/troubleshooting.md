@@ -5,7 +5,7 @@ description: "Resolve common SuperSplat Editor problems with startup, imports, s
 
 ## The Editor Does Not Start
 
-The Editor requires WebGPU. If the page shows "SuperSplat requires WebGPU, which this browser does not support" instead of loading, switch to a current version of Chrome or Edge, Safari 26 or later, or Firefox with WebGPU enabled, and make sure hardware acceleration is turned on in the browser's settings. On a machine with more than one GPU, the browser must be allowed to use the dedicated one.
+The Editor requires WebGPU. If the page shows "SuperSplat requires WebGPU, which this browser does not support" instead of loading, switch to a [supported browser](/user-manual/supersplat/editor/#system-requirements) and make sure hardware acceleration is turned on in the browser's settings. On a machine with more than one GPU, the browser must be allowed to use the dedicated one.
 
 If the message is "SuperSplat failed to start", open the browser console for details and include them when you [report the problem](#reporting-a-problem).
 
@@ -69,8 +69,8 @@ See [Managing Projects](managing-projects.md) for the difference between saving,
 
 ## Publishing or Rendering Fails
 
-- Publishing requires you to be signed in to superspl.at with a PlayCanvas account.
-- If `Publish` is disabled with a message in the Publish dialog, your account has used today's publishing allowance or already has the maximum number of scenes processing. The message says when you can publish again. See [Publishing](/user-manual/supersplat/publishing/editor/).
+- Publishing requires you to be [signed in](/user-manual/supersplat/publishing/#account) to superspl.at with a PlayCanvas account.
+- If `Publish` is disabled with a message in the Publish dialog, your account has reached one of its [publishing limits](/user-manual/supersplat/publishing/#limits). The message says when you can publish again.
 - Scenes with more than 40 million splats can only be published with **Generate LODs** on. Delete unwanted Gaussians first if you want to publish a single, non-streamed file.
 - Video codec support depends on the browser. The Render Video dialog disables resolutions your browser or device cannot encode with the current settings — try a lower resolution, frame rate, or bitrate, another format or codec, or update your browser or graphics driver.
 - A blocked download, private-browsing restriction, or low free memory can prevent large renders and exports from completing. In browsers without the File System Access API, renders and exports are delivered as downloads.

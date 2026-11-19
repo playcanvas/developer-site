@@ -1,16 +1,11 @@
 ---
-title: Publishing
+title: Publishing from the Editor
 description: "Publish a splat from the SuperSplat Editor to superspl.at so it lands on your Manage page and can be opened in Studio."
-sidebar_label: Publishing from the Editor
 ---
 
 Publishing from the SuperSplat Editor uploads your edited splat to [superspl.at](https://superspl.at), where it lands on your [Manage page](/user-manual/supersplat/publishing/manage), gets a public [scene page](/user-manual/supersplat/viewing/scene-page), and can be opened in [Studio](/user-manual/supersplat/studio/) to curate the viewing experience (cameras, camera animation, annotations, post effects, skybox, collision).
 
-:::tip Two ways to publish
-
-You can also publish without using the Editor. Hit the orange **Upload Splat** button on the [superspl.at home page](https://superspl.at) (or use the [Direct Upload](/user-manual/supersplat/publishing/upload) flow) to publish a ready-made splat file straight to your Manage page. Both paths land in the same place and share the same downstream tooling.
-
-:::
+To publish a finished file without opening the Editor, use [Direct Upload](/user-manual/supersplat/publishing/upload). [Publishing](/user-manual/supersplat/publishing/) compares the ways to publish and explains who can see a published splat.
 
 To self-host your own copy of the published viewer instead of (or in addition to) publishing to superspl.at, see [Self-Hosting the Viewer](/user-manual/supersplat/developers/self-hosting).
 
@@ -46,13 +41,13 @@ To publish your splat:
 
 4. Select `Publish`.
 
-If your account cannot publish another model right now, the dialog says why and `Publish` is disabled. This happens when you have used today's publishing allowance (the message says when you can publish again) or when you already have the maximum number of scenes processing (you can publish again when one finishes). Updating only the animation of an existing scene is still allowed, since no model is uploaded.
+If your account cannot publish another model right now, the dialog says why and `Publish` is disabled. This happens when your account reaches one of its [publishing limits](/user-manual/supersplat/publishing/#limits). Updating only the animation of an existing scene is still allowed, since no model is uploaded.
 
 The published scene's camera starts at the pose your viewport camera has at the moment you publish, so frame your favorite view before opening the dialog.
 
 :::note
 
-New scenes are published unlisted - they are only discoverable by people who have the link. To make a splat appear in [Explore](/user-manual/supersplat/viewing/explore) and in searches on superspl.at, set its **Visibility** to **Public** on your [Manage page](/user-manual/supersplat/publishing/manage) after publishing.
+New scenes are published **Unlisted**. To list one in [Explore](/user-manual/supersplat/viewing/explore), see [Who can see it](/user-manual/supersplat/publishing/#visibility).
 
 :::
 

@@ -1,16 +1,11 @@
 ---
-title: 公開
+title: Editorからの公開
 description: "SuperSplat Editorからsuperspl.atへスプラットを公開して、Manageページに表示し、Studioで開けるようにします。"
-sidebar_label: Editorからの公開
 ---
 
 SuperSplat Editorからの公開では、編集したスプラットを[superspl.at](https://superspl.at)にアップロードします。アップロードされたスプラットは[Manageページ](/user-manual/supersplat/publishing/manage)に表示され、公開[シーンページ](/user-manual/supersplat/viewing/scene-page)が割り当てられ、[Studio](/user-manual/supersplat/studio/)で開いて視聴体験（カメラ、カメラアニメーション、注釈、ポストエフェクト、スカイボックス、コリジョン）をキュレーションできます。
 
-:::tip 2つの公開方法
-
-Editorを使わずに公開することもできます。[superspl.atのホームページ](https://superspl.at)にあるオレンジ色の**Upload Splat**ボタンを押すか、[Direct Upload](/user-manual/supersplat/publishing/upload)フローを使用して、完成済みのスプラットファイルをManageページに直接公開できます。どちらの経路でも同じ場所に到達し、その後のツールも共通です。
-
-:::
+Editorを開かずに完成済みのファイルを公開するには、[ダイレクトアップロード](/user-manual/supersplat/publishing/upload)を使います。公開の方法の比較と、公開したスプラットを誰が閲覧できるかは、[公開](/user-manual/supersplat/publishing/)で説明しています。
 
 superspl.atに公開する代わりに（または併用して）自前のサーバーで公開済みビューアをホストする方法については、[ビューアのセルフホスティング](/user-manual/supersplat/developers/self-hosting)を参照してください。
 
@@ -46,13 +41,13 @@ superspl.atに公開する代わりに（または併用して）自前のサー
 
 4. `Publish`を選択します。
 
-アカウントが現在それ以上モデルを公開できない場合は、ダイアログにその理由が表示され、`Publish`は無効になります。これは、その日の公開枠を使い切った場合（再び公開できる時刻がメッセージに表示されます）や、処理中のシーンがすでに上限数に達している場合（いずれかの処理が完了すると再び公開できます）に発生します。既存のシーンのアニメーションだけを更新する場合は、モデルをアップロードしないため、引き続き公開できます。
+アカウントが現在それ以上モデルを公開できない場合は、ダイアログにその理由が表示され、`Publish`は無効になります。これは、アカウントが[公開の上限](/user-manual/supersplat/publishing/#limits)のいずれかに達したときに発生します。既存のシーンのアニメーションだけを更新する場合は、モデルをアップロードしないため、引き続き公開できます。
 
 公開されたシーンのカメラは、公開した瞬間のビューポートカメラのポーズから開始します。ダイアログを開く前に、お気に入りのビューでフレーミングしておきましょう。
 
 :::note
 
-新しいシーンは非公開（アンリスト）で公開されます - リンクを知っている人のみが発見できます。[Explore](/user-manual/supersplat/viewing/explore)やsuperspl.atの検索結果にスプラットを表示させるには、公開後に[Manageページ](/user-manual/supersplat/publishing/manage)で**Visibility**を**Public**に設定してください。
+新しいシーンは**Unlisted**として公開されます。[Explore](/user-manual/supersplat/viewing/explore)に載せる方法は、[誰が閲覧できるか](/user-manual/supersplat/publishing/#visibility)を参照してください。
 
 :::
 

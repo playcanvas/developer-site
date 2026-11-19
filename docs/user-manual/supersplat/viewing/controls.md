@@ -124,9 +124,7 @@ The viewer saves **Show Annotations**, **Gaming Controls**, **Quality** and **Pe
 
 ### Quality {#quality}
 
-The **Quality** slider sets the splat budget, the most splats the viewer draws at once in a streamed scene, from a ladder for the device: for example 2M, 4M, 8M and 16M on a desktop. [Streaming & Performance](/user-manual/supersplat/publishing/streaming#near-instant-loads-and-the-gaussian-budget) lists every ladder. Phones and tablets start at **Performance**, other devices at **Default**. Positions the device doesn't have the memory for are disabled.
-
-At **Performance**, the viewer also renders at half resolution, unless Performance Mode is on. A scene published as a single file draws all its splats at every position.
+The **Quality** slider sets the splat budget, the most splats the viewer draws at once in a streamed scene, from a ladder for the device: for example 2M, 4M, 8M and 16M on a desktop. At **Performance**, the viewer also renders at half resolution. [Streaming & Performance](/user-manual/supersplat/publishing/streaming#near-instant-loads-and-the-gaussian-budget) lists every device's ladder and starting position, and explains how the budget works.
 
 ### Performance Mode {#performance-mode}
 
@@ -159,7 +157,7 @@ Shortcuts follow the characters your keyboard layout types. On a layout that doe
 
 Scenes with [annotations](/user-manual/supersplat/studio/annotations) show a numbered hotspot for each one.
 
-- **Click or tap a hotspot** to select it. The camera eases to the annotation's view, and its title and text appear in a panel beside the hotspot as the camera arrives. Orbiting from there pivots near the annotated point, and the panel stays open.
+- **Click or tap a hotspot** to select it. The camera eases to the annotation's view, and its title and text appear in a panel beside the hotspot as the camera arrives. An annotation with neither title nor text shows no panel. Orbiting from there pivots near the annotated point, and the panel stays open.
 - **Step through annotations** with the navigator's previous and next arrows, which show the annotation's number and title. The navigator appears when a scene has two or more annotations and wraps around at either end.
 - **Click elsewhere in the viewer** to deselect. A drag doesn't count, so orbiting leaves the selection alone. The navigator keeps the last annotation, greyed out; click it to select it again.
 

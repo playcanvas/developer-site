@@ -23,7 +23,7 @@ Upload Splatダイアログを開く方法は3つあります：
 
 アップロードにはPlayCanvasアカウントでのサインインが必要です。[アカウント作成](/user-manual/account-management/user-accounts/account-creation)を参照してください。
 
-## 対応入力フォーマット
+## 対応入力フォーマット {#supported-input-formats}
 
 ファイルシステムからドラッグ＆ドロップするか選択します。ダイアログは以下のフォーマットを、それぞれの最大サイズまで受け付けます。ダイアログの**Upload Guide**にも概要がまとめられています。
 
@@ -76,7 +76,7 @@ Edit Splatビューから次のことができます：
 | **File Too Large** | ファイルがそのフォーマットの最大サイズを超えている。メッセージに両方のサイズが表示されます。 |
 | **Upload Failed** | ネットワーク中断またはサーバー側の問題。再試行してください。問題が続く場合は接続を確認してください。 |
 
-また、すべてのアカウントには、圧縮後の出力サイズで計測される1日あたりの公開許容量と、同時にアップロード中または処理中にできるシーン数の上限があります。いずれかに達すると、ダイアログにその旨（**Publishing Allowance Used**または**Scenes Still Processing**）と、再びアップロードできる時期が表示されます。[制限](/user-manual/supersplat/developers/api-integrations#limits)を参照してください。
+アカウントの[公開の上限](/user-manual/supersplat/publishing/#limits)も適用されます。いずれかに達すると、ダイアログにその旨（**Publishing Allowance Used**または**Scenes Still Processing**）と、再びアップロードできる時期が表示されます。
 
 ## 関連項目
 

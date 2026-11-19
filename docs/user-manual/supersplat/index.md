@@ -60,16 +60,6 @@ You can skip the Editor. Hit the orange **Upload Splat** button on the [superspl
 
 :::
 
-## Your first splat in 10 minutes
-
-1. **Load.** Open [superspl.at/editor](https://superspl.at/editor) and drop in your splat file. See [Import and Export](editor/import-export) for the supported formats.
-2. **Clean.** Select stray floaters with the brush, sphere, or box selection tools and press <kbd>Delete</kbd>. See [Selection and Cleanup](editor/editing-splats).
-3. **Publish.** Choose **File → Publish**. Your splat lands on your [Manage page](/user-manual/supersplat/publishing/manage/) with its own [scene page](/user-manual/supersplat/viewing/scene-page/). See [Publishing](/user-manual/supersplat/publishing/editor/).
-4. **Curate.** Open it in [Studio](studio/) to frame the camera, add annotations, and switch on post effects.
-5. **Share.** Copy the scene link, grab the embed snippet, or set it to **Public** so it appears in [Explore](/user-manual/supersplat/viewing/explore/).
-
-The [Getting Started](getting-started) guide walks through each step with screenshots.
-
 ## How the pieces fit together
 
 Some parts of SuperSplat you use as a creator, some your visitors use to view what you've made, and some are general-purpose utilities.
@@ -109,7 +99,7 @@ flowchart TB
 
 ## Good to know
 
-- **Everything runs in your browser.** The Editor loads splats locally and nothing is uploaded until you choose to publish. It needs a WebGPU-capable browser: current Chrome or Edge, Safari 26 or later, or Firefox with WebGPU enabled.
+- **Everything runs in your browser.** The Editor loads splats locally and nothing is uploaded until you choose to publish. It needs a [browser with WebGPU](/user-manual/supersplat/editor/#system-requirements).
 - **Browsing is anonymous.** A free PlayCanvas account is needed to publish, like, or comment. See [Account Creation](/user-manual/account-management/user-accounts/account-creation).
 - **Open source at the core.** The [Editor](https://github.com/playcanvas/supersplat), the [Viewer](https://github.com/playcanvas/supersplat-viewer), and [splat-transform](https://github.com/playcanvas/splat-transform) (which powers Convert) are MIT-licensed. Studio, Manage, Explore, scene pages, and the publish API are hosted by PlayCanvas on superspl.at.
 - **Publishing optimizes for you.** Every published splat is compressed to SOG, and splats over one million Gaussians are streamed progressively so they load fast on any device. See [Streaming & Performance](/user-manual/supersplat/publishing/streaming/).

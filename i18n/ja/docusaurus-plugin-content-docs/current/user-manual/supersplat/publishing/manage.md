@@ -65,7 +65,7 @@ Manageへのアクセスには、PlayCanvasアカウントでのサインイン�
 
 選んだライセンスは[シーンページ](/user-manual/supersplat/viewing/scene-page)のDownloadダイアログに、アイコン、概要、ワンクリックでクレジットをコピーできる**Copy credit**ボタンとともに表示されます。
 
-## 一覧からのVisibility
+## 一覧からのVisibility {#visibility-from-the-list}
 
 **Public**と**Unlisted**の変更にEditダイアログは不要です — 各行の**Visibility**ドロップダウンを使います。ボタンには現在の設定（アイコンとラベル）とシェブロンが表示され、メニューから**Public**または**Unlisted**を選びます。Unlistedのスプラットは[Explore](/user-manual/supersplat/viewing/explore)から除外され、他のユーザーが検索しても表示されません。
 
