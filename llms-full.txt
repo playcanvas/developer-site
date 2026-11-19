@@ -23894,7 +23894,7 @@ flowchart TB
 ## Stay in the loop
 
 - [SuperSplat news on the PlayCanvas blog](https://blog.playcanvas.com/tags/supersplat/)
-- [Discord](https://discord.gg/RSaMRzg) for questions and sharing your splats
+- [Discord](https://discord.gg/qcydPEtn65) for questions and sharing your splats
 - [GitHub](https://github.com/playcanvas/supersplat) for issues and contributions
 
 --------------------------------------------------------------------------------
@@ -24178,7 +24178,7 @@ The **Preferences** popup (the gear icon in the [Right Toolbar](https://develope
 | | **Anti-Aliasing** | Auto | For splats trained with anti-aliasing, such as Mip-Splatting. Without it, they draw too bright. **Auto** follows the anti-aliasing tag stored in each file; **On** and **Off** override it for every splat. Unlike the other settings, this is saved with the project rather than as a preference, and a new scene starts at Auto. Exports are tagged to match what the viewport shows. |
 | | **Sort Mode** | Radial | The order in which Gaussians are blended. **Radial** sorts by distance from the camera, which stays stable when the camera turns in place. **Depth** sorts along the view direction. Orthographic views always sort by depth. |
 | | **Stochastic Alpha** | Auto | How heavy scenes are drawn while you move the camera. **Disabled** always draws depth-sorted, blended frames. **Enabled** always uses stochastic transparency, which needs no sorting and stays responsive on very large scenes at some cost in image quality. **Movement** uses stochastic frames only while the camera or a tool is moving and draws an exact sorted frame once the view settles. **Auto** keeps drawing sorted frames until one proves slow, then behaves like Movement. |
-| Camera | **Field of View** | 85° | Vertical field of view of the viewport camera (10°–120°). |
+| Camera | **Field of View** | 85° | Field of view of the viewport camera (10°–120°), measured across the viewport's longer side. See [Camera Settings](https://developer.playcanvas.com/user-manual/supersplat/editor/camera-controls.md#camera-settings). |
 | | **Fly Speed** | 1 | Speed of WASD navigation in fly mode (0.1–30). |
 | | **FOV Auto Dolly** | Off | Move the camera as the field of view changes so the subject keeps its framing. See [Camera Settings](https://developer.playcanvas.com/user-manual/supersplat/editor/camera-controls.md#camera-settings). |
 | Colors | **Background Color** | Black | The viewport background. Also the default background of [published](https://developer.playcanvas.com/user-manual/supersplat/editor/publishing.md) scenes and exported viewers. |
@@ -24522,9 +24522,11 @@ Access camera settings through the **Preferences** popup (the gear icon in the r
 
 | Setting | Range | Default | Description |
 |---------|-------|---------|-------------|
-| **Field of View** | 10° - 120° | 85° | Vertical camera viewing angle |
+| **Field of View** | 10° - 120° | 85° | Camera viewing angle across the viewport's longer side |
 | **FOV Auto Dolly** | On / Off | Off | How Field of View changes affect the camera (see below) |
 | **Fly Speed** | 0.1 - 30 | 1 | Speed of WASD navigation |
+
+The field of view spans the longer side of the viewport: horizontally when the viewport is wider than it is tall, and vertically when it is taller than it is wide. Published scenes and exported viewers apply it the same way.
 
 By default, changing the Field of View behaves like a lens zoom: the camera stays where it is and the scene appears magnified or shrunk. Enable **FOV Auto Dolly** to have the camera dolly (move) as the FOV changes instead, preserving the subject's framing.
 
@@ -25444,7 +25446,7 @@ To publish your splat:
    | **Title** | A short title that will appear below your splat's thumbnail once it is published |
    | **Description** | A textual description of your splat that will be displayed under the splat on its viewer page |
    | **Background** | The background color of the viewer. Defaults to the Editor's current background color (set in the **Colors** section of the [Preferences](https://developer.playcanvas.com/user-manual/supersplat/editor/interface.md#preferences) popup) |
-   | **Field of View** | The vertical field of view of the viewer's camera in degrees. Defaults to the Editor camera's current setting |
+   | **Field of View** | The field of view of the viewer's camera in degrees, measured across the longer side of the screen. Defaults to the Editor camera's current setting |
    | **Animation** | If enabled, the camera animation authored on the [Timeline](https://developer.playcanvas.com/user-manual/supersplat/editor/timeline.md) is baked into the scene and plays when it loads. Only available when the Timeline has keyframes (and enabled by default in that case) |
    | **Loop Mode** | How an included camera animation plays back in the viewer:<br/>• **None**: Play once and stop<br/>• **Repeat**: Loop continuously<br/>• **Ping Pong**: Play forwards, then backwards, repeatedly<br/>Initialized from the Timeline's Loop toggle - **Repeat** if looping is enabled, **None** otherwise |
    | **SH Bands** | The number of spherical harmonic bands to publish (0–3). Defaults to the highest band count in the scene, capped by the **SH Bands** setting in [Preferences](https://developer.playcanvas.com/user-manual/supersplat/editor/interface.md#preferences). Choosing more bands than the scene contains fills the missing ones with zeros |
@@ -25458,7 +25460,7 @@ The published scene's camera starts at the pose your viewport camera has at the 
 
 :::note
 
-New scenes are published unlisted - they are only discoverable by people who have the link. To make a splat appear in searches on the SuperSplat website, list it from your [Manage page](https://developer.playcanvas.com/user-manual/supersplat/manage.md) after publishing.
+New scenes are published unlisted - they are only discoverable by people who have the link. To make a splat appear in [Explore](https://developer.playcanvas.com/user-manual/supersplat/explore.md) and in searches on superspl.at, set its **Visibility** to **Public** on your [Manage page](https://developer.playcanvas.com/user-manual/supersplat/manage.md) after publishing.
 
 :::
 
@@ -25472,7 +25474,7 @@ Once the publish process is complete, a modal dialog will show with the URL of y
 
 ## Republishing to an Existing Scene
 
-Setting **Publish to** to one of your existing scenes overwrites that scene in place, keeping its URL. In this mode, two toggles choose what gets replaced (**SH Bands** and **Generate LODs** are hidden when only the animation is replaced):
+Setting **Publish to** to one of your existing scenes overwrites that scene in place. The scene keeps its URL, title, description, and [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md) settings, so the dialog hides **Title**, **Description**, **Background**, **Field of View**, and **Animation**. Instead, two toggles choose what gets replaced (**SH Bands** and **Generate LODs** are hidden when only the animation is replaced):
 
 | Option | Description |
 |--------|-------------|
@@ -25626,7 +25628,7 @@ See [Managing Projects](https://developer.playcanvas.com/user-manual/supersplat/
 
 ## Reporting a Problem
 
-If the problem persists, open **Help > Log an Issue** in the Editor and include the Editor version, browser version, operating system, GPU, source format, approximate Gaussian count, and the steps that reproduce the problem. The **About** dialog (**Help > About SuperSplat**, or click the version label in the bottom-right corner of the viewport) shows the Editor version and your GPU. You can also ask in the [SuperSplat Discord community](https://discord.gg/T3pnhRTTAY).
+If the problem persists, open **Help > Log an Issue** in the Editor and include the Editor version, browser version, operating system, GPU, source format, approximate Gaussian count, and the steps that reproduce the problem. The **About** dialog (**Help > About SuperSplat**, or click the version label in the bottom-right corner of the viewport) shows the Editor version and your GPU. You can also ask in the [SuperSplat Discord community](https://discord.gg/qcydPEtn65).
 
 --------------------------------------------------------------------------------
 
@@ -25657,22 +25659,21 @@ You must be signed in with a PlayCanvas account to upload. See [Account Creation
 
 ## Supported input formats
 
-Drag and drop, or pick from your filesystem. The dialog accepts:
+Drag and drop, or pick from your filesystem. The dialog accepts these formats, each up to its own maximum size. Its **Upload Guide** summarizes them.
 
-| Format | File to upload | How it is validated |
-|--------|----------------|---------------------|
-| **PLY** | `.ply` | Starts with a PLY header and declares an ASCII or binary format. |
-| **SOG** | `.sog` | Contains one `meta.json` file and the expected SOG WebP payload files. |
-| **Streamed SOG bundle (SSOG)** | `.zip` | Contains `lod-meta.json` and one or more SOG chunk folders. See [Streaming & Performance](https://developer.playcanvas.com/user-manual/supersplat/streaming.md). |
-| **LCC** | `.zip` | Contains exactly one `.lcc` file with sibling `index.bin` and `data.bin` files. |
+| Format | File to upload | Maximum size | How it is validated |
+|--------|----------------|--------------|---------------------|
+| **PLY** | `.ply` | 15 GB | A PLY file containing Gaussian splat data. A PLY that holds only a mesh or a point cloud is rejected. |
+| **SPZ** | `.spz` | 5 GB | A readable SPZ file. |
+| **SOG** | `.sog` | 10 GB | Contains one `meta.json` file and the expected SOG WebP payload files. |
+| **Streamed SOG bundle (SSOG)** | `.zip` | 10 GB | Contains `lod-meta.json` and one or more SOG chunk folders. See [Streaming & Performance](https://developer.playcanvas.com/user-manual/supersplat/streaming.md). |
+| **LCC or LCC2** | `.zip` | 10 GB | Contains exactly one `.lcc2` file, or exactly one `.lcc` file with sibling `index.bin` and `data.bin` files. |
 
-The file contents are validated after selection. Direct Upload does not accept `.compressed.ply`, `.ksplat`, `.splat`, or `.spz` files directly; use the [Convert](https://developer.playcanvas.com/user-manual/supersplat/convert.md) utility or the [splat-transform CLI](https://developer.playcanvas.com/user-manual/splat-transform.md) to convert those first.
+The file contents are validated after selection. Direct Upload does not accept `.compressed.ply`, `.ksplat`, or `.splat` files directly. Use the [Convert](https://developer.playcanvas.com/user-manual/supersplat/convert.md) utility or the [splat-transform CLI](https://developer.playcanvas.com/user-manual/splat-transform.md) to convert those first, or to bring a file under its format's maximum size.
 
-:::note Maximum file size
+### Levels of detail
 
-Direct Upload accepts files up to **10 GB**. Larger files must be split or compressed first — try the [Convert](https://developer.playcanvas.com/user-manual/supersplat/convert.md) utility or the [splat-transform CLI](https://developer.playcanvas.com/user-manual/splat-transform.md) to bring file size down before uploading.
-
-:::
+When you choose a PLY or SPZ file, the dialog shows an **Auto generate LODs** checkbox. When it is ticked, the splat is published as a progressively streamed [Streamed SOG](https://developer.playcanvas.com/user-manual/supersplat/streaming.md) instead of a single SOG file. It is ticked automatically for splats of 1 million Gaussians or more, and you can change it before uploading. Splats of more than 40 million Gaussians must be streamed, so for them it is ticked and locked. SOG files are always published as a single file, while SSOG and LCC archives are always streamed.
 
 ## What happens after upload
 
@@ -25704,11 +25705,12 @@ From the Edit Splat view, you can:
 
 | Error | Cause |
 |-------|-------|
-| **Unrecognized format** | The file does not match one of the supported structures above. |
-| **File too large** | The file exceeds the 10 GB limit. |
-| **Upload failed** | Network interruption or a server-side issue. Try again; if the problem persists, check your connection. |
+| **Unrecognized Format** | The file does not match one of the supported structures above. |
+| **No Gaussian Splat Data** | The file is a valid PLY, but it holds a mesh or a point cloud rather than a Gaussian splat. |
+| **File Too Large** | The file is larger than its format's maximum size. The message gives both sizes. |
+| **Upload Failed** | Network interruption or a server-side issue. Try again; if the problem persists, check your connection. |
 
-Every account also has a daily publishing allowance, measured in compressed output, and a limit on how many scenes can be uploading or processing at once. See [Limits](https://developer.playcanvas.com/user-manual/supersplat/api-integrations.md#limits).
+Every account also has a daily publishing allowance, measured in compressed output, and a limit on how many scenes can be uploading or processing at once. When you reach either, the dialog says so (**Publishing Allowance Used** or **Scenes Still Processing**) and when you can upload again. See [Limits](https://developer.playcanvas.com/user-manual/supersplat/api-integrations.md#limits).
 
 ## See also
 
@@ -26363,7 +26365,7 @@ Older `v1` settings are migrated to `v2` automatically when loaded by Studio or 
 - [Viewer / embedding](https://developer.playcanvas.com/user-manual/supersplat/viewer/embedding.md) — how to point a Viewer at a `settings.json` URL
 - [Viewer API](https://developer.playcanvas.com/user-manual/supersplat/viewer/api.md) — pass settings to a viewer you create in your own page
 - [Viewer / self-hosting](https://developer.playcanvas.com/user-manual/supersplat/viewer/self-hosting.md) — exporting a self-contained Viewer that bundles a copy of these settings
-- [Splat Publishing API](https://developer.playcanvas.com/user-manual/api/splat-publish/) — programmatic access to publishing and updating settings
+- [API & Integrations](https://developer.playcanvas.com/user-manual/supersplat/api-integrations.md) — publish splats to superspl.at from your own code
 
 --------------------------------------------------------------------------------
 
@@ -26393,21 +26395,22 @@ The viewer is the open-source [SuperSplat Viewer](https://developer.playcanvas.c
 | **Title** | The headline you set in the [Edit Splat dialog](https://developer.playcanvas.com/user-manual/supersplat/manage.md). |
 | **Author** | A chip linking to the creator's [user profile](https://developer.playcanvas.com/user-manual/supersplat/user-profile.md), with a **Follow** button so you can [follow them](https://developer.playcanvas.com/user-manual/supersplat/following.md). |
 | **Views** | Total view count. |
-| **Likes** | Total stars; highlighted if you've liked this splat. |
+| **Downloads** | Total download count. Only shown if the splat is downloadable. |
 | **Visibility badge** | **Public** or **Unlisted**. |
 | **Software used** | Chips for the tools you tagged in the Edit Splat dialog (capture / training tools). |
 | **Description** | The longer description you set in the Edit Splat dialog (sanitized HTML). |
 | **Format / size** | The published splat format and download size, with a tooltip. |
+| **Splat count** | The number of Gaussians in the published splat. Its tooltip lists the levels of detail of a [streamed](https://developer.playcanvas.com/user-manual/supersplat/streaming.md) splat, and the spherical harmonic bands. |
 | **Created** | Relative time the splat was published, with the exact date on hover. |
 
 ### Action buttons
 
 | Button | What it does |
 |--------|--------------|
+| **Like** (thumbs-up) | Shows the splat's like count and toggles your like. Highlighted if you've liked the splat. Requires login — anonymous visitors are prompted to sign in. |
 | **Share** | Opens the [Share dialog](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md#share-dialog). |
 | **Embed** | Opens the [Embed dialog](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md#embed-dialog). |
 | **Download** | Opens the [Download dialog](https://developer.playcanvas.com/user-manual/supersplat/scene-page.md#download-dialog). Only shown if the splat is downloadable. |
-| **Like** (star) | Toggles your like for the splat. Requires login — anonymous visitors are prompted to sign in. |
 
 Owners also see an **Edit in Studio** entry point that opens [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md) for this scene.
 
@@ -26451,15 +26454,15 @@ Some download targets are produced on demand — the dialog shows a **Preparing�
 Below the viewer is the comments section. Anyone signed in can post a comment; the splat's owner can delete any comment.
 
 - Each comment shows the commenter's avatar, username, timestamp, and sanitized HTML body.
-- Comments can be liked individually (the per-comment star icon).
+- Comments can be liked individually (the per-comment thumbs-up icon).
 - The comments list is paginated; up to **100 comments** are returned per page.
 - Comments are sorted newest-first.
 
 A PlayCanvas account is required to post — unauthenticated visitors see a prompt to sign in.
 
-## Likes (stars)
+## Likes
 
-The **Like** button in the action bar is a single-click toggle. Counts update immediately. Like requires a PlayCanvas account; visitors without one are prompted to sign in.
+The **Like** button (thumbs-up) in the action bar is a single-click toggle that also shows the like count. Counts update immediately. Like requires a PlayCanvas account; visitors without one are prompted to sign in.
 
 ## Suggested splats
 
@@ -26661,7 +26664,7 @@ A published splat takes one of two forms:
 Which one you get depends on how you publish:
 
 - **From the Editor**, the **Generate LODs** toggle in the [Publish Settings](https://developer.playcanvas.com/user-manual/supersplat/editor/publishing.md) dialog decides. It's on by default for scenes of 1 million Gaussians or more that span a large area. Scenes of more than 40 million Gaussians must be streamed, so for them the toggle is switched on and can't be turned off.
-- **With [Direct Upload](https://developer.playcanvas.com/user-manual/supersplat/upload.md)**, a PLY gets an **Auto generate LODs** checkbox, ticked automatically at 1 million Gaussians or more; you can override it before publishing. Splats uploaded as a pre-built LCC or SSOG archive are always streamed.
+- **With [Direct Upload](https://developer.playcanvas.com/user-manual/supersplat/upload.md)**, a PLY or SPZ file gets an **Auto generate LODs** checkbox, ticked automatically at 1 million Gaussians or more; you can override it before publishing, except above 40 million Gaussians, where it is locked on. A SOG file is published as a single file, and splats uploaded as a pre-built LCC or SSOG archive are always streamed.
 
 ## Near-instant loads and the Gaussian budget
 
@@ -27224,7 +27227,7 @@ That camera looks across a captured space from inside it; `defaultSettings('obje
 
 ## Programmatic publishing
 
-If you want to publish splats and update their settings without going through the Editor or Studio UIs, the [Splat Publishing API](https://developer.playcanvas.com/user-manual/api/splat-publish/) exposes the underlying REST endpoints.
+To publish splats to superspl.at from your own pipeline instead of the Editor, use the [SuperSplat API](https://developer.playcanvas.com/user-manual/supersplat/api-integrations.md). A scene published this way starts with the default settings, and its viewing experience is curated in [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md).
 
 ## See also
 
@@ -27232,7 +27235,7 @@ If you want to publish splats and update their settings without going through th
 - [Viewer API](https://developer.playcanvas.com/user-manual/supersplat/viewer/api.md) — `createViewer` and the viewer handle
 - [Self-Hosting](https://developer.playcanvas.com/user-manual/supersplat/viewer/self-hosting.md) — single-file HTML export from the Editor
 - [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md) — the JSON contract the viewer reads
-- [Splat Publishing API](https://developer.playcanvas.com/user-manual/api/splat-publish/) — REST endpoints for programmatic publishing
+- [API & Integrations](https://developer.playcanvas.com/user-manual/supersplat/api-integrations.md) — publish splats to superspl.at from your own code
 
 --------------------------------------------------------------------------------
 
@@ -27493,7 +27496,7 @@ The viewer export can be configured via several options:
 | **Animation** | If enabled, the camera animation authored on the [Timeline](https://developer.playcanvas.com/user-manual/supersplat/editor/timeline.md) is included and plays when the viewer loads. Only available when the Timeline has keyframes (and enabled by default in that case) |
 | **Loop Mode** | How an included camera animation plays back:<br/>• **None**: Play once and stop<br/>• **Repeat**: Loop continuously<br/>• **Ping Pong**: Play forwards, then backwards, repeatedly<br/>Initialized from the Timeline's Loop toggle - **Repeat** if looping is enabled, **None** otherwise |
 | **Background** | The background color of the viewer. Defaults to the Editor's **Background Color**, set in the **Colors** section of the [Preferences](https://developer.playcanvas.com/user-manual/supersplat/editor/interface.md#preferences) popup |
-| **Field of View** | The vertical field of view of the viewer's camera in degrees. Defaults to the Editor camera's current setting |
+| **Field of View** | The field of view of the viewer's camera in degrees, measured across the longer side of the screen. Defaults to the Editor camera's current setting |
 | **SH Bands** | The exact number of spherical harmonics bands written to the exported splat data (0–3). Defaults to the highest band count in the scene, capped by the **SH Bands** setting in [Preferences](https://developer.playcanvas.com/user-manual/supersplat/editor/interface.md#preferences). Choosing more bands than a splat contains fills the missing ones with zeros |
 
 The exported viewer's camera starts at the pose your viewport camera has at the moment you export, so frame your favorite view before exporting.

@@ -83,5 +83,5 @@ flowchart TB
 ## Stay in the loop
 
 - [SuperSplat news on the PlayCanvas blog](https://blog.playcanvas.com/tags/supersplat/)
-- [Discord](https://discord.gg/RSaMRzg) for questions and sharing your splats
+- [Discord](https://discord.gg/qcydPEtn65) for questions and sharing your splats
 - [GitHub](https://github.com/playcanvas/supersplat) for issues and contributions

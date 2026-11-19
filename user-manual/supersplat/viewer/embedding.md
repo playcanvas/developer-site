@@ -187,7 +187,7 @@ That camera looks across a captured space from inside it; `defaultSettings('obje
 
 ## Programmatic publishing
 
-If you want to publish splats and update their settings without going through the Editor or Studio UIs, the [Splat Publishing API](https://developer.playcanvas.com/user-manual/api/splat-publish/) exposes the underlying REST endpoints.
+To publish splats to superspl.at from your own pipeline instead of the Editor, use the [SuperSplat API](https://developer.playcanvas.com/user-manual/supersplat/api-integrations.md). A scene published this way starts with the default settings, and its viewing experience is curated in [Studio](https://developer.playcanvas.com/user-manual/supersplat/studio.md).
 
 ## See also
 
@@ -195,4 +195,4 @@ If you want to publish splats and update their settings without going through th
 - [Viewer API](https://developer.playcanvas.com/user-manual/supersplat/viewer/api.md) — `createViewer` and the viewer handle
 - [Self-Hosting](https://developer.playcanvas.com/user-manual/supersplat/viewer/self-hosting.md) — single-file HTML export from the Editor
 - [Experience Settings](https://developer.playcanvas.com/user-manual/supersplat/studio/experience-settings.md) — the JSON contract the viewer reads
-- [Splat Publishing API](https://developer.playcanvas.com/user-manual/api/splat-publish/) — REST endpoints for programmatic publishing
+- [API & Integrations](https://developer.playcanvas.com/user-manual/supersplat/api-integrations.md) — publish splats to superspl.at from your own code

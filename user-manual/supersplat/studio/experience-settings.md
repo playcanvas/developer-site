@@ -165,4 +165,4 @@ Older `v1` settings are migrated to `v2` automatically when loaded by Studio or 
 - [Viewer / embedding](https://developer.playcanvas.com/user-manual/supersplat/viewer/embedding.md) — how to point a Viewer at a `settings.json` URL
 - [Viewer API](https://developer.playcanvas.com/user-manual/supersplat/viewer/api.md) — pass settings to a viewer you create in your own page
 - [Viewer / self-hosting](https://developer.playcanvas.com/user-manual/supersplat/viewer/self-hosting.md) — exporting a self-contained Viewer that bundles a copy of these settings
-- [Splat Publishing API](https://developer.playcanvas.com/user-manual/api/splat-publish/) — programmatic access to publishing and updating settings
+- [API & Integrations](https://developer.playcanvas.com/user-manual/supersplat/api-integrations.md) — publish splats to superspl.at from your own code
