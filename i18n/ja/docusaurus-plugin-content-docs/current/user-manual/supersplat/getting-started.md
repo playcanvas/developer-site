@@ -74,9 +74,9 @@ SOG形式への圧縮には少し時間がかかり、非常に大きなシー�
 
 最初に試す価値のある3つのこと：
 
-- **最初のショットを決める。** **Scene**タブの**Cameras**で、初期カメラの位置、ターゲット、視野角を設定し、訪問者が最良のアングルから始められるようにします。[カメラ](studio/cameras.md)を参照してください。
-- **ホットスポットを追加する。** **Annotations**タブで細部に構図を合わせ、注釈を追加し、タイトルとテキストを付けます。訪問者はガイドツアーのようにホットスポットを順にクリックして巡ることができます。[注釈](studio/annotations.md)を参照してください。
-- **仕上げを加える。** **Post Effects**で、控えめな**Bloom**や**Vignette**を試したり、**Tonemapping**のカーブを選んだりしてみましょう。[ポストエフェクト](studio/post-effects.md)を参照してください。
+- **最初のショットを決める。** **Scene**タブの**Cameras**で、最良のアングルをフレーミングして**Set camera to current view**をクリックし、訪問者がそこから始められるようにします。[カメラ](studio/cameras.md)を参照してください。
+- **ホットスポットを追加する。** 細部に構図を合わせて<kbd>C</kbd>を押し、注釈を付けたい場所をクリックして、タイトルとテキストを付けます。訪問者はガイドツアーのようにホットスポットを順にクリックして巡ることができます。[注釈](studio/annotations.md)を参照してください。
+- **仕上げを加える。** **Look & Tone**で**Tonemapping**のカーブを選んだり、**Post Effects**で**Vignette**や**Color Grading**を試したりしてみましょう。[Look & Tone](studio/look-and-tone.md)と[ポストエフェクト](studio/post-effects.md)を参照してください。
 
 <video autoPlay muted loop controls src='/video/supersplat-studio-edit-camera.mp4' style={{width: '100%', height: 'auto'}} />
 

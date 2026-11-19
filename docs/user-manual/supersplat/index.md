@@ -34,7 +34,7 @@ Browse, view, clean up, publish, curate, convert, and share: the whole platform 
   <div className="col col--6">
     <Link className="card path-card" to="/user-manual/supersplat/studio/">
       <div className="card__header"><h3>🎬 I've published a splat</h3></div>
-      <div className="card__body"><p>Make it shine in Studio: frame the opening camera, add annotated hotspots, dial in bloom and color grading, set a skybox, or make the scene walkable with collision.</p></div>
+      <div className="card__body"><p>Make it shine in Studio: frame the opening camera, keyframe a flythrough, add annotated hotspots, dial in bloom and color grading, set a skybox, or make the scene walkable with collision.</p></div>
       <div className="card__footer">Studio →</div>
     </Link>
   </div>
@@ -99,7 +99,7 @@ flowchart TB
 | **[Editor](editor/)** | Browser-based editor for cleaning, cropping, color-adjusting, and animating splats. Publishes to superspl.at. | [superspl.at/editor](https://superspl.at/editor) |
 | **[Direct Upload](upload)** | Publish an already-clean splat file without opening the Editor. | The orange **Upload Splat** button on [superspl.at](https://superspl.at) |
 | **[Manage](manage)** | Your splat library: edit title and description, change visibility, choose downloadable + license, delete, open in Studio. | [superspl.at/manage](https://superspl.at/manage) |
-| **[Studio](studio/)** | Curate the published viewing experience: cameras, annotations, post effects, skybox, collision. | `superspl.at/scene/<hash>/studio` |
+| **[Studio](studio/)** | Curate the published viewing experience: look and tone, skybox, cameras, camera animation, collision, post effects, annotations. | `superspl.at/scene/<hash>/studio` |
 | **[Scene page](scene-page)** | Public page for a published splat: embedded viewer, share, embed, download, comments, likes, suggested splats. | `superspl.at/scene/<hash>` |
 | **[Explore](explore)** | Public gallery with sort, time, feature filters, and search. The superspl.at home page. | [superspl.at](https://superspl.at) |
 | **[User Profile](user-profile)** | A creator's public page: avatar, bio, social links, their published splats. | `superspl.at/user/<username>` |

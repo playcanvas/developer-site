@@ -1,88 +1,63 @@
 ---
 title: ポストエフェクト
-description: "SuperSplat Studioで公開済みスプラットにシャープネス、ブルーム、カラーグレーディング、ビネット、フリンジング、トーンマッピング、高精度レンダリングを適用します。"
+description: "SuperSplat Studioで公開済みスプラットにシャープネス、ブルーム、カラーグレーディング、ビネット、色収差フリンジングを適用します。"
 ---
 
-[Studio](/user-manual/supersplat/studio/)の**Post Effects**パネルは、スプラットがレンダリングされた後のシーンの見え方を制御します。エフェクトはビューア内でフレームごとに評価されます。各セクションには有効化トグルと独自のパラメータがあります。
+[Studio](/user-manual/supersplat/studio/)の**Scene**タブの最下部にある**Post Effects**セクションは、スプラットがレンダリングされた後のシーンの見え方を制御します。エフェクトはビューア内でフレームごとに評価されます。各エフェクトにはスイッチがあり、オンにするとそのパラメータが表示されます。
 
-パネルには関連する2つのグローバルコントロールも含まれます：ハイダイナミックレンジ出力をディスプレイの輝度にどうマッピングするかを形作る**Tonemapping**ドロップダウンと、ビューアをより正確（だがより高コスト）なレンダリングパイプラインに切り替える**High Precision Rendering**トグルです。
+画像全体を形作るTonemappingとHigh Precision Renderingは、[Look & Tone](/user-manual/supersplat/studio/look-and-tone)セクションにあります。
 
-<!-- TODO: media — /img/user-manual/supersplat/studio/post-effects-panel.png — 展開されたPost Effectsパネル -->
+<img loading="lazy" alt="Bloom、Color Grading、VignetteをオンにしたPost Effectsセクション" width="383" src="/img/user-manual/supersplat/studio/post-effects-panel.png" />
 
-## エフェクトセクション
-
-### Sharpness
+## Sharpness
 
 | フィールド | 説明 |
 |-------|-------------|
-| **Enabled** | マスタートグル。 |
 | **Amount** | シャープニングフィルタの強度。 |
 
 密度の高いスプラットキャプチャの体感的なディテールを回復するのに有用です。
 
-### Bloom
+## Bloom
 
 | フィールド | 説明 |
 |-------|-------------|
-| **Enabled** | マスタートグル。 |
 | **Intensity** | ブルームグローの強さ。 |
-| **Blur level** | ブルームカーネルのサイズ — 大きいほど柔らかく広いグローになります。 |
+| **Blur Level** | ブルームカーネルのサイズ。大きいほど柔らかく広いグローになります。 |
 
-シーンの明るい領域にグローを追加します。
+シーンの明るい領域にグローを追加します。Bloomには[High Precision Rendering](/user-manual/supersplat/studio/look-and-tone)が必要です。それがオフの間は、セクションに**Bloom requires High Precision Rendering**と表示され、**Enable**でオンにできます。
 
-### Grading
+## Color Grading
 
 カラーグレーディングは画像にグローバルな変換を適用します。
 
 | フィールド | 説明 |
 |-------|-------------|
-| **Enabled** | マスタートグル。 |
 | **Brightness** | 全体的な明るさのリフト。 |
 | **Contrast** | 暗部と明部のトーン分離。 |
 | **Saturation** | 色の強度（`0`はグレースケール）。 |
-| **Tint** | 画像にブレンドされるRGB色 — 暖色／寒色のグレーディングに有用。 |
+| **Tint** | 画像にブレンドされるRGB色。暖色／寒色のグレーディングに有用です。 |
 
-### Vignette
+## Vignette
 
 | フィールド | 説明 |
 |-------|-------------|
-| **Enabled** | マスタートグル。 |
 | **Intensity** | コーナーの暗化の強さ。 |
 | **Inner** | ビネットが始まる半径。 |
 | **Outer** | ビネットが完全な強度に達する半径。 |
 | **Curvature** | ビネットの減衰の形状。 |
 
-### Fringing
+## Chromatic Fringing
 
 | フィールド | 説明 |
 |-------|-------------|
-| **Enabled** | マスタートグル。 |
 | **Intensity** | フレーム端での色収差効果の強さ。 |
-
-## Tonemapping
-
-HDR出力をディスプレイにどうマッピングするかを選ぶドロップダウン：
-
-| 値 | 備考 |
-|-------|-------|
-| `linear`（デフォルト） | トーンマッピングカーブなし — 出力は線形。 |
-| `none` | スケーリングなしのパススルー。 |
-| `filmic` | 古典的なフィルム模倣カーブ。 |
-| `hejl` | Hejl-Burgess-Dawsonカーブ。 |
-| `aces` | ACESフィルミックカーブ。 |
-| `aces2` | ハイライトをロールオフしたACESバリアント。 |
-| `neutral` | Khronos Neutralトーンマップ。 |
-
-## High Precision Rendering
-
-より正確なレンダリングパスを有効にするトグル（デフォルト**off**）。明るいハイライト、細かいカラーグレーディング、ポストエフェクトがデフォルトパスでバンディングを起こす場合に有用です — フレームあたりのGPU処理量が増えるという代償があります。
 
 ## ビューアでの動作
 
 - **VRとAR** — [VRまたはARのセッション](/user-manual/supersplat/viewer/xr)中は、ポストエフェクトと高精度レンダリングは適用されません。シーンのトーンマッピングは引き続き適用され、セッションが終了するとすべて元に戻ります。
-- **セルフホスティング** — [ビューアを自分でホストする](/user-manual/supersplat/viewer/embedding#url-parameters)場合は、`nofx` URLパラメータでポストエフェクトをオフにでき、`hpr`でHigh Precision Renderingの設定を上書きできます。
+- **セルフホスティング** — [ビューアを自分でホストする](/user-manual/supersplat/viewer/embedding#url-parameters)場合は、`nofx` URLパラメータでポストエフェクトをオフにできます。
 
 ## 関連項目
 
-- [Skybox](/user-manual/supersplat/studio/skybox) — 背景色とスカイボックス画像
+- [Look & Tone](/user-manual/supersplat/studio/look-and-tone) — 背景、スカイボックス、トーンマッピング、High Precision Rendering
 - [Experience Settings](/user-manual/supersplat/studio/experience-settings) — ポストエフェクト設定を格納するJSONコントラクト
