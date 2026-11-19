@@ -5,7 +5,7 @@ description: 共同編集者を招待し、読み取り・書き込み・管理�
 
 PlayCanvasでの共同開発には、効果的なチーム管理が不可欠です。このセクションでは、チームメンバーの追加方法、権限の管理、開発チームとの連携について説明します。
 
-## チームメンバーの追加
+## チームメンバーの追加 {#adding-team-members}
 
 プロジェクトにチームメンバーを追加するには：
 
@@ -52,32 +52,38 @@ PlayCanvasプロジェクトは、3つの権限レベルをサポートしてい
 
 :::
 
-## Organizationチーム管理
+## Organizationのプロジェクト {#organization-projects}
 
-### Organizationプロジェクト
+プロジェクトが[Organization](/user-manual/account-management/organizations/)に属している場合、Organizationのオーナーと管理者もプロジェクトを管理できます。また、プライベートプロジェクトに参加しているユーザーは、Organizationのシートを使用します。
 
-プロジェクトがOrganizationに属している場合、チーム管理は少し異なります：
+### Organizationの管理者 {#organization-administrators}
 
-#### Organization管理者
+Organizationのオーナーと管理者は、次のことができます。
 
-- 任意のOrganizationプロジェクトに自身を追加できます
-- Organization全体のプロジェクトチームを管理できます
-- billingおよびseat managementにアクセスできます
+- Organizationの任意のプロジェクトに、自分自身を管理者として追加できます。[Organizationのプロジェクトに自分を追加する](#adding-organization-members)を参照してください。
+- 管理者になっているプロジェクトのチームを、前述の手順で管理できます。
+- Organizationのアカウント設定の**People**タブで、Organizationの管理者を追加・削除し、シートを使用しているユーザーを確認できます。[Organizationの管理](/user-manual/account-management/organizations/managing/#people)を参照してください。
 
-#### Seat管理
+Organizationの請求情報の確認、プランの変更、シート数の変更ができるのはオーナーだけです。
 
-seat制限のあるOrganizationアカウントの場合：
+### シートの管理 {#seat-management}
 
-- プライベートプロジェクトの各チームメンバーはseatを占有します
-- パブリックプロジェクトはseatを必要としません
-- Organizationの所有者はseatの割り当てを管理できます
-- プロジェクトからユーザーを削除するとseatが解放されます
+Organizationプランでは：
 
-### Organizationメンバーの追加
+- Organizationのプライベートプロジェクトに参加している各ユーザーは、シートを1つ使用します。1つのシートで、そのOrganizationのすべてのプロジェクトに参加できます。
+- パブリックプロジェクトにはシートは必要ありません。
+- オーナーは、プロジェクトで作業していない場合、シートを使用する必要はありません。
+- Organizationのすべてのプライベートプロジェクトからユーザーを削除すると、そのユーザーのシートが空きます。一度に削除するには、Organizationの**People**タブの**Seats**で、そのユーザーの横にある**Remove**を選択します。
+- シート数は、オーナーがOrganizationの**Billing**タブで変更します。[シートの追加と削除](/user-manual/account-management/organizations/managing/#adding-and-removing-seats)を参照してください。
 
-Organization管理者はプロジェクトに自身を追加できます：
+詳しくは[シート](/user-manual/account-management/organizations/managing/#seats)を参照してください。
 
-1. Organizationアカウントページに移動します
-2. プロジェクトリストからプロジェクトを見つけます
-3. ドロップダウン矢印をクリックします
-4. 「Add me as admin」を選択します
+### Organizationのプロジェクトに自分を追加する {#adding-organization-members}
+
+Organizationの管理者は、プロジェクトダッシュボードからプロジェクトに自分自身を追加できます：
+
+1. [プロジェクトダッシュボード](/user-manual/editor/projects/dashboard/)のサイドバーで、**Organizations**からOrganizationを選択します
+2. プロジェクトのカードを選択して設定を開きます。まだプロジェクトに参加していない場合、設定には**Team**だけが表示され、プロジェクトの管理者ではないことを示すメッセージが表示されます
+3. **ADD ME AS ADMIN**を選択します
+
+あなたが管理者として追加され、プロジェクトのすべての設定が開きます。その後は、通常どおり[他のチームメンバーを追加](#adding-team-members)できます。[プロジェクト設定](/user-manual/editor/projects/dashboard/#project-settings)を参照してください。
