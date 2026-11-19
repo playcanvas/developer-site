@@ -5,7 +5,7 @@ description: "SuperSplat Editorの起動、インポート、選択、変形、�
 
 ## Editorが起動しない
 
-EditorにはWebGPUが必要です。読み込まれる代わりに「SuperSplat requires WebGPU, which this browser does not support」と表示される場合は、最新のChromeまたはEdge、Safari 26以降、あるいはWebGPUを有効にしたFirefoxに切り替え、ブラウザの設定でハードウェアアクセラレーションが有効になっていることを確認してください。複数のGPUを搭載したマシンでは、ブラウザが専用GPUを使用できるようにする必要があります。
+EditorにはWebGPUが必要です。読み込まれる代わりに「SuperSplat requires WebGPU, which this browser does not support」と表示される場合は、[対応ブラウザ](/user-manual/supersplat/editor/#system-requirements)に切り替え、ブラウザの設定でハードウェアアクセラレーションが有効になっていることを確認してください。複数のGPUを搭載したマシンでは、ブラウザが専用GPUを使用できるようにする必要があります。
 
 「SuperSplat failed to start」と表示される場合は、ブラウザのコンソールで詳細を確認し、[問題を報告](#reporting-a-problem)する際にその内容を含めてください。
 
@@ -69,8 +69,8 @@ SOGとViewer Appのエクスポートでは、GPUでスプラットを圧縮し�
 
 ## 公開またはレンダリングに失敗する
 
-- 公開するには、PlayCanvasアカウントでsuperspl.atにサインインする必要があります。
-- Publishダイアログで`Publish`がメッセージとともに無効になっている場合は、アカウントがその日の公開枠を使い切ったか、処理中のシーンがすでに上限数に達しています。再び公開できる時刻はメッセージに表示されます。[公開](/user-manual/supersplat/publishing/editor/)を参照してください。
+- 公開するには、PlayCanvasアカウントでsuperspl.atに[サインイン](/user-manual/supersplat/publishing/#account)する必要があります。
+- Publishダイアログで`Publish`がメッセージとともに無効になっている場合は、アカウントが[公開の上限](/user-manual/supersplat/publishing/#limits)のいずれかに達しています。再び公開できる時刻はメッセージに表示されます。
 - スプラット数が4000万を超えるシーンは、**Generate LODs**をオンにした場合にのみ公開できます。ストリーミングしない単一のファイルとして公開したい場合は、先に不要なガウシアンを削除してください。
 - 動画コーデックの対応状況はブラウザによって異なります。Render Videoダイアログでは、現在の設定でブラウザやデバイスがエンコードできない解像度は無効になります。解像度、フレームレート、ビットレートを下げるか、別の形式やコーデックを試すか、ブラウザやグラフィックスドライバーを更新してください。
 - ダウンロードのブロック、プライベートブラウジングの制限、空きメモリ不足によって、大きなレンダリングやエクスポートが完了しないことがあります。File System Access APIに対応していないブラウザでは、レンダリングとエクスポートはダウンロードとして提供されます。

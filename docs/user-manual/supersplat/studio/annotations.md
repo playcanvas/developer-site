@@ -44,15 +44,7 @@ Each row on the **Annotations** tab also has **Go to annotation**, which moves t
 
 ## How visitors use them
 
-On the [scene page](/user-manual/supersplat/viewing/scene-page), the viewer shows each annotation as a numbered hotspot:
-
-- **Selecting a hotspot** eases the camera to the annotation's pose, and its title and text appear in a panel beside the hotspot as the camera arrives. An annotation with neither title nor text shows no panel. Visitors can orbit from there, pivoting near the annotated point, and the panel stays open.
-- **The navigator**, shown when a scene has two or more annotations, displays the current annotation's number and title, with arrows to step to the previous and next one in list order.
-- **Clicking elsewhere** in the viewer deselects the annotation and returns to free navigation. The navigator keeps the last annotation, greyed out, and clicking it selects it again.
-- **Hotspots hidden** behind part of the scene are faded once the camera stops moving.
-- **Show Annotations**, in the viewer's settings panel, lets visitors hide the hotspots and the navigator.
-
-See [Viewer Controls](/user-manual/supersplat/viewing/controls#annotations) for the full visitor experience.
+On the [scene page](/user-manual/supersplat/viewing/scene-page), the viewer shows each annotation as a numbered hotspot. Selecting one eases the camera to the annotation's view and shows its title and text, and a navigator steps through the annotations in list order. [Viewer Controls](/user-manual/supersplat/viewing/controls#annotations) describes everything visitors can do with them.
 
 :::note
 

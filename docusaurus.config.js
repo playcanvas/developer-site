@@ -187,8 +187,6 @@ const config = {
         { from: ['/user-manual/supersplat/data-panel/'], to: '/user-manual/supersplat/editor/data-panel/' },
         { from: ['/user-manual/supersplat/timeline/'], to: '/user-manual/supersplat/editor/timeline/' },
         { from: ['/user-manual/supersplat/rendering/'], to: '/user-manual/supersplat/editor/rendering/' },
-        // Remove this one if publishing/ gets an overview page of its own
-        { from: ['/user-manual/supersplat/publishing/'], to: '/user-manual/supersplat/publishing/editor/' },
         // Studio's Skybox & Background page became Look & Tone to match the redesigned Studio
         { from: ['/user-manual/supersplat/studio/skybox/'], to: '/user-manual/supersplat/studio/look-and-tone/' },
         // SuperSplat pages moved into folders that match their sidebar groups:

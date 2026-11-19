@@ -76,7 +76,7 @@ From the Edit Splat view, you can:
 | **File Too Large** | The file is larger than its format's maximum size. The message gives both sizes. |
 | **Upload Failed** | Network interruption or a server-side issue. Try again; if the problem persists, check your connection. |
 
-Every account also has a daily publishing allowance, measured in compressed output, and a limit on how many scenes can be uploading or processing at once. When you reach either, the dialog says so (**Publishing Allowance Used** or **Scenes Still Processing**) and when you can upload again. See [Limits](/user-manual/supersplat/developers/api-integrations#limits).
+Your account's [publishing limits](/user-manual/supersplat/publishing/#limits) also apply. When you reach one, the dialog says so (**Publishing Allowance Used** or **Scenes Still Processing**) and when you can upload again.
 
 ## See also
 

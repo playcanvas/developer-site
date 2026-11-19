@@ -5,11 +5,7 @@ description: "SuperSplat Editor: the open-source, browser-based editor for clean
 
 The [SuperSplat Editor](https://superspl.at/editor) is the open-source, browser-based editor at the heart of the [SuperSplat platform](../). It's the tool you use to clean up raw splat captures, trim floaters, crop scenes, retouch colors, build camera animations, and publish a finished splat ready to share. The Editor is [open source on GitHub](https://github.com/playcanvas/supersplat) under the MIT license and runs entirely in your browser — nothing is uploaded until you choose to publish.
 
-:::tip Already have a clean splat?
-
-You can skip the Editor entirely. Hit the orange **Upload Splat** button on the [superspl.at home page](https://superspl.at) (or use the [Direct Upload](/user-manual/supersplat/publishing/upload/) flow) to publish a ready-made splat straight to your [Manage page](/user-manual/supersplat/publishing/manage/).
-
-:::
+If your splat is already clean, you can skip the Editor and [upload it directly](/user-manual/supersplat/publishing/upload/).
 
 ![SuperSplat Interface](/img/user-manual/supersplat/editor/editor-hero.webp)
 
@@ -31,15 +27,7 @@ For a more comprehensive guide to using the SuperSplat Editor, check out this in
     <iframe width="560" height="315" src="https://www.youtube.com/embed/J37rTieKgJ8" title="SuperSplat In-Depth Tutorial" allowfullscreen></iframe>
 </div>
 
-## Getting Started
-
-### Accessing the Editor
-
-1. **Open your browser** — Navigate to [superspl.at/editor](https://superspl.at/editor)
-2. **Load your splat file** — Drag and drop it into the window, or use **File > Import**
-3. **Begin editing** — Use the interface controls to navigate and edit
-
-### System Requirements
+## System Requirements {#system-requirements}
 
 - **A WebGPU-capable browser** — Current Chrome or Edge, Safari 26 or later, or Firefox with WebGPU enabled. If WebGPU is unavailable, the Editor shows a message at startup instead of loading.
 - **GPU acceleration** — Keep hardware acceleration enabled in your browser. A dedicated GPU helps with very large splats.
@@ -47,6 +35,7 @@ For a more comprehensive guide to using the SuperSplat Editor, check out this in
 
 ## What's next?
 
+- New to SuperSplat? [Getting Started](/user-manual/supersplat/getting-started/) takes a splat from import to a published scene in about ten minutes
 - Get oriented with the [Interface Overview](interface)
 - Learn the supported [Import and Export](import-export) formats
 - Clean a capture with [Selection and Cleanup](editing-splats), then use [Transform, Measure and Align](transform-measure-align) to prepare it
