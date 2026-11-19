@@ -3,7 +3,7 @@ title: Camera Animation
 description: "Keyframe a camera flythrough for a published splat on SuperSplat Studio's timeline, and choose whether it plays when the scene opens."
 ---
 
-A **camera animation** moves the camera along a keyframed path, from a gentle turntable around an object to a full flythrough of a captured space. In [Studio](/user-manual/supersplat/studio/) you author it on the **Timeline** panel and control it from the **Animation** section of the **Scene** tab. Visitors watch it on the [scene page](/user-manual/supersplat/scene-page), and can pause it or take over the camera at any time.
+A **camera animation** moves the camera along a keyframed path, from a gentle turntable around an object to a full flythrough of a captured space. In [Studio](/user-manual/supersplat/studio/) you author it on the **Timeline** panel and control it from the **Animation** section of the **Scene** tab. Visitors watch it on the [scene page](/user-manual/supersplat/viewing/scene-page), and can pause it or take over the camera at any time.
 
 A scene has one camera animation. If you published the splat from the Editor with an animation from its [Timeline](/user-manual/supersplat/editor/timeline), Studio opens with that animation, ready to edit.
 
@@ -71,5 +71,5 @@ You can also keyframe the camera on the Editor's [Timeline](/user-manual/supersp
 ## See also
 
 - [Cameras](/user-manual/supersplat/studio/cameras) — the starting camera and field of view
-- [Viewer Controls](/user-manual/supersplat/viewer/controls) — how visitors play, pause and scrub an animation
-- [Experience Settings](/user-manual/supersplat/studio/experience-settings) — the `animTracks` and `startMode` fields this page edits
+- [Viewer Controls](/user-manual/supersplat/viewing/controls) — how visitors play, pause and scrub an animation
+- [Experience Settings](/user-manual/supersplat/developers/experience-settings) — the `animTracks` and `startMode` fields this page edits

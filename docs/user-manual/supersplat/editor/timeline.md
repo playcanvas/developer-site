@@ -182,13 +182,13 @@ When you import a [PLY sequence](import-export.md#ply-sequences) as a sequence, 
 
 ## Publishing and Playback on the Scene Page
 
-The Timeline animation lives in your SuperSplat project. To make it play for visitors, [publish](/user-manual/supersplat/editor/publishing) the splat with the publish dialog's **Animation** toggle enabled. This bakes the keyframed camera path into the published scene and sets it to play on load. The dialog's **Loop Mode** option is initialized from the Timeline's Loop toggle - **Repeat** if looping is enabled, **None** if not - and controls whether the published animation plays once or loops in the viewer.
+The Timeline animation lives in your SuperSplat project. To make it play for visitors, [publish](/user-manual/supersplat/publishing/editor) the splat with the publish dialog's **Animation** toggle enabled. This bakes the keyframed camera path into the published scene and sets it to play on load. The dialog's **Loop Mode** option is initialized from the Timeline's Loop toggle - **Repeat** if looping is enabled, **None** if not - and controls whether the published animation plays once or loops in the viewer.
 
-On the [scene page](/user-manual/supersplat/scene-page), the open-source [SuperSplat Viewer](/user-manual/supersplat/viewer/) auto-plays the track when a visitor opens the scene. Depending on the track's loop mode it either plays once and stops or loops continuously — a `repeat` loop turns the splat into a hands-off cinematic flythrough.
+On the [scene page](/user-manual/supersplat/viewing/scene-page), the open-source [SuperSplat Viewer](/user-manual/supersplat/developers/viewer/) auto-plays the track when a visitor opens the scene. Depending on the track's loop mode it either plays once and stops or loops continuously — a `repeat` loop turns the splat into a hands-off cinematic flythrough.
 
 :::note
 
-Once a splat is published, you can also keyframe its camera animation in [SuperSplat Studio](/user-manual/supersplat/studio/animation), and turn playing on open on or off there. Both edit the same published animation, so the last one saved wins: republishing with **Override Animation** replaces Studio's animation. For how animation is stored in the published settings — the `animTracks` array (each track's `loopMode`, `interpolation`, and keyframes) plus the scene-level `startMode` — see [Experience Settings](/user-manual/supersplat/studio/experience-settings).
+Once a splat is published, you can also keyframe its camera animation in [SuperSplat Studio](/user-manual/supersplat/studio/animation), and turn playing on open on or off there. Both edit the same published animation, so the last one saved wins: republishing with **Override Animation** replaces Studio's animation. For how animation is stored in the published settings — the `animTracks` array (each track's `loopMode`, `interpolation`, and keyframes) plus the scene-level `startMode` — see [Experience Settings](/user-manual/supersplat/developers/experience-settings).
 
 :::
 

@@ -632,10 +632,10 @@ const sidebars = {
           label: 'Publishing',
           key: 'supersplat-publishing',
           items: [
-            'user-manual/supersplat/editor/publishing',
-            'user-manual/supersplat/upload',
-            'user-manual/supersplat/manage',
-            'user-manual/supersplat/streaming',
+            'user-manual/supersplat/publishing/editor',
+            'user-manual/supersplat/publishing/upload',
+            'user-manual/supersplat/publishing/manage',
+            'user-manual/supersplat/publishing/streaming',
           ],
         },
         {
@@ -658,12 +658,12 @@ const sidebars = {
           type: 'category',
           label: 'Viewing & Community',
           items: [
-            'user-manual/supersplat/scene-page',
-            'user-manual/supersplat/viewer/controls',
-            'user-manual/supersplat/viewer/xr',
-            'user-manual/supersplat/explore',
-            'user-manual/supersplat/user-profile',
-            'user-manual/supersplat/following',
+            'user-manual/supersplat/viewing/scene-page',
+            'user-manual/supersplat/viewing/controls',
+            'user-manual/supersplat/viewing/xr',
+            'user-manual/supersplat/viewing/explore',
+            'user-manual/supersplat/viewing/user-profile',
+            'user-manual/supersplat/viewing/following',
           ],
         },
         {
@@ -671,17 +671,17 @@ const sidebars = {
           label: 'Developers',
           key: 'supersplat-developers',
           items: [
-            'user-manual/supersplat/viewer/index',
-            'user-manual/supersplat/viewer/embedding',
-            'user-manual/supersplat/viewer/api',
-            'user-manual/supersplat/viewer/self-hosting',
-            'user-manual/supersplat/studio/experience-settings',
+            'user-manual/supersplat/developers/viewer',
+            'user-manual/supersplat/developers/embedding',
+            'user-manual/supersplat/developers/viewer-api',
+            'user-manual/supersplat/developers/self-hosting',
+            'user-manual/supersplat/developers/experience-settings',
             {
               type: 'category',
               label: 'API & Integrations',
               link: {
                 type: 'doc',
-                id: 'user-manual/supersplat/api-integrations',
+                id: 'user-manual/supersplat/developers/api-integrations',
               },
               items: [
                 {

@@ -182,13 +182,13 @@ FPS設定は、アニメーションの再生速度を制御します。利用�
 
 ## シーンページでの公開と再生
 
-タイムラインアニメーションはSuperSplatプロジェクトに保存されます。訪問者に再生させるには、公開ダイアログの**Animation**トグルを有効にしてスプラットを[公開](/user-manual/supersplat/editor/publishing)します。これにより、キーフレーム化されたカメラパスが公開シーンにベイクされ、読み込み時に再生されるよう設定されます。ダイアログの**Loop Mode**オプションはタイムラインのループトグルから初期化され（ループ有効なら**Repeat**、無効なら**None**）、公開されたアニメーションをビューアで1回だけ再生するかループさせるかを制御します。
+タイムラインアニメーションはSuperSplatプロジェクトに保存されます。訪問者に再生させるには、公開ダイアログの**Animation**トグルを有効にしてスプラットを[公開](/user-manual/supersplat/publishing/editor)します。これにより、キーフレーム化されたカメラパスが公開シーンにベイクされ、読み込み時に再生されるよう設定されます。ダイアログの**Loop Mode**オプションはタイムラインのループトグルから初期化され（ループ有効なら**Repeat**、無効なら**None**）、公開されたアニメーションをビューアで1回だけ再生するかループさせるかを制御します。
 
-[シーンページ](/user-manual/supersplat/scene-page)では、オープンソースの[SuperSplat Viewer](/user-manual/supersplat/viewer/)が、訪問者がシーンを開いたときにトラックを自動再生します。トラックのループモードに応じて、一度再生して停止するか、連続してループします — `repeat`ループにすると、スプラットを手放しのシネマティックなフライスルーに変えられます。
+[シーンページ](/user-manual/supersplat/viewing/scene-page)では、オープンソースの[SuperSplat Viewer](/user-manual/supersplat/developers/viewer/)が、訪問者がシーンを開いたときにトラックを自動再生します。トラックのループモードに応じて、一度再生して停止するか、連続してループします — `repeat`ループにすると、スプラットを手放しのシネマティックなフライスルーに変えられます。
 
 :::note
 
-公開後は、[SuperSplat Studio](/user-manual/supersplat/studio/animation)でもカメラアニメーションのキーフレームを作成し、開いたときに再生するかどうかを切り替えられます。どちらも同じ公開済みのアニメーションを編集するため、最後に保存したほうが有効になります。**Override Animation**を有効にして再公開すると、Studioのアニメーションは置き換えられます。公開設定でアニメーションがどのように保存されるか — `animTracks`配列（各トラックの`loopMode`、`interpolation`、キーフレーム）と、シーンレベルの`startMode` — については、[Experience Settings](/user-manual/supersplat/studio/experience-settings)を参照してください。
+公開後は、[SuperSplat Studio](/user-manual/supersplat/studio/animation)でもカメラアニメーションのキーフレームを作成し、開いたときに再生するかどうかを切り替えられます。どちらも同じ公開済みのアニメーションを編集するため、最後に保存したほうが有効になります。**Override Animation**を有効にして再公開すると、Studioのアニメーションは置き換えられます。公開設定でアニメーションがどのように保存されるか — `animTracks`配列（各トラックの`loopMode`、`interpolation`、キーフレーム）と、シーンレベルの`startMode` — については、[Experience Settings](/user-manual/supersplat/developers/experience-settings)を参照してください。
 
 :::
 

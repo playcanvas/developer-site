@@ -176,7 +176,7 @@ const config = {
         { from: ['/user-manual/gaussian-splatting/editing/supersplat/data-panel/'], to: '/user-manual/supersplat/editor/data-panel/' },
         { from: ['/user-manual/gaussian-splatting/editing/supersplat/timeline/'], to: '/user-manual/supersplat/editor/timeline/' },
         { from: ['/user-manual/gaussian-splatting/editing/supersplat/rendering/'], to: '/user-manual/supersplat/editor/rendering/' },
-        { from: ['/user-manual/gaussian-splatting/editing/supersplat/publishing/'], to: '/user-manual/supersplat/editor/publishing/' },
+        { from: ['/user-manual/gaussian-splatting/editing/supersplat/publishing/'], to: '/user-manual/supersplat/publishing/editor/' },
         // Editor pages moved from supersplat/<page>/ to supersplat/editor/<page>/ as part of
         // restructuring the section into a full-platform overview (Editor + Studio + Viewer + Convert).
         { from: ['/user-manual/supersplat/interface/'], to: '/user-manual/supersplat/editor/interface/' },
@@ -187,9 +187,28 @@ const config = {
         { from: ['/user-manual/supersplat/data-panel/'], to: '/user-manual/supersplat/editor/data-panel/' },
         { from: ['/user-manual/supersplat/timeline/'], to: '/user-manual/supersplat/editor/timeline/' },
         { from: ['/user-manual/supersplat/rendering/'], to: '/user-manual/supersplat/editor/rendering/' },
-        { from: ['/user-manual/supersplat/publishing/'], to: '/user-manual/supersplat/editor/publishing/' },
+        // Remove this one if publishing/ gets an overview page of its own
+        { from: ['/user-manual/supersplat/publishing/'], to: '/user-manual/supersplat/publishing/editor/' },
         // Studio's Skybox & Background page became Look & Tone to match the redesigned Studio
         { from: ['/user-manual/supersplat/studio/skybox/'], to: '/user-manual/supersplat/studio/look-and-tone/' },
+        // SuperSplat pages moved into folders that match their sidebar groups:
+        // publishing/, viewing/ (Viewing & Community) and developers/
+        { from: ['/user-manual/supersplat/editor/publishing/'], to: '/user-manual/supersplat/publishing/editor/' },
+        { from: ['/user-manual/supersplat/upload/'], to: '/user-manual/supersplat/publishing/upload/' },
+        { from: ['/user-manual/supersplat/manage/'], to: '/user-manual/supersplat/publishing/manage/' },
+        { from: ['/user-manual/supersplat/streaming/'], to: '/user-manual/supersplat/publishing/streaming/' },
+        { from: ['/user-manual/supersplat/scene-page/'], to: '/user-manual/supersplat/viewing/scene-page/' },
+        { from: ['/user-manual/supersplat/viewer/controls/'], to: '/user-manual/supersplat/viewing/controls/' },
+        { from: ['/user-manual/supersplat/viewer/xr/'], to: '/user-manual/supersplat/viewing/xr/' },
+        { from: ['/user-manual/supersplat/explore/'], to: '/user-manual/supersplat/viewing/explore/' },
+        { from: ['/user-manual/supersplat/user-profile/'], to: '/user-manual/supersplat/viewing/user-profile/' },
+        { from: ['/user-manual/supersplat/following/'], to: '/user-manual/supersplat/viewing/following/' },
+        { from: ['/user-manual/supersplat/viewer/'], to: '/user-manual/supersplat/developers/viewer/' },
+        { from: ['/user-manual/supersplat/viewer/embedding/'], to: '/user-manual/supersplat/developers/embedding/' },
+        { from: ['/user-manual/supersplat/viewer/api/'], to: '/user-manual/supersplat/developers/viewer-api/' },
+        { from: ['/user-manual/supersplat/viewer/self-hosting/'], to: '/user-manual/supersplat/developers/self-hosting/' },
+        { from: ['/user-manual/supersplat/studio/experience-settings/'], to: '/user-manual/supersplat/developers/experience-settings/' },
+        { from: ['/user-manual/supersplat/api-integrations/'], to: '/user-manual/supersplat/developers/api-integrations/' },
         // CameraFrame custom render passes moved to the Frame Graph section
         { from: ['/user-manual/graphics/posteffects/cameraframe/custom-passes/'], to: '/user-manual/graphics/advanced-rendering/frame-graph/camera-passes/' },
         // CameraFrame compose shader customization and FramePassCameraFrame subclassing replaced by effects

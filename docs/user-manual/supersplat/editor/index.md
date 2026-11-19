@@ -7,7 +7,7 @@ The [SuperSplat Editor](https://superspl.at/editor) is the open-source, browser-
 
 :::tip Already have a clean splat?
 
-You can skip the Editor entirely. Hit the orange **Upload Splat** button on the [superspl.at home page](https://superspl.at) (or use the [Direct Upload](../upload) flow) to publish a ready-made splat straight to your [Manage page](../manage).
+You can skip the Editor entirely. Hit the orange **Upload Splat** button on the [superspl.at home page](https://superspl.at) (or use the [Direct Upload](/user-manual/supersplat/publishing/upload/) flow) to publish a ready-made splat straight to your [Manage page](/user-manual/supersplat/publishing/manage/).
 
 :::
 
@@ -52,5 +52,5 @@ For a more comprehensive guide to using the SuperSplat Editor, check out this in
 - Clean a capture with [Selection and Cleanup](editing-splats), then use [Transform, Measure and Align](transform-measure-align) to prepare it
 - Work with multiple captures using [Managing Splats](scene-management), and finish their look with [Color and Appearance](color-and-appearance)
 - Keep the [Keyboard Shortcuts](keyboard-shortcuts) reference nearby, or check [Troubleshooting](troubleshooting) when a workflow does not behave as expected
-- Once your splat is clean, [Publish](publishing) it to superspl.at to land on your [Manage page](../manage) and open it in [Studio](../studio/)
+- Once your splat is clean, [Publish](/user-manual/supersplat/publishing/editor/) it to superspl.at to land on your [Manage page](/user-manual/supersplat/publishing/manage/) and open it in [Studio](../studio/)
 - Let an AI agent inspect and edit your scene through the browser's experimental [WebMCP](webmcp) tools

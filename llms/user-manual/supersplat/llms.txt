@@ -48,10 +48,10 @@ Use this index to edit, publish, present or embed splats. To render splats in yo
 
 ## Publishing
 
-- [Publishing from the Editor](/user-manual/supersplat/editor/publishing/): Publishing a splat from the Editor to superspl.at.
-- [Direct Upload](/user-manual/supersplat/upload/): Uploading a finished splat file to superspl.at without the Editor.
-- [Manage](/user-manual/supersplat/manage/): Listing, editing, sharing and deleting your published splats.
-- [Streaming & Performance](/user-manual/supersplat/streaming/): How published splats are compressed and streamed, the Gaussian budget, and the Viewer's Quality and Performance Mode settings.
+- [Publishing from the Editor](/user-manual/supersplat/publishing/editor/): Publishing a splat from the Editor to superspl.at.
+- [Direct Upload](/user-manual/supersplat/publishing/upload/): Uploading a finished splat file to superspl.at without the Editor.
+- [Manage](/user-manual/supersplat/publishing/manage/): Listing, editing, sharing and deleting your published splats.
+- [Streaming & Performance](/user-manual/supersplat/publishing/streaming/): How published splats are compressed and streamed, the Gaussian budget, and the Viewer's Quality and Performance Mode settings.
 
 ## Studio
 
@@ -65,18 +65,18 @@ Use this index to edit, publish, present or embed splats. To render splats in yo
 
 ## Viewing scenes
 
-- [Scene Page](/user-manual/supersplat/scene-page/): The public page of a published splat: viewer, sharing, embedding, downloads and comments.
-- [Viewer Controls](/user-manual/supersplat/viewer/controls/): Navigating a scene in the Viewer: toolbar, orbit, fly and walk, the Controls, Settings and Info panels, shortcuts, touch and annotations.
-- [Viewing in VR and AR](/user-manual/supersplat/viewer/xr/): VR and AR sessions in the Viewer: teleporting, grabbing and scaling, AR placement and the hand menu.
+- [Scene Page](/user-manual/supersplat/viewing/scene-page/): The public page of a published splat: viewer, sharing, embedding, downloads and comments.
+- [Viewer Controls](/user-manual/supersplat/viewing/controls/): Navigating a scene in the Viewer: toolbar, orbit, fly and walk, the Controls, Settings and Info panels, shortcuts, touch and annotations.
+- [Viewing in VR and AR](/user-manual/supersplat/viewing/xr/): VR and AR sessions in the Viewer: teleporting, grabbing and scaling, AR placement and the hand menu.
 
 ## Developers
 
-- [SuperSplat Viewer](/user-manual/supersplat/viewer/): The open-source viewer behind scene pages.
-- [Embedding the Viewer](/user-manual/supersplat/viewer/embedding/): Hosting the prebuilt viewer with URL parameters, or rendering a page with `renderViewerHtml`.
-- [Viewer API](/user-manual/supersplat/viewer/api/): Creating and controlling viewer instances in your own app with `createViewer`.
-- [Self-Hosting the Viewer](/user-manual/supersplat/viewer/self-hosting/): Exporting a splat as a self-contained HTML viewer to host anywhere.
-- [Experience Settings](/user-manual/supersplat/studio/experience-settings/): The JSON schema of Studio's settings, as the Viewer reads them.
-- [API & Integrations](/user-manual/supersplat/api-integrations/): Publishing splats and listing a user's scenes from capture tools, training pipelines and apps, and downloading scenes whose owners allow it.
+- [SuperSplat Viewer](/user-manual/supersplat/developers/viewer/): The open-source viewer behind scene pages.
+- [Embedding the Viewer](/user-manual/supersplat/developers/embedding/): Hosting the prebuilt viewer with URL parameters, or rendering a page with `renderViewerHtml`.
+- [Viewer API](/user-manual/supersplat/developers/viewer-api/): Creating and controlling viewer instances in your own app with `createViewer`.
+- [Self-Hosting the Viewer](/user-manual/supersplat/developers/self-hosting/): Exporting a splat as a self-contained HTML viewer to host anywhere.
+- [Experience Settings](/user-manual/supersplat/developers/experience-settings/): The JSON schema of Studio's settings, as the Viewer reads them.
+- [API & Integrations](/user-manual/supersplat/developers/api-integrations/): Publishing splats and listing a user's scenes from capture tools, training pipelines and apps, and downloading scenes whose owners allow it.
 - [SuperSplat API specification](https://playcanvas.com/api/supersplat/openapi.json): The OpenAPI definition of every endpoint.
 
 ## Source

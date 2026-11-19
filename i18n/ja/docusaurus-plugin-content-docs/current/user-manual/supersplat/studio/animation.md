@@ -3,7 +3,7 @@ title: カメラアニメーション
 description: "SuperSplat Studioのタイムラインで公開済みスプラットのカメラのフライスルーをキーフレームで作成し、シーンを開いたときに再生するかどうかを選びます。"
 ---
 
-**カメラアニメーション**は、キーフレームで定義したパスに沿ってカメラを動かします。オブジェクトの周りを穏やかに回るターンテーブルから、キャプチャした空間の本格的なフライスルーまで作れます。[Studio](/user-manual/supersplat/studio/)では、**Timeline**パネルで作成し、**Scene**タブの**Animation**セクションで制御します。訪問者は[シーンページ](/user-manual/supersplat/scene-page)でそれを見ることができ、いつでも一時停止したりカメラを操作したりできます。
+**カメラアニメーション**は、キーフレームで定義したパスに沿ってカメラを動かします。オブジェクトの周りを穏やかに回るターンテーブルから、キャプチャした空間の本格的なフライスルーまで作れます。[Studio](/user-manual/supersplat/studio/)では、**Timeline**パネルで作成し、**Scene**タブの**Animation**セクションで制御します。訪問者は[シーンページ](/user-manual/supersplat/viewing/scene-page)でそれを見ることができ、いつでも一時停止したりカメラを操作したりできます。
 
 シーンが持てるカメラアニメーションは1つです。Editorの[タイムライン](/user-manual/supersplat/editor/timeline)のアニメーション付きでスプラットを公開した場合、Studioはそのアニメーションを読み込んだ状態で開き、すぐに編集できます。
 
@@ -71,5 +71,5 @@ Editorの[タイムライン](/user-manual/supersplat/editor/timeline)でカメ�
 ## 関連項目
 
 - [Cameras](/user-manual/supersplat/studio/cameras) — 開始カメラと視野角
-- [ビューアの操作](/user-manual/supersplat/viewer/controls) — 訪問者がアニメーションを再生、一時停止、スクラブする方法
-- [Experience Settings](/user-manual/supersplat/studio/experience-settings) — このページで編集する`animTracks`と`startMode`フィールド
+- [ビューアの操作](/user-manual/supersplat/viewing/controls) — 訪問者がアニメーションを再生、一時停止、スクラブする方法
+- [Experience Settings](/user-manual/supersplat/developers/experience-settings) — このページで編集する`animTracks`と`startMode`フィールド

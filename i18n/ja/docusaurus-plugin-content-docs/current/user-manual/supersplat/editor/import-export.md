@@ -15,7 +15,7 @@ SuperSplatは、複数のGaussian Splatシーン形式に加えて、タイム�
 | `.compressed.ply` | ✅ | ✅ | 圧縮PLY形式 - 非圧縮PLYよりもはるかに小さく、データを量子化。[詳細](https://blog.playcanvas.com/compressing-gaussian-splats/) |
 | `.sog` | ✅ | ✅ | バンドル超圧縮形式（`meta.json`と`.webp`テクスチャを含むzipファイル）。ランタイムアプリケーションに推奨 |
 | `meta.json` | ✅ | ❌ | アンバンドル超圧縮形式（`.webp`テクスチャを伴う）。エクスポートには[SplatTransform](/user-manual/splat-transform/) CLIツールを使用 |
-| `lod-meta.json` | ✅ | ❌ | [Streamed SOG](/user-manual/supersplat/streaming)バンドル（LODごとの`.sog`チャンクを伴う）。エクスポートには[SplatTransform](/user-manual/splat-transform/) CLIツールを使用 |
+| `lod-meta.json` | ✅ | ❌ | [Streamed SOG](/user-manual/supersplat/publishing/streaming)バンドル（LODごとの`.sog`チャンクを伴う）。エクスポートには[SplatTransform](/user-manual/splat-transform/) CLIツールを使用 |
 | `.splat` | ✅ | ✅ | レガシー圧縮スプラット形式（antimatter15） - 圧縮PLYよりも効率が劣る |
 | `.ksplat` | ✅ | ❌ | KSplat圧縮スプラット形式。インポートのみ対応 |
 | `.spz` | ✅ | ✅ | Niantic圧縮形式。エクスポートはデフォルトでSPZバージョン4、古いリーダー向けにSPZバージョン3も選択可能 |
@@ -115,7 +115,7 @@ PLYシーケンスをインポートするには：
   - **PLY**：**Compress PLY**を有効にすると、フルサイズのPLYではなく`.compressed.ply`を書き出します。**SH Bands**で含める球面調和関数のバンド数を選択します。
   - **SOG**：**SH Bands**と、球面調和関数データの圧縮に使用するクラスタリングの反復回数である**Iterations**（1～20、デフォルト10）。反復回数を増やすと、エクスポート時間は延びますが品質がわずかに向上します。
   - **SPZ**：**SH Bands**と**Version**。**SPZ 4**（仕様の最新バージョン）がデフォルトで、古いサードパーティ製SPZリーダーとの互換性のために**SPZ 3**（レガシーgzipコンテナ）も利用できます。
-  - **Viewer App**：スタンドアロンHTMLビューアのオプションは[ビューアのセルフホスティング](/user-manual/supersplat/viewer/self-hosting)で説明しています。
+  - **Viewer App**：スタンドアロンHTMLビューアのオプションは[ビューアのセルフホスティング](/user-manual/supersplat/developers/self-hosting)で説明しています。
 
 **SH Bands**（0～3）は、書き出される球面調和関数のバンドの正確な数です。初期値はシーン内の最大のバンド数で、[Preferences](interface.md#preferences)の**SH Bands**設定が上限になるため、デフォルトのエクスポートではビューポートに表示されている内容がそのまま保持されます。スプラットに含まれるより多いバンド数を選ぶと、不足している係数は0で埋められます。これにより、固定の球面調和関数レイアウトを前提とするツール向けに、バンド0のスプラットを3バンドでエクスポートできます。
 

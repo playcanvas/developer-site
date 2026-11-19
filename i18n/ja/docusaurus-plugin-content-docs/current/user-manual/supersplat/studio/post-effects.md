@@ -54,10 +54,10 @@ description: "SuperSplat Studioで公開済みスプラットにシャープネ�
 
 ## ビューアでの動作
 
-- **VRとAR** — [VRまたはARのセッション](/user-manual/supersplat/viewer/xr)中は、ポストエフェクトと高精度レンダリングは適用されません。シーンのトーンマッピングは引き続き適用され、セッションが終了するとすべて元に戻ります。
-- **セルフホスティング** — [ビューアを自分でホストする](/user-manual/supersplat/viewer/embedding#url-parameters)場合は、`nofx` URLパラメータでポストエフェクトをオフにできます。
+- **VRとAR** — [VRまたはARのセッション](/user-manual/supersplat/viewing/xr)中は、ポストエフェクトと高精度レンダリングは適用されません。シーンのトーンマッピングは引き続き適用され、セッションが終了するとすべて元に戻ります。
+- **セルフホスティング** — [ビューアを自分でホストする](/user-manual/supersplat/developers/embedding#url-parameters)場合は、`nofx` URLパラメータでポストエフェクトをオフにできます。
 
 ## 関連項目
 
 - [Look & Tone](/user-manual/supersplat/studio/look-and-tone) — 背景、スカイボックス、トーンマッピング、High Precision Rendering
-- [Experience Settings](/user-manual/supersplat/studio/experience-settings) — ポストエフェクト設定を格納するJSONコントラクト
+- [Experience Settings](/user-manual/supersplat/developers/experience-settings) — ポストエフェクト設定を格納するJSONコントラクト

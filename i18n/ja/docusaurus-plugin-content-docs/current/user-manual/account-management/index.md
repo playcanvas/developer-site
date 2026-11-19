@@ -11,7 +11,7 @@ PlayCanvasアカウントで、PlayCanvas EditorとSuperSplatにログインで�
 
 - **探索と学習** - 何千もの公開Editorプロジェクトのスクリプトやアセットを閲覧し、アイデアやインスピレーションを得られます。
 - **アセットの生成** - Editorのアセット処理機能を使って、PlayCanvasベースのあらゆるプロジェクト向けにアセットを準備できます。
-- **Gaussian splatの公開** - [SuperSplat](/user-manual/supersplat/)にスプラットを公開し、他のユーザーのスプラットにいいねやコメントができます。公開[Explore](/user-manual/supersplat/explore)ギャラリーの閲覧や公開シーンページの表示には、アカウントは必要ありません。
+- **Gaussian splatの公開** - [SuperSplat](/user-manual/supersplat/)にスプラットを公開し、他のユーザーのスプラットにいいねやコメントができます。公開[Explore](/user-manual/supersplat/viewing/explore)ギャラリーの閲覧や公開シーンページの表示には、アカウントは必要ありません。
 - **コミュニティへの参加** - 他のユーザーのプロジェクトにスターを付けたり、ウォッチしたり、コメントしたりできます。
 - **最新情報の入手** - PlayCanvasプラットフォーム全体の最新情報を受け取れます。
 

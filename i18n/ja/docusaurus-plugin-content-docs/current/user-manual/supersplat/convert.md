@@ -80,5 +80,5 @@ ConvertはWebAssemblyを使って**完全にブラウザ内で動作**します�
 ## 関連項目
 
 - [splat-transform CLI](/user-manual/splat-transform/) — コマンドライン版の同じアクションとフォーマット
-- [Direct Upload](/user-manual/supersplat/upload) — 完成したスプラットを、ブラウザを離れずに公開する
+- [Direct Upload](/user-manual/supersplat/publishing/upload) — 完成したスプラットを、ブラウザを離れずに公開する
 - [Studio / Collision](/user-manual/supersplat/studio/collision) — `.voxel.zip`の使い方

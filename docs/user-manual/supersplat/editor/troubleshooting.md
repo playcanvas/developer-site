@@ -70,7 +70,7 @@ See [Managing Projects](managing-projects.md) for the difference between saving,
 ## Publishing or Rendering Fails
 
 - Publishing requires you to be signed in to superspl.at with a PlayCanvas account.
-- If `Publish` is disabled with a message in the Publish dialog, your account has used today's publishing allowance or already has the maximum number of scenes processing. The message says when you can publish again. See [Publishing](publishing.md).
+- If `Publish` is disabled with a message in the Publish dialog, your account has used today's publishing allowance or already has the maximum number of scenes processing. The message says when you can publish again. See [Publishing](/user-manual/supersplat/publishing/editor/).
 - Scenes with more than 40 million splats can only be published with **Generate LODs** on. Delete unwanted Gaussians first if you want to publish a single, non-streamed file.
 - Video codec support depends on the browser. The Render Video dialog disables resolutions your browser or device cannot encode with the current settings — try a lower resolution, frame rate, or bitrate, another format or codec, or update your browser or graphics driver.
 - A blocked download, private-browsing restriction, or low free memory can prevent large renders and exports from completing. In browsers without the File System Access API, renders and exports are delivered as downloads.

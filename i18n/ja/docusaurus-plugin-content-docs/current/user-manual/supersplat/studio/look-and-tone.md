@@ -46,16 +46,16 @@ Mip-Splattingなどでアンチエイリアスありでトレーニングされ�
 
 :::note
 
-[SuperSplat Viewer](/user-manual/supersplat/viewer/)はまだこの設定を適用しません。シーンページや埋め込みでは、各スプラットファイル自身のアンチエイリアスのタグで決まります。[ビューアを自分でホストする](/user-manual/supersplat/viewer/embedding#url-parameters)場合は、`aa` URLパラメータでそれを上書きできます。
+[SuperSplat Viewer](/user-manual/supersplat/developers/viewer/)はまだこの設定を適用しません。シーンページや埋め込みでは、各スプラットファイル自身のアンチエイリアスのタグで決まります。[ビューアを自分でホストする](/user-manual/supersplat/developers/embedding#url-parameters)場合は、`aa` URLパラメータでそれを上書きできます。
 
 :::
 
 ## ビューアでの動作
 
-- **AR** — [ARセッション](/user-manual/supersplat/viewer/xr)中はスカイボックスと背景色が非表示になり、スプラットの周囲に実際の部屋が透けて見えます。VRセッションではそのまま表示されます。
-- **セルフホスティング** — ビューアはシーンの設定からスカイボックスを読み込みません。[ビューアを自分でホストする](/user-manual/supersplat/viewer/embedding#url-parameters)場合は、`skybox` URLパラメータまたは`skyboxUrl`オプションで画像を渡し、High Precision Renderingは`hpr`で上書きしてください。
+- **AR** — [ARセッション](/user-manual/supersplat/viewing/xr)中はスカイボックスと背景色が非表示になり、スプラットの周囲に実際の部屋が透けて見えます。VRセッションではそのまま表示されます。
+- **セルフホスティング** — ビューアはシーンの設定からスカイボックスを読み込みません。[ビューアを自分でホストする](/user-manual/supersplat/developers/embedding#url-parameters)場合は、`skybox` URLパラメータまたは`skyboxUrl`オプションで画像を渡し、High Precision Renderingは`hpr`で上書きしてください。
 
 ## 関連項目
 
 - [Post Effects](/user-manual/supersplat/studio/post-effects) — シャープネス、ブルーム、カラーグレーディング、ビネット、色収差フリンジング
-- [Experience Settings](/user-manual/supersplat/studio/experience-settings) — これらの設定を格納するJSONコントラクト
+- [Experience Settings](/user-manual/supersplat/developers/experience-settings) — これらの設定を格納するJSONコントラクト

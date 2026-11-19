@@ -109,7 +109,7 @@ The PLY format serves as the lingua franca of the 3DGS ecosystem:
 - **Training Software**: Brush, nerfstudio, Postshot
 - **Editors**: [SuperSplat Editor](/user-manual/supersplat/editor/)
 - **Converters**: [SplatTransform](/user-manual/splat-transform/), [SuperSplat Convert](/user-manual/supersplat/convert)
-- **Viewers**: [SuperSplat Viewer](/user-manual/supersplat/viewer/), [Model Viewer](https://github.com/playcanvas/model-viewer)
+- **Viewers**: [SuperSplat Viewer](/user-manual/supersplat/developers/viewer/), [Model Viewer](https://github.com/playcanvas/model-viewer)
 
 ### Cross-Platform Workflow
 

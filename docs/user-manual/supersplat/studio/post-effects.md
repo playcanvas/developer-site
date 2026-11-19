@@ -54,10 +54,10 @@ Color grading applies a global transform to the image.
 
 ## In the viewer
 
-- **VR and AR** — post effects and High Precision Rendering aren't applied during a [VR or AR session](/user-manual/supersplat/viewer/xr). The scene's tonemapping still is, and everything returns when the session ends.
-- **Self-hosting** — when you [host the viewer yourself](/user-manual/supersplat/viewer/embedding#url-parameters), the `nofx` URL parameter turns post effects off.
+- **VR and AR** — post effects and High Precision Rendering aren't applied during a [VR or AR session](/user-manual/supersplat/viewing/xr). The scene's tonemapping still is, and everything returns when the session ends.
+- **Self-hosting** — when you [host the viewer yourself](/user-manual/supersplat/developers/embedding#url-parameters), the `nofx` URL parameter turns post effects off.
 
 ## See also
 
 - [Look & Tone](/user-manual/supersplat/studio/look-and-tone) — background, skybox, tonemapping and High Precision Rendering
-- [Experience Settings](/user-manual/supersplat/studio/experience-settings) — the JSON contract that stores post-effect settings
+- [Experience Settings](/user-manual/supersplat/developers/experience-settings) — the JSON contract that stores post-effect settings

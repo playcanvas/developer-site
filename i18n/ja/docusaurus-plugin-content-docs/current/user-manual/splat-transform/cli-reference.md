@@ -230,7 +230,7 @@ NVIDIA GPUを搭載したサーバーでsplat-transformを実行する方法に�
 
 :::note
 
-`--viewer-settings` オプションにデータを渡す方法の詳細については、[SuperSplat Viewer Settings Schema](/user-manual/supersplat/studio/experience-settings/) を参照してください。設定はページを書き込む前に検証されるため、無効なファイルを指定すると、何も表示されないビューアを生成する代わりに実行が失敗します。
+`--viewer-settings` オプションにデータを渡す方法の詳細については、[SuperSplat Viewer Settings Schema](/user-manual/supersplat/developers/experience-settings/) を参照してください。設定はページを書き込む前に検証されるため、無効なファイルを指定すると、何も表示されないビューアを生成する代わりに実行が失敗します。
 
 :::
 
