@@ -27,6 +27,8 @@ Image rendering creates a single high-quality frame from your current camera pos
 
 When you select `Image` from the Render menu, a dialog will appear with settings to customize your image:
 
+<img loading="lazy" alt="The Image Settings dialog" width="408" src="/img/user-manual/supersplat/editor/render-image-settings.png" />
+
 - **Projection:** Choose the type of image to render:
   - `Standard` (default) - A regular flat image rendered from the camera's point of view
   - `360° Equirectangular` - A monoscopic 360° panorama capturing the full sphere around the camera's position
