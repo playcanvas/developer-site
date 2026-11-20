@@ -23,10 +23,10 @@ If the message is "SuperSplat failed to start", open the browser console for det
 
 Check the [mode strip](interface.md#mode-strip) beside the View Cube:
 
-- **X-Ray** (`N`) is on by default, so a selection reaches through the whole scene and also picks Gaussians hidden behind the surface you clicked. Turn it off to select only the visible surface. With X-Ray off and **Markers** on, markers are drawn only on the Gaussians a selection can reach, which shows you what a drag would pick.
-- In **Centers** mode (the default, `M` toggles), a Gaussian is only picked when its center lies inside the tool's shape. Large, soft Gaussians whose centers sit just outside your selection are left out; switch to **Rings** mode to select by the whole footprint instead.
+- **X-Ray** (<kbd>N</kbd>) is on by default, so a selection reaches through the whole scene and also picks Gaussians hidden behind the surface you clicked. Turn it off to select only the visible surface. With X-Ray off and **Markers** on, markers are drawn only on the Gaussians a selection can reach, which shows you what a drag would pick.
+- In **Centers** mode (the default, <kbd>M</kbd> toggles), a Gaussian is only picked when its center lies inside the tool's shape. Large, soft Gaussians whose centers sit just outside your selection are left out; switch to **Rings** mode to select by the whole footprint instead.
 
-Pressing `Tab` only shows or hides the markers; it does not change how selection works. Locked or deleted Gaussians cannot be selected; use **Select > Unlock All** or **Select > Reset Splat** when appropriate.
+Pressing <kbd>Tab</kbd> only shows or hides the markers; it does not change how selection works. Locked or deleted Gaussians cannot be selected; use **Select > Unlock All** or **Select > Reset Splat** when appropriate.
 
 See [Selection Mode and X-Ray](editing-splats.md#selection-mode-and-x-ray) and the cleanup recipes in [Selection and Cleanup](editing-splats.md).
 

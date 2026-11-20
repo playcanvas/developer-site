@@ -36,7 +36,7 @@ Studioは現在、単一のカメラのみをサポートしています。複�
 
 :::
 
-編集中にもう一度**Edit**をクリックする（または**Escape**を押す）と、保存せずに編集モードを終了できます。**Cancel**とは異なり、ビューポートは元の姿勢に戻りません — 保存済みの姿勢だけが変わりません。
+編集中にもう一度**Edit**をクリックする（または<kbd>Esc</kbd>を押す）と、保存せずに編集モードを終了できます。**Cancel**とは異なり、ビューポートは元の姿勢に戻りません — 保存済みの姿勢だけが変わりません。
 
 <video autoPlay muted loop controls src='/video/supersplat-studio-edit-camera.mp4' style={{width: '100%', height: 'auto'}} />
 

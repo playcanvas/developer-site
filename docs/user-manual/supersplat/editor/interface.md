@@ -41,9 +41,9 @@ The small icon strip beside the View Cube decides what you see and what a select
 
 | Control | Shortcut | Default | Description |
 |---|---|---|---|
-| **Centers** / **Rings** | `M` | Centers | The editing mode: selections pick Gaussians by their center points or by their footprints. Switching mode also turns **Markers** on. |
-| **Markers** | `Tab` | Off | Shows the center or ring markers on the unselected Gaussians. When off, the scene renders plainly and selected Gaussians keep their indicators. |
-| **X-Ray** | `N` | On | Selects through all depths. Turn it off to select only the visible surface. |
+| **Centers** / **Rings** | <kbd>M</kbd> | Centers | The editing mode: selections pick Gaussians by their center points or by their footprints. Switching mode also turns **Markers** on. |
+| **Markers** | <kbd>Tab</kbd> | Off | Shows the center or ring markers on the unselected Gaussians. When off, the scene renders plainly and selected Gaussians keep their indicators. |
+| **X-Ray** | <kbd>N</kbd> | On | Selects through all depths. Turn it off to select only the visible surface. |
 
 Press and hold **Centers** or **Rings** for that marker's size and its **Splat Colors** switch, or press and hold **Markers** for **Markers Only**, **Tint Selection**, and **Outline Selection**. See [Selection Mode and X-Ray](editing-splats.md#selection-mode-and-x-ray) and [Markers and Selection Display](color-and-appearance.md#appearance).
 
@@ -52,8 +52,8 @@ Press and hold **Centers** or **Rings** for that marker's size and its **Splat C
 This vertical toolbar contains, from top to bottom:
 
 * **Overlays** (eye icon) — opens the [Overlays](#overlays) popup: grid, bounding box, camera poses, camera info, and diagnostics.
-* **Orbit Camera** / **Fly Camera** — a two-option switch for the [camera control mode](camera-controls.md) (`V`).
-* **Frame Selection** (`F`) and **Reset Camera** (`Shift + F`).
+* **Orbit Camera** / **Fly Camera** — a two-option switch for the [camera control mode](camera-controls.md) (<kbd>V</kbd>).
+* **Frame Selection** (<kbd>F</kbd>) and **Reset Camera** (<kbd>Shift</kbd>+<kbd>F</kbd>).
 * **Preferences** (gear icon) — opens the [Preferences](#preferences) popup.
 
 Only one of the Overlays and Preferences popups is open at a time.
@@ -66,13 +66,13 @@ This horizontal toolbar contains, from left to right:
 * The 2D selection tools: **Rectangle**, **Brush**, **Polygon** / **Lasso**, and **Eyedropper** / **Flood**. The last two buttons each hold a pair of tools: click to use the current one, or press and hold to switch to the other.
 * The 3D selection tools: **Sphere Brush**, **Sphere Selection**, and **Box Selection**.
 * **Move**, **Rotate**, and **Scale**.
-* **Measure** and **Orient**, followed by the **Use Local Orientation** toggle (`Shift + C`) and **Reset Pivot**.
+* **Measure** and **Orient**, followed by the **Use Local Orientation** toggle (<kbd>Shift</kbd>+<kbd>C</kbd>) and **Reset Pivot**.
 
 How the selection tools decide what they hit is set on the [Mode Strip](#mode-strip). See [Selection and Cleanup](editing-splats.md) and [Transform, Measure and Align](transform-measure-align.md).
 
 ### Status Bar
 
-The bar along the bottom edge opens the **Timeline** (`Ctrl + T`) and **Splat Data** (`Ctrl + D`) panels and shows live counts of the active splat's **Splats**, **Selected**, **Locked**, and **Deleted** Gaussians. The Editor version is shown in the bottom-right corner of the viewport; click it to open the **About** dialog, which also lists your GPU and the versions of the PlayCanvas Engine, Splat Transform, and PCUI that the Editor uses.
+The bar along the bottom edge opens the **Timeline** (<kbd>Ctrl</kbd>+<kbd>T</kbd>) and **Splat Data** (<kbd>Ctrl</kbd>+<kbd>D</kbd>) panels and shows live counts of the active splat's **Splats**, **Selected**, **Locked**, and **Deleted** Gaussians. The Editor version is shown in the bottom-right corner of the viewport; click it to open the **About** dialog, which also lists your GPU and the versions of the PlayCanvas Engine, Splat Transform, and PCUI that the Editor uses.
 
 ### Animation Timeline
 
@@ -90,12 +90,12 @@ The **Overlays** popup (the eye icon in the [Right Toolbar](#right-toolbar)) hol
 
 | Section | Control | Default | Description |
 |---|---|---|---|
-| Helpers | **Grid** (`G`) | On | Shows the reference grid. |
+| Helpers | **Grid** (<kbd>G</kbd>) | On | Shows the reference grid. |
 | | **Planes** | XZ | Which grid planes are drawn: **XZ**, **XY**, and **YZ**, in any combination. The choice is saved with your preferences and in `.ssproj` projects. |
 | | **Bounding Box** | On | Draws the bounding box of the active splat. |
 | | **Dimensions** | Off | Labels the bounding box edges with their lengths in the viewport, and the [Measure](transform-measure-align.md#measure-and-rescale-a-splat) tool's line with its length. |
 | | **Camera Poses** | Off | Draws a camera gizmo at every [Timeline](timeline.md) keyframe. |
-| | **Camera Info** (`I`) | Off | Shows the editable [camera position and target overlay](camera-controls.md#camera-info-overlay). |
+| | **Camera Info** (<kbd>I</kbd>) | Off | Shows the editable [camera position and target overlay](camera-controls.md#camera-info-overlay). |
 | Diagnostics | **Frame Timings** | Off | Live GPU and CPU frame times (median, minimum, and 95th percentile over the last second) with a graph, and whether the last frame was rendered sorted or stochastic. |
 | | **Overdraw** | Off | Replaces the image with a heat map of how many Gaussians overlap each pixel, with a legend from 1 to over 1000. Red-to-white regions are where cleanup would help performance most. |
 
