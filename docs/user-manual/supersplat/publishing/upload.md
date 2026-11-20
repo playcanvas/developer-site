@@ -25,13 +25,14 @@ You must be signed in with a PlayCanvas account to upload. See [Account Creation
 
 ## Supported input formats
 
-Drag and drop, or pick from your filesystem. The dialog accepts these formats, each up to its own maximum size. Its **Upload Guide** summarizes them.
+Drag and drop, or pick from your filesystem. The dialog accepts these formats, each up to its own maximum size. Its **Upload Guide** summarizes them. Below the drop area, the dialog also shows how much of today's [publishing allowance](/user-manual/supersplat/publishing/#limits) you've used and when it resets.
 
 | Format | File to upload | Maximum size | How it is validated |
 |--------|----------------|--------------|---------------------|
 | **PLY** | `.ply` | 15 GB | A PLY file containing Gaussian splat data. A PLY that holds only a mesh or a point cloud is rejected. |
 | **SPZ** | `.spz` | 5 GB | A readable SPZ file. |
 | **SOG** | `.sog` | 10 GB | Contains one `meta.json` file and the expected SOG WebP payload files. |
+| **GSAF** | `.gsaf` | 1 GB | An animated splat sequence, recognized by the `GSAF` header at the start of the file. Playing its animation needs WebGPU, and downloads aren't available for GSAF scenes yet. |
 | **Streamed SOG bundle (SSOG)** | `.zip` | 10 GB | Contains `lod-meta.json` and one or more SOG chunk folders. See [Streaming & Performance](/user-manual/supersplat/publishing/streaming). |
 | **LCC or LCC2** | `.zip` | 10 GB | Contains exactly one `.lcc2` file, or exactly one `.lcc` file with sibling `index.bin` and `data.bin` files. |
 
