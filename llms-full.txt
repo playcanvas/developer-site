@@ -27840,7 +27840,7 @@ Most fields are authored in a Studio control. The camera animation can also come
 
 A few fields behave in ways the schema alone doesn't show:
 
-- **`background.skyboxUrl`** — the viewer doesn't load the skybox from the settings. When you host the viewer yourself, pass the image with the `skybox` [URL parameter](https://developer.playcanvas.com/user-manual/supersplat/developers/embedding.md#url-parameters) or the `skyboxUrl` option.
+- **`background.skyboxUrl`** — the open-source viewer doesn't load the skybox from the settings. On superspl.at, scene pages and embeds still show the skybox you upload in Studio, because superspl.at passes it to the viewer itself. When you host the viewer yourself, pass the image with the `skybox` [URL parameter](https://developer.playcanvas.com/user-manual/supersplat/developers/embedding.md#url-parameters) or the `skyboxUrl` option.
 - **`soundUrl`** — the sound starts on the visitor's first click in the viewer, since browsers block audio that plays on its own.
 - **`cameras` and `animTracks`** — the format allows several, but the viewer uses only the first camera and plays only the first track.
 - **`annotations[].text`** — shown as plain text, so HTML markup isn't rendered.
