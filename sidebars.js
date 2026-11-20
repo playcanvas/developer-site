@@ -830,6 +830,7 @@ const sidebars = {
           items: [
             'user-manual/graphics/meshes/creating-meshes',
             'user-manual/graphics/meshes/mesh-instances',
+            'user-manual/graphics/meshes/compressed-meshes',
           ],
         },
         {

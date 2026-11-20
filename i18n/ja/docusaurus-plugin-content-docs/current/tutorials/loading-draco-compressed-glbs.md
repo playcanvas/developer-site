@@ -13,6 +13,8 @@ Draco 3Dデータ圧縮の詳細は https://google.github.io/draco/ を参照し
 
 glTFモデルを圧縮するツールについては https://github.com/CesiumGS/gltf-pipeline を参照してください。
 
+Draco デコーダーの設定方法や、Draco と meshopt 圧縮の比較については、[圧縮メッシュ](/user-manual/graphics/meshes/compressed-meshes/)を参照してください。
+
 <div className="iframe-container">
     <iframe src="https://playcanv.as/p/2uU2aYDh/" title="Loading Draco Compressed GLBs" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>

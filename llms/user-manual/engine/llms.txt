@@ -90,6 +90,7 @@ Use this index to write code against the engine directly. React, Web Components 
 - [Meshes](/user-manual/graphics/meshes/): What a `Mesh` holds, where meshes come from, and how they are shared.
 - [Creating Meshes](/user-manual/graphics/meshes/creating-meshes/): Building meshes from geometry classes, vertex data or vertex buffers, and updating them every frame.
 - [Mesh Instances](/user-manual/graphics/meshes/mesh-instances/): Creating, sharing and destroying mesh instances, rendering them through a render component or a layer, and their settings: visibility, culling, shadows, sort order, render style and shader parameters.
+- [Compressed Meshes](/user-manual/graphics/meshes/compressed-meshes/): Loading Draco and meshopt compressed GLBs with `dracoInitialize` and `meshoptInitialize`, and choosing between them.
 
 ### Lighting and materials
 
