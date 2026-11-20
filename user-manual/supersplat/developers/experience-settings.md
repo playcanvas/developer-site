@@ -95,7 +95,7 @@ A few fields behave in ways the schema alone doesn't show:
 - **`cameras` and `animTracks`** — the format allows several, but the viewer uses only the first camera and plays only the first track.
 - **`annotations[].text`** — shown as plain text, so HTML markup isn't rendered.
 - **`startMode: 'annotation'`** — accepted, but the viewer starts as it does for `default`.
-- **`antiAlias`** — not part of the schema above, but Studio adds it: its [Anti-aliasing](https://developer.playcanvas.com/user-manual/supersplat/studio/look-and-tone.md#anti-aliasing) switch stores `antiAlias: false` when turned off. The viewer doesn't read it. Each splat file's own anti-aliasing tag decides, and the `aa` [URL parameter](https://developer.playcanvas.com/user-manual/supersplat/developers/embedding.md#url-parameters) overrides that.
+- **`antiAlias`** — not part of the schema above, but Studio adds it: its [Anti-aliasing](https://developer.playcanvas.com/user-manual/supersplat/studio/look-and-tone.md#anti-aliasing) switch stores `antiAlias: false` when turned off. Scene pages and embeds on superspl.at apply it, with compensation on unless it's `false`. The open-source viewer doesn't read it from the settings file: there, the `aa` [URL parameter](https://developer.playcanvas.com/user-manual/supersplat/developers/embedding.md#url-parameters) sets it, and without that each splat file's own anti-aliasing tag decides.
 
 ## Authoring limits
 

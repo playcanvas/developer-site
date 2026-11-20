@@ -26243,18 +26243,12 @@ The background color still matters with a skybox: it shows anywhere the skybox d
 
 ## Anti-aliasing
 
-Splats trained with anti-aliasing, such as with Mip-Splatting, draw too bright without compensation. Studio's switch turns that compensation on (the default) or off for the whole scene, and saves the choice with the scene's settings.
-
-:::note
-
-The [SuperSplat Viewer](https://developer.playcanvas.com/user-manual/supersplat/developers/viewer.md) doesn't apply this setting yet. On the scene page and in embeds, each splat file's own anti-aliasing tag decides. When you [host the viewer yourself](https://developer.playcanvas.com/user-manual/supersplat/developers/embedding.md#url-parameters), the `aa` URL parameter overrides it.
-
-:::
+Splats trained with anti-aliasing, such as with Mip-Splatting, draw too bright without compensation. Studio's switch turns that compensation on (the default) or off for the whole scene, and saves the choice with the scene's settings. On superspl.at, scene pages and embeds follow the switch: compensation is on unless you turn it off here.
 
 ## In the viewer
 
 - **AR** — the skybox and background color are hidden during an [AR session](https://developer.playcanvas.com/user-manual/supersplat/viewing/xr.md), so the room shows through around the splat. VR sessions keep them.
-- **Self-hosting** — the viewer doesn't load the skybox from the scene's settings. When you [host the viewer yourself](https://developer.playcanvas.com/user-manual/supersplat/developers/embedding.md#url-parameters), pass the image with the `skybox` URL parameter or the `skyboxUrl` option, and override High Precision Rendering with `hpr`.
+- **Self-hosting** — the viewer doesn't load the skybox or the anti-aliasing setting from the scene's settings. When you [host the viewer yourself](https://developer.playcanvas.com/user-manual/supersplat/developers/embedding.md#url-parameters), pass the image with the `skybox` URL parameter or the `skyboxUrl` option, override High Precision Rendering with `hpr`, and set anti-aliasing with `aa`. Without `aa`, each splat file's own anti-aliasing tag decides.
 
 ## See also
 
@@ -27800,7 +27794,7 @@ A few fields behave in ways the schema alone doesn't show:
 - **`cameras` and `animTracks`** — the format allows several, but the viewer uses only the first camera and plays only the first track.
 - **`annotations[].text`** — shown as plain text, so HTML markup isn't rendered.
 - **`startMode: 'annotation'`** — accepted, but the viewer starts as it does for `default`.
-- **`antiAlias`** — not part of the schema above, but Studio adds it: its [Anti-aliasing](https://developer.playcanvas.com/user-manual/supersplat/studio/look-and-tone.md#anti-aliasing) switch stores `antiAlias: false` when turned off. The viewer doesn't read it. Each splat file's own anti-aliasing tag decides, and the `aa` [URL parameter](https://developer.playcanvas.com/user-manual/supersplat/developers/embedding.md#url-parameters) overrides that.
+- **`antiAlias`** — not part of the schema above, but Studio adds it: its [Anti-aliasing](https://developer.playcanvas.com/user-manual/supersplat/studio/look-and-tone.md#anti-aliasing) switch stores `antiAlias: false` when turned off. Scene pages and embeds on superspl.at apply it, with compensation on unless it's `false`. The open-source viewer doesn't read it from the settings file: there, the `aa` [URL parameter](https://developer.playcanvas.com/user-manual/supersplat/developers/embedding.md#url-parameters) sets it, and without that each splat file's own anti-aliasing tag decides.
 
 ## Authoring limits
 

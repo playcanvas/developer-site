@@ -39,18 +39,12 @@ The background color still matters with a skybox: it shows anywhere the skybox d
 
 ## Anti-aliasing
 
-Splats trained with anti-aliasing, such as with Mip-Splatting, draw too bright without compensation. Studio's switch turns that compensation on (the default) or off for the whole scene, and saves the choice with the scene's settings.
-
-:::note
-
-The [SuperSplat Viewer](https://developer.playcanvas.com/user-manual/supersplat/developers/viewer.md) doesn't apply this setting yet. On the scene page and in embeds, each splat file's own anti-aliasing tag decides. When you [host the viewer yourself](https://developer.playcanvas.com/user-manual/supersplat/developers/embedding.md#url-parameters), the `aa` URL parameter overrides it.
-
-:::
+Splats trained with anti-aliasing, such as with Mip-Splatting, draw too bright without compensation. Studio's switch turns that compensation on (the default) or off for the whole scene, and saves the choice with the scene's settings. On superspl.at, scene pages and embeds follow the switch: compensation is on unless you turn it off here.
 
 ## In the viewer
 
 - **AR** — the skybox and background color are hidden during an [AR session](https://developer.playcanvas.com/user-manual/supersplat/viewing/xr.md), so the room shows through around the splat. VR sessions keep them.
-- **Self-hosting** — the viewer doesn't load the skybox from the scene's settings. When you [host the viewer yourself](https://developer.playcanvas.com/user-manual/supersplat/developers/embedding.md#url-parameters), pass the image with the `skybox` URL parameter or the `skyboxUrl` option, and override High Precision Rendering with `hpr`.
+- **Self-hosting** — the viewer doesn't load the skybox or the anti-aliasing setting from the scene's settings. When you [host the viewer yourself](https://developer.playcanvas.com/user-manual/supersplat/developers/embedding.md#url-parameters), pass the image with the `skybox` URL parameter or the `skyboxUrl` option, override High Precision Rendering with `hpr`, and set anti-aliasing with `aa`. Without `aa`, each splat file's own anti-aliasing tag decides.
 
 ## See also
 
