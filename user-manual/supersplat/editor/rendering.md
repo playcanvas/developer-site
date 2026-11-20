@@ -24,6 +24,8 @@ Image rendering creates a single high-quality frame from your current camera pos
 
 When you select `Image` from the Render menu, a dialog will appear with settings to customize your image:
 
+[Image: The Image Settings dialog]
+
 - **Projection:** Choose the type of image to render:
   - `Standard` (default) - A regular flat image rendered from the camera's point of view
   - `360° Equirectangular` - A monoscopic 360° panorama capturing the full sphere around the camera's position
@@ -62,6 +64,8 @@ Video rendering creates an animated sequence using camera animations from the Ti
 ### Video Settings
 
 When you select `Video` from the Render menu, a dialog will appear with several settings to customize your video:
+
+[Image: The Video Settings dialog]
 
 - **Projection:** Choose the type of video to render:
   - `Standard` (default) - A regular flat video rendered from the camera's point of view

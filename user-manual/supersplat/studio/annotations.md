@@ -41,6 +41,10 @@ Each row on the **Annotations** tab also has **Go to annotation**, which moves t
 
 On the [scene page](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md), the viewer shows each annotation as a numbered hotspot. Selecting one eases the camera to the annotation's view and shows its title and text, and a navigator steps through the annotations in list order. [Viewer Controls](https://developer.playcanvas.com/user-manual/supersplat/viewing/controls.md#annotations) describes everything visitors can do with them.
 
+[Video](https://developer.playcanvas.com/video/supersplat-annotations-visitor.mp4)
+
+A visitor selects a hotspot, then steps through the annotations with the navigator. Honeybee by [danylyon](https://superspl.at/user/danylyon).
+
 :::note
 
 The settings format accepts `annotation` as a scene's start mode, but the viewer doesn't act on it: a scene always starts from its [starting camera](https://developer.playcanvas.com/user-manual/supersplat/studio/cameras.md) or its camera animation.

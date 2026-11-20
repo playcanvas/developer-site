@@ -2,6 +2,8 @@
 
 The **Scene Manager** lists the splats in the current project. Each splat file you import appears as a separate row. This makes it possible to assemble several captures, compare revisions, or align independently captured areas before exporting them together.
 
+[Image: The Scene Manager listing two splats, with the Transform and Colors sections below]
+
 ## The Active Splat
 
 Click a row to make that splat active. The active splat is the target for:

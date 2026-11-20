@@ -19,6 +19,8 @@ Select the active splat, then choose a tool from the bottom toolbar:
 
 Drag the gizmo handles in the viewport. For precise values, edit **Position**, **Rotation**, and uniform **Scale** in the **Transform** section below the Scene Manager's splat list (click its header to collapse or expand it). Transform operations can be undone and redone.
 
+[Image: The Move tool's gizmo on the active splat, with the splat's values in the Transform section]
+
 ### Copy and Paste a Transform
 
 Right-click the **Transform** header and choose **Copy** to copy the whole transform, or right-click the **Position**, **Rotation**, or **Scale** row to copy just that value. Values are copied at full precision as plain JSON text, for example `{"position":[1.5,0,-2],"rotation":[0,90,0],"scale":1}`, so they can be pasted back into the Editor, into another splat, or into any text field. **Paste** on the header accepts any subset of these keys, so `{"scale":2}` changes only the scale; **Paste** on a row accepts a bare value such as `[1.5,0,-2]` or a copied section. A paste is a single undo step. Invalid clipboard contents change nothing and briefly flash the target red.

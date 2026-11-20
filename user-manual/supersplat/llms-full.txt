@@ -4,7 +4,7 @@
 
 Index: https://developer.playcanvas.com/user-manual/supersplat/llms.txt
 Total Documents: 41
-Generated: 2026-11-19
+Generated: 2026-11-20
 
 ================================================================================
 
@@ -581,6 +581,8 @@ Markdown: https://developer.playcanvas.com/user-manual/supersplat/editor/scene-m
 
 The **Scene Manager** lists the splats in the current project. Each splat file you import appears as a separate row. This makes it possible to assemble several captures, compare revisions, or align independently captured areas before exporting them together.
 
+[Image: The Scene Manager listing two splats, with the Transform and Colors sections below]
+
 ## The Active Splat
 
 Click a row to make that splat active. The active splat is the target for:
@@ -775,6 +777,8 @@ Select the active splat, then choose a tool from the bottom toolbar:
 - **Scale** (`3`) scales the target.
 
 Drag the gizmo handles in the viewport. For precise values, edit **Position**, **Rotation**, and uniform **Scale** in the **Transform** section below the Scene Manager's splat list (click its header to collapse or expand it). Transform operations can be undone and redone.
+
+[Image: The Move tool's gizmo on the active splat, with the splat's values in the Transform section]
 
 ### Copy and Paste a Transform
 
@@ -1279,6 +1283,8 @@ Image rendering creates a single high-quality frame from your current camera pos
 
 When you select `Image` from the Render menu, a dialog will appear with settings to customize your image:
 
+[Image: The Image Settings dialog]
+
 - **Projection:** Choose the type of image to render:
   - `Standard` (default) - A regular flat image rendered from the camera's point of view
   - `360° Equirectangular` - A monoscopic 360° panorama capturing the full sphere around the camera's position
@@ -1317,6 +1323,8 @@ Video rendering creates an animated sequence using camera animations from the Ti
 ### Video Settings
 
 When you select `Video` from the Render menu, a dialog will appear with several settings to customize your video:
+
+[Image: The Video Settings dialog]
 
 - **Projection:** Choose the type of video to render:
   - `Standard` (default) - A regular flat video rendered from the camera's point of view
@@ -1959,6 +1967,10 @@ Phones and tablets start at **Performance** and other devices at **Default**; th
 
 As the camera moves, the viewer raises and lowers the level of detail across the scene to stay within this budget — so you get consistent performance and bounded memory use on everything from a phone to a desktop. In a VR or AR session, detail is chosen by distance alone, so turning your head doesn't stream new detail.
 
+To see it at work, turn on the viewer's `colorize` [URL parameter](https://developer.playcanvas.com/user-manual/supersplat/developers/embedding.md#url-parameters), which tints each level of detail its own color:
+
+[Image: The same view of a streamed scene, as normal on the left and with colorize on the right, where each color is a level of detail]
+
 A splat that isn't streamed is drawn in full whatever the budget; for it, the Quality slider only changes the resolution at **Performance**.
 
 ## Bringing your own LODs
@@ -2465,6 +2477,10 @@ Each row on the **Annotations** tab also has **Go to annotation**, which moves t
 
 On the [scene page](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md), the viewer shows each annotation as a numbered hotspot. Selecting one eases the camera to the annotation's view and shows its title and text, and a navigator steps through the annotations in list order. [Viewer Controls](https://developer.playcanvas.com/user-manual/supersplat/viewing/controls.md#annotations) describes everything visitors can do with them.
 
+[Video](https://developer.playcanvas.com/video/supersplat-annotations-visitor.mp4)
+
+A visitor selects a hotspot, then steps through the annotations with the navigator. Honeybee by [danylyon](https://superspl.at/user/danylyon).
+
 :::note
 
 The settings format accepts `annotation` as a scene's start mode, but the viewer doesn't act on it: a scene always starts from its [starting camera](https://developer.playcanvas.com/user-manual/supersplat/studio/cameras.md) or its camera animation.
@@ -2879,6 +2895,8 @@ Markdown: https://developer.playcanvas.com/user-manual/supersplat/developers/vie
 The **SuperSplat Viewer** is the open-source web viewer that renders every [scene page](https://developer.playcanvas.com/user-manual/supersplat/viewing/scene-page.md) on superspl.at. It takes a splat plus a settings JSON document and turns them into an interactive 3D experience: orbit, fly and walk camera modes, annotations, camera animations, post effects, collision for walkable scenes, and VR and AR on devices that support WebXR.
 
 The viewer is [open source on GitHub](https://github.com/playcanvas/supersplat-viewer) under the MIT license and is distributed on npm as [`@playcanvas/supersplat-viewer`](https://www.npmjs.com/package/@playcanvas/supersplat-viewer).
+
+[Image: A blog post with the SuperSplat Viewer embedded in it]
 
 ## Using the viewer
 
