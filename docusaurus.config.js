@@ -161,6 +161,8 @@ const config = {
         // Preloading renamed
         { from: ['/user-manual/assets/preloading-and-streaming/'], to: '/user-manual/assets/preloading/' },
         { from: ['/user-manual/api/project-archive/'], to: '/user-manual/api/project-export/' },
+        // The legacy Splat Publishing API page was replaced by SuperSplat's API & Integrations
+        { from: ['/user-manual/api/splat-publish/'], to: '/user-manual/supersplat/developers/api-integrations/' },
         { from: ['/user-manual/editor/projects/backup-archiving/'], to: '/user-manual/editor/projects/backup-and-export/' },
         // SplatTransform promoted from gaussian-splatting/editing/splat-transform/ to top-level Core Products
         { from: ['/user-manual/gaussian-splatting/editing/splat-transform/'], to: '/user-manual/splat-transform/' },
