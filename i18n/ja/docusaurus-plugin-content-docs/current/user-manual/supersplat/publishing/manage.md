@@ -33,7 +33,7 @@ Manageへのアクセスには、PlayCanvasアカウントでのサインイン�
 
 ページヘッダの**Upload Splat**ボタンを押すとUploadダイアログが開きます。詳しいフローは[Direct Upload](/user-manual/supersplat/publishing/upload)を参照してください。
 
-## スプラットのメタデータを編集する
+## スプラットのメタデータを編集する {#editing-splat-metadata}
 
 行の**Actions**列の**Edit details**（鉛筆）をクリックして**Edit Splat**ダイアログを開きます。
 

@@ -54,6 +54,8 @@ On your own profile you'll also find:
 - **Everyone you follow.** Click your **following** count to see the list and [unfollow](#managing) anyone you like.
 - **A Likes tab** with every splat you've liked. Only you can see it.
 
+Comments, likes and new followers on your splats appear in the [Notifications](/user-manual/supersplat/viewing/notifications) panel, where you can also choose which ones you're emailed about.
+
 ## See also
 
 - [Explore](/user-manual/supersplat/viewing/explore) — discover splats and creators across the whole platform

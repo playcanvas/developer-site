@@ -26,7 +26,7 @@ description: "superspl.atに公開されたスプラットの公開ページ —
 | **Views** | 総閲覧数。 |
 | **Downloads** | 総ダウンロード数。スプラットがダウンロード可能な場合にのみ表示されます。 |
 | **Visibility badge** | **Public**または**Unlisted**。 |
-| **Software used** | Edit Splatダイアログでタグ付けしたツール（キャプチャ／トレーニングツール）のチップ。 |
+| **Software used** | Edit Splatダイアログでタグ付けしたツール（キャプチャ／トレーニングツール）のチップ。クリックすると、[そのツールで作られたほかのスプラット](/user-manual/supersplat/viewing/explore#splats-by-software)が表示されます。 |
 | **Description** | Edit Splatダイアログで設定した詳しい説明（サニタイズされたHTML）。 |
 | **Format / size** | 公開済みスプラットのフォーマットとダウンロードサイズ。ツールチップ付き。 |
 | **Splat count** | 公開済みスプラットのガウシアン数。ツールチップには、[ストリーミング](/user-manual/supersplat/publishing/streaming)されるスプラットの詳細レベルと、球面調和関数のバンド数が表示されます。 |
