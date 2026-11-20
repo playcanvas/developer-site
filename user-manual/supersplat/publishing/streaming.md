@@ -41,7 +41,7 @@ A splat that isn't streamed is drawn in full whatever the budget; for it, the Qu
 Advanced users can skip the automatic step and supply a pre-built Streamed SOG bundle:
 
 - Generate one with the [splat-transform](https://developer.playcanvas.com/user-manual/splat-transform.md) CLI (use `--decimate` to build the LOD levels), then [directly upload](https://developer.playcanvas.com/user-manual/supersplat/publishing/upload.md) the resulting bundle.
-- Or produce LOD-capable output from the [Convert](https://developer.playcanvas.com/user-manual/supersplat/convert.md) utility.
+- Or build one in your browser with the [Streamed SOG](https://developer.playcanvas.com/user-manual/supersplat/convert.md#streamed-sog) tab of Convert, then upload its zip.
 
 ## See also
 
