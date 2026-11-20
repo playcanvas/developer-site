@@ -40,11 +40,13 @@ While an annotation is selected, **Distance to camera** on the **Annotations** t
 
 Each row on the **Annotations** tab also has **Go to annotation**, which moves the viewport to the annotation's camera, and **Delete annotation**. Drag rows to reorder them: the order controls how visitors step through the annotations, and the number each hotspot shows.
 
-<!-- TODO: media — /video/user-manual/supersplat/studio/annotation-flythrough.mp4 — visitor navigating between hotspots -->
-
 ## How visitors use them
 
 On the [scene page](/user-manual/supersplat/viewing/scene-page), the viewer shows each annotation as a numbered hotspot. Selecting one eases the camera to the annotation's view and shows its title and text, and a navigator steps through the annotations in list order. [Viewer Controls](/user-manual/supersplat/viewing/controls#annotations) describes everything visitors can do with them.
+
+<video autoPlay muted loop controls src='/video/supersplat-annotations-visitor.mp4' style={{width: '100%', height: 'auto'}} />
+
+A visitor selects a hotspot, then steps through the annotations with the navigator. Honeybee by [danylyon](https://superspl.at/user/danylyon).
 
 :::note
 

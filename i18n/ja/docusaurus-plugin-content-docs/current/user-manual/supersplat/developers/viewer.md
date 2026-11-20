@@ -7,7 +7,7 @@ description: "SuperSplatのシーンページを動かしているオープン�
 
 ビューアはMITライセンスの下で[GitHubでオープンソース](https://github.com/playcanvas/supersplat-viewer)であり、npmで[`@playcanvas/supersplat-viewer`](https://www.npmjs.com/package/@playcanvas/supersplat-viewer)として配布されています。
 
-<!-- TODO: media — /img/user-manual/supersplat/developers/embed-example.png — サードパーティのページ内でレンダリングされるビューア -->
+![SuperSplat Viewerを埋め込んだブログ記事](/img/user-manual/supersplat/developers/embed-example.webp)
 
 ## ビューアの使い方
 

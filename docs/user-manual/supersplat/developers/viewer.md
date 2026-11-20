@@ -7,7 +7,7 @@ The **SuperSplat Viewer** is the open-source web viewer that renders every [scen
 
 The viewer is [open source on GitHub](https://github.com/playcanvas/supersplat-viewer) under the MIT license and is distributed on npm as [`@playcanvas/supersplat-viewer`](https://www.npmjs.com/package/@playcanvas/supersplat-viewer).
 
-<!-- TODO: media — /img/user-manual/supersplat/developers/embed-example.png — the viewer rendered inside a third-party page -->
+![A blog post with the SuperSplat Viewer embedded in it](/img/user-manual/supersplat/developers/embed-example.webp)
 
 ## Using the viewer
 

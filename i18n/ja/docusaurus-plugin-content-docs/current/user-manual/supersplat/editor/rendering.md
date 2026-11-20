@@ -27,6 +27,8 @@ Editorは、現在のカメラからスプラットの静止画を、[Timeline](
 
 Renderメニューから`Image`を選択すると、画像をカスタマイズするための設定ダイアログが表示されます。
 
+<img loading="lazy" alt="Image Settingsダイアログ" width="408" src="/img/user-manual/supersplat/editor/render-image-settings.png" />
+
 - **Projection:** レンダリングする画像の種類を選択します：
   - `Standard`（デフォルト） - カメラの視点からレンダリングされる通常の画像
   - `360° Equirectangular` - カメラ位置を中心とした全球をキャプチャするモノスコピックの360°パノラマ
@@ -65,6 +67,8 @@ Renderメニューから`Image`を選択すると、画像をカスタマイズ�
 ### ビデオ設定
 
 Renderメニューから`Video`を選択すると、ビデオをカスタマイズするためのいくつかの設定ダイアログが表示されます。
+
+<img loading="lazy" alt="Video Settingsダイアログ" width="408" src="/img/user-manual/supersplat/editor/render-video-settings.png" />
 
 - **Projection:** レンダリングするビデオの種類を選択します：
   - `Standard`（デフォルト） - カメラの視点からレンダリングされる通常のビデオ
