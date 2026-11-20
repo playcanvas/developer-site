@@ -224,7 +224,13 @@ describe('the generated files', () => {
         assert.equal(urls.at(-1), `${siteUrl}/user-manual/security/`);
     });
 
-    it('leaves out unlisted docs', () => {
-        assert.ok(!llmsFullTxt.includes(`URL: ${siteUrl}/user-manual/api/splat-publish/`));
+    it('leaves out unlisted and draft docs', () => {
+        const hidden = docFiles().filter((file) => {
+            const frontMatter = readFrontMatter(fs.readFileSync(file, 'utf-8'));
+            return frontMatter.unlisted || frontMatter.draft;
+        }).map(file => docPathFromId(docIdFromFile(docsDir, file)));
+        for (const urlPath of hidden) {
+            assert.ok(!llmsFullTxt.includes(`URL: ${siteUrl}${urlPath}\n`), `${urlPath} is unlisted or a draft but was published`);
+        }
     });
 });

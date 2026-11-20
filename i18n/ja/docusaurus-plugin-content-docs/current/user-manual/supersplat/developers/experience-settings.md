@@ -93,7 +93,7 @@ type ExperienceSettings = {
 
 いくつかのフィールドは、スキーマだけではわからない動作をします：
 
-- **`background.skyboxUrl`** — ビューアは設定からスカイボックスを読み込みません。ビューアを自分でホストする場合は、`skybox` [URLパラメータ](/user-manual/supersplat/developers/embedding#url-parameters)または`skyboxUrl`オプションで画像を渡してください。
+- **`background.skyboxUrl`** — オープンソースのビューアは設定からスカイボックスを読み込みません。superspl.atのシーンページと埋め込みでは、superspl.atがスカイボックスをビューアに直接渡すため、Studioでアップロードしたスカイボックスが表示されます。ビューアを自分でホストする場合は、`skybox` [URLパラメータ](/user-manual/supersplat/developers/embedding#url-parameters)または`skyboxUrl`オプションで画像を渡してください。
 - **`soundUrl`** — ブラウザは自動で再生される音声をブロックするため、サウンドは訪問者がビューア内を最初にクリックしたときに再生が始まります。
 - **`cameras`と`animTracks`** — フォーマット上は複数指定できますが、ビューアは最初のカメラだけを使い、最初のトラックだけを再生します。
 - **`annotations[].text`** — プレーンテキストとして表示されるため、HTMLマークアップはレンダリングされません。
