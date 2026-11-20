@@ -41,6 +41,7 @@ Use inline links (`[link text](url)`) and minimize the use of HTML as much as po
 
 - `<iframe>` for PlayCanvas project builds
 - `<img>` to adjust sizes of images
+- `<kbd>` for keyboard keys (see [Keyboard Keys](#keyboard-keys))
 - alert style boxes
 
 For `<iframe>` and `<img>`, use `loading="lazy"` attribute to reduce initial page load times and size.
@@ -70,6 +71,22 @@ When inserting code into a Markdown file, use backticks. For example:
 Be sure to specify the relevant language to enable syntax highlighting. Valid values are: `css`, `glsl`, `html`, `javascript`, `json`, `sh` and `typescript`. Use `none` to disable syntax highlighting.
 
 For any JavaScript code, please refer to the [PlayCanvas style guide](https://github.com/playcanvas/engine/blob/main/.github/CONTRIBUTING.md).
+
+### Keyboard Keys
+
+Write each key in its own `<kbd>` tag, not in backticks or bold:
+
+```markdown
+Press <kbd>F</kbd> to frame the selection.
+```
+
+- Join a key combination with `+` and no spaces: `<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd>`.
+- Write a mouse action in plain text after the key: `<kbd>Ctrl</kbd>-click`, `<kbd>Shift</kbd>-drag`, `<kbd>Alt</kbd> + mouse wheel`.
+- Use these key names: `Ctrl`, `Shift`, `Alt`, `Cmd`, `Esc`, `Enter`, `Space`, `Tab`, `Delete` and `Backspace`.
+- When a shortcut differs on macOS, give that version in parentheses: `<kbd>Ctrl</kbd>+<kbd>Z</kbd> (<kbd>Cmd</kbd>+<kbd>Z</kbd> on macOS)`.
+- Write the `<` and `>` keys as `<kbd>&lt;</kbd>` and `<kbd>&gt;</kbd>`. Pages are parsed as MDX, where a bare `<` starts a tag.
+
+Only keys go in `<kbd>`. Menu items, buttons and fields keep their usual formatting.
 
 ### Other files
 

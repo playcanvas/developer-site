@@ -25,6 +25,10 @@ llms/           # Hand-written llms.txt indexes for AI agents (mirrors their pub
 3. **File operations**: Use `git mv` and `git rm` for moving/deleting files to ensure proper version control tracking.
 4. **LLM indexes**: When you move, rename or remove a page, update any `llms/` index that links it. A new top-level User Manual section must be added to the `covers` list of one index. `npm test` and CI builds fail until both hold (local builds only warn).
 
+## Writing Style
+
+Follow the [Writing Standards](.github/CONTRIBUTING.md#writing-standards) in `.github/CONTRIBUTING.md`. In particular, write keyboard keys with `<kbd>` (`<kbd>Ctrl</kbd>+<kbd>Z</kbd>`), never in backticks or bold.
+
 ## Commands
 
 ```bash
