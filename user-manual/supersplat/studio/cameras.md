@@ -33,7 +33,7 @@ While framing, **double-click a point on the splat** to set it as the focal poin
 
 :::
 
-Click **Edit** again (or press **Escape**) to exit edit mode without saving. Unlike **Cancel**, the viewport is not restored — only the stored pose stays unchanged.
+Click **Edit** again (or press <kbd>Esc</kbd>) to exit edit mode without saving. Unlike **Cancel**, the viewport is not restored — only the stored pose stays unchanged.
 
 [Video](https://developer.playcanvas.com/video/supersplat-studio-edit-camera.mp4)
 

@@ -13,9 +13,9 @@ If you intended to move the whole splat, choose **Select > None** before transfo
 
 Select the active splat, then choose a tool from the bottom toolbar:
 
-- **Move** (`1`) translates the target.
-- **Rotate** (`2`) rotates the target.
-- **Scale** (`3`) scales the target.
+- **Move** (<kbd>1</kbd>) translates the target.
+- **Rotate** (<kbd>2</kbd>) rotates the target.
+- **Scale** (<kbd>3</kbd>) scales the target.
 
 Drag the gizmo handles in the viewport. For precise values, edit **Position**, **Rotation**, and uniform **Scale** in the **Transform** section below the Scene Manager's splat list (click its header to collapse or expand it). Transform operations can be undone and redone.
 
@@ -25,14 +25,14 @@ Drag the gizmo handles in the viewport. For precise values, edit **Position**, *
 
 Right-click the **Transform** header and choose **Copy** to copy the whole transform, or right-click the **Position**, **Rotation**, or **Scale** row to copy just that value. Values are copied at full precision as plain JSON text, for example `{"position":[1.5,0,-2],"rotation":[0,90,0],"scale":1}`, so they can be pasted back into the Editor, into another splat, or into any text field. **Paste** on the header accepts any subset of these keys, so `{"scale":2}` changes only the scale; **Paste** on a row accepts a bare value such as `[1.5,0,-2]` or a copied section. A paste is a single undo step. Invalid clipboard contents change nothing and briefly flash the target red.
 
-Gizmos start in the splat's local coordinate space. Press `Shift + C` (or the coordinate-space toggle in the bottom toolbar) to switch between local and world space.
+Gizmos start in the splat's local coordinate space. Press <kbd>Shift</kbd>+<kbd>C</kbd> (or the coordinate-space toggle in the bottom toolbar) to switch between local and world space.
 
 ## Position the Pivot
 
 The pivot marks the transform origin — where rotation and scale are applied — and defines the splat's local coordinate frame:
 
 - While Move, Rotate, or Scale is active, double-click a visible surface to place the pivot at that point.
-- Click **Reset Pivot** in the bottom toolbar to return the pivot to the splat's origin and reset its orientation. `Shift`-click it to place the pivot at the bound center instead: the center of the whole splat, or of the selected Gaussians when a selection exists.
+- Click **Reset Pivot** in the bottom toolbar to return the pivot to the splat's origin and reset its orientation. <kbd>Shift</kbd>-click it to place the pivot at the bound center instead: the center of the whole splat, or of the selected Gaussians when a selection exists.
 - The [Orient tool](https://developer.playcanvas.com/user-manual/supersplat/editor/transform-measure-align.md#orient-a-splat-to-the-grid) can set the pivot from a plane picked on the splat's surface.
 
 Moving the pivot does not move the splat until you use a transform control. Pivot changes are undoable, and a custom pivot is saved with the project in `.ssproj` files.
@@ -45,7 +45,7 @@ The Orient tool levels a mis-rotated splat — a Z-up import, a tilted capture, 
 2. Click points on the splat:
    - **Three points** on a surface that should be level, such as a floor or table top, define a plane.
    - **Two points** on an edge that should be vertical, such as a door frame or column, define a line. Click the bottom point first, then the top. Use this when the capture has no usable floor.
-3. Click a placed point and use its move gizmo to refine the position. `Delete` or `Backspace` removes the active point, **Clear** removes all of them, and `F` frames the points in the viewport.
+3. Click a placed point and use its move gizmo to refine the position. <kbd>Delete</kbd> or <kbd>Backspace</kbd> removes the active point, **Clear** removes all of them, and <kbd>F</kbd> frames the points in the viewport.
 4. Press **Align to Grid**.
    - With three points, the whole active splat rotates and translates so the picked plane lands exactly on the grid plane, pivoting around the picked points so the clicked region stays in place. The side of the plane facing the camera becomes up. If the result is upside down, orbit underneath the plane and press **Align to Grid** again.
    - With two points, the whole active splat rotates about the midpoint of the line so the line points straight up from the grid, from the first point to the second. Click order sets the direction, so tilted, sideways, and upside-down captures all level in one step. The splat is not moved onto the grid, because a line does not define a floor.
@@ -78,7 +78,7 @@ The Measure tool reports the distance between two surface points and can rescale
 4. Read the measured length in the toolbar above the bottom controls. With **Dimensions** enabled in the Overlays popup, the length is also labeled along the line in the viewport.
 5. To calibrate the splat, enter the real distance in that field. SuperSplat uniformly rescales the whole active splat around the midpoint of the two markers.
 
-`Delete` or `Backspace` removes the active marker while Measure is active, and `F` frames the placed markers. Press `Escape` to leave the tool. Changing the length is undoable.
+<kbd>Delete</kbd> or <kbd>Backspace</kbd> removes the active marker while Measure is active, and <kbd>F</kbd> frames the placed markers. Press <kbd>Esc</kbd> to leave the tool. Changing the length is undoable.
 
 ## Merge Visible Splats
 

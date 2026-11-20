@@ -140,4 +140,4 @@ You can render 360° still images in the same way: set the `Projection` option i
 ## Tips
 
 - **For 360° Videos:** The camera animation drives the viewer's position through the scene. Slow, smooth camera movement is much more comfortable to watch in a VR headset than rapid motion.
-- **Debug Overlays:** Enable **Show Debug Overlays** when you need to show the Gaussian structure for educational or technical presentations. Press `Tab` in the Editor first so the markers are visible, and choose and configure them on the [mode strip](https://developer.playcanvas.com/user-manual/supersplat/editor/color-and-appearance.md#appearance).
+- **Debug Overlays:** Enable **Show Debug Overlays** when you need to show the Gaussian structure for educational or technical presentations. Press <kbd>Tab</kbd> in the Editor first so the markers are visible, and choose and configure them on the [mode strip](https://developer.playcanvas.com/user-manual/supersplat/editor/color-and-appearance.md#appearance).

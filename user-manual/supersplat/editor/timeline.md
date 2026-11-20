@@ -9,7 +9,7 @@ The Timeline panel allows you to create camera animations for your Gaussian Spla
 The Timeline panel includes the following controls:
 
 - **Play/Pause button** - Play or pause the animation playback
-- **Previous/Next Frame buttons** - Step one frame backward or forward. Hold **Shift** while clicking to jump to the previous or next keyframe instead
+- **Previous/Next Frame buttons** - Step one frame backward or forward. Hold <kbd>Shift</kbd> while clicking to jump to the previous or next keyframe instead
 - **Add Key button (`+`)** - Create a new keyframe at the current timeline position
 - **Remove Key button (`-`)** - Delete the keyframe at the current playhead position
 - **Timeline slider** - Scrub through the animation by dragging the playhead (which displays the current frame number)
@@ -20,7 +20,7 @@ The Timeline panel includes the following controls:
 
 ### Keyboard Shortcuts
 
-The timeline can also be driven from the keyboard: **Space** plays and pauses, and **Enter** adds a keyframe at the current frame. [Keyboard Shortcuts](https://developer.playcanvas.com/user-manual/supersplat/editor/keyboard-shortcuts.md#timeline) lists them all. **Ctrl + T** (**Cmd + T** on Mac) shows or hides the panel.
+The timeline can also be driven from the keyboard: <kbd>Space</kbd> plays and pauses, and <kbd>Enter</kbd> adds a keyframe at the current frame. [Keyboard Shortcuts](https://developer.playcanvas.com/user-manual/supersplat/editor/keyboard-shortcuts.md#timeline) lists them all. <kbd>Ctrl</kbd>+<kbd>T</kbd> (<kbd>Cmd</kbd>+<kbd>T</kbd> on macOS) shows or hides the panel.
 
 ## Creating Keyframes
 
@@ -28,7 +28,7 @@ To create a camera animation keyframe:
 
 1. Position the timeline playhead at the desired frame (by clicking on the timeline or using the frame counter)
 2. Move and orient the viewport camera to the desired position
-3. Click the `+` (Add Keyframe) button on the Timeline (or press **Enter**)
+3. Click the `+` (Add Keyframe) button on the Timeline (or press <kbd>Enter</kbd>)
 
 The keyframe will appear as a yellow diamond on the timeline at the current frame position. Keyframes store the camera's position and rotation at that moment in time.
 
@@ -68,7 +68,7 @@ Click and drag the yellow diamond keyframes along the timeline to adjust when ea
 
 ### Copying Keyframes
 
-Hold **Shift** and drag a keyframe to copy it instead of moving it. A clone of the keyframe follows the pointer while you drag, and a copy is created at the frame where you release, leaving the original keyframe in place.
+Hold <kbd>Shift</kbd> and drag a keyframe to copy it instead of moving it. A clone of the keyframe follows the pointer while you drag, and a copy is created at the frame where you release, leaving the original keyframe in place.
 
 ### Updating Camera Position/Rotation
 
@@ -78,18 +78,18 @@ To change the camera position or rotation stored in an existing keyframe:
 2. Adjust the viewport camera to the new desired position and rotation
 3. Click the `+` (Add Key) button - this will overwrite the existing keyframe with the updated camera values
 
-Alternatively, hold **Ctrl** and click a keyframe diamond to overwrite it with the current view directly - no need to move the playhead first.
+Alternatively, hold <kbd>Ctrl</kbd> and click a keyframe diamond to overwrite it with the current view directly - no need to move the playhead first.
 
 ## Deleting Keyframes
 
 To delete a keyframe:
 
 1. Move the playhead to the frame containing the keyframe you want to delete
-2. Click the `-` (Remove Key) button (or press **Shift + Enter**)
+2. Click the `-` (Remove Key) button (or press <kbd>Shift</kbd>+<kbd>Enter</kbd>)
 
 :::note
 
-All keyframe operations - adding, moving, copying, and removing - can be undone with **Ctrl + Z** (or **Cmd + Z** on Mac) and redone with **Ctrl + Shift + Z** (or **Cmd + Shift + Z** on Mac).
+All keyframe operations - adding, moving, copying, and removing - can be undone with <kbd>Ctrl</kbd>+<kbd>Z</kbd> (or <kbd>Cmd</kbd>+<kbd>Z</kbd> on macOS) and redone with <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd> (or <kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd> on macOS).
 
 :::
 
@@ -130,7 +130,7 @@ Adjusting smoothness allows you to control the feel of your camera animation, fr
 
 ## Playing Animations
 
-Use the play button (or press **Space**) to preview your animation. The camera will interpolate between keyframes based on your smoothness setting, creating fluid motion. With the Loop toggle enabled (the default), the animation loops continuously, wrapping from the last keyframe back to the first.
+Use the play button (or press <kbd>Space</kbd>) to preview your animation. The camera will interpolate between keyframes based on your smoothness setting, creating fluid motion. With the Loop toggle enabled (the default), the animation loops continuously, wrapping from the last keyframe back to the first.
 
 ### Animation Looping
 

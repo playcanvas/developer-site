@@ -65,7 +65,7 @@ Selected markers always use the selected color.
 
 ### Markers Options
 
-Press and hold **Markers** on the mode strip to open its options. A short press toggles the markers, like `Tab`.
+Press and hold **Markers** on the mode strip to open its options. A short press toggles the markers, like <kbd>Tab</kbd>.
 
 | Control | Default | Description |
 |---|---|---|

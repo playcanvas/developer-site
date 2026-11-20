@@ -118,4 +118,4 @@ To export your currently loaded scene, open the `File` > `Export` submenu and ch
 
 The suggested filename is the splat's name with its extension, in upper or lower case, replaced by the export format's: a splat loaded from `Garden.PLY` is suggested as `Garden.sog` for a SOG export.
 
-Choose `File` > `Re-export` (`Ctrl + Shift + E`) to repeat the last export with the same options to the same file. It overwrites the previous output without further prompts, which is handy while iterating on a cleanup.
+Choose `File` > `Re-export` (<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>E</kbd>) to repeat the last export with the same options to the same file. It overwrites the previous output without further prompts, which is handy while iterating on a cleanup.
