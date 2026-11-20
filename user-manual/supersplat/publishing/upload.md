@@ -22,7 +22,7 @@ You must be signed in with a PlayCanvas account to upload. See [Account Creation
 
 ## Supported input formats
 
-Drag and drop, or pick from your filesystem. The dialog accepts these formats, each up to its own maximum size. Its **Upload Guide** summarizes them.
+Drag and drop, or pick from your filesystem. The dialog accepts these formats, each up to its own maximum size. Its **Upload Guide** summarizes them. Below the drop area, the dialog also shows how much of today's [publishing allowance](https://developer.playcanvas.com/user-manual/supersplat/publishing.md#limits) you've used and when it resets.
 
 | Format | File to upload | Maximum size | How it is validated |
 |--------|----------------|--------------|---------------------|
