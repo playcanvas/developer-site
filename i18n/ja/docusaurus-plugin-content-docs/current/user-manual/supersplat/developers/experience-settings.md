@@ -98,7 +98,7 @@ type ExperienceSettings = {
 - **`cameras`と`animTracks`** — フォーマット上は複数指定できますが、ビューアは最初のカメラだけを使い、最初のトラックだけを再生します。
 - **`annotations[].text`** — プレーンテキストとして表示されるため、HTMLマークアップはレンダリングされません。
 - **`startMode: 'annotation'`** — 受け付けられますが、ビューアは`default`の場合と同じように開始します。
-- **`antiAlias`** — 上のスキーマには含まれませんが、Studioが追加します：Studioの[Anti-aliasing](/user-manual/supersplat/studio/look-and-tone#anti-aliasing)スイッチをオフにすると`antiAlias: false`が保存されます。ビューアはこれを読みません。各スプラットファイル自身のアンチエイリアスのタグで決まり、`aa` [URLパラメータ](/user-manual/supersplat/developers/embedding#url-parameters)でそれを上書きできます。
+- **`antiAlias`** — 上のスキーマには含まれませんが、Studioが追加します：Studioの[Anti-aliasing](/user-manual/supersplat/studio/look-and-tone#anti-aliasing)スイッチをオフにすると`antiAlias: false`が保存されます。superspl.atのシーンページと埋め込みはこれを適用し、`false`でない限り補正はオンになります。オープンソースのビューアは設定ファイルからこれを読みません。その場合は`aa` [URLパラメータ](/user-manual/supersplat/developers/embedding#url-parameters)で指定し、指定がなければ各スプラットファイル自身のアンチエイリアスのタグで決まります。
 
 ## 作成時の制限 {#authoring-limits}
 

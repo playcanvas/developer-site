@@ -42,18 +42,12 @@ description: "SuperSplat Studioで公開済みスプラットの背景色、ス�
 
 ## アンチエイリアス {#anti-aliasing}
 
-Mip-Splattingなどでアンチエイリアスありでトレーニングされたスプラットは、補正しないと明るすぎて描画されます。Studioのスイッチは、シーン全体でこの補正をオン（デフォルト）またはオフにし、その選択をシーンの設定と一緒に保存します。
-
-:::note
-
-[SuperSplat Viewer](/user-manual/supersplat/developers/viewer/)はまだこの設定を適用しません。シーンページや埋め込みでは、各スプラットファイル自身のアンチエイリアスのタグで決まります。[ビューアを自分でホストする](/user-manual/supersplat/developers/embedding#url-parameters)場合は、`aa` URLパラメータでそれを上書きできます。
-
-:::
+Mip-Splattingなどでアンチエイリアスありでトレーニングされたスプラットは、補正しないと明るすぎて描画されます。Studioのスイッチは、シーン全体でこの補正をオン（デフォルト）またはオフにし、その選択をシーンの設定と一緒に保存します。superspl.atのシーンページと埋め込みはこのスイッチに従い、ここでオフにしない限り補正はオンになります。
 
 ## ビューアでの動作
 
 - **AR** — [ARセッション](/user-manual/supersplat/viewing/xr)中はスカイボックスと背景色が非表示になり、スプラットの周囲に実際の部屋が透けて見えます。VRセッションではそのまま表示されます。
-- **セルフホスティング** — ビューアはシーンの設定からスカイボックスを読み込みません。[ビューアを自分でホストする](/user-manual/supersplat/developers/embedding#url-parameters)場合は、`skybox` URLパラメータまたは`skyboxUrl`オプションで画像を渡し、High Precision Renderingは`hpr`で上書きしてください。
+- **セルフホスティング** — ビューアはシーンの設定からスカイボックスとアンチエイリアスの設定を読み込みません。[ビューアを自分でホストする](/user-manual/supersplat/developers/embedding#url-parameters)場合は、`skybox` URLパラメータまたは`skyboxUrl`オプションで画像を渡し、High Precision Renderingは`hpr`で上書きし、アンチエイリアスは`aa`で指定してください。`aa`がない場合は、各スプラットファイル自身のアンチエイリアスのタグで決まります。
 
 ## 関連項目
 
