@@ -119,3 +119,7 @@ These callbacks are called while the tween plays:
 ## Easing
 
 The easing curve shapes how the value moves between the start and the target. The library has `Linear`, and the `In`, `Out` and `InOut` variants of `Quadratic`, `Cubic`, `Quartic`, `Quintic`, `Sine`, `Exponential`, `Circular`, `Back`, `Bounce` and `Elastic`, such as `SineOut` or `ElasticInOut`.
+
+## Other tween libraries
+
+The engine's [Tween example](https://playcanvas.com/examples/#/animation/tween) uses a different library, the third-party [tween.js](https://github.com/tweenjs/tween.js). The example loads tween.js as the `TWEEN` global, and the [tween script](https://github.com/playcanvas/engine/blob/main/scripts/animation/tween.js) in the engine repository drives it. The script takes its tweens as JSON script attributes, and uses the easing functions of tween.js. It does not use playcanvas-tween, so the code on this page does not apply to the example, and the other way around.
