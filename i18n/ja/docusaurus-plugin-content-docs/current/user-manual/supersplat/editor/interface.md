@@ -41,9 +41,9 @@ SuperSplat Editorのインターフェースは以下のようになります。
 
 | コントロール | ショートカット | デフォルト | 説明 |
 |---|---|---|---|
-| **Centers** / **Rings** | `M` | Centers | 編集モードです。選択でガウシアンを中心点で拾うか、フットプリントで拾うかを切り替えます。モードを切り替えると**Markers**もオンになります。 |
-| **Markers** | `Tab` | オフ | 未選択のガウシアンに中心点またはリングのマーカーを表示します。オフのときはシーンがそのままレンダリングされ、選択されたガウシアンにはインジケーターが表示されたままです。 |
-| **X-Ray** | `N` | オン | すべての深度を貫通して選択します。オフにすると可視サーフェスだけを選択します。 |
+| **Centers** / **Rings** | <kbd>M</kbd> | Centers | 編集モードです。選択でガウシアンを中心点で拾うか、フットプリントで拾うかを切り替えます。モードを切り替えると**Markers**もオンになります。 |
+| **Markers** | <kbd>Tab</kbd> | オフ | 未選択のガウシアンに中心点またはリングのマーカーを表示します。オフのときはシーンがそのままレンダリングされ、選択されたガウシアンにはインジケーターが表示されたままです。 |
+| **X-Ray** | <kbd>N</kbd> | オン | すべての深度を貫通して選択します。オフにすると可視サーフェスだけを選択します。 |
 
 **Centers**または**Rings**を長押しすると、そのマーカーのサイズと**Splat Colors**スイッチが表示されます。**Markers**を長押しすると、**Markers Only**、**Tint Selection**、**Outline Selection**が表示されます。[選択モードとX-Ray](editing-splats.md#selection-mode-and-x-ray)と[マーカーと選択範囲の表示](color-and-appearance.md#appearance)を参照してください。
 
@@ -52,8 +52,8 @@ SuperSplat Editorのインターフェースは以下のようになります。
 この縦型のツールバーには、上から順に次のボタンがあります。
 
 * **Overlays**（オーバーレイ、目のアイコン） — グリッド、バウンディングボックス、カメラポーズ、カメラ情報、診断機能をまとめた[Overlays](#overlays)ポップアップを開きます。
-* **Orbit Camera** / **Fly Camera** — [カメラコントロールモード](camera-controls.md)を切り替える2択のスイッチです（`V`）。
-* **Frame Selection**（`F`）と**Reset Camera**（`Shift + F`）。
+* **Orbit Camera** / **Fly Camera** — [カメラコントロールモード](camera-controls.md)を切り替える2択のスイッチです（<kbd>V</kbd>）。
+* **Frame Selection**（<kbd>F</kbd>）と**Reset Camera**（<kbd>Shift</kbd>+<kbd>F</kbd>）。
 * **Preferences**（環境設定、歯車アイコン） — [Preferences](#preferences)ポップアップを開きます。
 
 OverlaysとPreferencesのポップアップは、同時に1つだけ開きます。
@@ -66,13 +66,13 @@ OverlaysとPreferencesのポップアップは、同時に1つだけ開きます
 * 2D選択ツール：**Rectangle**、**Brush**、**Polygon** / **Lasso**、**Eyedropper** / **Flood**。最後の2つのボタンはそれぞれ2つのツールを持ち、クリックで現在のツールを使用し、長押しでもう一方に切り替えます。
 * 3D選択ツール：**Sphere Brush**、**Sphere Selection**、**Box Selection**。
 * **Move**、**Rotate**、**Scale**。
-* **Measure**と**Orient**、続いて**Use Local Orientation**トグル（`Shift + C`）と**Reset Pivot**。
+* **Measure**と**Orient**、続いて**Use Local Orientation**トグル（<kbd>Shift</kbd>+<kbd>C</kbd>）と**Reset Pivot**。
 
 選択ツールが何を対象にするかは、[モードストリップ](#mode-strip)で設定します。[選択とクリーンアップ](editing-splats.md)および[変形、測定、位置合わせ](transform-measure-align.md)を参照してください。
 
 ### ステータスバー
 
-下端のバーでは、**Timeline**（`Ctrl + T`）と**Splat Data**（`Ctrl + D`）のパネルを開閉でき、アクティブスプラットの**Splats**、**Selected**、**Locked**、**Deleted**のガウシアン数がリアルタイムに表示されます。Editorのバージョンはビューポートの右下隅に表示されます。クリックすると**About**ダイアログが開き、GPUと、Editorが使用しているPlayCanvas Engine、Splat Transform、PCUIのバージョンも確認できます。
+下端のバーでは、**Timeline**（<kbd>Ctrl</kbd>+<kbd>T</kbd>）と**Splat Data**（<kbd>Ctrl</kbd>+<kbd>D</kbd>）のパネルを開閉でき、アクティブスプラットの**Splats**、**Selected**、**Locked**、**Deleted**のガウシアン数がリアルタイムに表示されます。Editorのバージョンはビューポートの右下隅に表示されます。クリックすると**About**ダイアログが開き、GPUと、Editorが使用しているPlayCanvas Engine、Splat Transform、PCUIのバージョンも確認できます。
 
 ### アニメーションタイムライン
 
@@ -90,12 +90,12 @@ OverlaysとPreferencesのポップアップは、同時に1つだけ開きます
 
 | セクション | コントロール | デフォルト | 説明 |
 |---|---|---|---|
-| Helpers | **Grid**（`G`） | オン | 基準グリッドを表示します。 |
+| Helpers | **Grid**（<kbd>G</kbd>） | オン | 基準グリッドを表示します。 |
 | | **Planes** | XZ | 描画するグリッド平面：**XZ**、**XY**、**YZ**を任意の組み合わせで選べます。選択は環境設定と`.ssproj`プロジェクトに保存されます。 |
 | | **Bounding Box** | オン | アクティブスプラットのバウンディングボックスを描画します。 |
 | | **Dimensions** | オフ | バウンディングボックスの各辺の長さと、[Measure](transform-measure-align.md#measure-and-rescale-a-splat)ツールの線の長さをビューポート内にラベル表示します。 |
 | | **Camera Poses** | オフ | [Timeline](timeline.md)の各キーフレームにカメラギズモを描画します。 |
-| | **Camera Info**（`I`） | オフ | 編集可能な[カメラの位置とターゲットのオーバーレイ](camera-controls.md#camera-info-overlay)を表示します。 |
+| | **Camera Info**（<kbd>I</kbd>） | オフ | 編集可能な[カメラの位置とターゲットのオーバーレイ](camera-controls.md#camera-info-overlay)を表示します。 |
 | Diagnostics | **Frame Timings** | オフ | GPUとCPUのフレーム時間（直近1秒間の中央値、最小値、95パーセンタイル）をグラフとともにリアルタイム表示し、直前のフレームがソート描画か確率的描画かを示します。 |
 | | **Overdraw** | オフ | 各ピクセルに重なるガウシアン数のヒートマップで画像を置き換え、1から1000超までの凡例を表示します。赤から白の領域は、クリーンアップによるパフォーマンス改善効果が最も大きい場所です。 |
 

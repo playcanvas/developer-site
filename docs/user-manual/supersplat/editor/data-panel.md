@@ -12,7 +12,7 @@ The **Splat Data** panel visualizes the attribute values of the active splat as 
 The panel opens at the bottom of the Editor and is collapsed by default. Open or close it by:
 
 - Clicking **Splat Data** in the status bar.
-- Pressing **Ctrl + D** (or **Cmd + D** on macOS).
+- Pressing <kbd>Ctrl</kbd>+<kbd>D</kbd> (or <kbd>Cmd</kbd>+<kbd>D</kbd> on macOS).
 
 Drag the panel's top edge to change its height.
 
@@ -71,9 +71,9 @@ Hold modifier keys when releasing the pointer to control how the range is applie
 | Modifier | Operation | Result |
 |----------|-----------|--------|
 | None | **Set** | Replace the current selection with the range. |
-| **Shift** | **Add** | Add the range to the current selection. |
-| **Ctrl** | **Remove** | Remove the range from the current selection. |
-| **Shift + Ctrl** | **Intersect** | Keep only Gaussians that are in both the current selection and the range. |
+| <kbd>Shift</kbd> | **Add** | Add the range to the current selection. |
+| <kbd>Ctrl</kbd> | **Remove** | Remove the range from the current selection. |
+| <kbd>Shift</kbd>+<kbd>Ctrl</kbd> | **Intersect** | Keep only Gaussians that are in both the current selection and the range. |
 
 The pointer displays the active Set, Add, Remove, or Intersect operation while it is over the histogram. These operations match the modifiers used by the [2D selection tools](editing-splats.md#selection-modifiers).
 

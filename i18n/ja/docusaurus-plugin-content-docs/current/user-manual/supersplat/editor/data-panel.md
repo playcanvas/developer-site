@@ -12,7 +12,7 @@ description: "SuperSplatのSplat Dataパネルを使用して、ガウシアン�
 パネルはEditorの下部に開き、デフォルトでは折りたたまれています。次の方法で開閉できます：
 
 - ステータスバーの**Splat Data**をクリックする。
-- **Ctrl + D**（macOSでは**Cmd + D**）を押す。
+- <kbd>Ctrl</kbd>+<kbd>D</kbd>（macOSでは<kbd>Cmd</kbd>+<kbd>D</kbd>）を押す。
 
 パネルの上端をドラッグすると、高さを変更できます。
 
@@ -71,9 +71,9 @@ description: "SuperSplatのSplat Dataパネルを使用して、ガウシアン�
 | 修飾キー | 操作 | 結果 |
 |----------|------|------|
 | なし | **Set** | 現在の選択をこの範囲で置き換えます。 |
-| **Shift** | **Add** | この範囲を現在の選択に追加します。 |
-| **Ctrl** | **Remove** | この範囲を現在の選択から削除します。 |
-| **Shift + Ctrl** | **Intersect** | 現在の選択とこの範囲の両方に含まれるガウシアンだけを残します。 |
+| <kbd>Shift</kbd> | **Add** | この範囲を現在の選択に追加します。 |
+| <kbd>Ctrl</kbd> | **Remove** | この範囲を現在の選択から削除します。 |
+| <kbd>Shift</kbd>+<kbd>Ctrl</kbd> | **Intersect** | 現在の選択とこの範囲の両方に含まれるガウシアンだけを残します。 |
 
 ヒストグラム上では、ポインターに現在のSet、Add、Remove、またはIntersect操作が表示されます。これらの操作は、[2D選択ツール](editing-splats.md#selection-modifiers)の修飾キーと同じです。
 
