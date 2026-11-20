@@ -44,7 +44,7 @@ Use this index to edit, publish, present or embed splats. To render splats in yo
 
 ## Convert
 
-- [Convert](/user-manual/supersplat/convert/): Converting and transforming splats in the browser at superspl.at/convert.
+- [Convert](/user-manual/supersplat/convert/): Converting, transforming, decimating and combining splats in the browser at superspl.at/convert, and building a Streamed SOG from a large splat.
 
 ## Publishing
 

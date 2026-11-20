@@ -44,7 +44,7 @@ Streamed SOGスプラットは**段階的に**読み込まれます。ビュー�
 上級ユーザーは自動処理を省略し、事前にビルドしたStreamed SOGバンドルを用意できます：
 
 - [splat-transform](/user-manual/splat-transform/) CLIで生成し（`--decimate`でLODレベルをビルド）、できたバンドルを[直接アップロード](/user-manual/supersplat/publishing/upload)します。
-- または[Convert](/user-manual/supersplat/convert)ユーティリティからLOD対応の出力を生成します。
+- または、Convertの[Streamed SOG](/user-manual/supersplat/convert#streamed-sog)タブでブラウザ上で作成し、そのzipをアップロードします。
 
 ## 関連項目
 
