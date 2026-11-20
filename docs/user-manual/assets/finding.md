@@ -24,6 +24,7 @@ Asset marketplaces are online libraries of content that you can download, either
 | [Mixamo](https://www.mixamo.com/)                                        |          | &#x2713; |          |
 | [PlayOnLoop](https://www.playonloop.com/music-loops-category/videogame/) |          |          | &#x2713; |
 | [Open Game Art](https://opengameart.org/)                                | &#x2713; | &#x2713; | &#x2713; |
+| [SFXMint](https://sfxmint.com/)                                          |          |          | &#x2713; |
 | [Sound Bible](https://soundbible.com/)                                   |          |          | &#x2713; |
 | [Turbosquid](https://www.turbosquid.com/)                                | &#x2713; | &#x2713; | &#x2713; |
 
