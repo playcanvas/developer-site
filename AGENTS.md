@@ -27,7 +27,7 @@ llms/           # Hand-written llms.txt indexes for AI agents (mirrors their pub
 
 ## Writing Style
 
-Follow the [Writing Standards](.github/CONTRIBUTING.md#writing-standards) in `.github/CONTRIBUTING.md`. In particular, write keyboard keys with `<kbd>` (`<kbd>Ctrl</kbd>+<kbd>Z</kbd>`), never in backticks or bold.
+Follow the [Writing Standards](.github/CONTRIBUTING.md#writing-standards).
 
 ## Commands
 
