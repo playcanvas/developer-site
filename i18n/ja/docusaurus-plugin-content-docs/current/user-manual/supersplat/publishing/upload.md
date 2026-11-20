@@ -32,7 +32,6 @@ Upload Splatダイアログを開く方法は3つあります：
 | **PLY** | `.ply` | 15 GB | ガウシアンスプラットのデータを含むPLYファイルであること。メッシュや点群だけを含むPLYは拒否されます。 |
 | **SPZ** | `.spz` | 5 GB | 読み込み可能なSPZファイルであること。 |
 | **SOG** | `.sog` | 10 GB | 1つの`meta.json`ファイルと、期待されるSOGのWebPペイロードファイルを含むこと。 |
-| **GSAF** | `.gsaf` | 1 GB | アニメーションするスプラットのシーケンスで、ファイル先頭の`GSAF`ヘッダーで判別されます。アニメーションの再生にはWebGPUが必要で、GSAFのシーンはまだダウンロードできません。 |
 | **Streamed SOGバンドル (SSOG)** | `.zip` | 10 GB | `lod-meta.json`と1つ以上のSOGチャンクフォルダを含むこと。[ストリーミングとパフォーマンス](/user-manual/supersplat/publishing/streaming)を参照してください。 |
 | **LCCまたはLCC2** | `.zip` | 10 GB | 正確に1つの`.lcc2`ファイル、または正確に1つの`.lcc`ファイルと隣接する`index.bin`および`data.bin`ファイルを含むこと。 |
 
