@@ -26,7 +26,7 @@ The viewer is the open-source [SuperSplat Viewer](/user-manual/supersplat/develo
 | **Views** | Total view count. |
 | **Downloads** | Total download count. Only shown if the splat is downloadable. |
 | **Visibility badge** | **Public** or **Unlisted**. |
-| **Software used** | Chips for the tools you tagged in the Edit Splat dialog (capture / training tools). |
+| **Software used** | Chips for the tools you tagged in the Edit Splat dialog (capture / training tools). Click one to see [other splats made with that tool](/user-manual/supersplat/viewing/explore#splats-by-software). |
 | **Description** | The longer description you set in the Edit Splat dialog (sanitized HTML). |
 | **Format / size** | The published splat format and download size, with a tooltip. |
 | **Splat count** | The number of Gaussians in the published splat. Its tooltip lists the levels of detail of a [streamed](/user-manual/supersplat/publishing/streaming) splat, and the spherical harmonic bands. |
