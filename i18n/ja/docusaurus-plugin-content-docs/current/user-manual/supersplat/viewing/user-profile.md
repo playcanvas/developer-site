@@ -20,6 +20,7 @@ SuperSplatの各クリエイターには`https://superspl.at/user/<username>`に
 | **ソーシャルリンク** | クリエイターが追加した外部プロフィール（X、LinkedIn、個人サイトなど）へのリンク。 |
 | **フォロワーとフォロー中** | クリエイターをフォローしている人数と、クリエイターがフォローしている人数。どちらかの数をクリックすると、誰なのかが表示されます。[もっとクリエイターを見つける](#lists)を参照してください。 |
 | **Follow** | クリエイターを[フォロー](#following)すると、そのスプラットがFollowingフィードに表示されます。 |
+| **Share Profile** | プロファイルの[Shareダイアログ](/user-manual/supersplat/viewing/scene-page#share-dialog)を開きます。プロファイルのリンクをFacebook、X、LinkedIn、Redditに投稿したり、コピーしたりできます。 |
 | **スプラットグリッド** | クリエイターが公開したすべての**Public**スプラットを、[Explore](/user-manual/supersplat/viewing/explore)と同じカードUIで表示。任意のカードをクリックすると、その[シーンページ](/user-manual/supersplat/viewing/scene-page)が開きます。 |
 
 Unlistedのスプラットは公開プロファイルには表示されません — クリエイター本人だけが[Manageページ](/user-manual/supersplat/publishing/manage)から確認できます。
