@@ -87,6 +87,7 @@ Use this index to write code against the engine directly. React, Web Components 
 - [Meshes](https://developer.playcanvas.com/user-manual/graphics/meshes.md): What a `Mesh` holds, where meshes come from, and how they are shared.
 - [Creating Meshes](https://developer.playcanvas.com/user-manual/graphics/meshes/creating-meshes.md): Building meshes from geometry classes, vertex data or vertex buffers, and updating them every frame.
 - [Mesh Instances](https://developer.playcanvas.com/user-manual/graphics/meshes/mesh-instances.md): Creating, sharing and destroying mesh instances, rendering them through a render component or a layer, and their settings: visibility, culling, shadows, sort order, render style and shader parameters.
+- [Compressed Meshes](https://developer.playcanvas.com/user-manual/graphics/meshes/compressed-meshes.md): Loading Draco and meshopt compressed GLBs with `dracoInitialize` and `meshoptInitialize`, and choosing between them.
 
 ### Lighting and materials
 
@@ -261,7 +262,7 @@ Use this index to write code against the engine directly. React, Web Components 
 
 ## Optional
 
-- [All pages of this index in one file](https://developer.playcanvas.com/user-manual/engine/llms-full.txt): 255 pages (1845 KB), for downloading and searching rather than reading into context.
+- [All pages of this index in one file](https://developer.playcanvas.com/user-manual/engine/llms-full.txt): 256 pages (1852 KB), for downloading and searching rather than reading into context.
 - [PlayCanvas Engine](https://developer.playcanvas.com/user-manual/engine.md)
 - [Versioning and Releases](https://developer.playcanvas.com/user-manual/engine/versioning.md)
 - [Assets](https://developer.playcanvas.com/user-manual/assets.md)
