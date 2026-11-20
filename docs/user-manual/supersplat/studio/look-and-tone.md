@@ -42,18 +42,12 @@ The background color still matters with a skybox: it shows anywhere the skybox d
 
 ## Anti-aliasing {#anti-aliasing}
 
-Splats trained with anti-aliasing, such as with Mip-Splatting, draw too bright without compensation. Studio's switch turns that compensation on (the default) or off for the whole scene, and saves the choice with the scene's settings.
-
-:::note
-
-The [SuperSplat Viewer](/user-manual/supersplat/developers/viewer/) doesn't apply this setting yet. On the scene page and in embeds, each splat file's own anti-aliasing tag decides. When you [host the viewer yourself](/user-manual/supersplat/developers/embedding#url-parameters), the `aa` URL parameter overrides it.
-
-:::
+Splats trained with anti-aliasing, such as with Mip-Splatting, draw too bright without compensation. Studio's switch turns that compensation on (the default) or off for the whole scene, and saves the choice with the scene's settings. On superspl.at, scene pages and embeds follow the switch: compensation is on unless you turn it off here.
 
 ## In the viewer
 
 - **AR** — the skybox and background color are hidden during an [AR session](/user-manual/supersplat/viewing/xr), so the room shows through around the splat. VR sessions keep them.
-- **Self-hosting** — the viewer doesn't load the skybox from the scene's settings. When you [host the viewer yourself](/user-manual/supersplat/developers/embedding#url-parameters), pass the image with the `skybox` URL parameter or the `skyboxUrl` option, and override High Precision Rendering with `hpr`.
+- **Self-hosting** — the viewer doesn't load the skybox or the anti-aliasing setting from the scene's settings. When you [host the viewer yourself](/user-manual/supersplat/developers/embedding#url-parameters), pass the image with the `skybox` URL parameter or the `skyboxUrl` option, override High Precision Rendering with `hpr`, and set anti-aliasing with `aa`. Without `aa`, each splat file's own anti-aliasing tag decides.
 
 ## See also
 
