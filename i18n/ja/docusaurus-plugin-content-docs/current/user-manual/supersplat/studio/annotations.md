@@ -40,11 +40,13 @@ description: "公開済みスプラットに3D空間配置のテキストホッ�
 
 **Annotations**タブの各行には、ビューポートを注釈のカメラに移動する**Go to annotation**と、**Delete annotation**もあります。行をドラッグして並べ替えられます。順序は、訪問者が注釈をどの順に進むかと、各ホットスポットに表示される番号を決めます。
 
-<!-- TODO: media — /video/user-manual/supersplat/studio/annotation-flythrough.mp4 — ホットスポット間を移動する訪問者 -->
-
 ## 訪問者の使い方
 
 [シーンページ](/user-manual/supersplat/viewing/scene-page)では、ビューアが各注釈を番号付きのホットスポットとして表示します。ホットスポットを選択するとカメラが注釈のビューへなめらかに移動してタイトルとテキストが表示され、ナビゲータを使うとリストの順に注釈をたどれます。訪問者が注釈でできることは、すべて[ビューアの操作](/user-manual/supersplat/viewing/controls#annotations)で説明しています。
+
+<video autoPlay muted loop controls src='/video/supersplat-annotations-visitor.mp4' style={{width: '100%', height: 'auto'}} />
+
+訪問者がホットスポットを選択し、ナビゲータで注釈を順にたどっています。ミツバチは[danylyon](https://superspl.at/user/danylyon)によるものです。
 
 :::note
 

@@ -33,6 +33,10 @@ Phones and tablets start at **Performance** and other devices at **Default**; th
 
 As the camera moves, the viewer raises and lowers the level of detail across the scene to stay within this budget — so you get consistent performance and bounded memory use on everything from a phone to a desktop. In a VR or AR session, detail is chosen by distance alone, so turning your head doesn't stream new detail.
 
+To see it at work, turn on the viewer's `colorize` [URL parameter](/user-manual/supersplat/developers/embedding#url-parameters), which tints each level of detail its own color:
+
+![The same view of a streamed scene, as normal on the left and with colorize on the right, where each color is a level of detail](/img/user-manual/supersplat/publishing/streaming-lod-colorize.webp)
+
 A splat that isn't streamed is drawn in full whatever the budget; for it, the Quality slider only changes the resolution at **Performance**.
 
 ## Bringing your own LODs

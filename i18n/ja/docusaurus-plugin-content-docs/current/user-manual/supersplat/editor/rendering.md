@@ -66,6 +66,8 @@ Renderメニューから`Image`を選択すると、画像をカスタマイズ�
 
 Renderメニューから`Video`を選択すると、ビデオをカスタマイズするためのいくつかの設定ダイアログが表示されます。
 
+<img loading="lazy" alt="Video Settingsダイアログ" width="408" src="/img/user-manual/supersplat/editor/render-video-settings.png" />
+
 - **Projection:** レンダリングするビデオの種類を選択します：
   - `Standard`（デフォルト） - カメラの視点からレンダリングされる通常のビデオ
   - `360° Equirectangular` - YouTubeやVRヘッドセット、VLCなどの360°対応プレーヤーで視聴できるモノスコピック360°ビデオ
