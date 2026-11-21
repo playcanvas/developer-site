@@ -43,7 +43,7 @@ If you paste URLs into the chat, they will be formatted as clickable hyperlinks.
 
 Each user in the scene is represented in the [Viewport](../interface/viewport) by a colored, wireframe camera frustum.
 
-![Viewport Cameras](/img/user-manual/editor/realtime-collaboration/viewport-cameras.webp)
+<video autoPlay muted loop controls playsInline src='/video/editor-collaboration-viewport-cameras.mp4' style={{width: '100%', height: 'auto'}} />
 
 Mouse over the shaded center plane of a user camera to view the associated username:
 

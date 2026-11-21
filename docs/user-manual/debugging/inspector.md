@@ -105,7 +105,7 @@ The Frame graph tab can draw a frame one draw call at a time, to see how the ima
 3. Press the Up and Down arrow keys to step back and forward one draw at a time. The property view lists the drawn mesh instances with the current one highlighted, the view outlines it, and the status bar shows its number, such as *draw 8 of 12 · World opaque*. Expand an entry to see more about it, such as its mesh and material.
 4. Turn off **Debug frame** to draw the full frame again.
 
-<img loading="lazy" alt="Stepping through the draws of the World layer one at a time" width="800" src="/img/user-manual/debugging/inspector/debug-frame.webp" />
+<video autoPlay muted loop controls playsInline src='/video/debugging-inspector-debug-frame.mp4' style={{width: '100%', maxWidth: '800px', height: 'auto'}} />
 
 :::note
 Stepping through draws needs the debug build of the engine, and the option is disabled with other builds. Bundlers such as Vite pick the debug build in development through the `development` export condition of the `playcanvas` package.

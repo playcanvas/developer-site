@@ -5,7 +5,7 @@ description: 生成または選択した Script によるローディング画�
 
 新しく作成されたPlayCanvasプロジェクトはすべて、デフォルトのローディング画面を使用します。
 
-![Default Loading Screen](/img/user-manual/editor/launch-page/loading-screen/loading-screen-default.webp)
+<video autoPlay muted loop controls playsInline src='/video/editor-loading-screen-default.mp4' style={{width: '100%', height: 'auto'}} />
 
 これはLaunch Pageと公開されたアプリの両方に表示されます。
 

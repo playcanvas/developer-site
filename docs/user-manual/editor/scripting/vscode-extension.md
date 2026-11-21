@@ -5,7 +5,7 @@ description: Install the PlayCanvas VS Code Extension, choose a sync mode, manag
 
 The PlayCanvas VS Code Extension maps text-based assets from a PlayCanvas project into a local workspace. You can edit scripts and shaders with VS Code or Cursor while the extension handles authentication, branches, type information, and synchronization with the Editor.
 
-![VS Code Extension Demo](/img/user-manual/scripting/vscode-demo.webp)
+<video autoPlay muted loop controls playsInline src='/video/scripting-vscode-demo.mp4' style={{width: '100%', height: 'auto'}} />
 
 The extension is [open source on GitHub](https://github.com/playcanvas/vscode-extension) and licensed under MIT.
 
