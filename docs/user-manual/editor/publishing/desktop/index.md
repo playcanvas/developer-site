@@ -1,6 +1,13 @@
 ---
 title: Desktop
-description: Points to NW.js packaging to produce Windows macOS and Linux desktop executables from your PlayCanvas web application.
+description: "Packaging a PlayCanvas Editor app as a desktop app for Windows, macOS and Linux with NW.js."
 ---
 
-It is possible to convert your PlayCanvas app to a native executable for each of the major desktop operating systems: Windows, Mac OS X and Linux. To do this, we recommend using [NW.js](https://nwjs.io/). Instructions for generating the executable can be found on the [NW.js Wiki](https://github.com/nwjs/nw.js/wiki/How-to-package-and-distribute-your-apps).
+A PlayCanvas app runs in desktop browsers as it is. To ship it as an app people install on Windows, macOS or Linux, for example on a game store, package it with a tool that bundles a browser engine and your app together.
+
+We recommend [NW.js](https://nwjs.io/):
+
+1. [Download a build](../../projects/downloading.md) of your project in the static format.
+2. Package it with NW.js. The [NW.js documentation](https://github.com/nwjs/nw.js/wiki/How-to-package-and-distribute-your-apps) explains how to make an app for each operating system.
+
+Test the packaged app on each system you ship to, as you would in a browser.

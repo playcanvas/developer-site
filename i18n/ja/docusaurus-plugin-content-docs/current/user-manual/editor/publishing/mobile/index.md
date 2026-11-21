@@ -1,11 +1,17 @@
 ---
 title: モバイル
-description: Cordova、GoNative、またはローカルのフルスクリーン WebView を使って、PlayCanvas の Web ゲームをストア向けネイティブアプリにラップする方法を紹介します。
+description: "PlayCanvas EditorのアプリをネイティブアプリでラップしてApple App StoreやGoogle Playに出す方法です。Apache Cordova、Median.co（旧GoNative）、自作のWebViewを扱います。"
 ---
 
-PlayCanvasのゲームはウェブページで構成されています。つまり、index.htmlファイルとリソースのコレクション（JavaScriptファイル、JSONファイル、画像など）で構成されています。ウェブブラウザでは最適に機能しますが、Google PlayやApple App Storeなどのモバイルアプリストアでゲームを公開する場合は、何らかの方法でPlayCanvasゲームをネイティブアプリに変換する必要があります。そのプロセスを簡素化するためには次の製品を利用できます：
+PlayCanvasのアプリはもともとモバイルブラウザで動くので、スマートフォンに届けるいちばん簡単な方法はリンクです。Apple App StoreやGoogle Playなどのアプリストアに出すには、アプリを**WebView**（アプリの中のブラウザビュー）で表示するネイティブアプリで包みます。
 
-* [Cordova](/user-manual/editor/publishing/mobile/cordova)
-* [GoNative](/user-manual/editor/publishing/mobile/gonative)
+WebViewにアプリを入れる方法は2つあります。
 
-他の方法としては、ローカルアプリのリソースからPlayCanvasアプリを読み込む単一のフルスクリーンWebViewで構成されるAndroidまたはiOSアプリを作成することもできます。
+| 方法 | しくみ | オフラインで動くか |
+| --- | --- | --- |
+| [Apache Cordova](cordova.md) | [ダウンロードしたビルド](../../projects/downloading.md)をアプリの中にパッケージする、オープンソースのツールです。 | 動く |
+| [Median.co（旧GoNative）](gonative.md) | アプリのウェブアドレスをもとにアプリを作る有料サービスです。 | 動かない（ホスト先から読み込む） |
+
+1つのフルスクリーンWebViewだけでできたiOSアプリやAndroidアプリを自分で作り、ダウンロードしたビルドをアプリ自身のファイルから読み込むこともできます。
+
+ストアに提出する前に、[起動ページ](../../interface/launch-page/index.md)で実機でテストし、[テクスチャ圧縮](/user-manual/optimization/texture-compression/)でダウンロードを小さく保ってください。

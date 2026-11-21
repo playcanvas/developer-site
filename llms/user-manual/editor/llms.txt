@@ -62,7 +62,7 @@ Use this index for projects made in the Editor, where code lives in scripts atta
 
 ## Scripting
 
-- [Scripting](/user-manual/editor/scripting/): Script assets, import maps, the code editor, the VS Code extension, hot reloading and load order.
+- [Scripting](/user-manual/editor/scripting/): ESM and classic scripts, managing them, the Code Editor, the VS Code extension, hot reloading, import maps, load order and loading scenes.
 - [Managing Your Scripts](/user-manual/editor/scripting/managing-scripts/): Creating, organizing and importing script assets, and adding them to entities.
 - [ESM Scripts](/user-manual/scripting/esm-scripts/): The ESM script format.
 - [ESM Script Attributes](/user-manual/scripting/script-attributes/esm/): Declaring attributes that the Inspector can edit.
@@ -81,7 +81,7 @@ Use this index for projects made in the Editor, where code lives in scripts atta
 
 ## Scenes and entities
 
-- [Working with Scenes](/user-manual/editor/scenes/): Entities, components and scene settings.
+- [Working with Scenes](/user-manual/editor/scenes/): What a scene holds, the panels for building it, components, templates and the scene size limit.
 - [Managing Scenes](/user-manual/editor/scenes/managing-scenes/): Creating, duplicating, opening and deleting scenes.
 - [Loading Scenes](/user-manual/editor/scenes/loading-scenes/): Changing scenes at runtime with the scene registry, and loading scenes additively.
 - [Components](/user-manual/editor/scenes/components/): Every component and its Inspector settings.
@@ -109,7 +109,7 @@ Use this index for projects made in the Editor, where code lives in scripts atta
 
 ## Interface
 
-- [Editor Interface](/user-manual/editor/interface/): A map of the toolbar, hierarchy, inspector, viewport and Assets panel.
+- [Editor Interface](/user-manual/editor/interface/): A tour of the Editor: its five main areas, moving around the Viewport, selecting and transforming entities, and launching.
 - [Launch Page](/user-manual/editor/interface/launch-page/): Running the project in a browser tab and on phones, with live updates.
 - [Using a Custom Engine](/user-manual/editor/interface/launch-page/custom-engine/): Launching with another engine build.
 - [Project Settings](/user-manual/editor/interface/settings/): The project's engine, rendering, physics, lightmapping, input, layers and other settings.

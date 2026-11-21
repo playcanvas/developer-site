@@ -1,25 +1,28 @@
 ---
 title: Working with Scenes
-description: Scenes hub explaining entities, components, scene-wide settings and the 16 MB scene size limit, with links for managing scene files, component types, and runtime scene loading.
+description: "Building scenes in the PlayCanvas Editor: what a scene holds, the panels you build it with, components, templates, and the 16 MB scene size limit."
 ---
 
-A **Scene** is the foundation of your PlayCanvas application. It defines the 3D world that users will experience, containing all the entities, components and settings that make up your game or interactive experience.
+A **scene** is one world your app can show, such as a level or a menu. A project can have many. Each scene holds:
 
-## What's in a Scene?
+- **Entities**: the objects in the scene, arranged in a hierarchy. An entity can be a character, a prop, a light, a camera or an empty group.
+- **Components**: what gives each entity its abilities, such as rendering a model, lighting the scene, colliding, playing sound or running a script.
+- **Scene settings**: properties of the whole scene, such as its skybox, ambient light, fog and physics gravity. Open them with the cog on the [Toolbar](../interface/toolbar.md). See [Rendering](../interface/settings/rendering.md) and [Physics](../interface/settings/physics.md) settings.
 
-Every scene contains:
+New to entities and components? [Entity Component System](/user-manual/ecs/) explains the model, and [How Editor Projects Work](../getting-started/how-projects-work.md) shows where scenes fit in a project.
 
-- **Entities** - The objects in your scene, organized in a hierarchy. Entities can represent characters, props, lights, cameras or any other element.
-- **Components** - The building blocks that give entities their behavior and appearance. Components handle rendering, physics, audio, user interface and more.
-- **Scene Settings** - Global properties that affect the entire scene, such as physics gravity, ambient lighting, fog and skybox.
+## In This Section {#in-this-section}
 
-## In This Section
+| Page | What it covers |
+| --- | --- |
+| [Managing Scenes](managing-scenes.md) | Create, open, duplicate and delete the scenes in your project. |
+| [Hierarchy Panel](../interface/hierarchy.md) | Create, find, reparent, duplicate and copy entities. |
+| [Viewport](../interface/viewport.md) | Move around the scene, transform entities with gizmos, and switch cameras and render modes. |
+| [Inspector Panel](../interface/inspector.md) | Edit the selected entity's components and properties. |
+| [Components](components/index.md) | Every component type, with the properties it shows in the Inspector. |
+| [Templates](../templates/index.md) | Save an entity hierarchy as a reusable asset, place it many times and update it everywhere. Includes [Nested Templates](../templates/nested.md) and the [Override Diff View](../templates/diff.md). |
 
-| Topic | Description |
-|-------|-------------|
-| [Managing Scenes](managing-scenes.md) | Create, open, duplicate and delete scenes in your project. |
-| [Components](components/index.md) | Learn about the different component types you can add to entities. |
-| [Loading Scenes](loading-scenes.md) | Load scenes dynamically at runtime in your application. |
+To load scenes while your app runs, see [Loading Scenes](loading-scenes.md) in Scripting.
 
 ## Scene Size Limit {#size-limit}
 
