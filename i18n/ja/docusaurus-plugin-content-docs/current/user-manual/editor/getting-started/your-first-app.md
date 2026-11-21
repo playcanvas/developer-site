@@ -10,7 +10,7 @@ import StepVideo from '@site/src/components/StepVideo';
 これが完成したゲームです。ゲームをクリックしてから、矢印キーでボールを転がしてみてください。
 
 <div className="iframe-container">
-    <iframe src="https://playcanv.as/p/gLOk3TQH/" title="このガイドで作るゲーム Can Knockdown" allow="fullscreen" allowFullScreen></iframe>
+    <iframe src="https://playcanv.as/p/gLOk3TQH/" title="このガイドで作るゲーム Can Knockdown" loading="lazy" allow="fullscreen" allowFullScreen></iframe>
 </div>
 
 その過程で、あらゆる PlayCanvas アプリの土台となる考え方を一通り使います。
@@ -45,7 +45,7 @@ import StepVideo from '@site/src/components/StepVideo';
 
 Blank Project には、**Camera**、**Light**、**Box**、そして床になる **Plane** からなる小さなシーンが入っています。各部の場所は次のとおりです。
 
-![5 つの主な領域に番号を付けた PlayCanvas Editor](/img/user-manual/editor/getting-started/your-first-app/editor-interface.webp)
+![5 つの主な領域に番号を付けた PlayCanvas Editor](/img/user-manual/editor/getting-started/your-first-app/editor-interface.png)
 
 1. [**Hierarchy**](/user-manual/editor/interface/hierarchy/): シーン内のすべてのエンティティをツリーで表示します。クリックすると選択できます。
 2. [**Viewport**](/user-manual/editor/interface/viewport/): シーンを映す 3D ビューです。
@@ -53,13 +53,13 @@ Blank Project には、**Camera**、**Light**、**Box**、そして床になる 
 4. [**Assets**](/user-manual/editor/interface/assets/): マテリアル、スクリプト、テクスチャ、モデルなど、プロジェクトで使うファイルです。
 5. [**Toolbar**](/user-manual/editor/interface/toolbar/): 移動、回転、拡大縮小のツールと、公開のボタンがあります。
 
-では Viewport を操作してみましょう。左ボタンでドラッグすると視点が回り、ホイールでズームします。Hierarchy で **Box** を選択し、マウスを Viewport の上に戻して **F** キーを押すと、Box にフォーカスします。迷ったときはこれで戻れます。
+では Viewport を操作してみましょう。左ボタンでドラッグすると視点が回り、ホイールでズームします。Hierarchy で **Box** を選択し、マウスを Viewport の上に戻して <kbd>F</kbd> キーを押すと、Box にフォーカスします。迷ったときはこれで戻れます。
 
 <StepVideo src="/video/editor-first-app-navigate.mp4" poster="/img/user-manual/editor/getting-started/your-first-app/navigate.webp" label="Viewport で視点を回してズームし、F キーで Box にフォーカスする" />
 
 :::tip
 
-**Shift** キーを押しながらドラッグすると、視点を平行移動できます。そのほかの操作は[操作とキーボードショートカット](/user-manual/editor/interface/keyboard-shortcuts/)にまとまっています。
+<kbd>Shift</kbd> キーを押しながらドラッグすると、視点を平行移動できます。そのほかの操作は[操作とキーボードショートカット](/user-manual/editor/interface/keyboard-shortcuts/)にまとまっています。
 
 :::
 
@@ -113,13 +113,13 @@ Blank Project には、**Camera**、**Light**、**Box**、そして床になる 
 
 <StepVideo src="/video/editor-first-app-drop-test.mp4" poster="/img/user-manual/editor/getting-started/your-first-app/drop-test.webp" label="Can を床の上に持ち上げ、シーンを起動して落ちるのを見る" />
 
-Editor のタブに戻り、**Ctrl+Z**（Mac では **Cmd+Z**）を押して缶を床に戻します。Editor での操作は、すべて元に戻せます。
+Editor のタブに戻り、<kbd>Ctrl</kbd>+<kbd>Z</kbd>（macOS では <kbd>Cmd</kbd>+<kbd>Z</kbd>）を押して缶を床に戻します。Editor での操作は、すべて元に戻せます。
 
 ## 6. ピラミッドを積む {#stack-the-pyramid}
 
 缶が 1 つでは、的として物足りません。複製はエンティティをコンポーネントごとコピーするので、コピーはどれも最初から赤く、物理も付いています。
 
-1. **Can** を選択したまま、Hierarchy 上部の **Duplicate** ボタンを選択するか、**Ctrl+D** を押します。
+1. **Can** を選択したまま、Hierarchy 上部の **Duplicate** ボタンを選択するか、<kbd>Ctrl</kbd>+<kbd>D</kbd>（macOS では <kbd>Cmd</kbd>+<kbd>D</kbd>）を押します。
 2. 新しい缶の **Position** を下の表のとおりに設定します。
 3. 缶が 6 つになるまで繰り返します。
 
@@ -158,9 +158,9 @@ Position Z はどの缶も `0` のままです。
 コンポーネントで多くのことができますが、ゲーム固有の振る舞いは**スクリプト**で作ります。このスクリプトは、矢印キーを押すとボールを押します。
 
 1. **Ball** を選択し、**ADD COMPONENT** > **Script** を選びます。
-2. **+ ADD SCRIPT** 欄に `roll.mjs` と入力し、**Enter** キーを押します。拡張子 `.mjs` を付けると、新しい形式の [ESM スクリプト](/user-manual/scripting/esm-scripts/)が作られます。スクリプトはボールに追加され、Assets パネルにも表示されます。
+2. **+ ADD SCRIPT** 欄に `roll.mjs` と入力し、<kbd>Enter</kbd> キーを押します。拡張子 `.mjs` を付けると、JavaScript モジュール（ECMAScript モジュール、ESM）を使う新しい形式の [ESM スクリプト](/user-manual/scripting/esm-scripts/)が作られます。スクリプトはボールに追加され、Assets パネルにも表示されます。
 3. **roll** スクリプトの **Edit**（鉛筆）ボタンを選択します。コードエディターが新しいタブで開きます。
-4. ファイルの中身をすべて下のコードに置き換え、**Ctrl+S**（Mac では **Cmd+S**）で保存します。
+4. ファイルの中身をすべて下のコードに置き換え、<kbd>Ctrl</kbd>+<kbd>S</kbd>（macOS では <kbd>Cmd</kbd>+<kbd>S</kbd>）で保存します。
 5. Editor に戻り、**Parse** ボタン（**Edit** の隣の 2 本の矢印）を選択します。スクリプトの下に **power** 欄が表示されます。
 
 ```javascript
@@ -257,8 +257,8 @@ Launch のタブは、**ライブリンク**で Editor とつながったまま�
 - **難しいレベルを作る**: ピラミッドを高くしたり、Static の Box エンティティで壁を足したりします。
 - **見た目を変える**: マテリアルのほかのセクションを試したり、ライトを足したり、[Asset Store](/user-manual/editor/assets/asset-store/) のモデルを置いたりします。
 - **自分の素材を使う**: 自分のモデル、テクスチャ、サウンドを[インポート](/user-manual/editor/assets/importing/)します。
-- **スコアを数える**: [衝突イベント](/user-manual/physics/collision-events/)でヒット数を数え、[UI のテキスト要素](/user-manual/user-interface/)でスコアを表示します。
-- **リセットキーを付ける**: 各缶の最初の位置をスクリプトに保存し、**R** キーで元に戻します。
+- **スコアを数える**: [衝突イベント](/user-manual/physics/collision-events/)でヒット数を数え、[テキスト要素](/user-manual/user-interface/)でスコアを表示します。
+- **リセットキーを付ける**: 各缶の最初の位置をスクリプトに保存し、<kbd>R</kbd> キーで元に戻します。
 
 ### さらに学ぶ {#keep-learning}
 

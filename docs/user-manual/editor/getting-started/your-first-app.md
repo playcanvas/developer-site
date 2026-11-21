@@ -10,7 +10,7 @@ In the next 15 minutes you'll build **Can Knockdown**, a tiny physics game where
 This is the finished game. Click it, then use the arrow keys to roll the ball:
 
 <div className="iframe-container">
-    <iframe src="https://playcanv.as/p/gLOk3TQH/" title="Can Knockdown, the game you build in this guide" allow="fullscreen" allowFullScreen></iframe>
+    <iframe src="https://playcanv.as/p/gLOk3TQH/" title="Can Knockdown, the game you build in this guide" loading="lazy" allow="fullscreen" allowFullScreen></iframe>
 </div>
 
 Along the way you'll use the core ideas that every PlayCanvas app is built from:
@@ -45,7 +45,7 @@ Every app lives in a project. Start a new one:
 
 The Blank Project starts you with a small scene: a **Camera**, a **Light**, a **Box** and a **Plane** for the floor. Here's where everything lives:
 
-![The PlayCanvas Editor with its five main areas numbered](/img/user-manual/editor/getting-started/your-first-app/editor-interface.webp)
+![The PlayCanvas Editor with its five main areas numbered](/img/user-manual/editor/getting-started/your-first-app/editor-interface.png)
 
 1. **[Hierarchy](/user-manual/editor/interface/hierarchy/)**: every entity in the scene, as a tree. Click one to select it.
 2. **[Viewport](/user-manual/editor/interface/viewport/)**: your 3D view of the scene.
@@ -53,13 +53,13 @@ The Blank Project starts you with a small scene: a **Camera**, a **Light**, a **
 4. **[Assets](/user-manual/editor/interface/assets/)**: the files your project uses, such as materials, scripts, textures and models.
 5. **[Toolbar](/user-manual/editor/interface/toolbar/)**: tools for moving, rotating and scaling, plus publishing.
 
-Now take the Viewport for a spin. Drag with the left mouse button to orbit, and scroll to zoom. Select **Box** in the Hierarchy, move the mouse back over the Viewport and press **F** to focus on it. That's your way home whenever you get lost.
+Now take the Viewport for a spin. Drag with the left mouse button to orbit, and scroll to zoom. Select **Box** in the Hierarchy, move the mouse back over the Viewport and press <kbd>F</kbd> to focus on it. That's your way home whenever you get lost.
 
 <StepVideo src="/video/editor-first-app-navigate.mp4" poster="/img/user-manual/editor/getting-started/your-first-app/navigate.webp" label="Orbiting and zooming the Viewport, then pressing F to focus on the Box" />
 
 :::tip
 
-Hold **Shift** while dragging to pan. The [Controls and Keyboard Shortcuts](/user-manual/editor/interface/keyboard-shortcuts/) page lists everything else.
+<kbd>Shift</kbd>-drag to pan. The [Controls and Keyboard Shortcuts](/user-manual/editor/interface/keyboard-shortcuts/) page lists everything else.
 
 :::
 
@@ -113,13 +113,13 @@ Time to see physics in action. Select the **Can** and drag the green arrow up to
 
 <StepVideo src="/video/editor-first-app-drop-test.mp4" poster="/img/user-manual/editor/getting-started/your-first-app/drop-test.webp" label="Lifting the Can above the floor and launching the scene to watch it fall" />
 
-Switch back to the Editor tab and press **Ctrl+Z** (**Cmd+Z** on a Mac) to put the can back on the floor. Everything you do in the Editor can be undone.
+Switch back to the Editor tab and press <kbd>Ctrl</kbd>+<kbd>Z</kbd> (<kbd>Cmd</kbd>+<kbd>Z</kbd> on macOS) to put the can back on the floor. Everything you do in the Editor can be undone.
 
 ## 6. Stack the Pyramid {#stack-the-pyramid}
 
 One can isn't much of a target. A duplicate copies an entity with all its components, so every copy is already red and ready for physics:
 
-1. With the **Can** selected, select the **Duplicate** button at the top of the Hierarchy, or press **Ctrl+D**.
+1. With the **Can** selected, select the **Duplicate** button at the top of the Hierarchy, or press <kbd>Ctrl</kbd>+<kbd>D</kbd> (<kbd>Cmd</kbd>+<kbd>D</kbd> on macOS).
 2. Set the new can's **Position** from the table below.
 3. Repeat until you have all six cans.
 
@@ -158,9 +158,9 @@ The **Camera** decides what the player sees. Select it in the Hierarchy and a li
 Components do a lot, but behavior that's specific to your game comes from **scripts**. This one pushes the ball when you press the arrow keys.
 
 1. Select the **Ball** and choose **ADD COMPONENT** > **Script**.
-2. In the **+ ADD SCRIPT** field, type `roll.mjs` and press **Enter**. The `.mjs` extension creates a modern [ESM script](/user-manual/scripting/esm-scripts/). The script is attached to the ball and appears in the Assets panel.
+2. In the **+ ADD SCRIPT** field, type `roll.mjs` and press <kbd>Enter</kbd>. The `.mjs` extension creates an [ESM script](/user-manual/scripting/esm-scripts/), the modern kind of script built on JavaScript modules (ECMAScript modules, or ESM). The script is attached to the ball and appears in the Assets panel.
 3. Select the **Edit** (pencil) button on the **roll** script. The Code Editor opens in a new tab.
-4. Replace everything in the file with the code below, then press **Ctrl+S** (**Cmd+S** on a Mac) to save.
+4. Replace everything in the file with the code below, then press <kbd>Ctrl</kbd>+<kbd>S</kbd> (<kbd>Cmd</kbd>+<kbd>S</kbd> on macOS) to save.
 5. Back in the Editor, select the **Parse** button (the two arrows next to **Edit**). A **power** field appears under the script.
 
 ```javascript
@@ -257,8 +257,8 @@ Some ideas for what to try next, roughly from easiest to hardest:
 - **Build a harder level.** Stack a taller pyramid, or add walls with more static Box entities.
 - **Change the look.** Try the other material sections, add more lights, or drop in a model from the [Asset Store](/user-manual/editor/assets/asset-store/).
 - **Bring your own art.** [Import](/user-manual/editor/assets/importing/) your own models, textures and sounds.
-- **Keep score.** Use [collision events](/user-manual/physics/collision-events/) to count hits, and show the score with a [UI text element](/user-manual/user-interface/).
-- **Add a reset key.** Store each can's starting position in a script and put it back when **R** is pressed.
+- **Keep score.** Use [collision events](/user-manual/physics/collision-events/) to count hits, and show the score with a [text element](/user-manual/user-interface/).
+- **Add a reset key.** Store each can's starting position in a script and put it back when <kbd>R</kbd> is pressed.
 
 ### Keep Learning {#keep-learning}
 
