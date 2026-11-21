@@ -7,11 +7,9 @@ import Link from '@docusaurus/Link';
 
 PlayCanvas Editorは、ウェブブラウザで動く3Dアプリやゲームを作るためのビジュアルエディターで、Editor自体もブラウザで動きます。チームでリアルタイムにシーンを作り、JavaScriptで動きを加え、どんなデバイスでもテストし、リンク1つでウェブに公開できます。
 
-<div className="iframe-container">
-    <iframe src="https://playcanv.as/p/gLOk3TQH/" title="PlayCanvas Editorで作った小さな物理ゲーム、Can Knockdown" loading="lazy" allow="fullscreen" allowFullScreen></iframe>
-</div>
+![ガラスのチェスセットがあるゲームルームを表示したPlayCanvas Editor。Viewportではキングが選択され、左にシーンのエンティティ、右のInspectorにキングのコンポーネント、下にチェスの駒のアセットが表示されています。](/img/user-manual/editor/editor-seemore-games-room.webp)
 
-ゲームをクリックし、矢印キーでボールを転がして缶に当ててみてください。このゲームはEditorで15分ほどで作られたもので、[初めてのアプリ](getting-started/your-first-app.md)で同じものを作る手順を説明しています。
+これは、ArmのデモをPlayCanvasチームがウェブに移植した[Seemore](https://playcanvas.com/project/612100)のゲームルームを、Editorで開いたところです。左にシーンのエンティティ、右に選択したチェスの駒のコンポーネント、下にプロジェクトのアセットが表示されています。[初めてのアプリ](getting-started/your-first-app.md)では、自分のシーンを作って公開する手順を15分ほどで説明しています。
 
 <div className="cta-buttons">
     <Link className="button button--primary button--lg" to="/user-manual/editor/getting-started/your-first-app/">初めてのアプリを作る →</Link>

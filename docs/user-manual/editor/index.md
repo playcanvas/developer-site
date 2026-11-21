@@ -7,11 +7,9 @@ import Link from '@docusaurus/Link';
 
 The PlayCanvas Editor is a visual editor for building 3D apps and games that run in a web browser, and it runs in your browser too. Build scenes with your team in real time, add behavior with JavaScript, test on any device and publish to the web with a link.
 
-<div className="iframe-container">
-    <iframe src="https://playcanv.as/p/gLOk3TQH/" title="Can Knockdown, a small physics game built in the PlayCanvas Editor" loading="lazy" allow="fullscreen" allowFullScreen></iframe>
-</div>
+![The PlayCanvas Editor showing a games room with a glass chess set. The King is selected in the Viewport, the scene's entities are listed on the left, the King's components are in the Inspector on the right, and the chess piece assets are below.](/img/user-manual/editor/editor-seemore-games-room.webp)
 
-Click the game, then use the arrow keys to roll the ball into the cans. It was built in the Editor in about 15 minutes, and [Your First App](getting-started/your-first-app.md) shows you how to build it yourself.
+This is the games room from [Seemore](https://playcanvas.com/project/612100), a demo by Arm that the PlayCanvas team brought to the web, open in the Editor. The scene's entities are on the left, the selected chess piece's components are on the right, and the project's assets are below. [Your First App](getting-started/your-first-app.md) shows you how to build and publish a scene of your own in about 15 minutes.
 
 <div className="cta-buttons">
     <Link className="button button--primary button--lg" to="/user-manual/editor/getting-started/your-first-app/">Build Your First App →</Link>
