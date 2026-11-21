@@ -62,6 +62,28 @@ There's no need to convert existing PNG and JPEG images.
 
 Don't use animated images. Use a [video](#videos) instead.
 
+### Screenshots
+
+Screenshots of the Editor, the Project Dashboard and other PlayCanvas tools should show the interface at the size it appears in a browser at 100% zoom. Then a button looks the same size in every screenshot, however much of the screen the screenshot shows.
+
+- **One image pixel per screen pixel.** Capture with a device pixel ratio of 1. A screenshot taken on a Retina Mac (2x), or on Windows with display scaling above 100% (1.25x to 2x), has more pixels than the screen area it shows, so it appears enlarged on the page.
+- **Use a 1600 × 900 window.** A screenshot of the whole window is then 1600 × 900, and every full-window screenshot shrinks to fit the page by the same amount.
+- **Keep other screenshots at most 800 pixels wide**, so they display at full size in the text column. If the part you want to show is wider, crop to less of it, or make the window narrower so the layout reflows.
+- **Crop, don't resize.** Don't scale a screenshot up or down after capturing it, and don't set a `width` on it.
+- **Save as lossless WebP** (see [Images](#images)).
+
+Chrome DevTools can capture to these rules on any computer:
+
+1. Open DevTools and select **Toggle device toolbar** (<kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>M</kbd>, or <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>M</kbd> on a Mac).
+2. Choose **Responsive** and set the size to 1600 × 900.
+3. In the toolbar's **⋮** menu, select **Add device pixel ratio** and **Add device type**. Set the pixel ratio to 1 and the type to **Desktop**.
+4. Capture:
+   - The whole window: **⋮** > **Capture screenshot**.
+   - One panel, dialog or menu: right-click its element in the **Elements** panel and select **Capture node screenshot**.
+   - Any other area: open the Command Menu (<kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd>) and run **Capture area screenshot**.
+
+Existing screenshots don't need to change until their page is next updated.
+
 ### Videos
 
 Use MP4 video for anything that moves, such as screen recordings and animations. Avoid animated WebP and animated GIF. Safari plays animated WebP slower and slower as it goes, and GIF has poor compression and quality.

@@ -5,7 +5,7 @@ description: Adjusts branding artwork visibility descriptions domains and other 
 
 The Project Settings allow you to configure various aspects of your project including basic information, privacy settings, and branding options.
 
-![Project Settings](/img/user-manual/editor/projects/project-settings.png)
+![Project Settings](/img/user-manual/editor/projects/project-settings.webp)
 
 ## Accessing Project Settings
 
