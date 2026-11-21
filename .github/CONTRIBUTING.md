@@ -42,6 +42,7 @@ Use inline links (`[link text](url)`) and minimize the use of HTML as much as po
 - `<iframe>` for PlayCanvas project builds
 - `<img>` to adjust sizes of images
 - `<kbd>` for keyboard keys (see [Keyboard Keys](#keyboard-keys))
+- `<video>` for screen recordings and other animations (see [Videos](#videos))
 - alert style boxes
 
 For `<iframe>` and `<img>`, use `loading="lazy"` attribute to reduce initial page load times and size.
@@ -52,9 +53,32 @@ Refer to existing pages to see examples of prior use.
 
 Images should be placed in the [`static/img`](https://github.com/playcanvas/developer-site/tree/main/static/img) folder. The folder structure should mirror the same structure as the folder for the Markdown files mentioned in the [Pages section](#pages).
 
-Please use PNG for anything Editor UI based and JPEG for anything else such as a game screenshot.
+Use WebP for new images. It is smaller than PNG and JPEG for the same quality:
 
-Use WebP for animated images (the site is moving away from Animated GIFs due to their poor compression and quality).
+- **Lossless WebP** for Editor UI, diagrams and anything else with text or sharp edges. It keeps every pixel, like PNG, at a smaller size. For example, `cwebp -lossless input.png -o output.webp`.
+- **Lossy WebP** for photographic content such as game screenshots and rendered scenes, where you would otherwise use JPEG. A quality of around 85 works well: `cwebp -q 85 input.png -o output.webp`.
+
+There's no need to convert existing PNG and JPEG images.
+
+Don't use animated images. Use a [video](#videos) instead.
+
+### Videos
+
+Use MP4 video for anything that moves, such as screen recordings and animations. Avoid animated WebP and animated GIF. Safari plays animated WebP slower and slower as it goes, and GIF has poor compression and quality.
+
+Put videos in the [`static/video`](https://github.com/playcanvas/developer-site/tree/main/static/video) folder and embed them with a `<video>` tag:
+
+```html
+<video autoPlay muted loop controls playsInline src="/video/my-feature.mp4" style={{width: '100%', height: 'auto'}} />
+```
+
+Encode with H.264, without an audio track, and with the index at the start of the file so playback can begin before the download finishes. 1600 × 900 is plenty for the width of a page. For example:
+
+```sh
+ffmpeg -i input.mov -vf scale=1600:-2 -c:v libx264 -crf 26 -preset slow -pix_fmt yuv420p -movflags +faststart -an output.mp4
+```
+
+On a page with several videos, the `StepVideo` component plays each one only while it's on screen. See [Your First App](https://github.com/playcanvas/developer-site/blob/main/docs/user-manual/editor/getting-started/your-first-app.md) for an example.
 
 All images should be less than 2MB ideally.
 

@@ -45,7 +45,7 @@ import StepVideo from '@site/src/components/StepVideo';
 
 Blank Project には、**Camera**、**Light**、**Box**、そして床になる **Plane** からなる小さなシーンが入っています。各部の場所は次のとおりです。
 
-![5 つの主な領域に番号を付けた PlayCanvas Editor](/img/user-manual/editor/getting-started/your-first-app/editor-interface.png)
+![5 つの主な領域に番号を付けた PlayCanvas Editor](/img/user-manual/editor/getting-started/your-first-app/editor-interface.webp)
 
 1. [**Hierarchy**](/user-manual/editor/interface/hierarchy/): シーン内のすべてのエンティティをツリーで表示します。クリックすると選択できます。
 2. [**Viewport**](/user-manual/editor/interface/viewport/): シーンを映す 3D ビューです。

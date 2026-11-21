@@ -45,7 +45,7 @@ Every app lives in a project. Start a new one:
 
 The Blank Project starts you with a small scene: a **Camera**, a **Light**, a **Box** and a **Plane** for the floor. Here's where everything lives:
 
-![The PlayCanvas Editor with its five main areas numbered](/img/user-manual/editor/getting-started/your-first-app/editor-interface.png)
+![The PlayCanvas Editor with its five main areas numbered](/img/user-manual/editor/getting-started/your-first-app/editor-interface.webp)
 
 1. **[Hierarchy](/user-manual/editor/interface/hierarchy/)**: every entity in the scene, as a tree. Click one to select it.
 2. **[Viewport](/user-manual/editor/interface/viewport/)**: your 3D view of the scene.
