@@ -181,7 +181,7 @@ description: playcanvas.com/editor のプロジェクトダッシュボードか
 
 ![Project Settings](/img/user-manual/editor/projects/project-settings.webp)
 
-- **Project settings** には名前、説明、公開設定、フォークの場合は **Forked From** のリンク、過去 28 日間の **Activity** グリッド、すでに使用している場合は **Private Source Assets** が表示されます。フッターには **Copy link**、**Fork Project**、**Export Project**、**Delete Project** があります。[プロジェクト設定](/user-manual/editor/projects/settings/)を参照してください。
+- **Project settings** には名前、説明、公開設定、フォークの場合は **Forked From** のリンク、過去 28 日間の **Activity** グリッド、すでに使用している場合は **Private Source Assets** が表示されます。フッターには **Copy link**、**Fork Project**、**Export Project**、**Delete Project** があります。[プロジェクトの名前と公開設定](/user-manual/editor/projects/settings/)を参照してください。
 - **Dev log** にはプロジェクトの投稿が一覧表示され、投稿の作成、編集、削除ができます。[Dev Logs](/user-manual/editor/projects/dev-logs/#write-a-post-from-the-project-dashboard) を参照してください。
 - **Team** にはプロジェクトのメンバーとそのアクセス権が表示されます。[チーム管理](/user-manual/editor/projects/team-management/)を参照してください。
 

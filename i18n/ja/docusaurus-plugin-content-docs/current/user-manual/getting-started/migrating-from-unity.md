@@ -29,7 +29,7 @@ Unityでプロジェクトを作ったことがあれば、PlayCanvasの多く�
 | 2 | [ヒエラルキー](/user-manual/editor/interface/hierarchy/) | Hierarchyウィンドウ |
 | 3 | [ビューポート](/user-manual/editor/interface/viewport/) | Sceneビュー |
 | 4 | [インスペクター](/user-manual/editor/interface/inspector/) | Inspectorウィンドウ |
-| 5 | [アセットパネル](/user-manual/editor/interface/assets/) | Projectウィンドウ |
+| 5 | [アセットパネル](/user-manual/editor/assets/asset-panel/) | Projectウィンドウ |
 
 Unityのその他のウィンドウやメニューに相当するものは、次のとおりです。
 
@@ -115,7 +115,7 @@ macOSでは、Ctrlの代わりにCmdを使います。UnityのViewツール（Q�
 | Canvas | [Screen](/user-manual/editor/scenes/components/screen/)コンポーネント | |
 | RectTransform、Image、Text | [Element](/user-manual/editor/scenes/components/element/)コンポーネント | |
 | Sprite Renderer | [Sprite](/user-manual/editor/scenes/components/sprite/)コンポーネント | |
-| ScriptableObject | [JSON](/user-manual/editor/assets/inspectors/json/)アセット | または、データをエクスポートするJavaScriptモジュール。 |
+| ScriptableObject | [JSON](/user-manual/editor/assets/inspectors/text/#json)アセット | または、データをエクスポートするJavaScriptモジュール。 |
 | `Resources`とAddressables | [アセットレジストリ](/user-manual/assets/asset-registry/) | [アセット](#assets)を参照してください。 |
 
 ## 座標系と単位 {#coordinate-system-and-units}

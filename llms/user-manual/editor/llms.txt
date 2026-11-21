@@ -75,9 +75,8 @@ Use this index for projects made in the Editor, where code lives in scripts atta
 
 ## Engine versions
 
-- [Engine Compatibility](/user-manual/editor/engine-compatibility/): Engine V1 versus V2, and switching a project between them.
+- [Engine Compatibility](/user-manual/editor/engine-compatibility/): Engine V1 versus V2, switching a project between them, and fixing brightness differences after a switch (gamma, tone mapping and sRGB textures).
 - [Engine Settings](/user-manual/editor/interface/settings/engine/): Choosing the engine version used to launch, publish and download the project.
-- [Troubleshooting](/user-manual/editor/troubleshooting/): Fixing brightness differences between the Editor and the Launch page caused by gamma, tone mapping and sRGB textures.
 
 ## Scenes and entities
 

@@ -53,7 +53,7 @@ The result is a character count. The warning appears when it passes 14,680,064 (
 
 - **Split your content into multiple scenes.** Give each level, area or menu its own scene. Switch between them at runtime, or load several additively to build a larger world. See [Loading Scenes](loading-scenes.md#loading-scenes-additively).
 - **Instantiate templates at runtime.** Template instances placed in the Editor are stored in the scene, but a template spawned from a script is stored once, in its asset. For objects that repeat many times, such as enemies, pickups or props, spawn them from code. See [Instantiating at Runtime](/user-manual/editor/templates/#instantiating-at-runtime).
-- **Load data at runtime.** Keep large data sets, such as level layouts, dialog or configuration tables, in a [JSON asset](/user-manual/editor/assets/inspectors/json/) instead of in script attributes. Load the asset when your application needs it. See [Loading and Unloading](/user-manual/assets/loading-unloading/).
+- **Load data at runtime.** Keep large data sets, such as level layouts, dialog or configuration tables, in a [JSON asset](/user-manual/editor/assets/inspectors/text/#json) instead of in script attributes. Load the asset when your application needs it. See [Loading and Unloading](/user-manual/assets/loading-unloading/).
 - **Remove what you don't need.** Delete unused entities, such as test objects or nodes of an imported model that you never use.
 
 :::ai

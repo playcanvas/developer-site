@@ -254,7 +254,6 @@ const sidebars = {
             },
             { type: 'link', label: 'Debugging', key: 'editor-debugging-link', href: '/user-manual/debugging/' },
             'user-manual/editor/engine-compatibility',
-            'user-manual/editor/troubleshooting',
           ],
         },
         {
@@ -368,7 +367,6 @@ const sidebars = {
           key: 'editor-reference',
           items: [
             'user-manual/editor/interface/toolbar',
-            'user-manual/editor/interface/assets',
             'user-manual/editor/interface/keyboard-shortcuts',
             {
               type: 'category',
@@ -434,15 +432,11 @@ const sidebars = {
               items: [
                 'user-manual/editor/assets/inspectors/animation',
                 'user-manual/editor/assets/inspectors/audio',
-                'user-manual/editor/assets/inspectors/css',
                 'user-manual/editor/assets/inspectors/cubemap',
                 'user-manual/editor/assets/inspectors/font',
                 'user-manual/editor/assets/inspectors/gsplat',
-                'user-manual/editor/assets/inspectors/html',
-                'user-manual/editor/assets/inspectors/json',
                 'user-manual/editor/assets/inspectors/material',
                 'user-manual/editor/assets/inspectors/render',
-                'user-manual/editor/assets/inspectors/shader',
                 'user-manual/editor/assets/inspectors/sprite',
                 'user-manual/editor/assets/inspectors/template',
                 'user-manual/editor/assets/inspectors/text',

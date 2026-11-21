@@ -7,7 +7,7 @@ description: マテリアル Inspector のリファレンス。折りたたみ�
 
 ## インスペクター
 
-[アセットパネル](/user-manual/editor/interface/assets)でマテリアルアセットを選択し、[インスペクター](/user-manual/editor/interface/inspector)で表示できます。
+[アセットパネル](/user-manual/editor/assets/asset-panel/)でマテリアルアセットを選択し、[インスペクター](/user-manual/editor/interface/inspector)で表示できます。
 
 ![Material Inspector](/img/user-manual/editor/assets/inspectors/material/inspector.png)
 
