@@ -47,9 +47,10 @@ Use this index for projects made in the Editor, where code lives in scripts atta
 
 ## Getting started
 
-- [PlayCanvas Editor](/user-manual/editor/): A tour of the Editor: live testing, collaboration, version control, visual editing, scripting, assets and publishing.
-- [The Editor Workflow](/user-manual/editor/getting-started/workflow/): From importing assets and building scenes to scripting and publishing.
+- [PlayCanvas Editor](/user-manual/editor/): Where to start with the Editor, what it gives you, and a map of its documentation.
 - [Your First App](/user-manual/editor/getting-started/your-first-app/): A first project step by step: a scene, materials, a script, movement and publishing.
+- [How Editor Projects Work](/user-manual/editor/getting-started/how-projects-work/): How scenes, entities, components, assets, scripts, settings, branches and builds fit together, and what saves automatically.
+- [What to Learn Next](/user-manual/editor/getting-started/next-steps/): A suggested order of Editor tutorials after the first app, grouped by goal.
 - [Common Questions](/user-manual/editor/faq/): Quick answers to everyday tasks, such as adding components, scripts, materials, lights and cameras.
 
 ## Working from code

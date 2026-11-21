@@ -86,7 +86,7 @@ const config = {
         // The User Accounts landing page was folded into the Account Management index
         { from: ['/user-manual/account-management/user-accounts/'], to: '/user-manual/account-management/' },
         { from: ['/user-manual/faq/'], to: '/user-manual/editor/faq/' },
-        { from: ['/user-manual/getting-started/workflow/'], to: '/user-manual/editor/getting-started/workflow/' },
+        { from: ['/user-manual/getting-started/workflow/', '/user-manual/editor/getting-started/workflow/'], to: '/user-manual/editor/getting-started/how-projects-work/' },
         { from: ['/user-manual/getting-started/your-first-app/'], to: '/user-manual/editor/getting-started/your-first-app/' },
         { from: ['/user-manual/graphics/gaussian-splatting/'], to: '/user-manual/gaussian-splatting/' },
         // Gaussian splatting: unified-rendering merged into the rendering-architecture page (now its own section)
