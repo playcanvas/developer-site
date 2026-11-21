@@ -9,7 +9,7 @@ A project holds everything that makes up one app: its scenes, assets, scripts an
 
 | Page | What it covers |
 | --- | --- |
-| [Project Settings](settings.md) | The project's name, description, artwork and visibility, public or private. |
+| [Project Name and Visibility](settings.md) | The project's name, description, artwork and visibility, public or private. |
 | [Dev Logs](dev-logs.md) | Post updates about a project for the people watching it and the PlayCanvas feed. |
 | [Backup and Export](backup-and-export.md) | Keep a copy of a project by forking or exporting it, and restore it later. |
 | [Ownership and Transfers](ownership-transfers.md) | What the owner of a project can do, and how to hand a project to another user or organization. |

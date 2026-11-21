@@ -50,7 +50,7 @@ The Blank Project starts you with a small scene: a **Camera**, a **Light**, a **
 1. **[Hierarchy](/user-manual/editor/interface/hierarchy/)**: every entity in the scene, as a tree. Click one to select it.
 2. **[Viewport](/user-manual/editor/interface/viewport/)**: your 3D view of the scene.
 3. **[Inspector](/user-manual/editor/interface/inspector/)**: the properties of whatever is selected. This is where you'll do most of your editing.
-4. **[Assets](/user-manual/editor/interface/assets/)**: the files your project uses, such as materials, scripts, textures and models.
+4. **[Assets](/user-manual/editor/assets/asset-panel/)**: the files your project uses, such as materials, scripts, textures and models.
 5. **[Toolbar](/user-manual/editor/interface/toolbar/)**: tools for moving, rotating and scaling, plus publishing.
 
 Now take the Viewport for a spin. Drag with the left mouse button to orbit, and scroll to zoom. Select **Box** in the Hierarchy, move the mouse back over the Viewport and press <kbd>F</kbd> to focus on it. That's your way home whenever you get lost.

@@ -7,7 +7,7 @@ A Material asset defines the visual appearance of a surface when rendered. PlayC
 
 ## Inspector
 
-You can select a Material asset in the [Assets Panel](/user-manual/editor/interface/assets) and view it in the [Inspector](/user-manual/editor/interface/inspector).
+You can select a Material asset in the [Assets Panel](/user-manual/editor/assets/asset-panel/) and view it in the [Inspector](/user-manual/editor/interface/inspector).
 
 ![Material Inspector](/img/user-manual/editor/assets/inspectors/material/inspector.png)
 

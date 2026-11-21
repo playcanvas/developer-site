@@ -29,7 +29,7 @@ The Editor's layout is much like Unity's default layout:
 | 2 | [Hierarchy](/user-manual/editor/interface/hierarchy/) | Hierarchy window |
 | 3 | [Viewport](/user-manual/editor/interface/viewport/) | Scene view |
 | 4 | [Inspector](/user-manual/editor/interface/inspector/) | Inspector window |
-| 5 | [Assets panel](/user-manual/editor/interface/assets/) | Project window |
+| 5 | [Assets panel](/user-manual/editor/assets/asset-panel/) | Project window |
 
 Other Unity windows and menus have these equivalents:
 
@@ -115,7 +115,7 @@ On macOS, use Cmd in place of Ctrl. Unity's View tool (Q) has no equivalent, bec
 | Canvas | [Screen](/user-manual/editor/scenes/components/screen/) component | |
 | RectTransform, Image and Text | [Element](/user-manual/editor/scenes/components/element/) component | |
 | Sprite Renderer | [Sprite](/user-manual/editor/scenes/components/sprite/) component | |
-| ScriptableObject | [JSON](/user-manual/editor/assets/inspectors/json/) asset | Or a JavaScript module that exports the data. |
+| ScriptableObject | [JSON](/user-manual/editor/assets/inspectors/text/#json) asset | Or a JavaScript module that exports the data. |
 | `Resources` and Addressables | The [asset registry](/user-manual/assets/asset-registry/) | See [Assets](#assets). |
 
 ## Coordinate System and Units {#coordinate-system-and-units}

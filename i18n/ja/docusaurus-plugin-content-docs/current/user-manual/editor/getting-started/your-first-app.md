@@ -50,7 +50,7 @@ Blank Project には、**Camera**、**Light**、**Box**、そして床になる 
 1. [**Hierarchy**](/user-manual/editor/interface/hierarchy/): シーン内のすべてのエンティティをツリーで表示します。クリックすると選択できます。
 2. [**Viewport**](/user-manual/editor/interface/viewport/): シーンを映す 3D ビューです。
 3. [**Inspector**](/user-manual/editor/interface/inspector/): 選択中のもののプロパティを表示します。編集の大半はここで行います。
-4. [**Assets**](/user-manual/editor/interface/assets/): マテリアル、スクリプト、テクスチャ、モデルなど、プロジェクトで使うファイルです。
+4. [**Assets**](/user-manual/editor/assets/asset-panel/): マテリアル、スクリプト、テクスチャ、モデルなど、プロジェクトで使うファイルです。
 5. [**Toolbar**](/user-manual/editor/interface/toolbar/): 移動、回転、拡大縮小のツールと、公開のボタンがあります。
 
 では Viewport を操作してみましょう。左ボタンでドラッグすると視点が回り、ホイールでズームします。Hierarchy で **Box** を選択し、マウスを Viewport の上に戻して <kbd>F</kbd> キーを押すと、Box にフォーカスします。迷ったときはこれで戻れます。

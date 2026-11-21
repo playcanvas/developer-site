@@ -1,9 +1,9 @@
 ---
-title: Project Settings
+title: Project Name and Visibility
 description: Adjusts branding artwork visibility descriptions domains and other metadata controlling how a project appears and behaves.
 ---
 
-The Project Settings allow you to configure various aspects of your project including basic information, privacy settings, and branding options.
+The **Project settings** panel on the [Project Dashboard](dashboard.md) is where you set a project's name, description, artwork and visibility. These are different from the Editor's [Project Settings](../interface/settings/index.md), which control how the project runs, such as its rendering, physics and input.
 
 ![Project Settings](/img/user-manual/editor/projects/project-settings.webp)
 

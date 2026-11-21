@@ -181,7 +181,7 @@ Select a project's card, or **Project settings** in its menu, to open its settin
 
 ![Project Settings](/img/user-manual/editor/projects/project-settings.webp)
 
-- **Project settings** shows the name, description and visibility, a **Forked From** link for forks, an **Activity** grid covering the last 28 days, and **Private Source Assets** when the project already uses it. The footer has **Copy link**, **Fork Project**, **Export Project** and **Delete Project**. See [Project Settings](/user-manual/editor/projects/settings/).
+- **Project settings** shows the name, description and visibility, a **Forked From** link for forks, an **Activity** grid covering the last 28 days, and **Private Source Assets** when the project already uses it. The footer has **Copy link**, **Fork Project**, **Export Project** and **Delete Project**. See [Project Name and Visibility](/user-manual/editor/projects/settings/).
 - **Dev log** lists the project's posts, and lets you write, edit and delete them. See [Dev Logs](/user-manual/editor/projects/dev-logs/#write-a-post-from-the-project-dashboard).
 - **Team** lists the people on the project and their access. See [Team Management](/user-manual/editor/projects/team-management/).
 

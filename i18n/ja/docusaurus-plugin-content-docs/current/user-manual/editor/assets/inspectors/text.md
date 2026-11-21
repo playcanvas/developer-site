@@ -1,22 +1,40 @@
 ---
-title: Text
-description: Text Asset はダイアログや設定などのプレーンテキストを保持します。Inspector は読み取り専用の内容プレビューを表示し、専用プロパティはありません。
+title: テキスト系アセット
+description: "CSS、HTML、JSON、Shader、Textの各アセットについて、元になるファイルの種類、作成と編集の方法、Inspectorでの読み取り専用プレビューを説明します。"
 ---
 
-Text アセットは、プレーンテキストデータを保存するために使用されます。多用途であり、対話、構成データ、またはその他のテキスト情報を保存するなど、さまざまな目的に使用できます。
+自分で書いたりアップロードしたりしたテキストを保持するアセットには、**CSS**、**HTML**、**JSON**、**Shader**、**Text** の5種類があります。Editorではどれも同じように扱います。
 
-エディターで新しいTextアセットを作成するか、`.txt`拡張子のファイルをアップロードして作成できます。
+- **作成**: [Assetsパネル](../asset-panel.md)の **+** メニューから作成するか、下にある拡張子のファイルをアップロードします。
+- **編集**: Assetsパネルでアセットを右クリックして **Edit** を選択すると、[コードエディター](../../scripting/code-editor.md)で開きます。
+- **確認**: アセットを選択すると、Inspectorに内容の読み取り専用プレビューが表示されます。これらのアセットに設定するプロパティはありません。
 
-## Inspector
+![JSONアセットのインスペクター。アセットのデータを整形したプレビューが表示されています](/img/user-manual/editor/assets/inspectors/asset-inspector-json.png)
 
-![Text Asset Inspector](/img/user-manual/editor/assets/inspectors/asset-inspector-text.png)
+スクリプトからこれらのアセットを使うには、[Asset属性](/user-manual/scripting/script-attributes/esm/#asset-attribute)を参照してください。
 
-Text アセットインスペクターは、アセットに含まれるテキストコンテンツのプレビューを表示します。
+## CSS {#css}
 
-## Properties
+CSSアセットはスタイルシートを保持します。`.css`ファイルをアップロードすると作成できます。HTMLで作ったユーザーインターフェースなど、アプリがページに追加するHTMLのスタイル設定に使います。[HTMLとCSS](/user-manual/user-interface/html-and-css/)を参照してください。
 
-このアセットタイプには、インスペクターで設定可能なプロパティはありません。テキストコンテンツの読み取り専用プレビューが表示されます。
+## HTML {#html}
 
-:::tip
-スクリプトでこのアセットを使用するには、[Asset Attributes](/user-manual/scripting/script-attributes/esm/#asset-attribute)を参照してください。
-:::
+HTMLアセットは、ページ全体または一部のHTMLを保持します。`.html`ファイルをアップロードすると作成できます。
+
+## JSON {#json}
+
+JSONアセットは、[JavaScript Object Notation](https://ja.wikipedia.org/wiki/JavaScript_Object_Notation)形式の構造化データを保持します。人が読み書きしやすく、コードで解析しやすい形式です。`.json`ファイルをアップロードすると作成できます。JSONアセットは次のような用途に便利です。
+
+- 設定やゲームの設定値
+- レベルのレイアウトなどのデザインデータ
+- プロシージャル生成のためのデータ
+
+大きなデータをスクリプト属性ではなくJSONアセットに入れておくと、シーンも小さく保てます。[シーンのサイズ上限](../../scenes/index.md#size-limit)を参照してください。
+
+## Shader {#shader}
+
+Shaderアセットは、独自の描画効果のためのGLSLコードを保持します。`.glsl`、`.vert`、`.frag`ファイルをアップロードすると作成できます。[シェーダー](/user-manual/graphics/shaders/)を参照してください。
+
+## Text {#text}
+
+Textアセットは、会話のテキストやアプリが読み込むその他のデータなど、プレーンテキストを保持します。`.txt`か`.xml`ファイルをアップロードすると作成できます。Spineのテクスチャアトラス（`.atlas`ファイル）もTextアセットとしてアップロードされます。[Spine](/user-manual/engine/libraries/spine/)を参照してください。
