@@ -1,10 +1,11 @@
 ---
-title: GoNative
-description: Describes using GoNative to generate a native WebView app from your hosted PlayCanvas URL plus plugin integrations.
+title: Median.co (formerly GoNative)
+sidebar_label: Median.co
+description: "Using Median.co, formerly GoNative, to turn a hosted PlayCanvas app's web address into a native iOS or Android app, with plugins for native features."
 ---
 
-[GoNative](https://gonative.io/) is a paid third party service that can take a URL and create a native mobile application that uses a native WebView to run on mobile in a few clicks.
+[Median.co](https://median.co/), which was called GoNative until 2023, is a paid third-party service that takes a web address and builds a native mobile app around it. The app shows your PlayCanvas app in a native WebView.
 
-As it is using a WebView, the user has to be online to use the app and you will have to host your PlayCanvas application somewhere such as [AWS Web Hosting services](https://aws.amazon.com/websites/).
+Because the app loads your PlayCanvas app from its web address, players need to be online, and your app needs to be hosted somewhere: on [PlayCanvas Hosting](../web/playcanvas-hosting.md) or on [your own server](../web/self-hosting.md).
 
-GoNative also provides simple integration of mobile native plugins that can be accessed from your PlayCanvas application such as Google AdMob and In-App Purchases. A full list of [plugins can be found here](https://gonative.io/plugins).
+Median.co also offers [plugins](https://median.co/plugins) that give your PlayCanvas app access to native features, such as ads and in-app purchases.

@@ -1,36 +1,24 @@
 ---
-title: Projects
-description: Maps project administration topics from creation through the dashboard, settings, teamwork, dev logs, exports and ownership transfers.
+title: Managing Projects
+description: "Looking after a PlayCanvas Editor project once you have one: its name, artwork and visibility, dev logs, backups and exports, and transferring ownership."
 ---
 
-## Overview
+A project holds everything that makes up one app: its scenes, assets, scripts and settings. The pages in this section cover looking after a project once you have one. Most of these tasks happen on the [Project Dashboard](dashboard.md) at [playcanvas.com/editor](https://playcanvas.com/editor), rather than inside the Editor.
 
-Projects are the foundation for everything you create in the PlayCanvas Editor. A project contains all the assets, scenes, scripts, and settings needed to build your application or game. This section covers all aspects of project management, from creation to configuration.
+## In This Section {#in-this-section}
 
-## Project Management Topics
+| Page | What it covers |
+| --- | --- |
+| [Project Settings](settings.md) | The project's name, description, artwork and visibility, public or private. |
+| [Dev Logs](dev-logs.md) | Post updates about a project for the people watching it and the PlayCanvas feed. |
+| [Backup and Export](backup-and-export.md) | Keep a copy of a project by forking or exporting it, and restore it later. |
+| [Ownership and Transfers](ownership-transfers.md) | What the owner of a project can do, and how to hand a project to another user or organization. |
 
-### Getting Started
+## Elsewhere in the Manual {#elsewhere-in-the-manual}
 
-- **[Creating Projects](creating)** - How to create new projects.
+Some project tasks live with the part of the manual you'll need them in:
 
-### Working with Projects
-
-- **[Project Dashboard](dashboard)** - Find, create, fork and manage projects and organizations at playcanvas.com/editor.
-- **[Project Settings](settings)** - Configure your project's name, description, privacy, and branding.
-- **[Team Management](team-management)** - Adding collaborators and managing permissions.
-- **[Development Logs](dev-logs)** - Using dev logs for project updates and team communication.
-- **[Downloading Projects](downloading)** - Download app packages and choose static or npm package formats.
-
-### Advanced Management
-
-- **[Backup and Export](backup-and-export)** - Protecting your projects with backups and exports.
-- **[Ownership and Transfers](ownership-transfers)** - Transferring projects between users and organizations.
-
-## Quick Actions
-
-Once you understand the basics of project management, you can:
-
-- Access the [Editor](../interface) to build your project.
-- Test your project using the [Launch Page](../interface/launch-page).
-- Use [Real-time Collaboration](../realtime-collaboration) to build with others.
-- Use [Version Control](../version-control) to manage your development workflow.
+- [Creating Projects](creating.md) and the [Project Dashboard](dashboard.md) are in [Getting Started](../getting-started/index.md).
+- [Team Management](team-management.md), for adding people and setting their permissions, is with [Real-time Collaboration](../realtime-collaboration.md).
+- [Downloading Projects](downloading.md), for the formats you can download a build in, is with [Self-hosting](../publishing/web/self-hosting.md).
+- Plans, billing and organizations are in [Account Management](/user-manual/account-management/).
