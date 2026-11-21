@@ -5,7 +5,7 @@ description: Find, create, fork and manage projects and organizations from the P
 
 The Project Dashboard is the control center for your projects. Open it at [playcanvas.com/editor](https://playcanvas.com/editor). From Editor 2.35 the dashboard is part of the Editor and replaces the dashboard pages on playcanvas.com.
 
-![Dashboard](/img/user-manual/editor/projects/project-dashboard.png)
+![Dashboard](/img/user-manual/editor/projects/project-dashboard.webp)
 
 The dashboard runs in its own browser tab and doesn't load the Editor itself, so it opens quickly. It never opens a project inside itself: **Open editor** switches to the project's own tab, opening it only if it isn't already open. **All Projects** in the Editor's logo menu, <kbd>Ctrl</kbd>/<kbd>Cmd</kbd> + <kbd>O</kbd> and the **Projects** breadcrumb in the viewport switch back to the dashboard, and the Editor keeps its scene.
 
@@ -27,7 +27,7 @@ From the Project Dashboard you can:
 
 The sidebar on the left can be resized by dragging its edge.
 
-![Sidebar](/img/user-manual/editor/projects/new-project-button.png)
+![Sidebar](/img/user-manual/editor/projects/new-project-button.webp)
 
 ### New Project
 
@@ -47,7 +47,7 @@ Select **Import project** and choose an exported project's `.zip` file to create
 
 Select **+** next to **Organizations** to create one. Enter its **Name**, its **URL** on playcanvas.com and a **Billing email**, then select **Create organization**. The new organization appears in the sidebar.
 
-![New Organization](/img/user-manual/editor/projects/project-dashboard-new-organization.png)
+![New Organization](/img/user-manual/editor/projects/project-dashboard-new-organization.webp)
 
 An organization's **⋮** menu has **Organization details**, which opens its account page on playcanvas.com, and **Delete organization**. Deleting asks you to type the organization's name to confirm. If the organization has projects, they are transferred to your account.
 
@@ -59,19 +59,19 @@ An organization's **⋮** menu has **Organization details**, which opens its acc
 
 The **MCP server** button next to your account connects the Project Dashboard to the [Editor MCP Server](/user-manual/editor/mcp-server/), so an AI assistant can list, create, update and open your projects before any project is open. See [Connect from the Project Dashboard](/user-manual/editor/mcp-server/#connect-from-the-project-dashboard).
 
-![MCP Server](/img/user-manual/editor/projects/project-dashboard-mcp.png)
+![MCP Server](/img/user-manual/editor/projects/project-dashboard-mcp.webp)
 
 ## Continue Editing
 
 The main panel opens with **Continue editing**, which shows the project you edited last with **Open editor** and **Play** buttons, followed by your projects.
 
-![Dashboard Header](/img/user-manual/editor/projects/dashboard-header.png)
+![Dashboard Header](/img/user-manual/editor/projects/dashboard-header.webp)
 
 ## Finding Projects
 
 Type in the search box to find projects by name, owner or description. Search tolerates typos. Press <kbd>/</kbd> to jump to it, unless a dialog or menu is open.
 
-![Search Filters](/img/user-manual/editor/projects/project-dashboard-search.png)
+![Search Filters](/img/user-manual/editor/projects/project-dashboard-search.webp)
 
 Narrow a search with these filters:
 
@@ -99,7 +99,7 @@ The tabs above the projects filter them further: **All**, **Mine**, **Shared wit
 
 The buttons next to **Sort by** switch between **Cards** and **List**. Cards show each project's thumbnail, owner and members, the time since it was edited and its size, with its views, plays and stars along the bottom. Projects without a thumbnail show a placeholder. The list view has a row per project with **Forks**, **Views**, **Plays**, **Stars**, **Size** and **Edited** columns.
 
-![List View](/img/user-manual/editor/projects/project-dashboard-list-view.png)
+![List View](/img/user-manual/editor/projects/project-dashboard-list-view.webp)
 
 A project can carry one of these badges:
 
@@ -115,7 +115,7 @@ A project can carry one of these badges:
 
 The **⋮** button on a card, a list row or the Continue editing panel opens the project menu. Items you don't have permission for are hidden.
 
-![Project Menu](/img/user-manual/editor/projects/fork-project-button.png)
+![Project Menu](/img/user-manual/editor/projects/fork-project-button.webp)
 
 ### Open Editor
 
@@ -150,7 +150,7 @@ Select **Watch** to show the project's dev log updates in the [Global Feed](http
 
 Select **Fork** to create a copy of the project in your account. The fork dialog shows the project you are forking from, with its name and description filled in, and an owner picker. Change anything you need and select **Fork project**.
 
-![Fork Project Dialog](/img/user-manual/editor/projects/project-dashboard-fork.png)
+![Fork Project Dialog](/img/user-manual/editor/projects/project-dashboard-fork.webp)
 
 When the fork is ready, select **Open project** to open it in its own tab, or **Not now** to stay on the dashboard, where the fork has a new card. See [Creating Projects](/user-manual/editor/projects/creating/#fork-an-existing-project) for what a fork copies and when forking is not possible.
 
@@ -177,11 +177,11 @@ The **Starred** tab and `is:starred` list the projects you have starred.
 
 ## Project Settings {#project-settings}
 
-Select a project's card, or **Project settings** in its menu, to open its settings. The panels on the left switch between **Project settings**, **Dev log** and **Team**, and **Open editor**, **Play** and **Delete Project** sit underneath.
+Select a project's card, or **Project settings** in its menu, to open its settings. The panels on the left switch between **Project settings**, **Dev log** and **Team**, with **Open editor** and **Play** above them.
 
-![Project Settings](/img/user-manual/editor/projects/project-settings.png)
+![Project Settings](/img/user-manual/editor/projects/project-settings.webp)
 
-- **Project settings** shows the name, description and visibility, a **Forked From** link for forks, an **Activity** strip covering the last 28 days, and **Private Source Assets** when the project already uses it. The footer has **Copy link**, **Fork Project** and **Export Project**. See [Project Settings](/user-manual/editor/projects/settings/).
+- **Project settings** shows the name, description and visibility, a **Forked From** link for forks, an **Activity** grid covering the last 28 days, and **Private Source Assets** when the project already uses it. The footer has **Copy link**, **Fork Project**, **Export Project** and **Delete Project**. See [Project Settings](/user-manual/editor/projects/settings/).
 - **Dev log** lists the project's posts, and lets you write, edit and delete them. See [Dev Logs](/user-manual/editor/projects/dev-logs/#write-a-post-from-the-project-dashboard).
 - **Team** lists the people on the project and their access. See [Team Management](/user-manual/editor/projects/team-management/).
 

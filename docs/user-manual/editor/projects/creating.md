@@ -15,7 +15,7 @@ Both are done from the [Project Dashboard](/user-manual/editor/projects/dashboar
 1. Open the Project Dashboard at [playcanvas.com/editor](https://playcanvas.com/editor).
 2. Select **New project** in the sidebar.
 
-   ![New Project Button](/img/user-manual/editor/projects/new-project-button.png)
+   ![New Project Button](/img/user-manual/editor/projects/new-project-button.webp)
 
 3. Pick a starter kit.
 
@@ -62,11 +62,11 @@ To fork a project from the [Project Dashboard](/user-manual/editor/projects/dash
 
 1. Select the **⋮** button on the project's card or row, then **Fork**.
 
-   ![Fork Project Button](/img/user-manual/editor/projects/fork-project-button.png)
+   ![Fork Project Button](/img/user-manual/editor/projects/fork-project-button.webp)
 
 2. The fork dialog shows the project you are forking from, with its name and description filled in. Change them, and the owner, as needed.
 
-   ![Fork Project Dialog](/img/user-manual/editor/projects/project-dashboard-fork.png)
+   ![Fork Project Dialog](/img/user-manual/editor/projects/project-dashboard-fork.webp)
 
 3. Select **Fork project**.
 

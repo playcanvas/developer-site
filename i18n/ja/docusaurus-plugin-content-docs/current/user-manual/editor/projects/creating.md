@@ -15,7 +15,7 @@ Editorプロジェクトを作成するには、2つの方法があります。
 1. [playcanvas.com/editor](https://playcanvas.com/editor) でプロジェクトダッシュボードを開きます。
 2. サイドバーの **New project** を選択します。
 
-   ![New Project Button](/img/user-manual/editor/projects/new-project-button.png)
+   ![New Project Button](/img/user-manual/editor/projects/new-project-button.webp)
 
 3. スターターキットを選びます。
 
@@ -62,11 +62,11 @@ Editorプロジェクトを作成するには、2つの方法があります。
 
 1. プロジェクトのカードまたは行の **⋮** ボタンを選択し、**Fork** を選択します。
 
-   ![Fork Project Button](/img/user-manual/editor/projects/fork-project-button.png)
+   ![Fork Project Button](/img/user-manual/editor/projects/fork-project-button.webp)
 
 2. フォークダイアログには、フォーク元のプロジェクトが名前と説明が入力済みの状態で表示されます。必要に応じて名前、説明、所有者を変更します。
 
-   ![Fork Project Dialog](/img/user-manual/editor/projects/project-dashboard-fork.png)
+   ![Fork Project Dialog](/img/user-manual/editor/projects/project-dashboard-fork.webp)
 
 3. **Fork project** を選択します。
 

@@ -5,7 +5,7 @@ description: playcanvas.com/editor のプロジェクトダッシュボードか
 
 プロジェクトダッシュボードは、プロジェクトのコントロールセンターです。[playcanvas.com/editor](https://playcanvas.com/editor) で開きます。Editor 2.35 からダッシュボードは Editor の一部になり、playcanvas.com のダッシュボードページに代わるものになりました。
 
-![Dashboard](/img/user-manual/editor/projects/project-dashboard.png)
+![Dashboard](/img/user-manual/editor/projects/project-dashboard.webp)
 
 ダッシュボードは専用のブラウザータブで動作し、Editor 本体を読み込まないため、すばやく開きます。ダッシュボードの中でプロジェクトを開くことはありません。**Open editor** はそのプロジェクト専用のタブに切り替え、まだ開いていない場合にのみ新しく開きます。Editor のロゴメニューの **All Projects**、<kbd>Ctrl</kbd>/<kbd>Cmd</kbd> + <kbd>O</kbd>、ビューポートの **Projects** パンくずリストはダッシュボードに戻り、Editor はシーンをそのまま保持します。
 
@@ -27,7 +27,7 @@ description: playcanvas.com/editor のプロジェクトダッシュボードか
 
 左側のサイドバーは、端をドラッグしてサイズを変更できます。
 
-![Sidebar](/img/user-manual/editor/projects/new-project-button.png)
+![Sidebar](/img/user-manual/editor/projects/new-project-button.webp)
 
 ### New Project {#new-project}
 
@@ -47,7 +47,7 @@ description: playcanvas.com/editor のプロジェクトダッシュボードか
 
 **Organizations** の横の **+** を選択して組織を作成します。**Name**、playcanvas.com 上の **URL**、**Billing email** を入力し、**Create organization** を選択します。新しい組織がサイドバーに表示されます。
 
-![New Organization](/img/user-manual/editor/projects/project-dashboard-new-organization.png)
+![New Organization](/img/user-manual/editor/projects/project-dashboard-new-organization.webp)
 
 組織の **⋮** メニューには、playcanvas.com のアカウントページを開く **Organization details** と、**Delete organization** があります。削除するには、確認のため組織名を入力する必要があります。組織にプロジェクトがある場合、それらはあなたのアカウントに移されます。
 
@@ -59,19 +59,19 @@ description: playcanvas.com/editor のプロジェクトダッシュボードか
 
 アカウントの横にある **MCP server** ボタンで、プロジェクトダッシュボードを [Editor MCP Server](/user-manual/editor/mcp-server/) に接続できます。プロジェクトを開く前から、AI アシスタントがプロジェクトの一覧表示、作成、更新、オープンを行えます。[プロジェクトダッシュボードから接続する](/user-manual/editor/mcp-server/#connect-from-the-project-dashboard)を参照してください。
 
-![MCP Server](/img/user-manual/editor/projects/project-dashboard-mcp.png)
+![MCP Server](/img/user-manual/editor/projects/project-dashboard-mcp.webp)
 
 ## Continue Editing {#continue-editing}
 
 メインパネルの先頭には **Continue editing** があり、最後に編集したプロジェクトが **Open editor** と **Play** ボタンとともに表示されます。その下にプロジェクトが並びます。
 
-![Dashboard Header](/img/user-manual/editor/projects/dashboard-header.png)
+![Dashboard Header](/img/user-manual/editor/projects/dashboard-header.webp)
 
 ## プロジェクトを探す {#finding-projects}
 
 検索ボックスに入力すると、名前、所有者、説明でプロジェクトを検索できます。検索は入力ミスをある程度許容します。<kbd>/</kbd> を押すと検索ボックスに移動します（ダイアログやメニューが開いている場合を除く）。
 
-![Search Filters](/img/user-manual/editor/projects/project-dashboard-search.png)
+![Search Filters](/img/user-manual/editor/projects/project-dashboard-search.webp)
 
 次のフィルターで検索を絞り込めます。
 
@@ -99,7 +99,7 @@ description: playcanvas.com/editor のプロジェクトダッシュボードか
 
 **Sort by** の横のボタンで **Cards** と **List** を切り替えます。カードには各プロジェクトのサムネイル、所有者とメンバー、最終編集からの経過時間とサイズが表示され、下部に閲覧数、プレイ数、スター数が表示されます。サムネイルがないプロジェクトにはプレースホルダーが表示されます。リスト表示では、プロジェクトごとに 1 行で **Forks**、**Views**、**Plays**、**Stars**、**Size**、**Edited** の列が表示されます。
 
-![List View](/img/user-manual/editor/projects/project-dashboard-list-view.png)
+![List View](/img/user-manual/editor/projects/project-dashboard-list-view.webp)
 
 プロジェクトには次のバッジが付くことがあります。
 
@@ -115,7 +115,7 @@ description: playcanvas.com/editor のプロジェクトダッシュボードか
 
 カード、リストの行、または Continue editing パネルの **⋮** ボタンでプロジェクトメニューが開きます。権限のない項目は表示されません。
 
-![Project Menu](/img/user-manual/editor/projects/fork-project-button.png)
+![Project Menu](/img/user-manual/editor/projects/fork-project-button.webp)
 
 ### Open Editor {#open-editor}
 
@@ -150,7 +150,7 @@ description: playcanvas.com/editor のプロジェクトダッシュボードか
 
 **Fork** を選択すると、このプロジェクトのコピーがアカウントに作成されます。フォークダイアログには、フォーク元のプロジェクトが名前と説明が入力済みの状態で表示され、所有者を選択できます。必要に応じて変更し、**Fork project** を選択します。
 
-![Fork Project Dialog](/img/user-manual/editor/projects/project-dashboard-fork.png)
+![Fork Project Dialog](/img/user-manual/editor/projects/project-dashboard-fork.webp)
 
 フォークの準備ができたら、**Open project** を選択して専用のタブで開くか、**Not now** を選択してダッシュボードに留まります。ダッシュボードにはフォークの新しいカードが表示されます。フォークでコピーされる内容と、フォークできない場合については[プロジェクトの作成](/user-manual/editor/projects/creating/#fork-an-existing-project)を参照してください。
 
@@ -177,11 +177,11 @@ description: playcanvas.com/editor のプロジェクトダッシュボードか
 
 ## プロジェクト設定 {#project-settings}
 
-プロジェクトのカード、またはメニューの **Project settings** を選択すると設定が開きます。左側のパネルで **Project settings**、**Dev log**、**Team** を切り替え、その下に **Open editor**、**Play**、**Delete Project** があります。
+プロジェクトのカード、またはメニューの **Project settings** を選択すると設定が開きます。左側のパネルで **Project settings**、**Dev log**、**Team** を切り替え、その上に **Open editor** と **Play** があります。
 
-![Project Settings](/img/user-manual/editor/projects/project-settings.png)
+![Project Settings](/img/user-manual/editor/projects/project-settings.webp)
 
-- **Project settings** には名前、説明、公開設定、フォークの場合は **Forked From** のリンク、過去 28 日間の **Activity** ストリップ、すでに使用している場合は **Private Source Assets** が表示されます。フッターには **Copy link**、**Fork Project**、**Export Project** があります。[プロジェクト設定](/user-manual/editor/projects/settings/)を参照してください。
+- **Project settings** には名前、説明、公開設定、フォークの場合は **Forked From** のリンク、過去 28 日間の **Activity** グリッド、すでに使用している場合は **Private Source Assets** が表示されます。フッターには **Copy link**、**Fork Project**、**Export Project**、**Delete Project** があります。[プロジェクト設定](/user-manual/editor/projects/settings/)を参照してください。
 - **Dev log** にはプロジェクトの投稿が一覧表示され、投稿の作成、編集、削除ができます。[Dev Logs](/user-manual/editor/projects/dev-logs/#write-a-post-from-the-project-dashboard) を参照してください。
 - **Team** にはプロジェクトのメンバーとそのアクセス権が表示されます。[チーム管理](/user-manual/editor/projects/team-management/)を参照してください。
 

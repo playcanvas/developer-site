@@ -5,7 +5,7 @@ description: ブランディング、アートワーク、公開範囲、説明�
 
 プロジェクト設定では、基本的な情報、プライバシー設定、ブランディングオプションなど、プロジェクトのさまざまな側面を設定できます。
 
-![プロジェクト設定](/img/user-manual/editor/projects/project-settings.png)
+![プロジェクト設定](/img/user-manual/editor/projects/project-settings.webp)
 
 ## プロジェクト設定へのアクセス
 
