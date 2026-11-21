@@ -145,6 +145,8 @@ const sidebars = {
           },
           items: [
             'user-manual/editor/getting-started/your-first-app',
+            'user-manual/editor/projects/creating',
+            'user-manual/editor/projects/dashboard',
             'user-manual/editor/getting-started/workflow',
             'user-manual/editor/interface/index',
           ],
@@ -336,14 +338,13 @@ const sidebars = {
         },
         {
           type: 'category',
-          label: 'Projects',
+          label: 'Managing Projects',
+          key: 'editor-projects',
           link: {
             type: 'doc',
             id: 'user-manual/editor/projects/index',
           },
           items: [
-            'user-manual/editor/projects/creating',
-            'user-manual/editor/projects/dashboard',
             'user-manual/editor/projects/settings',
             'user-manual/editor/projects/dev-logs',
             'user-manual/editor/projects/backup-and-export',

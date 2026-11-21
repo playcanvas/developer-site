@@ -119,9 +119,9 @@
     "message": "PlayCanvas Editor",
     "description": "The label for category PlayCanvas Editor in sidebar userManualSidebar"
   },
-  "sidebar.userManualSidebar.category.Projects": {
-    "message": "プロジェクト",
-    "description": "The label for category Projects in sidebar userManualSidebar"
+  "sidebar.userManualSidebar.category.editor-projects": {
+    "message": "プロジェクトの管理",
+    "description": "The label for category Managing Projects (Editor) in sidebar userManualSidebar"
   },
   "sidebar.userManualSidebar.category.editor-testing": {
     "message": "テストとデバッグ",
