@@ -24,3 +24,7 @@ Many 3D creation tools have lightmap generation included or available as an add-
 ### PlayCanvas Runtime Lightmap Generation
 
 The PlayCanvas Engine has built in lightmap generation. This can be used to generate lightmaps automatically just before your game runs. With this method you can use the standard light components, make changes and preview your scene directly in the Editor.
+
+## Probe Volumes
+
+A [probe volume](/user-manual/graphics/lighting/probe-volumes) bakes the indirect lighting of an area into a grid of probes at runtime. Unlike lightmaps, it lights moving objects as well as static ones, needs no lightmap UVs, and can be rebaked quickly as the lighting changes.

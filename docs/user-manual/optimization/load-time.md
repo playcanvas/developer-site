@@ -15,6 +15,7 @@ Here are some tips to achieve super-fast load times:
 * Ensure that imported models only have the vertex attributes that you need. For example, if your model has a second set of UVs but doesn't use them or if it has all-white vertex colors, go back to the modeling application and delete those attributes.
 * Use the Networking panel in Chrome Dev Tools (or the equivalent in other browsers) to sort loaded assets by size and look for anything that stands out. Look for assets that are not used and could be deleted. Look for assets that are essentially duplicates and delete them.
 * Using PlayCanvas' built-in physics engine incurs an additional download cost of 379KB. If you are using the physics engine to solve very simple problems, consider rolling an alternative solution that doesn't incur the download penalty.
+* Use [shader precompilation](/user-manual/optimization/shader-precompilation/) to compile the shaders and render pipelines of the scene in parallel before the first frame, instead of one by one while it renders.
 * If you self-host your PlayCanvas app, be sure to configure your web server to serve files with GZIP compression. In particular, JSON and JS files.
 
 ## Loading sequence best practices

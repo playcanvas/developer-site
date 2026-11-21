@@ -30,6 +30,12 @@ The use of [batching](/user-manual/graphics/advanced-rendering/batching) is not 
 
 :::
 
+:::tip
+
+To bake lighting which also lights moving objects, and which can be rebaked quickly as it changes, see [Probe Volumes](/user-manual/graphics/lighting/probe-volumes).
+
+:::
+
 ## Setting Up Lights for Baking {#setting-up-lights-for-baking}
 
 Each Light Component contains the following settings to enable lightmap baking. By default, new lights are set to Dynamic.

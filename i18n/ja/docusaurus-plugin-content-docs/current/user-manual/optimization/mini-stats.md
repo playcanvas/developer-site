@@ -138,7 +138,7 @@ GPU結果は非同期に届くため、数フレーム前の値になること�
 
 オーバーレイを有効にしても、デバイスにない機能は追加されません。MiniStatsでは取得できないGPU測定値がゼロとして表示されることがありますが、GPU描画のコストがゼロという意味ではありません。有効な測定値がない場合、[`app.stats.gpuFrameTime`](/user-manual/optimization/app-stats/#enabling-gpu-timing)は`undefined`を返します。
 
-既定のCPU時間、ドローコール数、メモリ推定値は、リリース版やminified版を含むすべてのエンジンビルドで動作します。一部の追加カウンターにはdebugまたはprofilerビルドが必要です。[対応表](/user-manual/optimization/app-stats/#metrics-and-build-availability)を参照してください。
+既定のCPU時間、ドローコール数、メモリ推定値は、リリース版やminified版を含むすべてのエンジンビルドで動作します。プリミティブ数にはdebugビルドが必要です。[対応表](/user-manual/optimization/app-stats/#metrics-and-build-availability)を参照してください。
 
 ## オーバーレイのカスタマイズ {#customizing-the-overlay}
 
@@ -175,17 +175,16 @@ options.stats.push({
     watermark: 1000 / 60
 });
 
-// Primitive counts are available only in debug and profiler builds.
-if (app.stats.primitiveCount !== undefined) {
-    options.stats.push({
-        name: 'Primitives',
-        stats: ['primitiveCount'],
-        decimalPlaces: 1,
-        multiplier: 1 / 1000,
-        unitsName: 'k',
-        watermark: 500
-    });
-}
+// Primitive counts are collected only in debug builds; other builds show 0.
+// プリミティブ数はdebugビルドでのみ収集されます。他のビルドでは0と表示されます。
+options.stats.push({
+    name: 'Primitives',
+    stats: ['primitiveCount'],
+    decimalPlaces: 1,
+    multiplier: 1 / 1000,
+    unitsName: 'k',
+    watermark: 500
+});
 ```
 
 `miniStats.enabled = false`でオーバーレイを非表示にしてカウンターのサンプリングを停止するか、`miniStats.destroy()`でリソースを解放します。GPUプロファイリングはデバイス側の設定であり、オーバーレイを非表示または破棄しても無効にはなりません。他にGPU時間を必要とするものがなければ、プロファイラーが存在することを確認したうえで、`app.graphicsDevice.gpuProfiler.enabled = false`で別途無効にしてください。
