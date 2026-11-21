@@ -79,7 +79,7 @@ When you're ready to share your creation, PlayCanvas has you covered:
 
 Ready to dive in? Here's your path forward:
 
-1. **[Create Your First App](getting-started/your-first-app)** — Build a simple 3D scene in minutes
+1. **[Create Your First App](getting-started/your-first-app)** — Build and publish a small physics game
 2. **[Explore the Interface](interface)** — Master the Editor's tools and panels
 3. **[Learn Scripting](scripting)** — Add interactivity with JavaScript
 4. **[Publish Your Project](publishing)** — Share your creation with the world
