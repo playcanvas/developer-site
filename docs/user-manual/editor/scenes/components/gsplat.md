@@ -11,7 +11,7 @@ The GSplat Component enables an entity to render a 3D Gaussian Splat.
 
 | Property | Description |
 |----------|-------------|
-| Asset    | The GSplat asset to be rendered by this GSplat Component. Only a single GSplat asset can be assigned to a GSplat Component. |
+| Asset    | The [GSplat asset](/user-manual/editor/assets/inspectors/gsplat/) to be rendered by this GSplat Component. Only a single GSplat asset can be assigned to a GSplat Component. |
 | Cast Shadows | When enabled, the splat casts shadows for lights that have shadow casting enabled. |
 | LOD Range Min | Lowest LOD level used when rendering this Gaussian splat. Integer, minimum 0. |
 | LOD Range Max | Highest LOD level used when rendering this Gaussian splat. Integer, minimum 0. |
@@ -38,6 +38,7 @@ Scene-wide Gaussian splat behaviour, including the global splat budget these LOD
 
 ## See Also
 
+- [GSplat Asset](/user-manual/editor/assets/inspectors/gsplat/) - The splat data the component renders, and the file formats you can import
 - [Gaussian Splatting](/user-manual/gaussian-splatting) - Learn more about 3D Gaussian Splats
 - [Rendering Settings](/user-manual/editor/interface/settings/rendering#gaussian-splatting) - Scene-wide Gaussian splat settings
 

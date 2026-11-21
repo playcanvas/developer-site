@@ -11,7 +11,7 @@ GSplatコンポーネントは、エンティティが3Dガウシアンスプラ
 
 | プロパティ名 | 説明 |
 |----------|-------------|
-| Asset    | このGSplatコンポーネントでレンダリングするGSplatアセット。GSplatコンポーネントには1つのGSplatアセットのみ割り当てることができます。 |
+| Asset    | このGSplatコンポーネントでレンダリングする[GSplatアセット](/user-manual/editor/assets/inspectors/gsplat/)。GSplatコンポーネントには1つのGSplatアセットのみ割り当てることができます。 |
 | Cast Shadows | 有効にすると、シャドウキャスティングが有効なライトに対してスプラットがシャドウを落とします。 |
 | LOD Range Min | このガウシアンスプラットのレンダリングに使用する最小のLODレベル。整数、最小値は0。 |
 | LOD Range Max | このガウシアンスプラットのレンダリングに使用する最大のLODレベル。整数、最小値は0。 |
@@ -38,6 +38,7 @@ LODの距離はカメラの視野角に応じて補正されます。視野角�
 
 ## 関連項目 {#see-also}
 
+- [GSplatアセット](/user-manual/editor/assets/inspectors/gsplat/) - コンポーネントがレンダリングするスプラットデータと、インポートできるファイル形式
 - [ガウシアンスプラッティング](/user-manual/gaussian-splatting) - 3Dガウシアンスプラットについて詳しく学ぶ
 - [レンダリング設定](/user-manual/editor/interface/settings/rendering#gaussian-splatting) - シーン全体のガウシアンスプラット設定
 
