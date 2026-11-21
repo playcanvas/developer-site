@@ -20,6 +20,7 @@ Browsing a profile is anonymous; no PlayCanvas account is required.
 | **Social links** | Links to any external profiles the creator has added (X, LinkedIn, personal site, etc.). |
 | **Followers and following** | How many people follow the creator and how many they follow. Click either number to see who. See [Finding more creators](#lists). |
 | **Follow** | [Follow](#following) the creator to see their splats in your Following feed. |
+| **Share Profile** | Opens the [Share dialog](/user-manual/supersplat/viewing/scene-page#share-dialog) for the profile, where you can post its link to Facebook, X, LinkedIn or Reddit, or copy it. |
 | **Splat grid** | Every **Public** splat the creator has published, using the same card UI as [Explore](/user-manual/supersplat/viewing/explore). Click any card to open its [scene page](/user-manual/supersplat/viewing/scene-page). |
 
 Unlisted splats are not shown on the public profile — only the creator can see those, via the [Manage page](/user-manual/supersplat/publishing/manage).
