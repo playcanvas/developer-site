@@ -119,13 +119,49 @@
     "message": "PlayCanvas Editor",
     "description": "The label for category PlayCanvas Editor in sidebar userManualSidebar"
   },
-  "sidebar.userManualSidebar.category.Projects": {
-    "message": "プロジェクト",
-    "description": "The label for category Projects in sidebar userManualSidebar"
+  "sidebar.userManualSidebar.category.editor-projects": {
+    "message": "プロジェクトの管理",
+    "description": "The label for category Managing Projects (Editor) in sidebar userManualSidebar"
   },
-  "sidebar.userManualSidebar.category.Editor Interface": {
-    "message": "エディターインターフェース",
-    "description": "The label for category Editor Interface in sidebar userManualSidebar"
+  "sidebar.userManualSidebar.category.editor-testing": {
+    "message": "テストとデバッグ",
+    "description": "The label for category Testing and Debugging (Editor) in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.editor-collaboration": {
+    "message": "コラボレーション",
+    "description": "The label for category Collaboration (Editor) in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.editor-automation": {
+    "message": "自動化とAI",
+    "description": "The label for category Automation and AI (Editor) in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.category.editor-reference": {
+    "message": "リファレンス",
+    "description": "The label for category Reference (Editor) in sidebar userManualSidebar"
+  },
+  "sidebar.userManualSidebar.link.editor-components-link": {
+    "message": "コンポーネント",
+    "description": "The label for link 'Components' in sidebar 'userManualSidebar' (item 'editor-components-link')"
+  },
+  "sidebar.userManualSidebar.link.editor-models-link": {
+    "message": "3Dモデルのインポート",
+    "description": "The label for link 'Importing 3D Models' in sidebar 'userManualSidebar' (item 'editor-models-link')"
+  },
+  "sidebar.userManualSidebar.link.editor-sprite-editor-link": {
+    "message": "スプライトエディター",
+    "description": "The label for link 'Sprite Editor' in sidebar 'userManualSidebar' (item 'editor-sprite-editor-link')"
+  },
+  "sidebar.userManualSidebar.link.editor-texture-compression-link": {
+    "message": "テクスチャ圧縮",
+    "description": "The label for link 'Texture Compression' in sidebar 'userManualSidebar' (item 'editor-texture-compression-link')"
+  },
+  "sidebar.userManualSidebar.link.editor-debugging-link": {
+    "message": "デバッグ",
+    "description": "The label for link 'Debugging' in sidebar 'userManualSidebar' (item 'editor-debugging-link')"
+  },
+  "sidebar.userManualSidebar.link.editor-rest-api-link": {
+    "message": "REST API",
+    "description": "The label for link 'REST API' in sidebar 'userManualSidebar' (item 'editor-rest-api-link')"
   },
   "sidebar.userManualSidebar.category.Project Settings": {
     "message": "プロジェクト設定",
