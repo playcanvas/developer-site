@@ -43,7 +43,7 @@ CHAT ボタンを選択すると、チャットパネルが展開され、Editor
 
 シーン内の各ユーザーは、[Viewport](../interface/viewport) 内で色付きのワイヤーフレームカメラの錐台として表現されます。
 
-![Viewport Cameras](/img/user-manual/editor/realtime-collaboration/viewport-cameras.webp)
+<video autoPlay muted loop controls playsInline src='/video/editor-collaboration-viewport-cameras.mp4' style={{width: '100%', height: 'auto'}} />
 
 ユーザーカメラの陰影付き中央平面にマウスオーバーすると、関連するユーザー名が表示されます。
 

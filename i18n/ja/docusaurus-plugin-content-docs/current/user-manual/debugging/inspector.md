@@ -105,7 +105,7 @@ Frame graphタブでは、フレームをドローコール1つずつ描画で�
 3. 上下の矢印キーで、描画を1つずつ戻ったり進めたりします。プロパティビューには描画されたメッシュインスタンスが一覧表示され、現在のものが強調表示されます。ビューではその輪郭が表示され、ステータスバーには*draw 8 of 12 · World opaque*のようにその番号が表示されます。項目を展開すると、メッシュやマテリアルなどの詳細を確認できます。
 4. **Debug frame**をオフにすると、再びフレーム全体が描画されます。
 
-<img loading="lazy" alt="Worldレイヤーの描画を1つずつ進めている様子" width="800" src="/img/user-manual/debugging/inspector/debug-frame.webp" />
+<video autoPlay muted loop controls playsInline src='/video/debugging-inspector-debug-frame.mp4' style={{width: '100%', maxWidth: '800px', height: 'auto'}} />
 
 :::note
 描画のステップ実行にはエンジンのデバッグビルドが必要で、他のビルドではこのオプションは無効になります。Viteなどのバンドラーは、開発時に`playcanvas`パッケージの`development`エクスポート条件によってデバッグビルドを選択します。

@@ -28,7 +28,7 @@ Make a change, see it instantly. With [live editing](scripting/hot-reloading), y
 
 ### Real-time Collaboration
 
-![Collaboration in the Viewport](/img/user-manual/editor/realtime-collaboration/viewport-cameras.webp)
+<video autoPlay muted loop controls playsInline src='/video/editor-collaboration-viewport-cameras.mp4' style={{width: '100%', height: 'auto'}} />
 
 Work together with your team in real-time. See where others are looking, what they're selecting, and chat directly within the Editor. Multiple developers, artists, and designers can build the same scene simultaneously—no merge conflicts, no stepping on each other's toes. [Learn more about collaboration →](realtime-collaboration)
 

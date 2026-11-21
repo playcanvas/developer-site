@@ -7,7 +7,7 @@ description: "PlayCanvas の物理演算の概要：rigid body、コリジョン
 
 物理エンジンは、自然界の常識を人工的なゲームの世界で再現しようとしています。オブジェクトを現実にあるべき姿で動かせるように試みています。
 
-![Physics Constraints](/img/user-manual/physics/physics-constraints.webp)
+<video autoPlay muted loop controls playsInline src='/video/physics-constraints.mp4' style={{width: '100%', height: 'auto'}} />
 
 PlayCanvasの物理演算は、オープンソースのBullet物理エンジンをWebAssemblyに移植した[ammo.js](https://github.com/kripken/ammo.js)によって動作します。物理演算はコンポーネントを通して扱います。[RigidBody](/user-manual/editor/scenes/components/rigidbody/)コンポーネントはエンティティがどのように動くかを決め、[Collision](/user-manual/editor/scenes/components/collision/)コンポーネントは物理的な形状を与え、アルファ版の[Joint](/user-manual/physics/joints/)コンポーネントは複数のボディを互いに拘束します。同じコンポーネントが同じプロパティで、エディター、エンジン直接、[PlayCanvas React](/user-manual/react/guide/physics/)、[Web Components](/user-manual/web-components/tags/pc-rigid-body/)のどの方法で構築しても利用できます。このセクションの各ページでは、概念を一度説明した後、それぞれの環境での適用方法を示します。
 

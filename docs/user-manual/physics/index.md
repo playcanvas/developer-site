@@ -7,7 +7,7 @@ Most video games you have ever played will have some form of physics. The player
 
 A physics engine attempts to reproduce our understanding of the natural world in an artificial game world. It attempts to realistically animate objects in an expected and predictable way.
 
-![Physics Constraints](/img/user-manual/physics/physics-constraints.webp)
+<video autoPlay muted loop controls playsInline src='/video/physics-constraints.mp4' style={{width: '100%', height: 'auto'}} />
 
 PlayCanvas physics is powered by [ammo.js](https://github.com/kripken/ammo.js), a WebAssembly port of the open source Bullet physics engine. You work with it through components. The [rigidbody](/user-manual/editor/scenes/components/rigidbody/) component decides how an entity moves, the [collision](/user-manual/editor/scenes/components/collision/) component gives it a physical shape, and the alpha [joint](/user-manual/physics/joints/) component constrains bodies to one another. The same components, with the same properties, are available whichever way you build: in the Editor, directly against the engine, in [PlayCanvas React](/user-manual/react/guide/physics/) and in [Web Components](/user-manual/web-components/tags/pc-rigid-body/). Each page in this section explains a concept once and then shows how to apply it on each of those surfaces.
 

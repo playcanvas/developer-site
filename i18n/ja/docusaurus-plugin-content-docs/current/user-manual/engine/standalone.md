@@ -160,7 +160,7 @@ npm create playcanvas@latest my-app -- -f engine
 
     これにより、`http://localhost:5173`でサーバーが起動します。ブラウザでこのURLにアクセスすると、以下が表示されます。
 
-    ![Spinning Cube](/img/user-manual/engine/standalone/spinning-cube.webp)
+    <video autoPlay muted loop controls playsInline src='/video/engine-standalone-spinning-cube.mp4' style={{width: '100%', height: 'auto'}} />
 
     :::tip
 
@@ -279,7 +279,7 @@ npm create playcanvas@latest my-app -- -f engine
 
     これにより、サーバーが`http://localhost:5173`で起動します。ブラウザでこのURLにアクセスすると、以下が表示されます。
 
-    ![回転する立方体](/img/user-manual/engine/standalone/spinning-cube.webp)
+    <video autoPlay muted loop controls playsInline src='/video/engine-standalone-spinning-cube.mp4' style={{width: '100%', height: 'auto'}} />
 
     :::tip
 
@@ -411,7 +411,7 @@ import * as pc from 'playcanvas';
 
     これにより、`http://localhost:3000` でサーバーが起動します。ブラウザでこのURLにアクセスすると、次の表示が表示されます:
 
-    ![回転するキューブ](/img/user-manual/engine/standalone/spinning-cube.webp)
+    <video autoPlay muted loop controls playsInline src='/video/engine-standalone-spinning-cube.mp4' style={{width: '100%', height: 'auto'}} />
 
   </TabItem>
   <TabItem value="typescript" label="TypeScript">
@@ -534,7 +534,7 @@ import * as pc from 'playcanvas';
 
     これにより、`http://localhost:3000` でサーバーが起動します。ブラウザでこのURLにアクセスすると、次の表示が表示されます:
 
-    ![回転するキューブ](/img/user-manual/engine/standalone/spinning-cube.webp)
+    <video autoPlay muted loop controls playsInline src='/video/engine-standalone-spinning-cube.mp4' style={{width: '100%', height: 'auto'}} />
 
   </TabItem>
 </Tabs>

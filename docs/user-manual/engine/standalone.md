@@ -153,7 +153,7 @@ First, select whether you prefer to develop in JavaScript or TypeScript:
 
     This starts a server at `http://localhost:5173`. Visit this URL in your browser and you will see the following:
 
-    ![Spinning Cube](/img/user-manual/engine/standalone/spinning-cube.webp)
+    <video autoPlay muted loop controls playsInline src='/video/engine-standalone-spinning-cube.mp4' style={{width: '100%', height: 'auto'}} />
 
     :::tip
 
@@ -272,7 +272,7 @@ First, select whether you prefer to develop in JavaScript or TypeScript:
 
     This starts a server at `http://localhost:5173`. Visit this URL in your browser and you will see the following:
 
-    ![Spinning Cube](/img/user-manual/engine/standalone/spinning-cube.webp)
+    <video autoPlay muted loop controls playsInline src='/video/engine-standalone-spinning-cube.mp4' style={{width: '100%', height: 'auto'}} />
 
     :::tip
 
@@ -404,7 +404,7 @@ First, select whether you prefer to develop in JavaScript or TypeScript:
 
     This starts a server at `http://localhost:3000`. Visit this URL in your browser and you will see the following:
 
-    ![Spinning Cube](/img/user-manual/engine/standalone/spinning-cube.webp)
+    <video autoPlay muted loop controls playsInline src='/video/engine-standalone-spinning-cube.mp4' style={{width: '100%', height: 'auto'}} />
 
   </TabItem>
   <TabItem value="typescript" label="TypeScript">
@@ -527,7 +527,7 @@ First, select whether you prefer to develop in JavaScript or TypeScript:
 
     This starts a server at `http://localhost:3000`. Visit this URL in your browser and you will see the following:
 
-    ![Spinning Cube](/img/user-manual/engine/standalone/spinning-cube.webp)
+    <video autoPlay muted loop controls playsInline src='/video/engine-standalone-spinning-cube.mp4' style={{width: '100%', height: 'auto'}} />
 
   </TabItem>
 </Tabs>

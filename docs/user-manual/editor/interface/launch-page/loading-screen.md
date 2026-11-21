@@ -5,7 +5,7 @@ description: Loading screen customization via generated or selected scripts that
 
 All newly created PlayCanvas projects use the default loading screen:
 
-![Default Loading Screen](/img/user-manual/editor/launch-page/loading-screen/loading-screen-default.webp)
+<video autoPlay muted loop controls playsInline src='/video/editor-loading-screen-default.mp4' style={{width: '100%', height: 'auto'}} />
 
 It will be displayed in both the Launch Page and your published app.
 

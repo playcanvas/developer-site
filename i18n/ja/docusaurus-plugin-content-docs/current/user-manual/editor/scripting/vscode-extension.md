@@ -5,7 +5,7 @@ description: PlayCanvas VS Code Extension をインストールし、同期モ�
 
 PlayCanvas VS Code Extension は、PlayCanvas プロジェクトのテキストベースアセットをローカルワークスペースにマッピングします。VS Code または Cursor でスクリプトやシェーダーを編集しながら、認証、ブランチ、型情報、Editor との同期を拡張機能で管理できます。
 
-![VS Code Extension Demo](/img/user-manual/scripting/vscode-demo.webp)
+<video autoPlay muted loop controls playsInline src='/video/scripting-vscode-demo.mp4' style={{width: '100%', height: 'auto'}} />
 
 この拡張機能は [GitHub でオープンソースとして公開](https://github.com/playcanvas/vscode-extension)され、MIT ライセンスで提供されています。
 
