@@ -11,11 +11,12 @@ description: Launch Page の基本。Launch メニューのデバイス、プロ
 
 ビューポート右上の **Launch** をクリックするか、<kbd>Ctrl</kbd>+<kbd>Enter</kbd>（macOS では <kbd>Cmd</kbd>+<kbd>Enter</kbd>）を押すと、起動ページが新しいタブで開きます。<kbd>Shift</kbd> を押しながら **Launch** をクリックすると、代わりにポップアップウィンドウで開きます。
 
-**Launch** ボタンにマウスを重ねると、メニューが表示されます。
+**Launch** ボタンにマウスを重ねると、メニューが表示されます。メニューの最初の項目は、1つのグラフィックスデバイスですぐに起動します。**Launch with WebGPU** と **Launch with WebGL 2.0** は、[レンダリング設定](../settings/rendering.md#device-and-api)で設定された順序でデバイスを試す代わりに、そのデバイスだけを使って起動します。プロジェクトが最初に試すデバイスはメニューに表示されません。<kbd>Shift</kbd> を押しながらクリックすると、ポップアップウィンドウで開きます。
+
+その下には、起動に適用するオプションがあります。
 
 | オプション | 説明 |
 | --- | --- |
-| **Launch with WebGPU**<br />**Launch with WebGL 2.0** | [レンダリング設定](../settings/rendering.md#device-and-api)で設定された順序でデバイスを試す代わりに、そのグラフィックスデバイスだけを使って起動します。プロジェクトが最初に試すデバイスはメニューに表示されません。<kbd>Shift</kbd> を押しながらクリックすると、ポップアップウィンドウで開きます。 |
 | **Profiler** | [Inspector](/user-manual/debugging/inspector/) を [Performance タブ](/user-manual/optimization/inspector-performance/#recording-the-start-of-the-application)で開き、アプリケーションの起動から記録します。Engine 2.23 以降が必要です。 |
 | **Debug** | エンジンの警告とエラーのメッセージを、ブラウザの JavaScript コンソールに出力します。 |
 | **Concatenate Scripts (Classic)** | 起動時に、プリロードされるクラシックスクリプトを 1 つのファイルにまとめ、シーンの読み込みを速くします。ESM スクリプトには影響しません。 |

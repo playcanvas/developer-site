@@ -11,11 +11,12 @@ The Editor's Viewport is where you visually construct your application. From the
 
 Click **Launch** in the top-right corner of the Viewport, or press <kbd>Ctrl</kbd>+<kbd>Enter</kbd> (<kbd>Cmd</kbd>+<kbd>Enter</kbd> on macOS), to open the Launch Page in a new tab. <kbd>Shift</kbd>-click **Launch** to open it in a popup window instead.
 
-Hover over the **Launch** button to show its menu:
+Hover over the **Launch** button to show its menu. Its first items launch straight away with a single graphics device: **Launch with WebGPU** and **Launch with WebGL 2.0** use only that device, instead of trying the devices in the order set in the [Rendering settings](../settings/rendering.md#device-and-api). The menu leaves out the device your project already tries first. <kbd>Shift</kbd>-click one to open it in a popup window.
+
+Below them are the options for your launches:
 
 | Option | Description |
 | --- | --- |
-| **Launch with WebGPU**<br />**Launch with WebGL 2.0** | Launch with only that graphics device, instead of trying the devices in the order set in the [Rendering settings](../settings/rendering.md#device-and-api). The menu leaves out the device your project already tries first. <kbd>Shift</kbd>-click one to open it in a popup window. |
 | **Profiler** | Open the [Inspector](/user-manual/debugging/inspector/) on its [Performance tab](/user-manual/optimization/inspector-performance/#recording-the-start-of-the-application), recording from the start of the application. Requires Engine 2.23 or later. |
 | **Debug** | Log the engine's warning and error messages to the browser's JavaScript console. |
 | **Concatenate Scripts (Classic)** | Combine the preloaded Classic scripts into a single file when you launch, so that the scene loads faster. ESM Scripts are not affected. |
