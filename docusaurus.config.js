@@ -8,6 +8,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 import remarkTypedoc from './utils/plugins/remark-typedoc.mjs';
 import remarkLiveExample from './utils/plugins/remark-live-example.mjs';
 import remarkRootStaticUrls from './utils/plugins/remark-root-static-urls.mjs';
+import { rememberAssetAttributes, restoreAssetAttributes } from './utils/plugins/remark-asset-attributes.mjs';
 import pluginLlms from './utils/plugins/docusaurus-plugin-llms.mjs';
 
 // A localized production build (e.g. `ja`) does not copy the ~500 MB shared
@@ -323,8 +324,14 @@ const config = {
           routeBasePath: '/', // Serve the docs at the site's root
           sidebarPath: './sidebars.js',
           admonitions: { keywords: ['ai'] },
-          beforeDefaultRemarkPlugins: localizedBuild ? [remarkRootStaticUrls] : [],
+          // remember/restoreAssetAttributes stop Docusaurus escaping image alt
+          // text twice (see utils/plugins/remark-asset-attributes.mjs)
+          beforeDefaultRemarkPlugins: [
+            rememberAssetAttributes,
+            ...(localizedBuild ? [remarkRootStaticUrls] : [])
+          ],
           remarkPlugins: [
+            restoreAssetAttributes,
             [remarkTypedoc, {
                typeResolver: ({ displayName, types, tags }) => {
 
