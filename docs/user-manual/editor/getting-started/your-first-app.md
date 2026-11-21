@@ -1,231 +1,268 @@
 ---
 title: Your First App
-description: Walks through building a simple 3D PlayCanvas Editor project from a new scene to materials, scripts, movement, and publishing.
+description: Build and publish a small physics game in the PlayCanvas Editor - knock down a pyramid of cans with a ball you roll using the arrow keys - and learn entities, materials, physics, scripting, Live Link and publishing along the way.
 ---
 
-Developing applications in the PlayCanvas Editor is easy and fun. Let's spend a few minutes learning the basics. We'll recreate the following simple 3D app:
+import StepVideo from '@site/src/components/StepVideo';
+
+In the next 15 minutes you'll build **Can Knockdown**, a tiny physics game where you roll a ball into a pyramid of cans. Then you'll publish it to the web with a link you can send to anyone. You don't need to install anything, and you'll write about 20 lines of code.
+
+This is the finished game. Click it, then use the arrow keys to roll the ball:
 
 <div className="iframe-container">
-    <iframe  src="https://playcanv.as/p/TnUtDXWp/" title="Simple PlayCanvas App" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
+    <iframe src="https://playcanv.as/p/gLOk3TQH/" title="Can Knockdown, the game you build in this guide" loading="lazy" allow="fullscreen" allowFullScreen></iframe>
 </div>
 
-*Use the arrow keys to move the red ball around.*
+Along the way you'll use the core ideas that every PlayCanvas app is built from:
 
-To begin, navigate to your PROJECTS page.
+- **Entities and components** to make objects and give them a shape, physics or behavior.
+- **Materials** to color them.
+- **Physics** so they fall, stack and scatter.
+- **A script** to read the keyboard.
+- **Live Link** to tweak the running game from the Editor.
+- **Publishing** to put the game online.
 
-![Projects Page](/img/user-manual/editor/getting-started/your-first-app/projects-page.png)
+Each step has a short video of exactly what to do. The videos play as you scroll to them, so keep the Editor open in another tab and follow along.
 
-Select the NEW button to create a new project:
+:::info[Before you start]
 
-![New Project](/img/user-manual/editor/getting-started/your-first-app/new-project.png)
+You need a free [PlayCanvas account](https://login.playcanvas.com/signup) and a desktop browser. The game is played with the arrow keys, so a keyboard helps too.
 
-Enter `My First App` as the project name. The description is optional and can be filled out later. Hit CREATE.
+:::
 
-With your project created, we can dive right into the Editor - simply hit the EDITOR button:
+## 1. Create a Project {#create-a-project}
 
-![Editor Button](/img/user-manual/editor/getting-started/your-first-app/editor-button.png)
+Every app lives in a project. Start a new one:
 
-When you first open the Editor, you should find that a minimal scene has been created for you:
+1. Go to your [Projects dashboard](https://playcanvas.com/editor) and select **New project**.
+2. Pick the **Blank Project** starter kit.
+3. Name it `My First App` and select **Create project**.
+4. When it's ready, select **Open project**. The Editor opens in a new tab.
 
-![Editor](/img/user-manual/editor/getting-started/your-first-app/editor.png)
+<StepVideo src="/video/editor-first-app-create-project.mp4" poster="/img/user-manual/editor/getting-started/your-first-app/create-project.webp" label="Creating a project from the Blank Project starter kit on the Projects dashboard" />
 
-Specifically, you have a camera (to render the scene), a box sitting on a plane and a light (to illuminate the 3D objects).
+## 2. Find Your Way Around {#find-your-way-around}
 
-You can easily change the box to another shape, like a sphere. To do this, select the Box entity in the HIERARCHY panel. In the Inspector panel on the right, change the Type property of the RENDER component from Box to Sphere. To be complete, rename the Entity from Box to Sphere too!
+The Blank Project starts you with a small scene: a **Camera**, a **Light**, a **Box** and a **Plane** for the floor. Here's where everything lives:
 
-![Box To Sphere](/img/user-manual/editor/getting-started/your-first-app/box-to-sphere.png)
+![The PlayCanvas Editor with its five main areas numbered](/img/user-manual/editor/getting-started/your-first-app/editor-interface.png)
 
-But our sphere is a slightly boring gray color. Let's color it red! To do this, we must create a material by hitting the **+** icon in the ASSETS panel:
+1. **[Hierarchy](/user-manual/editor/interface/hierarchy/)**: every entity in the scene, as a tree. Click one to select it.
+2. **[Viewport](/user-manual/editor/interface/viewport/)**: your 3D view of the scene.
+3. **[Inspector](/user-manual/editor/interface/inspector/)**: the properties of whatever is selected. This is where you'll do most of your editing.
+4. **[Assets](/user-manual/editor/interface/assets/)**: the files your project uses, such as materials, scripts, textures and models.
+5. **[Toolbar](/user-manual/editor/interface/toolbar/)**: tools for moving, rotating and scaling, plus publishing.
 
-![Create Material](/img/user-manual/editor/getting-started/your-first-app/create-material.png)
+Now take the Viewport for a spin. Drag with the left mouse button to orbit, and scroll to zoom. Select **Box** in the Hierarchy, move the mouse back over the Viewport and press <kbd>F</kbd> to focus on it. That's your way home whenever you get lost.
 
-Select the material and its properties will appear in the Inspector panel to the right. Expand the DIFFUSE section and click on the color swatch to edit the color to red:
+<StepVideo src="/video/editor-first-app-navigate.mp4" poster="/img/user-manual/editor/getting-started/your-first-app/navigate.webp" label="Orbiting and zooming the Viewport, then pressing F to focus on the Box" />
 
-![Red Material](/img/user-manual/editor/getting-started/your-first-app/red-material.png)
+:::tip
 
-Next, we must assign the material to the sphere. You can do this with a simple drag and drop operation:
+<kbd>Shift</kbd>-drag to pan. The [Controls and Keyboard Shortcuts](/user-manual/editor/interface/keyboard-shortcuts/) page lists everything else.
 
-![Drag And Drop Material](/img/user-manual/editor/getting-started/your-first-app/drag-and-drop-material.webp)
+:::
 
-Now let's set up the Camera entity. Select it in the HIERARCHY panel:
+## 3. Make a Can {#make-a-can}
 
-![Editor Camera Selected](/img/user-manual/editor/getting-started/your-first-app/editor-camera-selected.png)
+An **entity** is an empty object. **Components** give it everything else. The Box is an entity with a **Render** component, which draws a shape. Turn it into a can:
 
-Notice the little preview window that has appeared for the selected camera. Let's edit the camera's position and rotation to view the cube from directly in front. Edit the camera's position and rotation with the values below:
+1. Select **Box** in the Hierarchy.
+2. In the Inspector, change **Name** to `Can`.
+3. In the **RENDER** component, change **Type** from **Box** to **Cylinder**.
 
-![Camera Transform](/img/user-manual/editor/getting-started/your-first-app/camera-transform.png)
+It's a can, but a plain white one. Colors and shine come from a **material**:
 
-Next, let's make the sphere controllable with the arrow keys on the keyboard. To do this, we must create a script. Right click the Sphere entity and select `Add Component -> Script`.
+1. In the Assets panel, select **+** and choose **Material**.
+2. Select the new material in the Assets panel and rename it `Can` in the Inspector.
+3. Open the **DIFFUSE** section, click the **Color** swatch and enter `E52521`.
+4. Open the **SPECULAR** section and set **Metalness** to `0.6` and **Glossiness** to `80`.
+5. Drag the material from the Assets panel onto the can in the Viewport.
 
-![Add Script Component](/img/user-manual/editor/getting-started/your-first-app/add-script-component.png)
+<StepVideo src="/video/editor-first-app-can.mp4" poster="/img/user-manual/editor/getting-started/your-first-app/can.webp" label="Changing the Box into a red metallic Can with a new material" />
 
-A script component will appear in the Inspector on the Sphere entity. To create a script asset on the script component, enter the name `movement.js`.
+## 4. Add Physics {#add-physics}
 
-![Create Script Asset](/img/user-manual/editor/getting-started/your-first-app/create-script-asset.png)
+Right now the can is just a picture of a can. Two physics components make it a real object that falls, collides and gets knocked over:
 
-Hit Enter and your script will be created.
+- A **Rigid Body** gives it mass and lets the physics engine move it.
+- A **Collision** component gives it a shape for the physics engine to use. This is separate from the visible shape.
 
-![Edit Script](/img/user-manual/editor/getting-started/your-first-app/edit-script.png)
+Select the **Can** and add both:
 
-Now click the edit (pencil) icon on the movement script to open the Code Editor. You'll see the following skeleton script:
+1. Select **ADD COMPONENT** and choose **Physics** > **Rigid Body**. Set its **Type** to **Dynamic**, so the can can move.
+2. Select **ADD COMPONENT** again and choose **Physics** > **Collision**. Set its **Type** to **Cylinder** and its **Height** to `1`, so it matches the can.
+3. A red **Ammo module not found** notice appears. Select **IMPORT AMMO** to add the physics engine to your project.
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+Without physics on the floor, the can would fall straight through it. Select the **Plane** and give it the same two components:
 
-<Tabs defaultValue="esm" groupId='script-code'>
-<TabItem value="esm" label="ESM">
+1. Add a **Rigid Body** and leave its **Type** as **Static**. A static body never moves, but other bodies collide with it.
+2. Add a **Collision** component and leave it as a **Box**. Set **Half Extents** to `4`, `0.5`, `4` and **Position Offset** to `0`, `-0.5`, `0`.
 
-```javascript
-import { Script } from 'playcanvas';
+<StepVideo src="/video/editor-first-app-physics.mp4" poster="/img/user-manual/editor/getting-started/your-first-app/physics.webp" label="Adding Rigid Body and Collision components to the Can and the Plane, and importing Ammo" />
 
-export class Movement extends Script {
-    static scriptName = "movement";
+:::note[Why those numbers?]
 
-    initialize() {
-        // initialize code called once per entity
-    }
+[Collision shapes ignore the entity's **Scale**](/user-manual/physics/collision-shapes/#scale). The Plane is scaled to 8 × 8, so a box that reaches 4 out from the center in each direction covers it. The offset moves that box down by half its height, so its top sits level with the floor.
 
-    update(dt) {
-        // update code called every frame
-    }
-}
-```
+:::
 
-</TabItem>
-<TabItem value="classic" label="Classic">
+## 5. Drop Test {#drop-test}
 
-```javascript
-var Movement = pc.createScript('movement');
+Time to see physics in action. Select the **Can** and drag the green arrow up to lift it into the air. Then select **Launch** (the ▶ button at the top right of the Viewport). Your scene opens in a new tab and runs, and the can drops onto the floor.
 
-// initialize code called once per entity
-Movement.prototype.initialize = function() {
+<StepVideo src="/video/editor-first-app-drop-test.mp4" poster="/img/user-manual/editor/getting-started/your-first-app/drop-test.webp" label="Lifting the Can above the floor and launching the scene to watch it fall" />
 
-};
+Switch back to the Editor tab and press <kbd>Ctrl</kbd>+<kbd>Z</kbd> (<kbd>Cmd</kbd>+<kbd>Z</kbd> on macOS) to put the can back on the floor. Everything you do in the Editor can be undone.
 
-// update code called every frame
-Movement.prototype.update = function(dt) {
+## 6. Stack the Pyramid {#stack-the-pyramid}
 
-};
-```
+One can isn't much of a target. A duplicate copies an entity with all its components, so every copy is already red and ready for physics:
 
-</TabItem>
-</Tabs>
+1. With the **Can** selected, select the **Duplicate** button at the top of the Hierarchy, or press <kbd>Ctrl</kbd>+<kbd>D</kbd> (<kbd>Cmd</kbd>+<kbd>D</kbd> on macOS).
+2. Set the new can's **Position** from the table below.
+3. Repeat until you have all six cans.
 
-To make the sphere controllable, let's add some code to the `update` function. Copy and paste the code below:
+| Can | Position X | Position Y |
+| --- | --- | --- |
+| Bottom row | `-1`, `0`, `1` | `0.5` |
+| Middle row | `-0.5`, `0.5` | `1.5` |
+| Top | `0` | `2.5` |
 
-<Tabs defaultValue="esm" groupId='script-code'>
-<TabItem value="esm" label="ESM">
+Position Z stays `0` for every can.
+
+<StepVideo src="/video/editor-first-app-pyramid.mp4" poster="/img/user-manual/editor/getting-started/your-first-app/pyramid.webp" label="Duplicating the Can five times and positioning the copies into a pyramid" />
+
+## 7. Make the Ball {#make-the-ball}
+
+The ball is just another can, reshaped. Duplicate it so it keeps the physics components:
+
+1. With a can selected, duplicate it and rename the copy `Ball`.
+2. Set its **Position** to `0`, `0.5`, `3`, which puts it in front of the pyramid.
+3. In **RENDER**, set **Type** to **Sphere**. In **COLLISION**, set **Type** to **Sphere**.
+4. Create another material and name it `Ball`. Set its **DIFFUSE** **Color** to `1F8FFF` and its **SPECULAR** **Glossiness** to `80`, then drag it onto the ball.
+
+<StepVideo src="/video/editor-first-app-ball.mp4" poster="/img/user-manual/editor/getting-started/your-first-app/ball.webp" label="Duplicating a can into a blue Ball with a sphere shape and its own material" />
+
+## 8. Frame the Shot {#frame-the-shot}
+
+The **Camera** decides what the player sees. Select it in the Hierarchy and a live preview of its view appears in the corner of the Viewport. Point it down the length of the floor:
+
+1. Set **Position** to `0`, `4`, `9`.
+2. Set **Rotation** to `-20`, `0`, `0`.
+
+<StepVideo src="/video/editor-first-app-camera.mp4" poster="/img/user-manual/editor/getting-started/your-first-app/camera.webp" label="Positioning the Camera and watching its preview update" />
+
+## 9. Script the Controls {#script-the-controls}
+
+Components do a lot, but behavior that's specific to your game comes from **scripts**. This one pushes the ball when you press the arrow keys.
+
+1. Select the **Ball** and choose **ADD COMPONENT** > **Script**.
+2. In the **+ ADD SCRIPT** field, type `roll.mjs` and press <kbd>Enter</kbd>. The `.mjs` extension creates an [ESM script](/user-manual/scripting/esm-scripts/), the modern kind of script built on JavaScript modules (ECMAScript modules, or ESM). The script is attached to the ball and appears in the Assets panel.
+3. Select the **Edit** (pencil) button on the **roll** script. The Code Editor opens in a new tab.
+4. Replace everything in the file with the code below, then press <kbd>Ctrl</kbd>+<kbd>S</kbd> (<kbd>Cmd</kbd>+<kbd>S</kbd> on macOS) to save.
+5. Back in the Editor, select the **Parse** button (the two arrows next to **Edit**). A **power** field appears under the script.
 
 ```javascript
 import { Script, KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_DOWN } from 'playcanvas';
 
-export class Movement extends Script {
-    static scriptName = "movement";
+export class Roll extends Script {
+    static scriptName = 'roll';
 
-    initialize() {
-        // initialize code called once per entity
-    }
+    /**
+     * How hard the arrow keys push the ball.
+     *
+     * @attribute
+     */
+    power = 15;
 
     update(dt) {
-        // get which keys are pressed
-        var keyboard = this.app.keyboard;
-        var left  = keyboard.isPressed(KEY_LEFT);
-        var right = keyboard.isPressed(KEY_RIGHT);
-        var up    = keyboard.isPressed(KEY_UP);
-        var down  = keyboard.isPressed(KEY_DOWN);
+        const keyboard = this.app.keyboard;
 
-        // move this entity based on which keys are pressed
-        // dt is the time in seconds since the last frame and stands for 'delta time'
-        if (left) {
-            this.entity.translate(-dt, 0, 0);
-        }
-        if (right) {
-            this.entity.translate(dt, 0, 0);
-        }
-        if (up) {
-            this.entity.translate(0, 0, -dt);
-        }
-        if (down) {
-            this.entity.translate(0, 0, dt);
-        }
+        // Which way are the arrow keys pointing?
+        let x = 0;
+        let z = 0;
+        if (keyboard.isPressed(KEY_LEFT)) x -= 1;
+        if (keyboard.isPressed(KEY_RIGHT)) x += 1;
+        if (keyboard.isPressed(KEY_UP)) z -= 1;
+        if (keyboard.isPressed(KEY_DOWN)) z += 1;
+
+        // Push the ball while a key is held. Physics does the rest.
+        this.entity.rigidbody.applyForce(x * this.power, 0, z * this.power);
     }
 }
 ```
 
-</TabItem>
-<TabItem value="classic" label="Classic">
+<StepVideo src="/video/editor-first-app-script.mp4" poster="/img/user-manual/editor/getting-started/your-first-app/script.webp" label="Adding the roll script to the Ball, pasting the code in the Code Editor and parsing it" />
 
-```javascript
-var Movement = pc.createScript('movement');
+Here's what the script does:
 
-// initialize code called once per entity
-Movement.prototype.initialize = function() {
+- `update` runs once every frame, about 60 times a second.
+- `keyboard.isPressed` checks whether a key is held down right now. Up moves away from the camera, which is the negative Z direction.
+- `applyForce` pushes the ball's rigid body. You never move the ball yourself: the physics engine works out the rolling, the bouncing and every can it hits.
+- The `@attribute` comment turns `power` into an editable field in the Inspector. That's why you parsed the script, and it means you can tune the game without touching the code.
 
-};
+## 10. Play {#play}
 
-// update code called every frame
-Movement.prototype.update = function(dt) {
-    // get which keys are pressed
-    const keyboard = this.app.keyboard;
-    const left  = keyboard.isPressed(pc.KEY_LEFT);
-    const right = keyboard.isPressed(pc.KEY_RIGHT);
-    const up    = keyboard.isPressed(pc.KEY_UP);
-    const down  = keyboard.isPressed(pc.KEY_DOWN);
+Select **Launch** again. Hold the up arrow to roll the ball, steer with left and right, and aim between two cans for the biggest crash.
 
-    // move this entity based on which keys are pressed
-    // dt is the time in seconds since the last frame and stands for 'delta time'
-    if (left) {
-        this.entity.translate(-dt, 0, 0);
-    }
-    if (right) {
-        this.entity.translate(dt, 0, 0);
-    }
-    if (up) {
-        this.entity.translate(0, 0, -dt);
-    }
-    if (down) {
-        this.entity.translate(0, 0, dt);
-    }
-};
-```
+<StepVideo src="/video/editor-first-app-play.mp4" poster="/img/user-manual/editor/getting-started/your-first-app/play.webp" label="Playing the game: the ball rolls into the pyramid and the cans scatter" />
 
-</TabItem>
-</Tabs>
+To play again, reload the tab.
 
-When the code is updated, save the script using CTRL+S (or CMD+S on Mac) and close the Code Editor tab.
+:::tip[Not working?]
 
-You are now ready to preview your app by opening the Launch page. To do this, hit the Launch button in the top right of the Editor's 3D view.
-
-![Launch Button](/img/user-manual/editor/getting-started/your-first-app/launch-button.png)
-
-The Launch page opens in a new tab. When it opens, try pressing the 4 arrow keys to move the sphere around.
-
-![Launch Page](/img/user-manual/editor/getting-started/your-first-app/launch-page.webp)
-
-:::tip
-
-There is a 'Live Link' between the Editor and the Launch page. Any change you make in the Editor will be reflected in the Launch page in real time! It can be convenient to place the Launch page side by side with the Editor while you are working.
-
-![Editor Live Link](/img/user-manual/editor/getting-started/your-first-app/live-link.webp)
+- **Nothing falls:** check that you selected **IMPORT AMMO**, and that the cans' Rigid Body **Type** is **Dynamic**.
+- **The ball won't move:** click inside the game first so it has keyboard focus. Then check that the **power** field appears under the roll script. If it doesn't, select **Parse** again.
+- **The cans fall through the floor:** check the Plane's Collision **Half Extents** and **Position Offset**.
 
 :::
 
-The final step is to publish your app so you can share it with others. To do this, click on the <span class="pc-icon">&#57911;</span> button in the left hand side toolbar.
+## 11. Tweak It Live {#tweak-it-live}
 
-![Publish Button](/img/user-manual/editor/getting-started/your-first-app/publish-button.png)
+The Launch tab stays connected to the Editor through **Live Link**. Change something in the Editor and the running game updates at once, with no reload. Put the two windows side by side and try it:
 
-This will open up the Publishing dialog. Here you can publish a build (or even download a build for self-hosting).
+- Select the **Settings** (gear) button at the top of the Viewport, open **PHYSICS** and set the **Gravity** Y value to `-1.5`. Now roll the ball: it's playing on the Moon.
+- Select the **Ball** material and give it a new **Color**.
+- Select the **Ball** and turn **power** up to `40`.
 
-![Publish](/img/user-manual/editor/getting-started/your-first-app/publish-dialog.png)
+<StepVideo src="/video/editor-first-app-live-link.mp4" poster="/img/user-manual/editor/getting-started/your-first-app/live-link.webp" label="The Editor and the running game side by side: lowering gravity and recoloring the ball update the game instantly" />
 
-Click the Publish button. You can then configure your published app.
+When you're done, set **Gravity** back to `-9.8`, or keep it. It's your game.
 
-![Publish New Build](/img/user-manual/editor/getting-started/your-first-app/publish-options.png)
+Live Link covers scene and asset changes. After you edit the code in a script, reload the Launch tab to run the new version.
 
-Leave the defaults and select Publish.
+## 12. Publish {#publish}
 
-![Builds](/img/user-manual/editor/getting-started/your-first-app/builds.png)
+Last step: put your game on the web.
 
-You now have a URL for your published build! Feel free to share it with the world on Twitter or Facebook!
+1. Select the **Publish / Download** button in the toolbar on the left.
+2. Select **Publish**.
+3. Your build gets your project's name as its title. Select **Publish** at the bottom of the form.
 
-And so, that is the process from start to finish for building and publishing a PlayCanvas application. In this quick introduction, we have touched on the basics. Now explore the rest of the User Manual to learn some more advanced topics. Good luck and have fun!
+<StepVideo src="/video/editor-first-app-publish.mp4" poster="/img/user-manual/editor/getting-started/your-first-app/publish.webp" label="Publishing a build and getting its playcanv.as link" />
+
+A few seconds later your game is live, with a link like `https://playcanv.as/p/...`. The game at the top of this page was published exactly this way. Open it on your phone, send it to a friend, post it anywhere.
+
+Your first build automatically becomes the project's **primary build**, which is what that link plays. When you publish again, you choose when the new build replaces it, so you can test a build before your players see it. See [PlayCanvas Hosting](/user-manual/editor/publishing/web/playcanvas-hosting/) to manage builds, or [Self-Hosting](/user-manual/editor/publishing/web/self-hosting/) to download a build and host it yourself.
+
+## You Made a Game {#you-made-a-game}
+
+In one sitting you've used the same building blocks as every PlayCanvas app: entities and components, materials, rigid bodies and collision, a script with an editable attribute, Live Link and publishing. Everything else builds on them.
+
+### Make It Yours {#make-it-yours}
+
+Some ideas for what to try next, roughly from easiest to hardest:
+
+- **Build a harder level.** Stack a taller pyramid, or add walls with more static Box entities.
+- **Change the look.** Try the other material sections, add more lights, or drop in a model from the [Asset Store](/user-manual/editor/assets/asset-store/).
+- **Bring your own art.** [Import](/user-manual/editor/assets/importing/) your own models, textures and sounds.
+- **Keep score.** Use [collision events](/user-manual/physics/collision-events/) to count hits, and show the score with a [text element](/user-manual/user-interface/).
+- **Add a reset key.** Store each can's starting position in a script and put it back when <kbd>R</kbd> is pressed.
+
+### Keep Learning {#keep-learning}
+
+- [Scripting](/user-manual/scripting/): everything scripts can do.
+- [Physics](/user-manual/physics/): forces, joints, triggers and ray casts.
+- [The Editor interface](/user-manual/editor/interface/): every panel in depth.
+- [Tutorials](/tutorials/): complete projects to explore and fork, such as the [Keepy Up](/tutorials/keepyup-part-one/) game.

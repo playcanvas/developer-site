@@ -285,7 +285,7 @@ function StartBuilding() {
             <div className={styles.laneActions}>
               <Link className={styles.primaryButton} to="/user-manual/editor/getting-started/your-first-app/">
                 <Translate id="homepage.start.editor.action">Create your first app</Translate>
-                <Duration minutes={5} />
+                <Duration minutes={15} />
               </Link>
               <Link className={styles.textLink} to="/tutorials/">
                 <Translate id="homepage.start.editor.secondary">Editor tutorials</Translate>

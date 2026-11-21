@@ -1,0 +1,10 @@
+.video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  margin-bottom: var(--ifm-leading);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 6px;
+  background: #20292b;
+}
