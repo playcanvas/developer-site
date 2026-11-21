@@ -76,6 +76,8 @@ const config = {
         { from: ['/user-manual/scripting/debugging/console-logging/'], to: '/user-manual/debugging/console-logging/' },
         { from: ['/user-manual/scripting/debugging/browser-dev-tools/'], to: '/user-manual/debugging/browser-dev-tools/' },
         { from: ['/user-manual/scripting/debugging/inspector/'], to: '/user-manual/debugging/inspector/' },
+        // The Launch menu's Profiler overlay was replaced by the Inspector's Performance tab
+        { from: ['/user-manual/optimization/profiler/'], to: '/user-manual/optimization/inspector-performance/#recording-the-start-of-the-application' },
         { from: ['/api', '/en/api'], to: 'https://api.playcanvas.com' },
         // Retired Facebook docs (the Facebook Canvas web games platform was discontinued)
         { from: ['/tutorials/facebook-api/'], to: '/tutorials/' },

@@ -31,24 +31,36 @@ description: ワイヤーフレームからアルベド、法線、エミッシ�
 
 ![Gizmos](/img/user-manual/editor/viewport/gizmos.jpg)
 
-スクリーンショットで見ることができる3色の軸は、[ギズモ](/user-manual/glossary#gizmo)と呼ばれます。これは、選択したエンティティの変換行列を操作するために使用されます。変換ギズモには3つの種類があります。矢印が軸の端にある「移動」、色付きの円がある「回転」、軸の端にキューブがある「拡大縮小」です。4つ目のギズモである「エレメントのサイズ変更」は、[UIエレメント](/user-manual/user-interface/elements/#element-resizing)の幅と高さを変更します。これらのギズモは、[ツールバー](toolbar.md)または 1、2、3、4 キーで切り替えます。
+スクリーンショットで見ることができる3色の軸は、[ギズモ](/user-manual/glossary#gizmo)と呼ばれます。これは、選択したエンティティの変換行列を操作するために使用されます。変換ギズモには3つの種類があります。矢印が軸の端にある「移動」、色付きの円がある「回転」、軸の端にキューブがある「拡大縮小」です。4つ目のギズモである「エレメントのサイズ変更」は、[UIエレメント](/user-manual/user-interface/elements/#element-resizing)の幅と高さを変更します。これらのギズモは、[ツールバー](toolbar.md)または <kbd>1</kbd>、<kbd>2</kbd>、<kbd>3</kbd>、<kbd>4</kbd> キーで切り替えます。
 
-ギズモのサイズとスタイルを変更するには、[エディター設定](settings/editor.md)の **Gizmo Size** と **Gizmo Preset** を使用します。
+エンティティを選択すると、一部のコンポーネントについてはヘルパーギズモも表示されます。
+
+- **Camera**: 視錐台を表示します。ハンドルで近クリップ面と遠クリップ面、視野角（正投影では Ortho Height）をドラッグできます。
+- **Light**: ディレクショナルライトでは矢印、オムニライトでは範囲、スポットライトではコーン、エリアライトでは形状を表示します。ハンドルで範囲、コーンの角度、エリアライトのサイズをドラッグできます。
+- **Collision**: コリジョンの形状を表示します。ハンドルで形状のサイズを変更できます。エンティティを1つだけ選択しているときに表示されます。
+- **バウンディングボックス**: 選択範囲を囲むコーナーブラケットを表示します。面と角のハンドルでサイズを変更できます。エンティティにコリジョン形状がある場合は、コリジョンのハンドルが優先されます。
+
+ハンドルをドラッグしている間は値がラベルで表示され、各ドラッグは1回の操作で元に戻せます。ハンドルを使うには、プロジェクトへの書き込み権限が必要です。
+
+ギズモのサイズとスタイルを変更するには、[エディター設定](settings/editor.md)の **Gizmo Size** と **Gizmo Preset** を使用します。Classic プリセットでは、ヘルパーギズモはハンドルのない細い白線で描かれ、バウンディングボックスは単純なボックスで描かれます。
 
 ## エンティティアイコン {#entity-icons}
 
-一部のコンポーネントは可視ジオメトリを持たないため、エディタは非選択時にエンティティの位置を示すアイコンをビューポートに描画します。アイコンをクリックすると、そのエンティティが[ヒエラルキー](/user-manual/editor/interface/hierarchy)パネルと[インスペクター](/user-manual/editor/interface/inspector)パネルで選択されます。
+一部のコンポーネントは可視ジオメトリを持たないため、エディタはエンティティの位置を示すアイコンをビューポートに描画します。アイコンをクリックすると、そのエンティティが[ヒエラルキー](/user-manual/editor/interface/hierarchy)パネルと[インスペクター](/user-manual/editor/interface/inspector)パネルで選択されます。アイコンはシーンと一緒にピックされるため、アイコンの手前にジオメトリがあるとそちらが選択されます。また、矩形選択には、矩形内にアイコンがあるエンティティも含まれます。
 
 | コンポーネント | アイコン |
 | --------- | ---- |
-| [Camera](/user-manual/editor/scenes/components/camera) | ![Camera icon](/img/user-manual/editor/viewport/entity-icons/camera.png) |
-| [Light](/user-manual/editor/scenes/components/light) — directional | ![Directional light icon](/img/user-manual/editor/viewport/entity-icons/light-directional.png) |
-| [Light](/user-manual/editor/scenes/components/light) — omni | ![Omni light icon](/img/user-manual/editor/viewport/entity-icons/light-point.png) |
-| [Light](/user-manual/editor/scenes/components/light) — spot | ![Spot light icon](/img/user-manual/editor/viewport/entity-icons/light-spot.png) |
-| [Script](/user-manual/editor/scenes/components/script) | ![Script icon](/img/user-manual/editor/viewport/entity-icons/script.png) |
-| [Animation](/user-manual/editor/scenes/components/animation) | ![Animation icon](/img/user-manual/editor/viewport/entity-icons/animation.png) |
+| [Camera](/user-manual/editor/scenes/components/camera) | ![Camera icon](/img/user-manual/editor/viewport/entity-icons/camera.webp) |
+| [Light](/user-manual/editor/scenes/components/light) | ![Light icon](/img/user-manual/editor/viewport/entity-icons/light.webp) |
+| [Audio Listener](/user-manual/editor/scenes/components/audiolistener) | ![Audio Listener icon](/img/user-manual/editor/viewport/entity-icons/audio-listener.webp) |
+| [Sound](/user-manual/editor/scenes/components/sound) | ![Sound icon](/img/user-manual/editor/viewport/entity-icons/sound.webp) |
+| [Particle System](/user-manual/editor/scenes/components/particlesystem) | ![Particle System icon](/img/user-manual/editor/viewport/entity-icons/particle-system.webp) |
+| [Anim](/user-manual/editor/scenes/components/anim)、[Animation](/user-manual/editor/scenes/components/animation) | ![Anim icon](/img/user-manual/editor/viewport/entity-icons/anim.webp) |
+| [Script](/user-manual/editor/scenes/components/script) | ![Script icon](/img/user-manual/editor/viewport/entity-icons/script.webp) |
 
-エンティティが複数のコンポーネントを持つ場合、表示されるアイコンは次の優先順位に従います: camera、light、script、animation。また、ライトのアイコンはライトの色に合わせて着色されます。
+エンティティがこれらのコンポーネントを複数持つ場合は、表の上にあるものほど優先してアイコンが表示されます。エンティティが無効な場合や、見えるものを持つ場合（メッシュのある有効な Render または Model コンポーネント、または有効な Sprite か Element コンポーネント）は、アイコンは表示されません。
+
+選択したエンティティのアイコンは、変換ギズモの下に隠れます。シーンのジオメトリの奥にあるアイコンは薄く描画されます。**Gizmo Preset** が Default の場合、ライトのアイコンはそのライトの色で表示されます。アイコンのサイズを変更するには、[エディター設定](settings/editor.md)の **Icons Size** を変更します。デフォルトは 0.2 で、0 にするとアイコンが非表示になります。
 
 ## レンダーモード {#render-mode}
 

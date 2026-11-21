@@ -85,7 +85,9 @@ Frame、CPU、GPU のチャートでは、破線がディスプレイの間隔�
 
 ## アプリケーションの起動の記録 {#recording-the-start-of-the-application}
 
-アプリケーションが最初に実行するフレームから記録するには、Inspector に `record: true` を渡すか、`EntityInspector` スクリプトの `record` 属性を設定します。`app.init()` の直後のように、アプリケーションが最初のフレームを実行する前に作成すると、Inspector はアプリケーションの起動も記録します。
+アプリケーションが最初に実行するフレームから記録するには、Editor の [Launch](/user-manual/editor/interface/launch-page/#launching) ボタンのメニューで **Profiler** にチェックを入れます。アプリケーションは、Inspector の Performance タブを開いて記録している状態で起動します。Engine 2.23 以降が必要です。
+
+自分のコードでは、Inspector に `record: true` を渡すか、`EntityInspector` スクリプトの `record` 属性を設定します。`app.init()` の直後のように、アプリケーションが最初のフレームを実行する前に作成すると、Inspector はアプリケーションの起動も記録します。
 
 ```javascript
 const app = new AppBase(canvas);

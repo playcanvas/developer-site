@@ -85,7 +85,9 @@ Hover the section for what was loading, and click an asset to show it on the Ass
 
 ## Recording the Start of the Application {#recording-the-start-of-the-application}
 
-To record from the first frame the application runs, pass `record: true` to the Inspector, or set the `record` attribute of the `EntityInspector` script. Created before the application runs its first frame, as right after `app.init()`, the Inspector records the start of the application too:
+To record from the first frame the application runs, tick **Profiler** in the menu of the Editor's [Launch](/user-manual/editor/interface/launch-page/#launching) button. The application then opens with the Inspector on its Performance tab, already recording. This needs Engine 2.23 or later.
+
+In your own code, pass `record: true` to the Inspector, or set the `record` attribute of the `EntityInspector` script. Created before the application runs its first frame, as right after `app.init()`, the Inspector records the start of the application too:
 
 ```javascript
 const app = new AppBase(canvas);

@@ -31,24 +31,36 @@ The View Cube is hidden while you use one of the orthographic cameras. To turn i
 
 ![Gizmos](/img/user-manual/editor/viewport/gizmos.jpg)
 
-The 3-Colored Axis you can see in the screenshot above is called a [Gizmo](/user-manual/glossary#gizmo). This is used to manipulate the transform matrix of the selected Entity. There are three types of transform Gizmo: Translate (with arrows on the ends of the axes); Rotate (which is made up of three colored rings) and Scale (with cubes on the ends of the axes). A fourth gizmo, Resize Element, changes the width and height of a [UI element](/user-manual/user-interface/elements/#element-resizing). Switch between them with the [Toolbar](toolbar.md) or the 1, 2, 3 and 4 keys.
+The 3-Colored Axis you can see in the screenshot above is called a [Gizmo](/user-manual/glossary#gizmo). This is used to manipulate the transform matrix of the selected Entity. There are three types of transform Gizmo: Translate (with arrows on the ends of the axes); Rotate (which is made up of three colored rings) and Scale (with cubes on the ends of the axes). A fourth gizmo, Resize Element, changes the width and height of a [UI element](/user-manual/user-interface/elements/#element-resizing). Switch between them with the [Toolbar](toolbar.md) or the <kbd>1</kbd>, <kbd>2</kbd>, <kbd>3</kbd> and <kbd>4</kbd> keys.
 
-To change the size and style of the gizmos, use **Gizmo Size** and **Gizmo Preset** in the [Editor settings](settings/editor.md).
+Selecting an Entity also shows helper gizmos for some of its components:
+
+- **Camera**: the view frustum, with handles that drag the near and far clip planes and the field of view (or the orthographic height).
+- **Light**: an arrow for a directional light, the range of an omni light, the cone of a spot light or the shape of an area light, with handles that drag the range, the cone angles or the area light's size.
+- **Collision**: the collision shape, with handles that resize it. Shown when a single Entity is selected.
+- **Bounds**: corner brackets around the selection, with face and corner handles that resize it. When the Entity has a collision shape, its handles take over.
+
+A label shows the value while you drag a handle, and each drag can be undone in one step. The handles need write access to the project.
+
+To change the size and style of the gizmos, use **Gizmo Size** and **Gizmo Preset** in the [Editor settings](settings/editor.md). The Classic preset draws the helper gizmos as thin white lines with no handles, and the bounds as a plain box.
 
 ## Entity Icons {#entity-icons}
 
-Some components have no visible geometry of their own, so the Editor draws an icon in the viewport to mark the Entity's position when it is not selected. Click an icon to select that Entity in the [Hierarchy](/user-manual/editor/interface/hierarchy) and [Inspector](/user-manual/editor/interface/inspector) panels.
+Some components have no visible geometry of their own, so the Editor draws an icon in the viewport to mark where their Entity is. Click an icon to select that Entity in the [Hierarchy](/user-manual/editor/interface/hierarchy) and [Inspector](/user-manual/editor/interface/inspector) panels. Icons are picked along with the scene, so geometry in front of an icon is picked instead, and a rectangle selection includes the Entities whose icons it covers.
 
 | Component | Icon |
 | --------- | ---- |
-| [Camera](/user-manual/editor/scenes/components/camera) | ![Camera icon](/img/user-manual/editor/viewport/entity-icons/camera.png) |
-| [Light](/user-manual/editor/scenes/components/light) — directional | ![Directional light icon](/img/user-manual/editor/viewport/entity-icons/light-directional.png) |
-| [Light](/user-manual/editor/scenes/components/light) — omni | ![Omni light icon](/img/user-manual/editor/viewport/entity-icons/light-point.png) |
-| [Light](/user-manual/editor/scenes/components/light) — spot | ![Spot light icon](/img/user-manual/editor/viewport/entity-icons/light-spot.png) |
-| [Script](/user-manual/editor/scenes/components/script) | ![Script icon](/img/user-manual/editor/viewport/entity-icons/script.png) |
-| [Animation](/user-manual/editor/scenes/components/animation) | ![Animation icon](/img/user-manual/editor/viewport/entity-icons/animation.png) |
+| [Camera](/user-manual/editor/scenes/components/camera) | ![Camera icon](/img/user-manual/editor/viewport/entity-icons/camera.webp) |
+| [Light](/user-manual/editor/scenes/components/light) | ![Light icon](/img/user-manual/editor/viewport/entity-icons/light.webp) |
+| [Audio Listener](/user-manual/editor/scenes/components/audiolistener) | ![Audio Listener icon](/img/user-manual/editor/viewport/entity-icons/audio-listener.webp) |
+| [Sound](/user-manual/editor/scenes/components/sound) | ![Sound icon](/img/user-manual/editor/viewport/entity-icons/sound.webp) |
+| [Particle System](/user-manual/editor/scenes/components/particlesystem) | ![Particle System icon](/img/user-manual/editor/viewport/entity-icons/particle-system.webp) |
+| [Anim](/user-manual/editor/scenes/components/anim) and [Animation](/user-manual/editor/scenes/components/animation) | ![Anim icon](/img/user-manual/editor/viewport/entity-icons/anim.webp) |
+| [Script](/user-manual/editor/scenes/components/script) | ![Script icon](/img/user-manual/editor/viewport/entity-icons/script.webp) |
 
-When an Entity has several of these components, the icon shown follows this priority order: camera, light, script, animation. Light icons are also tinted to match the light's color.
+An Entity with several of these components shows the icon that comes first in the table. An Entity shows no icon when it is disabled, or when it has something to see: an enabled Render or Model component with meshes, or an enabled Sprite or Element component.
+
+A selected Entity's icon hides under the transform gizmo. Icons behind scene geometry are drawn faded. With the Default **Gizmo Preset**, light icons take the color of their light. To resize the icons, change **Icons Size** in the [Editor settings](settings/editor.md). The default is 0.2, and 0 hides them.
 
 ## Render Mode {#render-mode}
 

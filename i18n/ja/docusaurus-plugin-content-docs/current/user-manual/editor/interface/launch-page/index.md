@@ -9,21 +9,21 @@ description: Launch Page の基本。Launch メニューのデバイス、プロ
 
 ## 起動 {#launching}
 
-ビューポート右上の **Launch** をクリックするか、CTRL + ENTER（Mac では CMD + ENTER）を押すと、起動ページが新しいタブで開きます。SHIFT を押しながら **Launch** をクリックすると、代わりにポップアップウィンドウで開きます。
+ビューポート右上の **Launch** をクリックするか、<kbd>Ctrl</kbd>+<kbd>Enter</kbd>（macOS では <kbd>Cmd</kbd>+<kbd>Enter</kbd>）を押すと、起動ページが新しいタブで開きます。<kbd>Shift</kbd> を押しながら **Launch** をクリックすると、代わりにポップアップウィンドウで開きます。
 
 **Launch** ボタンにマウスを重ねると、メニューが表示されます。
 
 | オプション | 説明 |
 | --- | --- |
-| **Launch with WebGPU**<br />**Launch with WebGL 2.0** | [レンダリング設定](../settings/rendering.md#device-and-api)で設定された順序でデバイスを試す代わりに、そのグラフィックスデバイスだけを使って起動します。プロジェクトが最初に試すデバイスはメニューに表示されません。SHIFT を押しながらクリックすると、ポップアップウィンドウで開きます。 |
-| **Profiler** | 実行中のアプリケーションの上に[プロファイラー](/user-manual/optimization/profiler/)を表示します。 |
+| **Launch with WebGPU**<br />**Launch with WebGL 2.0** | [レンダリング設定](../settings/rendering.md#device-and-api)で設定された順序でデバイスを試す代わりに、そのグラフィックスデバイスだけを使って起動します。プロジェクトが最初に試すデバイスはメニューに表示されません。<kbd>Shift</kbd> を押しながらクリックすると、ポップアップウィンドウで開きます。 |
+| **Profiler** | [Inspector](/user-manual/debugging/inspector/) を [Performance タブ](/user-manual/optimization/inspector-performance/#recording-the-start-of-the-application)で開き、アプリケーションの起動から記録します。Engine 2.23 以降が必要です。 |
 | **Debug** | エンジンの警告とエラーのメッセージを、ブラウザの JavaScript コンソールに出力します。 |
 | **Concatenate Scripts (Classic)** | 起動時に、プリロードされるクラシックスクリプトを 1 つのファイルにまとめ、シーンの読み込みを速くします。ESM スクリプトには影響しません。 |
 | **Mini stats** | 実行中のアプリケーションに [MiniStats](/user-manual/optimization/mini-stats/) のオーバーレイを表示します。 |
-| **Inspector** | 実行中のアプリケーションに [Inspector](/user-manual/scripting/debugging/inspector/) のデバッグパネルを表示します。Engine 2.23 以降が必要です。 |
-| **Use Release Candidate** | エンジンのリリース候補版で起動します。リリース候補版が提供されている間のみ表示されます。[エンジン設定](../settings/engine.md)も参照してください。 |
+| **Inspector** | 実行中のアプリケーションに [Inspector](/user-manual/debugging/inspector/) のデバッグパネルを表示します。Engine 2.23 以降が必要です。 |
+| **Use Latest Engine** | エンジンの最新リリースで起動します。そのバージョンはオプションのツールチップに表示されます。Editor が最新リリースを提供している間のみ表示されます。[エンジン設定](../settings/engine.md)も参照してください。 |
 
-オプションは、チェックを外すまですべての起動に適用されます。**Debug**、**Mini stats**、**Inspector**、**Use Release Candidate** はこのプロジェクトであなた用に記憶されますが、**Profiler** と **Concatenate Scripts (Classic)** はエディターを再読み込みするとクリアされます。
+オプションは、チェックを外すまですべての起動に適用されます。**Debug**、**Mini stats**、**Inspector**、**Use Latest Engine** はこのプロジェクトであなた用に記憶されますが、**Profiler** と **Concatenate Scripts (Classic)** はエディターを再読み込みするとクリアされます。
 
 ## 起動ページでの作業 {#working-with-the-launch-page}
 

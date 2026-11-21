@@ -9,21 +9,21 @@ The Editor's Viewport is where you visually construct your application. From the
 
 ## Launching {#launching}
 
-Click **Launch** in the top-right corner of the Viewport, or press CTRL + ENTER (CMD + ENTER on a Mac), to open the Launch Page in a new tab. Hold SHIFT when you click **Launch** to open it in a popup window instead.
+Click **Launch** in the top-right corner of the Viewport, or press <kbd>Ctrl</kbd>+<kbd>Enter</kbd> (<kbd>Cmd</kbd>+<kbd>Enter</kbd> on macOS), to open the Launch Page in a new tab. <kbd>Shift</kbd>-click **Launch** to open it in a popup window instead.
 
 Hover over the **Launch** button to show its menu:
 
 | Option | Description |
 | --- | --- |
-| **Launch with WebGPU**<br />**Launch with WebGL 2.0** | Launch with only that graphics device, instead of trying the devices in the order set in the [Rendering settings](../settings/rendering.md#device-and-api). The menu leaves out the device your project already tries first. Hold SHIFT when you click one to open it in a popup window. |
-| **Profiler** | Show the [Profiler](/user-manual/optimization/profiler/) over the running application. |
+| **Launch with WebGPU**<br />**Launch with WebGL 2.0** | Launch with only that graphics device, instead of trying the devices in the order set in the [Rendering settings](../settings/rendering.md#device-and-api). The menu leaves out the device your project already tries first. <kbd>Shift</kbd>-click one to open it in a popup window. |
+| **Profiler** | Open the [Inspector](/user-manual/debugging/inspector/) on its [Performance tab](/user-manual/optimization/inspector-performance/#recording-the-start-of-the-application), recording from the start of the application. Requires Engine 2.23 or later. |
 | **Debug** | Log the engine's warning and error messages to the browser's JavaScript console. |
 | **Concatenate Scripts (Classic)** | Combine the preloaded Classic scripts into a single file when you launch, so that the scene loads faster. ESM Scripts are not affected. |
 | **Mini stats** | Show the [MiniStats](/user-manual/optimization/mini-stats/) overlay in the running application. |
-| **Inspector** | Show the [Inspector](/user-manual/scripting/debugging/inspector/) debug panel in the running application. Requires Engine 2.23 or later. |
-| **Use Release Candidate** | Launch with the engine release candidate. Only listed while a release candidate is available. See also [Engine Settings](../settings/engine.md). |
+| **Inspector** | Show the [Inspector](/user-manual/debugging/inspector/) debug panel in the running application. Requires Engine 2.23 or later. |
+| **Use Latest Engine** | Launch with the latest engine release, whose version the option's tooltip shows. Only listed while the Editor offers one. See also [Engine Settings](../settings/engine.md). |
 
-The options apply to every launch until you untick them. **Debug**, **Mini stats**, **Inspector** and **Use Release Candidate** are remembered for you in this project, while **Profiler** and **Concatenate Scripts (Classic)** are cleared when you reload the Editor.
+The options apply to every launch until you untick them. **Debug**, **Mini stats**, **Inspector** and **Use Latest Engine** are remembered for you in this project, while **Profiler** and **Concatenate Scripts (Classic)** are cleared when you reload the Editor.
 
 ## Working with the Launch Page {#working-with-the-launch-page}
 

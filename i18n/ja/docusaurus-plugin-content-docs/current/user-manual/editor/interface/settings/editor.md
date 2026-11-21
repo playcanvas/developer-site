@@ -22,12 +22,12 @@ description: 個人用の Editor 設定。グリッド、スナップ、ズー�
 
 | 設定 | 説明 |
 | --- | --- |
-| **Grid Divisions** | グリッドの水平方向あたりのセル数。0 に設定するとグリッドを無効化します。 |
+| **Grid Divisions** | グリッドの水平方向あたりのセル数。0 に設定するとグリッドを無効化します。**Gizmo Preset** が Default の場合、グリッドは距離に応じてフェードアウトするため、0 以外の値は効果がありません。 |
 | **Grid Division Size** | 各セルのサイズ。 |
 | **Snap** | [ギズモ](../viewport.md#gizmos)のスナップ間隔。Shiftを押すかツールバーの Snap トグルでギズモ使用中にスナップを有効化します。 |
 | **Zoom Sensitivity** | エディターのビューポートでのズーム感度。 |
 | **Gizmo Size** | ビューポートに表示される[ギズモ](../viewport.md#gizmos)のサイズ。 |
-| **Gizmo Preset** | 変換ギズモのスタイルと操作方法:<ul><li><strong>Default</strong>: 視覚的なフィードバックを改善したモダンなスタイル</li><li><strong>Classic</strong>: 従来の PlayCanvas Editor のスタイル</li></ul> |
+| **Gizmo Preset** | [ギズモ](../viewport.md#gizmos)とグリッドの見た目:<ul><li><strong>Default</strong>: 変換ギズモはドラッグした量を表示し、平面に輪郭線を描き、真横から見える軸や平面をフェードアウトします。ヘルパーギズモには、カメラ、ライト、コリジョン形状、選択範囲のバウンディングボックスを編集するハンドルがあり、ライトのアイコンはそのライトの色で表示されます。グリッドは距離に応じてフェードアウトします。</li><li><strong>Classic</strong>: 従来の PlayCanvas Editor の見た目です。ギズモの平面は不透明で、グリッドは線で描かれ、バウンディングボックスは単純なボックスで表示されます。ヘルパーギズモはハンドルのない細い白線で描かれます。</li></ul> |
 | **Show View Cube** | ビューポートの [View Cube](../viewport.md#view-cube) を表示または非表示にします。 |
 | **View Cube Size** | View Cube のサイズ。**Show View Cube** が有効な場合にのみ表示されます。 |
 | **Camera Depth Grabpass** | エディタービューポート用のデプスマップテクスチャを生成します。特定のマテリアル効果のプレビューに必要です。 |
