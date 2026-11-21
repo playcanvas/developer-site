@@ -61,7 +61,7 @@
     "@mdx-js/react": "^3.1.1",
     "@playcanvas/react": "^0.11.7",
     "@slorber/remark-comment": "^1.0.0",
-    "@tanstack/react-query": "^5.108.1",
+    "@tanstack/react-query": "^5.108.2",
     "canvas-confetti": "^1.9.4",
     "clsx": "^2.1.1",
     "docusaurus-plugin-copy-page-button": "^0.8.6",
@@ -90,7 +90,7 @@
     "@docusaurus/module-type-aliases": "^3.10.2",
     "@docusaurus/types": "^3.10.2",
     "gray-matter": "^4.0.3",
-    "markdownlint-cli2": "^0.24.1",
+    "markdownlint-cli2": "^0.24.2",
     "marked": "^18.2.1"
   },
   "browserslist": {
