@@ -52,9 +52,13 @@ Refer to existing pages to see examples of prior use.
 
 Images should be placed in the [`static/img`](https://github.com/playcanvas/developer-site/tree/main/static/img) folder. The folder structure should mirror the same structure as the folder for the Markdown files mentioned in the [Pages section](#pages).
 
-Please use PNG for anything Editor UI based and JPEG for anything else such as a game screenshot.
+Use WebP for new images. It is smaller than PNG and JPEG for the same quality:
 
-Use WebP for animated images (the site is moving away from Animated GIFs due to their poor compression and quality).
+- **Lossless WebP** for Editor UI, diagrams and anything else with text or sharp edges. It keeps every pixel, like PNG, at a smaller size. For example, `cwebp -lossless input.png -o output.webp`.
+- **Lossy WebP** for photographic content such as game screenshots and rendered scenes, where you would otherwise use JPEG. A quality of around 85 works well: `cwebp -q 85 input.png -o output.webp`.
+- **Animated WebP** instead of animated GIF, which has poor compression and quality.
+
+There's no need to convert existing PNG and JPEG images.
 
 All images should be less than 2MB ideally.
 
