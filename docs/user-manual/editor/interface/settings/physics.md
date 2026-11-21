@@ -1,6 +1,6 @@
 ---
 title: Physics Settings
-description: Physics settings for installing Ammo from the store controlling global gravity on rigid bodies and understanding why simulation stays off without the library.
+description: Physics settings for installing Ammo from the store, setting each scene's gravity on rigid bodies, and understanding why simulation stays off without the library.
 sidebar_label: Physics
 ---
 
@@ -8,7 +8,7 @@ Controls the global physics simulation settings.
 
 :::note
 
-These settings affect all users on the currently active [branch](../../version-control/branches.md) of the project.
+**Gravity** is a scene setting: it is saved with the scene that is open, so each scene can have its own gravity. **Physics Library** adds files to the project, so it applies to every scene. Both affect all users on the currently active [branch](../../version-control/branches.md) of the project.
 
 :::
 
@@ -28,4 +28,4 @@ Here is a breakdown of the available settings:
 ### Notes
 
 - Without Ammo.js imported, physics features will not function.
-- Gravity can be adjusted to simulate different worlds.
+- Gravity can be adjusted to simulate different worlds, and each scene can use a different value.

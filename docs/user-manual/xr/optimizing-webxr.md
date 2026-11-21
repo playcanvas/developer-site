@@ -47,7 +47,7 @@ Web browsers feature automatic garbage collection of unused JavaScript objects. 
 
 ### Profiling Tools
 
-PlayCanvas comes with a built-in [profiler tool](/user-manual/optimization/profiler/). In the Editor, enable the Profiler option in the Launch menu to run your application with profiling active.
+The [Performance tab](/user-manual/optimization/inspector-performance/) of the [Inspector](/user-manual/debugging/inspector/) records the frames of your application, to find the slow ones and what holds them back. In the Editor, tick **Profiler** in the Launch menu to launch with it recording from the start.
 
 ### General optimization tips
 
