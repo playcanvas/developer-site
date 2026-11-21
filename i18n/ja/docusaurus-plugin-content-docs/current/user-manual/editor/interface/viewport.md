@@ -3,15 +3,15 @@ title: ビューポート (Viewport)
 description: ワイヤーフレームからアルベド、法線、エミッションなどのマテリアルデバッグビューまで、ビューポートのカメラ、ギズモ、レンダーモードを使ってリリース前にライティングを検証します。
 ---
 
-![Viewport](/img/user-manual/editor/viewport/viewport.jpg)
+![パネルを非表示にして、ビューポートがウィンドウ全体に表示されたエディター](/img/user-manual/editor/viewport/viewport.webp)
 
-ビューポートは現在レンダリングされているシーンを表示します。エディタの現在のカメラを操作して、自由にシーン内を移動できます。
+ビューポートは現在レンダリングされているシーンを表示します。エディタの現在のカメラを操作して、自由にシーン内を移動できます。上の画像のようにビューポートをウィンドウ全体に表示するには、<kbd>Space</kbd> を押すか、**Launch** の隣のボタンをクリックしてパネルを非表示にします。もう一度同じ操作をすると、パネルが再び表示されます。
 
 ## カメラ (Cameras) {#cameras}
 
 エディタは最初に **Perspective** (透視投影) カメラを使用するように設定されています。このカメラは、シーン内に浮かんでいるかのように見えます。カメラドロップダウンメニューを使用して、他のさまざまなカメラを使用してシーンを表示できます。
 
-![Camera Dropdown](/img/user-manual/editor/viewport/camera-dropdown.jpg)
+![カメラメニュー。エディターの Perspective カメラと正投影カメラ、シーンにある2つのカメラエンティティが表示されています](/img/user-manual/editor/viewport/camera-menu.webp)
 
 上部、下部、前面、背面、左側、右側の**正投影**カメラでは、遠近法のないシーンを表示できます。位置を微調整するのに便利です。
 
@@ -23,13 +23,15 @@ description: ワイヤーフレームからアルベド、法線、エミッシ�
 
 ビューポートの右下にある View Cube は、カメラの向きを示します。各軸の先には円があります。X、Y、Z のラベルが付いた色付きの円は正の軸を、色付きの輪郭を持つグレーの円は負の軸を表します。
 
+![View Cube。正の X、Y、Z 軸にラベル付きの円、負の軸に輪郭だけの円があります](/img/user-manual/editor/viewport/view-cube.webp)
+
 円をクリックすると、その方向からシーンを表示します。カメラはその軸上に回り込み、周回の中心となる点の方を向きます。中心からの距離と透視投影はそのまま保たれるため、新しい視点から続けて周回できます。たとえば、Y をクリックするとシーンを真上から見下ろし、Z をクリックすると正面から表示します。
 
 正投影カメラを使用している間、View Cube は表示されません。View Cube を非表示にしたりサイズを変更したりするには、[エディター設定](settings/editor.md)の **Show View Cube** と **View Cube Size** を使用します。
 
 ## ギズモ (Gizmo) {#gizmos}
 
-![Gizmos](/img/user-manual/editor/viewport/gizmos.jpg)
+![選択したチェスの駒に表示された移動、回転、拡大縮小のギズモ。駒の周りにはコリジョン形状とバウンディングボックスも描かれています](/img/user-manual/editor/viewport/gizmos.webp)
 
 スクリーンショットで見ることができる3色の軸は、[ギズモ](/user-manual/glossary#gizmo)と呼ばれます。これは、選択したエンティティの変換行列を操作するために使用されます。変換ギズモには3つの種類があります。矢印が軸の端にある「移動」、色付きの円がある「回転」、軸の端にキューブがある「拡大縮小」です。4つ目のギズモである「エレメントのサイズ変更」は、[UIエレメント](/user-manual/user-interface/elements/#element-resizing)の幅と高さを変更します。これらのギズモは、[ツールバー](toolbar.md)または <kbd>1</kbd>、<kbd>2</kbd>、<kbd>3</kbd>、<kbd>4</kbd> キーで切り替えます。
 
@@ -64,14 +66,14 @@ description: ワイヤーフレームからアルベド、法線、エミッシ�
 
 ## レンダーモード {#render-mode}
 
-ビューポートの右上のこのドロップダウンメニューを使用して、ビューポートのレンダーモードを変更できます。
+ビューポートでのシーンの描画方法を変更するには、ビューポート右上のレンダーボタンにマウスを重ねます。ボタンには現在のレンダーモードが表示されます。変更していなければ **Standard** です。
 
-![Viewport Render Mode Menu](/img/user-manual/editor/viewport/render-mode-menu.png)
+![レンダーメニュー。レンダーモードの一覧の上に Wireframe オプションがあります](/img/user-manual/editor/viewport/render-menu.webp)
 
-ワイヤーフレームレンダリングを切り替えることができます。
+**Wireframe** にチェックを入れると、シーンのメッシュがワイヤーフレームで描画されます。
 
-![Viewport Wireframe](/img/user-manual/editor/viewport/wireframe.png)
+![ワイヤーフレームで描画したゲームルーム](/img/user-manual/editor/viewport/wireframe.webp)
 
-また、さまざまなデバッグレンダーモードでシーンを視覚化することもできます。これにより、レンダリングされるシーンはアルベド、ノーマル、AO、エミッションなどに限定されます。
+その他のオプションはデバッグ用のレンダーモードです。最終的な画像の代わりに、マテリアルとライティングの入力や結果を1つずつ表示します: **Albedo**、**Opacity**、**World Normal**、**Specularity**、**Gloss**、**Metalness**、**AO**、**Emission**、**Lighting**、**UV0**。通常の描画に戻すには **Standard** を選択します。下の画像は、左上から Albedo、World Normal、Lighting、UV0 です。
 
-![Viewport Render Modes](/img/user-manual/editor/viewport/render-modes.png)
+![Albedo、World Normal、Lighting、UV0 の各レンダーモードで表示した2つのチェスの駒](/img/user-manual/editor/viewport/render-modes.webp)

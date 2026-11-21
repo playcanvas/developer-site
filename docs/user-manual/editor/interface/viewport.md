@@ -3,15 +3,15 @@ title: Viewport
 description: Use viewport cameras gizmos and render modes from wireframe to material debug views like albedo normals or emission to validate lighting before shipping.
 ---
 
-![Viewport](/img/user-manual/editor/viewport/viewport.jpg)
+![The Editor with its panels hidden, so that the viewport fills the window](/img/user-manual/editor/viewport/viewport.webp)
 
-The viewport shows your scene as currently rendered. You can freely move around the scene by manipulating the Editor's current camera.
+The viewport shows your scene as currently rendered. You can freely move around the scene by manipulating the Editor's current camera. To give it the whole window, as above, press <kbd>Space</kbd> or click the button beside **Launch** to hide the panels, and do the same again to bring them back.
 
 ## Cameras {#cameras}
 
 Initially the Editor is set to use the **Perspective** camera. This camera is as if a movie camera was floating in your scene. You can use the camera dropdown menu to view the scene using various other cameras.
 
-![Camera Dropdown](/img/user-manual/editor/viewport/camera-dropdown.jpg)
+![The camera menu, listing the Perspective and orthographic cameras of the Editor and the two camera entities of the scene](/img/user-manual/editor/viewport/camera-menu.webp)
 
 The **orthographic** cameras: Top, Bottom, Front, Back, Left, Right, let you view a version of the scene with no perspective. Useful for fine-tuning positions.
 
@@ -23,13 +23,15 @@ To switch cameras from the keyboard, use the numeric keypad. See [Viewport Camer
 
 The View Cube in the bottom-right corner of the viewport shows the orientation of the camera. Each axis ends in a circle: the colored circles labeled X, Y and Z mark the positive axes, and the gray circles with a colored outline mark the negative axes.
 
+![The View Cube, with labeled circles on the positive X, Y and Z axes and outlined circles on the negative axes](/img/user-manual/editor/viewport/view-cube.webp)
+
 Click a circle to view the scene from that side. The camera swings round onto that axis and looks back at the point it orbits around, keeping its distance and its perspective projection, so you can carry on orbiting from the new view. For example, click Y to look straight down on the scene, or Z to view it from the front.
 
 The View Cube is hidden while you use one of the orthographic cameras. To turn it off or change its size, use **Show View Cube** and **View Cube Size** in the [Editor settings](settings/editor.md).
 
 ## Gizmos {#gizmos}
 
-![Gizmos](/img/user-manual/editor/viewport/gizmos.jpg)
+![The translate, rotate and scale gizmos on a selected chess piece, with its collision shape and bounds drawn around it](/img/user-manual/editor/viewport/gizmos.webp)
 
 The 3-Colored Axis you can see in the screenshot above is called a [Gizmo](/user-manual/glossary#gizmo). This is used to manipulate the transform matrix of the selected Entity. There are three types of transform Gizmo: Translate (with arrows on the ends of the axes); Rotate (which is made up of three colored rings) and Scale (with cubes on the ends of the axes). A fourth gizmo, Resize Element, changes the width and height of a [UI element](/user-manual/user-interface/elements/#element-resizing). Switch between them with the [Toolbar](toolbar.md) or the <kbd>1</kbd>, <kbd>2</kbd>, <kbd>3</kbd> and <kbd>4</kbd> keys.
 
@@ -64,14 +66,14 @@ A selected Entity's icon hides under the transform gizmo. Icons behind scene geo
 
 ## Render Mode {#render-mode}
 
-You can modify the viewport render mode using this drop-down menu in the top-right of the viewport:
+To change how the viewport renders the scene, hover over the render button in the top-right of the viewport. The button shows the current render mode, **Standard** unless you change it.
 
-![Viewport Render Mode Menu](/img/user-manual/editor/viewport/render-mode-menu.png)
+![The render menu, with the Wireframe option above the list of render modes](/img/user-manual/editor/viewport/render-menu.webp)
 
-It allows you to toggle wireframe rendering:
+Tick **Wireframe** to draw the meshes of the scene as wireframes:
 
-![Viewport Wireframe](/img/user-manual/editor/viewport/wireframe.png)
+![The games room drawn in wireframe](/img/user-manual/editor/viewport/wireframe.webp)
 
-You can also visualize your scene in various debug render modes. This restricts the rendered scene to just show albedo, normals, AO, emission and more.
+The other options are debug render modes. Each shows one input or result of the materials and lighting in place of the final image: **Albedo**, **Opacity**, **World Normal**, **Specularity**, **Gloss**, **Metalness**, **AO**, **Emission**, **Lighting** and **UV0**. Select **Standard** to return to the normal render. Below, from the top left, are Albedo, World Normal, Lighting and UV0:
 
-![Viewport Render Modes](/img/user-manual/editor/viewport/render-modes.png)
+![Two chess pieces in the Albedo, World Normal, Lighting and UV0 render modes](/img/user-manual/editor/viewport/render-modes.webp)
