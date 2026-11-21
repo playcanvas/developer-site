@@ -147,8 +147,9 @@ const sidebars = {
             'user-manual/editor/getting-started/your-first-app',
             'user-manual/editor/projects/creating',
             'user-manual/editor/projects/dashboard',
-            'user-manual/editor/getting-started/workflow',
+            'user-manual/editor/getting-started/how-projects-work',
             'user-manual/editor/interface/index',
+            'user-manual/editor/getting-started/next-steps',
           ],
         },
         {

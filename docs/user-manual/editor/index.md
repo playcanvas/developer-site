@@ -1,97 +1,102 @@
 ---
 title: PlayCanvas Editor
-description: PlayCanvas web Editor tour covering live testing, collaboration, version control, visual editing, scripting, asset workflow, and export to web or native.
+description: "The browser-based visual editor for building PlayCanvas apps and games together: a game built in it, where to start, what it gives you, and a map of this section."
 ---
 
-The PlayCanvas Editor is a powerful, browser-based development environment for creating stunning 3D applications. No downloads, no installations—just open your browser and start building.
+import Link from '@docusaurus/Link';
 
-![PlayCanvas Editor Interface](/img/user-manual/editor/interface/editor-interface.png)
+The PlayCanvas Editor is a visual editor for building 3D apps and games that run in a web browser, and it runs in your browser too. Build scenes with your team in real time, add behavior with JavaScript, test on any device and publish to the web with a link.
 
-## Why Choose the PlayCanvas Editor?
+<div className="iframe-container">
+    <iframe src="https://playcanv.as/p/gLOk3TQH/" title="Can Knockdown, a small physics game built in the PlayCanvas Editor" loading="lazy" allow="fullscreen" allowFullScreen></iframe>
+</div>
 
-### 🌐 Accessible Anywhere
+Click the game, then use the arrow keys to roll the ball into the cans. It was built in the Editor in about 15 minutes, and [Your First App](getting-started/your-first-app.md) shows you how to build it yourself.
 
-The entire Editor runs in your web browser. Whether you're at your desk, on a laptop, or borrowing a friend's computer, your projects are just a login away. Your work is automatically saved to the cloud, so you never lose progress.
+<div className="cta-buttons">
+    <Link className="button button--primary button--lg" to="/user-manual/editor/getting-started/your-first-app/">Build Your First App →</Link>
+    <Link className="button button--secondary button--lg" to="https://playcanvas.com/editor">Open the Editor</Link>
+    <Link className="button button--secondary button--lg" to="/tutorials/">Browse the Tutorials</Link>
+</div>
 
-### 👁️ What You See Is What You Get
+## Where Do You Want to Start? {#where-do-you-want-to-start}
 
-The Editor uses the same [PlayCanvas Engine](../engine) that powers your published applications. Every material, every light, every shadow you see in the Editor is exactly what your users will experience. No surprises at runtime.
+<div className="row path-cards">
+  <div className="col col--6">
+    <Link className="card path-card" to="/user-manual/editor/getting-started/your-first-app/">
+      <div className="card__header"><h3>🚀 I'm new to the Editor</h3></div>
+      <div className="card__body"><p>Build and publish a small physics game in about 15 minutes, and meet entities, materials, physics, scripts and publishing along the way.</p></div>
+      <div className="card__footer">Your First App →</div>
+    </Link>
+  </div>
+  <div className="col col--6">
+    <Link className="card path-card" to="/user-manual/editor/getting-started/how-projects-work/">
+      <div className="card__header"><h3>🧭 I want the big picture</h3></div>
+      <div className="card__body"><p>See how scenes, entities, assets, scripts, branches and builds fit together in a project.</p></div>
+      <div className="card__footer">How Editor Projects Work →</div>
+    </Link>
+  </div>
+  <div className="col col--6">
+    <Link className="card path-card" to="/user-manual/getting-started/migrating-from-unity/">
+      <div className="card__header"><h3>🎮 I'm coming from Unity</h3></div>
+      <div className="card__body"><p>Map what you know about Unity's scenes, prefabs, components and C# scripts to the Editor and its JavaScript scripts.</p></div>
+      <div className="card__footer">Migrating from Unity →</div>
+    </Link>
+  </div>
+  <div className="col col--6">
+    <Link className="card path-card" to="/user-manual/editor/assets/">
+      <div className="card__header"><h3>📦 I have models and art</h3></div>
+      <div className="card__body"><p>Upload models, textures and audio, and see what the Editor turns them into.</p></div>
+      <div className="card__footer">Assets →</div>
+    </Link>
+  </div>
+  <div className="col col--6">
+    <Link className="card path-card" to="/user-manual/editor/scripting/">
+      <div className="card__header"><h3>🧩 I want to write code</h3></div>
+      <div className="card__body"><p>Create scripts, attach them to entities, and edit them in the built-in Code Editor or in Visual Studio Code.</p></div>
+      <div className="card__footer">Scripting →</div>
+    </Link>
+  </div>
+  <div className="col col--6">
+    <Link className="card path-card" to="/user-manual/editor/mcp-server/">
+      <div className="card__header"><h3>🤖 I work with an AI assistant</h3></div>
+      <div className="card__body"><p>Connect Claude Code, Codex, Cursor or another assistant to your project with the Editor's Model Context Protocol (MCP) server.</p></div>
+      <div className="card__footer">MCP Server →</div>
+    </Link>
+  </div>
+</div>
 
-### ⚡ Instant Iteration
+## Why the PlayCanvas Editor? {#why-the-playcanvas-editor}
 
-Make a change, see it instantly. With [live editing](scripting/hot-reloading), you can tweak materials, adjust positions, and even modify scripts while your application runs. Hit the [Launch](interface/launch-page) button and your project opens in a new tab, ready to test. The feedback loop between idea and implementation has never been shorter.
+- **Nothing to install.** The Editor runs in the browser and your projects are stored online, so you can carry on from any computer.
+- **Build together, live.** Everyone working on a scene sees each other's changes as they happen, with presence indicators and chat built in. See [Real-time Collaboration](realtime-collaboration.md).
+- **Changes show up in the running app.** [Launch](interface/launch-page/index.md) your scene in another tab or on a phone, and edits in the Editor update it as you make them.
+- **Version control built in.** Save [checkpoints](version-control/checkpoints.md), try ideas on [branches](version-control/branches.md) and [merge](version-control/merging.md) them back, comparing both versions of anything that conflicts.
+- **Write code your way.** Use the built-in [Code Editor](scripting/code-editor.md), or [Visual Studio Code](scripting/vscode-extension.md) with your own tools and AI coding assistants.
+- **Publish anywhere a browser runs.** [Host a build on playcanvas.com](publishing/web/playcanvas-hosting.md) at a link you can share, [download it](projects/downloading.md) to host yourself, or package it as a [playable ad](publishing/playable-ads/index.md) or a [mobile app](publishing/mobile/index.md).
+- **The full Engine underneath.** Editor projects run on the open-source [PlayCanvas Engine](../engine/index.md), so everything in this manual about graphics, physics, animation and user interfaces applies to them.
+- **Open source.** The Editor itself is developed in the open [on GitHub](https://github.com/playcanvas/editor) under the MIT license.
 
-<!-- TODO: Capture a GIF showing the Launch button being clicked and the project opening -->
-<!-- Suggested image: /img/user-manual/editor/editor-launch-workflow.gif -->
+See what teams have built with it in [Made with PlayCanvas](/user-manual/getting-started/made-with-playcanvas/).
 
-## Built for Teams
+## In This Section {#in-this-section}
 
-### Real-time Collaboration
+- [Getting Started](getting-started/index.md) — your first app, creating projects, how a project works and the interface.
+- [Working with Scenes](scenes/index.md) — scenes, the Hierarchy, the Viewport, the Inspector and templates.
+- [Assets](assets/index.md) — upload, organize and configure models, textures, audio and more.
+- [Scripting](scripting/index.md) — create and manage scripts, edit them in the Code Editor or Visual Studio Code, and control how they load.
+- [Testing and Debugging](interface/launch-page/index.md) — the Launch Page, custom engine builds, engine compatibility and troubleshooting.
+- [Collaboration](realtime-collaboration.md) — work on a scene with others in real time, and manage your team.
+- [Version Control](version-control/index.md) — checkpoints, branches and merging.
+- [Publishing](publishing/index.md) — the web, mobile, desktop, playable ads and Snapchat.
+- [Managing Projects](projects/index.md) — project settings, dev logs, backups and ownership.
+- [Automation and AI](mcp-server.md) — the MCP Server, the [Editor API](editor-api.md) and the [REST API](/user-manual/api/).
+- Reference — the [toolbar](interface/toolbar.md), [keyboard shortcuts](interface/keyboard-shortcuts.md), [settings](interface/settings/index.md), [components](scenes/components/index.md) and [asset inspectors](assets/inspectors/index.md).
+- [Tutorials](/tutorials/) — complete Editor projects to learn from, filterable by topic.
 
-<video autoPlay muted loop controls playsInline src='/video/editor-collaboration-viewport-cameras.mp4' style={{width: '100%', height: 'auto'}} />
+## Stay in the Loop {#stay-in-the-loop}
 
-Work together with your team in real-time. See where others are looking, what they're selecting, and chat directly within the Editor. Multiple developers, artists, and designers can build the same scene simultaneously—no merge conflicts, no stepping on each other's toes. [Learn more about collaboration →](realtime-collaboration)
-
-### Professional Version Control
-
-![Version Control Graph](/img/user-manual/editor/version-control/graph-view/overview.png)
-
-PlayCanvas includes a complete [version control system](version-control) designed specifically for 3D projects:
-
-- **Checkpoints** — Snapshot your project at any point and roll back if needed
-- **Branches** — Develop features in isolation without affecting the main project
-- **Merging** — Combine work from multiple branches with visual conflict resolution
-- **History** — Track every change to every asset and entity over time
-
-## Complete Development Toolkit
-
-### Visual Scene Building
-
-Construct your 3D worlds using intuitive [transform gizmos](interface/viewport), a hierarchical [entity tree](interface/hierarchy), and a comprehensive [property inspector](interface/inspector). Drag and drop assets directly into your scene, parent entities with a click, and fine-tune every detail.
-
-### Integrated Code Editor
-
-Write scripts without leaving your browser. The built-in [code editor](scripting/code-editor) features syntax highlighting, intelligent autocomplete, and real-time error checking. For larger projects, use the [VS Code extension](scripting/vscode-extension) and develop locally with full IDE power.
-
-### Powerful Asset Pipeline
-
-Import models, textures, audio, and more with a streamlined [asset pipeline](assets/import-pipeline). The Editor automatically optimizes your assets and handles format conversions. Organize everything in the [Assets Panel](assets/asset-panel) with folders, search, and filtering.
-
-<!-- TODO: Capture screenshot of Assets panel with various asset types -->
-<!-- Suggested image: /img/user-manual/editor/assets-panel-overview.png -->
-
-### Component-Based Architecture
-
-Build complex behaviors by combining [components](scenes/components)—camera, light, physics, audio, scripts, and more. This modular approach keeps your project organized and your code reusable.
-
-## Publish Everywhere
-
-When you're ready to share your creation, PlayCanvas has you covered:
-
-| Platform | Description |
-|----------|-------------|
-| [Web](publishing/web) | Deploy to PlayCanvas hosting or self-host anywhere |
-| [Mobile](publishing/mobile) | Package as native iOS and Android apps |
-| [Desktop](publishing/desktop) | Build standalone applications for Windows, macOS, and Linux |
-| [Playable Ads](publishing/playable-ads) | Export optimized builds for Facebook, Snapchat, and more |
-
-## Getting Started
-
-Ready to dive in? Here's your path forward:
-
-1. **[Create Your First App](getting-started/your-first-app)** — Build and publish a small physics game
-2. **[Explore the Interface](interface)** — Master the Editor's tools and panels
-3. **[Learn Scripting](scripting)** — Add interactivity with JavaScript
-4. **[Publish Your Project](publishing)** — Share your creation with the world
-
-## Extend and Customize
-
-For advanced workflows, the [Editor API](editor-api) lets you build custom tools, automate repetitive tasks, and integrate with external systems. If you can imagine it, you can build it.
-
----
-
-:::info[Engine Compatibility]
-
-The Editor evolves alongside the PlayCanvas Engine. If you're upgrading an older project or experiencing issues, check the [engine compatibility](engine-compatibility) guide or visit [troubleshooting](troubleshooting) for solutions.
-
-:::
+- [GitHub](https://github.com/playcanvas/editor) for the Editor's source code and issues, and [release notes](https://github.com/playcanvas/editor/releases) for every version
+- [The PlayCanvas blog](https://blog.playcanvas.com/) for news
+- [Discord](https://discord.gg/RSaMRzg) and the [forum](https://forum.playcanvas.com/) for questions and sharing your work
+- [The Editor's AI-readable documentation index](https://developer.playcanvas.com/user-manual/editor/llms.txt) for coding agents
