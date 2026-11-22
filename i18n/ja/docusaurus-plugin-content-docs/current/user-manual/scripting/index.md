@@ -5,6 +5,8 @@ description: JavaScriptでScriptを書き、インタラクティブ性、入力
 
 スクリプトは、PlayCanvas におけるインタラクティブ性の中心です。これは再利用可能なコードのパーツであり、エンティティにアタッチすることで、挙動の定義、ユーザー入力の処理、ゲームロジックの管理など、プロジェクトに命を吹き込みます。
 
+スクリプトは JavaScript で記述します。JavaScript が初めての場合は、MDN Web Docs の [JavaScript ガイド](https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide)から始めてください。モダンなスクリプトで使われるクラスやモジュールについても解説しています。
+
 :::tip Editorをお使いですか？
 PlayCanvas Editorをお使いの場合は、[Editorでのスクリプト](/user-manual/editor/scripting/)セクションで、スクリプトの管理、コードエディタ、VS Code連携、ホットリロードについてご確認ください。
 :::

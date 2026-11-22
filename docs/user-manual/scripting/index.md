@@ -5,6 +5,8 @@ description: Write scripts in JavaScript to add interactivity, handle input, and
 
 Scripts are the heart of interactivity in PlayCanvas. They're reusable pieces of code that you attach to Entities to define behaviors, handle user input, manage game logic, and bring your projects to life.
 
+Scripts are written in JavaScript. If you're new to the language, start with the [JavaScript Guide](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide) on MDN Web Docs, which also covers the classes and modules that modern scripts use.
+
 :::tip Using the Editor?
 If you're using the PlayCanvas Editor, check out the [Editor Scripting](/user-manual/editor/scripting/) section to learn about managing scripts, the code editor, VS Code integration, and hot reloading.
 :::
