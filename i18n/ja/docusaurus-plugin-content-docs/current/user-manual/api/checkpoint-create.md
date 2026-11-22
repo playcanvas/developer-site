@@ -17,7 +17,7 @@ POST https://playcanvas.com/api/checkpoints
 
 ## 例
 
-```none
+```sh
 curl -H "Authorization: Bearer {accessToken}" -H "Content-Type: application/json" -X POST -d '{"projectId": {projectId}, "branchId": "{branchId}", "description": "My checkpoint"}' "https://playcanvas.com/api/checkpoints"
 ```
 
@@ -37,11 +37,11 @@ Content-Type: application/json
 
 ## パラメーター
 
-| 名前          | タイプ     | Required | 説明                                                                      |
-| ------------- | -------- | :------: | -------------------------------------------------------------------------------- |
-| `projectId`   | `number` | ✔️      | The id of the project.                                                           |
-| `branchId`    | `string` | ✔️      | The id of the branch.                                                            |
-| `description` | `string` | ✔️      | A description for the checkpoint. Must be non-empty and cannot exceed 10,000 characters. |
+| 名前            | タイプ      | 必須  | デフォルト | 説明                                                                                       |
+| ------------- | -------- | :-: | :---: | ---------------------------------------------------------------------------------------- |
+| `projectId`   | `number` | ✔️  | —     | The id of the project.                                                                   |
+| `branchId`    | `string` | ✔️  | —     | The id of the branch.                                                                    |
+| `description` | `string` | ✔️  | —     | A description for the checkpoint. Must be non-empty and cannot exceed 10,000 characters. |
 
 ## レスポンススキーマ
 

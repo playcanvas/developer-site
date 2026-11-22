@@ -17,16 +17,16 @@ The request will start an export job and the job details will be returned in the
 
 ## Example
 
-```none
+```sh
 curl -H "Authorization: Bearer {accessToken}" -H "Content-Type: application/json" -X POST -d '{"branch_id": "99999999-9999-9999-9999-999999999999"}' "https://playcanvas.com/api/projects/{projectId}/export"
 ```
 
 ## Parameters
 
-| Name        | Type     | Required | Description                                                                |
-| ----------- | -------- | :------: | -------------------------------------------------------------------------- |
-| `projectId` | `number` | ✔️      | The id of the project.                                                     |
-| `branch_id` | `string` |          | The id of the branch. If no id is specified, the main branch will be used. |
+| Name        | Type     | Required | Default     | Description            |
+| ----------- | -------- | :------: | :---------: | ---------------------- |
+| `projectId` | `number` | ✔️       | —           | The id of the project. |
+| `branch_id` | `string` |          | Main branch | The id of the branch.  |
 
 ## Response Schema
 

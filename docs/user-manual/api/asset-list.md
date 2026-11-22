@@ -15,7 +15,7 @@ Get the details of all assets in a project for a specific branch
 
 ## Example
 
-```none
+```sh
 curl -H "Authorization: Bearer {accessToken}" "https://playcanvas.com/api/projects/{projectId}/assets?branchId={branchId}&skip={number}&limit={number}"
 ```
 
@@ -28,12 +28,12 @@ Authorization: Bearer {accessToken}
 
 ## Parameters
 
-| Name        | Type       | Required | Description                                                                  |
-| ----------- | ---------- | :------: | ---------------------------------------------------------------------------- |
-| `projectId` | `number`   | ✔️      | The id of the project.                                                       |
-| `branchId`  | `string`   | ✔️      | The id of the branch.                                                        |
-| `skip`      | `number`   |          | Number of assets to skip before listing. Used for pagination. Defaults to 0. |
-| `limit`     | `number`   |          | Maximum number of assets to list. Defaults to 16. Maximum 100000.            |
+| Name        | Type     | Required | Default | Description                                                   |
+| ----------- | -------- | :------: | :-----: | ------------------------------------------------------------- |
+| `projectId` | `number` | ✔️       | —       | The id of the project.                                        |
+| `branchId`  | `string` | ✔️       | —       | The id of the branch.                                         |
+| `skip`      | `number` |          | `0`     | Number of assets to skip before listing. Used for pagination. |
+| `limit`     | `number` |          | `16`    | Maximum number of assets to list. Maximum 100000.             |
 
 ## Response Schema
 

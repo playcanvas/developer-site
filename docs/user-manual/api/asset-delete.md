@@ -21,7 +21,7 @@ Deleting an asset is permanent and unrecoverable unless you have taken a checkpo
 
 ## Example
 
-```none
+```sh
 curl -H "Authorization: Bearer {accessToken}" -X DELETE "https://playcanvas.com/api/assets/{assetId}?branchId={branchId}"
 ```
 
@@ -34,10 +34,10 @@ Authorization: Bearer {accessToken}
 
 ## Parameters
 
-| Name       | Type     | Required | Description                                    |
-| ---------- | -------- | :------: | ---------------------------------------------- |
-| `assetId`  | `number` | ✔️      | The id of the asset to delete.                 |
-| `branchId` | `string` | ✔️      | The id of the branch to delete the asset from. |
+| Name       | Type     | Required | Default | Description                                    |
+| ---------- | -------- | :------: | :-----: | ---------------------------------------------- |
+| `assetId`  | `number` | ✔️       | —       | The id of the asset to delete.                 |
+| `branchId` | `string` | ✔️       | —       | The id of the branch to delete the asset from. |
 
 ## Response Schema
 

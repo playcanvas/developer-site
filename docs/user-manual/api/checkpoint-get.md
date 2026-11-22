@@ -15,7 +15,7 @@ Get a checkpoint by its id.
 
 ## Example
 
-```none
+```sh
 curl -H "Authorization: Bearer {accessToken}" "https://playcanvas.com/api/checkpoints/{id}"
 ```
 
@@ -28,9 +28,9 @@ Authorization: Bearer {accessToken}
 
 ## Parameters
 
-| Name | Type     | Description              |
-| ---- | -------- | ------------------------ |
-| `id` | `string` | The id of the checkpoint. |
+| Name | Type     | Required | Default | Description               |
+| ---- | -------- | :------: | :-----: | ------------------------- |
+| `id` | `string` | ✔️       | —       | The id of the checkpoint. |
 
 ## Response Schema
 

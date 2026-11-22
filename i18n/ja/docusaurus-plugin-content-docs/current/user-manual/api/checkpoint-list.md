@@ -15,7 +15,7 @@ GET https://playcanvas.com/api/branches/:branchId/checkpoints
 
 ## 例
 
-```none
+```sh
 curl -H "Authorization: Bearer {accessToken}" "https://playcanvas.com/api/branches/{branchId}/checkpoints"
 ```
 
@@ -28,11 +28,11 @@ Authorization: Bearer {accessToken}
 
 ## パラメーター
 
-| 名前       | タイプ     | Required | 説明                                                                                           |
-| ---------- | -------- | :------: | ----------------------------------------------------------------------------------------------------- |
-| `branchId` | `string` | ✔️      | The id of the branch.                                                                                 |
-| `limit`    | `number` |          | The maximum number of checkpoints to return. Cannot exceed 50.                                        |
-| `skip`     | `string` |          | A checkpoint id. The result will only contain checkpoints that were created before this checkpoint.    |
+| 名前         | タイプ      | 必須  | デフォルト | 説明                                                                                                  |
+| ---------- | -------- | :-: | :---: | --------------------------------------------------------------------------------------------------- |
+| `branchId` | `string` | ✔️  | —     | The id of the branch.                                                                               |
+| `limit`    | `number` |     | —     | The maximum number of checkpoints to return. Cannot exceed 50.                                      |
+| `skip`     | `string` |     | —     | A checkpoint id. The result will only contain checkpoints that were created before this checkpoint. |
 
 ## レスポンススキーマ
 

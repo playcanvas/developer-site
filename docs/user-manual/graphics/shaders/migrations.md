@@ -209,6 +209,47 @@ gsplatMaterial.getShaderChunks(shaderLanguage).set('gsplatModifyVS', customShade
 
 ---
 
+### *Engine v2.7*
+
+#### Texture, uniform and vertex color reads
+
+The `StandardMaterial` chunks that read material textures, uniforms and vertex colors changed how they do it, in preparation for native WGSL chunks on WebGPU. See [PR #7487](https://github.com/playcanvas/engine/pull/7487) for details. If you override any of these chunks, update your override to match the engine's v2.7 version of the chunk.
+
+- More commonly modified chunks:
+  - `diffusePS`
+  - `emissivePS`
+  - `opacityPS`
+- Less commonly modified chunks:
+  - `aoPS`
+  - `clearCoatGlossPS`
+  - `clearCoatNormalPS`
+  - `clearCoatPS`
+  - `glossPS`
+  - `iorPS`
+  - `iridescencePS`
+  - `iridescenceThicknessPS`
+  - `metalnessPS`
+  - `normalMapPS`
+  - `parallaxPS`
+  - `sheenGlossPS`
+  - `sheenPS`
+  - `specularPS`
+  - `specularityFactorPS`
+  - `thicknessPS`
+  - `transmissionPS`
+
+The chunk API versions of these chunks didn't change, so the debug engine doesn't warn about them. It does warn when you override one of the removed chunks below.
+
+#### Removed chunks
+
+- `diffuseDetailMapPS` was removed and its functionality moved into `diffusePS`. This only affects your `diffusePS` override if the material uses a diffuse detail map.
+- `aoDetailMapPS` was removed and its functionality moved into `aoPS`. This only affects your `aoPS` override if the material uses an AO detail map.
+- `normalDetailMapPS` was removed and its functionality moved into `normalMapPS`.
+- `normalXYPS` and `normalXYZPS` were removed and their functionality moved into `decodePS`. `normalMapPS` and `clearCoatNormalPS` used to call a hard-coded decode function. Like the other chunks, they now use the decode function that the texture's parameters select.
+- `lightmapDirPS` and `lightmapSinglePS` were removed and replaced by a single `lightmapPS` chunk.
+
+---
+
 ### *Engine v2.6*
 
 #### Internal engine chunks

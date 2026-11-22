@@ -23,17 +23,17 @@ PUT https://playcanvas.com/api/assets/:assetId
 
 ## 例
 
-```none
+```sh
 curl -H "Authorization: Bearer {accessToken}" -X PUT -F 'pow2={pow2}' -F 'file=@./script.js' "https://playcanvas.com/api/assets/{assetId}"
 ```
 
 ## パラメーター
 
-| 名前       | タイプ      | Required | 説明                                                                                                 |
-| ---------- | --------- | :------: | ----------------------------------------------------------------------------------------------------------- |
-| `assetId`  | `number`  | ✔️      | The id of the asset.                                                                                        |
-| `file`     | `file`    | ✔️      | Data to update asset file with.                                                                             |
-| `pow2`     | `boolean` |          | Only used for textures and defaults to false. Resize the texture to power of two dimensions (true / false). |
+| 名前        | タイプ       | 必須  | デフォルト   | 説明                                                                                    |
+| --------- | --------- | :-: | :-----: | ------------------------------------------------------------------------------------- |
+| `assetId` | `number`  | ✔️  | —       | The id of the asset.                                                                  |
+| `file`    | `file`    | ✔️  | —       | Data to update asset file with.                                                       |
+| `pow2`    | `boolean` |     | `false` | Only used for textures. Resize the texture to power of two dimensions (true / false). |
 
 ## レスポンススキーマ
 

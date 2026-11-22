@@ -15,7 +15,7 @@ GET https://playcanvas.com/api/assets/:assetId/file/:filename?branchId=:branchId
 
 ## 例
 
-```none
+```sh
 curl -H "Authorization: Bearer {accessToken}" "https://playcanvas.com/api/assets/{assetId}/file/{filename}?branchId={branchId}"
 ```
 
@@ -28,11 +28,11 @@ Authorization: Bearer {accessToken}
 
 ## パラメーター
 
-| 名前       | タイプ     | Required | 説明                |
-| ---------- | -------- | :------: | -------------------------- |
-| `assetId`  | `number` | ✔️      | The id of the asset.       |
-| `branchId` | `string` | ✔️      | The id of the branch.      |
-| `filename` | `string` | ✔️      | The filename of the asset. |
+| 名前         | タイプ      | 必須  | デフォルト | 説明                         |
+| ---------- | -------- | :-: | :---: | -------------------------- |
+| `assetId`  | `number` | ✔️  | —     | The id of the asset.       |
+| `branchId` | `string` | ✔️  | —     | The id of the branch.      |
+| `filename` | `string` | ✔️  | —     | The filename of the asset. |
 
 ## レスポンススキーマ
 

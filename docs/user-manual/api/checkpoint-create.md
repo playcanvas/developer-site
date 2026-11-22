@@ -17,7 +17,7 @@ The request will return job details immediately. You can [poll the job by id](/u
 
 ## Example
 
-```none
+```sh
 curl -H "Authorization: Bearer {accessToken}" -H "Content-Type: application/json" -X POST -d '{"projectId": {projectId}, "branchId": "{branchId}", "description": "My checkpoint"}' "https://playcanvas.com/api/checkpoints"
 ```
 
@@ -37,11 +37,11 @@ Content-Type: application/json
 
 ## Parameters
 
-| Name          | Type     | Required | Description                                                                      |
-| ------------- | -------- | :------: | -------------------------------------------------------------------------------- |
-| `projectId`   | `number` | ✔️      | The id of the project.                                                           |
-| `branchId`    | `string` | ✔️      | The id of the branch.                                                            |
-| `description` | `string` | ✔️      | A description for the checkpoint. Must be non-empty and cannot exceed 10,000 characters. |
+| Name          | Type     | Required | Default | Description                                                                              |
+| ------------- | -------- | :------: | :-----: | ---------------------------------------------------------------------------------------- |
+| `projectId`   | `number` | ✔️       | —       | The id of the project.                                                                   |
+| `branchId`    | `string` | ✔️       | —       | The id of the branch.                                                                    |
+| `description` | `string` | ✔️       | —       | A description for the checkpoint. Must be non-empty and cannot exceed 10,000 characters. |
 
 ## Response Schema
 

@@ -23,7 +23,7 @@ POST https://playcanvas.com/api/assets
 
 ## 例
 
-```none
+```sh
 curl -H "Authorization: Bearer {accessToken}" -X POST -F 'name={name}' -F 'projectId={projectId}' -F 'parent={parent}' -F 'preload={preload}' -F 'pow2={pow2}' -F 'file=@./script.js' "https://playcanvas.com/api/assets"
 ```
 
@@ -60,15 +60,15 @@ Content-Type: application/javascript
 
 ## パラメーター
 
-| 名前        | タイプ      | Required | 説明                                                                                                 |
-| ----------- | --------- | :------: | ----------------------------------------------------------------------------------------------------------- |
-| `name`      | `string`  | ✔️      | The name of the asset.                                                                                      |
-| `projectId` | `number`  | ✔️      | The id of the project.                                                                                      |
-| `branchId`  | `string`  | ✔️      | The id of the branch.                                                                                       |
-| `parent`    | `number`  |          | Parent asset's id.                                                                                          |
-| `preload`   | `boolean` |          | Preload the asset (true / false).                                                                           |
-| `file`      | `file`    |          | Data to store as the asset file.                                                                            |
-| `pow2`      | `boolean` |          | Only used for textures and defaults to false. Resize the texture to power of two dimensions (true / false). |
+| 名前          | タイプ       | 必須  | デフォルト   | 説明                                                                                    |
+| ----------- | --------- | :-: | :-----: | ------------------------------------------------------------------------------------- |
+| `name`      | `string`  | ✔️  | —       | The name of the asset.                                                                |
+| `projectId` | `number`  | ✔️  | —       | The id of the project.                                                                |
+| `branchId`  | `string`  | ✔️  | —       | The id of the branch.                                                                 |
+| `parent`    | `number`  |     | —       | Parent asset's id.                                                                    |
+| `preload`   | `boolean` |     | —       | Preload the asset (true / false).                                                     |
+| `file`      | `file`    |     | —       | Data to store as the asset file.                                                      |
+| `pow2`      | `boolean` |     | `false` | Only used for textures. Resize the texture to power of two dimensions (true / false). |
 
 ## レスポンススキーマ
 
