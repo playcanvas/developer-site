@@ -15,7 +15,7 @@ POST https://playcanvas.com/api/branches
 
 ## 例
 
-```none
+```sh
 curl -H "Authorization: Bearer {accessToken}" -H "Content-Type: application/json" -X POST -d '{"projectId": {projectId}, "name": "My New Branch", "sourceBranchId": "{sourceBranchId}"}' "https://playcanvas.com/api/branches"
 ```
 
@@ -35,12 +35,12 @@ Content-Type: application/json
 
 ## パラメーター
 
-| 名前                   | タイプ     | Required | 説明                                                                                                          |
-| ---------------------- | -------- | :------: | -------------------------------------------------------------------------------------------------------------------- |
-| `name`                 | `string` | ✔️      | The name of the new branch. Must be non-empty and cannot exceed 1000 characters.                                     |
-| `projectId`            | `number` | ✔️      | The id of the project.                                                                                               |
-| `sourceBranchId`       | `string` | ✔️      | The id of the branch to create the new branch from.                                                                  |
-| `sourceCheckpointId`   | `string` |          | The id of the checkpoint to create the new branch from. Must belong to the source branch. If not specified, the latest checkpoint of the source branch will be used. |
+| 名前                   | タイプ      | 必須  | デフォルト       | 説明                                                                                        |
+| -------------------- | -------- | :-: | :---------: | ----------------------------------------------------------------------------------------- |
+| `name`               | `string` | ✔️  | —           | The name of the new branch. Must be non-empty and cannot exceed 1000 characters.          |
+| `projectId`          | `number` | ✔️  | —           | The id of the project.                                                                    |
+| `sourceBranchId`     | `string` | ✔️  | —           | The id of the branch to create the new branch from.                                       |
+| `sourceCheckpointId` | `string` |     | 最新のチェックポイント | The id of the checkpoint to create the new branch from. Must belong to the source branch. |
 
 ## レスポンススキーマ
 

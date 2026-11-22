@@ -1,5 +1,5 @@
 ---
-title: Assets - Get Asset
+title: Assets - Get asset
 description: "GET asset metadata by id and branch id: REST route, curl example, and fields returned for a single project asset."
 ---
 
@@ -15,7 +15,7 @@ Get the details of a single asset
 
 ## Example
 
-```none
+```sh
 curl -H "Authorization: Bearer {accessToken}" https://playcanvas.com/api/assets/{assetId}?branchId={branchId}
 ```
 
@@ -28,10 +28,10 @@ Authorization: Bearer {accessToken}
 
 ## Parameters
 
-| Name       | Type     | Required | Description           |
-| ---------- | -------- | :------: | --------------------- |
-| `assetId`  | `number` | ✔️      | The id of the asset.  |
-| `branchId` | `string` | ✔️      | The id of the branch. |
+| Name       | Type     | Required | Default | Description           |
+| ---------- | -------- | :------: | :-----: | --------------------- |
+| `assetId`  | `number` | ✔️       | —       | The id of the asset.  |
+| `branchId` | `string` | ✔️       | —       | The id of the branch. |
 
 ## Response Schema
 

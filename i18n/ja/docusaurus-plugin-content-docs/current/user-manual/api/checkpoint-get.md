@@ -15,7 +15,7 @@ IDを指定してチェックポイントを取得します。
 
 ## 例
 
-```none
+```sh
 curl -H "Authorization: Bearer {accessToken}" "https://playcanvas.com/api/checkpoints/{id}"
 ```
 
@@ -28,9 +28,9 @@ Authorization: Bearer {accessToken}
 
 ## パラメーター
 
-| 名前 | タイプ     | 説明              |
-| ---- | -------- | ------------------------ |
-| `id` | `string` | The id of the checkpoint. |
+| 名前   | タイプ      | 必須  | デフォルト | 説明                        |
+| ---- | -------- | :-: | :---: | ------------------------- |
+| `id` | `string` | ✔️  | —     | The id of the checkpoint. |
 
 ## レスポンススキーマ
 

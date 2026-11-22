@@ -23,17 +23,17 @@ This endpoint currently only supports updating `script`, `html`, `css`, `text`, 
 
 ## Example
 
-```none
+```sh
 curl -H "Authorization: Bearer {accessToken}" -X PUT -F 'pow2={pow2}' -F 'file=@./script.js' "https://playcanvas.com/api/assets/{assetId}"
 ```
 
 ## Parameters
 
-| Name       | Type      | Required | Description                                                                                                 |
-| ---------- | --------- | :------: | ----------------------------------------------------------------------------------------------------------- |
-| `assetId`  | `number`  | ✔️      | The id of the asset.                                                                                        |
-| `file`     | `file`    | ✔️      | Data to update asset file with.                                                                             |
-| `pow2`     | `boolean` |          | Only used for textures and defaults to false. Resize the texture to power of two dimensions (true / false). |
+| Name      | Type      | Required | Default | Description                                                                           |
+| --------- | --------- | :------: | :-----: | ------------------------------------------------------------------------------------- |
+| `assetId` | `number`  | ✔️       | —       | The id of the asset.                                                                  |
+| `file`    | `file`    | ✔️       | —       | Data to update asset file with.                                                       |
+| `pow2`    | `boolean` |          | `false` | Only used for textures. Resize the texture to power of two dimensions (true / false). |
 
 ## Response Schema
 

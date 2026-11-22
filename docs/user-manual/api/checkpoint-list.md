@@ -15,7 +15,7 @@ Get a list of checkpoints for a branch, sorted by newest first.
 
 ## Example
 
-```none
+```sh
 curl -H "Authorization: Bearer {accessToken}" "https://playcanvas.com/api/branches/{branchId}/checkpoints"
 ```
 
@@ -28,11 +28,11 @@ Authorization: Bearer {accessToken}
 
 ## Parameters
 
-| Name       | Type     | Required | Description                                                                                           |
-| ---------- | -------- | :------: | ----------------------------------------------------------------------------------------------------- |
-| `branchId` | `string` | ✔️      | The id of the branch.                                                                                 |
-| `limit`    | `number` |          | The maximum number of checkpoints to return. Cannot exceed 50.                                        |
-| `skip`     | `string` |          | A checkpoint id. The result will only contain checkpoints that were created before this checkpoint.    |
+| Name       | Type     | Required | Default | Description                                                                                         |
+| ---------- | -------- | :------: | :-----: | --------------------------------------------------------------------------------------------------- |
+| `branchId` | `string` | ✔️       | —       | The id of the branch.                                                                               |
+| `limit`    | `number` |          | —       | The maximum number of checkpoints to return. Cannot exceed 50.                                      |
+| `skip`     | `string` |          | —       | A checkpoint id. The result will only contain checkpoints that were created before this checkpoint. |
 
 ## Response Schema
 

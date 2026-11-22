@@ -15,7 +15,7 @@ GET https://playcanvas.com/api/projects/:projectId/branches
 
 ## 例
 
-```none
+```sh
 curl -H "Authorization: Bearer {accessToken}" "https://playcanvas.com/api/projects/{projectId}/branches"
 ```
 
@@ -28,9 +28,9 @@ Authorization: Bearer {accessToken}
 
 ## パラメーター
 
-| 名前        | タイプ     | 説明            |
-| ----------- | -------- | ---------------------- |
-| `projectId` | `number` | The id of the project. |
+| 名前          | タイプ      | 必須  | デフォルト | 説明                     |
+| ----------- | -------- | :-: | :---: | ---------------------- |
+| `projectId` | `number` | ✔️  | —     | The id of the project. |
 
 ## レスポンススキーマ
 

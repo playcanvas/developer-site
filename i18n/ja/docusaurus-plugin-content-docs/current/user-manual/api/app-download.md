@@ -11,33 +11,33 @@ POST https://playcanvas.com/api/apps/download
 
 ## 説明
 
-自分のサーバーでセルフホストすることができるアプリをダウンロードできます。リクエストによりダウンロードジョブが開始され、ジョブの詳細がレスポンスで返されます。[idを指定してジョブをポール](/user-manual/api/job-get)して、そのステータスが「完了」または「エラー」になるまで待ちます。ジョブが完了すると、そのデータにはアプリパッケージをダウンロードするためのURLが含まれます。
+自分のサーバーでセルフホストすることができるアプリをダウンロードできます。リクエストによりダウンロードジョブが開始され、ジョブの詳細がレスポンスで返されます。[idを指定してジョブをポール](/user-manual/api/job-get)して、そのステータスが「完了」または「エラー」になるまで待ちます。ジョブが完了すると、その`data.download_url`プロパティにアプリパッケージをダウンロードするためのURLが入ります。
 
 `format`でパッケージタイプを選択します。省略するか`static`に設定すると標準のセルフホスト用パッケージ、`npm`に設定するとViteベースのnpmプロジェクトとしてダウンロードされます。利用可能なダウンロード形式と[NPMプロジェクト構造](/user-manual/editor/projects/downloading#npm-project-structure)の詳細については、[プロジェクトのダウンロード](/user-manual/editor/projects/downloading#download-formats)を参照してください。
 
 ## 例
 
-```none
-curl -H "Authorization: Bearer {accessToken}" -H "Content-Type: application/json" -X POST -d '{"project_id": 9999999, "scenes": [9999999], "name": "My App", "format": "npm"}' "https://playcanvas.com/api/apps/download"
+```sh
+curl -H "Authorization: Bearer {accessToken}" -H "Content-Type: application/json" -X POST -d '{"project_id": {projectId}, "scenes": [{sceneId}], "name": "My App", "format": "npm"}' "https://playcanvas.com/api/apps/download"
 ```
 
 ## パラメーター
 
-| 名前                    | タイプ       | Required | 説明                                                                                                                                                           |
-| ----------------------- | ---------- | :------: | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `project_id`            | `number`   | ✔️      | The id of the project.                                                                                                                                                |
-| `name`                  | `string`   | ✔️      | The name of the app. Must be less than 1000 characters.                                                                                                               |
-| `scenes`                | `number[]` | ✔️      | A list of scene ids to be included in the app. When you specify scenes then the first scene in the list will be used as the initial scene of the application.         |
-| `branch_id`             | `string`   |          | The id of the branch. If no id is specified the main branch will be used.                                                                                             |
-| `description`           | `string`   |          | The description of the app. Must be less than 10,000 characters.                                                                                                      |
-| `version`               | `string`   |          | The version of the app. Can be a string up to 20 characters.                                                                                                          |
-| `release_notes`         | `string`   |          | Release notes for the app. Can be a string up to 10,000 characters.                                                                                                   |
-| `scripts_concatenate`   | `boolean`  |          | Set it to true if you want scripts to be concatenated.                                                                                                                |
-| `scripts_minify`        | `boolean`  |          | Set it to true if you want scripts to be minified. Defaults to true.                                                                                                  |
-| `scripts_sourcemaps`    | `boolean`  |          | Set it to true if you want script sourcemaps to be generated. Defaults to false.                                                                                      |
-| `optimize_scene_format` | `boolean`  |          | Set it to true if you want scenes to be in an optimized format (see [Optimize Scene Format](/user-manual/optimization/optimizing-scene-format) for more information). |
-| `format`                | `string`   |          | ダウンロードするパッケージタイプ: `static`または`npm`。デフォルトは`static`です。[プロジェクトのダウンロード](/user-manual/editor/projects/downloading#download-formats)を参照してください。 |
-| `engine_version`        | `string`   |          | Set it to a Engine version string ([full list of releases](https://github.com/playcanvas/engine/releases)) if a specific version is needed for the app.               |
+| 名前                      | タイプ        | 必須  | デフォルト      | 説明                                                                                                                                                                    |
+| ----------------------- | ---------- | :-: | :--------: | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `project_id`            | `number`   | ✔️  | —          | The id of the project.                                                                                                                                                |
+| `name`                  | `string`   | ✔️  | —          | The name of the app. Must be less than 1000 characters.                                                                                                               |
+| `scenes`                | `number[]` | ✔️  | —          | A list of scene ids to be included in the app. When you specify scenes then the first scene in the list will be used as the initial scene of the application.         |
+| `branch_id`             | `string`   |     | メインブランチ    | The id of the branch.                                                                                                                                                 |
+| `description`           | `string`   |     | —          | The description of the app. Must be less than 10,000 characters.                                                                                                      |
+| `version`               | `string`   |     | —          | The version of the app. Can be a string up to 20 characters.                                                                                                          |
+| `release_notes`         | `string`   |     | —          | Release notes for the app. Can be a string up to 10,000 characters.                                                                                                   |
+| `scripts_concatenate`   | `boolean`  |     | `false`    | Set it to true if you want scripts to be concatenated.                                                                                                                |
+| `scripts_minify`        | `boolean`  |     | `true`     | Set it to true if you want scripts to be minified.                                                                                                                    |
+| `scripts_sourcemaps`    | `boolean`  |     | `false`    | Set it to true if you want script sourcemaps to be generated.                                                                                                         |
+| `optimize_scene_format` | `boolean`  |     | `false`    | Set it to true if you want scenes to be in an optimized format (see [Optimize Scene Format](/user-manual/optimization/optimizing-scene-format) for more information). |
+| `format`                | `string`   |     | `static`   | ダウンロードするパッケージタイプ: `static`または`npm`。[プロジェクトのダウンロード](/user-manual/editor/projects/downloading#download-formats)を参照してください。                                               |
+| `engine_version`        | `string`   |     | サポートされる最新版 | 特定のバージョンが必要な場合は、Engine のバージョン文字列（[リリースの一覧](https://github.com/playcanvas/engine/releases)）を設定します。省略すると、プロジェクトのメジャーバージョンで Editor がサポートする最新の Engine バージョンが使用されます。       |
 
 ## レスポンススキーマ
 

@@ -208,6 +208,47 @@ gsplatMaterial.getShaderChunks(shaderLanguage).set('gsplatModifyVS', customShade
 
 ---
 
+### *Engine v2.7*
+
+#### テクスチャ、ユニフォーム、頂点カラーの読み取り
+
+マテリアルのテクスチャ、ユニフォーム、頂点カラーを読み取る `StandardMaterial` のチャンクは、WebGPU でネイティブの WGSL チャンクに対応する準備として、その読み取り方が変更されました。詳細は [PR #7487](https://github.com/playcanvas/engine/pull/7487) を参照してください。これらのチャンクをオーバーライドしている場合は、オーバーライドをエンジンの v2.7 版のチャンクに合わせて更新してください。
+
+- よく変更されるチャンク:
+  - `diffusePS`
+  - `emissivePS`
+  - `opacityPS`
+- あまり変更されないチャンク:
+  - `aoPS`
+  - `clearCoatGlossPS`
+  - `clearCoatNormalPS`
+  - `clearCoatPS`
+  - `glossPS`
+  - `iorPS`
+  - `iridescencePS`
+  - `iridescenceThicknessPS`
+  - `metalnessPS`
+  - `normalMapPS`
+  - `parallaxPS`
+  - `sheenGlossPS`
+  - `sheenPS`
+  - `specularPS`
+  - `specularityFactorPS`
+  - `thicknessPS`
+  - `transmissionPS`
+
+これらのチャンクのチャンク API バージョンは変わっていないため、デバッグ版エンジンはこれらについて警告しません。下記の削除されたチャンクをオーバーライドした場合は警告します。
+
+#### 削除されたチャンク
+
+- `diffuseDetailMapPS` は削除され、その機能は `diffusePS` に移されました。`diffusePS` のオーバーライドに影響するのは、マテリアルがディフューズのディテールマップを使用している場合のみです。
+- `aoDetailMapPS` は削除され、その機能は `aoPS` に移されました。`aoPS` のオーバーライドに影響するのは、マテリアルが AO のディテールマップを使用している場合のみです。
+- `normalDetailMapPS` は削除され、その機能は `normalMapPS` に移されました。
+- `normalXYPS` と `normalXYZPS` は削除され、その機能は `decodePS` に移されました。`normalMapPS` と `clearCoatNormalPS` はこれまでハードコードされたデコード関数を呼び出していましたが、他のチャンクと同様に、テクスチャのパラメーターで選択されるデコード関数を使用するようになりました。
+- `lightmapDirPS` と `lightmapSinglePS` は削除され、単一の `lightmapPS` チャンクに置き換えられました。
+
+---
+
 ### *Engine v2.6*
 
 #### Internal engine chunks

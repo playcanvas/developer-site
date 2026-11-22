@@ -21,7 +21,7 @@ GET https://playcanvas.com/api/assets/:assetId?branchId=:branchId
 
 ## 例
 
-```none
+```sh
 curl -H "Authorization: Bearer {accessToken}" -X DELETE "https://playcanvas.com/api/assets/{assetId}?branchId={branchId}"
 ```
 
@@ -34,10 +34,10 @@ Authorization: Bearer {accessToken}
 
 ## パラメーター
 
-| 名前       | タイプ     | Required | 説明                                    |
-| ---------- | -------- | :------: | ---------------------------------------------- |
-| `assetId`  | `number` | ✔️      | The id of the asset to delete.                 |
-| `branchId` | `string` | ✔️      | The id of the branch to delete the asset from. |
+| 名前         | タイプ      | 必須  | デフォルト | 説明                                             |
+| ---------- | -------- | :-: | :---: | ---------------------------------------------- |
+| `assetId`  | `number` | ✔️  | —     | The id of the asset to delete.                 |
+| `branchId` | `string` | ✔️  | —     | The id of the branch to delete the asset from. |
 
 ## レスポンススキーマ
 

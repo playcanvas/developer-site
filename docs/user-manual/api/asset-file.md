@@ -1,5 +1,5 @@
 ---
-title: Assets - Get Asset File
+title: Assets - Get asset file
 description: Fetch a specific asset file variant by filename for a branch, including URL pattern, authentication, and response handling.
 ---
 
@@ -15,7 +15,7 @@ Get the details of a single asset
 
 ## Example
 
-```none
+```sh
 curl -H "Authorization: Bearer {accessToken}" "https://playcanvas.com/api/assets/{assetId}/file/{filename}?branchId={branchId}"
 ```
 
@@ -28,11 +28,11 @@ Authorization: Bearer {accessToken}
 
 ## Parameters
 
-| Name       | Type     | Required | Description                |
-| ---------- | -------- | :------: | -------------------------- |
-| `assetId`  | `number` | ✔️      | The id of the asset.       |
-| `branchId` | `string` | ✔️      | The id of the branch.      |
-| `filename` | `string` | ✔️      | The filename of the asset. |
+| Name       | Type     | Required | Default | Description                |
+| ---------- | -------- | :------: | :-----: | -------------------------- |
+| `assetId`  | `number` | ✔️       | —       | The id of the asset.       |
+| `branchId` | `string` | ✔️       | —       | The id of the branch.      |
+| `filename` | `string` | ✔️       | —       | The filename of the asset. |
 
 ## Response Schema
 

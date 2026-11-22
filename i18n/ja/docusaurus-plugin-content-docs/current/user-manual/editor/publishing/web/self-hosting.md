@@ -59,7 +59,7 @@ GitHub Pagesドキュメントは、[`.nojekyll`](https://docs.github.com/en/pag
 
 ウェブサーバを実行するためのオプションは多数あります。いくつかを紹介します：
 
-* *初級:* [Python](https://www.python.org/)をインストールし、アプリケーションのindex.htmlと同じフォルダから*python -m SimpleHTTPServer*コマンドを実行します。その後、ブラウザを `http://localhost:8000` に向けます。
+* *初級:* [Python](https://www.python.org/)をインストールし、アプリケーションのindex.htmlと同じフォルダから*python -m http.server*コマンドを実行します。その後、ブラウザを `http://localhost:8000` に向けます。
 * *中級:* [NPM](https://www.npmjs.com/)と[http-server](https://www.npmjs.com/package/http-server)をグローバルにインストールします。アプリケーションのindex.htmlと同じフォルダから *http-server -p 8000 --cors -c-1* というコマンドを実行します。そして、ブラウザを `http://localhost:8000` に向けます。
 * *中級:* [XAMPP](https://www.apachefriends.org/index.html)をインストールします。これは完全なPHP開発環境ですが、簡単に設定できるApacheサーバーが含まれています。
 * *上級:* スタンドアロンサービスとして[Apache](https://httpd.apache.org/)または[nginx](https://www.nginx.com/)をインストールします。

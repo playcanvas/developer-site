@@ -15,7 +15,7 @@ Get a list of all open branches for a project
 
 ## Example
 
-```none
+```sh
 curl -H "Authorization: Bearer {accessToken}" "https://playcanvas.com/api/projects/{projectId}/branches"
 ```
 
@@ -28,9 +28,9 @@ Authorization: Bearer {accessToken}
 
 ## Parameters
 
-| Name        | Type     | Description            |
-| ----------- | -------- | ---------------------- |
-| `projectId` | `number` | The id of the project. |
+| Name        | Type     | Required | Default | Description            |
+| ----------- | -------- | :------: | :-----: | ---------------------- |
+| `projectId` | `number` | ✔️       | —       | The id of the project. |
 
 ## Response Schema
 
