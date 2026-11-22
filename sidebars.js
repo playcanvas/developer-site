@@ -253,7 +253,7 @@ const sidebars = {
               ],
             },
             { type: 'link', label: 'Debugging', key: 'editor-debugging-link', href: '/user-manual/debugging/' },
-            'user-manual/editor/engine-compatibility',
+            'user-manual/editor/upgrading-engine-v1-projects',
           ],
         },
         {

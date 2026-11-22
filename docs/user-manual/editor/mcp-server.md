@@ -140,7 +140,7 @@ Editor viewport, launch the scene, capture the running result, and report any co
 
 The assistant can inspect and edit entities, components, scripts, assets, scenes, project settings, templates, animation data, builds, and version-control state. Let it select the tools needed for the requested outcome.
 
-## Verify the Running Result
+## Verify the Running Result {#verify-the-running-result}
 
 For scene or behavior changes, source inspection is not enough. Ask the assistant to:
 

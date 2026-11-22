@@ -43,7 +43,7 @@ As well as stable releases, the Engine publishes prerelease builds to npm. Each 
 | `beta` | `X.Y.0-beta.N` | A build of the `main` branch toward the next minor release, made each night at 02:00 UTC if `main` has changed since the last beta. It contains merged features that have not been through release testing yet. |
 | `preview` | `X.Y.Z-preview.N` | Published when a minor or patch release is being prepared on its `release-X.Y` branch, before the release is final. Recent releases have followed within minutes, so this tag often points at a version older than `latest`. |
 | `alpha` | `X.Y.Z-alpha.PR.N` | An occasional build of a pull request, made so the change can be tested before it merges, for example on mobile devices. Don't use it in projects. |
-| `lts` | `1.Y.Z` | The latest Engine v1 release. Engine v1 receives critical fixes only. See [Engine Compatibility](../editor/engine-compatibility.md). |
+| `lts` | `1.Y.Z` | The latest Engine v1 release. Engine v1 receives critical fixes only. The Editor no longer supports it: see [Upgrading Engine V1 Projects](../editor/upgrading-engine-v1-projects.md). |
 
 To install a tagged build, add the tag to the package name:
 
