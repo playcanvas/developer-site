@@ -5,7 +5,7 @@ description: Font assets are MSDF atlases generated in the Editor from a TTF or 
 
 A Font asset renders text through an [Element](/user-manual/editor/scenes/components/element/) component of type Text. Add an Element component to an Entity, set its type to Text, then drag the Font asset onto the component's **Font** slot.
 
-Fonts are stored as multi-channel signed distance field (MSDF) atlases rather than fixed-size bitmaps, so one asset stays crisp at every size and you only need one per typeface. The technique suits some typefaces better than others.
+Fonts are stored as multi-channel signed distance field (MSDF) atlases rather than fixed-size bitmaps, so one asset stays crisp at every size and you only need one per typeface.
 
 ## Importing a font
 
