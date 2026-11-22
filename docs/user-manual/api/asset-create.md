@@ -24,7 +24,7 @@ This endpoint currently only supports creating `script`, `html`, `css`, `text`, 
 ## Example
 
 ```sh
-curl -H "Authorization: Bearer {accessToken}" -X POST -F 'name={name}' -F 'projectId={projectId}' -F 'parent={parent}' -F 'preload={preload}' -F 'pow2={pow2}' -F 'file=@./script.js' "https://playcanvas.com/api/assets"
+curl -H "Authorization: Bearer {accessToken}" -X POST -F 'name={name}' -F 'projectId={projectId}' -F 'branchId={branchId}' -F 'parent={parent}' -F 'preload={preload}' -F 'pow2={pow2}' -F 'file=@./script.js' "https://playcanvas.com/api/assets"
 ```
 
 HTTP Request
@@ -34,6 +34,10 @@ POST https://playcanvas.com/api/assets
 Authorization: Bearer {accessToken}
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryTdsfsfT
 
+------WebKitFormBoundaryTdsfsfT
+Content-Disposition: form-data; name="name"
+
+{name}
 ------WebKitFormBoundaryTdsfsfT
 Content-Disposition: form-data; name="projectId"
 
@@ -51,7 +55,7 @@ Content-Disposition: form-data; name="preload"
 
 {preload}
 ------WebKitFormBoundaryTdsfsfT
-Content-Disposition: form-data; name=""; filename="script.js"
+Content-Disposition: form-data; name="file"; filename="script.js"
 Content-Type: application/javascript
 
 {fileContent}

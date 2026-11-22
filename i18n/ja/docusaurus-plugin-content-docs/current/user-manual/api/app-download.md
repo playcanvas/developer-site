@@ -18,7 +18,7 @@ POST https://playcanvas.com/api/apps/download
 ## 例
 
 ```sh
-curl -H "Authorization: Bearer {accessToken}" -H "Content-Type: application/json" -X POST -d '{"project_id": 9999999, "scenes": [9999999], "name": "My App", "format": "npm"}' "https://playcanvas.com/api/apps/download"
+curl -H "Authorization: Bearer {accessToken}" -H "Content-Type: application/json" -X POST -d '{"project_id": {projectId}, "scenes": [{sceneId}], "name": "My App", "format": "npm"}' "https://playcanvas.com/api/apps/download"
 ```
 
 ## パラメーター

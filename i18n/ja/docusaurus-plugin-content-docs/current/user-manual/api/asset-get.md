@@ -1,5 +1,5 @@
 ---
-title: アセット - Get Asset
+title: アセット - Get asset
 description: "IDとブランチIDでAssetメタデータをGET: RESTルート、curl例、単一プロジェクトAssetの返却フィールド。"
 ---
 

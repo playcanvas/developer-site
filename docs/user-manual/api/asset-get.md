@@ -1,5 +1,5 @@
 ---
-title: Assets - Get Asset
+title: Assets - Get asset
 description: "GET asset metadata by id and branch id: REST route, curl example, and fields returned for a single project asset."
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: アセット - Get Asset File
+title: アセット - Get asset file
 description: ブランチのファイル名で特定のAssetファイルバリアントを取得し、URLパターン、認証、レスポンス処理を含みます。
 ---
 

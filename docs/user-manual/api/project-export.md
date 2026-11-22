@@ -18,7 +18,7 @@ The request will start an export job and the job details will be returned in the
 ## Example
 
 ```sh
-curl -H "Authorization: Bearer {accessToken}" -H "Content-Type: application/json" -X POST -d '{"branch_id": "99999999-9999-9999-9999-999999999999"}' "https://playcanvas.com/api/projects/{projectId}/export"
+curl -H "Authorization: Bearer {accessToken}" -H "Content-Type: application/json" -X POST -d '{"branch_id": "{branchId}"}' "https://playcanvas.com/api/projects/{projectId}/export"
 ```
 
 ## Parameters
