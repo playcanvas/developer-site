@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting
-description: Find the cause of common user interface problems, such as invisible text, ignored clicks, buttons that don't change, tiny or huge interfaces, scroll views that won't scroll, empty masks, text that won't wrap, untranslated keys, and interfaces drawn twice or through walls.
+description: Find the cause of common user interface problems, such as invisible text, letters with holes, ignored clicks, buttons that don't change, tiny or huge interfaces, scroll views that won't scroll, empty masks, text that won't wrap, untranslated keys, and interfaces drawn twice or through walls.
 ---
 
 Each section below starts from what you see, lists the usual causes, most likely first, and links to the page that explains each one.
@@ -25,6 +25,11 @@ Wrapping needs **Wrap Lines**, and a width to wrap at: turn **Auto Width** off a
 ### Markup Shows as Text {#markup-shows-as-text}
 
 Markup needs **Enable Markup**. With it on, a text with a markup error, such as an unclosed tag, is drawn as written, and the console reports the error. See [Markup](/user-manual/user-interface/text-elements/#markup).
+
+### Letters Have Holes or Notches {#letters-have-holes}
+
+- **An old font asset.** Many fonts build their letters from outlines that overlap where strokes cross or join. Font assets generated before the Editor and font-tools removed those overlaps can have holes there. Generate the font asset again. In the Editor, select it and click **REGENERATE FONT ASSETS**, or **CONVERT TO REFERENCED FONT** for a font imported before Editor 2.30.0. With font-tools, run it on the font file again. See [Creating a Font Asset](/user-manual/user-interface/fonts/#creating-a-font-asset).
+- **An old engine.** Engine versions before 2.20.0 draw every letter slightly thinner than its font, which can cut through thin strokes such as the bar of an `f`. Use engine 2.20.0 or later.
 
 ## Input {#input}
 
