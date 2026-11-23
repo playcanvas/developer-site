@@ -10,6 +10,7 @@ A PlayCanvas app is a web page, so anything that can show a web page can run it.
 | Destination | How |
 | --- | --- |
 | [The web](web/index.md) | [Host a build on playcanvas.com](web/playcanvas-hosting.md) at a link you can share, or [download it](../projects/downloading.md) to [host yourself](web/self-hosting.md). |
+| [Game platforms](/user-manual/publishing/) | Upload a build to a browser game platform such as [Wavedash](/user-manual/publishing/wavedash/). |
 | [Playable ads](playable-ads/index.md) | Export a build as an interactive ad for [Facebook](playable-ads/fb-playable-ads.md) or [Snapchat](playable-ads/snapchat-playable-ads.md). |
 | [Snapchat Web Lenses](snapchat-web-lenses.md) | Upload a build to Snapchat as a Web Lens. |
 | [Mobile app stores](mobile/index.md) | Wrap a build in a native iOS or Android app. |

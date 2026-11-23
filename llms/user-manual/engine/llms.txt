@@ -1,5 +1,5 @@
 ---
-covers: [engine, ecs, scripting, assets, graphics, gaussian-splatting, physics, animation, audio, user-interface, xr, debugging, optimization, 2D]
+covers: [engine, ecs, scripting, assets, graphics, gaussian-splatting, physics, animation, audio, user-interface, xr, debugging, optimization, 2D, publishing]
 ---
 # PlayCanvas Engine
 
@@ -228,6 +228,11 @@ Use this index to write code against the engine directly. React, Web Components 
 - [MiniStats](/user-manual/optimization/mini-stats/): An on-screen overlay of draw calls, frame time, and CPU and GPU timings.
 - [GPU Profiling](/user-manual/optimization/gpu-profiling/): Capturing WebGL and WebGPU frames with native GPU profilers.
 - [Device Pixel Ratio](/user-manual/optimization/runtime-devicepixelratio/): Trading sharpness for fill rate with `maxPixelRatio`.
+
+## Publishing
+
+- [Publishing](/user-manual/publishing/): Publishing an app from any authoring surface to browser game platforms.
+- [Publishing on Wavedash](/user-manual/publishing/wavedash/): Calling `window.Wavedash?.init()` when the game is ready, the build to upload for each surface, and the Wavedash CLI commands.
 
 ## API reference
 

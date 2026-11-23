@@ -34,6 +34,7 @@ Use this index for React projects, where the scene is JSX. The engine features t
 - [Materials](/user-manual/react/guide/materials/): Creating `StandardMaterial`s with `useMaterial` and applying them to `Render`.
 - [Physics](/user-manual/react/guide/physics/): Installing sync-ammo, `usePhysics`, rigid bodies and collision shapes, and how ammo.js is loaded.
 - [XR](/user-manual/react/guide/xr/): WebXR sessions from React: XR scripts on cameras, controller visuals, session buttons and HTTPS.
+- [Publishing on Wavedash](/user-manual/publishing/wavedash/): Calling `window.Wavedash?.init()` from an effect once the first scene's assets have loaded, and uploading the Vite build.
 
 ## Components
 

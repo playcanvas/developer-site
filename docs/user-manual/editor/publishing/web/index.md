@@ -1,6 +1,6 @@
 ---
 title: Web
-description: "Publishing a PlayCanvas Editor app on the web: PlayCanvas hosting, self-hosting a downloaded build, serving assets from a CDN, talking to the surrounding page, and heyVR."
+description: "Publishing a PlayCanvas Editor app on the web: PlayCanvas hosting, self-hosting a downloaded build, serving assets from a CDN, talking to the surrounding page, heyVR, and game platforms."
 ---
 
 PlayCanvas apps are web pages, so the web is their natural home. You can publish to playcanvas.com in a few steps, or download a build and host it wherever you like.
@@ -10,6 +10,7 @@ PlayCanvas apps are web pages, so the web is their natural home. You can publish
 - **The quickest way:** [PlayCanvas Hosting](playcanvas-hosting.md) publishes a build to a playcanvas.com link that you can share or embed. Its **primary build** link always plays the build you choose, so you can update the app without breaking the link.
 - **On your own site or domain:** [Self-hosting](self-hosting.md) covers embedding a hosted build in your page with an iframe, or downloading the build and putting it on your own server. [Downloading Projects](../../projects/downloading.md) explains the download formats.
 - **For virtual reality (VR) games:** [heyVR](hosting-heyvr.md) is a platform for publishing web-based VR games to players on headsets and other devices.
+- **On a game platform:** sites such as [Wavedash](/user-manual/publishing/wavedash/) host browser games and add an SDK for player accounts, leaderboards and more. See [Publishing](/user-manual/publishing/) for every platform.
 
 ## In This Section {#in-this-section}
 

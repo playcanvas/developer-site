@@ -131,6 +131,7 @@ Use this index for projects made in the Editor, where code lives in scripts atta
 - [Communication with web pages](/user-manual/editor/publishing/web/communicating-webpage/): Messaging between an app and the page that hosts it.
 - [Playable Ads](/user-manual/editor/publishing/playable-ads/): Exporting playable ads for Facebook and Snapchat.
 - [Snapchat Web Lenses](/user-manual/editor/publishing/snapchat-web-lenses/): Publishing a build on Snapchat as a Web Lens, with the Web Lens API loaded before the engine.
+- [Publishing on Wavedash](/user-manual/publishing/wavedash/): Showing an Editor build on Wavedash with a script that calls `Wavedash.init()`, then uploading it with the Wavedash CLI.
 
 ## API reference
 

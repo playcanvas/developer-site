@@ -1359,6 +1359,19 @@ const sidebars = {
         },
       ],
     },
+    {
+      type: 'category',
+      label: 'Publishing',
+      // distinct from the Editor's Publishing category, which has the same label
+      key: 'publishing-platforms',
+      link: {
+        type: 'doc',
+        id: 'user-manual/publishing/index',
+      },
+      items: [
+        'user-manual/publishing/wavedash',
+      ],
+    },
     sectionHeader('Foundational APIs'),
     {
       type: 'category',
