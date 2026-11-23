@@ -16,10 +16,10 @@ import Link from '@docusaurus/Link';
 ## 60秒でわかるSuperSplat
 
 <div className="iframe-container">
-    <iframe src="https://www.youtube.com/embed/7B0KdoJCUK8" title="SuperSplat：3Dガウシアンスプラットの編集、公開、共有" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen loading="lazy"></iframe>
+    <iframe src="https://www.youtube.com/embed/ohEANEGjxJ0" title="60秒でわかるSuperSplat：3Dガウシアンスプラットの編集、公開、共有" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen loading="lazy"></iframe>
 </div>
 
-閲覧、視聴、クリーンアップ、公開、キュレーション、変換、共有。プラットフォーム全体を1分以内で紹介します。
+キャプチャ、クリーンアップ、公開、Studioでの仕上げ、共有。ワークフロー全体を1分で紹介します。
 
 ## どこから始めますか？
 
