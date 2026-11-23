@@ -181,7 +181,7 @@ export class Visualizer extends Script {
                 lineIndex += 2;
             }
         }
-        this.app.renderLines(this.lines, color);
+        this.app.drawLines(this.lines, color);
     }
 }
 ```
@@ -249,14 +249,14 @@ Visualizer.prototype.renderData = function (data, color, scale, offset) {
             line += 2;
         }
     }
-    this.app.renderLines(this.lines, color);
+    this.app.drawLines(this.lines, color);
 };
 ```
 
 </TabItem>
 </Tabs>
 
-ビジュアライザースクリプトは、すべてのアナライザーからのデータを取得し、[`this.app.renderLines`](https://api.playcanvas.com/engine/classes/AppBase.html#renderlines) APIを使用して直線グラフとしてレンダリングします。
+ビジュアライザースクリプトは、すべてのアナライザーからのデータを取得し、[`this.app.drawLines`](https://api.playcanvas.com/engine/classes/AppBase.html#drawlines) APIを使用して直線グラフとしてレンダリングします。
 
 設定では、線に使用するベクターを割り当てています。各データの点に対して2つ必要です(線の開始と終了)。その後、すべての線が画面に表示されることを確認するためにいくつかのスケールファクタを設定します。`AnalyserNode`にはデータに含むことができるデシベルの最小値と最大値が含まれています。これは必ず正確ではないようですが(この範囲外の値を取得しました)、データを正規化するための良い基礎となります。
 

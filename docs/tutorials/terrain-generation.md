@@ -95,7 +95,7 @@ export class Terrain extends Script {
 
         // We still have to create a model resource to create a runtime collision mesh
         const node = new GraphNode();
-        const meshInstance = new MeshInstance(node, collisionMesh, this.material.resource);
+        const meshInstance = new MeshInstance(collisionMesh, this.material.resource, node);
         const collisionModel = new Model();
         collisionModel.graph = node;
         collisionModel.meshInstances.push(meshInstance);
@@ -253,7 +253,7 @@ Terrain.prototype.initialize = function() {
     // We still have to create a model resource to create a runtime
     // collision mesh
     var node = new pc.GraphNode();
-    var meshInstance = new pc.MeshInstance(node, collisionMesh, this.material.resource);
+    var meshInstance = new pc.MeshInstance(collisionMesh, this.material.resource, node);
     var collisionModel = new pc.Model();
     collisionModel.graph = node;
     collisionModel.meshInstances.push(meshInstance);

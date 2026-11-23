@@ -140,7 +140,7 @@ export class FirstPersonMovement extends Script {
 
         // use direction from keypresses to apply a force to the character
         if (x !== 0 || z !== 0) {
-            force.set(x, 0, z).normalize().scale(this.power);
+            force.set(x, 0, z).normalize().mulScalar(this.power);
             this.entity.rigidbody.applyForce(force);
         }
 
@@ -160,7 +160,7 @@ export class FirstPersonMovement extends Script {
     _createCamera() {
         // If user hasn't assigned a camera, create a new one
         this.camera = new Entity();
-        this.camera.setName("First Person Camera");
+        this.camera.name = "First Person Camera";
         this.camera.addComponent("camera");
         this.entity.addChild(this.camera);
         this.camera.translateLocal(0, 0.5, 0);
@@ -260,7 +260,7 @@ FirstPersonMovement.prototype.update = function(dt) {
 
     // use direction from keypresses to apply a force to the character
     if (x !== 0 || z !== 0) {
-        force.set(x, 0, z).normalize().scale(this.power);
+        force.set(x, 0, z).normalize().mulScalar(this.power);
         this.entity.rigidbody.applyForce(force);
     }
 
@@ -280,7 +280,7 @@ FirstPersonMovement.prototype._onMouseMove = function (e) {
 FirstPersonMovement.prototype._createCamera = function () {
     // If user hasn't assigned a camera, create a new one
     this.camera = new pc.Entity();
-    this.camera.setName("First Person Camera");
+    this.camera.name = "First Person Camera";
     this.camera.addComponent("camera");
     this.entity.addChild(this.camera);
     this.camera.translateLocal(0, 0.5, 0);

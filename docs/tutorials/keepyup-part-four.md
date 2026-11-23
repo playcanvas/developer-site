@@ -120,11 +120,11 @@ export class Ball extends Script {
         let tmp = Ball.tmp;
 
         // integrate the velocity in a temporary variable
-        tmp.copy(this._acc).scale(dt);
+        tmp.copy(this._acc).mulScalar(dt);
         this._vel.add(tmp);
 
         // integrate the position in a temporary variable
-        tmp.copy(this._vel).scale(dt);
+        tmp.copy(this._vel).mulScalar(dt);
         p.add(tmp);
 
         // update position
@@ -268,11 +268,11 @@ Ball.prototype.update = function(dt) {
     var tmp = Ball.tmp;
 
     // integrate the velocity in a temporary variable
-    tmp.copy(this._acc).scale(dt);
+    tmp.copy(this._acc).mulScalar(dt);
     this._vel.add(tmp);
 
     // integrate the position in a temporary variable
-    tmp.copy(this._vel).scale(dt);
+    tmp.copy(this._vel).mulScalar(dt);
     p.add(tmp);
 
     // update position
@@ -389,11 +389,11 @@ In code this looks like this:
 var p = this.entity.getLocalPosition();
 
 // integrate the velocity in a temporary variable
-tmp.copy(this._acc).scale(dt);
+tmp.copy(this._acc).mulScalar(dt);
 this._vel.add(tmp);
 
 // integrate the position in a temporary variable
-tmp.copy(this._vel).scale(dt);
+tmp.copy(this._vel).mulScalar(dt);
 p.add(tmp);
 
 // update position

@@ -150,7 +150,7 @@ this.loadJsonFromRemote("https://api.github.com/", function (data) {
 <TabItem value="esm" label="ESM">
 
 ```javascript
-import { Script, createStyle } from 'playcanvas';
+import { Script } from 'playcanvas';
 
 export class Game extends Script {
     static scriptName = "game";
@@ -206,7 +206,8 @@ export class Game extends Script {
     }
 
     initDisplay() {
-        const el = createStyle(this.style.resource);
+        const el = document.createElement('style');
+        el.textContent = this.style.resource;
         document.head.appendChild(el);
 
         const div = document.createElement("div");
@@ -289,7 +290,8 @@ Game.prototype.initialize = function() {
 };
 
 Game.prototype.initDisplay = function () {
-    var el = pc.createStyle(this.style.resource);
+    var el = document.createElement('style');
+    el.textContent = this.style.resource;
     document.head.appendChild(el);
 
     var div = document.createElement("div");

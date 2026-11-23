@@ -87,9 +87,9 @@ XR環境のための3D UIの作成方法は、ノンXR環境でのマウス/タ�
 vecA.copy(inputSource.getOrigin());
 // set end point of ray
 vecB.copy(inputSource.getDirection());
-vecB.scale(1000).add(vecA);
+vecB.mulScalar(1000).add(vecA);
 // render line between those two points
-app.renderLine(vecA, vecB, color);
+app.drawLine(vecA, vecB, color);
 ```
 
 ## UIインタラクション

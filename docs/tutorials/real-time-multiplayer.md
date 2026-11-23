@@ -184,7 +184,7 @@ export class Movement extends Script {
             x *= dt;
             z *= dt;
 
-            this.force.set(x, 0, z).normalize().scale(this.playerSpeed);
+            this.force.set(x, 0, z).normalize().mulScalar(this.playerSpeed);
             this.entity.rigidbody.applyForce(this.force);
         }
     }
@@ -241,7 +241,7 @@ Movement.prototype.update = function(dt) {
         x *= dt;
         z *= dt;
 
-        this.force.set (x, 0, z).normalize ().scale ((this.playerSpeed));
+        this.force.set(x, 0, z).normalize().mulScalar(this.playerSpeed);
         this.entity.rigidbody.applyForce (this.force);
     }
 };
@@ -360,7 +360,7 @@ And then declare these new functions inside Network.js:
         newPlayer.enabled = true;
 
         // Add the entity to the entity hierarchy
-        this.other.getParent().addChild(newPlayer);
+        this.other.parent.addChild(newPlayer);
 
         // If a location was given, teleport the new entity to the position of the connected player
         if (data)
@@ -400,7 +400,7 @@ Network.prototype.createPlayerEntity = function (data) {
     newPlayer.enabled = true;
 
     // Add the entity to the entity hierarchy
-    this.other.getParent().addChild(newPlayer);
+    this.other.parent.addChild(newPlayer);
 
     // If a location was given, teleport the new entity to the position of the connected player
     if (data)
