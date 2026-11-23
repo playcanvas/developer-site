@@ -37,7 +37,7 @@
     "sync:supersplat-api": "node utils/sync-supersplat-api.mjs",
     "check:web-components": "node utils/check-web-components-manifest.mjs",
     "lint": "markdownlint-cli2 docs i18n .github/CONTRIBUTING.md README.md",
-    "test": "node --test utils/plugins/llms/test/*.test.mjs",
+    "test": "node --test utils/plugins/llms/test/*.test.mjs utils/plugins/test/*.test.mjs",
     "preview-llms": "node utils/plugins/llms/preview.mjs"
   },
   "dependencies": {
