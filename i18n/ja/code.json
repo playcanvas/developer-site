@@ -797,5 +797,81 @@
   "liveExample.exitFullscreen": {
     "message": "フルスクリーンを終了",
     "description": "Button that exits the live example fullscreen mode"
+  },
+  "gaussianSplatDemo.error": {
+    "message": "デモを読み込めませんでした。",
+    "description": "Shown when a Gaussian splat demo fails to load"
+  },
+  "gaussianSplatDemo.loading": {
+    "message": "デモを読み込み中…",
+    "description": "Shown while a Gaussian splat demo loads"
+  },
+  "gaussianSplatDemo.unsupported": {
+    "message": "このデモにはWebGL 2が必要ですが、お使いのブラウザは対応していません。",
+    "description": "Shown when the browser cannot run a Gaussian splat demo"
+  },
+  "gaussianSplatDemo.orbitHint": {
+    "message": "ドラッグで回転・ピンチでズーム",
+    "description": "Hint over a Gaussian splat demo explaining how to move the camera"
+  },
+  "gaussianSplatDemo.explorerTitle": {
+    "message": "おもちゃの猫のGaussian splat",
+    "description": "Accessible name of the toy cat splat demo"
+  },
+  "gaussianSplatDemo.size": {
+    "message": "ガウシアンのサイズ",
+    "description": "Slider that shrinks every Gaussian in the toy cat splat"
+  },
+  "gaussianSplatDemo.randomColors": {
+    "message": "ランダムな色",
+    "description": "Checkbox that gives each Gaussian a random color"
+  },
+  "gaussianSplatDemo.viewDependent": {
+    "message": "視点依存の色",
+    "description": "Checkbox that turns spherical harmonics on and off"
+  },
+  "gaussianSplatDemo.explorerCaption": {
+    "message": "{count}個のガウシアンでできたおもちゃの猫。三角形は1つもありません。",
+    "description": "Caption of the toy cat splat demo"
+  },
+  "gaussianSplatDemo.explorerCaptionLoading": {
+    "message": "ガウシアンでできたおもちゃの猫。三角形は1つもありません。",
+    "description": "Caption of the toy cat splat demo before it has loaded"
+  },
+  "gaussianSplatDemo.singleTitle": {
+    "message": "1つの3Dガウシアン",
+    "description": "Accessible name of the single Gaussian demo"
+  },
+  "gaussianSplatDemo.scale": {
+    "message": "スケール",
+    "description": "Heading of the scale sliders in the single Gaussian demo"
+  },
+  "gaussianSplatDemo.rotation": {
+    "message": "回転",
+    "description": "Heading of the rotation sliders in the single Gaussian demo"
+  },
+  "gaussianSplatDemo.appearance": {
+    "message": "色と不透明度",
+    "description": "Heading of the color and opacity controls in the single Gaussian demo"
+  },
+  "gaussianSplatDemo.opacity": {
+    "message": "不透明度",
+    "description": "Slider that sets the opacity of the single Gaussian"
+  },
+  "gaussianSplatDemo.color": {
+    "message": "色",
+    "description": "Color picker for the single Gaussian"
+  },
+  "gaussianSplatDemo.reset": {
+    "message": "リセット",
+    "description": "Button that restores the single Gaussian demo to its starting values"
+  },
+  "gaussianSplatDemo.singleCaption": {
+    "message": "このガウシアンを定義する14個の数値：",
+    "description": "Introduces the list of values that define the single Gaussian"
+  },
+  "gaussianSplatDemo.position": {
+    "message": "位置",
+    "description": "Label of the position values of the single Gaussian"
   }
 }
