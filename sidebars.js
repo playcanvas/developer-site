@@ -1342,6 +1342,7 @@ const sidebars = {
       items: [
         'user-manual/publishing/web-hosting',
         'user-manual/publishing/embedding',
+        'user-manual/publishing/itch-io',
         'user-manual/publishing/wavedash',
         'user-manual/publishing/heyvr',
         'user-manual/publishing/snapchat-web-lenses',

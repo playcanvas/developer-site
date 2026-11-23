@@ -22,7 +22,7 @@ A build doesn't run if you open its `index.html` file in a browser by double-cli
 Any host that serves static files works. For example:
 
 - **Static hosting services**, such as [GitHub Pages](https://pages.github.com/), [Netlify](https://www.netlify.com/), [Cloudflare Pages](https://pages.cloudflare.com/) and [Vercel](https://vercel.com/), publish a folder that you upload or push to a Git repository. They serve it from a content delivery network (CDN), with compression and caching already set up.
-- **Game portals**, such as [itch.io](https://itch.io/), accept a zip file of the build. [Publishing](index.md#where-to-publish) lists the platforms that have their own page.
+- **Game portals**, such as [itch.io](itch-io.md), accept a zip file of the build. [Publishing](index.md#where-to-publish) lists the platforms that have their own page.
 - **Your own web server**, such as Apache, nginx or IIS, serves the build like any other static site. See [Configuring Your Server](#configuring-your-server).
 
 If the build lives in a subfolder of a site rather than at the root of a domain, as a GitHub Pages project site does, it must load its files with relative URLs. Editor builds and create-playcanvas projects already do. In other Vite projects, set Vite's [`base`](https://vite.dev/config/shared-options#base) option to `'./'`.

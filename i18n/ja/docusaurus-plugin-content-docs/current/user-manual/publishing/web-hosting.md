@@ -22,7 +22,7 @@ import TabItem from '@theme/TabItem';
 静的ファイルを配信できるホストなら、どれでも使えます。たとえば：
 
 - **静的ホスティングサービス:** [GitHub Pages](https://pages.github.com/)、[Netlify](https://www.netlify.com/)、[Cloudflare Pages](https://pages.cloudflare.com/)、[Vercel](https://vercel.com/)などは、アップロードしたフォルダーやGitリポジトリにプッシュしたフォルダーを公開します。圧縮とキャッシュが設定済みのコンテンツデリバリーネットワーク（CDN）から配信されます。
-- **ゲームポータル:** [itch.io](https://itch.io/)などは、ビルドのzipファイルを受け付けます。専用のページがあるプラットフォームは[公開](index.md#where-to-publish)に一覧があります。
+- **ゲームポータル:** [itch.io](itch-io.md)などは、ビルドのzipファイルを受け付けます。専用のページがあるプラットフォームは[公開](index.md#where-to-publish)に一覧があります。
 - **自分のWebサーバー:** Apache、nginx、IISなどで、ほかの静的サイトと同じようにビルドを配信します。[サーバーを設定する](#configuring-your-server)を参照してください。
 
 GitHub Pagesのプロジェクトサイトのように、ドメインのルートではなくサイトのサブフォルダーにビルドを置く場合は、ビルドが相対URLでファイルを読み込む必要があります。Editorのビルドとcreate-playcanvasのプロジェクトは、すでにそうなっています。ほかのViteのプロジェクトでは、Viteの[`base`](https://vite.dev/config/shared-options#base)オプションを`'./'`に設定してください。

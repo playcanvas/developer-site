@@ -132,6 +132,7 @@ Use this index for projects made in the Editor, where code lives in scripts atta
 - [Web Hosting](/user-manual/publishing/web-hosting/): Serving a build from any host, testing it locally, server settings, and `ASSET_PREFIX` for loading assets from a CDN.
 - [Embedding in a Web Page](/user-manual/publishing/embedding/): Iframe permissions, and `postMessage` between the page and a script in the app.
 - [Snapchat Web Lenses](/user-manual/publishing/snapchat-web-lenses/): Publishing a build on Snapchat as a Web Lens, with the Web Lens API loaded before the engine.
+- [Publishing on itch.io](/user-manual/publishing/itch-io/): Uploading a downloaded build's zip file to itch.io as an HTML project, and keeping its file count and asset path lengths inside itch.io's limits.
 - [Publishing on Wavedash](/user-manual/publishing/wavedash/): Showing an Editor build on Wavedash with a script that calls `Wavedash.init()`, then uploading it with the Wavedash CLI.
 
 ## API reference
