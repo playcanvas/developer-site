@@ -71,7 +71,7 @@ PlayCanvas Editorは、ウェブブラウザで動く3Dアプリやゲームを�
 - **変更が実行中のアプリに反映される。** シーンを別のタブやスマートフォンで[起動](interface/launch-page/index.md)すると、Editorでの編集がその場で反映されます。
 - **バージョン管理を内蔵。** [チェックポイント](version-control/checkpoints.md)を保存し、[ブランチ](version-control/branches.md)でアイデアを試して[マージ](version-control/merging.md)で戻せます。競合したものは両方のバージョンを比べられます。
 - **好きな方法でコードを書ける。** 組み込みの[コードエディター](scripting/code-editor.md)を使うことも、使い慣れたツールやAIコーディングアシスタントと一緒に[Visual Studio Code](scripting/vscode-extension.md)を使うこともできます。
-- **ブラウザが動く場所ならどこへでも公開できる。** [playcanvas.comでビルドをホスト](publishing/web/playcanvas-hosting.md)して共有できるリンクで公開することも、[ダウンロード](projects/downloading.md)して自分でホストすることも、[プレイアブル広告](publishing/playable-ads/index.md)や[モバイルアプリ](publishing/mobile/index.md)としてパッケージすることもできます。
+- **ブラウザが動く場所ならどこへでも公開できる。** [playcanvas.comでビルドをホスト](publishing/playcanvas-hosting.md)して共有できるリンクで公開することも、[ダウンロード](publishing/downloading.md)して自分でホストすることも、[プレイアブル広告](publishing/playable-ads/index.md)や[モバイルアプリ](/user-manual/publishing/mobile/)としてパッケージすることもできます。
 - **フル機能のEngineが土台。** Editorのプロジェクトはオープンソースの[PlayCanvas Engine](../engine/index.md)で動くので、グラフィックス、物理演算、アニメーション、ユーザーインターフェースについてこのマニュアルで説明していることは、すべてEditorのプロジェクトにも当てはまります。
 - **オープンソース。** Editor自体も[GitHub](https://github.com/playcanvas/editor)でMITライセンスのもとオープンに開発されています。
 
@@ -86,7 +86,7 @@ Editorで作られたものは[PlayCanvasの利用実績](/user-manual/getting-s
 - [テストとデバッグ](interface/launch-page/index.md) — 起動ページ、カスタムエンジンのビルド、エンジンの互換性、トラブルシューティング。
 - [コラボレーション](realtime-collaboration.md) — 他の人とリアルタイムで1つのシーンを作り、チームを管理します。
 - [バージョン管理](version-control/index.md) — チェックポイント、ブランチ、マージ。
-- [公開](publishing/index.md) — ウェブ、モバイル、デスクトップ、プレイアブル広告、Snapchat。
+- [公開](publishing/index.md) — ビルド、PlayCanvasホスティング、ダウンロード、プレイアブル広告。
 - [プロジェクトの管理](projects/index.md) — プロジェクト設定、開発ログ、バックアップ、所有権。
 - [自動化とAI](mcp-server.md) — MCP Server、[Editor API](editor-api.md)、[REST API](/user-manual/api/)。
 - リファレンス — [ツールバー](interface/toolbar.md)、[キーボードショートカット](interface/keyboard-shortcuts.md)、[設定](interface/settings/index.md)、[コンポーネント](scenes/components/index.md)、[アセットインスペクター](assets/inspectors/index.md)。

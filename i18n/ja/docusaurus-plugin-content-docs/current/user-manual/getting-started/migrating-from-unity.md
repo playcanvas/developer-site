@@ -631,9 +631,9 @@ Unityのプロジェクトを自動で変換するツールはありません。
 
 Unityはプラットフォームごとにプレイヤーをビルドします。PlayCanvasが公開するのは、HTML、JavaScript、アセットで構成されるWebアプリです。
 
-- **Publish** はビルドをPlayCanvasでホストし、共有用のURLを発行します。[PlayCanvasホスティング](/user-manual/editor/publishing/web/playcanvas-hosting/)を参照してください。
-- **Download** は、[セルフホスティング](/user-manual/editor/publishing/web/self-hosting/)用のZIPファイルを作成します。
-- アプリストア向けには、Webアプリを[モバイル](/user-manual/editor/publishing/mobile/)や[デスクトップ](/user-manual/editor/publishing/desktop/)向けにラップするか、[プレイアブル広告](/user-manual/editor/publishing/playable-ads/)として公開します。
+- **Publish** はビルドをPlayCanvasでホストし、共有用のURLを発行します。[PlayCanvasホスティング](/user-manual/editor/publishing/playcanvas-hosting/)を参照してください。
+- **Download** は、[自分でホストする](/user-manual/publishing/web-hosting/)ためのZIPファイルを作成します。
+- アプリストア向けには、Webアプリを[モバイル](/user-manual/publishing/mobile/)や[デスクトップ](/user-manual/publishing/desktop/)向けにラップするか、[プレイアブル広告](/user-manual/editor/publishing/playable-ads/)として公開します。
 
 ## デバッグとプロファイリング {#debugging-and-profiling}
 

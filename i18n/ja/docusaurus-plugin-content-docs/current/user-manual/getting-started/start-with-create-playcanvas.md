@@ -81,7 +81,7 @@ npm run package
 
 このコマンドはゲームをビルドし、Snapのアップロードのルールに照らしてビルドを確認し、`dist/`にzipを書き出します。確認に失敗した場合は、修正するファイルを示し、zipは書き出しません。zipは、Snapの[Publishing](https://developers.snap.com/web-lenses/publishing)ガイドに従って[My Lenses](https://my-lenses.snapchat.com/)からアップロードします。
 
-EditorのプロジェクトをWeb Lensとして公開する場合は、[Snapchat Web Lens](/user-manual/editor/publishing/snapchat-web-lenses/)を参照してください。
+既存のプロジェクトにWeb Lens APIを追加する場合や、EditorのプロジェクトをWeb Lensとして公開する場合は、[Snapchat Web Lens](/user-manual/publishing/snapchat-web-lenses/)を参照してください。
 
 ## Inspectorでデバッグする
 

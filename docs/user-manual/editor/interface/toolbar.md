@@ -19,7 +19,7 @@ The Editor's main toolbar can be found on the left, vertical edge of the Editor.
 | ![Redo](/img/user-manual/editor/interface/toolbar/redo.png) | **Redo** | Redo the last operation. |
 | ![Bake](/img/user-manual/editor/interface/toolbar/lightmapper.png) | **Lightmapper** | Access the [Lightmapper](/user-manual/graphics/lighting/runtime-lightmaps) bake and auto-rebake controls. |
 | ![Code Editor](/img/user-manual/editor/interface/toolbar/code-editor.png) | **Code Editor** | Open the [Code Editor](/user-manual/editor/scripting/code-editor). |
-| ![Publish](/img/user-manual/editor/interface/toolbar/publish.png) | **Publish / Download** | [Publish a build](/user-manual/editor/publishing/web/playcanvas-hosting#publishing-a-new-build) or download your project. |
+| ![Publish](/img/user-manual/editor/interface/toolbar/publish.png) | **Publish / Download** | Open the [Builds panel](/user-manual/editor/publishing/#the-builds-panel) to publish or download a build. |
 | ![GitHub](/img/user-manual/editor/interface/toolbar/github.png) | **GitHub** | Report issues on [GitHub](https://github.com/playcanvas/editor/issues). |
 | ![Discord](/img/user-manual/editor/interface/toolbar/discord.png) | **Discord** | Join the PlayCanvas [Discord server](https://discord.gg/RSaMRzg). |
 | ![Forum](/img/user-manual/editor/interface/toolbar/forum.png) | **Forum** | Ask for help on the [forum](https://forum.playcanvas.com). |

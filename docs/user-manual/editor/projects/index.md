@@ -20,5 +20,5 @@ Some project tasks live with the part of the manual you'll need them in:
 
 - [Creating Projects](creating.md) and the [Project Dashboard](dashboard.md) are in [Getting Started](../getting-started/index.md).
 - [Team Management](team-management.md), for adding people and setting their permissions, is with [Real-time Collaboration](../realtime-collaboration.md).
-- [Downloading Projects](downloading.md), for the formats you can download a build in, is with [Self-hosting](../publishing/web/self-hosting.md).
+- [Downloading a Build](../publishing/downloading.md), for the formats you can download a build in, is in [Publishing](../publishing/index.md).
 - Plans, billing and organizations are in [Account Management](/user-manual/account-management/).

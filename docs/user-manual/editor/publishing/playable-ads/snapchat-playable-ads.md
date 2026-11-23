@@ -73,7 +73,7 @@ Full details of options and commands can be found in the readme section for '[Co
 
 To test the ad on a device, we can use the Android app [Creative Preview](https://play.google.com/store/apps/details?id=com.google.android.apps.audition&hl=en_GB&gl=US) but we need to host the ad on a https server.
 
-Our recommended approach is to [host locally](/user-manual/editor/publishing/web/self-hosting/#running-a-downloaded-build) and use [ngrok](https://ngrok.com/) to create a https tunnel to your computer that the app can access.
+Our recommended approach is to [host locally](/user-manual/publishing/web-hosting/#testing-a-build-locally) and use [ngrok](https://ngrok.com/) to create a https tunnel to your computer that the app can access.
 
 <img loading="lazy" src="/img/user-manual/editor/publishing/playable-ads/snapchat-playable-ads/ngrok.png" width="600" />
 

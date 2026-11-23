@@ -19,7 +19,7 @@ Editorのメインツールバーは、Editorの左側、垂直な端にあり�
 | ![Redo](/img/user-manual/editor/interface/toolbar/redo.png) | **やり直し** | 最後の操作をやり直します。 |
 | ![Bake](/img/user-manual/editor/interface/toolbar/lightmapper.png) | **Lightmapper** | [Lightmapper](/user-manual/graphics/lighting/runtime-lightmaps)のベイクと自動再ベイクのコントロールにアクセスします。 |
 | ![Code Editor](/img/user-manual/editor/interface/toolbar/code-editor.png) | **コードエディター** | [コードエディター](/user-manual/editor/scripting/code-editor)を開きます。 |
-| ![Publish](/img/user-manual/editor/interface/toolbar/publish.png) | **公開 / ダウンロード** | プロジェクトの[ビルドを公開](/user-manual/editor/publishing/web/playcanvas-hosting#publishing-a-new-build)またはダウンロードします。 |
+| ![Publish](/img/user-manual/editor/interface/toolbar/publish.png) | **公開 / ダウンロード** | [Buildsパネル](/user-manual/editor/publishing/#the-builds-panel)を開き、ビルドを公開またはダウンロードします。 |
 | ![GitHub](/img/user-manual/editor/interface/toolbar/github.png) | **GitHub** | [GitHub](https://github.com/playcanvas/editor/issues)で問題を報告します。 |
 | ![Discord](/img/user-manual/editor/interface/toolbar/discord.png) | **Discord** | PlayCanvasの[Discordサーバー](https://discord.gg/RSaMRzg)に参加します。 |
 | ![Forum](/img/user-manual/editor/interface/toolbar/forum.png) | **フォーラム** | [フォーラム](https://forum.playcanvas.com)でヘルプを求めます。 |

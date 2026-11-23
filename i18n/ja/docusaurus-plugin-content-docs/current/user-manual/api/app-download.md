@@ -13,7 +13,7 @@ POST https://playcanvas.com/api/apps/download
 
 自分のサーバーでセルフホストすることができるアプリをダウンロードできます。リクエストによりダウンロードジョブが開始され、ジョブの詳細がレスポンスで返されます。[idを指定してジョブをポール](/user-manual/api/job-get)して、そのステータスが「完了」または「エラー」になるまで待ちます。ジョブが完了すると、その`data.download_url`プロパティにアプリパッケージをダウンロードするためのURLが入ります。
 
-`format`でパッケージタイプを選択します。省略するか`static`に設定すると標準のセルフホスト用パッケージ、`npm`に設定するとViteベースのnpmプロジェクトとしてダウンロードされます。利用可能なダウンロード形式と[NPMプロジェクト構造](/user-manual/editor/projects/downloading#npm-project-structure)の詳細については、[プロジェクトのダウンロード](/user-manual/editor/projects/downloading#download-formats)を参照してください。
+`format`でパッケージタイプを選択します。省略するか`static`に設定すると標準のセルフホスト用パッケージ、`npm`に設定するとViteベースのnpmプロジェクトとしてダウンロードされます。利用可能なダウンロード形式と[NPMプロジェクト構造](/user-manual/editor/publishing/downloading/#npm-project-structure)の詳細については、[ビルドのダウンロード](/user-manual/editor/publishing/downloading/#download-formats)を参照してください。
 
 ## 例
 
@@ -36,7 +36,7 @@ curl -H "Authorization: Bearer {accessToken}" -H "Content-Type: application/json
 | `scripts_minify`        | `boolean`  |     | `true`     | Set it to true if you want scripts to be minified.                                                                                                                    |
 | `scripts_sourcemaps`    | `boolean`  |     | `false`    | Set it to true if you want script sourcemaps to be generated.                                                                                                         |
 | `optimize_scene_format` | `boolean`  |     | `false`    | Set it to true if you want scenes to be in an optimized format (see [Optimize Scene Format](/user-manual/optimization/optimizing-scene-format) for more information). |
-| `format`                | `string`   |     | `static`   | ダウンロードするパッケージタイプ: `static`または`npm`。[プロジェクトのダウンロード](/user-manual/editor/projects/downloading#download-formats)を参照してください。                                               |
+| `format`                | `string`   |     | `static`   | ダウンロードするパッケージタイプ: `static`または`npm`。[ビルドのダウンロード](/user-manual/editor/publishing/downloading/#download-formats)を参照してください。                                               |
 | `engine_version`        | `string`   |     | サポートされる最新版 | 特定のバージョンが必要な場合は、Engine のバージョン文字列（[リリースの一覧](https://github.com/playcanvas/engine/releases)）を設定します。省略すると、プロジェクトのメジャーバージョンで Editor がサポートする最新の Engine バージョンが使用されます。       |
 
 ## レスポンススキーマ

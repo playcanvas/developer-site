@@ -60,7 +60,7 @@ Viewport右上の**Launch**を選択すると、現在のシーンが新しい�
 
 ## ビルド {#builds}
 
-アプリを公開できる状態になったら、**ビルド**を[公開](../publishing/index.md)します。ビルドは選んだシーンのスナップショットで、単独で動くようにパッケージされます。[playcanvas.comでホスト](../publishing/web/playcanvas-hosting.md)して誰にでも送れるリンクで公開することも、[ダウンロード](../projects/downloading.md)して自分でホストすることもできます。公開後に加えた変更は、新しいビルドを公開するまでビルドには反映されません。
+アプリを公開できる状態になったら、**ビルド**を[公開](../publishing/index.md)します。ビルドは選んだシーンのスナップショットで、単独で動くようにパッケージされます。[playcanvas.comでホスト](../publishing/playcanvas-hosting.md)して誰にでも送れるリンクで公開することも、[ダウンロード](../publishing/downloading.md)して自分でホストすることもできます。公開後に加えた変更は、新しいビルドを公開するまでビルドには反映されません。
 
 ## EditorとEngine {#the-editor-and-the-engine}
 

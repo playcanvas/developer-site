@@ -13,7 +13,7 @@ POST https://playcanvas.com/api/apps/download
 
 This will allow you to download an app which you can self host on your own server. The request will start a download job and the job details will be returned in the response. You can [poll the job by id](/user-manual/api/job-get) until its status is either 'complete' or 'error'. When the job is complete, its `data.download_url` property holds the URL to download the app package.
 
-Use `format` to choose the package type. Omit it or set it to `static` for the standard self-hostable package, or set it to `npm` for a Vite-based npm project. See [Downloading Projects](/user-manual/editor/projects/downloading#download-formats) for details on the available download formats and [NPM project structure](/user-manual/editor/projects/downloading#npm-project-structure).
+Use `format` to choose the package type. Omit it or set it to `static` for the standard self-hostable package, or set it to `npm` for a Vite-based npm project. See [Downloading a Build](/user-manual/editor/publishing/downloading/#download-formats) for details on the available download formats and [NPM project structure](/user-manual/editor/publishing/downloading/#npm-project-structure).
 
 ## Example
 
@@ -36,7 +36,7 @@ curl -H "Authorization: Bearer {accessToken}" -H "Content-Type: application/json
 | `scripts_minify`        | `boolean`  |          | `true`           | Set it to true if you want scripts to be minified.                                                                                                                                                                                                                    |
 | `scripts_sourcemaps`    | `boolean`  |          | `false`          | Set it to true if you want script sourcemaps to be generated.                                                                                                                                                                                                         |
 | `optimize_scene_format` | `boolean`  |          | `false`          | Set it to true if you want scenes to be in an optimized format (see [Optimize Scene Format](/user-manual/optimization/optimizing-scene-format) for more information).                                                                                                 |
-| `format`                | `string`   |          | `static`         | Download package type: `static` or `npm`. See [Downloading Projects](/user-manual/editor/projects/downloading#download-formats).                                                                                                                                      |
+| `format`                | `string`   |          | `static`         | Download package type: `static` or `npm`. See [Downloading a Build](/user-manual/editor/publishing/downloading/#download-formats).                                                                                                                                      |
 | `engine_version`        | `string`   |          | Latest supported | Set it to an Engine version string ([full list of releases](https://github.com/playcanvas/engine/releases)) if a specific version is needed for the app. If you omit it, the app uses the latest Engine version the Editor supports for your project's major version. |
 
 ## Response Schema

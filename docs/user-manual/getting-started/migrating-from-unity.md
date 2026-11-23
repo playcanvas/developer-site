@@ -631,9 +631,9 @@ There is no automatic converter from Unity projects. Assets come across through 
 
 Unity builds a player for each platform. PlayCanvas publishes a web app, made of HTML, JavaScript and your assets:
 
-- **Publish** hosts the build on PlayCanvas and gives it a URL to share. See [PlayCanvas Hosting](/user-manual/editor/publishing/web/playcanvas-hosting/).
-- **Download** creates a ZIP file to [host yourself](/user-manual/editor/publishing/web/self-hosting/).
-- For app stores, wrap the web app for [mobile](/user-manual/editor/publishing/mobile/) or [desktop](/user-manual/editor/publishing/desktop/), or publish it as a [playable ad](/user-manual/editor/publishing/playable-ads/).
+- **Publish** hosts the build on PlayCanvas and gives it a URL to share. See [PlayCanvas Hosting](/user-manual/editor/publishing/playcanvas-hosting/).
+- **Download** creates a ZIP file to [host yourself](/user-manual/publishing/web-hosting/).
+- For app stores, wrap the web app for [mobile](/user-manual/publishing/mobile/) or [desktop](/user-manual/publishing/desktop/), or publish it as a [playable ad](/user-manual/editor/publishing/playable-ads/).
 
 ## Debugging and Profiling {#debugging-and-profiling}
 

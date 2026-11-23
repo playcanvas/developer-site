@@ -231,7 +231,9 @@ Use this index to write code against the engine directly. React, Web Components 
 
 ## Publishing
 
-- [Publishing](/user-manual/publishing/): Publishing an app from any authoring surface to browser game platforms.
+- [Publishing](/user-manual/publishing/): Making a build from any authoring surface, and where to publish it.
+- [Web Hosting](/user-manual/publishing/web-hosting/): Testing a build locally, Vite's `base: './'`, server settings, and `app.assets.prefix` for a CDN.
+- [Embedding in a Web Page](/user-manual/publishing/embedding/): Iframe permissions and `postMessage` in both directions.
 - [Publishing on Wavedash](/user-manual/publishing/wavedash/): Calling `window.Wavedash?.init()` when the game is ready, the build to upload for each surface, and the Wavedash CLI commands.
 
 ## API reference

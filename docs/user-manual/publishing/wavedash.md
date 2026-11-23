@@ -34,7 +34,7 @@ Create your game in the [Developer Portal](https://wavedash.com/dev-portal), or 
 
 Wavedash shows its own loading screen until your game calls `Wavedash.init()`, so your game stays hidden until then. Call it once the assets your first scene needs have loaded.
 
-When your game runs on Wavedash, the platform defines a global `window.Wavedash` object before your code starts, so there is nothing to install. Writing the call as `window.Wavedash?.init()` makes it do nothing on other hosts, so the same build still works on [PlayCanvas Hosting](/user-manual/editor/publishing/web/playcanvas-hosting/) or your own server.
+When your game runs on Wavedash, the platform defines a global `window.Wavedash` object before your code starts, so there is nothing to install. Writing the call as `window.Wavedash?.init()` makes it do nothing on other hosts, so the same build still works on [PlayCanvas Hosting](/user-manual/editor/publishing/playcanvas-hosting/) or [your own server](web-hosting.md).
 
 <Tabs groupId="authoring-surface">
 <TabItem value="editor" label="Editor">
@@ -144,7 +144,7 @@ Keep the import type-only. Importing the package itself throws an error whenever
 <Tabs groupId="authoring-surface">
 <TabItem value="editor" label="Editor">
 
-Download a web build of your application by following the steps for **Self-hosting on your own server** on the [Self-hosting](/user-manual/editor/publishing/web/self-hosting/#self-hosting-on-your-own-server) page, with the **Download Format** set to **Static Website**. Extract the zip file into a folder named `build`, which is your upload folder.
+[Download a build](/user-manual/editor/publishing/downloading/) of your project with the **Download Format** set to **Static Website**. Extract the zip file into a folder named `build`, which is your upload folder.
 
 </TabItem>
 <TabItem value="engine" label="Engine">

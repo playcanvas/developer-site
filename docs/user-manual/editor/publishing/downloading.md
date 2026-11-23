@@ -1,25 +1,33 @@
 ---
-title: Downloading Projects
-description: Explains PlayCanvas project download formats for self-hosted apps, including static and npm package layouts.
+title: Downloading a Build
+description: "Downloading a build of a PlayCanvas Editor project to host yourself: the Static Website and npm download formats, and the files each one contains for Classic, ESM and mixed scripts."
 ---
 
-PlayCanvas projects can be downloaded as self-hostable application packages. Downloaded packages contain the files needed to run your app outside PlayCanvas hosting, not the full editable project history.
+Download a build when you want to run your app somewhere other than [PlayCanvas Hosting](playcanvas-hosting.md): on your own server, on a game platform, in an app store or as a desktop app. A download contains the files your app needs to run, not the project itself. To back up a project so that you can import it again, see [Backup and Export](../projects/backup-and-export.md).
 
-For project backups that can be imported back into PlayCanvas, see [Backup and Export](backup-and-export.md).
+## Downloading a Build {#downloading-a-build}
+
+1. Select the **Publish / Download** button in the [toolbar](../interface/toolbar.md) to open the [Builds panel](index.md#the-builds-panel).
+2. Select **Download**.
+3. Give the build a **Title**, choose a **Download Format**, and select the scenes to include. See [Making a Build](index.md#making-a-build) for the other settings.
+4. Select **Download** at the bottom of the form.
+
+The build appears in **Build history**. When it's ready, select its download button to save it as a zip file.
+
+A build doesn't run if you open its `index.html` from your computer's files. To try it, [serve it from a local web server](/user-manual/publishing/web-hosting/#testing-a-build-locally).
 
 ## Download Formats {#download-formats}
 
-Use `static` for the standard self-hostable package. This is the right choice when you want to upload the downloaded files directly to a web server or hosting provider.
+| Format | Use it when |
+| --- | --- |
+| **Static Website** | You want to put the build on a web server, a static hosting service or a game platform as it is. See [Web Hosting](/user-manual/publishing/web-hosting/). |
+| **NPM + Vite Project** | You want to keep working on the app as code: run it with Vite, change it, and make production builds with npm scripts. This format is a work in progress. |
 
-Use `npm` for a Vite-based npm project. This is the right choice when you want to work with the downloaded app locally, run it with Vite, or create production builds with npm scripts.
-
-The REST [Download app](/user-manual/api/app-download) endpoint uses the `format` parameter to select either `static` or `npm`.
+The REST API's [Download app](/user-manual/api/app-download/) endpoint downloads builds too. Its `format` parameter is `static` for a static website or `npm` for an npm project.
 
 ## Static Project Structure {#static-project-structure}
 
-When the download format is `static`, the downloaded project is a self-contained web build for direct web-server hosting. Serve the extracted folder over HTTP or HTTPS; opening `index.html` from a `file://` URL is not supported.
-
-Static downloads also use different layouts depending on the script types in the source project.
+A Static Website build is a folder of files that runs as it is. Its layout depends on the kinds of script your project uses.
 
 ### Classic Scripts {#static-projects-with-classic-scripts}
 
@@ -95,7 +103,7 @@ The `npm` download format is currently in active development. Package layouts an
 
 :::
 
-When the download format is `npm`, the downloaded project uses one of these layouts depending on the script types in the source project. Generated app config and scene data are placed in `src/data/` so they can be watched during local development, while runtime assets and static files remain in `public/`.
+An npm project uses one of these layouts depending on the script types in the source project. Generated app config and scene data are placed in `src/data/` so they can be watched during local development, while runtime assets and static files remain in `public/`.
 
 ### File Names and Conflicts
 
