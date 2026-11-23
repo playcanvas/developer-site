@@ -89,9 +89,9 @@ By default, each XrInputSource has an `elementInput` property enabled. This mean
 vecA.copy(inputSource.getOrigin());
 // set end point of ray
 vecB.copy(inputSource.getDirection());
-vecB.scale(1000).add(vecA);
+vecB.mulScalar(1000).add(vecA);
 // render line between those two points
-app.renderLine(vecA, vecB, color);
+app.drawLine(vecA, vecB, color);
 ```
 
 ## UI Interaction

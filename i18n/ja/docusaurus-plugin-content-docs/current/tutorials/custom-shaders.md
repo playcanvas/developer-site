@@ -289,7 +289,7 @@ import {
  * エンティティのレンダーコンポーネントにディゾルブシェーダーマテリアルを適用します。
  */
 export class CustomShader extends Script {
-    scriptName = 'dissolveShader';
+    static scriptName = 'dissolveShader';
 
     /**
      * GLSL 頂点シェーダー。

@@ -291,7 +291,7 @@ import {
  * Apply a dissolve shader material to an entity's render components.
  */
 export class CustomShader extends Script {
-    scriptName = 'dissolveShader';
+    static scriptName = 'dissolveShader';
 
     /**
      * GLSL vertex shader.

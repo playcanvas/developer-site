@@ -163,7 +163,7 @@ export class PickerFramebuffer extends Script {
         const canvasWidth = parseInt(canvas.clientWidth, 10);
         const canvasHeight = parseInt(canvas.clientHeight, 10);
 
-        const camera = this.entity.camera.camera;
+        const camera = this.entity.camera;
         const scene = this.app.scene;
         const picker = this.picker;
 
@@ -172,10 +172,10 @@ export class PickerFramebuffer extends Script {
 
         // Map the mouse coordinates into picker coordinates and
         // query the selection
-        const selected = picker.getSelection({
-            x: Math.floor(event.x * (picker.width / canvasWidth)),
-            y: picker.height - Math.floor(event.y * (picker.height / canvasHeight))
-        });
+        const selected = picker.getSelection(
+            Math.floor(event.x * (picker.width / canvasWidth)),
+            Math.floor(event.y * (picker.height / canvasHeight))
+        );
 
         if (selected.length > 0) {
             // Get the graph node used by the selected mesh instance
@@ -183,7 +183,7 @@ export class PickerFramebuffer extends Script {
 
             // Bubble up the hierarchy until we find an actual Entity
             while (entity !== null && !(entity instanceof Entity) && (entity.script && entity.script.pulse)) {
-                entity = entity.getParent();
+                entity = entity.parent;
             }
             if (entity) {
                 entity.script.pulse.pulse();
@@ -244,7 +244,7 @@ PickerFramebuffer.prototype.onSelect = function (event) {
     var canvasWidth = parseInt(canvas.clientWidth, 10);
     var canvasHeight = parseInt(canvas.clientHeight, 10);
 
-    var camera = this.entity.camera.camera;
+    var camera = this.entity.camera;
     var scene = this.app.scene;
     var picker = this.picker;
 
@@ -253,10 +253,10 @@ PickerFramebuffer.prototype.onSelect = function (event) {
 
     // Map the mouse coordinates into picker coordinates and
     // query the selection
-    var selected = picker.getSelection({
-        x: Math.floor(event.x * (picker.width / canvasWidth)),
-        y: picker.height - Math.floor(event.y * (picker.height / canvasHeight))
-    });
+    var selected = picker.getSelection(
+        Math.floor(event.x * (picker.width / canvasWidth)),
+        Math.floor(event.y * (picker.height / canvasHeight))
+    );
 
     if (selected.length > 0) {
         // Get the graph node used by the selected mesh instance
@@ -265,7 +265,7 @@ PickerFramebuffer.prototype.onSelect = function (event) {
         // Bubble up the hierarchy until we find an actual Entity
         // that has the script we are looking for
         while (entity !== null && !(entity instanceof pc.Entity) && (entity.script && entity.script.pulse)) {
-            entity = entity.getParent();
+            entity = entity.parent;
         }
         if (entity) {
             entity.script.pulse.pulse();

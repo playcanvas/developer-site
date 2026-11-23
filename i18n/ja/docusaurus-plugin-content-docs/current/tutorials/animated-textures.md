@@ -31,7 +31,7 @@ update(dt) {
     // テクスチャのオフセット量を計算する
     // Speed * dt
     velocity.set(this.speed.x, this.speed.y);
-    velocity.scale(dt);
+    velocity.mulScalar(dt);
 
     // 現在のdiffuseおよびnormalマップのオフセット値を更新する
     offset.copy(this.material.diffuseMapOffset);
@@ -54,7 +54,7 @@ ScrollingTexture.prototype.update = function(dt) {
     // テクスチャのオフセット量を計算する
     // Speed * dt
     velocity.set(this.speed.x, this.speed.y);
-    velocity.scale(dt);
+    velocity.mulScalar(dt);
 
     // 現在のdiffuseおよびnormalマップのオフセット値を更新する
     offset.copy(this.material.diffuseMapOffset);

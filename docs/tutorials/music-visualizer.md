@@ -183,7 +183,7 @@ export class Visualizer extends Script {
                 lineIndex += 2;
             }
         }
-        this.app.renderLines(this.lines, color);
+        this.app.drawLines(this.lines, color);
     }
 }
 ```
@@ -251,14 +251,14 @@ Visualizer.prototype.renderData = function (data, color, scale, offset) {
             line += 2;
         }
     }
-    this.app.renderLines(this.lines, color);
+    this.app.drawLines(this.lines, color);
 };
 ```
 
 </TabItem>
 </Tabs>
 
-The visualizer script takes all the data from the analyser and renders it as line graph using the [`this.app.renderLines`](https://api.playcanvas.com/engine/classes/AppBase.html#renderlines) API.
+The visualizer script takes all the data from the analyser and renders it as line graph using the [`this.app.drawLines`](https://api.playcanvas.com/engine/classes/AppBase.html#drawlines) API.
 
 In our setup we are allocating a load of vectors to use in for the lines. We need 2 for every point of data (for the start and end of the lines). Then we are setting up some scale factors to make sure the lines all appear on the screen. The `AnalyserNode` contains a min and max value of decibels that the data can contain. I've found this isn't particularly accurate (I definitely got values outside of this range) but it forms a good basis for normalizing the data.
 

@@ -33,7 +33,7 @@ update(dt) {
     // Calculate how much to offset the texture
     // Speed * dt
     velocity.set(this.speed.x, this.speed.y);
-    velocity.scale(dt);
+    velocity.mulScalar(dt);
 
     // Update the diffuse and normal map offset values
     offset.copy(this.material.diffuseMapOffset);
@@ -56,7 +56,7 @@ ScrollingTexture.prototype.update = function(dt) {
     // Calculate how much to offset the texture
     // Speed * dt
     velocity.set(this.speed.x, this.speed.y);
-    velocity.scale(dt);
+    velocity.mulScalar(dt);
 
     // Update the diffuse and normal map offset values
     offset.copy(this.material.diffuseMapOffset);

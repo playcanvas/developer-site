@@ -97,7 +97,7 @@ Now, you'll create a script to apply the shaders to your scene. Create a new scr
 <TabItem value="esm" label="ESM">
 
 ```javascript
-import { Script, PostEffect, Shader, SEMANTIC_POSITION, drawFullscreenQuad } from 'playcanvas';
+import { Script, PostEffect, Shader, SEMANTIC_POSITION } from 'playcanvas';
 
 // --------------- POST EFFECT DEFINITION------------------------//
 class WatercolorEffect extends PostEffect {
@@ -122,7 +122,7 @@ class WatercolorEffect extends PostEffect {
         
         // Draw a full screen quad on the output target. In this case the output target is the screen.
         // Drawing a full screen quad will run the shader that we defined above
-        drawFullscreenQuad(this.device, outputTarget, this.vertexBuffer, this.shader, rect);
+        this.drawQuad(outputTarget, this.shader, rect);
     }
 }
 
@@ -158,7 +158,7 @@ export class WaterColor extends Script {
         
         // when the script is enabled add our effect to the camera's postEffects queue
         this.on('enable', function () {
-            queue.addEffect(effect, false); 
+            queue.addEffect(effect);
         });
         
         // when the script is disabled remove our effect from the camera's postEffects queue
@@ -196,7 +196,7 @@ class WatercolorEffect extends pc.PostEffect {
 
         // Draw a full screen quad on the output target. In this case the output target is the screen.
         // Drawing a full screen quad will run the shader that we defined above
-        pc.drawFullscreenQuad(this.device, outputTarget, this.vertexBuffer, this.shader, rect);
+        this.drawQuad(outputTarget, this.shader, rect);
     }
 }
 
@@ -226,7 +226,7 @@ Watercolor.prototype.initialize = function() {
 
     // when the script is enabled add our effect to the camera's postEffects queue
     this.on('enable', function () {
-        queue.addEffect(effect, false); 
+        queue.addEffect(effect);
     });
 
     // when the script is disabled remove our effect from the camera's postEffects queue

@@ -118,7 +118,7 @@ export class Halo extends Script {
         let tmp = Halo.tmp;
 
         // Store the vector the parent is facing (note forwards is negative z)
-        tmp.copy(this.parent.forward).scale(-1);
+        tmp.copy(this.parent.forward).mulScalar(-1);
 
         let meshes = this.plane.model.meshInstances;
 
@@ -171,7 +171,7 @@ Halo.prototype.update = function(dt) {
     var tmp = Halo.tmp;
 
     // Store the vector the parent is facing (note forwards is negative z)
-    tmp.copy(this.parent.forward).scale(-1);
+    tmp.copy(this.parent.forward).mulScalar(-1);
 
     var meshes = this.plane.render.meshInstances;
 
