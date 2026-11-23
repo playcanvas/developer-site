@@ -124,13 +124,14 @@ Use this index for projects made in the Editor, where code lives in scripts atta
 
 ## Publishing
 
-- [Publishing](/user-manual/editor/publishing/): Publishing to the web, mobile, desktop and playable ad networks.
-- [PlayCanvas Hosting](/user-manual/editor/publishing/web/playcanvas-hosting/): Publishing builds to playcanvas.com.
-- [Self-hosting](/user-manual/editor/publishing/web/self-hosting/): Embedding a hosted build, or downloading a build to deploy on your own server.
-- [Downloading Projects](/user-manual/editor/projects/downloading/): The static and npm package formats of downloaded projects.
-- [Communication with web pages](/user-manual/editor/publishing/web/communicating-webpage/): Messaging between an app and the page that hosts it.
-- [Playable Ads](/user-manual/editor/publishing/playable-ads/): Exporting playable ads for Facebook and Snapchat.
-- [Snapchat Web Lenses](/user-manual/editor/publishing/snapchat-web-lenses/): Publishing a build on Snapchat as a Web Lens, with the Web Lens API loaded before the engine.
+- [Publishing](/user-manual/editor/publishing/): The Builds panel, the build form, and the Concatenate Scripts, Minify Scripts, Generate Source Maps and Optimize Scene Format options.
+- [PlayCanvas Hosting](/user-manual/editor/publishing/playcanvas-hosting/): Publishing a build to playcanv.as, the project link and build links, the primary build, and the `/e/` link for iframes.
+- [Downloading a Build](/user-manual/editor/publishing/downloading/): Downloading a build as a Static Website or an npm project, and the files each contains for Classic, ESM and mixed scripts.
+- [Playable Ads](/user-manual/editor/publishing/playable-ads/): Exporting playable ads for Facebook and Snapchat with the REST API Tools, which need a project with only Classic scripts.
+- [Publishing for every surface](/user-manual/publishing/): Hosting a downloaded build, embedding it in a page, game platforms, Snapchat Web Lenses, and mobile and desktop apps, with steps for every authoring surface.
+- [Web Hosting](/user-manual/publishing/web-hosting/): Serving a build from any host, testing it locally, server settings, and `ASSET_PREFIX` for loading assets from a CDN.
+- [Embedding in a Web Page](/user-manual/publishing/embedding/): Iframe permissions, and `postMessage` between the page and a script in the app.
+- [Snapchat Web Lenses](/user-manual/publishing/snapchat-web-lenses/): Publishing a build on Snapchat as a Web Lens, with the Web Lens API loaded before the engine.
 - [Publishing on Wavedash](/user-manual/publishing/wavedash/): Showing an Editor build on Wavedash with a script that calls `Wavedash.init()`, then uploading it with the Wavedash CLI.
 
 ## API reference

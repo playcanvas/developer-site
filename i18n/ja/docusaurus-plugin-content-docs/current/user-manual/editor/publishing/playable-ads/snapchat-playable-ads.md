@@ -73,7 +73,7 @@ npm run one-page
 
 デバイス上で広告をテストするには、Androidアプリ[Creative Preview](https://play.google.com/store/apps/details?id=com.google.android.apps.audition&hl=en_GB&gl=US)を使用しますが、広告をhttpsサーバーにホストする必要があります。
 
-私たちのお勧めの方法は、[ローカルホスト](/user-manual/editor/publishing/web/self-hosting/#running-a-downloaded-build)をホストし、アプリがアクセスできるように[ngrok](https://ngrok.com/)を使用することです。
+私たちのお勧めの方法は、[ローカルホスト](/user-manual/publishing/web-hosting/#testing-a-build-locally)をホストし、アプリがアクセスできるように[ngrok](https://ngrok.com/)を使用することです。
 
 <img loading="lazy" src="/img/user-manual/editor/publishing/playable-ads/snapchat-playable-ads/ngrok.png" width="600" />
 

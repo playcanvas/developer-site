@@ -81,7 +81,7 @@ npm run package
 
 This builds the game, checks the build against Snap's upload rules, and writes a zip to `dist/`. If a check fails, it names the file to fix and writes no zip. Upload the zip through [My Lenses](https://my-lenses.snapchat.com/), following Snap's [Publishing](https://developers.snap.com/web-lenses/publishing) guide.
 
-To publish an Editor project as a Web Lens instead, see [Snapchat Web Lenses](/user-manual/editor/publishing/snapchat-web-lenses/).
+To add the Web Lens API to an existing project, or to publish an Editor project as a Web Lens, see [Snapchat Web Lenses](/user-manual/publishing/snapchat-web-lenses/).
 
 ## Debug with the Inspector
 

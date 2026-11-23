@@ -244,7 +244,7 @@ Last step: put your game on the web.
 
 A few seconds later your game is live, with a link like `https://playcanv.as/p/...`. The game at the top of this page was published exactly this way. Open it on your phone, send it to a friend, post it anywhere.
 
-Your first build automatically becomes the project's **primary build**, which is what that link plays. When you publish again, you choose when the new build replaces it, so you can test a build before your players see it. See [PlayCanvas Hosting](/user-manual/editor/publishing/web/playcanvas-hosting/) to manage builds, or [Self-Hosting](/user-manual/editor/publishing/web/self-hosting/) to download a build and host it yourself.
+Your first build automatically becomes the project's **primary build**, which is what that link plays. When you publish again, you choose when the new build replaces it, so you can test a build before your players see it. See [PlayCanvas Hosting](/user-manual/editor/publishing/playcanvas-hosting/) to manage builds, or [Downloading a Build](/user-manual/editor/publishing/downloading/) to download a build and host it yourself.
 
 ## You Made a Game {#you-made-a-game}
 

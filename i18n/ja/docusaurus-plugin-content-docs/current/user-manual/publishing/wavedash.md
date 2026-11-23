@@ -34,7 +34,7 @@ wavedash auth login
 
 Wavedashは、ゲームが`Wavedash.init()`を呼び出すまで独自のローディング画面を表示するので、それまでゲームは表示されません。最初のシーンに必要なアセットの読み込みが終わったら呼び出してください。
 
-ゲームがWavedash上で動作するとき、プラットフォームはコードの実行前にグローバルな`window.Wavedash`オブジェクトを定義するので、何かをインストールする必要はありません。呼び出しを`window.Wavedash?.init()`と書くと、他のホストでは何もしないので、同じビルドを[PlayCanvasホスティング](/user-manual/editor/publishing/web/playcanvas-hosting/)や自分のサーバーでもそのまま動かせます。
+ゲームがWavedash上で動作するとき、プラットフォームはコードの実行前にグローバルな`window.Wavedash`オブジェクトを定義するので、何かをインストールする必要はありません。呼び出しを`window.Wavedash?.init()`と書くと、他のホストでは何もしないので、同じビルドを[PlayCanvasホスティング](/user-manual/editor/publishing/playcanvas-hosting/)や[自分のサーバー](web-hosting.md)でもそのまま動かせます。
 
 <Tabs groupId="authoring-surface">
 <TabItem value="editor" label="Editor">
@@ -144,7 +144,7 @@ import type {} from '@wvdsh/sdk-js';
 <Tabs groupId="authoring-surface">
 <TabItem value="editor" label="Editor">
 
-[セルフホスティング](/user-manual/editor/publishing/web/self-hosting/#self-hosting-on-your-own-server)ページの**自身のサーバでセルフホスティング**の手順に従い、**Download Format**を**Static Website**にしてアプリケーションのWebビルドをダウンロードします。zipファイルを`build`という名前のフォルダーに展開します。これがアップロードフォルダーです。
+**Download Format**を**Static Website**にして、プロジェクトの[ビルドをダウンロード](/user-manual/editor/publishing/downloading/)します。zipファイルを`build`という名前のフォルダーに展開します。これがアップロードフォルダーです。
 
 </TabItem>
 <TabItem value="engine" label="Engine">

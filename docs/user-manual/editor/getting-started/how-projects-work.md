@@ -60,7 +60,7 @@ Every project starts with a **main** branch, and everything in the diagram above
 
 ## Builds {#builds}
 
-When your app is ready to share, [publish](../publishing/index.md) a **build**: a snapshot of the scenes you choose, packaged to run on its own. You can [host it on playcanvas.com](../publishing/web/playcanvas-hosting.md) at a link you can send to anyone, or [download it](../projects/downloading.md) to host yourself. Changes you make afterwards don't affect a build until you publish a new one.
+When your app is ready to share, [publish](../publishing/index.md) a **build**: a snapshot of the scenes you choose, packaged to run on its own. You can [host it on playcanvas.com](../publishing/playcanvas-hosting.md) at a link you can send to anyone, or [download it](../publishing/downloading.md) to host yourself. Changes you make afterwards don't affect a build until you publish a new one.
 
 ## The Editor and the Engine {#the-editor-and-the-engine}
 

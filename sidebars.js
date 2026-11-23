@@ -290,23 +290,8 @@ const sidebars = {
             id: 'user-manual/editor/publishing/index',
           },
           items: [
-            {
-              type: 'category',
-              label: 'Web',
-              link: {
-                type: 'doc',
-                id: 'user-manual/editor/publishing/web/index',
-              },
-              items: [
-                'user-manual/editor/publishing/web/playcanvas-hosting',
-                'user-manual/editor/publishing/web/self-hosting',
-                'user-manual/editor/projects/downloading',
-                'user-manual/editor/publishing/web/self-hosting-for-beginners',
-                'user-manual/editor/publishing/web/hosting-cdn',
-                'user-manual/editor/publishing/web/communicating-webpage',
-                'user-manual/editor/publishing/web/hosting-heyvr',
-              ],
-            },
+            'user-manual/editor/publishing/playcanvas-hosting',
+            'user-manual/editor/publishing/downloading',
             'user-manual/editor/interface/launch-page/loading-screen',
             {
               type: 'category',
@@ -320,20 +305,6 @@ const sidebars = {
                 'user-manual/editor/publishing/playable-ads/snapchat-playable-ads',
               ],
             },
-            'user-manual/editor/publishing/snapchat-web-lenses',
-            {
-              type: 'category',
-              label: 'Mobile',
-              link: {
-                type: 'doc',
-                id: 'user-manual/editor/publishing/mobile/index',
-              },
-              items: [
-                'user-manual/editor/publishing/mobile/cordova',
-                'user-manual/editor/publishing/mobile/gonative',
-              ],
-            },
-            'user-manual/editor/publishing/desktop/index',
           ],
         },
         {
@@ -1369,7 +1340,13 @@ const sidebars = {
         id: 'user-manual/publishing/index',
       },
       items: [
+        'user-manual/publishing/web-hosting',
+        'user-manual/publishing/embedding',
         'user-manual/publishing/wavedash',
+        'user-manual/publishing/heyvr',
+        'user-manual/publishing/snapchat-web-lenses',
+        'user-manual/publishing/mobile',
+        'user-manual/publishing/desktop',
       ],
     },
     sectionHeader('Foundational APIs'),

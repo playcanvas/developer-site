@@ -20,5 +20,5 @@ description: "できあがったPlayCanvas Editorのプロジェクトを管理�
 
 - [プロジェクトの作成](creating.md)と[プロジェクトダッシュボード](dashboard.md)は[はじめに](../getting-started/index.md)にあります。
 - メンバーの追加と権限の設定を扱う[チーム管理](team-management.md)は、[リアルタイムコラボレーション](../realtime-collaboration.md)と一緒にあります。
-- ビルドをダウンロードするときの形式を扱う[プロジェクトのダウンロード](downloading.md)は、[セルフホスティング](../publishing/web/self-hosting.md)と一緒にあります。
+- ビルドをダウンロードするときの形式を扱う[ビルドのダウンロード](../publishing/downloading.md)は、[公開](../publishing/index.md)にあります。
 - プラン、請求、組織については[アカウント管理](/user-manual/account-management/)を参照してください。

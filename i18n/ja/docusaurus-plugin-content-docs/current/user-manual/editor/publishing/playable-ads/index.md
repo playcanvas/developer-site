@@ -7,6 +7,8 @@ description: "PlayCanvas Editorのプロジェクトを、広告ネットワー�
 
 Editorのプロジェクトからプレイアブル広告を作るには、GitHubにある公式のコマンドラインツール[PlayCanvas REST API Tools](https://github.com/playcanvas/playcanvas-rest-api-tools)を使います。このツールはプロジェクトのビルドをダウンロードし、各広告ネットワークが受け付ける形式にパッケージし直します。
 
+このツールは、スクリプトがすべて[クラシックスクリプト](/user-manual/scripting/)のプロジェクトでのみ動作します。`__settings__.js`や`__start__.js`など、そうしたプロジェクトのビルドにしかないファイルを編集するためです。
+
 | ネットワーク | 形式 |
 | --- | --- |
 | [Facebook](fb-playable-ads.md) | 2MBまでの単一のHTMLファイル、または5MBまでのZIPファイル（どちらも非圧縮）。 |

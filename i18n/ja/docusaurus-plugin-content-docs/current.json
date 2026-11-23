@@ -183,14 +183,6 @@
     "message": "公開",
     "description": "The label for category 'Publishing' in sidebar 'userManualSidebar'"
   },
-  "sidebar.userManualSidebar.category.Web": {
-    "message": "ウェブ",
-    "description": "The label for category Web in sidebar userManualSidebar"
-  },
-  "sidebar.userManualSidebar.category.Mobile": {
-    "message": "モバイル",
-    "description": "The label for category Mobile in sidebar userManualSidebar"
-  },
   "sidebar.userManualSidebar.category.Playable Ads": {
     "message": "プレイアブル広告",
     "description": "The label for category Playable Ads in sidebar userManualSidebar"

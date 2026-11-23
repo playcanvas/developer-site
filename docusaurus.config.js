@@ -81,7 +81,21 @@ const config = {
         { from: ['/api', '/en/api'], to: 'https://api.playcanvas.com' },
         // Retired Facebook docs (the Facebook Canvas web games platform was discontinued)
         { from: ['/tutorials/facebook-api/'], to: '/tutorials/' },
-        { from: ['/user-manual/editor/publishing/web/facebook/'], to: '/user-manual/editor/publishing/web/' },
+        { from: ['/user-manual/editor/publishing/web/facebook/', '/user-manual/publishing/web/facebook/'], to: '/user-manual/publishing/' },
+        // Publishing pages that apply to every authoring surface moved from Editor Publishing to the shared
+        // Publishing section, and the Editor-only pages left its Web category (the old /user-manual/publishing/
+        // paths are from before Publishing moved under the Editor)
+        { from: ['/user-manual/editor/publishing/web/', '/user-manual/publishing/web/'], to: '/user-manual/publishing/web-hosting/' },
+        { from: ['/user-manual/editor/publishing/web/self-hosting/', '/user-manual/publishing/web/self-hosting/'], to: '/user-manual/publishing/web-hosting/' },
+        { from: ['/user-manual/editor/publishing/web/self-hosting-for-beginners/', '/user-manual/publishing/web/self-hosting-for-beginners/'], to: '/user-manual/publishing/web-hosting/' },
+        { from: ['/user-manual/editor/publishing/web/hosting-cdn/', '/user-manual/publishing/web/hosting-cdn/'], to: '/user-manual/publishing/web-hosting/#serving-assets-from-a-cdn' },
+        { from: ['/user-manual/editor/publishing/web/communicating-webpage/', '/user-manual/publishing/web/communicating-webpage/'], to: '/user-manual/publishing/embedding/' },
+        { from: ['/user-manual/editor/publishing/web/hosting-heyvr/', '/user-manual/publishing/web/hosting-heyvr/'], to: '/user-manual/publishing/heyvr/' },
+        { from: ['/user-manual/editor/publishing/web/playcanvas-hosting/', '/user-manual/publishing/web/playcanvas-hosting/'], to: '/user-manual/editor/publishing/playcanvas-hosting/' },
+        { from: ['/user-manual/editor/publishing/snapchat-web-lenses/'], to: '/user-manual/publishing/snapchat-web-lenses/' },
+        { from: ['/user-manual/editor/publishing/mobile/', '/user-manual/editor/publishing/mobile/cordova/', '/user-manual/editor/publishing/mobile/gonative/', '/user-manual/publishing/mobile/cordova/', '/user-manual/publishing/mobile/gonative/'], to: '/user-manual/publishing/mobile/' },
+        { from: ['/user-manual/editor/publishing/desktop/'], to: '/user-manual/publishing/desktop/' },
+        { from: ['/user-manual/editor/projects/downloading/'], to: '/user-manual/editor/publishing/downloading/' },
         { from: ['/user-manual/billing/'], to: '/user-manual/account-management/billing/' },
         // User Home became Your Profile when playcanvas.com moved home pages to the Project Dashboard
         { from: ['/user-manual/account-management/user-accounts/user-home/'], to: '/user-manual/account-management/user-accounts/profile/' },

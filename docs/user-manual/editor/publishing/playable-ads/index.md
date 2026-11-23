@@ -7,6 +7,8 @@ A **playable ad** is a small, interactive version of a game or app that runs ins
 
 You make one from an Editor project with the [PlayCanvas REST API Tools](https://github.com/playcanvas/playcanvas-rest-api-tools), an official command-line tool on GitHub. It downloads a build of your project and repackages it in the format each ad network accepts.
 
+The tool works only with projects whose scripts are all [Classic scripts](/user-manual/scripting/#two-scripting-systems). It edits files that only their builds contain, such as `__settings__.js` and `__start__.js`.
+
 | Network | Format |
 | --- | --- |
 | [Facebook](fb-playable-ads.md) | A single HTML file of up to 2 MB, or a ZIP file of up to 5 MB, uncompressed. |

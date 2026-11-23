@@ -71,7 +71,7 @@ This is the games room from [Seemore](https://playcanvas.com/project/612100), a 
 - **Changes show up in the running app.** [Launch](interface/launch-page/index.md) your scene in another tab or on a phone, and edits in the Editor update it as you make them.
 - **Version control built in.** Save [checkpoints](version-control/checkpoints.md), try ideas on [branches](version-control/branches.md) and [merge](version-control/merging.md) them back, comparing both versions of anything that conflicts.
 - **Write code your way.** Use the built-in [Code Editor](scripting/code-editor.md), or [Visual Studio Code](scripting/vscode-extension.md) with your own tools and AI coding assistants.
-- **Publish anywhere a browser runs.** [Host a build on playcanvas.com](publishing/web/playcanvas-hosting.md) at a link you can share, [download it](projects/downloading.md) to host yourself, or package it as a [playable ad](publishing/playable-ads/index.md) or a [mobile app](publishing/mobile/index.md).
+- **Publish anywhere a browser runs.** [Host a build on playcanvas.com](publishing/playcanvas-hosting.md) at a link you can share, [download it](publishing/downloading.md) to host yourself, or package it as a [playable ad](publishing/playable-ads/index.md) or a [mobile app](/user-manual/publishing/mobile/).
 - **The full Engine underneath.** Editor projects run on the open-source [PlayCanvas Engine](../engine/index.md), so everything in this manual about graphics, physics, animation and user interfaces applies to them.
 - **Open source.** The Editor itself is developed in the open [on GitHub](https://github.com/playcanvas/editor) under the MIT license.
 
@@ -86,7 +86,7 @@ See what teams have built with it in [Made with PlayCanvas](/user-manual/getting
 - [Testing and Debugging](interface/launch-page/index.md) — the Launch Page, custom engine builds, engine compatibility and troubleshooting.
 - [Collaboration](realtime-collaboration.md) — work on a scene with others in real time, and manage your team.
 - [Version Control](version-control/index.md) — checkpoints, branches and merging.
-- [Publishing](publishing/index.md) — the web, mobile, desktop, playable ads and Snapchat.
+- [Publishing](publishing/index.md) — builds, PlayCanvas Hosting, downloads and playable ads.
 - [Managing Projects](projects/index.md) — project settings, dev logs, backups and ownership.
 - [Automation and AI](mcp-server.md) — the MCP Server, the [Editor API](editor-api.md) and the [REST API](/user-manual/api/).
 - Reference — the [toolbar](interface/toolbar.md), [keyboard shortcuts](interface/keyboard-shortcuts.md), [settings](interface/settings/index.md), [components](scenes/components/index.md) and [asset inspectors](assets/inspectors/index.md).
