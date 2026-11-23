@@ -76,7 +76,6 @@ We welcome contributions from developers of all skill levels! Whether you're fix
 - **Follow Guidelines**: Each repository has specific code style and contribution guidelines
 - **Stay Focused**: Keep PRs small and focused on a single feature or fix
 - **Include Tests**: Add or update tests when appropriate
-- **Complete CLA**: Sign our [Contributor License Agreement](https://docs.google.com/a/playcanvas.com/forms/d/1Ih69zQfJG-QDLIEpHr6CsaAs6fPORNOVnMv5nuo0cjk/viewform)
 
 #### 3. **Review Process**
 
