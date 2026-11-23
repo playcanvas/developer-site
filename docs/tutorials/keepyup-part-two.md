@@ -2,6 +2,8 @@
 title: Making a Simple Game - Part 2
 description: Set up Physical materials and a cubemap for image-based lighting on the ball, ground, and backdrop.
 tags: [games]
+kind: tutorial
+topic: Games
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406050/LIJTDO-image-75.jpg
 ---
 

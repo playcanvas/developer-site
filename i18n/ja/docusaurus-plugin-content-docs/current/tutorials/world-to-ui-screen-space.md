@@ -1,6 +1,6 @@
 ---
 title: 'ワールド座標からUIスクリーン空間へ'
-tags: [camera, ui, tutorial]
+tags: [camera, ui]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/679740/EB1B6D-image-75.jpg
 description: 3Dワールド座標をスクリーン空間のアンカーに投影し、ラベルとマーカーが2Dオーバーレイ上で動くオブジェクトを追従します。
 ---

@@ -1,7 +1,9 @@
 ---
 title: 'Loading glTF GLBs'
 description: Load glTF GLB files as binary assets at runtime and add the resulting model instance to your PlayCanvas scene hierarchy.
-tags: [rendering, assets, tutorial, scripts]
+tags: [rendering, assets, scripts]
+kind: sample
+topic: Assets and Scenes
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/730738/0641C2-image-75.jpg
 ---
 

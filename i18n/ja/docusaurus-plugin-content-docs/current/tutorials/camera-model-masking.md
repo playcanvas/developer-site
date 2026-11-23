@@ -1,6 +1,6 @@
 ---
 title: 'カメラ・モデルマスキング'
-tags: [rendering, camera, tutorial]
+tags: [rendering, camera]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/436772/B47904-image-75.jpg
 description: Camera とライトのマスクグループで、レイヤー Scene で特定のライトとビューが選んだモデルのみに影響するようにします。
 ---

@@ -1,6 +1,6 @@
 ---
 title: 'Loading an asset at runtime'
-tags: [loading, assets, tutorial]
+tags: [loading, assets]
 thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/439122/FA68B8-image-75.jpg"
 description: 単一の Asset をオンデマンドで読み込み、Script が要求するまで未使用リソースを初期プリロード一覧から外します。
 ---

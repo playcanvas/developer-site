@@ -1,7 +1,9 @@
 ---
 title: 'Billboards'
 description: Keep planes facing the camera for trees, flares, and sprites that always show their front toward the viewer.
-tags: [rendering, camera, tutorial]
+tags: [rendering, camera]
+kind: sample
+topic: Graphics
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/353938/4RTOLK-image-75.jpg
 ---
 

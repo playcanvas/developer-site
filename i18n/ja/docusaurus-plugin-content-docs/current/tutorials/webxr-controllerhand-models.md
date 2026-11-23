@@ -1,6 +1,6 @@
 ---
 title: 'WebXR Controller/Hand Models'
-tags: [input, vr, tutorial]
+tags: [input, vr]
 thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/706679/B12FF3-image-75.jpg"
 description: WebXR input profileのメッシュをコントローラーと手用にロードし、トラッキングされたハードウェアがVRで各ベンダーのシルエットに合います。
 ---

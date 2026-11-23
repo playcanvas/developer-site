@@ -1,6 +1,6 @@
 ---
 title: 'WebXR 360 Video'
-tags: [vr, video, tutorial]
+tags: [vr, video]
 thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/434444/6E87E1-image-75.jpg"
 description: WebXRセッションで全方向ビデオを再生し、ヘッドセット利用者がクリップを周囲に流しながら自由に向きを変えられます。
 ---

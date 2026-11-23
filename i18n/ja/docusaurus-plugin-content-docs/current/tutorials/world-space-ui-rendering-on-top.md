@@ -1,6 +1,6 @@
 ---
 title: 'ワールド空間UIを上にレンダリング'
-tags: [rendering, ui, tutorial]
+tags: [rendering, ui]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/691979/606E3E-image-75.jpg
 description: ワールド空間のElementパネルを重ね、UIクワッドが不透明ジオメトリの後に描画され、忙しい3Dシーンの上でも読みやすくします。
 ---

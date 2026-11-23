@@ -1,7 +1,9 @@
 ---
 title: 'Space Rocks!'
 description: Fork an Asteroids-style shooter template with mouse aiming, shooting, and waves of rocks to learn arcade game flow.
-tags: [games, tutorial]
+tags: [games]
+kind: sample
+topic: Games
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/1029772/10FC7E-image-75.jpg
 ---
 

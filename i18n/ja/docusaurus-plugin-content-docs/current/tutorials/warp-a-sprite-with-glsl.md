@@ -1,6 +1,6 @@
 ---
 title: 'GLSLでスプライトを歪める'
-tags: [rendering, shaders, tutorial]
+tags: [rendering, shaders]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/426038/2C7C85-image-75.jpg
 description: カスタムGLSLシェーダーでスプライトのUVを歪め、毎フレームメッシュジオメトリを作り直さずに波打ちや膨らみの効果を作ります。
 ---

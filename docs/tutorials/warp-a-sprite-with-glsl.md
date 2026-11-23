@@ -1,7 +1,9 @@
 ---
 title: 'Warp a Sprite with GLSL'
 description: Distort sprite UVs in a custom GLSL shader to create wavy or bulging effects without rebuilding mesh geometry each frame.
-tags: [rendering, shaders, tutorial]
+tags: [rendering, shaders]
+kind: sample
+topic: Shaders and Post Effects
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/426038/2C7C85-image-75.jpg
 ---
 

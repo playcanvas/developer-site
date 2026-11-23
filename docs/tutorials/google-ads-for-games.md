@@ -2,6 +2,8 @@
 title: Google H5 Ads Beta Monetization
 description: Integrate Google H5 Games interstitial and rewarded ads into a PlayCanvas title for mobile web monetization.
 tags: [scripts, monetization, games]
+kind: tutorial
+topic: Games
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/889020/CDC848-image-75.jpg
 ---
 

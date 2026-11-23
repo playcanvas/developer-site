@@ -1,6 +1,6 @@
 ---
 title: 'オービットカメラ'
-tags: [input, camera, tutorial]
+tags: [input, camera]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/438243/FDA218-image-75.jpg
 description: マウスとタッチでオービットカメラを実装し、スクロールホイールのズームと焦点の Entity 周りのピンチズームに対応します。
 ---

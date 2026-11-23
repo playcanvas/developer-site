@@ -1,6 +1,6 @@
 ---
 title: 'Space Rocks!'
-tags: [games, tutorial]
+tags: [games]
 thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/1029772/10FC7E-image-75.jpg"
 description: Asteroids 風のシューターテンプレートをフォークし、マウス照準、射撃、岩のウェーブでアーケードゲームの流れを学びます。
 ---

@@ -33,13 +33,13 @@
     "write-heading-ids": "docusaurus write-heading-ids",
     "faq": "node faq.js",
     "faq-to-json": "node faq_to_json.js --dir faq --out ../editor/static/json/howdoi.json",
-    "generate-tutorial-data": "node utils/generate-tutorial-data.mjs",
+    "sync:tutorial-plays": "node utils/sync-tutorial-plays.mjs",
     "sync:supersplat-api": "node utils/sync-supersplat-api.mjs",
     "check:web-components": "node utils/check-web-components-manifest.mjs",
     "check:i18n": "node utils/check-i18n-parity.mjs",
     "check:links": "node utils/check-external-links.mjs",
     "lint": "markdownlint-cli2 docs i18n .github/CONTRIBUTING.md README.md",
-    "test": "node --test utils/plugins/llms/test/*.test.mjs",
+    "test": "node --test utils/plugins/llms/test/*.test.mjs utils/plugins/tutorials/test/*.test.mjs",
     "preview-llms": "node utils/plugins/llms/preview.mjs"
   },
   "dependencies": {
@@ -90,7 +90,6 @@
   "devDependencies": {
     "@docusaurus/module-type-aliases": "^3.10.2",
     "@docusaurus/types": "^3.10.2",
-    "gray-matter": "^4.0.3",
     "markdownlint-cli2": "^0.24.2",
     "marked": "^18.2.1"
   },

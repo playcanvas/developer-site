@@ -1,7 +1,9 @@
 ---
 title: '3D Gaussian Splat Streamed SOG'
 description: Stream huge Gaussian splat scenes with Streamed SOG so large environments load progressively.
-tags: [gaussiansplatting, tutorial]
+tags: [gaussiansplatting]
+kind: sample
+topic: Gaussian Splatting
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/1408991/3CA651-image-75.jpg
 ---
 

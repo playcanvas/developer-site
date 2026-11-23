@@ -1,6 +1,6 @@
 ---
 title: 'スクリーンショットのキャプチャ'
-tags: [rendering, camera, tutorial]
+tags: [rendering, camera]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/438437/35C2AB-image-75.jpg
 description: Camera からテクスチャにレンダリングし、ピクセルを PNG として書き出してアプリから共有します。
 ---

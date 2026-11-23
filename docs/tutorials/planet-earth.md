@@ -1,7 +1,9 @@
 ---
 title: 'Planet Earth'
 description: Shade a globe with Earth textures, materials, and shaders to present a stylized planetary body in real time.
-tags: [textures, rendering, materials, shaders, tutorial]
+tags: [textures, rendering, materials, shaders]
+kind: sample
+topic: Graphics
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/419706/12261C-image-75.jpg
 ---
 

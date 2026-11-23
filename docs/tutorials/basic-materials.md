@@ -2,6 +2,8 @@
 title: Basic Materials
 description: Create materials, assign them to meshes, and tune color and physical shading on primitives step by step.
 tags: [materials,basics]
+kind: tutorial
+topic: Graphics
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/186/KM6GIE-image-75.jpg
 ---
 

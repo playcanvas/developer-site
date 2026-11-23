@@ -1,6 +1,6 @@
 ---
 title: 'HTML/CSS - ライブ更新'
-tags: [html, ui, assets, tutorial]
+tags: [html, ui, assets]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/354600/0FD3B1-image-75.jpg
 description: HTML と CSS の Asset をライブリロードで編集し、Scene が動いたまま HUD の変更を即座に反映します。
 ---

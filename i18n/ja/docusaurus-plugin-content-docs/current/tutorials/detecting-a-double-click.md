@@ -1,6 +1,6 @@
 ---
 title: 'ダブルクリックの検出'
-tags: [input, mouse, tutorial]
+tags: [input, mouse]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/436526/A98DD2-image-75.jpg
 description: タイミングロジックでダブルクリックを検出し、デスクトップブラウザでカメラ移動やアクションのトリガーに使います。
 ---

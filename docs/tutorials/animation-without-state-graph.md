@@ -1,7 +1,9 @@
 ---
 title: 'Animation without State Graph'
 description: Play and control animation clips from scripts without an Anim State Graph for straightforward playback and tests.
-tags: [animation, tutorial, scripts]
+tags: [animation, scripts]
+kind: sample
+topic: Animation
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/841793/1ED6A8-image-75.jpg
 ---
 

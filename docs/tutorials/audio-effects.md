@@ -2,6 +2,8 @@
 title: Audio Effects
 description: Chain Web Audio nodes in PlayCanvas to add reverb, filters, and other effects to sounds routed through the engine.
 tags: [audio]
+kind: tutorial
+topic: Audio
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406047/G0ZA35-image-75.jpg
 ---
 

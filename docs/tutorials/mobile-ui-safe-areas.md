@@ -1,7 +1,9 @@
 ---
 title: 'Mobile UI Safe Areas'
 description: Lay out screen UI inside notched and rounded device safe areas so controls stay clear of system bars and hardware cutouts.
-tags: [ui, tutorial, scripts]
+tags: [ui, scripts]
+kind: sample
+topic: User Interface
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/828118/9F85DB-image-75.jpg
 ---
 

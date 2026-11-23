@@ -1,7 +1,9 @@
 ---
 title: 'Creating Rigid Bodies in Code'
 description: Spawn entities with collision and rigidbody components entirely from scripts for procedural physics objects.
-tags: [animation, physics, tutorial, procedural]
+tags: [animation, physics, procedural]
+kind: sample
+topic: Physics
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/442322/BABA92-image-75.jpg
 ---
 

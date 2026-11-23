@@ -1,6 +1,6 @@
 ---
 title: 'フレームレート（FPS）カウンター'
-tags: [rendering, tutorial, scripts]
+tags: [rendering, scripts]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/433323/373838-image-75.jpg
 description: 開発時とパフォーマンス調整用に、軽量の FPS オーバーレイスクリプトでフレームレートを監視します。
 ---

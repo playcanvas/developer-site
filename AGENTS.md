@@ -24,6 +24,7 @@ llms/           # Hand-written llms.txt indexes for AI agents (mirrors their pub
 2. **FAQ**: Do not edit `docs/user-manual/editor/faq.md` directly - it is auto-generated from `faq/`. Run `npm run faq` after editing FAQ source files.
 3. **File operations**: Use `git mv` and `git rm` for moving/deleting files to ensure proper version control tracking.
 4. **LLM indexes**: When you move, rename or remove a page, update any `llms/` index that links it. A new top-level User Manual section must be added to the `covers` list of one index. `npm test` and CI builds fail until both hold (local builds only warn).
+5. **Tutorials**: Every page in `docs/tutorials/` sets `kind` and `topic` in its front matter (see [Update Tutorials](README.md#update-tutorials)). `npm test` and builds fail otherwise.
 
 ## Writing Style
 
@@ -35,7 +36,7 @@ Follow the [Writing Standards](.github/CONTRIBUTING.md#writing-standards).
 npm run start   # Development server
 npm run build   # Production build (slow - several minutes, avoid unless necessary)
 npm run lint    # Lint Markdown files
-npm test        # Test the LLM file generation, including every llms/ index
+npm test        # Test the LLM file generation, including every llms/ index, and the tutorials front matter
 npm run faq     # Regenerate FAQ page
 npm run check:i18n    # Check every page has a Japanese counterpart at the same path
 npm run check:links   # Check external links still resolve (slow - also runs weekly in CI)

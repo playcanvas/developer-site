@@ -1,6 +1,6 @@
 ---
 title: '3Dガウシアンスプラットアノテーション'
-tags: [gaussiansplatting, tutorial]
+tags: [gaussiansplatting]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/1444720/AC20A8-image-75.jpg
 description: クリック可能なホットスポットと UI アノテーション付きの Gaussian splat 製品ビューアを構築します。
 ---

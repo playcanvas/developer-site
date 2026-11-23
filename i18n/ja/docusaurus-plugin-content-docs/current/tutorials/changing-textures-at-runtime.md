@@ -1,6 +1,6 @@
 ---
 title: '実行時のテクスチャ変更'
-tags: [textures, assets, tutorial]
+tags: [textures, assets]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/437446/54BF56-image-75.jpg
 description: Script からマテリアルのテクスチャマップを差し替え、メッシュ Asset を複製せずにその場で再テクスチャします。
 ---

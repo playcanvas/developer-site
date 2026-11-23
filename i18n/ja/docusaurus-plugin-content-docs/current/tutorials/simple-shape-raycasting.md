@@ -1,6 +1,6 @@
 ---
 title: 'シンプルなシェイプレイキャスティング'
-tags: [input, physics, raycast, tutorial]
+tags: [input, physics, raycast]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/457922/D9DAC0-image-75.jpg
 description: カメラからポインタへ物理レイを飛ばし、カーソル下にある Entity やシェイプを検出します。
 ---

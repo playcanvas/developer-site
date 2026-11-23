@@ -2,6 +2,8 @@
 title: User Interface - Buttons
 description: Build clickable buttons with Element and Button components on a Screen, wiring events for hover, press, and navigation states.
 tags: [ui]
+kind: tutorial
+topic: User Interface
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/501973/ED1B35-image-75.jpg
 ---
 

@@ -2,6 +2,8 @@
 title: Animated Textures
 description: Scroll UV offsets on materials each frame to fake flowing water, conveyors, and other moving surface effects.
 tags: [animation, textures]
+kind: tutorial
+topic: Graphics
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405882/831708-image-75.jpg
 ---
 
