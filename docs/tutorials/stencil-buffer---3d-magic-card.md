@@ -1,7 +1,9 @@
 ---
 title: 'Stencil Buffer - 3D Magic Card'
 description: Use stencil tests to mask a playing-card shape and reveal a separate 3D scene through the window like a magic portal.
-tags: [rendering, culling, materials, tutorial, scripts]
+tags: [rendering, culling, materials, scripts]
+kind: sample
+topic: Graphics
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/855103/3B0AC0-image-75.jpg
 ---
 

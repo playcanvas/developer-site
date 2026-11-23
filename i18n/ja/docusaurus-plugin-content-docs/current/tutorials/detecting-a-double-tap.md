@@ -1,6 +1,6 @@
 ---
 title: 'ダブルタップの検出'
-tags: [touch, input, tutorial]
+tags: [touch, input]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/436531/38B52B-image-75.jpg
 description: タッチスクリーンでシングルタップと区別してダブルタップを認識し、モバイル向け操作にします。
 ---

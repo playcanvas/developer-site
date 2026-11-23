@@ -1,7 +1,9 @@
 ---
 title: 'Loading Draco Compressed GLBs'
 description: Load Draco-compressed GLB models in PlayCanvas with the right pipeline so meshes stay small without breaking rendering.
-tags: [rendering, assets, tutorial, scripts]
+tags: [rendering, assets, scripts]
+kind: sample
+topic: Assets and Scenes
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/730372/61CE32-image-75.jpg
 ---
 

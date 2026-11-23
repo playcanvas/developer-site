@@ -1,6 +1,6 @@
 ---
 title: 'Tutorial: Shop User Interface'
-tags: [ui, tutorial]
+tags: [ui]
 thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/559492/CBFB0A-image-75.jpg"
 description: layout groups、Button、スプライト、アトラスでショップ画面を組み立て、アイテム一覧と購入操作をすっきり表示します。
 ---

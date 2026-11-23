@@ -1,6 +1,6 @@
 ---
 title: 'WebXR AR: DOM Overlay'
-tags: [camera, ar, tutorial]
+tags: [camera, ar]
 thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/747233/D92E6B-image-75.jpg"
 description: WebXR ARとDOM overlay APIを組み合わせ、カスタムWebGLテキストなしでスタイル付きHTML/CSSのUIをカメラ映像の上に置きます。
 ---

@@ -1,6 +1,6 @@
 ---
 title: 'マルチタッチ入力'
-tags: [touch, input, mobile, tutorial]
+tags: [touch, input, mobile]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/437474/C0A0E1-image-75.jpg
 description: すべてのアクティブなタッチ点を追跡し、画面上の指の間に線を描いてマルチタッチジェスチャを可視化します。
 ---

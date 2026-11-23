@@ -1,7 +1,9 @@
 ---
 title: 'Base64 Loading Screen Images'
 description: Customize the loading screen with embedded Base64 images so branding and splash art show while the app initializes.
-tags: [loading, tutorial]
+tags: [loading]
+kind: sample
+topic: Assets and Scenes
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/458028/1A9054-image-75.jpg
 ---
 

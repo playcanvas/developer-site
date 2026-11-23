@@ -1,7 +1,9 @@
 ---
 title: 'First Person Shooter Starter Kit'
 description: Extend first-person controls with jumping and navigation as a starter for FPS-style movement prototypes.
-tags: [input, camera, tutorial, scripts]
+tags: [input, camera, scripts]
+kind: sample
+topic: Games
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/626211/62AB30-image-75.jpg
 ---
 

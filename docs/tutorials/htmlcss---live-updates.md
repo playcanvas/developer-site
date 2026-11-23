@@ -1,7 +1,9 @@
 ---
 title: 'HTML/CSS - Live Updates'
 description: Edit HTML and CSS assets with live reload so HUD changes appear instantly while the scene keeps running.
-tags: [html, ui, assets, tutorial]
+tags: [html, ui, assets]
+kind: sample
+topic: User Interface
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/354600/0FD3B1-image-75.jpg
 ---
 

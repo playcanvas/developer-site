@@ -1,7 +1,9 @@
 ---
 title: 'Dynamic UI Scroll View'
 description: Add and remove scroll view children at runtime to build lists and feeds with PlayCanvas screen-space UI.
-tags: [ui, tutorial, scripts]
+tags: [ui, scripts]
+kind: sample
+topic: User Interface
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/734864/1DC6CB-image-75.jpg
 ---
 

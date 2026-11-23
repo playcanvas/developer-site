@@ -2,6 +2,8 @@
 title: Crash Course - Make a Game
 description: Follow an end-to-end PlayCanvas game build with video and a playable demo covering physics, UI, and core workflow.
 tags: [games,basics,physics,ui]
+kind: tutorial
+topic: Games
 thumb: /img/tutorials/crash-course/crash-course-thumbnail.jpg
 ---
 

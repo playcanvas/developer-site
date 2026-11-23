@@ -1,7 +1,9 @@
 ---
 title: 'Frames Per Sec (FPS) counter'
 description: Add a lightweight FPS overlay script to monitor frame rate during development and performance tuning.
-tags: [rendering, tutorial, scripts]
+tags: [rendering, scripts]
+kind: sample
+topic: Basics
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/433323/373838-image-75.jpg
 ---
 

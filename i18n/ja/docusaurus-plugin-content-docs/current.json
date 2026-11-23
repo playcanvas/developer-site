@@ -414,5 +414,121 @@
   "sidebar.userManualSidebar.category.Add-on Libraries": {
     "message": "アドオンライブラリ",
     "description": "The label for category Add-on Libraries in sidebar userManualSidebar"
+  },
+  "sidebar.tutorialsSidebar.link.tutorials-browse-all": {
+    "message": "すべて見る",
+    "description": "The label for link 'Browse All' in sidebar 'tutorialsSidebar' (item 'tutorials-browse-all')"
+  },
+  "sidebar.tutorialsSidebar.category.tutorials-kind-tutorial": {
+    "message": "チュートリアル",
+    "description": "The label for category Tutorials in sidebar tutorialsSidebar"
+  },
+  "sidebar.tutorialsSidebar.category.tutorials-kind-sample": {
+    "message": "サンプルプロジェクト",
+    "description": "The label for category Sample Projects in sidebar tutorialsSidebar"
+  },
+  "sidebar.tutorialsSidebar.category.tutorials-tutorial-basics": {
+    "message": "基本",
+    "description": "The label for category Basics (Tutorials) in sidebar tutorialsSidebar"
+  },
+  "sidebar.tutorialsSidebar.category.tutorials-tutorial-games": {
+    "message": "ゲーム",
+    "description": "The label for category Games (Tutorials) in sidebar tutorialsSidebar"
+  },
+  "sidebar.tutorialsSidebar.category.tutorials-tutorial-input": {
+    "message": "入力",
+    "description": "The label for category Input (Tutorials) in sidebar tutorialsSidebar"
+  },
+  "sidebar.tutorialsSidebar.category.tutorials-tutorial-cameras": {
+    "message": "カメラ",
+    "description": "The label for category Cameras (Tutorials) in sidebar tutorialsSidebar"
+  },
+  "sidebar.tutorialsSidebar.category.tutorials-tutorial-physics": {
+    "message": "物理演算",
+    "description": "The label for category Physics (Tutorials) in sidebar tutorialsSidebar"
+  },
+  "sidebar.tutorialsSidebar.category.tutorials-tutorial-graphics": {
+    "message": "グラフィック",
+    "description": "The label for category Graphics (Tutorials) in sidebar tutorialsSidebar"
+  },
+  "sidebar.tutorialsSidebar.category.tutorials-tutorial-shaders-and-post-effects": {
+    "message": "シェーダーとポストエフェクト",
+    "description": "The label for category Shaders and Post Effects (Tutorials) in sidebar tutorialsSidebar"
+  },
+  "sidebar.tutorialsSidebar.category.tutorials-tutorial-animation": {
+    "message": "アニメーション",
+    "description": "The label for category Animation (Tutorials) in sidebar tutorialsSidebar"
+  },
+  "sidebar.tutorialsSidebar.category.tutorials-tutorial-audio": {
+    "message": "オーディオ",
+    "description": "The label for category Audio (Tutorials) in sidebar tutorialsSidebar"
+  },
+  "sidebar.tutorialsSidebar.category.tutorials-tutorial-user-interface": {
+    "message": "ユーザーインターフェース",
+    "description": "The label for category User Interface (Tutorials) in sidebar tutorialsSidebar"
+  },
+  "sidebar.tutorialsSidebar.category.tutorials-tutorial-assets-and-scenes": {
+    "message": "アセットとシーン",
+    "description": "The label for category Assets and Scenes (Tutorials) in sidebar tutorialsSidebar"
+  },
+  "sidebar.tutorialsSidebar.category.tutorials-tutorial-xr": {
+    "message": "XR",
+    "description": "The label for category XR (Tutorials) in sidebar tutorialsSidebar"
+  },
+  "sidebar.tutorialsSidebar.category.tutorials-tutorial-multiplayer": {
+    "message": "マルチプレイヤー",
+    "description": "The label for category Multiplayer (Tutorials) in sidebar tutorialsSidebar"
+  },
+  "sidebar.tutorialsSidebar.category.tutorials-sample-basics": {
+    "message": "基本",
+    "description": "The label for category Basics (Sample Projects) in sidebar tutorialsSidebar"
+  },
+  "sidebar.tutorialsSidebar.category.tutorials-sample-games": {
+    "message": "ゲーム",
+    "description": "The label for category Games (Sample Projects) in sidebar tutorialsSidebar"
+  },
+  "sidebar.tutorialsSidebar.category.tutorials-sample-input": {
+    "message": "入力",
+    "description": "The label for category Input (Sample Projects) in sidebar tutorialsSidebar"
+  },
+  "sidebar.tutorialsSidebar.category.tutorials-sample-cameras": {
+    "message": "カメラ",
+    "description": "The label for category Cameras (Sample Projects) in sidebar tutorialsSidebar"
+  },
+  "sidebar.tutorialsSidebar.category.tutorials-sample-physics": {
+    "message": "物理演算",
+    "description": "The label for category Physics (Sample Projects) in sidebar tutorialsSidebar"
+  },
+  "sidebar.tutorialsSidebar.category.tutorials-sample-graphics": {
+    "message": "グラフィック",
+    "description": "The label for category Graphics (Sample Projects) in sidebar tutorialsSidebar"
+  },
+  "sidebar.tutorialsSidebar.category.tutorials-sample-shaders-and-post-effects": {
+    "message": "シェーダーとポストエフェクト",
+    "description": "The label for category Shaders and Post Effects (Sample Projects) in sidebar tutorialsSidebar"
+  },
+  "sidebar.tutorialsSidebar.category.tutorials-sample-animation": {
+    "message": "アニメーション",
+    "description": "The label for category Animation (Sample Projects) in sidebar tutorialsSidebar"
+  },
+  "sidebar.tutorialsSidebar.category.tutorials-sample-audio": {
+    "message": "オーディオ",
+    "description": "The label for category Audio (Sample Projects) in sidebar tutorialsSidebar"
+  },
+  "sidebar.tutorialsSidebar.category.tutorials-sample-user-interface": {
+    "message": "ユーザーインターフェース",
+    "description": "The label for category User Interface (Sample Projects) in sidebar tutorialsSidebar"
+  },
+  "sidebar.tutorialsSidebar.category.tutorials-sample-assets-and-scenes": {
+    "message": "アセットとシーン",
+    "description": "The label for category Assets and Scenes (Sample Projects) in sidebar tutorialsSidebar"
+  },
+  "sidebar.tutorialsSidebar.category.tutorials-sample-gaussian-splatting": {
+    "message": "ガウシアン・スプラッティング",
+    "description": "The label for category Gaussian Splatting (Sample Projects) in sidebar tutorialsSidebar"
+  },
+  "sidebar.tutorialsSidebar.category.tutorials-sample-xr": {
+    "message": "XR",
+    "description": "The label for category XR (Sample Projects) in sidebar tutorialsSidebar"
   }
 }

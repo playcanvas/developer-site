@@ -873,5 +873,73 @@
   "gaussianSplatDemo.position": {
     "message": "位置",
     "description": "Label of the position values of the single Gaussian"
+  },
+  "tutorials.title": {
+    "message": "チュートリアル",
+    "description": "Title of the tutorials index page"
+  },
+  "tutorials.description": {
+    "message": "PlayCanvasエディターのステップバイステップのチュートリアルとサンプルプロジェクト。",
+    "description": "Meta description of the tutorials index page"
+  },
+  "tutorials.lead": {
+    "message": "ステップバイステップのチュートリアルでPlayCanvasエディターを学んだり、サンプルプロジェクトを開いて作り方を確認したりできます。",
+    "description": "Introduction under the title of the tutorials index page"
+  },
+  "tutorials.kind.label": {
+    "message": "表示",
+    "description": "Accessible label of the buttons that choose between tutorials and sample projects"
+  },
+  "tutorials.kind.all": {
+    "message": "すべて",
+    "description": "Button that shows both tutorials and sample projects"
+  },
+  "tutorials.kind.tutorial": {
+    "message": "チュートリアル",
+    "description": "Name of the step-by-step pages, used on a button and as a section heading"
+  },
+  "tutorials.kind.sample": {
+    "message": "サンプルプロジェクト",
+    "description": "Name of the pages that only present a project, used on a button and as a section heading"
+  },
+  "tutorials.kind.tutorial.lead": {
+    "message": "作り方を順を追って説明するガイドです。",
+    "description": "Sentence under the Tutorials section heading"
+  },
+  "tutorials.kind.sample.lead": {
+    "message": "エディターで開いて中身を確認したり、フォークしたりできる、実際に動くプロジェクトです。",
+    "description": "Sentence under the Sample projects section heading"
+  },
+  "tutorials.search.placeholder": {
+    "message": "チュートリアルを検索",
+    "description": "Placeholder and accessible label of the search box on the tutorials index page"
+  },
+  "tutorials.sort.label": {
+    "message": "並び替え",
+    "description": "Label of the sort order menu"
+  },
+  "tutorials.sort.plays": {
+    "message": "プレイ回数順",
+    "description": "Sort order: most played project first"
+  },
+  "tutorials.sort.title": {
+    "message": "タイトル順",
+    "description": "Sort order: alphabetical by title"
+  },
+  "tutorials.tags.label": {
+    "message": "タグで絞り込む",
+    "description": "Accessible label of the tag filter buttons"
+  },
+  "tutorials.count": {
+    "message": "{total}件中{count}件を表示",
+    "description": "How many pages match the filters"
+  },
+  "tutorials.clear": {
+    "message": "フィルターをクリア",
+    "description": "Button that removes the search text, kind and tag filters"
+  },
+  "tutorials.empty": {
+    "message": "条件に一致するものはありません。",
+    "description": "Shown when no page matches the filters"
   }
 }

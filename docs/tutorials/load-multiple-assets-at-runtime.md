@@ -1,7 +1,9 @@
 ---
 title: 'Load multiple assets at runtime'
 description: Load several assets after startup using PlayCanvas asset APIs instead of preloading every file before the scene begins.
-tags: [loading, assets, tutorial]
+tags: [loading, assets]
+kind: sample
+topic: Assets and Scenes
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/439131/AC1AEB-image-75.jpg
 ---
 

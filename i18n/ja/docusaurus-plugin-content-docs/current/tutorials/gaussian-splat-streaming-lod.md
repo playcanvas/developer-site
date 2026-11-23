@@ -1,6 +1,6 @@
 ---
 title: '3DガウシアンスプラットStreamed SOG'
-tags: [gaussiansplatting, tutorial]
+tags: [gaussiansplatting]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/1408991/3CA651-image-75.jpg
 description: Streamed SOGで巨大なGaussian splatシーンをストリーミングし、大規模環境を段階的に読み込みます。
 ---

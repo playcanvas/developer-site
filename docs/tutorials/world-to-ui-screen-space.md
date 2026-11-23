@@ -1,7 +1,9 @@
 ---
 title: 'World to UI Screen space'
 description: Project 3D world positions into screen-space anchors so labels and markers track moving objects on the 2D overlay.
-tags: [camera, ui, tutorial]
+tags: [camera, ui]
+kind: sample
+topic: User Interface
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/679740/EB1B6D-image-75.jpg
 ---
 

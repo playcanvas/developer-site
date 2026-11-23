@@ -2,6 +2,8 @@
 title: Anim State Graph Blending
 description: Blend animation clips in the Anim State Graph so characters transition smoothly between idle, walk, punch, and other cycles.
 tags: [animation,basics]
+kind: tutorial
+topic: Animation
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405874/A8B1FE-image-75.jpg
 ---
 

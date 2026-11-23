@@ -1,0 +1,409 @@
+/**
+ * Tutorials index page styles. The surface, border and shadow values match the homepage
+ * cards (src/pages/index.module.css).
+ */
+
+.page {
+  --tutorials-surface: #fff;
+  --tutorials-border: rgb(15 23 42 / 10%);
+  --tutorials-border-strong: rgb(15 23 42 / 18%);
+  --tutorials-text-muted: #525a61;
+  --tutorials-chip: rgb(15 23 42 / 6%);
+  --tutorials-on-accent: #20292b;
+  --tutorials-shadow: 0 1px 2px rgb(15 23 42 / 5%), 0 8px 24px -14px rgb(15 23 42 / 22%);
+  --tutorials-shadow-hover: 0 2px 4px rgb(15 23 42 / 6%), 0 18px 32px -14px rgb(15 23 42 / 32%);
+  --tutorials-radius: 14px;
+
+  width: 100%;
+  max-width: 1240px;
+  padding: 2.5rem 1.5rem 4rem;
+  margin: 0 auto;
+}
+
+[data-theme='dark'] .page {
+  --tutorials-surface: #212527;
+  --tutorials-border: rgb(255 255 255 / 9%);
+  --tutorials-border-strong: rgb(255 255 255 / 18%);
+  --tutorials-text-muted: #b1b9bd;
+  --tutorials-chip: rgb(255 255 255 / 7%);
+  --tutorials-shadow: 0 1px 2px rgb(0 0 0 / 30%), 0 8px 24px -14px rgb(0 0 0 / 60%);
+  --tutorials-shadow-hover: 0 2px 4px rgb(0 0 0 / 35%), 0 18px 32px -14px rgb(0 0 0 / 75%);
+}
+
+.header {
+  margin-bottom: 1.75rem;
+}
+
+.title {
+  margin: 0 0 0.5rem;
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  line-height: 1.15;
+}
+
+.lead {
+  max-width: 46rem;
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--tutorials-text-muted);
+}
+
+/* Search, kind and sort */
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+  align-items: center;
+}
+
+.search {
+  display: flex;
+  flex: 1 1 16rem;
+  gap: 0.6rem;
+  align-items: center;
+  max-width: 26rem;
+  padding: 0 0.9rem;
+  color: var(--tutorials-text-muted);
+  background: var(--tutorials-surface);
+  border: 1px solid var(--tutorials-border-strong);
+  border-radius: 999px;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.search:focus-within {
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 0 0 3px rgb(255 138 60 / 25%);
+}
+
+.searchIcon {
+  flex: none;
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.search input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.6rem 0;
+  font: inherit;
+  color: var(--ifm-font-color-base);
+  background: none;
+  border: 0;
+  outline: 0;
+}
+
+.kinds {
+  display: inline-flex;
+  padding: 0.2rem;
+  background: var(--tutorials-chip);
+  border-radius: 999px;
+}
+
+.kind {
+  display: inline-flex;
+  gap: 0.45rem;
+  align-items: center;
+  padding: 0.4rem 0.9rem;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--tutorials-text-muted);
+  white-space: nowrap;
+  cursor: pointer;
+  background: none;
+  border: 0;
+  border-radius: 999px;
+  transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
+}
+
+.kind:hover {
+  color: var(--ifm-font-color-base);
+}
+
+.kindActive,
+.kindActive:hover {
+  color: var(--ifm-font-color-base);
+  background: var(--tutorials-surface);
+  box-shadow: 0 1px 2px rgb(15 23 42 / 18%);
+}
+
+.kindCount {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--tutorials-text-muted);
+}
+
+.sort {
+  display: inline-flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-left: auto;
+  font-size: 0.9rem;
+  color: var(--tutorials-text-muted);
+}
+
+.sort select {
+  padding: 0.45rem 0.6rem;
+  font: inherit;
+  color: var(--ifm-font-color-base);
+  cursor: pointer;
+  background: var(--tutorials-surface);
+  border: 1px solid var(--tutorials-border-strong);
+  border-radius: 8px;
+}
+
+.kind:focus-visible,
+.tag:focus-visible,
+.clear:focus-visible,
+.sort select:focus-visible,
+.tutorialCard:focus-visible,
+.sampleCard:focus-visible {
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+}
+
+/* Tags */
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 1rem;
+}
+
+.tag {
+  padding: 0.3rem 0.75rem;
+  font: inherit;
+  font-size: 0.8rem;
+  color: var(--ifm-font-color-base);
+  white-space: nowrap;
+  cursor: pointer;
+  background: var(--tutorials-chip);
+  border: 1px solid transparent;
+  border-radius: 999px;
+  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+}
+
+.tag:hover {
+  border-color: var(--ifm-color-primary);
+}
+
+.tagActive,
+.tagActive:hover {
+  font-weight: 600;
+  color: var(--tutorials-on-accent);
+  background: var(--ifm-color-primary);
+  border-color: var(--ifm-color-primary);
+}
+
+/* Result count */
+
+.count {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  min-height: 1.6rem;
+  margin: 1rem 0 0;
+  font-size: 0.9rem;
+  color: var(--tutorials-text-muted);
+}
+
+.clear {
+  padding: 0;
+  font: inherit;
+  color: var(--ifm-link-color);
+  cursor: pointer;
+  background: none;
+  border: 0;
+}
+
+.clear:hover {
+  text-decoration: underline;
+}
+
+.empty {
+  padding: 3rem 0;
+  font-size: 1.05rem;
+  color: var(--tutorials-text-muted);
+  text-align: center;
+}
+
+/* Sections and cards */
+
+.section {
+  margin-top: 1.5rem;
+}
+
+.sectionTitle {
+  display: flex;
+  gap: 0.6rem;
+  align-items: baseline;
+  margin: 0 0 0.25rem;
+  font-size: 1.5rem;
+}
+
+.sectionCount {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--tutorials-text-muted);
+}
+
+.sectionLead {
+  margin: 0 0 1.25rem;
+  color: var(--tutorials-text-muted);
+}
+
+.tutorialGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr));
+  gap: 1rem;
+}
+
+.sampleGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr));
+  gap: 1.25rem 1rem;
+}
+
+.tutorialCard,
+.sampleCard {
+  color: inherit;
+  transition: transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out, border-color 0.15s ease-in-out;
+}
+
+.tutorialCard:hover,
+.sampleCard:hover {
+  color: inherit;
+  text-decoration: none;
+}
+
+.tutorialCard {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  padding: 0.75rem;
+  background: var(--tutorials-surface);
+  border: 1px solid var(--tutorials-border);
+  border-radius: var(--tutorials-radius);
+  box-shadow: var(--tutorials-shadow);
+}
+
+.tutorialCard:hover {
+  border-color: var(--ifm-color-primary);
+  box-shadow: var(--tutorials-shadow-hover);
+  transform: translateY(-2px);
+}
+
+.tutorialCard .thumbnail {
+  flex: none;
+  width: 5.5rem;
+  height: 5.5rem;
+  border-radius: 9px;
+}
+
+.tutorialText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.sampleCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sampleCard .thumbnail {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  border: 1px solid var(--tutorials-border);
+  border-radius: 10px;
+  box-shadow: var(--tutorials-shadow);
+  transition: box-shadow 0.15s ease-in-out, border-color 0.15s ease-in-out;
+}
+
+.sampleCard:hover {
+  transform: translateY(-2px);
+}
+
+.sampleCard:hover .thumbnail {
+  border-color: var(--ifm-color-primary);
+  box-shadow: var(--tutorials-shadow-hover);
+}
+
+.thumbnail {
+  display: block;
+  object-fit: cover;
+  background: var(--tutorials-chip);
+}
+
+.cardTitle {
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.sampleCard .cardTitle {
+  font-size: 0.9rem;
+}
+
+.cardDescription {
+  display: -webkit-box;
+  overflow: hidden;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: var(--tutorials-text-muted);
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding: 1.75rem 1rem 3rem;
+  }
+
+  .search {
+    max-width: none;
+  }
+
+  .kinds {
+    width: 100%;
+  }
+
+  .kind {
+    flex: 1;
+    justify-content: center;
+    padding-inline: 0.5rem;
+  }
+
+  .sort {
+    margin-left: 0;
+  }
+
+  /* One row that scrolls sideways, so the tags do not push the list off the first screen */
+  .tags {
+    flex-wrap: nowrap;
+    padding: 0 1rem 0.4rem;
+    margin-inline: -1rem;
+    overflow-x: auto;
+    scrollbar-width: thin;
+  }
+
+  .tag {
+    flex: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tutorialCard,
+  .sampleCard {
+    transition: none;
+  }
+
+  .tutorialCard:hover,
+  .sampleCard:hover {
+    transform: none;
+  }
+}

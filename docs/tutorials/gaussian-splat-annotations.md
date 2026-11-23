@@ -1,7 +1,9 @@
 ---
 title: '3D Gaussian Splat Annotations'
 description: Build a Gaussian splat product viewer with clickable hotspots and UI annotations over the captured scene.
-tags: [gaussiansplatting, tutorial]
+tags: [gaussiansplatting]
+kind: sample
+topic: Gaussian Splatting
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/1444720/AC20A8-image-75.jpg
 ---
 

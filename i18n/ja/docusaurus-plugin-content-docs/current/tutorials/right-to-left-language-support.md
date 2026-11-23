@@ -1,6 +1,6 @@
 ---
 title: '右から左に書く言語のサポート'
-tags: [ui, tutorial, scripts]
+tags: [ui, scripts]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/764309/A62C41-image-75.jpg
 description: Element Component のテキストとレイアウト用の Script を、アラビア語などの右から左へ書く言語向けに正しい配置の流れで調整します。
 ---

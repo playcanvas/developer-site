@@ -2,7 +2,9 @@
 title: 360 lookaround camera
 description: Use mouse and touch to rotate the camera and look around a scene for a panoramic or first-person style viewer.
 id: 360-lookaround-camera
-tags: [input, camera, tutorial]
+tags: [input, camera]
+kind: sample
+topic: Cameras
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/438216/3B51C6-image-75.jpg
 ---
 

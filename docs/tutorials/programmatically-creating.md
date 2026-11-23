@@ -2,6 +2,8 @@
 title: Programmatically Creating Entities
 description: Instantiate entities from scripts, parent them under the scene root, and attach components to build objects without the editor.
 tags: [procedural, basics]
+kind: tutorial
+topic: Basics
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406042/4479BC-image-75.jpg
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: '長押しの検出'
-tags: [touch, input, mouse, tutorial]
+tags: [touch, input, mouse]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/438459/3173EE-image-75.jpg
 description: タッチやマウスで押下時間を計測し、十分長く押したあとにアクションを発火します。
 ---

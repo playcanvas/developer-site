@@ -1,7 +1,9 @@
 ---
 title: 'Resolution Scaling'
 description: Scale internal 3D resolution for performance while keeping crisp screen-space UI by separating world and overlay render paths.
-tags: [mobile, rendering, resolution, tutorial]
+tags: [mobile, rendering, resolution]
+kind: sample
+topic: Graphics
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/708300/702D33-image-75.jpg
 ---
 

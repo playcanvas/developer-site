@@ -1,6 +1,6 @@
 ---
 title: 'ポイント&クリック移動'
-tags: [touch, input, mouse, raycast, tutorial]
+tags: [touch, input, mouse, raycast]
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/461494/9F45F6-image-75.jpg
 description: スクリーンからワールドへの raycast でクリックした地面の位置へキャラクターやオブジェクトを移動し、シンプルなナビゲーションを実現します。
 ---

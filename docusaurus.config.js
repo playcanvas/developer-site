@@ -9,6 +9,7 @@ import remarkTypedoc from './utils/plugins/remark-typedoc.mjs';
 import remarkLiveExample from './utils/plugins/remark-live-example.mjs';
 import remarkRootStaticUrls from './utils/plugins/remark-root-static-urls.mjs';
 import pluginLlms from './utils/plugins/docusaurus-plugin-llms.mjs';
+import pluginTutorials, { tutorialsSidebarItems } from './utils/plugins/docusaurus-plugin-tutorials.mjs';
 
 // A localized production build (e.g. `ja`) does not copy the ~500 MB shared
 // static/ folder into its output — pages reference the single copy emitted at
@@ -83,6 +84,8 @@ const config = {
         // The Launch menu's Profiler overlay was replaced by the Inspector's Performance tab
         { from: ['/user-manual/optimization/profiler/'], to: '/user-manual/optimization/inspector-performance/#recording-the-start-of-the-application' },
         { from: ['/api', '/en/api'], to: 'https://api.playcanvas.com' },
+        // Sample projects used to be marked with a `tutorial` tag; they now set `kind: sample`
+        { from: ['/tags/tutorial/'], to: '/tutorials/' },
         // Retired Facebook docs (the Facebook Canvas web games platform was discontinued)
         { from: ['/tutorials/facebook-api/'], to: '/tutorials/' },
         { from: ['/user-manual/editor/publishing/web/facebook/', '/user-manual/publishing/web/facebook/'], to: '/user-manual/publishing/' },
@@ -334,6 +337,8 @@ const config = {
     'docusaurus-plugin-sass',
     // Fail CI builds on docs the LLM files cannot represent faithfully
     [pluginLlms, { failOnError: process.env.CI === 'true' }],
+    // Builds the tutorials index page at /tutorials/ from the docs under docs/tutorials/
+    pluginTutorials,
     'docusaurus-plugin-copy-page-button'
   ],
 
@@ -345,6 +350,10 @@ const config = {
         docs: {
           routeBasePath: '/', // Serve the docs at the site's root
           sidebarPath: './sidebars.js',
+          // The tutorials sidebar is generated from each page's `kind` and `topic` front matter
+          sidebarItemsGenerator: ({ defaultSidebarItemsGenerator, ...args }) => (
+            args.item.dirName === 'tutorials' ? tutorialsSidebarItems(args) : defaultSidebarItemsGenerator(args)
+          ),
           admonitions: { keywords: ['ai'] },
           beforeDefaultRemarkPlugins: localizedBuild ? [remarkRootStaticUrls] : [],
           remarkPlugins: [

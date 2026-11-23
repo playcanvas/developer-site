@@ -1,7 +1,9 @@
 ---
 title: 'Animate entities with curves'
 description: Drive entity motion with animation curves for simple scripted movement without building a full Anim State Graph.
-tags: [animation, tutorial]
+tags: [animation]
+kind: sample
+topic: Animation
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/438191/53A10A-image-75.jpg
 ---
 

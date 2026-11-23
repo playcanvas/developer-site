@@ -1,7 +1,9 @@
 ---
 title: 'WebXR Realistic Hands'
 description: Skin tracked hand joints with detailed meshes and materials so articulated fingers read clearly in immersive VR sessions.
-tags: [input, vr, tutorial]
+tags: [input, vr]
+kind: sample
+topic: XR
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/771952/F9B95C-image-75.jpg
 ---
 

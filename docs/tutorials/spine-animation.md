@@ -2,6 +2,8 @@
 title: Spine Animation
 description: Play Spine 4.3 skeletal animations in the Editor with the playcanvas-spine plugin, from binary and JSON exports, and control them from a script.
 tags: [animation, scripts, ui]
+kind: tutorial
+topic: Animation
 thumb: /img/tutorials/spine-animation/thumbnail.jpg
 ---
 

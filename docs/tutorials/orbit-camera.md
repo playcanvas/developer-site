@@ -1,7 +1,9 @@
 ---
 title: 'Orbit camera'
 description: Implement an orbit camera with mouse and touch, including scroll-wheel zoom and pinch-to-zoom around a focal entity.
-tags: [input, camera, tutorial]
+tags: [input, camera]
+kind: sample
+topic: Cameras
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/438243/FDA218-image-75.jpg
 ---
 

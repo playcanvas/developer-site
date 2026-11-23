@@ -1,7 +1,9 @@
 ---
 title: 'Switching materials at runtime'
 description: Swap material assets on render components in code to change colors, shaders, or skins without duplicating mesh entities.
-tags: [materials, assets, tutorial]
+tags: [materials, assets]
+kind: sample
+topic: Graphics
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/437442/709ED5-image-75.jpg
 ---
 

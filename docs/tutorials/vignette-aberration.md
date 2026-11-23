@@ -1,7 +1,9 @@
 ---
 title: 'Vignette Aberration'
 description: Darken image edges with a vignette while splitting color channels for subtle chromatic aberration in a post-process pass.
-tags: [tutorial, posteffects]
+tags: [posteffects]
+kind: sample
+topic: Shaders and Post Effects
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/440854/0F743E-image-75.jpg
 ---
 

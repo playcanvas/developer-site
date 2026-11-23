@@ -1,7 +1,9 @@
 ---
 title: 'Pan Camera to Target'
 description: Smoothly move and aim the camera toward a world-space target so clicks or events frame important locations in the scene.
-tags: [input, camera, animation, tutorial]
+tags: [input, camera, animation]
+kind: sample
+topic: Cameras
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/693889/B745F1-image-75.jpg
 ---
 

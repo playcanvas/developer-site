@@ -1,7 +1,9 @@
 ---
 title: 'Camera following a path'
 description: Animate a camera along a spline path through waypoints for flythroughs and guided cinematic motion.
-tags: [camera, tutorial]
+tags: [camera]
+kind: sample
+topic: Cameras
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/438429/66E9AF-image-75.jpg
 ---
 

@@ -32,7 +32,19 @@ npm run start
 
 ## Update Tutorials
 
-Tutorials are regular markdown files and can be edited directly. However, if you change the front matter (i.e. the tags, title or thumbnail), you'll need to regenerate the tutorials index using `npm run generate-tutorial-data`. You'll also need to do this if you add or remove a tutorial.
+Tutorials are regular Markdown files in `docs/tutorials`. The index page at `/tutorials/` and the tutorials sidebar are built from each page's front matter, so there is nothing to regenerate when you add, remove or edit one. Every tutorial sets these fields:
+
+| Field | Value |
+| --- | --- |
+| `title`, `description` | Shown on the index page |
+| `tags` | The tag filters on the index page |
+| `thumb` | A square thumbnail image |
+| `kind` | `tutorial` for a step-by-step guide, or `sample` for a project with little or no write-up |
+| `topic` | The sidebar group, one of the topics listed in `utils/plugins/tutorials/data.mjs` |
+
+`kind` and `topic` are read from the English page only, so leave them out of the Japanese translation. The build fails if either is missing or misspelled.
+
+The **Most played** order on the index page uses a snapshot of how often each tutorial's project has been played. Refresh it with `npm run sync:tutorial-plays`.
 
 ## Update FAQ
 
