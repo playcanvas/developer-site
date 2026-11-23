@@ -14,7 +14,7 @@ import TabItem from '@theme/TabItem';
 
 `.ttf`、`.ttc`、`.otf`、`.dfont`のいずれかのファイルをアップロードします。エディターはブラウザ内でフォントアセットを生成し、ソースファイル、`.json`ファイル、`.png`テクスチャページ、フォントアセット本体を1つのフォルダーにまとめます。
 
-フォントアセットを選択すると、インスペクターで含める文字を選べます。**CHARACTER PRESETS**は文字のセット（**Latin**、**Latin Supplement**、**Cyrillic**、**Greek**）を丸ごと追加し、**CUSTOM CHARACTER RANGE**は16進数で指定したUnicodeのコードポイントの範囲を追加します。**Characters**フィールドには、アセットに含まれるすべての文字が並びます。**REGENERATE FONT ASSETS**をクリックすると、それらの文字でアセットが作り直されます。フォントファイルにない文字がある場合は、インスペクターにそれらの文字が一覧表示され、各文字またはそのコードをコピーするボタンも表示されます。
+フォントアセットを選択すると、インスペクターで含める文字を選べます。**CHARACTER PRESETS**は文字のセット（**Latin**、**Latin Supplement**、**Cyrillic**、**Greek**）を丸ごと追加し、**CUSTOM CHARACTER RANGE**は16進数で指定したUnicodeのコードポイントの範囲を追加します（[文字の範囲](#character-ranges)を参照）。**Characters**フィールドには、アセットに含まれるすべての文字が並びます。**REGENERATE FONT ASSETS**をクリックすると、それらの文字でアセットが作り直されます。フォントファイルにない文字がある場合は、インスペクターにそれらの文字が一覧表示され、各文字またはそのコードをコピーするボタンも表示されます。
 
 古いバージョンのエディターで作成したフォントは、初めて再生成したときに現在の形式に変換されます。この変換は元に戻せません。その他のオプションについては、[フォントアセットのインスペクター](/user-manual/editor/assets/inspectors/font/)を参照してください。
 
@@ -47,6 +47,35 @@ font-toolsはデフォルトでフォントのカーニングペアを読み取�
 フォントアセットには作成時に指定した文字しか含まれず、テキストエレメントはそれ以外の文字を空白として描画し、コンソールに警告を出します。アクセント付きの文字、`“”`や`…`などの句読点、通貨記号、[ローカライズ](/user-manual/user-interface/localization/)先のすべての言語の文字など、テキストで使うすべての文字を含めてください。
 
 文字はそれぞれテクスチャページの領域を占めるため、中国語、日本語、韓国語のテキストに必要な数千の文字を含めると、アセットが大きくなり、読み込みに時間がかかります。文字体系全体ではなく、テキストで実際に使う文字を含めてください。言語によって文字セットが大きく異なる場合は、言語ごとに[ローカライズされたフォント](/user-manual/user-interface/localization/#localized-fonts)を用意します。
+
+### 文字の範囲 {#character-ranges}
+
+Unicodeは、連続するコードポイントをブロックにまとめて文字を分類しています。フォントアセットでよく必要になる文字は、次のブロックにあります。
+
+| ブロック | 開始 | 終了 | 文字 |
+| --- | --- | --- | --- |
+| Basic Latin | `0x0020` | `0x007E` | 英語のアルファベット、数字、句読点、スペース |
+| Latin-1 Supplement | `0x00A0` | `0x00FF` | é、ñ、üなどの西ヨーロッパ言語のアクセント付き文字と、©、°、£などの記号 |
+| Latin Extended-A | `0x0100` | `0x017F` | č、ł、ő、ğなどの中央ヨーロッパ言語とトルコ語の文字 |
+| Latin Extended-B | `0x0180` | `0x024F` | ルーマニア語のșとț、ベトナム語のơとưなど、その他のラテン文字 |
+| Greek and Coptic | `0x0370` | `0x03FF` | ギリシャ語 |
+| Cyrillic | `0x0400` | `0x04FF` | ロシア語、ウクライナ語、ブルガリア語、セルビア語など、キリル文字で書く言語 |
+| Hebrew | `0x0590` | `0x05FF` | ヘブライ語 |
+| Arabic | `0x0600` | `0x06FF` | アラビア語の文字、数字、句読点 |
+| Latin Extended Additional | `0x1E00` | `0x1EFF` | ếやộなど、2つの記号が付いたベトナム語の文字 |
+| General Punctuation | `0x2000` | `0x206F` | 引用符、ダッシュ、三点リーダー、ビュレット（“ ” ‘ ’ – — … •） |
+| Currency Symbols | `0x20A0` | `0x20CF` | €、₹、₩、₽。$記号はBasic Latin、£と¥はLatin-1 Supplementにあります |
+| CJK Symbols and Punctuation | `0x3000` | `0x303F` | 、。「」などの中国語と日本語の句読点 |
+| Hiragana | `0x3040` | `0x309F` | ひらがな |
+| Katakana | `0x30A0` | `0x30FF` | カタカナと長音符ー |
+| CJK Unified Ideographs | `0x4E00` | `0x9FFF` | 中国語、日本語、韓国語の漢字（20,992文字） |
+| Hangul Syllables | `0xAC00` | `0xD7AF` | 韓国語のハングル音節（11,172文字） |
+| Arabic Presentation Forms-B | `0xFE70` | `0xFEFF` | アラビア文字が語頭、語中、語末でとる形 |
+| Halfwidth and Fullwidth Forms | `0xFF00` | `0xFFEF` | ！、？、（）など、中国語と日本語のテキストでよく使う全角の句読点 |
+
+エディターでブロックを追加するには、**CUSTOM CHARACTER RANGE**の2つのフィールドに、その開始と終了の値を`0x`接頭辞ごと入力し、**+** ボタンをクリックします。**Latin**、**Latin Supplement**、**Greek**、**Cyrillic**のプリセットは、それぞれBasic Latin、Latin-1 Supplement、Greek and Coptic、Cyrillicを追加します。font-toolsのプリセットはどれもBasic Latinを含み、`latin-ext`はLatin-1 SupplementとLatin Extended-Aを、`greek`はGreek and Copticを、`cyrillic`はCyrillicを追加します。それ以外の文字は、文字そのものを`--charset`に指定してください。すべてのブロックとその文字の一覧は、[Unicodeのコードチャート](https://www.unicode.org/charts/)にあります。
+
+フォントアセットに含めても、テキストエレメントが正しく描画できない文字もあります。テキストエレメントはテキストのシェーピングを行わず、各文字のグリフを個別に描画します。文字の連結、合字の形成、結合記号の位置調整は行いません。ヘブライ語とアラビア語は右から左に書き、アラビア文字は前後の文字とつながるように形を変えます。[右から左に書く言語のサポート](/tutorials/right-to-left-language-support/)のチュートリアルのスクリプトは、テキストを並べ替え、各アラビア文字を単語内での位置に応じた形（Arabic Presentation Forms-Bの文字）に置き換えます。そのため、アラビア語のフォントアセットには、Arabicに加えてこのブロックも必要です。デーヴァナーガリー、ベンガル文字、タミル文字など、それ以上のシェーピングを必要とする文字体系は、フォントアセットにその文字をいくら含めても正しく描画されません。
 
 ## フォントアセットの使用 {#using-a-font-asset}
 

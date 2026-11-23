@@ -14,7 +14,7 @@ A [text element](/user-manual/user-interface/text-elements/) draws its text with
 
 Upload a `.ttf`, `.ttc`, `.otf` or `.dfont` file. The Editor generates the font asset in your browser, in a folder that holds the source file, the `.json` file, the `.png` texture pages and the font asset itself.
 
-Select the font asset to choose its characters in the inspector. **CHARACTER PRESETS** adds whole sets of characters (**Latin**, **Latin Supplement**, **Cyrillic** and **Greek**), **CUSTOM CHARACTER RANGE** adds a range of Unicode code points given in hex, and the **Characters** field lists every character the asset will hold. Click **REGENERATE FONT ASSETS** to build the asset again with them. If the font file lacks some of the characters, the inspector lists them, with buttons to copy each character or its code.
+Select the font asset to choose its characters in the inspector. **CHARACTER PRESETS** adds whole sets of characters (**Latin**, **Latin Supplement**, **Cyrillic** and **Greek**), **CUSTOM CHARACTER RANGE** adds a range of Unicode code points given in hex (see [Character Ranges](#character-ranges)), and the **Characters** field lists every character the asset will hold. Click **REGENERATE FONT ASSETS** to build the asset again with them. If the font file lacks some of the characters, the inspector lists them, with buttons to copy each character or its code.
 
 A font created by an older version of the Editor is converted to the current format the first time you regenerate it, which can't be undone. See the [Font asset inspector](/user-manual/editor/assets/inspectors/font/) for the other options.
 
@@ -47,6 +47,35 @@ font-tools reads the kerning pairs of a font by default, and the Editor does not
 A font asset holds only the characters it was created with, and a text element draws any other character as a space, with a warning in the console. Include every character your text uses: accented letters, punctuation such as `“”` and `…`, currency symbols, and the characters of every language you [localize](/user-manual/user-interface/localization/) into.
 
 Each character takes space in the texture pages, so thousands of characters, as Chinese, Japanese and Korean text needs, make a large asset that takes longer to load. Include the characters your text actually uses, rather than whole scripts, and give each language its own [localized font](/user-manual/user-interface/localization/#localized-fonts) if the sets differ a lot.
+
+### Character Ranges {#character-ranges}
+
+Unicode groups characters into blocks of consecutive code points. These blocks hold the characters that font assets most often need:
+
+| Block | From | To | Characters |
+| --- | --- | --- | --- |
+| Basic Latin | `0x0020` | `0x007E` | English letters, digits, punctuation and the space |
+| Latin-1 Supplement | `0x00A0` | `0x00FF` | Accented letters of Western European languages, such as é, ñ and ü, and symbols such as ©, ° and £ |
+| Latin Extended-A | `0x0100` | `0x017F` | Letters of Central European languages and Turkish, such as č, ł, ő and ğ |
+| Latin Extended-B | `0x0180` | `0x024F` | More Latin letters, such as Romanian ș and ț, and Vietnamese ơ and ư |
+| Greek and Coptic | `0x0370` | `0x03FF` | Greek |
+| Cyrillic | `0x0400` | `0x04FF` | Russian, Ukrainian, Bulgarian, Serbian and other languages written in Cyrillic |
+| Hebrew | `0x0590` | `0x05FF` | Hebrew |
+| Arabic | `0x0600` | `0x06FF` | Arabic letters, digits and punctuation |
+| Latin Extended Additional | `0x1E00` | `0x1EFF` | Vietnamese letters with two marks, such as ế and ộ |
+| General Punctuation | `0x2000` | `0x206F` | Curly quotes, dashes, the ellipsis and the bullet: “ ” ‘ ’ – — … • |
+| Currency Symbols | `0x20A0` | `0x20CF` | €, ₹, ₩ and ₽. The $ sign is in Basic Latin, and £ and ¥ are in Latin-1 Supplement |
+| CJK Symbols and Punctuation | `0x3000` | `0x303F` | Chinese and Japanese punctuation, such as 、。「」 |
+| Hiragana | `0x3040` | `0x309F` | Japanese hiragana |
+| Katakana | `0x30A0` | `0x30FF` | Japanese katakana, and the long vowel mark ー |
+| CJK Unified Ideographs | `0x4E00` | `0x9FFF` | Chinese characters, Japanese kanji and Korean hanja: 20,992 characters |
+| Hangul Syllables | `0xAC00` | `0xD7AF` | Korean: 11,172 syllables |
+| Arabic Presentation Forms-B | `0xFE70` | `0xFEFF` | The forms Arabic letters take at the start, middle and end of a word |
+| Halfwidth and Fullwidth Forms | `0xFF00` | `0xFFEF` | Full-width punctuation common in Chinese and Japanese text, such as ！, ？ and （） |
+
+To add a block in the Editor, enter its From and To values, `0x` prefix included, in the two fields under **CUSTOM CHARACTER RANGE**, and click **+**. The **Latin**, **Latin Supplement**, **Greek** and **Cyrillic** presets add Basic Latin, Latin-1 Supplement, Greek and Coptic, and Cyrillic. Every font-tools preset includes Basic Latin: `latin-ext` adds Latin-1 Supplement and Latin Extended-A, `greek` adds Greek and Coptic, and `cyrillic` adds Cyrillic. For other characters, give `--charset` the characters themselves. The [Unicode code charts](https://www.unicode.org/charts/) list every block, with a chart of its characters.
+
+A font asset can hold characters that a text element can't draw correctly. Text elements draw each character's glyph on its own, without shaping the text: they don't join letters, form ligatures or position marks. Hebrew and Arabic run right to left, and Arabic letters change form to join their neighbors. The scripts in the [Right to Left Language Support](/tutorials/right-to-left-language-support/) tutorial reorder the text, and replace each Arabic letter with the form it takes in its word, from Arabic Presentation Forms-B, so a font asset for Arabic needs that block as well as Arabic. Scripts that need more shaping than that, such as Devanagari, Bengali and Tamil, don't render correctly however many of their characters a font asset holds.
 
 ## Using a Font Asset {#using-a-font-asset}
 

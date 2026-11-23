@@ -62,11 +62,11 @@ The panel warns you when the references cannot produce a usable font: nothing re
 
 ### Character Presets
 
-Click a preset to add its characters to the font. Presets add to the current selection rather than replacing it.
+Click a preset to add its characters to the font: **Latin** (`0x20`–`0x7E`), **Latin Supplement** (`0xA0`–`0xFF`), **Cyrillic** (`0x400`–`0x4FF`) or **Greek** (`0x370`–`0x3FF`). Presets add to the current selection rather than replacing it.
 
 ### Custom Character Range
 
-To include a specific range, enter its start and end in hex and click the **+** button to append it to the character selection.
+To include a specific range, enter its start and end in hex, with the `0x` prefix, such as `0x400` and `0x4FF`, and click the **+** button to append it to the character selection. Without the prefix, the Editor adds one wrong character instead of the range. [Character Ranges](/user-manual/user-interface/fonts/#character-ranges) lists the ranges of common scripts and symbols.
 
 ### Font
 
