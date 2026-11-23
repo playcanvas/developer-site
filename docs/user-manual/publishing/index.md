@@ -19,6 +19,7 @@ How you make a build depends on how you build your app:
 | --- | --- |
 | [Web Hosting](web-hosting.md) | Putting a build on your own server or a static hosting service, testing it locally, and serving its assets from a content delivery network (CDN). |
 | [Embedding in a Web Page](embedding.md) | Showing an app inside another page with an iframe, and passing messages between the page and the app. |
+| [itch.io](itch-io.md) | A marketplace for independent games that hosts browser games from a zip file of the build. |
 | [Wavedash](wavedash.md) | A platform for browser games, with player accounts, leaderboards and multiplayer lobbies. |
 | [heyVR](heyvr.md) | A platform for WebXR games that players open on VR headsets and other devices. |
 | [Snapchat Web Lenses](snapchat-web-lenses.md) | Running a game inside Snapchat as a Lens. |
