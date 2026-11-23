@@ -16,10 +16,10 @@ Drag to orbit, scroll to zoom, and click the numbered hotspots. This honeybee by
 ## SuperSplat in 60 seconds
 
 <div className="iframe-container">
-    <iframe src="https://www.youtube.com/embed/7B0KdoJCUK8" title="SuperSplat: Edit, Publish and Share 3D Gaussian Splats" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen loading="lazy"></iframe>
+    <iframe src="https://www.youtube.com/embed/ohEANEGjxJ0" title="SuperSplat in 60 Seconds: Edit, Publish and Share 3D Gaussian Splats" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen loading="lazy"></iframe>
 </div>
 
-Browse, view, clean up, publish, curate, convert, and share: the whole platform in under a minute.
+Capture, clean up, publish, polish in Studio, and share: the whole workflow in one minute.
 
 ## Where do you want to start?
 
