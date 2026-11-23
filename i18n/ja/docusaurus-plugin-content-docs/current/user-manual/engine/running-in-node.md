@@ -27,7 +27,7 @@ npm install playcanvas
 
 ## ヘッドレスアプリケーションの作成 {#creating-a-headless-application}
 
-Node.jsでPlayCanvasアプリケーションを実行する場合、レンダリングは必要ない可能性が高いです。この場合、何もレンダリングしない[`NullGraphicsDevice`](https://api.playcanvas.com/engine/classes/NullGraphicsDevice.html)を作成できます。表示するものがないため、キャンバスの代わりにプレーンなオブジェクトを使用できます。
+Node.jsでPlayCanvasアプリケーションを実行する場合、レンダリングは必要ない可能性が高いです。この場合、何もレンダリングしない[`NullGraphicsDevice`](https://github.com/playcanvas/engine/blob/main/src/platform/graphics/null/null-graphics-device.js)を作成できます。表示するものがないため、キャンバスの代わりにプレーンなオブジェクトを使用できます。
 
 ```javascript
 import { AppBase, AppOptions, NullGraphicsDevice, ScriptComponentSystem } from 'playcanvas';

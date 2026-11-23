@@ -118,7 +118,7 @@ app.assets.add(asset);
 app.assets.load(asset);
 ```
 
-完全に動作するカスタム**モデル**パーサーの例については、エンジンの [OBJ パーサー](https://github.com/playcanvas/engine/blob/main/scripts/parsers/obj-model.js)と、それを使用する [OBJ ローダーの例](https://playcanvas.github.io/#/loaders/obj)を参照してください。
+完全に動作するカスタム**モデル**パーサーの例については、エンジンの [OBJ パーサー](https://github.com/playcanvas/engine/blob/main/scripts/esm/parsers/obj-model.mjs)と、それを使用する [OBJ ローダーの例](https://playcanvas.github.io/#/loaders/obj)を参照してください。
 
 ## ハンドラーに関する注意
 

@@ -1,0 +1,70 @@
+name: External links
+
+# Requests every external link in the docs and reports the ones that no longer resolve.
+#
+# This runs on a schedule, not on pull requests: a link breaks when the site it points to
+# changes, not when the docs do, and a pull request should not fail over a page its author
+# never touched. A run that finds broken links opens an issue listing them, or updates the one
+# already open, and the first run that finds none closes it.
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Mondays at 06:17 UTC
+    - cron: '17 6 * * 1'
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    name: Check external links
+    # Forks inherit the schedule, and only this repository should have issues filed on it
+    if: github.repository == 'playcanvas/developer-site'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      ISSUE_TITLE: Broken external links in the docs
+    steps:
+    - name: Checkout files
+      uses: actions/checkout@v7
+
+    - name: Setup Node.js 22.x
+      uses: actions/setup-node@v7
+      with:
+        node-version: 22.x
+
+    # The script needs only Node built-ins, so there is no install step. It exits 1 when a link
+    # is broken and writes the report last, so a report with a failure means broken links and
+    # a failure without one means the script itself went wrong.
+    - name: Check external links
+      id: links
+      continue-on-error: true
+      run: npm run check:links -- --report links-report.md
+
+    - name: Find the open issue
+      id: issue
+      run: |
+        number=$(gh issue list --state open --search "\"$ISSUE_TITLE\" in:title" --json number,title \
+          --jq ".[] | select(.title == \"$ISSUE_TITLE\") | .number" | head -n 1)
+        echo "number=$number" >> "$GITHUB_OUTPUT"
+
+    - name: Open or update the issue
+      if: steps.links.outcome == 'failure' && hashFiles('links-report.md') != ''
+      run: |
+        if [ -n "${{ steps.issue.outputs.number }}" ]; then
+          gh issue edit "${{ steps.issue.outputs.number }}" --body-file links-report.md
+        else
+          gh issue create --title "$ISSUE_TITLE" --body-file links-report.md
+        fi
+
+    - name: Close the issue
+      if: steps.links.outcome == 'success' && steps.issue.outputs.number != ''
+      run: gh issue close "${{ steps.issue.outputs.number }}" --comment "Every external link in the docs resolves again."
+
+    - name: Fail the run
+      if: steps.links.outcome == 'failure'
+      run: exit 1

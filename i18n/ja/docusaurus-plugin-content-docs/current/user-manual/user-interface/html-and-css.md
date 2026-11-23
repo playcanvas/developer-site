@@ -219,7 +219,7 @@ Chrome 157以降でデフォルトで有効になっているブラウザAPIのH
 
 ## ツール向けのPCUI {#pcui}
 
-ゲームではなくエディターやツールには、PlayCanvasエディターの構築に使われているHTMLコンポーネントライブラリ、[PCUI](https://playcanvas.github.io/pcui/)があります。パネル、インスペクター、ツリービュー、入力フィールドなどを、素のJavaScriptまたはReactで利用できます。
+ゲームではなくエディターやツールには、PlayCanvasエディターの構築に使われているHTMLコンポーネントライブラリ、[PCUI](/user-manual/pcui/)があります。パネル、インスペクター、ツリービュー、入力フィールドなどを、素のJavaScriptまたはReactで利用できます。
 
 ## 関連情報 {#see-also}
 

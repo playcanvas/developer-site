@@ -77,7 +77,7 @@ MyScript.prototype.initialize = function () {
 
 ## 属性の型
 
-属性を宣言する際には、その属性の型も宣言します。これにより、エディターは属性を編集するための適切なコントロールを表示できます。ほとんどの型は自己説明的で、例えば「boolean」、「number」、または「string」などです。ただし、一部の型は以下の例でさらに説明が必要です。詳細については、[属性の完全なリファレンス](https://api.playcanvas.com/classes/Engine.ScriptAttributes.html)を参照してください。
+属性を宣言する際には、その属性の型も宣言します。これにより、エディターは属性を編集するための適切なコントロールを表示できます。ほとんどの型は自己説明的で、例えば「boolean」、「number」、または「string」などです。ただし、一部の型は以下の例でさらに説明が必要です。詳細については、[属性の完全なリファレンス](https://api.playcanvas.com/engine/classes/ScriptAttributes.html)を参照してください。
 
 ### エンティティ属性
 

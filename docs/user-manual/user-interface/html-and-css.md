@@ -219,7 +219,7 @@ HTML-in-Canvas, a browser API enabled by default in Chrome 157 and later, draws 
 
 ## PCUI for Tools {#pcui}
 
-For editors and tools rather than games, [PCUI](https://playcanvas.github.io/pcui/) is the HTML component library that the PlayCanvas Editor is built with: panels, inspectors, tree views, inputs and more, in plain JavaScript or React.
+For editors and tools rather than games, [PCUI](/user-manual/pcui/) is the HTML component library that the PlayCanvas Editor is built with: panels, inspectors, tree views, inputs and more, in plain JavaScript or React.
 
 ## See Also
 

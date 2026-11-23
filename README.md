@@ -48,6 +48,6 @@ The Developer Site is localized to Japanese using AI-powered translation via the
 
 When documentation in `docs` is updated, translate the affected files to Japanese using the markdown-translator tool. The translated files should be placed in the appropriate `i18n/ja/` directory structure to be picked up by Docusaurus.
 
-Submit a PR with both the updated English content and the new Japanese translations.
+Submit a PR with both the updated English content and the new Japanese translations. Every page in `docs` needs a translation at the same path, or the Japanese site serves that page in English. CI checks this, and you can run the check yourself with `npm run check:i18n`.
 
 **Note:** We welcome PRs to fix any translation errors or improvements in the localized documentation. AI translation isn't perfect, and community contributions help ensure accuracy!

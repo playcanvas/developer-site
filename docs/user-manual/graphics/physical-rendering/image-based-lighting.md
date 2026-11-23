@@ -29,7 +29,7 @@ Environment Maps comes in different projections: equirectangular, CubeMap (face 
 
 In order to convert between projections you can use various tools, one of them is cross-platform open-source CubeMap filtering tool: [cmftStudio](https://github.com/dariomanesku/cmftStudio).
 
-CubeMaps can be CGI rendered or assembled from photography, and there are websites to download/buy HDR environment maps. Some of good sources for experimenting can be: [sIBL Archive](http://www.hdrlabs.com/sibl/archive.html), [No Emotion HDR's](http://noemotionhdrs.net/), [Open Footage](https://www.openfootage.net/?tag=hdri), [Paul Debevec](https://www.pauldebevec.com/Probes/). Environment maps can come in equirectangular projection and convertible by cmftStudio mentioned above.
+CubeMaps can be CGI rendered or assembled from photography, and there are websites to download/buy HDR environment maps. Some of good sources for experimenting can be: [Poly Haven](https://polyhaven.com/hdris), [No Emotion HDR's](http://noemotionhdrs.net/), [Open Footage](https://www.openfootage.net/?tag=hdri), [Paul Debevec](https://www.pauldebevec.com/Probes/). Environment maps can come in equirectangular projection and convertible by cmftStudio mentioned above.
 
 ## Rendering CubeMap
 
