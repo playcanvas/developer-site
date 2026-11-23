@@ -8,7 +8,7 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/4058
 ---
 
 <div className="iframe-container">
-    <iframe src="https://playcanv.as/p/BqhCi6oy/" title="Creating a Music Visualizer" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
+    <iframe src="https://playcanv.as/p/ZngcQ82V/" title="Creating a Music Visualizer" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 *Find out more by forking the [full project](https://playcanvas.com/project/405891).*
