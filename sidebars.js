@@ -305,7 +305,6 @@ const sidebars = {
                 'user-manual/editor/publishing/web/hosting-cdn',
                 'user-manual/editor/publishing/web/communicating-webpage',
                 'user-manual/editor/publishing/web/hosting-heyvr',
-                'user-manual/editor/publishing/web/wavedash',
               ],
             },
             'user-manual/editor/interface/launch-page/loading-screen',
@@ -1358,6 +1357,17 @@ const sidebars = {
             'user-manual/optimization/troubleshooting-performance',
           ],
         },
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Publishing',
+      link: {
+        type: 'doc',
+        id: 'user-manual/publishing/index',
+      },
+      items: [
+        'user-manual/publishing/wavedash',
       ],
     },
     sectionHeader('Foundational APIs'),

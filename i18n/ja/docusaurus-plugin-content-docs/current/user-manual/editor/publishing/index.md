@@ -10,6 +10,7 @@ PlayCanvasのアプリはウェブページなので、ウェブページを表�
 | 公開先 | 方法 |
 | --- | --- |
 | [ウェブ](web/index.md) | [playcanvas.comでビルドをホスト](web/playcanvas-hosting.md)して共有できるリンクで公開するか、[ダウンロード](../projects/downloading.md)して[自分でホスト](web/self-hosting.md)します。 |
+| [ゲームプラットフォーム](/user-manual/publishing/) | [Wavedash](/user-manual/publishing/wavedash/)などのブラウザゲームのプラットフォームにビルドをアップロードします。 |
 | [プレイアブル広告](playable-ads/index.md) | ビルドを[Facebook](playable-ads/fb-playable-ads.md)や[Snapchat](playable-ads/snapchat-playable-ads.md)向けのインタラクティブな広告としてエクスポートします。 |
 | [Snapchat Web Lens](snapchat-web-lenses.md) | ビルドをWeb LensとしてSnapchatにアップロードします。 |
 | [モバイルのアプリストア](mobile/index.md) | ビルドをネイティブのiOSアプリやAndroidアプリで包みます。 |
