@@ -29,7 +29,7 @@ Notice how bright parts in the texture are clamped using LDR.
 
 投影間で変換するには、さまざまなツールを使用できます。その1つは、クロスプラットフォームのオープンソースのCubeMapフィルタリングツール[cmftStudio](https://github.com/dariomanesku/cmftStudio)です。
 
-CubeMapsはCGIでレンダリングしたり、写真から組み立てたり、HDR環境マップをウェブサイトからダウンロード/購入することもできます。実験のための良い情報源には：[sIBL Archive](http://www.hdrlabs.com/sibl/archive.html)、[No Emotion HDR's](http://noemotionhdrs.net/)、[Open Footage](https://www.openfootage.net/?tag=hdri)、[Paul Debevec](https://www.pauldebevec.com/Probes/)などがあります。環境マップは、上述のcmftStudioによって等角投影法とコンバーチブル法が可能です。
+CubeMapsはCGIでレンダリングしたり、写真から組み立てたり、HDR環境マップをウェブサイトからダウンロード/購入することもできます。実験のための良い情報源には：[Poly Haven](https://polyhaven.com/hdris)、[No Emotion HDR's](http://noemotionhdrs.net/)、[Open Footage](https://www.openfootage.net/?tag=hdri)、[Paul Debevec](https://www.pauldebevec.com/Probes/)などがあります。環境マップは、上述のcmftStudioによって等角投影法とコンバーチブル法が可能です。
 
 ## CubeMapのレンダリング
 

@@ -92,3 +92,25 @@ jobs:
 
     - name: Check the tag reference against the manifest
       run: npm run check:web-components
+
+  # The Japanese site is built from docs/ with i18n/ja/ overlaid on it by path. A page with no
+  # file at the same path under i18n/ja/ is served in English there, and a translation whose
+  # path matches no page in docs/ is never served, and neither fails the build. This compares
+  # the two trees by exact path, case included, since the deployed site is case-sensitive and
+  # most contributors' machines are not. The script needs only Node built-ins, so there is no
+  # install step.
+  translations:
+    name: Translations
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+    - name: Checkout files
+      uses: actions/checkout@v7
+
+    - name: Setup Node.js 22.x
+      uses: actions/setup-node@v7
+      with:
+        node-version: 22.x
+
+    - name: Check every page has a Japanese counterpart
+      run: npm run check:i18n

@@ -118,7 +118,7 @@ app.assets.add(asset);
 app.assets.load(asset);
 ```
 
-For a complete, runnable example of a custom **model** parser, see the engine's [OBJ parser](https://github.com/playcanvas/engine/blob/main/scripts/parsers/obj-model.js) and the [OBJ loader example](https://playcanvas.github.io/#/loaders/obj) that uses it.
+For a complete, runnable example of a custom **model** parser, see the engine's [OBJ parser](https://github.com/playcanvas/engine/blob/main/scripts/esm/parsers/obj-model.mjs) and the [OBJ loader example](https://playcanvas.github.io/#/loaders/obj) that uses it.
 
 ## Handler notes
 

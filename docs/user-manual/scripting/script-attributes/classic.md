@@ -77,7 +77,7 @@ MyScript.prototype.initialize = function () {
 
 ## Attribute Types
 
-When you declare an attribute you also declare the type of the attribute. This allows the Editor to show the relevant controls for you to edit the attribute. Most types are self-explanatory, for example, 'boolean', 'number' or 'string'. But some require some further explanation in the below examples. See the [full attribute reference](https://api.playcanvas.com/classes/Engine.ScriptAttributes.html) for more details.
+When you declare an attribute you also declare the type of the attribute. This allows the Editor to show the relevant controls for you to edit the attribute. Most types are self-explanatory, for example, 'boolean', 'number' or 'string'. But some require some further explanation in the below examples. See the [full attribute reference](https://api.playcanvas.com/engine/classes/ScriptAttributes.html) for more details.
 
 ### Entity Attribute
 

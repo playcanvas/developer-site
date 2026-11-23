@@ -85,7 +85,7 @@ In the new **"URL"** field, let's include the Colyseus JavaScript SDK, from a CD
 https://unpkg.com/colyseus.js@^0.16.0/dist/colyseus.js
 ```
 
-This is going to make the `Colyseus` [JavaScript SDK](https://docs.colyseus.io/getting-started/javascript-client/) available for our PlayCanvas scripts.
+This is going to make the `Colyseus` [JavaScript SDK](https://docs.colyseus.io/sdk) available for our PlayCanvas scripts.
 
 ## Establishing a Client-Server Connection {#establishing-a-client-server-connection}
 
@@ -439,7 +439,7 @@ To view the monitor panel from your local server, go to `http://localhost:2567/c
 
 You can see and interact with all spawned rooms and active client connections through this panel.
 
-> See [more information about the monitor panel](https://docs.colyseus.io/tools/monitor/).
+> See [more information about the monitor panel](https://docs.colyseus.io/tools/monitoring).
 
 ## More {#more}
 

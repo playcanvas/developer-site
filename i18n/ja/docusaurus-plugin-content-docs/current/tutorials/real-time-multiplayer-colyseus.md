@@ -88,7 +88,7 @@ PlayCanvasにColyseus JavaScript SDKを追加する必要があります。
 https://unpkg.com/colyseus.js@^0.16.0/dist/colyseus.js
 ```
 
-これにより、PlayCanvasスクリプトの `Colyseus` [JavaScript SDK](https://docs.colyseus.io/getting-started/javascript-client/) を使用できます。
+これにより、PlayCanvasスクリプトの `Colyseus` [JavaScript SDK](https://docs.colyseus.io/sdk) を使用できます。
 
 ## クライアント - サーバー接続の確立 {#establishing-a-client-server-connection}
 
@@ -439,7 +439,7 @@ Colyseusには、ゲーム開発中に役立つオプションのモニタリン
 
 このパネルを通じて、スポーンしたすべてのルームやアクティブなクライアント接続を見ることができ、相互作用することができます。
 
-> [モニタリングパネルの詳細についてはこちらをご覧ください。](https://docs.colyseus.io/tools/monitor/)
+> [モニタリングパネルの詳細についてはこちらをご覧ください。](https://docs.colyseus.io/tools/monitoring)
 
 ## さらに詳しく {#more}
 

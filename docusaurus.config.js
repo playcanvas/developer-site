@@ -38,6 +38,10 @@ const config = {
 
   trailingSlash: true,
 
+  // A link to a page that does not exist already fails the build. Make a link to a heading
+  // that does not exist fail it too, instead of warning in a log nobody reads.
+  onBrokenAnchors: 'throw',
+
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
   // may want to replace "en" with "zh-Hans".

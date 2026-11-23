@@ -27,7 +27,7 @@ npm install playcanvas
 
 ## Creating a Headless Application
 
-When running a PlayCanvas application in Node.js, you are unlikely to require rendering. In this case, you can create a [`NullGraphicsDevice`](https://api.playcanvas.com/engine/classes/NullGraphicsDevice.html), which renders nothing. Since there is nothing to display, a plain object can stand in for the canvas.
+When running a PlayCanvas application in Node.js, you are unlikely to require rendering. In this case, you can create a [`NullGraphicsDevice`](https://github.com/playcanvas/engine/blob/main/src/platform/graphics/null/null-graphics-device.js), which renders nothing. Since there is nothing to display, a plain object can stand in for the canvas.
 
 ```javascript
 import { AppBase, AppOptions, NullGraphicsDevice, ScriptComponentSystem } from 'playcanvas';

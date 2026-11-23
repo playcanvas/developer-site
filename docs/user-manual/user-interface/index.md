@@ -71,4 +71,4 @@ PlayCanvas React has components for screens and elements. The others are added a
 - [User Interface - Text Input](/tutorials/ui-text-input/) - Tutorial that builds a text field
 - [Touchscreen Joypad Controls](/tutorials/touch-joypad/) - Tutorial that builds on-screen joysticks
 - [2D](/user-manual/2D/) - Sprites, texture atlases and 9-slicing
-- [PCUI](https://playcanvas.github.io/pcui/) - The HTML component library for building tools and editors
+- [PCUI](/user-manual/pcui/) - The HTML component library for building tools and editors

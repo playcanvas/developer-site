@@ -15,7 +15,7 @@ const graph = new Graph(schema, {
 })
 ```
 
-`defaultStyles`オブジェクトには、グラフの背景のスタイリングオプションのほか、nodeおよびedgeのスタイルが含まれています。これらの上書き可能なプロパティの全リストは、[こちら](https://github.com/playcanvas/pcui-graph/blob/main/src/constants.js)で確認できます。
+`defaultStyles`オブジェクトには、グラフの背景のスタイリングオプションのほか、nodeおよびedgeのスタイルが含まれています。これらの上書き可能なプロパティの全リストは、[こちら](https://github.com/playcanvas/pcui-graph/blob/main/src/constants.ts)で確認できます。
 
 特定のnode/edgeタイプのスタイリングを更新したい場合は、`defaultStyles`オブジェクトで指定されたnodeまたはedgeプロパティを、特定のnodeまたはedgeのschemaで以下のように定義することで上書きできます。
 

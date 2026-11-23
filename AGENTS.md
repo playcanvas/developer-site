@@ -20,7 +20,7 @@ llms/           # Hand-written llms.txt indexes for AI agents (mirrors their pub
 
 ## Critical Rules
 
-1. **Localization**: When updating `docs/`, also update the corresponding file in `i18n/ja/docusaurus-plugin-content-docs/current/`
+1. **Localization**: When updating `docs/`, also update the corresponding file in `i18n/ja/docusaurus-plugin-content-docs/current/`. Every page needs a Japanese file at the same path, case included: `npm run check:i18n` and CI fail otherwise.
 2. **FAQ**: Do not edit `docs/user-manual/editor/faq.md` directly - it is auto-generated from `faq/`. Run `npm run faq` after editing FAQ source files.
 3. **File operations**: Use `git mv` and `git rm` for moving/deleting files to ensure proper version control tracking.
 4. **LLM indexes**: When you move, rename or remove a page, update any `llms/` index that links it. A new top-level User Manual section must be added to the `covers` list of one index. `npm test` and CI builds fail until both hold (local builds only warn).
@@ -37,4 +37,6 @@ npm run build   # Production build (slow - several minutes, avoid unless necessa
 npm run lint    # Lint Markdown files
 npm test        # Test the LLM file generation, including every llms/ index
 npm run faq     # Regenerate FAQ page
+npm run check:i18n    # Check every page has a Japanese counterpart at the same path
+npm run check:links   # Check external links still resolve (slow - also runs weekly in CI)
 ```

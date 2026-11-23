@@ -71,4 +71,4 @@ PlayCanvas Reactには、スクリーンとエレメントのコンポーネン�
 - [ユーザーインターフェース - テキスト入力](/tutorials/ui-text-input/) - テキストフィールドを構築するチュートリアル
 - [タッチスクリーンのジョイパッド操作](/tutorials/touch-joypad/) - 画面上のジョイスティックを構築するチュートリアル
 - [2D](/user-manual/2D/) - スプライト、テクスチャアトラス、9スライス
-- [PCUI](https://playcanvas.github.io/pcui/) - ツールやエディターを構築するためのHTMLコンポーネントライブラリ
+- [PCUI](/user-manual/pcui/) - ツールやエディターを構築するためのHTMLコンポーネントライブラリ
