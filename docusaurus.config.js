@@ -89,7 +89,9 @@ const config = {
         { from: ['/user-manual/account-management/user-accounts/'], to: '/user-manual/account-management/' },
         { from: ['/user-manual/faq/'], to: '/user-manual/editor/faq/' },
         { from: ['/user-manual/editor/interface/assets/', '/user-manual/designer/interface/assets/'], to: '/user-manual/editor/assets/asset-panel/' },
-        { from: ['/user-manual/editor/troubleshooting/', '/user-manual/designer/troubleshooting/'], to: '/user-manual/editor/engine-compatibility/#troubleshooting-the-switch' },
+        { from: ['/user-manual/editor/troubleshooting/', '/user-manual/designer/troubleshooting/'], to: '/user-manual/editor/upgrading-engine-v1-projects/#troubleshooting-the-upgrade' },
+        // Engine Compatibility became Upgrading Engine V1 Projects when the Editor dropped Engine V1
+        { from: ['/user-manual/editor/engine-compatibility/'], to: '/user-manual/editor/upgrading-engine-v1-projects/' },
         { from: ['/user-manual/getting-started/workflow/', '/user-manual/editor/getting-started/workflow/'], to: '/user-manual/editor/getting-started/how-projects-work/' },
         { from: ['/user-manual/getting-started/your-first-app/'], to: '/user-manual/editor/getting-started/your-first-app/' },
         { from: ['/user-manual/graphics/gaussian-splatting/'], to: '/user-manual/gaussian-splatting/' },

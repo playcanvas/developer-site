@@ -1,7 +1,7 @@
 ---
 title: レンダリング設定
 sidebar_label: Rendering
-description: シーンごとのスカイ、クラスタードライト、シャドウ、ガウシアンスプラット、トーンマッピング、露出、フォグの設定と、プロジェクト全体の解像度、グラフィックスデバイス、キャンバス、圧縮ライブラリのオプションです。
+description: シーンごとのスカイ、クラスタードライト、シャドウ、ガウシアンスプラット、露出、フォグの設定と、プロジェクト全体の解像度、グラフィックスデバイス、キャンバス、圧縮ライブラリのオプションです。
 ---
 
 ライティング、解像度、各種レンダリング機能を制御します。
@@ -85,13 +85,13 @@ description: シーンごとのスカイ、クラスタードライト、シャ�
 | **Data Format** | ガウシアンスプラットのレンダリングに使用するワークバッファの形式。オプション：Compact、Large。 |
 | **Enable IDs** | ガウシアンスプラットのワークバッファに一意のコンポーネントIDを格納します。 |
 
-### トーンマッピング、露出とフォグ {#tonemapping-exposure-and-fog}
+### 露出とフォグ {#exposure-and-fog}
+
+トーンマッピングとガンマ補正は、各[カメラ](/user-manual/editor/scenes/components/camera)で設定します。
 
 | 設定 | 説明 |
 | --- | --- |
-| **Tonemapping** | Engine v1 のプロジェクトのみ。トーンマッピングは HDR の色を表示可能な範囲に圧縮します。オプション：Linear、Filmic、Hejl、ACES、ACES2、Neutral。Engine v2 のプロジェクトでは、トーンマッピングは各[カメラ](/user-manual/editor/scenes/components/camera)で設定します。 |
 | **Exposure** | シーン全体の明るさを調整します。 |
-| **Gamma** | Engine v1 のプロジェクトのみ。ガンマ補正：1.0（補正なし）または 2.2（sRGB）。Engine v2 のプロジェクトでは、ガンマ補正は各[カメラ](/user-manual/editor/scenes/components/camera)で設定します。 |
 | **Fog** | シーン内のアンビエントフォグの近似を制御します。種類:<ul><li><strong>None</strong>: 無効</li><li><strong>Linear</strong>: Distance Start と Distance End の距離間で線形にフェード</li><li><strong>Exponential</strong>: 視点から指数関数に従ってフェード</li><li><strong>Exponential Squared</strong>: 視点から指数関数二乗に従ってフェード</li></ul> |
 | **Distance Start / End** | Linear フォグがフェードインを開始する距離（Start）と最大に達する距離（End）。シーン単位で指定します。 |
 | **Density** | Exponential / Exponential Squared タイプでのフェードイン率を制御します。大きいほど素早く濃くなります。正の値にしてください。 |

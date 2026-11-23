@@ -5,7 +5,7 @@ description: Settings panel map for scene, project and personal settings, from e
 
 The Settings panel controls how your project runs and how the Editor behaves. Each setting has one of three scopes:
 
-- **Scene**: saved with the scene that is open, so each scene can have its own values. Gravity, the environment (ambient color and skybox), clustered lighting, Gaussian splat rendering, exposure, fog and lightmapping are scene settings, as are tonemapping and gamma in Engine v1 projects.
+- **Scene**: saved with the scene that is open, so each scene can have its own values. Gravity, the environment (ambient color and skybox), clustered lighting, Gaussian splat rendering, exposure, fog and lightmapping are scene settings.
 - **Project**: shared by every scene in the project, such as the resolution, the graphics device, anti-aliasing, layers, batch groups and input devices.
 - **You**: personal preferences that affect only you, such as the Editor settings and the asset import options.
 

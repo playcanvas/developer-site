@@ -25,8 +25,8 @@ The Camera Component enables an entity to render a scene from a certain viewpoin
 | Priority           | A number that defines the order in which camera views are rendered by the engine. Smaller numbers are rendered first. |
 | Viewport           | A rectangle that specifies the viewport onto the camera's attached render target. This allows you to implement features like split-screen or picture-in-picture. It is defined by normalized coordinates (0 to 1) in the following format: X (lower left x), Y (lower left y), W (width), H (height). |
 | Layers             | The layers that this camera will render. Only mesh instances on matching layers will be rendered by this camera. |
-| Tonemapping        | The tonemapping algorithm to apply when rendering HDR content. Options are: Linear, Filmic, Hejl, ACES, ACES2, Neutral. This property is only available with Engine v2. |
-| Gamma              | The gamma correction value to apply. Options are 1.0 (no correction) or 2.2 (standard gamma). This property is only available with Engine v2. |
+| Tonemapping        | The tonemapping algorithm to apply when rendering HDR content. Options are: Linear, Filmic, Hejl, ACES, ACES2, Neutral. |
+| Gamma              | The gamma correction value to apply. Options are 1.0 (no correction) or 2.2 (standard gamma). |
 
 ## See Also
 

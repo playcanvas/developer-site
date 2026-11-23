@@ -9,7 +9,7 @@ Use this index for projects made in the Editor, where code lives in scripts atta
 
 ## Rules
 
-- **Check which engine the project runs.** A project uses Engine V1 or Engine V2 (see Engine Settings), and their APIs differ: the Engine index's rules for Engine 2 apply to V2 projects only.
+- **Projects run Engine 2.** The Editor upgrades Engine V1 projects to Engine V2 when they are opened, but leaves their scripts unchanged, so an old project's scripts may still call Engine 1 APIs. Check them against the [Engine Migrations](/user-manual/engine/migrations/) guide.
 - **A project lives in the Editor.** Its scenes, entities and assets are stored there and shared with collaborators in real time. Edit its scripts locally with the VS Code extension; change scenes from code with the Editor API, or from an agent with the MCP server.
 - **Write new scripts as ESM scripts**, and never mix the ESM and classic formats in one file. An ESM script is a `.mjs` file exporting a class that extends `Script`, with a `static scriptName`, and attributes declared as class fields tagged `/** @attribute */`:
 
@@ -75,7 +75,7 @@ Use this index for projects made in the Editor, where code lives in scripts atta
 
 ## Engine versions
 
-- [Engine Compatibility](/user-manual/editor/engine-compatibility/): Engine V1 versus V2, switching a project between them, and fixing brightness differences after a switch (gamma, tone mapping and sRGB textures).
+- [Upgrading Engine V1 Projects](/user-manual/editor/upgrading-engine-v1-projects/): The automatic upgrade of Engine V1 projects to Engine V2, and what to check afterwards: per-camera gamma and tone mapping, sRGB textures and scripts.
 - [Engine Settings](/user-manual/editor/interface/settings/engine/): Choosing the engine version used to launch, publish and download the project.
 
 ## Scenes and entities

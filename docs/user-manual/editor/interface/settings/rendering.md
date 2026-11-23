@@ -1,6 +1,6 @@
 ---
 title: Rendering Settings
-description: Rendering settings for each scene's sky, clustered lights, shadows, Gaussian splats, tonemapping, exposure and fog, plus the project-wide resolution, graphics device, canvas and compression library options.
+description: Rendering settings for each scene's sky, clustered lights, shadows, Gaussian splats, exposure and fog, plus the project-wide resolution, graphics device, canvas and compression library options.
 sidebar_label: Rendering
 ---
 
@@ -85,13 +85,13 @@ Scene-wide settings for [Gaussian splat](/user-manual/gaussian-splatting) render
 | **Data Format** | Work-buffer format used for Gaussian splat rendering. Options: Compact, Large. |
 | **Enable IDs** | Store a unique component ID in the Gaussian splat work buffer. |
 
-### Tonemapping, Exposure & Fog {#tonemapping-exposure-and-fog}
+### Exposure & Fog {#exposure-and-fog}
+
+Tone mapping and gamma correction are set on each [Camera](/user-manual/editor/scenes/components/camera).
 
 | Setting | Description |
 | --- | --- |
-| **Tonemapping** | Engine v1 projects only. Tone mapping compresses HDR colors into the displayable range. Options: Linear, Filmic, Hejl, ACES, ACES2, Neutral. In Engine v2 projects, tone mapping is set on each [Camera](/user-manual/editor/scenes/components/camera). |
 | **Exposure** | The exposure value tweaks the overall brightness of the scene. |
-| **Gamma** | Engine v1 projects only. Gamma correction: 1.0 (none) or 2.2 (sRGB). In Engine v2 projects, gamma correction is set on each [Camera](/user-manual/editor/scenes/components/camera). |
 | **Fog** | Controls an approximation of ambient fog in your scene. Types:<ul><li><strong>None</strong>: Fog disabled</li><li><strong>Linear</strong>: Fades in linearly between the Distance Start and Distance End</li><li><strong>Exponential</strong>: Fades in from the view position according to an exponential function</li><li><strong>Exponential Squared</strong>: Fades in from the view position according to an exponential squared function</li></ul> |
 | **Distance Start / End** | Distances, in scene units, where Linear fog starts to fade in (start) and where it reaches maximum (end). |
 | **Density** | Controls the rate at which fog fades in for the Exponential and Exponential Squared fog types. Larger values cause fog to fade in more quickly. Must be positive. |
