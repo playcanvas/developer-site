@@ -276,7 +276,8 @@ const config = {
           redirects.push(redirect);
         }
 
-        if (existingPath.includes('/user-manual/editor/publishing/')) {
+        // /user-manual/publishing/ itself is now the shared Publishing section, so only redirect its old subpages
+        if (existingPath.includes('/user-manual/editor/publishing/') && !existingPath.endsWith('/user-manual/editor/publishing/')) {
           const redirect = existingPath.replace('/user-manual/editor/publishing/', '/user-manual/publishing/');
           redirects.push(redirect);
         }

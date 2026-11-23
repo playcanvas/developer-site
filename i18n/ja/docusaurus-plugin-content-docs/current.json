@@ -179,6 +179,10 @@
     "message": "公開",
     "description": "The label for category Publishing in sidebar userManualSidebar"
   },
+  "sidebar.userManualSidebar.category.publishing-platforms": {
+    "message": "公開",
+    "description": "The label for category 'Publishing' in sidebar 'userManualSidebar'"
+  },
   "sidebar.userManualSidebar.category.Web": {
     "message": "ウェブ",
     "description": "The label for category Web in sidebar userManualSidebar"
