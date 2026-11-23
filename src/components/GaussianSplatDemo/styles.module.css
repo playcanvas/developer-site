@@ -1,0 +1,183 @@
+.demo {
+  margin: 0 0 var(--ifm-leading);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--ifm-background-surface-color);
+}
+
+.viewport {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  max-height: 460px;
+  width: 100%;
+  background: #17191c;
+}
+
+.canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  cursor: grab;
+}
+
+.canvas:active {
+  cursor: grabbing;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  color: #c9ccd1;
+  font-size: 0.9rem;
+  text-align: center;
+  pointer-events: none;
+}
+
+.hint {
+  position: absolute;
+  right: 0.6rem;
+  bottom: 0.5rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 4px;
+  background: rgb(0 0 0 / 45%);
+  color: #d7dade;
+  font-size: 0.75rem;
+  pointer-events: none;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1.5rem;
+  padding: 0.75rem 1rem;
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.controls .slider {
+  flex: 1 1 260px;
+}
+
+.groups {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.25rem 1.25rem;
+  padding: 0.5rem 1rem 0.75rem;
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.groups fieldset {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.groups legend {
+  padding: 0.25rem 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ifm-color-emphasis-700);
+}
+
+.slider {
+  display: grid;
+  grid-template-columns: minmax(1.5rem, auto) 1fr minmax(3.25rem, auto);
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.9rem;
+}
+
+.slider label {
+  white-space: nowrap;
+  color: var(--demo-accent, inherit);
+  font-weight: var(--demo-accent-weight, normal);
+}
+
+.slider input[type='range'] {
+  width: 100%;
+  min-width: 0;
+  accent-color: var(--demo-accent, var(--ifm-color-primary));
+}
+
+.slider input[type='color'] {
+  width: 100%;
+  height: 1.6rem;
+  padding: 0;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 4px;
+  background: none;
+  cursor: pointer;
+}
+
+.slider output {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.8rem;
+  text-align: right;
+  color: var(--ifm-color-emphasis-700);
+}
+
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.toggle input {
+  accent-color: var(--ifm-color-primary);
+}
+
+.toggle input:disabled,
+.toggle input:disabled + * {
+  cursor: not-allowed;
+}
+
+.reset {
+  margin-top: 0.4rem;
+  padding: 0.15rem 0.75rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 4px;
+  background: var(--ifm-color-emphasis-100);
+  color: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.reset:hover {
+  background: var(--ifm-color-emphasis-200);
+}
+
+.caption {
+  padding: 0.5rem 1rem;
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+  color: var(--ifm-color-emphasis-700);
+  font-size: 0.85rem;
+}
+
+.data {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.1rem 1rem;
+  margin: 0.35rem 0 0;
+  font-size: 0.8rem;
+}
+
+.data dt {
+  font-weight: normal;
+}
+
+.data dd {
+  margin: 0;
+  font-family: var(--ifm-font-family-monospace);
+}
