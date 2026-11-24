@@ -47,7 +47,41 @@ The indirect draw buffer is a storage buffer that holds draw call parameters. It
 
 - Access via `app.graphicsDevice.indirectDrawBuffer`
 - Size controlled by `maxIndirectDrawCount` property
-- Each slot contains: `indexCount`, `instanceCount`, `firstIndex`, `baseVertex`, `firstInstance`
+- Each slot is 20 bytes (five 32-bit words)
+
+### Slot Layout {#slot-layout}
+
+The engine issues an indexed draw (`drawIndexedIndirect`) for a mesh with an index buffer, and a non-indexed draw (`drawIndirect`) for a mesh without one. The two draws read a different layout from the same 20-byte slot, so write the one that matches your mesh:
+
+```wgsl
+// Mesh with an index buffer: all five words are read
+struct DrawIndexedIndirectArgs {
+    indexCount: u32,
+    instanceCount: u32,
+    firstIndex: u32,
+    baseVertex: i32,
+    firstInstance: u32
+};
+
+// Mesh without an index buffer: only the first four words are read
+struct DrawIndirectArgs {
+    vertexCount: u32,
+    instanceCount: u32,
+    firstVertex: u32,
+    firstInstance: u32,
+    unused: u32 // keeps the 20-byte slot stride
+};
+```
+
+For a non-indexed mesh, `firstInstance` is the fourth word. A value written to the fifth word is ignored.
+
+### Passing Per-Draw Data
+
+The shader reads `firstInstance` as part of the instance index (`pcInstanceIndex` in WGSL), separately from the vertex index. This makes it a good place for a per-draw value, such as an offset into instance data.
+
+Do not use `baseVertex` for this. The GPU adds it to every index, so it shifts the vertex index the shader receives.
+
+A non-zero `firstInstance` requires the `indirect-first-instance` WebGPU feature, which is widely supported. Check [`GraphicsDevice.supportsIndirectFirstInstance`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#supportsindirectfirstinstance) before you rely on it. Without the feature, the GPU skips any indirect draw whose `firstInstance` is not zero.
 
 ### Using with Compute Shaders
 
@@ -68,12 +102,15 @@ compute.setParameter('indirectSlot', indirectSlot);
 device.computeDispatch([compute], 'GenerateIndirectDraw');
 ```
 
+The metadata is not an indirect draw command. Its last value is reserved and is not `firstInstance`. Copy the values into the slot layout that matches your mesh, as shown in [Slot Layout](#slot-layout).
+
 ## API Reference
 
 For detailed API documentation, refer to these PlayCanvas engine classes and methods:
 
 - [`MeshInstance.setIndirect()`](https://api.playcanvas.com/engine/classes/MeshInstance.html#setindirect) - Configure a mesh instance for indirect rendering
 - [`GraphicsDevice.supportsIndirectDraw`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#supportsindirectdraw) - Check whether the device supports indirect drawing
+- [`GraphicsDevice.supportsIndirectFirstInstance`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#supportsindirectfirstinstance) - Check whether indirect draws can use a non-zero `firstInstance`
 - [`GraphicsDevice.getIndirectDrawSlot()`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#getindirectdrawslot) - Allocate a slot in the indirect draw buffer
 - [`GraphicsDevice.indirectDrawBuffer`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#indirectdrawbuffer) - Access the indirect draw buffer
 - [`GraphicsDevice.maxIndirectDrawCount`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#maxindirectdrawcount) - Control maximum indirect draw calls per frame

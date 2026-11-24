@@ -145,7 +145,7 @@ app.on('update', (dt) => {
 
 ### WebGPUアプローチ
 
-WebGPUでは、`firstInstance`パラメータを使用して、各サブドローがインスタンスデータをどこから読み取るかを指定できます：
+WebGPUでは、`firstInstance`パラメータを使用して、各サブドローがインスタンスデータをどこから読み取るかを指定できます。0以外の`firstInstance`には[`GraphicsDevice.supportsIndirectFirstInstance`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#supportsindirectfirstinstance)が必要です。これは広くサポートされていますが、サポートされていない場合、GPUはそれらのサブドローをスキップします：
 
 ```javascript
 // 異なるインスタンス数を持つ3つのジオメトリ
@@ -258,8 +258,10 @@ cmd.add(i, indexOrVertexCount, instanceCount, firstIndexOrVertex, baseVertex, fi
 - `indexOrVertexCount` - 描画するインデックスまたは頂点の数
 - `instanceCount` - インスタンス数（インスタンス化されていない場合は1を使用）
 - `firstIndexOrVertex` - 開始インデックスまたは頂点オフセット
-- `baseVertex` - ベース頂点オフセット（WebGPUのみ、デフォルト0）
-- `firstInstance` - 最初のインスタンスオフセット（WebGPUのみ、デフォルト0）
+- `baseVertex` - 各インデックスに加算される符号付きオフセット（WebGPUのみ、インデックスバッファを持つメッシュのみ、デフォルト0）
+- `firstInstance` - 最初のインスタンスオフセット（WebGPUのみ、デフォルト0）。0以外の場合は`GraphicsDevice.supportsIndirectFirstInstance`が必要です。
+
+インデックスバッファを持たないメッシュでは、`baseVertex`は無視されます。描画ごとの値をシェーダーに渡すには、`firstInstance`を使用してください。シェーダーはこれをインスタンスインデックス（WGSLでは`pcInstanceIndex`）の一部として読み取ります。
 
 ### update
 
