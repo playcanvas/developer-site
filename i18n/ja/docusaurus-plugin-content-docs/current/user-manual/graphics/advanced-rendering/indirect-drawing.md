@@ -47,7 +47,41 @@ app.graphicsDevice.maxIndirectDrawCount = 2048;
 
 - `app.graphicsDevice.indirectDrawBuffer` を介してアクセス
 - `maxIndirectDrawCount` プロパティによってサイズが制御されます
-- 各スロットには: `indexCount`、`instanceCount`、`firstIndex`、`baseVertex`、`firstInstance` が含まれます
+- 各スロットは20バイト（32ビットワード5個）です
+
+### スロットのレイアウト {#slot-layout}
+
+エンジンは、インデックスバッファを持つメッシュにはインデックス付き描画（`drawIndexedIndirect`）を、インデックスバッファを持たないメッシュにはインデックスなし描画（`drawIndirect`）を発行します。2つの描画は同じ20バイトのスロットから異なるレイアウトを読み取るため、メッシュに合ったレイアウトで書き込んでください:
+
+```wgsl
+// インデックスバッファを持つメッシュ: 5つのワードすべてが読み取られる
+struct DrawIndexedIndirectArgs {
+    indexCount: u32,
+    instanceCount: u32,
+    firstIndex: u32,
+    baseVertex: i32,
+    firstInstance: u32
+};
+
+// インデックスバッファを持たないメッシュ: 最初の4つのワードのみが読み取られる
+struct DrawIndirectArgs {
+    vertexCount: u32,
+    instanceCount: u32,
+    firstVertex: u32,
+    firstInstance: u32,
+    unused: u32 // 20バイトのスロット間隔を保つ
+};
+```
+
+インデックスなしのメッシュでは、`firstInstance` は4番目のワードです。5番目のワードに書き込んだ値は無視されます。
+
+### 描画ごとのデータの受け渡し
+
+シェーダーは `firstInstance` をインスタンスインデックス（WGSLでは `pcInstanceIndex`）の一部として、頂点インデックスとは別に読み取ります。そのため、インスタンスデータへのオフセットなど、描画ごとの値を渡すのに適しています。
+
+この用途に `baseVertex` を使用しないでください。GPUはこの値をすべてのインデックスに加算するため、シェーダーが受け取る頂点インデックスがずれます。
+
+0以外の `firstInstance` には、WebGPUの `indirect-first-instance` 機能が必要です。この機能は広くサポートされています。使用する前に [`GraphicsDevice.supportsIndirectFirstInstance`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#supportsindirectfirstinstance) を確認してください。この機能がない場合、GPUは `firstInstance` が0以外の間接描画をスキップします。
 
 ### コンピュートシェーダーとの併用
 
@@ -68,12 +102,15 @@ compute.setParameter('indirectSlot', indirectSlot);
 device.computeDispatch([compute], 'GenerateIndirectDraw');
 ```
 
+このメタデータは間接描画コマンドではありません。最後の値は予約済みで、`firstInstance` ではありません。[スロットのレイアウト](#slot-layout) に示すように、メッシュに合ったスロットのレイアウトに値をコピーしてください。
+
 ## APIリファレンス
 
 詳細なAPIドキュメントについては、以下のPlayCanvasエンジンクラスとメソッドを参照してください:
 
 - [`MeshInstance.setIndirect()`](https://api.playcanvas.com/engine/classes/MeshInstance.html#setindirect) - 間接レンダリング用にメッシュインスタンスを設定する
 - [`GraphicsDevice.supportsIndirectDraw`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#supportsindirectdraw) - デバイスが間接描画をサポートしているかを確認する
+- [`GraphicsDevice.supportsIndirectFirstInstance`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#supportsindirectfirstinstance) - 間接描画で0以外の `firstInstance` を使用できるかを確認する
 - [`GraphicsDevice.getIndirectDrawSlot()`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#getindirectdrawslot) - 間接描画バッファにスロットを割り当てる
 - [`GraphicsDevice.indirectDrawBuffer`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#indirectdrawbuffer) - 間接描画バッファにアクセスする
 - [`GraphicsDevice.maxIndirectDrawCount`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#maxindirectdrawcount) - フレームごとの間接描画呼び出しの最大数を制御する

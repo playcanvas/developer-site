@@ -145,7 +145,7 @@ Multi-draw can be combined with hardware instancing to render different geometri
 
 ### WebGPU Approach
 
-On WebGPU, you can use the `firstInstance` parameter to specify where each sub-draw reads its instance data from:
+On WebGPU, you can use the `firstInstance` parameter to specify where each sub-draw reads its instance data from. A non-zero `firstInstance` requires [`GraphicsDevice.supportsIndirectFirstInstance`](https://api.playcanvas.com/engine/classes/GraphicsDevice.html#supportsindirectfirstinstance), which is widely supported. Without it, the GPU skips those sub-draws.
 
 ```javascript
 // Three geometries with different instance counts
@@ -258,8 +258,10 @@ cmd.add(i, indexOrVertexCount, instanceCount, firstIndexOrVertex, baseVertex, fi
 - `indexOrVertexCount` - Number of indices or vertices to draw
 - `instanceCount` - Number of instances (use 1 if not instanced)
 - `firstIndexOrVertex` - Starting index or vertex offset
-- `baseVertex` - Base vertex offset (WebGPU only, default 0)
-- `firstInstance` - First instance offset (WebGPU only, default 0)
+- `baseVertex` - Signed offset added to each index (WebGPU only, meshes with an index buffer only, default 0)
+- `firstInstance` - First instance offset (WebGPU only, default 0). Requires `GraphicsDevice.supportsIndirectFirstInstance` when not zero.
+
+On a mesh without an index buffer, `baseVertex` is ignored. To pass a per-draw value to the shader, use `firstInstance`, which the shader reads as part of the instance index (`pcInstanceIndex` in WGSL).
 
 ### update
 
