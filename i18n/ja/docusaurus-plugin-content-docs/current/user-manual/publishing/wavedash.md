@@ -36,7 +36,7 @@ Wavedashは、ゲームが`Wavedash.init()`を呼び出すまで独自のロー�
 
 ゲームがWavedash上で動作するとき、プラットフォームはコードの実行前にグローバルな`window.Wavedash`オブジェクトを定義するので、何かをインストールする必要はありません。呼び出しを`window.Wavedash?.init()`と書くと、他のホストでは何もしないので、同じビルドを[PlayCanvasホスティング](/user-manual/editor/publishing/playcanvas-hosting/)や[自分のサーバー](web-hosting.md)でもそのまま動かせます。
 
-<Tabs groupId="authoring-surface">
+<Tabs groupId="workflow">
 <TabItem value="editor" label="Editor">
 
 次のコードでスクリプトを作成し、最初のシーンのエンティティ（Rootエンティティなど）にアタッチします：
@@ -141,7 +141,7 @@ import type {} from '@wvdsh/sdk-js';
 
 ### 3. プロジェクトをビルドする
 
-<Tabs groupId="authoring-surface">
+<Tabs groupId="workflow">
 <TabItem value="editor" label="Editor">
 
 **Download Format**を**Static Website**にして、プロジェクトの[ビルドをダウンロード](/user-manual/editor/publishing/downloading/)します。zipファイルを`build`という名前のフォルダーに展開します。これがアップロードフォルダーです。
