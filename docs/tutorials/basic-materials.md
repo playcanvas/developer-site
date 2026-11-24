@@ -4,61 +4,71 @@ description: Create materials, assign them to meshes, and tune color and physica
 tags: [materials,basics]
 kind: tutorial
 topic: Graphics
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/186/KM6GIE-image-75.jpg
+thumb: /img/tutorials/basic-materials/thumbnail.webp
 ---
 
-Materials are what define the appearance of the surfaces of a 3D Model. At its very simplest a Material sets the color of the polygons, at its most complex a material can simulate the surface of an ocean or the way that light passes through glass.
+Materials define the appearance of the surfaces of a 3D model. At its simplest, a material sets the color of a surface. At its most complex, it can simulate the surface of an ocean or the way that light passes through glass.
 
-In this tutorial, we'll walk through how you create a Material, assign it to a primitive shape, and edit the Material's properties. First create a new and empty scene.
+In this tutorial, you'll create a material, assign it to a box, change its color and then add textures to it. You can follow along in any scene. A new project created from the **Blank Project** kit is a good place to start.
 
-## Step 1 - Add a cube to your scene
+## Step 1 - Add a box to your scene
 
-Select the root Entity of your Scene. At the start this will be called "Root". In the Attribute Editor rename the Entity to something meaningful, like "Material Tutorial".
+In the [Hierarchy](/user-manual/editor/interface/hierarchy) panel, click the **+** (Add Entity) button and select **3D** > **Box**.
 
-Select 'New Entity' -> 'Box' menu in the Hierarchy panel. This creates a new Box Entity in the Hierarchy.
+![The Add Entity menu with 3D > Box highlighted](/img/tutorials/basic-materials/add-box.webp)
 
-![New Box](/img/tutorials/beginner/basic-materials/new-box.jpg)
+This creates a new Entity called Box, with a [Render Component](/user-manual/editor/scenes/components/render) that draws the box. If your scene already has a box, as the Blank Project does, you can use that one instead.
 
-## Step 2 - Create a new Material
+## Step 2 - Create a material
 
-Create new material directly from the PlayCanvas Editor interface. In the Asset panel use the + button to open the New Asset menu and select Material.
+In the [Assets](/user-manual/editor/assets/asset-panel) panel, click the **+** (Add Asset) button and select **Material**.
 
-![Add Material](/img/tutorials/beginner/basic-materials/new-material.jpg)
+![The Add Asset menu with Material highlighted](/img/tutorials/basic-materials/add-material.webp)
 
-This creates a new Material Asset and brings up the Material Editor on the right-hand side of the screen. In the Material Editor rename the Material to "Box Material".
+A new material called New Material appears in the Assets panel. Select it to show its properties in the [Inspector](/user-manual/editor/interface/inspector), then change its **Name** to `Box Material`.
 
-## Step 3 - Assign the material to the cube
+## Step 3 - Assign the material to the box
 
-When you create a new cube in the Editor it will have no material assigned and will be rendered using a plain default material. To assign your new material to a model in the scene simply drag the model from the asset panel into the viewport and drop it on to the model you want to assign it to.
+Until you give it a material, a new box is drawn with a plain default material. To assign your material, drag it from the Assets panel into the [Viewport](/user-manual/editor/interface/viewport) and drop it on the box.
+
+You can also assign it in the Inspector. Select the box and find **Materials** at the bottom of its Render Component. Drag the material onto the **Material #0** slot, or click the pencil icon on the slot and then click the material in the Assets panel.
+
+![The Materials property of the Render Component with Box Material assigned](/img/tutorials/basic-materials/assign-material.webp)
+
+A new material is white, so the box doesn't look any different yet.
 
 ## Step 4 - Change the color of the material
 
-To change the color of the Material we will want to edit the *Diffuse* property of the material.
+Select Box Material in the Assets panel. In the Inspector, expand the **Diffuse** section and click the **Color** swatch to open the color picker. Pick a color, or type a hex value such as `2979FF`.
 
-Select the material either by clicking on it in the asset panel. Or by selecting it from the property inspector when you select the box.
+![The Diffuse section of the material with the color picker open, and the box turned blue](/img/tutorials/basic-materials/diffuse-color.webp)
 
-![Diffuse Color](/img/tutorials/beginner/basic-materials/diffuse-panel.jpg)
-
-You'll have to expand the Diffuse settings panel in the material editor in the right panel. Click on the color property to edit the diffuse color of the material.
+The box updates in the Viewport as you edit the material. So would any other mesh that uses the same material.
 
 ## Bonus - Add textures to the material
 
 Changing the color of the material is a good start, but you'll quickly want more detail than a flat color. That is where texture maps come in.
 
-Download & save these sample textures:
+Download and save these two sample textures:
 
-![Sample Diffuse Map](/img/tutorials/beginner/basic-materials/proto_orange.png)
+![Sample Diffuse Map](/img/tutorials/basic-materials/proto_orange.png)
 
-![Sample Normal Map](/img/tutorials/beginner/basic-materials/proto_gray_n.png)
+![Sample Normal Map](/img/tutorials/basic-materials/proto_gray_n.png)
 
-Then upload them to your project by dragging the files into the Editor.
+Then [upload them](/user-manual/editor/assets/importing) to your project by dragging the files into the Assets panel.
 
-Once they're uploaded it's time to assign them to texture slots on the Material. Select the Material as before and open up the Diffuse section. Drag the `proto_orange` texture from the asset panel into the empty diffuse slot. Then open the Normals section and drag the `proto_gray_n` texture into the normal map slot.
+Once they're uploaded, assign them to texture slots on the material:
 
-You'll see something that looks a little like this:
+1. Select Box Material and expand the **Diffuse** section. Drag `proto_orange.png` from the Assets panel onto the empty **Diffuse** slot.
+2. The diffuse **Color** tints the texture, so set it back to white (`FFFFFF`) to see the texture's own colors.
+3. Expand the **Normals** section and drag `proto_gray_n.png` onto the empty **Normals** slot.
 
-![Cube](/img/tutorials/beginner/basic-materials/diffuse_normal_cube.jpg)
+![The box with the diffuse and normal maps assigned](/img/tutorials/basic-materials/textured-box.webp)
 
-Try modifying the **Tiling** and **Offset** properties to affect the way the texture is wrapped around the cube.
+A normal map stores surface directions and not colors, so it must not be treated as sRGB. Select `proto_gray_n.png` in the Assets panel and untick **sRGB** in the Inspector. Until you do, the Editor shows a warning in its Console.
 
-Take a look at the user manual section on [Physical Materials](/user-manual/graphics/physical-rendering/physical-materials/) for more depth on setting up materials.
+![The Texture section of the Inspector with sRGB unticked](/img/tutorials/basic-materials/normal-map-srgb.webp)
+
+Try changing **Offset** and **Tiling** in the material's **Texture Transform** section to change how the textures are wrapped around the box.
+
+To learn more about setting up materials, see [Physical Materials](/user-manual/graphics/physical-rendering/physical-materials/) and the [Material Inspector](/user-manual/editor/assets/inspectors/material/) reference.

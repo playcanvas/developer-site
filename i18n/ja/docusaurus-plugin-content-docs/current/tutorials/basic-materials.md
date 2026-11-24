@@ -1,62 +1,72 @@
 ---
 title: マテリアルの基本設定
 tags: [materials,basics]
-thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/186/KM6GIE-image-75.jpg"
+thumb: /img/tutorials/basic-materials/thumbnail.webp
 description: マテリアルを作成してメッシュに割り当て、プリミティブで色と物理ベースシェーディングを段階的に調整します。
 ---
 
-マテリアルは、3Dモデルの表面の外観を定義するものです。最も単純な場合、マテリアルはポリゴンの色を設定します。最も複雑な場合、マテリアルは海の表面やガラスを通過する光の振る舞いなどをシミュレートすることができます。
+マテリアルは、3Dモデルの表面の外観を定義するものです。最も単純な場合、マテリアルは表面の色を設定します。最も複雑な場合は、海面や、ガラスを通過する光の振る舞いをシミュレートすることもできます。
 
-このチュートリアルでは、マテリアルの作成方法、プリミティブ形状への割り当て、およびマテリアルのプロパティの編集方法について説明します。まず、新しい空のシーンを作成してください。
+このチュートリアルでは、マテリアルを作成してボックスに割り当て、色を変更し、最後にテクスチャを追加します。どのシーンでも進められますが、**Blank Project** キットから作成した新しいプロジェクトで始めるのがおすすめです。
 
-## ステップ1 - シーンにキューブを追加
+## ステップ1 - シーンにボックスを追加する
 
-シーンのルートエンティティを選択します。初期の名前は "Root" と呼ばれます。属性エディタで、エンティティの名前を "Material Tutorial" のような意味のある名前に変更します。
+[Hierarchy](/user-manual/editor/interface/hierarchy)（ヒエラルキー）パネルで **+**（エンティティを追加）ボタンをクリックし、**3D** > **Box** を選択します。
 
-ヒエラルキーパネルで 'New Entity'-> 'Box' メニューを選択します。これにより、ヒエラルキーに新しいボックスエンティティが作成されます。
+![3D > Box がハイライトされたエンティティ追加メニュー](/img/tutorials/basic-materials/add-box.webp)
 
-![New Box](/img/tutorials/beginner/basic-materials/new-box.jpg)
+これにより、ボックスを描画する[Renderコンポーネント](/user-manual/editor/scenes/components/render)を持つ、Box という名前の新しいエンティティが作成されます。Blank Project のようにシーンにすでにボックスがある場合は、そのボックスを使っても構いません。
 
-## ステップ2 - 新しいマテリアルを作成
+## ステップ2 - マテリアルを作成する
 
-PlayCanvasエディターのインターフェースから直接新しいマテリアルを作成します。アセットパネルで+ボタンを使用して、新しいアセットメニューを開き、マテリアルを選択します。
+[Assets](/user-manual/editor/assets/asset-panel)（アセット）パネルで **+**（アセットを追加）ボタンをクリックし、**Material** を選択します。
 
-![Add Material](/img/tutorials/beginner/basic-materials/new-material.jpg)
+![Material がハイライトされたアセット追加メニュー](/img/tutorials/basic-materials/add-material.webp)
 
-これにより、新しいマテリアルアセットが作成され、画面の右側にマテリアルエディタが表示されます。マテリアルエディタで、マテリアルの名前を「Box Material」と変更してください。
+New Material という名前の新しいマテリアルがアセットパネルに表示されます。それを選択して[Inspector](/user-manual/editor/interface/inspector)（インスペクター）にプロパティを表示し、**Name** を `Box Material` に変更します。
 
-## ステップ3 - キューブにマテリアルを割り当てる
+## ステップ3 - ボックスにマテリアルを割り当てる
 
-エディタで新しいキューブを作成すると、マテリアルが割り当てられず、デフォルトのプレーンなマテリアルが使用されます。シーン内のモデルに新しいマテリアルを割り当てるには、単純にアセットパネルからモデルをビューポートにドラッグして、割り当てたいモデルの上にドロップします。
+マテリアルを割り当てるまで、新しいボックスはプレーンなデフォルトマテリアルで描画されます。マテリアルを割り当てるには、アセットパネルから[Viewport](/user-manual/editor/interface/viewport)（ビューポート）にドラッグし、ボックスの上にドロップします。
+
+インスペクターで割り当てることもできます。ボックスを選択し、Renderコンポーネントの一番下にある **Materials** を見つけます。マテリアルを **Material #0** スロットにドラッグするか、スロットの鉛筆アイコンをクリックしてからアセットパネルでマテリアルをクリックします。
+
+![Box Material が割り当てられた Render コンポーネントの Materials プロパティ](/img/tutorials/basic-materials/assign-material.webp)
+
+新しいマテリアルは白なので、この時点ではボックスの見た目は変わりません。
 
 ## ステップ4 - マテリアルの色を変更する
 
-マテリアルの色を変更するには、マテリアルの *Diffuse* プロパティを編集する必要があります。
+アセットパネルで Box Material を選択します。インスペクターで **Diffuse** セクションを展開し、**Color** のスウォッチをクリックしてカラーピッカーを開きます。色を選ぶか、`2979FF` のような16進数の値を入力します。
 
-マテリアルを選択するには、アセットパネルでそれをクリックするか、ボックスを選択したときにプロパティインスペクターから選択します。
+![カラーピッカーを開いたマテリアルの Diffuse セクションと、青くなったボックス](/img/tutorials/basic-materials/diffuse-color.webp)
 
-![Diffuse Color](/img/tutorials/beginner/basic-materials/diffuse-panel.jpg)
-
-マテリアルエディタの右パネルで、Diffuse設定パネルを展開してください。カラープロパティをクリックして、マテリアルのDiffuseカラーを編集します。
+マテリアルを編集すると、ビューポートのボックスもすぐに更新されます。同じマテリアルを使用する他のメッシュも同様に更新されます。
 
 ## ボーナス - マテリアルにテクスチャを追加する
 
-マテリアルの色を変更することは良いスタートですが、フラットな色だけでは詳細な表現が必要になることがあります。そのために、テクスチャマップが役立ちます。
+マテリアルの色を変更するのは良いスタートですが、すぐに単色以上のディテールが欲しくなるでしょう。そこで役立つのがテクスチャマップです。
 
-こちらからサンプルのテクスチャをダウンロードして保存してください。
+次の2つのサンプルテクスチャをダウンロードして保存してください。
 
-![Sample Diffuse Map](/img/tutorials/beginner/basic-materials/proto_orange.png)
+![Sample Diffuse Map](/img/tutorials/basic-materials/proto_orange.png)
 
-![Sample Normal Map](/img/tutorials/beginner/basic-materials/proto_gray_n.png)
+![Sample Normal Map](/img/tutorials/basic-materials/proto_gray_n.png)
 
-その後、エディタにドラッグしてファイルをアップロードします。
+次に、ファイルをアセットパネルにドラッグして、プロジェクトに[アップロード](/user-manual/editor/assets/importing)します。
 
-アップロードすると、マテリアルのテクスチャスロットにそれらを割り当てる時が来ました。前述のようにマテリアルを選択して、Diffuseセクションを開きます。アセットパネルから `proto_orange` テクスチャを空の拡散スロットにドラッグします。次にNormalsセクションを開き、 `proto_gray_n` テクスチャをNormalマップスロットにドラッグします。
+アップロードできたら、マテリアルのテクスチャスロットに割り当てます。
 
-以下のようなものが表示されます。
+1. Box Material を選択し、**Diffuse** セクションを展開します。アセットパネルから `proto_orange.png` を空の **Diffuse** スロットにドラッグします。
+2. ディフューズの **Color** はテクスチャに色を乗算するため、白（`FFFFFF`）に戻して、テクスチャ本来の色が見えるようにします。
+3. **Normals** セクションを展開し、`proto_gray_n.png` を空の **Normals** スロットにドラッグします。
 
-![Cube](/img/tutorials/beginner/basic-materials/diffuse_normal_cube.jpg)
+![ディフューズマップと法線マップを割り当てたボックス](/img/tutorials/basic-materials/textured-box.webp)
 
-テクスチャがキューブに巻き付けられる方法を変更するには、 **Tiling** および **Offset** プロパティを変更してみてください。
+法線マップは色ではなく表面の向きを格納するため、sRGBとして扱ってはいけません。アセットパネルで `proto_gray_n.png` を選択し、インスペクターで **sRGB** のチェックを外します。チェックを外すまで、エディターのコンソールに警告が表示されます。
 
-マテリアルを設定するのにさらに深い知識が必要な場合は、ユーザーマニュアルの[物理マテリアル](/user-manual/graphics/physical-rendering/physical-materials/)セクションを参照してください。
+![sRGB のチェックを外したインスペクターの Texture セクション](/img/tutorials/basic-materials/normal-map-srgb.webp)
+
+マテリアルの **Texture Transform** セクションにある **Offset** と **Tiling** を変更して、テクスチャがボックスに巻き付けられる方法を変えてみてください。
+
+マテリアルの設定についてさらに詳しく知るには、[物理マテリアル](/user-manual/graphics/physical-rendering/physical-materials/)と[マテリアルインスペクター](/user-manual/editor/assets/inspectors/material/)のリファレンスを参照してください。

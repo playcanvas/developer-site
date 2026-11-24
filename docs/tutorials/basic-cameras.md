@@ -4,7 +4,7 @@ description: Add camera entities so your scene renders to the screen and learn t
 tags: [camera,basics]
 kind: tutorial
 topic: Cameras
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/186/KM6GIE-image-75.jpg
+thumb: /img/tutorials/basic-cameras/thumbnail.webp
 ---
 
 ## Camera Entities
