@@ -279,23 +279,17 @@ To achieve the dissolving effect, we use the height map value as a threshold tha
 ## Complete Script
 
 ```javascript
-import {
-    Script,
-    ShaderMaterial,
-    SEMANTIC_POSITION,
-    SEMANTIC_TEXCOORD0,
-    Asset
-} from 'playcanvas';
+import { Asset, Script, ShaderMaterial, SEMANTIC_POSITION, SEMANTIC_TEXCOORD0 } from 'playcanvas';
 
 /**
  * Apply a dissolve shader material to an entity's render components.
  */
 export class CustomShader extends Script {
-    static scriptName = 'dissolveShader';
+    static scriptName = 'customShader';
 
     /**
      * GLSL vertex shader.
-     * 
+     *
      * @attribute
      * @title GLSL Vertex Shader
      * @type {Asset}
@@ -304,7 +298,7 @@ export class CustomShader extends Script {
 
     /**
      * GLSL fragment shader.
-     * 
+     *
      * @attribute
      * @title GLSL Fragment Shader
      * @type {Asset}
@@ -313,7 +307,7 @@ export class CustomShader extends Script {
 
     /**
      * WGSL vertex shader.
-     * 
+     *
      * @attribute
      * @title WGSL Vertex Shader
      * @type {Asset}
@@ -322,7 +316,7 @@ export class CustomShader extends Script {
 
     /**
      * WGSL fragment shader.
-     * 
+     *
      * @attribute
      * @title WGSL Fragment Shader
      * @type {Asset}
@@ -331,7 +325,7 @@ export class CustomShader extends Script {
 
     /**
      * Diffuse Map
-     * 
+     *
      * @attribute
      * @title Diffuse Map
      * @type {Asset}
@@ -340,7 +334,7 @@ export class CustomShader extends Script {
 
     /**
      * Height Map
-     * 
+     *
      * @attribute
      * @title Height Map
      * @type {Asset}

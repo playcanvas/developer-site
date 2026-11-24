@@ -92,31 +92,40 @@ JSONアセットを読み取り、リーダーボードにデータを埋め込�
 <TabItem value="esm" label="ESM">
 
 ```javascript
-import { Script } from 'playcanvas';
+import { Entity, Script } from 'playcanvas';
 
+/**
+ * Handles displaying leaderboard entries, including personal and top-ten scores.
+ */
 export class Leaderboard extends Script {
-    static scriptName = "leaderBoard";
+    static scriptName = 'leaderboard';
 
     /**
+     * The text entry template to clone.
+     *
      * @attribute
      * @title Template
      * @type {Entity}
      */
-    template = null;
+    template;
 
     /**
+     * The parent leaderboard for the personal score.
+     *
      * @attribute
      * @title Personal
      * @type {Entity}
      */
-    personal = null;
+    personal;
 
     /**
+     * The parent leaderboard for the top ten.
+     *
      * @attribute
      * @title Leaderboard
      * @type {Entity}
      */
-    leaderboard = null;
+    leaderboard;
 
     initialize() {
         this.entries = [];
@@ -124,24 +133,29 @@ export class Leaderboard extends Script {
         this.load((data) => {
             this.clear();
 
-            // add the personal entry
+            // Add the personal entry
             let y = -75;
             this.addEntry(this.personal, y, data.personal.position, data.personal.name, data.personal.score);
 
-            // add the top ten
+            // Add the top ten
             y = -60;
             for (let i = 0; i < Math.min(data.leaderboard.length, 10); i++) {
                 this.addEntry(this.leaderboard, y, i + 1, data.leaderboard[i].name, data.leaderboard[i].score);
-                y -= 99; // offset each entry
+                y -= 99; // Offset each entry
             }
         });
     }
 
+    // Clear all leaderboard entries
     clear() {
-        this.entries.forEach(entry => entry.destroy());
+        for (let i = 0; i < this.entries.length; i++) {
+            this.entries[i].destroy();
+        }
+
         this.entries = [];
     }
 
+    // Add a new entry into the leaderboard
     addEntry(parent, y, position, name, score) {
         const entry = this.template.clone();
         entry.enabled = true;
@@ -156,6 +170,7 @@ export class Leaderboard extends Script {
         entry.translateLocal(0, y, 0);
     }
 
+    // Mock loading leaderboard data from a JSON file in the project
     load(callback) {
         const asset = this.app.assets.find("leaderboard-data.json");
         asset.ready(() => {

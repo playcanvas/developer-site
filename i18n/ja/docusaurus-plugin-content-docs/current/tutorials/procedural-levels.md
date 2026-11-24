@@ -24,47 +24,49 @@ import TabItem from '@theme/TabItem';
 ```javascript
 import { Script } from 'playcanvas';
 
+/**
+ * Generate dynamically spawns a grid of tiles using predefined templates.
+ * Tiles are randomly chosen between grass and house, with grass being more frequent.
+ */
 export class Generate extends Script {
-    static scriptName = "generate";
+    static scriptName = 'generate';
 
     /**
+     * Number of tiles to spawn along the X-axis.
+     *
      * @attribute
-     * @title Num Tiles X
      * @type {number}
      */
     numTilesX = 10;
 
     /**
+     * Number of tiles to spawn along the Y-axis.
+     *
      * @attribute
-     * @title Num Tiles Y
      * @type {number}
      */
     numTilesY = 10;
 
-    // initialize code called once per entity
     initialize() {
-        // ワールドタイルとして使用する2つのテンプレートを作成しました
-        // エディターの階層では、テンプレートを無効にしています。
-        // テンプレート自体は表示せず、生成した
-        // ワールドだけを表示したいからです
+        // Reference to the template group in the hierarchy
         const templates = this.app.root.findByName('Templates');
         const grass = templates.findByName('Grass');
         const house = templates.findByName('House');
 
         for (let y = 0; y < this.numTilesY; y++) {
             for (let x = 0; x < this.numTilesX; x++) {
-                // ランダムにタイルを選択します (家より草の方が選ばれやすい)
-                var tile = (Math.random() > 0.8) ? house : grass;
+                // Pick a tile at random (80% grass, 20% house)
+                const tile = Math.random() > 0.8 ? house : grass;
 
-                // タイルをクローン
-                var e = tile.clone();
+                // Clone the selected template
+                const e = tile.clone();
 
-                // クローンしたタイルのワールド座標を設定します。タイルは
-                // X,Z 方向に 10x10 のサイズなので、
-                // 座標を 10 倍する必要があることに注意してください
-                e.setPosition((x - this.numTilesX / 2) * 10, 0, (y - this.numTilesX / 2) * 10);
+                // Position tiles in a 10x10 grid
+                const posX = (x - this.numTilesX / 2) * 10;
+                const posZ = (y - this.numTilesY / 2) * 10;
+                e.setPosition(posX, 0, posZ);
 
-                // シーンの階層にタイルを追加します。
+                // Add the tile to the scene hierarchy
                 this.app.root.addChild(e);
             }
         }

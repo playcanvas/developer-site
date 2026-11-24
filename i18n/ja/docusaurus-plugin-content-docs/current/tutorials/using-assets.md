@@ -106,64 +106,69 @@ if (this.app.keyboard.isPressed(KEY_L)) {
 <TabItem value="esm" label="ESM">
 
 ```javascript
-import { Script, KEY_SPACE, KEY_C, KEY_L } from 'playcanvas';
+import { Asset, Script, KEY_SPACE, KEY_C, KEY_L } from 'playcanvas';
 
+/**
+ * Dynamically switches the render asset of an entity based on keyboard input.
+ * - SPACE switches to asset B.
+ * - C switches to asset C (if loaded).
+ * - Otherwise, it defaults to asset A.
+ * - Pressing L will load asset C.
+ */
 export class UpdateAsset extends Script {
-    static scriptName = "updateAsset";
+    static scriptName = 'updateAsset';
 
     /**
+     * Render asset A (default asset).
+     *
      * @attribute
-     * @title A
+     * @title Asset A
      * @type {Asset}
      * @resource render
      */
-    a = null;
+    a;
 
     /**
+     * Render asset B (used when spacebar is pressed).
+     *
      * @attribute
-     * @title B
+     * @title Asset B
      * @type {Asset}
      * @resource render
      */
-    b = null;
+    b;
 
     /**
+     * Render asset C (used when "C" is pressed and loaded).
+     *
      * @attribute
-     * @title C
+     * @title Asset C
      * @type {Asset}
      * @resource render
      */
-    c = null;
+    c;
 
-    // initialize code called once per entity
     initialize() {
         this.app.keyboard.preventDefault = true;
     }
 
-    // update code called every frame
     update(dt) {
-        var app = this.app;
+        const app = this.app;
 
         if (app.keyboard.isPressed(KEY_SPACE)) {
             if (this.entity.render.asset !== this.b.id) {
-                // Renderアセットを新しいRenderアセットに更新する
                 console.log('Changed to B Render Asset');
                 this.entity.render.asset = this.b;
             }
+        } else if (app.keyboard.isPressed(KEY_C)) {
+            if (this.c.loaded && this.entity.render.asset !== this.c.id) {
+                console.log('Changed to C Render Asset');
+                this.entity.render.asset = this.c;
+            }
         } else {
-            if (app.keyboard.isPressed(KEY_C)) {
-                if (this.c.loaded) {
-                    if (this.entity.render.asset !== this.c.id) {
-                        console.log('Changed to C Render Asset');
-                        this.entity.render.asset = this.c;
-                    }
-                }
-            } else {
-                if (this.entity.render.asset !== this.a.id) {
-                    // オリジナルのRenderアセットに戻す
-                    console.log('Changed to A Render Asset');
-                    this.entity.render.asset = this.a;
-                }
+            if (this.entity.render.asset !== this.a.id) {
+                console.log('Changed to A Render Asset');
+                this.entity.render.asset = this.a;
             }
         }
 

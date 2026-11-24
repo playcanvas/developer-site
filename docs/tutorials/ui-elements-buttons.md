@@ -122,14 +122,17 @@ import TabItem from '@theme/TabItem';
 <TabItem value="esm" label="ESM">
 
 ```javascript
-import { Script } from 'playcanvas';
+import { Entity, Script } from 'playcanvas';
 
+/**
+ * Logic to update a text element when a button is clicked.
+ */
 export class ButtonLogic extends Script {
-    static scriptName = "buttonLogic";
+    static scriptName = 'buttonLogic';
 
     /**
      * The entity that we want to update when the button is clicked.
-     * 
+     *
      * @attribute
      * @title Text Entity
      * @type {Entity}
@@ -137,11 +140,13 @@ export class ButtonLogic extends Script {
     textEntity = null;
 
     /**
+     * The description text to display on click.
+     *
      * @attribute
      * @title Description
      * @type {string}
      */
-    description = null;
+    description = '';
 
     initialize() {
         this.entity.button.on('click', (event) => {
@@ -178,9 +183,9 @@ This script is attached to the button entities in the scene.
 The Button component has a [`click` event](https://api.playcanvas.com/engine/classes/ButtonComponent.html#event:click) against which a callback function can be registered that works for both mouse and touch input.
 
 ```javascript
-this.entity.button.on('click', function(event) {
+this.entity.button.on('click', (event) => {
     this.textEntity.element.text = this.description;
-}, this);
+});
 ```
 
 There are other events that can be listened to such as `mouseenter` and `mouseleave`. A full list can be found in the [API documentation](https://api.playcanvas.com/engine/classes/ButtonComponent.html#event:click).

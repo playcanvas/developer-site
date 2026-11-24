@@ -120,14 +120,17 @@ ElementのタイプはImageで、画面の下部にアンカーが設定され�
 <TabItem value="esm" label="ESM">
 
 ```javascript
-import { Script } from 'playcanvas';
+import { Entity, Script } from 'playcanvas';
 
+/**
+ * Logic to update a text element when a button is clicked.
+ */
 export class ButtonLogic extends Script {
-    static scriptName = "buttonLogic";
+    static scriptName = 'buttonLogic';
 
     /**
      * The entity that we want to update when the button is clicked.
-     * 
+     *
      * @attribute
      * @title Text Entity
      * @type {Entity}
@@ -135,11 +138,13 @@ export class ButtonLogic extends Script {
     textEntity = null;
 
     /**
+     * The description text to display on click.
+     *
      * @attribute
      * @title Description
      * @type {string}
      */
-    description = null;
+    description = '';
 
     initialize() {
         this.entity.button.on('click', (event) => {
@@ -176,9 +181,9 @@ ButtonLogic.prototype.initialize = function() {
 ボタンコンポーネントには、マウスとタッチ入力の両方に対して機能するコールバック関数を登録できる[`クリックイベント`](https://api.playcanvas.com/engine/classes/ButtonComponent.html#event:click) があります。
 
 ```javascript
-this.entity.button.on('click', function(event) {
+this.entity.button.on('click', (event) => {
     this.textEntity.element.text = this.description;
-}, this);
+});
 ```
 
 `mouseenter` と `mouseleave` など、他のリッスンできるイベントもあります。完全なリストは[APIドキュメント](https://api.playcanvas.com/engine/classes/ButtonComponent.html#event:click)にあります。

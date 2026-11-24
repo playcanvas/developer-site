@@ -28,73 +28,76 @@ import TabItem from '@theme/TabItem';
 
 ```javascript
 import {
+    Asset,
     Script,
     Texture,
     PIXELFORMAT_RGB8,
-    FILTER_LINEAR_MIPMAP_LINEAR,
     FILTER_LINEAR,
+    FILTER_LINEAR_MIPMAP_LINEAR,
     ADDRESS_CLAMP_TO_EDGE
 } from 'playcanvas';
 
+/**
+ * Creates and manages a video texture, loading from an asset or URL, and triggering an event when ready.
+ */
 export class VideoTexture extends Script {
-    static scriptName = "videoTexture";
+    static scriptName = 'videoTexture';
 
     /**
-     * このビデオテクスチャで再生するMP4ビデオアセットです。
-     * 
+     * MP4 video asset to play back on this video texture.
+     *
      * @attribute
-     * @title ビデオアセット
+     * @title Video Asset
      * @type {Asset}
      */
-    videoAsset = null;
+    videoAsset;
 
     /**
-     * ビデオアセットが選択されていない場合に使用するURLです。
-     * 
+     * URL to use if there is no video asset selected.
+     *
      * @attribute
-     * @title ビデオURL
+     * @title Video Url
      * @type {string}
      */
-    videoUrl = null;
+    videoUrl;
 
     /**
-     * ビデオテクスチャが再生可能になったら発生するイベントです。
-     * 
+     * Event that is fired as soon as the video texture is ready to play.
+     *
      * @attribute
-     * @title 再生イベント
+     * @title Play Event
      * @type {string}
+     * @default ''
      */
     playEvent = '';
 
-    // initialize code called once per entity
     initialize() {
         const app = this.app;
 
-        // Create HTML Video Element to play the video
+        // Create an HTML video element to play the video
         const video = document.createElement('video');
         video.loop = true;
 
-        // muted attribute is required for videos to autoplay
+        // Videos must be muted to autoplay
         video.muted = true;
 
-        // critical for iOS or the video won't initially play, and will go fullscreen when playing
+        // Critical for iOS, or the video won't play at first and goes fullscreen when it does
         video.playsInline = true;
 
-        // needed because the video is being hosted on a different server url
-        video.crossOrigin = "anonymous";
+        // Needed because the video is hosted on a different origin
+        video.crossOrigin = 'anonymous';
 
-        // autoplay the video
         video.autoplay = true;
 
-        // iOS video texture playback requires that you add the video to the DOMParser
-        // with at least 1x1 as the video's dimensions
-        const style = video.style;
-        style.width = '1px';
-        style.height = '1px';
-        style.position = 'absolute';
-        style.opacity = '0';
-        style.zIndex = '-1000';
-        style.pointerEvents = 'none';
+        // iOS only plays a video texture if the video is in the DOM and at least 1x1 in size
+        Object.assign(video.style, {
+            width: '1px',
+            height: '1px',
+            position: 'absolute',
+            opacity: '0',
+            zIndex: '-1000',
+            pointerEvents: 'none'
+        });
 
         document.body.appendChild(video);
 
@@ -107,17 +110,17 @@ export class VideoTexture extends Script {
             addressV: ADDRESS_CLAMP_TO_EDGE,
             mipmaps: true
         });
-        this.videoTexture.setSource(video);
 
-        video.addEventListener('canplaythrough', (e) => {
+        this.videoTexture.setSource(video);
+        this.video = video;
+
+        // Play the video and fire the event when ready
+        video.addEventListener('canplaythrough', () => {
             app.fire(this.playEvent, this.videoTexture);
             video.play();
         });
 
-        // set video source
         video.src = this.videoAsset ? this.videoAsset.getFileUrl() : this.videoUrl;
-
-        document.body.appendChild(video);
         video.load();
 
         this.on('destroy', () => {
@@ -126,7 +129,6 @@ export class VideoTexture extends Script {
         });
     }
 
-    // update code called every frame
     update(dt) {
         // Transfer the latest video frame to the video texture
         this.videoTexture.upload();

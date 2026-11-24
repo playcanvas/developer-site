@@ -54,67 +54,76 @@ import TabItem from '@theme/TabItem';
 <TabItem value="esm" label="ESM">
 
 ```javascript
-import { Script, math, Entity } from 'playcanvas';
+import { Entity, Script, math } from 'playcanvas';
 
+/**
+ * A simple progress bar component that adjusts a fill image's width based on a 0-1 progress value.
+ */
 export class ProgressBar extends Script {
-    static scriptName = "progressBar";
+    static scriptName = 'progressBar';
 
-   /**
+    /**
+     * The entity that shows the fill image.
+     *
      * @attribute
      * @title Progress Image
      * @type {Entity}
      */
-    progressImage = null;
+    progressImage;
 
     /**
+     * The maximum width of the fill image.
+     *
      * @attribute
      * @title Progress Image Max Width
      * @type {number}
      */
-    progressImageMaxWidth = null;
+    progressImageMaxWidth;
 
     initialize() {
-        // use our own rect object to set the size of
-        // the progress bar
+        // Use our own rect object to set the size of the progress bar
         this.imageRect = this.progressImage.element.rect.clone();
 
-        // initialize progress to 0
+        // Initialize progress to 0
         this.setProgress(0);
-        // if true the progress bar will increase
-        // otherwise it will decrease in update
+
+        // If true, the progress bar will increase; otherwise, it will decrease in update
         this.increase = true;
     }
 
+    /**
+     * Set progress - value should be between 0 and 1.
+     * @param {number} value
+     */
     setProgress(value) {
-        // clamp value between 0 and 1
+        // Clamp value between 0 and 1
         value = math.clamp(value, 0, 1);
 
         this.progress = value;
 
-        // find the desired width of our progress fill image
-        var width = math.lerp(0, this.progressImageMaxWidth, value);
-        // set the width of the fill image element
+        // Calculate desired width of the fill image
+        const width = math.lerp(0, this.progressImageMaxWidth, value);
         this.progressImage.element.width = width;
 
-        // Set the width of the element's rect (rect.z) to be the same
-        // value as our 0-1 progress.
-        // This is so that the fill image will only show the portion
-        // of the texture that is visible
+        // Update the rect to reflect progress
         this.imageRect.copy(this.progressImage.element.rect);
         this.imageRect.z = value;
-        // force rect update
-        this.progressImage.element.rect = this.progressImage.element.rect;
+        this.progressImage.element.rect = this.imageRect;
     }
 
-    // Increase or decrease the progress automatically
+    /**
+     * Automatically increase or decrease the progress each frame.
+     * @param {number} dt - Delta time since the last frame.
+     */
     update(dt) {
         const diff = this.increase ? dt : -dt;
         this.setProgress(this.progress + diff);
 
-        if (this.progress >= 1)
+        if (this.progress >= 1) {
             this.increase = false;
-        else if (this.progress <= 0)
+        } else if (this.progress <= 0) {
             this.increase = true;
+        }
     }
 }
 ```

@@ -27,6 +27,7 @@ PlayCanvasのエンジンでは、`Mouse`オブジェクトが提供されてお
 
 ```javascript
 import {
+    Asset,
     Script,
     Vec3,
     MOUSEBUTTON_LEFT,
@@ -36,73 +37,79 @@ import {
     EVENT_MOUSEDOWN
 } from 'playcanvas';
 
+/**
+ * Mouse - Moves an entity based on mouse position and changes its material based on mouse clicks.
+ */
 export class Mouse extends Script {
-    static scriptName = "mouse";
+    static scriptName = 'mouse';
 
     /**
+     * Red material to apply on left click.
+     *
      * @attribute
      * @title Red Material
      * @type {Asset}
-     * @resource material
+     * @resource Material
      */
-    redMaterial = null;
+    redMaterial;
 
     /**
+     * Green material to apply on middle click.
+     *
      * @attribute
      * @title Green Material
      * @type {Asset}
-     * @resource material
+     * @resource Material
      */
-    greenMaterial = null;
+    greenMaterial;
 
     /**
+     * Blue material to apply on right click.
+     *
      * @attribute
      * @title Blue Material
      * @type {Asset}
-     * @resource material
+     * @resource Material
      */
-    blueMaterial = null;
+    blueMaterial;
 
-    // initialize code called once per entity
     initialize() {
+        /** @private */
         this.pos = new Vec3();
 
-        // Disabling the context menu stops the browser displaying a menu when
-        // you right-click the page
         this.app.mouse.disableContextMenu();
 
-        // Use the on() method to attach event handlers.
-        // The mouse object supports events on move, button down and
-        // up, and scroll wheel.
-        this.app.mouse.on(EVENT_MOUSEMOVE, this.onMouseMove, this);
-        this.app.mouse.on(EVENT_MOUSEDOWN, this.onMouseDown, this);
+        this.app.mouse.on(EVENT_MOUSEMOVE, this._onMouseMove, this);
+        this.app.mouse.on(EVENT_MOUSEDOWN, this._onMouseDown, this);
     }
 
-    onMouseMove(event) {
-        // Use the camera component's screenToWorld function to convert the
-        // position of the mouse into a position in 3D space
-        var depth = 10;
-        var cameraEntity = this.app.root.findByName('Camera');
-        cameraEntity.camera.screenToWorld(event.x, event.y, depth, this.pos);
+    _onMouseMove(event) {
+        const cameraEntity = this.app.root.findByName('Camera');
+        const depth = 10;
 
-        // Finally update the cube's world-space position
-        this.entity.setPosition(this.pos);
+        if (cameraEntity?.camera) {
+            cameraEntity.camera.screenToWorld(event.x, event.y, depth, this.pos);
+            this.entity.setPosition(this.pos);
+        }
     }
 
-    onMouseDown(event) {
-        // If the left mouse button is pressed, change the cube color to red
-        if (event.button === MOUSEBUTTON_LEFT) {
-            this.entity.model.meshInstances[0].material = this.redMaterial.resource;
+    _onMouseDown(event) {
+        const materialAsset = this._getMaterialForButton(event.button);
+        if (materialAsset?.resource) {
+            this.entity.render.meshInstances[0].material = materialAsset.resource;
         }
-        
-        // If the middle mouse button is pressed, change the cube color to green
-        if (event.button === MOUSEBUTTON_MIDDLE) {
-            this.entity.model.meshInstances[0].material = this.greenMaterial.resource;
-        }
-        
-        // If the right mouse button is pressed, change the cube color to blue
-        if (event.button === MOUSEBUTTON_RIGHT) {
-            this.entity.model.meshInstances[0].material = this.blueMaterial.resource;
+    }
+
+    _getMaterialForButton(button) {
+        switch (button) {
+            case MOUSEBUTTON_LEFT:
+                return this.redMaterial;
+            case MOUSEBUTTON_MIDDLE:
+                return this.greenMaterial;
+            case MOUSEBUTTON_RIGHT:
+                return this.blueMaterial;
+            default:
+                return null;
         }
     }
 }
@@ -194,13 +201,13 @@ this.app.mouse.disableContextMenu();
 
 ### イベントへのバインド
 
-`Mouse`オブジェクトでは、マウスアクションに対応する異なるイベントをリッスンすることができます。チュートリアルでは、`onMouseMove`メソッドを移動イベントにバインドし、`onMouseDown`メソッドをボタンダウンイベントにバインドしています。
+`Mouse`オブジェクトでは、マウスアクションに対応する異なるイベントをリッスンすることができます。チュートリアルでは、`_onMouseMove`メソッドを移動イベントにバインドし、`_onMouseDown`メソッドをボタンダウンイベントにバインドしています。
 
 私たちがイベントにバインドするためにon()メソッドに`this`を渡すことにも注目してください。この3つ目の引数は、イベントコールバック内で`this`として使われるオブジェクトです。
 
 ```javascript
-this.app.mouse.on(EVENT_MOUSEMOVE, this.onMouseMove, this);
-this.app.mouse.on(EVENT_MOUSEDOWN, this.onMouseDown, this);
+this.app.mouse.on(EVENT_MOUSEMOVE, this._onMouseMove, this);
+this.app.mouse.on(EVENT_MOUSEDOWN, this._onMouseDown, this);
 ```
 
 `Mouse` で利用可能なイベントは以下の通りです。
@@ -214,11 +221,11 @@ this.app.mouse.on(EVENT_MOUSEDOWN, this.onMouseDown, this);
 
 ### マウスの移動
 
-最初のイベントハンドラは`onMouseMove`です。これはマウスが動くたびに発火します。`EVENT_MOUSEMOVE`イベントの場合、`MouseEvent`オブジェクトは現在のマウスの位置`x`と`y`、そして最後のイベントからの位置の変化`dx`と`dy`を持っています。当チュートリアルでは、マウスの現在の位置を使用し、キューブをカーソル位置に移動させています。
+最初のイベントハンドラは`_onMouseMove`です。これはマウスが動くたびに発火します。`EVENT_MOUSEMOVE`イベントの場合、`MouseEvent`オブジェクトは現在のマウスの位置`x`と`y`、そして最後のイベントからの位置の変化`dx`と`dy`を持っています。当チュートリアルでは、マウスの現在の位置を使用し、キューブをカーソル位置に移動させています。
 
 ### マウスボタン
 
-2つ目のイベントハンドラは`onMouseDown`です。これはマウスの三つのボタンのいずれかがクリックされるたびに発火します。`EVENT_MOUSEDOWN`と`EVENT_MOUSEUP`イベントでは、`MouseEvent`オブジェクトは押された/解放されたボタンを含む`button`プロパティを持ちます。次のいずれかの値になります。
+2つ目のイベントハンドラは`_onMouseDown`です。これはマウスの三つのボタンのいずれかがクリックされるたびに発火します。`EVENT_MOUSEDOWN`と`EVENT_MOUSEUP`イベントでは、`MouseEvent`オブジェクトは押された/解放されたボタンを含む`button`プロパティを持ちます。次のいずれかの値になります。
 
 * `MOUSEBUTTON_NONE`
 * `MOUSEBUTTON_LEFT`

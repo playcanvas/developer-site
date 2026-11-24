@@ -30,33 +30,38 @@ import TabItem from '@theme/TabItem';
 ```javascript
 import { Script } from 'playcanvas';
 
+/**
+ * Analyser - Routes the "track" sound slot through a Web Audio analyser node and reads its
+ * frequency and time domain data every frame.
+ */
 export class Analyser extends Script {
-    static scriptName = "analyser";
+    static scriptName = 'analyser';
 
     /**
+     * Size of the FFT used by the analyser node. Must be a power of two.
+     *
      * @attribute
-     * @title Fftsize
+     * @title FFT Size
      * @type {number}
      */
-    fftsize = null;
+    fftsize;
 
-    // initialize code called once per entity
     initialize() {
         const context = this.app.systems.sound.context;
 
-        // Create analyser node and set up
+        // Create the analyser node and set it up
         this.analyser = context.createAnalyser();
         this.analyser.smoothingTimeConstant = 0.6;
         this.analyser.fftSize = this.fftsize;
 
         this.freqData = new Float32Array(this.analyser.frequencyBinCount);
-        this.timeData = new Float32Array(this.analyser.fftSize);
+        this.timeData = new Float32Array(this.analyser.frequencyBinCount);
 
-        const slot = this.entity.sound.slot("track");
+        // Insert the analyser node into the audio graph of the sound slot
+        const slot = this.entity.sound.slot('track');
         slot.setExternalNodes(this.analyser);
     }
 
-    // update code called every frame
     update(dt) {
         this.analyser.getFloatFrequencyData(this.freqData);
         this.analyser.getFloatTimeDomainData(this.timeData);
@@ -116,73 +121,89 @@ Then in our update loop we use the `AnalyserNode` methods `getFloatFrequencyData
 <TabItem value="esm" label="ESM">
 
 ```javascript
-import { Script, Vec3 } from 'playcanvas';
+import { Color, Entity, Script, Vec3 } from 'playcanvas';
 
+/**
+ * Visualizer - Renders frequency and time domain data as lines using an audio analyser.
+ */
 export class Visualizer extends Script {
-    static scriptName = "visualizer";
+    static scriptName = 'visualizer';
 
     /**
+     * Entity with the Analyser script.
+     *
      * @attribute
      * @title Analyser
      * @type {Entity}
      */
-    analyser = null;
+    analyser;
 
     /**
+     * Line color for frequency domain data.
+     *
      * @attribute
-     * @title Freqcolor
+     * @title Frequency Color
      * @type {Color}
      */
-    freqcolor = null;
+    freqcolor;
 
     /**
+     * Line color for time domain data.
+     *
      * @attribute
-     * @title Timecolor
+     * @title Time Color
      * @type {Color}
      */
-    timecolor = null;
+    timecolor;
 
     /**
+     * Scale applied to vertical height of lines.
+     *
      * @attribute
      * @title Height Scale
      * @type {number}
+     * @default 1
      */
     heightScale = 1;
 
-    // initialize code called once per entity
     initialize() {
         this.lines = [];
-        const count = this.analyser.script.analyser.fftsize;
-        for (let i = 0; i < count; i++) {
-            this.lines.push(new Vec3(), new Vec3()); // Push two for each line segment
+        const fftsize = this.analyser.script.analyser.fftsize;
+
+        for (let i = 0; i < fftsize; i++) {
+            this.lines.push(new Vec3());
         }
 
-        this.xScale = 0.10 * 2048 / count;
-        this.minDb = this.analyser.script.analyser.analyser.minDecibels;
-        this.maxDb = this.analyser.script.analyser.analyser.maxDecibels;
+        this.xScale = (0.10 * 2048) / fftsize;
+
+        const analyserNode = this.analyser.script.analyser.analyser;
+        this.minDb = analyserNode.minDecibels;
+        this.maxDb = analyserNode.maxDecibels;
+
         this.freqScale = 1 / (this.maxDb - this.minDb);
         this.freqOffset = this.minDb;
     }
 
-    // update code called every frame
     update(dt) {
-        this.renderData(this.analyser.script.analyser.freqData, this.freqcolor, this.freqScale, this.freqOffset);
-        this.renderData(this.analyser.script.analyser.timeData, this.timecolor, 0.5, 0);
+        const analyserScript = this.analyser.script.analyser;
+        this.renderData(analyserScript.freqData, this.freqcolor, this.freqScale, this.freqOffset);
+        this.renderData(analyserScript.timeData, this.timecolor, 0.5, 0);
     }
 
     renderData(data, color, scale, offset) {
-        let lineIndex = 0;
+        let line = 0;
         for (let i = 0; i < data.length - 1; i++) {
-            if (lineIndex < this.lines.length - 1) {
+            if (line + 1 < this.lines.length) {
                 const h1 = scale * (data[i] - offset);
                 const h2 = scale * (data[i + 1] - offset);
 
-                this.lines[lineIndex].set(i * this.xScale, this.heightScale * h1, 0);
-                this.lines[lineIndex + 1].set((i + 1) * this.xScale, this.heightScale * h2, 0);
+                this.lines[line].set(i * this.xScale, this.heightScale * h1, 0);
+                this.lines[line + 1].set((i + 1) * this.xScale, this.heightScale * h2, 0);
 
-                lineIndex += 2;
+                line += 2;
             }
         }
+
         this.app.drawLines(this.lines, color);
     }
 }
