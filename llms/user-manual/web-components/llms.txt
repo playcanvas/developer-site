@@ -32,6 +32,7 @@ Use this index for pages built from `<pc-*>` elements. The engine features the t
 - [Reusable Scenes with Templates](/user-manual/web-components/templates/): Declaring a subtree once in an HTML template and cloning it into live instances, like prefabs.
 - [XR Support](/user-manual/web-components/xr/): WebXR with the engine's XR scripts: the WebGL 2 backend it needs, a camera rig with `xrSession`, and starting sessions from app events.
 - [Publishing](/user-manual/publishing/): Making a build, hosting it, embedding it in a page, and publishing it to game platforms, Snapchat, app stores and desktop.
+- [Publishing on CrazyGames](/user-manual/publishing/crazygames/): Reporting gameplay to the CrazyGames SDK after `whenReady` resolves for `pc-app`, and pausing and muting its `app` during video ads.
 - [Publishing on Wavedash](/user-manual/publishing/wavedash/): Calling `window.Wavedash?.init()` after `whenReady` resolves for `pc-app`, and uploading the build or the folder with `index.html`.
 
 ## Tag reference

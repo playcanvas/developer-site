@@ -36,7 +36,7 @@ Wavedash shows its own loading screen until your game calls `Wavedash.init()`, s
 
 When your game runs on Wavedash, the platform defines a global `window.Wavedash` object before your code starts, so there is nothing to install. Writing the call as `window.Wavedash?.init()` makes it do nothing on other hosts, so the same build still works on [PlayCanvas Hosting](/user-manual/editor/publishing/playcanvas-hosting/) or [your own server](web-hosting.md).
 
-<Tabs groupId="authoring-surface">
+<Tabs groupId="workflow">
 <TabItem value="editor" label="Editor">
 
 Create a script with the following code and attach it to an entity in your first scene, such as the Root entity:
@@ -141,7 +141,7 @@ Keep the import type-only. Importing the package itself throws an error whenever
 
 ### 3. Build your project
 
-<Tabs groupId="authoring-surface">
+<Tabs groupId="workflow">
 <TabItem value="editor" label="Editor">
 
 [Download a build](/user-manual/editor/publishing/downloading/) of your project with the **Download Format** set to **Static Website**. Extract the zip file into a folder named `build`, which is your upload folder.
