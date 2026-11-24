@@ -209,6 +209,7 @@ Uniforms are set using the [`setParameter()`](https://api.playcanvas.com/engine/
  * @attribute
  * @title GLSL Vertex Shader
  * @type {Asset}
+ * @resource shader
  */
 vertexGLSL;
 
@@ -218,6 +219,7 @@ vertexGLSL;
  * @attribute
  * @title GLSL Fragment Shader
  * @type {Asset}
+ * @resource shader
  */
 fragmentGLSL;
 
@@ -227,6 +229,7 @@ fragmentGLSL;
  * @attribute
  * @title WGSL Vertex Shader
  * @type {Asset}
+ * @resource shader
  */
 vertexWGSL;
 
@@ -236,6 +239,7 @@ vertexWGSL;
  * @attribute
  * @title WGSL Fragment Shader
  * @type {Asset}
+ * @resource shader
  */
 fragmentWGSL;
 
@@ -245,6 +249,7 @@ fragmentWGSL;
  * @attribute
  * @title Diffuse Map
  * @type {Asset}
+ * @resource texture
  */
 diffuseMap;
 
@@ -254,6 +259,7 @@ diffuseMap;
  * @attribute
  * @title Height Map
  * @type {Asset}
+ * @resource texture
  */
 heightMap;
 ```
@@ -293,6 +299,7 @@ export class CustomShader extends Script {
      * @attribute
      * @title GLSL Vertex Shader
      * @type {Asset}
+     * @resource shader
      */
     vertexGLSL;
 
@@ -302,6 +309,7 @@ export class CustomShader extends Script {
      * @attribute
      * @title GLSL Fragment Shader
      * @type {Asset}
+     * @resource shader
      */
     fragmentGLSL;
 
@@ -311,6 +319,7 @@ export class CustomShader extends Script {
      * @attribute
      * @title WGSL Vertex Shader
      * @type {Asset}
+     * @resource shader
      */
     vertexWGSL;
 
@@ -320,6 +329,7 @@ export class CustomShader extends Script {
      * @attribute
      * @title WGSL Fragment Shader
      * @type {Asset}
+     * @resource shader
      */
     fragmentWGSL;
 
@@ -329,6 +339,7 @@ export class CustomShader extends Script {
      * @attribute
      * @title Diffuse Map
      * @type {Asset}
+     * @resource texture
      */
     diffuseMap;
 
@@ -338,6 +349,7 @@ export class CustomShader extends Script {
      * @attribute
      * @title Height Map
      * @type {Asset}
+     * @resource texture
      */
     heightMap;
 

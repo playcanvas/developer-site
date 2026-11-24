@@ -49,7 +49,7 @@ export class Mouse extends Script {
      * @attribute
      * @title Red Material
      * @type {Asset}
-     * @resource Material
+     * @resource material
      */
     redMaterial;
 
@@ -59,7 +59,7 @@ export class Mouse extends Script {
      * @attribute
      * @title Green Material
      * @type {Asset}
-     * @resource Material
+     * @resource material
      */
     greenMaterial;
 
@@ -69,7 +69,7 @@ export class Mouse extends Script {
      * @attribute
      * @title Blue Material
      * @type {Asset}
-     * @resource Material
+     * @resource material
      */
     blueMaterial;
 

@@ -140,6 +140,7 @@ export class Watercolor extends Script {
      * @attribute
      * @title Vertex Shader
      * @type {Asset}
+     * @resource shader
      */
     vs;
 
@@ -149,6 +150,7 @@ export class Watercolor extends Script {
      * @attribute
      * @title Fragment Shader
      * @type {Asset}
+     * @resource shader
      */
     fs;
 
