@@ -71,8 +71,11 @@ Boostカウンターを開きます - 他のエンティティも同じ構成で
 ```javascript
 import { Script, math } from 'playcanvas';
 
+/**
+ * A stat counter: plus and minus buttons change a value shown by a progress bar.
+ */
 export class UiStats extends Script {
-    static scriptName = "uiStats";
+    static scriptName = 'uiStats';
 
     initialize() {
         // find our widgets
@@ -85,12 +88,12 @@ export class UiStats extends Script {
         this.setValue(0);
 
         // increase value with plus button
-        this.btnPlus.element.on('click', (evt) => {
+        this.btnPlus.element.on('click', () => {
             this.setValue(this.value + 1);
         });
 
         // decrease value with minus button
-        this.btnMinus.element.on('click', (evt) => {
+        this.btnMinus.element.on('click', () => {
             this.setValue(this.value - 1);
         });
     }
@@ -102,7 +105,7 @@ export class UiStats extends Script {
         // set progress
         this.progressBar.script.progressBar.setProgress(this.value / 10);
         // update progress text
-        this.progressText.element.text = this.value + ' / ' + 10;
+        this.progressText.element.text = `${this.value} / 10`;
     }
 }
 ```

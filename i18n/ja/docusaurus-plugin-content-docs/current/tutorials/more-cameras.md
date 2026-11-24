@@ -26,33 +26,41 @@ import TabItem from '@theme/TabItem';
 ```javascript
 import { Script, KEY_SPACE } from 'playcanvas';
 
+/**
+ * Zoom - Toggles between two camera FOV values when pressing Space, smoothly interpolating between them.
+ */
 export class Zoom extends Script {
-    static scriptName = "zoom";
+    static scriptName = 'zoom';
 
-    // initialize code called once per entity
     initialize() {
+        /**
+         * The target field of view for the camera (degrees).
+         * @type {number}
+         */
         this.targetFov = 45;
     }
 
-    // update code called every frame
     update(dt) {
+        const camera = this.entity.camera;
+
+        // Toggle between zoomed-in and default FOV on Space key press
         if (this.app.keyboard.wasPressed(KEY_SPACE)) {
             this.targetFov = this.targetFov === 10 ? 45 : 10;
         }
 
-        let fov = this.entity.camera.fov;
-        if (fov < this.targetFov) {
-            fov += 10 * dt;
-            if (fov > this.targetFov) {
-                fov = this.targetFov;
-            }
-        } else if (fov > this.targetFov) {
-            fov -= 10 * dt;
-            if (fov < this.targetFov) {
-                fov = this.targetFov;
-            }
+        let currentFov = camera.fov;
+        const speed = 10;
+
+        // Smoothly interpolate towards the target FOV
+        if (currentFov < this.targetFov) {
+            currentFov += speed * dt;
+            if (currentFov > this.targetFov) currentFov = this.targetFov;
+        } else if (currentFov > this.targetFov) {
+            currentFov -= speed * dt;
+            if (currentFov < this.targetFov) currentFov = this.targetFov;
         }
-        this.entity.camera.fov = fov;
+
+        camera.fov = currentFov;
     }
 }
 ```
@@ -101,13 +109,13 @@ Zoom.prototype.update = function(dt) {
 </TabItem>
 </Tabs>
 
-このサンプルでは、スペースバーを押すと、視野角が変わります。 `var fov = this.entity.camera.fov` で、このスクリプトがアタッチされているエンティティのCameraコンポーネントから `fov` の値を `get()` します。
+このサンプルでは、スペースバーを押すと、視野角が変わります。 `let currentFov = camera.fov` で、このスクリプトがアタッチされているエンティティのCameraコンポーネントから `fov` の値を `get()` します。
 
 `this.app.keyboard.wasPressed()` でキー操作を検出し、ターゲットfovの値を切り替えます。
 
 最後の2つのネストされた `if(){}` 構造で、ズームイン/ズームアウト効果を作成するために、徐々にfovの値を変更します。
 
-`this.entity.camera.fov = fov` で、新しい値で `set()` fovカメラ属性を設定します。
+`camera.fov = currentFov` で、新しい値で `set()` fovカメラ属性を設定します。
 
 ズームアウトしている場合、上部と下部のキューブが画面の端に配置されていることに注意してください。これは、[PlayCanvasエディタのシーン](https://playcanvas.com/editor/scene/440116)での期待に合致しています。そこでは、キューブはカメラの[フラスタム](https://en.wikipedia.org/wiki/Frustum)の上部と下部に配置されています。
 
@@ -119,42 +127,55 @@ Zoom.prototype.update = function(dt) {
 <TabItem value="esm" label="ESM">
 
 ```javascript
-import { Script, KEY_SPACE, KEY_LEFT, KEY_RIGHT } from 'playcanvas';
+import { Script, KEY_LEFT, KEY_RIGHT, KEY_SPACE, EVENT_KEYDOWN } from 'playcanvas';
 
+/**
+ * CameraManager - Switches between child cameras by name based on keyboard input.
+ */
 export class CameraManager extends Script {
-    static scriptName = "cameraManager";
+    static scriptName = 'cameraManager';
 
-    // initialize code called once per entity
     initialize() {
         this.activeCamera = this.entity.findByName('Center');
-        this.app.keyboard.on("keydown", this.onKeyDown, this);
+
+        this.app.keyboard.on(EVENT_KEYDOWN, this._onKeyDown, this);
 
         this.on('destroy', () => {
-            this.app.keyboard.off("keydown", this.onKeyDown, this);
+            this.app.keyboard.off(EVENT_KEYDOWN, this._onKeyDown, this);
         });
     }
 
-    // prevents default browser actions, such as scrolling when pressing cursor keys
-    onKeyDown(event) {
+    /**
+     * Prevent default browser behavior when keys are pressed.
+     */
+    _onKeyDown(event) {
         event.event.preventDefault();
     }
 
+    /**
+     * Switch to a new camera by name.
+     * @param {string} cameraName - The name of the child entity with a camera component.
+     */
     setCamera(cameraName) {
-        // Disable the currently active camera
-        this.activeCamera.enabled = false;
+        if (this.activeCamera) {
+            this.activeCamera.enabled = false;
+        }
 
-        // Enable the newly specified camera
-        this.activeCamera = this.entity.findByName(cameraName);
-        this.activeCamera.enabled = true;
+        const newCam = this.entity.findByName(cameraName);
+        if (newCam) {
+            newCam.enabled = true;
+            this.activeCamera = newCam;
+        }
     }
 
-    // update code called every frame
     update(dt) {
-        if (this.app.keyboard.wasPressed(KEY_SPACE)) {
+        const keyboard = this.app.keyboard;
+
+        if (keyboard.wasPressed(KEY_SPACE)) {
             this.setCamera('Center');
-        } else if (this.app.keyboard.wasPressed(KEY_LEFT)) {
+        } else if (keyboard.wasPressed(KEY_LEFT)) {
             this.setCamera('Left');
-        } else if (this.app.keyboard.wasPressed(KEY_RIGHT)) {
+        } else if (keyboard.wasPressed(KEY_RIGHT)) {
             this.setCamera('Right');
         }
     }

@@ -83,28 +83,32 @@ import TabItem from '@theme/TabItem';
 <TabItem value="esm" label="ESM">
 
 ```javascript
-import { Script, Vec3, Entity } from 'playcanvas';
+import { Entity, Script, Vec3 } from 'playcanvas';
 
+/**
+ * Makes a halo plane face the camera and, optionally, fade as its parent turns away from it.
+ */
 export class Halo extends Script {
-    static scriptName = "halo";
+    static scriptName = 'halo';
 
     /**
+     * The camera the halo faces.
+     *
      * @attribute
-     * @title Camera
      * @type {Entity}
      */
-    camera = null;
+    camera;
 
     /**
+     * Fade the halo out as it turns away from the camera.
+     *
      * @attribute
-     * @title Unidirectional
      * @type {boolean}
      */
     unidirectional = false;
 
     static tmp = new Vec3();
 
-    // initialize code called once per entity
     initialize() {
         // Get the Entity with the plane model on it
         this.plane = this.entity.children[0];
@@ -113,18 +117,17 @@ export class Halo extends Script {
         this.parent = this.entity.parent;
     }
 
-    // update code called every frame
     update(dt) {
-        let tmp = Halo.tmp;
+        const tmp = Halo.tmp;
 
         // Store the vector the parent is facing (note forwards is negative z)
         tmp.copy(this.parent.forward).mulScalar(-1);
 
-        let meshes = this.plane.model.meshInstances;
+        const meshes = this.plane.render.meshInstances;
 
         if (this.camera) {
             // Set the glow to always face the camera
-            this.entity.lookAt(this.camera.getPosition(), Vec3.UP);
+            this.entity.lookAt(this.camera.getPosition());
 
             // If enabled, unidirectional means the glow fades off as it turns away from the camera
             if (this.unidirectional) {

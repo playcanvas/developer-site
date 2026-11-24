@@ -29,33 +29,41 @@ import TabItem from '@theme/TabItem';
 ```javascript
 import { Script, KEY_SPACE } from 'playcanvas';
 
+/**
+ * Zoom - Toggles between two camera FOV values when pressing Space, smoothly interpolating between them.
+ */
 export class Zoom extends Script {
-    static scriptName = "zoom";
+    static scriptName = 'zoom';
 
-    // initialize code called once per entity
     initialize() {
+        /**
+         * The target field of view for the camera (degrees).
+         * @type {number}
+         */
         this.targetFov = 45;
     }
 
-    // update code called every frame
     update(dt) {
+        const camera = this.entity.camera;
+
+        // Toggle between zoomed-in and default FOV on Space key press
         if (this.app.keyboard.wasPressed(KEY_SPACE)) {
             this.targetFov = this.targetFov === 10 ? 45 : 10;
         }
 
-        let fov = this.entity.camera.fov;
-        if (fov < this.targetFov) {
-            fov += 10 * dt;
-            if (fov > this.targetFov) {
-                fov = this.targetFov;
-            }
-        } else if (fov > this.targetFov) {
-            fov -= 10 * dt;
-            if (fov < this.targetFov) {
-                fov = this.targetFov;
-            }
+        let currentFov = camera.fov;
+        const speed = 10;
+
+        // Smoothly interpolate towards the target FOV
+        if (currentFov < this.targetFov) {
+            currentFov += speed * dt;
+            if (currentFov > this.targetFov) currentFov = this.targetFov;
+        } else if (currentFov > this.targetFov) {
+            currentFov -= speed * dt;
+            if (currentFov < this.targetFov) currentFov = this.targetFov;
         }
-        this.entity.camera.fov = fov;
+
+        camera.fov = currentFov;
     }
 }
 ```
@@ -103,13 +111,13 @@ Zoom.prototype.update = function(dt) {
 </TabItem>
 </Tabs>
 
-In this sample pressing the spacebar triggers a change in field of view. With the line `var fov = this.entity.camera.fov` we `get()` the value of `fov` from the camera component of the entity that this script is attached to.
+In this sample pressing the spacebar triggers a change in field of view. With the line `let currentFov = camera.fov` we `get()` the value of `fov` from the camera component of the entity that this script is attached to.
 
 With `this.app.keyboard.wasPressed()` we detect the keypress and toggle between the value of the target fov.
 
 With the final two nested `if(){}` constructs we gradually change the fov values to create the zoom in/ zoom out effect.
 
-With the line `this.entity.camera.fov = fov` we `set()` the fov camera attribute to the new value.
+With the line `camera.fov = currentFov` we `set()` the fov camera attribute to the new value.
 
 Notice that when you are zoomed out the top and bottom cubes are at the edges of the screen, this matches our expectation from the [PlayCanvas Editor scene](https://playcanvas.com/editor/scene/440116) where the cubes sit next to the
 top and bottom sides of the camera [frustum](https://en.wikipedia.org/wiki/Frustum)
@@ -122,42 +130,55 @@ Another way you might want to create interactivity with cameras is by switching 
 <TabItem value="esm" label="ESM">
 
 ```javascript
-import { Script, KEY_SPACE, KEY_LEFT, KEY_RIGHT } from 'playcanvas';
+import { Script, KEY_LEFT, KEY_RIGHT, KEY_SPACE, EVENT_KEYDOWN } from 'playcanvas';
 
+/**
+ * CameraManager - Switches between child cameras by name based on keyboard input.
+ */
 export class CameraManager extends Script {
-    static scriptName = "cameraManager";
+    static scriptName = 'cameraManager';
 
-    // initialize code called once per entity
     initialize() {
         this.activeCamera = this.entity.findByName('Center');
-        this.app.keyboard.on("keydown", this.onKeyDown, this);
+
+        this.app.keyboard.on(EVENT_KEYDOWN, this._onKeyDown, this);
 
         this.on('destroy', () => {
-            this.app.keyboard.off("keydown", this.onKeyDown, this);
+            this.app.keyboard.off(EVENT_KEYDOWN, this._onKeyDown, this);
         });
     }
 
-    //prevents default browser actions, such as scrolling when pressing cursor keys
-    onKeyDown(event) {
+    /**
+     * Prevent default browser behavior when keys are pressed.
+     */
+    _onKeyDown(event) {
         event.event.preventDefault();
     }
 
+    /**
+     * Switch to a new camera by name.
+     * @param {string} cameraName - The name of the child entity with a camera component.
+     */
     setCamera(cameraName) {
-        // Disable the currently active camera
-        this.activeCamera.enabled = false;
+        if (this.activeCamera) {
+            this.activeCamera.enabled = false;
+        }
 
-        // Enable the newly specified camera
-        this.activeCamera = this.entity.findByName(cameraName);
-        this.activeCamera.enabled = true;
+        const newCam = this.entity.findByName(cameraName);
+        if (newCam) {
+            newCam.enabled = true;
+            this.activeCamera = newCam;
+        }
     }
 
-    // update code called every frame
     update(dt) {
-        if (this.app.keyboard.wasPressed(KEY_SPACE)) {
+        const keyboard = this.app.keyboard;
+
+        if (keyboard.wasPressed(KEY_SPACE)) {
             this.setCamera('Center');
-        } else if (this.app.keyboard.wasPressed(KEY_LEFT)) {
+        } else if (keyboard.wasPressed(KEY_LEFT)) {
             this.setCamera('Left');
-        } else if (this.app.keyboard.wasPressed(KEY_RIGHT)) {
+        } else if (keyboard.wasPressed(KEY_RIGHT)) {
             this.setCamera('Right');
         }
     }

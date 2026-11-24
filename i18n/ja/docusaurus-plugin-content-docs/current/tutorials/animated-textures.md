@@ -40,7 +40,7 @@ update(dt) {
     this.material.diffuseMapOffset = offset;
     this.material.normalMapOffset = offset;
     this.material.update();
-};
+}
 ```
 
 </TabItem>

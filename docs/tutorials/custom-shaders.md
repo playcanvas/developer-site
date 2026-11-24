@@ -209,6 +209,7 @@ Uniforms are set using the [`setParameter()`](https://api.playcanvas.com/engine/
  * @attribute
  * @title GLSL Vertex Shader
  * @type {Asset}
+ * @resource shader
  */
 vertexGLSL;
 
@@ -218,6 +219,7 @@ vertexGLSL;
  * @attribute
  * @title GLSL Fragment Shader
  * @type {Asset}
+ * @resource shader
  */
 fragmentGLSL;
 
@@ -227,6 +229,7 @@ fragmentGLSL;
  * @attribute
  * @title WGSL Vertex Shader
  * @type {Asset}
+ * @resource shader
  */
 vertexWGSL;
 
@@ -236,6 +239,7 @@ vertexWGSL;
  * @attribute
  * @title WGSL Fragment Shader
  * @type {Asset}
+ * @resource shader
  */
 fragmentWGSL;
 
@@ -245,6 +249,7 @@ fragmentWGSL;
  * @attribute
  * @title Diffuse Map
  * @type {Asset}
+ * @resource texture
  */
 diffuseMap;
 
@@ -254,6 +259,7 @@ diffuseMap;
  * @attribute
  * @title Height Map
  * @type {Asset}
+ * @resource texture
  */
 heightMap;
 ```
@@ -279,71 +285,71 @@ To achieve the dissolving effect, we use the height map value as a threshold tha
 ## Complete Script
 
 ```javascript
-import {
-    Script,
-    ShaderMaterial,
-    SEMANTIC_POSITION,
-    SEMANTIC_TEXCOORD0,
-    Asset
-} from 'playcanvas';
+import { Asset, Script, ShaderMaterial, SEMANTIC_POSITION, SEMANTIC_TEXCOORD0 } from 'playcanvas';
 
 /**
  * Apply a dissolve shader material to an entity's render components.
  */
 export class CustomShader extends Script {
-    static scriptName = 'dissolveShader';
+    static scriptName = 'customShader';
 
     /**
      * GLSL vertex shader.
-     * 
+     *
      * @attribute
      * @title GLSL Vertex Shader
      * @type {Asset}
+     * @resource shader
      */
     vertexGLSL;
 
     /**
      * GLSL fragment shader.
-     * 
+     *
      * @attribute
      * @title GLSL Fragment Shader
      * @type {Asset}
+     * @resource shader
      */
     fragmentGLSL;
 
     /**
      * WGSL vertex shader.
-     * 
+     *
      * @attribute
      * @title WGSL Vertex Shader
      * @type {Asset}
+     * @resource shader
      */
     vertexWGSL;
 
     /**
      * WGSL fragment shader.
-     * 
+     *
      * @attribute
      * @title WGSL Fragment Shader
      * @type {Asset}
+     * @resource shader
      */
     fragmentWGSL;
 
     /**
      * Diffuse Map
-     * 
+     *
      * @attribute
      * @title Diffuse Map
      * @type {Asset}
+     * @resource texture
      */
     diffuseMap;
 
     /**
      * Height Map
-     * 
+     *
      * @attribute
      * @title Height Map
      * @type {Asset}
+     * @resource texture
      */
     heightMap;
 

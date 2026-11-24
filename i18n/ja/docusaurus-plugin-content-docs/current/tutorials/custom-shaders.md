@@ -207,6 +207,7 @@ Uniform は、通常の Materials と同じように動作する[`setParameter()
  * @attribute
  * @title GLSL 頂点シェーダー
  * @type {Asset}
+ * @resource shader
  */
 vertexGLSL;
 
@@ -216,6 +217,7 @@ vertexGLSL;
  * @attribute
  * @title GLSL フラグメントシェーダー
  * @type {Asset}
+ * @resource shader
  */
 fragmentGLSL;
 
@@ -225,6 +227,7 @@ fragmentGLSL;
  * @attribute
  * @title WGSL 頂点シェーダー
  * @type {Asset}
+ * @resource shader
  */
 vertexWGSL;
 
@@ -234,6 +237,7 @@ vertexWGSL;
  * @attribute
  * @title WGSL フラグメントシェーダー
  * @type {Asset}
+ * @resource shader
  */
 fragmentWGSL;
 
@@ -243,6 +247,7 @@ fragmentWGSL;
  * @attribute
  * @title ディフューズマップ
  * @type {Asset}
+ * @resource texture
  */
 diffuseMap;
 
@@ -252,6 +257,7 @@ diffuseMap;
  * @attribute
  * @title ハイトマップ
  * @type {Asset}
+ * @resource texture
  */
 heightMap;
 ```
@@ -277,79 +283,79 @@ update(dt) {
 ## 完全なスクリプト
 
 ```javascript
-import {
-    Script,
-    ShaderMaterial,
-    SEMANTIC_POSITION,
-    SEMANTIC_TEXCOORD0,
-    Asset
-} from 'playcanvas';
+import { Asset, Script, ShaderMaterial, SEMANTIC_POSITION, SEMANTIC_TEXCOORD0 } from 'playcanvas';
 
 /**
- * エンティティのレンダーコンポーネントにディゾルブシェーダーマテリアルを適用します。
+ * Apply a dissolve shader material to an entity's render components.
  */
 export class CustomShader extends Script {
-    static scriptName = 'dissolveShader';
+    static scriptName = 'customShader';
 
     /**
-     * GLSL 頂点シェーダー。
-     * 
+     * GLSL vertex shader.
+     *
      * @attribute
-     * @title GLSL 頂点シェーダー
+     * @title GLSL Vertex Shader
      * @type {Asset}
+     * @resource shader
      */
     vertexGLSL;
 
     /**
-     * GLSL フラグメントシェーダー。
-     * 
+     * GLSL fragment shader.
+     *
      * @attribute
-     * @title GLSL フラグメントシェーダー
+     * @title GLSL Fragment Shader
      * @type {Asset}
+     * @resource shader
      */
     fragmentGLSL;
 
     /**
-     * WGSL 頂点シェーダー。
-     * 
+     * WGSL vertex shader.
+     *
      * @attribute
-     * @title WGSL 頂点シェーダー
+     * @title WGSL Vertex Shader
      * @type {Asset}
+     * @resource shader
      */
     vertexWGSL;
 
     /**
-     * WGSL フラグメントシェーダー。
-     * 
+     * WGSL fragment shader.
+     *
      * @attribute
-     * @title WGSL フラグメントシェーダー
+     * @title WGSL Fragment Shader
      * @type {Asset}
+     * @resource shader
      */
     fragmentWGSL;
 
     /**
-     * ディフューズマップ
-     * 
+     * Diffuse Map
+     *
      * @attribute
-     * @title ディフューズマップ
+     * @title Diffuse Map
      * @type {Asset}
+     * @resource texture
      */
     diffuseMap;
 
     /**
-     * ハイトマップ
-     * 
+     * Height Map
+     *
      * @attribute
-     * @title ハイトマップ
+     * @title Height Map
      * @type {Asset}
+     * @resource texture
      */
     heightMap;
 
     time = 0;
 
-    // エンティティごとに一度呼び出される初期化コード
+    // initialize code called once per entity
     initialize() {
-        // 新しいマテリアルを作成し、シェーダーを設定する
+        // Create a new material and set the shader
         this.material = new ShaderMaterial({
             uniqueName: 'Dissolve',
             vertexGLSL: this.vertexGLSL.resource,
@@ -362,18 +368,18 @@ export class CustomShader extends Script {
             }
         });
 
-        // 初期時間パラメータを設定する
+        // Set the initial time parameter
         this.material.setParameter('uTime', 0);
 
-        // ディフューズテクスチャを設定する
+        // Set the diffuse texture
         const diffuseTexture = this.diffuseMap.resource;
         this.material.setParameter('uDiffuseMap', diffuseTexture);
 
-        // ハイトマップテクスチャを設定する
+        // Set the height map texture
         const heightTexture = this.heightMap.resource;
         this.material.setParameter('uHeightMap', heightTexture);
 
-        // すべてのレンダーコンポーネントのマテリアルを置き換える
+        // Replace the material on all render components
         const renders = this.entity.findComponents('render');
         for (let i = 0; i < renders.length; ++i) {
             const meshInstances = renders[i].meshInstances;
@@ -383,14 +389,14 @@ export class CustomShader extends Script {
         }
     }
 
-    // フレームごとに呼び出される更新コード
+    // update code called every frame
     update(dt) {
         this.time += dt;
 
-        // 正弦波を使用して滑らかな振動を作成する
+        // Create a smooth oscillation using sine wave
         const t = (Math.sin(this.time) + 1) / 2;
 
-        // マテリアルのタイム値を更新する
+        // Update the time value in the material
         this.material.setParameter('uTime', t);
     }
 }

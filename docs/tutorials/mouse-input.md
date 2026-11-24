@@ -29,6 +29,7 @@ import TabItem from '@theme/TabItem';
 
 ```javascript
 import {
+    Asset,
     Script,
     Vec3,
     MOUSEBUTTON_LEFT,
@@ -38,73 +39,79 @@ import {
     EVENT_MOUSEDOWN
 } from 'playcanvas';
 
+/**
+ * Mouse - Moves an entity based on mouse position and changes its material based on mouse clicks.
+ */
 export class Mouse extends Script {
-    static scriptName = "mouse";
+    static scriptName = 'mouse';
 
     /**
+     * Red material to apply on left click.
+     *
      * @attribute
      * @title Red Material
      * @type {Asset}
      * @resource material
      */
-    redMaterial = null;
+    redMaterial;
 
     /**
+     * Green material to apply on middle click.
+     *
      * @attribute
      * @title Green Material
      * @type {Asset}
      * @resource material
      */
-    greenMaterial = null;
+    greenMaterial;
 
     /**
+     * Blue material to apply on right click.
+     *
      * @attribute
      * @title Blue Material
      * @type {Asset}
      * @resource material
      */
-    blueMaterial = null;
+    blueMaterial;
 
-    // initialize code called once per entity
     initialize() {
+        /** @private */
         this.pos = new Vec3();
 
-        // Disabling the context menu stops the browser displaying a menu when
-        // you right-click the page
         this.app.mouse.disableContextMenu();
 
-        // Use the on() method to attach event handlers.
-        // The mouse object supports events on move, button down and
-        // up, and scroll wheel.
-        this.app.mouse.on(EVENT_MOUSEMOVE, this.onMouseMove, this);
-        this.app.mouse.on(EVENT_MOUSEDOWN, this.onMouseDown, this);
+        this.app.mouse.on(EVENT_MOUSEMOVE, this._onMouseMove, this);
+        this.app.mouse.on(EVENT_MOUSEDOWN, this._onMouseDown, this);
     }
 
-    onMouseMove(event) {
-        // Use the camera component's screenToWorld function to convert the
-        // position of the mouse into a position in 3D space
-        var depth = 10;
-        var cameraEntity = this.app.root.findByName('Camera');
-        cameraEntity.camera.screenToWorld(event.x, event.y, depth, this.pos);
+    _onMouseMove(event) {
+        const cameraEntity = this.app.root.findByName('Camera');
+        const depth = 10;
 
-        // Finally update the cube's world-space position
-        this.entity.setPosition(this.pos);
+        if (cameraEntity?.camera) {
+            cameraEntity.camera.screenToWorld(event.x, event.y, depth, this.pos);
+            this.entity.setPosition(this.pos);
+        }
     }
 
-    onMouseDown(event) {
-        // If the left mouse button is pressed, change the cube color to red
-        if (event.button === MOUSEBUTTON_LEFT) {
-            this.entity.model.meshInstances[0].material = this.redMaterial.resource;
+    _onMouseDown(event) {
+        const materialAsset = this._getMaterialForButton(event.button);
+        if (materialAsset?.resource) {
+            this.entity.render.meshInstances[0].material = materialAsset.resource;
         }
-        
-        // If the middle mouse button is pressed, change the cube color to green
-        if (event.button === MOUSEBUTTON_MIDDLE) {
-            this.entity.model.meshInstances[0].material = this.greenMaterial.resource;
-        }
-        
-        // If the right mouse button is pressed, change the cube color to blue
-        if (event.button === MOUSEBUTTON_RIGHT) {
-            this.entity.model.meshInstances[0].material = this.blueMaterial.resource;
+    }
+
+    _getMaterialForButton(button) {
+        switch (button) {
+            case MOUSEBUTTON_LEFT:
+                return this.redMaterial;
+            case MOUSEBUTTON_MIDDLE:
+                return this.greenMaterial;
+            case MOUSEBUTTON_RIGHT:
+                return this.blueMaterial;
+            default:
+                return null;
         }
     }
 }
@@ -196,13 +203,13 @@ this.app.mouse.disableContextMenu();
 
 ### Binding to events
 
-The `Mouse` object allows you to listen to different events corresponding to mouse actions. In the tutorial, we are binding the method `onMouseMove` to the move event and `onMouseDown` to the button down event.
+The `Mouse` object allows you to listen to different events corresponding to mouse actions. In the tutorial, we are binding the method `_onMouseMove` to the move event and `_onMouseDown` to the button down event.
 
 Notice how we also pass `this` into the on() method for binding to events. This third argument is the object that is used as `this` in the event callback.
 
 ```javascript
-this.app.mouse.on(EVENT_MOUSEMOVE, this.onMouseMove, this);
-this.app.mouse.on(EVENT_MOUSEDOWN, this.onMouseDown, this);
+this.app.mouse.on(EVENT_MOUSEMOVE, this._onMouseMove, this);
+this.app.mouse.on(EVENT_MOUSEDOWN, this._onMouseDown, this);
 ```
 
 Events available on `Mouse` are:
@@ -216,11 +223,11 @@ Mouse input in browsers is usually implemented by listening to [DOM](/user-manua
 
 ### Moving the mouse
 
-The first event handler is `onMouseMove`. This is fired whenever the mouse moves. For an `EVENT_MOUSEMOVE` event, the `MouseEvent` object will have the current position of the mouse `x` and `y` and also the change in position since the last event in `dx` and `dy`. In our tutorial we're using the current position of the mouse and moving the cube to the cursor position.
+The first event handler is `_onMouseMove`. This is fired whenever the mouse moves. For an `EVENT_MOUSEMOVE` event, the `MouseEvent` object will have the current position of the mouse `x` and `y` and also the change in position since the last event in `dx` and `dy`. In our tutorial we're using the current position of the mouse and moving the cube to the cursor position.
 
 ### Mouse buttons
 
-The second event handler is `onMouseDown`. This is fired whenever one of the three mouse buttons is clicked. In the `EVENT_MOUSEDOWN` and `EVENT_MOUSEUP` events, the `MouseEvent` object will have a `button` property which contains the button that has been pressed/released. It can be one of the following values:
+The second event handler is `_onMouseDown`. This is fired whenever one of the three mouse buttons is clicked. In the `EVENT_MOUSEDOWN` and `EVENT_MOUSEUP` events, the `MouseEvent` object will have a `button` property which contains the button that has been pressed/released. It can be one of the following values:
 
 * `MOUSEBUTTON_NONE`
 * `MOUSEBUTTON_LEFT`
