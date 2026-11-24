@@ -122,6 +122,16 @@ This results in the following define being added to the shader:
 #define CUSTOM_PASS
 ```
 
+### Reverse-Z Define {#reverse-z-define}
+
+When a camera renders with [reverse-z](/user-manual/graphics/cameras/projection#reverse-z), its shaders are compiled with the `REVERSE_Z` define. The depth buffer then stores 1 at the near plane and 0 at the far plane, so a custom shader that writes a depth value, or reads the depth of the camera, needs to flip it:
+
+```glsl
+#ifdef REVERSE_Z
+    depth = 1.0 - depth;
+#endif
+```
+
 ### Shader Includes {#shader-includes}
 
 The engine builds internal shaders out of chunks; small shader functions that are combined to form a final shader. These chunks are also available for use in custom shaders with `ShaderMaterial`, making it easy to integrate engine functionality.
