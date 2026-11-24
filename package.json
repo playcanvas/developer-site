@@ -70,7 +70,7 @@
     "js-yaml": "^5.5.0",
     "leva": "^0.10.1",
     "motion": "^14.14.0",
-    "playcanvas": "^2.24.2",
+    "playcanvas": "^2.24.3",
     "prism-react-renderer": "^2.4.1",
     "prismjs": "^1.30.0",
     "raw-loader": "^4.0.2",
@@ -91,7 +91,7 @@
     "@docusaurus/module-type-aliases": "^3.10.2",
     "@docusaurus/types": "^3.10.2",
     "markdownlint-cli2": "^0.24.2",
-    "marked": "^18.2.1"
+    "marked": "^18.3.0"
   },
   "browserslist": {
     "production": [
