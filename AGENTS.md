@@ -40,4 +40,5 @@ npm test        # Test the LLM file generation, including every llms/ index, and
 npm run faq     # Regenerate FAQ page
 npm run check:i18n    # Check every page has a Japanese counterpart at the same path
 npm run check:links   # Check external links still resolve (slow - also runs weekly in CI)
+npm run check:static  # Check static/ has no GIFs, oversized images or unused files
 ```
