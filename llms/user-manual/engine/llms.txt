@@ -29,7 +29,7 @@ Use this index to write code against the engine directly. React, Web Components 
 
 - [Using the Engine Standalone](/user-manual/engine/standalone/): Setting up an `AppBase` project with Vite and npm, or without a build step using an import map and the CDN build, and registering the component systems and resource handlers it uses.
 - [Start with create-playcanvas](/user-manual/getting-started/start-with-create-playcanvas/): `npm create playcanvas@latest my-app -- -f engine` creates a runnable Vite and TypeScript project, with PlayCanvas Skills for coding agents.
-- [Snapchat Web Lens starter](/user-manual/getting-started/start-with-create-playcanvas/#snapchat-web-lens-starter): A portrait game set up for Snapchat Web Lenses, with the Web Lens API wired up and `npm run package` to check and zip the build.
+- [Snapchat Web Lens starter](/user-manual/getting-started/start-with-create-playcanvas/#snapchat-web-lens-starter): A portrait game for Snapchat Web Lenses, with the Web Lens API and `npm run package` to check and zip the build.
 - [Developing with AI](/user-manual/engine/developing-with-ai/): Setting up a coding agent on an Engine project and verifying its changes in a browser.
 - [Engine Migrations](/user-manual/engine/migrations/): The breaking changes of each major release. Read it before using an API you remember from Engine 1.
 - [Supported Browsers](/user-manual/engine/supported-browsers/): Minimum browser versions for WebGL2 and WebGPU.
@@ -38,9 +38,9 @@ Use this index to write code against the engine directly. React, Web Components 
 ## Add-on libraries
 
 - [Add-on Libraries](/user-manual/engine/libraries/): Libraries used alongside the engine, what each one adds and who maintains it.
-- [Spine](/user-manual/engine/libraries/spine/): Playing 2D skeletal animations from the Spine editor with the playcanvas-spine plugin: plugin versions, texture sRGB settings, binary skeletons, animation state, colors, physics and layers.
-- [3D Tiles](/user-manual/engine/libraries/3d-tiles/): Streaming 3D Tiles tilesets with the PlayCanvas renderer of 3DTilesRendererJS: setup, error target and memory budget, Draco and KTX2 decoders, adjusting loaded tiles, plugins and limitations.
-- [Tween](/user-manual/engine/libraries/tween/): Animating entity transforms and other values over time with playcanvas-tween: its UMD and ESM builds, chaining, looping, yoyo, callbacks and easing curves.
+- [Spine](/user-manual/engine/libraries/spine/): Playing Spine 2D skeletal animations with the playcanvas-spine plugin: versions, sRGB textures, binary skeletons, animation state, physics and layers.
+- [3D Tiles](/user-manual/engine/libraries/3d-tiles/): Streaming 3D Tiles tilesets with 3DTilesRendererJS: setup, error target and memory budget, Draco and KTX2 decoders, plugins and limitations.
+- [Tween](/user-manual/engine/libraries/tween/): Animating entity transforms and other values with playcanvas-tween: chaining, looping, yoyo, callbacks and easing curves.
 - [loaders.gl](/user-manual/engine/libraries/loaders-gl/): Parsing data formats the engine does not load itself with loaders.gl, and building engine meshes from the parsed arrays.
 
 ## Entities and components
@@ -122,7 +122,7 @@ Use this index to write code against the engine directly. React, Web Components 
 - [Effects with Passes](/user-manual/graphics/posteffects/cameraframe/effect-passes/): CameraFrame effects owning frame passes: stages, frame resources, rebuilding passes and resolving the scene.
 - [Layers](/user-manual/graphics/layers/): Controlling render order and visibility with layers and the layer composition.
 - [Render Targets](/user-manual/graphics/advanced-rendering/render-targets/): Rendering into an offscreen texture and using the result in the scene.
-- [Frame Graph](/user-manual/graphics/advanced-rendering/frame-graph/): How a frame renders as logical passes in physical render and compute passes, and the engine's frame passes: adding passes to a camera, render passes, shader quad passes, rendering the scene into a texture, and compute passes.
+- [Frame Graph](/user-manual/graphics/advanced-rendering/frame-graph/): How a frame renders as passes: adding passes to a camera, render passes, shader quad passes, rendering the scene into a texture, and compute passes.
 - [Hardware Instancing](/user-manual/graphics/advanced-rendering/hardware-instancing/): Drawing many copies of a mesh at once: instance buffer formats, mesh instance setup and shader chunks.
 - [Batching](/user-manual/graphics/advanced-rendering/batching/): Merging mesh instances into batch groups to reduce draw calls.
 - [Particles](/user-manual/graphics/particles/): Particle systems, starting them from scripts, and soft particles.
@@ -164,10 +164,10 @@ Use this index to write code against the engine directly. React, Web Components 
 
 - [Animation](/user-manual/animation/): How the anim component plays clips with states, state graphs, blend trees, layers, masks and events, and how each surface sets it up.
 - [Playing Animations](/user-manual/animation/playing-animations/): Adding the anim component, playing and cross-fading clips by name, speed, pausing, looping, and telling when a clip has finished.
-- [Animation Clips](/user-manual/animation/clips/): Clips in GLB and FBX files, animation-only files, how curves bind to nodes by path, and building clips from keyframes with AnimTrack, AnimCurve and AnimData.
-- [State Graphs](/user-manual/animation/state-graphs/): States, the START, END and ANY states, transitions with durations, exit times, conditions and priorities, parameters and triggers, built in the Editor or loaded with loadStateGraph.
+- [Animation Clips](/user-manual/animation/clips/): Clips in GLB and FBX files, how curves bind to nodes by path, and building clips from keyframes with AnimTrack, AnimCurve and AnimData.
+- [State Graphs](/user-manual/animation/state-graphs/): States, transitions with exit times, conditions and priorities, parameters and triggers, built in the Editor or loaded with loadStateGraph.
 - [Blend Trees](/user-manual/animation/blend-trees/): 1D, 2D Cartesian, 2D Directional and Direct blend trees, State.Child clip paths, and keeping clips in step with syncAnimations.
-- [Layers and Masks](/user-manual/animation/layers-and-masks/): Several state machines on one model, overwrite and additive blending by weight, blendToWeight, normalizeWeights, and masks that limit a layer to part of a hierarchy.
+- [Layers and Masks](/user-manual/animation/layers-and-masks/): Several state machines on one model, overwrite and additive blending by weight, and masks that limit a layer to part of a hierarchy.
 - [Animation Events](/user-manual/animation/events/): Adding named events to clips in the Editor or with AnimEvents, listening for them on the anim component, and when they fire.
 
 ## User interface
@@ -186,12 +186,12 @@ Use this index to write code against the engine directly. React, Web Components 
 - [Input](/user-manual/user-interface/input/): Enabling element input with `ElementInput`, mouse, touch and XR events, bubbling, hit testing and keeping UI clicks from game input.
 - [Buttons](/user-manual/user-interface/buttons/): The button component, tint and sprite transitions, button events and states, hit padding and disabling buttons.
 - [Scroll Views](/user-manual/user-interface/scroll-views/): Scrolling content by dragging, with the mouse wheel and with scrollbars, bouncing and friction, sizing the content and scrolling from code.
-- [Common Widgets](/user-manual/user-interface/common-widgets/): Recipes for progress bars, sliders, toggles, dialogs, tooltips, dynamic lists, drag and drop, text fields and animated UI.
+- [Common Widgets](/user-manual/user-interface/common-widgets/): Recipes for progress bars, sliders, toggles, dialogs, tooltips, lists, drag and drop and text fields.
 - [World-Space UI](/user-manual/user-interface/world-space-ui/): Interfaces in the 3D scene, sized in meters, facing the camera, and labels over characters placed with `worldToScreen`.
 - [UI in XR](/user-manual/user-interface/xr/): World-space panels in VR and AR, pointing and selecting with controllers and hands, and the `XrMenu` script.
 - [HTML and CSS](/user-manual/user-interface/html-and-css/): HTML overlays on each surface, keeping their input away from the game, and placing HTML over 3D points and elements.
-- [Draw Order and Performance](/user-manual/user-interface/draw-order-and-performance/): The UI layer, draw order and screen priority, cameras and post-processing, batching, text updates and culling.
-- [Troubleshooting](/user-manual/user-interface/troubleshooting/): Causes and fixes for invisible text, ignored clicks, unchanging buttons, wrong sizes, empty masks and other common problems.
+- [Draw Order and Performance](/user-manual/user-interface/draw-order-and-performance/): Draw order and screen priority, cameras and post-processing, batching, text updates and culling.
+- [Troubleshooting](/user-manual/user-interface/troubleshooting/): Causes and fixes for invisible text, ignored clicks, unchanging buttons, wrong sizes and empty masks.
 
 ## XR
 
@@ -206,7 +206,7 @@ Use this index to write code against the engine directly. React, Web Components 
 ## Debugging and Optimization
 
 - [Debugging and Optimization](/user-manual/optimization/): Which tool to use to debug and profile an application, and the goals of optimizing it.
-- [Inspector Performance](/user-manual/optimization/inspector-performance/): Recording frames with the Inspector: frame, CPU, GPU and script times, loading and the start of the application, counters, and each frame on a timeline.
+- [Inspector Performance](/user-manual/optimization/inspector-performance/): Recording frames with the Inspector: CPU, GPU and script times, loading, counters, and each frame on a timeline.
 - [General Guidelines](/user-manual/optimization/guidelines/): Tuning scripts, draw calls, batching, shaders, lighting, textures and post effects.
 - [Optimizing Load Time](/user-manual/optimization/load-time/): Image formats, texture sizes, preloading, asset audits, compression and staged loading.
 - [Shader Precompilation](/user-manual/optimization/shader-precompilation/): Compiling shaders and render pipelines in parallel before rendering with `app.precompile()`, with progress events.
@@ -246,8 +246,8 @@ Use this index to write code against the engine directly. React, Web Components 
 
 ## Examples and scripts
 
-- [Engine Examples Browser](https://playcanvas.com/examples): Hundreds of live examples by category, including animation, cameras, compute, Gaussian splatting, graphics, input, loaders, materials, physics, shaders, sound, user interface and XR. The source of each is at `https://github.com/playcanvas/engine/blob/main/examples/src/examples/<category>/<name>/example.mjs`, next to the files it imports: read it and port what you need rather than importing it.
-- [Engine scripts](https://github.com/playcanvas/engine/tree/main/scripts/esm): Production `Script` classes shipped in the npm package under `playcanvas/scripts/esm/`: camera controls, first- and third-person controllers, CameraFrame post-processing, planar reflections, a shadow catcher, a reference grid, a procedural sky, annotations, XR helpers and Gaussian splat effects.
+- [Engine Examples Browser](https://playcanvas.com/examples): Hundreds of live examples by category, covering every engine feature. The source of each is at `https://github.com/playcanvas/engine/blob/main/examples/src/examples/<category>/<name>/example.mjs`, next to the files it imports: read it and port what you need rather than importing it.
+- [Engine scripts](https://github.com/playcanvas/engine/tree/main/scripts/esm): Production `Script` classes shipped in the npm package under `playcanvas/scripts/esm/`: camera controls, character controllers, CameraFrame post-processing, reflections, a shadow catcher, a grid, a sky, XR helpers and Gaussian splat effects.
 
 ## Optional
 
