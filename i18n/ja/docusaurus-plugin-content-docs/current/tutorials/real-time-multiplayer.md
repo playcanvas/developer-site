@@ -1,603 +1,427 @@
 ---
 title: リアルタイムマルチプレイヤー
+description: Node.jsとSocket.IOのサーバーを自分のコンピューターで動かし、ブラウザ間でプレイヤーを同期します。その後サーバーをオンラインに公開します。ホスト型のマルチプレイヤーサービスは使いません。
 tags: [multiplayer, networking]
-thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406048/507186-image-75.jpg"
-description: Node.js の Socket.io サーバーを立ち上げ、ブラウザ間でプレイヤーの transform を同期し、ホスト型 SDK なしでカスタムマルチプレイを実現します。
+thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406048/507186-image-75.jpg
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+<video autoPlay muted loop controls playsInline src="/video/real-time-multiplayer-two-windows.mp4" style={{width: '100%', height: 'auto'}} />
 
-:::note
+*完成したプロジェクトを2つのブラウザウィンドウで実行しているところ。それぞれのウィンドウは白いカプセルを操作し、相手のプレイヤーは青で表示されます。*
 
-このチュートリアルでは、ゼロから自分自身のマルチプレイヤーを作成する方法について説明します。ホストされたマルチプレイヤーサービスを使用する場合は、[Colyseus](/tutorials/real-time-multiplayer-colyseus)および[Photon](/tutorials/real-time-multiplayer-photon)のチュートリアルがあります。
+このチュートリアルでは、小さなマルチプレイヤープロジェクトをゼロから作ります。各プレイヤーは<kbd>W</kbd>、<kbd>A</kbd>、<kbd>S</kbd>、<kbd>D</kbd>キーでカプセルを動かし、他のプレイヤーのカプセルがリアルタイムで動くのを見ることができます。
+
+プロジェクトは2つの部分でできています。
+
+- **サーバー**。[Node.js](https://nodejs.org/)と[Socket.IO](https://socket.io/)で書きます。プレイヤーの一覧を保持し、プレイヤー間でメッセージを受け渡します。最初は自分のコンピューターで動かし、最後にオンラインに公開します。
+- **クライアント**。あなたのPlayCanvasプロジェクトです。プロジェクトを開いたすべてのブラウザが、サーバーに接続します。
+
+:::info[はじめる前に]
+
+コンピューターに[Node.js](https://nodejs.org/en/download)と、コマンドを実行するためのターミナルが必要です。エディターの使い方に慣れるために、先に[初めてのアプリ](/user-manual/editor/getting-started/your-first-app/)を終えておくとよいでしょう。自分の作業と比べるには、[完成したプロジェクト](https://playcanvas.com/project/406048/overview/tutorial-realtime-multiplayer)を開いてください。
 
 :::
 
-<div className="iframe-container">
-    <iframe src="https://playcanv.as/p/XFp1Ty3X/" title="Real Time Multiplayer" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
-</div>
+## 1. サーバーを作成する {#create-the-server}
 
-*WASD キーを使用してプレイヤーを移動します。カプセルが 1 つしか表示されない場合は、別のタブまたは別のコンピューターでこのページを開いてみてください。*
+1. サーバー用のフォルダーを作り、セットアップして、Socket.IOをインストールします。
 
-In this tutorial we’ll cover how to setup a basic multiplayer project using Node.js and Socket.io. We’ll focus on implementing it in PlayCanvas. By the end you should have a project similar to the one above. You can find the [tutorial project here](https://playcanvas.com/project/406048/overview/tutorial-realtime-multiplayer).
+    ```sh
+    mkdir multiplayer-server
+    cd multiplayer-server
+    npm init -y
+    npm install socket.io
+    ```
 
-## サーバーのセットアップ
+2. そのフォルダーに `server.js` というファイルを作り、次のコードを書きます。
 
-ピアツーピアではなく、クライアントとサーバーのモデルを実装します。これは、すべてのクライアント(PlayCanvasのインスタンス)からデータを受信し、ブロードキャストします。
+    ```javascript
+    const http = require('http');
+    const { Server } = require('socket.io');
 
-[Glitch](https://glitch.com/) provides a really convenient way to write and deploy backend apps for free completely in your browser! You can use it without an account but creating one will let you easily find your work. [Create a new Node app](https://glitch.com/edit/#!/new-project) and replace the contents of `server.js` with this:
+    const server = http.createServer();
 
-```javascript
-const http = require('http');
-const { Server } = require('socket.io');
-
-const server = http.createServer();
-
-// Configure Socket.IO with CORS
-const io = new Server(server, {
-    cors: {
-        // If you only want to allow PlayCanvas launch domain:
-        // origin: "https://launch.playcanvas.com",
-
-        // Or allow all origins (less secure, but quick for testing)
-        origin: "*",
-        methods: ["GET", "POST"]
-    }
-});
-
-io.on('connection', (socket) => {
-    console.log(`New client connected: ${socket.id}`);
-});
-
-const PORT = process.env.PORT || 3000;
-server.listen(PORT, () => {
-    console.log(`Server started on port ${PORT}`);
-});
-```
-
-Glitch will automatically re-run the server every time you finish typing. Once you’ve copied this, you should get an error. Click on the `Logs` button at the bottom of the window to open up the server console. Here you can see any server output, as well as the errors. You should see `Error: Cannot find module 'socket.io'`.
-
-![Opening the log](/img/tutorials/multiplayer/glitch-error.png)
-
-パッケージを含めるには、`package.json` に移動し、トップの `Add Package` ボタンをクリックします。 `socket.io` を検索します。
-
-![Adding a package](/img/tutorials/multiplayer/glitch-add-package.png)
-
-Once `socket.io` has finished installing, the server will automatically restart and you should see `Server started on port 3000` in the log. Congratulations! You've successfully deployed a server!
-
-You can find the domain your server is deployed at by clicking `Settings` in the left sidebar. This is where you can also rename the project.
-
-このサーバーは、誰かが接続するたびにメッセージをログに記録するだけです。これでクライアントが接続して、サーバーに接続したことを確認できます。
-
-## プロジェクトのセットアップ
-
-Create a new project on PlayCanvas. We first need to include the Socket.io client JS library, as an external script. To do this. go to your project settings:
-
-![Project settings](/img/tutorials/multiplayer/project-settings.png)
-
-'External Scripts'を見つけて開きます。
-
-![External scripts settings](/img/tutorials/multiplayer/external_scripts_settings.png)
-
-Change the value from 0 to 1 and add the CDN URL for the socket library from their [framework server](https://cdnjs.com/libraries/socket.io). In this case, we will be using version `4.8.1` as that is the latest at time of writing:
-
-![Project settings](/img/tutorials/multiplayer/added_socket_io_library.png)
-
-```none
-https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.8.1/socket.io.min.js
-```
-
-次に、ネットワークロジックを処理する新しいスクリプトを作成する必要があります。 `Network.js`という新しいスクリプトを作成します。最初に、サーバーに接続する必要があります。これは、initializeメソッドに次の行を追加することで行うことができます。
-
-```javascript
-this.socket = io.connect('https://playcanvas-multiplayer-server.glitch.me');
-```
-
-Replace `https://playcanvas-multiplayer-server.glitch.me` with the address of your own server.
-
-To confirm that this works, attach this network script to the `Root` entity, and then launch the game. Keep your eye on the server log at Glitch. If everything worked, the server should log `New client connected:` along with the client ID. The project is now setup to send and receive messages to and from the server.
-
-## サーバーとクライアントの通信
-
-The way you can send data between the client and server is with the socket connection we made earlier. To send data from the client (in Network.js on PlayCanvas), we use the `emit` function. Here’s an example:
-
-```javascript
-this.socket.emit('playerJoined', 'John');
-```
-
-This emits a message called `playerJoined`, with the data `John`. For the server to receive the message, we need to write in the server file (in `server.js` on Glitch):
-
-```javascript
-socket.on('playerJoined', function (name) {
-    console.log (name);
-});
-```
-
-これは、`playerJoined`が送信されたときにサーバーに送信されるデータをログに記録します。
-
-このデモでは、リアルタイムマルチプレイヤーでプレイヤーが移動するようにしたいため、環境を作成する必要があります。グラウンドとして使用するエンティティを作成し、Collision (ボックス形状) とStaticタイプのRigidBodyを追加します。以下は、グラウンドエンティティの設定です：
-
-<img loading="lazy" src="/img/tutorials/multiplayer/ground_entity.png" width="360" />
-
-次に、操作するプレイヤーを作成する必要があります。新しいカプセルを作成し、 `Player` と呼びます。ダイナミックなリジッドボディと衝突ボックスを追加し、リジッドボディの設定を以下の画像のように変更します。
-
-<img loading="lazy" src="/img/tutorials/multiplayer/player_entity.png" width="360" />
-
-プレイヤーエンティティを複製し、 'Other' という名前に変更します。この新しいエンティティの `Enabled` ボックスをオフにして、最初は無効にします。これは、ゲーム内の他のプレイヤーをシミュレートするために使用するエンティティです。
-
-プレイヤーにスクリプトコンポーネントを追加し、 `Movement.js` という新しいスクリプトをアタッチします。
-
-<Tabs defaultValue="esm" groupId='script-code'>
-<TabItem value="esm" label="ESM">
-
-```javascript
-import { Script, Vec3, KEY_A, KEY_D, KEY_W, KEY_S } from 'playcanvas';
-
-export class Movement extends Script {
-    static scriptName = "movement";
-
-    /**
-     * @attribute
-     * @title Player Speed
-     * @type {number}
-     */
-    playerSpeed = 30;
-
-    // initialize code called once per entity
-    initialize() {
-        this.force = new Vec3();
-    }
-
-    // update code called every frame
-    update(dt) {
-        const forward = this.entity.forward;
-        const right = this.entity.right;
-        const app = this.app;
-
-        let x = 0;
-        let z = 0;
-
-        if (app.keyboard.isPressed(KEY_A)) {
-            x -= right.x;
-            z -= right.z;
+    const io = new Server(server, {
+        cors: {
+            // Any page may connect. Before you publish a game, list the addresses it is
+            // served from instead, such as 'https://playcanv.as'.
+            origin: '*'
         }
-
-        if (app.keyboard.isPressed(KEY_D)) {
-            x += right.x;
-            z += right.z;
-        }
-
-        if (app.keyboard.isPressed(KEY_W)) {
-            x += forward.x;
-            z += forward.z;
-        }
-
-        if (app.keyboard.isPressed(KEY_S)) {
-            x -= forward.x;
-            z -= forward.z;
-        }
-
-        if (x !== 0 || z !== 0) {
-            x *= dt;
-            z *= dt;
-
-            this.force.set(x, 0, z).normalize().mulScalar(this.playerSpeed);
-            this.entity.rigidbody.applyForce(this.force);
-        }
-    }
-}
-```
-
-</TabItem>
-<TabItem value="classic" label="Classic">
-
-```javascript
-var Movement = pc.createScript('movement');
-
-Movement.attributes.add('playerSpeed', {
-    type: 'number',
-    default: 30,
-    title: 'Player Speed'
-});
-
-// initialize code called once per entity
-Movement.prototype.initialize = function() {
-    this.force = new pc.Vec3();
-};
-
-// update code called every frame
-Movement.prototype.update = function(dt) {
-    var forward = this.entity.forward;
-    var right = this.entity.right;
-    var app = this.app;
-
-    x = 0;
-    z = 0;
-
-    if (app.keyboard.isPressed(pc.KEY_A)) {
-        x -= right.x;
-        z -= right.z;
-    }
-
-    if (app.keyboard.isPressed(pc.KEY_D)) {
-        x += right.x;
-        z += right.z;
-    }
-
-    if (app.keyboard.isPressed(pc.KEY_W)) {
-        x += forward.x;
-        z += forward.z;
-    }
-
-    if (app.keyboard.isPressed(pc.KEY_S)) {
-        x -= forward.x;
-        z -= forward.z;
-    }
-
-    if (x !== 0 || z !== 0) {
-        x *= dt;
-        z *= dt;
-
-        this.force.set(x, 0, z).normalize().mulScalar(this.playerSpeed);
-        this.entity.rigidbody.applyForce (this.force);
-    }
-};
-```
-
-</TabItem>
-</Tabs>
-
-When you launch the game you should be able to use WASD to move your player around. If not, you’ve missed a step or did not set the correct settings for the entity. Try changing the speed attribute on the movement script.
-
-For the game to work in real time multiplayer, we need to keep track of all players in the game. Replace the current server code with this:
-
-```javascript
-const http = require('http');
-const { Server } = require('socket.io');
-
-/** 
- * Class to track each connected player (id + position)
- */
-class Player {
-    constructor(id) {
-        this.id = id;
-        this.x = 0;
-        this.y = 0;
-        this.z = 0;
-    }
-}
-
-const server = http.createServer();
-
-// Configure Socket.IO with CORS
-const io = new Server(server, {
-    cors: {
-        // If you only want to allow PlayCanvas launch domain:
-        // origin: "https://launch.playcanvas.com",
-
-        // Or allow all origins (less secure, but quick for testing)
-        origin: "*",
-        methods: ["GET", "POST"]
-    }
-});
-
-const players = {};
-
-/**
- * Handle new socket connections
- */
-io.on('connection', (socket) => {
-    console.log(`New client connected: ${socket.id}`);
-
-    // Fired when the client is ready to initialize their Player object
-    socket.on('initialize', () => {
-        const newPlayer = new Player(socket.id);
-        players[socket.id] = newPlayer;
-
-        // Send to this client its own ID and the current list of players
-        socket.emit('playerData', { id: socket.id, players });
-
-        // Tell everyone else about this new player
-        socket.broadcast.emit('playerJoined', newPlayer);
-    });
-});
-
-const PORT = process.env.PORT || 3000;
-server.listen(PORT, () => {
-    console.log(`Server started on port ${PORT}`);
-});
-```
-
-上記のコードでは、プレイヤーが `initialize` メッセージを送信すると、ユニークなIDとゲーム内の他のプレイヤーのデータを送信します。また、他のプレイヤーが接続したことを通知します。これらのロジックを Network スクリプトに追加しましょう。
-
-`initialize` に以下のコードを追加します。
-
-```javascript
-// Your io.connect function call should be up here
-
-this.socket.emit('initialize');
-var socket = this.socket;
-
-this.player = this.app.root.findByName('Player');
-this.other = this.app.root.findByName('Other');
-
-var self = this;
-socket.on('playerData', function (data) {
-    self.initializePlayers (data);
-});
-
-socket.on('playerJoined', function (data) {
-    self.addPlayer(data);
-});
-```
-
-そして、Network.js 内に以下の新しい関数を宣言します。
-
-<Tabs defaultValue="esm" groupId='script-code'>
-<TabItem value="esm" label="ESM">
-
-```javascript
-    initializePlayers (data) {
-        this.players = data.players;
-        Network.id = data.id;
-
-        for (let id in this.players) {
-            if (id != Network.id) {
-                this.players[id].entity = this.createPlayerEntity(this.players[id]);
-            }
-        }
-
-        this.initialized = true;
-        console.log('initialized');
-    };
-
-    createPlayerEntity (data) {
-        // Create a new player entity
-        const newPlayer = this.other.clone();
-        newPlayer.enabled = true;
-
-        // Add the entity to the entity hierarchy
-        this.other.parent.addChild(newPlayer);
-
-        // If a location was given, teleport the new entity to the position of the connected player
-        if (data)
-            newPlayer.rigidbody.teleport(data.x, data.y, data.z);
-
-        return newPlayer;
-    };
-
-    addPlayer (data) {
-        this.players[data.id] = data;
-        this.players[data.id].entity = this.createPlayerEntity(data);
-    };
-}
-```
-
-</TabItem>
-<TabItem value="classic" label="Classic">
-
-```javascript
-Network.prototype.initializePlayers = function (data) {
-    this.players = data.players;
-    Network.id = data.id;
-
-    for (var id in this.players) {
-        if (id != Network.id) {
-            this.players[id].entity = this.createPlayerEntity(this.players[id]);
-        }
-    }
-
-    this.initialized = true;
-    console.log('initialized');
-};
-
-Network.prototype.createPlayerEntity = function (data) {
-    // Create a new player entity
-    var newPlayer = this.other.clone();
-    newPlayer.enabled = true;
-
-    // Add the entity to the entity hierarchy
-    this.other.parent.addChild(newPlayer);
-
-    // If a location was given, teleport the new entity to the position of the connected player
-    if (data)
-        newPlayer.rigidbody.teleport(data.x, data.y, data.z);
-
-    return newPlayer;
-};
-
-Network.prototype.addPlayer = function (data) {
-    this.players[data.id] = data;
-    this.players[data.id].entity = this.createPlayerEntity(data);
-};
-```
-
-</TabItem>
-</Tabs>
-
-ここでゲームに参加すると、クライアントがサーバーに接続したことを伝え、サーバーからプレイヤーのリストとその位置を受信します。その後、接続されている各プレイヤーに対して新しいエンティティを作成し、現在の位置に移動します。唯一の問題は、サーバーがすべてのプレイヤーの位置を把握していないことです。現在位置を1フレームごとにサーバーに送信する必要があります。
-
-これらのコードを Network.js の `initialize` に追加します。
-
-```javascript
-socket.on('playerMoved', function (data) {
-    self.movePlayer(data);
-});
-```
-
-`update` を以下のコードで置き換えます。
-
-```javascript
-Network.prototype.update = function (dt) {
-    this.updatePosition();
-};
-```
-
-そして、Network.js 内に以下の新しい関数を宣言します。
-
-<Tabs defaultValue="esm" groupId='script-code'>
-<TabItem value="esm" label="ESM">
-
-```javascript
-movePlayer(data) {
-    if (this.initialized)
-        this.players[data.id].entity.rigidbody.teleport (data.x, data.y, data.z);
-}
-
-updatePosition() {
-    if (this.initialized) {
-        const pos = this.player.getPosition();
-        this.socket.emit ('positionUpdate', {id: this.id, x: pos.x, y: pos.y, z: pos.z});
-    }
-}
-```
-
-</TabItem>
-<TabItem value="classic" label="Classic">
-
-```javascript
-Network.prototype.movePlayer = function (data) {
-    if (this.initialized && !this.players[data.id].deleted) {
-        this.players[data.id].entity.rigidbody.teleport(data.x, data.y, data.z);
-    }
-};
-
-Network.prototype.updatePosition = function () {
-    if (this.initialized) {    
-        var pos = this.player.getPosition();
-        Network.socket.emit('positionUpdate', {id: Network.id, x: pos.x, y: pos.y, z: pos.z});
-    }
-};
-```
-
-</TabItem>
-</Tabs>
-
-サーバーに戻り、プレイヤーが自分の位置を送信した場合にどうなるかを考慮する必要があります。サーバーで新しいイベントを追加する必要があります。
-
-```javascript
-// Update player position
-socket.on('positionUpdate', (data) => {
-    if (!players[socket.id]) return;
-    players[socket.id].x = data.x;
-    players[socket.id].y = data.y;
-    players[socket.id].z = data.z;
-
-    // Broadcast updated position to all other players
-    socket.broadcast.emit('playerMoved', {
-        id: socket.id,
-        x: data.x,
-        y: data.y,
-        z: data.z
-    });
-});
-```
-
-Finally, we need to handle player disconnects. We can do this by listening for the `disconnect` event on the socket.
-
-```javascript
-// Handle disconnections
-socket.on('disconnect', () => {
-    console.log(`Client disconnected: ${socket.id}`);
-    if (!players[socket.id]) return;
-    delete players[socket.id];
-    // Notify other players to remove this player
-    socket.broadcast.emit('killPlayer', socket.id);
-});
-```
-
-Let's review the full and final server code:
-
-```javascript
-const http = require('http');
-const { Server } = require('socket.io');
-
-/** 
- * Class to track each connected player (id + position)
- */
-class Player {
-    constructor(id) {
-        this.id = id;
-        this.x = 0;
-        this.y = 0;
-        this.z = 0;
-    }
-}
-
-const server = http.createServer();
-
-// Configure Socket.IO with CORS
-const io = new Server(server, {
-    cors: {
-        // If you only want to allow PlayCanvas launch domain:
-        // origin: "https://launch.playcanvas.com",
-
-        // Or allow all origins (less secure, but quick for testing)
-        origin: "*",
-        methods: ["GET", "POST"]
-    }
-});
-
-const players = {};
-
-/**
- * Handle new socket connections
- */
-io.on('connection', (socket) => {
-    console.log(`New client connected: ${socket.id}`);
-
-    // Fired when the client is ready to initialize their Player object
-    socket.on('initialize', () => {
-        const newPlayer = new Player(socket.id);
-        players[socket.id] = newPlayer;
-
-        // Send to this client its own ID and the current list of players
-        socket.emit('playerData', { id: socket.id, players });
-
-        // Tell everyone else about this new player
-        socket.broadcast.emit('playerJoined', newPlayer);
     });
 
-    // Update player position
-    socket.on('positionUpdate', (data) => {
-        if (!players[socket.id]) return;
-        players[socket.id].x = data.x;
-        players[socket.id].y = data.y;
-        players[socket.id].z = data.z;
+    // Every connected player's last known position, keyed by socket ID
+    const players = {};
 
-        // Broadcast updated position to all other players
-        socket.broadcast.emit('playerMoved', {
-            id: socket.id,
-            x: data.x,
-            y: data.y,
-            z: data.z
+    io.on('connection', (socket) => {
+        console.log(`Player connected: ${socket.id}`);
+
+        // A client sends this once it is ready to receive the list of players
+        socket.on('initialize', () => {
+            // Start each player at a random place on the ground
+            players[socket.id] = {
+                id: socket.id,
+                x: Math.random() * 10 - 5,
+                y: 1,
+                z: Math.random() * 10 - 5
+            };
+
+            // Tell the new player its own ID and where everyone is
+            socket.emit('playerData', { id: socket.id, players });
+
+            // Tell everyone else that a new player has arrived
+            socket.broadcast.emit('playerJoined', players[socket.id]);
+        });
+
+        // A client sends this whenever its player has moved
+        socket.on('positionUpdate', (position) => {
+            const player = players[socket.id];
+            if (!player) return;
+
+            player.x = position.x;
+            player.y = position.y;
+            player.z = position.z;
+
+            socket.broadcast.emit('playerMoved', player);
+        });
+
+        socket.on('disconnect', () => {
+            console.log(`Player disconnected: ${socket.id}`);
+            if (!players[socket.id]) return;
+
+            delete players[socket.id];
+            socket.broadcast.emit('playerLeft', socket.id);
         });
     });
 
-    // Handle disconnections
-    socket.on('disconnect', () => {
-        console.log(`Client disconnected: ${socket.id}`);
-        if (!players[socket.id]) return;
-        delete players[socket.id];
-        // Notify other players to remove this player
-        socket.broadcast.emit('killPlayer', socket.id);
+    const port = process.env.PORT || 3000;
+    server.listen(port, () => {
+        console.log(`Server listening on port ${port}`);
     });
-});
+    ```
 
-const PORT = process.env.PORT || 3000;
-server.listen(PORT, () => {
-    console.log(`Server started on port ${PORT}`);
-});
+3. サーバーを起動します。
+
+    ```sh
+    node server.js
+    ```
+
+    `Server listening on port 3000` と表示されます。チュートリアルの残りの間、このターミナルで実行したままにしておきます。後で停止するには、<kbd>Ctrl</kbd>+<kbd>C</kbd>を押します。
+
+サーバーはゲームの中身を見ません。メッセージを受け取り、メッセージを送り出すだけです。メッセージについては、クライアントが動くようになってから、[メッセージの流れ](#how-the-messages-flow)で説明します。
+
+## 2. シーンを作る {#build-the-scene}
+
+**Blank Project** キットから新しいプロジェクトを作成し、エディターで開きます。シーンには、Camera、Light、Box、Planeがあります。
+
+### 地面 {#the-ground}
+
+1. ヒエラルキーで **Box** を選択し、<kbd>Delete</kbd>キーを押します。
+2. **Plane** を選択します。インスペクターで **Name** を `Ground` に、**Scale** を `16`、`1`、`16` に変更します。
+3. **ADD COMPONENT** > **Physics** > **Collision** を選択します。**Half Extents** を `8`、`0.1`、`8` に、**Position Offset** を `0`、`-0.1`、`0` に設定します。これで地面に、上に立つための薄いボックスができます。ボックスの上面は、平面の表面と同じ高さになります。
+4. コンポーネントに **Ammo module not found** と表示されます。**IMPORT AMMO** を選択して、[物理エンジン](/user-manual/physics/)をプロジェクトに追加します。
+5. **ADD COMPONENT** > **Physics** > **Rigid Body** を選択します。**Type** は **Static** のままにします。
+
+### プレイヤー {#the-players}
+
+シーンには2つのカプセルが必要です。`Player` は、このブラウザが操作するカプセルです。`Other` はテンプレートで、他のプレイヤーが参加するたびに、プロジェクトがそのコピーを作ります。
+
+1. ヒエラルキーで **Root** を選択し、**+**（エンティティを追加）ボタン、**3D** > **Capsule** の順に選択します。
+2. インスペクターで **Name** を `Player` に、**Position** を `0`、`1`、`0` に変更します。
+3. **Player** を選択した状態で、ヒエラルキーの上部にある **Duplicate Entity** ボタンを選択します。コピーが選択された状態になり、その名前もPlayerです。
+4. コピーの **Name** を `Other` に変更し、インスペクターの一番上にある **Enabled** をオフにします。他のプレイヤーは描画されるだけなので、`Other` に物理は必要ありません。
+5. アセットパネルで **+**（アセットを追加）ボタンを選択し、**Material** を選択します。新しいマテリアルを選択し、**Name** を `Blue` に変更して、**Diffuse** を展開し、**Color** の色見本を選択します。16進数のフィールドに `2F80ED` と入力して、<kbd>Tab</kbd>キーを押します。
+6. もう一度 **Other** を選択します。アセットパネルから `Blue` を、インスペクターの **Materials** の下にある空のマテリアルスロットにドラッグします。
+7. **Player** を選択します。**Collision** コンポーネントを追加し、**Type** を **Capsule** に設定します。
+8. **Rigid Body** コンポーネントを追加します。**Type** を **Dynamic** に、**Angular Factor** を `0`、`0`、`0` に設定します。これでカプセルが倒れなくなります。
+
+![PlayerのRigid Bodyコンポーネント](/img/tutorials/real-time-multiplayer/rigid-body.webp)
+
+### カメラとライト {#the-camera-and-the-light}
+
+1. **Camera** を選択します。地面全体を見下ろすように、**Position** を `0`、`14`、`16` に、**Rotation** を `-42`、`0`、`0` に設定します。
+2. **Light** を選択します。影が地面の奥まで届くように、**Cast Shadows** の下にある **Distance** を `40` に設定します。
+
+![エディターで開いたシーン](/img/tutorials/real-time-multiplayer/scene.webp)
+
+## 3. Socket.IOクライアントを追加する {#add-the-socket-io-client}
+
+サーバーはSocket.IOライブラリを使っているので、クライアントにも、対応するブラウザ用のライブラリが必要です。PlayCanvasは、スクリプトを実行する前に、Webアドレスからライブラリを読み込むことができます。
+
+1. ビューポートの上部のツールバーにある **Settings** ボタン（歯車）を選択します。
+2. インスペクターで **External Scripts** を展開し、**Number of URLs** を `1` に設定します。
+3. 次のアドレスを **URL** フィールドに貼り付けて、<kbd>Enter</kbd>キーを押します。
+
+    ```none
+    https://cdn.socket.io/4.8.4/socket.io.min.js
+    ```
+
+![External Scriptsの設定](/img/tutorials/real-time-multiplayer/external-scripts.webp)
+
+## 4. プレイヤーを動かす {#move-the-player}
+
+1. アセットパネルで **+**（アセットを追加）ボタンを選択し、**Script** を選択します。ファイル名に `movement.mjs` と入力して、<kbd>Enter</kbd>キーを押します。
+2. `movement.mjs` をダブルクリックして、[Code Editor](/user-manual/editor/scripting/code-editor/)（コードエディター）で開きます。
+3. ファイルの内容をすべて次のコードに置き換え、<kbd>Ctrl</kbd>+<kbd>S</kbd>（Macでは<kbd>Cmd</kbd>+<kbd>S</kbd>）で保存します。
+
+```javascript
+import { Script, Vec3, KEY_A, KEY_D, KEY_S, KEY_W } from 'playcanvas';
+
+/**
+ * Moves the player with the W, A, S and D keys, and returns it to the start if it falls
+ * off the ground.
+ */
+export class Movement extends Script {
+    static scriptName = 'movement';
+
+    /**
+     * How fast the player moves, in units per second.
+     *
+     * @attribute
+     * @type {number}
+     */
+    speed = 5;
+
+    initialize() {
+        this.direction = new Vec3();
+    }
+
+    update(dt) {
+        const keyboard = this.app.keyboard;
+        const body = this.entity.rigidbody;
+
+        // The camera looks along the negative Z axis, so W moves the player away from it
+        const x = (keyboard.isPressed(KEY_D) ? 1 : 0) - (keyboard.isPressed(KEY_A) ? 1 : 0);
+        const z = (keyboard.isPressed(KEY_S) ? 1 : 0) - (keyboard.isPressed(KEY_W) ? 1 : 0);
+        this.direction.set(x, 0, z).normalize().mulScalar(this.speed);
+
+        // Set the sideways speed and leave the vertical speed to gravity
+        const velocity = body.linearVelocity;
+        velocity.x = this.direction.x;
+        velocity.z = this.direction.z;
+        body.linearVelocity = velocity;
+
+        // Fell off the edge: start again in the middle
+        if (this.entity.getPosition().y < -10) {
+            body.teleport(0, 1, 0);
+            body.linearVelocity = Vec3.ZERO;
+        }
+    }
+}
 ```
 
-## 最後に
+次に、スクリプトをプレイヤーにアタッチします。
 
-以上です！お好みで、以下のアイデアを追加してみてください。
+1. エディターに戻り、**Player** を選択します。
+2. **ADD COMPONENT** > **Script** を選択します。新しい[Scriptコンポーネント](/user-manual/editor/scenes/components/script/)はインスペクターの一番下に追加されるので、そこまでスクロールします。
+3. **+ ADD SCRIPT** フィールドを選択し、`movement` を選びます。
+4. `movement` スクリプトの **Parse** ボタンを選択します。**Edit** の隣にある、2つの矢印のボタンです。エディターがコードを読み取り、`speed` 属性を表示します。
 
-* プレイヤーがゲームを終了したときに削除されるようにする
-* プレイヤーが端から落ちた場合の復帰機能を追加する
+ビューポートの右上にある **Launch** を選択します。プロジェクトが新しいタブで開き、<kbd>W</kbd>、<kbd>A</kbd>、<kbd>S</kbd>、<kbd>D</kbd>キーでカプセルが動きます。端から落ちると、中央からやり直しになります。
 
-Keep in mind this is only a very basic implementation of multiplayer. Realistically, when creating larger multiplayer games you'll want to consider using an authoritative server, instead of handling all the game logic on the client. You can read a more in depth tutorial about [how Socket.io works and how to develop multiplayer in JavaScript here](https://code.tutsplus.com/create-a-multiplayer-pirate-shooter-game-in-your-browser--cms-23311t).
+## 5. サーバーに接続する {#connect-to-the-server}
 
-You can find the [full server code on Glitch here](https://glitch.com/edit/#!/playcanvas-multiplayer-server), where you can also fork it and extend it.
+1. `movement.mjs` と同じ方法で、`network.mjs` という2つ目のスクリプトを作成します。
+2. ファイルの内容をすべて次のコードに置き換えて、保存します。
+
+```javascript
+import { Script, Vec3 } from 'playcanvas';
+
+/**
+ * Connects to the multiplayer server, sends it this player's position and shows a capsule
+ * for every other player.
+ */
+export class Network extends Script {
+    static scriptName = 'network';
+
+    /**
+     * The address of the multiplayer server.
+     *
+     * @attribute
+     * @type {string}
+     */
+    serverUrl = 'http://localhost:3000';
+
+    initialize() {
+        this.player = this.app.root.findByName('Player');
+        this.other = this.app.root.findByName('Other');
+
+        // The other players, keyed by ID. It stays null until the server sends the list.
+        this.players = null;
+        this.lastSent = new Vec3();
+
+        // io is defined by the Socket.IO client library
+        this.socket = io(this.serverUrl);
+
+        this.socket.on('connect', () => {
+            console.log(`Connected to ${this.serverUrl}`);
+            this.socket.emit('initialize');
+        });
+
+        this.socket.on('playerData', (data) => {
+            this.removeAll();
+            this.players = {};
+            for (const id in data.players) {
+                const player = data.players[id];
+                if (id === data.id) {
+                    // This is us: move to the position the server chose
+                    this.player.rigidbody.teleport(player.x, player.y, player.z);
+                } else {
+                    this.addPlayer(player);
+                }
+            }
+        });
+
+        this.socket.on('playerJoined', (data) => {
+            if (this.players) {
+                this.addPlayer(data);
+            }
+        });
+
+        this.socket.on('playerMoved', (data) => {
+            const entity = this.players?.[data.id];
+            if (entity) {
+                entity.setPosition(data.x, data.y, data.z);
+            }
+        });
+
+        this.socket.on('playerLeft', (id) => {
+            const entity = this.players?.[id];
+            if (entity) {
+                entity.destroy();
+                delete this.players[id];
+            }
+        });
+
+        // Close the connection when this script is destroyed
+        this.once('destroy', () => {
+            this.socket.disconnect();
+        });
+    }
+
+    update(dt) {
+        if (!this.players) return;
+
+        // Tell the server where this player is, but only when it has moved
+        const position = this.player.getPosition();
+        if (!position.equals(this.lastSent)) {
+            this.lastSent.copy(position);
+            this.socket.emit('positionUpdate', { x: position.x, y: position.y, z: position.z });
+        }
+    }
+
+    /**
+     * Shows a capsule for another player.
+     *
+     * @param {{ id: string, x: number, y: number, z: number }} data - The player's ID and position.
+     */
+    addPlayer(data) {
+        const entity = this.other.clone();
+        this.other.parent.addChild(entity);
+        entity.setPosition(data.x, data.y, data.z);
+        entity.enabled = true;
+        this.players[data.id] = entity;
+    }
+
+    /**
+     * Removes every other player's capsule. The server sends the full list again each time
+     * the connection is made, including after a dropped connection.
+     */
+    removeAll() {
+        for (const id in this.players) {
+            this.players[id].destroy();
+        }
+    }
+}
+```
+
+スクリプトをシーンにアタッチします。
+
+1. エディターで **Root** を選択します。
+2. **Script** コンポーネントを追加して `network` スクリプトを追加し、その **Parse** ボタンを選択します。`serverUrl` 属性が表示され、自分のコンピューター上のサーバーのアドレスが設定されています。
+
+![Rootエンティティのnetworkスクリプト](/img/tutorials/real-time-multiplayer/network-script.webp)
+
+### 試してみる {#try-it}
+
+1. [手順1](#create-the-server)のサーバーがまだ実行中であることを確認します。
+2. プロジェクトを **Launch** します。
+3. 初回は、`launch.playcanvas.com` がこのデバイス上の他のアプリやサービスにアクセスしてよいかどうかを、ブラウザが確認します。**許可**（Allow）を選択します。ブラウザが確認するのは、インターネット上のページが、自分のコンピューター上のプログラムに接続しようとしているからです。
+4. サーバーを実行しているターミナルに、`Player connected:` とIDが表示されます。
+5. Launchタブのアドレスをコピーして、2つ目のブラウザウィンドウで開きます。2つのウィンドウを横に並べます。
+
+それぞれのウィンドウに、2つのカプセルが表示されます。ウィンドウをクリックして白いカプセルを動かすと、もう一方のウィンドウの青いカプセルが同じように動きます。ウィンドウを閉じると、そのカプセルはもう一方のウィンドウから消えます。
+
+:::note
+
+Safariは、インターネット上のページが `localhost` に接続することを拒否する場合があります。サーバーに `Player connected:` が表示されない場合は、Chrome、Edge、Firefoxのいずれかでテストしてください。これは自分のコンピューター上のサーバーにだけ当てはまり、[オンライン](#put-the-server-online)のサーバーには影響しません。
+
+:::
+
+カプセルが1つしか表示されない場合は、ブラウザの開発者ツール（<kbd>F12</kbd>）を開いて、コンソールを確認します。
+
+- `Connected to http://localhost:3000` と表示されていれば、クライアントはサーバーに到達しています。サーバーのターミナルにエラーが出ていないか確認してください。
+- `localhost:3000` を含むエラーが表示されていれば、サーバーが実行されていないか、ブラウザがサーバーへのアクセスを許可されていません。もう一度確認を表示させるには、アドレスバーの左端にあるアイコンを選択してサイトの権限をリセットし、タブを再読み込みします。
+
+## 6. メッセージの流れ {#how-the-messages-flow}
+
+クライアントとサーバーは、名前の付いたメッセージを送り合って通信します。`socket.emit(name, data)` はメッセージを送信し、`socket.on(name, callback)` はメッセージが届いたときに関数を実行します。このプロジェクトでは6つのメッセージを使います。
+
+| メッセージ | 送信元 | 意味 |
+| --- | --- | --- |
+| `initialize` | クライアント（接続時） | 「準備ができました。誰がプレイしていますか？」 |
+| `playerData` | サーバー（そのクライアントへ） | そのクライアント自身のIDと、すべてのプレイヤーの位置。サーバーがそのクライアントのために選んだ開始位置も含みます |
+| `playerJoined` | サーバー（他のすべてのクライアントへ） | 新しいプレイヤーとその位置 |
+| `positionUpdate` | クライアント（自分のプレイヤーが動いたとき） | プレイヤーの新しい位置 |
+| `playerMoved` | サーバー（他のすべてのクライアントへ） | プレイヤーのIDと新しい位置 |
+| `playerLeft` | サーバー（他のすべてのクライアントへ） | 切断したプレイヤーのID |
+
+サーバー側では、`socket.emit` はその `socket` が属する1つのクライアントに返信し、`socket.broadcast.emit` はそのクライアント以外のすべてのクライアントに送信します。
+
+プロジェクトをシンプルに保っている点が2つあります。
+
+- `network` スクリプトは、位置が変わったときにだけ位置を送信します。そのため、立ち止まっているプレイヤーは何も送信しません。
+- `Other` のコピーには物理がありません。サーバーが伝えた他のプレイヤーの位置に、そのまま配置されます。
+
+## 7. サーバーをオンラインに公開する {#put-the-server-online}
+
+自分のコンピューター上のサーバーには、自分のコンピューターからしか接続できません。他の人とプレイするには、同じ `server.js` をホスティングサービスで実行します。次の条件を満たすサービスであれば、どれでも使えます。
+
+- Node.jsのプログラムを継続して実行できること。要求があったときに短い関数を実行するだけのサービスでは、接続を開いたままにできません。
+- WebSocket接続を受け付けること。
+- サーバーに `https://` のアドレスが与えられること。パブリッシュしたPlayCanvasのゲームはHTTPSで配信されます。ブラウザは、HTTPSのページが安全でないアドレスに接続することを、自分のコンピューター上のアドレスを除いて許可しません。
+
+ほとんどのサービスは、サーバーが待ち受けるポートを `PORT` 環境変数で伝えます。`server.js` はすでにこの変数を読み取っています。
+
+手順はどのサービスでもほぼ同じです。
+
+1. `server.js`、`package.json`、`package-lock.json` をGitリポジトリに入れます。`node_modules` フォルダーは含めません。
+2. ホスティングサービスで、そのリポジトリからWebサービスを作成します。入力を求められた場合、ビルドコマンドは `npm install`、起動コマンドは `node server.js` です。
+3. サービスから与えられたアドレスの後ろに `/socket.io/?EIO=4&transport=polling` を付けて、ブラウザで開きます。`0{"sid":` で始まる応答が返ってくれば、サーバーは実行されています。
+4. エディターで **Root** を選択し、`network` スクリプトの `serverUrl` 属性をそのアドレスに変更します。たとえば `https://my-multiplayer-server.example.com` です。
+5. プロジェクトを **Launch** して接続できることを確認してから、[パブリッシュ](/user-manual/editor/publishing/)します。
+
+:::info[一例]
+
+この記事を書いている2026年11月の時点では、[Render](https://render.com/docs/free)に、3つの条件をすべて満たす無料のWebサービスがあります。トラフィックのない状態が15分続くとスリープし、復帰には1分ほどかかります。そのため、最初に来たプレイヤーは、他のプレイヤーが表示されるまで待つことになります。ホスティングのプランは変わることがあるので、利用する前にサービスの内容を確認してください。
+
+:::
+
+ゲームをパブリッシュしたら、自分のページだけがサーバーを使えるようにします。`server.js` の `origin: '*'` を、ゲームが配信されるアドレスに置き換えます。
+
+```javascript
+cors: {
+    origin: ['https://playcanv.as', 'https://launch.playcanvas.com']
+}
+```
+
+## 次のステップ {#where-next}
+
+試してみるとよいこと:
+
+- 各プレイヤーに名前や色を付ける。サーバーが選び、`playerData` で送信します。
+- 位置の送信を1秒間に最大20回までにし、更新の合間は他のカプセルを滑らかに動かす。
+- 他のプレイヤーに物理を追加して、カプセル同士が押し合えるようにする。
+
+このプロジェクトは、各クライアントが報告する自分の位置をそのまま信用しているので、簡単に不正ができます。大規模なゲームでは、ゲームそのものをサーバーで実行し、クライアントには結果だけを送ります。これを権威サーバー（authoritative server）と呼びます。
+
+これらをすべて自分で書く必要はありません。マルチプレイヤーのフレームワークやホスト型のサービスを使って作るには、[Colyseusを使ったリアルタイムマルチプレイヤー](/tutorials/real-time-multiplayer-colyseus/)と[Photonを使用したリアルタイムマルチプレイヤー](/tutorials/real-time-multiplayer-photon/)を参照してください。

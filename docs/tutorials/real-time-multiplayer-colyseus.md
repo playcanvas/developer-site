@@ -147,7 +147,7 @@ NetworkManager.prototype.initialize = async function () {
 </TabItem>
 </Tabs>
 
-> Note that we're using the local `ws://localhost:2567` endpoint here. You need to [deploy your server](https://docs.colyseus.io/deployment/) to the public internet in order to play with others online. You can also use [Glitch](https://glitch.com/edit/#!/tutorial-playcanvas-server) to host your server publicly.
+> Note that we're using the local `ws://localhost:2567` endpoint here. You need to [deploy your server](https://docs.colyseus.io/deployment/) to the public internet in order to play with others online.
 
 When you **"Launch"** your PlayCanvas project now, your client is going to establish a connection with the server, and the server is going to create the room `my_room` on demand for you.
 
