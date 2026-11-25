@@ -3,6 +3,8 @@ title: Branches
 description: Documents main branch current branch creation favorites search closing deletion and collaborator expectations for branch lines.
 ---
 
+import StepVideo from '@site/src/components/StepVideo';
+
 A branch is an isolated line of development. Every checkpoint created belongs to a branch and a series of checkpoints in a branch can track the development of an application or a particular feature. A PlayCanvas project will always have at least one branch, the main branch, and will often have multiple branches. You can merge the changes from one branch into any other branch using the version control panel in the Editor.
 
 ## Main branch {#main-branch}
@@ -27,7 +29,7 @@ Branches created by you will automatically be favorited so you can quickly find 
 
 ## Filtering branch list {#filtering-branch-list}
 
-![Branch filter](/img/user-manual/editor/version-control/branches/filter-branches.gif)
+<StepVideo src="/video/user-manual/editor/version-control/branches/filter-branches.mp4" poster="/img/user-manual/editor/version-control/branches/filter-branches.webp" label="Branch filter" width={1265} height={720} />
 
 You can filter branches between:
 
@@ -39,15 +41,15 @@ Favoriting a branch can be done with the following options:
 
 ### Drop down menu {#drop-down-menu}
 
-![Favorite a branch via menu](/img/user-manual/editor/version-control/branches/favorite-branch-via-dropdown.gif)
+<StepVideo src="/video/user-manual/editor/version-control/branches/favorite-branch-via-dropdown.mp4" poster="/img/user-manual/editor/version-control/branches/favorite-branch-via-dropdown.webp" label="Favorite a branch via menu" width={1265} height={720} />
 
 ### Selected branch button {#selected-branch-button}
 
-![Favorite a branch via button](/img/user-manual/editor/version-control/branches/favorite-branch-via-button.gif)
+<StepVideo src="/video/user-manual/editor/version-control/branches/favorite-branch-via-button.mp4" poster="/img/user-manual/editor/version-control/branches/favorite-branch-via-button.webp" label="Favorite a branch via button" width={1265} height={720} />
 
 ## Searching for a branch {#searching-for-a-branch}
 
-![Searching for a branch](/img/user-manual/editor/version-control/branches/search-for-a-branch.gif)
+<StepVideo src="/video/user-manual/editor/version-control/branches/search-for-a-branch.mp4" poster="/img/user-manual/editor/version-control/branches/search-for-a-branch.webp" label="Searching for a branch" width={1275} height={720} />
 
 To help find a branch in the current list filter, you can use the search bar at the top.
 

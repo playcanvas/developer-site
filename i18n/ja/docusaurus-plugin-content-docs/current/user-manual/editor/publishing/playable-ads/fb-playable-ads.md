@@ -3,9 +3,11 @@ title: Facebookプレイアブル広告
 description: Facebook の単一ファイルまたは zip プレイアブル広告向けに、REST API ツールのエクスポート設定、サイズ予算、チェックリストをまとめます。
 ---
 
+import StepVideo from '@site/src/components/StepVideo';
+
 PlayCanvasは、[公式の外部ツール](https://github.com/playcanvas/playcanvas-rest-api-tools)を通じて[Facebook Playable Ad](https://www.facebook.com/business/ads/playable-ad-format)フォーマットと要件をサポートしています。
 
-![Facebook Playable Ads](/img/user-manual/editor/publishing/playable-ads/fb-playable-ads/fb-playable-ads.gif)
+<StepVideo src="/video/user-manual/editor/publishing/playable-ads/fb-playable-ads/fb-playable-ads.mp4" poster="/img/user-manual/editor/publishing/playable-ads/fb-playable-ads/fb-playable-ads.webp" label="Facebook Playable Ads" width={595} height={360} />
 
 ツールは、構成オプションを通じて、片方が2MB(無圧縮)HTMLファイル、もう片方が5MB(無圧縮)ZIPフォーマットの両方を作成できます。Facebook Playable Adの全仕様は、[ヘルプセンター](https://www.facebook.com/business/help/412951382532338)で見つけることができます。
 

@@ -3,6 +3,8 @@ title: Launch Page
 description: Launch Page basics with the Launch menu's device, profiler, debug, MiniStats and Inspector options, what the Editor live link updates and what needs a reload, dual-tab testing tips and running on phones.
 ---
 
+import StepVideo from '@site/src/components/StepVideo';
+
 The Editor's Viewport is where you visually construct your application. From there, you can press the Launch button to open the Launch Page and actually _run_ your application.
 
 ![Launch Button](/img/user-manual/editor/launch-page/launch-button.png)
@@ -43,7 +45,7 @@ A key feature of the Launch Page is that it maintains a real-time connection (or
 - **Assets**: changes such as editing a material or replacing a texture.
 - **Settings**: scene settings such as gravity, the skybox, fog and exposure, and project settings such as the resolution, layers, batch groups and localization assets.
 
-![Launch Page Live Link](/img/user-manual/editor/launch-page/launch-page-live-link.gif)
+<StepVideo src="/video/user-manual/editor/launch-page/launch-page-live-link.mp4" poster="/img/user-manual/editor/launch-page/launch-page-live-link.webp" label="Launch Page Live Link" width={1799} height={1001} />
 
 And if any other users (with write permission) are present in the Editor with you, their edits can update your Launch Page as well.
 

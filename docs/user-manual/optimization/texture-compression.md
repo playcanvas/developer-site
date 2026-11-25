@@ -3,6 +3,8 @@ title: Texture Compression
 description: Reduce VRAM and download size with Basis texture compression and runtime transcoding in the Editor.
 ---
 
+import StepVideo from '@site/src/components/StepVideo';
+
 Texture data is stored in a device's video memory (or VRAM). It is important to ensure that your application does not exhaust VRAM as this can cause undesirable things like browser tab crashes.
 
 The Editor has the ability to apply lossy compression schemes to your textures to dramatically reduce the amount of VRAM used using Basis.
@@ -40,7 +42,7 @@ Once the texture has been imported into the Editor, select it and scroll down in
 5. Change the quality setting to balance file size vs quality. Lower quality results in smaller file sizes.
 6. Click on Compress Basis.
 
-<img loading="lazy" src="/img/user-manual/assets/textures/texture-compression/enable-basis-texture-compression.gif" alt="Enabling Basis Texture Compression" width="400" />
+<StepVideo src="/video/user-manual/assets/textures/texture-compression/enable-basis-texture-compression.mp4" poster="/img/user-manual/assets/textures/texture-compression/enable-basis-texture-compression.webp" label="Enabling Basis Texture Compression" width={400} height={285} />
 
 The Basis WASM module will add 253KB of extra gzipped data to the preload download size but that should be offset by the texture size savings compared to using the legacy texture compression format files ([see below](#legacy-texture-compression)).
 
@@ -49,7 +51,7 @@ To remove Basis compression from a texture:
 1. Untick BASIS.
 2. Click on Compress Basis.
 
-<img loading="lazy" src="/img/user-manual/assets/textures/texture-compression/disable-basis-texture-compression.gif" alt="Disabling Basis Texture Compression" width="400" />
+<StepVideo src="/video/user-manual/assets/textures/texture-compression/disable-basis-texture-compression.mp4" poster="/img/user-manual/assets/textures/texture-compression/disable-basis-texture-compression.webp" label="Disabling Basis Texture Compression" width={400} height={222} />
 
 If you would no longer want to use Basis, remove Basis compression from all textures and delete the Basis folder from the project.
 
@@ -78,14 +80,14 @@ To use the Legacy Texture Compression options, select the texture and scroll dow
 2. Tick all the formats you wish to use.
 3. Click on Compress Legacy.
 
-<img loading="lazy" src="/img/user-manual/assets/textures/texture-compression/enable-legacy-texture-compression.gif" alt="Enabling Legacy Texture Compression" width="400" />
+<StepVideo src="/video/user-manual/assets/textures/texture-compression/enable-legacy-texture-compression.mp4" poster="/img/user-manual/assets/textures/texture-compression/enable-legacy-texture-compression.webp" label="Enabling Legacy Texture Compression" width={400} height={311} />
 
 To remove one or several formats:
 
 1. Untick all the formats you wish to remove.
 2. Click on Compress Legacy.
 
-<img loading="lazy" src="/img/user-manual/assets/textures/texture-compression/disable-legacy-texture-compression.gif" alt="Disabling Legacy Texture Compression" width="400" />
+<StepVideo src="/video/user-manual/assets/textures/texture-compression/disable-legacy-texture-compression.mp4" poster="/img/user-manual/assets/textures/texture-compression/disable-legacy-texture-compression.webp" label="Disabling Legacy Texture Compression" width={400} height={311} />
 
 ## Migrating from Legacy to Basis Texture Compression {#migrating-from-legacy-to-basis-texture-compression}
 
@@ -94,4 +96,4 @@ If you have a project that is already using the Legacy Texture Compression forma
 1. Remove all the legacy texture formats.
 2. Enable and use Basis.
 
-<img loading="lazy" src="/img/user-manual/assets/textures/texture-compression/migrate-legacy-to-basis.gif" alt="Migrate from Legacy to Basis" width="400" />
+<StepVideo src="/video/user-manual/assets/textures/texture-compression/migrate-legacy-to-basis.mp4" poster="/img/user-manual/assets/textures/texture-compression/migrate-legacy-to-basis.webp" label="Migrate from Legacy to Basis" width={400} height={482} />

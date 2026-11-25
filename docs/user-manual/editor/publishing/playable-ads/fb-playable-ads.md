@@ -3,9 +3,11 @@ title: Facebook Playable Ad
 description: Documents the REST API tool export settings, size budgeting, and checklists for Facebook single-file or zip playable ads.
 ---
 
+import StepVideo from '@site/src/components/StepVideo';
+
 PlayCanvas supports the [Facebook Playable Ad](https://www.facebook.com/business/ads/playable-ad-format) formats and requirements via an [official external tool on GitHub](https://github.com/playcanvas/playcanvas-rest-api-tools).
 
-![Facebook Playable Ads](/img/user-manual/editor/publishing/playable-ads/fb-playable-ads/fb-playable-ads.gif)
+<StepVideo src="/video/user-manual/editor/publishing/playable-ads/fb-playable-ads/fb-playable-ads.mp4" poster="/img/user-manual/editor/publishing/playable-ads/fb-playable-ads/fb-playable-ads.webp" label="Facebook Playable Ads" width={595} height={360} />
 
 The tool can create both the single 2MB (uncompressed) HTML file and the 5MB (uncompressed) ZIP formats via the configuration options. Full specifications for Facebook Playable Ads can be found on their [help center](https://www.facebook.com/business/help/412951382532338).
 

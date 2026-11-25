@@ -3,6 +3,8 @@ title: Editor API
 description: Beta Editor API examples using DevTools or Violentmonkey scripts to automate entities and extend UI atop the evolving open-source editor-api repository.
 ---
 
+import StepVideo from '@site/src/components/StepVideo';
+
 :::warning
 
 The Editor API is a beta feature. Please use caution when using on live projects.
@@ -19,7 +21,7 @@ The Editor API is open sourced on [GitHub](https://github.com/playcanvas/editor-
 
 The API can be accessed via the browser's devtools console allowing for automation of repetitive tasks. In the example below, we are using the Editor to find all the Entities that have the tag 'red' and disabling them by running code in the browser console.
 
-![](/img/user-manual/editor/editor-api/disable-red-boxes.gif)
+<StepVideo src="/video/user-manual/editor/editor-api/disable-red-boxes.mp4" poster="/img/user-manual/editor/editor-api/disable-red-boxes.webp" width={1921} height={1080} />
 
 Editor API code:
 
@@ -40,7 +42,7 @@ User scripts is the more accessible out of the two which allows you to run custo
 
 Below we have an example where a button has been added to the [Viewport](/user-manual/editor/interface/viewport) to generate and randomly place boxes into the scene.
 
-![](/img/user-manual/editor/editor-api/generate-random-boxes.gif)
+<StepVideo src="/video/user-manual/editor/editor-api/generate-random-boxes.mp4" poster="/img/user-manual/editor/editor-api/generate-random-boxes.webp" width={1281} height={720} />
 
 The PlayCanvas team are currently using the [Violentmonkey](https://violentmonkey.github.io/) open source browser extension to manage user scripts.
 

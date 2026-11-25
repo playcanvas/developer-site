@@ -5,6 +5,7 @@ description: リアルタイムシャドウを有効化し、シャドウタイ�
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import StepVideo from '@site/src/components/StepVideo';
 
 シャドウはシーン内のオブジェクトを接地させ、奥行きやオブジェクト同士の空間的な関係を伝えることで、リアリズムと視覚的な完成度を高めます。
 
@@ -317,7 +318,7 @@ app.on('update', () => {
 
 このライトによってキャストされる、1を完全な強度のシャドウ、0をシャドウのないものとするシャドウの強度（`light.shadowIntensity`）。
 
-![Shadow Intensity](/img/user-manual/graphics/lighting/shadows/shadow-intensity.gif)
+<StepVideo src="/video/user-manual/graphics/lighting/shadows/shadow-intensity.mp4" poster="/img/user-manual/graphics/lighting/shadows/shadow-intensity.webp" label="Shadow Intensity" width={1280} height={720} />
 
 ## シャドウアーティファクトの解消 {#fixing-shadow-artifacts}
 

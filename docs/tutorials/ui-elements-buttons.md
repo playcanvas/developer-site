@@ -7,6 +7,8 @@ topic: User Interface
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/501973/ED1B35-image-75.jpg
 ---
 
+import StepVideo from '@site/src/components/StepVideo';
+
 <div className="iframe-container">
     <iframe src="https://playcanv.as/p/jpRiV53D/" title="User Interface - Buttons" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
@@ -37,13 +39,13 @@ There are two ways to add a button to the scene.
 
 This is the easiest way to add a button to the scene as it creates the necessary entities, components and preconfigures the properties.
 
-<img loading="lazy" src="/img/tutorials/ui/buttons/adding-button-via-hierarchy.gif" />
+<StepVideo src="/video/tutorials/ui/buttons/adding-button-via-hierarchy.mp4" poster="/img/tutorials/ui/buttons/adding-button-via-hierarchy.webp" width={700} height={480} />
 
 ### With an existing Element
 
 If there is an existing Element that we would like to turn into a button, we can add Button component to it in the Inspector panel and configure it ourselves.
 
-<img loading="lazy" src="/img/tutorials/ui/buttons/adding-button-via-inspector.gif" width="300" />
+<StepVideo src="/video/tutorials/ui/buttons/adding-button-via-inspector.mp4" poster="/img/tutorials/ui/buttons/adding-button-via-inspector.webp" width={300} height={875} />
 
 Remember to enable Use Input on the Element component so the user can interact with it:
 
@@ -99,7 +101,7 @@ Tinting the button color in each state is the easiest method to add some user fe
 
 With the following effect:
 
-<img loading="lazy" src="/img/tutorials/ui/buttons/high-quality-button-effect.gif" />
+<StepVideo src="/video/tutorials/ui/buttons/high-quality-button-effect.mp4" poster="/img/tutorials/ui/buttons/high-quality-button-effect.webp" width={418} height={400} />
 
 #### Changing the Sprite
 
@@ -109,7 +111,7 @@ We can also change the sprite image of the button in the different states for ca
 
 With the following effect:
 
-<img loading="lazy" src="/img/tutorials/ui/buttons/low-quality-button-effect.gif" />
+<StepVideo src="/video/tutorials/ui/buttons/low-quality-button-effect.mp4" poster="/img/tutorials/ui/buttons/low-quality-button-effect.webp" width={418} height={400} />
 
 ### Button events
 

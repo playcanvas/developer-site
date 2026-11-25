@@ -3,6 +3,8 @@ title: Batching
 description: "Batch groups merge mesh instances to cut draw calls: Editor setup, static versus dynamic rules, and limitations."
 ---
 
+import StepVideo from '@site/src/components/StepVideo';
+
 Batching is the process of combining multiple mesh instances together into a single mesh instance, so that they can all be rendered in a single GPU draw call. PlayCanvas provides a handy feature on the [Model](/user-manual/editor/scenes/components/model), [Sprite](/user-manual/editor/scenes/components/sprite) and [Element](/user-manual/editor/scenes/components/element) components that lets you assign these components to batch groups which give the engine hints on how to combine meshes to reduce the overall draw call count.
 
 There are a variety of rules which the engine will apply to see if mesh instances are able to be combined. The primary rule is that all mesh instances must share the same material.
@@ -71,11 +73,11 @@ if (element.batchGroupId)
 
 In this scene we have created a static environment from 7 separate model files, some of which are repeated in the scene. For example, the road tile is used in 50 entities to create the long road through the center of the scene.
 
-![Western Animation](/img/user-manual/optimization/batching/western-animation-all.gif)
+<StepVideo src="/video/user-manual/optimization/batching/western-animation-all.mp4" poster="/img/user-manual/optimization/batching/western-animation-all.webp" label="Western Animation" width={600} height={337} />
 
 You can see in the animation each draw call as it is made. In this environment the engine makes over 50 draw calls to draw each of the models individually. However, apart from the ground, all of these models use the same material and so they can be combined into batch groups.
 
-![Western Animation Batched](/img/user-manual/optimization/batching/western-animation.gif)
+<StepVideo src="/video/user-manual/optimization/batching/western-animation.mp4" poster="/img/user-manual/optimization/batching/western-animation.webp" label="Western Animation Batched" width={600} height={338} />
 
 In this animation we have created 4 batch groups for the buildings, the cacti, the road and the ground. Notice, that the road and the ground are not combined into single draw calls because the meshes are larger than the Max AABB Size defined on the batch group.
 

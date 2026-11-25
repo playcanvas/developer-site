@@ -3,9 +3,11 @@ title: アセットのエクスポート
 description: Blender、Maya、または 3DS Max から GLB または FBX 形式で 3D モデルをエクスポートし、PlayCanvas にインポートします。
 ---
 
+import StepVideo from '@site/src/components/StepVideo';
+
 PlayCanvasは、glTFバイナリ(GLB)、FBX、OBJ、3DS、COLLADA(DAE)の以下の形式の3Dコンテンツをインポートできます。 GLBはオープンソースの標準規格であり、エディターで非常によくサポートされているため、GLBの使用を強くお勧めします。
 
-![GLBインポートの例](/img/user-manual/assets/models/building/glb-import.gif)  
+<StepVideo src="/video/user-manual/assets/models/building/glb-import.mp4" poster="/img/user-manual/assets/models/building/glb-import.webp" label="GLBインポートの例" width={600} height={338} />
 *Loïc NorgeotによるモデルとGeoffrey Marchalによる蚊のスキャンは、[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)ライセンスに基づき[Sketchfab](https://sketchfab.com/3d-models/real-time-refraction-demo-mosquito-in-amber-37233d6ed84844fea1ebe88069ea58d1)から提供されています*
 
 GLBが利用できない場合は、ロバストで十分にテストされた業界標準形式であるFBXを使用してください。

@@ -7,6 +7,8 @@ topic: User Interface
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/1005906/36C2AF-image-75.jpg
 ---
 
+import StepVideo from '@site/src/components/StepVideo';
+
 <div className="iframe-container">
     <iframe src="https://playcanv.as/p/8ZQaDGf8/" title="User Interface - Text Input" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
@@ -25,7 +27,7 @@ If touch is used, there is an assumption that a virtual keyboard would be shown 
 
 Here are examples of it being used on desktop:
 
-![](/img/tutorials/ui-text-input/desktop-preview.gif)
+<StepVideo src="/video/tutorials/ui-text-input/desktop-preview.mp4" poster="/img/tutorials/ui-text-input/desktop-preview.webp" width={406} height={240} />
 
 And on mobile:
 
@@ -40,32 +42,32 @@ This doesn't support 3D elements.
 ## How to install
 
 Open the [example project](https://playcanvas.com/project/1005906/overview/ui-text-input), right click on the folder 'ui-input' and click on 'Copy'.
-![](/img/tutorials/ui-text-input/copy-folder.gif)
+<StepVideo src="/video/tutorials/ui-text-input/copy-folder.mp4" poster="/img/tutorials/ui-text-input/copy-folder.webp" width={1578} height={702} />
 
 Open your project, right click in the assets panel and click on 'Paste'
-![](/img/tutorials/ui-text-input/paste-folder.gif)
+<StepVideo src="/video/tutorials/ui-text-input/paste-folder.mp4" poster="/img/tutorials/ui-text-input/paste-folder.webp" width={810} height={360} />
 
 ## Adding your first text input
 
 Create an UI Image/Group Element Entity as a child of a UI 2D Screen and size it accordingly. Make sure to enable 'Use Input' on the Element component. This defines the input area for the user to click on and start inputting text.
 
-![](/img/tutorials/ui-text-input/create-image-element.gif)
+<StepVideo src="/video/tutorials/ui-text-input/create-image-element.mp4" poster="/img/tutorials/ui-text-input/create-image-element.webp" width={1129} height={480} />
 
 Add a Script Component to the Element Entity and add the Script Type 'uiInputField'.
 
-![](/img/tutorials/ui-text-input/add-script-component.gif)
+<StepVideo src="/video/tutorials/ui-text-input/add-script-component.mp4" poster="/img/tutorials/ui-text-input/add-script-component.webp" width={1129} height={480} />
 
 Create a UI Text Element Entity as a child of the Element Entity that we just created. The text in the element will updated by the Script Type 'uiInputField' based on the user input and the script attributes data.
 
-![](/img/tutorials/ui-text-input/create-text-element.gif)
+<StepVideo src="/video/tutorials/ui-text-input/create-text-element.mp4" poster="/img/tutorials/ui-text-input/create-text-element.webp" width={1129} height={480} />
 
 Go back to the Script Type 'uiInputField' that added earlier, reference the Text Element Entity and change the script attributes data to your use case. Hover over each attribute to see the tooltip and description.
 
-![](/img/tutorials/ui-text-input/update-script-type.gif)
+<StepVideo src="/video/tutorials/ui-text-input/update-script-type.mp4" poster="/img/tutorials/ui-text-input/update-script-type.webp" width={1129} height={480} />
 
 Finally, launch the scene to test.
 
-![](/img/tutorials/ui-text-input/launch-scene.gif)
+<StepVideo src="/video/tutorials/ui-text-input/launch-scene.mp4" poster="/img/tutorials/ui-text-input/launch-scene.webp" width={1129} height={480} />
 
 ## Advanced: How to style
 

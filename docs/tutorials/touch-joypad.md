@@ -7,6 +7,8 @@ topic: Input
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/1007506/2F5E56-image-75.jpg
 ---
 
+import StepVideo from '@site/src/components/StepVideo';
+
 <div className="iframe-container">
     <iframe src="https://playcanv.as/p/kvE0iJWc/" title="Touchscreen Joypad Controls" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
@@ -19,15 +21,15 @@ This tutorial shares a Touchscreen Joypad library that can be installed and cust
 
 We recommend reading about the [PlayCanvas UI system](/user-manual/user-interface/) if you have not used it before as it is used to render and position the controls for this library.
 
-![](/img/tutorials/touchscreen-joypad-controls/preview.gif)
+<StepVideo src="/video/tutorials/touchscreen-joypad-controls/preview.mp4" poster="/img/tutorials/touchscreen-joypad-controls/preview.webp" width={572} height={320} />
 
 ## How to install
 
 Open the [example project](https://playcanvas.com/project/1007506/overview/touchscreen-joypad-controls), right click on the folder 'touch-joypad' and click on 'Copy'.
-![](/img/tutorials/touchscreen-joypad-controls/copy-folder.gif)
+<StepVideo src="/video/tutorials/touchscreen-joypad-controls/copy-folder.mp4" poster="/img/tutorials/touchscreen-joypad-controls/copy-folder.webp" width={821} height={360} />
 
 Open your project, right click in the assets panel and click on 'Paste'
-![](/img/tutorials/touchscreen-joypad-controls/paste-folder.gif)
+<StepVideo src="/video/tutorials/touchscreen-joypad-controls/paste-folder.mp4" poster="/img/tutorials/touchscreen-joypad-controls/paste-folder.webp" width={821} height={360} />
 
 ## Adding your joystick
 
@@ -40,7 +42,7 @@ For this example, let's use the 'Left Half Touch Joystick' template.
 
 Create a 2D screen Entity and [add the template](/user-manual/editor/templates/#adding-templates-in-your-scene) as a child of the screen Entity.
 
-![](/img/tutorials/touchscreen-joypad-controls/adding-left-half-joystick.gif)
+<StepVideo src="/video/tutorials/touchscreen-joypad-controls/adding-left-half-joystick.mp4" poster="/img/tutorials/touchscreen-joypad-controls/adding-left-half-joystick.webp" width={868} height={480} />
 
 The joystick is made of three Entities:
 
@@ -58,7 +60,7 @@ As the input area is an UI Element, it can be positioned, sized and anchored spe
 
 It also has the 'touchJoystick' which has all the logic and attributes for the joystick. Each attribute has tooltips describing what they are for with some more details below.
 
-![](/img/tutorials/touchscreen-joypad-controls/joystick-script-attributes.gif)
+<StepVideo src="/video/tutorials/touchscreen-joypad-controls/joystick-script-attributes.mp4" poster="/img/tutorials/touchscreen-joypad-controls/joystick-script-attributes.webp" width={868} height={480} />
 
 The base and nub Entities are controlled by the script and are UI Elements. If you would like the joystick to be in a different place than where it is in the template, please position and anchor the base Entity to where you need them to be and not the input area.
 
@@ -69,13 +71,13 @@ There are 3 behavior types for the joystick that are commonly found in touch scr
 ![](/img/tutorials/touchscreen-joypad-controls/joystick-type.png)
 
 'Fixed in place' where the base of the joystick does not move from its position:
-![](/img/tutorials/touchscreen-joypad-controls/joystick-fixed.gif)
+<StepVideo src="/video/tutorials/touchscreen-joypad-controls/joystick-fixed.mp4" poster="/img/tutorials/touchscreen-joypad-controls/joystick-fixed.webp" width={854} height={480} />
 
 'Move to first touch and fixed' where the base of the joystick moves to where the user first touches in the input area and then stays fixed:
-![](/img/tutorials/touchscreen-joypad-controls/joystick-relative-fixed.gif)
+<StepVideo src="/video/tutorials/touchscreen-joypad-controls/joystick-relative-fixed.mp4" poster="/img/tutorials/touchscreen-joypad-controls/joystick-relative-fixed.webp" width={854} height={480} />
 
 'Move to first touch and drags' where the base of the joystick moves to where the user first touches in the input area and then is dragged when the user drags pass the joystick range:
-![](/img/tutorials/touchscreen-joypad-controls/joystick-relative-drag.gif)
+<StepVideo src="/video/tutorials/touchscreen-joypad-controls/joystick-relative-drag.mp4" poster="/img/tutorials/touchscreen-joypad-controls/joystick-relative-drag.webp" width={855} height={480} />
 
 This can be changed at runtime so it's possible to add this as a user option in the application as part of the in-application settings.
 
@@ -107,7 +109,7 @@ console.log('X: ' + joystick.x + ', Y: ' + joystick.y);
 
 Buttons are fixed position UI Elements on the screen. There is a template for button in the 'templates' folder and [should be added](/user-manual/editor/templates/#adding-templates-in-your-scene) as a child of the screen Entity.
 
-![](/img/tutorials/touchscreen-joypad-controls/adding-button.gif)
+<StepVideo src="/video/tutorials/touchscreen-joypad-controls/adding-button.mp4" poster="/img/tutorials/touchscreen-joypad-controls/adding-button.webp" width={868} height={480} />
 
 As they are UI Elements, they can be positioned, sized and anchored specifically for your needs via the [UI system layout](/user-manual/user-interface/elements/).
 

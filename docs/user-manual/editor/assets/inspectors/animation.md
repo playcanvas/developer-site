@@ -3,17 +3,19 @@ title: Animation
 description: Preview animations on templates or models from the asset inspector, explore graph previews, and tune experimental animation import quality settings.
 ---
 
+import StepVideo from '@site/src/components/StepVideo';
+
 An Animation asset is used to play a single animation on a 3D model. Animations are imported by uploading 3D scenes (such as FBX files) which contain animation data. The animation data is extracted from the uploaded file by the [asset pipeline](/user-manual/glossary#asset-pipeline) and a [Target Asset](/user-manual/glossary#target-asset) is created to use in game.
 
 ## Animation Preview
 
 The inspector has a viewer that can be used to preview the animation with any Template or Model asset. This is useful if you have a single animation that can be applied to different character rigs.
 
-![Asset Inspector Preview](/img/user-manual/assets/animation/inspector-preview.gif)
+<StepVideo src="/video/user-manual/assets/animation/inspector-preview.mp4" poster="/img/user-manual/assets/animation/inspector-preview.webp" label="Asset Inspector Preview" width={1449} height={911} />
 
 There is also a viewer in the [Anim State Graph Editor](/user-manual/animation/state-graphs/) when you select a state in the graph. When selected, all Entities in the scene that are using the graph will show in a list and can be selected for preview.
 
-![Anim State Graph Preview](/img/user-manual/assets/animation/anim-state-graph-preview.gif)
+<StepVideo src="/video/user-manual/assets/animation/anim-state-graph-preview.mp4" poster="/img/user-manual/assets/animation/anim-state-graph-preview.webp" label="Anim State Graph Preview" width={1449} height={911} />
 
 ## Animation Import Settings
 

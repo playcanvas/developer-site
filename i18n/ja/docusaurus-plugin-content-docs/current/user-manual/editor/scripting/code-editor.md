@@ -3,6 +3,8 @@ title: コードエディター
 description: Monaco ベースの共同編集、ファイルタブ、オートコンプリート、JSHint のリント、ショートカット、バージョン管理フックの開き方を説明します。
 ---
 
+import StepVideo from '@site/src/components/StepVideo';
+
 コードエディターは、スクリプトアセットやJSON、HTML、CSSなどのテキストベースのアセットを編集できる、オンラインリアルタイムコラボレーションエディタです。
 
 ## コードエディターの開き方
@@ -110,7 +112,7 @@ description: Monaco ベースの共同編集、ファイルタブ、オートコ
 
 Ctrl + P（MacではCmd + P）を押すことで、アセットを素早く開くことができます。これにより、そのアセットの名前で検索できるパネルが開きます。アセットの名前を入力し始めると、パネルはあいまい検索を行い、探しているアセットを見つけます。Enterキーを押すと選択したアセットが開きます。
 
-![Go to Anything](/img/user-manual/scripting/go-to-anything.gif)
+<StepVideo src="/video/user-manual/scripting/go-to-anything.mp4" poster="/img/user-manual/scripting/go-to-anything.webp" label="Go to Anything" width={1500} height={650} />
 
 ## Preferences
 
@@ -124,16 +126,16 @@ Ctrl + P（MacではCmd + P）を押すことで、アセットを素早く開�
 
 コードエディターで単語をハイライトすると、そのファイル内の他のすべてのマッチがハイライトされ、変数や関数がどこで使用されているかを確認するのが容易になります。
 
-![Quick Searching](/img/user-manual/scripting/code-editor-quick-searching.gif)
+<StepVideo src="/video/user-manual/scripting/code-editor-quick-searching.mp4" poster="/img/user-manual/scripting/code-editor-quick-searching.webp" label="Quick Searching" width={660} height={218} />
 
 ### 複数選択編集
 
 Altキーを押しながら左マウスボタンをクリックすると、エディタに別のカーソルが追加されます。これにより、ファイルの複数の箇所で同じ変更を素早く行うことができます。
 
-![Multiple Selection Editing](/img/user-manual/scripting/code-editor-multiple-selection.gif)
+<StepVideo src="/video/user-manual/scripting/code-editor-multiple-selection.mp4" poster="/img/user-manual/scripting/code-editor-multiple-selection.webp" label="Multiple Selection Editing" width={660} height={68} />
 
 ### 矩形選択
 
 Alt + Shiftキーを押しながら左マウスボタンをドラッグすると、矩形選択が作成されます。これは、テキストの列を選択し、編集するのに便利です。
 
-![Rectangular Selection](/img/user-manual/scripting/code-editor-rectangular-selection.gif)
+<StepVideo src="/video/user-manual/scripting/code-editor-rectangular-selection.mp4" poster="/img/user-manual/scripting/code-editor-rectangular-selection.webp" label="Rectangular Selection" width={660} height={68} />

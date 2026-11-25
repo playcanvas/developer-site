@@ -5,6 +5,8 @@ thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/100
 description: PlayCanvas の UI 要素でカスタマイズ可能なオンスクリーンのツインスティック風ジョイパッドを追加し、モバイルのキャラクター操作に使います。
 ---
 
+import StepVideo from '@site/src/components/StepVideo';
+
 <div className="iframe-container">
     <iframe src="https://playcanv.as/p/kvE0iJWc/" title="Touchscreen Joypad Controls" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
@@ -17,15 +19,15 @@ description: PlayCanvas の UI 要素でカスタマイズ可能なオンスク�
 
 このライブラリでは、[PlayCanvas UI system](/user-manual/user-interface/)が使用されているため、その前に使用したことがない場合は、UIシステムについて読むことをお勧めします。
 
-![](/img/tutorials/touchscreen-joypad-controls/preview.gif)
+<StepVideo src="/video/tutorials/touchscreen-joypad-controls/preview.mp4" poster="/img/tutorials/touchscreen-joypad-controls/preview.webp" width={572} height={320} />
 
 ## インストール方法
 
 Open the [example project](https://playcanvas.com/project/1007506/overview/touchscreen-joypad-controls), right click on the folder 'touch-joypad' and click on 'Copy'.
-![](/img/tutorials/touchscreen-joypad-controls/copy-folder.gif)
+<StepVideo src="/video/tutorials/touchscreen-joypad-controls/copy-folder.mp4" poster="/img/tutorials/touchscreen-joypad-controls/copy-folder.webp" width={821} height={360} />
 
 Open your project, right click in the assets panel and click on 'Paste'
-![](/img/tutorials/touchscreen-joypad-controls/paste-folder.gif)
+<StepVideo src="/video/tutorials/touchscreen-joypad-controls/paste-folder.mp4" poster="/img/tutorials/touchscreen-joypad-controls/paste-folder.webp" width={821} height={360} />
 
 ## ジョイスティックの追加
 
@@ -38,7 +40,7 @@ Open your project, right click in the assets panel and click on 'Paste'
 
 2DスクリーンのEntityを作成し、[テンプレートを子として追加](/user-manual/editor/templates/#adding-templates-in-your-scene)します。
 
-![](/img/tutorials/touchscreen-joypad-controls/adding-left-half-joystick.gif)
+<StepVideo src="/video/tutorials/touchscreen-joypad-controls/adding-left-half-joystick.mp4" poster="/img/tutorials/touchscreen-joypad-controls/adding-left-half-joystick.webp" width={868} height={480} />
 
 ジョイスティックは3つのEntityで構成されています。
 
@@ -56,7 +58,7 @@ Open your project, right click in the assets panel and click on 'Paste'
 
 また、ジョイスティックに必要なすべてのロジックと属性を持つ'touchJoystick'があります。各属性には、詳細が記載されたツールチップがあります。
 
-![](/img/tutorials/touchscreen-joypad-controls/joystick-script-attributes.gif)
+<StepVideo src="/video/tutorials/touchscreen-joypad-controls/joystick-script-attributes.mp4" poster="/img/tutorials/touchscreen-joypad-controls/joystick-script-attributes.webp" width={868} height={480} />
 
 ベースとノブのエンティティはスクリプトで制御され、UIエレメントです。ジョイスティックをテンプレート内の場所以外に配置する場合は、ベースエンティティを必要な場所に配置し、アンカーを設定してください。
 
@@ -67,13 +69,13 @@ Open your project, right click in the assets panel and click on 'Paste'
 ![](/img/tutorials/touchscreen-joypad-controls/joystick-type.png)
 
 'Fixed in place' where the base of the joystick does not move from it's position:
-![](/img/tutorials/touchscreen-joypad-controls/joystick-fixed.gif)
+<StepVideo src="/video/tutorials/touchscreen-joypad-controls/joystick-fixed.mp4" poster="/img/tutorials/touchscreen-joypad-controls/joystick-fixed.webp" width={854} height={480} />
 
 'Move to first touch and fixed' where the base of the joystick moves to where the user first touches in the input area and then stays fixed:
-![](/img/tutorials/touchscreen-joypad-controls/joystick-relative-fixed.gif)
+<StepVideo src="/video/tutorials/touchscreen-joypad-controls/joystick-relative-fixed.mp4" poster="/img/tutorials/touchscreen-joypad-controls/joystick-relative-fixed.webp" width={854} height={480} />
 
 'Move to first touch and drags' where the base of the joystick moves to where the user first touches in the input area and then is dragged when the user drags pass the joystick range:
-![](/img/tutorials/touchscreen-joypad-controls/joystick-relative-drag.gif)
+<StepVideo src="/video/tutorials/touchscreen-joypad-controls/joystick-relative-drag.mp4" poster="/img/tutorials/touchscreen-joypad-controls/joystick-relative-drag.webp" width={855} height={480} />
 
 これは、ランタイムで変更できるため、アプリケーションの設定の一部として、ユーザーオプションとして追加することができます。
 
@@ -105,7 +107,7 @@ console.log('X: ' + joystick.x + ', Y: ' + joystick.y);
 
 ボタンは画面上の固定位置のUIエレメントです。'templates'フォルダにボタンのテンプレートがあり、[子として追加](/user-manual/editor/templates/#adding-templates-in-your-scene)する必要があります。
 
-![](/img/tutorials/touchscreen-joypad-controls/adding-button.gif)
+<StepVideo src="/video/tutorials/touchscreen-joypad-controls/adding-button.mp4" poster="/img/tutorials/touchscreen-joypad-controls/adding-button.webp" width={868} height={480} />
 
 UIエレメントであるため、[UIシステムレイアウト](/user-manual/user-interface/elements/)を使用して、必要に応じて位置、サイズ、およびアンカーを特定することができます。
 

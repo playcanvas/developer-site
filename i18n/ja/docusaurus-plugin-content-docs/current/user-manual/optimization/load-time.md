@@ -3,6 +3,8 @@ title: ロード時間の最適化
 description: 画像形式、テクスチャサイズ、プリロードの選択、Asset の監査、gzip、段階的ロードで起動を高速化します。
 ---
 
+import StepVideo from '@site/src/components/StepVideo';
+
 最適化によってフレームレートを向上させるのに限定されません。ロード時間も同様に重要です。アプリのロードが速ければ、ユーザーがそれを体験するために残留する可能性が高くなります。ユーザーの離脱を防ぐためにアプリが5秒以下で読み込まれるようにすることを目指してください。
 
 以下は、高速なロード時間を実現するためのいくつかのヒントです。
@@ -37,7 +39,7 @@ description: 画像形式、テクスチャサイズ、プリロードの選択�
 
 ただし、ユーザーがアセットのロードが完了する前に開始ボタンを押した場合は、ボタンに進行状況バーが表示されます。バーが100%に達すると、ゲームは自動的にメインゲームに移行します。
 
-![Virtual Voodoo Assets Not Ready](/img/user-manual/optimization/loading/virtual-voodoo-assets-not-ready.gif)
+<StepVideo src="/video/user-manual/optimization/loading/virtual-voodoo-assets-not-ready.mp4" poster="/img/user-manual/optimization/loading/virtual-voodoo-assets-not-ready.webp" label="Virtual Voodoo Assets Not Ready" width={862} height={480} />
 
 アセットを段階的にロードし、定期的にユーザーが新しいものとやりとりおよび/または見ることができるようにすることで、ロード時間が長い場合でも、ユーザーは参加し続けることができます。
 
@@ -49,4 +51,4 @@ description: 画像形式、テクスチャサイズ、プリロードの選択�
 
 以下は、キャラクターの輪郭線を完全に読み込むまでのプレースホルダーとして、キャラクターのシルエットを使用する例です。シルエットのプレースホルダーはファイルサイズが小さいため、プリロードシーケンスの一部として使用できます。また、アプリケーション内の他のキャラクターでも再利用できます。
 
-![Lazy Load Character](/img/user-manual/optimization/loading/character-load.gif)
+<StepVideo src="/video/user-manual/optimization/loading/character-load.mp4" poster="/img/user-manual/optimization/loading/character-load.webp" label="Lazy Load Character" width={444} height={360} />

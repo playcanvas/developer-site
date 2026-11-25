@@ -3,9 +3,11 @@ title: ヒエラルキーを含むモデルのインポート
 description: Import Hierarchy を有効にすると、モデルが編集可能な Entity ツリーとしてインポートされ、リンクされたマテリアル、テクスチャ、アニメーション、Template が Scene 構成に使えます。
 ---
 
+import StepVideo from '@site/src/components/StepVideo';
+
 PlayCanvasでは、シーン内のエンティティ階層ごとにメッシュを持つモデルをインポートすることができます。これにより、エディタで異なるメッシュを直接編集することができます。コンポーネントを追加したり、他のエンティティをアタッチしたり、エンティティ階層内のエンティティを移動/回転/スケールしたりすることができます。
 
-![Edit model hierarchy in the Editor](/img/user-manual/assets/import-pipeline/import-hierarchy/edit-hierarchy.gif)
+<StepVideo src="/video/user-manual/assets/import-pipeline/import-hierarchy/edit-hierarchy.mp4" poster="/img/user-manual/assets/import-pipeline/import-hierarchy/edit-hierarchy.webp" label="Edit model hierarchy in the Editor" width={945} height={480} />
 
 ## 有効化の方法
 
@@ -29,7 +31,7 @@ PlayCanvasでは、シーン内のエンティティ階層ごとにメッシュ�
 
 概要として、モデルファイルを 'アセットパネル' にドラッグします。
 
-![Drag Model into Assets Panel](/img/user-manual/assets/import-pipeline/import-hierarchy/import-model.gif)
+<StepVideo src="/video/user-manual/assets/import-pipeline/import-hierarchy/import-model.mp4" poster="/img/user-manual/assets/import-pipeline/import-hierarchy/import-model.webp" label="Drag Model into Assets Panel" width={1235} height={480} />
 
 インポート時に次のアセットが作成されます。
 

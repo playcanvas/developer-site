@@ -5,6 +5,8 @@ thumb: /img/tutorials/importing-first-model-and-animation/thumbnail.jpg
 description: リグ付きキャラクターをインポートし、Animation Component を設定し、パッケージされたサンプル Asset のクリップを再生します。
 ---
 
+import StepVideo from '@site/src/components/StepVideo';
+
 <div className="iframe-container">
     <iframe src="https://www.youtube.com/embed/r0LYQw7laRA" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
@@ -13,7 +15,7 @@ description: リグ付きキャラクターをインポートし、Animation Com
 
 このチュートリアルでは、最初のアニメーションモデルをプロジェクトに追加する方法を説明します。
 
-![](/img/tutorials/importing-first-model-and-animation/preview.gif)
+<StepVideo src="/video/tutorials/importing-first-model-and-animation/preview.mp4" poster="/img/tutorials/importing-first-model-and-animation/preview.webp" width={932} height={480} />
 
 ## サンプルアセットの入手
 
@@ -35,7 +37,7 @@ description: リグ付きキャラクターをインポートし、Animation Com
 
 すると、ファイルがプロジェクトにインポートされ、PlayCanvasエディターがマテリアル (Material) 、コンテナ (Container) 、レンダー(Render) アセット、そして最も重要なテンプレート (Template) アセットを作成します。
 
-![](/img/tutorials/importing-first-model-and-animation/importing-model-fbx.gif)
+<StepVideo src="/video/tutorials/importing-first-model-and-animation/importing-model-fbx.mp4" poster="/img/tutorials/importing-first-model-and-animation/importing-model-fbx.webp" width={1019} height={480} />
 
 既存のプロジェクトにFBXをインポートする場合は、Project Settings -> Asset Importで以下の設定を確認してください。
 
@@ -49,19 +51,19 @@ description: リグ付きキャラクターをインポートし、Animation Com
 
 選択したEntityの子として、3Dビューポートにドラッグするだけです。
 
-![](/img/tutorials/importing-first-model-and-animation/template-add-scene-view.gif)
+<StepVideo src="/video/tutorials/importing-first-model-and-animation/template-add-scene-view.mp4" poster="/img/tutorials/importing-first-model-and-animation/template-add-scene-view.webp" width={934} height={480} />
 
 Entityのヒエラルキービューにドラッグすると、そのEntityの子として追加されます。
 
-![](/img/tutorials/importing-first-model-and-animation/template-add-on-entity.gif)
+<StepVideo src="/video/tutorials/importing-first-model-and-animation/template-add-on-entity.mp4" poster="/img/tutorials/importing-first-model-and-animation/template-add-on-entity.webp" width={934} height={480} />
 
 ヒエラルキービューの空白領域にドラッグすると、シーンで最上位のEntityの子に追加されます。
 
-![](/img/tutorials/importing-first-model-and-animation/template-add-scene-hierarchy-area.gif)
+<StepVideo src="/video/tutorials/importing-first-model-and-animation/template-add-scene-hierarchy-area.mp4" poster="/img/tutorials/importing-first-model-and-animation/template-add-scene-hierarchy-area.webp" width={934} height={480} />
 
 最後に、Entityを右クリックしてテンプレートのコンテキストメニューオプションを選択します。
 
-![](/img/tutorials/importing-first-model-and-animation/template-add-context-menu.gif)
+<StepVideo src="/video/tutorials/importing-first-model-and-animation/template-add-context-menu.mp4" poster="/img/tutorials/importing-first-model-and-animation/template-add-context-menu.webp" width={934} height={480} />
 
 シーンに追加されたので、テクスチャがないことが分かります。今回の場合、FBXにテクスチャが埋め込まれておらず、別途用意されています。
 
@@ -75,15 +77,15 @@ Entityのヒエラルキービューにドラッグすると、そのEntityの�
 
 さて、Kenney Characterへ戻りましょう。skinフォルダからテクスチャを1つアップロードし、モデルのマテリアルに適用しましょう。
 
-![](/img/tutorials/importing-first-model-and-animation/importing-texture.gif)
+<StepVideo src="/video/tutorials/importing-first-model-and-animation/importing-texture.mp4" poster="/img/tutorials/importing-first-model-and-animation/importing-texture.webp" width={830} height={480} />
 
 テクスチャアセットをマテリアルスロットにドラッグすることで、これを行うことができます。
 
-![](/img/tutorials/importing-first-model-and-animation/texture-to-material.gif)
+<StepVideo src="/video/tutorials/importing-first-model-and-animation/texture-to-material.mp4" poster="/img/tutorials/importing-first-model-and-animation/texture-to-material.webp" width={932} height={480} />
 
 または、マテリアルスロットの 'Edit' ボタンを使用し、アセットパネルでそれを見つけることもできます。
 
-![](/img/tutorials/importing-first-model-and-animation/material-pick-texture.gif)
+<StepVideo src="/video/tutorials/importing-first-model-and-animation/material-pick-texture.mp4" poster="/img/tutorials/importing-first-model-and-animation/material-pick-texture.webp" width={932} height={480} />
 
 素晴らしい！これでシーンに完全にテクスチャが施されたモデルがあり、アニメーションの準備が整いました。
 
@@ -91,7 +93,7 @@ Entityのヒエラルキービューにドラッグすると、そのEntityの�
 
 先ほど述べたように、アニメーションは別のFBXファイルにありますので、ランニングアニメーションをエディタにインポートしましょう。
 
-![](/img/tutorials/importing-first-model-and-animation/importing-animation-fbx.gif)
+<StepVideo src="/video/tutorials/importing-first-model-and-animation/importing-animation-fbx.mp4" poster="/img/tutorials/importing-first-model-and-animation/importing-animation-fbx.webp" width={807} height={480} />
 
 これにより、アニメーションを含むいくつかのアセットが作成されます。必要なのはそれだけなので、他の作成されたアセットは削除しても構いません。
 
@@ -99,7 +101,7 @@ Entityのヒエラルキービューにドラッグすると、そのEntityの�
 
 ここから、アセットパネルとインスペクターでそれを選択することでアニメーションをプレビューすることができます。また、アニメーションを適用するプレビューアセットを選択する必要もあります。この場合、先にインポートしたモデルFBXのために作成されたテンプレートアセットになります。
 
-![](/img/tutorials/importing-first-model-and-animation/animation-preview.gif)
+<StepVideo src="/video/tutorials/importing-first-model-and-animation/animation-preview.mp4" poster="/img/tutorials/importing-first-model-and-animation/animation-preview.webp" width={935} height={480} />
 
 ## モデルのアニメーション
 
@@ -107,7 +109,7 @@ Entityのヒエラルキービューにドラッグすると、そのEntityの�
 
 Anim State Graphアセットは、アセットパネルで右クリックし、'New Asset'  -> 'Anim State Graph' を選択することで作成されます。
 
-![](/img/tutorials/importing-first-model-and-animation/create-anim-state-graph.gif)
+<StepVideo src="/video/tutorials/importing-first-model-and-animation/create-anim-state-graph.mp4" poster="/img/tutorials/importing-first-model-and-animation/create-anim-state-graph.webp" width={935} height={480} />
 
 グラフアセットには複数のステートがあり、各ステートにはアニメーションが割り当てられることがあります。ステート間のフローは、条件付きのトランジションによって制御されます。
 
@@ -119,10 +121,10 @@ Anim State Graphアセットは、アセットパネルで右クリックし、'
 
 Animコンポーネントでは、Anim State Graphアセットを割り当て、グラフ内のステートがコンポーネントに表示されます。ここで、アニメーションアセットをステートに割り当ててプロジェクトを起動することができます。
 
-![](/img/tutorials/importing-first-model-and-animation/add-anim-component.gif)
+<StepVideo src="/video/tutorials/importing-first-model-and-animation/add-anim-component.mp4" poster="/img/tutorials/importing-first-model-and-animation/add-anim-component.webp" width={935} height={480} />
 
-![](/img/tutorials/importing-first-model-and-animation/add-animation-to-anim.gif)
+<StepVideo src="/video/tutorials/importing-first-model-and-animation/add-animation-to-anim.mp4" poster="/img/tutorials/importing-first-model-and-animation/add-animation-to-anim.webp" width={935} height={480} />
 
 以上です！最初のモデルとループアニメーションをPlayCanvasに正常にインポートしました！
 
-![](/img/tutorials/importing-first-model-and-animation/preview.gif)
+<StepVideo src="/video/tutorials/importing-first-model-and-animation/preview.mp4" poster="/img/tutorials/importing-first-model-and-animation/preview.webp" width={932} height={480} />

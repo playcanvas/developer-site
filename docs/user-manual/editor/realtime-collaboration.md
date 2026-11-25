@@ -3,6 +3,8 @@ title: Real-time Collaboration
 description: Collaboration UX for presence avatars, project chat, teammate camera frustums, hierarchy selection markers, and highlighted models picked by other users.
 ---
 
+import StepVideo from '@site/src/components/StepVideo';
+
 Real-time collaboration is at the heart of the PlayCanvas Editor. This brings a number of benefits:
 
 * 🧑‍🤝‍🧑 Multiple users can work together to build a scene.
@@ -29,7 +31,7 @@ Each user is assigned a unique 'user color' that is used throughout the interfac
 
 If you select the CHAT button, the Chat panel will expand and you can broadcast messages to other users present in the Editor with you.
 
-![Chat](/img/user-manual/editor/realtime-collaboration/chat.gif)
+<StepVideo src="/video/user-manual/editor/realtime-collaboration/chat.mp4" poster="/img/user-manual/editor/realtime-collaboration/chat.webp" label="Chat" width={1976} height={816} />
 
 You can toggle browser notifications for chat messages in the [Settings](interface/settings/editor.md#settings).
 
@@ -53,8 +55,8 @@ Mouse over the shaded center plane of a user camera to view the associated usern
 
 It can be useful to know what entities other users are selecting and potentially editing. The [Hierarchy](../interface/hierarchy) displays square indicators to the right of entities selected by other users (shaded according to their user color).
 
-![Selection Indicators](/img/user-manual/editor/realtime-collaboration/selection-indicators.gif)
+<StepVideo src="/video/user-manual/editor/realtime-collaboration/selection-indicators.mp4" poster="/img/user-manual/editor/realtime-collaboration/selection-indicators.webp" label="Selection Indicators" width={485} height={248} />
 
 Whenever an entity with a 3D model is selected by any user, its outline will be rendered in the [Viewport](../interface/viewport).
 
-![Viewport Selection](/img/user-manual/editor/realtime-collaboration/viewport-selection.gif)
+<StepVideo src="/video/user-manual/editor/realtime-collaboration/viewport-selection.mp4" poster="/img/user-manual/editor/realtime-collaboration/viewport-selection.webp" label="Viewport Selection" width={1388} height={851} />

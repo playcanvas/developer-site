@@ -5,6 +5,7 @@ description: box、sphere、capsule、cylinder、cone、mesh、compound のコ�
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import StepVideo from '@site/src/components/StepVideo';
 
 [Collision](/user-manual/editor/scenes/components/collision/)コンポーネントは、エンティティに物理的な形状を与えます。rigidbodyコンポーネントと組み合わせるとその[RigidBody](/user-manual/physics/rigid-bodies/)の形状を定義し、単独では[トリガーボリューム](/user-manual/physics/trigger-volumes/)として機能します。形状はエンティティの見た目と一致する必要はなく、通常は一致させるべきではありません。物理エンジンは1秒間に何度も形状同士を判定するため、細かいモデルを囲む単純なボックスやカプセルの方が、すべてのポリゴンをなぞるメッシュより高速かつ安定します。
 
@@ -218,7 +219,7 @@ chair.addChild(seat);
 </TabItem>
 </Tabs>
 
-![Compound shapes chair](/img/user-manual/physics/compound-shape-chair.gif)
+<StepVideo src="/video/user-manual/physics/compound-shape-chair.mp4" poster="/img/user-manual/physics/compound-shape-chair.webp" label="Compound shapes chair" width={846} height={480} />
 
 DynamicまたはKinematicな複合形状の子エンティティは実行時に移動できます。子のトランスフォームが変わると、エンジンは複合形状内のその形状のオフセットを更新し、親のボディをスリープから復帰させます。Staticな複合形状は、他の[Staticなボディ](/user-manual/physics/rigid-bodies/#moving-static-bodies)と同じく、作成時の形状を保ちます。親エンティティはボディの重心でもあるため、形状の範囲内（通常は中心）に置いてください。そうでない場合、力やトルクが加わったときに、見えないピボットを中心に回転するなど、ボディが不思議な挙動を示す可能性があります。
 

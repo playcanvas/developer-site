@@ -3,6 +3,8 @@ title: Particles
 description: Create and tune particle systems in the Editor, start them from scripts, and use soft particles with scene depth.
 ---
 
+import StepVideo from '@site/src/components/StepVideo';
+
 PlayCanvas provides comprehensive support for creating and editing particle systems.
 
 ## What is a Particle System?
@@ -23,7 +25,7 @@ To create a new particle system, simply create a new entity and add a particle s
 
 A newly created particle system with the default settings looks like this:
 
-![Default particle system](/img/user-manual/graphics/particles/particle-system-default.gif)
+<StepVideo src="/video/user-manual/graphics/particles/particle-system-default.mp4" poster="/img/user-manual/graphics/particles/particle-system-default.webp" label="Default particle system" width={500} height={500} />
 
 To configure the particle system via the particle system component interface, consult the reference [here](/user-manual/editor/scenes/components/particlesystem).
 

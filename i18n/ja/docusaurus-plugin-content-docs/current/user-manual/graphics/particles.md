@@ -3,6 +3,8 @@ title: パーティクル
 description: Editor でパーティクルシステムを作成・調整し、Script から起動し、Scene の深度でソフトパーティクルを使います。
 ---
 
+import StepVideo from '@site/src/components/StepVideo';
+
 PlayCanvasはパーティクルシステムの作成と編集のための包括的なサポートを提供します。
 
 ## パーティクルシステム (ParticleSystem) とは？
@@ -23,7 +25,7 @@ PlayCanvasはパーティクルシステムの作成と編集のための包括�
 
 デフォルトの設定を使用して新しく作成されたパーティクルシステムは、次のようになります。
 
-![Default particle system](/img/user-manual/graphics/particles/particle-system-default.gif)
+<StepVideo src="/video/user-manual/graphics/particles/particle-system-default.mp4" poster="/img/user-manual/graphics/particles/particle-system-default.webp" label="Default particle system" width={500} height={500} />
 
 ParticleSystemコンポーネントインターフェースを介してパーティクルシステムを構成するには、[こちら](/user-manual/editor/scenes/components/particlesystem)を参照してください。
 

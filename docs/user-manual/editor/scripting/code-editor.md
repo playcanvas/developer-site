@@ -3,6 +3,8 @@ title: Code Editor
 description: Describes opening Monaco-based collaborative editing, file tabs, autocomplete, JSHint linting, shortcuts, and version control hooks.
 ---
 
+import StepVideo from '@site/src/components/StepVideo';
+
 The Code Editor is an online real-time collaborative editor that allows you to edit your Script assets and also all the other text based assets like JSON, HTML, CSS etc.
 
 ## Opening The Code Editor
@@ -110,7 +112,7 @@ For changes spanning related text assets, use an AI coding assistant through **[
 
 You can quickly open an asset by hitting Ctrl + P (or Cmd + P on Mac) which will open a panel where you can search for the asset by its name. Start typing the name of the asset and the panel will perform a fuzzy search to find the asset you are looking for. Hit Enter to open the selected asset.
 
-![Go to Anything](/img/user-manual/scripting/go-to-anything.gif)
+<StepVideo src="/video/user-manual/scripting/go-to-anything.mp4" poster="/img/user-manual/scripting/go-to-anything.webp" label="Go to Anything" width={1500} height={650} />
 
 ## Preferences
 
@@ -124,16 +126,16 @@ You can edit your preferences by clicking on Edit -> Preferences. Here you can c
 
 Highlighting a word in the code editor will highlight all other matches in the file which makes it easier to check where a variable or function is being used.
 
-![Quick Searching](/img/user-manual/scripting/code-editor-quick-searching.gif)
+<StepVideo src="/video/user-manual/scripting/code-editor-quick-searching.mp4" poster="/img/user-manual/scripting/code-editor-quick-searching.webp" label="Quick Searching" width={660} height={218} />
 
 ### Multiple Selection Editing
 
 Holding down Alt and clicking left mouse button will add another cursor to the editor. This allows you to quickly make the same changes in multiple areas of the file.
 
-![Multiple Selection Editing](/img/user-manual/scripting/code-editor-multiple-selection.gif)
+<StepVideo src="/video/user-manual/scripting/code-editor-multiple-selection.mp4" poster="/img/user-manual/scripting/code-editor-multiple-selection.webp" label="Multiple Selection Editing" width={660} height={68} />
 
 ### Rectangular Selection
 
 Holding down Alt + Shift and dragging left mouse button will create a rectangular selection which is useful for selecting and editing columns of text.
 
-![Rectangular Selection](/img/user-manual/scripting/code-editor-rectangular-selection.gif)
+<StepVideo src="/video/user-manual/scripting/code-editor-rectangular-selection.mp4" poster="/img/user-manual/scripting/code-editor-rectangular-selection.webp" label="Rectangular Selection" width={660} height={68} />

@@ -3,17 +3,19 @@ title: Animation
 description: Asset Inspector から Template またはモデル上でアニメーションをプレビューし、グラフのプレビューを確認し、実験的なアニメーションインポート品質を調整します。
 ---
 
+import StepVideo from '@site/src/components/StepVideo';
+
 Animationアセットは、3Dモデルで単一のアニメーションを再生するために使用されます。アニメーションは、アニメーションデータを含む3Dシーン(FBXファイルなど)をアップロードすることによってインポートされます。アニメーションデータは、[アセットパイプライン](/user-manual/glossary#asset-pipeline)によってアップロードされたファイルから抽出され、ゲームで使用するための[ターゲットアセット](/user-manual/glossary#target-asset)が作成されます。
 
 ## アニメーションプレビュー
 
 インスペクタには、テンプレートまたはModelアセットとともにアニメーションをプレビューするために使用できるビューアがあります。これは、異なるキャラクターリグに適用できる単一のアニメーションがある場合に便利です。
 
-![Asset Inspector Preview](/img/user-manual/assets/animation/inspector-preview.gif)
+<StepVideo src="/video/user-manual/assets/animation/inspector-preview.mp4" poster="/img/user-manual/assets/animation/inspector-preview.webp" label="Asset Inspector Preview" width={1449} height={911} />
 
 また、グラフで状態を選択すると、[Anim State Graph Editor](/user-manual/animation/state-graphs/)にもビューアがあります。選択すると、グラフを使用しているシーン内のすべてのエンティティが一覧表示され、プレビューのために選択できます。
 
-![Anim State Graph Preview](/img/user-manual/assets/animation/anim-state-graph-preview.gif)
+<StepVideo src="/video/user-manual/assets/animation/anim-state-graph-preview.mp4" poster="/img/user-manual/assets/animation/anim-state-graph-preview.webp" label="Anim State Graph Preview" width={1449} height={911} />
 
 ## アニメーションインポート設定 (Animation Import Settings)
 
