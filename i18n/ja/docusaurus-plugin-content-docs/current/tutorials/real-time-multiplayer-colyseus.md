@@ -145,7 +145,7 @@ NetworkManager.prototype.initialize = async function () {
 </TabItem>
 </Tabs>
 
-> ここで、ローカルの `ws://localhost:2567` エンドポイントを使用しています。他の人とオンラインでプレイするには、 [サーバーをデプロイ](https://docs.colyseus.io/deployment/)して、公共のインターネットを使用する必要があります。[Glitch](https://glitch.com/edit/#!/tutorial-playcanvas-server)を使ってサーバーを公開することもできます。
+> ここで、ローカルの `ws://localhost:2567` エンドポイントを使用しています。他の人とオンラインでプレイするには、 [サーバーをデプロイ](https://docs.colyseus.io/deployment/)して、公共のインターネットを使用する必要があります。
 
 PlayCanvasプロジェクトを**起動**すると、クライアントはサーバーと接続し、サーバーは必要に応じて`my_room`という部屋を作成します。
 
