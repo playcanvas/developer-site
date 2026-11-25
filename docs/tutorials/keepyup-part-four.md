@@ -1,415 +1,173 @@
 ---
-title: Making a Simple Game - Part 4
-description: Deep dive the football entity with physics, collisions, and audio hooks as the core interactive object.
+title: "Making a Simple Game - Part 4: Game Flow and Scoring"
+description: Add a game script that keeps score using application events, and build the first piece of user interface for Keepy Up, a score drawn with a Screen and a Text Element.
 tags: [games]
 kind: tutorial
 topic: Games
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406050/LIJTDO-image-75.jpg
+thumb: /img/tutorials/keepyup-part-four/thumbnail.webp
 ---
 
-<div className="iframe-container">
-    <iframe src="https://playcanv.as/p/KH37bnOk/?overlay=false" title="Making a Simple Game - Part 4" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
-</div>
+In [Part 3](/tutorials/keepyup-part-three/) you made a ball that can be kicked. In this part a game script counts the kicks, and you build your first piece of [user interface](/user-manual/user-interface/) to show the score.
 
-*You can find the [full project here](https://playcanvas.com/project/406050). If you haven't see [Part 1](/tutorials/keepyup-part-one/), [Part 2](/tutorials/keepyup-part-two/) and [Part 3](/tutorials/keepyup-part-three/) read them first.*
+:::info[Before you start]
 
-## The Football
+You need the project you made in Parts 1 to 3. To compare your work, open the [finished project](https://playcanvas.com/project/1660780/overview/keepy-up).
 
-The football is the center of attention in our Keepy Up game. It responds to player input, it responds to the environment (well, gravity), it makes sounds. It's probably the most complicated part of the game. Fortunately, we're going to explain all the bits to you as simply as we can.
+:::
 
-## ball.js
+## 1. Write the Game Script {#write-the-game-script}
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
-<Tabs defaultValue="esm" groupId='script-code'>
-<TabItem value="esm" label="ESM">
+Create a script called `game.mjs` in the **Scripts** folder, with this code:
 
 ```javascript
-import { Script, Vec3 } from 'playcanvas';
+import { Script } from 'playcanvas';
 
-export class Ball extends Script {
-    static scriptName = "ball";
+/**
+ * Keeps the score and tells the rest of the game when a round starts and ends.
+ */
+export class Game extends Script {
+    static scriptName = 'game';
 
-    /**
-     * The value of gravity to use.
-     * 
-     * @attribute
-     * @title Gravity
-     * @type {number}
-     */
-    gravity = -9.8;
+    score = 0;
 
-    /**
-     * Speed to set the ball to when it is tapped.
-     * 
-     * @attribute
-     * @title Default Tap
-     * @type {number}
-     */
-    defaultTap = 5;
+    playing = false;
 
-    /**
-     * The particle effect to trigger when the ball is tapped.
-     * 
-     * @attribute
-     * @title Impact Effect
-     * @type {Entity}
-     */
-    impactEffect = null;
-
-    /**
-     * When ball goes below minimum y value, game over is triggered.
-     * 
-     * @attribute
-     * @title Ball Minimum
-     * @type {number}
-     */
-    ballMinimum = -6;
-
-    /**
-     * Multiplier to apply to X speed when tap is off center.
-     * 
-     * @attribute
-     * @title Speed Mult
-     * @type {number}
-     */
-    speedMult = 4;
-
-    /**
-     * Multiplier to apply to angular speed when tap is off center.
-     * 
-     * @attribute
-     * @title Ang Mult
-     * @type {number}
-     */
-    angMult = -6;
-
-    static tmp = new Vec3();
-
-    // initialize code called once per entity
     initialize() {
-        this.paused = true;
+        this.app.on('ball:kicked', this.onBallKicked, this);
+        this.app.on('ball:lost', this.onBallLost, this);
 
-        // Get the "Game" Entity and start listening for events
-        this.game = this.app.root.findByName("Game");
-
-        this.app.on("game:start", this.unpause, this);
-        this.app.on("game:gameover", this.pause, this);
-        this.app.on("game:reset", this.reset, this);
-
-        // Initialize properties
-        this._vel = new Vec3(0, 0, 0);
-        this._acc = new Vec3(0, this.gravity, 0);
-        this._angSpeed = 0;
-
-        // Store the initial position and rotation for reseting
-        this._origin = this.entity.getLocalPosition().clone();
-        this._rotation = this.entity.getLocalRotation().clone();
+        this.on('destroy', () => {
+            this.app.off('ball:kicked', this.onBallKicked, this);
+            this.app.off('ball:lost', this.onBallLost, this);
+        });
     }
 
-    // update code called every frame
-    update(dt) {
-        // Don't update when paused
-        if (this.paused) {
-            this.entity.rotate(0, 30 * dt, 0);
-            return;
+    onBallKicked() {
+        // The first kick starts a new round
+        if (!this.playing) {
+            this.playing = true;
+            this.score = 0;
+            this.app.fire('game:start');
         }
 
-        let p = this.entity.getLocalPosition();
-        let tmp = Ball.tmp;
-
-        // integrate the velocity in a temporary variable
-        tmp.copy(this._acc).mulScalar(dt);
-        this._vel.add(tmp);
-
-        // integrate the position in a temporary variable
-        tmp.copy(this._vel).mulScalar(dt);
-        p.add(tmp);
-
-        // update position
-        this.entity.setLocalPosition(p);
-
-        // rotate by angular speed
-        this.entity.rotate(0, 0, this._angSpeed);
-
-        // check for game over condition
-        if (p.y < this.ballMinimum) {
-            this.game.script.game.gameOver();
-        }
+        this.score++;
+        this.app.fire('game:score', this.score);
     }
 
-    /*
-     * Called by the input handler to tap the ball up in the air
-     * dx is the tap distance from centre of ball in x
-     * dy is the tap distance from centre of ball in y
-     */
-    tap(dx, dy) {
-        // Update velocity and spin based on position of tap
-        this._vel.set(this.speedMult * dx, this.defaultTap, 0);
-        this._angSpeed += this.angMult * dx;
-
-        // calculate the position of the tap in world space
-        let tmp = Ball.tmp;
-        tmp.copy(this.entity.getLocalPosition());
-        tmp.x -= dx;
-        tmp.y -= dy;
-
-        // trigger particle effect to tap position, facing away from the center of the ball
-        this.impactEffect.setLocalPosition(tmp);
-        this.impactEffect.particlesystem.reset();
-        this.impactEffect.particlesystem.play();
-        this.impactEffect.lookAt(this.entity.getPosition());
-
-        // play audio
-        this.entity.sound.play("bounce");
-
-        // increment the score by 1
-        this.game.script.game.addScore(1);
-    }
-
-    // Pause the ball update when not playing the game
-    unpause() {
-        this.paused = false;
-
-        // start game with a tap
-        this.tap(0, 0);
-    }
-
-    // Resume ball updating
-    pause() {
-        this.paused = true;
-    }
-
-    // Reset the ball to initial values
-    reset() {
-        this.entity.setLocalPosition(this._origin);
-        this.entity.setLocalRotation(this._rotation);
-        this._vel.set(0, 0, 0);
-        this._acc.set(0, this.gravity, 0);
-        this._angSpeed = 0;
+    onBallLost() {
+        this.playing = false;
+        this.app.fire('game:over', this.score);
     }
 }
 ```
 
-</TabItem>
-<TabItem value="classic" label="Classic">
+Then select the **Game** entity and add the `game` script to its Script Component, below `input`.
+
+### How the Game Script Works {#how-the-game-script-works}
+
+The ball script fires `ball:kicked` and `ball:lost`. The game script listens for those two events with `this.app.on`, and fires three of its own:
+
+| Event | Fired when | Carries |
+| --- | --- | --- |
+| `game:start` | The first kick of a round lands | |
+| `game:score` | The score changes | The new score |
+| `game:over` | The ball is lost | The final score |
+
+Notice what is missing: the ball script never mentions the game script, and the game script never mentions the ball. Each one only announces what happened, and anything that cares can listen. This keeps scripts independent, and it lets you add the scoreboard, the menus and the sound later without changing a line of what you have written so far.
+
+The handlers are removed again in the `destroy` handler. That matters whenever an Entity can be destroyed while the application keeps running.
+
+## 2. Make the Font Ready {#make-the-font-ready}
+
+Text is drawn with a [font asset](/user-manual/editor/assets/inspectors/font/). The starter project includes one, but the image of its characters has to be generated in your own project.
+
+1. In the Assets panel, open **Fonts** and select the font `LilitaOne-Regular.ttf`.
+2. In the Inspector, find the **Font** section and select **REGENERATE FONT ASSETS**.
+
+![The Inspector for the font asset](/img/tutorials/keepyup-part-four/font.webp)
+
+## 3. Add a Screen {#add-a-screen}
+
+Every user interface starts with a [Screen](/user-manual/editor/scenes/components/screen/). It defines the area that the interface is laid out in.
+
+1. Add an Entity to **Root** called `UI`. It only keeps the Hierarchy tidy.
+2. Select **UI**, then **+** (Add Entity) > **User Interface** > **2D Screen**. Name the new Entity `Score Screen`.
+3. In its Screen Component, set **Ref Resolution** to `720` by `1280` and **Scale Blend** to `1`.
+
+![The Screen Component of the Score Screen entity, with the uiScore script below it](/img/tutorials/keepyup-part-four/screen.webp)
+
+The reference resolution is the size you design the interface at. With a **Scale Blend** of `1`, the interface is scaled to fit the height of the window. The camera's view of the world also follows the window's height, so the interface and the ball stay lined up on any shape of screen.
+
+## 4. Add the Score {#add-the-score}
+
+1. Select **Score Screen**, then **+** > **User Interface** > **Text Element**. Name the new Entity `Score`.
+2. In its [Element Component](/user-manual/editor/scenes/components/element/), set **Preset** to **Top Anchor & Pivot**. The text now hangs from the top center of the screen.
+3. Set the Entity's **Position** to `0`, `-50`, `0` to move it down from the edge.
+4. Drag the font from the Assets panel onto the **Font** slot.
+5. Set **Text** to `0`, and **Font Size** and **Line Height** to `150`.
+6. To make the number stand out against the crowd, set **Outline Color** to `0F2440` and **Outline Thickness** to `0.5`. Then set **Shadow Color** to `081428` with an alpha of about 150, and **Shadow Offset** to `0`, `-0.28`.
+
+![The Element Component of the Score entity](/img/tutorials/keepyup-part-four/score-element.webp)
+
+Your Hierarchy should now look like this:
+
+![The Hierarchy with UI, Score Screen and Score](/img/tutorials/keepyup-part-four/hierarchy.webp)
+
+## 5. Write the Score Script {#write-the-score-script}
+
+Create a script called `ui-score.mjs`:
 
 ```javascript
-var Ball = pc.createScript('ball');
+import { Entity, Script } from 'playcanvas';
 
-Ball.attributes.add('gravity', {
-    type: 'number',
-    default: -9.8,
-    description: 'The value of gravity to use'
-});
-
-Ball.attributes.add('defaultTap', {
-    type: 'number',
-    default: 5,
-    description: 'Speed to set the ball to when it is tapped'
-});
-
-Ball.attributes.add('impactEffect', {
-    type: 'entity',
-    description: 'The particle effect to trigger when the ball is tapped'
-});
-
-Ball.attributes.add('ballMinimum', {
-    type: 'number',
-    default: -6,
-    description: 'When ball goes below minimum y value game over is triggered'
-});
-
-Ball.attributes.add('speedMult', {
-    type: 'number',
-    default: 4,
-    description: 'Multiplier to apply to X speed when tap is off center'
-});
-
-Ball.attributes.add('angMult', {
-    type: 'number',
-    default: -6,
-    description: 'Multiplier to apply to angular speed when tap is off center'
-});
-
-Ball.tmp = new pc.Vec3();
-
-// initialize code called once per entity
-Ball.prototype.initialize = function() {
-    this.paused = true;
-
-    // Get the "Game" Entity and start listening for events
-    this.game = this.app.root.findByName("Game");
-
-    this.app.on("game:start", this.unpause, this);
-    this.app.on("game:gameover", this.pause, this);
-    this.app.on("game:reset", this.reset, this);
-
-    // Initialize properties
-    this._vel = new pc.Vec3(0, 0, 0);
-    this._acc = new pc.Vec3(0, this.gravity, 0);
-    this._angSpeed = 0;
-
-    // Store the initial position and rotation for reseting
-    this._origin = this.entity.getLocalPosition().clone();
-    this._rotation = this.entity.getLocalRotation().clone();
-};
-
-// update code called every frame
-Ball.prototype.update = function(dt) {
-    // Don't update when paused
-    if (this.paused) {
-        this.entity.rotate(0, 30*dt, 0);
-        return;
-    }
-
-    var p = this.entity.getLocalPosition();
-    var tmp = Ball.tmp;
-
-    // integrate the velocity in a temporary variable
-    tmp.copy(this._acc).mulScalar(dt);
-    this._vel.add(tmp);
-
-    // integrate the position in a temporary variable
-    tmp.copy(this._vel).mulScalar(dt);
-    p.add(tmp);
-
-    // update position
-    this.entity.setLocalPosition(p);
-
-    // rotate by angular speed
-    this.entity.rotate(0, 0, this._angSpeed);
-
-    // check for game over condition
-    if (p.y < this.ballMinimum) {
-        this.game.script.game.gameOver();
-    }
-};
-
-/*
- * Called by the input handler to tap the ball up in the air
- * dx is the tap distance from centre of ball in x
- * dy is the tap distance from centre of ball in y
+/**
+ * Shows the score while a round is being played.
  */
-Ball.prototype.tap = function (dx, dy) {
-    // Update velocity and spin based on position of tap
-    this._vel.set(this.speedMult * dx, this.defaultTap, 0);
-    this._angSpeed += this.angMult * dx;
+export class UiScore extends Script {
+    static scriptName = 'uiScore';
 
-    // calculate the position of the tap in world space
-    var tmp = Ball.tmp;
-    tmp.copy(this.entity.getLocalPosition());
-    tmp.x -= dx;
-    tmp.y -= dy;
+    /**
+     * The text element that displays the score.
+     *
+     * @attribute
+     * @type {Entity}
+     */
+    label;
 
-    // trigger particle effect to tap position, facing away from the center of the ball
-    this.impactEffect.setLocalPosition(tmp);
-    this.impactEffect.particlesystem.reset();
-    this.impactEffect.particlesystem.play();
-    this.impactEffect.lookAt(this.entity.getPosition());
+    initialize() {
+        // Nothing to show until the first round starts
+        this.label.enabled = false;
 
-    // play audio
-    this.entity.sound.play("bounce");
+        this.app.on('game:start', this.onGameStart, this);
+        this.app.on('game:score', this.onGameScore, this);
 
-    // increment the score by 1
-    this.game.script.game.addScore(1);
-};
+        this.on('destroy', () => {
+            this.app.off('game:start', this.onGameStart, this);
+            this.app.off('game:score', this.onGameScore, this);
+        });
+    }
 
-// Pause the ball update when not playing the game
-Ball.prototype.unpause = function () {
-    this.paused = false;
+    onGameStart() {
+        this.label.enabled = true;
+    }
 
-    // start game with a tap
-    this.tap(0, 0);
-};
-
-// Resume ball updating
-Ball.prototype.pause = function () {
-    this.paused = true;
-};
-
-// Reset the ball to initial values
-Ball.prototype.reset = function () {
-    this.entity.setLocalPosition(this._origin);
-    this.entity.setLocalRotation(this._rotation);
-    this._vel.set(0,0,0);
-    this._acc.set(0, this.gravity, 0);
-    this._angSpeed = 0;
-};
+    onGameScore(score) {
+        this.label.element.text = String(score);
+    }
+}
 ```
 
-</TabItem>
-</Tabs>
+1. Add a **Script** component to **Score Screen** and add the `uiScore` script.
+2. Drag the **Score** entity from the Hierarchy onto the script's `label` slot.
 
-### Script Attributes
+The script hides the number until the first round starts, then changes the element's `text` every time `game:score` fires.
 
-The first thing you'll notice at the top of the script are a set of script attributes that we've defined. Defining script attributes lets you expose values from your script into the editor. There are three very good reasons to do this.
+The script is on the screen and not on the text itself for a reason: a script on a disabled Entity does not run, so the text could not switch itself back on.
 
-![Script Attributes](/img/tutorials/beginner/keepyup-part-four/ball-script-attributes.jpg)
+## Check Your Progress {#check-your-progress}
 
-First, it lets you use the same script for many different Entities with different values. For example, you could have a script attribute which sets a color, and in the editor create a red, blue and green version of a entity just by modifying the script attribute.
+**Launch** the game. The score appears with your first kick and counts up with each one after it. When you lose the ball, your score stays on screen until the next round starts from 1.
 
-Second, you can quickly and easily tune the behavior of scripts. When you modify a script attribute (or indeed any property from the editor) the changes are made instantly to any instance of the game that you have launched from the editor. So for example in the case of the `ballMinimum` property we define here, you can launch the game and test what the value of `ballMinimum` should be to allow the ball to drop off the bottom of the screen without ever having to reload the game. Test the game, modify the value, test the game.
+![The game at the end of Part 4: the ball in the air and a score of 1 at the top of the screen](/img/tutorials/keepyup-part-four/result.webp)
 
-This is known as "iteration speed". The faster you can modify and test your game, the quicker you can get it developed!
-
-For the ball, we define script attributes that let us tweak a number of game play properties like the gravity, the impulse applied when the ball is tapped. These attributes let us very quickly tune the game to our liking.
-
-Third, the script attribute is a great way to link a script to an Entity or an Asset in your scene. For example, the ball script needs to trigger a particle effect when it is tapped. The particle effect is on another Entity in our scene. We define a script attribute called `impactEffect` of type `entity` and in the Editor we link this to the entity with our particle effect. Our script now has a reference to the entity and we are free to modify this entity or change to another entity without breaking our code.
-
-### The Physics Simulation
-
-For those of you with some basic vector maths knowledge this `update()` loop of the ball should be simple, but for everyone else we'll explain a little about simulating a ball in a video game.
-
-A simple way to simulate something in video game is to give that object an acceleration, a velocity and a position. Every time step (or frame) the acceleration (which is the rate of change of velocity) changes the velocity and the velocity (which is the rate of change of position) changes the position. Then you draw your object at the new position.
-
-You can influence the position of your object in one of three ways.
-
-* **Change the acceleration**, this is useful for applying a force over a period of time, like gravity on the ball.
-* **Change the velocity**, this is an instantaneous change. Like a ball bouncing off the floor.
-* **Change the position**, like teleportation, there isn't a real world equivalent!
-
-In our simulation we have a constant acceleration due to gravity, when you tap the ball we apply an instant change in velocity and when you reset the game we teleport the ball back to it's starting position.
-
-#### Simulating
-
-The update loop does this:
-
-```none
-(Change in Velocity) = (Acceleration) * (Time since last frame)
-(New Velocity) = (Old Velocity) + (Change in Velocity)
-(Change in Position) = (New Velocity) * (Time since last frame)
-(New Position) = (Old Position) + (Change in Position)
-```
-
-In code this looks like this:
-
-```javascript
-var p = this.entity.getLocalPosition();
-
-// integrate the velocity in a temporary variable
-tmp.copy(this._acc).mulScalar(dt);
-this._vel.add(tmp);
-
-// integrate the position in a temporary variable
-tmp.copy(this._vel).mulScalar(dt);
-p.add(tmp);
-
-// update position
-this.entity.setLocalPosition(p);
-```
-
-You will note that we use temporary vector `tmp` to store intermediate values. It's important not to create a new vector every frame for this. Also notice that we have to call `setLocalPosition` to apply the updated position.
-
-Finally, for a nice effect we add rotate the ball by the angular speed value using `entity.rotate()`. This isn't very physically accurate, but it looks nice.
-
-#### Responding to input
-
-You may remember from [Part 2](/tutorials/keepyup-part-two/) that the `input.js` script checked to see if an input has hit the ball and if so it calls the `tap()` method. The `tap()` method defined above applies a direct change to the velocity and the angular speed of the ball. We use a couple of our script attributes `this.speedMult` and `this.angMult` to multiply the new velocity and angular speed to match our expectations of the gameplay.
-
-We also use the tap method to trigger a particle dust cloud at the point of impact and play a sound effect. We'll talk about particle and sounds in [Part 5](/tutorials/keepyup-part-five/).
-
-## Summary
-
-The ball script runs a simple physical simulation to make the ball fall under gravity and respond to taps. It also listens for game events to know when to pause and reset. Finally, it interacts with some other systems to show particle effects and play sounds.
+The game now has rules, but it does not explain itself. In [Part 5: Menu and Game Over Screens](/tutorials/keepyup-part-five/) you add a title and tell the player when a round is over.

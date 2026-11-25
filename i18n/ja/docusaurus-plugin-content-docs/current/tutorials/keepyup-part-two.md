@@ -1,82 +1,86 @@
 ---
-title: シンプルなゲームの作成 - パート2
+title: "シンプルなゲームの作成 - パート2: ライティングとマテリアル"
+description: Keepy Upを完成時の見た目に仕上げます。空の画像をイメージベースドライティングに変え、影を追加し、カメラのトーンマッピングを設定して、サッカーボールのマテリアルにつやを出します。
 tags: [games]
-thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406050/LIJTDO-image-75.jpg"
-description: Physical マテリアルと cubemap を設定し、ボール、地面、背景に image-based lighting を適用します。
+thumb: /img/tutorials/keepyup-part-two/thumbnail.webp
 ---
 
-<div className="iframe-container">
-    <iframe src="https://playcanv.as/p/KH37bnOk/?overlay=false" title="Making a Simple Game - Part 2" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
-</div>
+[パート1](/tutorials/keepyup-part-one/)では、スタジアムとボールを配置しました。このパートでは、それらを照らします。1枚の空の画像が、背景にも、あらゆる方向からの光源にもなります。ボールには、見栄えのするつやのある仕上げを加えます。
 
-*[完成されたプロジェクトはこちら](https://playcanvas.com/project/406050)です。先に[その1](/tutorials/keepyup-part-one/)を読んでください。*
+:::info[はじめる前に]
 
-## マテリアルの設定
+パート1で作ったプロジェクトが必要です。自分の作業と比べるには、[完成したプロジェクト](https://playcanvas.com/project/1660780/overview/keepy-up)を開いてください。
 
-このゲームのグラフィクスは非常に単純なものですので、たくさんの設定をしなければいけないということはありません。ボール、背景とオーバーレイについて設定を行います。
+:::
 
-### マテリアルとは?
+## 1. 空からキューブマップを作る {#make-a-cubemap-from-the-sky}
 
-マテリアルとはPlayCanvasでのアセットのひとつで、3Dモデルがスクリーン上に描画される時、それがどのように見えるべきかを決めるものです。マテリアルは物体表面の色を決め、また同時に物体表面が光にどのように反応するかも決めます。例えば、マテリアルの設定によっては物体は金属のように滑らかになったり、ゴムのようにざらざらとしたものになります。PlayCanvasは物理的マテリアルという組み込みの機能をもっており、マテリアルの用途の9割ほどをカバーします。あなたが上級者になったら、自分のマテリアルを、GLSLシェーダ言語を用いて自分で書くこともできます。
+**Textures** フォルダーには、緑のフィールドの上に広がる空のパノラマ画像 `stadium-sky.png` が入っています。PlayCanvasは、このような空を[キューブマップ](/user-manual/editor/assets/inspectors/cubemap/)として使います。キューブマップは、シーンを取り囲む6枚の正方形の画像です。
 
-### キューブマップ (Cubemap)
+1. アセットパネルで **Textures** を開き、`stadium-sky.png` を右クリックします。
+2. **Create Cubemap** を選択します。エディターが6枚の面テクスチャと、`stadium-sky_cubemap` というキューブマップを追加します。
+3. キューブマップを選択します。インスペクターで **Prefiltering** を見つけ、**PREFILTER CUBEMAP** を選択します。
 
-マテリアルについて話し始める前に、キューブマップの設定をします。キューブマップとは、立方体のそれぞれの面に貼られた6枚のテクスチャからなるアセットです。これはシーンの遠方にある背景として処理されます。PlayCanvasの物理的マテリアルは、キューブマップを画像ベースのライティングに使用することができます。このライティングは、キューブマップの色をシーン内のマテリアルを照らす明かりとして使います。例えば、このゲームのシーンでは、キューブマップは青い空と緑の草の地面です。そのため、ゲーム内のぼーるは上からは青い光で、下からは緑の光で照らされます。[詳しくはドキュメントを参照してください](/user-manual/editor/assets/inspectors/cubemap/)。
+![キューブマップのインスペクター](/img/tutorials/keepyup-part-two/cubemap.webp)
 
-![Cubemap](/img/tutorials/beginner/keepyup-part-two/cubemap-preview.jpg)
+プリフィルタリングは、空をぼかしたコピーを作ります。粗い表面はぼやけた空を映し、磨かれた表面はくっきりした空を映すので、エンジンにはその両方が必要です。これを[イメージベースドライティング](/user-manual/graphics/physical-rendering/image-based-lighting/)と呼びます。
 
-キューブマップを設定するには、まずキューブマップアセットをNew Assetメニューから作成し、キューブマップの面に6枚のテクスチャを割り当てます。キューブマップの6面全てにテクスチャを割り当てたら、"Prefilter"ボタンをクリックしてください。**プレフィルタリングはキューブマップを正しく動作させるために必要な準備です。**
+## 2. スカイボックスを設定する {#set-the-skybox}
 
-## Footballマテリアル
+1. ツールバーの一番下にある歯車アイコンを選択して **Settings** を開き、**Rendering** を展開します。
+2. アセットパネルから `stadium-sky_cubemap` を **Skybox** スロットにドラッグします。
 
-![Football](/img/tutorials/beginner/keepyup-part-two/ball-material.jpg)
+![Rendering設定のSkyboxスロット](/img/tutorials/keepyup-part-two/skybox.webp)
 
-サッカーボールは[PlayCanvasアセットライブラリ](https://store.playcanvas.com/)からインポートした3Dモデルです。footballマテリアルはすでに設定済みですが、いくつか単純な調整が必要になるかもしれません。サッカーボールに使われているそれぞれのテクスチャを確認してみましょう。
+ビューポートに空が表示され、シーン内のすべてがその空に照らされます。上からは青、下からは緑の光です。
 
-### ディフューズ (Diffuse)
+## 3. トーンマッピングを選ぶ {#choose-the-tone-mapping}
 
-![Diffuse](/img/tutorials/beginner/keepyup-part-two/ball-diffuse.jpg)
+トーンマッピングは、レンダリングされた画像の明るい値を、画面が表示できる範囲にどう収めるかを決めます。これはカメラごとのプロパティです。
 
-Diffuseマップは表面の色を決めます。このゲームでは黒と白のサッカーボールのパターンになっています。
+1. **Camera** を選択します。
+2. Cameraコンポーネントで、**Tonemapping** を **Neutral** に設定します。
 
-### 環境マップ (Environment)
+![CameraコンポーネントのTonemapping設定](/img/tutorials/keepyup-part-two/tonemapping.webp)
 
-![Environment](/img/tutorials/beginner/keepyup-part-two/ball-env.jpg)
+**Neutral** は、選んだ色に近い色を保つので、このゲームの明るくシンプルな見た目に合います。他のオプションも試して、それぞれが画像をどう変えるか見てみてください。
 
-スペキュラマップの効果を説明するために必要なため、環境マップの説明を簡単にここでしておきます。環境マップの設定をしたい場合は、キューブマップをマテリアルのスロットにドラッグしてください。
+## 4. 影を落とす {#cast-shadows}
 
-### スペキュラーマップ (Specular)
+ピッチに落ちる影は、ボールがどこにあるかをプレイヤーに伝えます。
 
-![Specular](/img/tutorials/beginner/keepyup-part-two/ball-spec.jpg)
+1. **Light** を選択します。
+2. Lightコンポーネントで、**Cast Shadows** をオンにします。
+3. **Resolution** を `2048 x 2048`、**Cascades** を `2`、**Distance** を `420` に設定します。
+4. **Shadow Bias** を `0.3`、**Normal Offset Bias** を `0.2` に設定します。
 
-specular（鏡面）セクションはマテリアルがどのように照明と相互作用するかを決定します。specularには、「Metalnessワークフロー」と「Specularワークフロー」の2つの「ワークフロー」があります。詳細は[ドキュメント](/user-manual/graphics/physical-rendering/physical-materials/)をご確認ください。サッカーボールではMetalnessを使用しているので、「Use Metalness」チェックボックスをオンにしてください。サッカーボールは金属製でないので、metalnessスライダーを0になるようスライドさせます。次に、光沢スライダーを使用してマテリアルの滑らかさを設定します。ボールが滑らか過ぎず、ちょうど良い光沢になるよう約半分の位置に設定します。
+![Lightコンポーネントの影の設定](/img/tutorials/keepyup-part-two/shadows.webp)
 
-### 法線 (Normal)
+**Distance** は、カメラからどこまで影を描画するかです。スタジアムは大きいので、この値も大きくする必要があります。**Cascades** は、その距離をいくつかの範囲に分け、それぞれにシャドウマップを割り当てます。これにより、ボールの影がくっきり保たれます。2つのバイアス値は、このスケールで表面が自分自身に影を落とすのを防ぎます。
 
-![Normal](/img/tutorials/beginner/keepyup-part-two/ball-normal.jpg)
+## 5. ボールを磨く {#polish-the-ball}
 
-最終に適用するテクスチャマップはnormal（法線）マップです。normalマップは、モデルにディテールを加えるために使用します。この場合、サッカーボールの繋ぎ目がジオメトリでモデル化されていませんが(滑らかな球体)、normalマップではモデル化されています。つまり、ボールは繋ぎ目があるかのように点灯しますが、余分なポリゴンのオーバーヘッドはありません。
+サッカーボールは3つの[マテリアル](/user-manual/graphics/physical-rendering/physical-materials/)を使っています。白いパネル用の `Ball Light`、黒いパネル用の `Ball Dark`、その間の溝用の `Ball Seam` です。これらは **Models** > **Football** にあります。
 
-## Backdropマテリアル
+1. `Ball Light` を選択し、インスペクターで **Clearcoat** を展開します。
+2. **Clear Coat Factor** を `0.4` に、**Clear Coat Gloss** を `0.85` に設定します。
+3. `Ball Dark` にも同じ設定をします。
 
-![Backdrop](/img/tutorials/beginner/keepyup-part-two/backdrop-material.jpg)
+![マテリアルインスペクターのClearcoatセクション](/img/tutorials/keepyup-part-two/clearcoat.webp)
 
-Backdropマテリアルはより単純です。テキスチャーマップは一つのみです。
+クリアコートは、ニスのように、マテリアルの上に薄いつやのある層を加えます。これでボールに空が映り込むようになります。
 
-### エミッシブ (Emissive)
+マテリアルを開いているついでに、他のセクションも見てみましょう。
 
-![Emissive](/img/tutorials/beginner/keepyup-part-two/backdrop-emissive.jpg)
+- **Diffuse** はベースの色を設定します。`Ball Light` と `Ball Dark` の **Color** を変えると、ボールを自分のチームの色にできます。
+- **Specular** には **Metalness** と **Gloss** があり、表面がどれだけ鏡のようになるかを決めます。
 
-Emissiveマップは、表面の色を設定して、まるでその色の光を発光しているかのように見せます。つまり、シーン内の照明はEmissiveの表面の明るさに影響を与えません。Emissiveマテリアルはシーン内の他のオブジェクトには影響しませんが、実際に光は発光されません。
+**Models** > **Stadium** にあるスタジアムのマテリアルでは、さらに3つの手法を見ることができます。`Crowd` は、**Diffuse** スロットのテクスチャから色を取ります。`Boards` は同じテクスチャを **Emissive** にも使っているので、広告ボードが画面のように光ります。`Net` は **Opacity** が1未満で **Blend Type** が **Alpha** になっており、ゴールネットが透けて見えます。
 
-この場合、静的なシーンなので背景が点灯されないようにします。そのためには、Emissiveマップを使用します。
+## 進み具合を確認する {#check-your-progress}
 
-## オーバーレイマテリアル
+もう一度ゲームを **Launch** します。
 
-![Overlay](/img/tutorials/beginner/keepyup-part-two/overlay-material.jpg)
+![パート2終了時のゲーム: 青空の下の、ライティングされたスタジアム](/img/tutorials/keepyup-part-two/result.webp)
 
-オーバーレイ素材は、背景より簡単です。この場合、Emissiveプロパティの色を設定しています。
-
-![Emissive](/img/tutorials/beginner/keepyup-part-two/overlay-emissive.jpg)
-
-[その3](/tutorials/keepyup-part-three/)に進む。
+シーンは完成時の見た目になりましたが、まだ1枚の絵のままです。[パート3: ボールを動かす](/tutorials/keepyup-part-three/)では、これを遊べるものに変えるスクリプトを書きます。

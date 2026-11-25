@@ -265,4 +265,4 @@ Launch のタブは、**ライブリンク**で Editor とつながったまま�
 - [スクリプト](/user-manual/scripting/): スクリプトでできることのすべて。
 - [物理](/user-manual/physics/): 力、ジョイント、トリガー、レイキャスト。
 - [Editor のインターフェース](/user-manual/editor/interface/): 各パネルの詳細。
-- [チュートリアル](/tutorials/): 調べたりフォークしたりできる完成プロジェクト。たとえば [Keepy Up](/tutorials/keepyup-part-one/) ゲームがあります。
+- [チュートリアル](/tutorials/): 調べたりフォークしたりできる完成プロジェクトや、Keepy Up ゲームを作る[シンプルなゲームの作成](/tutorials/keepyup-part-one/)のようなステップバイステップのシリーズがあります。

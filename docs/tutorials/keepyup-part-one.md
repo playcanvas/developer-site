@@ -1,77 +1,119 @@
 ---
-title: Making a Simple Game - Part 1
-description: Start the Keepy Up series with scene hierarchy, roadmap topics, and how the sample soccer game fits together.
+title: "Making a Simple Game - Part 1: Setting Up the Scene"
+description: Start building Keepy Up, a tap-to-play football game, in the PlayCanvas Editor. Fork the starter project, place the stadium and the ball, and set up the camera and light.
 tags: [games]
 kind: tutorial
 topic: Games
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406050/LIJTDO-image-75.jpg
+thumb: /img/tutorials/keepyup-part-one/thumbnail.webp
 ---
 
+In this six-part series you'll build **Keepy Up**, a small game where you tap a football to keep it in the air. Each part ends with something you can run, and by the end you'll have a finished game published to the web.
+
+This is the finished game. Tap or click the ball to start:
+
 <div className="iframe-container">
-    <iframe src="https://playcanv.as/p/KH37bnOk/?overlay=false" title="Making a Simple Game - Part 1" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
+    <iframe src="https://playcanv.as/p/qWhjnAAp/" title="Keepy Up, the game you build in this series" loading="lazy" allow="fullscreen" allowFullScreen></iframe>
 </div>
 
-*You can find the [full project here](https://playcanvas.com/project/406050)*
+The series covers:
 
-In this series of tutorials we're going to show you how a complete game is made using PlayCanvas. We've made a simple "Keepy Up" game where the object is to click or tap on the soccer ball to keep it in the air.
+1. **Setting up the scene** (this part): the project, the stadium, the ball, the camera and the light.
+2. [Lighting and materials](/tutorials/keepyup-part-two/): a sky that lights the scene, shadows, and a shinier ball.
+3. [Making the ball move](/tutorials/keepyup-part-three/): your first two scripts.
+4. [Game flow and scoring](/tutorials/keepyup-part-four/): a game script and a score on screen.
+5. [Menu and game over screens](/tutorials/keepyup-part-five/): the rest of the user interface.
+6. [Sound, particles and publishing](/tutorials/keepyup-part-six/): the finishing touches, then putting the game online.
 
-We'll cover these topics:
+:::info[Before you start]
 
-1. **The Scene and Hierarchy**
-1. Material Setup
-1. The Game Script
-1. Ball Physics and Input
-1. Audio & Effects
-1. User Interface
+- You need a free [PlayCanvas account](https://login.playcanvas.com/signup) and a desktop browser.
+- If you have never used the Editor, work through [Your First App](/user-manual/editor/getting-started/your-first-app/) first. It takes about 15 minutes and teaches the panels this series uses.
+- You can look at the [finished project](https://playcanvas.com/project/1660780/overview/keepy-up) at any time to compare it with your own.
 
-This isn't a step-by-step guide, but we will talk about all areas of the scripts and try and explain how each bit works. We recommend you fork the Game project into your own account and follow along as we go through.
+:::
 
-## Part 1: The Scene and Hierarchy
+## 1. Fork the Starter Project {#fork-the-starter-project}
 
-In PlayCanvas your scene is described by a hierarchy of Entities. Each Entity is a "thing" in your application, it will always consist of an ID, a name and a transform. A transform is a matrix which defines the position, rotation and scale of the Entity in 3D space. To build your scene you create Entities and arrange them in a tree structure which is displayed on the left panel of the editor. The tree structure allows parent Entities to affect their children, for example, all child Entities inherit their parents position, rotation and scale. Also, if you disable a parent Entity all child Entities will also be disabled.
+The models, textures, sounds and font for the game are ready for you in a starter project. [Forking](/user-manual/editor/projects/creating/#fork-an-existing-project) it gives you your own copy to build on.
 
-In our Keepy Up scene we have 7 top level Entities in the hierarchy.
+1. Open the [Keepy Up Starter](https://playcanvas.com/project/1660810/overview/keepy-up-starter) project and select **Fork**.
+2. Name your copy `Keepy Up` and confirm.
+3. Open your new project in the Editor.
 
-![Hierarchy](/img/tutorials/beginner/keepyup-part-one/hierarchy.jpg)
+The [Assets](/user-manual/editor/assets/asset-panel/) panel shows what you have to work with:
 
-### Camera Entity
+![The Assets panel of the starter project, with six folders](/img/tutorials/keepyup-part-one/assets.webp)
 
-A Camera is where your scene is viewed from while the application is running. In this game we only have one camera and it is stationary.
+| Folder | Contents |
+| --- | --- |
+| **Models** | The football and the stadium |
+| **Textures** | A sky image and a particle image |
+| **UI** | A ring to draw around the ball |
+| **Sounds** | A kick, a game over sound and a music loop |
+| **Fonts** | The font for the score and the titles |
+| **Scripts** | Empty. You'll write the scripts yourself |
 
-### Directional Light Entity
+The scene, called Game, holds only a Camera and a Light.
 
-Lights illuminate 3D models in the scene. The more lights you have active at once, the longer it will take to render a scene and this can effect the frame rate of your game. You should aim to have only a few lights active at once. In this game we have a single stationary Directional Light.
+## 2. Sharpen the Picture {#sharpen-the-picture}
 
-### Football Entity
+Phones and many laptops have screens with more than one physical pixel per CSS pixel. By default a PlayCanvas app ignores that and looks soft on them.
 
-The football is the main dynamic Entity in the scene. The Football Entity has 3 components attached to it. You can see the components by selecting the Football and viewing the Attribute Panel on the right side of the editor. The 3 components are:
+1. Select the cog icon at the bottom of the toolbar to open the project's **Settings** in the [Inspector](/user-manual/editor/interface/inspector/).
+2. Expand **Rendering** and turn on **Device Pixel Ratio**.
 
-#### Sound Component
+A new project already fills the browser window and matches its resolution, so there is nothing else to change here.
 
-The sound component lets you play back sound files. Each Sound component has a number of slots, one for each sound file. You can choose playback settings like, whether the sound will loop, the volume or the pitch. The football has a single slot for the sound made when the ball bounces.
+## 3. Add the Stadium {#add-the-stadium}
 
-#### Model Component
+When a model is imported, the Editor makes a [template](/user-manual/editor/templates/) for it: a ready-made Entity that you can drop into a scene.
 
-The model component is used to attach a 3D model asset to an Entity. When you have an enabled model component on an Entity the 3D model will be rendered at the Entity's position in the 3D space. In this case, we have attached the football model.
+1. In the Assets panel, open **Models** > **Stadium**.
+2. Drag the `stadium` template into the [Hierarchy](/user-manual/editor/interface/hierarchy/) panel and drop it on **Root**.
+3. With the new Entity selected, change its **Name** in the Inspector to `Stadium`.
 
-#### Script Component
+Its **Position** should be `0`, `0`, `0`. The stadium is built so that its pitch is 7 units below that point, which puts the game's camera at about chest height.
 
-The script component lets you attach javascript files to an Entity. Each entity will create an instance of the script inside the javascript file so that you can customize the behavior of the Entity. We'll go into more detail about the script on the football in Part 3.
+![The Editor with the stadium selected in the Viewport](/img/tutorials/keepyup-part-one/scene.webp)
 
-### Background
+## 4. Add the Football {#add-the-football}
 
-The Background Entity has another model component. This time it is the back plane that forms the background to the game. The background is created using a texture of a stadium in a material asset applied to the built in Plane Entity type. We're using the Emissive slot on the material to make sure the background is bright and is not shadowed by the light and the football. This effect is a bit like a matte painting used in an old film.
+1. Open **Models** > **Football** and drag the `football` template onto **Root**.
+2. Rename the Entity `Football`.
+3. Set its **Position** to `0`, `0.7`, `0` and its **Scale** to `1.2`, `1.2`, `1.2`.
 
-### Impact Effect Entity
+![The Inspector for the Football entity, with its position and scale set](/img/tutorials/keepyup-part-one/football.webp)
 
-The Impact Effect Entity is a particle effect that plays when the ball is bounced. We'll go into more detail in Part 4.
+The panel at the top of the Inspector tells you that the Entity is an instance of a template, and counts the values you have changed as overrides. You can ignore it for this project.
 
-### Audio
+## 5. Aim the Camera {#aim-the-camera}
 
-The Audio Entity has more sound components attached to it. This Entity is for playing the music and the game over sound.
+The game is played side on, with the camera looking straight at the ball.
 
-### UI (User Interface)
+1. Select **Camera** in the Hierarchy.
+2. Set its **Position** to `0`, `0`, `12.4` and its **Rotation** to `0`, `0`, `0`.
+3. In the [Camera Component](/user-manual/editor/scenes/components/camera/), set **Field Of View** to `45`, **Near Clip** to `0.5` and **Far Clip** to `2000`.
 
-The UI Entity is the parent of several other Entities, one for each screen that is used for the user interface of the game. We'll cover the UI Entity in Part 5.
+![The Inspector for the Camera entity](/img/tutorials/keepyup-part-one/camera.webp)
 
-[Part 2](/tutorials/keepyup-part-two/) covers the main game script.
+**Near Clip** and **Far Clip** set the range of distances that the camera draws. This range covers the whole stadium with room to spare.
+
+## 6. Turn the Light {#turn-the-light}
+
+A directional light acts like the sun. Only its rotation matters, not its position.
+
+1. Select **Light** in the Hierarchy.
+2. Set its **Rotation** to `45`, `-40`, `0`, so that it shines from behind the camera and to its left.
+3. In the [Light Component](/user-manual/editor/scenes/components/light/), set **Intensity** to `1.6`, and set **Color** to a slightly warm white such as `FFF7E6`.
+
+![The Inspector for the Light entity](/img/tutorials/keepyup-part-one/light.webp)
+
+## Check Your Progress {#check-your-progress}
+
+Select **Launch** at the top right of the [Viewport](/user-manual/editor/interface/viewport/). Your game opens in a new tab and should look like this:
+
+![The game at the end of Part 1: the ball in front of the stadium, with a black sky](/img/tutorials/keepyup-part-one/result.webp)
+
+The ball hangs in front of the goal and nothing moves yet. The sky is black because the scene has no sky, and the ball looks flat because the only light on it comes from one direction.
+
+You fix both in [Part 2: Lighting and Materials](/tutorials/keepyup-part-two/).

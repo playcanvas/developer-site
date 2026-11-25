@@ -1,84 +1,88 @@
 ---
-title: Making a Simple Game - Part 2
-description: Set up Physical materials and a cubemap for image-based lighting on the ball, ground, and backdrop.
+title: "Making a Simple Game - Part 2: Lighting and Materials"
+description: Give Keepy Up its finished look. Turn a sky image into image-based lighting, add shadows, set the camera's tone mapping and make the football's materials shine.
 tags: [games]
 kind: tutorial
 topic: Games
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406050/LIJTDO-image-75.jpg
+thumb: /img/tutorials/keepyup-part-two/thumbnail.webp
 ---
 
-<div className="iframe-container">
-    <iframe src="https://playcanv.as/p/KH37bnOk/?overlay=false" title="Making a Simple Game - Part 2" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
-</div>
+In [Part 1](/tutorials/keepyup-part-one/) you placed the stadium and the ball. In this part you light them. One image of a sky will become both the background and a source of light from every direction, and the ball will get a glossy finish that shows it off.
 
-*You can find the [full project here](https://playcanvas.com/project/406050). If you haven't seen [Part 1](/tutorials/keepyup-part-one/) read it first.*
+:::info[Before you start]
 
-## Material Setup
+You need the project you made in Part 1. To compare your work, open the [finished project](https://playcanvas.com/project/1660780/overview/keepy-up).
 
-We've kept the graphics very simple for this game so there isn't too much set up but will have to set up some Material assets for the ball, the background and the overlay.
+:::
 
-### What is a material?
+## 1. Make a Cubemap from the Sky {#make-a-cubemap-from-the-sky}
 
-A Material is a type of asset in PlayCanvas that describes the way that the surface of a 3D model looks when it is rendered to the screen. The material determines the color of the surface, but also the way the surface interacts with light. For example, you can set up a material to be a smooth metal, or a rough rubber. PlayCanvas has a built in material called a Physical Material which should cover 90% of your use cases for a material. When you get more advanced it is possible to create your own materials by using GLSL shader code to write your own.
+The **Textures** folder holds `stadium-sky.png`, a panorama of a sky above a green field. PlayCanvas uses a sky like this as a [cubemap](/user-manual/editor/assets/inspectors/cubemap/): six square images that surround the scene.
 
-### Cubemap
+1. In the Assets panel, open **Textures** and right-click `stadium-sky.png`.
+2. Select **Create Cubemap**. The Editor adds six face textures and a cubemap called `stadium-sky_cubemap`.
+3. Select the cubemap. In the Inspector, find **Prefiltering** and select **PREFILTER CUBEMAP**.
 
-Before we jump into the materials, we're going to set up our cubemap asset. A cubemap is an asset that consists of 6 textures on the faces of a cube. You can think of this as the far off environment of your scene. The PlayCanvas Physical materials can use a cubemap to do Image Based Lighting. This uses the colors in the cubemap to light materials in the scene. For example in our scene the cubemap has a blue sky and a green grass surface. So our ball will be lit blue from above and green from below. [Read more](/user-manual/editor/assets/inspectors/cubemap/) in our documentation.
+![The Inspector for the cubemap](/img/tutorials/keepyup-part-two/cubemap.webp)
 
-![Cubemap](/img/tutorials/beginner/keepyup-part-two/cubemap-preview.jpg)
+Prefiltering makes blurred copies of the sky. A rough surface reflects a blurred sky and a polished one reflects a sharp sky, so the engine needs both. This is called [image-based lighting](/user-manual/graphics/physical-rendering/image-based-lighting/).
 
-To set up a cubemap, first create a Cubemap asset from the New Asset menu, assign 6 textures, one to each face of the cubemap. When your cubemap has all 6 faces assigned, press the "Prefilter" button. **Prefiltering in required for the cubemap to work correctly!**
+## 2. Set the Skybox {#set-the-skybox}
 
-## Football Material
+1. Select the cog icon at the bottom of the toolbar to open **Settings**, and expand **Rendering**.
+2. Drag `stadium-sky_cubemap` from the Assets panel onto the **Skybox** slot.
 
-![Football](/img/tutorials/beginner/keepyup-part-two/ball-material.jpg)
+![The Skybox slot in the Rendering settings](/img/tutorials/keepyup-part-two/skybox.webp)
 
-The football is a 3D model that we imported from the [PlayCanvas Asset Library](https://store.playcanvas.com/). The football materials will mostly be set up for you but you may need to make some simple changes. Lets look at each map used by the football
+The Viewport now has a sky, and everything in the scene is lit by it: blue from above and green from below.
 
-### Diffuse
+## 3. Choose the Tone Mapping {#choose-the-tone-mapping}
 
-![Diffuse](/img/tutorials/beginner/keepyup-part-two/ball-diffuse.jpg)
+Tone mapping decides how the bright values in the rendered picture are fitted into the range a screen can show. It is a property of each camera.
 
-The diffuse map defines the color of the surface. In this case it is the black and white pattern of the football.
+1. Select **Camera**.
+2. In the Camera Component, set **Tonemapping** to **Neutral**.
 
-### Environment
+![The Tonemapping setting of the Camera Component](/img/tutorials/keepyup-part-two/tonemapping.webp)
 
-![Environment](/img/tutorials/beginner/keepyup-part-two/ball-env.jpg)
+**Neutral** keeps colors close to the ones you chose, which suits the bright, simple look of this game. Try the other options to see how each one changes the picture.
 
-We're going to jump quickly to the Environment section as this is needed to see the effects of the Specular changes. To set up the Environment drag the Cubemap asset on the the cubemap slot in the material.
+## 4. Cast Shadows {#cast-shadows}
 
-### Specular
+A shadow on the pitch shows the player where the ball is.
 
-![Specular](/img/tutorials/beginner/keepyup-part-two/ball-spec.jpg)
+1. Select **Light**.
+2. In the Light Component, turn on **Cast Shadows**.
+3. Set **Resolution** to `2048 x 2048`, **Cascades** to `2` and **Distance** to `420`.
+4. Set **Shadow Bias** to `0.3` and **Normal Offset Bias** to `0.2`.
 
-The specular section determines how the material interacts with lights. There are two "workflows" for specular, the "Metalness workflow" and the "Specular workflow", you can find more information in our [documentation](/user-manual/graphics/physical-rendering/physical-materials/). For the football we are using Metalness, so be sure to check the "Use Metalness" box. Our football is not made of metal, so we slide the metalness slider all the way down to 0. Then we use the glossiness slider to set our rough/smooth the material should be. We've set this to about halfway which gives a nice shine to the ball, but not completely smooth.
+![The shadow settings of the Light Component](/img/tutorials/keepyup-part-two/shadows.webp)
 
-### Normal
+**Distance** is how far from the camera shadows are drawn. The stadium is large, so it has to be large too. **Cascades** splits that distance into ranges with a shadow map each, which keeps the ball's shadow sharp. The two bias values stop surfaces from shadowing themselves at this scale.
 
-![Normal](/img/tutorials/beginner/keepyup-part-two/ball-normal.jpg)
+## 5. Polish the Ball {#polish-the-ball}
 
-The final texture map we apply is the normal map. The normal map is used to add details to the model. In this case, the separate patches of the football are not modelled in the geometry (which is smooth sphere) but they are in the normal map. This means the ball will be correctly lit as if the patches were there, but without the overhead of lots of extra polygons.
+The football uses three [materials](/user-manual/graphics/physical-rendering/physical-materials/): `Ball Light` for the white panels, `Ball Dark` for the black ones and `Ball Seam` for the grooves between them. They are in **Models** > **Football**.
 
-## Backdrop Material
+1. Select `Ball Light` and expand **Clearcoat** in the Inspector.
+2. Set **Clear Coat Factor** to `0.4` and **Clear Coat Gloss** to `0.85`.
+3. Do the same for `Ball Dark`.
 
-![Backdrop](/img/tutorials/beginner/keepyup-part-two/backdrop-material.jpg)
+![The Clearcoat section of the material Inspector](/img/tutorials/keepyup-part-two/clearcoat.webp)
 
-The backdrop material is much simpler, we have only one texture map.
+Clear coat adds a thin glossy layer over the material, like varnish. The ball now picks up a reflection of the sky.
 
-### Emissive
+While you have a material open, look at its other sections:
 
-![Emissive](/img/tutorials/beginner/keepyup-part-two/backdrop-emissive.jpg)
+- **Diffuse** sets the base color. Change the **Color** of `Ball Light` and `Ball Dark` to put the ball in your own team's colors.
+- **Specular** holds **Metalness** and **Gloss**, which decide how mirror-like the surface is.
 
-The emissive map sets the color at the surface as if it was emitting light of that color. This means that lights in the scene don't effect how bright an emissive surface is. Note, an emissive material doesn't affect any other objects in your scene, there is no light actually emitted.
+The stadium's materials, in **Models** > **Stadium**, show three more techniques. `Crowd` takes its color from a texture in its **Diffuse** slot. `Boards` uses the same texture in **Emissive**, so the advertising boards glow like screens. `Net` has an **Opacity** below 1 and a **Blend Type** of **Alpha**, which makes the goal net see-through.
 
-In this case, we don't want the background to be lit, it is just a static scene. So we use the emissive map to do that.
+## Check Your Progress {#check-your-progress}
 
-## Overlay Material
+**Launch** the game again:
 
-![Overlay](/img/tutorials/beginner/keepyup-part-two/overlay-material.jpg)
+![The game at the end of Part 2: the lit stadium under a blue sky](/img/tutorials/keepyup-part-two/result.webp)
 
-The overlay material is even simpler than the backdrop. In this case all we are doing is setting the color of the emissive property
-
-![Emissive](/img/tutorials/beginner/keepyup-part-two/overlay-emissive.jpg)
-
-Continue on to [Part 3](/tutorials/keepyup-part-three/).
+The scene has its finished look, but it is still a picture. In [Part 3: Making the Ball Move](/tutorials/keepyup-part-three/) you write the scripts that turn it into something you can play.

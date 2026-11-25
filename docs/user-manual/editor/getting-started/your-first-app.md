@@ -265,4 +265,4 @@ Some ideas for what to try next, roughly from easiest to hardest:
 - [Scripting](/user-manual/scripting/): everything scripts can do.
 - [Physics](/user-manual/physics/): forces, joints, triggers and ray casts.
 - [The Editor interface](/user-manual/editor/interface/): every panel in depth.
-- [Tutorials](/tutorials/): complete projects to explore and fork, such as the [Keepy Up](/tutorials/keepyup-part-one/) game.
+- [Tutorials](/tutorials/): complete projects to explore and fork, and step-by-step series such as [Making a Simple Game](/tutorials/keepyup-part-one/), which builds the Keepy Up game.

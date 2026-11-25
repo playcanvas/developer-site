@@ -1,496 +1,265 @@
 ---
-title: シンプルなゲームの作成 - パート3
+title: "シンプルなゲームの作成 - パート3: ボールを動かす"
+description: Keepy Upの最初の2つのスクリプトを書きます。1つは重力でサッカーボールを動かしてキックし、もう1つはマウスのクリックとタッチをキックに変えます。
 tags: [games]
-thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406050/LIJTDO-image-75.jpg"
-description: Keepy Up でタップ、スコア、全体の流れを駆動するルートのゲームと入力 Script を順に追います。
+thumb: /img/tutorials/keepyup-part-three/thumbnail.webp
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import StepVideo from '@site/src/components/StepVideo';
 
-<div className="iframe-container">
-    <iframe src="https://playcanv.as/p/KH37bnOk/?overlay=false" title="Making a Simple Game - Part 3" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
-</div>
+[パート2](/tutorials/keepyup-part-two/)では、シーンの見た目を仕上げました。このパートでは、2つの[スクリプト](/user-manual/scripting/)を書きます。1つ目は、ボールを落下させ、キックできるようにします。2つ目は、クリックやタッチがボールに当たったかどうかを判定します。
 
-*[完成されたプロジェクトはこちら](https://playcanvas.com/project/406050)です。先に[その1](/tutorials/keepyup-part-one/)と[その2](/tutorials/keepyup-part-two/) を読んでください。*
+:::info[はじめる前に]
 
-## ゲームスクリプトと入力
+パート1と2で作ったプロジェクトが必要です。自分の作業と比べるには、[完成したプロジェクト](https://playcanvas.com/project/1660780/overview/keepy-up)を開いてください。
 
-これらの2つのスクリプト`game.js`と`input.js`は、「Game」と呼ばれるシーンのルートエンティティに添付されています。スクリプトは基本的にヒエラルキーで遭遇される順に実行されるので、エンティティ特有でない任意のスクリプトを最初のエンティティに添付するのが最も簡単です。また、エンティティに添付せずに最初にスクリプトを読み込むために、エディタの設定パネルでのスクリプトの読み込み順を管理することができます。
+:::
 
-## game.js
+## 1. ボールのスクリプトを書く {#write-the-ball-script}
 
-<Tabs defaultValue="esm" groupId='script-code'>
-<TabItem value="esm" label="ESM">
-
-```javascript
-import { Script, RESOLUTION_AUTO, FILLMODE_FILL_WINDOW } from 'playcanvas';
-
-export class Game extends Script {
-    static scriptName = "game";
-
-    /**
-     * 
-     * @attribute
-     * @title UI Menu
-     * @type {Entity}
-     */
-    uiMenu = null;
-
-    /**
-     * 
-     * @attribute
-     * @title UI In Game
-     * @type {Entity}
-     */
-    uiInGame = null;
-
-    /**
-     * 
-     * @attribute
-     * @title UI Game Over
-     * @type {Entity}
-     */
-    uiGameOver = null;
-
-    /**
-     * 
-     * @attribute
-     * @title Audio
-     * @type {Entity}
-     */
-    audio = null;
-
-    static STATE_MENU = 'menu';
-    static STATE_INGAME = 'ingame';
-    static STATE_GAMEOVER = 'gameover';
-
-    // initialize code called once per entity
-    initialize() {
-        this._state = Game.STATE_MENU;
-        this._score = 0;
-
-        this.setResolution();
-
-        window.addEventListener("resize", this.setResolution.bind(this));
-
-        // UI からのイベントをリッスンする
-        this.app.on("ui:start", this.start, this);
-        this.app.on("ui:reset", this.reset, this);
-    }
-
-    setResolution() {
-        // 画面サイズに応じて解像度を調整する
-        const w = window.screen.width;
-        const h = window.screen.height;
-
-        if (w < 640) {
-            this.app.setCanvasResolution(RESOLUTION_AUTO, w, h);
-            this.app.setCanvasFillMode(FILLMODE_FILL_WINDOW);
-        }
-    }
-
-    // MENU から INGAME に移動するために呼び出す
-    start() {
-        this._state = Game.STATE_INGAME;
-        this.app.fire("game:start");
-        this.uiMenu.enabled = false;
-        this.uiInGame.enabled = true;
-
-        this.audio.sound.play("music");
-    }
-
-    // INGAME から GAMEOVER に移動するために呼び出す
-    gameOver() {
-        this._state = Game.STATE_GAMEOVER;
-        this.app.fire("game:gameover");
-        this.uiInGame.enabled = false;
-        this.uiGameOver.enabled = true;
-
-        this.audio.sound.stop();
-        this.audio.sound.play("gameover");
-    }
-
-    // GAMEOVER から MENU に移動するために呼び出す
-    reset() {
-        this.app.fire("game:reset");
-        this.resetScore();
-        this._state = Game.STATE_MENU;
-        this.uiGameOver.enabled = false;
-        this.uiMenu.enabled = true;
-
-        this.audio.sound.stop();
-    }
-
-    // 現在のスコアを返す
-    getScore() {
-        return this._score;
-    }
-
-    // スコアを加算する
-    addScore(v) {
-        this._score += v;
-        this.app.fire("game:score", this._score);
-    }
-
-    // スコアをリセットする
-    resetScore() {
-        this._score = 0;
-        this.app.fire("game:score", this._score);
-    }
-}
-```
-
-</TabItem>
-<TabItem value="classic" label="Classic">
-
-```javascript
-var Game = pc.createScript('game');
-
-Game.attributes.add('uiMenu', {type: 'entity'});
-Game.attributes.add('uiInGame', {type: 'entity'});
-Game.attributes.add('uiGameOver', {type: 'entity'});
-Game.attributes.add('audio', {type: 'entity'});
-
-Game.STATE_MENU = 'menu';
-Game.STATE_INGAME = 'ingame';
-Game.STATE_GAMEOVER = 'gameover';
-
-// initialize code called once per entity
-Game.prototype.initialize = function() {
-    this._state = Game.STATE_MENU;
-    this._score = 0;
-
-    this.setResolution();
-
-    window.addEventListener("resize", this.setResolution.bind(this));
-
-    // UI からのイベントをリッスンする
-    this.app.on("ui:start", this.start, this);
-    this.app.on("ui:reset", this.reset, this);
-};
-
-Game.prototype.setResolution = function () {
-    // 画面の幅が 640 未満の場合は画面いっぱいに表示する
-    // それ以外はデフォルト設定を使用する
-
-    var w = window.screen.width;
-    var h = window.screen.height;
-
-    if (w < 640) {
-        this.app.setCanvasResolution(pc.RESOLUTION_AUTO, w, h);
-        this.app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
-    }
-};
-
-// MENU から INGAME に移動するために呼び出す
-Game.prototype.start = function () {
-    this._state = Game.STATE_INGAME;
-    this.app.fire("game:start");
-    this.uiMenu.enabled = false;
-    this.uiInGame.enabled = true;
-
-    this.audio.sound.play("music");
-};
-
-// INGAME から GAMEOVER に移動するために呼び出す
-Game.prototype.gameOver = function () {
-    this._state = Game.STATE_GAMEOVER;
-    this.app.fire("game:gameover");
-    this.uiInGame.enabled = false;
-    this.uiGameOver.enabled = true;
-
-    this.audio.sound.stop();
-    this.audio.sound.play("gameover");
-};
-
-// GAMEOVER から MENU に移動するために呼び出す
-Game.prototype.reset = function () {
-    this.app.fire("game:reset");
-    this.resetScore();
-    this._state = Game.STATE_MENU;
-    this.uiGameOver.enabled = false;
-    this.uiMenu.enabled = true;
-
-    this.audio.sound.stop();
-};
-
-// 現在のスコアを返す
-Game.prototype.getScore = function () {
-    return this._score;
-};
-
-// スコアを加算する
-Game.prototype.addScore = function (v) {
-    this._score += v;
-    this.app.fire("game:score", this._score);
-};
-
-// スコアをリセットする
-Game.prototype.resetScore = function () {
-    this._score = 0;
-    this.app.fire("game:score", this._score);
-};
-```
-
-</TabItem>
-</Tabs>
-
-### ゲームの状態
-
-ゲームスクリプトは、ゲームの全体的な状態を管理し、ゲームの状態を変更するためのメソッドを公開し、ゲームの状態が変更されたことを他のコードに通知するためのイベントを発行します。
-
-ゲームには3つの主要の状態、メニュー、ゲーム内、ゲームオーバーがあります。`start()`, `gameOver()`, `reset()`のゲームスクリプトを使用して各状態間を移行します。それぞれが現在の状態を記憶するために`_state`変数を設定し、状態の変化を他のスクリプトに通知するためにアプリケーションイベントを発生させ、ユーザインタフェース要素のオン・オフを切り替え、音楽やゲームオーバーの効果音の状態を管理します。
-
-これらの状態の変更メソッドは、適切なトリガーイベントが発生した場合に他のスクリプトから呼び出されます。例えば、`gameOver()`メソッドはボールが画面下から出た時に `ball.js` によって呼び出されます。
-
-### アプリケーションイベント
-
-ゲームスクリプトがどのようにアプリケーションでイベントを発生させるかを確認してみましょう。
-
-```javascript
-this.app.fire("game:start")
-```
-
-イベントは、一つのスクリプトを他のスクリプトと通信させるための非常に便利な方法です。オブジェクトがイベントの発生を選択します(この場合は`this.app`)。オブジェクトへのアクセス権を持つ他のコードは、このオブジェクトのイベントにリッスンすることができ、イベントが発生したとき、コードに通知が送られます。
-
-ここで問題となのは、コードがイベントにリッスンし始めるために、オブジェクトにアクセスする必要があるということです。アプリケーションイベントが非常に便利なのはこのためです。PlayCanvas内のすべてのスクリプトに`this.app`へのアクセス権があります。それは他のスクリプトとの間の中央通信ハブとして機能させることで有用になります。
-
-イベントを明確にし、衝突を避けるために、名前空間パターンを使用しています。上記の`game:start` イベントをリッスンする場合、次のコードを使用します：
-
-```javascript
-this.app.on("game:start", function () {
-    console.log("game:start event was fired");
-}, this)
-```
-
-### スコア
-
-ゲームスクリプトは現在のスコアも管理します。これは、スコアを変更するためのメソッドを公開し、スコアが変更したことを他のコードに知らせるためにイベントを発生させます。
-
-### Resolution
-
-最後に、モバイルとデスクトップの両方でメインキャンバスが正しいサイズになることを確認するために、ゲームのスクリプトは解像度の初期の選択を処理します。モバイルでは(640ピクセル未満の画面)、ゲームが画面全体を埋めます。デスクトップでは、プロジェクト設定で設定した定義済みの解像度を使用します。
-
-## input.js
-
-入力スクリプトはマウスやタッチスクリーンからの入力にリッスンし、これらの入力を標準的な「タップ」に統一し、アプリケーションにタップが発生していることを知らせます。
-
-<Tabs defaultValue="esm" groupId='script-code'>
-<TabItem value="esm" label="ESM">
+1. アセットパネルで **Scripts** フォルダーを開きます。
+2. **+**（アセットを追加）ボタンを選択し、**Script** を選択します。名前を `ball.mjs` にして作成します。
+3. `ball.mjs` をダブルクリックして、[Code Editor](/user-manual/editor/scripting/code-editor/)（コードエディター）で開きます。
+4. ファイルの内容をすべて次のコードに置き換え、<kbd>Ctrl</kbd>+<kbd>S</kbd>（Macでは<kbd>Cmd</kbd>+<kbd>S</kbd>）で保存します。
 
 ```javascript
 import { Script, Vec3 } from 'playcanvas';
 
-export class Input extends Script {
-    static scriptName = "input";
+/**
+ * Moves the ball under gravity, kicks it when it is tapped and returns it to its starting
+ * position when it falls out of view.
+ */
+export class Ball extends Script {
+    static scriptName = 'ball';
 
     /**
+     * The acceleration due to gravity, in units per second squared.
+     *
      * @attribute
-     * @title Ball
-     * @type {Entity}
-     */
-    ball = null;
-
-    /**
-     * @attribute
-     * @title Camera
-     * @type {Entity}
-     */
-    camera = null;
-
-    /**
-     * @attribute
-     * @title Ball Radius
      * @type {number}
      */
-    ballRadius = 0.5;
+    gravity = -20;
 
-    static worldPos = new Vec3();
+    /**
+     * The upward speed a kick gives the ball, in units per second.
+     *
+     * @attribute
+     * @type {number}
+     */
+    kickSpeed = 12;
 
-    // initialize code called once per entity
+    /**
+     * The sideways speed a kick adds for each unit it lands off center.
+     *
+     * @attribute
+     * @type {number}
+     */
+    sideSpeed = 4;
+
+    /**
+     * The spin a kick adds for each unit it lands off center, in degrees per second.
+     *
+     * @attribute
+     * @type {number}
+     */
+    spin = 360;
+
+    /**
+     * The height below which the ball is lost.
+     *
+     * @attribute
+     * @type {number}
+     */
+    floor = -6;
+
+    velocity = new Vec3();
+
+    spinSpeed = 0;
+
+    inPlay = false;
+
     initialize() {
-        this._paused = true;
-
-        // Listen for game events so we know whether to respond to input
-        this.app.on("game:start", () => {
-            this._paused = false;
-        });
-        this.app.on("game:gameover", () => {
-            this._paused = true;
-        });
-
-        // set up touch events if available
-        if (this.app.touch) {
-            this.app.touch.on("touchstart", this._onTouchStart, this);
-        }
-
-        // set up mouse events
-        this.app.mouse.on("mousedown", this._onMouseDown, this);
+        // Remember where the ball starts so it can be put back
+        this.startPosition = this.entity.getPosition().clone();
+        this.startRotation = this.entity.getRotation().clone();
     }
 
-    _onTap(x, y) {
-        let p = this.ball.getPosition();
-        let camPos = this.camera.getPosition();
-        let worldPos = Input.worldPos;
-
-        // Get the position in the 3D world of the touch or click
-        this.camera.camera.screenToWorld(x, y, camPos.z - p.z, worldPos);
-
-        // get the distance of the touch/click to the ball
-        let dx = (p.x - worldPos.x);
-        let dy = (p.y - worldPos.y);
-
-        // If the click is inside the ball, tap the ball
-        let lenSqr = dx * dx + dy * dy;
-        if (lenSqr < this.ballRadius * this.ballRadius) {
-            this.ball.script.ball.tap(dx, dy);
-        }
-    }
-
-    _onTouchStart(e) {
-        if (this._paused) {
+    update(dt) {
+        if (!this.inPlay) {
+            // Turn slowly while waiting for a kick
+            this.entity.rotate(0, 30 * dt, 0);
             return;
         }
 
-        // respond to event
-        let touch = e.changedTouches[0];
-        this._onTap(touch.x, touch.y);
+        // Gravity changes the velocity, and the velocity changes the position
+        this.velocity.y += this.gravity * dt;
+        this.entity.translate(this.velocity.x * dt, this.velocity.y * dt, 0);
 
-        // stop mouse events firing as well
-        e.event.preventDefault();
+        // Spin around the axis that points at the camera
+        this.entity.rotate(0, 0, this.spinSpeed * dt);
+
+        if (this.entity.getPosition().y < this.floor) {
+            this.lose();
+        }
     }
 
-    _onMouseDown(e) {
-        if (this._paused) {
-            return;
-        }
+    /**
+     * Kicks the ball up and away from a point.
+     *
+     * @param {Vec3} point - The position of the kick in world space.
+     */
+    kick(point) {
+        // How far the kick landed to the side of the ball's center
+        const offset = this.entity.getPosition().x - point.x;
 
-        // respond to event
-        this._onTap(e.x, e.y);
+        this.velocity.set(this.sideSpeed * offset, this.kickSpeed, 0);
+        this.spinSpeed -= this.spin * offset;
+        this.inPlay = true;
+
+        this.app.fire('ball:kicked', point);
+    }
+
+    lose() {
+        this.inPlay = false;
+        this.velocity.set(0, 0, 0);
+        this.spinSpeed = 0;
+        this.entity.setPosition(this.startPosition);
+        this.entity.setRotation(this.startRotation);
+
+        this.app.fire('ball:lost');
     }
 }
 ```
 
-</TabItem>
-<TabItem value="classic" label="Classic">
+## 2. サッカーボールにアタッチする {#attach-it-to-the-football}
+
+1. エディターに戻り、ヒエラルキーで **Football** を選択します。
+2. インスペクターで **Add Component** > **Script** を選択します。
+3. 新しい[Scriptコンポーネント](/user-manual/editor/scenes/components/script/)で **Add Script** を選択し、`ball` を選びます。
+
+![ballスクリプトの属性が表示された、Football エンティティのScriptコンポーネント](/img/tutorials/keepyup-part-three/ball-script.webp)
+
+スクリプトの下にある5つの値は、その[属性](/user-manual/scripting/script-attributes/)です。それぞれ、コードの中で上に `@attribute` コメントが付いたプロパティに対応しています。コードに触れずに、ここで値を変更できます。
+
+ゲームを **Launch** します。ボールはその場でゆっくり回転し、まだ誰にもできないキックを待っています。
+
+### ボールのスクリプトの仕組み {#how-the-ball-script-works}
+
+- **`initialize`** は、ゲームの開始時に一度だけ実行されます。ボールが最初にあった場所を覚えておきます。
+- **`update`** は毎フレーム実行され、`dt` は前のフレームからの経過時間（秒）です。ボールがプレー中の間、重力が速度を変え、速度が位置を変えます。`dt` を掛けることで、ゲームがどんな速さで動いていても、ボールは同じ速さで動きます。
+- **`kick`** は、ボールを上に蹴り上げます。キックがボールの中心から左右にずれていると、ボールはキックから離れる方向にも動き、回転します。
+- **`lose`** は、ボールが `floor` より下に落ちたら、最初の場所に戻します。
+
+このスクリプトは `this.app.fire` も2回呼び出しています。これは、ゲームの他の部分にイベントを送ります。ボールがキックされたときは `ball:kicked`、ボールを落としたときは `ball:lost` です。まだ誰もこれを聞いていません。パート4で、ゲームスクリプトがこれらのイベントを使ってスコアを数えます。
+
+## 3. 入力のスクリプトを書く {#write-the-input-script}
+
+ボールには、キックしてくれるものが必要です。**Scripts** フォルダーに `input.mjs` という2つ目のスクリプトを作成し、次のコードを入力します。
 
 ```javascript
-var Input = pc.createScript('input');
+import { Entity, MOUSEBUTTON_LEFT, Script, Vec3 } from 'playcanvas';
 
-Input.attributes.add('ball', {type: 'entity'});
-Input.attributes.add('camera', {type: 'entity'});
-Input.attributes.add('ballRadius', {type: 'number', default: 0.5});
+/**
+ * Turns mouse clicks and touches into kicks when they land on the ball.
+ */
+export class Input extends Script {
+    static scriptName = 'input';
 
-Input.worldPos = new pc.Vec3();
+    /**
+     * The ball to kick.
+     *
+     * @attribute
+     * @type {Entity}
+     */
+    ball;
 
-// initialize code called once per entity
-Input.prototype.initialize = function() {
+    /**
+     * The camera the game is viewed through.
+     *
+     * @attribute
+     * @type {Entity}
+     */
+    camera;
 
-    var self = this;
+    /**
+     * How close to the ball's center a tap must land to count, in units.
+     *
+     * @attribute
+     * @type {number}
+     */
+    hitRadius = 0.75;
 
-    this._paused = true;
+    point = new Vec3();
 
-    // Listen for game events so we know whether to respond to input
-    this.app.on("game:start", function () {
-        self._paused = false;
-    });
-    this.app.on("game:gameover", function () {
-        self._paused = true;
-    });
+    initialize() {
+        this.app.mouse.on('mousedown', this.onMouseDown, this);
+        this.app.touch?.on('touchstart', this.onTouchStart, this);
 
-    // set up touch events if available
-    if (this.app.touch) {
-        this.app.touch.on("touchstart", this._onTouchStart, this);
+        this.on('destroy', () => {
+            this.app.mouse.off('mousedown', this.onMouseDown, this);
+            this.app.touch?.off('touchstart', this.onTouchStart, this);
+        });
     }
 
-    // set up mouse events
-    this.app.mouse.on("mousedown", this._onMouseDown, this);
-};
-
-Input.prototype._onTap = function (x, y) {
-    var p = this.ball.getPosition();
-    var camPos = this.camera.getPosition();
-    var worldPos = Input.worldPos;
-
-    // Get the position in the 3D world of the touch or click
-    // Store the in worldPos variable.
-    // This position is at the same distance away from the camera as the ball
-    this.camera.camera.screenToWorld(x, y, camPos.z - p.z, worldPos);
-
-    // get the distance of the touch/click to the ball
-    var dx = (p.x - worldPos.x);
-    var dy = (p.y - worldPos.y);
-
-    // If the click is inside the ball, tap the ball
-    var lenSqr = dx*dx + dy*dy;
-    if (lenSqr < this.ballRadius*this.ballRadius) {
-        this.ball.script.ball.tap(dx, dy);
-    }
-};
-
-Input.prototype._onTouchStart = function (e) {
-    if (this._paused) {
-        return;
+    onMouseDown(event) {
+        if (event.button === MOUSEBUTTON_LEFT) {
+            this.tap(event.x, event.y);
+        }
     }
 
-    // respond to event
-    var touch = e.changedTouches[0];
-    this._onTap(touch.x, touch.y);
+    onTouchStart(event) {
+        const touch = event.changedTouches[0];
+        this.tap(touch.x, touch.y);
 
-    // stop mouse events firing as well
-    e.event.preventDefault();
-};
-
-Input.prototype._onMouseDown = function (e) {
-    if (this._paused) {
-        return;
+        // Stop the browser from also sending a mouse event for this touch
+        event.event.preventDefault();
     }
 
-    // respond to event
-    this._onTap(e.x, e.y);
-};
-```
+    /**
+     * Kicks the ball if a point on the screen is over it.
+     *
+     * @param {number} x - The horizontal position on the screen, in pixels.
+     * @param {number} y - The vertical position on the screen, in pixels.
+     */
+    tap(x, y) {
+        const ballPosition = this.ball.getPosition();
 
-</TabItem>
-</Tabs>
+        // Find the point in the world that is under the tap, at the ball's distance from the camera
+        const distance = this.camera.getPosition().z - ballPosition.z;
+        this.camera.camera.screenToWorld(x, y, distance, this.point);
 
-まず、initializeでイベントのリスニングを設定します。ゲームが一時停止中(つまりメニューまたはゲームオーバー状態)であることを判断するために、アプリケーションのイベントはにリッスンします。入力が一時停止されている場合、タップに反応しません。次に、タッチイベント (`this.app.touch`が利用可能か確認する必要があります)とマウスイベントにリッスンします。
-
-### タッチイベント
-
-タッチイベントの場合、最初のタッチの画面座標を渡します。また、ブラウザが `click`イベントを生成することを防ぐためにブラウザで`preventDefault()` を呼びます。
-
-### マウスイベント
-
-「マウスダウン」イベントではタップコードを介してスクリーン座標を渡します。 PlayCanvasはタッチとマウスイベントが同じ座標系を持っていることを保証します。これは通常のブラウザイベントとは異なります！
-
-### タップ
-
-`_onTap()` は画面座標(x, y)を使用してボールに当たっているかを判断し、当たっている場合はボールのコードにタップされたことを知らせます。
-
-```javascript
-this.camera.camera.screenToWorld(x, y, camPos.z - p.z, worldPos);
-```
-
-具体的には、この関数は画面座標を(x, y)を使用してカメラに要求を出し、画面上のその位置の下に3Dの点が来るよう変換します。これを行うには、この3Dの点の画面からの距離を深さで指定する必要があります。このケースでは、ボールの位置と同じ深さに3Dの点があります。
-
-ベクター`Input.worldPos`も渡します。PlayCanvasアプリケーションでは、更新ループ内で新しいオブジェクトを作成することを回避するべきです。例えば、新しいベクターを作成するために`new Vec3()` を呼び出す場合です。メモリ割り当てが増えると(`new`を呼ぶことで)、割り当てをクリアするためにブラウザはより多くのGarbage Collectionを行う必要があります。Garbage Collectionはオペレーション(比較的遅い)で、頻繁に行うとゲームやアプリケーションの動作に支障をもたらします。
-
-ほとんどの場合、PlayCanvasは事前にオブジェクトの割り当てや再利用ができるようにベクターまたは類似のオプションを渡すオプションを提供します。
-
-```javascript
-// get the distance of the touch/click to the ball
-var dx = (p.x - worldPos.x);
-var dy = (p.y - worldPos.y);
-
-// If the click is inside the ball, tap the ball
-var lenSqr = dx*dx + dy*dy;
-if (lenSqr < this.ballRadius*this.ballRadius) {
-    this.ball.script.ball.tap(dx, dy);
+        if (this.point.distance(ballPosition) < this.hitRadius) {
+            this.ball.script.ball.kick(this.point);
+        }
+    }
 }
 ```
 
-タップした位置の3D点を取したら、それがボールと重なっているかどうかをテストします。ここでは、二乗半径を、タップとボールの間の距離の二乗値に対してテストします。これにより、テストするたびに時間のかかる平方根オペレーションを行わずにすみます。
+## 4. Game エンティティを追加する {#add-a-game-entity}
 
-タップがボールに当たると、タップが発生した場所のボールからの距離を渡し、ボールスクリプトで`tap(dx, dy)` 関数を呼び出します。これは[パート4](/tutorials/keepyup-part-four/)で使用します。
+入力のスクリプトは、ボールにもカメラにも属さないので、専用のエンティティを用意します。
+
+1. ヒエラルキーで **Root** を選択し、**+**（エンティティを追加）ボタン、**Entity** の順に選択します。新しいエンティティの名前を `Game` にします。
+2. **Script** コンポーネントを追加し、`input` スクリプトを追加します。
+3. ヒエラルキーから **Football** を、スクリプトの `ball` スロットにドラッグします。
+4. ヒエラルキーから **Camera** を、`camera` スロットにドラッグします。
+
+![ballとcameraのスロットが埋まった、Game エンティティのinputスクリプト](/img/tutorials/keepyup-part-three/input-script.webp)
+
+この2つのスロットがあるのは、コードが `ball` と `camera` を `Entity` 型の属性として指定しているからです。こうして、1つのスクリプトにシーン内の他のエンティティを教えます。
+
+### 入力のスクリプトの仕組み {#how-the-input-script-works}
+
+- **`initialize`** は、マウスが押されたときとタッチされたときに知らせてもらうよう登録します。`on` の前の `?.` は、タッチスクリーンのないデバイスではタッチの行をスキップします。
+- **`onMouseDown`** と **`onTouchStart`** は、それぞれ画面上の位置を `tap` に渡します。タッチの場合は、同じタップに対してブラウザが2つ目の見せかけのマウスイベントを送らないようにも指示します。
+- **`tap`** は、カメラの [`screenToWorld`](https://api.playcanvas.com/engine/classes/CameraComponent.html#screentoworld) 関数を使って、タップの下にある3Dワールド内の点を、カメラからボールまでと同じ距離で求めます。その点がボールの中心から `hitRadius` 以内にあれば、そこでボールをキックします。
+
+## 進み具合を確認する {#check-your-progress}
+
+ゲームを **Launch** して、ボールをクリックまたはタップします。できるだけ長くボールを空中に保ちましょう。失敗すると、ボールは最初の場所に戻ります。
+
+<StepVideo src="/video/keepyup-part-three.mp4" poster="/img/tutorials/keepyup-part-three/result.webp" label="ボールが何度か空中に蹴り上げられたあと、画面の外に落ちて最初の場所に戻る様子" />
+
+ここで少し実験してみましょう。**Football** を選択して、`ball` スクリプトの属性を変えてみてください。`gravity` を `-10` にするとふわふわしたボールになり、`sideSpeed` を `8` にすると、中心からずれたキックの立て直しがずっと難しくなります。
+
+これでおもちゃができました。[パート4: ゲームの流れとスコア](/tutorials/keepyup-part-four/)では、これをゲームに変えます。

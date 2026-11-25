@@ -48,16 +48,16 @@ description: "初めてのアプリの後に進むおすすめの道筋です。
 
 さらに詳しく: [ユーザーインターフェース](/user-manual/user-interface/)
 
-## 7. 完成したゲームを分解する {#take-apart-a-complete-game}
+## 7. 完成したゲームを作る {#build-a-complete-game}
 
-[シンプルなゲームの作成](/tutorials/keepyup-part-one/)では、ボールをタップして空中に保ち続ける完成したゲーム「Keepy Up」を、6つのパートで解説します。
+[シンプルなゲームの作成](/tutorials/keepyup-part-one/)では、ボールをタップして空中に保ち続けるゲーム「Keepy Up」を、スタータープロジェクトから公開まで、6つのパートで作ります。
 
-1. [ゲームの全体像](/tutorials/keepyup-part-one/)
-2. [マテリアルとライティング](/tutorials/keepyup-part-two/)
-3. [ゲームの流れ、入力、得点](/tutorials/keepyup-part-three/)
-4. [ボールの物理演算、衝突、サウンド](/tutorials/keepyup-part-four/)
-5. [音楽、効果音、パーティクル](/tutorials/keepyup-part-five/)
-6. [メニューと画面](/tutorials/keepyup-part-six/)
+1. [シーンのセットアップ](/tutorials/keepyup-part-one/)
+2. [ライティングとマテリアル](/tutorials/keepyup-part-two/)
+3. [ボールを動かす](/tutorials/keepyup-part-three/)
+4. [ゲームの流れとスコア](/tutorials/keepyup-part-four/)
+5. [メニュー画面とゲームオーバー画面](/tutorials/keepyup-part-five/)
+6. [サウンド、パーティクル、公開](/tutorials/keepyup-part-six/)
 
 ## 8. チームで作業して公開する {#work-as-a-team-and-ship}
 
