@@ -48,16 +48,16 @@ Go deeper: [Lighting](/user-manual/graphics/lighting/) and [Audio](/user-manual/
 
 Go deeper: [User Interface](/user-manual/user-interface/).
 
-## 7. Take Apart a Complete Game {#take-apart-a-complete-game}
+## 7. Build a Complete Game {#build-a-complete-game}
 
-[Making a Simple Game](/tutorials/keepyup-part-one/) walks through Keepy Up, a finished game where you tap a ball to keep it in the air, in six parts:
+[Making a Simple Game](/tutorials/keepyup-part-one/) has you build Keepy Up, a game where you tap a ball to keep it in the air, from a starter project to a published game in six parts:
 
-1. [How the game fits together](/tutorials/keepyup-part-one/)
-2. [Materials and lighting](/tutorials/keepyup-part-two/)
-3. [Game flow, input and scoring](/tutorials/keepyup-part-three/)
-4. [The ball's physics, collisions and sound](/tutorials/keepyup-part-four/)
-5. [Music, sound effects and particles](/tutorials/keepyup-part-five/)
-6. [Menus and screens](/tutorials/keepyup-part-six/)
+1. [Setting up the scene](/tutorials/keepyup-part-one/)
+2. [Lighting and materials](/tutorials/keepyup-part-two/)
+3. [Making the ball move](/tutorials/keepyup-part-three/)
+4. [Game flow and scoring](/tutorials/keepyup-part-four/)
+5. [Menu and game over screens](/tutorials/keepyup-part-five/)
+6. [Sound, particles and publishing](/tutorials/keepyup-part-six/)
 
 ## 8. Work as a Team and Ship {#work-as-a-team-and-ship}
 

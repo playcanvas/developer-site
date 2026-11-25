@@ -1,143 +1,149 @@
 ---
-title: Making a Simple Game - Part 6
-description: Build menu, in-game, and game-over UI with Screen and Element components and state switching.
+title: "Making a Simple Game - Part 6: Sound, Particles and Publishing"
+description: Finish Keepy Up with a kick sound, music, a game over sound and a burst of particles, all driven by one script, then publish the game to the web.
 tags: [games]
 kind: tutorial
 topic: Games
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406050/LIJTDO-image-75.jpg
+thumb: /img/tutorials/keepyup-part-six/thumbnail.webp
 ---
 
-<div className="iframe-container">
-    <iframe src="https://playcanv.as/p/KH37bnOk/?overlay=false" title="Making a Simple Game - Part 6" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
-</div>
+import StepVideo from '@site/src/components/StepVideo';
 
-*You can find the [full project here](https://playcanvas.com/project/406050). If you haven't see [Part 1](/tutorials/keepyup-part-one/), [Part 2](/tutorials/keepyup-part-two/), [Part 3](/tutorials/keepyup-part-three/), [Part 4](/tutorials/keepyup-part-four/) and [Part 5](/tutorials/keepyup-part-five/) read them first.*
+In [Part 5](/tutorials/keepyup-part-five/) you completed the game's screens. In this last part you add sound and a particle effect, and then you publish the game.
 
-## User Interface
+:::info[Before you start]
 
-The user interface of a game is the first thing you see and often it's the last thing people think about when making a game. But a good user interface will not only give your game a great style. It can actively affect the number of people who can play your game.
+You need the project you made in Parts 1 to 5. To compare your work, open the [finished project](https://playcanvas.com/project/1660780/overview/keepy-up).
 
-User Interfaces are built in PlayCanvas using the [Screen Component](/user-manual/editor/scenes/components/screen/) and the [Element Component](/user-manual/editor/scenes/components/element/). There are more details in the [user manual](/user-manual/user-interface/)
+:::
 
-### User Interface Entities
+## 1. Add the Sounds {#add-the-sounds}
 
-![Hierarchy](/img/tutorials/beginner/keepyup-part-six/ui-hierarchy.jpg)
+A [Sound Component](/user-manual/editor/scenes/components/sound/) plays audio assets. Each sound it can play has a **slot**, and a script plays a slot by name.
 
-We have divided our user interface up into the three game states: Menu, In Game and Game Over. Each state has an Screen Entity which is activated when the state is entered. We also have a Screen especially for the overlay. Because the overlay displays underneath the ball in the menu, we use a 3D Screen component to render the overlay in world space behind the ball.
+1. Add an Entity to **Root** called `Effects`.
+2. Select **Add Component** > **Sound**.
+3. Turn off **Positional**. Positional sounds get quieter with distance from the camera, which suits a sound in a 3D world but not music.
+4. The component starts with one slot. Set it up as the first row of the table, then select **ADD SLOT** twice for the other two.
 
-### Images and Text
+| Name | Asset | Settings |
+| --- | --- | --- |
+| `kick` | `kick.mp3` | **Overlap** on, so that quick kicks do not cut each other off |
+| `music` | `music.mp3` | **Loop** on, **Volume** `0.6` |
+| `gameOver` | `game-over.mp3` | |
 
-![Image Element](/img/tutorials/beginner/keepyup-part-six/image-element.jpg)
+The sounds are in the **Sounds** folder. Leave **Auto Play** off for all three: the script decides when each one plays.
 
-Images and Text are added to the user interface using the Element Component. This Component can display images in the form of a texture asset or text in the form a font asset.
+![The Sound Component on the Effects entity, with its kick and music slots](/img/tutorials/keepyup-part-six/sound.webp)
 
-![Image Attriubtes](/img/tutorials/beginner/keepyup-part-six/element-attr.jpg)
+To learn more about sound in PlayCanvas, see the [Audio](/user-manual/audio/) section.
 
-### User Interface script
+## 2. Add a Particle Effect {#add-a-particle-effect}
 
-Let's take a look at the script for the main menu.
+A puff of dust where the ball is kicked makes each kick feel solid.
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+1. Select **Effects**, then **+** (Add Entity) > **Particle System**. Name the new Entity `Impact`.
+2. In its [Particle System Component](/user-manual/editor/scenes/components/particlesystem/), turn off **Auto Play** and **Loop**. The effect should play once, when the script asks.
+3. Set **Particle Count** to `14`, **Lifetime** to `0.45`, and **Emission Rate** and **Emission Rate 2** to `0`. A rate of zero releases every particle at once.
+4. Set **Emitter Shape** to **Sphere** and **Emitter Radius** to `0.25`.
+5. Drag `puff.png` from the **Textures** folder onto the **Color Map** slot.
+6. Turn off **Lighting** and **Depth Write**, which suits soft, see-through particles.
 
-<Tabs defaultValue="esm" groupId='script-code'>
-<TabItem value="esm" label="ESM">
+![The Particle System Component on the Impact entity](/img/tutorials/keepyup-part-six/particles.webp)
+
+The remaining settings are curves, which change a value over each particle's life. Select a curve to open the curve editor.
+
+- **Local Velocity:** make particles fly outwards and slow down. Set the curves to run from about `3.5` at the start to `0.6` at the end, and use the editor's option for a random range so that the second set of curves runs from `-3.5` to `-0.6`. Leave the Z curves at `0`.
+- **Scale:** from `0.14` at the start to `0.45` at the end, so that each puff grows.
+- **Opacity:** from `0.85` at the start to `0` at the end, so that it fades away.
+
+Do not worry about matching these exactly. Once the script in the next step is in place, launch the game, kick the ball and adjust the effect until you like it.
+
+## 3. Write the Effects Script {#write-the-effects-script}
+
+Create a script called `effects.mjs`:
 
 ```javascript
-import { Script } from 'playcanvas';
+import { Entity, Script } from 'playcanvas';
 
-export class UiMenu extends Script {
-    static scriptName = "uiMenu";
+/**
+ * Plays the sounds and the particle effect that go with what happens in the game.
+ */
+export class Effects extends Script {
+    static scriptName = 'effects';
 
     /**
+     * The particle system to play where the ball is kicked.
+     *
      * @attribute
-     * @title Overlay
      * @type {Entity}
      */
-    overlay = null;
+    impact;
 
-    // initialize code called once per entity
     initialize() {
-        this.on('enable', this.onEnable, this);
-        this.on('disable', this.onDisable, this);
+        this.app.on('ball:kicked', this.onBallKicked, this);
+        this.app.on('game:start', this.onGameStart, this);
+        this.app.on('game:over', this.onGameOver, this);
 
-        this.onEnable();
+        this.on('destroy', () => {
+            this.app.off('ball:kicked', this.onBallKicked, this);
+            this.app.off('game:start', this.onGameStart, this);
+            this.app.off('game:over', this.onGameOver, this);
+        });
     }
 
-    onEnable() {
-        // Listen for clicks on the background
+    onBallKicked(point) {
+        this.entity.sound.play('kick');
 
-        this.overlay.enabled = true;
-        this.overlay.element.on("click", this.start, this);
-
-        if (this.ball) {
-            this.ball.model.meshInstances[0].material.depthTest = false;
-        }
+        // Restart the particle effect at the point of the kick
+        this.impact.setPosition(point);
+        this.impact.particlesystem.reset();
+        this.impact.particlesystem.play();
     }
 
-    onDisable() {
-        this.overlay.enabled = false;
-        // Stop listening to events
-        this.overlay.element.off("click", this.start, this);
+    onGameStart() {
+        this.entity.sound.play('music');
     }
 
-    start(e) {
-        this.app.fire("ui:start");
-        // prevent touch and mouse events
-        e.stopPropagation();
+    onGameOver() {
+        this.entity.sound.stop('music');
+        this.entity.sound.play('gameOver');
     }
 }
 ```
 
-</TabItem>
-<TabItem value="classic" label="Classic">
+1. Add a **Script** component to **Effects** and add the `effects` script.
+2. Drag the **Impact** entity onto the script's `impact` slot.
 
-```javascript
-var UiMenu = pc.createScript('uiMenu');
+This is where the events from Parts 3 and 4 pay off. The script listens for `ball:kicked`, `game:start` and `game:over`, and none of the earlier scripts had to change. The `ball:kicked` event carries the point where the kick landed, so the script moves the particle effect there before restarting it.
 
-UiMenu.attributes.add("overlay", {type: "entity"});
+Browsers do not let a page play sound until the player has interacted with it. That is not a problem here, because the first sound is triggered by the player's first tap.
 
-// initialize code called once per entity
-UiMenu.prototype.initialize = function() {
-    this.on('enable', this.onEnable, this);
-    this.on('disable', this.onDisable, this);
+## Check Your Progress {#check-your-progress}
 
-    this.onEnable();
-};
+**Launch** the game with your sound turned on. Each kick makes a thud and a puff of dust, the music starts with the round, and a whistle and a groan from the crowd tell you when it is over.
 
-UiMenu.prototype.onEnable = function () {
-    // Listen for clicks on the background
+<StepVideo src="/video/keepyup-part-six.mp4" poster="/img/tutorials/keepyup-part-six/result.webp" label="The finished game: the menu, several kicks with a puff of dust on each, then the game over screen" />
 
-    this.overlay.enabled = true;
-    this.overlay.element.on("click", this.start, this);
+## 4. Publish Your Game {#publish-your-game}
 
-    if (this.ball) {
-        this.ball.model.meshInstances[0].material.depthTest = false;
-    }
-};
+So far only you can play the game, from the Editor. [Publishing](/user-manual/editor/publishing/) makes a build that anyone can play from a link.
 
-UiMenu.prototype.onDisable = function () {
-    this.overlay.enabled = false;
-    // Stop listening to events
-    this.overlay.element.off("click", this.start, this);
-};
+1. Select the **Publish / Download** button in the toolbar on the left of the Editor.
+2. Select **Publish** to start a new build, and give it a name.
+3. Leave **Concatenate Scripts** turned on. A build of a project with scripts like these needs it.
+4. Select **Publish**. When the build is ready, it appears in the list with a link.
 
-UiMenu.prototype.start = function (e) {
-    this.app.fire("ui:start");
-    // prevent touch and mouse events
-    e.stopPropagation();
-};
-```
+Open the link on your phone and try the game with your thumb.
 
-</TabItem>
-</Tabs>
+## Where Next? {#where-next}
 
-First we have set up an attribute with a reference to the overlay element. The overlay element is a full screen element which tints the screen green. We also use this to detect input as we only care about the user clicking on the full screen.
+You have built and published a complete game. Along the way you used templates, image-based lighting, materials, scripts and their attributes, application events, user interface screens, sound and particles.
 
-When the Entity is enabled we display the full screen overlay by enabling it and then we start listening for the click event. When the Entity is disabled we stop listening for the event and we hide the overlay. When an event is triggered we fire a "ui:start" event which the main game script is listening for and that triggers a change of game state.
+Some ideas for making the game your own:
 
-We repeat similar behavior in the other two UI scripts where we listen for game events and fire ui events.
+- **Keep a best score.** Listen for `game:over` in a new script and save the highest score with the browser's [`localStorage`](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage).
+- **Make it harder.** Increase the ball's `gravity` a little with every point.
+- **Change the look.** Recolor the ball, or build a different backdrop.
 
-## Game Complete
-
-Congratulations on reaching the end of the series! We hope you've learned a lot about how you can structure and build a game using PlayCanvas. If you have any feedback on the tutorial, please get in touch on our [forum](https://forum.playcanvas.com).
+For more to learn, browse the other [tutorials](/tutorials/), or ask a question on the [forum](https://forum.playcanvas.com).

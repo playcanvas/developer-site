@@ -1,500 +1,267 @@
 ---
-title: Making a Simple Game - Part 3
-description: Walk through the root game and input scripts that drive taps, scoring, and overall flow in Keepy Up.
+title: "Making a Simple Game - Part 3: Making the Ball Move"
+description: Write the first two scripts for Keepy Up. One moves the football under gravity and kicks it, and the other turns mouse clicks and touches into kicks.
 tags: [games]
 kind: tutorial
 topic: Games
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406050/LIJTDO-image-75.jpg
+thumb: /img/tutorials/keepyup-part-three/thumbnail.webp
 ---
 
-<div className="iframe-container">
-    <iframe src="https://playcanv.as/p/KH37bnOk/?overlay=false" title="Making a Simple Game - Part 3" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
-</div>
+import StepVideo from '@site/src/components/StepVideo';
 
-*You can find the [full project here](https://playcanvas.com/project/406050). If you haven't see [Part 1](/tutorials/keepyup-part-one/) and [Part 2](/tutorials/keepyup-part-two/) read them first.*
+In [Part 2](/tutorials/keepyup-part-two/) you finished the look of the scene. In this part you write two [scripts](/user-manual/scripting/). The first makes the ball fall and lets it be kicked. The second works out whether a click or a touch landed on the ball.
 
-## The Game script & Input
+:::info[Before you start]
 
-These two scripts `game.js` and `input.js` are attached the root entity in the scene, called "Game". Scripts are generally executed in the order they are encountered in the hierarchy so it's easiest to attach any non-Entity specific scripts the first Entity. You can also manage the loading order of Scripts in the Settings panel of the Editor, to load scripts first without attaching them to an Entity.
+You need the project you made in Parts 1 and 2. To compare your work, open the [finished project](https://playcanvas.com/project/1660780/overview/keepy-up).
 
-## game.js
+:::
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+## 1. Write the Ball Script {#write-the-ball-script}
 
-<Tabs defaultValue="esm" groupId='script-code'>
-<TabItem value="esm" label="ESM">
-
-```javascript
-import { Script, RESOLUTION_AUTO, FILLMODE_FILL_WINDOW } from 'playcanvas';
-
-export class Game extends Script {
-    static scriptName = "game";
-
-    /**
-     * 
-     * @attribute
-     * @title UI Menu
-     * @type {Entity}
-     */
-    uiMenu = null;
-
-    /**
-     * 
-     * @attribute
-     * @title UI In Game
-     * @type {Entity}
-     */
-    uiInGame = null;
-
-    /**
-     * 
-     * @attribute
-     * @title UI Game Over
-     * @type {Entity}
-     */
-    uiGameOver = null;
-
-    /**
-     * 
-     * @attribute
-     * @title Audio
-     * @type {Entity}
-     */
-    audio = null;
-
-    static STATE_MENU = 'menu';
-    static STATE_INGAME = 'ingame';
-    static STATE_GAMEOVER = 'gameover';
-
-    // initialize code called once per entity
-    initialize() {
-        this._state = Game.STATE_MENU;
-        this._score = 0;
-
-        this.setResolution();
-
-        window.addEventListener("resize", this.setResolution.bind(this));
-
-        // listen to events from the UI
-        this.app.on("ui:start", this.start, this);
-        this.app.on("ui:reset", this.reset, this);
-    }
-
-    setResolution() {
-        // Adjust resolution based on screen size
-        const w = window.screen.width;
-        const h = window.screen.height;
-
-        if (w < 640) {
-            this.app.setCanvasResolution(RESOLUTION_AUTO, w, h);
-            this.app.setCanvasFillMode(FILLMODE_FILL_WINDOW);
-        }
-    }
-
-    // Call this to move from MENU to INGAME
-    start() {
-        this._state = Game.STATE_INGAME;
-        this.app.fire("game:start");
-        this.uiMenu.enabled = false;
-        this.uiInGame.enabled = true;
-
-        this.audio.sound.play("music");
-    }
-
-    // Call this to move from INGAME to GAMEOVER
-    gameOver() {
-        this._state = Game.STATE_GAMEOVER;
-        this.app.fire("game:gameover");
-        this.uiInGame.enabled = false;
-        this.uiGameOver.enabled = true;
-
-        this.audio.sound.stop();
-        this.audio.sound.play("gameover");
-    }
-
-    // Call this to move from GAMEOVER to MENU
-    reset() {
-        this.app.fire("game:reset");
-        this.resetScore();
-        this._state = Game.STATE_MENU;
-        this.uiGameOver.enabled = false;
-        this.uiMenu.enabled = true;
-
-        this.audio.sound.stop();
-    }
-
-    // return the current score
-    getScore() {
-        return this._score;
-    }
-
-    // add value to the score
-    addScore(v) {
-        this._score += v;
-        this.app.fire("game:score", this._score);
-    }
-
-    // reset the score
-    resetScore() {
-        this._score = 0;
-        this.app.fire("game:score", this._score);
-    }
-}
-```
-
-</TabItem>
-<TabItem value="classic" label="Classic">
-
-```javascript
-var Game = pc.createScript('game');
-
-Game.attributes.add('uiMenu', {type: 'entity'});
-Game.attributes.add('uiInGame', {type: 'entity'});
-Game.attributes.add('uiGameOver', {type: 'entity'});
-Game.attributes.add('audio', {type: 'entity'});
-
-Game.STATE_MENU = 'menu';
-Game.STATE_INGAME = 'ingame';
-Game.STATE_GAMEOVER = 'gameover';
-
-// initialize code called once per entity
-Game.prototype.initialize = function() {
-    this._state = Game.STATE_MENU;
-    this._score = 0;
-
-    this.setResolution();
-
-    window.addEventListener("resize", this.setResolution.bind(this));
-
-    // listen to events from the UI
-    this.app.on("ui:start", this.start, this);
-    this.app.on("ui:reset", this.reset, this);
-};
-
-Game.prototype.setResolution = function () {
-    // if the screen width is less than 640
-    // fill the whole window
-    // otherwise
-    // use the default setting
-
-    var w = window.screen.width;
-    var h = window.screen.height;
-
-    if (w < 640) {
-        this.app.setCanvasResolution(pc.RESOLUTION_AUTO, w, h);
-        this.app.setCanvasFillMode(pc.FILLMODE_FILL_WINDOW);
-    }
-};
-
-// Call this to move from MENU to INGAME
-Game.prototype.start = function () {
-    this._state = Game.STATE_INGAME;
-    this.app.fire("game:start");
-    this.uiMenu.enabled = false;
-    this.uiInGame.enabled = true;
-
-    this.audio.sound.play("music");
-};
-
-// Call this to move from INGAME to GAMEOVER
-Game.prototype.gameOver = function () {
-    this._state = Game.STATE_GAMEOVER;
-    this.app.fire("game:gameover");
-    this.uiInGame.enabled = false;
-    this.uiGameOver.enabled = true;
-
-    this.audio.sound.stop();
-    this.audio.sound.play("gameover");
-};
-
-// Call this to move from GAMEOVER to MENU
-Game.prototype.reset = function () {
-    this.app.fire("game:reset");
-    this.resetScore();
-    this._state = Game.STATE_MENU;
-    this.uiGameOver.enabled = false;
-    this.uiMenu.enabled = true;
-
-    this.audio.sound.stop();
-};
-
-// return the current score
-Game.prototype.getScore = function () {
-    return this._score;
-};
-
-// add a value to the score
-Game.prototype.addScore = function (v) {
-    this._score += v;
-    this.app.fire("game:score", this._score);
-};
-
-// reset the score
-Game.prototype.resetScore = function () {
-    this._score = 0;
-    this.app.fire("game:score", this._score);
-};
-```
-
-</TabItem>
-</Tabs>
-
-### Game State
-
-The game script manages the overall state of the game, it exposes some methods to alter the game state and fires events to alert other code that the game state has changed.
-
-We've divided the game up into three main states: Menu, In Game and Game Over. The game script provides the methods to transition between each state, `start()`, `gameOver()` and `reset()`. Each one sets the `_state` variable to remember which state we're in; fires an application event to alert other scripts to state changes; switches user interface elements on and off; and manages the state of the music or game over sound effect.
-
-These state change methods will be called from other scripts when the appropriate trigger events occur. For example, the `gameOver()` method is called by `ball.js` when the ball goes off the bottom of the screen.
-
-### Application Events
-
-Let's pause to take a look at the way the game script fires events on the application.
-
-```javascript
-this.app.fire("game:start")
-```
-
-Events are an extremely useful way to communicate form one script to many other scripts. The way an event works is that an object (in this case `this.app`) chooses to "fire" an event. Any other code that has access to the object can choose to listen to one or more events on this object and the code will be notified when the event is fired.
-
-One of the issues with this is that the code needs access to the object in order to start listening to the event. This is why application events are so useful. Every script in PlayCanvas has access to `this.app`. That makes it useful to act as a central communications hub between any other scripts.
-
-We have chosen to adopt a namespace pattern to make events clearer and avoid clashes. To listen for the `game:start` event from above. You would use this code:
-
-```javascript
-this.app.on("game:start", function () {
-    console.log("game:start event was fired");
-}, this)
-```
-
-### Scoring
-
-The game script also manages the current score. It exposes methods that are used to modify the score and also fires events to let other code know that the score has changed.
-
-### Resolution
-
-Finally the game script handles the initial choice of resolution to make sure the main canvas is the correct size on both mobile and desktop. On mobile (defined by a screen less than 640 pixels wide) the game simply fills the entire screen. On desktop we use the predefined resolution set in the project settings.
-
-## input.js
-
-The input script listens for input from the mouse or touchscreen, normalizes the input from the two into a general purpose "tap" and communicates with the rest of the application that a tap has occurred.
-
-<Tabs defaultValue="esm" groupId='script-code'>
-<TabItem value="esm" label="ESM">
+1. In the Assets panel, open the **Scripts** folder.
+2. Select the **+** (Add Asset) button, then **Script**. Name it `ball.mjs` and create it.
+3. Double-click `ball.mjs` to open it in the [Code Editor](/user-manual/editor/scripting/code-editor/).
+4. Replace everything in the file with the code below, then save with <kbd>Ctrl</kbd>+<kbd>S</kbd> (<kbd>Cmd</kbd>+<kbd>S</kbd> on a Mac).
 
 ```javascript
 import { Script, Vec3 } from 'playcanvas';
 
-export class Input extends Script {
-    static scriptName = "input";
+/**
+ * Moves the ball under gravity, kicks it when it is tapped and returns it to its starting
+ * position when it falls out of view.
+ */
+export class Ball extends Script {
+    static scriptName = 'ball';
 
     /**
+     * The acceleration due to gravity, in units per second squared.
+     *
      * @attribute
-     * @title Ball
-     * @type {Entity}
-     */
-    ball = null;
-
-    /**
-     * @attribute
-     * @title Camera
-     * @type {Entity}
-     */
-    camera = null;
-
-    /**
-     * @attribute
-     * @title Ball Radius
      * @type {number}
      */
-    ballRadius = 0.5;
+    gravity = -20;
 
-    static worldPos = new Vec3();
+    /**
+     * The upward speed a kick gives the ball, in units per second.
+     *
+     * @attribute
+     * @type {number}
+     */
+    kickSpeed = 12;
 
-    // initialize code called once per entity
+    /**
+     * The sideways speed a kick adds for each unit it lands off center.
+     *
+     * @attribute
+     * @type {number}
+     */
+    sideSpeed = 4;
+
+    /**
+     * The spin a kick adds for each unit it lands off center, in degrees per second.
+     *
+     * @attribute
+     * @type {number}
+     */
+    spin = 360;
+
+    /**
+     * The height below which the ball is lost.
+     *
+     * @attribute
+     * @type {number}
+     */
+    floor = -6;
+
+    velocity = new Vec3();
+
+    spinSpeed = 0;
+
+    inPlay = false;
+
     initialize() {
-        this._paused = true;
-
-        // Listen for game events so we know whether to respond to input
-        this.app.on("game:start", () => {
-            this._paused = false;
-        });
-        this.app.on("game:gameover", () => {
-            this._paused = true;
-        });
-
-        // set up touch events if available
-        if (this.app.touch) {
-            this.app.touch.on("touchstart", this._onTouchStart, this);
-        }
-
-        // set up mouse events
-        this.app.mouse.on("mousedown", this._onMouseDown, this);
+        // Remember where the ball starts so it can be put back
+        this.startPosition = this.entity.getPosition().clone();
+        this.startRotation = this.entity.getRotation().clone();
     }
 
-    _onTap(x, y) {
-        let p = this.ball.getPosition();
-        let camPos = this.camera.getPosition();
-        let worldPos = Input.worldPos;
-
-        // Get the position in the 3D world of the touch or click
-        this.camera.camera.screenToWorld(x, y, camPos.z - p.z, worldPos);
-
-        // get the distance of the touch/click to the ball
-        let dx = (p.x - worldPos.x);
-        let dy = (p.y - worldPos.y);
-
-        // If the click is inside the ball, tap the ball
-        let lenSqr = dx * dx + dy * dy;
-        if (lenSqr < this.ballRadius * this.ballRadius) {
-            this.ball.script.ball.tap(dx, dy);
-        }
-    }
-
-    _onTouchStart(e) {
-        if (this._paused) {
+    update(dt) {
+        if (!this.inPlay) {
+            // Turn slowly while waiting for a kick
+            this.entity.rotate(0, 30 * dt, 0);
             return;
         }
 
-        // respond to event
-        let touch = e.changedTouches[0];
-        this._onTap(touch.x, touch.y);
+        // Gravity changes the velocity, and the velocity changes the position
+        this.velocity.y += this.gravity * dt;
+        this.entity.translate(this.velocity.x * dt, this.velocity.y * dt, 0);
 
-        // stop mouse events firing as well
-        e.event.preventDefault();
+        // Spin around the axis that points at the camera
+        this.entity.rotate(0, 0, this.spinSpeed * dt);
+
+        if (this.entity.getPosition().y < this.floor) {
+            this.lose();
+        }
     }
 
-    _onMouseDown(e) {
-        if (this._paused) {
-            return;
-        }
+    /**
+     * Kicks the ball up and away from a point.
+     *
+     * @param {Vec3} point - The position of the kick in world space.
+     */
+    kick(point) {
+        // How far the kick landed to the side of the ball's center
+        const offset = this.entity.getPosition().x - point.x;
 
-        // respond to event
-        this._onTap(e.x, e.y);
+        this.velocity.set(this.sideSpeed * offset, this.kickSpeed, 0);
+        this.spinSpeed -= this.spin * offset;
+        this.inPlay = true;
+
+        this.app.fire('ball:kicked', point);
+    }
+
+    lose() {
+        this.inPlay = false;
+        this.velocity.set(0, 0, 0);
+        this.spinSpeed = 0;
+        this.entity.setPosition(this.startPosition);
+        this.entity.setRotation(this.startRotation);
+
+        this.app.fire('ball:lost');
     }
 }
 ```
 
-</TabItem>
-<TabItem value="classic" label="Classic">
+## 2. Attach It to the Football {#attach-it-to-the-football}
+
+1. Back in the Editor, select **Football** in the Hierarchy.
+2. In the Inspector, select **Add Component** > **Script**.
+3. In the new [Script Component](/user-manual/editor/scenes/components/script/), select **Add Script** and choose `ball`.
+
+![The Script Component on the Football entity, showing the ball script's attributes](/img/tutorials/keepyup-part-three/ball-script.webp)
+
+The five values under the script are its [attributes](/user-manual/scripting/script-attributes/). Each one comes from a property in the code that has an `@attribute` comment above it. You can change them here without touching the code.
+
+**Launch** the game. The ball turns slowly on the spot, waiting for a kick that nothing can give it yet.
+
+### How the Ball Script Works {#how-the-ball-script-works}
+
+- **`initialize`** runs once when the game starts. It remembers where the ball began.
+- **`update`** runs every frame, and `dt` is the time since the last frame in seconds. While the ball is in play, gravity changes its velocity and its velocity changes its position. Multiplying by `dt` makes the ball move at the same speed however fast the game is running.
+- **`kick`** throws the ball upwards. If the kick lands to one side of the ball's center, the ball also moves away from it and spins.
+- **`lose`** puts the ball back where it started once it drops below `floor`.
+
+The script also calls `this.app.fire` twice. That sends an event to the rest of the game: `ball:kicked` when the ball is kicked and `ball:lost` when it is lost. Nothing is listening yet. In Part 4 the game script will use these events to keep score.
+
+## 3. Write the Input Script {#write-the-input-script}
+
+The ball needs something to kick it. Create a second script in the **Scripts** folder called `input.mjs`, with this code:
 
 ```javascript
-var Input = pc.createScript('input');
+import { Entity, MOUSEBUTTON_LEFT, Script, Vec3 } from 'playcanvas';
 
-Input.attributes.add('ball', {type: 'entity'});
-Input.attributes.add('camera', {type: 'entity'});
-Input.attributes.add('ballRadius', {type: 'number', default: 0.5});
+/**
+ * Turns mouse clicks and touches into kicks when they land on the ball.
+ */
+export class Input extends Script {
+    static scriptName = 'input';
 
-Input.worldPos = new pc.Vec3();
+    /**
+     * The ball to kick.
+     *
+     * @attribute
+     * @type {Entity}
+     */
+    ball;
 
-// initialize code called once per entity
-Input.prototype.initialize = function() {
+    /**
+     * The camera the game is viewed through.
+     *
+     * @attribute
+     * @type {Entity}
+     */
+    camera;
 
-    var self = this;
+    /**
+     * How close to the ball's center a tap must land to count, in units.
+     *
+     * @attribute
+     * @type {number}
+     */
+    hitRadius = 0.75;
 
-    this._paused = true;
+    point = new Vec3();
 
-    // Listen for game events so we know whether to respond to input
-    this.app.on("game:start", function () {
-        self._paused = false;
-    });
-    this.app.on("game:gameover", function () {
-        self._paused = true;
-    });
+    initialize() {
+        this.app.mouse.on('mousedown', this.onMouseDown, this);
+        this.app.touch?.on('touchstart', this.onTouchStart, this);
 
-    // set up touch events if available
-    if (this.app.touch) {
-        this.app.touch.on("touchstart", this._onTouchStart, this);
+        this.on('destroy', () => {
+            this.app.mouse.off('mousedown', this.onMouseDown, this);
+            this.app.touch?.off('touchstart', this.onTouchStart, this);
+        });
     }
 
-    // set up mouse events
-    this.app.mouse.on("mousedown", this._onMouseDown, this);
-};
-
-Input.prototype._onTap = function (x, y) {
-    var p = this.ball.getPosition();
-    var camPos = this.camera.getPosition();
-    var worldPos = Input.worldPos;
-
-    // Get the position in the 3D world of the touch or click
-    // Store the in worldPos variable.
-    // This position is at the same distance away from the camera as the ball
-    this.camera.camera.screenToWorld(x, y, camPos.z - p.z, worldPos);
-
-    // get the distance of the touch/click to the ball
-    var dx = (p.x - worldPos.x);
-    var dy = (p.y - worldPos.y);
-
-    // If the click is inside the ball, tap the ball
-    var lenSqr = dx*dx + dy*dy;
-    if (lenSqr < this.ballRadius*this.ballRadius) {
-        this.ball.script.ball.tap(dx, dy);
-    }
-};
-
-Input.prototype._onTouchStart = function (e) {
-    if (this._paused) {
-        return;
+    onMouseDown(event) {
+        if (event.button === MOUSEBUTTON_LEFT) {
+            this.tap(event.x, event.y);
+        }
     }
 
-    // respond to event
-    var touch = e.changedTouches[0];
-    this._onTap(touch.x, touch.y);
+    onTouchStart(event) {
+        const touch = event.changedTouches[0];
+        this.tap(touch.x, touch.y);
 
-    // stop mouse events firing as well
-    e.event.preventDefault();
-};
-
-Input.prototype._onMouseDown = function (e) {
-    if (this._paused) {
-        return;
+        // Stop the browser from also sending a mouse event for this touch
+        event.event.preventDefault();
     }
 
-    // respond to event
-    this._onTap(e.x, e.y);
-};
-```
+    /**
+     * Kicks the ball if a point on the screen is over it.
+     *
+     * @param {number} x - The horizontal position on the screen, in pixels.
+     * @param {number} y - The vertical position on the screen, in pixels.
+     */
+    tap(x, y) {
+        const ballPosition = this.ball.getPosition();
 
-</TabItem>
-</Tabs>
+        // Find the point in the world that is under the tap, at the ball's distance from the camera
+        const distance = this.camera.getPosition().z - ballPosition.z;
+        this.camera.camera.screenToWorld(x, y, distance, this.point);
 
-First, in initialize we are setting up event listening. We listen for application events to determine if the game is in a paused state (that is in the menu or in the game over state). If the input is paused we don't respond to the taps. Next we listen for touch events (note, you must check if `this.app.touch` is available) and mouse events.
-
-### Touch Events
-
-For touch events we take the first touch and pass through the screen co-ordinates. We also call `preventDefault()` on the browser event to stop the browser also generating a `click` event which it will do otherwise.
-
-### Mouse Events
-
-On "mousedown" events we pass the screen co-ordinates through to the tap code. Note, that PlayCanvas ensures that touch and mouse events have the same coordinate system. This is not the case with normal browser events!
-
-### Taps
-
-`_onTap()` takes a screen co-ordinate (x, y) works out if this has "hit" the ball and if so tells the ball code that it has been tapped.
-
-```javascript
-this.camera.camera.screenToWorld(x, y, camPos.z - p.z, worldPos);
-```
-
-In detail, this function takes the screen co-ordinates (x, y) and asks the camera to convert them into a position in 3D space under that point on the screen. To do this, we need to supply a depth, as in how far away from the screen do you want the 3D point. In this case we get the 3D point at the same depth as the ball is.
-
-We also pass in a vector `Input.worldPos`. It's important in PlayCanvas applications to avoid creating new objects, like calling `new Vec3()` to create a new vector, in your update loops. The more memory allocations you do (by calling `new`) the more Garbage Collection the browser will have to do to clear up your allocations. Garbage Collection is a (comparatively slow) operation and will cause your game or application to stutter if it happens often.
-
-In most cases, PlayCanvas will provide an option to pass in vector or similar option so that you can pre-allocate and re-use objects.
-
-```javascript
-// get the distance of the touch/click to the ball
-var dx = (p.x - worldPos.x);
-var dy = (p.y - worldPos.y);
-
-// If the click is inside the ball, tap the ball
-var lenSqr = dx*dx + dy*dy;
-if (lenSqr < this.ballRadius*this.ballRadius) {
-    this.ball.script.ball.tap(dx, dy);
+        if (this.point.distance(ballPosition) < this.hitRadius) {
+            this.ball.script.ball.kick(this.point);
+        }
+    }
 }
 ```
 
-Once we have the the 3D point where we've just tapped, we test to see if it is overlapping with the ball. You'll see here we are testing the radius squared against the distance between the tap and the ball squared. This prevents us doing a slow Square Root operation every time we test.
+## 4. Add a Game Entity {#add-a-game-entity}
 
-If the tap has hit the ball, we call the `tap(dx, dy)` function on the ball script we pass in the distance from the ball where the tap occurred. We'll use that in the [Part 4](/tutorials/keepyup-part-four/).
+The input script does not belong to the ball or the camera, so give it an Entity of its own.
+
+1. In the Hierarchy, select **Root**, then the **+** (Add Entity) button, then **Entity**. Name the new Entity `Game`.
+2. Add a **Script** component to it and add the `input` script.
+3. Drag **Football** from the Hierarchy onto the script's `ball` slot.
+4. Drag **Camera** from the Hierarchy onto its `camera` slot.
+
+![The input script on the Game entity, with its ball and camera slots filled](/img/tutorials/keepyup-part-three/input-script.webp)
+
+The two slots exist because the code marks `ball` and `camera` as attributes of type `Entity`. This is how one script is told about other Entities in the scene.
+
+### How the Input Script Works {#how-the-input-script-works}
+
+- **`initialize`** asks to be told about mouse presses and touches. The `?.` before `on` skips the touch line on devices that have no touchscreen.
+- **`onMouseDown`** and **`onTouchStart`** each pass a position on the screen to `tap`. A touch also asks the browser not to send a second, pretend mouse press for the same tap.
+- **`tap`** uses the camera's [`screenToWorld`](https://api.playcanvas.com/engine/classes/CameraComponent.html#screentoworld) function to find the point in the 3D world that is under the tap, at the same distance from the camera as the ball. If that point is within `hitRadius` of the ball's center, it kicks the ball there.
+
+## Check Your Progress {#check-your-progress}
+
+**Launch** the game and click or tap the ball. Keep it in the air for as long as you can. When you miss, it comes back to its starting place.
+
+<StepVideo src="/video/keepyup-part-three.mp4" poster="/img/tutorials/keepyup-part-three/result.webp" label="The ball being kicked into the air several times, then dropping out of view and returning to its starting place" />
+
+Now is a good time to experiment. Select **Football** and change the attributes of the `ball` script: a `gravity` of `-10` gives a floaty ball, and a `sideSpeed` of `8` makes off-center kicks much harder to recover.
+
+You have a toy. [Part 4: Game Flow and Scoring](/tutorials/keepyup-part-four/) turns it into a game.

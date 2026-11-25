@@ -1,58 +1,151 @@
 ---
-title: シンプルなゲームの作成 - パート5
+title: "シンプルなゲームの作成 - パート5: メニュー画面とゲームオーバー画面"
+description: Text、Image、Groupエレメントを使ってKeepy Upのタイトル画面とゲームオーバー画面を作り、2つの短いスクリプトで表示と非表示を切り替えます。
 tags: [games]
-thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406050/LIJTDO-image-75.jpg"
-description: BGM、ヒットのスティング、パーティクル演出を追加し、タップ、ミス、ゲームフィールを強化します。
+thumb: /img/tutorials/keepyup-part-five/thumbnail.webp
 ---
 
-<div className="iframe-container">
-    <iframe src="https://playcanv.as/p/KH37bnOk/?overlay=false" title="Making a Simple Game - Part 5" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
-</div>
+[パート4](/tutorials/keepyup-part-four/)では、ScreenとText Elementでスコアを作りました。このパートでは、同じ部品に画像を加えて、タイトル画面とゲームオーバー画面を作ります。
 
-*[完成されたプロジェクトはこちら](https://playcanvas.com/project/406050)です。先に[その1](/tutorials/keepyup-part-one/), [その2](/tutorials/keepyup-part-two/), [その3](/tutorials/keepyup-part-three/), [その4](/tutorials/keepyup-part-four/)を読んでください。*
+:::info[はじめる前に]
 
-## オーディオとパーティクル
+パート1から4で作ったプロジェクトが必要です。自分の作業と比べるには、[完成したプロジェクト](https://playcanvas.com/project/1660780/overview/keepy-up)を開いてください。
 
-### オーディオ (Audio)
+:::
 
-音声は、ゲームにとって重要な部分です。プレイヤーに、彼らの入力が影響を与えていることを示す貴重なフィードバックを提供するだけでなく、ムードや雰囲気を醸し出すことができます。
+## 1. メニュー画面を作る {#build-the-menu-screen}
 
-Keepy Upゲームには次の3つの音声エフェクトがあります：BGM、ボールを打ったときのタップ音、負けたときの悲しげなトロンボーンの音です。それぞれの処理は少しずつ異なります。
+メニューは、タイトル、ボールを囲むリング、そしてプレイヤーに何をすればよいかを伝える1行で構成されます。
 
-#### 音楽とトロンボーン音
+1. **UI** を選択し、**+**（エンティティを追加）> **User Interface** > **2D Screen** を選択します。名前を `Menu Screen` にし、スコアのときと同じように、**Ref Resolution** を `720` × `1280` に、**Scale Blend** を `1` に設定します。
+2. **User Interface** メニューから **Menu Screen** に4つのエレメントを追加し、表のとおりに設定します。画像のエレメントは、メニューでは **Image Element** という名前です。
 
-音楽とトロンボーン音は同様の方法で処理されます。主な違いは、音楽がループするように設定されていることです。 `game.js`には、ゲームスクリプトを音声コンポーネントを持つエンティティにリンクするスクリプト属性があり、正しいスロットを再生および停止するだけです。
+| 名前 | 種類 | Position | 設定 |
+| --- | --- | --- | --- |
+| `Title Keepy` | Text | `0`, `455`, `0` | **Text** `KEEPY`、**Font Size** と **Line Height** `150` |
+| `Title Up` | Text | `0`, `317`, `0` | **Text** `UP`、**Font Size** と **Line Height** `150`、**Color** `FFD13D` |
+| `Ring` | Image | `0`, `87`, `0` | **Texture** に **UI** フォルダーの `ring.png`、**Width** と **Height** `264` |
+| `Prompt` | Text | `0`, `-147`, `0` | **Text** `TAP THE BALL`、**Font Size** と **Line Height** `54` |
+
+3つのテキストエレメントには、パート4でスコアに設定したのと同じフォント、アウトライン、シャドウを設定します。
+
+:::tip
+
+時間を節約するには、`Score` エンティティを選択して、<kbd>Ctrl</kbd>+<kbd>D</kbd>（Macでは<kbd>Cmd</kbd>+<kbd>D</kbd>）で複製します。コピーを **Menu Screen** にドラッグし、**Preset** を **Center Anchor & Pivot** に設定すれば、フォント、アウトライン、シャドウはすでに正しく設定されています。
+
+:::
+
+これらのエレメントは画面の中心にアンカーされているので、位置は画面の中央から測ります。リングが `87` にあるのは、カメラの高さより0.7ユニット上にあるボールの開始位置が、高さ1280ユニットの画面ではそこに来るからです。
+
+![Menu Screen の4つのエレメントがあるヒエラルキー](/img/tutorials/keepyup-part-five/hierarchy.webp)
+
+## 2. プレーが始まったらメニューを隠す {#hide-the-menu-when-play-starts}
+
+`ui-menu.mjs` というスクリプトを作成します。
 
 ```javascript
-this.audio.sound.stop(); // 現在再生中の音を停止する
-this.audio.sound.play("gameover") // 'gameover'スロットを再生する
+import { Script } from 'playcanvas';
+
+/**
+ * Hides the menu when the first round starts.
+ */
+export class UiMenu extends Script {
+    static scriptName = 'uiMenu';
+
+    initialize() {
+        this.app.once('game:start', this.onGameStart, this);
+
+        this.on('destroy', () => {
+            this.app.off('game:start', this.onGameStart, this);
+        });
+    }
+
+    onGameStart() {
+        this.entity.enabled = false;
+    }
+}
 ```
 
-#### ボールをタップする
+**Menu Screen** に **Script** コンポーネントを追加し、`uiMenu` スクリプトを追加します。
 
-ボールタップ音は、直接ボールエンティティに付けられています。短い、ループしない音です。そのため、タップがボールに当たるたびに再生します。
+このスクリプトは `this.app.on` ではなく `this.app.once` を使っているので、ハンドラーは最初の `game:start` に対してだけ実行されます。メニューは、その下にあるものすべてと一緒に無効になり、再び表示する必要はありません。
+
+## 3. ゲームオーバー画面を作る {#build-the-game-over-screen}
+
+この画面は、何度も表示と非表示を繰り返す必要があります。スクリプトは有効なままのScreenに置き、その下にあるエレメントのグループのオンとオフを切り替えます。
+
+1. **UI** に `Game Over Screen` という **2D Screen** をもう1つ追加し、同じ **Ref Resolution** と **Scale Blend** を設定します。
+2. それを選択し、**+** > **User Interface** > **Group Element** を選択します。グループの名前を `Panel` にし、**Preset** を **Stretch** に設定して、画面全体を覆うようにします。
+
+![画面いっぱいに引き伸ばしたグループである、Panel エンティティのElementコンポーネント](/img/tutorials/keepyup-part-five/panel-element.webp)
+
+次に、この4つのエレメントを **Panel** に追加します。メニューのエレメントを複製するのが一番早い方法です。
+
+| 名前 | 種類 | Position | 設定 |
+| --- | --- | --- | --- |
+| `Game` | Text | `0`, `388`, `0` | **Text** `GAME`、**Font Size** と **Line Height** `92` |
+| `Over` | Text | `0`, `300`, `0` | **Text** `OVER`、**Font Size** と **Line Height** `92`、**Color** `FFD13D` |
+| `Ring` | Image | `0`, `87`, `0` | メニューと同じ |
+| `Prompt` | Text | `0`, `-147`, `0` | メニューと同じ |
+
+この2つの単語は、スコアとリングの間に収める必要があるので、タイトルより小さくしています。
+
+## 4. ラウンドの合間に表示する {#show-it-between-rounds}
+
+`ui-game-over.mjs` というスクリプトを作成します。
 
 ```javascript
-this.entity.sound.play("bounce");
+import { Entity, Script } from 'playcanvas';
+
+/**
+ * Shows the game over message between rounds.
+ */
+export class UiGameOver extends Script {
+    static scriptName = 'uiGameOver';
+
+    /**
+     * The entity that holds everything on the game over screen.
+     *
+     * @attribute
+     * @type {Entity}
+     */
+    panel;
+
+    initialize() {
+        this.panel.enabled = false;
+
+        this.app.on('game:over', this.onGameOver, this);
+        this.app.on('game:start', this.onGameStart, this);
+
+        this.on('destroy', () => {
+            this.app.off('game:over', this.onGameOver, this);
+            this.app.off('game:start', this.onGameStart, this);
+        });
+    }
+
+    onGameOver() {
+        this.panel.enabled = true;
+    }
+
+    onGameStart() {
+        this.panel.enabled = false;
+    }
+}
 ```
 
-### パーティクル (Particle)
+1. **Game Over Screen** に **Script** コンポーネントを追加し、`uiGameOver` スクリプトを追加します。
+2. **Panel** エンティティを、スクリプトの `panel` スロットにドラッグします。
 
-![Particles](/img/tutorials/beginner/keepyup-part-five/particle-bounce.gif)
+パネルは、ゲームの読み込み時には隠され、`game:over` で表示され、次の `game:start` で再び隠されます。
 
-Keepy Upには一つのパーティクルエフェクトがあります。それは、ボールがタップされるたびにトリガーされるダストの雲です。ダストの雲は、非ループ効果であり、実行時に雲がボールから離れるように配置し回転させる必要があります。
+## 進み具合を確認する {#check-your-progress}
 
-```javascript
-this.impactEffect.setLocalPosition(tmp);
-this.impactEffect.particlesystem.reset();
-this.impactEffect.particlesystem.play();
-this.impactEffect.lookAt(this.entity.getPosition());
-```
+ゲームを **Launch** します。タイトルが表示されます。
 
-このコードでは、`reset()`と`play()`を呼ぶことでワンショットパーティクルエフェクトを再起動し、それがボールの中心に向かって指すように回転させます。
+![メニュー画面: リングに囲まれたボールの上に KEEPY UP](/img/tutorials/keepyup-part-five/menu.webp)
 
-![Curves](/img/tutorials/beginner/keepyup-part-five/particle-velocity-curves.jpg)
+ボールをキックすると、タイトルがスコアに変わります。ボールを落とすとゲームオーバー画面が表示され、ボールはリングの中に戻って、次のラウンドを待ちます。
 
-パーティクルエフェクト (Particle Effect)のエディターでLocal Velocityグラフを使用して、パーティクルエフェクトが向いている方向から離れて発射するように設定します。例：パーティクルは正のz軸に沿って移動します。
+![ゲームオーバー画面: スコア、GAME OVER、リングの中のボール](/img/tutorials/keepyup-part-five/game-over.webp)
 
-[パート6](/tutorials/keepyup-part-six/)に進んでください。
+ゲームは完成しましたが、まだ音がありません。[パート6: サウンド、パーティクル、公開](/tutorials/keepyup-part-six/)では、仕上げをして、ゲームをオンラインに公開します。

@@ -1,141 +1,147 @@
 ---
-title: シンプルなゲームの作成 - パート6
+title: "シンプルなゲームの作成 - パート6: サウンド、パーティクル、公開"
+description: 1つのスクリプトで制御するキック音、音楽、ゲームオーバー音、パーティクルのエフェクトを追加してKeepy Upを仕上げ、ゲームをウェブに公開します。
 tags: [games]
-thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406050/LIJTDO-image-75.jpg"
-description: Screen と Element Component と状態切り替えで、メニュー、ゲーム中、ゲームオーバー UI を構築します。
+thumb: /img/tutorials/keepyup-part-six/thumbnail.webp
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import StepVideo from '@site/src/components/StepVideo';
 
-<div className="iframe-container">
-    <iframe src="https://playcanv.as/p/KH37bnOk/?overlay=false" title="Making a Simple Game - Part 6" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
-</div>
+[パート5](/tutorials/keepyup-part-five/)では、ゲームの画面を完成させました。この最後のパートでは、サウンドとパーティクルエフェクトを追加し、ゲームを公開します。
 
-*[完成されたプロジェクトはこちら](https://playcanvas.com/project/406050)です。先に[その1](/tutorials/keepyup-part-one/), [その2](/tutorials/keepyup-part-two/), [その3](/tutorials/keepyup-part-three/), [その4](/tutorials/keepyup-part-four/), [その5](/tutorials/keepyup-part-five/)を読んでください。*
+:::info[はじめる前に]
 
-## ユーザーインターフェース
+パート1から5で作ったプロジェクトが必要です。自分の作業と比べるには、[完成したプロジェクト](https://playcanvas.com/project/1660780/overview/keepy-up)を開いてください。
 
-ゲームのユーザーインターフェースはユーザが最初に触れるものですが、開発の際には後回しにされがちです。優れたユーザーインターフェースは、ゲームに個性を与えるだけでなく、ゲームをプレイすることができる人数に影響を与えます。
+:::
 
-PlayCanvasではユーザインタフェースは[Screen Component](/user-manual/editor/scenes/components/screen/)と[Element Component](/user-manual/editor/scenes/components/element/)を使用して構築されます。詳細は [ユーザマニュアル](/user-manual/user-interface/)でご確認ください
+## 1. サウンドを追加する {#add-the-sounds}
 
-### ユーザーインターフェイスのエンティティ
+[Soundコンポーネント](/user-manual/editor/scenes/components/sound/)は、オーディオアセットを再生します。再生できるサウンドはそれぞれ**スロット**を持ち、スクリプトはスロットを名前で指定して再生します。
 
-![Hierarchy](/img/tutorials/beginner/keepyup-part-six/ui-hierarchy.jpg)
+1. **Root** に `Effects` というエンティティを追加します。
+2. **Add Component** > **Sound** を選択します。
+3. **Positional** をオフにします。ポジショナルサウンドはカメラから離れるほど小さくなります。3Dワールド内の音には適していますが、音楽には向きません。
+4. コンポーネントには最初からスロットが1つあります。それを表の1行目のとおりに設定し、**ADD SLOT** を2回選択して残りの2つを追加します。
 
-ユーザインターフェイスをメニュー、ゲーム、ゲームオーバーの３つのゲーム状態に分けました。各状態には、状態が入力されたときにアクティブ化されるスクリーンエンティティがあります。 また、オーバーレイのためのスクリーンがあります。オーバーレイはメニューのボールの下に表示されるため、3Dスクリーンコンポーネントを使用して、ボールの後ろのワールドスペースにオーバーレイをレンダリングします。
+| Name | Asset | 設定 |
+| --- | --- | --- |
+| `kick` | `kick.mp3` | **Overlap** をオン。続けてキックしても、音が互いを打ち消さないようにします |
+| `music` | `music.mp3` | **Loop** をオン、**Volume** `0.6` |
+| `gameOver` | `game-over.mp3` | |
 
-### イメージとテキスト
+サウンドは **Sounds** フォルダーにあります。3つとも **Auto Play** はオフのままにします。それぞれをいつ再生するかは、スクリプトが決めます。
 
-![Image Element](/img/tutorials/beginner/keepyup-part-six/image-element.jpg)
+![kickとmusicのスロットがある、Effects エンティティのSoundコンポーネント](/img/tutorials/keepyup-part-six/sound.webp)
 
-画像やテキストは要素コンポーネントを使用してユーザーインターフェイスに追加されます。このコンポーネントは、テクスチャアセットの形式または画像をフォントアセットの形式で表示することができます。
+PlayCanvasのサウンドについて詳しくは、[オーディオ](/user-manual/audio/)のセクションを参照してください。
 
-![Image Attriubtes](/img/tutorials/beginner/keepyup-part-six/element-attr.jpg)
+## 2. パーティクルエフェクトを追加する {#add-a-particle-effect}
 
-### ユーザーインターフェースのスクリプト
+ボールをキックした場所に土ぼこりが舞うと、キックに手応えが出ます。
 
-メインメニューのスクリプトを見てみましょう。
+1. **Effects** を選択し、**+**（エンティティを追加）> **Particle System** を選択します。新しいエンティティの名前を `Impact` にします。
+2. [Particle Systemコンポーネント](/user-manual/editor/scenes/components/particlesystem/)で、**Auto Play** と **Loop** をオフにします。エフェクトは、スクリプトが指示したときに一度だけ再生されるようにします。
+3. **Particle Count** を `14`、**Lifetime** を `0.45`、**Emission Rate** と **Emission Rate 2** を `0` に設定します。レートがゼロだと、すべてのパーティクルが一度に放出されます。
+4. **Emitter Shape** を **Sphere** に、**Emitter Radius** を `0.25` に設定します。
+5. **Textures** フォルダーから `puff.png` を **Color Map** スロットにドラッグします。
+6. **Lighting** と **Depth Write** をオフにします。これは、柔らかく透けるパーティクルに適した設定です。
 
-<Tabs defaultValue="esm" groupId='script-code'>
-<TabItem value="esm" label="ESM">
+![Impact エンティティのParticle Systemコンポーネント](/img/tutorials/keepyup-part-six/particles.webp)
+
+残りの設定はカーブです。カーブは、各パーティクルの寿命の間に値を変化させます。カーブを選択すると、カーブエディターが開きます。
+
+- **Local Velocity:** パーティクルを外側に飛ばし、減速させます。カーブが開始時の約 `3.5` から終了時の `0.6` になるように設定し、エディターのランダム範囲のオプションを使って、2組目のカーブが `-3.5` から `-0.6` になるようにします。Zのカーブは `0` のままにします。
+- **Scale:** 開始時の `0.14` から終了時の `0.45` に。土ぼこりが大きくなっていきます。
+- **Opacity:** 開始時の `0.85` から終了時の `0` に。消えていきます。
+
+これらを正確に合わせる必要はありません。次のステップのスクリプトを追加したら、ゲームを起動してボールをキックし、気に入るまでエフェクトを調整してください。
+
+## 3. エフェクトのスクリプトを書く {#write-the-effects-script}
+
+`effects.mjs` というスクリプトを作成します。
 
 ```javascript
-import { Script } from 'playcanvas';
+import { Entity, Script } from 'playcanvas';
 
-export class UiMenu extends Script {
-    static scriptName = "uiMenu";
+/**
+ * Plays the sounds and the particle effect that go with what happens in the game.
+ */
+export class Effects extends Script {
+    static scriptName = 'effects';
 
     /**
+     * The particle system to play where the ball is kicked.
+     *
      * @attribute
-     * @title Overlay
      * @type {Entity}
      */
-    overlay = null;
+    impact;
 
-    // initialize code called once per entity
     initialize() {
-        this.on('enable', this.onEnable, this);
-        this.on('disable', this.onDisable, this);
+        this.app.on('ball:kicked', this.onBallKicked, this);
+        this.app.on('game:start', this.onGameStart, this);
+        this.app.on('game:over', this.onGameOver, this);
 
-        this.onEnable();
+        this.on('destroy', () => {
+            this.app.off('ball:kicked', this.onBallKicked, this);
+            this.app.off('game:start', this.onGameStart, this);
+            this.app.off('game:over', this.onGameOver, this);
+        });
     }
 
-    onEnable() {
-        // Listen for clicks on the background
+    onBallKicked(point) {
+        this.entity.sound.play('kick');
 
-        this.overlay.enabled = true;
-        this.overlay.element.on("click", this.start, this);
-
-        if (this.ball) {
-            this.ball.model.meshInstances[0].material.depthTest = false;
-        }
+        // Restart the particle effect at the point of the kick
+        this.impact.setPosition(point);
+        this.impact.particlesystem.reset();
+        this.impact.particlesystem.play();
     }
 
-    onDisable() {
-        this.overlay.enabled = false;
-        // Stop listening to events
-        this.overlay.element.off("click", this.start, this);
+    onGameStart() {
+        this.entity.sound.play('music');
     }
 
-    start(e) {
-        this.app.fire("ui:start");
-        // prevent touch and mouse events
-        e.stopPropagation();
+    onGameOver() {
+        this.entity.sound.stop('music');
+        this.entity.sound.play('gameOver');
     }
 }
 ```
 
-</TabItem>
-<TabItem value="classic" label="Classic">
+1. **Effects** に **Script** コンポーネントを追加し、`effects` スクリプトを追加します。
+2. **Impact** エンティティを、スクリプトの `impact` スロットにドラッグします。
 
-```javascript
-var UiMenu = pc.createScript('uiMenu');
+パート3と4のイベントが、ここで役に立ちます。このスクリプトは `ball:kicked`、`game:start`、`game:over` を聞くだけで、これまでのスクリプトを変更する必要はありませんでした。`ball:kicked` イベントはキックが当たった点を渡すので、スクリプトはパーティクルエフェクトをそこに移動してから再生し直します。
 
-UiMenu.attributes.add("overlay", {type: "entity"});
+ブラウザは、プレイヤーがページを操作するまで、ページが音を鳴らすことを許可しません。このゲームでは、最初の音はプレイヤーの最初のタップによって鳴るので、問題になりません。
 
-// initialize code called once per entity
-UiMenu.prototype.initialize = function() {
-    this.on('enable', this.onEnable, this);
-    this.on('disable', this.onDisable, this);
+## 進み具合を確認する {#check-your-progress}
 
-    this.onEnable();
-};
+音を出せる状態で、ゲームを **Launch** します。キックするたびに鈍い音と土ぼこりが出て、ラウンドの開始とともに音楽が始まり、ホイッスルと観客のため息がラウンドの終わりを知らせます。
 
-UiMenu.prototype.onEnable = function () {
-    // Listen for clicks on the background
+<StepVideo src="/video/keepyup-part-six.mp4" poster="/img/tutorials/keepyup-part-six/result.webp" label="完成したゲーム: メニュー、土ぼこりの出る数回のキック、そしてゲームオーバー画面" />
 
-    this.overlay.enabled = true;
-    this.overlay.element.on("click", this.start, this);
+## 4. ゲームを公開する {#publish-your-game}
 
-    if (this.ball) {
-        this.ball.model.meshInstances[0].material.depthTest = false;
-    }
-};
+今のところ、このゲームをプレイできるのは、エディターから起動するあなただけです。[公開](/user-manual/editor/publishing/)すると、誰でもリンクからプレイできるビルドが作成されます。
 
-UiMenu.prototype.onDisable = function () {
-    this.overlay.enabled = false;
-    // Stop listening to events
-    this.overlay.element.off("click", this.start, this);
-};
+1. エディターの左側にあるツールバーで、**Publish / Download** ボタンを選択します。
+2. **Publish** を選択して新しいビルドを開始し、名前を付けます。
+3. **Concatenate Scripts** はオンのままにします。このようなスクリプトを使うプロジェクトのビルドには、これが必要です。
+4. **Publish** を選択します。ビルドの準備ができると、リンク付きで一覧に表示されます。
 
-UiMenu.prototype.start = function (e) {
-    this.app.fire("ui:start");
-    // prevent touch and mouse events
-    e.stopPropagation();
-};
-```
+スマートフォンでリンクを開き、親指でゲームを試してみましょう。
 
-</TabItem>
-</Tabs>
+## 次のステップ {#where-next}
 
-最初に、オーバーレイエレメントへの参照を持つ属性を設定しました。オーバーレイエレメントは画面全体を覆い、画面を緑色に色付けするために使用されます。また、ユーザーが画面全体をクリックしたことを検出するためにも使用されます。
+これで、1つのゲームを作り上げ、公開しました。その過程で、テンプレート、イメージベースドライティング、マテリアル、スクリプトとその属性、アプリケーションイベント、ユーザーインターフェースのScreen、サウンド、パーティクルを使いました。
 
-エンティティを有効にした場合、フルスクリーンオーバーレイを有効にして表示し、次にクリックイベントのリッスンを開始します。エンティティが無効になると、イベントのリッスンを停止し、オーバーレイを非表示にします。イベントがトリガーされると、メインゲームのスクリプトがリッスンしているゲームの状態の変化をトリガーする"ui:start" イベントが発生します。
+ゲームを自分のものにするためのアイデアをいくつか紹介します。
 
-ゲームのイベントにリッスンしたり、UIイベントを発動させる他の二つのUIスクリプトでも、同様の動作を繰り返します。
+- **ベストスコアを記録する。** 新しいスクリプトで `game:over` を聞き、ブラウザの [`localStorage`](https://developer.mozilla.org/ja/docs/Web/API/Window/localStorage) に最高スコアを保存します。
+- **難しくする。** 1点ごとに、ボールの `gravity` を少しずつ大きくします。
+- **見た目を変える。** ボールの色を変えたり、別の背景を作ったりします。
 
-## ゲーム完成
-
-シリーズの最後に到達しました！PlayCanvasを使用してゲームを構成および構築する方法について説明をしました。チュートリアルに関するご意見は[フォーラム](https://forum.playcanvas.com)から連絡ください。
+さらに学ぶには、他の[チュートリアル](/tutorials/)を見たり、[フォーラム](https://forum.playcanvas.com)で質問したりしてみてください。
