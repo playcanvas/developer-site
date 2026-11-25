@@ -9,7 +9,7 @@ Gaussian Splatsは、シーン内のメッシュやその他のサーフェス�
 
 <EngineExample id="gaussian-splatting/simple" title="ライブデモを見る" />
 
-![スプラットの影](/img/user-manual/gaussian-splatting/splat-shadows.png)
+![スプラットの影](/img/user-manual/gaussian-splatting/splat-shadows.webp)
 
 ## シャドウキャスティングの有効化
 

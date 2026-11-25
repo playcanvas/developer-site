@@ -32,7 +32,7 @@ import StepVideo from '@site/src/components/StepVideo';
 
 起動ページをアクティブにすると、新しいタブで開きます。エディターと起動ページの間を行き来することは全く問題ありません。ただし、大画面やマルチモニターのセットアップをお持ちの場合は、起動ページのタブを切り離してエディターと並べて配置することを検討してください。
 
-![起動ページを並べて表示](/img/user-manual/editor/launch-page/launch-page-side-by-side.png)
+![起動ページを並べて表示](/img/user-manual/editor/launch-page/launch-page-side-by-side.webp)
 
 これにより、両者をより簡単かつ迅速に切り替えることができます。
 

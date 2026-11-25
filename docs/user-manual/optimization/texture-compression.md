@@ -25,11 +25,11 @@ The compression has achieved a 6 times reduction in VRAM usage. Furthermore, in 
 
 Below is a side by side comparison of the brick texture on Mac with Chrome:
 
-<a href="/img/user-manual/assets/textures/texture-compression/basis-vs-no-compression-brick.png" target="_blank"><img loading="lazy" src="/img/user-manual/assets/textures/texture-compression/basis-vs-no-compression-brick-thumb.jpg" alt="Brick texture compression comparison" /></a>
+<a href="/img/user-manual/assets/textures/texture-compression/basis-vs-no-compression-brick.webp" target="_blank"><img loading="lazy" src="/img/user-manual/assets/textures/texture-compression/basis-vs-no-compression-brick-thumb.jpg" alt="Brick texture compression comparison" /></a>
 
 Here is another example of the PlayCanvas cube [with Basis (ETC mode)](https://playcanv.as/p/j8rsh3eO/) and [without](https://playcanv.as/p/nAW3WkW8/) on Mac with Chrome:
 
-<a href="/img/user-manual/assets/textures/texture-compression/basis-vs-no-compression-cube.png" target="_blank"><img loading="lazy" src="/img/user-manual/assets/textures/texture-compression/basis-vs-no-compression-cube-thumb.jpg" alt="PlayCanvas cube compression comparison" /></a>
+<a href="/img/user-manual/assets/textures/texture-compression/basis-vs-no-compression-cube.webp" target="_blank"><img loading="lazy" src="/img/user-manual/assets/textures/texture-compression/basis-vs-no-compression-cube-thumb.jpg" alt="PlayCanvas cube compression comparison" /></a>
 
 ## Using Basis Texture Compression {#using-basis-texture-compression}
 
