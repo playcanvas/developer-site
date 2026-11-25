@@ -21,9 +21,9 @@ The **Textures** folder holds `stadium-sky.png`, a panorama of a sky above a gre
 
 1. In the Assets panel, open **Textures** and right-click `stadium-sky.png`.
 2. Select **Create Cubemap**. The Editor adds six face textures and a cubemap called `stadium-sky_cubemap`.
-3. Select the cubemap. In the Inspector, find **Prefiltering** and select **PREFILTER CUBEMAP**.
+3. Select the cubemap. At the bottom of the Inspector, under **Prefiltering**, select **PREFILTER CUBEMAP**. When it has finished, the button changes to **DELETE PREFILTERED DATA**.
 
-![The Inspector for the cubemap](/img/tutorials/keepyup-part-two/cubemap.webp)
+![The Faces and Prefiltering sections of the Inspector for the cubemap](/img/tutorials/keepyup-part-two/cubemap.webp)
 
 Prefiltering makes blurred copies of the sky. A rough surface reflects a blurred sky and a polished one reflects a sharp sky, so the engine needs both. This is called [image-based lighting](/user-manual/graphics/physical-rendering/image-based-lighting/).
 
@@ -52,7 +52,7 @@ Tone mapping decides how the bright values in the rendered picture are fitted in
 A shadow on the pitch shows the player where the ball is.
 
 1. Select **Light**.
-2. In the Light Component, turn on **Cast Shadows**.
+2. In the Light Component, check that **Cast Shadows** is turned on. It already is for the Light in a new project.
 3. Set **Resolution** to `2048 x 2048`, **Cascades** to `2` and **Distance** to `420`.
 4. Set **Shadow Bias** to `0.3` and **Normal Offset Bias** to `0.2`.
 
@@ -65,8 +65,9 @@ A shadow on the pitch shows the player where the ball is.
 The football uses three [materials](/user-manual/graphics/physical-rendering/physical-materials/): `Ball Light` for the white panels, `Ball Dark` for the black ones and `Ball Seam` for the grooves between them. They are in **Models** > **Football**.
 
 1. Select `Ball Light` and expand **Clearcoat** in the Inspector.
-2. Set **Clear Coat Factor** to `0.4` and **Clear Coat Gloss** to `0.85`.
-3. Do the same for `Ball Dark`.
+2. Set **Clear Coat Factor** to `0.4`. More settings appear below it.
+3. Under **Clear Coat Gloss**, set **Glossiness** to `0.85`.
+4. Do the same for `Ball Dark`.
 
 ![The Clearcoat section of the material Inspector](/img/tutorials/keepyup-part-two/clearcoat.webp)
 
@@ -75,9 +76,9 @@ Clear coat adds a thin glossy layer over the material, like varnish. The ball no
 While you have a material open, look at its other sections:
 
 - **Diffuse** sets the base color. Change the **Color** of `Ball Light` and `Ball Dark` to put the ball in your own team's colors.
-- **Specular** holds **Metalness** and **Gloss**, which decide how mirror-like the surface is.
+- **Specular** holds **Metalness** and **Glossiness**, which decide how mirror-like the surface is.
 
-The stadium's materials, in **Models** > **Stadium**, show three more techniques. `Crowd` takes its color from a texture in its **Diffuse** slot. `Boards` uses the same texture in **Emissive**, so the advertising boards glow like screens. `Net` has an **Opacity** below 1 and a **Blend Type** of **Alpha**, which makes the goal net see-through.
+The stadium's materials, in **Models** > **Stadium**, show three more techniques. `Crowd` takes its color from a texture in its **Diffuse** slot. `Boards` also has its texture in the **Emissive** slot, so the advertising boards glow like screens. In its **Opacity** section, `Net` has an **Intensity** below 1 and a **Blend Type** of **Alpha**, which makes the goal net see-through.
 
 ## Check Your Progress {#check-your-progress}
 

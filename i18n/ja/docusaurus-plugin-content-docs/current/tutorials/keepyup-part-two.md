@@ -19,9 +19,9 @@ thumb: /img/tutorials/keepyup-part-two/thumbnail.webp
 
 1. アセットパネルで **Textures** を開き、`stadium-sky.png` を右クリックします。
 2. **Create Cubemap** を選択します。エディターが6枚の面テクスチャと、`stadium-sky_cubemap` というキューブマップを追加します。
-3. キューブマップを選択します。インスペクターで **Prefiltering** を見つけ、**PREFILTER CUBEMAP** を選択します。
+3. キューブマップを選択します。インスペクターの一番下にある **Prefiltering** で、**PREFILTER CUBEMAP** を選択します。処理が終わると、ボタンは **DELETE PREFILTERED DATA** に変わります。
 
-![キューブマップのインスペクター](/img/tutorials/keepyup-part-two/cubemap.webp)
+![キューブマップのインスペクターのFacesセクションとPrefilteringセクション](/img/tutorials/keepyup-part-two/cubemap.webp)
 
 プリフィルタリングは、空をぼかしたコピーを作ります。粗い表面はぼやけた空を映し、磨かれた表面はくっきりした空を映すので、エンジンにはその両方が必要です。これを[イメージベースドライティング](/user-manual/graphics/physical-rendering/image-based-lighting/)と呼びます。
 
@@ -50,7 +50,7 @@ thumb: /img/tutorials/keepyup-part-two/thumbnail.webp
 ピッチに落ちる影は、ボールがどこにあるかをプレイヤーに伝えます。
 
 1. **Light** を選択します。
-2. Lightコンポーネントで、**Cast Shadows** をオンにします。
+2. Lightコンポーネントで、**Cast Shadows** がオンになっていることを確認します。新しいプロジェクトのLightでは、最初からオンになっています。
 3. **Resolution** を `2048 x 2048`、**Cascades** を `2`、**Distance** を `420` に設定します。
 4. **Shadow Bias** を `0.3`、**Normal Offset Bias** を `0.2` に設定します。
 
@@ -63,8 +63,9 @@ thumb: /img/tutorials/keepyup-part-two/thumbnail.webp
 サッカーボールは3つの[マテリアル](/user-manual/graphics/physical-rendering/physical-materials/)を使っています。白いパネル用の `Ball Light`、黒いパネル用の `Ball Dark`、その間の溝用の `Ball Seam` です。これらは **Models** > **Football** にあります。
 
 1. `Ball Light` を選択し、インスペクターで **Clearcoat** を展開します。
-2. **Clear Coat Factor** を `0.4` に、**Clear Coat Gloss** を `0.85` に設定します。
-3. `Ball Dark` にも同じ設定をします。
+2. **Clear Coat Factor** を `0.4` に設定します。その下に、さらに設定が表示されます。
+3. **Clear Coat Gloss** の下にある **Glossiness** を `0.85` に設定します。
+4. `Ball Dark` にも同じ設定をします。
 
 ![マテリアルインスペクターのClearcoatセクション](/img/tutorials/keepyup-part-two/clearcoat.webp)
 
@@ -73,9 +74,9 @@ thumb: /img/tutorials/keepyup-part-two/thumbnail.webp
 マテリアルを開いているついでに、他のセクションも見てみましょう。
 
 - **Diffuse** はベースの色を設定します。`Ball Light` と `Ball Dark` の **Color** を変えると、ボールを自分のチームの色にできます。
-- **Specular** には **Metalness** と **Gloss** があり、表面がどれだけ鏡のようになるかを決めます。
+- **Specular** には **Metalness** と **Glossiness** があり、表面がどれだけ鏡のようになるかを決めます。
 
-**Models** > **Stadium** にあるスタジアムのマテリアルでは、さらに3つの手法を見ることができます。`Crowd` は、**Diffuse** スロットのテクスチャから色を取ります。`Boards` は同じテクスチャを **Emissive** にも使っているので、広告ボードが画面のように光ります。`Net` は **Opacity** が1未満で **Blend Type** が **Alpha** になっており、ゴールネットが透けて見えます。
+**Models** > **Stadium** にあるスタジアムのマテリアルでは、さらに3つの手法を見ることができます。`Crowd` は、**Diffuse** スロットのテクスチャから色を取ります。`Boards` は、自分のテクスチャを **Emissive** スロットにも使っているので、広告ボードが画面のように光ります。`Net` は、**Opacity** セクションの **Intensity** が1未満で **Blend Type** が **Alpha** になっており、ゴールネットが透けて見えます。
 
 ## 進み具合を確認する {#check-your-progress}
 

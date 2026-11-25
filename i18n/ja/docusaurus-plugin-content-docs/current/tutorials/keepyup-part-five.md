@@ -18,20 +18,26 @@ thumb: /img/tutorials/keepyup-part-five/thumbnail.webp
 メニューは、タイトル、ボールを囲むリング、そしてプレイヤーに何をすればよいかを伝える1行で構成されます。
 
 1. **UI** を選択し、**+**（エンティティを追加）> **User Interface** > **2D Screen** を選択します。名前を `Menu Screen` にし、スコアのときと同じように、**Ref Resolution** を `720` × `1280` に、**Scale Blend** を `1` に設定します。
-2. **User Interface** メニューから **Menu Screen** に4つのエレメントを追加し、表のとおりに設定します。画像のエレメントは、メニューでは **Image Element** という名前です。
+2. **User Interface** メニューから **Menu Screen** に4つのエレメントを追加し、表のとおりに設定します。新しいエレメントは選択中のものの中に追加されるので、1つ追加するたびに、先に **Menu Screen** を選択し直してください。
 
 | 名前 | 種類 | Position | 設定 |
 | --- | --- | --- | --- |
 | `Title Keepy` | Text | `0`, `455`, `0` | **Text** `KEEPY`、**Font Size** と **Line Height** `150` |
 | `Title Up` | Text | `0`, `317`, `0` | **Text** `UP`、**Font Size** と **Line Height** `150`、**Color** `FFD13D` |
-| `Ring` | Image | `0`, `87`, `0` | **Texture** に **UI** フォルダーの `ring.png`、**Width** と **Height** `264` |
+| `Ring` | Image | `0`, `87`, `0` | **Texture** に **UI** フォルダーの `ring.png`、その後で **Width** と **Height** `264` |
 | `Prompt` | Text | `0`, `-147`, `0` | **Text** `TAP THE BALL`、**Font Size** と **Line Height** `54` |
 
-3つのテキストエレメントには、パート4でスコアに設定したのと同じフォント、アウトライン、シャドウを設定します。
+3つのテキストエレメントには、パート4でスコアに設定したのと同じフォント、アウトライン、シャドウを設定します。リングは、サイズより先にテクスチャを設定します。エディターは、新しいテクスチャに合わせてImage Elementのサイズを変更するからです。
 
 :::tip
 
-時間を節約するには、`Score` エンティティを選択して、<kbd>Ctrl</kbd>+<kbd>D</kbd>（Macでは<kbd>Cmd</kbd>+<kbd>D</kbd>）で複製します。コピーを **Menu Screen** にドラッグし、**Preset** を **Center Anchor & Pivot** に設定すれば、フォント、アウトライン、シャドウはすでに正しく設定されています。
+時間を節約するには、`Score` エンティティを選択して、<kbd>Ctrl</kbd>+<kbd>D</kbd>（Macでは<kbd>Cmd</kbd>+<kbd>D</kbd>）で複製します。コピーは、元のエンティティのすぐ下に同じ名前で表示されます。それを **Menu Screen** にドラッグし、**Preset** を **Center Anchor & Pivot** に設定すれば、フォント、アウトライン、シャドウはすでに正しく設定されています。
+
+:::
+
+:::note
+
+選択を失わずに **UI** フォルダーを開くには、アセットパネルの左側にあるフォルダーツリーで選択します。パネルのメイン部分でフォルダーをダブルクリックすると選択が変わり、作業中のエレメントがインスペクターに表示されなくなります。
 
 :::
 
@@ -66,7 +72,7 @@ export class UiMenu extends Script {
 }
 ```
 
-**Menu Screen** に **Script** コンポーネントを追加し、`uiMenu` スクリプトを追加します。
+**Menu Screen** に **Script** コンポーネントを追加し、`uiMenu` スクリプトを追加します。このスクリプトには属性がないので、**Parse** は必要ありません。
 
 このスクリプトは `this.app.on` ではなく `this.app.once` を使っているので、ハンドラーは最初の `game:start` に対してだけ実行されます。メニューは、その下にあるものすべてと一緒に無効になり、再び表示する必要はありません。
 
@@ -75,11 +81,11 @@ export class UiMenu extends Script {
 この画面は、何度も表示と非表示を繰り返す必要があります。スクリプトは有効なままのScreenに置き、その下にあるエレメントのグループのオンとオフを切り替えます。
 
 1. **UI** に `Game Over Screen` という **2D Screen** をもう1つ追加し、同じ **Ref Resolution** と **Scale Blend** を設定します。
-2. それを選択し、**+** > **User Interface** > **Group Element** を選択します。グループの名前を `Panel` にし、**Preset** を **Stretch** に設定して、画面全体を覆うようにします。
+2. **Game Over Screen** を選択した状態で、**+** > **User Interface** > **Group Element** を選択します。グループの名前を `Panel` にし、**Preset** を **Stretch** に設定して、画面全体を覆うようにします。
 
 ![画面いっぱいに引き伸ばしたグループである、Panel エンティティのElementコンポーネント](/img/tutorials/keepyup-part-five/panel-element.webp)
 
-次に、この4つのエレメントを **Panel** に追加します。メニューのエレメントを複製するのが一番早い方法です。
+次に、この4つのエレメントを **Panel** に追加します。メニューのエレメントを複製し、コピーを **Panel** にドラッグするのが一番早い方法です。
 
 | 名前 | 種類 | Position | 設定 |
 | --- | --- | --- | --- |
@@ -133,7 +139,7 @@ export class UiGameOver extends Script {
 }
 ```
 
-1. **Game Over Screen** に **Script** コンポーネントを追加し、`uiGameOver` スクリプトを追加します。
+1. **Game Over Screen** に **Script** コンポーネントを追加して `uiGameOver` スクリプトを追加し、その **Parse** ボタンを選択します。
 2. **Panel** エンティティを、スクリプトの `panel` スロットにドラッグします。
 
 パネルは、ゲームの読み込み時には隠され、`game:over` で表示され、次の `game:start` で再び隠されます。
