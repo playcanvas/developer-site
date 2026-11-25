@@ -3,6 +3,8 @@ title: Graph View
 description: Navigates the expandable checkpoint graph comparing nodes restoring hard resetting and copying metadata from version history.
 ---
 
+import StepVideo from '@site/src/components/StepVideo';
+
 ## Overview
 
 The Version Control Graph makes it easy to track progress and merge history of the branches of a PlayCanvas project.
@@ -39,7 +41,7 @@ Clicking on a node will open up the context menu for some or all following optio
 
 - **Compare with Selected** - Launch a Diff View between the current node and a node marked via 'Select for Compare'.
 
-![](/img/user-manual/editor/version-control/graph-view/compare-checkpoints-example.gif)
+<StepVideo src="/video/user-manual/editor/version-control/graph-view/compare-checkpoints-example.mp4" poster="/img/user-manual/editor/version-control/graph-view/compare-checkpoints-example.webp" width={3182} height={1588} />
 
 - **New Branch** - Create a new branch from the selected checkpoint. ([More details](/user-manual/editor/version-control/branches/#creating-a-new-branch))
 
@@ -57,7 +59,7 @@ Initially the Graph View displays up to 20 checkpoints from each branch, and up 
 
 A triangle in the top right corner of a node means that it has yet more incoming or outgoing edges (such as branches and merges), and can be expanded via the 'Expand Node' context menu entry.
 
-![](/img/user-manual/editor/version-control/graph-view/node-expand-example.gif)
+<StepVideo src="/video/user-manual/editor/version-control/graph-view/node-expand-example.mp4" poster="/img/user-manual/editor/version-control/graph-view/node-expand-example.webp" width={1770} height={728} />
 
 ## Closed Branches
 

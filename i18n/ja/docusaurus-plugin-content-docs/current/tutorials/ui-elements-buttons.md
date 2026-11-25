@@ -7,6 +7,7 @@ description: Screen上のElementとButtonコンポーネントでクリック可
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import StepVideo from '@site/src/components/StepVideo';
 
 <div className="iframe-container">
     <iframe src="https://playcanv.as/p/jpRiV53D/" title="User Interface - Buttons" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
@@ -38,13 +39,13 @@ import TabItem from '@theme/TabItem';
 
 これは必要なエンティティ、コンポーネントを作成し、プロパティを事前設定するためにもっとも簡単な方法です。
 
-<img loading="lazy" src="/img/tutorials/ui/buttons/adding-button-via-hierarchy.gif" />
+<StepVideo src="/video/tutorials/ui/buttons/adding-button-via-hierarchy.mp4" poster="/img/tutorials/ui/buttons/adding-button-via-hierarchy.webp" width={700} height={480} />
 
 ### 既存の要素を使用して
 
 ボタンに変えたい既存の要素がある場合は、インスペクターパネルでその要素にButtonコンポーネントを追加し、必要に応じて構成できます。
 
-<img loading="lazy" src="/img/tutorials/ui/buttons/adding-button-via-inspector.gif" width="300" />
+<StepVideo src="/video/tutorials/ui/buttons/adding-button-via-inspector.mp4" poster="/img/tutorials/ui/buttons/adding-button-via-inspector.webp" width={300} height={875} />
 
 ユーザーがインタラクトできるように、ElementコンポーネントでUse Inputを有効にする必要があることを覚えてください。
 
@@ -100,7 +101,7 @@ ElementのタイプはImageで、画面の下部にアンカーが設定され�
 
 次のエフェクトがあります。
 
-<img loading="lazy" src="/img/tutorials/ui/buttons/high-quality-button-effect.gif" />
+<StepVideo src="/video/tutorials/ui/buttons/high-quality-button-effect.mp4" poster="/img/tutorials/ui/buttons/high-quality-button-effect.webp" width={418} height={400} />
 
 #### スプライトを変更する
 
@@ -110,7 +111,7 @@ ElementのタイプはImageで、画面の下部にアンカーが設定され�
 
 次のエフェクトがあります。
 
-<img loading="lazy" src="/img/tutorials/ui/buttons/low-quality-button-effect.gif" />
+<StepVideo src="/video/tutorials/ui/buttons/low-quality-button-effect.mp4" poster="/img/tutorials/ui/buttons/low-quality-button-effect.webp" width={418} height={400} />
 
 ### ボタンイベント
 

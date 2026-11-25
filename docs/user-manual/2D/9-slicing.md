@@ -3,6 +3,8 @@ title: 9-slicing
 description: Scale buttons and panels without distorted corners using nine-slice borders defined in texture atlas frames.
 ---
 
+import StepVideo from '@site/src/components/StepVideo';
+
 9-slicing (sometimes called 9-patch) is a technique for 2D graphics that splits a single image into 9 areas which are scaled individually in order to prevent stretching when the image is displayed at different sizes and with different aspect ratios.
 
 ![9 Sliced Button](/img/user-manual/2D/9-slicing/9-sliced-labelled.jpg)
@@ -14,7 +16,7 @@ In the image above you can see the 9 areas that a defined using the Texture Atla
 * **Left, Right** - stretch or tile vertically only
 * **TopLeft, TopRight, BottomLeft, BottomRight** - Do not stretch or tile
 
-![Button Resize Animation](/img/user-manual/2D/9-slicing/button-resize.gif)
+<StepVideo src="/video/user-manual/2D/9-slicing/button-resize.mp4" poster="/img/user-manual/2D/9-slicing/button-resize.webp" label="Button Resize Animation" width={480} height={240} />
 
 ## Setting up 9-slicing
 
@@ -30,18 +32,18 @@ Sprite Assets can have one of three Render Modes.
 
 ### Simple Sprites
 
-![Simple Render Mode](/img/user-manual/2D/9-slicing/simple-resize.gif)
+<StepVideo src="/video/user-manual/2D/9-slicing/simple-resize.mp4" poster="/img/user-manual/2D/9-slicing/simple-resize.webp" label="Simple Render Mode" width={480} height={240} />
 
 *Simple* Render Mode has no 9-slicing. Use this mode for regular sprites.
 
 ### Sliced Sprites
 
-![Sliced Render Mode](/img/user-manual/2D/9-slicing/sliced-resize.gif)
+<StepVideo src="/video/user-manual/2D/9-slicing/sliced-resize.mp4" poster="/img/user-manual/2D/9-slicing/sliced-resize.webp" label="Sliced Render Mode" width={480} height={240} />
 
 *Sliced* Render Mode stretches portions of the image. The center stretches horizontally and vertically; the left and right sections stretch vertically; the top and bottom sections stretch horizontally and the corners do not stretch at all.
 
 ### Tiled Sprites
 
-![Tiled Render Mode](/img/user-manual/2D/9-slicing/tiled-resize.gif)
+<StepVideo src="/video/user-manual/2D/9-slicing/tiled-resize.mp4" poster="/img/user-manual/2D/9-slicing/tiled-resize.webp" label="Tiled Render Mode" width={480} height={240} />
 
 *Tiled* Render Mode is similar to *Sliced* mode except instead of stretching the sections repeat in a tiled manner. The center tiles horizontally and vertically; the left and right tile vertically; the top and bottom tile horizontally and the corners do not tile at all.

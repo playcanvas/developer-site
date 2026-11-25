@@ -3,6 +3,8 @@ title: エディターAPI
 description: ベータの Editor API の例。DevTools や Violentmonkey の Script で Entity を自動化し、進化するオープンソースの editor-api リポジトリ上で UI を拡張します。
 ---
 
+import StepVideo from '@site/src/components/StepVideo';
+
 :::warning
 
 エディターAPI はベータ機能です。ライブプロジェクトで使用する際は注意してください。
@@ -19,7 +21,7 @@ The Editor APIは[GitHub](https://github.com/playcanvas/editor-api)でオープ�
 
 APIはブラウザの開発者ツールコンソールを介してアクセスでき、繰り返しタスクを自動化することができます。以下の例では、エディタを使用して、タグ「red」を持つすべてのエンティティを検索し、ブラウザコンソールでコードを実行して無効にしています。
 
-![](/img/user-manual/editor/editor-api/disable-red-boxes.gif)
+<StepVideo src="/video/user-manual/editor/editor-api/disable-red-boxes.mp4" poster="/img/user-manual/editor/editor-api/disable-red-boxes.webp" width={1921} height={1080} />
 
 Editor API コード:
 
@@ -40,7 +42,7 @@ Editor API コード:
 
 以下には、[Viewport](/user-manual/editor/interface/viewport)にボタンが追加され、ボックスをシーンにランダムに配置する例があります。
 
-![](/img/user-manual/editor/editor-api/generate-random-boxes.gif)
+<StepVideo src="/video/user-manual/editor/editor-api/generate-random-boxes.mp4" poster="/img/user-manual/editor/editor-api/generate-random-boxes.webp" width={1281} height={720} />
 
 PlayCanvas チームは現在、[Violentmonkey](https://violentmonkey.github.io/)オープンソースブラウザーエクステンションを使用してユーザースクリプトを管理しています。
 

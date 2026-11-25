@@ -7,6 +7,7 @@ description: Google H5 Games の interstitial 広告と rewarded 広告を PlayC
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import StepVideo from '@site/src/components/StepVideo';
 
 このチュートリアルのリンク
 
@@ -24,13 +25,13 @@ import TabItem from '@theme/TabItem';
 
 [Flappy Bird の例](https://playcanvas.com/project/877568/overview/google-h5-ads-demo)では、プレイヤーが死んでメインメニューに戻って再度プレイするときに広告が表示されます。
 
-![](/img/tutorials/google-afg/flappy-bird-demo-interstitial-ad.gif)
+<StepVideo src="/video/tutorials/google-afg/flappy-bird-demo-interstitial-ad.mp4" poster="/img/tutorials/google-afg/flappy-bird-demo-interstitial-ad.webp" width={933} height={480} />
 
 もう一つの形式は、リワード広告で、プレイヤーがコインや続けてプレイすることができる  'リワード' を得るために広告を視聴することができます。これらは、プレイヤーに広告を見るかどうかの選択肢を与え、試合中にすぐに報酬を得ることができるため、効果的とされています。
 
 例では、倒れた後に続けてプレイできるようにするために、リワード広告を使用しています。これは、ユーザーに広告を見るインセンティブを提供する強力な方法です。
 
-![](/img/tutorials/google-afg/flappy-bird-demo-rewarded-ad.gif)
+<StepVideo src="/video/tutorials/google-afg/flappy-bird-demo-rewarded-ad.mp4" poster="/img/tutorials/google-afg/flappy-bird-demo-rewarded-ad.webp" width={933} height={480} />
 
 チュートリアルでは、[Google H5 Ad Tutorial (Start)](https://playcanvas.com/project/889095/overview/google-h5-ad-tutorial-start)プロジェクトをフォークして、少しずつ広告SDKライブラリと機能を追加していきます。
 
@@ -115,11 +116,11 @@ UiController.prototype.initialize = function() {
 
 まず、Google SDKの統合ファイルを追加していきます。これは、[Flappy Birdプロジェクト](https://playcanvas.com/project/877568/overview/google-h5-ads-demo)から「Google H5 Games Ads」フォルダをコピーして、チュートリアルプロジェクトのフォークに貼り付けることで行います。
 
-![](/img/tutorials/google-afg/copy-afg-folder.gif)
+<StepVideo src="/video/tutorials/google-afg/copy-afg-folder.mp4" poster="/img/tutorials/google-afg/copy-afg-folder.webp" width={1516} height={638} />
 
 そして、フォークされたチュートリアルプロジェクトに貼り付けます。
 
-![](/img/tutorials/google-afg/paste-afg-folder.gif)
+<StepVideo src="/video/tutorials/google-afg/paste-afg-folder.mp4" poster="/img/tutorials/google-afg/paste-afg-folder.webp" width={1516} height={638} />
 
 中身を見てみましょう。
 
@@ -266,7 +267,7 @@ this.interstitialAdButtonEntity.button.on('click', function(e) {
 
 さあ、実際に見てみましょう!
 
-![](/img/tutorials/google-afg/tutorial-interstitial-ad.gif)
+<StepVideo src="/video/tutorials/google-afg/tutorial-interstitial-ad.mp4" poster="/img/tutorials/google-afg/tutorial-interstitial-ad.webp" width={899} height={480} />
 
 ゲームでインタースティシャル広告を表示することを意図している場合は、常に`adBreak`を呼び出すことが目的です。これには、afg-integration.jsで先に設定した広告の頻度ヒントを含む、Google SDKが広告自体を表示する際のロジックが含まれています。
 
@@ -401,7 +402,7 @@ this.rewardedAdButtonEntity.button.on('click', function (e) {
 
 これを動作中に見てみましょう。
 
-![](/img/tutorials/google-afg/tutorial-rewarded-ad.gif)
+<StepVideo src="/video/tutorials/google-afg/tutorial-rewarded-ad.mp4" poster="/img/tutorials/google-afg/tutorial-rewarded-ad.webp" width={899} height={480} />
 
 完了した `ui-controller.js` ファイルは次のようになるはずです。
 

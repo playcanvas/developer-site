@@ -3,6 +3,8 @@ title: バッチング
 description: "バッチグループがメッシュインスタンスをまとめてドローコールを削減：Editorの設定、静的と動的のルール、制限です。"
 ---
 
+import StepVideo from '@site/src/components/StepVideo';
+
 バッチング (Batching) とは、複数のメッシュインスタンスを1つのメッシュインスタンスに結合することで、すべてを1回のGPUドローコールでレンダリングできるようにするプロセスです。 PlayCanvasは、[Model](/user-manual/editor/scenes/components/model)、[Sprite](/user-manual/editor/scenes/components/sprite)、および[Element](/user-manual/editor/scenes/components/element)コンポーネントに便利な機能を提供し、これらのコンポーネントをBatch Groupに割り当てることができます。これにより、エンジンがメッシュを結合して総ドローコール数を減らす方法に関するヒントを与えることができます。
 
 メッシュインスタンスを組み合わせることができるか、エンジンが確認するためのルールが多数存在しています。最初のルールは、すべてのメッシュインスタンスが同じマテリアルを共有する必要があるというものです。
@@ -71,11 +73,11 @@ if (element.batchGroupId)
 
 このシーンでは、7つの個別のモデルファイルから静的環境を作成しました。これらの一部はシーン内で反復されます。たとえば、ロードタイルは50個のエンティティで使用され、シーンの中央で長い道路が作成されています。
 
-![Western Animation](/img/user-manual/optimization/batching/western-animation-all.gif)
+<StepVideo src="/video/user-manual/optimization/batching/western-animation-all.mp4" poster="/img/user-manual/optimization/batching/western-animation-all.webp" label="Western Animation" width={600} height={337} />
 
 アニメーションでは、各ドローコールが作成される点を参照できます。この環境では、エンジンは50以上のドローコールを作成して、各モデルを個別にドローしています。ただし地面を除き、これらのモデルはすべて同じマテリアルを使用しており、このためBatch Groupに結合することができます。
 
-![Western Animation Batched](/img/user-manual/optimization/batching/western-animation.gif)
+<StepVideo src="/video/user-manual/optimization/batching/western-animation.mp4" poster="/img/user-manual/optimization/batching/western-animation.webp" label="Western Animation Batched" width={600} height={338} />
 
 このアニメーションでは、建物、サボテン、道路、地面用に4つのBatch Groupを作成しました。道路と地面は1つのドローコールに結合されていない点に留意してください。これは、メッシュがBatch Groupで定義されたMax AABBサイズよりも大きいためです。
 

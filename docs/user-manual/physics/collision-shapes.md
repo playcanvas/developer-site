@@ -5,6 +5,7 @@ description: Give rigid bodies and triggers a physical shape with box, sphere, c
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import StepVideo from '@site/src/components/StepVideo';
 
 The [collision](/user-manual/editor/scenes/components/collision/) component gives an entity a physical shape. Paired with a rigidbody component it defines the shape of that [rigid body](/user-manual/physics/rigid-bodies/); on its own it acts as a [trigger volume](/user-manual/physics/trigger-volumes/). The shape does not have to match what the entity looks like, and usually should not: the physics engine tests shapes against each other many times a second, so a simple box or capsule around a detailed model is both faster and more stable than a mesh that follows every polygon.
 
@@ -218,7 +219,7 @@ Give the parent a **Collision** component with **Type** set to **Compound** and 
 </TabItem>
 </Tabs>
 
-![Compound shapes chair](/img/user-manual/physics/compound-shape-chair.gif)
+<StepVideo src="/video/user-manual/physics/compound-shape-chair.mp4" poster="/img/user-manual/physics/compound-shape-chair.webp" label="Compound shapes chair" width={846} height={480} />
 
 The children of a dynamic or kinematic compound can be moved at runtime. When a child's transform changes, the engine updates that shape's offset within the compound and wakes the parent body. A static compound, like any [static body](/user-manual/physics/rigid-bodies/#moving-static-bodies), keeps the shape it was created with. The parent entity is also the body's center of mass, so keep it within the bounds of the shape (usually its center); otherwise the body may behave oddly when forces and torque are applied, such as rotating around an invisible pivot.
 

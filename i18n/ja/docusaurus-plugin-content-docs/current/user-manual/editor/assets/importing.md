@@ -3,6 +3,8 @@ title: アップロードとインポート
 description: Editor でドラッグ＆ドロップで Asset をアップロードし、ファイル名を一致させて置き換え、プロジェクト設定で古い JSON モデル出力を GLB に移行します。
 ---
 
+import StepVideo from '@site/src/components/StepVideo';
+
 ## 新しいアセットの作成
 
 PlayCanvasにアセットをアップロードするには、以下の手順に従ってください。
@@ -41,6 +43,6 @@ PlayCanvasにアセットをアップロードするには、以下の手順に�
 
 最後に、モデルおよび/またはアニメーションファイルを再インポートします。ドラッグアンドドロップまたは「アップロード」メニューオプションを使用して、GLBアセットを作成します。
 
-<img loading="lazy" src="/img/user-manual/assets/importing/drag-and-drop.gif" alt="Drag and drop file" />
+<StepVideo src="/video/user-manual/assets/importing/drag-and-drop.mp4" poster="/img/user-manual/assets/importing/drag-and-drop.webp" label="Drag and drop file" width={800} height={298} />
 
 作成されたGLBアセットは、既存のJSONアセットの代わりにエンティティに参照されることができます。

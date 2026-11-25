@@ -3,6 +3,8 @@ title: テクスチャ圧縮
 description: Basis テクスチャ圧縮と Editor でのランタイムトランスコードで VRAM とダウンロードサイズを削減します。
 ---
 
+import StepVideo from '@site/src/components/StepVideo';
+
 テクスチャデータは、デバイスのビデオメモリ(またはVRAM)に格納されます。ブラウザタブのクラッシュなど、望ましくないことが発生しないように、アプリケーションが VRAM を使い果たさないようにすることが重要です。
 
 エディタには、テクスチャに対して Basis を使用して、損失がある圧縮スキームを適用して VRAM 使用量を劇的に減らす機能があります。
@@ -40,7 +42,7 @@ description: Basis テクスチャ圧縮と Editor でのランタイムトラ�
 5. ファイルサイズと品質のバランスを取るために、品質設定を変更します。品質を下げると、より小さなファイルサイズになります。
 6. Compress Basis をクリックします。
 
-<img loading="lazy" src="/img/user-manual/assets/textures/texture-compression/enable-basis-texture-compression.gif" alt="Enabling Basis Texture Compression" width="400" />
+<StepVideo src="/video/user-manual/assets/textures/texture-compression/enable-basis-texture-compression.mp4" poster="/img/user-manual/assets/textures/texture-compression/enable-basis-texture-compression.webp" label="Enabling Basis Texture Compression" width={400} height={285} />
 
 BasisのWASMモジュールは、プリロードダウンロードサイズに追加で253KBのgzip圧縮データを追加しますが、それはレガシーのテクスチャ圧縮フォーマットのファイルを使用する場合と比較してテクスチャサイズの節約によって相殺されるはずです（[下記参照](#legacy-texture-compression)）。
 
@@ -49,7 +51,7 @@ BasisのWASMモジュールは、プリロードダウンロードサイズに�
 1. BASIS のチェックを外します。
 2. Compress Basis をクリックします。
 
-<img loading="lazy" src="/img/user-manual/assets/textures/texture-compression/disable-basis-texture-compression.gif" alt="Disabling Basis Texture Compression" width="400" />
+<StepVideo src="/video/user-manual/assets/textures/texture-compression/disable-basis-texture-compression.mp4" poster="/img/user-manual/assets/textures/texture-compression/disable-basis-texture-compression.webp" label="Disabling Basis Texture Compression" width={400} height={222} />
 
 もう Basis を使用しない場合は、すべてのテクスチャから Basis 圧縮を削除し、プロジェクトから Basis フォルダを削除してください。
 
@@ -78,14 +80,14 @@ Legacy Texture Compression オプションを使用するには、テクスチ�
 2. 使いたいすべてのフォーマットをチェックします。
 3. Compress Legacy をクリックします。
 
-<img loading="lazy" src="/img/user-manual/assets/textures/texture-compression/enable-legacy-texture-compression.gif" alt="Enabling Legacy Texture Compression" width="400" />
+<StepVideo src="/video/user-manual/assets/textures/texture-compression/enable-legacy-texture-compression.mp4" poster="/img/user-manual/assets/textures/texture-compression/enable-legacy-texture-compression.webp" label="Enabling Legacy Texture Compression" width={400} height={311} />
 
 フォーマットを1つまたは複数削除するには:
 
 1. 削除したいすべてのフォーマットのチェックを外します。
 2. Compress Legacy をクリックします。
 
-<img loading="lazy" src="/img/user-manual/assets/textures/texture-compression/disable-legacy-texture-compression.gif" alt="Disabling Legacy Texture Compression" width="400" />
+<StepVideo src="/video/user-manual/assets/textures/texture-compression/disable-legacy-texture-compression.mp4" poster="/img/user-manual/assets/textures/texture-compression/disable-legacy-texture-compression.webp" label="Disabling Legacy Texture Compression" width={400} height={311} />
 
 ## Legacy テクスチャ圧縮から Basis テクスチャ圧縮への移行 {#migrating-from-legacy-to-basis-texture-compression}
 
@@ -94,4 +96,4 @@ Legacy Texture Compression オプションを使用するには、テクスチ�
 1. すべての Legacy テクスチャフォーマットを削除します。
 2. Basis を有効にして使用します。
 
-<img loading="lazy" src="/img/user-manual/assets/textures/texture-compression/migrate-legacy-to-basis.gif" alt="Migrate from Legacy to Basis" width="400" />
+<StepVideo src="/video/user-manual/assets/textures/texture-compression/migrate-legacy-to-basis.mp4" poster="/img/user-manual/assets/textures/texture-compression/migrate-legacy-to-basis.webp" label="Migrate from Legacy to Basis" width={400} height={482} />

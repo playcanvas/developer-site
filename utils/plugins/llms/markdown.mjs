@@ -362,6 +362,11 @@ function renderElement(node, ctx) {
             const src = stringAttribute(node, 'src');
             return src ? `[Video](${resolveUrl(src, ctx)})` : '';
         }
+        case 'StepVideo': {
+            const src = stringAttribute(node, 'src');
+            const label = stringAttribute(node, 'label');
+            return src ? `[${label ? `Video: ${label}` : 'Video'}](${resolveUrl(src, ctx)})` : '';
+        }
         case 'iframe':
             return renderIframe(node, ctx);
         case 'div': {

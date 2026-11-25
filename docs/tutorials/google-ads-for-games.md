@@ -9,6 +9,7 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/8890
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import StepVideo from '@site/src/components/StepVideo';
 
 Links for this tutorial:
 
@@ -26,13 +27,13 @@ Interstitial Ads that can appear between sessions of play such as going from 'ga
 
 In our [Flappy Bird example](https://playcanvas.com/project/877568/overview/google-h5-ads-demo), we have the ads show after the player dies and return to the main menu to play again.
 
-![](/img/tutorials/google-afg/flappy-bird-demo-interstitial-ad.gif)
+<StepVideo src="/video/tutorials/google-afg/flappy-bird-demo-interstitial-ad.mp4" poster="/img/tutorials/google-afg/flappy-bird-demo-interstitial-ad.webp" width={933} height={480} />
 
 The second form are Rewarded Ads that the player can choose to play in order to get a 'reward' such as coins or being able to continue playing. These are considered to be effective as they give players the option to watch an ad rather than being forced to and they also get an immediate in-game reward.
 
 In our example, we use rewarded ads to allow the user to continue after dying which tends to be a strong incentive for users to watch an ad.
 
-![](/img/tutorials/google-afg/flappy-bird-demo-rewarded-ad.gif)
+<StepVideo src="/video/tutorials/google-afg/flappy-bird-demo-rewarded-ad.mp4" poster="/img/tutorials/google-afg/flappy-bird-demo-rewarded-ad.webp" width={933} height={480} />
 
 For the tutorial we are going to fork the [Google H5 Ad Tutorial (Start)](https://playcanvas.com/project/889095/overview/google-h5-ad-tutorial-start) project and add the ad SDK library and functionality bit by bit.
 
@@ -117,11 +118,11 @@ UiController.prototype.initialize = function() {
 
 The first step is to add the Google SDK integration files which we can do by copying the folder 'Google H5 Games Ads' from the [Flappy Bird project](https://playcanvas.com/project/877568/overview/google-h5-ads-demo).
 
-![](/img/tutorials/google-afg/copy-afg-folder.gif)
+<StepVideo src="/video/tutorials/google-afg/copy-afg-folder.mp4" poster="/img/tutorials/google-afg/copy-afg-folder.webp" width={1516} height={638} />
 
 And pasting into our fork of the tutorial project.
 
-![](/img/tutorials/google-afg/paste-afg-folder.gif)
+<StepVideo src="/video/tutorials/google-afg/paste-afg-folder.mp4" poster="/img/tutorials/google-afg/paste-afg-folder.webp" width={1516} height={638} />
 
 Let's take a look inside:
 
@@ -271,7 +272,7 @@ As you can see, we use our helper functions `onBeforeAd` and `onAfterAd` in the 
 
 Now lets see it in action!
 
-![](/img/tutorials/google-afg/tutorial-interstitial-ad.gif)
+<StepVideo src="/video/tutorials/google-afg/tutorial-interstitial-ad.mp4" poster="/img/tutorials/google-afg/tutorial-interstitial-ad.webp" width={899} height={480} />
 
 It is intended to always call `adBreak` when it is intended in the game to show an interstitial as the Google SDK controls the logic of when to show the ad itself including the ad frequency hint that we set in afg-integration.js earlier.
 
@@ -409,7 +410,7 @@ First we check that we have the function from the SDK to show the ad first and i
 
 Let's see it in action:
 
-![](/img/tutorials/google-afg/tutorial-rewarded-ad.gif)
+<StepVideo src="/video/tutorials/google-afg/tutorial-rewarded-ad.mp4" poster="/img/tutorials/google-afg/tutorial-rewarded-ad.webp" width={899} height={480} />
 
 The completed `ui-controller.js` file should look like this:
 

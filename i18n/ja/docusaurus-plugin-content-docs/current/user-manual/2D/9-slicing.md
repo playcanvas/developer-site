@@ -3,6 +3,8 @@ title: 9スライス
 description: テクスチャアトラスのフレームで定義した9スライス境界で、角が歪まないようボタンやパネルをスケールします。
 ---
 
+import StepVideo from '@site/src/components/StepVideo';
+
 9スライス(9-slicing、9パッチとも呼ばれます)は、2Dグラフィックスにおいて、1つの画像を9つの領域に分割し、異なるサイズやアスペクト比で画像を表示する際に引き伸ばされるのを防ぐために、各領域を個別にスケーリングする技術です。
 
 ![9 Sliced Button](/img/user-manual/2D/9-slicing/9-sliced-labelled.jpg)
@@ -14,7 +16,7 @@ description: テクスチャアトラスのフレームで定義した9スライ
 * **Left, Right** - 垂直方向のみストレッチまたはタイル表示
 * **TopLeft, TopRight, BottomLeft, BottomRight** - 拡大または縮小しない
 
-![Button Resize Animation](/img/user-manual/2D/9-slicing/button-resize.gif)
+<StepVideo src="/video/user-manual/2D/9-slicing/button-resize.mp4" poster="/img/user-manual/2D/9-slicing/button-resize.webp" label="Button Resize Animation" width={480} height={240} />
 
 ## 9スライスの設定
 
@@ -30,18 +32,18 @@ Spriteアセットには、3つの描画モードがあります。
 
 ### シンプルスプライト (Simple Sprites)
 
-![Simple Render Mode](/img/user-manual/2D/9-slicing/simple-resize.gif)
+<StepVideo src="/video/user-manual/2D/9-slicing/simple-resize.mp4" poster="/img/user-manual/2D/9-slicing/simple-resize.webp" label="Simple Render Mode" width={480} height={240} />
 
 *Simple* 描画モードには9スライスはありません。このモードは通常のスプライトに使用します。
 
 ### スライススプライト (Sliced Sprites)
 
-![Sliced Render Mode](/img/user-manual/2D/9-slicing/sliced-resize.gif)
+<StepVideo src="/video/user-manual/2D/9-slicing/sliced-resize.mp4" poster="/img/user-manual/2D/9-slicing/sliced-resize.webp" label="Sliced Render Mode" width={480} height={240} />
 
 *Sliced* 描画モードでは、画像の一部が伸びます。中心は水平および垂直に伸び、左右のセクションは垂直に伸び、上下のセクションは水平に伸び、角は全く伸びません。
 
 ### タイルスプライト (Tiled Sprite)
 
-![Tiled Render Mode](/img/user-manual/2D/9-slicing/tiled-resize.gif)
+<StepVideo src="/video/user-manual/2D/9-slicing/tiled-resize.mp4" poster="/img/user-manual/2D/9-slicing/tiled-resize.webp" label="Tiled Render Mode" width={480} height={240} />
 
 *Tiled* 描画モードは *Sliced*に似ていますが、セクションが伸びる代わりに、タイル状に繰り返します。中心は水平および垂直にタイル状になり、左右は垂直にタイル状になり、上下は水平にタイル状になり、角は全くタイル状になりません。

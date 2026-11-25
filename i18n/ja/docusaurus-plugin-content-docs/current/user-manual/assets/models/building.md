@@ -3,6 +3,8 @@ title: モデルの構築
 description: 推奨の GLB 形式を用いて、Blender、Maya、3DS Max などのツールで PlayCanvas 向けの 3D モデルを作成します。
 ---
 
+import StepVideo from '@site/src/components/StepVideo';
+
 PlayCanvasではアートやアニメーションの構築は、ほとんど全ての利用可能な3Dモデリングプログラムを使用して行うことができます。例：Blender、SketchUp、Autodesk 3D Studio Max、Autodesk Maya。
 
 PlayCanvasは、オープンソースのglTFバイナリ（GLB）形式を介して、コンテンツを最も正確にインポートするように設計されています。したがって、一般的に、モデリングアプリケーションがGLBをサポートしていれば、PlayCanvasもサポートします。
@@ -20,7 +22,7 @@ GLBのインポートでは、以下のglTF機能がサポートされ、非常�
 
 そのため、PlayCanvasを対象とする場合、特別なアートツールプラグインを使用する必要はなく、従う必要のあるPlayCanvas固有のワークフローはありません。
 
-![GLBインポートの例](/img/user-manual/assets/models/building/glb-import.gif)  
+<StepVideo src="/video/user-manual/assets/models/building/glb-import.mp4" poster="/img/user-manual/assets/models/building/glb-import.webp" label="GLBインポートの例" width={600} height={338} />
 *Loïc NorgeotによるモデルとGeoffrey Marchalによる蚊のスキャンは、[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)ライセンスに基づき[Sketchfab](https://sketchfab.com/3d-models/real-time-refraction-demo-mosquito-in-amber-37233d6ed84844fea1ebe88069ea58d1)から提供されています*
 
 PlayCanvasは、FBXファイルのインポートもサポートしており、これはより一般的な相互運用形式の1つです。ただし、FBXのマテリアルはGLTFのマテリアルよりも忠実にはインポートされず、インポート後に編集が必要な場合があります。

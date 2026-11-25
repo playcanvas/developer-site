@@ -7,6 +7,8 @@ topic: Animation
 thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405874/A8B1FE-image-75.jpg
 ---
 
+import StepVideo from '@site/src/components/StepVideo';
+
 <div className='iframe-container'>
     <iframe src="https://playcanv.as/p/HI8kniOx/" title="Anim State Graph Blending" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
@@ -32,11 +34,11 @@ When creating an animstategraph asset, you’ll be presented with its editor:
 
 By default, the animstategraph asset creates a single animation state called ‘Initial State’ which has a default transition from the START state to it. This means when the animstategraph first begins playing, it’ll immediately begin playing the Initial State. This can be renamed to Idle which is the name of the initial animation used in this tutorial. We can then right click the canvas and select `Add new state` to create another animation state in the graph. This state can be renamed to Punch:
 
-![New State](/img/tutorials/anim_blending/new_state.gif)
+<StepVideo src="/video/tutorials/anim_blending/new_state.mp4" poster="/img/tutorials/anim_blending/new_state.webp" label="New State" width={1600} height={879} />
 
 Next we must tell the state graph how and when it should move between the Idle and Punch animation states. This is achieved by creating transitions. Right click the Idle animation and select `Add transition` from the context menu, then select the Punch animation state. This will create a transition moving from the Idle state to the Punch state.
 
-![Add Transition](/img/tutorials/anim_blending/add_transition.gif)
+<StepVideo src="/video/tutorials/anim_blending/add_transition.mp4" poster="/img/tutorials/anim_blending/add_transition.webp" label="Add Transition" width={1600} height={847} />
 
 Selecting this transition will show the transition inspector in the panel to the right. Here the duration of the transition can be set, which will determine how long the blend between the two animations should last. We’ll set this to 0.2 seconds.
 

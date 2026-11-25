@@ -3,6 +3,8 @@ title: リアルタイムコラボレーション
 description: プレゼンスアバター、プロジェクトチャット、チームメイトのカメラ視錐台、階層の選択マーカー、他ユーザーがピックしたモデルのハイライトなど、コラボレーションの UX を扱います。
 ---
 
+import StepVideo from '@site/src/components/StepVideo';
+
 リアルタイムコラボレーションは、PlayCanvas Editor の中核をなす機能です。これにより、以下のようないくつかのメリットが生まれます。
 
 * 🧑‍🤝‍🧑 複数のユーザーが共同でシーンを構築できます。
@@ -29,7 +31,7 @@ description: プレゼンスアバター、プロジェクトチャット、チ�
 
 CHAT ボタンを選択すると、チャットパネルが展開され、Editor 内にいる他のユーザーにメッセージをブロードキャストできます。
 
-![Chat](/img/user-manual/editor/realtime-collaboration/chat.gif)
+<StepVideo src="/video/user-manual/editor/realtime-collaboration/chat.mp4" poster="/img/user-manual/editor/realtime-collaboration/chat.webp" label="Chat" width={1976} height={816} />
 
 チャットメッセージのブラウザ通知は、[設定](interface/settings/editor.md)で切り替えることができます。
 
@@ -53,8 +55,8 @@ CHAT ボタンを選択すると、チャットパネルが展開され、Editor
 
 他のユーザーがどのエンティティを選択し、潜在的に編集しているかを知ることは有用です。[Hierarchy](../interface/hierarchy) には、他のユーザーによって選択されたエンティティの右側に四角いインジケーターが表示されます（ユーザーカラーに応じて陰影が付けられます）。
 
-![Selection Indicators](/img/user-manual/editor/realtime-collaboration/selection-indicators.gif)
+<StepVideo src="/video/user-manual/editor/realtime-collaboration/selection-indicators.mp4" poster="/img/user-manual/editor/realtime-collaboration/selection-indicators.webp" label="Selection Indicators" width={485} height={248} />
 
 3D モデルを持つエンティティが任意のユーザーによって選択されると、そのアウトラインが [Viewport](../interface/viewport) にレンダリングされます。
 
-![Viewport Selection](/img/user-manual/editor/realtime-collaboration/viewport-selection.gif)
+<StepVideo src="/video/user-manual/editor/realtime-collaboration/viewport-selection.mp4" poster="/img/user-manual/editor/realtime-collaboration/viewport-selection.webp" label="Viewport Selection" width={1388} height={851} />

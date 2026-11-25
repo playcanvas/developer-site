@@ -3,6 +3,8 @@ title: Uploading and Importing
 description: Upload assets via drag and drop in the Editor, replace files by matching filename, and migrate older JSON model output to GLB in project settings.
 ---
 
+import StepVideo from '@site/src/components/StepVideo';
+
 ## Creating New Assets
 
 To upload an asset to PlayCanvas, follow these steps:
@@ -41,6 +43,6 @@ Open 'Asset Import' and tick 'Convert to GLB'.
 
 And finally reimport the model and/or animation file (via drag and drop or the 'Upload' menu option) to create the GLB asset.
 
-<img loading="lazy" src="/img/user-manual/assets/importing/drag-and-drop.gif" alt="Drag and drop file" />
+<StepVideo src="/video/user-manual/assets/importing/drag-and-drop.mp4" poster="/img/user-manual/assets/importing/drag-and-drop.webp" label="Drag and drop file" width={800} height={298} />
 
 Once created, this can be referenced to Entities in place of the existing JSON asset.

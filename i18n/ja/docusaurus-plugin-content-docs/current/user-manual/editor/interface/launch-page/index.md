@@ -3,6 +3,8 @@ title: 起動ページ
 description: Launch Page の基本。Launch メニューのデバイス、プロファイラー、デバッグ、MiniStats、Inspector の各オプション、Editor のライブリンクで更新される内容と再読み込みが必要な変更、2 タブでのテストのコツ、スマートフォンでの実行方法です。
 ---
 
+import StepVideo from '@site/src/components/StepVideo';
+
 エディターのビューポートは、アプリケーションを視覚的に構築する場所です。そこから「起動」ボタンを押すと、起動ページが開き、実際にアプリケーションを*実行*できます。
 
 ![起動ボタン](/img/user-manual/editor/launch-page/launch-button.png)
@@ -43,7 +45,7 @@ description: Launch Page の基本。Launch メニューのデバイス、プロ
 - **アセット**: マテリアルの編集やテクスチャの置き換えなどの変更。
 - **設定**: 重力、スカイボックス、フォグ、露出などのシーン設定と、解像度、レイヤー、バッチグループ、ローカライズ用アセットなどのプロジェクト設定。
 
-![起動ページのライブリンク](/img/user-manual/editor/launch-page/launch-page-live-link.gif)
+<StepVideo src="/video/user-manual/editor/launch-page/launch-page-live-link.mp4" poster="/img/user-manual/editor/launch-page/launch-page-live-link.webp" label="起動ページのライブリンク" width={1799} height={1001} />
 
 また、他のユーザー（書き込み権限を持つ）があなたと一緒にエディターにいる場合、彼らの編集もあなたの起動ページを更新することができます。
 

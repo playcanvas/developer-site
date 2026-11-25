@@ -3,6 +3,8 @@ title: Optimizing Load Time
 description: Speed up startup with image formats, texture sizes, preload choices, asset audits, gzip, and staged loading.
 ---
 
+import StepVideo from '@site/src/components/StepVideo';
+
 Optimizing isn't just related to improving frame rate. Fast load times are also critical. The faster your app loads, the more likely your users will stick around to experience it. Aim to have your app load in less than 5 seconds to prevent users from churning.
 
 Here are some tips to achieve super-fast load times:
@@ -37,7 +39,7 @@ When the Title Screen is active, the game starts background loading the assets t
 
 However, if the user presses the start button before the assets have finished loading, a progress bar will appear on the button instead. Once it reaches 100%, the game will automatically transition to the Main Game.
 
-![Virtual Voodoo Assets Not Ready](/img/user-manual/optimization/loading/virtual-voodoo-assets-not-ready.gif)
+<StepVideo src="/video/user-manual/optimization/loading/virtual-voodoo-assets-not-ready.mp4" poster="/img/user-manual/optimization/loading/virtual-voodoo-assets-not-ready.webp" label="Virtual Voodoo Assets Not Ready" width={862} height={480} />
 
 With the assets being loaded in phases and giving something new for the user to interact with and/or look at periodically, the user stays engaged despite a long loading time.
 
@@ -49,4 +51,4 @@ If the game allows, using common placeholders while the more detailed assets are
 
 An example below is using a silhouette of a character as the placeholder until it has fully loaded. The silhouette placeholder is small in file size so it can be part of a preload sequence and also can be reused for other characters in the application.
 
-![Lazy Load Character](/img/user-manual/optimization/loading/character-load.gif)
+<StepVideo src="/video/user-manual/optimization/loading/character-load.mp4" poster="/img/user-manual/optimization/loading/character-load.webp" label="Lazy Load Character" width={444} height={360} />

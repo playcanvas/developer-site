@@ -7,6 +7,7 @@ description: Anim State Graph でアニメーションクリップをブレン�
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import StepVideo from '@site/src/components/StepVideo';
 
 <div className='iframe-container'>
     <iframe src="https://playcanv.as/p/HI8kniOx/" title="Anim State Graph Blending" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
@@ -33,11 +34,11 @@ animstategraphアセットを作成すると、エディタが表示されます
 
 デフォルトでは、animstategraphアセットは ‘Initial State’ という名前の単一のアニメーション状態を作成し、開始状態からデフォルトのトランジションが作成されます。つまり、animstategraphが最初に再生されたときには、即座に「Initial State」が再生されます。この「Initial State」の名前を、このチュートリアルで使用される初期アニメーションである「Idle」に変更することができます。次に、キャンバス上で右クリックし、`Add new state`を選択して、グラフに別のアニメーション状態を作成することができます。この状態の名前は「Punch」と変更することができます。
 
-![New State](/img/tutorials/anim_blending/new_state.gif)
+<StepVideo src="/video/tutorials/anim_blending/new_state.mp4" poster="/img/tutorials/anim_blending/new_state.webp" label="New State" width={1600} height={879} />
 
 次に、ステートグラフに、IdleとPunchのアニメーションステート間での移行方法とタイミングを指定する必要があります。これはトランジションを作成することで実現します。Idleアニメーションを右クリックし、コンテキストメニューから `Add transition` を選択し、次にPunchアニメーションステートを選択します。これにより、IdleステートからPunchステートへの移行するトランジションが作成されます。
 
-![Add Transition](/img/tutorials/anim_blending/add_transition.gif)
+<StepVideo src="/video/tutorials/anim_blending/add_transition.mp4" poster="/img/tutorials/anim_blending/add_transition.webp" label="Add Transition" width={1600} height={847} />
 
 このトランジションを選択すると、右側のパネルにトランジションインスペクターが表示されます。ここでは、トランジションの持続時間を設定することができます。これは、2つのアニメーション間のブレンドがどれくらいの時間続くかを決定します。この持続時間を0.2秒に設定します。
 

@@ -3,6 +3,8 @@ title: Graph View
 description: 展開可能なチェックポイントグラフでノードを比較し、復元、ハードリセット、バージョン履歴からのメタデータのコピーを扱います。
 ---
 
+import StepVideo from '@site/src/components/StepVideo';
+
 ## 概要
 
 バージョンコントロールグラフ (Version Control Graph) は、PlayCanvasプロジェクトのブランチの進捗状況やマージ履歴を追跡することが容易になります。
@@ -39,7 +41,7 @@ description: 展開可能なチェックポイントグラフでノードを比�
 
 - **選択の比較 (Compare with Selected)** - 現在のノードと、 'Select for Compare'を通じてマークされたノードとの間にDiff Viewを起動します。
 
-![](/img/user-manual/editor/version-control/graph-view/compare-checkpoints-example.gif)
+<StepVideo src="/video/user-manual/editor/version-control/graph-view/compare-checkpoints-example.mp4" poster="/img/user-manual/editor/version-control/graph-view/compare-checkpoints-example.webp" width={3182} height={1588} />
 
 - **新しいブランチ (New Branch)** - 選択したチェックポイントから新しいブランチを作成します。 ([詳細](/user-manual/editor/version-control/branches/#creating-a-new-branch))
 
@@ -57,7 +59,7 @@ description: 展開可能なチェックポイントグラフでノードを比�
 
 ノードの右上隅にある三角形は、追加の入力または出力エッジ(ブランチやマージなど)を持っていることを意味し、 'ノードの展開'コンテキストメニューエントリを介して展開できます。
 
-![](/img/user-manual/editor/version-control/graph-view/node-expand-example.gif)
+<StepVideo src="/video/user-manual/editor/version-control/graph-view/node-expand-example.mp4" poster="/img/user-manual/editor/version-control/graph-view/node-expand-example.webp" width={1770} height={728} />
 
 ## クローズされたブランチ
 

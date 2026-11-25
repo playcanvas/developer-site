@@ -5,6 +5,7 @@ description: Enable real-time shadows, choose a shadow type (PCF, VSM, or PCSS),
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import StepVideo from '@site/src/components/StepVideo';
 
 Shadows ground the objects in your scene, conveying depth and the spatial relationships between them while adding realism and visual polish.
 
@@ -317,7 +318,7 @@ See it in action in the engine's shadow bounds example, which compares the shado
 
 The intensity of the shadow (`light.shadowIntensity`), where 1 represents full intensity shadow cast by this light, and 0 represents no shadow.
 
-![Shadow Intensity](/img/user-manual/graphics/lighting/shadows/shadow-intensity.gif)
+<StepVideo src="/video/user-manual/graphics/lighting/shadows/shadow-intensity.mp4" poster="/img/user-manual/graphics/lighting/shadows/shadow-intensity.webp" label="Shadow Intensity" width={1280} height={720} />
 
 ## Fixing Shadow Artifacts {#fixing-shadow-artifacts}
 

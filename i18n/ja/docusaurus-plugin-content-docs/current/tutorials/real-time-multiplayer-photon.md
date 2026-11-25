@@ -7,6 +7,7 @@ description: Photon のネットワークを統合し、PlayCanvas の HTML5 ク
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import StepVideo from '@site/src/components/StepVideo';
 
 <div className="iframe-container">
     <iframe src="https://playcanv.as/e/p/dvJYXs1Y/" title="Real-time Multiplayer with Photon - including matchmaking" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
@@ -839,7 +840,7 @@ Player.prototype.update = function (dt) {
 
 Photonを使用してマルチプレイヤーをプレイできるようになりました！
 
-![Project](/img/tutorials/multiplayer-photon/16.gif)
+<StepVideo src="/video/tutorials/multiplayer-photon/16.mp4" poster="/img/tutorials/multiplayer-photon/16.webp" label="Project" width={640} height={360} />
 
 Photonを使ってルームを作成し、プレイヤーの位置を同期できます。
 

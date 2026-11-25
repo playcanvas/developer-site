@@ -3,6 +3,8 @@ title: ブランチ
 description: main ブランチ、現在のブランチ、作成、お気に入り、検索、閉じる、削除、ブランチラインに対する共同編集者の想定をまとめます。
 ---
 
+import StepVideo from '@site/src/components/StepVideo';
+
 ブランチは独立した開発ラインです。作成されたすべてのチェックポイントはブランチに所属し、ブランチ内の一連のチェックポイントはアプリケーションの開発または特定の機能の開発を追跡することができます。PlayCanvasのプロジェクトには、常に最低1つのブランチ、つまりメインブランチが存在し、しばしば複数のブランチが存在します。エディタのバージョンコントロールパネルを使用して、一つのブランチからの変更を任意の他のブランチにマージすることができます。
 
 ## メインブランチ {#main-branch}
@@ -27,7 +29,7 @@ description: main ブランチ、現在のブランチ、作成、お気に入�
 
 ## ブランチリストのフィルタリング {#filtering-branch-list}
 
-![Branch filter](/img/user-manual/editor/version-control/branches/filter-branches.gif)
+<StepVideo src="/video/user-manual/editor/version-control/branches/filter-branches.mp4" poster="/img/user-manual/editor/version-control/branches/filter-branches.webp" label="Branch filter" width={1265} height={720} />
 
 次の方法で分岐をフィルタリングできます。
 
@@ -39,15 +41,15 @@ description: main ブランチ、現在のブランチ、作成、お気に入�
 
 ### ドロップダウンメニュー {#drop-down-menu}
 
-![Favorite a branch via menu](/img/user-manual/editor/version-control/branches/favorite-branch-via-dropdown.gif)
+<StepVideo src="/video/user-manual/editor/version-control/branches/favorite-branch-via-dropdown.mp4" poster="/img/user-manual/editor/version-control/branches/favorite-branch-via-dropdown.webp" label="Favorite a branch via menu" width={1265} height={720} />
 
 ### 選択されたブランチボタン {#selected-branch-button}
 
-![Favorite a branch via button](/img/user-manual/editor/version-control/branches/favorite-branch-via-button.gif)
+<StepVideo src="/video/user-manual/editor/version-control/branches/favorite-branch-via-button.mp4" poster="/img/user-manual/editor/version-control/branches/favorite-branch-via-button.webp" label="Favorite a branch via button" width={1265} height={720} />
 
 ## ブランチの検索 {#searching-for-a-branch}
 
-![Searching for a branch](/img/user-manual/editor/version-control/branches/search-for-a-branch.gif)
+<StepVideo src="/video/user-manual/editor/version-control/branches/search-for-a-branch.mp4" poster="/img/user-manual/editor/version-control/branches/search-for-a-branch.webp" label="Searching for a branch" width={1275} height={720} />
 
 現在のブランチリストで特定のブランチを探すためには、上部の検索バーを使用すると便利です。
 
