@@ -40,15 +40,15 @@ Create a new project from the **Blank Project** kit and open it in the Editor. I
 Every other part of the level is a copy of the floor with a different size.
 
 1. With **Floor** selected, select the **Duplicate Entity** button at the top of the Hierarchy. The copy is selected and is also called Floor.
-2. Change the copy's **Name** to `Wall North`, its **Position** to `0`, `1.5`, `-10.5` and its **Scale** to `22`, `3`, `1`.
-3. In its Collision component, set **Half Extents** to `11`, `1.5`, `0.5`.
+2. Change the copy's **Name** to `Wall North`, its **Position** to `0`, `2.5`, `-10.5` and its **Scale** to `22`, `5`, `1`. The walls are five units high so that the player cannot jump over them, even from the top of a step.
+3. In its Collision component, set **Half Extents** to `11`, `2.5`, `0.5`.
 4. Select **Duplicate Entity** three more times. There are now four Entities called Wall North in the same place. Leave one as it is and give the other three these values:
 
     | Name | Position | Rotation |
     | --- | --- | --- |
-    | `Wall South` | `0`, `1.5`, `10.5` | `0`, `0`, `0` |
-    | `Wall East` | `10.5`, `1.5`, `0` | `0`, `90`, `0` |
-    | `Wall West` | `-10.5`, `1.5`, `0` | `0`, `90`, `0` |
+    | `Wall South` | `0`, `2.5`, `10.5` | `0`, `0`, `0` |
+    | `Wall East` | `10.5`, `2.5`, `0` | `0`, `90`, `0` |
+    | `Wall West` | `-10.5`, `2.5`, `0` | `0`, `90`, `0` |
 
 A Collision component does follow the Entity's rotation, so the two turned walls need no other change.
 
@@ -388,7 +388,7 @@ Select **Player** and change the script's attributes. You can do it while the pr
 | **Look Speed** | `0.25` | Degrees turned for each pixel the mouse moves. Lower is steadier, higher is twitchier. |
 | **Speed** | `5` | Top speed, in units per second. A brisk walk is about 2 and a sprint about 8. |
 | **Acceleration** | `10` | How fast the gap to the wanted velocity closes. At `10` the player is close to top speed in a third of a second. At `2` it feels like ice. |
-| **Jump Speed** | `5.5` | Upward speed at take-off. The height of the jump is the speed squared, divided by twice the gravity: 5.5 gives about 1.5 units, enough for a step that is 1 high. |
+| **Jump Speed** | `5.5` | Upward speed at take-off. The height of the jump is the speed squared, divided by twice the gravity: 5.5 gives about 1.5 units, enough for a step that is 1 high. Above about 7, a jump from the high step clears the walls. |
 
 Two values on the Player's Rigid Body matter as well. **Mass** decides how the player and the crates push each other: set it to `1` and a crate almost stops you. **Friction** above zero lets the player cling to a wall by walking into it in mid-air.
 
