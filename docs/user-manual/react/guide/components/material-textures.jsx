@@ -5,22 +5,22 @@ import { useControls } from 'leva';
 
 const textures = {
     'Granite': {
-        diffuse: '/assets/materials/granite/albedo.png',
-        normal: '/assets/materials/granite/normal.png',
-        roughness: '/assets/materials/granite/roughness.png',
-        ao: '/assets/materials/granite/ao.png'
+        diffuse: '/assets/materials/granite/albedo.webp',
+        normal: '/assets/materials/granite/normal.webp',
+        roughness: '/assets/materials/granite/roughness.webp',
+        ao: '/assets/materials/granite/ao.webp'
     },
     'Paint': {
-        diffuse: '/assets/materials/paint/albedo.png',
-        normal: '/assets/materials/paint/normal.png',
-        roughness: '/assets/materials/paint/roughness.png',
-        ao: '/assets/materials/paint/ao.png'
+        diffuse: '/assets/materials/paint/albedo.webp',
+        normal: '/assets/materials/paint/normal.webp',
+        roughness: '/assets/materials/paint/roughness.webp',
+        ao: '/assets/materials/paint/ao.webp'
     },
     'Concrete': {
-        diffuse: '/assets/materials/concrete/albedo.png',
-        normal: '/assets/materials/concrete/normal.png',
-        roughness: '/assets/materials/concrete/roughness.png',
-        ao: '/assets/materials/concrete/ao.png'
+        diffuse: '/assets/materials/concrete/albedo.webp',
+        normal: '/assets/materials/concrete/normal.webp',
+        roughness: '/assets/materials/concrete/roughness.webp',
+        ao: '/assets/materials/concrete/ao.webp'
     }
 };
 
