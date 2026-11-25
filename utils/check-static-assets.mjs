@@ -45,8 +45,8 @@ const LARGE_IMAGES = {
 
 // Files no tracked text file names by path, relative to static/, with why they stay
 const KEEP = {
-    'CNAME': 'GitHub Pages custom domain',
-    '.nojekyll': 'stops GitHub Pages running Jekyll',
+    'CNAME': 'GitHub Pages custom domain (kept so a branch deploy would still work)',
+    '.nojekyll': 'stops GitHub Pages running Jekyll on a branch deploy',
     'user-manual/context7.json': 'claims the site on context7.com',
     'assets/audio-credits.txt': 'provenance of the generated audio in assets/',
     'assets/fonts/arial.png': 'atlas loaded beside arial.json',

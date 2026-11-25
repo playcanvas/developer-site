@@ -33,7 +33,7 @@ const config = {
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
 
-  // GitHub Pages deployment config (used by docusaurus deploy and the gh-pages workflow).
+  // The GitHub repository. The site deploys from .github/workflows/deploy.yml, not `docusaurus deploy`.
   organizationName: 'playcanvas',
   projectName: 'developer-site',
 
