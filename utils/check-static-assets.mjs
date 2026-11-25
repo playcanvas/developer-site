@@ -38,7 +38,9 @@ const LARGE_IMAGES = {
     'img/user-manual/assets/textures/texture-compression/basis-vs-no-compression-cube.webp':
         'lossless on purpose: readers zoom in to compare compression artefacts',
     'assets/materials/concrete/normal.webp': 'normal map, near-lossless so lighting stays smooth',
-    'assets/materials/granite/normal.webp': 'normal map, near-lossless so lighting stays smooth'
+    'assets/materials/granite/normal.webp': 'normal map, near-lossless so lighting stays smooth',
+    'assets/museum-rgbp.webp': '4096 x 2048 RGBP environment map, sharp enough for a full-screen skybox',
+    'assets/wide-street-rgbp.webp': '4096 x 2048 RGBP environment map, sharp enough for a full-screen skybox'
 };
 
 // Files no tracked text file names by path, relative to static/, with why they stay

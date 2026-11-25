@@ -7,10 +7,10 @@ const vars = {
     exposure: { value: 0.75, min: 0, max: 1 }, 
     environment: {
         options: {
-        Street:'/assets/wide-street.hdr', 
-        ['Aviation Museum']:'/assets/museum.hdr'
+        Street:'/assets/wide-street-rgbp.webp',
+        ['Aviation Museum']:'/assets/museum-rgbp.webp'
         },
-        value: '/assets/wide-street.hdr'
+        value: '/assets/wide-street-rgbp.webp'
     } 
 }
 // ↑ imports hidden
@@ -20,7 +20,8 @@ export const EnvironmentExample = () => {
     
     // Load the assets
     const { asset: lambo } = useModel('/assets/lambo.glb');
-    const { asset: skybox } = useTexture(environment);
+    // The environments are RGBP-encoded WebP: HDR, at a fraction of the size of a .hdr file
+    const { asset: skybox } = useTexture(environment, { data: { type: 'rgbp', mipmaps: false } });
     
     if (!lambo || !skybox) return null;
 
