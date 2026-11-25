@@ -422,8 +422,16 @@ Some things to try:
 
 - Give each player a name or a color, chosen by the server and sent in `playerData`.
 - Send positions at most 20 times a second, and move the other capsules smoothly between updates.
-- Add physics to the other players so that capsules can push each other.
+- Have the server check each `positionUpdate` and ignore one that is further from the last position than a player could have moved. A player who falls off the ground moves faster than one who walks, then jumps back to the middle, so allow for both.
 
-This project trusts every client to report its own position, which makes cheating easy. Larger games run the game itself on the server, known as an authoritative server, and send clients only the results.
+### Where the game runs {#where-the-game-runs}
+
+In this project, each browser runs the physics for its own player and tells the server where that player is. The server passes the positions on without checking them. This keeps the server small and makes the player respond to the keys at once, and it is enough for a game where players cooperate or nothing is at stake. It has three costs:
+
+- **Cheating is easy.** The server believes any position a client sends.
+- **Players pass through each other.** Each browser simulates its own capsule and only draws the others. Adding a Rigid Body to the others is not a full fix: each browser would still work out every collision on its own, and a capsule that appears inside your player throws it across the scene.
+- **Nothing can be shared.** A ball that two players push would end up in a different place in each window.
+
+A game that cannot accept these costs runs the game itself on the server, known as an authoritative server. Each client sends its key presses, and the server runs the physics for every player and sends back the results. The server then needs a physics engine of its own, and each client has to predict its own movement to hide the delay, so this is a much larger project.
 
 You do not have to write all of this yourself. To build on a multiplayer framework or a hosted service instead, see [Real-time Multiplayer with Colyseus](/tutorials/real-time-multiplayer-colyseus/) and [Real-time Multiplayer with Photon](/tutorials/real-time-multiplayer-photon/).
