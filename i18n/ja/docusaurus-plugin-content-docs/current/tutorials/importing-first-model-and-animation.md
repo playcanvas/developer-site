@@ -1,130 +1,147 @@
 ---
 title: 最初のモデルとアニメーションのインポート方法
 tags: [animation,basics]
-thumb: /img/tutorials/importing-first-model-and-animation/thumbnail.jpg
-description: リグ付きキャラクターをインポートし、Animation Component を設定し、パッケージされたサンプル Asset のクリップを再生します。
+thumb: /img/tutorials/importing-first-model-and-animation/thumbnail.webp
+description: 無料のリグ付きキャラクターをエディターにインポートしてシーンに追加し、Anim コンポーネントでループする走りのアニメーションを再生します。
 ---
 
 import StepVideo from '@site/src/components/StepVideo';
 
-<div className="iframe-container">
-    <iframe src="https://www.youtube.com/embed/r0LYQw7laRA" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
+このチュートリアルでは、リグ付きのキャラクターとそのアニメーションを PlayCanvas エディターにインポートし、キャラクターをシーンに追加して、その場で走らせます。完成するとこのようになります。
 
-## 概要
+<StepVideo src="/video/tutorials/importing-first-model-and-animation/preview.mp4" poster="/img/tutorials/importing-first-model-and-animation/preview.webp" width={960} height={540} label="起動したシーンでその場で走る Knight キャラクター" />
 
-このチュートリアルでは、最初のアニメーションモデルをプロジェクトに追加する方法を説明します。
+:::info[始める前に]
 
-<StepVideo src="/video/tutorials/importing-first-model-and-animation/preview.mp4" poster="/img/tutorials/importing-first-model-and-animation/preview.webp" width={932} height={480} />
+無料の [PlayCanvas アカウント](https://login.playcanvas.com/signup)が必要です。[初めてのアプリ](/user-manual/editor/getting-started/your-first-app/#create-a-project)と同じように **Blank Project** スターターキットから新しいプロジェクトを作成し、エディターで開きます。次に、キャラクターが隠れないように、Hierarchy で **Box** エンティティを選択して <kbd>Delete</kbd> を押します。
 
-## サンプルアセットの入手
+:::
 
-[Kenney Animated Characters アセットパック](https://www.kenney.nl/assets/animated-characters-1)を使用します。
+## サンプルアセットの入手 {#getting-the-example-assets}
 
-![](/img/tutorials/importing-first-model-and-animation/kenney-site.jpg)
+このチュートリアルでは、Kay Lousberg による [KayKit Character Pack: Adventurers](https://kaylousberg.itch.io/kaykit-adventurers) を使用します。無料版はパブリックドメインのライセンスである [CC0](https://creativecommons.org/publicdomain/zero/1.0/) で公開されているため、クレジットを表記せずにどのプロジェクトでも使用できます。
 
-ダウンロードして解凍したら、内容を確認しましょう。
+1. パックのページで **Download Now** を選択します。
+2. このパックは価格を自分で決められます。無料でダウンロードするには、 **No thanks, just take me to the downloads** を選択します。
+3. **Free** 版の `KayKit_Adventurers_2.0_FREE.zip` をダウンロードします。
 
-モデルとアニメーションのファイルを分離しているため、使いやすいです。
+ファイルを解凍します。パックには複数の形式が含まれています。このチュートリアルでは、`gltf` フォルダーにある glTF バイナリ (`.glb`) ファイルを使用します。これは [PlayCanvas が推奨する形式](/user-manual/assets/supported-formats/)です。
 
-![](/img/tutorials/importing-first-model-and-animation/asset-pack-contents.png)
+```none
+KayKit_Adventurers_2.0_FREE/
+├── Characters/
+│   └── gltf/
+│       ├── Barbarian.glb
+│       ├── Knight.glb
+│       └── ...
+└── Animations/
+    └── gltf/
+        └── Rig_Medium/
+            ├── Rig_Medium_General.glb
+            └── Rig_Medium_MovementBasic.glb
+```
 
-## モデルのFBXファイルのインポート
+キャラクターとアニメーションは別々のファイルに分かれています。すべてのキャラクターが `Rig_Medium` という同じスケルトンを共有しているため、パック内のどのアニメーションもどのキャラクターでも使えます。
 
-まずはモデルファイルに注目しましょう。
+## モデルのインポート {#importing-the-model}
 
-モデルフォルダを開き、FBXファイルをプロジェクトアセットパネルにドラッグします。
+まずは Knight から始めましょう。
 
-すると、ファイルがプロジェクトにインポートされ、PlayCanvasエディターがマテリアル (Material) 、コンテナ (Container) 、レンダー(Render) アセット、そして最も重要なテンプレート (Template) アセットを作成します。
+1. Assets パネルで **+** を選択し、 **Upload** を選択します。ファイルをコンピューターから Assets パネルにドラッグすることもできます。
+2. `Characters/gltf/Knight.glb` を選択します。
 
-<StepVideo src="/video/tutorials/importing-first-model-and-animation/importing-model-fbx.mp4" poster="/img/tutorials/importing-first-model-and-animation/importing-model-fbx.webp" width={1019} height={480} />
+<StepVideo src="/video/tutorials/importing-first-model-and-animation/importing-model.mp4" poster="/img/tutorials/importing-first-model-and-animation/importing-model.webp" label="Assets パネルの + メニューから Knight.glb をアップロードする。インポートによって Knight.glb フォルダーにアセットが作成される" />
 
-既存のプロジェクトにFBXをインポートする場合は、Project Settings -> Asset Importで以下の設定を確認してください。
+エディターはファイルを新しい `Knight.glb` フォルダーにインポートし、次のアセットを作成します。
 
-![](/img/tutorials/importing-first-model-and-animation/asset-tasks-settings.png)
+- **Knight** : テンプレートアセットです。キャラクターのエンティティヒエラルキー全体を保持しており、キャラクターをシーンに追加するときに使います。
+- **Knight.glb** : インポートしたモデルデータを保持するコンテナアセットです。
+- **knight** : マテリアルアセットです。
+- **knight_texture.png** : テクスチャアセットです。テクスチャが GLB ファイルに埋め込まれていたため、インポート時にマテリアルにも割り当てられています。
+- キャラクターのメッシュの各パーツのレンダーアセット ( **Knight_Body** や **Knight_Helmet** など) 。
 
-## モデルテンプレートをシーンに追加
+元の `Knight.glb` ファイルも、ソースアセットとして保存されます。
 
-テンプレートアセットは、完全なEntityヒエラルキーを含み、モデルをシーンに追加するために使用されます。
+:::tip
 
-次のように複数の方法でできます。
+既存のプロジェクトにモデルをインポートする場合は、[Toolbar](/user-manual/editor/interface/toolbar/) の歯車アイコンを選択して **Settings** を開き、 **Asset Import** セクションで **Import Hierarchy** と **Create FBX Folder** にチェックが入っていることを確認してください。Import Hierarchy はテンプレートアセットを作成し、Create FBX Folder はモデルの形式にかかわらず、インポートしたアセットを専用のフォルダーにまとめます。FBX ファイルの場合は、 **Convert to GLB** にもチェックを入れてください。すべての設定については、[Asset Import 設定](/user-manual/editor/interface/settings/asset-import/)を参照してください。
 
-選択したEntityの子として、3Dビューポートにドラッグするだけです。
+![Settings の Asset Import セクションにある Model Import Settings](/img/tutorials/importing-first-model-and-animation/asset-import-settings.webp)
 
-<StepVideo src="/video/tutorials/importing-first-model-and-animation/template-add-scene-view.mp4" poster="/img/tutorials/importing-first-model-and-animation/template-add-scene-view.webp" width={934} height={480} />
+:::
 
-Entityのヒエラルキービューにドラッグすると、そのEntityの子として追加されます。
+## モデルのテンプレートをシーンに追加 {#adding-the-model-template-to-the-scene}
 
-<StepVideo src="/video/tutorials/importing-first-model-and-animation/template-add-on-entity.mp4" poster="/img/tutorials/importing-first-model-and-animation/template-add-on-entity.webp" width={934} height={480} />
+テンプレートアセット (他のゲームエンジンではプレハブと呼ばれます) を使うと、キャラクター全体を一度にシーンに追加できます。インスタンスを追加する方法はいくつかあります。
 
-ヒエラルキービューの空白領域にドラッグすると、シーンで最上位のEntityの子に追加されます。
+テンプレートを Viewport にドラッグします。
 
-<StepVideo src="/video/tutorials/importing-first-model-and-animation/template-add-scene-hierarchy-area.mp4" poster="/img/tutorials/importing-first-model-and-animation/template-add-scene-hierarchy-area.webp" width={934} height={480} />
+<StepVideo src="/video/tutorials/importing-first-model-and-animation/template-add-scene-view.mp4" poster="/img/tutorials/importing-first-model-and-animation/template-add-scene-view.webp" label="Assets パネルから Knight テンプレートを Viewport にドラッグする" />
 
-最後に、Entityを右クリックしてテンプレートのコンテキストメニューオプションを選択します。
+または、Hierarchy の空いている領域にドラッグすると、最上位のエンティティである **Root** の子として追加されます。Hierarchy 内のエンティティの上にドロップすると、そのエンティティの子として追加されます。
 
-<StepVideo src="/video/tutorials/importing-first-model-and-animation/template-add-context-menu.mp4" poster="/img/tutorials/importing-first-model-and-animation/template-add-context-menu.webp" width={934} height={480} />
+<StepVideo src="/video/tutorials/importing-first-model-and-animation/template-add-hierarchy.mp4" poster="/img/tutorials/importing-first-model-and-animation/template-add-hierarchy.webp" label="Knight テンプレートを Hierarchy の空いている領域にドラッグする" />
 
-シーンに追加されたので、テクスチャがないことが分かります。今回の場合、FBXにテクスチャが埋め込まれておらず、別途用意されています。
+または、Hierarchy でエンティティを右クリックし、 **Template** 、 **Add Instance** の順に選択して、Assets パネルでテンプレートを選びます。インスタンスは右クリックしたエンティティの子として追加されます。
 
-もしFBXに埋め込まれていた場合は、インポートプロセスがテクスチャアセットを作成し、適切なマテリアルに割り当てます。
+<StepVideo src="/video/tutorials/importing-first-model-and-animation/template-add-context-menu.mp4" poster="/img/tutorials/importing-first-model-and-animation/template-add-context-menu.webp" label="Root を右クリックして Template と Add Instance を選択し、Knight テンプレートを選ぶ" />
 
-ここでは、テクスチャアセットが作成され、テクスチャが割り当てられたマテリアルを確認できます。
+どの方法を使っても構いませんが、シーンに追加する Knight は 1 体だけにしてください。テンプレートの詳細については、[テンプレート](/user-manual/editor/templates/)を参照してください。
 
-![](/img/tutorials/importing-first-model-and-animation/embedded-textures-fbx-example.png)
+## マテリアルとテクスチャの確認 {#checking-the-material-and-texture}
 
-## テクスチャをモデルに追加
+テクスチャが `Knight.glb` に埋め込まれていたため、Knight にはすでにテクスチャが付いています。Assets パネルで **knight** マテリアルを選択すると、Inspector で確認できます。テクスチャは **Diffuse** セクションにあります。
 
-さて、Kenney Characterへ戻りましょう。skinフォルダからテクスチャを1つアップロードし、モデルのマテリアルに適用しましょう。
+<StepVideo src="/video/tutorials/importing-first-model-and-animation/material-texture.mp4" poster="/img/tutorials/importing-first-model-and-animation/material-texture.webp" label="knight マテリアルを選択する。Inspector の Diffuse スロットに knight_texture.png が表示される" />
 
-<StepVideo src="/video/tutorials/importing-first-model-and-animation/importing-texture.mp4" poster="/img/tutorials/importing-first-model-and-animation/importing-texture.webp" width={830} height={480} />
+すべてのモデルファイルにテクスチャが含まれているわけではありません。たとえば FBX ファイルでは、テクスチャが別の画像ファイルになっていることがよくあり、テクスチャなしでインポートしたモデルは真っ白に見えます。その場合は画像ファイルもアップロードし、各テクスチャをマテリアルに追加します。Inspector でテクスチャアセットをマテリアルのスロットにドラッグするか、スロットの鉛筆 (編集) ボタンを選択して Assets パネルでテクスチャを選びます。マテリアルの詳細については、[Material Inspector](/user-manual/editor/assets/inspectors/material/) を参照してください。
 
-テクスチャアセットをマテリアルスロットにドラッグすることで、これを行うことができます。
+## アニメーションのインポート {#importing-the-animations}
 
-<StepVideo src="/video/tutorials/importing-first-model-and-animation/texture-to-material.mp4" poster="/img/tutorials/importing-first-model-and-animation/texture-to-material.webp" width={932} height={480} />
+アニメーションは別のファイルに入っています。インポートするには、Assets パネルのルートフォルダー ( **/** ) に戻り、もう一度 **+** と **Upload** を選択して、`Animations/gltf/Rig_Medium/Rig_Medium_MovementBasic.glb` を選択します。
 
-または、マテリアルスロットの 'Edit' ボタンを使用し、アセットパネルでそれを見つけることもできます。
+<StepVideo src="/video/tutorials/importing-first-model-and-animation/importing-animation.mp4" poster="/img/tutorials/importing-first-model-and-animation/importing-animation.webp" label="Rig_Medium_MovementBasic.glb をアップロードする。ファイル内の各クリップのアニメーションアセットが作成される" />
 
-<StepVideo src="/video/tutorials/importing-first-model-and-animation/material-pick-texture.mp4" poster="/img/tutorials/importing-first-model-and-animation/material-pick-texture.webp" width={932} height={480} />
+インポートによって、 **Running_A.glb** 、 **Walking_A.glb** 、 **Jump_Full_Long.glb** など、ファイル内の各クリップのアニメーションアセットが作成されます。
 
-素晴らしい！これでシーンに完全にテクスチャが施されたモデルがあり、アニメーションの準備が整いました。
+このファイルには、アニメーションを表示するためのマネキンキャラクターも含まれています。これは必要ないので、そのアセットは削除して構いません。Assets パネルを **Details** ビュー (リストのアイコン) に切り替えると、各アセットの種類を確認できます。 **Character_Material** 、6 つの **Mannequin_** レンダーアセット、 **Rig_Medium_MovementBasic** テンプレート、 **Rig_Medium_MovementBasic.glb** コンテナを選択します。複数選択するには <kbd>Ctrl</kbd>-click （macOS では <kbd>Cmd</kbd>-click）します。次に <kbd>Delete</kbd> を押して **Delete** を選択します。アニメーションアセットと **Model (source)** アセットは残してください。
 
-## アニメーション付きのFBXのインポート
+<StepVideo src="/video/tutorials/importing-first-model-and-animation/delete-extra-assets.mp4" poster="/img/tutorials/importing-first-model-and-animation/delete-extra-assets.webp" label="Details ビューでマネキンのマテリアル、レンダー、テンプレート、コンテナのアセットを選択して削除する" />
 
-先ほど述べたように、アニメーションは別のFBXファイルにありますので、ランニングアニメーションをエディタにインポートしましょう。
+アニメーションをプレビューするには、Assets パネルでアニメーションを選択します。Inspector で再生するにはキャラクターが必要です。 **Preview Asset** の鉛筆 (編集) ボタンを選択し、`Knight.glb` フォルダーを開いて **Knight** テンプレートを選びます。
 
-<StepVideo src="/video/tutorials/importing-first-model-and-animation/importing-animation-fbx.mp4" poster="/img/tutorials/importing-first-model-and-animation/importing-animation-fbx.webp" width={807} height={480} />
+<StepVideo src="/video/tutorials/importing-first-model-and-animation/animation-preview.mp4" poster="/img/tutorials/importing-first-model-and-animation/animation-preview.webp" label="Running_A.glb を選択し、Preview Asset に Knight テンプレートを選ぶ。Inspector で Knight が走る" />
 
-これにより、アニメーションを含むいくつかのアセットが作成されます。必要なのはそれだけなので、他の作成されたアセットは削除しても構いません。
+## モデルのアニメーション {#animating-the-model}
 
-![](/img/tutorials/importing-first-model-and-animation/delete-animation-files.png)
+キャラクターでアニメーションを再生するには、Anim State Graph アセットと、キャラクターのエンティティの Anim コンポーネントが必要です。
 
-ここから、アセットパネルとインスペクターでそれを選択することでアニメーションをプレビューすることができます。また、アニメーションを適用するプレビューアセットを選択する必要もあります。この場合、先にインポートしたモデルFBXのために作成されたテンプレートアセットになります。
+グラフを作成するには、Assets パネルで **+** を選択し、 **Anim State Graph** を選択します。エディターが **New Anim State Graph** アセットを作成します。
 
-<StepVideo src="/video/tutorials/importing-first-model-and-animation/animation-preview.mp4" poster="/img/tutorials/importing-first-model-and-animation/animation-preview.webp" width={935} height={480} />
+<StepVideo src="/video/tutorials/importing-first-model-and-animation/create-anim-state-graph.mp4" poster="/img/tutorials/importing-first-model-and-animation/create-anim-state-graph.webp" label="Assets パネルの + メニューから Anim State Graph アセットを作成する" />
 
-## モデルのアニメーション
+ステートグラフには複数のステートを持たせることができ、各ステートがアニメーションを再生します。ステート間の流れは、条件付きのトランジションによって制御されます。新しいグラフには、ループする **Initial State** というステートが 1 つだけあります。Inspector で **Open Graph Editor** を選択すると確認できます。
 
-キャラクターにアニメーションを追加するために、エンティティのAnimコンポーネントを使用し、さらにAnim State Graphアセットを作成する必要があります。
+![グラフエディターの新しいグラフ。START から loop にチェックが入った Initial State につながっている](/img/tutorials/importing-first-model-and-animation/anim-state-graph.webp)
 
-Anim State Graphアセットは、アセットパネルで右クリックし、'New Asset'  -> 'Anim State Graph' を選択することで作成されます。
+このチュートリアルで必要なのは、1 つのアニメーションを持つこのステートだけです。ステート、トランジション、パラメーターについては、[ステートグラフ](/user-manual/animation/state-graphs/)と [アニメーション](/user-manual/animation/)セクションのほかのページを参照してください。
 
-<StepVideo src="/video/tutorials/importing-first-model-and-animation/create-anim-state-graph.mp4" poster="/img/tutorials/importing-first-model-and-animation/create-anim-state-graph.webp" width={935} height={480} />
+次に、キャラクターに Anim コンポーネントを追加します。
 
-グラフアセットには複数のステートがあり、各ステートにはアニメーションが割り当てられることがあります。ステート間のフローは、条件付きのトランジションによって制御されます。
+1. Hierarchy で **Knight** エンティティを選択します。
+2. Inspector で **Add Component** を選択し、 **Animation** 、 **Anim** の順に選択します。
 
-![](/img/tutorials/importing-first-model-and-animation/anim-state-graph.png)
+<StepVideo src="/video/tutorials/importing-first-model-and-animation/add-anim-component.mp4" poster="/img/tutorials/importing-first-model-and-animation/add-anim-component.webp" label="Add Component メニューから Knight エンティティに Anim コンポーネントを追加する" />
 
-このチュートリアルでは、単一のステートと単一のアニメーションに焦点を当てます。アニメーションに関する詳細なドキュメントやチュートリアルは  [こちら](/user-manual/animation/)で確認できます。
+次に、コンポーネントにグラフとアニメーションを設定します。
 
-モデルにグラフを追加するためには、シーン内のテンプレートエンティティインスタンスを選択し、インスペクターにてAnimコンポーネントを追加します。
+1. **New Anim State Graph** アセットをコンポーネントの **State Graph** スロットにドラッグします。グラフのステートがコンポーネントに表示されます。
+2. `Rig_Medium_MovementBasic.glb` フォルダーを開き、 **Running_A.glb** を **Initial State** スロットにドラッグします。
 
-Animコンポーネントでは、Anim State Graphアセットを割り当て、グラフ内のステートがコンポーネントに表示されます。ここで、アニメーションアセットをステートに割り当ててプロジェクトを起動することができます。
+<StepVideo src="/video/tutorials/importing-first-model-and-animation/add-animation-to-anim.mp4" poster="/img/tutorials/importing-first-model-and-animation/add-animation-to-anim.webp" label="ステートグラフを State Graph スロットに、Running_A.glb を Initial State スロットにドラッグする" />
 
-<StepVideo src="/video/tutorials/importing-first-model-and-animation/add-anim-component.mp4" poster="/img/tutorials/importing-first-model-and-animation/add-anim-component.webp" width={935} height={480} />
+Knight エンティティはテンプレートのインスタンスなので、Inspector では新しいコンポーネントがテンプレートに対するオーバーライドとして表示されます。オーバーライドのままでも構いませんし、 **Apply All** を選択してコンポーネントをテンプレートにも保存することもできます。
 
-<StepVideo src="/video/tutorials/importing-first-model-and-animation/add-animation-to-anim.mp4" poster="/img/tutorials/importing-first-model-and-animation/add-animation-to-anim.webp" width={935} height={480} />
+Viewport の右上にある **Launch** を選択します。シーンが新しいタブで開き、Knight がその場で走ります。
 
-以上です！最初のモデルとループアニメーションをPlayCanvasに正常にインポートしました！
-
-<StepVideo src="/video/tutorials/importing-first-model-and-animation/preview.mp4" poster="/img/tutorials/importing-first-model-and-animation/preview.webp" width={932} height={480} />
+以上です！最初のモデルとループするアニメーションを PlayCanvas にインポートできました。 **Walking_A.glb** などパック内のほかのアニメーションを **Initial State** スロットにドラッグして試したり、パックから別のキャラクターをインポートして専用の Anim コンポーネントを追加したりしてみましょう。
