@@ -114,3 +114,23 @@ jobs:
 
     - name: Check every page has a Japanese counterpart
       run: npm run check:i18n
+
+  # Everything in static/ ships with every deploy, so it must stay lean. This fails on an
+  # animated GIF (use MP4), an image over 1 MiB, a video over 25 MiB, or a file whose path no
+  # tracked text file mentions, such as an image a page stopped using. The script needs only
+  # Node built-ins and git, so there is no install step.
+  static-assets:
+    name: Static assets
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+    - name: Checkout files
+      uses: actions/checkout@v7
+
+    - name: Setup Node.js 22.x
+      uses: actions/setup-node@v7
+      with:
+        node-version: 22.x
+
+    - name: Check static/ for GIFs, oversized files and unused files
+      run: npm run check:static

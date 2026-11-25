@@ -102,7 +102,7 @@ ffmpeg -i input.mov -vf scale=1600:-2 -c:v libx264 -crf 26 -preset slow -pix_fmt
 
 On a page with several videos, the `StepVideo` component plays each one only while it's on screen. See [Your First App](https://github.com/playcanvas/developer-site/blob/main/docs/user-manual/editor/getting-started/your-first-app.md) for an example.
 
-All images should be less than 2MB ideally.
+CI checks `static/` and fails on an animated GIF, an image over 1 MB, a video over 25 MB, or a file that no page or component uses. When a page stops using an image, delete the image too. Run the check yourself with `npm run check:static`.
 
 ### Code Blocks
 

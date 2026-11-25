@@ -99,6 +99,8 @@ The **Overlays** popup (the eye icon in the [Right Toolbar](#right-toolbar)) hol
 | Diagnostics | **Frame Timings** | Off | Live GPU and CPU frame times (median, minimum, and 95th percentile over the last second) with a graph, and whether the last frame was rendered sorted or stochastic. |
 | | **Overdraw** | Off | Replaces the image with a heat map of how many Gaussians overlap each pixel, with a legend from 1 to over 1000. Red-to-white regions are where cleanup would help performance most. |
 
+![The Overdraw heat map: red and pink where many Gaussians overlap, with its legend at the bottom left](/img/user-manual/supersplat/editor/overdraw-heatmap.webp)
+
 Click the reset icon in the popup's header to restore the Overlays defaults.
 
 ## Preferences
