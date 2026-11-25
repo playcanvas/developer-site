@@ -61,7 +61,7 @@ export class Game extends Script {
 }
 ```
 
-Then select the **Game** entity and add the `game` script to its Script Component, below `input`.
+Then select the **Game** entity and add the `game` script to its Script Component, below `input`. This script has no attributes, so there is nothing to parse.
 
 ### How the Game Script Works {#how-the-game-script-works}
 
@@ -81,18 +81,26 @@ The handlers are removed again in the `destroy` handler. That matters whenever a
 
 Text is drawn with a [font asset](/user-manual/editor/assets/inspectors/font/). The starter project includes one, but the image of its characters has to be generated in your own project.
 
-1. In the Assets panel, open **Fonts** and select the font `LilitaOne-Regular.ttf`.
-2. In the Inspector, find the **Font** section and select **REGENERATE FONT ASSETS**.
+1. In the Assets panel, open **Fonts**. Two assets are called `LilitaOne-Regular.ttf`. Select the font, which has an **Aa** icon. The other one, with a dashed outline, is the file the font was made from.
+2. In the Inspector, **JSON** and **Textures** under **Source Files** both read **Missing**. Scroll down to the **Font** section and select **REGENERATE FONT ASSETS**.
 
-![The Inspector for the font asset](/img/tutorials/keepyup-part-four/font.webp)
+![The Source Files and Font sections of the Inspector for the font asset](/img/tutorials/keepyup-part-four/font.webp)
+
+After a few seconds, **Source Files** names a new JSON asset and a new texture. The Editor adds them to the **Fonts** folder, beside the two they replace.
 
 ## 3. Add a Screen {#add-a-screen}
 
 Every user interface starts with a [Screen](/user-manual/editor/scenes/components/screen/). It defines the area that the interface is laid out in.
 
 1. Add an Entity to **Root** called `UI`. It only keeps the Hierarchy tidy.
-2. Select **UI**, then **+** (Add Entity) > **User Interface** > **2D Screen**. Name the new Entity `Score Screen`.
+2. With **UI** selected, select **+** (Add Entity) > **User Interface** > **2D Screen**. Name the new Entity `Score Screen`.
 3. In its Screen Component, set **Ref Resolution** to `720` by `1280` and **Scale Blend** to `1`.
+
+:::note
+
+A new Entity is added inside the Entity that is selected, or to Root if nothing is selected. Clicking an Entity that is already selected deselects it, so check that the parent you want is highlighted in the Hierarchy before you add to it. If an Entity ends up in the wrong place, drag it onto its parent in the Hierarchy.
+
+:::
 
 ![The Screen Component of the Score Screen entity, with the uiScore script below it](/img/tutorials/keepyup-part-four/screen.webp)
 
@@ -100,14 +108,16 @@ The reference resolution is the size you design the interface at. With a **Scale
 
 ## 4. Add the Score {#add-the-score}
 
-1. Select **Score Screen**, then **+** > **User Interface** > **Text Element**. Name the new Entity `Score`.
+1. With **Score Screen** selected, select **+** > **User Interface** > **Text Element**. Name the new Entity `Score`.
 2. In its [Element Component](/user-manual/editor/scenes/components/element/), set **Preset** to **Top Anchor & Pivot**. The text now hangs from the top center of the screen.
 3. Set the Entity's **Position** to `0`, `-50`, `0` to move it down from the edge.
-4. Drag the font from the Assets panel onto the **Font** slot.
+4. Check that the **Font** slot shows `LilitaOne-Regular.ttf`. The Editor fills it in with the font you last selected. If the slot is empty, drag the font from the Assets panel onto it.
 5. Set **Text** to `0`, and **Font Size** and **Line Height** to `150`.
-6. To make the number stand out against the crowd, set **Outline Color** to `0F2440` and **Outline Thickness** to `0.5`. Then set **Shadow Color** to `081428` with an alpha of about 150, and **Shadow Offset** to `0`, `-0.28`.
+6. To make the number stand out against the crowd, set **Outline Color** to `0F2440FF` and **Outline Thickness** to `0.5`. Then set **Shadow Color** to `08142899` and **Shadow Offset** to `0`, `-0.28`.
 
-![The Element Component of the Score entity](/img/tutorials/keepyup-part-four/score-element.webp)
+![The text settings in the Element Component of the Score entity, from Font to Shadow Offset](/img/tutorials/keepyup-part-four/score-element.webp)
+
+These two colors have an alpha value, so their hex codes have eight digits. The last two digits are the alpha: `FF` is opaque and `99` is 60%. If you type only six digits, the alpha becomes 0 and the outline or the shadow is invisible.
 
 Your Hierarchy should now look like this:
 
@@ -157,7 +167,7 @@ export class UiScore extends Script {
 }
 ```
 
-1. Add a **Script** component to **Score Screen** and add the `uiScore` script.
+1. Add a **Script** component to **Score Screen**, add the `uiScore` script and select its **Parse** button.
 2. Drag the **Score** entity from the Hierarchy onto the script's `label` slot.
 
 The script hides the number until the first round starts, then changes the element's `text` every time `game:score` fires.

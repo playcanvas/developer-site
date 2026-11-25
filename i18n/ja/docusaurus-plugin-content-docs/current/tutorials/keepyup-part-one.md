@@ -34,9 +34,9 @@ thumb: /img/tutorials/keepyup-part-one/thumbnail.webp
 
 ゲームに使うモデル、テクスチャ、サウンド、フォントは、スタータープロジェクトに用意されています。これを[フォーク](/user-manual/editor/projects/creating/#fork-an-existing-project)すると、自分用のコピーができます。
 
-1. [Keepy Up Starter](https://playcanvas.com/project/1660810/overview/keepy-up-starter) プロジェクトを開き、**Fork** を選択します。
-2. コピーに `Keepy Up` という名前を付けて確定します。
-3. 新しいプロジェクトをエディターで開きます。
+1. [Keepy Up Starter](https://playcanvas.com/project/1660810/overview/keepy-up-starter) プロジェクトを開き、**Fork Project** を選択します。
+2. コピーに `Keepy Up` という名前を付けて、**Fork project** を選択します。
+3. コピーの準備ができたら、**Open project** を選択します。エディターが新しいタブで開きます。
 
 [Assets](/user-manual/editor/assets/asset-panel/)（アセット）パネルに、使える素材が表示されます。
 
@@ -58,7 +58,7 @@ Game という名前のシーンには、Camera と Light だけが入ってい�
 スマートフォンや多くのノートパソコンの画面は、CSSピクセル1つに対して複数の物理ピクセルを持っています。PlayCanvasアプリはデフォルトではこれを無視するため、そうした画面ではぼやけて見えます。
 
 1. ツールバーの一番下にある歯車アイコンを選択して、[Inspector](/user-manual/editor/interface/inspector/)（インスペクター）にプロジェクトの **Settings** を開きます。
-2. **Rendering** を展開し、**Device Pixel Ratio** をオンにします。
+2. **Rendering** を展開し、セクションの下のほうにある **Device Pixel Ratio** をオンにします。
 
 新しいプロジェクトは、最初からブラウザのウィンドウ全体に表示され、その解像度に合わせるようになっているので、ここで変更するものは他にありません。
 
@@ -67,16 +67,21 @@ Game という名前のシーンには、Camera と Light だけが入ってい�
 モデルをインポートすると、エディターはそのモデルの[テンプレート](/user-manual/editor/templates/)を作成します。テンプレートは、シーンにドロップできるできあがったエンティティです。
 
 1. アセットパネルで **Models** > **Stadium** を開きます。
-2. `stadium` テンプレートを[Hierarchy](/user-manual/editor/interface/hierarchy/)（ヒエラルキー）パネルにドラッグし、**Root** の上にドロップします。
-3. 新しいエンティティを選択したまま、インスペクターで **Name** を `Stadium` に変更します。
+2. `stadium` テンプレートを探します。このフォルダーには、ほぼ同じ名前のアセットが4つあります。テンプレートは、ひし形のアイコンが付いているものです。見えない場合は下にスクロールします。
+3. テンプレートを[Hierarchy](/user-manual/editor/interface/hierarchy/)（ヒエラルキー）パネルにドラッグし、**Root** の上にドロップします。
+4. 新しいエンティティを選択したまま、インスペクターで **Name** を `Stadium` に変更します。
+
+![アセットパネルの stadium テンプレート。隣に2つの stadium.glb アセット、上に Stadium レンダーアセットがある](/img/tutorials/keepyup-part-one/template.webp)
 
 **Position** は `0`, `0`, `0` のままにします。スタジアムは、ピッチがこの点より7ユニット下になるように作られているので、ゲームのカメラはおよそ胸の高さになります。
+
+スタジアム全体を見るには、ポインターを[Viewport](/user-manual/editor/interface/viewport/)（ビューポート）の上に移動して、<kbd>F</kbd>キーを押します。
 
 ![ビューポートでスタジアムを選択したエディター](/img/tutorials/keepyup-part-one/scene.webp)
 
 ## 4. サッカーボールを追加する {#add-the-football}
 
-1. **Models** > **Football** を開き、`football` テンプレートを **Root** にドラッグします。
+1. **Models** > **Football** を開き、同じひし形のアイコンが付いた `football` テンプレートを **Root** にドラッグします。
 2. エンティティの名前を `Football` に変更します。
 3. **Position** を `0`, `0.7`, `0` に、**Scale** を `1.2`, `1.2`, `1.2` に設定します。
 
@@ -108,10 +113,10 @@ Game という名前のシーンには、Camera と Light だけが入ってい�
 
 ## 進み具合を確認する {#check-your-progress}
 
-[Viewport](/user-manual/editor/interface/viewport/)（ビューポート）の右上にある **Launch** を選択します。ゲームが新しいタブで開き、次のように見えるはずです。
+ビューポートの右上にある **Launch** を選択します。ゲームが新しいタブで開き、次のように見えるはずです。
 
-![パート1終了時のゲーム: スタジアムの前にあるボールと黒い空](/img/tutorials/keepyup-part-one/result.webp)
+![パート1終了時のゲーム: スタジアムの前にあるボールと、何もない暗い空](/img/tutorials/keepyup-part-one/result.webp)
 
-ボールはゴールの前に浮かんでいて、まだ何も動きません。空が黒いのはシーンに空がないからで、ボールが平坦に見えるのは、光が一方向からしか当たっていないからです。
+ボールはゴールの前に浮かんでいて、まだ何も動きません。空が暗いのはシーンに空がないからで、ボールが平坦に見えるのは、光が一方向からしか当たっていないからです。
 
 どちらも[パート2: ライティングとマテリアル](/tutorials/keepyup-part-two/)で直します。

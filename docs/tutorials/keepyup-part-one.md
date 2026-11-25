@@ -36,9 +36,9 @@ The series covers:
 
 The models, textures, sounds and font for the game are ready for you in a starter project. [Forking](/user-manual/editor/projects/creating/#fork-an-existing-project) it gives you your own copy to build on.
 
-1. Open the [Keepy Up Starter](https://playcanvas.com/project/1660810/overview/keepy-up-starter) project and select **Fork**.
-2. Name your copy `Keepy Up` and confirm.
-3. Open your new project in the Editor.
+1. Open the [Keepy Up Starter](https://playcanvas.com/project/1660810/overview/keepy-up-starter) project and select **Fork Project**.
+2. Name your copy `Keepy Up` and select **Fork project**.
+3. When your copy is ready, select **Open project**. The Editor opens in a new tab.
 
 The [Assets](/user-manual/editor/assets/asset-panel/) panel shows what you have to work with:
 
@@ -60,7 +60,7 @@ The scene, called Game, holds only a Camera and a Light.
 Phones and many laptops have screens with more than one physical pixel per CSS pixel. By default a PlayCanvas app ignores that and looks soft on them.
 
 1. Select the cog icon at the bottom of the toolbar to open the project's **Settings** in the [Inspector](/user-manual/editor/interface/inspector/).
-2. Expand **Rendering** and turn on **Device Pixel Ratio**.
+2. Expand **Rendering** and turn on **Device Pixel Ratio**, near the bottom of the section.
 
 A new project already fills the browser window and matches its resolution, so there is nothing else to change here.
 
@@ -69,16 +69,21 @@ A new project already fills the browser window and matches its resolution, so th
 When a model is imported, the Editor makes a [template](/user-manual/editor/templates/) for it: a ready-made Entity that you can drop into a scene.
 
 1. In the Assets panel, open **Models** > **Stadium**.
-2. Drag the `stadium` template into the [Hierarchy](/user-manual/editor/interface/hierarchy/) panel and drop it on **Root**.
-3. With the new Entity selected, change its **Name** in the Inspector to `Stadium`.
+2. Find the `stadium` template. Four assets in this folder have almost the same name, and the template is the one with a diamond-shaped icon. Scroll down if you can't see it.
+3. Drag the template into the [Hierarchy](/user-manual/editor/interface/hierarchy/) panel and drop it on **Root**.
+4. With the new Entity selected, change its **Name** in the Inspector to `Stadium`.
+
+![The stadium template in the Assets panel, next to the two stadium.glb assets and below the Stadium render asset](/img/tutorials/keepyup-part-one/template.webp)
 
 Its **Position** should be `0`, `0`, `0`. The stadium is built so that its pitch is 7 units below that point, which puts the game's camera at about chest height.
+
+To see the whole stadium, move the pointer over the [Viewport](/user-manual/editor/interface/viewport/) and press <kbd>F</kbd>.
 
 ![The Editor with the stadium selected in the Viewport](/img/tutorials/keepyup-part-one/scene.webp)
 
 ## 4. Add the Football {#add-the-football}
 
-1. Open **Models** > **Football** and drag the `football` template onto **Root**.
+1. Open **Models** > **Football** and drag the `football` template, which has the same diamond-shaped icon, onto **Root**.
 2. Rename the Entity `Football`.
 3. Set its **Position** to `0`, `0.7`, `0` and its **Scale** to `1.2`, `1.2`, `1.2`.
 
@@ -110,10 +115,10 @@ A directional light acts like the sun. Only its rotation matters, not its positi
 
 ## Check Your Progress {#check-your-progress}
 
-Select **Launch** at the top right of the [Viewport](/user-manual/editor/interface/viewport/). Your game opens in a new tab and should look like this:
+Select **Launch** at the top right of the Viewport. Your game opens in a new tab and should look like this:
 
-![The game at the end of Part 1: the ball in front of the stadium, with a black sky](/img/tutorials/keepyup-part-one/result.webp)
+![The game at the end of Part 1: the ball in front of the stadium, with a dark, empty sky](/img/tutorials/keepyup-part-one/result.webp)
 
-The ball hangs in front of the goal and nothing moves yet. The sky is black because the scene has no sky, and the ball looks flat because the only light on it comes from one direction.
+The ball hangs in front of the goal and nothing moves yet. The sky is dark because the scene has no sky, and the ball looks flat because the only light on it comes from one direction.
 
 You fix both in [Part 2: Lighting and Materials](/tutorials/keepyup-part-two/).

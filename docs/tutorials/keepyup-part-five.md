@@ -20,20 +20,26 @@ You need the project you made in Parts 1 to 4. To compare your work, open the [f
 The menu is a title, a ring around the ball and a line telling the player what to do.
 
 1. Select **UI**, then **+** (Add Entity) > **User Interface** > **2D Screen**. Name it `Menu Screen`, and set **Ref Resolution** to `720` by `1280` and **Scale Blend** to `1`, as you did for the score.
-2. Add four elements to **Menu Screen** from the **User Interface** menu, and set them up as in the table. An Image Element is called **Image Element** in the menu.
+2. Add four elements to **Menu Screen** from the **User Interface** menu, and set them up as in the table. Select **Menu Screen** again before you add each one, because a new element is added inside whatever is selected.
 
 | Name | Type | Position | Settings |
 | --- | --- | --- | --- |
 | `Title Keepy` | Text | `0`, `455`, `0` | **Text** `KEEPY`, **Font Size** and **Line Height** `150` |
 | `Title Up` | Text | `0`, `317`, `0` | **Text** `UP`, **Font Size** and **Line Height** `150`, **Color** `FFD13D` |
-| `Ring` | Image | `0`, `87`, `0` | **Texture** `ring.png` from the **UI** folder, **Width** and **Height** `264` |
+| `Ring` | Image | `0`, `87`, `0` | **Texture** `ring.png` from the **UI** folder, then **Width** and **Height** `264` |
 | `Prompt` | Text | `0`, `-147`, `0` | **Text** `TAP THE BALL`, **Font Size** and **Line Height** `54` |
 
-Give each of the three text elements the font, outline and shadow that you gave the score in Part 4.
+Give each of the three text elements the font, outline and shadow that you gave the score in Part 4. Set the ring's texture before its size, because the Editor resizes an Image Element to fit a new texture.
 
 :::tip
 
-To save time, select the `Score` entity and duplicate it with <kbd>Ctrl</kbd>+<kbd>D</kbd> (<kbd>Cmd</kbd>+<kbd>D</kbd> on a Mac). Drag the copy onto **Menu Screen**, set its **Preset** to **Center Anchor & Pivot**, and it already has the right font, outline and shadow.
+To save time, select the `Score` entity and duplicate it with <kbd>Ctrl</kbd>+<kbd>D</kbd> (<kbd>Cmd</kbd>+<kbd>D</kbd> on a Mac). The copy appears below the original, with the same name. Drag it onto **Menu Screen**, set its **Preset** to **Center Anchor & Pivot**, and it already has the right font, outline and shadow.
+
+:::
+
+:::note
+
+To open the **UI** folder without losing your selection, select it in the folder tree on the left of the Assets panel. Double-clicking a folder in the main part of the panel changes the selection, so the Inspector no longer shows the element you were working on.
 
 :::
 
@@ -68,7 +74,7 @@ export class UiMenu extends Script {
 }
 ```
 
-Add a **Script** component to **Menu Screen** and add the `uiMenu` script.
+Add a **Script** component to **Menu Screen** and add the `uiMenu` script. It has no attributes to parse.
 
 The script uses `this.app.once` and not `this.app.on`, so its handler runs for the first `game:start` only. The menu is disabled along with everything under it, and it never needs to come back.
 
@@ -77,11 +83,11 @@ The script uses `this.app.once` and not `this.app.on`, so its handler runs for t
 This screen has to appear and disappear many times. Its script lives on the screen, which stays enabled, and switches a group of elements under it on and off.
 
 1. Add another **2D Screen** to **UI** called `Game Over Screen`, with the same **Ref Resolution** and **Scale Blend**.
-2. Select it, then **+** > **User Interface** > **Group Element**. Name the group `Panel` and set its **Preset** to **Stretch**, so that it covers the whole screen.
+2. With **Game Over Screen** selected, select **+** > **User Interface** > **Group Element**. Name the group `Panel` and set its **Preset** to **Stretch**, so that it covers the whole screen.
 
 ![The Element Component of the Panel entity, a group stretched to fill the screen](/img/tutorials/keepyup-part-five/panel-element.webp)
 
-Then add these four elements to **Panel**. Duplicating the ones on the menu is the quickest way.
+Then add these four elements to **Panel**. The quickest way is to duplicate the ones on the menu and drag the copies onto **Panel**.
 
 | Name | Type | Position | Settings |
 | --- | --- | --- | --- |
@@ -135,7 +141,7 @@ export class UiGameOver extends Script {
 }
 ```
 
-1. Add a **Script** component to **Game Over Screen** and add the `uiGameOver` script.
+1. Add a **Script** component to **Game Over Screen**, add the `uiGameOver` script and select its **Parse** button.
 2. Drag the **Panel** entity onto the script's `panel` slot.
 
 The panel is hidden when the game loads, shown on `game:over` and hidden again on the next `game:start`.

@@ -18,7 +18,7 @@ import StepVideo from '@site/src/components/StepVideo';
 ## 1. ボールのスクリプトを書く {#write-the-ball-script}
 
 1. アセットパネルで **Scripts** フォルダーを開きます。
-2. **+**（アセットを追加）ボタンを選択し、**Script** を選択します。名前を `ball.mjs` にして作成します。
+2. **+**（アセットを追加）ボタンを選択し、**Script** を選択します。ファイル名に `ball.mjs` と入力して、<kbd>Enter</kbd>キーを押します。
 3. `ball.mjs` をダブルクリックして、[Code Editor](/user-manual/editor/scripting/code-editor/)（コードエディター）で開きます。
 4. ファイルの内容をすべて次のコードに置き換え、<kbd>Ctrl</kbd>+<kbd>S</kbd>（Macでは<kbd>Cmd</kbd>+<kbd>S</kbd>）で保存します。
 
@@ -134,12 +134,19 @@ export class Ball extends Script {
 ## 2. サッカーボールにアタッチする {#attach-it-to-the-football}
 
 1. エディターに戻り、ヒエラルキーで **Football** を選択します。
-2. インスペクターで **Add Component** > **Script** を選択します。
-3. 新しい[Scriptコンポーネント](/user-manual/editor/scenes/components/script/)で **Add Script** を選択し、`ball` を選びます。
+2. インスペクターで **ADD COMPONENT** > **Script** を選択します。新しい[Scriptコンポーネント](/user-manual/editor/scenes/components/script/)はインスペクターの一番下に追加されるので、そこまでスクロールします。
+3. **+ ADD SCRIPT** フィールドを選択し、`ball` を選びます。
+4. `ball` スクリプトの **Parse** ボタンを選択します。**Edit** の隣にある、2つの矢印のボタンです。エディターがコードを読み取り、スクリプトの属性を一覧表示します。
 
 ![ballスクリプトの属性が表示された、Football エンティティのScriptコンポーネント](/img/tutorials/keepyup-part-three/ball-script.webp)
 
 スクリプトの下にある5つの値は、その[属性](/user-manual/scripting/script-attributes/)です。それぞれ、コードの中で上に `@attribute` コメントが付いたプロパティに対応しています。コードに触れずに、ここで値を変更できます。
+
+:::note
+
+エディターがスクリプトの属性を読み取るのは、**Parse** を選択したときだけです。このシリーズで属性を持つスクリプトには、すべてこの操作を行ってください。コードの中の属性を変更したときも、もう一度行います。
+
+:::
 
 ゲームを **Launch** します。ボールはその場でゆっくり回転し、まだ誰にもできないキックを待っています。
 
@@ -239,8 +246,8 @@ export class Input extends Script {
 
 入力のスクリプトは、ボールにもカメラにも属さないので、専用のエンティティを用意します。
 
-1. ヒエラルキーで **Root** を選択し、**+**（エンティティを追加）ボタン、**Entity** の順に選択します。新しいエンティティの名前を `Game` にします。
-2. **Script** コンポーネントを追加し、`input` スクリプトを追加します。
+1. ヒエラルキーで **Root** を選択し、**+**（エンティティを追加）ボタン、**Entity** の順に選択します。インスペクターで、新しいエンティティの **Name** を `Game` に変更します。
+2. **Script** コンポーネントを追加して `input` スクリプトを追加し、その **Parse** ボタンを選択します。
 3. ヒエラルキーから **Football** を、スクリプトの `ball` スロットにドラッグします。
 4. ヒエラルキーから **Camera** を、`camera` スロットにドラッグします。
 

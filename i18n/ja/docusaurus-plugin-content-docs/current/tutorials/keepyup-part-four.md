@@ -59,7 +59,7 @@ export class Game extends Script {
 }
 ```
 
-次に、**Game** エンティティを選択し、そのScriptコンポーネントの `input` の下に `game` スクリプトを追加します。
+次に、**Game** エンティティを選択し、そのScriptコンポーネントの `input` の下に `game` スクリプトを追加します。このスクリプトには属性がないので、**Parse** は必要ありません。
 
 ### ゲームのスクリプトの仕組み {#how-the-game-script-works}
 
@@ -79,18 +79,26 @@ export class Game extends Script {
 
 テキストは[フォントアセット](/user-manual/editor/assets/inspectors/font/)を使って描画します。スタータープロジェクトにはフォントが1つ含まれていますが、その文字の画像は自分のプロジェクトで生成する必要があります。
 
-1. アセットパネルで **Fonts** を開き、フォント `LilitaOne-Regular.ttf` を選択します。
-2. インスペクターで **Font** セクションを見つけ、**REGENERATE FONT ASSETS** を選択します。
+1. アセットパネルで **Fonts** を開きます。`LilitaOne-Regular.ttf` という名前のアセットが2つあります。**Aa** のアイコンが付いているフォントのほうを選択します。破線の枠が付いているもう1つは、フォントの元になったファイルです。
+2. インスペクターの **Source Files** では、**JSON** と **Textures** がどちらも **Missing** になっています。**Font** セクションまで下にスクロールし、**REGENERATE FONT ASSETS** を選択します。
 
-![フォントアセットのインスペクター](/img/tutorials/keepyup-part-four/font.webp)
+![フォントアセットのインスペクターのSource FilesセクションとFontセクション](/img/tutorials/keepyup-part-four/font.webp)
+
+数秒後、**Source Files** に新しいJSONアセットと新しいテクスチャの名前が表示されます。エディターは、この2つを **Fonts** フォルダーに追加します。置き換えられた古い2つも、そのまま残ります。
 
 ## 3. Screenを追加する {#add-a-screen}
 
 すべてのユーザーインターフェースは[Screen](/user-manual/editor/scenes/components/screen/)から始まります。Screenは、インターフェースをレイアウトする領域を定義します。
 
 1. **Root** に `UI` というエンティティを追加します。これはヒエラルキーを整理するためだけのものです。
-2. **UI** を選択し、**+**（エンティティを追加）> **User Interface** > **2D Screen** を選択します。新しいエンティティの名前を `Score Screen` にします。
+2. **UI** を選択した状態で、**+**（エンティティを追加）> **User Interface** > **2D Screen** を選択します。新しいエンティティの名前を `Score Screen` にします。
 3. Screenコンポーネントで、**Ref Resolution** を `720` × `1280` に、**Scale Blend** を `1` に設定します。
+
+:::note
+
+新しいエンティティは、選択中のエンティティの中に追加されます。何も選択していない場合は、Rootに追加されます。すでに選択されているエンティティをクリックすると選択が解除されるので、追加する前に、親にしたいエンティティがヒエラルキーでハイライトされていることを確認してください。エンティティが間違った場所にできてしまったら、ヒエラルキーで親にしたいエンティティの上にドラッグします。
+
+:::
 
 ![Score Screen エンティティのScreenコンポーネントと、その下のuiScoreスクリプト](/img/tutorials/keepyup-part-four/screen.webp)
 
@@ -98,14 +106,16 @@ export class Game extends Script {
 
 ## 4. スコアを追加する {#add-the-score}
 
-1. **Score Screen** を選択し、**+** > **User Interface** > **Text Element** を選択します。新しいエンティティの名前を `Score` にします。
+1. **Score Screen** を選択した状態で、**+** > **User Interface** > **Text Element** を選択します。新しいエンティティの名前を `Score` にします。
 2. [Elementコンポーネント](/user-manual/editor/scenes/components/element/)で、**Preset** を **Top Anchor & Pivot** に設定します。これでテキストが画面の上端中央からぶら下がる形になります。
 3. エンティティの **Position** を `0`, `-50`, `0` に設定して、端から下に下げます。
-4. アセットパネルからフォントを **Font** スロットにドラッグします。
+4. **Font** スロットに `LilitaOne-Regular.ttf` が表示されていることを確認します。エディターは、最後に選択したフォントをここに自動で設定します。スロットが空の場合は、アセットパネルからフォントをドラッグします。
 5. **Text** を `0` に、**Font Size** と **Line Height** を `150` に設定します。
-6. 観客を背景にしても数字が目立つように、**Outline Color** を `0F2440` に、**Outline Thickness** を `0.5` に設定します。次に、**Shadow Color** を `081428`、アルファを150程度にし、**Shadow Offset** を `0`, `-0.28` に設定します。
+6. 観客を背景にしても数字が目立つように、**Outline Color** を `0F2440FF` に、**Outline Thickness** を `0.5` に設定します。次に、**Shadow Color** を `08142899` に、**Shadow Offset** を `0`, `-0.28` に設定します。
 
-![Score エンティティのElementコンポーネント](/img/tutorials/keepyup-part-four/score-element.webp)
+![Score エンティティのElementコンポーネントの、FontからShadow Offsetまでのテキスト設定](/img/tutorials/keepyup-part-four/score-element.webp)
+
+この2つの色にはアルファ値があるので、16進コードは8桁になります。最後の2桁がアルファで、`FF` は不透明、`99` は60%です。6桁しか入力しないとアルファが0になり、アウトラインやシャドウが見えなくなります。
 
 ヒエラルキーは次のようになっているはずです。
 
@@ -155,7 +165,7 @@ export class UiScore extends Script {
 }
 ```
 
-1. **Score Screen** に **Script** コンポーネントを追加し、`uiScore` スクリプトを追加します。
+1. **Score Screen** に **Script** コンポーネントを追加して `uiScore` スクリプトを追加し、その **Parse** ボタンを選択します。
 2. ヒエラルキーから **Score** エンティティを、スクリプトの `label` スロットにドラッグします。
 
 このスクリプトは、最初のラウンドが始まるまで数字を隠し、その後は `game:score` が発行されるたびにエレメントの `text` を変更します。

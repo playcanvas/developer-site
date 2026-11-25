@@ -20,7 +20,7 @@ You need the project you made in Parts 1 and 2. To compare your work, open the [
 ## 1. Write the Ball Script {#write-the-ball-script}
 
 1. In the Assets panel, open the **Scripts** folder.
-2. Select the **+** (Add Asset) button, then **Script**. Name it `ball.mjs` and create it.
+2. Select the **+** (Add Asset) button, then **Script**. Type `ball.mjs` as the filename and press <kbd>Enter</kbd>.
 3. Double-click `ball.mjs` to open it in the [Code Editor](/user-manual/editor/scripting/code-editor/).
 4. Replace everything in the file with the code below, then save with <kbd>Ctrl</kbd>+<kbd>S</kbd> (<kbd>Cmd</kbd>+<kbd>S</kbd> on a Mac).
 
@@ -136,12 +136,19 @@ export class Ball extends Script {
 ## 2. Attach It to the Football {#attach-it-to-the-football}
 
 1. Back in the Editor, select **Football** in the Hierarchy.
-2. In the Inspector, select **Add Component** > **Script**.
-3. In the new [Script Component](/user-manual/editor/scenes/components/script/), select **Add Script** and choose `ball`.
+2. In the Inspector, select **ADD COMPONENT** > **Script**. The new [Script Component](/user-manual/editor/scenes/components/script/) is added at the bottom of the Inspector, so scroll down to it.
+3. Select the **+ ADD SCRIPT** field and choose `ball`.
+4. Select the **Parse** button on the `ball` script: the two arrows next to **Edit**. The Editor reads the code and lists the script's attributes.
 
 ![The Script Component on the Football entity, showing the ball script's attributes](/img/tutorials/keepyup-part-three/ball-script.webp)
 
 The five values under the script are its [attributes](/user-manual/scripting/script-attributes/). Each one comes from a property in the code that has an `@attribute` comment above it. You can change them here without touching the code.
+
+:::note
+
+The Editor reads a script's attributes only when you select **Parse**. Do it for every script in this series that has attributes, and again whenever you change an attribute in the code.
+
+:::
 
 **Launch** the game. The ball turns slowly on the spot, waiting for a kick that nothing can give it yet.
 
@@ -241,8 +248,8 @@ export class Input extends Script {
 
 The input script does not belong to the ball or the camera, so give it an Entity of its own.
 
-1. In the Hierarchy, select **Root**, then the **+** (Add Entity) button, then **Entity**. Name the new Entity `Game`.
-2. Add a **Script** component to it and add the `input` script.
+1. In the Hierarchy, select **Root**, then the **+** (Add Entity) button, then **Entity**. In the Inspector, change the **Name** of the new Entity to `Game`.
+2. Add a **Script** component to it, add the `input` script and select its **Parse** button.
 3. Drag **Football** from the Hierarchy onto the script's `ball` slot.
 4. Drag **Camera** from the Hierarchy onto its `camera` slot.
 
