@@ -32,7 +32,7 @@ The options apply to every launch until you untick them. **Debug**, **Mini stats
 
 When you activate the Launch Page, it will open in a new tab. It is perfectly valid to switch back and forth between the Editor and the Launch Page. However, if you have a large screen or even a multi-monitor setup, consider tearing off the Launch Page tab and placing it side by side with the Editor.
 
-![Launch Page Side by Side](/img/user-manual/editor/launch-page/launch-page-side-by-side.png)
+![Launch Page Side by Side](/img/user-manual/editor/launch-page/launch-page-side-by-side.webp)
 
 This can make it easier and quicker to switch between the two.
 

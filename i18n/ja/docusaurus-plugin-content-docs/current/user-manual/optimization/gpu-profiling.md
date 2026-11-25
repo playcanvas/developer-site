@@ -50,7 +50,7 @@ description: デスクトップと Android のネイティブ GPU プロファ�
 
 * このファイルをダブルクリックしてXcodeで開き、表示されるダイアログで「Replay」ボタンをクリックします。これにより、フレームのドローコールを検査し、リソースを分析し、シェーダーをデバッグし、パフォーマンスメトリクスを収集することができます。
 
-    ![Xcode](/img/user-manual/optimization/gpu-profiling/xcode-webgpu.png)
+    ![Xcode](/img/user-manual/optimization/gpu-profiling/xcode-webgpu.webp)
 
 ## Apple Silicon搭載macOS上でのWebGLアプリケーション
 

@@ -25,11 +25,11 @@ import StepVideo from '@site/src/components/StepVideo';
 
 以下に、MacのChromeでのレンガテクスチャの並べて比較を示します。
 
-<a href="/img/user-manual/assets/textures/texture-compression/basis-vs-no-compression-brick.png" target="_blank"><img loading="lazy" src="/img/user-manual/assets/textures/texture-compression/basis-vs-no-compression-brick-thumb.jpg" alt="Brick texture compression comparison" /></a>
+<a href="/img/user-manual/assets/textures/texture-compression/basis-vs-no-compression-brick.webp" target="_blank"><img loading="lazy" src="/img/user-manual/assets/textures/texture-compression/basis-vs-no-compression-brick-thumb.jpg" alt="Brick texture compression comparison" /></a>
 
 以下は、MacとChromeで PlayCanvas のキューブを Basis [ETCモード](https://playcanv.as/p/j8rsh3eO/) で比較したものと、[圧縮していないもの](https://playcanv.as/p/nAW3WkW8/)です。
 
-<a href="/img/user-manual/assets/textures/texture-compression/basis-vs-no-compression-cube.png" target="_blank"><img loading="lazy" src="/img/user-manual/assets/textures/texture-compression/basis-vs-no-compression-cube-thumb.jpg" alt="PlayCanvas cube compression comparison" /></a>
+<a href="/img/user-manual/assets/textures/texture-compression/basis-vs-no-compression-cube.webp" target="_blank"><img loading="lazy" src="/img/user-manual/assets/textures/texture-compression/basis-vs-no-compression-cube-thumb.jpg" alt="PlayCanvas cube compression comparison" /></a>
 
 ## Basis テクスチャ圧縮の使用 {#using-basis-texture-compression}
 
