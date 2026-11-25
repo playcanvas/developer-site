@@ -14,6 +14,8 @@ description: カメラレイヤーでSceneのカラーと深度バッファを�
 
 キャプチャした深度を画面で確認するには、[TextureRenderer.sceneDepth](../debug-drawing.md#scene-depth) を使用してください。
 
+シーン深度マップは、[リバースZ](projection.md#reverse-z)でレンダリングするカメラをまだサポートしていません。
+
 ## バッファのアクセス
 
 シェーダー内でテクスチャーとしてこれらのバッファにアクセスするには、次のユニフォーム名を使用します:

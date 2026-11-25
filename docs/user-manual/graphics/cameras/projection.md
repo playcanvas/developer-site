@@ -75,7 +75,67 @@ camera.camera.farClip = 500;
 
 :::note
 
-The ratio between the far and near clip planes determines how depth buffer precision is distributed across the scene. If the near plane is very small relative to the far plane, distant surfaces can be left with too little precision to be separated reliably, causing flickering known as z-fighting. To avoid it, set the near plane as large as your scene can tolerate and the far plane no larger than necessary.
+The ratio between the far and near clip planes determines how depth buffer precision is distributed across the scene. If the near plane is very small relative to the far plane, distant surfaces can be left with too little precision to be separated reliably, causing flickering known as z-fighting. To avoid it, set the near plane as large as your scene can tolerate and the far plane no larger than necessary. For scenes that need a very large view distance, use [reverse-z](#reverse-z).
+
+:::
+
+## Reverse-Z {#reverse-z}
+
+By default, the depth buffer stores a depth of 0 at the near plane and 1 at the far plane. A perspective projection spends most of the available values close to the camera, so distant surfaces get the least precision. Reverse-z flips the range, storing 1 at the near plane and 0 at the far plane. Combined with a floating point depth buffer, whose own precision is highest near 0, this spreads the precision almost evenly across the view distance. Scenes such as terrain, flight or space views can then keep a small near plane and a far plane many kilometers away without z-fighting.
+
+Enable it per camera with the `reverseZ` property:
+
+```javascript
+if (app.graphicsDevice.supportsReverseZ) {
+    camera.camera.reverseZ = true;
+}
+```
+
+Reverse-z is supported on WebGPU, where `GraphicsDevice#supportsReverseZ` is `true`. On other devices, the camera keeps the setting but renders without it. It is also not applied while the camera renders the views of an XR session.
+
+### Depth Buffer Format {#reverse-z-depth-format}
+
+Reverse-z only improves precision when the depth buffer stores floating point values. On WebGPU, the engine allocates `depth24plus-stencil8` for the back buffer and for render targets created without a depth buffer of their own. This format may use 24-bit fixed point depth, in which case reverse-z makes little difference.
+
+For the full precision gain, render the camera into a render target with a [`PIXELFORMAT_DEPTH`](https://api.playcanvas.com/engine/variables/PIXELFORMAT_DEPTH.html) depth buffer, which uses `depth32float`:
+
+```javascript
+const colorBuffer = new Texture(device, {
+    width, height,
+    format: PIXELFORMAT_RGBA8,
+    mipmaps: false
+});
+
+const depthBuffer = new Texture(device, {
+    width, height,
+    format: PIXELFORMAT_DEPTH,
+    mipmaps: false
+});
+
+camera.camera.renderTarget = new RenderTarget({ colorBuffer, depthBuffer });
+camera.camera.reverseZ = true;
+```
+
+The depth buffer must be single-sampled, or explicitly multisampled with the same sample count as the render target. When a multisampled render target uses a single-sampled depth texture, the engine renders into an internal `depth24plus-stencil8` attachment and only resolves the result to the float texture, which does not recover the lost precision.
+
+### Rendering Behavior {#reverse-z-rendering}
+
+Materials and depth states keep their usual meaning with reverse-z. The graphics device reverses the depth test functions and depth biases for the camera, so [`FUNC_LESSEQUAL`](https://api.playcanvas.com/engine/variables/FUNC_LESSEQUAL.html) still passes the nearer fragments, and the depth clear value of the camera (`clearDepth`, 1 by default) is reversed as well. The same layers can therefore be rendered by cameras with and without reverse-z.
+
+Cameras that render into the same depth buffer need to use the same setting.
+
+The built-in perspective and orthographic projections compute the reversed depth from the clip planes, keeping the far plane exact for any ratio of the far clip to the near clip. A projection supplied by `calculateProjection` is reversed from its own 32-bit values, which loses some precision when that ratio is very large.
+
+Shaders compiled for a camera with reverse-z get the `REVERSE_Z` define. Custom shaders that write or read the depth of the camera need to handle it, see [Reverse-Z Define](/user-manual/graphics/shaders/#reverse-z-define).
+
+:::warning
+
+Features that read the depth rendered by the camera do not support reverse-z yet, and render incorrectly with it:
+
+- The scene depth map, see [Depth Layer](depth-layer.md)
+- The depth prepass of [CameraFrame](/user-manual/graphics/posteffects/cameraframe/)
+- [Picking](scene-picker.md)
+- [Gaussian splats](/user-manual/gaussian-splatting/)
 
 :::
 

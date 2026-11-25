@@ -114,6 +114,16 @@ camera.setShaderPass('custom');
 #define CUSTOM_PASS
 ```
 
+### リバースZの定義 {#reverse-z-define}
+
+カメラが[リバースZ](/user-manual/graphics/cameras/projection#reverse-z)でレンダリングする場合、そのシェーダーは `REVERSE_Z` 定義付きでコンパイルされます。このとき深度バッファはニア面で 1、ファー面で 0 を格納するため、深度値を書き込む、またはカメラの深度を読み取るカスタムシェーダーは、値を反転する必要があります:
+
+```glsl
+#ifdef REVERSE_Z
+    depth = 1.0 - depth;
+#endif
+```
+
 ### シェーダーのインクルード {#shader-includes}
 
 エンジンは内部シェーダーをチャンクから構築します。これらは、最終的なシェーダーを形成するために結合される小さなシェーダー関数です。これらのチャンクは`ShaderMaterial`を使用したカスタムシェーダーでも使用でき、エンジンの機能を簡単に統合できます。

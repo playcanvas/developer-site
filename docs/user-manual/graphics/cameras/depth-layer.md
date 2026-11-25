@@ -14,6 +14,8 @@ Additionally, to capture these buffers, the capture needs to be enabled on a Cam
 
 To inspect captured depth on screen, use [TextureRenderer.sceneDepth](../debug-drawing.md#scene-depth).
 
+The scene depth map does not support cameras rendering with [reverse-z](projection.md#reverse-z) yet.
+
 ## Buffer access
 
 To access one of these buffers in the shader as a texture, these are the uniform names to be used:
