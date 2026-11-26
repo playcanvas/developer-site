@@ -16,7 +16,7 @@ PlayCanvas VS Code Extension は、PlayCanvas プロジェクトのテキスト�
     - VS Code: [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=playcanvas.playcanvas)
     - Cursor: [Open VSX](https://open-vsx.org/extension/playcanvas/playcanvas)
 3. サインイン通知を選択し、PlayCanvas アカウントで認証します。
-4. `Ctrl`/`Cmd` + `Shift` + `P` でコマンドパレットを開きます。
+4. <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd>（macOSでは<kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd>） でコマンドパレットを開きます。
 5. **PlayCanvas: Open Project** を実行し、プロンプトに従ってプロジェクトとブランチを選択します。
 
 Explorer にはプロジェクトのテキストアセットが表示されます。スクリプトを開くと、PlayCanvas 対応の型チェック、オートコンプリート、インライン API 情報を利用できます。**Collaborators** ビューには、同じプロジェクトで作業しているユーザーが表示されます。
@@ -38,9 +38,9 @@ Realtime はデフォルトのモードです。
 
 - 開いているファイルへの変更は入力と同時に同期されます。
 - コラボレーターによる変更は、開いているファイルに自動的に反映されます。
-- `Ctrl`/`Cmd` + `S` で PlayCanvas Editor のアセットを保存します。
+- <kbd>Ctrl</kbd>+<kbd>S</kbd>（macOSでは<kbd>Cmd</kbd>+<kbd>S</kbd>） で PlayCanvas Editor のアセットを保存します。
 - Explorer でファイルを作成、削除、名前変更、移動するとプロジェクトが更新されます。
-- `Ctrl`/`Cmd` + `Z` と `Ctrl`/`Cmd` + `Shift` + `Z` では、自分の変更のみを元に戻す、またはやり直します。
+- <kbd>Ctrl</kbd>+<kbd>Z</kbd>（macOSでは<kbd>Cmd</kbd>+<kbd>Z</kbd>） と <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd>（macOSでは<kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd>） では、自分の変更のみを元に戻す、またはやり直します。
 
 ファイルを開くと、サーバー上の最新状態に更新されます。他のアプリケーションが閉じているファイルをディスク上で変更した場合、Realtime モードはローカル変更をディスクに残しますが、サーバーには送信しません。拡張機能には Pull/Push モードを案内する警告が表示されます。
 
@@ -56,8 +56,8 @@ Pull/Push では、同期を実行するまでファイルシステム上の変�
 
 PlayCanvas のステータスバー項目には、受信、送信、コンフリクト中のファイル数が表示されます。コマンドパレットから **PlayCanvas: Pull** または **PlayCanvas: Push** を実行することもできます。
 
-- Pull: `Ctrl`/`Cmd` + `Alt` + `Down`
-- Push: `Ctrl`/`Cmd` + `Alt` + `Up`
+- Pull: <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>↓</kbd>（macOSでは<kbd>Cmd</kbd>+<kbd>Alt</kbd>+<kbd>↓</kbd>）
+- Push: <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>↑</kbd>（macOSでは<kbd>Cmd</kbd>+<kbd>Alt</kbd>+<kbd>↑</kbd>）
 
 Push は fast-forward のみに対応しています。最後の Pull 以降にサーバーが変更されている場合、上書きせずに Push が停止します。先に Pull してコンフリクトを解決し、再度 Push してください。
 

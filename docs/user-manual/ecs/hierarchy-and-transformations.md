@@ -337,7 +337,7 @@ trailer.insertChild(spare, 0);
 </TabItem>
 <TabItem value="editor" label="Editor">
 
-Drag an entity onto another in the Hierarchy to make it its child, or between two entities to move it there. The Editor keeps the entity's world transform when you reparent it, so it doesn't move in the viewport; hold **Ctrl** (**Cmd** on Mac) while you drop it to keep its local transform instead. See [Hierarchy Panel](/user-manual/editor/interface/hierarchy/#organizing-the-hierarchy).
+Drag an entity onto another in the Hierarchy to make it its child, or between two entities to move it there. The Editor keeps the entity's world transform when you reparent it, so it doesn't move in the viewport; hold <kbd>Ctrl</kbd> (<kbd>Cmd</kbd> on macOS) while you drop it to keep its local transform instead. See [Hierarchy Panel](/user-manual/editor/interface/hierarchy/#organizing-the-hierarchy).
 
 </TabItem>
 <TabItem value="react" label="React">

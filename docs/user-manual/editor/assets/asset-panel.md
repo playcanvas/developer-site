@@ -15,7 +15,7 @@ To create a new Folder, select the Add Asset (+) button and select 'Folder'. Alt
 
 To rename a folder, double click it in the hierarchy panel and edit the Name field in the Inspector.
 
-To delete a folder, double click it in the hierarchy and hit delete. Alternatively, right click the folder you want to delete and select 'Delete' from the context menu.
+To delete a folder, double click it in the hierarchy and press <kbd>Delete</kbd>. Alternatively, right click the folder you want to delete and select 'Delete' from the context menu.
 
 Folders can be drag and dropped into each other if you want to reorganize your folder structure.
 
@@ -63,7 +63,7 @@ Here are some examples:
 
 ## Drag and Drop {#drag-and-drop}
 
-Assets can be moved to different folders by dragging them from the main panel to a folder in the folder hierarchy. Note that assets support multi-selection. Pressing CTRL+A will select all assets in the currently selected folder.
+Assets can be moved to different folders by dragging them from the main panel to a folder in the folder hierarchy. Note that assets support multi-selection. Pressing <kbd>Ctrl</kbd>+<kbd>A</kbd> will select all assets in the currently selected folder.
 
 You can also drag Assets from the Asset Panel to highlighted slots in the [Inspector](/user-manual/editor/interface/inspector). Slots in the Inspector will either be asset attributes of components or asset-type script attributes.
 
@@ -75,11 +75,11 @@ You can also drag model, material, and cubemap assets directly into the [Viewpor
 
 ## Copy and Paste between Projects {#copy-and-paste-between-projects}
 
-To copy an asset or a selection of assets between projects, select the asset(s) and right-click to bring up the context menu to select 'Copy'. You can also use the hotkey Ctrl/Cmd + C instead if the context menu is not available due to being a read-only project.
+To copy an asset or a selection of assets between projects, select the asset(s) and right-click to bring up the context menu to select 'Copy'. You can also use the hotkey <kbd>Ctrl</kbd>+<kbd>C</kbd> (<kbd>Cmd</kbd>+<kbd>C</kbd> on macOS) instead if the context menu is not available due to being a read-only project.
 
 <img loading="lazy" src="/img/user-manual/editor/assets-panel/right-click-copy.png" alt="Right click copy menu" width="500" />
 
-In the project that you want to copy the asset(s) to, right click in the assets panel and select 'Paste'. Ctrl/Cmd + V hotkey can be used instead.
+In the project that you want to copy the asset(s) to, right click in the assets panel and select 'Paste'. <kbd>Ctrl</kbd>+<kbd>V</kbd> (<kbd>Cmd</kbd>+<kbd>V</kbd> on macOS) hotkey can be used instead.
 
 <img loading="lazy" src="/img/user-manual/editor/assets-panel/right-click-paste.png" alt="Right click paste menu" width="500" />
 
@@ -91,7 +91,7 @@ If you copy and paste just the model asset into a different project, those asset
 
 <img loading="lazy" src="/img/user-manual/editor/assets-panel/pasted-reference-assets.png" alt="Pasted referenced assets" width="100%" />
 
-By default, it is pasted as a flat hierarchy. If you want keep the folder structure, hold Shift when the context menu is opened and an option will appear called 'Paste (keep folders)'. This will attempt to keep the folder structure using the folder you are pasting into as the root folder.
+By default, it is pasted as a flat hierarchy. If you want keep the folder structure, hold <kbd>Shift</kbd> when the context menu is opened and an option will appear called 'Paste (keep folders)'. This will attempt to keep the folder structure using the folder you are pasting into as the root folder.
 
 <img loading="lazy" src="/img/user-manual/editor/assets-panel/right-click-paste-keep-folders.png" alt="Right click paste (keep folders) menu" width="500" />
 

@@ -5,7 +5,7 @@ description: Chrome と Firefox の開発者ツールでブレークポイント
 
 PlayCanvasのスクリプトを作成するためには、ブラウザの開発ツールにアクセスして使用する方法を知っていることが重要です。
 
-Chrome、Firefoxや他のブラウザでは、ブラウザに直接組み込まれているDeveloper Toolがあります。通常、Mac上でALT-CMD-I、WindowsではF12キーを押すことでアクセスすることができます。またはブラウザのメニューを使用して開発者ツールにアクセスすることができます。
+Chrome、Firefoxや他のブラウザでは、ブラウザに直接組み込まれているDeveloper Toolがあります。通常、macOSでは<kbd>Option</kbd>+<kbd>Cmd</kbd>+<kbd>I</kbd>、Windowsでは<kbd>F12</kbd>キーを押すことでアクセスすることができます。またはブラウザのメニューを使用して開発者ツールにアクセスすることができます。
 
 ### スクリプトのデバッグ
 

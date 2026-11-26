@@ -17,7 +17,7 @@ Checkpoints are created from the Version Control panel.
 
 ![VC Panel](/img/user-manual/editor/version-control/vc-panel.jpg)
 
-The New Checkpoint button opens the input form to create a checkpoint. You can also use the keyboard shortcut Ctrl+S (Cmd+S on OS X)
+The New Checkpoint button opens the input form to create a checkpoint. You can also use the keyboard shortcut <kbd>Ctrl</kbd>+<kbd>S</kbd> (<kbd>Cmd</kbd>+<kbd>S</kbd> on macOS)
 
 ![Create Checkpoint](/img/user-manual/editor/version-control/create-checkpoint.jpg)
 

@@ -111,7 +111,7 @@ The `leftButton`, `middleButton` and `rightButton` attributes set what each mous
 
 | Action | Description |
 | --- | --- |
-| `orbit` | Turns the view around the focus point. With shift held, it pans instead. |
+| `orbit` | Turns the view around the focus point. With <kbd>Shift</kbd> held, it pans instead. |
 | `pan` | Pans the view. |
 | `look` | Turns the view in place, as when flying with the keys. It orbits instead when `enableFly` is off. |
 | `none` | Ignores the button, leaving it to your application. |

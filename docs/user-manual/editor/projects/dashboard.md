@@ -7,7 +7,7 @@ The Project Dashboard is the control center for your projects. Open it at [playc
 
 ![Dashboard](/img/user-manual/editor/projects/project-dashboard.webp)
 
-The dashboard runs in its own browser tab and doesn't load the Editor itself, so it opens quickly. It never opens a project inside itself: **Open editor** switches to the project's own tab, opening it only if it isn't already open. **All Projects** in the Editor's logo menu, <kbd>Ctrl</kbd>/<kbd>Cmd</kbd> + <kbd>O</kbd> and the **Projects** breadcrumb in the viewport switch back to the dashboard, and the Editor keeps its scene.
+The dashboard runs in its own browser tab and doesn't load the Editor itself, so it opens quickly. It never opens a project inside itself: **Open editor** switches to the project's own tab, opening it only if it isn't already open. **All Projects** in the Editor's logo menu, <kbd>Ctrl</kbd>+<kbd>O</kbd> (<kbd>Cmd</kbd>+<kbd>O</kbd> on macOS) and the **Projects** breadcrumb in the viewport switch back to the dashboard, and the Editor keeps its scene.
 
 ## Dashboard Overview
 

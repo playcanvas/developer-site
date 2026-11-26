@@ -29,7 +29,7 @@ player.addChild(hat);
 </TabItem>
 <TabItem value="editor" label="Editor">
 
-[ヒエラルキー](/user-manual/editor/interface/hierarchy/)上部の **+** をクリックするか、エンティティを右クリックして**New Entity**を選択します。メニューには、空の**Entity**のほか、**3D › Box**や**Light › Spot Light**のように、名前のとおりのコンポーネントを最初から持つ既製のエンティティが並びます。新しいエンティティは選択中のエンティティの子として追加されるので、先に親を選択しておきます。**Ctrl+E**（Macでは**Cmd+E**）を押すと、メニューを使わずに空のエンティティを追加できます。
+[ヒエラルキー](/user-manual/editor/interface/hierarchy/)上部の **+** をクリックするか、エンティティを右クリックして**New Entity**を選択します。メニューには、空の**Entity**のほか、**3D › Box**や**Light › Spot Light**のように、名前のとおりのコンポーネントを最初から持つ既製のエンティティが並びます。新しいエンティティは選択中のエンティティの子として追加されるので、先に親を選択しておきます。<kbd>Ctrl</kbd>+<kbd>E</kbd>（macOSでは<kbd>Cmd</kbd>+<kbd>E</kbd>）を押すと、メニューを使わずに空のエンティティを追加できます。
 
 ![ヒエラルキーパネル。上部にRootエンティティ、その下に入れ子になったエンティティが表示され、ヘッダーに追加、複製、削除のボタンがあります](/img/user-manual/editor/hierarchy/hierarchy-panel.png)
 
@@ -91,7 +91,7 @@ console.log(enemy.tags.list()); // ['enemy']
 </TabItem>
 <TabItem value="editor" label="Editor">
 
-エンティティの**Name**と**Tags**は、[インスペクター](/user-manual/editor/interface/inspector/)の上部で設定します。選択中のエンティティの名前は、**F2**を押すか、ヒエラルキーでダブルクリックしても変更できます。
+エンティティの**Name**と**Tags**は、[インスペクター](/user-manual/editor/interface/inspector/)の上部で設定します。選択中のエンティティの名前は、<kbd>F2</kbd>を押すか、ヒエラルキーでダブルクリックしても変更できます。
 
 </TabItem>
 <TabItem value="react" label="React">
@@ -204,7 +204,7 @@ enemy.destroy();
 </TabItem>
 <TabItem value="editor" label="Editor">
 
-エンティティを選択して**Delete**を押すか、ヒエラルキー上部の削除ボタンをクリックするか、右クリックして**Delete**を選択します。実行時にエンティティを破棄するには、スクリプトからそのエンティティの`destroy()`を呼び出します。たとえば`this.entity.destroy()`です。
+エンティティを選択して<kbd>Delete</kbd>を押すか、ヒエラルキー上部の削除ボタンをクリックするか、右クリックして**Delete**を選択します。実行時にエンティティを破棄するには、スクリプトからそのエンティティの`destroy()`を呼び出します。たとえば`this.entity.destroy()`です。
 
 </TabItem>
 <TabItem value="react" label="React">
@@ -257,7 +257,7 @@ app.scripts.add(MyScript);
 </TabItem>
 <TabItem value="editor" label="Editor">
 
-シーン内のエンティティを複製するには、エンティティを選択して**Ctrl+D**（Macでは**Cmd+D**）を押すか、右クリックして**Duplicate**を選択します。各コピーは元のエンティティのすぐ隣に置かれます。
+シーン内のエンティティを複製するには、エンティティを選択して<kbd>Ctrl</kbd>+<kbd>D</kbd>（macOSでは<kbd>Cmd</kbd>+<kbd>D</kbd>）を押すか、右クリックして**Duplicate**を選択します。各コピーは元のエンティティのすぐ隣に置かれます。
 
 実行時には、シーン内のエンティティの`clone()`を呼び出すか、テンプレートアセットのインスタンスを作成します。テンプレートはインスタンス化する前に読み込まれている必要があるので、そのアセットをプリロードに設定するか、先に[読み込んで](/user-manual/assets/loading-unloading/)おきます。
 

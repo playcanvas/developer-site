@@ -29,7 +29,7 @@ In a [script](/user-manual/scripting/), the root is `this.app.root`, and `this.e
 </TabItem>
 <TabItem value="editor" label="Editor">
 
-Click **+** at the top of the [Hierarchy](/user-manual/editor/interface/hierarchy/), or right-click an entity and choose **New Entity**. The menu offers an empty **Entity** and ready-made ones, such as **3D › Box** and **Light › Spot Light**, that already have the components their names say. A new entity is added as a child of the selected entity, so select its parent first. Press **Ctrl+E** (**Cmd+E** on Mac) to add an empty entity without the menu.
+Click **+** at the top of the [Hierarchy](/user-manual/editor/interface/hierarchy/), or right-click an entity and choose **New Entity**. The menu offers an empty **Entity** and ready-made ones, such as **3D › Box** and **Light › Spot Light**, that already have the components their names say. A new entity is added as a child of the selected entity, so select its parent first. Press <kbd>Ctrl</kbd>+<kbd>E</kbd> (<kbd>Cmd</kbd>+<kbd>E</kbd> on macOS) to add an empty entity without the menu.
 
 ![The Hierarchy panel, showing the Root entity at the top and nested entities below it, with the add, duplicate and delete buttons in its header](/img/user-manual/editor/hierarchy/hierarchy-panel.png)
 
@@ -91,7 +91,7 @@ console.log(enemy.tags.list()); // ['enemy']
 </TabItem>
 <TabItem value="editor" label="Editor">
 
-Set an entity's **Name** and **Tags** at the top of the [Inspector](/user-manual/editor/interface/inspector/). You can also rename the selected entity by pressing **F2**, or by double-clicking it in the Hierarchy.
+Set an entity's **Name** and **Tags** at the top of the [Inspector](/user-manual/editor/interface/inspector/). You can also rename the selected entity by pressing <kbd>F2</kbd>, or by double-clicking it in the Hierarchy.
 
 </TabItem>
 <TabItem value="react" label="React">
@@ -204,7 +204,7 @@ enemy.destroy();
 </TabItem>
 <TabItem value="editor" label="Editor">
 
-Select entities and press **Delete**, click the delete button at the top of the Hierarchy, or right-click and choose **Delete**. To destroy an entity at runtime, call `destroy()` on it from a script, for example `this.entity.destroy()`.
+Select entities and press <kbd>Delete</kbd>, click the delete button at the top of the Hierarchy, or right-click and choose **Delete**. To destroy an entity at runtime, call `destroy()` on it from a script, for example `this.entity.destroy()`.
 
 </TabItem>
 <TabItem value="react" label="React">
@@ -257,7 +257,7 @@ app.scripts.add(MyScript);
 </TabItem>
 <TabItem value="editor" label="Editor">
 
-To copy entities in the scene, select them and press **Ctrl+D** (**Cmd+D** on Mac), or right-click and choose **Duplicate**. Each copy is placed next to its original.
+To copy entities in the scene, select them and press <kbd>Ctrl</kbd>+<kbd>D</kbd> (<kbd>Cmd</kbd>+<kbd>D</kbd> on macOS), or right-click and choose **Duplicate**. Each copy is placed next to its original.
 
 At runtime, call `clone()` on an entity in the scene, or create an instance of a template asset. A template needs to be loaded before you instantiate it, so mark its asset to preload, or [load it](/user-manual/assets/loading-unloading/) first:
 

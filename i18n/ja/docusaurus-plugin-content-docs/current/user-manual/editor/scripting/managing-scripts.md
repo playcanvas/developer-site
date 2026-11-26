@@ -74,7 +74,7 @@ Script Asset 自体は、Script Component を介して Entity にアタッチさ
 Script Asset を削除するには：
 
 1. Asset Panel で Script Asset を選択します。
-2. Delete キーを押すか、右クリックして Delete を選択します。
+2. <kbd>Delete</kbd>キーを押すか、右クリックして Delete を選択します。
 
 3. 確認ダイアログが表示されます。「DELETE」をクリックして確定します。
 

@@ -49,7 +49,7 @@ CDN から XR スクリプトを読み込む場合は、[Getting Started ガイ�
 
 :::
 
-* [`xr-session.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/xr/xr-session.mjs) - WebXR セッションのライフサイクルを管理します。アプリイベント（デフォルトでは `ar:start` と `vr:start`）に応じて AR または VR セッションを開始し、`xr:end` イベントまたは Escape キーで終了し、カメラリグのトランスフォーム、AR の透過、クリーンアップを自動的に処理します。
+* [`xr-session.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/xr/xr-session.mjs) - WebXR セッションのライフサイクルを管理します。アプリイベント（デフォルトでは `ar:start` と `vr:start`）に応じて AR または VR セッションを開始し、`xr:end` イベントまたは <kbd>Esc</kbd>キーで終了し、カメラリグのトランスフォーム、AR の透過、クリーンアップを自動的に処理します。
 * [`xr-controllers.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/xr/xr-controllers.mjs) - 検出された XR コントローラー（手を含む）の XR コントローラーモデル（GLB）を動的にダウンロードし、レンダリングします。
 * [`xr-navigation.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/xr/xr-navigation.mjs) - リグを移動させます。ポイントして選択することによるテレポート、左スティックによるスムーズな移動、そして右スティックによるスナップまたはスムーズな回転とスナップでの上下移動です。テレポートの着地点は、コードでスクリプトの `castRay` を割り当てて地面を自分で判定しない限り、スクリプトの `ground-height`（デフォルトは 0）にある平面です。
 * [`xr-menu.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/xr/xr-menu.mjs) - ヘッドセット内メニューを表示します（ハンドトラッキングでは手のひらを上に向けるジェスチャー、またはコントローラーのボタンで表示）。メニュー項目はアプリイベントを発火します — 「Exit XR」ボタンに最適です。
@@ -116,7 +116,7 @@ document.getElementById('enterVR').addEventListener('click', () => app.fire('vr:
 
 :::
 
-イベント名は `xrSession` のスクリプト属性（`start-ar-event`、`start-vr-event`、`end-event`）なので、独自のイベントと衝突する場合は名前を変更できます。セッションの終了に追加のコードは不要です。`xrSession` は、`xr:end` イベントが発火したとき（上記の「Exit XR」メニュー項目）、またはユーザーが Escape キーを押したときにセッションを終了します。
+イベント名は `xrSession` のスクリプト属性（`start-ar-event`、`start-vr-event`、`end-event`）なので、独自のイベントと衝突する場合は名前を変更できます。セッションの終了に追加のコードは不要です。`xrSession` は、`xr:end` イベントが発火したとき（上記の「Exit XR」メニュー項目）、またはユーザーが <kbd>Esc</kbd>キーを押したときにセッションを終了します。
 
 また、デバイスがそのセッションタイプをサポートしている間だけ、各ボタンを表示することもできます。エンジンはアプリの開始後に非同期でサポートを確認し、デバイスが接続・切断されるたびに再確認するため、現在の結果でボタンを設定し、`available` イベントに追従させてください。
 

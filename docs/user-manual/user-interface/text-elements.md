@@ -34,7 +34,7 @@ screen.addChild(title);
 </TabItem>
 <TabItem value="editor" label="Editor">
 
-Select a screen or an element, click **+** in the Hierarchy and choose **User Interface › Text Element**. Set **Font** to a font asset, then set **Text**, **Font Size** and **Color**. In the **Text** field, press Shift+Enter to start a new line.
+Select a screen or an element, click **+** in the Hierarchy and choose **User Interface › Text Element**. Set **Font** to a font asset, then set **Text**, **Font Size** and **Color**. In the **Text** field, press <kbd>Shift</kbd>+<kbd>Enter</kbd> to start a new line.
 
 </TabItem>
 <TabItem value="react" label="React">

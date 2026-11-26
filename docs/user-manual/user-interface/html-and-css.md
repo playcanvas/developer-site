@@ -209,7 +209,7 @@ The browser lays out and paints HTML on its own, alongside the canvas. Changing 
 
 ## Accessibility {#accessibility}
 
-In-canvas UI is pixels: screen readers can't read it, and keyboard users can't reach its controls with Tab. HTML controls are accessible by default when they use the right elements, such as `<button>`, `<input>` and `<label>`. Use HTML for menus, settings and anything else that has to be accessible, and give every control a visible focus state.
+In-canvas UI is pixels: screen readers can't read it, and keyboard users can't reach its controls with <kbd>Tab</kbd>. HTML controls are accessible by default when they use the right elements, such as `<button>`, `<input>` and `<label>`. Use HTML for menus, settings and anything else that has to be accessible, and give every control a visible focus state.
 
 ## HTML in the Canvas {#html-in-the-canvas}
 

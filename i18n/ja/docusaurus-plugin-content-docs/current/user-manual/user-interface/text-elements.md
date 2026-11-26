@@ -34,7 +34,7 @@ screen.addChild(title);
 </TabItem>
 <TabItem value="editor" label="Editor">
 
-スクリーンまたはエレメントを選択し、ヒエラルキーで **+** をクリックして**User Interface › Text Element**を選びます。**Font**にフォントアセットを設定し、続けて**Text**、**Font Size**、**Color**を設定します。**Text**フィールドで改行するには、Shift+Enterを押します。
+スクリーンまたはエレメントを選択し、ヒエラルキーで **+** をクリックして**User Interface › Text Element**を選びます。**Font**にフォントアセットを設定し、続けて**Text**、**Font Size**、**Color**を設定します。**Text**フィールドで改行するには、<kbd>Shift</kbd>+<kbd>Enter</kbd>を押します。
 
 </TabItem>
 <TabItem value="react" label="React">

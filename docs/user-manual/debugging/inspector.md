@@ -64,15 +64,15 @@ app.root.addChild(entity);
 
 | Button | Description |
 |--------|-------------|
-| **Pause / Resume** (F9) | Pauses the application: time stands still while rendering continues. |
-| **Step** (F10) | Advances one frame while paused. |
+| **Pause / Resume** (<kbd>F9</kbd>) | Pauses the application: time stands still while rendering continues. |
+| **Step** (<kbd>F10</kbd>) | Advances one frame while paused. |
 | **Pick** | Hover over the view to outline the entity under the pointer, and click to select it. |
 | **Fly** | Flies the camera with the mouse and WASD, without moving the application's own camera. |
 | **Orbit** | Orbits the camera around the selected entity: drag to orbit, right-drag to pan and use the wheel to zoom. |
 | **Pop out** | Moves the panel into a window of its own, leaving the canvas unobscured. |
 | **Hide** (`` ` ``) | Hides the panel. |
 
-Press Esc to stop picking, flying or orbiting.
+Press <kbd>Esc</kbd> to stop picking, flying or orbiting.
 
 ## Tabs
 
@@ -102,7 +102,7 @@ The Frame graph tab can draw a frame one draw call at a time, to see how the ima
 
 1. Open the **Frame graph** tab and select a forward pass, or one of its layer steps, such as the opaque meshes of the World layer.
 2. Turn on **Debug frame**. The application pauses, and the pass draws only up to the selected draw: the view shows the frame as far as that draw.
-3. Press the Up and Down arrow keys to step back and forward one draw at a time. The property view lists the drawn mesh instances with the current one highlighted, the view outlines it, and the status bar shows its number, such as *draw 8 of 12 · World opaque*. Expand an entry to see more about it, such as its mesh and material.
+3. Press <kbd>↑</kbd> and <kbd>↓</kbd> to step back and forward one draw at a time. The property view lists the drawn mesh instances with the current one highlighted, the view outlines it, and the status bar shows its number, such as *draw 8 of 12 · World opaque*. Expand an entry to see more about it, such as its mesh and material.
 4. Turn off **Debug frame** to draw the full frame again.
 
 <video autoPlay muted loop controls playsInline src='/video/debugging-inspector-debug-frame.mp4' style={{width: '100%', maxWidth: '800px', height: 'auto'}} />

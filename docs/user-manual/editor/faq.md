@@ -91,17 +91,17 @@ To create a skybox for your scene you first need to create a [Cubemap asset](/us
 
 ## How do I delete an asset?
 
-To delete an asset select it and press **Delete** or right click on it and select Delete.
+To delete an asset select it and press <kbd>Delete</kbd> or right click on it and select Delete.
 
 ## How do I delete an Entity?
 
-You can delete an Entity by selecting it and pressing **Delete**. Alternatively you can click on the <span class="pc-icon">&#57636;</span> Delete button in the Hierarchy panel or right click on the Entity and select Delete from the context menu.
+You can delete an Entity by selecting it and pressing <kbd>Delete</kbd>. Alternatively you can click on the <span class="pc-icon">&#57636;</span> Delete button in the Hierarchy panel or right click on the Entity and select Delete from the context menu.
 
 ## How do I duplicate an Entity?
 
-To duplicate an Entity use the <span class="pc-icon">&#57638;</span> Duplicate button in the Hierarchy panel or press **Ctrl+D**.
+To duplicate an Entity use the <span class="pc-icon">&#57638;</span> Duplicate button in the Hierarchy panel or press <kbd>Ctrl</kbd>+<kbd>D</kbd>.
 
-You can also copy and paste an Entity. To copy press **Ctrl+C** and to paste **Ctrl+V**.
+You can also copy and paste an Entity. To copy press <kbd>Ctrl</kbd>+<kbd>C</kbd> and to paste <kbd>Ctrl</kbd>+<kbd>V</kbd>.
 
 ## How do I play an animation?
 
@@ -137,7 +137,7 @@ To render a 3D model you need to add a **Model Component** to an Entity and drag
 
 To move an Entity, select it and then move it using the **<span class="pc-icon">&#57617;</span> Translate tool**. To rotate it use the **<span class="pc-icon">&#57619;</span> Rotate tool** and to scale it use the **<span class="pc-icon">&#57618;</span> Scale tool**.
 
-Switch between the Translate / Rotate / Scale tools by pressing 1 / 2 / 3 respectively.
+Switch between the Translate / Rotate / Scale tools by pressing <kbd>1</kbd> / <kbd>2</kbd> / <kbd>3</kbd> respectively.
 
 ## How do I upload assets?
 

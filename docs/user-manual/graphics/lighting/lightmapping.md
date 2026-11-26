@@ -34,7 +34,7 @@ In 3ds Max this option (Enable Gamma/LUT Correction) should be disabled and can 
 
 ![3ds Max > Preferences > Linear Space](/img/user-manual/graphics/lighting/lightmapping/3ds-max-preferences.png)
 
-Then make sure Color Mapping is updated. It can be found in Render Settings (F10, or from Render to Texture window). Output should not be clamped, and not post-processed (Mode option), Linear Multiply should be used for linear color space.
+Then make sure Color Mapping is updated. It can be found in Render Settings (<kbd>F10</kbd>, or from Render to Texture window). Output should not be clamped, and not post-processed (Mode option), Linear Multiply should be used for linear color space.
 Here is a screenshot of what options should be set to what values, click the "Default" button to expand settings to "Expert":
 
 ![3D's Max > Render Settings](/img/user-manual/graphics/lighting/lightmapping/3ds-max-render-settings-color-mapping.png)

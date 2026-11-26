@@ -16,7 +16,7 @@ The extension is [open source on GitHub](https://github.com/playcanvas/vscode-ex
     - VS Code: [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=playcanvas.playcanvas)
     - Cursor: [Open VSX](https://open-vsx.org/extension/playcanvas/playcanvas)
 3. Select the sign-in notification and authenticate with your PlayCanvas account.
-4. Open the Command Palette with `Ctrl`/`Cmd` + `Shift` + `P`.
+4. Open the Command Palette with <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> (<kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> on macOS).
 5. Run **PlayCanvas: Open Project** and follow the prompts to choose a project and branch.
 
 The Explorer shows the project's text assets. Open a script to use PlayCanvas-aware type checking, autocomplete, and inline API information. The **Collaborators** view shows who else is working in the project.
@@ -38,9 +38,9 @@ Realtime is the default mode.
 
 - Changes to open files synchronize as you type.
 - Changes from collaborators appear in your open files automatically.
-- `Ctrl`/`Cmd` + `S` saves the asset in the PlayCanvas Editor.
+- <kbd>Ctrl</kbd>+<kbd>S</kbd> (<kbd>Cmd</kbd>+<kbd>S</kbd> on macOS) saves the asset in the PlayCanvas Editor.
 - Creating, deleting, renaming, or moving files in the Explorer updates the project.
-- `Ctrl`/`Cmd` + `Z` and `Ctrl`/`Cmd` + `Shift` + `Z` undo or redo only your own changes.
+- <kbd>Ctrl</kbd>+<kbd>Z</kbd> (<kbd>Cmd</kbd>+<kbd>Z</kbd> on macOS) and <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd> (<kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd> on macOS) undo or redo only your own changes.
 
 Opening a file refreshes it from the server. If another application changes a closed file on disk, realtime mode leaves the local edit on disk but does not submit it. The extension shows a warning directing you to Pull/Push mode.
 
@@ -56,8 +56,8 @@ Pull/Push keeps filesystem edits local until you choose to synchronize them. Thi
 
 The PlayCanvas status-bar item shows incoming, outgoing, and conflicted file counts. You can also run **PlayCanvas: Pull** or **PlayCanvas: Push** from the Command Palette.
 
-- Pull: `Ctrl`/`Cmd` + `Alt` + `Down`
-- Push: `Ctrl`/`Cmd` + `Alt` + `Up`
+- Pull: <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>↓</kbd> (<kbd>Cmd</kbd>+<kbd>Alt</kbd>+<kbd>↓</kbd> on macOS)
+- Push: <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>↑</kbd> (<kbd>Cmd</kbd>+<kbd>Alt</kbd>+<kbd>↑</kbd> on macOS)
 
 Push is fast-forward only. If the server changed since your last Pull, Push stops without overwriting it. Pull first, resolve any conflicts, and then Push again.
 

@@ -91,17 +91,17 @@ JavaScriptを使用してエンティティの動作を制御できます。 エ
 
 ## アセットを削除するには?
 
-アセットを選択し、**Delete**を押すか、右クリックしてDeleteを選択します。
+アセットを選択し、<kbd>Delete</kbd>を押すか、右クリックしてDeleteを選択します。
 
 ## エンティティを削除するには?
 
-エンティティを選択し、**Delete**を押すか、ヒエラルキーパネルの<span class="pc-icon">&#57636;</span> Deleteボタンをクリックするか、エンティティを右クリックしてコンテキストメニューからDeleteを選択することで、エンティティを削除できます。
+エンティティを選択し、<kbd>Delete</kbd>を押すか、ヒエラルキーパネルの<span class="pc-icon">&#57636;</span> Deleteボタンをクリックするか、エンティティを右クリックしてコンテキストメニューからDeleteを選択することで、エンティティを削除できます。
 
 ## エンティティを複製するには?
 
-ヒエラルキーパネルの<span class="pc-icon">&#57638;</span> Duplicateボタンを使用するか、**Ctrl+D**を押してエンティティを複製できます。
+ヒエラルキーパネルの<span class="pc-icon">&#57638;</span> Duplicateボタンを使用するか、<kbd>Ctrl</kbd>+<kbd>D</kbd>を押してエンティティを複製できます。
 
-また、エンティティをコピーして貼り付けることもできます。コピーするには**Ctrl + C**、貼り付けるには**Ctrl + V**を押します。
+また、エンティティをコピーして貼り付けることもできます。コピーするには<kbd>Ctrl</kbd>+<kbd>C</kbd>、貼り付けるには<kbd>Ctrl</kbd>+<kbd>V</kbd>を押します。
 
 ## アニメーションを再生するには?
 
@@ -137,7 +137,7 @@ JavaScriptを使用してエンティティの動作を制御できます。 エ
 
 Entityを移動するには、それを選択して、**<span class="pc-icon">&#57617;</span> Translate tool**を使用して移動します。回転させるには、**<span class="pc-icon">&#57619;</span> Rotate tool**を使用し、拡大縮小するには、**<span class="pc-icon">&#57618;</span> Scale tool**を使用します。
 
-Translate / Rotate / Scaleツールを切り替えるには、それぞれ1/2/3を押します。
+Translate / Rotate / Scaleツールを切り替えるには、それぞれ<kbd>1</kbd>/<kbd>2</kbd>/<kbd>3</kbd>を押します。
 
 ## アセットをアップロードするには?
 

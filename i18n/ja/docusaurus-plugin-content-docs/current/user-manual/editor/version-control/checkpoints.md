@@ -17,7 +17,7 @@ description: 永続スナップショットの作成、復元、ハードリセ�
 
 ![VC Panel](/img/user-manual/editor/version-control/vc-panel.jpg)
 
-New Checkpointボタンをクリックすると、チェックポイントを作成するための入力フォームが開きます。また、キーボードショートカット Ctrl + S (OS Xの場合、Cmd + S) を使用することもできます。
+New Checkpointボタンをクリックすると、チェックポイントを作成するための入力フォームが開きます。また、キーボードショートカット <kbd>Ctrl</kbd>+<kbd>S</kbd> (macOSの場合、<kbd>Cmd</kbd>+<kbd>S</kbd>) を使用することもできます。
 
 ![Create Checkpoint](/img/user-manual/editor/version-control/create-checkpoint.jpg)
 

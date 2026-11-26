@@ -144,7 +144,7 @@ There are different ways to author normal maps, the main two differing in the fo
 
 ![Normal map](/img/user-manual/assets/models/building/wall-norm.jpg)
 
-Notice lighter areas at the bottom edge of raised areas. PlayCanvas expects the green component (or the Y component of each normal in the normal map) to be flipped. Loading the file into Photoshop, selecting the green channel and pressing Ctrl+I to invert the channel gives:
+Notice lighter areas at the bottom edge of raised areas. PlayCanvas expects the green component (or the Y component of each normal in the normal map) to be flipped. Loading the file into Photoshop, selecting the green channel and pressing <kbd>Ctrl</kbd>+<kbd>I</kbd> to invert the channel gives:
 
 ![Normal map with Y component flipped](/img/user-manual/assets/models/building/wall-norm-yflip.jpg)
 

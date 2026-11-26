@@ -9,7 +9,7 @@ import StepVideo from '@site/src/components/StepVideo';
 
 ## コードエディターの開き方
 
-[PlayCanvasエディター](/user-manual/editor/)内でCtrl + Iを押すことで、コードエディターを開くことができます。また、ツールバーアイコンをクリックすることでも開くことができます。
+[PlayCanvasエディター](/user-manual/editor/)内で<kbd>Ctrl</kbd>+<kbd>I</kbd>を押すことで、コードエディターを開くことができます。また、ツールバーアイコンをクリックすることでも開くことができます。
 
 ![Code Editor Toolbar](/img/user-manual/scripting/code-editor-toolbar.png)
 
@@ -39,7 +39,7 @@ import StepVideo from '@site/src/components/StepVideo';
 
 ここでは、アセットの内容を実際に編集できます。エディタには[Monaco](https://github.com/Microsoft/monaco-editor)が使用されており、これはVisual Studio Codeで使用されているテキストエディタライブラリと同じです。
 
-さらに、エディタはオートコンプリートをサポートしています。文字を入力するか、Ctrl + Spaceを押すと、オートコンプリート候補のリストが表示されます。
+さらに、エディタはオートコンプリートをサポートしています。文字を入力するか、<kbd>Ctrl</kbd>+<kbd>Space</kbd>を押すと、オートコンプリート候補のリストが表示されます。
 
 また、エディタはJavaScriptのコードをリントします。つまり、コードを入力すると、エディタは可能なエラーや不審な使用を検出するためにコードをスキャンします。これは[JSHint](https://jshint.com/)の支援によって行われます。JSHintは、挙動を制御する特別なコメントもサポートしています。これらの特別なコメントのリストについては、[ドキュメント](https://jshint.com/docs/)を参照してください。
 
@@ -59,7 +59,7 @@ import StepVideo from '@site/src/components/StepVideo';
 
 ## コマンドパレット
 
-テキスト編集機能は、コマンドパレットを使用して見つけることができます。WindowsではCtrl + Shift + P、MacではCmd + Shift + Pを使用します。
+テキスト編集機能は、コマンドパレットを使用して見つけることができます。Windowsでは<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd>、macOSでは<kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd>を使用します。
 
 ![](/img/user-manual/scripting/command-palette.png)
 
@@ -67,36 +67,36 @@ import StepVideo from '@site/src/components/StepVideo';
 
 エディタは、コードを編集する際に役立つさまざまなショートカットをサポートしています。これらのオプションは、メニューやコマンドパレットで見つけることができます。最も一般的なものは以下の通りです。
 
-| コマンド                         | PC                       | Mac                        |
+| コマンド                         | Windows                  | macOS                      |
 |---------------------------------|--------------------------|----------------------------|
-| 保存                            | Ctrl + S                 | Cmd + S                    |
-| 元に戻す                            | Ctrl + Z                 | Cmd + Z                    |
-| やり直し                            | Ctrl + Y                 | Cmd + Shift + ZまたはCmd + Y |
-| ファイル内検索                    | Ctrl + F                 | Cmd + F                    |
-| 次の一致を検索                 | F3                       | Cmd + G                    |
-| 前の一致を検索             | Shift + F3               | Cmd + Shift + G            |
-| 置換                         | Ctrl + H                 | Cmd + Alt + F              |
-| ファイル内を検索                   | Ctrl + Shift + F         | Cmd + Shift + F            |
-| 行または選択のコメント       | Ctrl + /                 | Cmd + /                    |
-| ブロックコメント行または選択 | Alt + Shift + A          | Alt + Shift + A            |
-| 行または選択のインデント        | Tab                      | Tab                        |
-| 行または選択のインデントを解除     | Shift + Tab              | Shift + Tab                |
-| 宣言にジャンプ             | Ctrl + F12               | Cmd + F12                  |
-| オートコンプリート表示               | Ctrl + SpaceまたはCtrl + I | Ctrl + SpaceまたはCmd + I    |
+| 保存                            | <kbd>Ctrl</kbd>+<kbd>S</kbd>                 | <kbd>Cmd</kbd>+<kbd>S</kbd>                    |
+| 元に戻す                            | <kbd>Ctrl</kbd>+<kbd>Z</kbd>                 | <kbd>Cmd</kbd>+<kbd>Z</kbd>                    |
+| やり直し                            | <kbd>Ctrl</kbd>+<kbd>Y</kbd>                 | <kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd>または<kbd>Cmd</kbd>+<kbd>Y</kbd> |
+| ファイル内検索                    | <kbd>Ctrl</kbd>+<kbd>F</kbd>                 | <kbd>Cmd</kbd>+<kbd>F</kbd>                    |
+| 次の一致を検索                 | <kbd>F3</kbd>                       | <kbd>Cmd</kbd>+<kbd>G</kbd>                    |
+| 前の一致を検索             | <kbd>Shift</kbd>+<kbd>F3</kbd>               | <kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>G</kbd>            |
+| 置換                         | <kbd>Ctrl</kbd>+<kbd>H</kbd>                 | <kbd>Cmd</kbd>+<kbd>Alt</kbd>+<kbd>F</kbd>              |
+| ファイル内を検索                   | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>F</kbd>         | <kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>F</kbd>            |
+| 行または選択のコメント       | <kbd>Ctrl</kbd>+<kbd>/</kbd>                 | <kbd>Cmd</kbd>+<kbd>/</kbd>                    |
+| ブロックコメント行または選択 | <kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>A</kbd>          | <kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>A</kbd>            |
+| 行または選択のインデント        | <kbd>Tab</kbd>                      | <kbd>Tab</kbd>                        |
+| 行または選択のインデントを解除     | <kbd>Shift</kbd>+<kbd>Tab</kbd>              | <kbd>Shift</kbd>+<kbd>Tab</kbd>                |
+| 宣言にジャンプ             | <kbd>Ctrl</kbd>+<kbd>F12</kbd>               | <kbd>Cmd</kbd>+<kbd>F12</kbd>                  |
+| オートコンプリート表示               | <kbd>Ctrl</kbd>+<kbd>Space</kbd>または<kbd>Ctrl</kbd>+<kbd>I</kbd> | <kbd>Ctrl</kbd>+<kbd>Space</kbd>または<kbd>Cmd</kbd>+<kbd>I</kbd>    |
 
 ## 検索
 
-ファイル内のテキストを検索するには、WindowsではCtrl + F、MacではCmd + Fを押します。これにより、右上に検索パネルが表示されます。
+ファイル内のテキストを検索するには、Windowsでは<kbd>Ctrl</kbd>+<kbd>F</kbd>、macOSでは<kbd>Cmd</kbd>+<kbd>F</kbd>を押します。これにより、右上に検索パネルが表示されます。
 
 ![](/img/user-manual/scripting/monaco-find-panel.png)
 
-ここに検索語を入力し、Enterキーを押してください。Enterキーを連続して押すことでマッチした項目間を移動できます（Shift + Enterで後方に移動します）。
+ここに検索語を入力し、<kbd>Enter</kbd>キーを押してください。<kbd>Enter</kbd>キーを連続して押すことでマッチした項目間を移動できます（<kbd>Shift</kbd>+<kbd>Enter</kbd>で後方に移動します）。
 
-マッチした項目を置換したい場合は、右側の置換用の入力フィールドに置換したいテキストを入力します。その後、Enterキーを押してマッチした項目を置換し、Enterキーを連打して subsequent match を置換します（Shift + Enterで後方に置換します）。
+マッチした項目を置換したい場合は、右側の置換用の入力フィールドに置換したいテキストを入力します。その後、<kbd>Enter</kbd>キーを押してマッチした項目を置換し、<kbd>Enter</kbd>キーを連打して subsequent match を置換します（<kbd>Shift</kbd>+<kbd>Enter</kbd>で後方に置換します）。
 
 ### ファイル内を検索
 
-すべてのアセット内で語句を検索することもできます。これを行うには、Ctrl + Shift + Fを押して下部に「ファイル内を検索」パネルを表示します。以前と同様に検索語を入力し、Enterキーを押します。これにより、検索結果が表示される新しいタブが開きます。
+すべてのアセット内で語句を検索することもできます。これを行うには、<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>F</kbd>を押して下部に「ファイル内を検索」パネルを表示します。以前と同様に検索語を入力し、<kbd>Enter</kbd>キーを押します。これにより、検索結果が表示される新しいタブが開きます。
 
 入力フィールドの左側には、様々な検索オプションがあります。これらを使用すると、正規表現を使用した検索、大文字・小文字を区別する検索、または全単語を検索することができます。もし、正規表現をより深く学び、実験したいなら、[RegExr](https://regexr.com/)はチートシート、例、そして正規表現のテスト用のオンラインエディタを提供している素晴らしいサイトです。
 
@@ -110,7 +110,7 @@ import StepVideo from '@site/src/components/StepVideo';
 
 ## クイックオープン
 
-Ctrl + P（MacではCmd + P）を押すことで、アセットを素早く開くことができます。これにより、そのアセットの名前で検索できるパネルが開きます。アセットの名前を入力し始めると、パネルはあいまい検索を行い、探しているアセットを見つけます。Enterキーを押すと選択したアセットが開きます。
+<kbd>Ctrl</kbd>+<kbd>P</kbd>（macOSでは<kbd>Cmd</kbd>+<kbd>P</kbd>）を押すことで、アセットを素早く開くことができます。これにより、そのアセットの名前で検索できるパネルが開きます。アセットの名前を入力し始めると、パネルはあいまい検索を行い、探しているアセットを見つけます。<kbd>Enter</kbd>キーを押すと選択したアセットが開きます。
 
 <StepVideo src="/video/user-manual/scripting/go-to-anything.mp4" poster="/img/user-manual/scripting/go-to-anything.webp" label="Go to Anything" width={1500} height={650} />
 
@@ -130,12 +130,12 @@ Ctrl + P（MacではCmd + P）を押すことで、アセットを素早く開�
 
 ### 複数選択編集
 
-Altキーを押しながら左マウスボタンをクリックすると、エディタに別のカーソルが追加されます。これにより、ファイルの複数の箇所で同じ変更を素早く行うことができます。
+<kbd>Alt</kbd>キーを押しながら左マウスボタンをクリックすると、エディタに別のカーソルが追加されます。これにより、ファイルの複数の箇所で同じ変更を素早く行うことができます。
 
 <StepVideo src="/video/user-manual/scripting/code-editor-multiple-selection.mp4" poster="/img/user-manual/scripting/code-editor-multiple-selection.webp" label="Multiple Selection Editing" width={660} height={68} />
 
 ### 矩形選択
 
-Alt + Shiftキーを押しながら左マウスボタンをドラッグすると、矩形選択が作成されます。これは、テキストの列を選択し、編集するのに便利です。
+<kbd>Alt</kbd>+<kbd>Shift</kbd>キーを押しながら左マウスボタンをドラッグすると、矩形選択が作成されます。これは、テキストの列を選択し、編集するのに便利です。
 
 <StepVideo src="/video/user-manual/scripting/code-editor-rectangular-selection.mp4" poster="/img/user-manual/scripting/code-editor-rectangular-selection.webp" label="Rectangular Selection" width={660} height={68} />

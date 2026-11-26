@@ -37,9 +37,9 @@ The Model Viewer supports the following commonly used Gaussian splat formats:
    | Left double click | Set orbit point |
    | Left click + drag | Orbit around the splat |
    | Right click + drag | Look around |
-   | Shift + click + drag | Pan the view |
+   | <kbd>Shift</kbd>-drag | Pan the view |
    | Mouse wheel | Zoom in/out |
-   | WASD or Arrow keys | Move forwards/backwards/left/right |
+   | <kbd>W</kbd>, <kbd>A</kbd>, <kbd>S</kbd>, <kbd>D</kbd> or the arrow keys | Move forwards/backwards/left/right |
 
 ## Open Source and Customization
 

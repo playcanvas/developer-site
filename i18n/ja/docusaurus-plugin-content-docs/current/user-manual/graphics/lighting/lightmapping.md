@@ -34,7 +34,7 @@ PlayCanvasでは、シーン内でライトマップを使用する２つの方�
 
 ![3ds Max > Preferences > Linear Space](/img/user-manual/graphics/lighting/lightmapping/3ds-max-preferences.png)
 
-次に、カラーマッピングが更新されていることを確認します。レンダリング設定(F10、またはレンダリングからテクスチャウィンドウ)にあります。出力はクランプや後処理されるべきではありません(Modeオプション)。Linear Multiplyは線形色空間に使用します。
+次に、カラーマッピングが更新されていることを確認します。レンダリング設定(<kbd>F10</kbd>、またはレンダリングからテクスチャウィンドウ)にあります。出力はクランプや後処理されるべきではありません(Modeオプション)。Linear Multiplyは線形色空間に使用します。
 以下は、どのオプションをどの値に設定するかのスクリーンショットです。Defaultボタンをクリックして設定をExpertに展開します。
 
 ![3D's Max > Render Settings](/img/user-manual/graphics/lighting/lightmapping/3ds-max-render-settings-color-mapping.png)
