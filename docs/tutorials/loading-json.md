@@ -97,7 +97,7 @@ Once you have the javascript object you can access the data as normal. For examp
 <TabItem value="esm" label="ESM">
 
 ```javascript
-async function loadJsonFromRemote(url, callback) {
+async loadJsonFromRemote(url, callback) {
     const res = await fetch(url);
     const json = await res.json();
     callback(json);
@@ -106,10 +106,10 @@ async function loadJsonFromRemote(url, callback) {
 //...
 
 // load JSON from a remote server
-loadJsonFromRemote("https://api.github.com/", (data) => {
+this.loadJsonFromRemote("https://api.github.com/", (data) => {
     // display JSON data from remote server
-    el = document.querySelector("#xhr-json");
-    el.textContent = JSON.stringify(data, null, 4);
+    const el = document.querySelector("#xhr-json");
+    if (el) el.textContent = JSON.stringify(data, null, 4);
 });
 ```
 
@@ -139,9 +139,7 @@ this.loadJsonFromRemote("https://api.github.com/", function (data) {
 </TabItem>
 </Tabs>
 
-In this code we are using the XMLHttpRequest object (which is part of the standard web browser API) to request JSON data from a URL, in this case the Github API.
-
-After receiving the `"load"` event we parse the JSON data using `JSON.parse` (another part of the standard web browser API) and return the data via the `callback` function.
+In this code we request JSON data from a URL, in this case the GitHub API, using the standard web browser API. The ESM version uses `fetch` and parses the response with `res.json()`. The Classic version uses an `XMLHttpRequest` and, after receiving the `"load"` event, parses the response with `JSON.parse`. Either way, the data is returned via the `callback` function.
 
 Note, that the call to `loadJsonFromRemote` is **asynchronous**.
 
@@ -151,7 +149,7 @@ Here is the full code listing:
 <TabItem value="esm" label="ESM">
 
 ```javascript
-import { Script } from 'playcanvas';
+import { Script, Asset } from 'playcanvas';
 
 export class Game extends Script {
     static scriptName = "game";
@@ -229,13 +227,10 @@ export class Game extends Script {
         return names;
     }
 
-    loadJsonFromRemote(url, callback) {
-        const xhr = new XMLHttpRequest();
-        xhr.addEventListener("load", function() {
-            callback(JSON.parse(this.responseText));
-        });
-        xhr.open("GET", url);
-        xhr.send();
+    async loadJsonFromRemote(url, callback) {
+        const res = await fetch(url);
+        const json = await res.json();
+        callback(json);
     }
 }
 ```

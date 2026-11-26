@@ -10,7 +10,7 @@ thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/4058
 import StepVideo from '@site/src/components/StepVideo';
 
 <div className='iframe-container'>
-    <iframe src="https://playcanv.as/p/HI8kniOx/" title="Anim State Graph Blending" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
+    <iframe src="https://playcanv.as/p/rXC3jL7Z/" title="Anim State Graph Blending" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 :::info
@@ -74,7 +74,7 @@ Once created it’ll display a slot for the animstategraph asset we just created
 
 ## Keyboard Input
 
-With the animations fully set up, we now need to make it possible for users to interact with our system. This is where scripts come in! A script component is required to enable this behavior which will be written in the script `keyboard_controls.js`. You can see how it’s attached to the entity below:
+With the animations fully set up, we now need to make it possible for users to interact with our system. This is where scripts come in! A script component is required to enable this behavior which will be written in the script `keyboard_controls.mjs`. You can see how it’s attached to the entity below:
 
 ![Keyboard Input](/img/tutorials/anim_blending/keyboard_input.png)
 
@@ -87,16 +87,10 @@ import TabItem from '@theme/TabItem';
 <TabItem value="esm" label="ESM">
 
 ```javascript
-import { Script, EVENT_KEYDOWN, EVENT_KEYUP, KEY_P } from 'playcanvas';
+import { Script, KEY_P } from 'playcanvas';
 
 export class KeyboardControls extends Script {
     static scriptName = 'keyboardControls';
-
-    // initialize code called once per entity
-    initialize() {
-        this.app.keyboard.on(EVENT_KEYDOWN, this.keyDown, this);
-        this.app.keyboard.on(EVENT_KEYUP, this.keyUp, this);
-    }
 
     update(dt) {
         if (this.app.keyboard.wasPressed(KEY_P) && (this.entity.anim.baseLayer.activeState !== 'Punch')) {
@@ -115,12 +109,6 @@ export class KeyboardControls extends Script {
 
 ```javascript
 var KeyboardControls = pc.createScript('keyboardControls');
-
-// initialize code called once per entity
-KeyboardControls.prototype.initialize = function() {
-    this.app.keyboard.on(pc.EVENT_KEYDOWN, this.keyDown, this);
-    this.app.keyboard.on(pc.EVENT_KEYUP, this.keyUp, this);
-};
 
 KeyboardControls.prototype.update = function(dt) {
     if (this.app.keyboard.wasPressed(pc.KEY_P) && (this.entity.anim.baseLayer.activeState !== 'Punch')) {
