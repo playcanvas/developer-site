@@ -48,7 +48,7 @@ Open your project, right click in the assets panel and click on 'Paste'
 * ベース(青で囲まれた部分)
 * ノブ(青で囲まれた部分)
 
-![](/img/tutorials/touchscreen-joypad-controls/joystick-layout.png)
+![](/img/tutorials/touchscreen-joypad-controls/joystick-layout.webp)
 
 入力領域は、タッチおよびマウス(デバッグ目的)イベントをリッスンし、イベントの伝播を停止します。
 
@@ -66,7 +66,7 @@ Open your project, right click in the assets panel and click on 'Paste'
 
 タッチスクリーンゲームやアプリケーションで一般的に見つかるジョイスティックには、3つの動作タイプがあります。
 
-![](/img/tutorials/touchscreen-joypad-controls/joystick-type.png)
+![](/img/tutorials/touchscreen-joypad-controls/joystick-type.webp)
 
 'Fixed in place' where the base of the joystick does not move from it's position:
 <StepVideo src="/video/tutorials/touchscreen-joypad-controls/joystick-fixed.mp4" poster="/img/tutorials/touchscreen-joypad-controls/joystick-fixed.webp" width={854} height={480} />

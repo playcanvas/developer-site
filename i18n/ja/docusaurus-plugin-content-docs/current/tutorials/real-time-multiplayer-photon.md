@@ -34,7 +34,7 @@ Photonの無料プランでは、最大20人の同時接続ユーザー(CCU)に�
 
 [チュートリアルプロジェクト](https://playcanvas.com/project/954410/)をフォークします。シーンには、Light、Plane、Camera、そして **Player** という名前の赤いカプセルがあります。
 
-![Tutorial Project](/img/tutorials/multiplayer-photon/1.png)
+![Tutorial Project](/img/tutorials/multiplayer-photon/1.webp)
 
 プロジェクトには、このチュートリアルで完成する2つのスクリプト **photon-loadbalancing-playcanvas.mjs** と **player.mjs** も含まれています。手順に沿って自分で書く場合は、先にフォークからこれらを削除してください。完成したプロジェクトをそのまま動かす場合は、以下の手順でSDKとApp IDを追加してください。
 

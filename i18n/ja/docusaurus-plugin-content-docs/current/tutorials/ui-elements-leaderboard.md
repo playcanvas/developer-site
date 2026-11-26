@@ -20,7 +20,7 @@ import TabItem from '@theme/TabItem';
 
 ヒエラルキー上でUIはこのように見えます:
 
-![Hierarchy](/img/tutorials/ui/leaderboard/hierarchy.png)
+![Hierarchy](/img/tutorials/ui/leaderboard/hierarchy.webp)
 
 私たちは2Dの[Screen](/user-manual/user-interface/screens/)を持っており、タイトルとサブタイトルを表示するための2つの要素、およびリーダーボードデータの背景とパネルとして使用される2つのイメージ要素があります。 `Your Score` の下には、プレイヤーのリーダーボード内での位置を表示し、`Leaderboard` の下にはその他の情報を表示します。
 
@@ -44,13 +44,13 @@ The screen entityには、`leaderboard`スクリプトを含むScriptコンポ�
 
 リーダーボードの1行ごとのテンプレートは、ヒエラルキー構造上で次のようになっています。
 
-![Entry Template](/img/tutorials/ui/leaderboard/template.png)
+![Entry Template](/img/tutorials/ui/leaderboard/template.webp)
 
 プレーヤーのスコアと 'PTS'という名前のラベルを表示するための、リーダーボードの位置、プレイヤー名、プレイヤーのスコアを表示するための4つの子要素があります。
 
 `Entry Template`自体はGroup Elementです。
 
-![Entry Template Attributes](/img/tutorials/ui/leaderboard/group.png)
+![Entry Template Attributes](/img/tutorials/ui/leaderboard/group.webp)
 
 Group Elementには分割された水平アンカーがあることに注意してください:
 
@@ -64,25 +64,25 @@ Group Elementには分割された水平アンカーがあることに注意し�
 
 位置は左にアンカーされています:
 
-![Position](/img/tutorials/ui/leaderboard/position.png)
+![Position](/img/tutorials/ui/leaderboard/position.webp)
 
 ### Name
 
 名前は左にヒモ付けされ、やや右に移動されます。
 
-![Name](/img/tutorials/ui/leaderboard/name.png)
+![Name](/img/tutorials/ui/leaderboard/name.webp)
 
 ### スコア (Score)
 
 スコアは右にアンカーされています。
 
-![Score](/img/tutorials/ui/leaderboard/score.png)
+![Score](/img/tutorials/ui/leaderboard/score.webp)
 
 ### ポイント (Points)
 
 ポイントは右にアンカーされています。
 
-![Pts](/img/tutorials/ui/leaderboard/pts.png)
+![Pts](/img/tutorials/ui/leaderboard/pts.webp)
 
 ## スクリプト (Script)
 

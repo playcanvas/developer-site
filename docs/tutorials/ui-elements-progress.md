@@ -19,7 +19,7 @@ We can easily create progress bars using the built-in [Elements](/user-manual/us
 
 This is what our UI looks like in the Hierarchy:
 
-![Hierarchy](/img/tutorials/ui/progressbar/hierarchy.png)
+![Hierarchy](/img/tutorials/ui/progressbar/hierarchy.webp)
 
 ## Screen setup
 

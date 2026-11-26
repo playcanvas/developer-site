@@ -34,7 +34,7 @@ Photon's free plan supports up to 20 concurrent users (CCU).
 
 Fork the [tutorial project](https://playcanvas.com/project/954410/). Its scene has a Light, a Plane, a Camera and a red capsule named **Player**:
 
-![Tutorial Project](/img/tutorials/multiplayer-photon/1.png)
+![Tutorial Project](/img/tutorials/multiplayer-photon/1.webp)
 
 The project also contains the two finished scripts from this tutorial, **photon-loadbalancing-playcanvas.mjs** and **player.mjs**. To write them yourself as you follow the steps, delete them from your fork first. To run the finished project instead, add the SDK and your App ID as described below.
 

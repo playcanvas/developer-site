@@ -22,7 +22,7 @@ import TabItem from '@theme/TabItem';
 
 UIの構造は次のようになります。
 
-![Hierarchy](/img/tutorials/ui/stats/hierarchy.png)
+![Hierarchy](/img/tutorials/ui/stats/hierarchy.webp)
 
 ## スクリーンの設定
 
@@ -42,13 +42,13 @@ Boostカウンターを開きます - 他のエンティティも同じ構成で
 
 `stats-boost`のインスペクター。
 
-![Boost Attributes](/img/tutorials/ui/stats/boost-attributes.png)
+![Boost Attributes](/img/tutorials/ui/stats/boost-attributes.webp)
 
 ご覧のとおり、すべての要素を含む適切なサイズのGroup Elementコンポーネントがあり、画面の下部に固定されています。また、スクリプト `uiStats`が割り当てられているScript Component があります。このスクリプトを使用することで、グループの要素とのインタラクションを処理できます。
 
 ヒエラルキーにあるグループは次のように表示されます。
 
-![Boost Hierarchy](/img/tutorials/ui/stats/boost-hierarchy.png)
+![Boost Hierarchy](/img/tutorials/ui/stats/boost-hierarchy.webp)
 
 グループには次の子要素があります。
 

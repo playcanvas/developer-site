@@ -50,7 +50,7 @@ The joystick is made of three Entities:
 - Base (outlined in blue)
 - Nub (outlined in blue)
 
-![](/img/tutorials/touchscreen-joypad-controls/joystick-layout.png)
+![](/img/tutorials/touchscreen-joypad-controls/joystick-layout.webp)
 
 The input area will listen for touch and mouse (for debugging purposes) events and also stops the propagation of the event.
 
@@ -68,7 +68,7 @@ The base and nub Entities are controlled by the script and are UI Elements. If y
 
 There are 3 behavior types for the joystick that are commonly found in touch screen games and applications.
 
-![](/img/tutorials/touchscreen-joypad-controls/joystick-type.png)
+![](/img/tutorials/touchscreen-joypad-controls/joystick-type.webp)
 
 'Fixed in place' where the base of the joystick does not move from its position:
 <StepVideo src="/video/tutorials/touchscreen-joypad-controls/joystick-fixed.mp4" poster="/img/tutorials/touchscreen-joypad-controls/joystick-fixed.webp" width={854} height={480} />
