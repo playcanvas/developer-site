@@ -9,7 +9,7 @@ PlayCanvas incorporates an advanced graphics engine that delivers high-performan
 
 The PlayCanvas engine supports multiple graphics backends:
 
-* **WebGPU (Beta)** - Next-generation graphics API with reduced driver overhead and compute shader support
+* **WebGPU** - Next-generation graphics API with reduced driver overhead and compute shader support
 * **WebGL 2.0** - Mature and [widely supported](https://caniuse.com/webgl2) across all browsers and devices
 * **Null** - For running the engine in headless environments such as Node.
 
