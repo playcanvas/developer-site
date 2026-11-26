@@ -19,7 +19,7 @@ When building a UI for your application you will almost certainly need to create
 
 In this [scene](https://playcanvas.com/editor/scene/547900) we have created a 2D [Screen](/user-manual/user-interface/screens/) that looks like this in the hierarchy:
 
-![Hierarchy](/img/tutorials/ui/buttons/hierarchy.png)
+![Hierarchy](/img/tutorials/ui/buttons/hierarchy.webp)
 
 ## Screen setup
 
@@ -53,13 +53,13 @@ Remember to enable Use Input on the Element component so the user can interact w
 
 And set the Image Entity property on the Button component to be same Entity that the Element component is on.
 
-<img loading="lazy" src="/img/tutorials/ui/buttons/set-image-entity-button.png" width="300" />
+<img loading="lazy" src="/img/tutorials/ui/buttons/set-image-entity-button.webp" width="300" />
 
 ## Button setup
 
 Let's take a closer look at the first button in the example project:
 
-<img loading="lazy" src="/img/tutorials/ui/buttons/button.png" width="300" />
+<img loading="lazy" src="/img/tutorials/ui/buttons/button.webp" width="300" />
 
 The button has 3 components:
 
@@ -69,7 +69,7 @@ The button has 3 components:
 
 The button Entity also has a Text Element as a child for showing text (this is optional depending on the style of your button).
 
-<img loading="lazy" src="/img/tutorials/ui/buttons/text-element.png" width="300" />
+<img loading="lazy" src="/img/tutorials/ui/buttons/text-element.webp" width="300" />
 
 The Element's type is Image and it's anchored to the bottom of the screen.
 
@@ -77,7 +77,7 @@ The Element's type is Image and it's anchored to the bottom of the screen.
 
 After anchoring the button we give it an offset from the bottom by simply moving it up.
 
-<img loading="lazy" src="/img/tutorials/ui/buttons/offset-position.png" width="300" />
+<img loading="lazy" src="/img/tutorials/ui/buttons/offset-position.webp" width="300" />
 
 We also have Use Input enabled in order to interact with the button.
 
@@ -97,7 +97,7 @@ This can be done via two Transition Modes:
 
 Tinting the button color in each state is the easiest method to add some user feedback when they interact with it. In the project, the High Quality button has the following setup:
 
-<img loading="lazy" src="/img/tutorials/ui/buttons/high-quality-button-setup.png" width="300" />
+<img loading="lazy" src="/img/tutorials/ui/buttons/high-quality-button-setup.webp" width="300" />
 
 With the following effect:
 
@@ -107,7 +107,7 @@ With the following effect:
 
 We can also change the sprite image of the button in the different states for cases where you may want the button to change shape or want to give a look of the button being 'pressed' into the screen. The Low Quality button has the following setup:
 
-<img loading="lazy" src="/img/tutorials/ui/buttons/low-quality-button-setup.png" width="300" />
+<img loading="lazy" src="/img/tutorials/ui/buttons/low-quality-button-setup.webp" width="300" />
 
 With the following effect:
 

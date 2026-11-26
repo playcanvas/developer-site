@@ -19,7 +19,7 @@ This tutorial demonstrates how to create a simple leaderboard using the built-in
 
 This is what our UI looks like in the hierarchy:
 
-![Hierarchy](/img/tutorials/ui/leaderboard/hierarchy.png)
+![Hierarchy](/img/tutorials/ui/leaderboard/hierarchy.webp)
 
 As you can see we have a 2D [Screen](/user-manual/user-interface/screens/), two Elements to show the title and sub title and two Image Elements which are going to be used as the backgrounds and panels for our leaderboard data. Under `Your Score` we are going to show the player's position in the leaderboard and under `Leaderboard` we will show the rest.
 
@@ -43,13 +43,13 @@ For each panel we have an Image element that shows its background. Under the pan
 
 This is what our template for each leaderboard row looks like in the hierarchy:
 
-![Entry Template](/img/tutorials/ui/leaderboard/template.png)
+![Entry Template](/img/tutorials/ui/leaderboard/template.webp)
 
 It has four child Text Elements for displaying the Position in the leaderboard, the name of the player, the player's score and a label that says 'PTS'.
 
 The `Entry Template` itself is a Group Element:
 
-![Entry Template Attributes](/img/tutorials/ui/leaderboard/group.png)
+![Entry Template Attributes](/img/tutorials/ui/leaderboard/group.webp)
 
 Notice how the Group Element has split horizontal anchors:
 
@@ -63,25 +63,25 @@ Now let's look at the rest of the Group's children.
 
 Position is anchored to the left:
 
-![Position](/img/tutorials/ui/leaderboard/position.png)
+![Position](/img/tutorials/ui/leaderboard/position.webp)
 
 ### Name
 
 Name is anchored to the left and moved a bit to the right:
 
-![Name](/img/tutorials/ui/leaderboard/name.png)
+![Name](/img/tutorials/ui/leaderboard/name.webp)
 
 ### Score
 
 Score is anchored to the right
 
-![Score](/img/tutorials/ui/leaderboard/score.png)
+![Score](/img/tutorials/ui/leaderboard/score.webp)
 
 ### Points
 
 Points are anchored to the right
 
-![Pts](/img/tutorials/ui/leaderboard/pts.png)
+![Pts](/img/tutorials/ui/leaderboard/pts.webp)
 
 ## Script
 

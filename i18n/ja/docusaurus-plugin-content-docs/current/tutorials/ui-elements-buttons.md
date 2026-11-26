@@ -19,7 +19,7 @@ import StepVideo from '@site/src/components/StepVideo';
 
 この[シーン](https://playcanvas.com/editor/scene/547900)では、次のように階層が設定された2D [スクリーン](/user-manual/user-interface/screens/)を作成しました。
 
-![Hierarchy](/img/tutorials/ui/buttons/hierarchy.png)
+![Hierarchy](/img/tutorials/ui/buttons/hierarchy.webp)
 
 ## スクリーンの設定
 
@@ -53,13 +53,13 @@ import StepVideo from '@site/src/components/StepVideo';
 
 ButtonコンポーネントのImage Entityプロパティを、Elementコンポーネントがある同じエンティティに設定する必要があります。
 
-<img loading="lazy" src="/img/tutorials/ui/buttons/set-image-entity-button.png" width="300" />
+<img loading="lazy" src="/img/tutorials/ui/buttons/set-image-entity-button.webp" width="300" />
 
 ## ボタン設定
 
 サンプルプロジェクトの最初のボタンをもう少し詳しく見てみましょう。
 
-<img loading="lazy" src="/img/tutorials/ui/buttons/button.png" width="300" />
+<img loading="lazy" src="/img/tutorials/ui/buttons/button.webp" width="300" />
 
 ボタンには3つのコンポーネントがあります。
 
@@ -69,7 +69,7 @@ ButtonコンポーネントのImage Entityプロパティを、Elementコンポ�
 
 ボタンエンティティには、ボタンのスタイルによってオプションであるText Elementが子として含まれています。
 
-<img loading="lazy" src="/img/tutorials/ui/buttons/text-element.png" width="300" />
+<img loading="lazy" src="/img/tutorials/ui/buttons/text-element.webp" width="300" />
 
 ElementのタイプはImageで、画面の下部にアンカーが設定されています。
 
@@ -77,7 +77,7 @@ ElementのタイプはImageで、画面の下部にアンカーが設定され�
 
 ボタンをアンカーし、それを下に移動するだけで、ボタンから下部までのオフセットを設定します。
 
-<img loading="lazy" src="/img/tutorials/ui/buttons/offset-position.png" width="300" />
+<img loading="lazy" src="/img/tutorials/ui/buttons/offset-position.webp" width="300" />
 
 ボタンをインタラクト可能にするには、Use Inputが有効になっている必要があります。
 
@@ -97,7 +97,7 @@ ElementのタイプはImageで、画面の下部にアンカーが設定され�
 
 各状態でボタンの色を変更することは、ボタンとインタラクトしたときにユーザーフィードバックを追加する最も簡単な方法です。プロジェクトでは、High Qualityボタンに以下の設定があります。
 
-<img loading="lazy" src="/img/tutorials/ui/buttons/high-quality-button-setup.png" width="300" />
+<img loading="lazy" src="/img/tutorials/ui/buttons/high-quality-button-setup.webp" width="300" />
 
 次のエフェクトがあります。
 
@@ -107,7 +107,7 @@ ElementのタイプはImageで、画面の下部にアンカーが設定され�
 
 ボタンの形状を変更したり、ボタンが画面に「押し込まれた」見え方をしたりしたい場合は、異なる状態でボタンのスプライト画像を変更することができます。Low Quality には以下の設定があります。
 
-<img loading="lazy" src="/img/tutorials/ui/buttons/low-quality-button-setup.png" width="300" />
+<img loading="lazy" src="/img/tutorials/ui/buttons/low-quality-button-setup.webp" width="300" />
 
 次のエフェクトがあります。
 

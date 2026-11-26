@@ -20,7 +20,7 @@ import TabItem from '@theme/TabItem';
 
 UIの構造は次のようになります。
 
-![Hierarchy](/img/tutorials/ui/progressbar/hierarchy.png)
+![Hierarchy](/img/tutorials/ui/progressbar/hierarchy.webp)
 
 ## スクリーンの設定
 

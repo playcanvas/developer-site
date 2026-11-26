@@ -21,7 +21,7 @@ For each stat we need a minus button, a plus button, a progress bar and some tex
 
 This is what our UI looks like in the Hierarchy:
 
-![Hierarchy](/img/tutorials/ui/stats/hierarchy.png)
+![Hierarchy](/img/tutorials/ui/stats/hierarchy.webp)
 
 ## Screen setup
 
@@ -41,13 +41,13 @@ We will only examine the Boost stat - the others are exactly the same. This is w
 
 And these are its attributes:
 
-![Boost Attributes](/img/tutorials/ui/stats/boost-attributes.png)
+![Boost Attributes](/img/tutorials/ui/stats/boost-attributes.webp)
 
 As you can see it has a Group Element component with the appropriate size to contain all our elements and it's anchored to the bottom of the screen. It also has a Script Component with the script `uiStats` assigned to it. This script will allow us to handle interactions with the Elements of the group.
 
 This is what our group looks like in the Hierarchy:
 
-![Boost Hierarchy](/img/tutorials/ui/stats/boost-hierarchy.png)
+![Boost Hierarchy](/img/tutorials/ui/stats/boost-hierarchy.webp)
 
 Our group has the following child Elements:
 

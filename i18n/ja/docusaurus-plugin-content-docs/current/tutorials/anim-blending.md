@@ -30,7 +30,7 @@ import StepVideo from '@site/src/components/StepVideo';
 
 animstategraphアセットを作成すると、エディタが表示されます。
 
-![Initial Editor](/img/tutorials/anim_blending/initial_editor.png)
+![Initial Editor](/img/tutorials/anim_blending/initial_editor.webp)
 
 デフォルトでは、animstategraphアセットは ‘Initial State’ という名前の単一のアニメーション状態を作成し、開始状態からデフォルトのトランジションが作成されます。つまり、animstategraphが最初に再生されたときには、即座に「Initial State」が再生されます。この「Initial State」の名前を、このチュートリアルで使用される初期アニメーションである「Idle」に変更することができます。次に、キャンバス上で右クリックし、`Add new state`を選択して、グラフに別のアニメーション状態を作成することができます。この状態の名前は「Punch」と変更することができます。
 
@@ -44,19 +44,19 @@ animstategraphアセットを作成すると、エディタが表示されます
 
 次に、このトランジションがどのタイミングで発動するかを決定するためのパラメータを設定します。まず、左側のパラメータパネルで `+ parameter` を選択します。次に、このパラメータの名前を `punch` とし、 ‘Boolean‘ タイプに設定します。
 
-![Add Parameter](/img/tutorials/anim_blending/add_parameter.png)
+![Add Parameter](/img/tutorials/anim_blending/add_parameter.webp)
 
 今度は、作成したトランジションにこのパラメータを条件として設定することができます。まず、このトランジションを選択し、次にトランジションインスペクターで `New Condition` を選択します。
 
 このトランジションを、新しく作成した `punch` パラメータに対してテストするように設定し、条件を以下のように ‘== true‘ と設定します。
 
-![Add Condition](/img/tutorials/anim_blending/add_condition.png)
+![Add Condition](/img/tutorials/anim_blending/add_condition.webp)
 
 アイドル状態からパンチ状態への遷移は、パンチパラメータがtrueに設定された場合にのみ行われます。これにより、本当にパンチするときにのみ状態が変化することが確保されます。
 
 最後に、PunchからIdleに戻るためのもう1つのトランジションを作成する必要があります。
 
-![Complete State Graph](/img/tutorials/anim_blending/complete_state_graph.png)
+![Complete State Graph](/img/tutorials/anim_blending/complete_state_graph.webp)
 
 ここでは、同じ持続時間を設定しましたが、その条件はパンチパラメータがtrueではなくなったかどうかをテストします。
 
@@ -76,7 +76,7 @@ animstategraphアセットを作成すると、エディタが表示されます
 
 アニメーションが完全に設定されたら、ユーザーがシステムと対話できるようにする必要があります。そのためには、スクリプトが必要です！この動作を有効にするには、スクリプトコンポーネントが必要であり、それは `keyboard_controls.mjs` という名前のスクリプトに記述されます。以下では、それがエンティティにどのように添付されるかをご覧いただけます。
 
-![Keyboard Input](/img/tutorials/anim_blending/keyboard_input.png)
+![Keyboard Input](/img/tutorials/anim_blending/keyboard_input.webp)
 
 以前に設定した `punch` というパラメータを覚えていますか？このスクリプトは、簡単に言えば、現在「P」キーが押されているかどうかと、キャラクターが現在パンチしているかどうかに応じて、そのパラメータをオンとオフに切り替える役割を担います。
 

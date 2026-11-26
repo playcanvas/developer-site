@@ -34,7 +34,7 @@ Photon's free plan supports up to 20 concurrent users (CCU).
 
 Fork the [tutorial project](https://playcanvas.com/project/954410/). Its scene has a Light, a Plane, a Camera and a red capsule named **Player**:
 
-![Tutorial Project](/img/tutorials/multiplayer-photon/1.png)
+![Tutorial Project](/img/tutorials/multiplayer-photon/1.webp)
 
 The project also contains the two finished scripts from this tutorial, **photon-loadbalancing-playcanvas.mjs** and **player.mjs**. To write them yourself as you follow the steps, delete them from your fork first. To run the finished project instead, add the SDK and your App ID as described below.
 
@@ -250,13 +250,13 @@ PhotonLoadBalancingPlayCanvas.prototype.initialize = function () {
 
 Attach the **photon-loadbalancing-playcanvas** script to the Root entity in the Editor.
 
-![Root Entity - Inspector](/img/tutorials/multiplayer-photon/11.png)
+![Root Entity - Inspector](/img/tutorials/multiplayer-photon/11.webp)
 
 #### Paste AppId into the script attribute
 
 Enter AppId as a script attribute.
 
-![Script Attributes](/img/tutorials/multiplayer-photon/12.png)
+![Script Attributes](/img/tutorials/multiplayer-photon/12.webp)
 
 ```javascript
 this.loadBalancingClient = new Photon.LoadBalancing.LoadBalancingClient( this.wss ? 1 : 0, this.appId, this.appVersion );

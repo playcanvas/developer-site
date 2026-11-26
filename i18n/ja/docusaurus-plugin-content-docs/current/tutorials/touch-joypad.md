@@ -48,7 +48,7 @@ Open your project, right click in the assets panel and click on 'Paste'
 * ベース(青で囲まれた部分)
 * ノブ(青で囲まれた部分)
 
-![](/img/tutorials/touchscreen-joypad-controls/joystick-layout.png)
+![](/img/tutorials/touchscreen-joypad-controls/joystick-layout.webp)
 
 入力領域は、タッチおよびマウス(デバッグ目的)イベントをリッスンし、イベントの伝播を停止します。
 
@@ -66,15 +66,15 @@ Open your project, right click in the assets panel and click on 'Paste'
 
 タッチスクリーンゲームやアプリケーションで一般的に見つかるジョイスティックには、3つの動作タイプがあります。
 
-![](/img/tutorials/touchscreen-joypad-controls/joystick-type.png)
+![](/img/tutorials/touchscreen-joypad-controls/joystick-type.webp)
 
-'Fixed in place' where the base of the joystick does not move from it's position:
+**FIXED**, where the base of the joystick does not move from its position:
 <StepVideo src="/video/tutorials/touchscreen-joypad-controls/joystick-fixed.mp4" poster="/img/tutorials/touchscreen-joypad-controls/joystick-fixed.webp" width={854} height={480} />
 
-'Move to first touch and fixed' where the base of the joystick moves to where the user first touches in the input area and then stays fixed:
+**RELATIVE**, where the base of the joystick moves to where the user first touches in the input area and then stays fixed:
 <StepVideo src="/video/tutorials/touchscreen-joypad-controls/joystick-relative-fixed.mp4" poster="/img/tutorials/touchscreen-joypad-controls/joystick-relative-fixed.webp" width={854} height={480} />
 
-'Move to first touch and drags' where the base of the joystick moves to where the user first touches in the input area and then is dragged when the user drags pass the joystick range:
+**DRAG**, where the base of the joystick moves to where the user first touches in the input area and then is dragged when the user drags past the joystick range:
 <StepVideo src="/video/tutorials/touchscreen-joypad-controls/joystick-relative-drag.mp4" poster="/img/tutorials/touchscreen-joypad-controls/joystick-relative-drag.webp" width={855} height={480} />
 
 これは、ランタイムで変更できるため、アプリケーションの設定の一部として、ユーザーオプションとして追加することができます。
