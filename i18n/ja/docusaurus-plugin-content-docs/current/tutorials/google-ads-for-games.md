@@ -49,7 +49,7 @@ Google H5 Games Adsを使用するには、[Google Adsenseアカウント](https
 
 [Google H5 Ad Tutorial (Start)](https://playcanvas.com/project/889095/overview/google-h5-ad-tutorial-start)プロジェクトのダッシュボードページに移動し、「フォーク」をクリックして、プロジェクトを確認してみましょう。
 
-これは、`ui-controller.js`スクリプトに広告を表示するためのボタンクリックコールバックを追加する準備が整ったシンプルなプロジェクトです。
+これは、`ui-controller.mjs`スクリプトに広告を表示するためのボタンクリックコールバックを追加する準備が整ったシンプルなプロジェクトです。
 
 <Tabs defaultValue="esm" groupId='script-code'>
 <TabItem value="esm" label="ESM">
@@ -61,22 +61,26 @@ initialize() {
     this.rewardedGivenPanelEntity.enabled = false;
     this.rewardedAdButtonEntity.button.active = false;
 
-    const onRefresh = () => {}
+    const onRefresh = () => {
 
-    this.refreshButtonEntity.button.on('click', onRefresh)
+    };
 
-    this.interstitialAdButtonEntity.button.on('click', (e) => {
+    this.refreshButtonEntity.button.on('click', () => {
+        onRefresh();
+    });
+
+    this.interstitialAdButtonEntity.button.on('click', () => {
 
     });
 
-    this.rewardedAdButtonEntity.button.on('click', (e) => {
+    this.rewardedAdButtonEntity.button.on('click', () => {
 
     });
 
-    this.okRewardButtonEntity.button.on('click', (e) => {
-        
+    this.okRewardButtonEntity.button.on('click', () => {
+        this.rewardedGivenPanelEntity.enabled = false;
     });
-};
+}
 ```
 
 </TabItem>
@@ -239,7 +243,33 @@ UiController.prototype.initialize = function() {
 
 まず、プロジェクトにインタースティシャル広告を追加してみましょう。
 
-`ui-controller.js`のインタースティシャル広告ボタンクリックイベントコールバックに以下のコードを追加してください。
+`ui-controller.mjs`のインタースティシャル広告ボタンクリックイベントコールバックに以下のコードを追加してください。
+
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
+
+```javascript
+// ...
+this.interstitialAdButtonEntity.button.on('click', () => {
+    if (afg.ready) {
+        afg.adBreak({
+            type: 'start',
+            name: 'test-interstitial',
+            beforeAd: () => {
+                afg.onBeforeAd();
+            },
+            adBreakDone: () => {
+                afg.onAfterAd();
+                onRefresh();
+            }
+        });
+    }
+});
+// ...
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
 
 ```javascript
 // ...
@@ -255,6 +285,9 @@ this.interstitialAdButtonEntity.button.on('click', function(e) {
 }, this);
 // ...
 ```
+
+</TabItem>
+</Tabs>
 
 ここでは、まずGoogle SDKが準備ができているかどうかを確認し、`adBreak`を呼び出します。これはGoogle SDK自体が公開している関数です。詳細なドキュメントとオプションは[彼らのサイト](https://developers.google.com/ad-placement/apis/adbreak)で見つけることができます。例として、以下を使用します。
 
@@ -343,6 +376,44 @@ app.on('game:gameover', function () {
 
 報酬付き広告が表示可能かどうかは、リフレッシュボタンを使用して確認します。プレーヤーがボタンを押すと、次のコードを`onRefresh`関数に追加します。
 
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
+
+```javascript
+// ...
+const onRefresh = () => {
+    this.rewardedAdButtonEntity.button.active = false;
+
+    // Check if rewarded ad is available to view
+    if (afg.ready) {
+        afg.adBreak({
+            type: 'reward',
+            name: 'test-reward',
+            beforeReward: (showAdFn) => {
+                this._showRewardAdFn = showAdFn;
+                this.rewardedAdButtonEntity.button.active = true;
+            },
+            adViewed: () => {
+                afg.onAfterAd();
+                this.rewardedGivenPanelEntity.enabled = true;
+                this.rewardedAdButtonEntity.button.active = false;
+                this._showRewardAdFn = null;
+            },
+            adDismissed: () => {
+                afg.onAfterAd();
+                this.rewardedAdButtonEntity.button.active = false;
+                this._showRewardAdFn = null;
+            },
+            adBreakDone: (placementInfo) => { }
+        });
+    }
+};
+// ...
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
+
 ```javascript
 // ...
 var onRefresh = function () {
@@ -375,6 +446,9 @@ var onRefresh = function () {
 // ...
 ```
 
+</TabItem>
+</Tabs>
+
 リフレッシュボタンが押されると、報酬ボタンエンティティが無効になり、プレイヤーに表示されないようにします。
 
 `beforeReward`コールバックでは、広告を表示する関数への参照を保持し、報酬ボタンが表示できることを確認します。
@@ -387,6 +461,23 @@ var onRefresh = function () {
 
 次に、報酬広告ボタンが押されたときに広告を表示する必要があります。ボタンのクリックイベントのコールバックに、次のコードを追加します。
 
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
+
+```javascript
+// ...
+this.rewardedAdButtonEntity.button.on('click', () => {
+    if (this._showRewardAdFn) {
+        afg.onBeforeAd();
+        this._showRewardAdFn();
+    }
+});
+// ...
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
+
 ```javascript
 // ...
 this.rewardedAdButtonEntity.button.on('click', function (e) {
@@ -398,22 +489,25 @@ this.rewardedAdButtonEntity.button.on('click', function (e) {
 // ...
 ```
 
+</TabItem>
+</Tabs>
+
 まず、SDKから広告を最初に表示する機能があるか確認し、ある場合は、ヘルパー関数 `onBeforeAd()` を使用してゲームを一時停止し、広告を表示する機能を呼び出します。
 
 これを動作中に見てみましょう。
 
 <StepVideo src="/video/tutorials/google-afg/tutorial-rewarded-ad.mp4" poster="/img/tutorials/google-afg/tutorial-rewarded-ad.webp" width={899} height={480} />
 
-完了した `ui-controller.js` ファイルは次のようになるはずです。
+完了した `ui-controller.mjs` ファイルは次のようになるはずです。
 
 <Tabs defaultValue="esm" groupId='script-code'>
 <TabItem value="esm" label="ESM">
 
 ```javascript
-import { Script } from 'playcanvas';
+import { Script, Entity } from 'playcanvas';
 
 export class UiController extends Script {
-    static scriptName = "uiController";
+    static scriptName = 'uiController';
 
     /**
      * @attribute
@@ -465,10 +559,10 @@ export class UiController extends Script {
                 afg.adBreak({
                     type: 'reward',
                     name: 'test-reward',
-                    beforeReward: function(showAdFn) {
+                    beforeReward: (showAdFn) => {
                         this._showRewardAdFn = showAdFn;
                         this.rewardedAdButtonEntity.button.active = true;
-                    }.bind(this),
+                    },
                     adViewed: () => {
                         afg.onAfterAd();
                         this.rewardedGivenPanelEntity.enabled = true;
@@ -480,36 +574,41 @@ export class UiController extends Script {
                         this.rewardedAdButtonEntity.button.active = false;
                         this._showRewardAdFn = null;
                     },
-                    adBreakDone: function(placementInfo) { }.bind(this)
+                    adBreakDone: (placementInfo) => { }
                 });
             }
         };
 
-        this.refreshButtonEntity.button.on('click', (e) => {
+        this.refreshButtonEntity.button.on('click', () => {
             onRefresh();
-        }, this);
+        });
 
-        this.interstitialAdButtonEntity.button.on('click', (e) => {
+        this.interstitialAdButtonEntity.button.on('click', () => {
             if (afg.ready) {
                 afg.adBreak({
                     type: 'start',
                     name: 'test-interstitial',
-                    beforeAd: () => { afg.onBeforeAd(); },
-                    adBreakDone: () => { afg.onAfterAd(); onRefresh(); }
+                    beforeAd: () => {
+                        afg.onBeforeAd();
+                    },
+                    adBreakDone: () => {
+                        afg.onAfterAd();
+                        onRefresh();
+                    }
                 });
             }
-        }, this);
+        });
 
-        this.rewardedAdButtonEntity.button.on('click', (e) => {
+        this.rewardedAdButtonEntity.button.on('click', () => {
             if (this._showRewardAdFn) {
                 afg.onBeforeAd();
                 this._showRewardAdFn();
             }
-        }, this);
+        });
 
-        this.okRewardButtonEntity.button.on('click', (e) => {
+        this.okRewardButtonEntity.button.on('click', () => {
             this.rewardedGivenPanelEntity.enabled = false;
-        }, this);
+        });
     }
 }
 ```

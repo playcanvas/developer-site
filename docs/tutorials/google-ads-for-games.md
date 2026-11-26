@@ -51,7 +51,7 @@ You will also need to review the Google H5 Games Ads [policies](https://support.
 
 Go to the [Google H5 Ad Tutorial (Start)](https://playcanvas.com/project/889095/overview/google-h5-ad-tutorial-start) project dashboard page and click on 'fork' and let's take a look at the project.
 
-This is a simple project where it's ready for us to add the button click callbacks to show the ads in the `ui-controller.js` script:
+This is a simple project where it's ready for us to add the button click callbacks to show the ads in the `ui-controller.mjs` script:
 
 <Tabs defaultValue="esm" groupId='script-code'>
 <TabItem value="esm" label="ESM">
@@ -63,22 +63,26 @@ initialize() {
     this.rewardedGivenPanelEntity.enabled = false;
     this.rewardedAdButtonEntity.button.active = false;
 
-    const onRefresh = () => {}
+    const onRefresh = () => {
 
-    this.refreshButtonEntity.button.on('click', onRefresh)
+    };
 
-    this.interstitialAdButtonEntity.button.on('click', (e) => {
+    this.refreshButtonEntity.button.on('click', () => {
+        onRefresh();
+    });
+
+    this.interstitialAdButtonEntity.button.on('click', () => {
 
     });
 
-    this.rewardedAdButtonEntity.button.on('click', (e) => {
+    this.rewardedAdButtonEntity.button.on('click', () => {
 
     });
 
-    this.okRewardButtonEntity.button.on('click', (e) => {
-        
+    this.okRewardButtonEntity.button.on('click', () => {
+        this.rewardedGivenPanelEntity.enabled = false;
     });
-};
+}
 ```
 
 </TabItem>
@@ -241,9 +245,32 @@ This includes:
 
 Let's start with adding an interstitial ad to the project.
 
-Add the following code to the interstitial ad button click event callback in `ui-controller.js`:
+Add the following code to the interstitial ad button click event callback in `ui-controller.mjs`:
 
-<Tabs defaultValue="classic" groupId='script-code'>
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
+
+```javascript
+// ...
+this.interstitialAdButtonEntity.button.on('click', () => {
+    if (afg.ready) {
+        afg.adBreak({
+            type: 'start',
+            name: 'test-interstitial',
+            beforeAd: () => {
+                afg.onBeforeAd();
+            },
+            adBreakDone: () => {
+                afg.onAfterAd();
+                onRefresh();
+            }
+        });
+    }
+});
+// ...
+```
+
+</TabItem>
 <TabItem value="classic" label="Classic">
 
 ```javascript
@@ -260,6 +287,9 @@ this.interstitialAdButtonEntity.button.on('click', function(e) {
 }, this);
 // ...
 ```
+
+</TabItem>
+</Tabs>
 
 Here, we check if the Google SDK is ready first before calling `adBreak` which is the function exposed by the Google SDK itself. More documentation and options can be found on [their site](https://developers.google.com/ad-placement/apis/adbreak). For the example, we will use:
 
@@ -348,6 +378,44 @@ Let's now add this to our project.
 
 We are going to use the refresh button to check if we can show a rewarded ad or not. Add the following code to the `onRefresh` function that is called when the player presses the button.
 
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
+
+```javascript
+// ...
+const onRefresh = () => {
+    this.rewardedAdButtonEntity.button.active = false;
+
+    // Check if rewarded ad is available to view
+    if (afg.ready) {
+        afg.adBreak({
+            type: 'reward',
+            name: 'test-reward',
+            beforeReward: (showAdFn) => {
+                this._showRewardAdFn = showAdFn;
+                this.rewardedAdButtonEntity.button.active = true;
+            },
+            adViewed: () => {
+                afg.onAfterAd();
+                this.rewardedGivenPanelEntity.enabled = true;
+                this.rewardedAdButtonEntity.button.active = false;
+                this._showRewardAdFn = null;
+            },
+            adDismissed: () => {
+                afg.onAfterAd();
+                this.rewardedAdButtonEntity.button.active = false;
+                this._showRewardAdFn = null;
+            },
+            adBreakDone: (placementInfo) => { }
+        });
+    }
+};
+// ...
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
+
 ```javascript
 // ...
 var onRefresh = function () {
@@ -395,6 +463,23 @@ In the `adDismissed` callback, we just ensure that the reward button entity is d
 
 Now we need to show the ad when the reward ad button is pressed. In the callback for the button click event we add the following code:
 
+<Tabs defaultValue="esm" groupId='script-code'>
+<TabItem value="esm" label="ESM">
+
+```javascript
+// ...
+this.rewardedAdButtonEntity.button.on('click', () => {
+    if (this._showRewardAdFn) {
+        afg.onBeforeAd();
+        this._showRewardAdFn();
+    }
+});
+// ...
+```
+
+</TabItem>
+<TabItem value="classic" label="Classic">
+
 ```javascript
 // ...
 this.rewardedAdButtonEntity.button.on('click', function (e) {
@@ -406,22 +491,25 @@ this.rewardedAdButtonEntity.button.on('click', function (e) {
 // ...
 ```
 
+</TabItem>
+</Tabs>
+
 First we check that we have the function from the SDK to show the ad first and if we do, use our helper function `onBeforeAd()` to pause the game and call the function to show the ad.
 
 Let's see it in action:
 
 <StepVideo src="/video/tutorials/google-afg/tutorial-rewarded-ad.mp4" poster="/img/tutorials/google-afg/tutorial-rewarded-ad.webp" width={899} height={480} />
 
-The completed `ui-controller.js` file should look like this:
+The completed `ui-controller.mjs` file should look like this:
 
 <Tabs defaultValue="esm" groupId='script-code'>
 <TabItem value="esm" label="ESM">
 
 ```javascript
-import { Script } from 'playcanvas';
+import { Script, Entity } from 'playcanvas';
 
 export class UiController extends Script {
-    static scriptName = "uiController";
+    static scriptName = 'uiController';
 
     /**
      * @attribute
@@ -473,10 +561,10 @@ export class UiController extends Script {
                 afg.adBreak({
                     type: 'reward',
                     name: 'test-reward',
-                    beforeReward: function(showAdFn) {
+                    beforeReward: (showAdFn) => {
                         this._showRewardAdFn = showAdFn;
                         this.rewardedAdButtonEntity.button.active = true;
-                    }.bind(this),
+                    },
                     adViewed: () => {
                         afg.onAfterAd();
                         this.rewardedGivenPanelEntity.enabled = true;
@@ -488,36 +576,41 @@ export class UiController extends Script {
                         this.rewardedAdButtonEntity.button.active = false;
                         this._showRewardAdFn = null;
                     },
-                    adBreakDone: function(placementInfo) { }.bind(this)
+                    adBreakDone: (placementInfo) => { }
                 });
             }
         };
 
-        this.refreshButtonEntity.button.on('click', (e) => {
+        this.refreshButtonEntity.button.on('click', () => {
             onRefresh();
-        }, this);
+        });
 
-        this.interstitialAdButtonEntity.button.on('click', (e) => {
+        this.interstitialAdButtonEntity.button.on('click', () => {
             if (afg.ready) {
                 afg.adBreak({
                     type: 'start',
                     name: 'test-interstitial',
-                    beforeAd: () => { afg.onBeforeAd(); },
-                    adBreakDone: () => { afg.onAfterAd(); onRefresh(); }
+                    beforeAd: () => {
+                        afg.onBeforeAd();
+                    },
+                    adBreakDone: () => {
+                        afg.onAfterAd();
+                        onRefresh();
+                    }
                 });
             }
-        }, this);
+        });
 
-        this.rewardedAdButtonEntity.button.on('click', (e) => {
+        this.rewardedAdButtonEntity.button.on('click', () => {
             if (this._showRewardAdFn) {
                 afg.onBeforeAd();
                 this._showRewardAdFn();
             }
-        }, this);
+        });
 
-        this.okRewardButtonEntity.button.on('click', (e) => {
+        this.okRewardButtonEntity.button.on('click', () => {
             this.rewardedGivenPanelEntity.enabled = false;
-        }, this);
+        });
     }
 }
 ```
