@@ -12,7 +12,7 @@ Two different sets of controls affect how a splat looks in SuperSplat:
 
 Expand the **Colors** section at the bottom of the [Scene Manager](scene-management.md), below **Transform**, by clicking its header. The sliders hold a pending color grade that is previewed live in the viewport on the Gaussians it would affect: the current selection, or the whole active splat when nothing is selected. Click **Apply** to bake the grade into those Gaussians; the sliders then return to neutral, ready for the next adjustment. To grade one region differently from the rest, select it first.
 
-<img loading="lazy" alt="The Colors section of the Scene Manager" width="320" src="/img/user-manual/supersplat/editor/scene-manager-colors.png" />
+<img loading="lazy" alt="The Colors section of the Scene Manager" width="320" src="/img/user-manual/supersplat/editor/scene-manager-colors.webp" />
 
 ### Controls
 

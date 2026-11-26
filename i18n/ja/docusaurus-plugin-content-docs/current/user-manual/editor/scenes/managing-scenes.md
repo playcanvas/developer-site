@@ -11,15 +11,15 @@ description: メニューまたはツールバーから Scenes ダイアログ�
 
 1. **メニュー** - 左上のPlayCanvasロゴをクリックし、**Scenes**を選択します。
 
-    ![Menu - Scenes option](/img/user-manual/editor/scenes/managing-scenes/menu-scenes.png)
+    ![Menu - Scenes option](/img/user-manual/editor/scenes/managing-scenes/menu-scenes.webp)
 
 2. **シーン名** - ビューポートツールバーの現在のシーン名をクリックします。
 
-    ![Scene name in toolbar](/img/user-manual/editor/scenes/managing-scenes/scene-name-toolbar.png)
+    ![Scene name in toolbar](/img/user-manual/editor/scenes/managing-scenes/scene-name-toolbar.webp)
 
 ## シーンダイアログの概要
 
-![Scenes dialog](/img/user-manual/editor/scenes/managing-scenes/scenes-dialog.png)
+![Scenes dialog](/img/user-manual/editor/scenes/managing-scenes/scenes-dialog.webp)
 
 シーンダイアログには、プロジェクト内のすべてのシーンが表示されます。
 
@@ -41,7 +41,7 @@ description: メニューまたはツールバーから Scenes ダイアログ�
 
 各シーンの右側にあるドロップダウンボタンをクリックすると、追加のアクションにアクセスできます。
 
-![Scene dropdown menu](/img/user-manual/editor/scenes/managing-scenes/scene-dropdown.png)
+![Scene dropdown menu](/img/user-manual/editor/scenes/managing-scenes/scene-dropdown.webp)
 
 | アクション | 説明 |
 |--------|-------------|

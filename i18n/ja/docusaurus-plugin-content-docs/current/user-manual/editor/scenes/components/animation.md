@@ -11,7 +11,7 @@ Animationコンポーネントは非推奨です。これは[Anim](anim.md)コ�
 
 Animationコンポーネントを使用すれば、エンティティはModelコンポーネントに割り当てられているモデルに適用することのできるアニメーションを指定できます。
 
-![Animation Component](/img/user-manual/editor/scenes/components/component-animation.png)
+![Animation Component](/img/user-manual/editor/scenes/components/component-animation.webp)
 
 ## Properties
 

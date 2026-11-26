@@ -13,23 +13,23 @@ import StepVideo from '@site/src/components/StepVideo';
 
 次のようなTextureアセットがあるとします。
 
-<img loading="lazy" src="/img/user-manual/assets/textures/texture-compression/brick.jpg" alt="Brick Texture" width="256" height="256" />
+<img loading="lazy" src="/img/user-manual/assets/textures/texture-compression/brick.webp" alt="Brick Texture" width="256" height="256" />
 
 これは512x512のJPGでサイズは202KBです。しかし、JPGは圧縮された形式であり、グラフィックエンジンに渡されると解凍されたRGB8形式に拡張され、ミップマップレベルを含めると1.05MBのVRAMを占有します。
 
 テクスチャ圧縮を有効にすると、以下のような結果が得られます。
 
-<img loading="lazy" src="/img/user-manual/assets/textures/texture-compression/compression-results.png" alt="Basis Compression results" width="400" />
+<img loading="lazy" src="/img/user-manual/assets/textures/texture-compression/compression-results.webp" alt="Basis Compression results" width="400" />
 
 圧縮により、VRAMの使用量が6分の1に減少しました。さらに、この場合、圧縮によりダウンロードサイズが202KBからDefault品質設定とETCモードを使用して最小46KBまで減少しました。
 
 以下に、MacのChromeでのレンガテクスチャの並べて比較を示します。
 
-<a href="/img/user-manual/assets/textures/texture-compression/basis-vs-no-compression-brick.webp" target="_blank"><img loading="lazy" src="/img/user-manual/assets/textures/texture-compression/basis-vs-no-compression-brick-thumb.jpg" alt="Brick texture compression comparison" /></a>
+<a href="/img/user-manual/assets/textures/texture-compression/basis-vs-no-compression-brick.webp" target="_blank"><img loading="lazy" src="/img/user-manual/assets/textures/texture-compression/basis-vs-no-compression-brick-thumb.webp" alt="Brick texture compression comparison" /></a>
 
 以下は、MacとChromeで PlayCanvas のキューブを Basis [ETCモード](https://playcanv.as/p/j8rsh3eO/) で比較したものと、[圧縮していないもの](https://playcanv.as/p/nAW3WkW8/)です。
 
-<a href="/img/user-manual/assets/textures/texture-compression/basis-vs-no-compression-cube.webp" target="_blank"><img loading="lazy" src="/img/user-manual/assets/textures/texture-compression/basis-vs-no-compression-cube-thumb.jpg" alt="PlayCanvas cube compression comparison" /></a>
+<a href="/img/user-manual/assets/textures/texture-compression/basis-vs-no-compression-cube.webp" target="_blank"><img loading="lazy" src="/img/user-manual/assets/textures/texture-compression/basis-vs-no-compression-cube-thumb.webp" alt="PlayCanvas cube compression comparison" /></a>
 
 ## Basis テクスチャ圧縮の使用 {#using-basis-texture-compression}
 
@@ -55,7 +55,7 @@ BasisのWASMモジュールは、プリロードダウンロードサイズに�
 
 もう Basis を使用しない場合は、すべてのテクスチャから Basis 圧縮を削除し、プロジェクトから Basis フォルダを削除してください。
 
-<img loading="lazy" src="/img/user-manual/assets/textures/texture-compression/delete-basis-library.png" alt="Delete Basis Module" width="400" />
+<img loading="lazy" src="/img/user-manual/assets/textures/texture-compression/delete-basis-library.webp" alt="Delete Basis Module" width="400" />
 
 ## Basis の制限 {#basis-limitations}
 

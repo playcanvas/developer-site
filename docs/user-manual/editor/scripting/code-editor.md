@@ -11,13 +11,13 @@ The Code Editor is an online real-time collaborative editor that allows you to e
 
 You can open the Code Editor from inside the [PlayCanvas Editor](/user-manual/editor/) by pressing <kbd>Ctrl</kbd>+<kbd>I</kbd>. You can also click on this toolbar icon:
 
-![Code Editor Toolbar](/img/user-manual/scripting/code-editor-toolbar.png)
+![Code Editor Toolbar](/img/user-manual/scripting/code-editor-toolbar.webp)
 
 Alternatively you can double click on a text-based asset like a Script to open the Code Editor focused on that asset.
 
 ## Interface
 
-![Code Editor](/img/user-manual/scripting/code-editor.png)
+![Code Editor](/img/user-manual/scripting/code-editor.webp)
 
 ### Menu
 
@@ -61,7 +61,7 @@ If you have unsaved changes the Revert option in the File menu will cancel these
 
 All the text editing features can be found using the command palette via <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> (Windows) or <kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> (macOS).
 
-![](/img/user-manual/scripting/command-palette.png)
+![](/img/user-manual/scripting/command-palette.webp)
 
 ## Hot Keys
 
@@ -88,7 +88,7 @@ The editor supports various shortcuts to help you when editing code. You can fin
 
 You can search for text in a file by pressing <kbd>Ctrl</kbd>+<kbd>F</kbd> (Windows) or <kbd>Cmd</kbd>+<kbd>F</kbd> (macOS). This will open up the Find panel on the top right:
 
-![](/img/user-manual/scripting/monaco-find-panel.png)
+![](/img/user-manual/scripting/monaco-find-panel.webp)
 
 Enter your search term here and press <kbd>Enter</kbd>. You can navigate between matches by continuously hitting <kbd>Enter</kbd> (or <kbd>Shift</kbd>+<kbd>Enter</kbd> to go backwards).
 
@@ -100,7 +100,7 @@ You can also find a term by searching in all your assets. To do this hit <kbd>Ct
 
 On the left side of the input fields there are various search options. These allow you to search using a regular expression, do a case-sensitive search or search for whole words. If you would like to learn and experiment more with regex, then [RegExr](https://regexr.com/) is great site with cheat sheets, examples and an online editor for testing regex expressions.
 
-![Find in Files](/img/user-manual/scripting/find-in-files-results.png)
+![Find in Files](/img/user-manual/scripting/find-in-files-results.webp)
 
 You can double click on a line in the search results to go that particular line in the asset.
 
@@ -118,7 +118,7 @@ You can quickly open an asset by hitting <kbd>Ctrl</kbd>+<kbd>P</kbd> (or <kbd>C
 
 You can edit your preferences by clicking on Edit -> Preferences. Here you can change the font size for the text editor and also edit other editor related options.
 
-![Preferences](/img/user-manual/scripting/preferences.png)
+![Preferences](/img/user-manual/scripting/preferences.webp)
 
 ## Extra Tips
 

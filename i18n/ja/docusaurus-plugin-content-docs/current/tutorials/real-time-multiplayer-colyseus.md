@@ -508,7 +508,7 @@ Colyseusには、ゲーム開発中に役立つオプションの監視パネル
 
 ローカルサーバーの監視パネルを表示するには、`http://localhost:2567/monitor` にアクセスしてください。
 
-![monitor](/img/tutorials/multiplayer-colyseus/monitor.png)
+![monitor](/img/tutorials/multiplayer-colyseus/monitor.webp)
 
 このパネルから、作成されたすべてのルームとアクティブなクライアント接続を確認し、操作できます。
 

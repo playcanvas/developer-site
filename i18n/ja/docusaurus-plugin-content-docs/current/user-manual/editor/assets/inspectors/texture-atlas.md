@@ -11,7 +11,7 @@ description: Texture Atlas Asset は、テクスチャ上に矩形・ピボッ�
 
 ## Inspector
 
-![Texture Atlas](/img/user-manual/assets/texture-atlas/texture-atlas.jpg)
+![Texture Atlas](/img/user-manual/assets/texture-atlas/texture-atlas.webp)
 
 ## Properties
 

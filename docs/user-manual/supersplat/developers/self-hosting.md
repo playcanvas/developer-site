@@ -19,7 +19,7 @@ The splat data is compressed to SOG on the GPU as part of the export, so large s
 
 The viewer export can be configured via several options:
 
-![Viewer Export](/img/user-manual/supersplat/developers/viewer-export.png)
+![Viewer Export](/img/user-manual/supersplat/developers/viewer-export.webp)
 
 | Option | Description |
 |--------|-------------|

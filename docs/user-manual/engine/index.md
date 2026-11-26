@@ -130,14 +130,14 @@ Engine apps run in the browser, so whatever you build is a link away for anyone,
 <div className="row path-cards">
   <div className="col col--4">
     <Link className="card path-card showcase-card" to="https://playcanvas.com/examples/#/demos/catapult">
-      <div className="card__image"><img src="/img/user-manual/engine/showcases/catapult.jpg" alt="A catapult on a grassy slope launching a burning boulder at soldiers in a valley" width="960" height="540" loading="lazy" /></div>
+      <div className="card__image"><img src="/img/user-manual/engine/showcases/catapult.webp" alt="A catapult on a grassy slope launching a burning boulder at soldiers in a valley" width="960" height="540" loading="lazy" /></div>
       <div className="card__body"><h3>Games</h3><p>Browser and mobile games that start from a link, with nothing to install. This siege game is built entirely with the engine.</p></div>
       <div className="card__footer">Play the demo →</div>
     </Link>
   </div>
   <div className="col col--4">
     <Link className="card path-card showcase-card" to="https://playcanvas.com/examples/#/misc/html-texture-configurator">
-      <div className="card__image"><img src="/img/user-manual/engine/showcases/product-configurator.jpg" alt="A blue running shoe beside a panel of style options" width="960" height="540" loading="lazy" /></div>
+      <div className="card__image"><img src="/img/user-manual/engine/showcases/product-configurator.webp" alt="A blue running shoe beside a panel of style options" width="960" height="540" loading="lazy" /></div>
       <div className="card__body"><h3>Product Configurators</h3><p>Let shoppers restyle a product in real time. This shoe switches between glTF material variants from an HTML panel rendered in 3D.</p></div>
       <div className="card__footer">Try the demo →</div>
     </Link>
@@ -158,14 +158,14 @@ Engine apps run in the browser, so whatever you build is a link away for anyone,
   </div>
   <div className="col col--4">
     <Link className="card path-card showcase-card" to="/user-manual/editor/publishing/playable-ads/">
-      <div className="card__image"><img src="/img/user-manual/engine/showcases/playable-ad.jpg" alt="The catapult game running in portrait on a phone" width="960" height="540" loading="lazy" /></div>
+      <div className="card__image"><img src="/img/user-manual/engine/showcases/playable-ad.webp" alt="The catapult game running in portrait on a phone" width="960" height="540" loading="lazy" /></div>
       <div className="card__body"><h3>Playable Ads</h3><p>Package a game like the catapult as an interactive ad, and export it from the Editor for Facebook and Snapchat.</p></div>
       <div className="card__footer">Publish a playable ad →</div>
     </Link>
   </div>
   <div className="col col--4">
     <Link className="card path-card showcase-card" to="https://playcanvas.github.io/web-components/examples/#solar-system.html">
-      <div className="card__image"><img src="/img/user-manual/web-components/showcases/solar-system.jpg" alt="The Sun beside a panel of facts about it" width="960" height="540" loading="lazy" /></div>
+      <div className="card__image"><img src="/img/user-manual/web-components/showcases/solar-system.webp" alt="The Sun beside a panel of facts about it" width="960" height="540" loading="lazy" /></div>
       <div className="card__body"><h3>Education</h3><p>Interactive lessons and explainers. This scroll-driven tour of the solar system is a single HTML page built with Web Components.</p></div>
       <div className="card__footer">Explore the demo →</div>
     </Link>

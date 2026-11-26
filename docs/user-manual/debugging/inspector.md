@@ -5,7 +5,7 @@ description: Inspect a running PlayCanvas application in a debug panel - its ent
 
 The Inspector is a debug panel for a running PlayCanvas application. It docks over the canvas and shows the application's scene, GPU resources and rendered frames as they are now, with the properties of whatever you select updating live below.
 
-<img loading="lazy" alt="The Inspector panel docked beside a running application, with an entity selected in the hierarchy" width="800" src="/img/user-manual/debugging/inspector/inspector.png" />
+<img loading="lazy" alt="The Inspector panel docked beside a running application, with an entity selected in the hierarchy" width="800" src="/img/user-manual/debugging/inspector/inspector.webp" />
 
 Use it to answer questions such as:
 
@@ -94,7 +94,7 @@ Each tab lists one kind of object, and the property view below it shows the sele
 | **Shaders** | The compiled shaders, with their sources. |
 | **Physics** | The rigid bodies and joints of the physics world, and an option to draw the world over the scene. |
 
-<img loading="lazy" alt="The Frame graph tab, with the forward pass selected and its render target previewed over the view" width="800" src="/img/user-manual/debugging/inspector/frame-graph.png" />
+<img loading="lazy" alt="The Frame graph tab, with the forward pass selected and its render target previewed over the view" width="800" src="/img/user-manual/debugging/inspector/frame-graph.webp" />
 
 ## Stepping Through a Frame
 

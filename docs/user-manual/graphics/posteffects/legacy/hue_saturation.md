@@ -13,11 +13,11 @@ The hue-saturation effect allows you to modify the hue and saturation of the ren
 
 Here is an image without the effect:
 
-![Image without effect](/img/user-manual/graphics/posteffects/without-effects.png)
+![Image without effect](/img/user-manual/graphics/posteffects/without-effects.webp)
 
 And the same image with the effect applied and changes to hue and saturation:
 
-![Image with effect](/img/user-manual/graphics/posteffects/with-hue-saturation.png)
+![Image with effect](/img/user-manual/graphics/posteffects/with-hue-saturation.webp)
 
 The built-in hue-saturation effect has the following attributes:
 

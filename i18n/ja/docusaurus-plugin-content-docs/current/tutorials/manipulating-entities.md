@@ -19,7 +19,7 @@ description: ローカルとワールドの transform を編集して Entity を
 
 以下は、エンティティのワールド空間の座標系（左）とローカル空間の座標系（右）を図で表したものです。
 
-![World and Local Coordinate Systems](/img/tutorials/world-and-local.png)
+![World and Local Coordinate Systems](/img/tutorials/world-and-local.webp)
 
 ### ヒエラルキー (Hierarchy)
 

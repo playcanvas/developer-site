@@ -54,37 +54,37 @@ PlayCanvas Web Componentsを使えば、HTMLだけでリアルタイム3Dをウ�
 <div className="row path-cards">
   <div className="col col--4">
     <Link className="card path-card showcase-card" to="https://playcanvas.github.io/web-components/examples/#car-configurator.html">
-      <div className="card__image"><img src="/img/user-manual/web-components/showcases/car-configurator.jpg" alt="塗装色のスウォッチの列の上に置かれたシルバーのスポーツカー" width="960" height="540" loading="lazy" /></div>
+      <div className="card__image"><img src="/img/user-manual/web-components/showcases/car-configurator.webp" alt="塗装色のスウォッチの列の上に置かれたシルバーのスポーツカー" width="960" height="540" loading="lazy" /></div>
       <div className="card__body"><h3>Car Configurator</h3><p>塗装色を選ぶと、スポーツカーの色が変わります。</p></div>
     </Link>
   </div>
   <div className="col col--4">
     <Link className="card path-card showcase-card" to="https://playcanvas.github.io/web-components/examples/#product-viewer.html">
-      <div className="card__image"><img src="/img/user-manual/web-components/showcases/product-viewer.jpg" alt="Explode allとResetのボタンがあるパネルの横に浮かぶカメラドローン" width="960" height="540" loading="lazy" /></div>
+      <div className="card__image"><img src="/img/user-manual/web-components/showcases/product-viewer.webp" alt="Explode allとResetのボタンがあるパネルの横に浮かぶカメラドローン" width="960" height="540" loading="lazy" /></div>
       <div className="card__body"><h3>Product Viewer</h3><p>ドローンの部品にカーソルを合わせるとハイライトされ、クリックすると組み立てから引き出されます。</p></div>
     </Link>
   </div>
   <div className="col col--4">
     <Link className="card path-card showcase-card" to="https://playcanvas.github.io/web-components/examples/#solar-system.html">
-      <div className="card__image"><img src="/img/user-manual/web-components/showcases/solar-system.jpg" alt="太陽と、その解説を載せたパネル" width="960" height="540" loading="lazy" /></div>
+      <div className="card__image"><img src="/img/user-manual/web-components/showcases/solar-system.webp" alt="太陽と、その解説を載せたパネル" width="960" height="540" loading="lazy" /></div>
       <div className="card__body"><h3>Solar System</h3><p>ページをスクロールすると、太陽から8つの惑星を越えて旅します。</p></div>
     </Link>
   </div>
   <div className="col col--4">
     <Link className="card path-card showcase-card" to="https://playcanvas.github.io/web-components/examples/#basic-splat.html">
-      <div className="card__image"><img src="/img/user-manual/web-components/showcases/basic-splat.jpg" alt="ドームのあるホールに置かれた大理石の天使像をキャプチャしたGaussian splat" width="960" height="540" loading="lazy" /></div>
+      <div className="card__image"><img src="/img/user-manual/web-components/showcases/basic-splat.webp" alt="ドームのあるホールに置かれた大理石の天使像をキャプチャしたGaussian splat" width="960" height="540" loading="lazy" /></div>
       <div className="card__body"><h3>Gaussian Splat</h3><p>フォトリアルな3Dキャプチャを <code>&lt;pc-gsplat&gt;</code> タグで描画します。</p></div>
     </Link>
   </div>
   <div className="col col--4">
     <Link className="card path-card showcase-card" to="https://playcanvas.github.io/web-components/examples/#third-person-controller.html">
-      <div className="card__image"><img src="/img/user-manual/web-components/showcases/third-person-controller.jpg" alt="大きなアーチの下、石畳の中庭に立つアニメーションキャラクター" width="960" height="540" loading="lazy" /></div>
+      <div className="card__image"><img src="/img/user-manual/web-components/showcases/third-person-controller.webp" alt="大きなアーチの下、石畳の中庭に立つアニメーションキャラクター" width="960" height="540" loading="lazy" /></div>
       <div className="card__body"><h3>Third Person Controller</h3><p>物理演算とブレンドされたアニメーションで、中庭を歩き、走り、ジャンプします。</p></div>
     </Link>
   </div>
   <div className="col col--4">
     <Link className="card path-card showcase-card" to="https://playcanvas.github.io/web-components/examples/#clock-tower.html">
-      <div className="card__image"><img src="/img/user-manual/web-components/showcases/clock-tower.jpg" alt="ほこりの舞う鐘楼で、ランプが文字盤の裏の機構を照らしている" width="960" height="540" loading="lazy" /></div>
+      <div className="card__image"><img src="/img/user-manual/web-components/showcases/clock-tower.webp" alt="ほこりの舞う鐘楼で、ランプが文字盤の裏の機構を照らしている" width="960" height="540" loading="lazy" /></div>
       <div className="card__body"><h3>Clock Tower</h3><p>ローカル時刻に合わせて動く時計の機構を、ほこりの舞う光と鐘の音とともに。</p></div>
     </Link>
   </div>

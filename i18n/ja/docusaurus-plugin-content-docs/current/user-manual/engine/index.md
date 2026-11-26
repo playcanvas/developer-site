@@ -130,14 +130,14 @@ Engineのアプリはブラウザで動くため、作ったものはどんな�
 <div className="row path-cards">
   <div className="col col--4">
     <Link className="card path-card showcase-card" to="https://playcanvas.com/examples/#/demos/catapult">
-      <div className="card__image"><img src="/img/user-manual/engine/showcases/catapult.jpg" alt="草の斜面から谷の兵士たちへ燃える岩を放つカタパルト" width="960" height="540" loading="lazy" /></div>
+      <div className="card__image"><img src="/img/user-manual/engine/showcases/catapult.webp" alt="草の斜面から谷の兵士たちへ燃える岩を放つカタパルト" width="960" height="540" loading="lazy" /></div>
       <div className="card__body"><h3>ゲーム</h3><p>インストール不要で、リンクからすぐに遊べるブラウザゲームやモバイルゲーム。この攻城ゲームは、すべてエンジンで作られています。</p></div>
       <div className="card__footer">デモをプレイ →</div>
     </Link>
   </div>
   <div className="col col--4">
     <Link className="card path-card showcase-card" to="https://playcanvas.com/examples/#/misc/html-texture-configurator">
-      <div className="card__image"><img src="/img/user-manual/engine/showcases/product-configurator.jpg" alt="スタイルの選択パネルの横に置かれた青いランニングシューズ" width="960" height="540" loading="lazy" /></div>
+      <div className="card__image"><img src="/img/user-manual/engine/showcases/product-configurator.webp" alt="スタイルの選択パネルの横に置かれた青いランニングシューズ" width="960" height="540" loading="lazy" /></div>
       <div className="card__body"><h3>プロダクトコンフィギュレーター</h3><p>製品のスタイルを、購入者がリアルタイムで変更できます。このシューズは、3D空間に描画されたHTMLパネルから、glTFのマテリアルバリアントを切り替えます。</p></div>
       <div className="card__footer">デモを試す →</div>
     </Link>
@@ -158,14 +158,14 @@ Engineのアプリはブラウザで動くため、作ったものはどんな�
   </div>
   <div className="col col--4">
     <Link className="card path-card showcase-card" to="/user-manual/editor/publishing/playable-ads/">
-      <div className="card__image"><img src="/img/user-manual/engine/showcases/playable-ad.jpg" alt="スマートフォンの縦画面で動くカタパルトのゲーム" width="960" height="540" loading="lazy" /></div>
+      <div className="card__image"><img src="/img/user-manual/engine/showcases/playable-ad.webp" alt="スマートフォンの縦画面で動くカタパルトのゲーム" width="960" height="540" loading="lazy" /></div>
       <div className="card__body"><h3>プレイアブル広告</h3><p>カタパルトのようなゲームをインタラクティブな広告としてパッケージ化し、EditorからFacebookやSnapchat向けに書き出せます。</p></div>
       <div className="card__footer">プレイアブル広告を公開する →</div>
     </Link>
   </div>
   <div className="col col--4">
     <Link className="card path-card showcase-card" to="https://playcanvas.github.io/web-components/examples/#solar-system.html">
-      <div className="card__image"><img src="/img/user-manual/web-components/showcases/solar-system.jpg" alt="太陽と、その解説パネル" width="960" height="540" loading="lazy" /></div>
+      <div className="card__image"><img src="/img/user-manual/web-components/showcases/solar-system.webp" alt="太陽と、その解説パネル" width="960" height="540" loading="lazy" /></div>
       <div className="card__body"><h3>教育</h3><p>インタラクティブな教材や解説。スクロールで太陽系を巡るこのツアーは、Web Componentsで作られた1つのHTMLページです。</p></div>
       <div className="card__footer">デモを見る →</div>
     </Link>

@@ -18,7 +18,7 @@ Convertは**完全にブラウザ内で動作**します。スプラットはサ
 
 ## スプラットの変換 {#converting-splats}
 
-![ファイルにRotateアクションを付けたスプラットを追加し、SOG出力、Decimateオン、出力アクションを設定したConvertタブ](/img/user-manual/supersplat/convert/convert-ui.png)
+![ファイルにRotateアクションを付けたスプラットを追加し、SOG出力、Decimateオン、出力アクションを設定したConvertタブ](/img/user-manual/supersplat/convert/convert-ui.webp)
 
 ### 入力ファイル
 
@@ -92,7 +92,7 @@ SOG、Embedded Viewer、Voxel Collision Bundleの出力はGPUで作成される�
 
 デスクトップ版のChromeまたはEdgeが必要です。WebGPUを使い、作業内容をコンピュータ上のフォルダに保存するためで、これができるのはこれらのブラウザだけです。
 
-![ソースファイルと作業フォルダを選ぶ手順と、出力オプションがあるStreamed SOGタブ](/img/user-manual/supersplat/convert/streamed-sog-ui.png)
+![ソースファイルと作業フォルダを選ぶ手順と、出力オプションがあるStreamed SOGタブ](/img/user-manual/supersplat/convert/streamed-sog-ui.webp)
 
 ### Streamed SOGの作成
 

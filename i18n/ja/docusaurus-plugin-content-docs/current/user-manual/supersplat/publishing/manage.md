@@ -7,7 +7,7 @@ description: "superspl.atのManageページで、公開済みスプラットの�
 
 Manageへのアクセスには、PlayCanvasアカウントでのサインインが必要です。[アカウント作成](/user-manual/account-management/user-accounts/account-creation)を参照してください。
 
-![複数のスプラットが並ぶManageページのテーブル](/img/user-manual/supersplat/publishing/manage.png)
+![複数のスプラットが並ぶManageページのテーブル](/img/user-manual/supersplat/publishing/manage.webp)
 
 ## リストビュー
 
@@ -37,7 +37,7 @@ Manageへのアクセスには、PlayCanvasアカウントでのサインイン�
 
 行の**Actions**列の**Edit details**（鉛筆）をクリックして**Edit Splat**ダイアログを開きます。
 
-![Edit Splatダイアログ](/img/user-manual/supersplat/publishing/edit.png)
+![Edit Splatダイアログ](/img/user-manual/supersplat/publishing/edit.webp)
 
 | フィールド | 説明 |
 |-------|-------------|

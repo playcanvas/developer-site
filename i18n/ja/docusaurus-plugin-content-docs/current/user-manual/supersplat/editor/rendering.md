@@ -27,7 +27,7 @@ Editorは、現在のカメラからスプラットの静止画を、[Timeline](
 
 Renderメニューから`Image`を選択すると、画像をカスタマイズするための設定ダイアログが表示されます。
 
-<img loading="lazy" alt="Image Settingsダイアログ" width="408" src="/img/user-manual/supersplat/editor/render-image-settings.png" />
+<img loading="lazy" alt="Image Settingsダイアログ" width="408" src="/img/user-manual/supersplat/editor/render-image-settings.webp" />
 
 - **Projection:** レンダリングする画像の種類を選択します：
   - `Standard`（デフォルト） - カメラの視点からレンダリングされる通常の画像
@@ -68,7 +68,7 @@ Renderメニューから`Image`を選択すると、画像をカスタマイズ�
 
 Renderメニューから`Video`を選択すると、ビデオをカスタマイズするためのいくつかの設定ダイアログが表示されます。
 
-<img loading="lazy" alt="Video Settingsダイアログ" width="408" src="/img/user-manual/supersplat/editor/render-video-settings.png" />
+<img loading="lazy" alt="Video Settingsダイアログ" width="408" src="/img/user-manual/supersplat/editor/render-video-settings.webp" />
 
 - **Projection:** レンダリングするビデオの種類を選択します：
   - `Standard`（デフォルト） - カメラの視点からレンダリングされる通常のビデオ

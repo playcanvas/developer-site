@@ -11,7 +11,7 @@ PlayCanvasエディターまたはエンジンAPIを使用して、エンティ�
 
 各コンポーネントは、以下のコントロールを含む共通のヘッダーを持つパネルとしてインスペクターに表示されます：
 
-![Component Header](/img/user-manual/editor/scenes/components/component-header.png)
+![Component Header](/img/user-manual/editor/scenes/components/component-header.webp)
 
 | コントロール | 説明 |
 |---------|-------------|

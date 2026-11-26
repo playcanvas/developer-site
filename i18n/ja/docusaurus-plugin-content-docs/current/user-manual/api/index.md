@@ -70,19 +70,19 @@ curl -H "Authorization: Bearer nesgdxhiqe7hylfilr6ss1rds0gq1uj8" https://playcan
 
 プロジェクト概要ページのURLから見つけることができます。
 
-![Project ID](/img/user-manual/api/project-id.png)
+![Project ID](/img/user-manual/api/project-id.webp)
 
 ### scenes {#scenes}
 
 エディタでシーンを開く場合、シーンIDはURLにあります。
 
-![Scene ID](/img/user-manual/api/scene-id.png)
+![Scene ID](/img/user-manual/api/scene-id.webp)
 
 ### branch_id {#branch_id}
 
 これは[バージョン管理](/user-manual/editor/version-control/)パネルで見つかり、選択してコピーできます。
 
-![Branch ID](/img/user-manual/api/branch-id.png)
+![Branch ID](/img/user-manual/api/branch-id.webp)
 
 ## レスポンスフォーマット {#response-format}
 

@@ -127,7 +127,7 @@ The layer's `assignAnimation()` keeps the speed and loop that the graph gives ea
 4. Add the parameters with **+ PARAMETER** on the left.
 5. Select the entity's Anim component, choose the asset as its **State Graph**, and drag an animation asset into the slot of each state.
 
-![The Editor's graph editor, showing START, ANY and END on the left, the Idle, Walk and Jump states connected by transitions, and the layers and parameters panels](/img/user-manual/animation/state-graph-editor.png)
+![The Editor's graph editor, showing START, ANY and END on the left, the Idle, Walk and Jump states connected by transitions, and the layers and parameters panels](/img/user-manual/animation/state-graph-editor.webp)
 
 </TabItem>
 <TabItem value="react" label="React">

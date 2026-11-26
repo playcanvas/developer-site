@@ -5,7 +5,7 @@ description: "SuperSplatのタイムライン：カメラのキーフレーム�
 
 タイムラインパネルを使用すると、Gaussian Splatシーン用のカメラアニメーションを作成できます。キーフレームを設定してカメラの位置と動きを定義し、エディター内で再生できる滑らかなアニメーション遷移を作成できます。
 
-![タイムラインパネル](/img/user-manual/supersplat/editor/timeline.png)
+![タイムラインパネル](/img/user-manual/supersplat/editor/timeline.webp)
 
 ## タイムラインコントロール
 

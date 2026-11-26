@@ -79,7 +79,7 @@ cordova run ios
 
 ビルドが終わると、Simulatorが起動してアプリを開きます：
 
-![SimulatorでのMaster Archer](/img/user-manual/publishing/mobile/simulator-master-archer.png)
+![SimulatorでのMaster Archer](/img/user-manual/publishing/mobile/simulator-master-archer.webp)
 
 iPhoneやiPadでアプリを実行するには：
 
@@ -88,11 +88,11 @@ iPhoneやiPadでアプリを実行するには：
 3. アプリのターゲットの**Signing & Capabilities**設定で**Team**を選び、Xcodeがアプリに署名できるようにします。
 4. スキームのメニューでデバイスを選びます。
 
-    ![Xcodeのスキームのメニュー](/img/user-manual/publishing/mobile/xcode-scheme.png)
+    ![Xcodeのスキームのメニュー](/img/user-manual/publishing/mobile/xcode-scheme.webp)
 
 5. **Run**を選んで、アプリをビルドし、デバイスにインストールして開きます。
 
-    ![XcodeのRunボタン](/img/user-manual/publishing/mobile/xcode-run.png)
+    ![XcodeのRunボタン](/img/user-manual/publishing/mobile/xcode-run.webp)
 
 アプリに満足したら、[App Store Connect](https://developer.apple.com/app-store-connect/)にアップロードします。
 

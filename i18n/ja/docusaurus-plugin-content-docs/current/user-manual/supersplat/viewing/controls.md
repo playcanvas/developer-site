@@ -53,7 +53,7 @@ description: "SuperSplat Viewerでシーンをナビゲートする方法：ツ�
 
 **Controls**を押すとツールバーの上にパネルが開き、現在のカメラモードの操作方法が、最後に使った入力方法（マウスとキーボード、またはタッチ）に合わせて一覧表示されます。モードを切り替えたり、Gaming Controlsのオン・オフを切り替えたりすると、表示が更新されます。初めての訪問者にはパネルが開いた状態で表示され、閉じるとビューアがそれを記憶します。<kbd>H</kbd>で表示を切り替えます。
 
-<img loading="lazy" alt="カメラアニメーション中にビューアのツールバーの上に開いたControlsパネル" width="248" src="/img/user-manual/supersplat/viewing/controls-panel.png" />
+<img loading="lazy" alt="カメラアニメーション中にビューアのツールバーの上に開いたControlsパネル" width="248" src="/img/user-manual/supersplat/viewing/controls-panel.webp" />
 
 パネルには次の操作が表示されます。カメラアニメーションにはタッチ操作はなく、どこかに触れるとカメラの操作が訪問者に移ります。
 
@@ -106,7 +106,7 @@ Gaming Controlsがオンのときは、キャプチャされたマウス（ま�
 
 ## 設定パネル {#the-settings-panel}
 
-<img loading="lazy" alt="QualityスライダーとPerformance Modeを表示したSettingsパネル" width="248" src="/img/user-manual/supersplat/viewing/settings-panel.png" />
+<img loading="lazy" alt="QualityスライダーとPerformance Modeを表示したSettingsパネル" width="248" src="/img/user-manual/supersplat/viewing/settings-panel.webp" />
 
 **Settings**を押すと、ツールバーの上に次のパネルが開きます：
 

@@ -5,7 +5,7 @@ description: "Use SuperSplat's Splat Data panel to inspect Gaussian attributes, 
 
 The **Splat Data** panel visualizes the attribute values of the active splat as an interactive histogram. Use it to understand how values are distributed, find outliers, and select Gaussians whose values fall within a particular range. The panel's labels, like the status bar's, call individual Gaussians _splats_.
 
-![The Splat Data panel showing its filters, property list, and histogram](/img/user-manual/supersplat/editor/data-panel.png)
+![The Splat Data panel showing its filters, property list, and histogram](/img/user-manual/supersplat/editor/data-panel.webp)
 
 ## Opening the Panel
 

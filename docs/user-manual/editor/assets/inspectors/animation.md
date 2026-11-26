@@ -29,7 +29,7 @@ When importing animations, there are settings that can be tweaked to adjust the 
 
 They can be found in the Project Settings under Asset Import.
 
-![Animation Import Settings](/img/user-manual/assets/animation/animation-import-settings.png)
+![Animation Import Settings](/img/user-manual/assets/animation/animation-import-settings.webp)
 
 ### Naming Strategy
 

@@ -11,7 +11,7 @@ ESMスクリプトには明示的なロード順序がなく、特定の順序�
 
 一般的に、すべてのスクリプトはアプリケーションの起動時にロードされます。ロード順序はプロジェクトの設定です。変更するには、[設定](../interface/settings/index.md)を開いて `SCRIPTS LOADING ORDER` パネルを展開するか、スクリプトアセットのインスペクターで **Loading Order** の横にある **MANAGE** をクリックします。
 
-![Loading Order List](/img/user-manual/scripting/loading-order-list.jpg)
+![Loading Order List](/img/user-manual/scripting/loading-order-list.webp)
 
 このパネルには、`preload`とマークされたスクリプトが、ロードおよび実行される順に番号付きで表示されます。個々のスクリプトをドラッグアンドドロップで移動して、順序を編集できます。プリロードされる[ESMスクリプト](#esm-scripts)もリストに表示されますが、ロード順序が適用されるのはクラシック スクリプトだけです。
 

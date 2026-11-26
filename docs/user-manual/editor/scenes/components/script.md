@@ -5,7 +5,7 @@ description: PlayCanvas Script component attaches JavaScript scripts (.mjs ESM o
 
 The Script Component enables an entity to run user-supplied scripts. In this way, the user can write scripts in JavaScript that run when the entity is instantiated and updated on a per-frame basis. Script assets are `.mjs` files for [ESM Scripts](/user-manual/scripting/esm-scripts/) and `.js` files for Classic scripts.
 
-![Script Component](/img/user-manual/editor/scenes/components/component-script.png)
+![Script Component](/img/user-manual/editor/scenes/components/component-script.webp)
 
 ## Adding Scripts
 
@@ -16,7 +16,7 @@ To create a new script, click on the **Add Script** dropdown in the Script Compo
 
 Alternatively, you can drag a script asset from the Assets Panel onto the Script Component.
 
-![Add Script Dialog](/img/user-manual/editor/scenes/components/new-script.jpg)
+![Add Script Dialog](/img/user-manual/editor/scenes/components/new-script.webp)
 
 ## Script Panel Controls {#script-panel-controls}
 

@@ -19,11 +19,11 @@ This is now enabled by default for new projects.
 
 Open the 'Project Settings'
 
-<img loading="lazy" src="/img/user-manual/assets/import-pipeline/import-hierarchy/project-settings.png" width="480" />
+<img loading="lazy" src="/img/user-manual/assets/import-pipeline/import-hierarchy/project-settings.webp" width="480" />
 
 Scroll down to 'Asset Import' and enable 'Import Hierarchy':
 
-<img loading="lazy" src="/img/user-manual/assets/import-pipeline/import-hierarchy/asset-tasks.png" width="360" />
+<img loading="lazy" src="/img/user-manual/assets/import-pipeline/import-hierarchy/asset-tasks.webp" width="360" />
 
 ## Importing models
 
@@ -35,7 +35,7 @@ As an overview, when you drag the model file into the 'Assets Panel':
 
 The following assets will be created when imported:
 
-![Created Assets](/img/user-manual/assets/import-pipeline/import-hierarchy/created-assets.png)
+![Created Assets](/img/user-manual/assets/import-pipeline/import-hierarchy/created-assets.webp)
 
 | Asset Type | Description |
 |------------|-------------|

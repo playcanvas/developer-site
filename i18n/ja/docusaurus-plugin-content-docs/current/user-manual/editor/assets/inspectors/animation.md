@@ -29,7 +29,7 @@ Animationアセットは、3Dモデルで単一のアニメーションを再生
 
 これらは、プロジェクト設定のAsset Importの下で見つけることができます。
 
-![Animation Import Settings](/img/user-manual/assets/animation/animation-import-settings.png)
+![Animation Import Settings](/img/user-manual/assets/animation/animation-import-settings.webp)
 
 ### 命名基準 (Naming Strategy)
 

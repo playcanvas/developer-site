@@ -7,7 +7,7 @@ import StepVideo from '@site/src/components/StepVideo';
 
 9スライス(9-slicing、9パッチとも呼ばれます)は、2Dグラフィックスにおいて、1つの画像を9つの領域に分割し、異なるサイズやアスペクト比で画像を表示する際に引き伸ばされるのを防ぐために、各領域を個別にスケーリングする技術です。
 
-![9 Sliced Button](/img/user-manual/2D/9-slicing/9-sliced-labelled.jpg)
+![9 Sliced Button](/img/user-manual/2D/9-slicing/9-sliced-labelled.webp)
 
 上の画像では、[スプライトエディター](/user-manual/2D/sprite-editor)のテクスチャアトラスの編集機能を用いて定義される9つのエリアが表示されています。[Spriteコンポーネント](/user-manual/editor/scenes/components/sprite)または[Image Elementコンポーネント](/user-manual/editor/scenes/components/element)を使用してシーンに追加すると、コンポーネントの幅と高さプロパティを使用して画像のサイズを変更できます。各領域は以下の規則に従って拡大・縮小します。
 
@@ -20,7 +20,7 @@ import StepVideo from '@site/src/components/StepVideo';
 
 ## 9スライスの設定
 
-![Setup 9-slicing](/img/user-manual/2D/9-slicing/9-slice-setup.jpg)
+![Setup 9-slicing](/img/user-manual/2D/9-slicing/9-slice-setup.webp)
 
 9スライススプライトを設定するには、スプライトエディタで9スライスを使用したい領域の周囲にフレームを作成します。その後、青いハンドルまたはフレームインスペクタのBorderプロパティを使用して、スプライトの伸縮部分にしたい画像の中心部分をアウトラインするボーダーを設定します。
 

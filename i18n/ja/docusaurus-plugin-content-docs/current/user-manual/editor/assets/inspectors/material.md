@@ -9,7 +9,7 @@ description: マテリアル Inspector のリファレンス。折りたたみ�
 
 [アセットパネル](/user-manual/editor/assets/asset-panel/)でマテリアルアセットを選択し、[インスペクター](/user-manual/editor/interface/inspector)で表示できます。
 
-![Material Inspector](/img/user-manual/editor/assets/inspectors/material/inspector.png)
+![Material Inspector](/img/user-manual/editor/assets/inspectors/material/inspector.webp)
 
 マテリアルインスペクターは折りたたみ可能なセクションに分かれており、各セクションでマテリアルの外観の異なる側面を制御します。
 
@@ -17,7 +17,7 @@ description: マテリアル Inspector のリファレンス。折りたたみ�
 
 すべてのテクスチャマップのUVオフセット、タイリング、回転を制御します。
 
-![Texture Transform](/img/user-manual/editor/assets/inspectors/material/texture-transform.png)
+![Texture Transform](/img/user-manual/editor/assets/inspectors/material/texture-transform.webp)
 
 | プロパティ | 説明 |
 |----------|-------------|
@@ -30,7 +30,7 @@ description: マテリアル Inspector のリファレンス。折りたたみ�
 
 マテリアルがアンビエントライティングとアンビエントオクルージョンにどのように反応するかを制御します。
 
-![Ambient](/img/user-manual/editor/assets/inspectors/material/ambient.png)
+![Ambient](/img/user-manual/editor/assets/inspectors/material/ambient.webp)
 
 | プロパティ | 説明 |
 |----------|-------------|
@@ -46,7 +46,7 @@ description: マテリアル Inspector のリファレンス。折りたたみ�
 
 動的光源によって照らされたときのマテリアルの基本色を制御します。
 
-![Diffuse](/img/user-manual/editor/assets/inspectors/material/diffuse.png)
+![Diffuse](/img/user-manual/editor/assets/inspectors/material/diffuse.webp)
 
 | プロパティ | 説明 |
 |----------|-------------|
@@ -60,7 +60,7 @@ description: マテリアル Inspector のリファレンス。折りたたみ�
 
 マテリアルのスペキュラーハイライトと反射率を制御します。スペキュラーセクションは2つのワークフローをサポートしています: メタルネスとスペキュラー。
 
-![Specular](/img/user-manual/editor/assets/inspectors/material/specular.png)
+![Specular](/img/user-manual/editor/assets/inspectors/material/specular.webp)
 
 ### 共通プロパティ
 
@@ -109,7 +109,7 @@ Use Metalnessが無効な場合:
 
 マテリアルサーフェスからの発光を制御します。
 
-![Emissive](/img/user-manual/editor/assets/inspectors/material/emissive.png)
+![Emissive](/img/user-manual/editor/assets/inspectors/material/emissive.webp)
 
 | プロパティ | 説明 |
 |----------|-------------|
@@ -124,7 +124,7 @@ Use Metalnessが無効な場合:
 
 マテリアルの透明度とアルファテストを制御します。
 
-![Opacity](/img/user-manual/editor/assets/inspectors/material/opacity.png)
+![Opacity](/img/user-manual/editor/assets/inspectors/material/opacity.webp)
 
 | プロパティ | 説明 |
 |----------|-------------|
@@ -146,7 +146,7 @@ Use Metalnessが無効な場合:
 
 ノーマルマッピングによるサーフェスディテールを制御します。
 
-![Normals](/img/user-manual/editor/assets/inspectors/material/normals.png)
+![Normals](/img/user-manual/editor/assets/inspectors/material/normals.webp)
 
 | プロパティ | 説明 |
 |----------|-------------|
@@ -158,7 +158,7 @@ Use Metalnessが無効な場合:
 
 高さマッピングを使用してサーフェスに深さの錯覚を追加します。モードとその制限については [視差マッピング](/user-manual/graphics/physical-rendering/parallax-mapping/) を参照してください。
 
-![Parallax](/img/user-manual/editor/assets/inspectors/material/parallax.png)
+![Parallax](/img/user-manual/editor/assets/inspectors/material/parallax.webp)
 
 <video autoPlay muted loop controls src='/video/editor-parallax-occlusion.mp4' style={{width: '100%', height: 'auto'}} />
 
@@ -177,7 +177,7 @@ Use Metalnessが無効な場合:
 
 透明なコーティング(カーペイントやラッカー仕上げの木材など)をシミュレートする二次スペキュラーレイヤーを追加します。
 
-![Clear Coat](/img/user-manual/editor/assets/inspectors/material/clearcoat.png)
+![Clear Coat](/img/user-manual/editor/assets/inspectors/material/clearcoat.webp)
 
 | プロパティ | 説明 |
 |----------|-------------|
@@ -198,7 +198,7 @@ Use Metalnessが無効な場合:
 
 布地や類似のマテリアル用のソフトでベルベットのような反射を追加します。
 
-![Sheen](/img/user-manual/editor/assets/inspectors/material/sheen.png)
+![Sheen](/img/user-manual/editor/assets/inspectors/material/sheen.webp)
 
 | プロパティ | 説明 |
 |----------|-------------|
@@ -215,7 +215,7 @@ Use Metalnessが無効な場合:
 
 ガラスや水などの透明なマテリアルを通過する光の屈折を制御します。
 
-![Refraction](/img/user-manual/editor/assets/inspectors/material/refraction.png)
+![Refraction](/img/user-manual/editor/assets/inspectors/material/refraction.webp)
 
 | プロパティ | 説明 |
 |----------|-------------|
@@ -235,7 +235,7 @@ Use Metalnessが無効な場合:
 
 シャボン玉、油膜、甲虫の殻などに見られる虹色の色変化を作成します。
 
-![Iridescence](/img/user-manual/editor/assets/inspectors/material/iridescence.png)
+![Iridescence](/img/user-manual/editor/assets/inspectors/material/iridescence.webp)
 
 | プロパティ | 説明 |
 |----------|-------------|
@@ -252,7 +252,7 @@ Use Metalnessが無効な場合:
 
 キューブマップまたはスフィアマップを使用した環境反射を制御します。
 
-![Environment](/img/user-manual/editor/assets/inspectors/material/environment.png)
+![Environment](/img/user-manual/editor/assets/inspectors/material/environment.webp)
 
 | プロパティ | 説明 |
 |----------|-------------|
@@ -267,7 +267,7 @@ Use Metalnessが無効な場合:
 
 ライトマップテクスチャから事前ベイクされたライティングを適用します。
 
-![Lightmap](/img/user-manual/editor/assets/inspectors/material/lightmap.png)
+![Lightmap](/img/user-manual/editor/assets/inspectors/material/lightmap.webp)
 
 | プロパティ | 説明 |
 |----------|-------------|
@@ -280,7 +280,7 @@ Use Metalnessが無効な場合:
 
 追加のレンダー状態制御。
 
-![Other](/img/user-manual/editor/assets/inspectors/material/other.png)
+![Other](/img/user-manual/editor/assets/inspectors/material/other.webp)
 
 | プロパティ | 説明 |
 |----------|-------------|

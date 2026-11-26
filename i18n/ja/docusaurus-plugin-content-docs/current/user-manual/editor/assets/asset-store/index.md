@@ -9,11 +9,11 @@ PlayCanvas Asset Storeは、プロジェクトで使用できる無料のアセ�
 
 Editor内からアセットストアにアクセスするには、[Assets Panel](../asset-panel.md)の右上にあるASSET STOREボタンをクリックします。
 
-![Asset Store Button](/img/user-manual/assets/asset-store/asset-store-button.png)
+![Asset Store Button](/img/user-manual/assets/asset-store/asset-store-button.webp)
 
 するとアセットストアが開きます。
 
-![Asset Store](/img/user-manual/assets/asset-store/asset-store.png)
+![Asset Store](/img/user-manual/assets/asset-store/asset-store.webp)
 
 ## ストアの選択
 
@@ -29,13 +29,13 @@ Editor内からアセットストアにアクセスするには、[Assets Panel]
 
 ストアを検索するには、上部にある検索バーに検索語句を入力するだけです。その後、検索オプションを使用して検索結果をフィルタリングおよび並べ替えることができます。
 
-![Asset Store Search](/img/user-manual/assets/asset-store/asset-store-search.png)
+![Asset Store Search](/img/user-manual/assets/asset-store/asset-store-search.webp)
 
 ## プロジェクトへのアセットのインポート
 
 検索結果から任意のストアアイテムを選択すると、その詳細ページが開きます。
 
-![Asset Store Details](/img/user-manual/assets/asset-store/asset-store-details.png)
+![Asset Store Details](/img/user-manual/assets/asset-store/asset-store-details.webp)
 
 詳細ページでは、次のことができます。
 

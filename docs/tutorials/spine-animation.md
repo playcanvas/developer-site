@@ -4,7 +4,7 @@ description: Play Spine 4.3 skeletal animations in the Editor with the playcanva
 tags: [animation, scripts, ui]
 kind: tutorial
 topic: Animation
-thumb: /img/tutorials/spine-animation/thumbnail.jpg
+thumb: /img/tutorials/spine-animation/thumbnail.webp
 ---
 
 <div className="iframe-container">

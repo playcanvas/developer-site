@@ -1,5 +1,5 @@
 // Keeps static/ from growing back to the size it had before the 2026 asset diet (494 MB, now
-// about 245 MB). Everything in static/ is deployed with every build, so a file that is too big
+// about 220 MB). Everything in static/ is deployed with every build, so a file that is too big
 // or used by nothing costs every deploy and every clone.
 //
 // It fails on:

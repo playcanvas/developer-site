@@ -9,7 +9,7 @@ A Material asset defines the visual appearance of a surface when rendered. PlayC
 
 You can select a Material asset in the [Assets Panel](/user-manual/editor/assets/asset-panel/) and view it in the [Inspector](/user-manual/editor/interface/inspector).
 
-![Material Inspector](/img/user-manual/editor/assets/inspectors/material/inspector.png)
+![Material Inspector](/img/user-manual/editor/assets/inspectors/material/inspector.webp)
 
 The Material Inspector is organized into collapsible sections, each controlling different aspects of the material's appearance.
 
@@ -17,7 +17,7 @@ The Material Inspector is organized into collapsible sections, each controlling 
 
 Controls UV offset, tiling, and rotation for all texture maps.
 
-![Texture Transform](/img/user-manual/editor/assets/inspectors/material/texture-transform.png)
+![Texture Transform](/img/user-manual/editor/assets/inspectors/material/texture-transform.webp)
 
 | Property | Description |
 |----------|-------------|
@@ -30,7 +30,7 @@ Controls UV offset, tiling, and rotation for all texture maps.
 
 Controls how the material responds to ambient lighting and ambient occlusion.
 
-![Ambient](/img/user-manual/editor/assets/inspectors/material/ambient.png)
+![Ambient](/img/user-manual/editor/assets/inspectors/material/ambient.webp)
 
 | Property | Description |
 |----------|-------------|
@@ -46,7 +46,7 @@ Controls how the material responds to ambient lighting and ambient occlusion.
 
 Controls the base color of the material when lit by dynamic light sources.
 
-![Diffuse](/img/user-manual/editor/assets/inspectors/material/diffuse.png)
+![Diffuse](/img/user-manual/editor/assets/inspectors/material/diffuse.webp)
 
 | Property | Description |
 |----------|-------------|
@@ -60,7 +60,7 @@ Controls the base color of the material when lit by dynamic light sources.
 
 Controls the specular highlights and reflectivity of the material. The Specular section supports two workflows: Metalness and Specular.
 
-![Specular](/img/user-manual/editor/assets/inspectors/material/specular.png)
+![Specular](/img/user-manual/editor/assets/inspectors/material/specular.webp)
 
 ### Common Properties
 
@@ -109,7 +109,7 @@ When Use Metalness is disabled:
 
 Controls light emission from the material surface.
 
-![Emissive](/img/user-manual/editor/assets/inspectors/material/emissive.png)
+![Emissive](/img/user-manual/editor/assets/inspectors/material/emissive.webp)
 
 | Property | Description |
 |----------|-------------|
@@ -124,7 +124,7 @@ Controls light emission from the material surface.
 
 Controls material transparency and alpha testing.
 
-![Opacity](/img/user-manual/editor/assets/inspectors/material/opacity.png)
+![Opacity](/img/user-manual/editor/assets/inspectors/material/opacity.webp)
 
 | Property | Description |
 |----------|-------------|
@@ -146,7 +146,7 @@ Controls material transparency and alpha testing.
 
 Controls surface detail through normal mapping.
 
-![Normals](/img/user-manual/editor/assets/inspectors/material/normals.png)
+![Normals](/img/user-manual/editor/assets/inspectors/material/normals.webp)
 
 | Property | Description |
 |----------|-------------|
@@ -158,7 +158,7 @@ Controls surface detail through normal mapping.
 
 Adds depth illusion to surfaces using height mapping. See [Parallax Mapping](/user-manual/graphics/physical-rendering/parallax-mapping/) for the modes and their limits.
 
-![Parallax](/img/user-manual/editor/assets/inspectors/material/parallax.png)
+![Parallax](/img/user-manual/editor/assets/inspectors/material/parallax.webp)
 
 <video autoPlay muted loop controls src='/video/editor-parallax-occlusion.mp4' style={{width: '100%', height: 'auto'}} />
 
@@ -177,7 +177,7 @@ Adds depth illusion to surfaces using height mapping. See [Parallax Mapping](/us
 
 Adds a secondary specular layer simulating a clear coating (like car paint or lacquered wood).
 
-![Clear Coat](/img/user-manual/editor/assets/inspectors/material/clearcoat.png)
+![Clear Coat](/img/user-manual/editor/assets/inspectors/material/clearcoat.webp)
 
 | Property | Description |
 |----------|-------------|
@@ -198,7 +198,7 @@ Adds a secondary specular layer simulating a clear coating (like car paint or la
 
 Adds soft, velvet-like reflections for fabrics and similar materials.
 
-![Sheen](/img/user-manual/editor/assets/inspectors/material/sheen.png)
+![Sheen](/img/user-manual/editor/assets/inspectors/material/sheen.webp)
 
 | Property | Description |
 |----------|-------------|
@@ -215,7 +215,7 @@ Adds soft, velvet-like reflections for fabrics and similar materials.
 
 Controls light bending through transparent materials like glass or water.
 
-![Refraction](/img/user-manual/editor/assets/inspectors/material/refraction.png)
+![Refraction](/img/user-manual/editor/assets/inspectors/material/refraction.webp)
 
 | Property | Description |
 |----------|-------------|
@@ -235,7 +235,7 @@ Controls light bending through transparent materials like glass or water.
 
 Creates rainbow-like color shifts seen on soap bubbles, oil slicks, or beetle shells.
 
-![Iridescence](/img/user-manual/editor/assets/inspectors/material/iridescence.png)
+![Iridescence](/img/user-manual/editor/assets/inspectors/material/iridescence.webp)
 
 | Property | Description |
 |----------|-------------|
@@ -252,7 +252,7 @@ Creates rainbow-like color shifts seen on soap bubbles, oil slicks, or beetle sh
 
 Controls environment reflections using cube maps or sphere maps.
 
-![Environment](/img/user-manual/editor/assets/inspectors/material/environment.png)
+![Environment](/img/user-manual/editor/assets/inspectors/material/environment.webp)
 
 | Property | Description |
 |----------|-------------|
@@ -267,7 +267,7 @@ Controls environment reflections using cube maps or sphere maps.
 
 Applies pre-baked lighting from a lightmap texture.
 
-![Lightmap](/img/user-manual/editor/assets/inspectors/material/lightmap.png)
+![Lightmap](/img/user-manual/editor/assets/inspectors/material/lightmap.webp)
 
 | Property | Description |
 |----------|-------------|
@@ -280,7 +280,7 @@ Applies pre-baked lighting from a lightmap texture.
 
 Additional render state controls.
 
-![Other](/img/user-manual/editor/assets/inspectors/material/other.png)
+![Other](/img/user-manual/editor/assets/inspectors/material/other.webp)
 
 | Property | Description |
 |----------|-------------|

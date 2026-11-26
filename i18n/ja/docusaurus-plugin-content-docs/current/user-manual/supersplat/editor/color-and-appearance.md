@@ -12,7 +12,7 @@ SuperSplatでスプラットの見え方に影響するコントロールは2種
 
 [Scene Manager](scene-management.md)の最下部、**Transform**の下にある**Colors**セクションを、ヘッダーをクリックして展開します。スライダーは保留中のカラーグレードを保持し、対象となるガウシアン（現在の選択範囲、または何も選択していない場合はアクティブスプラット全体）にビューポートでリアルタイムにプレビューされます。**Apply**をクリックすると、グレードがそれらのガウシアンにベイクされ、スライダーは次の調整に備えてニュートラルに戻ります。一部の領域だけを異なる設定でグレーディングするには、先にその領域を選択します。
 
-<img loading="lazy" alt="Scene ManagerのColorsセクション" width="320" src="/img/user-manual/supersplat/editor/scene-manager-colors.png" />
+<img loading="lazy" alt="Scene ManagerのColorsセクション" width="320" src="/img/user-manual/supersplat/editor/scene-manager-colors.webp" />
 
 ### コントロール
 

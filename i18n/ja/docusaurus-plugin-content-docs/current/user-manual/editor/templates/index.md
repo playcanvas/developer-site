@@ -19,13 +19,13 @@ Templateアセットをシーンにドラッグ&ドロップするか、ヒエ�
 
 エンティティがテンプレートのインスタンスであるとき、ヒエラルキーには少し異なる外観があります。
 
-![Template Instance](/img/user-manual/editor/templates/hierarchy.png)
+![Template Instance](/img/user-manual/editor/templates/hierarchy.webp)
 
 テンプレートインスタンスのルート・エンティティとその子供たちは、同じテンプレートの一部であることを示す異なるアイコンを持っています。
 
 テンプレートインスタンスのルートを選択すると、エンティティインスペクターに次のプロパティが表示されることに注意してください。
 
-![Template Inspector](/img/user-manual/editor/templates/inspector.png)
+![Template Inspector](/img/user-manual/editor/templates/inspector.webp)
 
 ## テンプレートの更新 {#updating-templates}
 
@@ -43,13 +43,13 @@ Templateアセットに変更を加えるには、まずエディタにそのイ
 
 テンプレートインスタンスのルートを選択し、エンティティインスペクターを確認することによって、オーバーライドの概要を確認できます。
 
-![Overrides](/img/user-manual/editor/templates/override.png)
+![Overrides](/img/user-manual/editor/templates/override.webp)
 
 また、オーバーライドされたフィールドのラベルの色が異なることにも注目してください。オーバーライドの詳細なリストを表示するには、[Overrides Diff View](/user-manual/editor/templates/diff)をクリックしてください。
 
 オーバーライドされたフィールドのカラー・ラベルにマウスを重ねると、そのオーバーライドに関する詳細を表示することができます。
 
-![Override Hover](/img/user-manual/editor/templates/override-hover.png)
+![Override Hover](/img/user-manual/editor/templates/override-hover.webp)
 
 :::ai
 テンプレート全体にオーバーライドを適用する前に、AIアシスタントに[**Editor MCP Server**](/user-manual/editor/mcp-server/)で伝播内容を要約させます。チェックポイントを作成し、意図した変更だけを承認します。
@@ -83,7 +83,7 @@ Templateアセットに適用するオーバーライドは、そのTemplateア�
 
 オーバーライドを作成すると、それをオーバーライドするプロパティがTemplateアセットから更新されないように保護されます。たとえば、次のようなテンプレートインスタンスがあるとします。
 
-![Template Instance](/img/user-manual/editor/templates/hierarchy.png)
+![Template Instance](/img/user-manual/editor/templates/hierarchy.webp)
 
 Tree1/Sphereの位置を変更します。これにより、Sphereエンティティの位置にオーバーライドが作成されます。次に、別のTemplateアセットのインスタンスを作成し、Sphereの位置を別のものに変更します。第2のインスタンスからオーバーライドを適用すると、第1のインスタンスの位置が更新されないため、オーバーライドされて保護されます。Sphereエンティティの位置の変更を第1のインスタンスに反映させるには、まずオーバーライドを元に戻す必要があります。
 

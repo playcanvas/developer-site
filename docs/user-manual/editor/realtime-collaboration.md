@@ -17,7 +17,7 @@ Let's examine how real-time collaboration is surfaced in the interface.
 
 In the bottom left corner of the [Viewport](../interface/viewport) (next to the CHAT button), you will find the Presence Bar.
 
-![Presence Bar](/img/user-manual/editor/realtime-collaboration/presence-bar.png)
+![Presence Bar](/img/user-manual/editor/realtime-collaboration/presence-bar.webp)
 
 Whenever a new user enters the scene, their user avatar will be added to the Presence Bar. Likewise, when they close the Editor, their avatar will be removed from the Presence Bar. You can hover any avatar to view the associated username. And if you click an avatar, it will take you to that user's profile page.
 
@@ -49,7 +49,7 @@ Each user in the scene is represented in the [Viewport](../interface/viewport) b
 
 Mouse over the shaded center plane of a user camera to view the associated username:
 
-![Viewport Camera Username](/img/user-manual/editor/realtime-collaboration/viewport-camera-username.png)
+![Viewport Camera Username](/img/user-manual/editor/realtime-collaboration/viewport-camera-username.webp)
 
 ## Selection Indicators
 

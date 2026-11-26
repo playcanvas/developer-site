@@ -7,7 +7,7 @@ LayoutChildコンポーネントは、LayoutGroupコンポーネントによっ�
 
 レイアウトチャイルドでエレメントのレイアウトを変える方法は、[レイアウトチャイルド](/user-manual/user-interface/layout-groups/#layout-children)を参照してください。
 
-![LayoutChild Component](/img/user-manual/editor/scenes/components/component-layoutchild.png)
+![LayoutChild Component](/img/user-manual/editor/scenes/components/component-layoutchild.webp)
 
 ## Properties
 

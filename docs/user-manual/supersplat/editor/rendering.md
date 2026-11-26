@@ -27,7 +27,7 @@ Image rendering creates a single high-quality frame from your current camera pos
 
 When you select `Image` from the Render menu, a dialog will appear with settings to customize your image:
 
-<img loading="lazy" alt="The Image Settings dialog" width="408" src="/img/user-manual/supersplat/editor/render-image-settings.png" />
+<img loading="lazy" alt="The Image Settings dialog" width="408" src="/img/user-manual/supersplat/editor/render-image-settings.webp" />
 
 - **Projection:** Choose the type of image to render:
   - `Standard` (default) - A regular flat image rendered from the camera's point of view
@@ -68,7 +68,7 @@ Video rendering creates an animated sequence using camera animations from the Ti
 
 When you select `Video` from the Render menu, a dialog will appear with several settings to customize your video:
 
-<img loading="lazy" alt="The Video Settings dialog" width="408" src="/img/user-manual/supersplat/editor/render-video-settings.png" />
+<img loading="lazy" alt="The Video Settings dialog" width="408" src="/img/user-manual/supersplat/editor/render-video-settings.webp" />
 
 - **Projection:** Choose the type of video to render:
   - `Standard` (default) - A regular flat video rendered from the camera's point of view

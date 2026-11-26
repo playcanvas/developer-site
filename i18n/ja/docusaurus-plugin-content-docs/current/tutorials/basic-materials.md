@@ -49,9 +49,9 @@ New Material という名前の新しいマテリアルがアセットパネル�
 
 次の2つのサンプルテクスチャをダウンロードして保存してください。
 
-![Sample Diffuse Map](/img/tutorials/basic-materials/proto_orange.png)
+![Sample Diffuse Map](/img/tutorials/basic-materials/proto_orange.webp)
 
-![Sample Normal Map](/img/tutorials/basic-materials/proto_gray_n.png)
+![Sample Normal Map](/img/tutorials/basic-materials/proto_gray_n.webp)
 
 次に、ファイルをアセットパネルにドラッグして、プロジェクトに[アップロード](/user-manual/editor/assets/importing)します。
 

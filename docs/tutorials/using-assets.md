@@ -62,7 +62,7 @@ In this case we've declared three script attributes `a`, `b` and `c` which are a
 
 The **A** and **B** assets are marked as **preload** in this project. This means that during the loading screen, these assets are downloaded. They will be ready to use as soon as your application starts. When an asset is loaded, the loaded resource is available as `asset.resource` and we can assign the asset to the [render component asset property](https://api.playcanvas.com/engine/classes/RenderComponent.html#asset). If `asset.loaded` is `false`, then the asset isn't loaded.
 
-<img loading="lazy" src="/img/tutorials/using_assets/using-assets-a-preload.png" width="360" />
+<img loading="lazy" src="/img/tutorials/using_assets/using-assets-a-preload.webp" width="360" />
 
 So, the `A` and `B` models are preloaded, which means we know they will be ready when we are running the application. This code checks if the space bar is pressed, and if so we change the render asset on the render component to be the resource property of the asset. In this case `asset.resource` will be a `Render` object. For each different asset type (audio, texture, etc), the `asset.resource` property will be the relevant type.
 
@@ -87,7 +87,7 @@ if (app.keyboard.isPressed(KEY_C)) {
 
 The **C** render asset is not marked as *preload*, so in the code above, you can see that we check if the resource is loaded before we use it. if `asset.loaded` is false, then the resource isn't loaded and we can't change the render component. If the **C** render asset is loaded then `this.c.resource` will be the `Render` property and `asset.loaded` will be true, we'll be then able to assign it.
 
-<img loading="lazy" src="/img/tutorials/using_assets/using-assets-c-preload.png" width="360" />
+<img loading="lazy" src="/img/tutorials/using_assets/using-assets-c-preload.webp" width="360" />
 
 ```javascript
 if (this.app.keyboard.isPressed(KEY_L)) {

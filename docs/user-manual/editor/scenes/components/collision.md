@@ -7,31 +7,31 @@ The Collision Component assigns a collision volume to the entity. The component 
 
 #### Box
 
-![Collision Component (Box)](/img/user-manual/editor/scenes/components/component-collision-box.png)
+![Collision Component (Box)](/img/user-manual/editor/scenes/components/component-collision-box.webp)
 
 #### Capsule
 
-![Collision Component (Capsule)](/img/user-manual/editor/scenes/components/component-collision-capsule.png)
+![Collision Component (Capsule)](/img/user-manual/editor/scenes/components/component-collision-capsule.webp)
 
 #### Compound
 
-![Collision Component (Compound)](/img/user-manual/editor/scenes/components/component-collision-compound.png)
+![Collision Component (Compound)](/img/user-manual/editor/scenes/components/component-collision-compound.webp)
 
 #### Cone
 
-![Collision Component (Cone)](/img/user-manual/editor/scenes/components/component-collision-cone.png)
+![Collision Component (Cone)](/img/user-manual/editor/scenes/components/component-collision-cone.webp)
 
 #### Cylinder
 
-![Collision Component (Cylinder)](/img/user-manual/editor/scenes/components/component-collision-cylinder.png)
+![Collision Component (Cylinder)](/img/user-manual/editor/scenes/components/component-collision-cylinder.webp)
 
 #### Mesh
 
-![Collision Component (Mesh)](/img/user-manual/editor/scenes/components/component-collision-mesh.png)
+![Collision Component (Mesh)](/img/user-manual/editor/scenes/components/component-collision-mesh.webp)
 
 #### Sphere
 
-![Collision Component (Sphere)](/img/user-manual/editor/scenes/components/component-collision-sphere.png)
+![Collision Component (Sphere)](/img/user-manual/editor/scenes/components/component-collision-sphere.webp)
 
 If the entity also has a Rigid Body Component, the Collision Component determines the shape of the rigid body. If no Rigid Body Component is present, the Collision Component is treated as a trigger volume. The trigger volume cannot affect the simulation of other rigid bodies in the scene. Instead, you can add a Script Component and attach a script which responds to trigger events. For example, if another entity that has a Rigid Body Component enters or exits the trigger, your script can be notified.
 

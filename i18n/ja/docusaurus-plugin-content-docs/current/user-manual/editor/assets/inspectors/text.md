@@ -9,7 +9,7 @@ description: "CSS、HTML、JSON、Shader、Textの各アセットについて、
 - **編集**: Assetsパネルでアセットを右クリックして **Edit** を選択すると、[コードエディター](../../scripting/code-editor.md)で開きます。
 - **確認**: アセットを選択すると、Inspectorに内容の読み取り専用プレビューが表示されます。これらのアセットに設定するプロパティはありません。
 
-![JSONアセットのインスペクター。アセットのデータを整形したプレビューが表示されています](/img/user-manual/editor/assets/inspectors/asset-inspector-json.png)
+![JSONアセットのインスペクター。アセットのデータを整形したプレビューが表示されています](/img/user-manual/editor/assets/inspectors/asset-inspector-json.webp)
 
 スクリプトからこれらのアセットを使うには、[Asset属性](/user-manual/scripting/script-attributes/esm/#asset-attribute)を参照してください。
 

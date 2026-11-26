@@ -7,7 +7,7 @@ LayoutGroupコンポーネントは、エンティティが子Elementコンポ�
 
 レイアウトグループが子を配置するしくみとレイアウトの例は、[レイアウトグループ](/user-manual/user-interface/layout-groups/)を参照してください。
 
-![LayoutGroup Component](/img/user-manual/editor/scenes/components/component-layoutgroup.png)
+![LayoutGroup Component](/img/user-manual/editor/scenes/components/component-layoutgroup.webp)
 
 ## プロパティ
 

@@ -13,11 +13,11 @@ description: レガシーのセピア Script エフェクトの量と、セピ�
 
 これはエフェクトをかけていない画像です。
 
-![Image without effect](/img/user-manual/graphics/posteffects/without-effects.png)
+![Image without effect](/img/user-manual/graphics/posteffects/without-effects.webp)
 
 これがエフェクトを適用した同じ画像です。
 
-![Image with effect](/img/user-manual/graphics/posteffects/with-sepia.png)
+![Image with effect](/img/user-manual/graphics/posteffects/with-sepia.webp)
 
 ビルトインのセピアエフェクトは以下の様な属性値を持ちます:
 

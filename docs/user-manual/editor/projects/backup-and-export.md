@@ -25,7 +25,7 @@ The simplest way to create a backup is to fork your own project. Forking is [cov
 
 Export files provide complete project backups that can be stored offline and imported later.
 
-![Export Project](/img/user-manual/editor/projects/export-project.png)
+![Export Project](/img/user-manual/editor/projects/export-project.webp)
 
 To export a project:
 
@@ -82,7 +82,7 @@ PlayCanvas provides an [open-source Node.js tool](https://github.com/playcanvas/
 
 ### From Export Files
 
-![Import Project](/img/user-manual/editor/projects/import-project.png)
+![Import Project](/img/user-manual/editor/projects/import-project.webp)
 
 To restore a project from an export:
 

@@ -7,7 +7,7 @@ description: "SuperSplat Studioのタイムラインで公開済みスプラッ�
 
 シーンが持てるカメラアニメーションは1つです。Editorの[タイムライン](/user-manual/supersplat/editor/timeline)のアニメーション付きでスプラットを公開した場合、Studioはそのアニメーションを読み込んだ状態で開き、すぐに編集できます。
 
-![1つのキーフレームを選択し、その位置に再生ヘッドを置いたタイムラインパネル](/img/user-manual/supersplat/studio/timeline-panel.png)
+![1つのキーフレームを選択し、その位置に再生ヘッドを置いたタイムラインパネル](/img/user-manual/supersplat/studio/timeline-panel.webp)
 
 ## タイムラインパネル
 

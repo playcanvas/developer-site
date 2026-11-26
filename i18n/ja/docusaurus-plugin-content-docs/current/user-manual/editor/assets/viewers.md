@@ -5,13 +5,13 @@ description: 別のビューアタブでモデルとテクスチャを開き、M
 
 いくつかのアセットには、より詳細にチェックするためのビューアーツールがあります。これらで表示できるアセットは、インスペクターやコンテキストメニューに  'Open in Viewer' というオプションが表示されます。
 
-![Open in Viewer option](/img/user-manual/assets/viewers/open-in-viewer-option.jpg)
+![Open in Viewer option](/img/user-manual/assets/viewers/open-in-viewer-option.webp)
 
 これらのオプションのいずれかをクリックすると、アセットが新しいタブでビューアーで開かれます。
 
 ## モデルビューアー
 
-![Model Viewer Preview](/img/user-manual/assets/viewers/model-viewer-preview.jpg)
+![Model Viewer Preview](/img/user-manual/assets/viewers/model-viewer-preview.webp)
 
 (モデル: Wayfair LLC. [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) International 2021)
 
@@ -26,7 +26,7 @@ description: 別のビューアタブでモデルとテクスチャを開き、M
 
 ## Texture Tool
 
-![Texture Tool Preview](/img/user-manual/assets/viewers/texture-tool-preview.jpg)
+![Texture Tool Preview](/img/user-manual/assets/viewers/texture-tool-preview.webp)
 
 以下のアセットタイプで[オープンソースのテクスチャツール](https://github.com/playcanvas/texture-tool)が利用できます:
 

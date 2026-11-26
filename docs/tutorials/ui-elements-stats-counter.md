@@ -37,7 +37,7 @@ For each stat we will create a different Group Element. This allows us to treat 
 
 We will only examine the Boost stat - the others are exactly the same. This is what the `stats-boost` Entity looks like in the viewport:
 
-![Boost](/img/tutorials/ui/stats/boost-editor.png)
+![Boost](/img/tutorials/ui/stats/boost-editor.webp)
 
 And these are its attributes:
 

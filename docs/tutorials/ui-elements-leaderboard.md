@@ -53,7 +53,7 @@ The `Entry Template` itself is a Group Element:
 
 Notice how the Group Element has split horizontal anchors:
 
-![Split Anchors](/img/tutorials/ui/leaderboard/split-anchors.png)
+![Split Anchors](/img/tutorials/ui/leaderboard/split-anchors.webp)
 
 The horizontal anchors are not equal (they are 0 and 1) which means that the Element will expand automatically to fill the entire horizontal area if the Screen is resized. We also have a horizontal margin of 50 pixels to allow a small gap from the edges - the margin can only be set when anchors are split.
 

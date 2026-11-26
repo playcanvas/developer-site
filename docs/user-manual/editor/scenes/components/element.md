@@ -11,19 +11,19 @@ See [Elements](/user-manual/user-interface/elements/) for anchors, pivots, margi
 
 The group element provides just the layout properties of the Element Component.
 
-![Group Element](/img/user-manual/editor/scenes/components/component-element-group.png)
+![Group Element](/img/user-manual/editor/scenes/components/component-element-group.webp)
 
 ## Image Element
 
 The image element displays an image using a texture asset, sprite asset, or a solid color.
 
-![Image Element](/img/user-manual/editor/scenes/components/component-element-image.png)
+![Image Element](/img/user-manual/editor/scenes/components/component-element-image.webp)
 
 ## Text Element
 
 The text element renders a string of text using a [font asset](/user-manual/editor/assets/inspectors/font/).
 
-![Text Element](/img/user-manual/editor/scenes/components/component-element-text.png)
+![Text Element](/img/user-manual/editor/scenes/components/component-element-text.webp)
 
 ## Common Component Properties
 

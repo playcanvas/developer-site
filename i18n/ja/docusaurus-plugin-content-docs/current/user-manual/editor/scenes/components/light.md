@@ -7,15 +7,15 @@ Lightコンポーネントは、エンティティに動的な光源をアタッ
 
 #### Directional
 
-![Light Component (Directional)](/img/user-manual/editor/scenes/components/component-light-directional.png)
+![Light Component (Directional)](/img/user-manual/editor/scenes/components/component-light-directional.webp)
 
 #### Omni
 
-![Light Component (Omni)](/img/user-manual/editor/scenes/components/component-light-omni.png)
+![Light Component (Omni)](/img/user-manual/editor/scenes/components/component-light-omni.webp)
 
 #### Spot
 
-![Light Component (Spot)](/img/user-manual/editor/scenes/components/component-light-spot.png)
+![Light Component (Spot)](/img/user-manual/editor/scenes/components/component-light-spot.webp)
 
 ## プロパティ
 

@@ -9,7 +9,7 @@ description: "PlayCanvasのプランを比較して購読し、Billingタブか�
 
 プランページでは、プランを比較して購読できます。[プロジェクトダッシュボード](/user-manual/editor/projects/dashboard/)で自分の名前から開くメニューの**Upgrade plan**、または[請求タブ](#billing-tab)の**Change plan**か**Compare plans**から開きます。
 
-![プラン](/img/user-manual/account-management/billing/plans.png)
+![プラン](/img/user-manual/account-management/billing/plans.webp)
 
 **Individual**には**Free**プランと**Personal**プランが、**Team**には**Organization**プランが表示されます。プランは、表示中のアカウントに適用されます。OrganizationはOrganizationプランしか選択できないため、個人アカウントでは、**Team**にプランの代わりに**Create organization**が表示されます。
 
@@ -21,7 +21,7 @@ description: "PlayCanvasのプランを比較して購読し、Billingタブか�
 
 開くには、プロジェクトダッシュボードのサイドバー下部にある自分の名前を選択し、**Account settings**を選んで**Billing**タブを選択します。Organizationの場合は、先にページ上部のアカウント切り替えでそのOrganizationに切り替えます。
 
-![請求](/img/user-manual/account-management/billing/billing.png)
+![請求](/img/user-manual/account-management/billing/billing.webp)
 
 ### プラン {#plan}
 

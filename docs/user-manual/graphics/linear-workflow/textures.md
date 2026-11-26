@@ -24,7 +24,7 @@ new Asset(
 
 When working in the Editor, ensure that the color texture is marked as **sRGB** in the inspector panel. This guarantees that the engine correctly interprets the texture as sRGB and applies the necessary conversion to linear space.
 
-![sRGB](/img/user-manual/graphics/linear-workflow/srgb-editor.png)
+![sRGB](/img/user-manual/graphics/linear-workflow/srgb-editor.webp)
 
 #### **sRGB Procedural Textures / Render Targets**  
 

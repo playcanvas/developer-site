@@ -22,7 +22,7 @@ import StepVideo from '@site/src/components/StepVideo';
 
 ## Batch Groupの作成
 
-![Creating Batch Groups](/img/user-manual/optimization/batching/batch-groups.jpg)
+![Creating Batch Groups](/img/user-manual/optimization/batching/batch-groups.webp)
 
 Batch Groupは、[シーン設定パネル](/user-manual/editor/interface/settings/batch-groups/)のBatch Groupセクションから作成できます。各Batch Groupには、このBatch Groupからバッチを作成する方法に関するエンジンのヒントに使用されるいくつかのプロパティがあります。
 
@@ -34,7 +34,7 @@ Batch Groupは、[シーン設定パネル](/user-manual/editor/interface/settin
 
 ## Batch Groupにコンポーネントを追加
 
-![Selecting Batch Groups](/img/user-manual/optimization/batching/model-component.jpg)
+![Selecting Batch Groups](/img/user-manual/optimization/batching/model-component.webp)
 
 モデルコンポーネントにはBatch Groupプロパティがあり、このプロパティを使用してモデルをBatch Groupに割り当てます。
 
@@ -69,7 +69,7 @@ if (element.batchGroupId)
 
 ## 例 - 静的環境のバッチング
 
-![Western Scene](/img/user-manual/optimization/batching/western-scene.jpg)
+![Western Scene](/img/user-manual/optimization/batching/western-scene.webp)
 
 このシーンでは、7つの個別のモデルファイルから静的環境を作成しました。これらの一部はシーン内で反復されます。たとえば、ロードタイルは50個のエンティティで使用され、シーンの中央で長い道路が作成されています。
 

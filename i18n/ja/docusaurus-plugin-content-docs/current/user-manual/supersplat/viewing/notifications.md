@@ -25,7 +25,7 @@ description: "superspl.atの通知パネルで自分のスプラットへのコ�
 
 [superspl.at/settings/notifications](https://superspl.at/settings/notifications)の**Notification settings**ページでは、メールで受け取るアクティビティを選びます。通知パネルの歯車か、アカウントメニューの**Notification settings**から開けます。
 
-<img loading="lazy" alt="3つのEmailスイッチがあるNotification settingsページ" width="680" src="/img/user-manual/supersplat/viewing/notification-settings.png" />
+<img loading="lazy" alt="3つのEmailスイッチがあるNotification settingsページ" width="680" src="/img/user-manual/supersplat/viewing/notification-settings.webp" />
 
 **Email**の下には、アクティビティの種類ごとにスイッチがあります：
 

@@ -3,7 +3,7 @@ title: ライトマッピング
 description: 3ds Max や VRay など外部ツールでライトマップをベイクし、テクスチャをインポートして linear／gamma のベストプラクティスに従います。
 ---
 
-[![PlayCanvas Lightmapping](/img/user-manual/graphics/lighting/lightmapping/playcanvas-lightmapping-scene.jpg)](https://playcanv.as/p/zdkARz26/)
+[![PlayCanvas Lightmapping](/img/user-manual/graphics/lighting/lightmapping/playcanvas-lightmapping-scene.webp)](https://playcanv.as/p/zdkARz26/)
 *The lighting in this scene is implemented using Lightmap and AO textures and Box Projected IBL (reflections)*
 
 上の画像の結果を得るためにこれらのテクニックを使用する[最終シーン](https://playcanv.as/p/zdkARz26/)と[プロジェクト](https://playcanvas.com/project/446587/overview/archviz-example)へのリンクです：外部HDRライトマップ(このページで説明します)、[アンビエントオクルージョン](/user-manual/graphics/lighting/ambient-occlusion/)、HDR Cubemapは、[Image Based Lighting](/user-manual/graphics/physical-rendering/image-based-lighting/)技法を使用したBox Projectionで適用され、現実的な反射を実現します。
@@ -32,7 +32,7 @@ PlayCanvasでは、シーン内でライトマップを使用する２つの方�
 
 3ds Maxでは、このオプション(ガンマ/ LUT補正を有効にする)を無効にする必要があります。これは、環境設定(カスタマイズ > 環境設定)で確認できます：
 
-![3ds Max > Preferences > Linear Space](/img/user-manual/graphics/lighting/lightmapping/3ds-max-preferences.png)
+![3ds Max > Preferences > Linear Space](/img/user-manual/graphics/lighting/lightmapping/3ds-max-preferences.webp)
 
 次に、カラーマッピングが更新されていることを確認します。レンダリング設定(<kbd>F10</kbd>、またはレンダリングからテクスチャウィンドウ)にあります。出力はクランプや後処理されるべきではありません(Modeオプション)。Linear Multiplyは線形色空間に使用します。
 以下は、どのオプションをどの値に設定するかのスクリーンショットです。Defaultボタンをクリックして設定をExpertに展開します。
@@ -47,19 +47,19 @@ PlayCanvasでは、シーン内でライトマップを使用する２つの方�
 
 ジオメトリの面積は小さい方が良いです。三角形の面積を最小限に抑え、見えない三角形を削除してください。面積が大きくなると、ライトマップの詳細を減らし、より大きなテクスチャを必要とし、時には複数のアセットを必要とします。
 
-![Lighmapping Tips: Simple Geometry](/img/user-manual/graphics/lighting/lightmapping/uv-geometry.jpg)
+![Lighmapping Tips: Simple Geometry](/img/user-manual/graphics/lighting/lightmapping/uv-geometry.webp)
 
 ### 一貫したテクセルサイズ {#consistent-texel-size}
 
 同じジオメトリ内の他のテクセルと比較して、UVのテクセルを伸ばさずに一定に保ちます。これは、ライトマップテクスチャのディテールレベルがシーン内で一貫していることを保証するためです。テクスチャサイズのバリエーションは、ビジュアルおよび最適化の判断に応じてジオメトリを近づけたり、遠く離した場合に適用することができます。
 
-![Lighmapping Tips: UV Consistent Texel Size](/img/user-manual/graphics/lighting/lightmapping/uv-consistency.jpg)
+![Lighmapping Tips: UV Consistent Texel Size](/img/user-manual/graphics/lighting/lightmapping/uv-consistency.webp)
 
 ### 重ならないUV {#non-overlapping-uv}
 
 UVの三角形は重なり合わないようにして、各ピクセルがジオメトリ上の3D空間内で独特の位置を持ち、独自の照明情報を適切に格納するべきです。ライトマップのUV空間はクランプされます。つまり、UVは0.0〜1.0の間に含まれ、外側には出ません。
 
-![Lighmapping Tips: Non-overlapping UV](/img/user-manual/graphics/lighting/lightmapping/uv-overlapping.jpg)
+![Lighmapping Tips: Non-overlapping UV](/img/user-manual/graphics/lighting/lightmapping/uv-overlapping.webp)
 
 ## その他のヒント {#other-tips}
 
@@ -71,7 +71,7 @@ UVの三角形は重なり合わないようにして、各ピクセルがジオ
 4. Render To Textureウィンドウ(下記参照)で、 **Padding** をより大きな値に設定します。
 5. **ライトはジオメトリの後ろからリークすることがある** ので、それを防ぐためにブロッキングジオメトリを追加します。
 
-![Lighmapping Light Leaking](/img/user-manual/graphics/lighting/lightmapping/lightmapping-light-leak.jpg)
+![Lighmapping Light Leaking](/img/user-manual/graphics/lighting/lightmapping/lightmapping-light-leak.webp)
 
 ## テクスチャにレンダリング {#render-to-texture}
 
@@ -79,19 +79,19 @@ UVの三角形は重なり合わないようにして、各ピクセルがジオ
 
 3ds Maxでは、これはRender To Textureウィンドウを使用して行います。Paddingをより大きな値に設定する必要がある場合、2番目のUVチャンネルを選択、レンダラに応じて出力プロファイル。 以下のスクリーンショットでは`VRayRawTotalLightingMap`を使用します。
 
-![Render To Texture: PlayCanvas Lightmapping](/img/user-manual/graphics/lighting/lightmapping/3ds-max-render-to-texture-window.png)
+![Render To Texture: PlayCanvas Lightmapping](/img/user-manual/graphics/lighting/lightmapping/3ds-max-render-to-texture-window.webp)
 
 ## ノイズ {#noise}
 
 状況によってはレンダリングの品質と時間に応じて、出力の照明データが完全ではなく、ノイズに悩まされる可能性があります。これは、テクスチャの端をぼかすことなく面の部分を滑らかにするよう、ぼかしを画像に適用することで簡単に解決できます。Photoshopでは、これはSurface Blurフィルタを使用して行います。
 
-![Lightmapping: Photoshop > Surface Blur](/img/user-manual/graphics/lighting/lightmapping/lightmapping-surface-blur.jpg)
+![Lightmapping: Photoshop > Surface Blur](/img/user-manual/graphics/lighting/lightmapping/lightmapping-surface-blur.webp)
 
 ## エディタにアップロード {#upload-to-editor}
 
 これで２つ目のUVチャンネル(UV1)とHDRライトマップテクスチャを使用したジオメトリができたので、それらをPlayCanvasシーンにアップロードしてマテリアルを設定します。これは、ファイルをドラッグアンドドロップするか、アセットパネルのアップロードボタンを使用して行います。ジオメトリをアップロードすると、自動的にマテリアルが生成されます。ライトマップがレンダリングされる各マテリアルに、ライトマップテクスチャを設定する必要があります。必要なすべてのマテリアルを選択し、ドラッグアンドドロップをするか、Lightmapスロットのライトマップテクスチャを選択します。
 
-![PlayCanvas Editor: Material Lightmap Texture Slot](/img/user-manual/graphics/lighting/lightmapping/lightmapping-material-slot.png)
+![PlayCanvas Editor: Material Lightmap Texture Slot](/img/user-manual/graphics/lighting/lightmapping/lightmapping-material-slot.webp)
 
 ## 最後に {#final-remarks}
 

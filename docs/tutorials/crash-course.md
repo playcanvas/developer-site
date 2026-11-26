@@ -4,7 +4,7 @@ description: Follow an end-to-end PlayCanvas game build with video and a playabl
 tags: [games,basics,physics,ui]
 kind: tutorial
 topic: Games
-thumb: /img/tutorials/crash-course/crash-course-thumbnail.jpg
+thumb: /img/tutorials/crash-course/crash-course-thumbnail.webp
 ---
 
 <div className="iframe-container">

@@ -188,7 +188,7 @@ chair.addChild(seat);
 
 Give the parent a **Collision** component with **Type** set to **Compound** and a **Rigid Body** component. Add a child entity for each part, with a **Collision** component of a primitive type and its position and rotation set relative to the parent:
 
-![Compound shapes setup](/img/user-manual/physics/compound-shape-chair-setup.png)
+![Compound shapes setup](/img/user-manual/physics/compound-shape-chair-setup.webp)
 
 </TabItem>
 <TabItem value="react" label="React">

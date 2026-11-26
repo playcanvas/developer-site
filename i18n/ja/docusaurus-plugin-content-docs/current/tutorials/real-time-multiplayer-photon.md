@@ -48,7 +48,7 @@ SDKの使用とドキュメンテーションの閲覧にはアカウントの�
 
 ダッシュボードから**CREATE NEW APP**をクリックします。
 
-![Create New Application](/img/tutorials/multiplayer-photon/2.png)
+![Create New Application](/img/tutorials/multiplayer-photon/2.webp)
 
 #### Photonタイプとアプリケーション名を選択
 
@@ -57,13 +57,13 @@ SDKの使用とドキュメンテーションの閲覧にはアカウントの�
 - Photon Type: RealTime
 - Name: PlayCanvas-Photon など
 
-![Create Real Time Project](/img/tutorials/multiplayer-photon/3.png)
+![Create Real Time Project](/img/tutorials/multiplayer-photon/3.webp)
 
 #### AppIDをコピー
 
 AppIDをメモしておいてください。後日必要になります。
 
-![App Id](/img/tutorials/multiplayer-photon/4.png)
+![App Id](/img/tutorials/multiplayer-photon/4.webp)
 
 ### SDKをダウンロード
 
@@ -71,19 +71,19 @@ AppIDをメモしておいてください。後日必要になります。
 
 #### SDKをクリック
 
-![SDK](/img/tutorials/multiplayer-photon/5.png)
+![SDK](/img/tutorials/multiplayer-photon/5.webp)
 
 #### RealTime JavaScriptを選択
 
-![JavaScript SDK](/img/tutorials/multiplayer-photon/6.png)
+![JavaScript SDK](/img/tutorials/multiplayer-photon/6.webp)
 
 #### SDKをダウンロードをクリック
 
-![Download SDK](/img/tutorials/multiplayer-photon/7.png)
+![Download SDK](/img/tutorials/multiplayer-photon/7.webp)
 
 #### SDKを解凍
 
-![Unzip SDK](/img/tutorials/multiplayer-photon/8.png)
+![Unzip SDK](/img/tutorials/multiplayer-photon/8.webp)
 
 SDKはZIP形式でダウンロードされます。解凍してください: `photon-javascript-sdk_vX-X-X-X` → `lib` → **`Photon-Javascript_SDK.min.js`**。
 
@@ -93,13 +93,13 @@ SDKはZIP形式でダウンロードされます。解凍してください: `ph
 
 #### エディタにSDKをアップロード
 
-![Upload SDK](/img/tutorials/multiplayer-photon/9.jpg)
+![Upload SDK](/img/tutorials/multiplayer-photon/9.webp)
 
 SDKをエディタのアセットにドラッグ&ドロップしてください。
 
 #### Loading Typeを「Asset」から「Before Engine」に変更
 
-![Change Loading Type](/img/tutorials/multiplayer-photon/10.png)
+![Change Loading Type](/img/tutorials/multiplayer-photon/10.webp)
 
 ## マルチプレイヤー実装
 
@@ -316,7 +316,7 @@ PhotonLoadBalancingPlayCanvas.prototype.initialize = function () {
 
 connectToRegionMaster を実行してロビーに接続できた場合はJoinedLobbyがログに表示されます。
 
-![Console Log](/img/tutorials/multiplayer-photon/13.png)
+![Console Log](/img/tutorials/multiplayer-photon/13.webp)
 
 ### ルームの作成または参加
 
@@ -513,7 +513,7 @@ PhotonLoadBalancingPlayCanvas.prototype.onActorLeave = function (actor) {
 </TabItem>
 </Tabs>
 
-![Actor](/img/tutorials/multiplayer-photon/14.png)
+![Actor](/img/tutorials/multiplayer-photon/14.webp)
 
 - **actor** は `name`, `actorNr` , `isLocal` , `userId` を含みます。
 - **onActorJoin** 新しいユーザーが接続すると、参加したアクターを取得できます。
@@ -521,7 +521,7 @@ PhotonLoadBalancingPlayCanvas.prototype.onActorLeave = function (actor) {
 
 成功した場合、プレイヤーが参加したときにエンティティが追加されます。
 
-![Console log - Actors ](/img/tutorials/multiplayer-photon/15.png)
+![Console log - Actors ](/img/tutorials/multiplayer-photon/15.webp)
 
 #### プレイヤーの移動
 

@@ -5,7 +5,7 @@ description: "SuperSplatでインポートした複数のスプラットを選�
 
 **Scene Manager**には、現在のプロジェクト内のスプラットが一覧表示されます。インポートした各スプラットファイルは個別の行として表示されます。複数のキャプチャを組み合わせたり、異なるバージョンを比較したり、別々に撮影した領域を結合前に位置合わせしたりできます。
 
-<img loading="lazy" alt="2つのスプラットを一覧表示したScene Managerと、その下のTransformセクションとColorsセクション" width="336" src="/img/user-manual/supersplat/editor/scene-manager.png" />
+<img loading="lazy" alt="2つのスプラットを一覧表示したScene Managerと、その下のTransformセクションとColorsセクション" width="336" src="/img/user-manual/supersplat/editor/scene-manager.webp" />
 
 ## アクティブスプラット
 

@@ -51,9 +51,9 @@ Changing the color of the material is a good start, but you'll quickly want more
 
 Download and save these two sample textures:
 
-![Sample Diffuse Map](/img/tutorials/basic-materials/proto_orange.png)
+![Sample Diffuse Map](/img/tutorials/basic-materials/proto_orange.webp)
 
-![Sample Normal Map](/img/tutorials/basic-materials/proto_gray_n.png)
+![Sample Normal Map](/img/tutorials/basic-materials/proto_gray_n.webp)
 
 Then [upload them](/user-manual/editor/assets/importing) to your project by dragging the files into the Assets panel.
 

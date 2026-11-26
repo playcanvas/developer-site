@@ -5,4 +5,4 @@ description: 初期化から update ループまでの PlayCanvas アプリケ�
 
 以下は、PlayCanvasエディターで作成されたPlayCanvasアプリケーションのフローを示す図表です。
 
-![アプリケーションのライフサイクル](/img/user-manual/scripting/application-lifecycle.png)
+![アプリケーションのライフサイクル](/img/user-manual/scripting/application-lifecycle.webp)

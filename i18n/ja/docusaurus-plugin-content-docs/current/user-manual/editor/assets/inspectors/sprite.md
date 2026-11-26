@@ -7,7 +7,7 @@ description: Sprite Inspector は単位あたりピクセル、シンプルな�
 
 ## Inspector
 
-![Sprite Asset Inspector](/img/user-manual/editor/assets/inspectors/asset-inspector-sprite.png)
+![Sprite Asset Inspector](/img/user-manual/editor/assets/inspectors/asset-inspector-sprite.webp)
 
 ## Properties
 

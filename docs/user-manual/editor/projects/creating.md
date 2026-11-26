@@ -19,7 +19,7 @@ Both are done from the [Project Dashboard](/user-manual/editor/projects/dashboar
 
 3. Pick a starter kit.
 
-   ![New Project Dialog](/img/user-manual/editor/projects/new-project-dialog.png)
+   ![New Project Dialog](/img/user-manual/editor/projects/new-project-dialog.webp)
 
 4. Set the name, description and owner, and choose whether the project is **Private**.
 5. Select **Create project**.

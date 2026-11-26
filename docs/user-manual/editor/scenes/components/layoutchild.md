@@ -7,7 +7,7 @@ The LayoutChild Component enables an element that is controlled by a LayoutGroup
 
 See [Layout Children](/user-manual/user-interface/layout-groups/#layout-children) for how a layout child changes the way its element is laid out.
 
-![LayoutChild Component](/img/user-manual/editor/scenes/components/component-layoutchild.png)
+![LayoutChild Component](/img/user-manual/editor/scenes/components/component-layoutchild.webp)
 
 ## Properties
 

@@ -95,7 +95,7 @@ Hierarchyでライトを選択し、その[Lightコンポーネント](/user-man
 
 シャドウのアウトラインをペナンブラと呼びます。これは暗から明への遷移で、シャドウに柔らかいエッジを与えます。デフォルトの技術である PCF は、シャドウマップから複数の局所的なサンプルを読み込んで平均し、このエッジを一定量だけ柔らかくします。
 
-![Hard vs soft shadows](/img/user-manual/graphics/lighting/shadows/hard-vs-soft.jpg)
+![Hard vs soft shadows](/img/user-manual/graphics/lighting/shadows/hard-vs-soft.webp)
 
 カーネルサイズがトレードオフを決めます。1×1 は最も硬いエッジ、3×3 はデフォルト、5×5 は最も柔らかいエッジになります。カーネルが大きいほど多くのテクセルをサンプリングし、GPU コストが高くなります。
 
@@ -276,11 +276,11 @@ PlayCanvasが使用するシャドウマッピング技術には有限の解像�
 
 単一のシャドウカスケードを示すスクリーンショット。
 
-![One cascade](/img/user-manual/graphics/lighting/shadows/shadow-cascades-1.jpg)
+![One cascade](/img/user-manual/graphics/lighting/shadows/shadow-cascades-1.webp)
 
 4つのシャドウカスケードを示すスクリーンショット。
 
-![Four cascades](/img/user-manual/graphics/lighting/shadows/shadow-cascades-4.jpg)
+![Four cascades](/img/user-manual/graphics/lighting/shadows/shadow-cascades-4.webp)
 
 個々のシャドウカスケードのカメラフラスタムのサブディビジョンの分布（`light.cascadeDistribution`）。0から1の値を指定できます。値0は線形分布を表し、値1は対数分布を表します。ビジュアル的には、値が高いほど、前景オブジェクトにシャドウマップ解像度がより多く割り当てられ、値が低いほど、遠くのオブジェクトに割り当てられます。
 

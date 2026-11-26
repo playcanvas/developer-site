@@ -13,11 +13,11 @@ This legacy effect is deprecated. Use the bloom of [CameraFrame](/user-manual/gr
 
 Here is an image without bloom:
 
-![Image without effect](/img/user-manual/graphics/posteffects/without-effects.png)
+![Image without effect](/img/user-manual/graphics/posteffects/without-effects.webp)
 
 And the same image with bloom applied:
 
-![Image with effect](/img/user-manual/graphics/posteffects/with-bloom.png)
+![Image with effect](/img/user-manual/graphics/posteffects/with-bloom.webp)
 
 The built-in bloom effect has the following attributes:
 

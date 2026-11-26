@@ -60,7 +60,7 @@ Editorの3Dビューは、マウス、タッチ、キーボードで操作しま
 
 <kbd>I</kbd>を押す（または**Overlays**ポップアップで**Camera Info**を有効にする）と、ビューポートの左下隅に情報オーバーレイが表示されます：
 
-![カメラ情報オーバーレイ](/img/user-manual/supersplat/editor/camera-info-overlay.png)
+![カメラ情報オーバーレイ](/img/user-manual/supersplat/editor/camera-info-overlay.webp)
 
 オーバーレイには、カメラの現在のポーズがシーン単位の`x, y, z`座標で表示され、ナビゲートするたびにリアルタイムで更新されます：
 

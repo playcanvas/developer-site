@@ -42,7 +42,7 @@ To view our scene, we need a camera which we can add to our scene using the [`<p
 
 We've added a camera entity positioned 5 units down the positive Z axis. By default, a camera looks down the negative Z axis so our camera is now looking at the origin. At this point, the rendered scene is a solid grey color — the default clear color of a camera:
 
-![A solid grey frame showing the camera's default clear color](/img/user-manual/web-components/building-a-scene/camera-only.jpg)
+![A solid grey frame showing the camera's default clear color](/img/user-manual/web-components/building-a-scene/camera-only.webp)
 
 A grey void — but proof that the renderer is up and running.
 
@@ -65,7 +65,7 @@ The scene needs something to look at. Let's add a sphere using the [`<pc-render>
 
 A dark disc appears in the center of the screen. The sphere is definitely there — but the scene has no lights, so nothing illuminates its surface and it renders as a black silhouette:
 
-![An unlit sphere rendering as a black silhouette on a grey background](/img/user-manual/web-components/building-a-scene/unlit-sphere.jpg)
+![An unlit sphere rendering as a black silhouette on a grey background](/img/user-manual/web-components/building-a-scene/unlit-sphere.webp)
 
 ## Adding a Light
 
@@ -89,7 +89,7 @@ Let's fix that with a directional light, added between the camera and the sphere
 
 The light is rotated to shine down at an angle, which creates more interesting shading than lighting the sphere head-on. The sphere springs to life:
 
-![A white lit sphere on a grey background](/img/user-manual/web-components/building-a-scene/white-sphere.jpg)
+![A white lit sphere on a grey background](/img/user-manual/web-components/building-a-scene/white-sphere.webp)
 
 ## Adding Some Color
 
@@ -114,7 +114,7 @@ Everything so far uses defaults: a white material and a grey clear color. Let's 
 
 Both color values here are [CSS color names](https://github.com/playcanvas/web-components/blob/main/src/colors.ts). Color attributes also accept hex codes and space-separated numbers — see [Attributes](attributes.md) for the full conventions.
 
-![A crimson sphere on a light blue background](/img/user-manual/web-components/building-a-scene/colored-sphere.jpg)
+![A crimson sphere on a light blue background](/img/user-manual/web-components/building-a-scene/colored-sphere.webp)
 
 ## Grounding the Scene
 

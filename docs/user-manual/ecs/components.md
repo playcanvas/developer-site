@@ -63,7 +63,7 @@ app.root.addChild(lamp);
 
 Select the entity and click **Add Component** in the Inspector, or right-click the entity in the Hierarchy and choose **Add Component**. The menu groups the components by what they do, and grays out the ones the entity already has. The new component appears as a panel in the Inspector, showing its properties at their default values.
 
-<img loading="lazy" alt="The Inspector panel showing an entity's name, tags, position, rotation and scale above its Add Component button, and below them a Render component with its on/off switch and properties" width="360" src="/img/user-manual/editor/inspector/inspector.png" />
+<img loading="lazy" alt="The Inspector panel showing an entity's name, tags, position, rotation and scale above its Add Component button, and below them a Render component with its on/off switch and properties" width="360" src="/img/user-manual/editor/inspector/inspector.webp" />
 
 </TabItem>
 <TabItem value="react" label="React">

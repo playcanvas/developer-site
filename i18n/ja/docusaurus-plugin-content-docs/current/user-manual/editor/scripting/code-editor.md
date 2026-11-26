@@ -11,13 +11,13 @@ import StepVideo from '@site/src/components/StepVideo';
 
 [PlayCanvasエディター](/user-manual/editor/)内で<kbd>Ctrl</kbd>+<kbd>I</kbd>を押すことで、コードエディターを開くことができます。また、ツールバーアイコンをクリックすることでも開くことができます。
 
-![Code Editor Toolbar](/img/user-manual/scripting/code-editor-toolbar.png)
+![Code Editor Toolbar](/img/user-manual/scripting/code-editor-toolbar.webp)
 
 テキストベースのアセット(スクリプトなど)をダブルクリックすることでも、そのアセットに焦点を当てたコードエディターを開くことができます。
 
 ## インターフェイス
 
-![Code Editor](/img/user-manual/scripting/code-editor.png)
+![Code Editor](/img/user-manual/scripting/code-editor.webp)
 
 ### メニュー
 
@@ -61,7 +61,7 @@ import StepVideo from '@site/src/components/StepVideo';
 
 テキスト編集機能は、コマンドパレットを使用して見つけることができます。Windowsでは<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd>、macOSでは<kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd>を使用します。
 
-![](/img/user-manual/scripting/command-palette.png)
+![](/img/user-manual/scripting/command-palette.webp)
 
 ## ホットキー
 
@@ -88,7 +88,7 @@ import StepVideo from '@site/src/components/StepVideo';
 
 ファイル内のテキストを検索するには、Windowsでは<kbd>Ctrl</kbd>+<kbd>F</kbd>、macOSでは<kbd>Cmd</kbd>+<kbd>F</kbd>を押します。これにより、右上に検索パネルが表示されます。
 
-![](/img/user-manual/scripting/monaco-find-panel.png)
+![](/img/user-manual/scripting/monaco-find-panel.webp)
 
 ここに検索語を入力し、<kbd>Enter</kbd>キーを押してください。<kbd>Enter</kbd>キーを連続して押すことでマッチした項目間を移動できます（<kbd>Shift</kbd>+<kbd>Enter</kbd>で後方に移動します）。
 
@@ -100,7 +100,7 @@ import StepVideo from '@site/src/components/StepVideo';
 
 入力フィールドの左側には、様々な検索オプションがあります。これらを使用すると、正規表現を使用した検索、大文字・小文字を区別する検索、または全単語を検索することができます。もし、正規表現をより深く学び、実験したいなら、[RegExr](https://regexr.com/)はチートシート、例、そして正規表現のテスト用のオンラインエディタを提供している素晴らしいサイトです。
 
-![Find in Files](/img/user-manual/scripting/find-in-files-results.png)
+![Find in Files](/img/user-manual/scripting/find-in-files-results.webp)
 
 検索結果の行をダブルクリックすると、そのアセットの特定の行に移動します。
 
@@ -118,7 +118,7 @@ import StepVideo from '@site/src/components/StepVideo';
 
 「Edit」->「Preferences」をクリックすることで、設定を編集できます。ここでは、テキストエディタのフォントサイズを変更したり、他のエディタ関連のオプションを編集したりできます。
 
-![Preferences](/img/user-manual/scripting/preferences.png)
+![Preferences](/img/user-manual/scripting/preferences.webp)
 
 ## 追加のヒント
 

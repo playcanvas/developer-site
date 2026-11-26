@@ -5,7 +5,7 @@ description: PlayCanvas の Anim Component は、anim state graph とアニメ�
 
 Animコンポーネントは、Animstategraphアセットとその必要なアニメーションアセットを1つのエンティティに接続するために使用されます。
 
-![Anim Component](/img/user-manual/editor/scenes/components/component-anim.png)
+![Anim Component](/img/user-manual/editor/scenes/components/component-anim.webp)
 
 ## プロパティ
 
@@ -21,7 +21,7 @@ Animコンポーネントは、Animstategraphアセットとその必要なア�
 
 Animstategraphアセットを選択すると、Animコンポーネントにレイヤーごとに整理されたアニメーションアセットスロットのリストが表示されます。ステートグラフアセットの各レイヤーの各アニメーションステート（START、END、ANYステートを除く）に対して1つのスロットがあります。これにより、実際のアニメーションデータが以前に作成したステートグラフに接続されます。
 
-![Anim Component With Graph](/img/user-manual/animation/anim-component-with-graph.png)
+![Anim Component With Graph](/img/user-manual/animation/anim-component-with-graph.webp)
 
 複数のAnimコンポーネントが同じAnimstategraphアセットを使用でき、それぞれが独自のアニメーションアセットセットを持つことができます。すべてのアニメーションステートスロットが埋められると、Animコンポーネントは再生可能になります。Activateオプションが有効な場合、アニメーションは自動的に再生されます。無効な場合は、スクリプトで`entity.anim.playing = true`を設定し、`entity.anim.baseLayer.play()`のように各レイヤーの`play()`を呼び出して再生を開始します。
 
@@ -29,7 +29,7 @@ Animstategraphアセットを選択すると、Animコンポーネントにレ�
 
 ステートグラフの各レイヤーには、レイヤーのアニメーションが影響するボーンを制限するオプションのマスクを設定できます。これは、下半身で歩行アニメーションを再生しながら、上半身で手を振るアニメーションを再生するようなシナリオに便利です。
 
-![Create Mask Button](/img/user-manual/animation/anim-component-create-mask.png)
+![Create Mask Button](/img/user-manual/animation/anim-component-create-mask.webp)
 
 レイヤーのマスクを作成するには、レイヤー名の横にある**CREATE MASK**ボタンをクリックします。これによりマスクインスペクターが開きます。
 
@@ -37,7 +37,7 @@ Animstategraphアセットを選択すると、Animコンポーネントにレ�
 
 マスクインスペクターは、モデル階層内のすべてのボーンのツリービューを表示します。各ボーンには、レイヤーのアニメーションがそのボーンに影響するかどうかを決定するチェックボックスがあります。
 
-![Mask Inspector](/img/user-manual/animation/anim-mask-inspector.png)
+![Mask Inspector](/img/user-manual/animation/anim-mask-inspector.webp)
 
 マスクインスペクターにはいくつかのコントロールがあります：
 

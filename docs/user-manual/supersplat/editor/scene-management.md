@@ -5,7 +5,7 @@ description: "Manage multiple imported splats in SuperSplat: select, show, solo,
 
 The **Scene Manager** lists the splats in the current project. Each splat file you import appears as a separate row. This makes it possible to assemble several captures, compare revisions, or align independently captured areas before exporting them together.
 
-<img loading="lazy" alt="The Scene Manager listing two splats, with the Transform and Colors sections below" width="336" src="/img/user-manual/supersplat/editor/scene-manager.png" />
+<img loading="lazy" alt="The Scene Manager listing two splats, with the Transform and Colors sections below" width="336" src="/img/user-manual/supersplat/editor/scene-manager.webp" />
 
 ## The Active Splat
 

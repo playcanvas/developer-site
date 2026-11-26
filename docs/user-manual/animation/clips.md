@@ -38,7 +38,7 @@ Upload a GLB or FBX file to the Assets panel, and the Editor creates an **Animat
 
 Select an animation asset to see its duration and name in the Inspector, and to [preview it on a model](/user-manual/editor/assets/inspectors/animation/).
 
-![The Inspector for an animation asset, showing its duration and name, and an events panel with two foot_step events](/img/user-manual/animation/animation-asset-with-events.png)
+![The Inspector for an animation asset, showing its duration and name, and an events panel with two foot_step events](/img/user-manual/animation/animation-asset-with-events.webp)
 
 </TabItem>
 <TabItem value="react" label="React">

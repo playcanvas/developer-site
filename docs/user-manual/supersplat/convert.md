@@ -18,7 +18,7 @@ Use the **Convert** page when you want a single one-off conversion, want to expe
 
 ## Converting splats {#converting-splats}
 
-![The Convert tab with a splat added, a Rotate action on the file, SOG output, Decimate on and an output action](/img/user-manual/supersplat/convert/convert-ui.png)
+![The Convert tab with a splat added, a Rotate action on the file, SOG output, Decimate on and an output action](/img/user-manual/supersplat/convert/convert-ui.webp)
 
 ### Input files
 
@@ -92,7 +92,7 @@ The **Streamed SOG** tab, at [superspl.at/convert/streamed-sog](https://superspl
 
 It needs desktop Chrome or Edge. It uses WebGPU, and it saves its work to a folder on your computer, which only those browsers can do.
 
-![The Streamed SOG tab, with steps to choose a source file and a working folder, and the output options](/img/user-manual/supersplat/convert/streamed-sog-ui.png)
+![The Streamed SOG tab, with steps to choose a source file and a working folder, and the output options](/img/user-manual/supersplat/convert/streamed-sog-ui.webp)
 
 ### Building a Streamed SOG
 

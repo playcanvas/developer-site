@@ -39,7 +39,7 @@ layers: [
 
 ステートグラフアセットには最初からベースレイヤーがあり、これは削除できません。グラフエディターのレイヤーパネルで **+ LAYER** をクリックして別のレイヤーを追加し、そこで**Name**、**Default State**、**Blend Type**、**Blend Weight**を設定します。編集するレイヤーは、グラフの右上にあるドロップダウンから選択します。
 
-![グラフエディターのレイヤーパネル。BaseレイヤーとShootingレイヤーにそれぞれName、Blend Weight、Blend Type、Default Stateがあり、ブレンドタイプのドロップダウンが開いてOverwriteとAdditiveが表示されている](/img/user-manual/animation/anim-layer-blend.png)
+![グラフエディターのレイヤーパネル。BaseレイヤーとShootingレイヤーにそれぞれName、Blend Weight、Blend Type、Default Stateがあり、ブレンドタイプのドロップダウンが開いてOverwriteとAdditiveが表示されている](/img/user-manual/animation/anim-layer-blend.webp)
 
 Animコンポーネントには、レイヤーごとにセクションが表示され、その中にレイヤーの各ステートのスロットがあります。
 
@@ -124,11 +124,11 @@ upperBody.mask = {
 
 1. エンティティを選択し、Animコンポーネント内のレイヤーのセクションで**CREATE MASK**をクリックします。
 
-   ![BaseとShootingのレイヤーを持つステートグラフが設定されたAnimコンポーネント。各レイヤーのステートの上にCREATE MASKボタンがある](/img/user-manual/animation/anim-component-create-mask.png)
+   ![BaseとShootingのレイヤーを持つステートグラフが設定されたAnimコンポーネント。各レイヤーのステートの上にCREATE MASKボタンがある](/img/user-manual/animation/anim-component-create-mask.webp)
 
 2. マスクインスペクターには、コンポーネントがアニメーションさせる階層が**Root Bone**から表示されます。レイヤーにアニメーションさせるノードにチェックを入れます。ノードを右クリックして**Add hierarchy**または**Remove hierarchy**を選ぶと、そのノードとその下にあるすべてのノードのチェックを一度に入れたり外したりできます。
 
-   ![Shootingレイヤーのマスクインスペクター。キャラクターのボーンがツリー状に表示され、それぞれにチェックボックスがある](/img/user-manual/animation/anim-mask-inspector.png)
+   ![Shootingレイヤーのマスクインスペクター。キャラクターのボーンがツリー状に表示され、それぞれにチェックボックスがある](/img/user-manual/animation/anim-mask-inspector.webp)
 
 後からマスクを変更するには**EDIT MASK**をクリックし、削除するにはその横にある削除ボタンをクリックします。
 

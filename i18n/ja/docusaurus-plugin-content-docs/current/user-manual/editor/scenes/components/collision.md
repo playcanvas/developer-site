@@ -7,31 +7,31 @@ Collisionコンポーネントは、エンティティにコリジョンボリ�
 
 #### Box
 
-![Collision Component (Box)](/img/user-manual/editor/scenes/components/component-collision-box.png)
+![Collision Component (Box)](/img/user-manual/editor/scenes/components/component-collision-box.webp)
 
 #### Capsule
 
-![Collision Component (Capsule)](/img/user-manual/editor/scenes/components/component-collision-capsule.png)
+![Collision Component (Capsule)](/img/user-manual/editor/scenes/components/component-collision-capsule.webp)
 
 #### Compound
 
-![Collision Component (Compound)](/img/user-manual/editor/scenes/components/component-collision-compound.png)
+![Collision Component (Compound)](/img/user-manual/editor/scenes/components/component-collision-compound.webp)
 
 #### Cone
 
-![Collision Component (Cone)](/img/user-manual/editor/scenes/components/component-collision-cone.png)
+![Collision Component (Cone)](/img/user-manual/editor/scenes/components/component-collision-cone.webp)
 
 #### Cylinder
 
-![Collision Component (Cylinder)](/img/user-manual/editor/scenes/components/component-collision-cylinder.png)
+![Collision Component (Cylinder)](/img/user-manual/editor/scenes/components/component-collision-cylinder.webp)
 
 #### Mesh
 
-![Collision Component (Mesh)](/img/user-manual/editor/scenes/components/component-collision-mesh.png)
+![Collision Component (Mesh)](/img/user-manual/editor/scenes/components/component-collision-mesh.webp)
 
 #### Sphere
 
-![Collision Component (Sphere)](/img/user-manual/editor/scenes/components/component-collision-sphere.png)
+![Collision Component (Sphere)](/img/user-manual/editor/scenes/components/component-collision-sphere.webp)
 
 エンティティにRigidbodyコンポーネントがある場合、Collisionコンポーネントは剛体の形状を決定します。Rigidbodyコンポーネントが存在しない場合、Collisionコンポーネントはトリガーボリュームとして扱われます。トリガーボリュームは、シーン内の他の剛体のシミュレーションに影響を与えることはできません。代わりに、Scriptコンポーネントを追加し、トリガーイベントに応答するスクリプトをアタッチできます。たとえば、Rigidbodyコンポーネントを持つ別のエンティティがトリガーに入るか出ると、スクリプトに通知できます。
 

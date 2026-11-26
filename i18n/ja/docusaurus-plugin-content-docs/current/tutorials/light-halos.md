@@ -24,13 +24,13 @@ import TabItem from '@theme/TabItem';
 
 最初に、ハロー用のテクスチャが必要です。この例では、Photoshopなどのアートプログラムで作成された非常にシンプルなぼやけたブロブを使用しました。
 
-![blob](/img/tutorials/intermediate/light-halos/blob.jpg)
+![blob](/img/tutorials/intermediate/light-halos/blob.webp)
 
 このテクスチャはグローの基礎となります。
 
 ### マテリアル (Material)
 
-<img loading="lazy" src="/img/tutorials/intermediate/light-halos/material.png" height="600" />
+<img loading="lazy" src="/img/tutorials/intermediate/light-halos/material.webp" height="600" />
 
 ライトハローのマテリアルでは、Emissiveスロットにblobテクスチャが使用されています。ハローの色を設定するには、**tint**プロパティを使用します。また、不透明度スロットでブレンディングを有効にし、**Color Channel**を**R**に設定してもblobテクスチャが使用されます。
 
@@ -38,7 +38,7 @@ import TabItem from '@theme/TabItem';
 
 ## エンティティ
 
-![entities](/img/tutorials/intermediate/light-halos/entity-setup.jpg)
+![entities](/img/tutorials/intermediate/light-halos/entity-setup.webp)
 
 ハローのエンティティのセットアップも簡単です。ハロースクリプト用の親エンティティと、それにアタッチされた平面プリミティブを持つ子エンティティがあります。この設計を採用する理由は、`entity.lookAt`を使用してハローの向きを設定するためにコードをシンプルにするためです。平面プリミティブは上向きを向いているため、子エンティティを作成し、この子エンティティに回転を適用して平面がカメラに正しく向かうようにします。
 

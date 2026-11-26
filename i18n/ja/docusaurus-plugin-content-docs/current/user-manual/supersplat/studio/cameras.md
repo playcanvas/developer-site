@@ -5,7 +5,7 @@ description: "SuperSplat Studioで公開済みスプラットの開始カメラ�
 
 [Studio](/user-manual/supersplat/studio/)の左パネルの**Scene**タブにある**Cameras**セクションは、公開済みスプラットの**開始カメラ**を定義します。これは、訪問者が[シーンページ](/user-manual/supersplat/viewing/scene-page)を開いたときに最初に目にするビューです（シーンが[開いたときにカメラアニメーションを再生する](/user-manual/supersplat/studio/animation#playing-on-open)場合は除きます）。カメラには、**位置**、**ターゲット**（注視点）、**視野角**があります。
 
-<img loading="lazy" alt="Camera 1とLensの設定があるCamerasセクション" width="368" src="/img/user-manual/supersplat/studio/cameras-panel.png" />
+<img loading="lazy" alt="Camera 1とLensの設定があるCamerasセクション" width="368" src="/img/user-manual/supersplat/studio/cameras-panel.webp" />
 
 :::note
 

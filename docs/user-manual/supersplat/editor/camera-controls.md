@@ -60,7 +60,7 @@ By default, changing the Field of View behaves like a lens zoom: the camera stay
 
 Press <kbd>I</kbd> (or enable **Camera Info** in the **Overlays** popup) to toggle an information overlay in the bottom-left corner of the viewport:
 
-![Camera Info Overlay](/img/user-manual/supersplat/editor/camera-info-overlay.png)
+![Camera Info Overlay](/img/user-manual/supersplat/editor/camera-info-overlay.webp)
 
 The overlay shows the camera's live pose as `x, y, z` coordinates in scene units, updating in real time as you navigate:
 

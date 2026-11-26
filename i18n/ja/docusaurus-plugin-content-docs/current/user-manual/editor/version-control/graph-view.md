@@ -11,17 +11,17 @@ import StepVideo from '@site/src/components/StepVideo';
 
 バージョンコントロールパネル ( Version Control Panel) では、選択したブランチの最新のチェックポイントのシンプルなリストが表示されますが、グラフビューでは、チェックポイント、ブランチ、およびマージを含む、全体のバージョンコントロールグラフのより大きな(拡張可能な)ビューが表示されます。
 
-![](/img/user-manual/editor/version-control/graph-view/overview.png)
+![](/img/user-manual/editor/version-control/graph-view/overview.webp)
 
 ## グラフビューの起動
 
 グラフビュー (Graph View) にアクセスするには、バージョンコントロールパネルのトップメニューにある「グラフ」ボタンをクリック(現在のエディターブランチの場合)するか、ブランチメニュードロップダウンの「バージョンコントロールグラフ」エントリをクリックします。
 
-![](/img/user-manual/editor/version-control/graph-view/access-buttons.png)
+![](/img/user-manual/editor/version-control/graph-view/access-buttons.webp)
 
 ## グラフノード
 
-![](/img/user-manual/editor/version-control/graph-view/commit-node.png)
+![](/img/user-manual/editor/version-control/graph-view/commit-node.webp)
 
 グラフノードには、次の情報が含まれます。
 
@@ -31,7 +31,7 @@ import StepVideo from '@site/src/components/StepVideo';
 
 ## グラフノードコンテキストメニュー
 
-![](/img/user-manual/editor/version-control/graph-view/context-menu.png)
+![](/img/user-manual/editor/version-control/graph-view/context-menu.webp)
 
 ノードをクリックすると、ノードとアクセス許可に応じて、以下のいずれかの選択肢に対応するコンテキストメニューが開きます。
 
@@ -53,7 +53,7 @@ import StepVideo from '@site/src/components/StepVideo';
 
 ## 拡張可能なノード
 
-![](/img/user-manual/editor/version-control/graph-view/node-expand.png)
+![](/img/user-manual/editor/version-control/graph-view/node-expand.webp)
 
 最初に、グラフビューは、各ブランチから最大20のチェックポイント、および合計60のチェックポイントを表示します。
 
@@ -65,7 +65,7 @@ import StepVideo from '@site/src/components/StepVideo';
 
 グラフには、常にマージ結果チェックポイントの両方の親を表示できるように、閉じたブランチのチェックポイントも含まれます。ブランチ名の後に[X]が付いています。
 
-![](/img/user-manual/editor/version-control/graph-view/closed-branches.png)
+![](/img/user-manual/editor/version-control/graph-view/closed-branches.webp)
 
 ## グラフノードレイアウトロジック
 

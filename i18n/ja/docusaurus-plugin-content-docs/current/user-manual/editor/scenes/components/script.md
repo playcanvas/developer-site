@@ -5,7 +5,7 @@ description: PlayCanvas の Script Component は、load、update、カスタム�
 
 Scriptコンポーネントは、エンティティがユーザー提供のスクリプトを実行することを可能にします。これにより、ユーザーはJavaScriptでスクリプトを作成し、エンティティがインスタンス化されたときやフレームごとに更新されるときに実行できます。スクリプトアセットは、[ESM スクリプト](/user-manual/scripting/esm-scripts/)の場合は `.mjs` ファイル、クラシックスクリプトの場合は `.js` ファイルです。
 
-![Script Component](/img/user-manual/editor/scenes/components/component-script.png)
+![Script Component](/img/user-manual/editor/scenes/components/component-script.webp)
 
 ## スクリプトの追加 {#adding-scripts}
 
@@ -16,7 +16,7 @@ Scriptコンポーネントは、エンティティがユーザー提供のス�
 
 または、AssetsパネルからScriptコンポーネントにスクリプトアセットをドラッグ＆ドロップすることもできます。
 
-![Add Script Dialog](/img/user-manual/editor/scenes/components/new-script.jpg)
+![Add Script Dialog](/img/user-manual/editor/scenes/components/new-script.webp)
 
 ## スクリプトパネルのコントロール {#script-panel-controls}
 

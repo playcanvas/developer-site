@@ -13,23 +13,23 @@ The Editor has the ability to apply lossy compression schemes to your textures t
 
 Consider this texture asset:
 
-<img loading="lazy" src="/img/user-manual/assets/textures/texture-compression/brick.jpg" alt="Brick Texture" width="256" height="256" />
+<img loading="lazy" src="/img/user-manual/assets/textures/texture-compression/brick.webp" alt="Brick Texture" width="256" height="256" />
 
 It's a 512x512 JPG that is 202KB in size. However, JPG is a compressed format and when passed to the graphics engine, it is expanded to an uncompressed RGB8 format that occupies 1.05MB of VRAM (including mipmap levels).
 
 Enabling texture compression achieves the following results:
 
-<img loading="lazy" src="/img/user-manual/assets/textures/texture-compression/compression-results.png" alt="Basis Compression results" width="400" />
+<img loading="lazy" src="/img/user-manual/assets/textures/texture-compression/compression-results.webp" alt="Basis Compression results" width="400" />
 
 The compression has achieved a 6 times reduction in VRAM usage. Furthermore, in this case, compression has also reduced download size from 202KB to as little as 46KB using the Default quality setting and ETC Mode.
 
 Below is a side by side comparison of the brick texture on Mac with Chrome:
 
-<a href="/img/user-manual/assets/textures/texture-compression/basis-vs-no-compression-brick.webp" target="_blank"><img loading="lazy" src="/img/user-manual/assets/textures/texture-compression/basis-vs-no-compression-brick-thumb.jpg" alt="Brick texture compression comparison" /></a>
+<a href="/img/user-manual/assets/textures/texture-compression/basis-vs-no-compression-brick.webp" target="_blank"><img loading="lazy" src="/img/user-manual/assets/textures/texture-compression/basis-vs-no-compression-brick-thumb.webp" alt="Brick texture compression comparison" /></a>
 
 Here is another example of the PlayCanvas cube [with Basis (ETC mode)](https://playcanv.as/p/j8rsh3eO/) and [without](https://playcanv.as/p/nAW3WkW8/) on Mac with Chrome:
 
-<a href="/img/user-manual/assets/textures/texture-compression/basis-vs-no-compression-cube.webp" target="_blank"><img loading="lazy" src="/img/user-manual/assets/textures/texture-compression/basis-vs-no-compression-cube-thumb.jpg" alt="PlayCanvas cube compression comparison" /></a>
+<a href="/img/user-manual/assets/textures/texture-compression/basis-vs-no-compression-cube.webp" target="_blank"><img loading="lazy" src="/img/user-manual/assets/textures/texture-compression/basis-vs-no-compression-cube-thumb.webp" alt="PlayCanvas cube compression comparison" /></a>
 
 ## Using Basis Texture Compression {#using-basis-texture-compression}
 
@@ -55,7 +55,7 @@ To remove Basis compression from a texture:
 
 If you would no longer want to use Basis, remove Basis compression from all textures and delete the Basis folder from the project.
 
-<img loading="lazy" src="/img/user-manual/assets/textures/texture-compression/delete-basis-library.png" alt="Delete Basis Module" width="400" />
+<img loading="lazy" src="/img/user-manual/assets/textures/texture-compression/delete-basis-library.webp" alt="Delete Basis Module" width="400" />
 
 ## Basis Limitations {#basis-limitations}
 

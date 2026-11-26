@@ -7,7 +7,7 @@ Screenコンポーネントは、ユーザーインターフェースの領域�
 
 スクリーンのしくみは[スクリーン](/user-manual/user-interface/screens/)を、スクリーンを使ったインターフェースの構築は[ユーザーインターフェース](/user-manual/user-interface/)のセクションを参照してください。
 
-![Screen Component](/img/user-manual/editor/scenes/components/component-screen.png)
+![Screen Component](/img/user-manual/editor/scenes/components/component-screen.webp)
 
 ## プロパティ
 

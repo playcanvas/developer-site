@@ -53,7 +53,7 @@ Fly and walk mode have two control schemes. By default, you click or tap where y
 
 **Controls** opens a panel above the toolbar that lists the controls for the current camera mode, for whichever you last used: mouse and keyboard, or touch. It updates as you switch modes or turn Gaming Controls on and off. The panel is open for a first-time visitor, and the viewer remembers when it's closed. <kbd>H</kbd> toggles it.
 
-<img loading="lazy" alt="The Controls panel open above the viewer toolbar during a camera animation" width="248" src="/img/user-manual/supersplat/viewing/controls-panel.png" />
+<img loading="lazy" alt="The Controls panel open above the viewer toolbar during a camera animation" width="248" src="/img/user-manual/supersplat/viewing/controls-panel.webp" />
 
 The panel lists these controls. Touch has none for the camera animation: any touch takes over.
 
@@ -106,7 +106,7 @@ With Gaming Controls on, **Look Around** is the captured mouse (or touch + drag)
 
 ## The settings panel {#the-settings-panel}
 
-<img loading="lazy" alt="The Settings panel with the Quality slider and Performance Mode" width="248" src="/img/user-manual/supersplat/viewing/settings-panel.png" />
+<img loading="lazy" alt="The Settings panel with the Quality slider and Performance Mode" width="248" src="/img/user-manual/supersplat/viewing/settings-panel.webp" />
 
 **Settings** opens a panel above the toolbar:
 

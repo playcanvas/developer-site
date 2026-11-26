@@ -510,7 +510,7 @@ Colyseus comes with an optional monitoring panel that can be helpful during the 
 
 To view the monitor panel from your local server, go to `http://localhost:2567/monitor`.
 
-![monitor](/img/tutorials/multiplayer-colyseus/monitor.png)
+![monitor](/img/tutorials/multiplayer-colyseus/monitor.webp)
 
 You can see and interact with all spawned rooms and active client connections through this panel.
 

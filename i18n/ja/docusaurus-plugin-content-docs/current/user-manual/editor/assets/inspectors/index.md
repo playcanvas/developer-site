@@ -9,7 +9,7 @@ description: Asset の Inspector パネルのリファレンス。プリロー�
 
 すべてのアセットインスペクターは、ヘッダーセクションに共通のプロパティセットを表示します：
 
-![Common Asset Inspector Properties](/img/user-manual/editor/assets/inspectors/asset-inspector-common.png)
+![Common Asset Inspector Properties](/img/user-manual/editor/assets/inspectors/asset-inspector-common.webp)
 
 | Property | Description |
 |----------|-------------|
@@ -27,7 +27,7 @@ description: Asset の Inspector パネルのリファレンス。プリロー�
 
 スクリプトアセットには追加のプロパティが表示されます：
 
-![Script Asset Inspector Properties](/img/user-manual/editor/assets/inspectors/asset-inspector-common-script.png)
+![Script Asset Inspector Properties](/img/user-manual/editor/assets/inspectors/asset-inspector-common-script.webp)
 
 | Property | Description |
 |----------|-------------|
@@ -38,7 +38,7 @@ description: Asset の Inspector パネルのリファレンス。プリロー�
 
 [Asset Store](/user-manual/editor/assets/asset-store)からインポートされたアセットには、追加の帰属プロパティが表示されます：
 
-![Asset Store Inspector Properties](/img/user-manual/editor/assets/inspectors/asset-inspector-common-license.png)
+![Asset Store Inspector Properties](/img/user-manual/editor/assets/inspectors/asset-inspector-common-license.webp)
 
 | Property | Description |
 |----------|-------------|

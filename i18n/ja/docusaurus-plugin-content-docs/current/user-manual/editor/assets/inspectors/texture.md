@@ -40,7 +40,7 @@ HDRおよびEXRは[高ダイナミックレンジフォーマット](https://en.
 
 テクスチャは、標準的なアセットプロパティ(ID、名前、タグなど)を共有しますが、テクスチャ固有のプロパティもあります。
 
-![Texture Properties](/img/user-manual/assets/textures/texture-properties.png)
+![Texture Properties](/img/user-manual/assets/textures/texture-properties.webp)
 
 ### テクスチャのフィルタリング (Texture Filtering)
 
@@ -50,7 +50,7 @@ HDRおよびEXRは[高ダイナミックレンジフォーマット](https://en.
 
 テクスチャが斜めの角度で表面上に表示される場合、品質が低下し、ぼやけたように見えることがあります。この問題を解決するために、Anisotropyの値を設定することができます。異なるAnisotropyの値がテクスチャの外観にどのような影響を与えるかを見てみましょう。
 
-![Anisotropy](/img/user-manual/assets/textures/anisotropy.png)
+![Anisotropy](/img/user-manual/assets/textures/anisotropy.webp)
 
 Anisotropyが増加するにつれて、GPUでテクスチャをサンプリングするコストも増加します。
 
@@ -58,7 +58,7 @@ Anisotropyが増加するにつれて、GPUでテクスチャをサンプリン�
 
 テクスチャアドレスプロパティを使用すると、テクスチャ座標が範囲0から1以外の値でサンプリングされる方法を制御できます。さまざまなモードがスプライトにどのように影響するかを以下に示します。
 
-![Addressing](/img/user-manual/assets/textures/texture-address.png)
+![Addressing](/img/user-manual/assets/textures/texture-address.webp)
 
 ## 最大テクスチャサイズ
 
@@ -66,11 +66,11 @@ Anisotropyが増加するにつれて、GPUでテクスチャをサンプリン�
 
 たとえば、2020年のMacBook Pro 16インチの場合、Chromeで最大16384x16384までサポートされていることがわかります。
 
-<img loading="lazy" src="/img/user-manual/assets/textures/mac-webgl-report.png" alt="Macbook Pro WebGL report" width="600" />
+<img loading="lazy" src="/img/user-manual/assets/textures/mac-webgl-report.webp" alt="Macbook Pro WebGL report" width="600" />
 
 一方、Samsung S7モバイルデバイスでは、4096x4096のみサポートされています。
 
-<img loading="lazy" src="/img/user-manual/assets/textures/samsung-s7-webgl-report.jpg" alt="Samsung S7 WebGL report" width="600" />
+<img loading="lazy" src="/img/user-manual/assets/textures/samsung-s7-webgl-report.webp" alt="Samsung S7 WebGL report" width="600" />
 
 エンジンがWebGLによって報告される最大テクスチャサイズを超えるテクスチャを使用しようとした場合、実行時にこの最大サイズに縮小されます。これは、画像（PNG, JPG, AVIF, WebP, GIF）からロードされたテクスチャに対してのみ行われることに注意してください。圧縮されたテクスチャは実行時にサイズ変更できず、デバイスにとって大きすぎる場合は、単にレンダリングに失敗します。
 

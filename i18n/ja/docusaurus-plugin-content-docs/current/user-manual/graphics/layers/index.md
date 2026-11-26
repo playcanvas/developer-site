@@ -49,7 +49,7 @@ In addition to these sort modes, the `MeshInstance.drawBucket` property provides
 
 PlayCanvasアプリケーションは、デフォルトのレイヤーのセットで作成されます。これらのレイヤーを削除すると、一部のエンジン機能が正常に機能しなくなるため、これらのレイヤーはそのままにしておく必要があります。デフォルトの順序は次のとおりです:
 
-![Default Layers](/img/user-manual/graphics/layers/default-layers.jpg)
+![Default Layers](/img/user-manual/graphics/layers/default-layers.webp)
 
 1. **World (Opaque)** - 透明でないコンポーネントとほとんどの不透明なコンポーネントのメッシュをレンダリングするために使用されます。
 1. **Depth (Opaque)** - シーンのカラーまたはDepthバッファをキャプチャするために使用されます。[Depth Layer](/user-manual/graphics/cameras/depth-layer)を参照してください。
@@ -67,20 +67,20 @@ PlayCanvasアプリケーションは、デフォルトのレイヤーのセッ�
 
 レイヤーの管理は、エディターの**Settings**セクション内**LAYERS**パネルからおこないます。
 
-![Creating a layer](/img/user-manual/graphics/layers/new-layer.jpg)
+![Creating a layer](/img/user-manual/graphics/layers/new-layer.webp)
 
 Layersセクションで、作成するレイヤーの名前を入力し**Add Layer**をクリックします。ボタンの下に利用可能なレイヤーのリストが表示され、新規作成したレイヤーも含まれています。
 
 ### ソートモードの設定 {#setting-the-sort-mode}
 
-![Edit a layer](/img/user-manual/graphics/layers/edit-layer.jpg)
+![Edit a layer](/img/user-manual/graphics/layers/edit-layer.webp)
 
 レイヤーリストで、各サブレレイヤーのソートモードを選択できます。
 レイヤーを拡張し、ドロップダウンメニューからソートモードを選択してください。
 
 ### レイヤー順序の選択 {#choosing-the-layer-order}
 
-![Add layer](/img/user-manual/graphics/layers/add-sub-layer.jpg)
+![Add layer](/img/user-manual/graphics/layers/add-sub-layer.webp)
 
 レイヤー構成にサブレイヤーを追加するには、**ADD SUBLAYER**を選び、追加するサブレイヤーを選択します。レイヤーがRender Orderリストに表示されたら、各サブレイヤーをドラッグすれば順序を変更できます。
 
@@ -88,7 +88,7 @@ Layersセクションで、作成するレイヤーの名前を入力し**Add La
 
 メッシュをレンダリングするコンポーネントにはすべて`layers`プロパティがあり、このプロパティはメッシュをどのレイヤーやサブレイヤーに追加するかの決定に使用されます。これらのコンポーネントには、モデル、エレメント、スプライト、パーティクルシステムなどがあります。カメラコンポーネントとライトコンポーネントにも`layers`プロパティがあり、それぞれどのレイヤーをレンダリングするか、または照らすかを決定します。
 
-![Layer Components](/img/user-manual/graphics/layers/test-layer-components.jpg)
+![Layer Components](/img/user-manual/graphics/layers/test-layer-components.webp)
 
 *Note:* モデルはテストレイヤーに割り当てられています。これをレンダリングするためには、カメラはそのレイヤーリストにテストレイヤーを含める必要があります。これを照らすためには、ライトもまたそのレイヤーリストにテストレイヤーを含める必要があります。
 

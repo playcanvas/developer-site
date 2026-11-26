@@ -5,7 +5,7 @@ description: Manage your PlayCanvas account settings, including your picture, us
 
 Your account settings are at [playcanvas.com/account](https://playcanvas.com/account). To open them from the [Project Dashboard](/user-manual/editor/projects/dashboard/), select your name at the bottom of the sidebar and choose **Account settings**.
 
-<img loading="lazy" alt="Account Menu" width="254" src="/img/user-manual/account-management/user-accounts/account-menu.png" />
+<img loading="lazy" alt="Account Menu" width="254" src="/img/user-manual/account-management/user-accounts/account-menu.webp" />
 
 The settings are split into three tabs:
 
@@ -13,7 +13,7 @@ The settings are split into three tabs:
 - **[Security](#security)** - Your password and API tokens
 - **[Billing](#billing)** - Your plan, storage, payment details and invoices
 
-![Account Settings](/img/user-manual/account-management/user-accounts/account-settings.png)
+![Account Settings](/img/user-manual/account-management/user-accounts/account-settings.webp)
 
 The list on the left of each tab jumps to its sections. Across the top of the page:
 
@@ -47,7 +47,7 @@ Select the skills that describe you: **Coder**, **Artist**, **Designer** and **M
 
 Choose which emails PlayCanvas sends you. Each switch saves as soon as you change it.
 
-<img loading="lazy" alt="Email Notifications" width="784" src="/img/user-manual/account-management/user-accounts/email-notifications.png" />
+<img loading="lazy" alt="Email Notifications" width="784" src="/img/user-manual/account-management/user-accounts/email-notifications.webp" />
 
 | Switch | Emails you when |
 | --- | --- |
@@ -82,7 +82,7 @@ If you own any organizations, **Delete account** is turned off. Delete those org
 
 ## Security Tab {#security}
 
-![Security](/img/user-manual/account-management/user-accounts/account-security.png)
+![Security](/img/user-manual/account-management/user-accounts/account-security.webp)
 
 ### Password {#password}
 

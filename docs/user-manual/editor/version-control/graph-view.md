@@ -11,17 +11,17 @@ The Version Control Graph makes it easy to track progress and merge history of t
 
 While the Version Control Panel displays a simple list of the latest checkpoints of the selected branch, the Graph View shows a much larger (and expandable) view of the entire version control graph, including checkpoints, branches and merges:
 
-![](/img/user-manual/editor/version-control/graph-view/overview.png)
+![](/img/user-manual/editor/version-control/graph-view/overview.webp)
 
 ## Launching the Graph View
 
 To access the Graph View, either click the Graph button in the top menu of the Version Control panel (for the current Editor branch), or the 'Version Control Graph' entry in the branch menu dropdown.
 
-![](/img/user-manual/editor/version-control/graph-view/access-buttons.png)
+![](/img/user-manual/editor/version-control/graph-view/access-buttons.webp)
 
 ## Graph Nodes
 
-![](/img/user-manual/editor/version-control/graph-view/commit-node.png)
+![](/img/user-manual/editor/version-control/graph-view/commit-node.webp)
 
 A graph node will contain the following information:
 
@@ -31,7 +31,7 @@ A graph node will contain the following information:
 
 ## Graph Node Context Menu
 
-![](/img/user-manual/editor/version-control/graph-view/context-menu.png)
+![](/img/user-manual/editor/version-control/graph-view/context-menu.webp)
 
 Clicking on a node will open up the context menu for some or all following options depending on the node and access permissions:
 
@@ -53,7 +53,7 @@ Clicking on a node will open up the context menu for some or all following optio
 
 ## Expandable Nodes
 
-![](/img/user-manual/editor/version-control/graph-view/node-expand.png)
+![](/img/user-manual/editor/version-control/graph-view/node-expand.webp)
 
 Initially the Graph View displays up to 20 checkpoints from each branch, and up to 60 checkpoints total.
 
@@ -65,7 +65,7 @@ A triangle in the top right corner of a node means that it has yet more incoming
 
 The graph will also include checkpoints from closed branches so that they are able to always show both parents of a merge result checkpoint. They are marked with [x] after the branch name:
 
-![](/img/user-manual/editor/version-control/graph-view/closed-branches.png)
+![](/img/user-manual/editor/version-control/graph-view/closed-branches.webp)
 
 ## Graph Node Layout Logic
 

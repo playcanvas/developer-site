@@ -17,7 +17,7 @@ description: ユーザー間および組織間の所有権譲渡リクエスト�
 
 ### プロジェクトダッシュボードから {#from-the-project-dashboard}
 
-![Transfer Ownership Menu](/img/user-manual/editor/projects/transfer-ownership.png)
+![Transfer Ownership Menu](/img/user-manual/editor/projects/transfer-ownership.webp)
 
 プロジェクトの所有権を譲渡するには:
 
@@ -28,7 +28,7 @@ description: ユーザー間および組織間の所有権譲渡リクエスト�
 
 ### 譲渡ダイアログ
 
-![Transfer Ownership Dialog](/img/user-manual/editor/projects/transfer-ownership-dialog.png)
+![Transfer Ownership Dialog](/img/user-manual/editor/projects/transfer-ownership-dialog.webp)
 
 ダイアログでは、プロジェクトの新しい所有者を選ぶよう求められ、相手に承認のリクエストが届くことが説明されます。また、「Once they accept, everyone else on the project loses access.」（承認されると、プロジェクトの他のメンバー全員がアクセスを失います）という警告も表示されます。
 
@@ -57,7 +57,7 @@ description: ユーザー間および組織間の所有権譲渡リクエスト�
 
 ### 2. 受信者の承認
 
-![Transfer Ownership Accept](/img/user-manual/editor/projects/accept-transfer.png)
+![Transfer Ownership Accept](/img/user-manual/editor/projects/accept-transfer.webp)
 
 受信者には以下が表示されます:
 

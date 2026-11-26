@@ -7,15 +7,15 @@ Rigid Bodyコンポーネントを使用すると、エンティティがシー�
 
 #### Static
 
-![Rigid Body Component (Static)](/img/user-manual/editor/scenes/components/component-rigid-body-static.png)
+![Rigid Body Component (Static)](/img/user-manual/editor/scenes/components/component-rigid-body-static.webp)
 
 #### Dynamic
 
-![Rigid Body Component (Dynamic)](/img/user-manual/editor/scenes/components/component-rigid-body-dynamic.png)
+![Rigid Body Component (Dynamic)](/img/user-manual/editor/scenes/components/component-rigid-body-dynamic.webp)
 
 #### Kinematic
 
-![Rigid Body Component (Kinematic)](/img/user-manual/editor/scenes/components/component-rigid-body-kinematic.png)
+![Rigid Body Component (Kinematic)](/img/user-manual/editor/scenes/components/component-rigid-body-kinematic.webp)
 
 剛体の形状を定義するには、同じエンティティに[Collisionコンポーネント](collision.md)を追加する必要があります。そうしないと、Rigid Bodyコンポーネントは効果を持たず、物理シミュレーションに参加しません。
 
