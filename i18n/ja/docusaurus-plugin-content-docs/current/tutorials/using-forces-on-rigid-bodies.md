@@ -82,15 +82,15 @@ RigidBodyの詳細については、[CollisionのAPIページ](https://api.playc
 RigidBodyを瞬時に新しい位置にテレポートするには、Entity APIのsetPosition関数を使用できません。これは、物理エンジンがまだボディが古い位置にあると思っているためです。代わりに、RigidBodyコンポーネントのteleport関数を使用する必要があります。
 
 ```javascript
-//code within the update function
-this.playerPos = this.entity.getLocalPosition();
+// code within the update function
+const rb = this.entity.rigidbody;
+const pos = this.entity.getLocalPosition();
 
-// Keeping the cube on screen - cube moves off of one screen edge then appears from the opposite edge.
-if (this.playerPos.x < -9.0) {
-    this.entity.rigidbody.teleport(8.8, this.playerPos.y, this.playerPos.z);
-}
-if (this.playerPos.x > 9.0) {
-    this.entity.rigidbody.teleport(-8.8, this.playerPos.y, this.playerPos.z);
+// Wrap position around screen horizontally
+if (pos.x < -9.0) {
+    rb.teleport(8.8, pos.y, pos.z);
+} else if (pos.x > 9.0) {
+    rb.teleport(-8.8, pos.y, pos.z);
 }
 ```
 
@@ -105,10 +105,11 @@ if (app.keyboard.wasPressed(KEY_R)) {
 ```
 
 ```javascript
-reset: function () {
-    this.entity.rigidbody.teleport(0, 2, 0);
-    this.entity.rigidbody.linearVelocity = Vec3.ZERO;
-    this.entity.rigidbody.angularVelocity = Vec3.ZERO;
+reset() {
+    const rb = this.entity.rigidbody;
+    rb.teleport(0, 2, 0);
+    rb.linearVelocity = Vec3.ZERO;
+    rb.angularVelocity = Vec3.ZERO;
 }
 ```
 
@@ -120,79 +121,89 @@ reset: function () {
 <TabItem value="esm" label="ESM">
 
 ```javascript
-import {
-    Script, Vec3,
-    EVENT_KEYDOWN, KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_A, KEY_D, KEY_W, KEY_S, KEY_F, KEY_R
-} from 'playcanvas';
+import { Script, Vec3, KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_A, KEY_D, KEY_W, KEY_S, KEY_F, KEY_R, EVENT_KEYDOWN } from 'playcanvas';
 
-export class Movement extends Script {
-    static scriptName = "movement";
-        
-    // initialize code called once per entity
+/**
+ * A dynamic rigidbody controller that applies impulses and torque based on keyboard input.
+ * Includes screen wrapping and reset behavior.
+ */
+export class DynamicBody extends Script {
+    static scriptName = 'dynamicBody';
+
     initialize() {
         this.torque = 7;
+
         this.app.keyboard.on(EVENT_KEYDOWN, this.onKeyDown, this);
 
-        this.on('destroy', function() {
+        this.on('destroy', () => {
             this.app.keyboard.off(EVENT_KEYDOWN, this.onKeyDown, this);
-        }, this);
+        });
     }
 
+    /**
+     * Prevents default browser behavior on keydown.
+     * @param {KeyboardEvent} event
+     */
     onKeyDown(event) {
         event.event.preventDefault();
     }
 
-    // update code called every frame
     update(dt) {
-        // update player's position
-        this.playerPos = this.entity.getLocalPosition();
-
         const app = this.app;
+        const rb = this.entity.rigidbody;
+        const pos = this.entity.getLocalPosition();
 
-        // keyboard controls and applying forces and moments.
-        if (app.keyboard.isPressed(KEY_LEFT) ) {
-            this.entity.rigidbody.applyImpulse(-1, 0, 0);
+        // Keyboard controls: apply linear impulses
+        if (app.keyboard.isPressed(KEY_LEFT)) {
+            rb.applyImpulse(-1, 0, 0);
         }
-        if (app.keyboard.isPressed(KEY_RIGHT) ) {
-            this.entity.rigidbody.applyImpulse(1, 0, 0);
+        if (app.keyboard.isPressed(KEY_RIGHT)) {
+            rb.applyImpulse(1, 0, 0);
         }
-        if (app.keyboard.isPressed(KEY_UP) ) {
-            this.entity.rigidbody.applyImpulse(0, 1, 0);
-        }
-        if (app.keyboard.isPressed(KEY_A) ) {
-            this.entity.rigidbody.applyTorque(0, this.torque, 0);
-        }
-        if (app.keyboard.isPressed(KEY_D) ) {
-            this.entity.rigidbody.applyTorque(0, -this.torque, 0);
-        }
-        if (app.keyboard.isPressed(KEY_W) ) {
-            this.entity.rigidbody.applyTorque(-this.torque, 0, 0);
-        }
-        if (app.keyboard.isPressed(KEY_S) ) {
-            this.entity.rigidbody.applyTorque(this.torque, 0, 0);
-        }
-        if (app.keyboard.isPressed(KEY_F) ) {
-            this.entity.rigidbody.applyForce(0, 9.8, 0);
+        if (app.keyboard.isPressed(KEY_UP)) {
+            rb.applyImpulse(0, 1, 0);
         }
 
-        // Keeping the cube on screen - cube moves off of one screen edge then appears from the opposite edge.
-        if (this.playerPos.x < -9.0) {
-            this.entity.rigidbody.teleport(8.8, this.playerPos.y, this.playerPos.z);
+        // Keyboard controls: apply torques
+        if (app.keyboard.isPressed(KEY_A)) {
+            rb.applyTorque(0, this.torque, 0);
         }
-        if (this.playerPos.x > 9.0) {
-            this.entity.rigidbody.teleport(-8.8, this.playerPos.y, this.playerPos.z);
+        if (app.keyboard.isPressed(KEY_D)) {
+            rb.applyTorque(0, -this.torque, 0);
+        }
+        if (app.keyboard.isPressed(KEY_W)) {
+            rb.applyTorque(-this.torque, 0, 0);
+        }
+        if (app.keyboard.isPressed(KEY_S)) {
+            rb.applyTorque(this.torque, 0, 0);
         }
 
-        // cube reset control
-        if (app.keyboard.wasPressed(KEY_R) ) {
+        // Apply upward force
+        if (app.keyboard.isPressed(KEY_F)) {
+            rb.applyForce(0, 9.8, 0);
+        }
+
+        // Wrap position around screen horizontally
+        if (pos.x < -9.0) {
+            rb.teleport(8.8, pos.y, pos.z);
+        } else if (pos.x > 9.0) {
+            rb.teleport(-8.8, pos.y, pos.z);
+        }
+
+        // Reset position and velocity
+        if (app.keyboard.wasPressed(KEY_R)) {
             this.reset();
         }
     }
 
+    /**
+     * Resets the entity to its starting position and stops all movement.
+     */
     reset() {
-        this.entity.rigidbody.teleport(0, 2, 0);
-        this.entity.rigidbody.linearVelocity = Vec3.ZERO;
-        this.entity.rigidbody.angularVelocity = Vec3.ZERO;
+        const rb = this.entity.rigidbody;
+        rb.teleport(0, 2, 0);
+        rb.linearVelocity = Vec3.ZERO;
+        rb.angularVelocity = Vec3.ZERO;
     }
 }
 ```

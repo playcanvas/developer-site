@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 import StepVideo from '@site/src/components/StepVideo';
 
 <div className='iframe-container'>
-    <iframe src="https://playcanv.as/p/HI8kniOx/" title="Anim State Graph Blending" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
+    <iframe src="https://playcanv.as/p/rXC3jL7Z/" title="Anim State Graph Blending" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
 </div>
 
 :::info
@@ -74,7 +74,7 @@ animstategraphアセットを作成すると、エディタが表示されます
 
 ## キーボード入力
 
-アニメーションが完全に設定されたら、ユーザーがシステムと対話できるようにする必要があります。そのためには、スクリプトが必要です！この動作を有効にするには、スクリプトコンポーネントが必要であり、それは `keyboard_controls.js` という名前のスクリプトに記述されます。以下では、それがエンティティにどのように添付されるかをご覧いただけます。
+アニメーションが完全に設定されたら、ユーザーがシステムと対話できるようにする必要があります。そのためには、スクリプトが必要です！この動作を有効にするには、スクリプトコンポーネントが必要であり、それは `keyboard_controls.mjs` という名前のスクリプトに記述されます。以下では、それがエンティティにどのように添付されるかをご覧いただけます。
 
 ![Keyboard Input](/img/tutorials/anim_blending/keyboard_input.png)
 
@@ -84,16 +84,10 @@ animstategraphアセットを作成すると、エディタが表示されます
 <TabItem value="esm" label="ESM">
 
 ```javascript
-import { Script, EVENT_KEYDOWN, EVENT_KEYUP, KEY_P } from 'playcanvas';
+import { Script, KEY_P } from 'playcanvas';
 
 export class KeyboardControls extends Script {
     static scriptName = 'keyboardControls';
-
-    // initialize code called once per entity
-    initialize() {
-        this.app.keyboard.on(EVENT_KEYDOWN, this.keyDown, this);
-        this.app.keyboard.on(EVENT_KEYUP, this.keyUp, this);
-    }
 
     update(dt) {
         if (this.app.keyboard.wasPressed(KEY_P) && (this.entity.anim.baseLayer.activeState !== 'Punch')) {
@@ -112,12 +106,6 @@ export class KeyboardControls extends Script {
 
 ```javascript
 var KeyboardControls = pc.createScript('keyboardControls');
-
-// initialize code called once per entity
-KeyboardControls.prototype.initialize = function() {
-    this.app.keyboard.on(pc.EVENT_KEYDOWN, this.keyDown, this);
-    this.app.keyboard.on(pc.EVENT_KEYUP, this.keyUp, this);
-};
 
 KeyboardControls.prototype.update = function(dt) {
     if (this.app.keyboard.wasPressed(pc.KEY_P) && (this.entity.anim.baseLayer.activeState !== 'Punch')) {

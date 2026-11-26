@@ -96,7 +96,7 @@ Javascript オブジェクトを取得したら、通常通りデータにアク
 <TabItem value="esm" label="ESM">
 
 ```javascript
-async function loadJsonFromRemote(url, callback) {
+async loadJsonFromRemote(url, callback) {
     const res = await fetch(url);
     const json = await res.json();
     callback(json);
@@ -105,10 +105,10 @@ async function loadJsonFromRemote(url, callback) {
 // ...
 
 // リモートサーバーから JSON を取得
-loadJsonFromRemote("https://api.github.com/", (data) => {
+this.loadJsonFromRemote("https://api.github.com/", (data) => {
     // リモートサーバーからの JSON データを表示
-    el = document.querySelector("#xhr-json");
-    el.textContent = JSON.stringify(data, null, 4);
+    const el = document.querySelector("#xhr-json");
+    if (el) el.textContent = JSON.stringify(data, null, 4);
 });
 ```
 
@@ -138,9 +138,7 @@ this.loadJsonFromRemote("https://api.github.com/", function (data) {
 </TabItem>
 </Tabs>
 
-このコードでは、XMLHttpRequestオブジェクト（標準のWebブラウザAPIの一部）を使用して、URLからJSONデータをリクエストしています。この場合、GitHub APIを使用しています。
-
-`"load"`イベントを受け取った後、`JSON.parse`を使用してJSONデータを解析します（これも標準のWebブラウザAPIの一部です）。そして、データを`callback`関数を介して返します。
+このコードでは、標準のWebブラウザAPIを使用して、URL（この場合はGitHub API）からJSONデータをリクエストしています。ESM版は`fetch`を使用し、`res.json()`でレスポンスを解析します。Classic版は`XMLHttpRequest`を使用し、`"load"`イベントを受け取った後に`JSON.parse`でレスポンスを解析します。どちらの場合も、データは`callback`関数を介して返されます。
 
 `loadJsonFromRemote` の呼び出しは、**非同期**であることに注意してください。
 
@@ -150,7 +148,7 @@ this.loadJsonFromRemote("https://api.github.com/", function (data) {
 <TabItem value="esm" label="ESM">
 
 ```javascript
-import { Script } from 'playcanvas';
+import { Script, Asset } from 'playcanvas';
 
 export class Game extends Script {
     static scriptName = "game";
@@ -228,13 +226,10 @@ export class Game extends Script {
         return names;
     }
 
-    loadJsonFromRemote(url, callback) {
-        const xhr = new XMLHttpRequest();
-        xhr.addEventListener("load", function() {
-            callback(JSON.parse(this.responseText));
-        });
-        xhr.open("GET", url);
-        xhr.send();
+    async loadJsonFromRemote(url, callback) {
+        const res = await fetch(url);
+        const json = await res.json();
+        callback(json);
     }
 }
 ```
