@@ -74,7 +74,7 @@ As your project grows, so will your number of scripts. Good organization is cruc
 To delete a Script Asset:
 
 1. Select the Script Asset in the Asset Panel.
-2. Press the Delete key, or right-click and select Delete.
+2. Press <kbd>Delete</kbd>, or right-click and select Delete.
 3. A confirmation dialog will appear. Click DELETE to confirm.
 
 :::note

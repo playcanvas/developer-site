@@ -46,7 +46,7 @@ Unityのその他のウィンドウやメニューに相当するものは、次
 
 ### Playモードの代わりに起動する {#launching-instead-of-play-mode}
 
-Unityはゲームをエディターの中で再生します。PlayCanvasは新しいブラウザータブで[起動ページ](/user-manual/editor/interface/launch-page/)を開き、公開したときと同じようにシーンを実行します。**Launch** をクリックするか、Ctrl+Enterを押してください。
+Unityはゲームをエディターの中で再生します。PlayCanvasは新しいブラウザータブで[起動ページ](/user-manual/editor/interface/launch-page/)を開き、公開したときと同じようにシーンを実行します。**Launch** をクリックするか、<kbd>Ctrl</kbd>+<kbd>Enter</kbd>を押してください。
 
 起動ページはエディターに接続されたままです。エンティティ、コンポーネント、スクリプト属性、アセット、シーン設定への変更は、加えたそばから実行中のアプリに反映されます。Playモード中の編集とは違い、停止しても変更は失われません。エディターはすべての変更をその都度保存するからです。この使い方をするには、2つのタブを横に並べて配置してください。コードの変更は、スクリプトが[ホットリロード](/user-manual/editor/scripting/hot-reloading/)に対応していない限り、再読み込みが必要です。
 
@@ -58,37 +58,37 @@ Launchボタンのメニューには、テスト用のオプションがあり�
 
 | 操作 | Unity | PlayCanvas |
 | --- | --- | --- |
-| 周回（オービット） | Alt + 左ドラッグ | 左ドラッグ |
+| 周回（オービット） | <kbd>Alt</kbd> + 左ドラッグ | 左ドラッグ |
 | 見回す | 右ドラッグ | 右ドラッグ |
-| パン | 中ドラッグ | 中ドラッグ、またはShift + 左ドラッグ |
+| パン | 中ドラッグ | 中ドラッグ、または<kbd>Shift</kbd> + 左ドラッグ |
 | ズーム | マウスホイール | マウスホイール |
-| 飛行 | 右ボタンを押しながらW、A、S、D、Q、Eを押す | マウスボタンを押さずにW、A、S、D、Q、Eを押す（Shiftを押すと速く移動） |
-| 選択対象にフォーカス | F | F |
-| 矩形選択 | 何もない場所を左ドラッグ | Ctrl + 左ドラッグ |
-| 選択への追加と選択からの除外 | Shift+クリックまたはCtrl+クリック | Ctrl+クリック |
+| 飛行 | 右ボタンを押しながら<kbd>W</kbd>、<kbd>A</kbd>、<kbd>S</kbd>、<kbd>D</kbd>、<kbd>Q</kbd>、<kbd>E</kbd>を押す | マウスボタンを押さずに<kbd>W</kbd>、<kbd>A</kbd>、<kbd>S</kbd>、<kbd>D</kbd>、<kbd>Q</kbd>、<kbd>E</kbd>を押す（<kbd>Shift</kbd>を押すと速く移動） |
+| 選択対象にフォーカス | <kbd>F</kbd> | <kbd>F</kbd> |
+| 矩形選択 | 何もない場所を左ドラッグ | <kbd>Ctrl</kbd> + 左ドラッグ |
+| 選択への追加と選択からの除外 | <kbd>Shift</kbd>を押しながらクリック、または<kbd>Ctrl</kbd>を押しながらクリック | <kbd>Ctrl</kbd>を押しながらクリック |
 
 ### キーボードショートカット {#keyboard-shortcuts}
 
 | 操作 | Unity | PlayCanvas |
 | --- | --- | --- |
-| 移動ツール | W | 1 |
-| 回転ツール | E | 2 |
-| スケールツール | R | 3 |
-| 矩形ツール（UI要素） | T | 4 |
-| ギズモのローカル空間とワールド空間の切り替え | X | L |
-| 選択対象にフォーカス | F | F |
-| 再生 | Ctrl+P | Ctrl+Enter（Launch） |
-| 空の子オブジェクトを作成 | Alt+Shift+N | Ctrl+E |
-| 複製 | Ctrl+D | Ctrl+D |
-| 名前の変更 | F2 | F2 |
-| 削除 | Delete | Delete |
-| 元に戻す / やり直し | Ctrl+Z / Ctrl+Y | Ctrl+Z / Ctrl+Y |
-| 保存 | Ctrl+S | すべての変更が保存されるので不要です。Ctrl+Sを押すと、バージョン管理のチェックポイントを作成するフォームが開きます。 |
-| ビューの最大化 | Shift+Space | Space（ヒエラルキー、インスペクター、アセットパネルを隠す） |
-| 正面、右側面、上面のビュー | シーンギズモの軸をクリック | テンキーの1、3、7（Ctrlを加えると反対側）、またはビューキューブの軸をクリック |
-| 正投影と透視投影の切り替え | シーンギズモの中央をクリック | テンキーの5 |
+| 移動ツール | <kbd>W</kbd> | <kbd>1</kbd> |
+| 回転ツール | <kbd>E</kbd> | <kbd>2</kbd> |
+| スケールツール | <kbd>R</kbd> | <kbd>3</kbd> |
+| 矩形ツール（UI要素） | <kbd>T</kbd> | <kbd>4</kbd> |
+| ギズモのローカル空間とワールド空間の切り替え | <kbd>X</kbd> | <kbd>L</kbd> |
+| 選択対象にフォーカス | <kbd>F</kbd> | <kbd>F</kbd> |
+| 再生 | <kbd>Ctrl</kbd>+<kbd>P</kbd> | <kbd>Ctrl</kbd>+<kbd>Enter</kbd>（Launch） |
+| 空の子オブジェクトを作成 | <kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>N</kbd> | <kbd>Ctrl</kbd>+<kbd>E</kbd> |
+| 複製 | <kbd>Ctrl</kbd>+<kbd>D</kbd> | <kbd>Ctrl</kbd>+<kbd>D</kbd> |
+| 名前の変更 | <kbd>F2</kbd> | <kbd>F2</kbd> |
+| 削除 | <kbd>Delete</kbd> | <kbd>Delete</kbd> |
+| 元に戻す / やり直し | <kbd>Ctrl</kbd>+<kbd>Z</kbd> / <kbd>Ctrl</kbd>+<kbd>Y</kbd> | <kbd>Ctrl</kbd>+<kbd>Z</kbd> / <kbd>Ctrl</kbd>+<kbd>Y</kbd> |
+| 保存 | <kbd>Ctrl</kbd>+<kbd>S</kbd> | すべての変更が保存されるので不要です。<kbd>Ctrl</kbd>+<kbd>S</kbd>を押すと、バージョン管理のチェックポイントを作成するフォームが開きます。 |
+| ビューの最大化 | <kbd>Shift</kbd>+<kbd>Space</kbd> | <kbd>Space</kbd>（ヒエラルキー、インスペクター、アセットパネルを隠す） |
+| 正面、右側面、上面のビュー | シーンギズモの軸をクリック | <kbd>Numpad 1</kbd>、<kbd>Numpad 3</kbd>、<kbd>Numpad 7</kbd>（<kbd>Ctrl</kbd>を加えると反対側）、またはビューキューブの軸をクリック |
+| 正投影と透視投影の切り替え | シーンギズモの中央をクリック | <kbd>Numpad 5</kbd> |
 
-macOSでは、Ctrlの代わりにCmdを使います。UnityのViewツール（Q）に相当するものはありません。ビューポートの操作にツールは必要ないためです。すべてのショートカットは[操作とキーボードショートカット](/user-manual/editor/interface/keyboard-shortcuts/)のページにあります。
+macOSでは、<kbd>Ctrl</kbd>の代わりに<kbd>Cmd</kbd>を使います。UnityのViewツール（<kbd>Q</kbd>）に相当するものはありません。ビューポートの操作にツールは必要ないためです。すべてのショートカットは[操作とキーボードショートカット](/user-manual/editor/interface/keyboard-shortcuts/)のページにあります。
 
 ## 概念と用語 {#concepts-and-terminology}
 
@@ -139,7 +139,7 @@ PlayCanvasのスクリプトは、[`Script`](https://api.playcanvas.com/engine/c
 
 ### スクリプトの比較 {#a-script-side-by-side}
 
-次のUnityスクリプトは、GameObjectを回転させ、スペースキーでライトのオンとオフを切り替えます。
+次のUnityスクリプトは、GameObjectを回転させ、<kbd>Space</kbd>キーでライトのオンとオフを切り替えます。
 
 ```csharp
 using UnityEngine;
@@ -637,7 +637,7 @@ Unityはプラットフォームごとにプレイヤーをビルドします。
 
 ## デバッグとプロファイリング {#debugging-and-profiling}
 
-アプリはブラウザーで動作するので、起動したタブで、ブラウザーの開発者ツール（F12、macOSではCmd+Option+I）を使ってデバッグします。
+アプリはブラウザーで動作するので、起動したタブで、ブラウザーの開発者ツール（<kbd>F12</kbd>、macOSでは<kbd>Cmd</kbd>+<kbd>Option</kbd>+<kbd>I</kbd>）を使ってデバッグします。
 
 | Unity | PlayCanvas |
 | --- | --- |

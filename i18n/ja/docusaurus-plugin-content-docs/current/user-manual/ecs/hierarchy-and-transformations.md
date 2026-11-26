@@ -337,7 +337,7 @@ trailer.insertChild(spare, 0);
 </TabItem>
 <TabItem value="editor" label="Editor">
 
-ヒエラルキーでエンティティを別のエンティティの上にドラッグするとその子になり、2つのエンティティの間にドラッグするとそこへ移動します。親を付け替えるとき、エディターはエンティティのワールドトランスフォームを保つので、ビューポートでエンティティは動きません。代わりにローカルトランスフォームを保つには、**Ctrl**（Macでは**Cmd**）を押しながらドロップします。[ヒエラルキーパネル](/user-manual/editor/interface/hierarchy/#organizing-the-hierarchy)を参照してください。
+ヒエラルキーでエンティティを別のエンティティの上にドラッグするとその子になり、2つのエンティティの間にドラッグするとそこへ移動します。親を付け替えるとき、エディターはエンティティのワールドトランスフォームを保つので、ビューポートでエンティティは動きません。代わりにローカルトランスフォームを保つには、<kbd>Ctrl</kbd>（macOSでは<kbd>Cmd</kbd>）を押しながらドロップします。[ヒエラルキーパネル](/user-manual/editor/interface/hierarchy/#organizing-the-hierarchy)を参照してください。
 
 </TabItem>
 <TabItem value="react" label="React">

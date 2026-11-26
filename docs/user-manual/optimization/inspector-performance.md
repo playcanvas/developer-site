@@ -32,8 +32,8 @@ To look at part of the capture:
 
 - Click a frame to show it on the [frame timeline](#the-frame-timeline), with everything recorded for it in the property view below.
 - Drag across the charts to select frames together, with their averages, 95th percentiles and largest figures. The timeline then shows their average frame.
-- Scroll over the charts to zoom, then drag the scrollbar under them, or drag across them holding Shift, to pan. Double-click to see the whole capture again.
-- **‹** and **›** step a frame, **«** shows the first and **»** the newest, following it as frames are recorded. While the panel has focus, the arrow keys step a frame (ten with Shift), Home shows the first and End follows the newest.
+- Scroll over the charts to zoom, then drag the scrollbar under them, or drag across them holding <kbd>Shift</kbd>, to pan. Double-click to see the whole capture again.
+- **‹** and **›** step a frame, **«** shows the first and **»** the newest, following it as frames are recorded. While the panel has focus, the arrow keys step a frame (ten with <kbd>Shift</kbd>), <kbd>Home</kbd> shows the first and <kbd>End</kbd> follows the newest.
 
 ### Events
 
@@ -57,7 +57,7 @@ The timeline under the charts shows the frame selected along its own time, as a 
 - The **GPU** line holds the effects, such as bloom or depth of field, with the passes each runs below it, and the passes of their own. See [GPU Timings](#gpu-timings).
 - The **Events** line holds the long tasks of the main thread and the spans measured with `performance.measure`, and the lines below it the milestones, the assets and the requests of the frame.
 
-Hover a bar for its time, or a line for everything on it. Click a script type to show it on the Scripts tab, a pass or an effect to show it on the Frame graph tab, and an asset to show it on the Assets tab. Scroll over the timeline to zoom into part of the frame, drag the scrollbar under it or drag across it holding Shift to pan, and double-click it to see the whole frame again. Click its title to collapse it.
+Hover a bar for its time, or a line for everything on it. Click a script type to show it on the Scripts tab, a pass or an effect to show it on the Frame graph tab, and an asset to show it on the Assets tab. Scroll over the timeline to zoom into part of the frame, drag the scrollbar under it or drag across it holding <kbd>Shift</kbd> to pan, and double-click it to see the whole frame again. Click its title to collapse it.
 
 The property view below lists everything recorded for the frame: what held it back, the CPU time by phase, the GPU time of each pass, the scripts, the counters, what loaded, the work it submitted, memory and resources, and its events.
 
@@ -69,7 +69,7 @@ Turn on **GPU timings** to record the time of the GPU. On WebGPU each pass is ti
 
 Turn on **Script timing** to time each script type while recording: the time of its `update`, `postUpdate` and `initialize` calls, without the calls nested in them, and how many times each was called. The CPU chart then shows the scripts apart from the other systems, and the timeline draws them where they ran.
 
-The **Scripts** chart stacks the ten script types that took the longest, over the frames selected together or else the whole capture, so selecting a spike brings forward the scripts behind it. The others share one band, whose hover lists them. **▸ 10 more** under the list gives ten more types a band of their own. To follow a script whatever its time, pin it: **Pin** beside it in the frame details, or Shift+click it in the list. Alt+click a line of a list to show it alone, and again to show them all.
+The **Scripts** chart stacks the ten script types that took the longest, over the frames selected together or else the whole capture, so selecting a spike brings forward the scripts behind it. The others share one band, whose hover lists them. **▸ 10 more** under the list gives ten more types a band of their own. To follow a script whatever its time, pin it: **Pin** beside it in the frame details, or <kbd>Shift</kbd>-click it in the list. <kbd>Alt</kbd>-click a line of a list to show it alone, and again to show them all.
 
 Timing a call costs the application about half a microsecond, counted as the Inspector's time. Time spent in event handlers, timers and promises is not counted. On a page that is not cross-origin isolated, the browser's clock steps by a tenth of a millisecond, so the times of small scripts read best over many frames selected together.
 

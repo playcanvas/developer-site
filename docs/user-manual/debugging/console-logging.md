@@ -20,7 +20,7 @@ The console is a command-line interface within your browser's developer tools th
 
 How you open the developer console depends on your browser, but here are common methods:
 
-* **Keyboard Shortcut:** Press F12 on Windows/Linux or Option + Command + J (⌥ + ⌘ + J) on macOS (Chrome/Edge/Firefox). Safari uses Option + Command + C (⌥ + ⌘ + C), but you might need to enable the Develop menu first (Preferences > Advanced > Show Develop menu in menu bar).
+* **Keyboard Shortcut:** Press <kbd>F12</kbd> on Windows/Linux or <kbd>Option</kbd>+<kbd>Cmd</kbd>+<kbd>J</kbd> on macOS (Chrome/Edge/Firefox). Safari uses <kbd>Option</kbd>+<kbd>Cmd</kbd>+<kbd>C</kbd>, but you might need to enable the Develop menu first (Preferences > Advanced > Show Develop menu in menu bar).
 * **Right-Click Menu:** Right-click anywhere on your running PlayCanvas application page and select "Inspect" or "Inspect Element". Then, navigate to the "Console" tab in the tools that appear.
 * **Browser Menu:** Look for "Developer Tools", "Web Developer", or similar options in your browser's main menu (e.g., Chrome: More Tools > Developer Tools).
 

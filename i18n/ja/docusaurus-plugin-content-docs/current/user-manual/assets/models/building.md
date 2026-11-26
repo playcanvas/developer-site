@@ -144,7 +144,7 @@ Normalマップを作成する方法には異なる方法がありますが、�
 
 ![Normal map](/img/user-manual/assets/models/building/wall-norm.jpg)
 
-テクスチャのNormalマップの緑成分（または各NormalのY成分）を反転する必要があります。Photoshopでファイルを読み込み、緑チャンネルを選択し、Ctrl+Iを押してチャンネルを反転すると、以下のようになります。
+テクスチャのNormalマップの緑成分（または各NormalのY成分）を反転する必要があります。Photoshopでファイルを読み込み、緑チャンネルを選択し、<kbd>Ctrl</kbd>+<kbd>I</kbd>を押してチャンネルを反転すると、以下のようになります。
 
 ![Normal map with Y component flipped](/img/user-manual/assets/models/building/wall-norm-yflip.jpg)
 

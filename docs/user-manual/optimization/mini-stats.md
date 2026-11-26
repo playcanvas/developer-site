@@ -25,7 +25,7 @@ When using a script-tag build, use `new pc.MiniStats(app)` instead. MiniStats en
 
 ## Display Sizes
 
-Click or tap outside the section headings to cycle through three default views. You can also focus the overlay and press Enter or Space.
+Click or tap outside the section headings to cycle through three default views. You can also focus the overlay and press <kbd>Enter</kbd> or <kbd>Space</kbd>.
 
 | View | Contents |
 | ---- | -------- |

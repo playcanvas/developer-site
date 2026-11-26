@@ -9,7 +9,7 @@ The Code Editor is an online real-time collaborative editor that allows you to e
 
 ## Opening The Code Editor
 
-You can open the Code Editor from inside the [PlayCanvas Editor](/user-manual/editor/) by pressing Ctrl + I. You can also click on this toolbar icon:
+You can open the Code Editor from inside the [PlayCanvas Editor](/user-manual/editor/) by pressing <kbd>Ctrl</kbd>+<kbd>I</kbd>. You can also click on this toolbar icon:
 
 ![Code Editor Toolbar](/img/user-manual/scripting/code-editor-toolbar.png)
 
@@ -39,7 +39,7 @@ Each open asset has a corresponding tab in the tab view. You can rearrange tabs 
 
 Here you can actually edit the contents of your assets. The editor uses [Monaco](https://github.com/Microsoft/monaco-editor) which is the same text editor library used by Visual Studio Code.
 
-In addition, the editor supports auto-complete. When you type a letter or hit Ctrl+Space you will see a list of auto-complete suggestions.
+In addition, the editor supports auto-complete. When you type a letter or hit <kbd>Ctrl</kbd>+<kbd>Space</kbd> you will see a list of auto-complete suggestions.
 
 The editor will also lint your JavaScript code. This means that while you type your code the editor will scan your code for possible errors or suspicious usage. This is done with the help of [JSHint](https://jshint.com/), which also supports special comments which control its behavior. For a list of these special comments check out the [docs](https://jshint.com/docs/).
 
@@ -59,7 +59,7 @@ If you have unsaved changes the Revert option in the File menu will cancel these
 
 ## Command Palette
 
-All the text editing features can be found using the command palette via Ctrl + Shift + P (Windows) or Cmd + Shift + P (Mac).
+All the text editing features can be found using the command palette via <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> (Windows) or <kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> (macOS).
 
 ![](/img/user-manual/scripting/command-palette.png)
 
@@ -67,36 +67,36 @@ All the text editing features can be found using the command palette via Ctrl + 
 
 The editor supports various shortcuts to help you when editing code. You can find all those options in the Menu or the command palette. The most common can be found below:
 
-| Command                         | PC                       | Mac                        |
+| Command                         | Windows                  | macOS                      |
 |---------------------------------|--------------------------|----------------------------|
-| Save                            | Ctrl + S                 | Cmd + S                    |
-| Undo                            | Ctrl + Z                 | Cmd + Z                    |
-| Redo                            | Ctrl + Y                 | Cmd + Shift + Z or Cmd + Y |
-| Find in file                    | Ctrl + F                 | Cmd + F                    |
-| Find next match                 | F3                       | Cmd + G                    |
-| Find previous match             | Shift + F3               | Cmd + Shift + G            |
-| Replace                         | Ctrl + H                 | Cmd + Alt + F              |
-| Find in Files                   | Ctrl + Shift + F         | Cmd + Shift + F            |
-| Comment line or selection       | Ctrl + /                 | Cmd + /                    |
-| Block Comment line or selection | Alt + Shift + A          | Alt + Shift + A            |
-| Indent line or selection        | Tab                      | Tab                        |
-| Un-Indent line or selection     | Shift + Tab              | Shift + Tab                |
-| Jump to declaration             | Ctrl + F12               | Cmd + F12                  |
-| Show autocomplete               | Ctrl + Space or Ctrl + I | Ctrl + Space or Cmd + I    |
+| Save                            | <kbd>Ctrl</kbd>+<kbd>S</kbd>                 | <kbd>Cmd</kbd>+<kbd>S</kbd>                    |
+| Undo                            | <kbd>Ctrl</kbd>+<kbd>Z</kbd>                 | <kbd>Cmd</kbd>+<kbd>Z</kbd>                    |
+| Redo                            | <kbd>Ctrl</kbd>+<kbd>Y</kbd>                 | <kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd> or <kbd>Cmd</kbd>+<kbd>Y</kbd> |
+| Find in file                    | <kbd>Ctrl</kbd>+<kbd>F</kbd>                 | <kbd>Cmd</kbd>+<kbd>F</kbd>                    |
+| Find next match                 | <kbd>F3</kbd>                       | <kbd>Cmd</kbd>+<kbd>G</kbd>                    |
+| Find previous match             | <kbd>Shift</kbd>+<kbd>F3</kbd>               | <kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>G</kbd>            |
+| Replace                         | <kbd>Ctrl</kbd>+<kbd>H</kbd>                 | <kbd>Cmd</kbd>+<kbd>Alt</kbd>+<kbd>F</kbd>              |
+| Find in Files                   | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>F</kbd>         | <kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>F</kbd>            |
+| Comment line or selection       | <kbd>Ctrl</kbd>+<kbd>/</kbd>                 | <kbd>Cmd</kbd>+<kbd>/</kbd>                    |
+| Block Comment line or selection | <kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>A</kbd>          | <kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>A</kbd>            |
+| Indent line or selection        | <kbd>Tab</kbd>                      | <kbd>Tab</kbd>                        |
+| Un-Indent line or selection     | <kbd>Shift</kbd>+<kbd>Tab</kbd>              | <kbd>Shift</kbd>+<kbd>Tab</kbd>                |
+| Jump to declaration             | <kbd>Ctrl</kbd>+<kbd>F12</kbd>               | <kbd>Cmd</kbd>+<kbd>F12</kbd>                  |
+| Show autocomplete               | <kbd>Ctrl</kbd>+<kbd>Space</kbd> or <kbd>Ctrl</kbd>+<kbd>I</kbd> | <kbd>Ctrl</kbd>+<kbd>Space</kbd> or <kbd>Cmd</kbd>+<kbd>I</kbd>    |
 
 ## Searching
 
-You can search for text in a file by pressing Ctrl + F (Windows) or Cmd + F (Mac). This will open up the Find panel on the top right:
+You can search for text in a file by pressing <kbd>Ctrl</kbd>+<kbd>F</kbd> (Windows) or <kbd>Cmd</kbd>+<kbd>F</kbd> (macOS). This will open up the Find panel on the top right:
 
 ![](/img/user-manual/scripting/monaco-find-panel.png)
 
-Enter your search term here and press Enter. You can navigate between matches by continuously hitting Enter (or Shift + Enter to go backwards).
+Enter your search term here and press <kbd>Enter</kbd>. You can navigate between matches by continuously hitting <kbd>Enter</kbd> (or <kbd>Shift</kbd>+<kbd>Enter</kbd> to go backwards).
 
-If you want to replace a match enter the text you want to replace it with in the Replace input field on the right. Then hit Enter to replace the match and keep hitting Enter to replace each subsequent match (or Shift + Enter to replace backwards).
+If you want to replace a match enter the text you want to replace it with in the Replace input field on the right. Then hit <kbd>Enter</kbd> to replace the match and keep hitting <kbd>Enter</kbd> to replace each subsequent match (or <kbd>Shift</kbd>+<kbd>Enter</kbd> to replace backwards).
 
 ### Find in Files
 
-You can also find a term by searching in all your assets. To do this hit Ctrl + Shift + F to bring up the Find in Files panel on the bottom. Like before enter your search term and hit Enter. This will open up a new tab where the search results will be displayed:
+You can also find a term by searching in all your assets. To do this hit <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>F</kbd> to bring up the Find in Files panel on the bottom. Like before enter your search term and hit <kbd>Enter</kbd>. This will open up a new tab where the search results will be displayed:
 
 On the left side of the input fields there are various search options. These allow you to search using a regular expression, do a case-sensitive search or search for whole words. If you would like to learn and experiment more with regex, then [RegExr](https://regexr.com/) is great site with cheat sheets, examples and an online editor for testing regex expressions.
 
@@ -110,7 +110,7 @@ For changes spanning related text assets, use an AI coding assistant through **[
 
 ## Quick Open
 
-You can quickly open an asset by hitting Ctrl + P (or Cmd + P on Mac) which will open a panel where you can search for the asset by its name. Start typing the name of the asset and the panel will perform a fuzzy search to find the asset you are looking for. Hit Enter to open the selected asset.
+You can quickly open an asset by hitting <kbd>Ctrl</kbd>+<kbd>P</kbd> (or <kbd>Cmd</kbd>+<kbd>P</kbd> on macOS) which will open a panel where you can search for the asset by its name. Start typing the name of the asset and the panel will perform a fuzzy search to find the asset you are looking for. Hit <kbd>Enter</kbd> to open the selected asset.
 
 <StepVideo src="/video/user-manual/scripting/go-to-anything.mp4" poster="/img/user-manual/scripting/go-to-anything.webp" label="Go to Anything" width={1500} height={650} />
 
@@ -130,12 +130,12 @@ Highlighting a word in the code editor will highlight all other matches in the f
 
 ### Multiple Selection Editing
 
-Holding down Alt and clicking left mouse button will add another cursor to the editor. This allows you to quickly make the same changes in multiple areas of the file.
+Holding down <kbd>Alt</kbd> and clicking left mouse button will add another cursor to the editor. This allows you to quickly make the same changes in multiple areas of the file.
 
 <StepVideo src="/video/user-manual/scripting/code-editor-multiple-selection.mp4" poster="/img/user-manual/scripting/code-editor-multiple-selection.webp" label="Multiple Selection Editing" width={660} height={68} />
 
 ### Rectangular Selection
 
-Holding down Alt + Shift and dragging left mouse button will create a rectangular selection which is useful for selecting and editing columns of text.
+Holding down <kbd>Alt</kbd>+<kbd>Shift</kbd> and dragging left mouse button will create a rectangular selection which is useful for selecting and editing columns of text.
 
 <StepVideo src="/video/user-manual/scripting/code-editor-rectangular-selection.mp4" poster="/img/user-manual/scripting/code-editor-rectangular-selection.webp" label="Rectangular Selection" width={660} height={68} />

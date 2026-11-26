@@ -17,7 +17,7 @@ Once an Entity is selected in the Hierarchy, you can create a new child Entity o
 
 The order in which Entities are listed in the tree view is important. As the Scene is a hierarchy, Entities can be *children* of another Entity -- their *parent* -- and the transform matrix of a parent Entity is applied to all of its children. If you move or rotate a parent Entity, all children will move or rotate underneath the parent. This is very useful for simplifying the manipulation of many Entities.
 
-The structure of the Hierarchy can be edited via drag and drop. Simply select and drag any Entity in the Hierarchy. In this way, you can quickly reorder or reparent Entities. When you reparent an Entity in the Editor, its world-space transform (position, rotation, and scale) will be preserved so you won't see the Entity move, rotate, or change size after you change its parent. If you do not want that behavior, hold Ctrl (or Cmd on Mac).
+The structure of the Hierarchy can be edited via drag and drop. Simply select and drag any Entity in the Hierarchy. In this way, you can quickly reorder or reparent Entities. When you reparent an Entity in the Editor, its world-space transform (position, rotation, and scale) will be preserved so you won't see the Entity move, rotate, or change size after you change its parent. If you do not want that behavior, hold <kbd>Ctrl</kbd> (<kbd>Cmd</kbd> on macOS).
 
 :::note
 
@@ -39,10 +39,10 @@ You can customize the search by clicking the magnifying glass:
 
 ## Duplicating Entities
 
-You can duplicate Entities by selecting them and hitting Ctrl+D (or Cmd+D on Mac) or by right clicking and selecting Duplicate. A copy of each Entity will be created right next to its original.
+You can duplicate Entities by selecting them and hitting <kbd>Ctrl</kbd>+<kbd>D</kbd> (or <kbd>Cmd</kbd>+<kbd>D</kbd> on macOS) or by right clicking and selecting Duplicate. A copy of each Entity will be created right next to its original.
 
 ## Copying / Pasting Entities
 
-If you wish to paste Entities under a new parent you can select them and hit Ctrl+C (or Cmd+C on Mac) to copy them, then select the new parent and then Ctrl+V (or Cmd+V on Mac) to paste them under the selected parent. You can also use the Copy and Paste options when you right click on the selected Entities.
+If you wish to paste Entities under a new parent you can select them and hit <kbd>Ctrl</kbd>+<kbd>C</kbd> (or <kbd>Cmd</kbd>+<kbd>C</kbd> on macOS) to copy them, then select the new parent and then <kbd>Ctrl</kbd>+<kbd>V</kbd> (or <kbd>Cmd</kbd>+<kbd>V</kbd> on macOS) to paste them under the selected parent. You can also use the Copy and Paste options when you right click on the selected Entities.
 
 You can also copy and paste Entities between different Scenes or even different Projects. Just follow the same steps to copy Entities and then go to the desired Scene, select the desired parent and paste the Entities. The Editor will try to match any Asset references on the pasted Entities by path in the new Project. For example, if you are copy-pasting an Entity with a Model component that references a Model Asset called `mymodel.fbx` then when you paste the Entity in the other Project, the Editor will try to find an Asset named `mymodel.fbx` in the same folder. If a matching Asset is not found it will be left as missing so that you can fix it manually.

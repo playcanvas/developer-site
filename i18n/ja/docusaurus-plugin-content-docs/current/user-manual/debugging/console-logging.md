@@ -20,7 +20,7 @@ PlayCanvasスクリプトをデバッグするための最も基本的で不可�
 
 開発者コンソールを開く方法はブラウザによって異なりますが、一般的な方法は次のとおりです。
 
-* **キーボードショートカット:** Windows/LinuxではF12キー、macOS（Chrome/Edge/Firefox）ではOption + Command + J（⌥ + ⌘ + J）を押します。SafariではOption + Command + C（⌥ + ⌘ + C）を使用しますが、最初に開発メニューを有効にする必要がある場合があります（環境設定 > 詳細 > メニューバーに"開発"メニューを表示）。
+* **キーボードショートカット:** Windows/Linuxでは<kbd>F12</kbd>キー、macOS（Chrome/Edge/Firefox）では<kbd>Option</kbd>+<kbd>Cmd</kbd>+<kbd>J</kbd>を押します。Safariでは<kbd>Option</kbd>+<kbd>Cmd</kbd>+<kbd>C</kbd>を使用しますが、最初に開発メニューを有効にする必要がある場合があります（環境設定 > 詳細 > メニューバーに"開発"メニューを表示）。
 * **右クリックメニュー:** 実行中のPlayCanvasアプリケーションページ上の任意の場所を右クリックし、「Inspect」または「Inspect Element」を選択します。その後、表示されるツール内の「Console」タブに移動します。
 * **ブラウザメニュー:** ブラウザのメインメニューで「Developer Tools」、「Web Developer」、または類似のオプションを探します（例：Chromeの場合、その他のツール > デベロッパー ツール）。
 

@@ -5,7 +5,7 @@ description: Use Chrome and Firefox developer tools to set breakpoints, inspect 
 
 In order to create scripts for PlayCanvas, it is vital that you know how to access and use your browser's development tools.
 
-Chrome, Firefox and other browsers have Developer Tools integrated directly into the browser. You can usually access them by pressing F12 on Windows or ALT-CMD-I on Mac. Or use menu of a browser to access developer tools.
+Chrome, Firefox and other browsers have Developer Tools integrated directly into the browser. You can usually access them by pressing <kbd>F12</kbd> on Windows or <kbd>Option</kbd>+<kbd>Cmd</kbd>+<kbd>I</kbd> on macOS. Or use menu of a browser to access developer tools.
 
 ### Debugging Scripts
 

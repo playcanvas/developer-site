@@ -46,7 +46,7 @@ Other Unity windows and menus have these equivalents:
 
 ### Launching Instead of Play Mode {#launching-instead-of-play-mode}
 
-Unity plays your game inside the Editor. PlayCanvas opens it in a new browser tab, the [Launch Page](/user-manual/editor/interface/launch-page/), which runs your scene just as it will run when published. Click **Launch**, or press Ctrl+Enter.
+Unity plays your game inside the Editor. PlayCanvas opens it in a new browser tab, the [Launch Page](/user-manual/editor/interface/launch-page/), which runs your scene just as it will run when published. Click **Launch**, or press <kbd>Ctrl</kbd>+<kbd>Enter</kbd>.
 
 The Launch Page stays connected to the Editor. Changes to entities, components, script attributes, assets and scene settings show up in the running app as you make them, and unlike edits made in Play Mode, they are not thrown away when you stop: the Editor saves every change as you make it. Place the two tabs side by side to work this way. Code changes need a reload, unless the script supports [hot reloading](/user-manual/editor/scripting/hot-reloading/).
 
@@ -58,37 +58,37 @@ The Launch button's menu has options for testing: choose the graphics API, open 
 
 | Action | Unity | PlayCanvas |
 | --- | --- | --- |
-| Orbit | Alt + left-drag | Left-drag |
+| Orbit | <kbd>Alt</kbd> + left-drag | Left-drag |
 | Look around | Right-drag | Right-drag |
-| Pan | Middle-drag | Middle-drag, or Shift + left-drag |
+| Pan | Middle-drag | Middle-drag, or <kbd>Shift</kbd> + left-drag |
 | Zoom | Mouse wheel | Mouse wheel |
-| Fly | Hold the right mouse button and press W, A, S, D, Q, E | Press W, A, S, D, Q, E, with no mouse button held (hold Shift to go faster) |
-| Frame the selection | F | F |
-| Rectangle selection | Left-drag over empty space | Ctrl + left-drag |
-| Add to or remove from the selection | Shift+click or Ctrl+click | Ctrl+click |
+| Fly | Hold the right mouse button and press <kbd>W</kbd>, <kbd>A</kbd>, <kbd>S</kbd>, <kbd>D</kbd>, <kbd>Q</kbd>, <kbd>E</kbd> | Press <kbd>W</kbd>, <kbd>A</kbd>, <kbd>S</kbd>, <kbd>D</kbd>, <kbd>Q</kbd>, <kbd>E</kbd>, with no mouse button held (hold <kbd>Shift</kbd> to go faster) |
+| Frame the selection | <kbd>F</kbd> | <kbd>F</kbd> |
+| Rectangle selection | Left-drag over empty space | <kbd>Ctrl</kbd> + left-drag |
+| Add to or remove from the selection | <kbd>Shift</kbd>-click or <kbd>Ctrl</kbd>-click | <kbd>Ctrl</kbd>-click |
 
 ### Keyboard Shortcuts {#keyboard-shortcuts}
 
 | Action | Unity | PlayCanvas |
 | --- | --- | --- |
-| Move tool | W | 1 |
-| Rotate tool | E | 2 |
-| Scale tool | R | 3 |
-| Rect tool (UI elements) | T | 4 |
-| Toggle local and world gizmo space | X | L |
-| Frame the selection | F | F |
-| Play | Ctrl+P | Ctrl+Enter (Launch) |
-| Create an empty child | Alt+Shift+N | Ctrl+E |
-| Duplicate | Ctrl+D | Ctrl+D |
-| Rename | F2 | F2 |
-| Delete | Delete | Delete |
-| Undo / redo | Ctrl+Z / Ctrl+Y | Ctrl+Z / Ctrl+Y |
-| Save | Ctrl+S | Not needed, because every change is saved. Ctrl+S opens the form for creating a version control checkpoint. |
-| Maximize the view | Shift+Space | Space (hides the Hierarchy, Inspector and Assets panels) |
-| Front, right and top views | Click the arms of the Scene Gizmo | Numpad 1, 3 and 7 (add Ctrl for the opposite side), or click the axes of the view cube |
-| Toggle orthographic and perspective | Click the center of the Scene Gizmo | Numpad 5 |
+| Move tool | <kbd>W</kbd> | <kbd>1</kbd> |
+| Rotate tool | <kbd>E</kbd> | <kbd>2</kbd> |
+| Scale tool | <kbd>R</kbd> | <kbd>3</kbd> |
+| Rect tool (UI elements) | <kbd>T</kbd> | <kbd>4</kbd> |
+| Toggle local and world gizmo space | <kbd>X</kbd> | <kbd>L</kbd> |
+| Frame the selection | <kbd>F</kbd> | <kbd>F</kbd> |
+| Play | <kbd>Ctrl</kbd>+<kbd>P</kbd> | <kbd>Ctrl</kbd>+<kbd>Enter</kbd> (Launch) |
+| Create an empty child | <kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>N</kbd> | <kbd>Ctrl</kbd>+<kbd>E</kbd> |
+| Duplicate | <kbd>Ctrl</kbd>+<kbd>D</kbd> | <kbd>Ctrl</kbd>+<kbd>D</kbd> |
+| Rename | <kbd>F2</kbd> | <kbd>F2</kbd> |
+| Delete | <kbd>Delete</kbd> | <kbd>Delete</kbd> |
+| Undo / redo | <kbd>Ctrl</kbd>+<kbd>Z</kbd> / <kbd>Ctrl</kbd>+<kbd>Y</kbd> | <kbd>Ctrl</kbd>+<kbd>Z</kbd> / <kbd>Ctrl</kbd>+<kbd>Y</kbd> |
+| Save | <kbd>Ctrl</kbd>+<kbd>S</kbd> | Not needed, because every change is saved. <kbd>Ctrl</kbd>+<kbd>S</kbd> opens the form for creating a version control checkpoint. |
+| Maximize the view | <kbd>Shift</kbd>+<kbd>Space</kbd> | <kbd>Space</kbd> (hides the Hierarchy, Inspector and Assets panels) |
+| Front, right and top views | Click the arms of the Scene Gizmo | <kbd>Numpad 1</kbd>, <kbd>Numpad 3</kbd> and <kbd>Numpad 7</kbd> (add <kbd>Ctrl</kbd> for the opposite side), or click the axes of the view cube |
+| Toggle orthographic and perspective | Click the center of the Scene Gizmo | <kbd>Numpad 5</kbd> |
 
-On macOS, use Cmd in place of Ctrl. Unity's View tool (Q) has no equivalent, because navigating the viewport never needs a tool. The full list is on the [Controls & Keyboard Shortcuts](/user-manual/editor/interface/keyboard-shortcuts/) page.
+On macOS, use <kbd>Cmd</kbd> in place of <kbd>Ctrl</kbd>. Unity's View tool (<kbd>Q</kbd>) has no equivalent, because navigating the viewport never needs a tool. The full list is on the [Controls & Keyboard Shortcuts](/user-manual/editor/interface/keyboard-shortcuts/) page.
 
 ## Concepts and Terminology {#concepts-and-terminology}
 
@@ -139,7 +139,7 @@ PlayCanvas scripts are JavaScript classes that extend [`Script`](https://api.pla
 
 ### A Script Side by Side {#a-script-side-by-side}
 
-Here is a Unity script that spins its GameObject and switches a light on and off with the space bar:
+Here is a Unity script that spins its GameObject and switches a light on and off when you press <kbd>Space</kbd>:
 
 ```csharp
 using UnityEngine;
@@ -637,7 +637,7 @@ Unity builds a player for each platform. PlayCanvas publishes a web app, made of
 
 ## Debugging and Profiling {#debugging-and-profiling}
 
-Your app runs in the browser, so you debug it with the browser's developer tools (F12, or Cmd+Option+I on macOS) in the launched tab.
+Your app runs in the browser, so you debug it with the browser's developer tools (<kbd>F12</kbd>, or <kbd>Cmd</kbd>+<kbd>Option</kbd>+<kbd>I</kbd> on macOS) in the launched tab.
 
 | Unity | PlayCanvas |
 | --- | --- |

@@ -49,7 +49,7 @@ When loading XR scripts from a CDN, make sure your page's import map also points
 
 :::
 
-* [`xr-session.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/xr/xr-session.mjs) - Manages the WebXR session lifecycle: starts an AR or VR session in response to app events (`ar:start` and `vr:start` by default), ends it on `xr:end` or the Escape key, and handles camera rig transforms, AR transparency and cleanup automatically.
+* [`xr-session.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/xr/xr-session.mjs) - Manages the WebXR session lifecycle: starts an AR or VR session in response to app events (`ar:start` and `vr:start` by default), ends it on `xr:end` or <kbd>Esc</kbd>, and handles camera rig transforms, AR transparency and cleanup automatically.
 * [`xr-controllers.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/xr/xr-controllers.mjs) - Dynamically downloads and renders XR controller models (GLBs) for any detected XR controllers (including hands).
 * [`xr-navigation.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/xr/xr-navigation.mjs) - Moves the rig around: teleporting by pointing and selecting, smooth movement on the left thumbstick, and snap or smooth turning and snap vertical movement on the right. Teleports land on a flat plane at the script's `ground-height` (0 by default), unless your code assigns its `castRay` to pick the ground itself.
 * [`xr-menu.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/esm/xr/xr-menu.mjs) - Shows an in-headset menu (via a palm-up gesture with hand tracking, or a controller button) whose items fire app events — ideal for an "Exit XR" button.
@@ -116,7 +116,7 @@ This snippet imports `whenReady` by package name, which requires `@playcanvas/we
 
 :::
 
-The event names are script attributes of `xrSession` (`start-ar-event`, `start-vr-event` and `end-event`), so you can rename them if they clash with events of your own. Ending a session needs no extra code: `xrSession` ends it when the `xr:end` event fires (the "Exit XR" menu item above) or when the user presses Escape.
+The event names are script attributes of `xrSession` (`start-ar-event`, `start-vr-event` and `end-event`), so you can rename them if they clash with events of your own. Ending a session needs no extra code: `xrSession` ends it when the `xr:end` event fires (the "Exit XR" menu item above) or when the user presses <kbd>Esc</kbd>.
 
 You can also show each button only while the device supports its session type. The engine checks support asynchronously after the app starts, and again whenever a device is connected or disconnected, so set the buttons from its current answer and follow its `available` event:
 

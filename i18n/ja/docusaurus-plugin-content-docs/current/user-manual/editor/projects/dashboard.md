@@ -7,7 +7,7 @@ description: playcanvas.com/editor のプロジェクトダッシュボードか
 
 ![Dashboard](/img/user-manual/editor/projects/project-dashboard.webp)
 
-ダッシュボードは専用のブラウザータブで動作し、Editor 本体を読み込まないため、すばやく開きます。ダッシュボードの中でプロジェクトを開くことはありません。**Open editor** はそのプロジェクト専用のタブに切り替え、まだ開いていない場合にのみ新しく開きます。Editor のロゴメニューの **All Projects**、<kbd>Ctrl</kbd>/<kbd>Cmd</kbd> + <kbd>O</kbd>、ビューポートの **Projects** パンくずリストはダッシュボードに戻り、Editor はシーンをそのまま保持します。
+ダッシュボードは専用のブラウザータブで動作し、Editor 本体を読み込まないため、すばやく開きます。ダッシュボードの中でプロジェクトを開くことはありません。**Open editor** はそのプロジェクト専用のタブに切り替え、まだ開いていない場合にのみ新しく開きます。Editor のロゴメニューの **All Projects**、<kbd>Ctrl</kbd>+<kbd>O</kbd>（macOSでは<kbd>Cmd</kbd>+<kbd>O</kbd>）、ビューポートの **Projects** パンくずリストはダッシュボードに戻り、Editor はシーンをそのまま保持します。
 
 ## ダッシュボードの概要 {#dashboard-overview}
 
