@@ -1,5 +1,5 @@
 // Keeps static/ from growing back to the size it had before the 2026 asset diet (494 MB, now
-// about 330 MB). Everything in static/ is deployed with every build, so a file that is too big
+// about 245 MB). Everything in static/ is deployed with every build, so a file that is too big
 // or used by nothing costs every deploy and every clone.
 //
 // It fails on:
@@ -45,8 +45,6 @@ const LARGE_IMAGES = {
 
 // Files no tracked text file names by path, relative to static/, with why they stay
 const KEEP = {
-    'CNAME': 'GitHub Pages custom domain (kept so a branch deploy would still work)',
-    '.nojekyll': 'stops GitHub Pages running Jekyll on a branch deploy',
     'robots.txt': 'fetched by crawlers at the site root; lists the en and ja sitemaps',
     'user-manual/context7.json': 'claims the site on context7.com',
     'assets/audio-credits.txt': 'provenance of the generated audio in assets/',
