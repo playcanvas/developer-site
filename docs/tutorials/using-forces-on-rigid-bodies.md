@@ -69,13 +69,13 @@ For more information on rigidbody types, see [the collision API page](https://ap
 
 ## General setup
 
-We set up a basic scene with a spotlight, a cube (entity with model, rigidbody, collision and script components) and a floor (with model, rigidbody and collision components). The cube's rigidbody was set to dynamic while the floor's rigidbody was set to static. We created some materials for each box and changed the diffuse colors just to make it easier on the eye. We have also activated the 'cast shadows' option on both the SpotLight and DynamicBody entities. The full 'usingForces' Scene and code for [this PlayCanvas app can be found here](https://playcanvas.com/project/405828/overview/tutorial-forces--impulses).
+We set up a basic scene with a spotlight, a cube (entity with render, rigidbody, collision and script components) and a floor (with render, rigidbody and collision components). The cube's rigidbody was set to dynamic while the floor's rigidbody was set to static. We created some materials for each box and changed the diffuse colors just to make it easier on the eye. We have also activated the 'cast shadows' option on both the SpotLight and DynamicBody entities. The full 'usingForces' Scene and code for [this PlayCanvas app can be found here](https://playcanvas.com/project/405828/overview/tutorial-forces--impulses).
 
 ## Limiting and control
 
-Some Editor settings were set to prevent the constant application of unbalanced forces (and so prevent a body from continuously accelerating and moving out of control). We enabled angular damping on the cube's attribute editor as well as friction on both the cube and floor. Linear damping is not used here, however it can be used to simulate air resistance, and of course decelerations can be applied as required via code.
+Some Editor settings were set to prevent the constant application of unbalanced forces (and so prevent a body from continuously accelerating and moving out of control). We enabled angular damping on the cube's rigidbody in the Inspector as well as friction on both the cube and floor. Linear damping is not used here, however it can be used to simulate air resistance, and of course decelerations can be applied as required via code.
 
-<img loading="lazy" src="/img/tutorials/forces/rigidbody_settings.jpg" alt="rigidbody_settings" />
+<img loading="lazy" src="/img/tutorials/forces/rigidbody_settings.webp" alt="rigidbody_settings" />
 
 ## Teleporting a Body
 

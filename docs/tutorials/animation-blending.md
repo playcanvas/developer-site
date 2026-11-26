@@ -31,17 +31,17 @@ Let's examine how this is achieved via PlayCanvas...
 
 ## The Animation Component
 
-In order to apply an animation to a model, you add the animation component to your entity. Below is the configuration of the skinned character as displayed in PlayCanvas Editor.
+In order to apply an animation to a model, you add the animation component to your entity. The Editor lists it as **Animation (Legacy)**. Below is the configuration of the skinned character as displayed in PlayCanvas Editor.
 
-![Animated Entity](/img/tutorials/animation_blending.jpg)
+![Animated Entity](/img/tutorials/animation_blending.webp)
 
-In the image you can see the animation component in the Inspector. There are 2 animation assets assigned: an 'idle' cycle and a 'punch' cycle. With the animation component configured this way, the behavior is that the first animation (the idle cycle) is played and because the looping option is set, it will continue to animate ad infinitum. However, we would like to achieve something a little more interesting:
+In the image you can see the animation component in the Inspector. There are 2 animation assets assigned: an 'idle' cycle (`male.json`) and a 'punch' cycle (`male_uppercut_jab.json`). With the animation component configured this way, the behavior is that the first animation (the idle cycle) is played and because the looping option is set, it will continue to animate ad infinitum. However, we would like to achieve something a little more interesting:
 
 * Play a looping idle animation.
 * Blend to a looping punch animation on a key press.
 * Blend back to idle on key release.
 
-So this kind of functionality goes beyond the abilities of the humble animation component. A script component is required to cook up this additional behavior. You can see the script component in the above screenshot of the skinned character entity in Editor and it refers to a JS file called animation_blending.js. The contents of this file is:
+So this kind of functionality goes beyond the abilities of the humble animation component. A script component is required to cook up this additional behavior. You can see the script component in the above screenshot of the skinned character entity in Editor and it uses the `animationBlending` script from the file `animation-blending.mjs`. The contents of this file are:
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
