@@ -22,7 +22,7 @@ PlayCanvasエンジンでのキーボード操作は`Keyboard`オブジェクト
 <TabItem value="esm" label="ESM">
 
 ```javascript
-import { Script, KEY_LEFT, KEY_RIGHT, KEY_SPACE, KEY_A } from 'playcanvas';
+import { Script, Asset, KEY_LEFT, KEY_RIGHT, KEY_SPACE, KEY_A } from 'playcanvas';
 
 export class KeyboardHandler extends Script {
     static scriptName = "keyboardHandler";
