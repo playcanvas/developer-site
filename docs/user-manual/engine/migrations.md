@@ -31,7 +31,7 @@ The migration from major version 1 to major version 2 is a substantial update, i
 
 #### WebGL 1
 
-Support for WebGL1 has been discontinued; the engine now exclusively supports WebGL2 and WebGPU (in beta). If your application relies on WebGL1, you will need to continue using version 1 of the engine.
+Support for WebGL1 has been discontinued; the engine now exclusively supports WebGL2 and WebGPU. If your application relies on WebGL1, you will need to continue using version 1 of the engine.
 
 #### AudioSourceComponent
 
