@@ -126,7 +126,7 @@ The first step is to add the Google SDK integration files which we can do by cop
 
 And pasting into our fork of the tutorial project.
 
-<StepVideo src="/video/tutorials/google-afg/paste-afg-folder.mp4" poster="/img/tutorials/google-afg/paste-afg-folder.webp" width={1516} height={638} />
+<StepVideo src="/video/tutorials/google-afg/paste-afg-folder.mp4" poster="/img/tutorials/google-afg/paste-afg-folder.webp" width={858} height={344} />
 
 Let's take a look inside:
 

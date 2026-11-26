@@ -124,7 +124,7 @@ UiController.prototype.initialize = function() {
 
 そして、フォークされたチュートリアルプロジェクトに貼り付けます。
 
-<StepVideo src="/video/tutorials/google-afg/paste-afg-folder.mp4" poster="/img/tutorials/google-afg/paste-afg-folder.webp" width={1516} height={638} />
+<StepVideo src="/video/tutorials/google-afg/paste-afg-folder.mp4" poster="/img/tutorials/google-afg/paste-afg-folder.webp" width={858} height={344} />
 
 中身を見てみましょう。
 

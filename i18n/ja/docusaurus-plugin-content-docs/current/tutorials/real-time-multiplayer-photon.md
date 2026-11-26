@@ -248,13 +248,13 @@ PhotonLoadBalancingPlayCanvas.prototype.initialize = function () {
 
 エディタで **photon-loadbalancing-playcanvas** スクリプトをRootエンティティに添付します。
 
-![Root Entity - Inspector](/img/tutorials/multiplayer-photon/11.png)
+![Root Entity - Inspector](/img/tutorials/multiplayer-photon/11.webp)
 
 #### スクリプト属性にAppIdを貼り付ける
 
 スクリプト属性にAppIdを入力してください。
 
-![Script Attributes](/img/tutorials/multiplayer-photon/12.png)
+![Script Attributes](/img/tutorials/multiplayer-photon/12.webp)
 
 ```javascript
 this.loadBalancingClient = new Photon.LoadBalancing.LoadBalancingClient( this.wss ? 1 : 0, this.appId, this.appVersion );

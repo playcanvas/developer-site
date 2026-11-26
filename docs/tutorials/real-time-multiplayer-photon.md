@@ -250,13 +250,13 @@ PhotonLoadBalancingPlayCanvas.prototype.initialize = function () {
 
 Attach the **photon-loadbalancing-playcanvas** script to the Root entity in the Editor.
 
-![Root Entity - Inspector](/img/tutorials/multiplayer-photon/11.png)
+![Root Entity - Inspector](/img/tutorials/multiplayer-photon/11.webp)
 
 #### Paste AppId into the script attribute
 
 Enter AppId as a script attribute.
 
-![Script Attributes](/img/tutorials/multiplayer-photon/12.png)
+![Script Attributes](/img/tutorials/multiplayer-photon/12.webp)
 
 ```javascript
 this.loadBalancingClient = new Photon.LoadBalancing.LoadBalancingClient( this.wss ? 1 : 0, this.appId, this.appVersion );
