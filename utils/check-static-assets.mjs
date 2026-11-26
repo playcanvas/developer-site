@@ -47,6 +47,7 @@ const LARGE_IMAGES = {
 const KEEP = {
     'CNAME': 'GitHub Pages custom domain (kept so a branch deploy would still work)',
     '.nojekyll': 'stops GitHub Pages running Jekyll on a branch deploy',
+    'robots.txt': 'fetched by crawlers at the site root; lists the en and ja sitemaps',
     'user-manual/context7.json': 'claims the site on context7.com',
     'assets/audio-credits.txt': 'provenance of the generated audio in assets/',
     'assets/fonts/arial.png': 'atlas loaded beside arial.json',

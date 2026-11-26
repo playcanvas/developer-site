@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://developer.playcanvas.com/sitemap.xml
+Sitemap: https://developer.playcanvas.com/ja/sitemap.xml
