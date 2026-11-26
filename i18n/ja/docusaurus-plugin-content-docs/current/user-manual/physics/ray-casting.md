@@ -32,7 +32,7 @@ app.mouse.on(EVENT_MOUSEDOWN, (event) => pick(event.x, event.y));
 app.touch?.on(EVENT_TOUCHSTART, (event) => pick(event.touches[0].x, event.touches[0].y));
 ```
 
-エディターでは、このコードはカメラのエンティティに付けたスクリプトの中に置き、`app`と`cameraEntity`の代わりに`this.app`と`this.entity`を使います。完全なスクリプトは[物理演算によるエンティティのピッキング](/tutorials/entity-picking-using-physics/)チュートリアルにあります。Reactでは`useApp()`が、Web Componentsでは`whenReady('pc-app')`がアプリケーションを返します。これらのパターンは[ボディを動かす](/user-manual/physics/forces-and-impulses/#running-physics-code)を参照してください。
+エディターでは、このコードはカメラのエンティティに付けたスクリプトの中に置き、`app`と`cameraEntity`の代わりに`this.app`と`this.entity`を使います。完全なスクリプトは、[シーン上のエンティティの選択](/tutorials/entity-picking/)のチュートリアルで、手順を追って作ります。Reactでは`useApp()`が、Web Componentsでは`whenReady('pc-app')`がアプリケーションを返します。これらのパターンは[ボディを動かす](/user-manual/physics/forces-and-impulses/#running-physics-code)を参照してください。
 
 ## レイキャストの結果 {#raycast-results}
 
@@ -97,7 +97,7 @@ const onGround = hit !== null;
 
 ## 関連情報 {#see-also}
 
-- [物理演算によるエンティティのピッキング](/tutorials/entity-picking-using-physics/) - エディター向けの完全なピッキングスクリプトを含むチュートリアル
+- [シーン上のエンティティの選択](/tutorials/entity-picking/) - エディターで、レイキャストとPickerを使ったピッキングスクリプトを作るチュートリアル
 - [タグによる物理レイキャスティング](/tutorials/physics-raycasting-by-tag/) - `filterTags`でヒットを絞り込むチュートリアル
 - [物理演算でエンティティを配置する](/tutorials/place-an-entity-with-physics/) - レイが地面にヒットした位置にオブジェクトを生成するチュートリアル
 - [RigidBodyComponentSystem](https://api.playcanvas.com/engine/classes/RigidBodyComponentSystem.html) - `raycastFirst`と`raycastAll`のAPIリファレンス

@@ -32,7 +32,7 @@ app.mouse.on(EVENT_MOUSEDOWN, (event) => pick(event.x, event.y));
 app.touch?.on(EVENT_TOUCHSTART, (event) => pick(event.touches[0].x, event.touches[0].y));
 ```
 
-In the Editor this lives in a script on the camera entity, where `this.app` and `this.entity` stand in for `app` and `cameraEntity`; the [Entity picking using physics](/tutorials/entity-picking-using-physics/) tutorial has the complete script. In React, `useApp()` returns the application; in Web Components, `whenReady('pc-app')` does. See [Moving Bodies](/user-manual/physics/forces-and-impulses/#running-physics-code) for those patterns.
+In the Editor this lives in a script on the camera entity, where `this.app` and `this.entity` stand in for `app` and `cameraEntity`; the [Entity Picking](/tutorials/entity-picking/) tutorial builds the complete script step by step. In React, `useApp()` returns the application; in Web Components, `whenReady('pc-app')` does. See [Moving Bodies](/user-manual/physics/forces-and-impulses/#running-physics-code) for those patterns.
 
 ## Raycast Results {#raycast-results}
 
@@ -97,7 +97,7 @@ const onGround = hit !== null;
 
 ## See Also
 
-- [Entity picking using physics](/tutorials/entity-picking-using-physics/) - Tutorial with the complete picking script for the Editor
+- [Entity Picking](/tutorials/entity-picking/) - Tutorial that builds a picking script in the Editor, with a ray cast and with the Picker
 - [Physics raycasting by tag](/tutorials/physics-raycasting-by-tag/) - Tutorial that filters hits with `filterTags`
 - [Place an entity with physics](/tutorials/place-an-entity-with-physics/) - Tutorial that spawns objects where a ray hits the ground
 - [RigidBodyComponentSystem](https://api.playcanvas.com/engine/classes/RigidBodyComponentSystem.html) - API reference for `raycastFirst` and `raycastAll`
