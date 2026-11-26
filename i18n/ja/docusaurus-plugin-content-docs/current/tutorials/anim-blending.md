@@ -66,11 +66,11 @@ animstategraphアセットを作成すると、エディタが表示されます
 
 最初に、選択したエンティティに animコンポーネントを追加する必要があります。
 
-![New Anim Component](/img/tutorials/anim_blending/new_anim_component.png)
+![New Anim Component](/img/tutorials/anim_blending/new_anim_component.webp)
 
 作成後、animコンポーネントには、先ほど作成したanimstategraphアセット用のスロットが表示されます。これをドラッグして入れると、それぞれのアニメーションステートに対応するアニメーションスロットが表示されます。この場合、IdleとPunchのステートに対応するスロットがあります。適切なアニメーションアセットでこれらのスロットを埋めると、animコンポーネントは再生可能になります。
 
-![Complete Anim Component](/img/tutorials/anim_blending/complete_anim_component.png)
+![Complete Anim Component](/img/tutorials/anim_blending/complete_anim_component.webp)
 
 ## キーボード入力
 

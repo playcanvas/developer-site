@@ -59,7 +59,7 @@ Rigid Bodyの**Type**は、剛体の動き方を決定します。
 
 地面は、ランプの下にある大きな緑色のブロックです。
 
-![地面エンティティのコンポーネント設定](/img/tutorials/collision/ground-setup.png)
+![地面エンティティのコンポーネント設定](/img/tutorials/collision/ground-setup.webp)
 
 Render、Collision、Rigid Bodyコンポーネントを追加します。CollisionのTypeを**Box**、**Half Extents**を`10, 1, 10`に設定し、Rigid BodyのTypeを**Static**に設定します。この例では、摩擦を`0.9`、反発を`0.5`に設定し、滑りにくく少し弾む表面にしています。
 
@@ -137,7 +137,7 @@ Trigger.prototype.onTriggerEnter = function (entity) {
 
 ボックス、球体、カプセルにRigid BodyコンポーネントとCollisionコンポーネントを追加します。それぞれのRigid BodyのTypeを**Dynamic**に設定し、形状に対応するCollisionのTypeを選択します。
 
-![動的ボックスのRigid Body設定](/img/tutorials/collision/box-setup.png)
+![動的ボックスのRigid Body設定](/img/tutorials/collision/box-setup.webp)
 
 この例のボックスでは、質量を`1`、摩擦を`0.5`、反発を`0.5`に設定しています。球体とカプセルにも同じRigid Body設定を使用します。
 

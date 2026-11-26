@@ -25,7 +25,7 @@ import StepVideo from '@site/src/components/StepVideo';
 
 私たちのスクリーンは次のように設定されています。
 
-![Screen](/img/tutorials/ui/buttons/screen.png)
+![Screen](/img/tutorials/ui/buttons/screen.webp)
 
 2Dスクリーンであるため、 `Screen Space` を選択しました。 `Reference Resolution` は、ターゲットとしている解像度です。この場合、1080 x 1920です。スケールモードとしてBlendを選択しているため、スクリーンは解像度の変更に適応します。また、スケールブレンドを1に設定しているため、スクリーンは高さの変更にのみ適応されます。
 
@@ -49,7 +49,7 @@ import StepVideo from '@site/src/components/StepVideo';
 
 ユーザーがインタラクトできるように、ElementコンポーネントでUse Inputを有効にする必要があることを覚えてください。
 
-<img loading="lazy" src="/img/tutorials/ui/buttons/use-input-element.png" width="300" />
+<img loading="lazy" src="/img/tutorials/ui/buttons/use-input-element.webp" width="300" />
 
 ButtonコンポーネントのImage Entityプロパティを、Elementコンポーネントがある同じエンティティに設定する必要があります。
 
@@ -73,7 +73,7 @@ ButtonコンポーネントのImage Entityプロパティを、Elementコンポ�
 
 ElementのタイプはImageで、画面の下部にアンカーが設定されています。
 
-<img loading="lazy" src="/img/tutorials/ui/buttons/bottom-anchor-pivot.png" width="300" />
+<img loading="lazy" src="/img/tutorials/ui/buttons/bottom-anchor-pivot.webp" width="300" />
 
 ボタンをアンカーし、それを下に移動するだけで、ボタンから下部までのオフセットを設定します。
 
@@ -81,7 +81,7 @@ ElementのタイプはImageで、画面の下部にアンカーが設定され�
 
 ボタンをインタラクト可能にするには、Use Inputが有効になっている必要があります。
 
-<img loading="lazy" src="/img/tutorials/ui/buttons/use-input-element.png" width="300" />
+<img loading="lazy" src="/img/tutorials/ui/buttons/use-input-element.webp" width="300" />
 
 ### インタラクト時のボタンの見え方を変える
 
@@ -191,4 +191,4 @@ this.entity.button.on('click', (event) => {
 
 これらのイベントは、ElementコンポーネントでUse Inputが有効になっている場合にのみ発生するため、インスペクタでそれがチェックされていることを確認してください。
 
-<img loading="lazy" src="/img/tutorials/ui/buttons/use-input-element.png" width="300" />
+<img loading="lazy" src="/img/tutorials/ui/buttons/use-input-element.webp" width="300" />

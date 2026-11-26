@@ -30,7 +30,7 @@ import TabItem from '@theme/TabItem';
 
 [スクリーン](/user-manual/user-interface/screens/)は次のように設定されています。
 
-![Screen](/img/tutorials/ui/leaderboard/screen.png)
+![Screen](/img/tutorials/ui/leaderboard/screen.webp)
 
 2Dスクリーンであるため、 `Screen Space` を選択しました。 `Reference Resolution` は、ターゲットとしている解像度です。この場合、1080 x 1920です。スケールモードとしてBlendを選択しているため、スクリーンは解像度の変更に適応します。また、スケールブレンドを1に設定しているため、スクリーンは高さの変更にのみ適応されます。
 
