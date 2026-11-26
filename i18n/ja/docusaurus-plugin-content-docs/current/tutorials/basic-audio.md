@@ -49,11 +49,11 @@ PlayCanvasの基本的なオーディオシステムは二つのコンポーネ�
 
 ## 音源の作成
 
-サウンドソースを作成するには、サウンドを追加したいエンティティを選択し、*Entity* メニューから *New Component* を選択します。コンポーネントのリストから *sound* を選択し、*Add* ボタンを押します。
+サウンドソースを作成するには、サウンドを追加したいエンティティを選択し、**インスペクター**で **ADD COMPONENT** > **Sound** を選択します。
 
-サウンドのプロパティは、AttributeEditorに表示されます。
+サウンドのプロパティがインスペクターに表示されます。
 
-![Sound Component](/img/tutorials/audio/sound.jpg)
+![Sound Component](/img/tutorials/audio/sound.webp)
 
 タンクエンティティのSoundコンポーネントです。こちらはプロパティに関する情報です。
 

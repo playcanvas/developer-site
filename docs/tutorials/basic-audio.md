@@ -51,11 +51,11 @@ The tank also has a Script component which handles user input to make its turret
 
 ## Creating Sound sources
 
-To create a Sound source select the Entity you wish to add the Sound to and choose *New Component* from the *Entity* menu. Select *sound* from the list of Components and press the *Add* button.
+To create a Sound source, select the Entity you wish to add the Sound to, then select **ADD COMPONENT** > **Sound** in the **Inspector**.
 
-Sound properties will now appear in the AttributeEditor.
+The Sound properties now appear in the Inspector.
 
-![Sound Component](/img/tutorials/audio/sound.jpg)
+![Sound Component](/img/tutorials/audio/sound.webp)
 
 Here is the Sound component of the tank Entity. Here's some information about some of the properties:
 
