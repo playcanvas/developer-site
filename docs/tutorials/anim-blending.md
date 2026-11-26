@@ -66,11 +66,11 @@ Now with this complete animstategraph, we must connect it to animation assets an
 
 First, we must add the anim component to our chosen entity.
 
-![New Anim Component](/img/tutorials/anim_blending/new_anim_component.png)
+![New Anim Component](/img/tutorials/anim_blending/new_anim_component.webp)
 
 Once created it’ll display a slot for the animstategraph asset we just created. Drag this in and it’ll display animation slots for each of the animation states present in it. In this case it’ll have slots for the Idle and Punch states. Fill these slots with the appropriate animation assets and the anim component will become playable:
 
-![Complete Anim Component](/img/tutorials/anim_blending/complete_anim_component.png)
+![Complete Anim Component](/img/tutorials/anim_blending/complete_anim_component.webp)
 
 ## Keyboard Input
 

@@ -25,7 +25,7 @@ In this [scene](https://playcanvas.com/editor/scene/547900) we have created a 2D
 
 Our screen is set up like so:
 
-![Screen](/img/tutorials/ui/buttons/screen.png)
+![Screen](/img/tutorials/ui/buttons/screen.webp)
 
 Since it's a 2D screen we have ticked Screen Space. Our Reference Resolution is the resolution that we are targeting - in this case it's 1080 x 1920. We choose Blend for Scale Mode so that our Screen adapts to resolution changes and we set Scale Blend to 1 so that the Screen will adapt only to height changes.
 
@@ -49,7 +49,7 @@ If there is an existing Element that we would like to turn into a button, we can
 
 Remember to enable Use Input on the Element component so the user can interact with it:
 
-<img loading="lazy" src="/img/tutorials/ui/buttons/use-input-element.png" width="300" />
+<img loading="lazy" src="/img/tutorials/ui/buttons/use-input-element.webp" width="300" />
 
 And set the Image Entity property on the Button component to be same Entity that the Element component is on.
 
@@ -73,7 +73,7 @@ The button Entity also has a Text Element as a child for showing text (this is o
 
 The Element's type is Image and it's anchored to the bottom of the screen.
 
-<img loading="lazy" src="/img/tutorials/ui/buttons/bottom-anchor-pivot.png" width="300" />
+<img loading="lazy" src="/img/tutorials/ui/buttons/bottom-anchor-pivot.webp" width="300" />
 
 After anchoring the button we give it an offset from the bottom by simply moving it up.
 
@@ -81,7 +81,7 @@ After anchoring the button we give it an offset from the bottom by simply moving
 
 We also have Use Input enabled in order to interact with the button.
 
-<img loading="lazy" src="/img/tutorials/ui/buttons/use-input-element.png" width="300" />
+<img loading="lazy" src="/img/tutorials/ui/buttons/use-input-element.webp" width="300" />
 
 ### Changing how the button looks on interaction
 
@@ -194,4 +194,4 @@ There are other events that can be listened to such as `mouseenter` and `mousele
 
 These events will only fire if Use Input is enabled on the Element component so make sure that has been ticked in the inspector.
 
-<img loading="lazy" src="/img/tutorials/ui/buttons/use-input-element.png" width="300" />
+<img loading="lazy" src="/img/tutorials/ui/buttons/use-input-element.webp" width="300" />

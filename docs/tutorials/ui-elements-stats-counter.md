@@ -27,7 +27,7 @@ This is what our UI looks like in the Hierarchy:
 
 First we start by adding a new 2D [Screen](/user-manual/user-interface/screens/). This is what our Screen looks like:
 
-![Screen](/img/tutorials/ui/stats/screen.png)
+![Screen](/img/tutorials/ui/stats/screen.webp)
 
 Since it's a 2D screen we have ticked Screen Space. Our Reference Resolution is the resolution that we are targeting - in this case it's 1080 x 1920. We choose Blend for Scale Mode so that our Screen adapts to resolution changes and we set Scale Blend to 1 so that the Screen will adapt only to height changes.
 

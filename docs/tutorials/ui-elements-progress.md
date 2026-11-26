@@ -25,7 +25,7 @@ This is what our UI looks like in the Hierarchy:
 
 Our [screen](/user-manual/user-interface/screens/) is set up like so:
 
-![Screen](/img/tutorials/ui/progressbar/screen.png)
+![Screen](/img/tutorials/ui/progressbar/screen.webp)
 
 Since it's a 2D screen we have ticked Screen Space. Our Reference Resolution is the resolution that we are targeting - in this case it's 1080 x 1920. We choose Blend for Scale Mode so that our Screen adapts to resolution changes and we set Scale Blend to 1 so that the Screen will adapt only to height changes.
 
@@ -37,11 +37,11 @@ The progress bar is made of 2 Elements. The background image and the fill image.
 
 The background image is the `Progress Bar` entity in our example. It has an Image Element and it shows the background image of the progress bar:
 
-![Background Image](/img/tutorials/ui/progressbar/progress-bar-bg.png)
+![Background Image](/img/tutorials/ui/progressbar/progress-bar-bg.webp)
 
 The fill image is the `Fill Image` entity in our example. It is a child of the `Progress Bar` entity and it has an Image Element to show the fill of the progress bar. This image is anchored to the left of its parent background image. That allows us to change the width of the element in order to make the progress bar grow.
 
-![Fill Image](/img/tutorials/ui/progressbar/progress-bar-fill.png)
+![Fill Image](/img/tutorials/ui/progressbar/progress-bar-fill.webp)
 
 ## Script
 

@@ -61,7 +61,7 @@ The Rigid Body **Type** determines how the body moves:
 
 The ground is the large green block beneath the ramp.
 
-![Ground Entity](/img/tutorials/collision/ground-setup.png)
+![Ground Entity](/img/tutorials/collision/ground-setup.webp)
 
 Add Render, Collision, and Rigid Body components. Set the Collision type to **Box** with **Half Extents** of `10, 1, 10`, and set the Rigid Body type to **Static**. This example uses friction `0.9` and restitution `0.5` to make the surface grippy and slightly bouncy.
 
@@ -139,7 +139,7 @@ The event handle is detached when the script is destroyed. In `onTriggerEnter`, 
 
 Add Rigid Body and Collision components to the box, sphere, and capsule. Set each Rigid Body type to **Dynamic**, and choose the matching Collision type for each shape.
 
-![Box Entity](/img/tutorials/collision/box-setup.png)
+![Box Entity](/img/tutorials/collision/box-setup.webp)
 
 The example box has mass `1`, friction `0.5`, and restitution `0.5`. The sphere and capsule use the same Rigid Body settings.
 
