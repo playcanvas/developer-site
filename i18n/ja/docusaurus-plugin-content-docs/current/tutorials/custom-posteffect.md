@@ -1,7 +1,7 @@
 ---
 title: カスタムポストエフェクト
 tags: [posteffects]
-thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406045/ABC61F-image-75.jpg"
+thumb: /img/tutorials/custom-posteffect/thumbnail.webp
 description: シェーダーとカスタムポストエフェクトで、最終フレームバッファに水彩ぼかしと紙の粒状感を重ねます。
 ---
 

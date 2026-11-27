@@ -4,7 +4,7 @@ description: Clone editor-authored tile entities onto a grid with random selecti
 tags: [procedural]
 kind: sample
 topic: Basics
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405864/A3MSWE-image-75.jpg
+thumb: /img/tutorials/procedural-levels/thumbnail.webp
 ---
 
 <div className="iframe-container">

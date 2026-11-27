@@ -1,7 +1,7 @@
 ---
 title: 'ビネット・収差'
 tags: [posteffects]
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/440854/0F743E-image-75.jpg
+thumb: /img/tutorials/vignette-aberration/thumbnail.webp
 description: ポストプロセスパスでビネットで画像端を暗くし、色チャンネルを分けることで微妙な色収差を加えます。
 ---
 

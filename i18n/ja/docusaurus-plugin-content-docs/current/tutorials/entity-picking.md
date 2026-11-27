@@ -2,7 +2,7 @@
 title: シーン上のエンティティの選択
 description: ユーザーがクリックまたはタッチしたエンティティを調べます。まず物理のレイキャストで、次にPickerで行い、それぞれをいつ使うかを学びます。
 tags: [raycast, basics, physics]
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405856/DS51PO-image-75.jpg
+thumb: /img/tutorials/entity-picking/thumbnail.webp
 ---
 
 <div className="iframe-container">

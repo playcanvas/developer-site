@@ -4,7 +4,7 @@ description: Build a rainbow ribbon trail by updating mesh vertices and colors w
 tags: [rendering, shaders]
 kind: sample
 topic: Graphics
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/733569/6226C8-image-75.jpg
+thumb: /img/tutorials/rainbow-trail-with-mesh-api/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

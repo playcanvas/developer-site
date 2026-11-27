@@ -1,7 +1,7 @@
 ---
 title: 基本的なマウス入力
 tags: [mouse, input]
-thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405819/2DF062-image-75.jpg"
+thumb: /img/tutorials/mouse-input/thumbnail.webp
 description: Mouse API で移動、ボタン押下、ブラウザ間で一貫したスクリーン座標を読み取り、インタラクティブな操作に使います。
 ---
 

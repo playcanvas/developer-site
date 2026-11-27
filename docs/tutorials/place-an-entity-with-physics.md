@@ -4,7 +4,7 @@ description: Spawn physics-enabled props at clicked world positions using raycas
 tags: [input, physics]
 kind: sample
 topic: Input
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/437836/9F4675-image-75.jpg
+thumb: /img/tutorials/place-an-entity-with-physics/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

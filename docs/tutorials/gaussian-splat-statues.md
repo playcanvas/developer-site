@@ -4,7 +4,7 @@ description: Present a gallery of Gaussian splat statues with custom shaders and
 tags: [gaussiansplatting]
 kind: sample
 topic: Gaussian Splatting
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/1224723/266D9C-image-75.jpg
+thumb: /img/tutorials/gaussian-splat-statues/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

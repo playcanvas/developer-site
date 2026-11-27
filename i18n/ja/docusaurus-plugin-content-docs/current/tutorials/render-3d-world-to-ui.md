@@ -1,7 +1,7 @@
 ---
 title: '3DワールドをUIにレンダリング'
 tags: [rendering, camera, ui, scripts]
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/855150/6398DC-image-75.jpg
+thumb: /img/tutorials/render-3d-world-to-ui/thumbnail.webp
 description: 専用カメラで 3D プレビューをレンダリングし、インベントリアイコンやキャラクター選択パネルなどの UI 要素に表示します。
 ---
 

@@ -4,7 +4,7 @@ description: Skin tracked hand joints with detailed meshes and materials so arti
 tags: [input, vr]
 kind: sample
 topic: XR
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/771952/F9B95C-image-75.jpg
+thumb: /img/tutorials/webxr-realistic-hands/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

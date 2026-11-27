@@ -4,7 +4,7 @@ description: Project 3D world positions into screen-space anchors so labels and 
 tags: [camera, ui]
 kind: sample
 topic: User Interface
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/679740/EB1B6D-image-75.jpg
+thumb: /img/tutorials/world-to-ui-screen-space/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

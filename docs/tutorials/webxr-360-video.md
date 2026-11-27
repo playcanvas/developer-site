@@ -4,7 +4,7 @@ description: Play omnidirectional video in a WebXR session so headset users can 
 tags: [vr, video]
 kind: sample
 topic: XR
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/434444/6E87E1-image-75.jpg
+thumb: /img/tutorials/webxr-360-video/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

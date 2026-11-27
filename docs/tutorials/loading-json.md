@@ -4,7 +4,7 @@ description: Load JSON from a bundled asset or over HTTP from a remote URL and p
 tags: [loading]
 kind: tutorial
 topic: Assets and Scenes
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405827/G8YF23-image-75.jpg
+thumb: /img/tutorials/loading-json/thumbnail.webp
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

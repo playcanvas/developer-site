@@ -4,7 +4,7 @@ description: Edit HTML and CSS assets with live reload so HUD changes appear ins
 tags: [html, ui, assets]
 kind: sample
 topic: User Interface
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/354600/0FD3B1-image-75.jpg
+thumb: /img/tutorials/htmlcss---live-updates/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

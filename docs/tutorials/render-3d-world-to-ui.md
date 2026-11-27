@@ -4,7 +4,7 @@ description: Render a 3D preview with a dedicated camera into UI elements such a
 tags: [rendering, camera, ui, scripts]
 kind: sample
 topic: User Interface
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/855150/6398DC-image-75.jpg
+thumb: /img/tutorials/render-3d-world-to-ui/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

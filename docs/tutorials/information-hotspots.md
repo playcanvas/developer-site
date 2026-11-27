@@ -4,7 +4,7 @@ description: Place clickable hotspots in the 3D view that open info panels using
 tags: [rendering, camera, raycast, input]
 kind: sample
 topic: User Interface
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/438515/CA0481-image-75.jpg
+thumb: /img/tutorials/information-hotspots/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

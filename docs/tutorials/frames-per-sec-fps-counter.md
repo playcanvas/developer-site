@@ -4,7 +4,7 @@ description: Add a lightweight FPS overlay script to monitor frame rate during d
 tags: [rendering, scripts]
 kind: sample
 topic: Basics
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/433323/373838-image-75.jpg
+thumb: /img/tutorials/frames-per-sec-fps-counter/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

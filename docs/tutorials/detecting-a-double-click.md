@@ -4,7 +4,7 @@ description: Detect double-clicks with timing logic and use them to move the cam
 tags: [input, mouse]
 kind: sample
 topic: Input
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/436526/A98DD2-image-75.jpg
+thumb: /img/tutorials/detecting-a-double-click/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

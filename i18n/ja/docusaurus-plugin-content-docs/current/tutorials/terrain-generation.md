@@ -1,7 +1,7 @@
 ---
 title: ハイトマップを利用した地形生成
 tags: [procedural]
-thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406046/W2AUF9-image-75.jpg"
+thumb: /img/tutorials/terrain-generation/thumbnail.webp
 description: Mesh API でハイトマップの地形メッシュを構築し、テクスチャから頂点を変位させ、ブレンドしたタイリングのマテリアルを適用します。
 ---
 

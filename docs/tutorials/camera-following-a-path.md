@@ -4,7 +4,7 @@ description: Animate a camera along a spline path through waypoints for flythrou
 tags: [camera]
 kind: sample
 topic: Cameras
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/438429/66E9AF-image-75.jpg
+thumb: /img/tutorials/camera-following-a-path/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

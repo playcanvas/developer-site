@@ -4,7 +4,7 @@ description: Use collision shapes with rigidbodies for physical contacts and tri
 tags: [collision, physics]
 kind: tutorial
 topic: Physics
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405871/0D7E2F-image-75.jpg
+thumb: /img/tutorials/collision-and-triggers/thumbnail.webp
 ---
 
 <div className="iframe-container">

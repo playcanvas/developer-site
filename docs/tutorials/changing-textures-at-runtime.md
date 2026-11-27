@@ -4,7 +4,7 @@ description: Swap a material texture map from script to retexture models on the 
 tags: [textures, assets]
 kind: sample
 topic: Graphics
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/437446/54BF56-image-75.jpg
+thumb: /img/tutorials/changing-textures-at-runtime/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

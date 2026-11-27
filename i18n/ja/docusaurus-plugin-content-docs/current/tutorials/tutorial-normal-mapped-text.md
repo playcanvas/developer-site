@@ -1,7 +1,7 @@
 ---
 title: 'Tutorial: Normal Mapped Text'
 tags: [textures, rendering, materials]
-thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/371210/C1FNWI-image-75.jpg"
+thumb: /img/tutorials/tutorial-normal-mapped-text/thumbnail.webp
 description: 動的なテキスト用にノーマルマップとパララックスマップを生成し、文字が光を受けて浮き彫りのように見えるようにします。
 ---
 

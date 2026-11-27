@@ -4,7 +4,7 @@ description: Use sound and listener components so positional 3D audio follows mo
 tags: [audio,basics]
 kind: tutorial
 topic: Audio
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405821/V89N1G-image-75.jpg
+thumb: /img/tutorials/basic-audio/thumbnail.webp
 ---
 
 <div className="iframe-container">

@@ -4,7 +4,7 @@ description: Generate a gradient texture in code and apply it to materials inste
 tags: [textures, rendering]
 kind: sample
 topic: Graphics
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/708598/6E96B8-image-75.jpg
+thumb: /img/tutorials/procedural-gradient-texture/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

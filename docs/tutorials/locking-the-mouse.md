@@ -4,7 +4,7 @@ description: Request pointer lock on click to capture the mouse for first-person
 tags: [input, camera, mouse]
 kind: sample
 topic: Input
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/438440/941913-image-75.jpg
+thumb: /img/tutorials/locking-the-mouse/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

@@ -4,7 +4,7 @@ description: Render from a camera to a texture and export pixels as a PNG for ca
 tags: [rendering, camera]
 kind: sample
 topic: Graphics
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/438437/35C2AB-image-75.jpg
+thumb: /img/tutorials/capturing-a-screenshot/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

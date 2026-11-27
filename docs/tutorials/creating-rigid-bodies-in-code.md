@@ -4,7 +4,7 @@ description: Spawn entities with collision and rigidbody components entirely fro
 tags: [animation, physics, procedural]
 kind: sample
 topic: Physics
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/442322/BABA92-image-75.jpg
+thumb: /img/tutorials/creating-rigid-bodies-in-code/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

@@ -4,7 +4,7 @@ description: Integrate Google H5 Games interstitial and rewarded ads into a Play
 tags: [scripts, monetization, games]
 kind: tutorial
 topic: Games
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/889020/CDC848-image-75.jpg
+thumb: /img/tutorials/google-ads-for-games/thumbnail.webp
 ---
 
 import Tabs from '@theme/Tabs';

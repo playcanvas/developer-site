@@ -4,7 +4,7 @@ description: Decouple scripts by firing and listening for custom events on entit
 tags: [events, scripts]
 kind: sample
 topic: Basics
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/437673/ED3EC5-image-75.jpg
+thumb: /img/tutorials/using-events-with-scripts/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

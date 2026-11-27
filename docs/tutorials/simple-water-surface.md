@@ -4,7 +4,7 @@ description: Approximate a stylized water plane with scrolling normals and fresn
 tags: [rendering, materials]
 kind: sample
 topic: Graphics
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/438476/6F2C27-image-75.jpg
+thumb: /img/tutorials/simple-water-surface/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

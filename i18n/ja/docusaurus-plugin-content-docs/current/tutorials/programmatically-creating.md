@@ -1,7 +1,7 @@
 ---
 title: プログラムでのエンティティ作成
 tags: [procedural, basics]
-thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406042/4479BC-image-75.jpg"
+thumb: /img/tutorials/programmatically-creating/thumbnail.webp
 description: Script から Entity をインスタンス化し Scene のルートに親子付けし、Component を付けてエディタなしでオブジェクトを構築します。
 ---
 

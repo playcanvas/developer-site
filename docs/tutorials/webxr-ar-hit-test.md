@@ -4,7 +4,7 @@ description: Cast rays into real-world geometry with the WebXR hit-test API to a
 tags: [camera, ar, raycast]
 kind: sample
 topic: XR
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/672464/DAC6E9-image-75.jpg
+thumb: /img/tutorials/webxr-ar-hit-test/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

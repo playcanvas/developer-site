@@ -4,7 +4,7 @@ description: Cast physics raycasts from the pointer to hit colliders and select 
 tags: [input, physics, raycast]
 kind: sample
 topic: Input
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/410547/4B3EC7-image-75.jpg
+thumb: /img/tutorials/entity-picking-using-physics/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

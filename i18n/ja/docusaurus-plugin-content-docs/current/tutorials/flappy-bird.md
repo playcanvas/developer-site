@@ -1,7 +1,7 @@
 ---
 title: 'Flappy Bird'
 tags: [games]
-thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/8/375389/C803BC-image-75.jpg"
+thumb: /img/tutorials/flappy-bird/thumbnail.webp
 description: パイプとスコア付きのタップ飛行を再現し、コンパクトな PlayCanvas のゲームプレイサンプルです。
 ---
 

@@ -4,7 +4,7 @@ description: Extend the engine with one-shot timers that fire callbacks after de
 tags: [time]
 kind: sample
 topic: Basics
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/691984/71DABB-image-75.jpg
+thumb: /img/tutorials/timers/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

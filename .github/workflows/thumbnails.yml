@@ -1,0 +1,73 @@
+name: Tutorial thumbnails
+
+# Checks whether any tutorial project has a new thumbnail since the site copied it.
+#
+# Most tutorial thumbnails on /tutorials/ are copies of their project's thumbnail, listed in
+# utils/plugins/tutorials/thumbs.json. A copy goes out of date when the project's owner changes
+# the thumbnail, so this runs on a schedule, not on pull requests. A run that finds an
+# out-of-date copy, or a project that is gone, opens an issue listing them, or updates the one
+# already open, and the first run that finds nothing to do closes it. The fix is to run
+# `npm run sync:tutorial-thumbs` locally, since it needs cwebp to make the new copies.
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Mondays at 06:47 UTC, half an hour after the external links check
+    - cron: '47 6 * * 1'
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    name: Check tutorial thumbnails
+    # Forks inherit the schedule, and only this repository should have issues filed on it
+    if: github.repository == 'playcanvas/developer-site'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      ISSUE_TITLE: Tutorial thumbnails changed upstream
+    steps:
+    - name: Checkout files
+      uses: actions/checkout@v7
+
+    - name: Setup Node.js 22.x
+      uses: actions/setup-node@v7
+      with:
+        node-version: 22.x
+
+    # The check needs only Node built-ins, so there is no install step. It exits 1 when a
+    # thumbnail is out of date or a project is gone, and writes the report last, so a report
+    # with a failure means there is something to do and a failure without one means the script
+    # itself went wrong.
+    - name: Check tutorial thumbnails
+      id: thumbs
+      continue-on-error: true
+      run: npm run sync:tutorial-thumbs -- --check --report thumbs-report.md
+
+    - name: Find the open issue
+      id: issue
+      run: |
+        number=$(gh issue list --state open --search "\"$ISSUE_TITLE\" in:title" --json number,title \
+          --jq ".[] | select(.title == \"$ISSUE_TITLE\") | .number" | head -n 1)
+        echo "number=$number" >> "$GITHUB_OUTPUT"
+
+    - name: Open or update the issue
+      if: steps.thumbs.outcome == 'failure' && hashFiles('thumbs-report.md') != ''
+      run: |
+        if [ -n "${{ steps.issue.outputs.number }}" ]; then
+          gh issue edit "${{ steps.issue.outputs.number }}" --body-file thumbs-report.md
+        else
+          gh issue create --title "$ISSUE_TITLE" --body-file thumbs-report.md
+        fi
+
+    - name: Close the issue
+      if: steps.thumbs.outcome == 'success' && steps.issue.outputs.number != ''
+      run: gh issue close "${{ steps.issue.outputs.number }}" --comment "Every tutorial thumbnail matches its project's thumbnail again."
+
+    - name: Fail the run
+      if: steps.thumbs.outcome == 'failure'
+      run: exit 1

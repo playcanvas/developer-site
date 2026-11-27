@@ -1,7 +1,7 @@
 ---
 title: ライトハローの作成
 tags: [lighting]
-thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406040/2TX0AO-image-75.jpg"
+thumb: /img/tutorials/light-halos/thumbnail.webp
 description: billboard 化した光るハローの平面を作り、エッジオンで見たときにフェードさせ、霧がかった空気や明るいランプのまぶしさを演出します。
 ---
 

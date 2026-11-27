@@ -4,7 +4,7 @@ description: Filter physics raycast hits by entity tags so picking ignores the w
 tags: [input, physics, raycast]
 kind: sample
 topic: Physics
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/691309/22953E-image-75.jpg
+thumb: /img/tutorials/physics-raycasting-by-tag/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

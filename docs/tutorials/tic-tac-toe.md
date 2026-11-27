@@ -4,7 +4,7 @@ description: Implement a playable 3D tic-tac-toe board with turn handling, win d
 tags: [games]
 kind: sample
 topic: Games
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/671439/C24512-image-75.jpg
+thumb: /img/tutorials/tic-tac-toe/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

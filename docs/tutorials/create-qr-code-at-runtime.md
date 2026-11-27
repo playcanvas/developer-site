@@ -4,7 +4,7 @@ description: Generate QR codes in the browser at runtime with a small library an
 tags: [ui, scripts]
 kind: sample
 topic: User Interface
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/1025199/3FC3F4-image-75.jpg
+thumb: /img/tutorials/create-qr-code-at-runtime/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

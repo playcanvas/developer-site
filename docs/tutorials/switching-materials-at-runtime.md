@@ -4,7 +4,7 @@ description: Swap material assets on render components in code to change colors,
 tags: [materials, assets]
 kind: sample
 topic: Graphics
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/437442/709ED5-image-75.jpg
+thumb: /img/tutorials/switching-materials-at-runtime/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

@@ -4,7 +4,7 @@ description: Use ShaderMaterial for dissolve and edge effects with custom shader
 tags: [shaders, materials]
 kind: tutorial
 topic: Shaders and Post Effects
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406044/4J2JX2-image-75.jpg
+thumb: /img/tutorials/custom-shaders/thumbnail.webp
 ---
 
 <div className="iframe-container">

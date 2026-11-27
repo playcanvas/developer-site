@@ -4,7 +4,7 @@ description: Move a character or object toward clicked ground positions using sc
 tags: [touch, input, mouse, raycast]
 kind: sample
 topic: Input
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/461494/9F45F6-image-75.jpg
+thumb: /img/tutorials/point-and-click-movement/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

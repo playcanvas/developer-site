@@ -1,7 +1,7 @@
 ---
 title: 'プログレスバー付きアセット読み込み'
 tags: [assets, scripts]
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/436584/204B9A-image-75.jpg
+thumb: /img/tutorials/load-assets-with-a-progress-bar/thumbnail.webp
 description: 複数のランタイム Asset を読み込みながら UI のプログレスバーを更新し、ダウンロードとパースの進捗を表示します。
 ---
 

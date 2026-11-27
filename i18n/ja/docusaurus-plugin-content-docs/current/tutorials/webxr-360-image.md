@@ -1,7 +1,7 @@
 ---
 title: 'WebXR 360 Image'
 tags: [vr]
-thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/434266/3B51C6-image-75.jpg"
+thumb: /img/tutorials/webxr-360-image/thumbnail.webp
 description: WebXRでVR内の等角長方形360度写真を映し、没入感のある球面の背景を見回せます。
 ---
 

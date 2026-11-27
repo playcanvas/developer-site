@@ -4,7 +4,7 @@ description: Overlay an HTML text input on the canvas for OS-native typing, copy
 tags: [ui]
 kind: tutorial
 topic: User Interface
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/1005906/36C2AF-image-75.jpg
+thumb: /img/tutorials/ui-text-input/thumbnail.webp
 ---
 
 import StepVideo from '@site/src/components/StepVideo';

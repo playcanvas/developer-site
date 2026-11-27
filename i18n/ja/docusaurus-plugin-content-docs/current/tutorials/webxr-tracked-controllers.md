@@ -1,7 +1,7 @@
 ---
 title: 'WebXR Tracked Controllers'
 tags: [input, vr]
-thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/457917/EF3EDA-image-75.jpg"
+thumb: /img/tutorials/webxr-tracked-controllers/thumbnail.webp
 description: PlayCanvasのWebXRテンプレート内で6DoFコントローラーの姿勢、ボタン、触覚フィードバックのスターターコードを使ってVRで追従します。
 ---
 

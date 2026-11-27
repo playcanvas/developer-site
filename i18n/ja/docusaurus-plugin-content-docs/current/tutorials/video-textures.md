@@ -1,7 +1,7 @@
 ---
 title: ビデオテクスチャ
 tags: [video, textures]
-thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405850/WEKRBI-image-75.jpg"
+thumb: /img/tutorials/video-textures/thumbnail.webp
 description: 毎ティックでHTMLビデオのフレームを動的テクスチャに流し込み、メッシュにマッピングしてワールド内の画面やアニメーションするビルボードにします。
 ---
 

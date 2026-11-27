@@ -4,7 +4,7 @@ description: Toggle lights and adjust color and intensity from scripts for simpl
 tags: [lighting]
 kind: tutorial
 topic: Graphics
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405812/9D487A-image-75.jpg
+thumb: /img/tutorials/controlling-lights/thumbnail.webp
 ---
 
 <div className="iframe-container">

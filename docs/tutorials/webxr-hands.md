@@ -4,7 +4,7 @@ description: Read WebXR hand-tracking joint poses and mirror finger motion in th
 tags: [input, vr]
 kind: sample
 topic: XR
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/705931/2507B5-image-75.jpg
+thumb: /img/tutorials/webxr-hands/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

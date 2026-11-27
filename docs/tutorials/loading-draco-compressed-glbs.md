@@ -4,7 +4,7 @@ description: Load Draco-compressed GLB models in PlayCanvas with the right pipel
 tags: [rendering, assets, scripts]
 kind: sample
 topic: Assets and Scenes
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/730372/61CE32-image-75.jpg
+thumb: /img/tutorials/loading-draco-compressed-glbs/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

@@ -1,7 +1,7 @@
 ---
 title: 'VHS/CRTポストエフェクト'
 tags: [posteffects]
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/373076/0WJ6Y8-image-75.jpg
+thumb: /img/tutorials/vhscrt-post-effect/thumbnail.webp
 description: フルスクリーンパスでスキャンライン、ロール、色にじみを重ね、ノイズの多いVHSや湾曲したCRTモニターの見え方を再現します。
 ---
 

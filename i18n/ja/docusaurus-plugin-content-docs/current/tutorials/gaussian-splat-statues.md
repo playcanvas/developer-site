@@ -1,7 +1,7 @@
 ---
 title: '3Dガウシアンスプラット彫像'
 tags: [gaussiansplatting]
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/1224723/266D9C-image-75.jpg
+thumb: /img/tutorials/gaussian-splat-statues/thumbnail.webp
 description: 展示切り替えの間にカスタムシェーダーとポストエフェクトを挟み、Gaussian splat の彫像ギャラリーを提示します。
 ---
 

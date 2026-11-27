@@ -4,7 +4,7 @@ description: Load glTF GLB files as binary assets at runtime and add the resulti
 tags: [rendering, assets, scripts]
 kind: sample
 topic: Assets and Scenes
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/730738/0641C2-image-75.jpg
+thumb: /img/tutorials/loading-gltf-glbs/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

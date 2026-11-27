@@ -4,7 +4,7 @@ description: Drive entity motion with animation curves for simple scripted movem
 tags: [animation]
 kind: sample
 topic: Animation
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/438191/53A10A-image-75.jpg
+thumb: /img/tutorials/animate-entities-with-curves/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

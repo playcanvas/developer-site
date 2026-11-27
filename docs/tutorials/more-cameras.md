@@ -4,7 +4,7 @@ description: Script camera components to change FOV, position, and active camera
 tags: [basics, camera]
 kind: tutorial
 topic: Cameras
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405835/E7331A-image-75.jpg
+thumb: /img/tutorials/more-cameras/thumbnail.webp
 ---
 
 <div className="iframe-container">

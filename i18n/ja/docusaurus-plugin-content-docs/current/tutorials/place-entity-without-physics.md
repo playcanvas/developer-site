@@ -1,7 +1,7 @@
 ---
 title: '物理を使わないエンティティの配置'
 tags: [input]
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/437894/2D9F7B-image-75.jpg
+thumb: /img/tutorials/place-entity-without-physics/thumbnail.webp
 description: 数式と raycast でクリックした地面の位置に装飾用の Entity を生成し、Rigidbody シミュレーションは追加しません。
 ---
 

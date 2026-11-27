@@ -1,7 +1,7 @@
 ---
 title: '基本的なタッチ入力'
 tags: [touch, input, basics, mobile]
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/438010/E61079-image-75.jpg
+thumb: /img/tutorials/basic-touch-input/thumbnail.webp
 description: タッチイベントで画面上のオブジェクトをドラッグ移動する、モバイル向け最小サンプルです。
 ---
 

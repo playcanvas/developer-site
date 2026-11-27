@@ -4,7 +4,7 @@ description: Pause and resume gameplay by toggling Application timeScale so phys
 tags: [time]
 kind: sample
 topic: Basics
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/437707/9D3648-image-75.jpg
+thumb: /img/tutorials/pauseplay-application/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

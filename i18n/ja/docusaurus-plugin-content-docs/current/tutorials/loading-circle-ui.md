@@ -1,7 +1,7 @@
 ---
 title: 'ローディングサークルUI'
 tags: [materials, ui, animation]
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/705273/8B52B3-image-75.jpg
+thumb: /img/tutorials/loading-circle-ui/thumbnail.webp
 description: マテリアルとアニメーションで放射状のローディングスピナー UI を実装し、コンテンツ受信中のフィードバックを明確にします。
 ---
 

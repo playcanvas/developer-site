@@ -4,7 +4,7 @@ description: Drive a particle fireball that follows the pointer for a simple mag
 tags: [particles, input]
 kind: sample
 topic: Graphics
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/439385/DECA7B-image-75.jpg
+thumb: /img/tutorials/flaming-fireball/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

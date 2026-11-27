@@ -4,7 +4,7 @@ description: Point WebXR laser pointers or gaze at screen-space UI and handle cl
 tags: [vr, ar, input, ui]
 kind: tutorial
 topic: XR
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/460449/314C07-image-75.jpg
+thumb: /img/tutorials/webxr-ray-input/thumbnail.webp
 ---
 
 <div className="iframe-container">

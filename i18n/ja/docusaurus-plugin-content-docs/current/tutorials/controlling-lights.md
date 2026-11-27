@@ -1,7 +1,7 @@
 ---
 title: ライトの制御方法
 tags: [lighting]
-thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405812/9D487A-image-75.jpg"
+thumb: /img/tutorials/controlling-lights/thumbnail.webp
 description: Script からライトのオンオフや色・強度を調整し、Scene で簡単なランタイムのライティング変更を行います。
 ---
 

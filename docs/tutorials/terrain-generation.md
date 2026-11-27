@@ -4,7 +4,7 @@ description: Build a heightmap terrain mesh with the Mesh API, displacing vertic
 tags: [procedural]
 kind: sample
 topic: Graphics
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406046/W2AUF9-image-75.jpg
+thumb: /img/tutorials/terrain-generation/thumbnail.webp
 ---
 
 <div className="iframe-container">

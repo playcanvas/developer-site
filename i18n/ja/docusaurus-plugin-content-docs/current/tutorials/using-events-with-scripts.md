@@ -1,7 +1,7 @@
 ---
 title: 'Using events with scripts'
 tags: [events, scripts]
-thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/437673/ED3EC5-image-75.jpg"
+thumb: /img/tutorials/using-events-with-scripts/thumbnail.webp
 description: Entityやアプリケーションにカスタムイベントを発火・購読してスクリプトを疎結合にし、モジュール化したゲームプレイのメッセージングにします。
 ---
 

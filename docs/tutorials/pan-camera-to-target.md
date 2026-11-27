@@ -4,7 +4,7 @@ description: Smoothly move and aim the camera toward a world-space target so cli
 tags: [input, camera, animation]
 kind: sample
 topic: Cameras
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/693889/B745F1-image-75.jpg
+thumb: /img/tutorials/pan-camera-to-target/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

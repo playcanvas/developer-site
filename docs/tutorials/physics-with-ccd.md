@@ -4,7 +4,7 @@ description: Enable continuous collision detection on rigidbodies so fast projec
 tags: [physics]
 kind: sample
 topic: Physics
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/447023/525467-image-75.jpg
+thumb: /img/tutorials/physics-with-ccd/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

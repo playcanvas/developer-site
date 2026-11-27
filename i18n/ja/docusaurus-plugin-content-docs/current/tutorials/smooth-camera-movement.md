@@ -1,7 +1,7 @@
 ---
 title: 'スムーズなカメラ移動'
 tags: [camera]
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/437461/2E89D4-image-75.jpg
+thumb: /img/tutorials/smooth-camera-movement/thumbnail.webp
 description: ベクトルの lerp と quaternion の slerp で毎フレームカメラの位置と向きを滑らかに補間し、シネマティックな動きにします。
 ---
 

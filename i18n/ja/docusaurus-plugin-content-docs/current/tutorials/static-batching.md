@@ -1,7 +1,7 @@
 ---
 title: 'スタティックバッチング'
 tags: [rendering]
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/520389/C1E49E-image-75.jpg
+thumb: /img/tutorials/static-batching/thumbnail.webp
 description: バッチングで静的メッシュをより少ないドローコールにまとめ、動かないジオメトリを効率的に保ちつつ CPU 負荷を下げます。
 ---
 

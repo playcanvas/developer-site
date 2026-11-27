@@ -1,7 +1,7 @@
 ---
 title: Google H5広告ベータ版の収益化
 tags: [entities, monetization, games]
-thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/889020/CDC848-image-75.jpg"
+thumb: /img/tutorials/google-ads-for-games/thumbnail.webp
 description: Google H5 Games の interstitial 広告と rewarded 広告を PlayCanvas のタイトルに統合し、モバイル Web で収益化します。
 ---
 
