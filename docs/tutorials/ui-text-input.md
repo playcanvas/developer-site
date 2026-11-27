@@ -42,28 +42,28 @@ This doesn't support 3D elements.
 ## How to install
 
 Open the [example project](https://playcanvas.com/project/1005906/overview/ui-text-input), right click on the folder 'ui-input' and click on 'Copy'.
-<StepVideo src="/video/tutorials/ui-text-input/copy-folder.mp4" poster="/img/tutorials/ui-text-input/copy-folder.webp" width={1578} height={702} />
+<StepVideo src="/video/tutorials/ui-text-input/copy-folder.mp4" poster="/img/tutorials/ui-text-input/copy-folder.webp" width={1600} height={900} label="Right-clicking the ui-input folder in the example project and selecting Copy" />
 
 Open your project, right click in the assets panel and click on 'Paste'
-<StepVideo src="/video/tutorials/ui-text-input/paste-folder.mp4" poster="/img/tutorials/ui-text-input/paste-folder.webp" width={810} height={360} />
+<StepVideo src="/video/tutorials/ui-text-input/paste-folder.mp4" poster="/img/tutorials/ui-text-input/paste-folder.webp" width={1600} height={900} label="Right-clicking the Assets panel of another project and selecting Paste" />
 
 ## Adding your first text input
 
 Create an UI Image/Group Element Entity as a child of a UI 2D Screen and size it accordingly. Make sure to enable 'Use Input' on the Element component. This defines the input area for the user to click on and start inputting text.
 
-<StepVideo src="/video/tutorials/ui-text-input/create-image-element.mp4" poster="/img/tutorials/ui-text-input/create-image-element.webp" width={1129} height={480} />
+<StepVideo src="/video/tutorials/ui-text-input/create-image-element.mp4" poster="/img/tutorials/ui-text-input/create-image-element.webp" width={1600} height={900} label="Adding an Image Element under 2D Screen, setting its Width and Height and ticking Use Input" />
 
 Add a Script Component to the Element Entity and add the Script Type 'uiInputField'.
 
-<StepVideo src="/video/tutorials/ui-text-input/add-script-component.mp4" poster="/img/tutorials/ui-text-input/add-script-component.webp" width={1129} height={480} />
+<StepVideo src="/video/tutorials/ui-text-input/add-script-component.mp4" poster="/img/tutorials/ui-text-input/add-script-component.webp" width={1600} height={900} label="Adding a Script component to the Image entity and adding the uiInputField script" />
 
-Create a UI Text Element Entity as a child of the Element Entity that we just created. The text in the element will updated by the Script Type 'uiInputField' based on the user input and the script attributes data.
+Create a UI Text Element Entity as a child of the Element Entity that we just created. The text in the element will be updated by the Script Type 'uiInputField' based on the user input and the script attributes data.
 
-<StepVideo src="/video/tutorials/ui-text-input/create-text-element.mp4" poster="/img/tutorials/ui-text-input/create-text-element.webp" width={1129} height={480} />
+<StepVideo src="/video/tutorials/ui-text-input/create-text-element.mp4" poster="/img/tutorials/ui-text-input/create-text-element.webp" width={1600} height={900} label="Adding a Text Element under the Image entity and setting its font size and color" />
 
 Go back to the Script Type 'uiInputField' that added earlier, reference the Text Element Entity and change the script attributes data to your use case. Hover over each attribute to see the tooltip and description.
 
-<StepVideo src="/video/tutorials/ui-text-input/update-script-type.mp4" poster="/img/tutorials/ui-text-input/update-script-type.webp" width={1129} height={480} />
+<StepVideo src="/video/tutorials/ui-text-input/update-script-type.mp4" poster="/img/tutorials/ui-text-input/update-script-type.webp" width={1600} height={900} label="Picking the Text entity for Text Entity, then setting Input Type to EMAIL and the placeholder string" />
 
 Finally, launch the scene to test.
 
@@ -71,4 +71,4 @@ Finally, launch the scene to test.
 
 ## Advanced: How to style
 
-The library uses a neutral color style for the HTML input element. If you want to change the style to better suit your application, you can modify the CSS in 'ui-input-library.js' in function `createInputDom`.
+The library uses a neutral color style for the HTML input element. If you want to change the style to better suit your application, you can modify the CSS in `ui-input-library.mjs` in function `createInputDom`.
