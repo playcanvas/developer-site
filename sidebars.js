@@ -1246,8 +1246,7 @@ const sidebars = {
       },
       items: [
         'user-manual/xr/using-webxr',
-        'user-manual/xr/platforms',
-        'user-manual/xr/capabilities',
+        'user-manual/xr/sessions',
         'user-manual/xr/input-sources',
         'user-manual/xr/hand-tracking',
         {
@@ -1271,18 +1270,10 @@ const sidebars = {
             'user-manual/xr/ar/zappar-integration',
           ],
         },
-        {
-          type: 'category',
-          label: 'VR',
-          link: {
-            type: 'doc',
-            id: 'user-manual/xr/vr/index',
-          },
-          items: [
-            'user-manual/xr/vr/types-of-vr',
-          ],
-        },
         'user-manual/xr/optimizing-webxr',
+        'user-manual/xr/testing',
+        'user-manual/xr/platforms',
+        'user-manual/xr/troubleshooting',
       ],
     },
     {

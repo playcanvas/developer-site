@@ -210,13 +210,15 @@ Use this index to write code against the engine directly. React, Web Components 
 
 ## XR
 
-- [XR](/user-manual/xr/): WebXR AR and VR: platforms, capabilities and session setup.
-- [Using WebXR](/user-manual/xr/using-webxr/): Checking support, starting AR and VR sessions from user input, and configuring them with the camera component and `XrManager`.
+- [XR](/user-manual/xr/): How sessions, the camera rig and XR input work, and the engine's XR scripts.
+- [Getting Started](/user-manual/xr/using-webxr/): Setup, WebGL 2 or WebGPU, and a first VR scene with `XrSession` and `XrControllers`.
+- [Sessions](/user-manual/xr/sessions/): Availability, `startXr` options, reference spaces, the rig, tracking space and ending sessions.
 - [Input Sources](/user-manual/xr/input-sources/): Controllers, tracked hands, gaze and touch.
-- [Capabilities](/user-manual/xr/capabilities/): The supported WebXR modules, such as anchors, depth sensing, hand tracking, hit testing, and mesh and plane detection.
 - [Hit Testing](/user-manual/xr/ar/hit-testing/): Placing virtual objects on real-world surfaces in AR.
-- [Platforms](/user-manual/xr/platforms/): Tested devices and browsers for VR, AR and each capability.
-- [Optimizing WebXR Applications](/user-manual/xr/optimizing-webxr/): Keeping the frame rate up despite stereo rendering, draw calls and AR tracking costs.
+- [Performance](/user-manual/xr/optimizing-webxr/): XR resolution and `maxPixelRatio`, foveation and frame rate.
+- [Testing and Debugging](/user-manual/xr/testing/): Emulating a headset, and testing on devices.
+- [Platforms](/user-manual/xr/platforms/): Devices and browsers, and their XR features.
+- [Troubleshooting](/user-manual/xr/troubleshooting/): Common XR problems and their causes.
 
 ## Debugging and Optimization
 

@@ -151,7 +151,7 @@ An item with a `label` but no `eventName` is a line of text rather than a button
 
 ## Entering XR {#entering-xr}
 
-Browsers only start an immersive session in response to a user action, such as a click or a tap. The engine's XR examples start it from an HTML button over the canvas. See [Using WebXR](/user-manual/xr/using-webxr/) for how to start and end a session.
+Browsers only start an immersive session in response to a user action, such as a click or a tap. The engine's XR examples start it from an HTML button over the canvas. See [Sessions](/user-manual/xr/sessions/#starting-a-session) for how to start and end a session.
 
 ## See Also
 
