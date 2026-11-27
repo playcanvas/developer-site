@@ -26,10 +26,10 @@ We recommend reading about the [PlayCanvas UI system](/user-manual/user-interfac
 ## How to install
 
 Open the [example project](https://playcanvas.com/project/1007506/overview/touchscreen-joypad-controls), right click on the folder 'touch-joypad' and click on 'Copy'.
-<StepVideo src="/video/tutorials/touchscreen-joypad-controls/copy-folder.mp4" poster="/img/tutorials/touchscreen-joypad-controls/copy-folder.webp" width={821} height={360} />
+<StepVideo src="/video/tutorials/touchscreen-joypad-controls/copy-folder.mp4" poster="/img/tutorials/touchscreen-joypad-controls/copy-folder.webp" width={1600} height={900} label="Right-clicking the touch-joypad folder in the example project and selecting Copy" />
 
 Open your project, right click in the assets panel and click on 'Paste'
-<StepVideo src="/video/tutorials/touchscreen-joypad-controls/paste-folder.mp4" poster="/img/tutorials/touchscreen-joypad-controls/paste-folder.webp" width={821} height={360} />
+<StepVideo src="/video/tutorials/touchscreen-joypad-controls/paste-folder.mp4" poster="/img/tutorials/touchscreen-joypad-controls/paste-folder.webp" width={1600} height={900} label="Right-clicking the Assets panel of another project and selecting Paste" />
 
 ## Adding your joystick
 
@@ -42,7 +42,7 @@ For this example, let's use the 'Left Half Touch Joystick' template.
 
 Create a 2D screen Entity and [add the template](/user-manual/editor/templates/#adding-templates-in-your-scene) as a child of the screen Entity.
 
-<StepVideo src="/video/tutorials/touchscreen-joypad-controls/adding-left-half-joystick.mp4" poster="/img/tutorials/touchscreen-joypad-controls/adding-left-half-joystick.webp" width={868} height={480} />
+<StepVideo src="/video/tutorials/touchscreen-joypad-controls/adding-left-half-joystick.mp4" poster="/img/tutorials/touchscreen-joypad-controls/adding-left-half-joystick.webp" width={1600} height={900} label="Adding a 2D Screen Entity from the Hierarchy context menu, then dragging the Left Half Touch Joystick template onto it" />
 
 The joystick is made of three Entities:
 
@@ -60,7 +60,7 @@ As the input area is an UI Element, it can be positioned, sized and anchored spe
 
 It also has the 'touchJoystick' which has all the logic and attributes for the joystick. Each attribute has tooltips describing what they are for with some more details below.
 
-<StepVideo src="/video/tutorials/touchscreen-joypad-controls/joystick-script-attributes.mp4" poster="/img/tutorials/touchscreen-joypad-controls/joystick-script-attributes.webp" width={868} height={480} />
+<StepVideo src="/video/tutorials/touchscreen-joypad-controls/joystick-script-attributes.mp4" poster="/img/tutorials/touchscreen-joypad-controls/joystick-script-attributes.webp" width={1600} height={900} label="Selecting the joystick and hovering each touchJoystick attribute in the Inspector to show its tooltip" />
 
 The base and nub Entities are controlled by the script and are UI Elements. If you would like the joystick to be in a different place than where it is in the template, please position and anchor the base Entity to where you need them to be and not the input area.
 
@@ -109,7 +109,7 @@ console.log('X: ' + joystick.x + ', Y: ' + joystick.y);
 
 Buttons are fixed position UI Elements on the screen. There is a template for button in the 'templates' folder and [should be added](/user-manual/editor/templates/#adding-templates-in-your-scene) as a child of the screen Entity.
 
-<StepVideo src="/video/tutorials/touchscreen-joypad-controls/adding-button.mp4" poster="/img/tutorials/touchscreen-joypad-controls/adding-button.webp" width={868} height={480} />
+<StepVideo src="/video/tutorials/touchscreen-joypad-controls/adding-button.mp4" poster="/img/tutorials/touchscreen-joypad-controls/adding-button.webp" width={1600} height={900} label="Dragging the Touch Button template from the Assets panel onto the 2D Screen Entity" />
 
 As they are UI Elements, they can be positioned, sized and anchored specifically for your needs via the [UI system layout](/user-manual/user-interface/elements/).
 

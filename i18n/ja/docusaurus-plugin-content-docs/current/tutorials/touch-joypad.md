@@ -24,10 +24,10 @@ import StepVideo from '@site/src/components/StepVideo';
 ## インストール方法
 
 Open the [example project](https://playcanvas.com/project/1007506/overview/touchscreen-joypad-controls), right click on the folder 'touch-joypad' and click on 'Copy'.
-<StepVideo src="/video/tutorials/touchscreen-joypad-controls/copy-folder.mp4" poster="/img/tutorials/touchscreen-joypad-controls/copy-folder.webp" width={821} height={360} />
+<StepVideo src="/video/tutorials/touchscreen-joypad-controls/copy-folder.mp4" poster="/img/tutorials/touchscreen-joypad-controls/copy-folder.webp" width={1600} height={900} label="サンプルプロジェクトの touch-joypad フォルダを右クリックして Copy を選択" />
 
 Open your project, right click in the assets panel and click on 'Paste'
-<StepVideo src="/video/tutorials/touchscreen-joypad-controls/paste-folder.mp4" poster="/img/tutorials/touchscreen-joypad-controls/paste-folder.webp" width={821} height={360} />
+<StepVideo src="/video/tutorials/touchscreen-joypad-controls/paste-folder.mp4" poster="/img/tutorials/touchscreen-joypad-controls/paste-folder.webp" width={1600} height={900} label="別のプロジェクトの Assets パネルを右クリックして Paste を選択" />
 
 ## ジョイスティックの追加
 
@@ -40,7 +40,7 @@ Open your project, right click in the assets panel and click on 'Paste'
 
 2DスクリーンのEntityを作成し、[テンプレートを子として追加](/user-manual/editor/templates/#adding-templates-in-your-scene)します。
 
-<StepVideo src="/video/tutorials/touchscreen-joypad-controls/adding-left-half-joystick.mp4" poster="/img/tutorials/touchscreen-joypad-controls/adding-left-half-joystick.webp" width={868} height={480} />
+<StepVideo src="/video/tutorials/touchscreen-joypad-controls/adding-left-half-joystick.mp4" poster="/img/tutorials/touchscreen-joypad-controls/adding-left-half-joystick.webp" width={1600} height={900} label="Hierarchy のコンテキストメニューから 2D Screen エンティティを追加し、Left Half Touch Joystick テンプレートをその上にドラッグ" />
 
 ジョイスティックは3つのEntityで構成されています。
 
@@ -58,7 +58,7 @@ Open your project, right click in the assets panel and click on 'Paste'
 
 また、ジョイスティックに必要なすべてのロジックと属性を持つ'touchJoystick'があります。各属性には、詳細が記載されたツールチップがあります。
 
-<StepVideo src="/video/tutorials/touchscreen-joypad-controls/joystick-script-attributes.mp4" poster="/img/tutorials/touchscreen-joypad-controls/joystick-script-attributes.webp" width={868} height={480} />
+<StepVideo src="/video/tutorials/touchscreen-joypad-controls/joystick-script-attributes.mp4" poster="/img/tutorials/touchscreen-joypad-controls/joystick-script-attributes.webp" width={1600} height={900} label="ジョイスティックを選択し、Inspector で touchJoystick の各属性にカーソルを合わせてツールチップを表示" />
 
 ベースとノブのエンティティはスクリプトで制御され、UIエレメントです。ジョイスティックをテンプレート内の場所以外に配置する場合は、ベースエンティティを必要な場所に配置し、アンカーを設定してください。
 
@@ -107,7 +107,7 @@ console.log('X: ' + joystick.x + ', Y: ' + joystick.y);
 
 ボタンは画面上の固定位置のUIエレメントです。'templates'フォルダにボタンのテンプレートがあり、[子として追加](/user-manual/editor/templates/#adding-templates-in-your-scene)する必要があります。
 
-<StepVideo src="/video/tutorials/touchscreen-joypad-controls/adding-button.mp4" poster="/img/tutorials/touchscreen-joypad-controls/adding-button.webp" width={868} height={480} />
+<StepVideo src="/video/tutorials/touchscreen-joypad-controls/adding-button.mp4" poster="/img/tutorials/touchscreen-joypad-controls/adding-button.webp" width={1600} height={900} label="Assets パネルから Touch Button テンプレートを 2D Screen エンティティにドラッグ" />
 
 UIエレメントであるため、[UIシステムレイアウト](/user-manual/user-interface/elements/)を使用して、必要に応じて位置、サイズ、およびアンカーを特定することができます。
 
