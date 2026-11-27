@@ -53,6 +53,8 @@ Editor の [Asset Store](/user-manual/editor/assets/asset-store/) を使うと�
 | [Sketchfab](https://sketchfab.com/features/download) | コミュニティによる膨大なモデルのライブラリ。多くは glTF でダウンロードできます | 無料。モデルごとに Creative Commons ライセンスが異なります |
 | [TurboSquid](https://www.turbosquid.com/) | 大規模なモデルのマーケットプレイス。ほとんどが有料 | ほとんどが有料。フォーマットは商品によって異なります |
 
+[Sloyd](https://www.sloyd.ai/) を使えば、テキストのプロンプトや参考画像からモデルを生成することもできます。生成したモデルは GLB ファイルで書き出せます。無料プランは個人利用のみで、商用利用には有料プランが必要です。
+
 ## テクスチャとスカイボックス {#textures-and-skyboxes}
 
 | サイト | 内容 | 料金とライセンス |

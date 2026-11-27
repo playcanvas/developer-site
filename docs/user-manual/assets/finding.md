@@ -53,6 +53,8 @@ Your users download every asset before they see it. A model made for film or off
 | [Sketchfab](https://sketchfab.com/features/download) | A huge library of community models, many of them downloadable as glTF | Free. Each model has its own Creative Commons license |
 | [TurboSquid](https://www.turbosquid.com/) | A large marketplace of models, mostly paid | Mostly paid. Formats vary by listing |
 
+You can also generate models from a text prompt or a reference image with [Sloyd](https://www.sloyd.ai/), which exports GLB files. Its free plan is for personal use only. Paid plans add commercial use.
+
 ## Textures and Skyboxes
 
 | Site | What you'll find | Cost and license |
