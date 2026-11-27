@@ -1,54 +1,101 @@
 ---
-title: Optimizing WebXR applications
-description: "Performance guidance for WebXR: frame rate, stereo rendering cost, draw calls, batching, lightmaps, and mobile AR tracking overhead."
+title: Performance
+description: "Keep XR applications at the headset's frame rate: the frame budget, XR resolution with maxPixelRatio and framebufferScaleFactor, fixed foveation, choosing a frame rate, the costs of stereo rendering, and measuring on a device."
 ---
 
-## Introduction
+A headset shows a new frame at its refresh rate, typically 72, 90 or 120 times a second, and your application has to render every one of them in time. At 90 frames per second, that is 11 milliseconds for your scripts, the engine and the GPU together. When a frame is late, the headset shows the previous one again, shifted to follow the user's head. The world then judders or smears as the user looks around, which can make them feel unwell, so a steady frame rate matters more in XR than anywhere else.
 
-A high and consistent frame rate is critical for making an enjoyable XR experience. When creating VR/AR content, it is more important than ever to test and optimize early and maintain the target frame rate throughout development.
+It is also harder to reach. A headset renders your scene twice, once for each eye, usually at a higher resolution than a desktop monitor's. Standalone headsets such as the Meta Quest have the processor and GPU of a phone. And an AR session's tracking of the real world uses some of the same processor.
 
-For AR experiences, frame rates must be managed carefully as world tracking sometimes incurs significant performance costs. This is in addition to the typically performance-constrained mobile hardware most users have access to.
+## Resolution {#resolution}
 
-For VR experiences, rendering is especially expensive due to the fact that the scene must be rendered once for each view (eye). While PlayCanvas is highly optimized to ensure VR rendering doesn't fully duplicate effort, stereo rendering remains more expensive than mono rendering.
+Every device recommends a resolution for its views, which is about what its displays can show. The resolution of a session is that recommendation, scaled by two factors:
 
-For pass-through experiences, AR and VR requirements are combined, and the underlying system has to perform a lot of computation for positioning, image processing, and overlaying rendered images, in addition to other APIs that can be used: depth sensing, color access, image tracking, and more. And duplicate rendering for each eye.
+```none
+session resolution = recommended resolution × (maxPixelRatio ÷ devicePixelRatio) × framebufferScaleFactor
+```
 
-In addition, modern HMD devices demand high frame rates, like 75Hz or 90Hz and higher, further increasing the need for highly efficient rendering.
+- **`maxPixelRatio`** is a property of the graphics device that also limits the resolution of the canvas outside XR. It defaults differently on each surface:
 
-PlayCanvas, however, includes several features specifically designed to let your application do more in less time.
+  | Surface | Default `maxPixelRatio` |
+  | --- | --- |
+  | Engine and React | 1, so on a device whose `devicePixelRatio` is above 1, such as a phone, the session renders below the recommended resolution |
+  | Editor | `devicePixelRatio` when **Device Pixel Ratio** is on in the RENDERING settings, and 1 otherwise |
+  | Web Components | `devicePixelRatio` |
 
-### Draw Calls and Batching
+  To start sessions at the recommended resolution, set it to the browser's `devicePixelRatio` before the session starts:
 
-Draw Calls are operations when the engine provides the necessary information to the GPU for rendering an object. The more objects you have in the scene, the more draw calls it will require to render each frame. To reduce the number of draw calls, it is recommended to minimize the number of objects in the frame by culling, [static batching](/user-manual/graphics/advanced-rendering/batching/) and [instancing](/user-manual/graphics/advanced-rendering/hardware-instancing/).
+  ```javascript
+  app.graphicsDevice.maxPixelRatio = window.devicePixelRatio;
+  ```
 
-### Runtime lightmap generation
+- **`framebufferScaleFactor`** is a [session option](/user-manual/xr/sessions/#options-and-features), 1 by default. Values below 1 render fewer pixels, and above 1 render more, sharper ones, if the device allows it:
 
-Each dynamic light has a per-frame runtime cost. The more lights you have, the higher the cost and the slower your scene will render. By baking lights into lightmaps you can hugely reduce the cost of static lights to that of simply rendering a texture. Lightmaps can be generated offline using your favorite 3D modeling tool or you can use PlayCanvas' built-in [Runtime Lightmapper](/user-manual/graphics/lighting/runtime-lightmaps/).
+  ```javascript
+  camera.camera.startXr(XRTYPE_VR, XRSPACE_LOCALFLOOR, {
+      framebufferScaleFactor: 0.8
+  });
+  ```
 
-### Cautious use of real-time shadows
+The resolution is fixed when a session starts. `app.xr.framebufferScaleFactor` reports the factor of the running session, and changes to `maxPixelRatio` apply to the next session. The number of pixels grows with the square of the scale, so a factor of 0.8 renders about two thirds of them. For an application that is limited by its pixels, such as one with expensive materials, lowering it is the quickest saving.
 
-For similar reasons to dynamic lights, dynamic shadows also have a per-frame runtime cost. Omni lights, in particular, have to render the scene 6 times to generate shadow maps. You should avoid having too many lights casting dynamic shadows.
+## Fixed Foveation {#fixed-foveation}
 
-### Watch your fill rate and overdraw
+The lenses of a headset blur the edges of its displays, so pixels there are partly wasted. Fixed foveation renders the edges of each view at a lower resolution than the center. Set `app.xr.fixedFoveation`, from 0 (off) to 1 (the most), while a session runs:
 
-Fill rate refers to the number of pixels that can be filled by the GPU over time (normally per second). If you have expensive fragment shaders (e.g. lots of lights and complex materials) and a high resolution (e.g. a mobile phone with a high device pixel ratio) then your application will spend too much time rendering the scene to maintain a high frame rate.
+```javascript
+app.xr.on('start', () => {
+    // null when the device doesn't support fixed foveation
+    if (app.xr.fixedFoveation !== null) {
+        app.xr.fixedFoveation = 1;
+    }
+});
+```
 
-Overdraw refers to the rendering inefficiency that occurs when multiple layers of pixels are processed for the same screen area. This can happen for valid reasons (multiple layers of blending and/or transparency) or redundant reasons (more distant pixels being overwritten by nearer opaque pixels). For the latter case, you are wasting GPU processing trying to draw pixels that are not visible.
+With WebGL, fixed foveation only works when the graphics device has no anti-aliasing, as the engine then renders straight into the headset's framebuffer. Create the device with `antialias: false`, or turn off **Anti-aliasing** in the Editor's RENDERING settings. The engine logs a warning when it ignores the setting.
 
-:::tip
+## Frame Rate {#frame-rate}
 
-Using an extension like [WebGL Insight](https://github.com/3Dparallax/insight) can help you visualize overdraw.
+Some headsets can run at more than one refresh rate. A higher rate looks smoother, but leaves less time for each frame. `app.xr.supportedFrameRates` lists the rates a session can run at, or is `null` if the device doesn't say, and `app.xr.frameRate` is the current one. Ask for another with `updateTargetFrameRate`:
 
-:::
+```javascript
+app.xr.on('start', () => {
+    if (app.xr.supportedFrameRates?.includes(72)) {
+        app.xr.updateTargetFrameRate(72, (err) => {
+            if (err) console.warn(`Frame rate not changed: ${err.message}`);
+        });
+    }
+});
 
-### Garbage collection stalls
+app.xr.on('frameratechange', (frameRate) => {
+    console.log(`Now running at ${frameRate} Hz`);
+});
+```
 
-Web browsers feature automatic garbage collection of unused JavaScript objects. The PlayCanvas engine is designed to minimize runtime allocations and you should try to do the same in your code. Pre-allocate vectors and other objects and re-use them so that there are not lots of objects created and discarded every frame.
+A lower rate, such as 72, gives a heavy scene time to render every frame. A rate the application can't keep up with is worse than a lower one that it can.
 
-### Profiling Tools
+## Rendering Costs {#rendering-costs}
 
-The [Performance tab](/user-manual/optimization/inspector-performance/) of the [Inspector](/user-manual/debugging/inspector/) records the frames of your application, to find the slow ones and what holds them back. In the Editor, tick **Profiler** in the Launch menu to launch with it recording from the start.
+The guidance in [General Guidelines](/user-manual/optimization/guidelines/) applies to XR, and these parts of it matter most:
 
-### General optimization tips
+- **Draw calls.** The scene is drawn for each eye, so draw calls cost twice. Combine static meshes with [batching](/user-manual/graphics/advanced-rendering/batching/), and draw repeated meshes with [instancing](/user-manual/graphics/advanced-rendering/hardware-instancing/).
+- **Lights and shadows.** Each light adds to the cost of every pixel it reaches, and each shadow-casting light renders the scene again into its shadow map, six times for an omni light. Bake static lighting into [lightmaps](/user-manual/graphics/lighting/runtime-lightmaps/), and keep shadows for the few lights that need them.
+- **Pixels.** Expensive materials, transparency and overdraw are paid for at the session's full resolution, twice. Use [fixed foveation](#fixed-foveation), and lower the [resolution](#resolution) if you have to.
+- **Post-processing.** Full-screen effects are expensive at XR resolutions. With WebGPU in stereo, the engine doesn't yet support per-camera post-processing or the grab passes of refraction.
+- **Textures.** Compressed textures use less memory and bandwidth. See [Texture Compression](/user-manual/optimization/texture-compression/).
+- **Garbage collection.** A collection that pauses the application for a few milliseconds makes it miss a frame. Allocate objects up front and reuse them, rather than creating new vectors and arrays every frame.
 
-[Many more optimization guidelines](/user-manual/optimization/guidelines/) are available.
+## Measuring {#measuring}
+
+Measure on the devices you support, as an emulator on a desktop computer tells you nothing about a headset's frame rate. While a session runs, the headset's display shows your scene rather than the page, so overlays such as [MiniStats](/user-manual/optimization/mini-stats/) and the [Inspector](/user-manual/debugging/inspector/) aren't visible in it:
+
+- Profile over [remote debugging](/user-manual/xr/testing/#remote-debugging) with the **Performance** panel of your computer's browser, to see where the time of each frame goes.
+- On a Meta Quest, Meta's [OVR Metrics Tool](https://developers.meta.com/horizon/documentation/native/android/ts-ovrmetricstool/) shows the frame rate and GPU load over everything the headset shows.
+- Log `app.xr.frameRate` and your own timings to the console, and read them over remote debugging.
+
+## See Also
+
+- [General Guidelines](/user-manual/optimization/guidelines/) - Optimizing scripts, draw calls, materials and lighting
+- [Device Pixel Ratio](/user-manual/optimization/runtime-devicepixelratio/) - Choosing `maxPixelRatio` for the device
+- [GPU Profiling](/user-manual/optimization/gpu-profiling/) - Profiling frames with native GPU tools
+- [XrManager](https://api.playcanvas.com/engine/classes/XrManager.html) - Reference for `fixedFoveation`, `frameRate` and `updateTargetFrameRate`

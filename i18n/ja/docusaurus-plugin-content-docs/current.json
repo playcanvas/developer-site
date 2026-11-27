@@ -43,10 +43,6 @@
     "message": "XR",
     "description": "The label for category XR in sidebar userManualSidebar"
   },
-  "sidebar.userManualSidebar.category.VR": {
-    "message": "VR",
-    "description": "The label for category VR in sidebar userManualSidebar"
-  },
   "sidebar.userManualSidebar.category.AR": {
     "message": "AR",
     "description": "The label for category AR in sidebar userManualSidebar"

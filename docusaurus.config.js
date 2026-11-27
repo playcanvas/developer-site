@@ -243,6 +243,10 @@ const config = {
         // CameraFrame compose shader customization and FramePassCameraFrame subclassing replaced by effects
         { from: ['/user-manual/graphics/posteffects/cameraframe/compose-shader/'], to: '/user-manual/graphics/posteffects/cameraframe/custom-effects/' },
         { from: ['/user-manual/graphics/posteffects/cameraframe/extending-class/'], to: '/user-manual/graphics/posteffects/cameraframe/effect-passes/' },
+        // XR: pages absorbed by the rewrite of the section
+        { from: ['/user-manual/xr/capabilities/'], to: '/user-manual/xr/' },
+        { from: ['/user-manual/xr/vr/'], to: '/user-manual/xr/using-webxr/' },
+        { from: ['/user-manual/xr/vr/types-of-vr/'], to: '/user-manual/xr/sessions/' },
       ],
       createRedirects: (existingPath) => {
         // Create redirects from old paths prefixed with /en
