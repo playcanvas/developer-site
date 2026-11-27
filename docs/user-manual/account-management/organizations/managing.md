@@ -3,9 +3,9 @@ title: Managing Organizations
 description: Manage an Organization's profile, administrators, seats and plan, add administrators to its projects, and delete it.
 ---
 
-You manage an Organization from its account settings, where its owner and administrators handle its profile, people and billing. To open them, go to your [account settings](/user-manual/account-management/user-accounts/settings/) and choose the Organization in the account switcher at the top of the page. In the [Project Dashboard](/user-manual/editor/projects/dashboard/#organizations), **Organization details** in an Organization's **⋮** menu opens them too.
+You manage an Organization from its account settings, where its owner and administrators handle its profile and people, and its owner handles its billing. To open them, go to your [account settings](/user-manual/account-management/user-accounts/settings/) and choose the Organization in the account switcher at the top of the page. In the [Project Dashboard](/user-manual/editor/projects/dashboard/#organizations), **Organization details** in an Organization's **⋮** menu opens them too.
 
-An Organization's settings have three tabs: **Profile**, **People** and **Billing**.
+An Organization's settings have three tabs: **Profile**, **People** and **Billing**. Only the owner can use the **Billing** tab.
 
 ## Profile {#profile}
 
@@ -22,13 +22,13 @@ The **Profile** tab works like the one for your own [account settings](/user-man
 
 ### Administrators {#administrators}
 
-**Administrators** lists the Organization's **Owner** and its administrators. Administrators manage the Organization's projects, people and billing.
+**Administrators** lists the Organization's **Owner** and its administrators. Administrators manage the Organization's projects and people.
 
 - To add an administrator, enter their username or email address and select **Add administrator**.
 - To remove one, select **Remove** next to their name.
 - To hand the Organization to someone else, the owner selects **Transfer ownership**, finds the new owner by username and selects **Transfer**. The new owner takes over the Organization and its billing, and the previous owner stays an administrator.
 
-Administrators can do everything the owner can — including creating and deleting projects — *except* transfer ownership or delete the Organization itself. Only the owner can do that.
+Administrators can do everything the owner can — including creating and deleting projects — *except* see the Organization's billing, change its plan or seats, transfer ownership or delete the Organization itself. Only the owner can do those.
 
 ### Seats {#seats}
 
@@ -44,13 +44,13 @@ The owner doesn't need to occupy a seat if they aren't actively working on proje
 
 An Organization has its own **Billing** tab, with its plan, storage, payment details and invoices. See [Plans and Billing](/user-manual/account-management/plans-and-billing/#billing-tab).
 
-A new Organization starts on the Free plan. To give it private projects and seats, select **Change plan** on its **Billing** tab, then **Upgrade** followed by the Organization's name, and choose the number of seats at checkout.
+A new Organization starts on the Free plan. To give it private projects and seats, the owner selects **Change plan** on its **Billing** tab, then **Upgrade** followed by the Organization's name, and chooses the number of seats at checkout.
 
 ![Upgrade](/img/user-manual/account-management/organizations/managing/upgrade.png)
 
 ### Adding and Removing Seats {#adding-and-removing-seats}
 
-On the Organization plan, the **Plan** section of the **Billing** tab shows how many seats are in use. To add or remove seats at any time, select **Change seats**, choose the new number of seats and select **Save seats**. Seat changes are prorated on your next billing date — see the [worked example](/user-manual/account-management/billing/#how-is-billing-for-organization-accounts-calculated) in the Billing FAQ.
+On the Organization plan, the **Plan** section of the **Billing** tab shows how many seats are in use. The owner can add or remove seats at any time: select **Change seats**, choose the new number of seats and select **Save seats**. Seat changes are prorated on your next billing date — see the [worked example](/user-manual/account-management/billing/#how-is-billing-for-organization-accounts-calculated) in the Billing FAQ.
 
 ## Projects {#projects}
 
