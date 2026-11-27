@@ -4,7 +4,7 @@ description: Blend animation clips in the Anim State Graph so characters transit
 tags: [animation,basics]
 kind: tutorial
 topic: Animation
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405874/A8B1FE-image-75.jpg
+thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/752299/A8B1FE-image-75.jpg
 ---
 
 import StepVideo from '@site/src/components/StepVideo';
