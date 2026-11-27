@@ -34,11 +34,11 @@ When creating an animstategraph asset, you’ll be presented with its editor:
 
 By default, the animstategraph asset creates a single animation state called ‘Initial State’ which has a default transition from the START state to it. This means when the animstategraph first begins playing, it’ll immediately begin playing the Initial State. This can be renamed to Idle which is the name of the initial animation used in this tutorial. We can then right click the canvas and select `Add new state` to create another animation state in the graph. This state can be renamed to Punch:
 
-<StepVideo src="/video/tutorials/anim_blending/new_state.mp4" poster="/img/tutorials/anim_blending/new_state.webp" label="New State" width={1600} height={879} />
+<StepVideo src="/video/tutorials/anim_blending/new_state.mp4" poster="/img/tutorials/anim_blending/new_state.webp" width={1600} height={900} label="Right-clicking the graph canvas, selecting Add new state and renaming the new state to Punch" />
 
 Next we must tell the state graph how and when it should move between the Idle and Punch animation states. This is achieved by creating transitions. Right click the Idle animation and select `Add transition` from the context menu, then select the Punch animation state. This will create a transition moving from the Idle state to the Punch state.
 
-<StepVideo src="/video/tutorials/anim_blending/add_transition.mp4" poster="/img/tutorials/anim_blending/add_transition.webp" label="Add Transition" width={1600} height={847} />
+<StepVideo src="/video/tutorials/anim_blending/add_transition.mp4" poster="/img/tutorials/anim_blending/add_transition.webp" width={1600} height={900} label="Right-clicking the Idle state, selecting Add transition, clicking the Punch state, then selecting the transition and setting its Duration to 0.2" />
 
 Selecting this transition will show the transition inspector in the panel to the right. Here the duration of the transition can be set, which will determine how long the blend between the two animations should last. We’ll set this to 0.2 seconds.
 
