@@ -1,9 +1,9 @@
 ---
 title: Finding Assets
-description: Where to find free and paid 3D models, textures, skyboxes, sound effects and music for PlayCanvas projects, and what to check before you use them.
+description: Where to find free and paid 3D models, textures, skyboxes, sound effects and music for PlayCanvas projects, tools that generate assets, and what to check before you use them.
 ---
 
-You don't have to make every asset yourself. This page lists places to find 3D models, textures, skyboxes, sound effects and music, and what to check before you add them to a project.
+You don't have to make every asset yourself. This page lists places to find 3D models, textures, skyboxes, sound effects and music, tools that generate assets, and what to check before you add them to a project.
 
 ## In the Editor
 
@@ -79,8 +79,6 @@ HDRIs usually come as a single equirectangular (panorama) image. To use one as a
 | [PlayOnLoop](https://www.playonloop.com/) | Sound effects for games and videos | Free, CC BY |
 | [Sonniss GameAudioGDC](https://sonniss.com/gameaudiogdc/) | Tens of gigabytes of professional sound effects from the free bundles Sonniss releases for the Game Developers Conference | Free, royalty-free, no credit required |
 
-You can also make retro game sounds in your browser with [Bfxr](https://www.bfxr.net/) or [jsfxr](https://sfxr.me/).
-
 ## Music
 
 | Site | What you'll find | Cost and license |
@@ -96,6 +94,18 @@ You can also make retro game sounds in your browser with [Bfxr](https://www.bfxr
 
 To capture your own splats from photos or video, see [Recommended Tools](/user-manual/gaussian-splatting/creating/recommended-tools/).
 
+## Generation Tools
+
+These tools make new assets instead of offering ready-made ones. Some use AI to generate an asset from a text prompt or an image. A generated asset's license comes from the tool's terms, and often depends on your plan, so check what you're allowed to do before you use it in a commercial project.
+
+| Tool | What it makes | Cost and license |
+| ---- | ------------- | ---------------- |
+| [Bfxr](https://www.bfxr.net/) | Retro game sound effects, made in your browser or a Windows app and exported as WAV | Free and open source |
+| [jsfxr](https://sfxr.me/) | Retro game sound effects, made in your browser and exported as WAV. Also a JavaScript library that plays them in your game | Free, including commercial use. A paid Pro version adds MP3 and OGG export |
+| [Sloyd](https://www.sloyd.ai/) | 3D models generated with AI from a text prompt or a reference image, exported as GLB, OBJ or FBX | Free plan for personal use only. Paid plans add commercial use |
+
 ## Suggest a Site
 
 Know a good source that isn't listed here? Suggest it on the [forum](https://forum.playcanvas.com/), or open a pull request on [GitHub](https://github.com/playcanvas/developer-site).
+
+To be listed, an AI generation service must export a format the Editor imports and publish its terms for commercial use.
