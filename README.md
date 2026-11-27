@@ -46,7 +46,7 @@ Tutorials are regular Markdown files in `docs/tutorials`. The index page at `/tu
 
 The **Most played** order on the index page uses a snapshot of how often each tutorial's project has been played. Refresh it with `npm run sync:tutorial-plays`.
 
-Most thumbnails are copies of the tutorial project's own thumbnail, and `utils/plugins/tutorials/thumbs.json` records which project each one came from. When a project's thumbnail changes, the copy keeps showing the old one until you run `npm run sync:tutorial-thumbs`, which replaces the out-of-date copies (it needs `cwebp`, see [Images](.github/CONTRIBUTING.md#images)). `npm run sync:tutorial-thumbs -- --check` lists them without changing anything. For a new tutorial, save its project's thumbnail as `static/img/tutorials/<page>/thumbnail.webp` and add the page to `thumbs.json` with its project ID and the image URL, or use a thumbnail of your own and leave the page out of `thumbs.json`.
+Most thumbnails are copies of the tutorial project's own thumbnail, and `utils/plugins/tutorials/thumbs.json` records which project each one came from. When a project's thumbnail changes, the copy keeps showing the old one until you run `npm run sync:tutorial-thumbs`, which replaces the out-of-date copies (it needs `cwebp`, see [Images](.github/CONTRIBUTING.md#images)). `npm run sync:tutorial-thumbs -- --check` lists them without changing anything, and a weekly workflow runs the same check and opens an issue when there is something to do. For a new tutorial, save its project's thumbnail as `static/img/tutorials/<page>/thumbnail.webp` and add the page to `thumbs.json` with its project ID and the image URL, or use a thumbnail of your own and leave the page out of `thumbs.json`.
 
 ## Update FAQ
 

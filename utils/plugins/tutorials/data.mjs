@@ -14,6 +14,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 import { readFrontMatter } from '../llms/markdown.mjs';
+import { THUMBS_PATH } from './thumbs.mjs';
+
+export { THUMBS_PATH, thumbnailPath } from './thumbs.mjs';
 
 export const KINDS = ['tutorial', 'sample'];
 
@@ -37,20 +40,6 @@ export const TOPICS = [
 
 const TUTORIALS_DIR = 'docs/tutorials';
 const PLAYS_PATH = 'utils/plugins/tutorials/plays.json';
-
-// The pages whose thumbnail is a copy of a PlayCanvas project's thumbnail, with the project and
-// the image the copy was made from. `npm run sync:tutorial-thumbs` keeps the copies up to date.
-export const THUMBS_PATH = 'utils/plugins/tutorials/thumbs.json';
-
-/**
- * The path a page's thumbnail is served at, when the thumbnail comes from its project.
- *
- * @param {string} slug - The page's file name without its extension.
- * @returns {string} The path, relative to static/.
- */
-export function thumbnailPath(slug) {
-    return `img/tutorials/${slug}/thumbnail.webp`;
-}
 
 /**
  * Finds the PlayCanvas project a tutorial page is about: the first project the page links to,
