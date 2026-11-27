@@ -6,7 +6,7 @@ description: PlayCanvas を Colyseus サーバーに接続し、シンプルな�
 ---
 
 <div className="iframe-container">
-  <iframe src="https://playcanv.as/p/1QoAsx7r/" title="Real-time Multiplayer with Colyseus" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
+  <iframe src="https://playcanv.as/p/1QoAsx7r/" title="Real-time Multiplayer with Colyseus" allow="camera; microphone; xr-spatial-tracking; fullscreen; loopback-network; local-network-access" allowfullscreen></iframe>
 </div>
 
 > *このデモは、あなたのコンピューター上のColyseusサーバーに接続します。[サーバーの実行](#running-the-server)の手順でサーバーを起動してから、**CREATE GAME** を選択し、床のいずれかをクリックして移動してください。2つ目のブラウザタブでデモを開いて **JOIN EXISTING GAME** を選択すると、両方のプレイヤーが動く様子を確認できます。*
@@ -51,6 +51,8 @@ npm start
 ```
 
 サーバーは `ws://localhost:2567` でWebSocket接続を待ち受けます。サーバーが動いている間は、Editorから起動したプロジェクトでも、このページの上部にあるデモでも、PlayCanvasプロジェクトがサーバーに接続できます。
+
+プロジェクトが初めて接続するとき、ページがこのデバイス上の他のアプリやサービスにアクセスしてよいかどうかを、ブラウザが確認します。**許可**（Allow）を選択します。ブラウザが確認するのは、インターネット上のページが、自分のコンピューター上のプログラムに接続しようとしているからです。ブロックしてしまった場合は、アドレスバーの左端にあるアイコンを選択してサイトの権限をリセットし、ページを再読み込みします。Safariは、インターネット上のページが `localhost` に接続することを拒否する場合があるため、Chrome、Edge、Firefoxのいずれかを使ってください。
 
 代わりに独自のサーバーを一から作成するには、`npm create colyseus-app@latest ./my-server` を実行し、表示される質問に答えてください。
 

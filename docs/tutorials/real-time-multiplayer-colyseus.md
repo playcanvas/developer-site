@@ -8,7 +8,7 @@ thumb: https://avatars.githubusercontent.com/u/28384334?s=300&v=4
 ---
 
 <div className="iframe-container">
-  <iframe src="https://playcanv.as/p/1QoAsx7r/" title="Real-time Multiplayer with Colyseus" allow="camera; microphone; xr-spatial-tracking; fullscreen" allowfullscreen></iframe>
+  <iframe src="https://playcanv.as/p/1QoAsx7r/" title="Real-time Multiplayer with Colyseus" allow="camera; microphone; xr-spatial-tracking; fullscreen; loopback-network; local-network-access" allowfullscreen></iframe>
 </div>
 
 > *This demo connects to a Colyseus server on your own computer. Start the server as described in [Running the Server](#running-the-server), then select **CREATE GAME** and click anywhere on the floor to move. Open the demo in a second browser tab and select **JOIN EXISTING GAME** to see both players move.*
@@ -53,6 +53,8 @@ npm start
 ```
 
 The server listens for WebSocket connections on `ws://localhost:2567`. While it runs, the PlayCanvas project can connect to it, whether you launch the project from the Editor or play the demo at the top of this page.
+
+The first time the project connects, your browser asks whether the page may access other apps and services on this device. Select **Allow**. Browsers ask because a page on the internet is connecting to a program on your own computer. If you blocked it, select the icon at the left of the address bar, reset the site's permissions and reload the page. Safari may refuse to let a page on the internet connect to `localhost`, so use Chrome, Edge or Firefox.
 
 To start a server of your own from scratch instead, run `npm create colyseus-app@latest ./my-server` and follow the prompts.
 
