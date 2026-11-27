@@ -63,8 +63,7 @@ A rectangle selection selects the entities drawn inside the rectangle and replac
 | Launch | Launch the scene in a new tab | <kbd>Ctrl</kbd>+<kbd>Enter</kbd> |
 | New Entity | Creates a new entity as a child of the selected entity, or at the root of the scene when no entity is selected | <kbd>Ctrl</kbd>+<kbd>E</kbd> |
 | Duplicate Entity | Duplicates the selected entity and all children | <kbd>Ctrl</kbd>+<kbd>D</kbd> |
-| Rename Entity | Focuses on the name field of the selected entity | <kbd>F2</kbd> |
-| Rename Asset | Focuses on the name field of the selected asset | <kbd>N</kbd> or <kbd>F2</kbd> |
+| Rename Entity / Asset | Focuses on the name field of the selected entity or asset | <kbd>N</kbd> or <kbd>F2</kbd> |
 | Select All | With an entity selected, selects every entity in the scene. With an asset selected, selects every asset shown in the Assets panel | <kbd>Ctrl</kbd>+<kbd>A</kbd> |
 | Copy Entity / Asset | Copy the current entity/asset selection | <kbd>Ctrl</kbd>+<kbd>C</kbd> |
 | Paste Entity / Asset | Paste copied entity/asset under the currently selected entity/folder | <kbd>Ctrl</kbd>+<kbd>V</kbd> |
