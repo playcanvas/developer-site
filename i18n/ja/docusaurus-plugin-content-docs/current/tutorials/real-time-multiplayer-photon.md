@@ -40,62 +40,63 @@ Photonの無料プランでは、最大20人の同時接続ユーザー(CCU)に�
 
 ### Photonアカウント
 
-SDKの使用とドキュメンテーションの閲覧にはアカウントの登録が必要です。
+アプリの作成とSDKのダウンロードにはPhotonアカウントが必要です。
 
 [こちら](https://www.photonengine.com/)からPhotonアカウントを作成してください。
 
 #### 新しいアプリを作成
 
-ダッシュボードから**CREATE NEW APP**をクリックします。
+ダッシュボードで**Create New App**をクリックします。
 
-![Create New Application](/img/tutorials/multiplayer-photon/2.webp)
+![Create New App](/img/tutorials/multiplayer-photon/2.webp)
 
-#### Photonタイプとアプリケーション名を選択
+#### アプリケーションタイプ、SDK、名前を選択
 
-以下を入力してください。
+以下を入力して、**CREATE**をクリックします。
 
-- Photon Type: RealTime
-- Name: PlayCanvas-Photon など
+- Application Type: Multiplayer Game
+- Photon SDK: Realtime
+- Application Name: PlayCanvas-Photon、または任意の名前
 
-![Create Real Time Project](/img/tutorials/multiplayer-photon/3.webp)
+![Create a New Application](/img/tutorials/multiplayer-photon/3.webp)
 
-#### AppIDをコピー
+#### App IDをコピー
 
-AppIDをメモしておいてください。後日必要になります。
+新しいアプリがアプリ一覧に表示されます。App IDをクリックすると全体が表示されるので、コピーしてください。後で必要になります。
 
-![App Id](/img/tutorials/multiplayer-photon/4.webp)
+![App ID](/img/tutorials/multiplayer-photon/4.webp)
 
 ### SDKをダウンロード
 
-ダッシュボードからSDKをダウンロードします。
+PhotonのRealtime JavaScriptクライアントは**Voice JavaScript** SDKに含まれています。このSDKにはVoiceとChatのクライアントも含まれています。ダウンロードにはサインインが必要です。
 
-#### SDKをクリック
+#### ダッシュボードでSDKSをクリック
 
-![SDK](/img/tutorials/multiplayer-photon/5.webp)
+![SDKs](/img/tutorials/multiplayer-photon/5.webp)
 
-#### RealTime JavaScriptを選択
+#### Voice JavaScriptを選択
+
+**JavaScript**フィルターをクリックし、**Voice JavaScript**のカードをクリックします。
 
 ![JavaScript SDK](/img/tutorials/multiplayer-photon/6.webp)
 
-#### SDKをダウンロードをクリック
+#### DOWNLOADをクリック
 
 ![Download SDK](/img/tutorials/multiplayer-photon/7.webp)
 
 #### SDKを解凍
 
-![Unzip SDK](/img/tutorials/multiplayer-photon/8.webp)
-
-SDKはZIP形式でダウンロードされます。解凍してください: `photon-javascript-sdk_vX-X-X-X` → `lib` → **`Photon-Javascript_SDK.min.js`**。
+SDKはZIP形式でダウンロードされます。解凍してください: `photon-voice-javascript-sdk_vX-X-X-X` → `lib` → **`photon.min.js`**。このファイルがRealtimeクライアントです。`lib`内の他のファイルはVoiceを追加するもので、このチュートリアルでは使用しません。
 
 ### SDKのインポート
 
 ダウンロードしたSDKをPlayCanvasエディターにインポートします。
 
-#### エディタにSDKをアップロード
+#### エディターにSDKをアップロード
 
 ![Upload SDK](/img/tutorials/multiplayer-photon/9.webp)
 
-SDKをエディタのアセットにドラッグ&ドロップしてください。
+**photon.min.js**をエディターのAssetsパネルにドラッグ&ドロップしてください。
 
 #### Loading Typeを「Asset」から「Before Engine」に変更
 

@@ -40,62 +40,63 @@ The project also contains the two finished scripts from this tutorial, **photon-
 
 ### Photon account
 
-Account registration is required to use the SDK and view documentation.
+You need a Photon account to create an app and download the SDK.
 
 Create your Photon account [here](https://www.photonengine.com/) - (Photon Engine).
 
 #### Create a new app
 
-Click **CREATE NEW APP** from the dashboard
+On your dashboard, click **Create New App**.
 
-![Create New Application](/img/tutorials/multiplayer-photon/2.webp)
+![Create New App](/img/tutorials/multiplayer-photon/2.webp)
 
-#### Select Photon Type and Application name
+#### Select the application type, SDK and name
 
-Enter the following
+Enter the following, then click **CREATE**:
 
-- Photon Type: RealTime
-- Name: PlayCanvas-Photon etc.
+- Application Type: Multiplayer Game
+- Photon SDK: Realtime
+- Application Name: PlayCanvas-Photon, or a name of your own
 
-![Create Real Time Project](/img/tutorials/multiplayer-photon/3.webp)
+![Create a New Application](/img/tutorials/multiplayer-photon/3.webp)
 
-#### Copy of AppID
+#### Copy the App ID
 
-Please make a note of this AppId, as you will need it in the future.
+The new app appears in your list of apps. Click its App ID to show all of it, then copy it. You'll need it later.
 
-![App Id](/img/tutorials/multiplayer-photon/4.webp)
+![App ID](/img/tutorials/multiplayer-photon/4.webp)
 
 ### Download SDK
 
-Download the SDK from the dashboard.
+Photon's Realtime JavaScript client comes in the **Voice JavaScript** SDK, which also contains the Voice and Chat clients. You need to be signed in to download it.
 
-#### Click SDK from the dashboard
+#### Click SDKS on the dashboard
 
-![SDK](/img/tutorials/multiplayer-photon/5.webp)
+![SDKs](/img/tutorials/multiplayer-photon/5.webp)
 
-#### Select RealTime JavaScript
+#### Select Voice JavaScript
+
+Click the **JavaScript** filter, then the **Voice JavaScript** card.
 
 ![JavaScript SDK](/img/tutorials/multiplayer-photon/6.webp)
 
-#### Click Download SDK
+#### Click DOWNLOAD
 
 ![Download SDK](/img/tutorials/multiplayer-photon/7.webp)
 
 #### Unzip the SDK
 
-![Unzip SDK](/img/tutorials/multiplayer-photon/8.webp)
-
-The SDK will be downloaded in ZIP format, unzip it: `photon-javascript-sdk_vX-X-X-X` → `lib` → **`Photon-Javascript_SDK.min.js`**.
+The SDK downloads as a ZIP file. Unzip it: `photon-voice-javascript-sdk_vX-X-X-X` → `lib` → **`photon.min.js`**. This file is the Realtime client. The other files in `lib` add Voice, which this tutorial doesn't use.
 
 ### Importing SDK
 
-Import the SDK you have just downloaded into the PlayCanvas editor.
+Import the SDK you have just downloaded into the PlayCanvas Editor.
 
-#### Upload the SDK on the editor
+#### Upload the SDK in the Editor
 
 ![Upload SDK](/img/tutorials/multiplayer-photon/9.webp)
 
-Drag and drop the SDK to the assets in the editor.
+Drag and drop **photon.min.js** onto the Assets panel in the Editor.
 
 #### Change Loading Type "Asset" to "Before Engine"
 
