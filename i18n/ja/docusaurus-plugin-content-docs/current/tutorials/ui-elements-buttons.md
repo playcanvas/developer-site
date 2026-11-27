@@ -39,13 +39,13 @@ import StepVideo from '@site/src/components/StepVideo';
 
 これは必要なエンティティ、コンポーネントを作成し、プロパティを事前設定するためにもっとも簡単な方法です。
 
-<StepVideo src="/video/tutorials/ui/buttons/adding-button-via-hierarchy.mp4" poster="/img/tutorials/ui/buttons/adding-button-via-hierarchy.webp" width={700} height={480} />
+<StepVideo src="/video/tutorials/ui/buttons/adding-button-via-hierarchy.mp4" poster="/img/tutorials/ui/buttons/adding-button-via-hierarchy.webp" width={1600} height={900} label="2D Screen エンティティを右クリックして New Entity、User Interface、Button を選択し、新しい Button を展開して子の Text を表示" />
 
 ### 既存の要素を使用して
 
 ボタンに変えたい既存の要素がある場合は、インスペクターパネルでその要素にButtonコンポーネントを追加し、必要に応じて構成できます。
 
-<StepVideo src="/video/tutorials/ui/buttons/adding-button-via-inspector.mp4" poster="/img/tutorials/ui/buttons/adding-button-via-inspector.webp" width={300} height={875} />
+<StepVideo src="/video/tutorials/ui/buttons/adding-button-via-inspector.mp4" poster="/img/tutorials/ui/buttons/adding-button-via-inspector.webp" width={1600} height={900} label="Inspector で btn-default エンティティに Button コンポーネントを追加し、Use Input にチェックを入れ、Image に btn-default を設定" />
 
 ユーザーがインタラクトできるように、ElementコンポーネントでUse Inputを有効にする必要があることを覚えてください。
 
