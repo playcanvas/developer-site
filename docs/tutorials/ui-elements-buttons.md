@@ -39,13 +39,13 @@ There are two ways to add a button to the scene.
 
 This is the easiest way to add a button to the scene as it creates the necessary entities, components and preconfigures the properties.
 
-<StepVideo src="/video/tutorials/ui/buttons/adding-button-via-hierarchy.mp4" poster="/img/tutorials/ui/buttons/adding-button-via-hierarchy.webp" width={700} height={480} />
+<StepVideo src="/video/tutorials/ui/buttons/adding-button-via-hierarchy.mp4" poster="/img/tutorials/ui/buttons/adding-button-via-hierarchy.webp" width={1600} height={900} label="Right-clicking the 2D Screen Entity and selecting New Entity, User Interface, Button, then expanding the new Button to show its Text child" />
 
 ### With an existing Element
 
-If there is an existing Element that we would like to turn into a button, we can add Button component to it in the Inspector panel and configure it ourselves.
+If there is an existing Element that we would like to turn into a button, we can add a Button component to it in the Inspector panel and configure it ourselves.
 
-<StepVideo src="/video/tutorials/ui/buttons/adding-button-via-inspector.mp4" poster="/img/tutorials/ui/buttons/adding-button-via-inspector.webp" width={300} height={875} />
+<StepVideo src="/video/tutorials/ui/buttons/adding-button-via-inspector.mp4" poster="/img/tutorials/ui/buttons/adding-button-via-inspector.webp" width={1600} height={900} label="Adding a Button component to the btn-default Entity in the Inspector, ticking Use Input and setting Image to btn-default" />
 
 Remember to enable Use Input on the Element component so the user can interact with it:
 
