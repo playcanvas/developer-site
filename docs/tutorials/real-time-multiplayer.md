@@ -347,7 +347,7 @@ Attach it to the scene:
 
 1. Check that the server from [step 1](#create-the-server) is still running.
 2. **Launch** the project.
-3. The first time, your browser asks whether `launch.playcanvas.com` may access other apps and services on this device. Select **Allow**. Browsers ask because a page on the internet is connecting to a program on your own computer.
+3. Your browser may ask whether `launch.playcanvas.com` can access apps and services on your device. Select **Allow**. Browsers ask because a page on the internet is connecting to a program on your own computer.
 4. The terminal that runs the server prints `Player connected:` and an ID.
 5. Copy the address of the launch tab and open it in a second browser window. Put the two windows side by side.
 
