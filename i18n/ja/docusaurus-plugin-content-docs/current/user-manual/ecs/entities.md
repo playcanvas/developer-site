@@ -31,7 +31,7 @@ player.addChild(hat);
 
 [ヒエラルキー](/user-manual/editor/interface/hierarchy/)上部の **+** をクリックするか、エンティティを右クリックして**New Entity**を選択します。メニューには、空の**Entity**のほか、**3D › Box**や**Light › Spot Light**のように、名前のとおりのコンポーネントを最初から持つ既製のエンティティが並びます。新しいエンティティは選択中のエンティティの子として追加されるので、先に親を選択しておきます。<kbd>Ctrl</kbd>+<kbd>E</kbd>（macOSでは<kbd>Cmd</kbd>+<kbd>E</kbd>）を押すと、メニューを使わずに空のエンティティを追加できます。
 
-![ヒエラルキーパネル。上部にRootエンティティ、その下に入れ子になったエンティティが表示され、ヘッダーに追加、複製、削除のボタンがあります](/img/user-manual/editor/hierarchy/hierarchy-panel.png)
+![ヒエラルキーパネル。上部にRootエンティティ、その下に入れ子になったエンティティが表示され、ヘッダーに追加、複製、削除のボタンがあります](/img/user-manual/editor/hierarchy/hierarchy-panel.webp)
 
 アプリケーションの実行中にエンティティを作成するには、スクリプトからEngine APIを使います。
 

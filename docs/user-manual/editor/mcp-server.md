@@ -58,7 +58,7 @@ For JSON-based clients on Windows, use `"command": "cmd"` and prepend `"/c"` to 
 2. Select the **MCP** button at the bottom of the Editor toolbar.
 3. Check that the port is `52000` and select **Connect**.
 
-<img loading="lazy" src="/img/user-manual/editor/mcp.png" alt="Editor MCP Server connection panel" width="400" style={{ marginBottom: '1.5rem' }} />
+<img loading="lazy" src="/img/user-manual/editor/mcp.webp" alt="Editor MCP Server connection panel" width="400" style={{ marginBottom: '1.5rem' }} />
 
 Keep the MCP client running while you use the connection. Only one Editor instance can connect to the server at a time, so disconnect another Editor before changing projects or browser tabs.
 

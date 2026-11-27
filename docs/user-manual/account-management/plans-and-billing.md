@@ -9,7 +9,7 @@ Your personal account and each organization have their own plan and their own bi
 
 The Plans page compares the plans and lets you subscribe. Open it with **Upgrade plan** in the menu under your name in the [Project Dashboard](/user-manual/editor/projects/dashboard/), or with **Change plan** or **Compare plans** on the [Billing tab](#billing-tab).
 
-![Plans](/img/user-manual/account-management/billing/plans.png)
+![Plans](/img/user-manual/account-management/billing/plans.webp)
 
 **Individual** shows the **Free** and **Personal** plans, and **Team** shows the **Organization** plan. The plans apply to the account you're viewing. An organization can only choose the Organization plan, so on your personal account, **Team** offers **Create organization** instead.
 
@@ -21,7 +21,7 @@ If you have a promo code, enter it under **Have a promo code?** and select **App
 
 To open it, select your name at the bottom of the Project Dashboard sidebar, choose **Account settings** and select the **Billing** tab. For an organization, switch to it with the account switcher at the top of the page first.
 
-![Billing](/img/user-manual/account-management/billing/billing.png)
+![Billing](/img/user-manual/account-management/billing/billing.webp)
 
 ### Plan {#plan}
 

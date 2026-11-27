@@ -35,7 +35,7 @@ The View Cube is a gizmo that gives added control over the viewport camera. You 
 
 ### Mode Strip {#mode-strip}
 
-<img loading="lazy" alt="The mode strip, with Centers and Rings, Markers, and X-Ray" width="184" src="/img/user-manual/supersplat/editor/mode-strip.png" />
+<img loading="lazy" alt="The mode strip, with Centers and Rings, Markers, and X-Ray" width="184" src="/img/user-manual/supersplat/editor/mode-strip.webp" />
 
 The small icon strip beside the View Cube decides what you see and what a selection hits. Its buttons have no labels; hover one for its name, shortcut, and a short description. From left to right:
 
@@ -86,7 +86,7 @@ This panel visualizes the Gaussian data in the active splat as a histogram and l
 
 The **Overlays** popup (the eye icon in the [Right Toolbar](#right-toolbar)) holds viewport helpers and diagnostics. Each row is a toggle; click anywhere on the row to flip it.
 
-![The Overlays popup](/img/user-manual/supersplat/editor/overlays-panel.png)
+![The Overlays popup](/img/user-manual/supersplat/editor/overlays-panel.webp)
 
 | Section | Control | Default | Description |
 |---|---|---|---|
@@ -107,7 +107,7 @@ Click the reset icon in the popup's header to restore the Overlays defaults.
 
 The **Preferences** popup (the gear icon in the [Right Toolbar](#right-toolbar)) holds application-wide settings. They are saved in your browser and restored the next time you open the Editor. Hover a setting's name for a short description of what it does.
 
-<img loading="lazy" alt="The Preferences popup" width="320" src="/img/user-manual/supersplat/editor/preferences-panel.png" />
+<img loading="lazy" alt="The Preferences popup" width="320" src="/img/user-manual/supersplat/editor/preferences-panel.webp" />
 
 | Section | Setting | Default | Description |
 |---|---|---|---|

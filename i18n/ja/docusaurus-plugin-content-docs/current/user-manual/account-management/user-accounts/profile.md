@@ -11,7 +11,7 @@ https://playcanvas.com/user/<USERNAME>
 
 自分のプロフィールを開くには、[プロジェクトダッシュボード](/user-manual/editor/projects/dashboard/)のサイドバー下部にある自分の名前を選択し、**View public profile**を選びます。
 
-![プロフィール](/img/user-manual/account-management/user-accounts/profile.png)
+![プロフィール](/img/user-manual/account-management/user-accounts/profile.webp)
 
 プロフィールには次の内容が表示されます。
 

@@ -19,7 +19,7 @@ Editorプロジェクトを作成するには、2つの方法があります。
 
 3. スターターキットを選びます。
 
-   ![New Project Dialog](/img/user-manual/editor/projects/new-project-dialog.png)
+   ![New Project Dialog](/img/user-manual/editor/projects/new-project-dialog.webp)
 
 4. 名前、説明、所有者を設定し、プロジェクトを **Private** にするかを選びます。
 5. **Create project** を選択します。

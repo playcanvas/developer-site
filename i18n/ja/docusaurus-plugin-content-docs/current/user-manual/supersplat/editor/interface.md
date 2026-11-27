@@ -35,7 +35,7 @@ SuperSplat Editorのインターフェースは以下のようになります。
 
 ### モードストリップ {#mode-strip}
 
-<img loading="lazy" alt="モードストリップ（Centers / Rings、Markers、X-Ray）" width="184" src="/img/user-manual/supersplat/editor/mode-strip.png" />
+<img loading="lazy" alt="モードストリップ（Centers / Rings、Markers、X-Ray）" width="184" src="/img/user-manual/supersplat/editor/mode-strip.webp" />
 
 ビューキューブの横にある小さなアイコンの列で、何を表示し、選択が何を対象にするかを決めます。ボタンにはラベルがないため、カーソルを合わせて名前、ショートカット、短い説明を確認します。左から順に次のコントロールがあります。
 
@@ -86,7 +86,7 @@ OverlaysとPreferencesのポップアップは、同時に1つだけ開きます
 
 **Overlays**ポップアップ（[右ツールバー](#right-toolbar)の目のアイコン）には、ビューポートのヘルパーと診断機能があります。各行はトグルで、行のどこをクリックしても切り替わります。
 
-![Overlaysポップアップ](/img/user-manual/supersplat/editor/overlays-panel.png)
+![Overlaysポップアップ](/img/user-manual/supersplat/editor/overlays-panel.webp)
 
 | セクション | コントロール | デフォルト | 説明 |
 |---|---|---|---|
@@ -107,7 +107,7 @@ OverlaysとPreferencesのポップアップは、同時に1つだけ開きます
 
 **Preferences**ポップアップ（[右ツールバー](#right-toolbar)の歯車アイコン）には、アプリケーション全体の設定があります。設定はブラウザに保存され、次回Editorを開いたときに復元されます。設定名にカーソルを合わせると、その設定の短い説明が表示されます。
 
-<img loading="lazy" alt="Preferencesポップアップ" width="320" src="/img/user-manual/supersplat/editor/preferences-panel.png" />
+<img loading="lazy" alt="Preferencesポップアップ" width="320" src="/img/user-manual/supersplat/editor/preferences-panel.webp" />
 
 | セクション | 設定 | デフォルト | 説明 |
 |---|---|---|---|

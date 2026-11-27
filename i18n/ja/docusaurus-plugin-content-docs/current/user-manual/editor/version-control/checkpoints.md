@@ -5,7 +5,7 @@ description: 永続スナップショットの作成、復元、ハードリセ�
 
 チェックポイントは、特定の時間点でのプロジェクトのスナップショットです。プロジェクトの完全なデータセットを含んでいるため、将来的にいつでもこの状態を復元することが可能です。チェックポイントは他のバージョン管理システムの *コミット* と似ています。チェックポイントは、チェックポイントを作成する際に入力した一意のID番号と説明文によって識別されます。
 
-![Checkpoint](/img/user-manual/editor/version-control/checkpoint.jpg)
+![Checkpoint](/img/user-manual/editor/version-control/checkpoint.webp)
 
 チェックポイントは、プロジェクトの状態の永久的な記録であり、ブランチや変更のマージに使用されるグラフの一部を形成します。したがって、一度作成されたチェックポイントは削除できません。これは、一度チェックポイントとして変更をコミットした場合、プロジェクト履歴に永久に保存されることを意味します。
 
@@ -15,21 +15,21 @@ description: 永続スナップショットの作成、復元、ハードリセ�
 
 チェックポイントは、 バージョン管理パネルから作成されます。
 
-![VC Panel](/img/user-manual/editor/version-control/vc-panel.jpg)
+![VC Panel](/img/user-manual/editor/version-control/vc-panel.webp)
 
 New Checkpointボタンをクリックすると、チェックポイントを作成するための入力フォームが開きます。また、キーボードショートカット <kbd>Ctrl</kbd>+<kbd>S</kbd> (macOSの場合、<kbd>Cmd</kbd>+<kbd>S</kbd>) を使用することもできます。
 
-![Create Checkpoint](/img/user-manual/editor/version-control/create-checkpoint.jpg)
+![Create Checkpoint](/img/user-manual/editor/version-control/create-checkpoint.webp)
 
 ## チェックポイントの復元 {#restoring-a-checkpoint}
 
-![Restore Checkpoint](/img/user-manual/editor/version-control/restore-checkpoint.jpg)
+![Restore Checkpoint](/img/user-manual/editor/version-control/restore-checkpoint.webp)
 
 プロジェクトを以前のチェックポイントの状態に復元したい場合は、バージョン管理パネルから行うことができます。パネルを開き、復元したいチェックポイントを見つけ、チェックポイントのドロップダウンメニューから「チェックポイントを復元」を選択します。エディターは、チェックポイントでプロジェクトを再読み込みします。
 
 **注意:チェックポイントを復元すると、チェックポイントからの変更が現在のブランチに適用されますが、PlayCanvasではブランチを明示的に作成しない限り、ブランチを許可しません。したがって、チェックポイントを復元してから新しいチェックポイントを作成した場合、それはブランチ内の最新のチェックポイントの子となります。**
 
-![Restore checkpoint applied](/img/user-manual/editor/version-control/restore-checkpoint-applied.png)
+![Restore checkpoint applied](/img/user-manual/editor/version-control/restore-checkpoint-applied.webp)
 
 ## チェックポイントまでのハードリセット {#hard-reset-to-a-checkpoint}
 
@@ -46,10 +46,10 @@ New Checkpointボタンをクリックすると、チェックポイントを作
 
 ハードリセットを行うには、パネルを開き、リセットしたいチェックポイントを見つけ、チェックポイントのドロップダウンメニューから「ハードリセット」を選択します。
 
-![](/img/user-manual/editor/version-control/hard-reset.png)
+![](/img/user-manual/editor/version-control/hard-reset.webp)
 
 テキストボックスに 'hard reset' と入力して、選択したチェックポイント以降のすべてのチェックポイントを削除することを確認します。
 
-![](/img/user-manual/editor/version-control/hard-reset-confirm.png)
+![](/img/user-manual/editor/version-control/hard-reset-confirm.webp)
 
 エディターは、チェックポイントでプロジェクトを再読み込みします。

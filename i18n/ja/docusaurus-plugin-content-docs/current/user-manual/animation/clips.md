@@ -38,7 +38,7 @@ GLBファイルまたはFBXファイルをアセットパネルにアップロ�
 
 アニメーションアセットを選択すると、インスペクターでその長さと名前を確認でき、[モデル上でプレビュー](/user-manual/editor/assets/inspectors/animation/)することもできます。
 
-![アニメーションアセットのインスペクター。長さと名前、および2つのfoot_stepイベントがあるイベントパネルが表示されています](/img/user-manual/animation/animation-asset-with-events.png)
+![アニメーションアセットのインスペクター。長さと名前、および2つのfoot_stepイベントがあるイベントパネルが表示されています](/img/user-manual/animation/animation-asset-with-events.webp)
 
 </TabItem>
 <TabItem value="react" label="React">

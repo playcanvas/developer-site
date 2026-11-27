@@ -103,7 +103,7 @@ const wheels = this.entity.findByTag('wheel');
 
 To find entities while you edit, type in the search box at the top of the Hierarchy. Click the magnifying glass to choose what it matches: **Name**, **Component Type**, **Script Name** or **Tags**, the same things the search methods look for. **Smart Search** also matches names that are close to what you type.
 
-![The Hierarchy panel's search options: a Smart Search switch, and Search By checkboxes for Name, Component Type, Script Name and Tags](/img/user-manual/editor/hierarchy/hierarchy-search-options.png)
+![The Hierarchy panel's search options: a Smart Search switch, and Search By checkboxes for Name, Component Type, Script Name and Tags](/img/user-manual/editor/hierarchy/hierarchy-search-options.webp)
 
 In scripts, you rarely need to search. Give the script an [entity attribute](/user-manual/scripting/script-attributes/esm/) and drag the entity onto it in the Inspector. The reference then survives renaming and moving the entity, which a search by name or path does not:
 

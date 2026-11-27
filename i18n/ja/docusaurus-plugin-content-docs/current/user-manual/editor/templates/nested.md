@@ -11,7 +11,7 @@ PlayCanvasは、Nested Templates(ネストされたテンプレート)をサポ�
 
 以下のテンプレートインスタンスを例にしてみましょう。
 
-![Nested Example](/img/user-manual/editor/templates/nested.png)
+![Nested Example](/img/user-manual/editor/templates/nested.webp)
 
 この例では、TreeはBranch TemplateのインスタンスであるBranchから構成されています。 そして、Branch TemplateはApple Templateのインスタンスから構成されています。
 

@@ -17,11 +17,11 @@ import StepVideo from '@site/src/components/StepVideo';
 
 ## 新しいブランチの作成 {#creating-a-new-branch}
 
-![Create branch](/img/user-manual/editor/version-control/branches/new-branch.png)
+![Create branch](/img/user-manual/editor/version-control/branches/new-branch.webp)
 
 ブランチを作成するには、バージョンコントロールパネルを開き、ブランチの起点となるチェックポイントを選択し、チェックポイントのドロップダウンメニューから "New Branch" オプションを選択します。
 
-![New branch dialog](/img/user-manual/editor/version-control/branches/new-branch-dialog.png)
+![New branch dialog](/img/user-manual/editor/version-control/branches/new-branch-dialog.webp)
 
 ブランチの名前をつけるように求められます。`fix-player-bug`や`refactor-sound-effects`のように、ブランチの内容を表す名前をつけてみてください。ブランチを作成した後、自動的に新しく作成したブランチに切り替えられます。
 
@@ -55,7 +55,7 @@ import StepVideo from '@site/src/components/StepVideo';
 
 ## ブランチの切り替え (Switch) {#switching-to-a-branch}
 
-![Switch branch](/img/user-manual/editor/version-control/branches/switch-branch.png)
+![Switch branch](/img/user-manual/editor/version-control/branches/switch-branch.webp)
 
 ブランチを切り替えるには、バージョン管理パネルを開き、切り替えたいブランチを選択し、ブランチのドロップダウンメニューから "Switch to this branch" オプションを選択します。
 
@@ -63,13 +63,13 @@ import StepVideo from '@site/src/components/StepVideo';
 
 ## ブランチのクローズ (Close) {#closing-a-branch}
 
-![Close branch](/img/user-manual/editor/version-control/branches/close-branch.png)
+![Close branch](/img/user-manual/editor/version-control/branches/close-branch.webp)
 
 ブランチでの作業が完了した場合、リストから削除することができます。
 
 ブランチをクローズするするには、バージョン管理パネルを開き、閉じたいブランチを選択し、ブランチのドロップダウンメニューから "Close this branch" オプションを選択します。現在のブランチやメインブランチは閉じることができないので注意してください。現在のブランチを閉じる場合は、まず別のブランチに切り替えてください。
 
-![Close branch dialog](/img/user-manual/editor/version-control/branches/close-branch-dialog.png)
+![Close branch dialog](/img/user-manual/editor/version-control/branches/close-branch-dialog.webp)
 
 ブランチのクローズを確認するよう求められ、クローズ前にチェックポイントを作成するオプションがあります。これはデフォルトで有効化されています。これらの変更を破棄したい場合は、ここでそのオプションのチェックを外すことができます。
 
@@ -94,7 +94,7 @@ import StepVideo from '@site/src/components/StepVideo';
 
 ブランチを削除するには、バージョン管理パネルを開き、削除するブランチを選択し、ブランチのドロップダウンメニューで "Delete this branch" を選択します。
 
-![Delete a branch](/img/user-manual/editor/version-control/branches/delete-branch.png)
+![Delete a branch](/img/user-manual/editor/version-control/branches/delete-branch.webp)
 
 ダイアログボックスにブランチ名を入力して、ブランチの削除を確認する必要があります。
 
@@ -102,4 +102,4 @@ import StepVideo from '@site/src/components/StepVideo';
 
 **注:削除したブランチは復元できません!不安な場合は、ブランチをクローズしてください。**
 
-![Delete a branch warning](/img/user-manual/editor/version-control/branches/delete-branch-dialog.png)
+![Delete a branch warning](/img/user-manual/editor/version-control/branches/delete-branch-dialog.webp)

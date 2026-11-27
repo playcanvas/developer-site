@@ -2,7 +2,7 @@
 title: Spineアニメーション
 description: playcanvas-spineプラグインを使って、Spine 4.3のスケルタルアニメーションをバイナリとJSONのエクスポートからEditorで再生し、スクリプトから制御します。
 tags: [animation, scripts, ui]
-thumb: /img/tutorials/spine-animation/thumbnail.jpg
+thumb: /img/tutorials/spine-animation/thumbnail.webp
 ---
 
 <div className="iframe-container">

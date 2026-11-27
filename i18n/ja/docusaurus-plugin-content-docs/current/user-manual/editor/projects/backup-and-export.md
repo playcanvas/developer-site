@@ -25,7 +25,7 @@ PlayCanvasプロジェクトを定期的にバックアップして保護する�
 
 エクスポートファイルは、オフラインで保存し、後でインポートできる完全なプロジェクトバックアップを提供します。
 
-![Export Project](/img/user-manual/editor/projects/export-project.png)
+![Export Project](/img/user-manual/editor/projects/export-project.webp)
 
 プロジェクトをエクスポートするには：
 
@@ -82,7 +82,7 @@ PlayCanvasは、自動バックアップを簡素化するための[オープン
 
 ### エクスポートファイルから
 
-![Import Project](/img/user-manual/editor/projects/import-project.png)
+![Import Project](/img/user-manual/editor/projects/import-project.webp)
 
 エクスポートからプロジェクトを復元するには：
 

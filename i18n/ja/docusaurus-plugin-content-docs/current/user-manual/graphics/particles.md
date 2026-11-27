@@ -17,11 +17,11 @@ PlayCanvasはパーティクルシステムの作成と編集のための包括�
 
 エディターの3Dビューで、選択されていないパーティクルシステムは、次のアイコンで表されます。
 
-![Particle system icon](/img/user-manual/graphics/particles/particle-system-icon.png)
+![Particle system icon](/img/user-manual/graphics/particles/particle-system-icon.webp)
 
 新しいパーティクルシステムを作成するには、新しいエンティティを作成し、ParticleSystemコンポーネントを追加します。エディターメニューには、次のアイテムがあり、これを1つのステップで実行できます。
 
-![Particle system creation](/img/user-manual/graphics/particles/particle-system-create.png)
+![Particle system creation](/img/user-manual/graphics/particles/particle-system-create.webp)
 
 デフォルトの設定を使用して新しく作成されたパーティクルシステムは、次のようになります。
 

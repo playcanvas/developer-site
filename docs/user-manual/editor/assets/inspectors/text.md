@@ -9,7 +9,7 @@ Five asset types hold text that you write or upload: **CSS**, **HTML**, **JSON**
 - **Edit** one by right-clicking it in the Assets panel and selecting **Edit**, which opens it in the [Code Editor](../../scripting/code-editor.md).
 - **Inspect** one by selecting it. The Inspector shows a read-only preview of its contents, and these asset types have no properties to set.
 
-![The JSON asset inspector, showing a formatted preview of the asset's data](/img/user-manual/editor/assets/inspectors/asset-inspector-json.png)
+![The JSON asset inspector, showing a formatted preview of the asset's data](/img/user-manual/editor/assets/inspectors/asset-inspector-json.webp)
 
 To use one of these assets from a script, see [Asset Attributes](/user-manual/scripting/script-attributes/esm/#asset-attribute).
 

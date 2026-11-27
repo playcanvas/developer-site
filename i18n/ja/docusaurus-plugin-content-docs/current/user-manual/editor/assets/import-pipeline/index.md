@@ -13,7 +13,7 @@ PlayCanvasは、ソース (Source) アセットがアップロードされると
 
 利用可能な複数のオプションがあり、インポートパイプラインの動作を調整することができます。これにより、ニーズに合わせて設定を行うことができます。
 
-<img loading="lazy" src="/img/user-manual/assets/import-pipeline/asset-tasks.png" width="480" />
+<img loading="lazy" src="/img/user-manual/assets/import-pipeline/asset-tasks.webp" width="480" />
 
 ### 関連アセットの検索 (Search related assets) {#search-related-assets}
 
@@ -78,7 +78,7 @@ PlayCanvasは、ソース (Source) アセットがアップロードされると
 
 Draco圧縮を使用する場合は、プロジェクトにDraco WASMモジュールをインポートする必要があることに注意してください。インポートしてない場合には、モデルは読み込まれません。
 
-<img loading="lazy" src="/img/user-manual/assets/import-pipeline/draco-import-button.png" width="480" />
+<img loading="lazy" src="/img/user-manual/assets/import-pipeline/draco-import-button.webp" width="480" />
 
 ### FBXフォルダの作成 (Create FBX Folder) {#create-fbx-folder}
 

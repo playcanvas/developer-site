@@ -5,7 +5,7 @@ description: PlayCanvas の Render Component は、マテリアル、シャド�
 
 Renderコンポーネントは、エンティティがプリミティブ形状またはレンダーアセットをレンダリングすることを可能にします。
 
-![Render Component](/img/user-manual/editor/scenes/components/component-render.png)
+![Render Component](/img/user-manual/editor/scenes/components/component-render.webp)
 
 <video autoPlay muted loop controls src='/video/editor-shadow-cascade-mask.mp4' style={{width: '100%', height: 'auto'}} />
 

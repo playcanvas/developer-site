@@ -73,10 +73,10 @@ Full details of options and commands can be found in the readme section for '[Co
 
 Follow the steps [here](https://www.facebook.com/business/help/338940216641734) to create a Facebook ad and at the time where the files for the ad are uploaded, there is an opportunity to test within the manager.
 
-![Test Ad](/img/user-manual/editor/publishing/playable-ads/fb-playable-ads/fb-playable-ad-tester.jpg)
+![Test Ad](/img/user-manual/editor/publishing/playable-ads/fb-playable-ads/fb-playable-ad-tester.webp)
 
 Please ignore the warning about the source may contain an `XMLHttpRequest` as the code path has been removed by this tool.
 
 Facebook also allows testing on device via the ad manager but requires you to publish the ad first. This is a strange limitation by Facebook but is required at the moment.
 
-![Preview Ad](/img/user-manual/editor/publishing/playable-ads/fb-playable-ads/fb-playable-ad-preview-device.jpg)
+![Preview Ad](/img/user-manual/editor/publishing/playable-ads/fb-playable-ads/fb-playable-ad-preview-device.webp)

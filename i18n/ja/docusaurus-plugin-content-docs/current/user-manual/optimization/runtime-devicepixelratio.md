@@ -7,11 +7,11 @@ Device pixel ratioは、ハードウェア画面上の物理ピクセルと論�
 
 プロジェクト設定でDevice Pixel Ratioを有効にすると、アプリケーションは画面のネイティブ解像度でレンダリングされ、非常に鮮明に見えるようになります。ただし、これにより各フレームで塗りつぶしてレンダリングするピクセルが増えるため、パフォーマンスコストが発生します。
 
-![プロジェクト設定](/img/user-manual/optimization/device-pixel-ratio/device-pixel-ratio-setting.png)
+![プロジェクト設定](/img/user-manual/optimization/device-pixel-ratio/device-pixel-ratio-setting.webp)
 
 以下は、Device pixel ratioが有効および無効の場合のModel Viewer Starter Kitの例です。サムネイルをクリックしてフルサイズで表示してください。
 
-![Device Pixel Ratio](/img/user-manual/optimization/device-pixel-ratio/device-pixel-ratio-closeup.jpg)
+![Device Pixel Ratio](/img/user-manual/optimization/device-pixel-ratio/device-pixel-ratio-closeup.webp)
 
 これは、高解像度スクリーンを持つがグラフィック性能が低いローエンドまたはミッドレンジのモバイルデバイスなどで問題となる可能性があります。ハードウェアのフィルレート制限により、device pixel ratioが有効になっているとフレームレートが低下する可能性があります。
 

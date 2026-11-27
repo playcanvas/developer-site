@@ -7,7 +7,7 @@ Scroll Viewコンポーネントは、ユーザーインターフェース内の
 
 スクロールビューを構成するエンティティの関係と設定方法は、[スクロールビュー](/user-manual/user-interface/scroll-views/)を参照してください。
 
-![Scroll View Component](/img/user-manual/editor/scenes/components/component-scrollview.png)
+![Scroll View Component](/img/user-manual/editor/scenes/components/component-scrollview.webp)
 
 ## プロパティ
 

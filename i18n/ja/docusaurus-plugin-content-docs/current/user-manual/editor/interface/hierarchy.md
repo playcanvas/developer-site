@@ -3,7 +3,7 @@ title: ヒエラルキーパネル (Hierarchy)
 description: Hierarchy のテクニック。スマート検索、Entity のライフサイクル、親の付け替え、変換の複製、シーンをまたいだ貼り付け、フォルダパスが一致するときの Asset の再マッチングを扱います。
 ---
 
-![Hierarchy Panel](/img/user-manual/editor/hierarchy/hierarchy-panel.png)
+![Hierarchy Panel](/img/user-manual/editor/hierarchy/hierarchy-panel.webp)
 
 ヒエラルキーパネルは、シーン全体のツリービューを表示し、エンティティの階層から構成されます。シーンには常にツリーのトップにあるルートエンティティが含まれます。ここに表示される他のすべてのエンティティは、開発者によって追加されたものです。
 
@@ -29,13 +29,13 @@ description: Hierarchy のテクニック。スマート検索、Entity のラ�
 
 ヒエラルキーパネルのほぼ上部には、エンティティツリーの内容を動的にフィルターできる検索ボックスがあります。
 
-![Hierarchy Panel Search](/img/user-manual/editor/hierarchy/hierarchy-search.png)
+![Hierarchy Panel Search](/img/user-manual/editor/hierarchy/hierarchy-search.webp)
 
 デフォルトでは、検索は「Smart Search」が有効な状態でエンティティ名に基づいてフィルターされます。Smart Searchはあいまい検索であり、検索文字列と完全に一致するのではなく、類似した名前を照合します。これは、探しているエンティティの名前を正確に思い出せない場合に便利です。
 
 虫眼鏡アイコンをクリックすると、検索をカスタマイズできます。
 
-![Hierarchy Panel Search Options](/img/user-manual/editor/hierarchy/hierarchy-search-options.png)
+![Hierarchy Panel Search Options](/img/user-manual/editor/hierarchy/hierarchy-search-options.webp)
 
 ## エンティティの複製
 

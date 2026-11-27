@@ -5,7 +5,7 @@ description: "Set the starting camera for a published splat — frame its positi
 
 The **Cameras** section — in the **Scene** tab of [Studio](/user-manual/supersplat/studio/)'s left panel — defines the **starting camera** for your published splat: the view a visitor lands on when they open your [scene page](/user-manual/supersplat/viewing/scene-page) (unless the scene [plays its camera animation on open](/user-manual/supersplat/studio/animation#playing-on-open) instead). The camera has a **position**, a **target** (the point it looks at), and a **field of view**.
 
-<img loading="lazy" alt="The Cameras section with Camera 1 and its Lens settings" width="368" src="/img/user-manual/supersplat/studio/cameras-panel.png" />
+<img loading="lazy" alt="The Cameras section with Camera 1 and its Lens settings" width="368" src="/img/user-manual/supersplat/studio/cameras-panel.webp" />
 
 :::note
 

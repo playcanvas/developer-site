@@ -95,7 +95,7 @@ With [clustered lighting](/user-manual/graphics/lighting/clustered-lighting) ena
 
 The outline of a shadow is called the penumbra: the transition from dark to light that gives a shadow its soft edge. PCF, the default technique, reads several localized samples from the shadow map and averages them to soften this edge by a fixed amount.
 
-![Hard vs soft shadows](/img/user-manual/graphics/lighting/shadows/hard-vs-soft.jpg)
+![Hard vs soft shadows](/img/user-manual/graphics/lighting/shadows/hard-vs-soft.webp)
 
 The kernel size controls the trade-off: 1×1 gives the hardest edge, 3×3 is the default, and 5×5 produces the softest edges — larger kernels sample more texels and cost more on the GPU.
 
@@ -276,11 +276,11 @@ The number of cascades (`light.numCascades`) represents the number of view frust
 
 A screenshot showing a single shadow cascade.
 
-![One cascade](/img/user-manual/graphics/lighting/shadows/shadow-cascades-1.jpg)
+![One cascade](/img/user-manual/graphics/lighting/shadows/shadow-cascades-1.webp)
 
 A screenshot showing four shadow cascades.
 
-![Four cascades](/img/user-manual/graphics/lighting/shadows/shadow-cascades-4.jpg)
+![Four cascades](/img/user-manual/graphics/lighting/shadows/shadow-cascades-4.webp)
 
 The distribution (`light.cascadeDistribution`) of subdivision of the camera frustum for individual shadow cascades. A value in the range of 0 to 1 can be specified. A value of 0 represents a linear distribution and a value of 1 represents a logarithmic distribution. Visually, a higher value distributes more shadow map resolution to foreground objects, while a lower value distributes it to more distant objects.
 

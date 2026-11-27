@@ -23,13 +23,13 @@ It works like this: We create an entity with a plane primitive attached which ha
 
 First you'll need a halo texture. In this example we've just used a very simple blurred blob that was created in an art program like Photoshop.
 
-![blob](/img/tutorials/intermediate/light-halos/blob.jpg)
+![blob](/img/tutorials/intermediate/light-halos/blob.webp)
 
 This texture will form the basis of the glow.
 
 ### Material
 
-<img loading="lazy" src="/img/tutorials/intermediate/light-halos/material.png" height="600" />
+<img loading="lazy" src="/img/tutorials/intermediate/light-halos/material.webp" height="600" />
 
 The material for the light halo uses the blob texture in the emissive slot. Use the **tint** property to set the color of your halo. We've also enabled blending in the Opacity slot and it also uses the blob texture with **Color Channel** set to **R**.
 
@@ -37,7 +37,7 @@ The **Blend Type** is set to **Additive Alpha**. The **Additive** part means tha
 
 ## Entities
 
-![entities](/img/tutorials/intermediate/light-halos/entity-setup.jpg)
+![entities](/img/tutorials/intermediate/light-halos/entity-setup.webp)
 
 The Entity setup for the glow is simple too. We have a parent Entity for the halo script and a child Entity which has the plane primitive attached to it. The reason we do this is to simplify the code so that we can use `entity.lookAt` to set the orientation of the glow. The Plane primitive faces upwards so we create a child entity and apply a rotation to this child so that the plane is correctly positioned facing the camera.
 

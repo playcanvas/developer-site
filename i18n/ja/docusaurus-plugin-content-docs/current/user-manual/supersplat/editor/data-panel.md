@@ -5,7 +5,7 @@ description: "SuperSplatのSplat Dataパネルを使用して、ガウシアン�
 
 **Splat Data**パネルは、アクティブなスプラットの属性値をインタラクティブなヒストグラムとして可視化します。値の分布を把握し、外れ値を見つけ、特定の範囲に含まれるガウシアンを選択するために使用します。パネルのラベルは、ステータスバーと同じく、個々のガウシアンを「splats」と呼びます。
 
-![フィルター、プロパティリスト、ヒストグラムを表示したSplat Dataパネル](/img/user-manual/supersplat/editor/data-panel.png)
+![フィルター、プロパティリスト、ヒストグラムを表示したSplat Dataパネル](/img/user-manual/supersplat/editor/data-panel.webp)
 
 ## パネルを開く
 

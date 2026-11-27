@@ -11,7 +11,7 @@ Modelコンポーネントは非推奨です。これは[Render](render.md)コ�
 
 Modelコンポーネントを使用すると、エンティティにプリミティブシェイプまたはモデルアセットをレンダリングすることができます。
 
-![Model Component](/img/user-manual/editor/scenes/components/component-model.png)
+![Model Component](/img/user-manual/editor/scenes/components/component-model.webp)
 
 ## プロパティ
 

@@ -103,7 +103,7 @@ const wheels = this.entity.findByTag('wheel');
 
 編集中にエンティティを見つけるには、ヒエラルキー上部の検索ボックスに入力します。虫眼鏡をクリックすると、何に一致させるかを**Name**、**Component Type**、**Script Name**、**Tags**から選べます。これらは検索メソッドが調べるものと同じです。**Smart Search**を使うと、入力した文字列に近い名前にも一致します。
 
-![ヒエラルキーパネルの検索オプション。Smart Searchのスイッチと、Name、Component Type、Script Name、TagsのSearch Byチェックボックス](/img/user-manual/editor/hierarchy/hierarchy-search-options.png)
+![ヒエラルキーパネルの検索オプション。Smart Searchのスイッチと、Name、Component Type、Script Name、TagsのSearch Byチェックボックス](/img/user-manual/editor/hierarchy/hierarchy-search-options.webp)
 
 スクリプトの中で検索が必要になることはほとんどありません。スクリプトに[エンティティ属性](/user-manual/scripting/script-attributes/esm/)を持たせ、インスペクターでその属性にエンティティをドラッグします。こうして得た参照は、エンティティの名前を変えたり移動したりしても有効なままです。名前やパスによる検索ではそうはいきません。
 

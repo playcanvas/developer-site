@@ -7,7 +7,7 @@ The Screen Component defines the area and rendering of a user interface. Childre
 
 See [Screens](/user-manual/user-interface/screens/) for how screens work, and the [User Interface](/user-manual/user-interface/) section for building interfaces with them.
 
-![Screen Component](/img/user-manual/editor/scenes/components/component-screen.png)
+![Screen Component](/img/user-manual/editor/scenes/components/component-screen.webp)
 
 ## Properties
 

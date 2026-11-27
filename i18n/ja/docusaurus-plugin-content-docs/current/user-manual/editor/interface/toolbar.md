@@ -7,24 +7,24 @@ Editorのメインツールバーは、Editorの左側、垂直な端にあり�
 
 | ボタン | コマンド | 説明 |
 | ------ | ------- | ----------- |
-| ![Menu](/img/user-manual/editor/interface/toolbar/menu.png) | **メニュー** | メインメニューを開き、最も一般的に必要とされるEditor機能にアクセスします。 |
-| ![Gizmo Translate](/img/user-manual/editor/interface/toolbar/translate.png) | **平行移動** | Viewportで平行移動[gizmo](../viewport#gizmos)をアクティブにします。 |
-| ![Gizmo Rotate](/img/user-manual/editor/interface/toolbar/rotate.png) | **回転** | Viewportで回転[gizmo](../viewport#gizmos)をアクティブにします。 |
-| ![Gizmo Scale](/img/user-manual/editor/interface/toolbar/scale.png) | **拡大縮小** | Viewportで拡大縮小[gizmo](../viewport#gizmos)をアクティブにします。 |
-| ![Element Scale](/img/user-manual/editor/interface/toolbar/resize-element.png) | **要素のリサイズ** | Viewportでユーザーインターフェース[要素のリサイズgizmo](/user-manual/user-interface/elements#element-resizing)をアクティブにします。 |
-| ![World Local](/img/user-manual/editor/interface/toolbar/world-local.png) | **ワールド/ローカル** | Viewportでアクティブな[gizmo](../viewport#gizmos)のローカル座標系とワールド座標系を切り替えます。 |
-| ![Snap](/img/user-manual/editor/interface/toolbar/snap.png) | **スナップ** | Viewportで[gizmo](../viewport#gizmos)を使用する際、スナップを有効にします。 |
-| ![Focus](/img/user-manual/editor/interface/toolbar/focus.png) | **フォーカス** | 選択中のEntityにViewportカメラをズームします。 |
-| ![Undo](/img/user-manual/editor/interface/toolbar/undo.png) | **元に戻す** | 最後の操作を元に戻します。 |
-| ![Redo](/img/user-manual/editor/interface/toolbar/redo.png) | **やり直し** | 最後の操作をやり直します。 |
-| ![Bake](/img/user-manual/editor/interface/toolbar/lightmapper.png) | **Lightmapper** | [Lightmapper](/user-manual/graphics/lighting/runtime-lightmaps)のベイクと自動再ベイクのコントロールにアクセスします。 |
-| ![Code Editor](/img/user-manual/editor/interface/toolbar/code-editor.png) | **コードエディター** | [コードエディター](/user-manual/editor/scripting/code-editor)を開きます。 |
-| ![Publish](/img/user-manual/editor/interface/toolbar/publish.png) | **公開 / ダウンロード** | [Buildsパネル](/user-manual/editor/publishing/#the-builds-panel)を開き、ビルドを公開またはダウンロードします。 |
-| ![GitHub](/img/user-manual/editor/interface/toolbar/github.png) | **GitHub** | [GitHub](https://github.com/playcanvas/editor/issues)で問題を報告します。 |
-| ![Discord](/img/user-manual/editor/interface/toolbar/discord.png) | **Discord** | PlayCanvasの[Discordサーバー](https://discord.gg/RSaMRzg)に参加します。 |
-| ![Forum](/img/user-manual/editor/interface/toolbar/forum.png) | **フォーラム** | [フォーラム](https://forum.playcanvas.com)でヘルプを求めます。 |
-| ![How Do I](/img/user-manual/editor/interface/toolbar/how-do-i.png) | **使い方...？** | Viewportで「使い方...？」ヘルプウィジェットを切り替えます。 |
-| ![Controls](/img/user-manual/editor/interface/toolbar/controls.png) | **操作方法** | Editorがサポートする[操作方法とキーボードショートカット](../keyboard-shortcuts)のリストを表示します。 |
+| ![Menu](/img/user-manual/editor/interface/toolbar/menu.webp) | **メニュー** | メインメニューを開き、最も一般的に必要とされるEditor機能にアクセスします。 |
+| ![Gizmo Translate](/img/user-manual/editor/interface/toolbar/translate.webp) | **平行移動** | Viewportで平行移動[gizmo](../viewport#gizmos)をアクティブにします。 |
+| ![Gizmo Rotate](/img/user-manual/editor/interface/toolbar/rotate.webp) | **回転** | Viewportで回転[gizmo](../viewport#gizmos)をアクティブにします。 |
+| ![Gizmo Scale](/img/user-manual/editor/interface/toolbar/scale.webp) | **拡大縮小** | Viewportで拡大縮小[gizmo](../viewport#gizmos)をアクティブにします。 |
+| ![Element Scale](/img/user-manual/editor/interface/toolbar/resize-element.webp) | **要素のリサイズ** | Viewportでユーザーインターフェース[要素のリサイズgizmo](/user-manual/user-interface/elements#element-resizing)をアクティブにします。 |
+| ![World Local](/img/user-manual/editor/interface/toolbar/world-local.webp) | **ワールド/ローカル** | Viewportでアクティブな[gizmo](../viewport#gizmos)のローカル座標系とワールド座標系を切り替えます。 |
+| ![Snap](/img/user-manual/editor/interface/toolbar/snap.webp) | **スナップ** | Viewportで[gizmo](../viewport#gizmos)を使用する際、スナップを有効にします。 |
+| ![Focus](/img/user-manual/editor/interface/toolbar/focus.webp) | **フォーカス** | 選択中のEntityにViewportカメラをズームします。 |
+| ![Undo](/img/user-manual/editor/interface/toolbar/undo.webp) | **元に戻す** | 最後の操作を元に戻します。 |
+| ![Redo](/img/user-manual/editor/interface/toolbar/redo.webp) | **やり直し** | 最後の操作をやり直します。 |
+| ![Bake](/img/user-manual/editor/interface/toolbar/lightmapper.webp) | **Lightmapper** | [Lightmapper](/user-manual/graphics/lighting/runtime-lightmaps)のベイクと自動再ベイクのコントロールにアクセスします。 |
+| ![Code Editor](/img/user-manual/editor/interface/toolbar/code-editor.webp) | **コードエディター** | [コードエディター](/user-manual/editor/scripting/code-editor)を開きます。 |
+| ![Publish](/img/user-manual/editor/interface/toolbar/publish.webp) | **公開 / ダウンロード** | [Buildsパネル](/user-manual/editor/publishing/#the-builds-panel)を開き、ビルドを公開またはダウンロードします。 |
+| ![GitHub](/img/user-manual/editor/interface/toolbar/github.webp) | **GitHub** | [GitHub](https://github.com/playcanvas/editor/issues)で問題を報告します。 |
+| ![Discord](/img/user-manual/editor/interface/toolbar/discord.webp) | **Discord** | PlayCanvasの[Discordサーバー](https://discord.gg/RSaMRzg)に参加します。 |
+| ![Forum](/img/user-manual/editor/interface/toolbar/forum.webp) | **フォーラム** | [フォーラム](https://forum.playcanvas.com)でヘルプを求めます。 |
+| ![How Do I](/img/user-manual/editor/interface/toolbar/how-do-i.webp) | **使い方...？** | Viewportで「使い方...？」ヘルプウィジェットを切り替えます。 |
+| ![Controls](/img/user-manual/editor/interface/toolbar/controls.webp) | **操作方法** | Editorがサポートする[操作方法とキーボードショートカット](../keyboard-shortcuts)のリストを表示します。 |
 | ![Settings](/img/user-manual/editor/interface/toolbar/settings.png) | **設定** | Editorとシーンの設定を[Inspector](../inspector)に読み込みます。 |
 
 ## ツールバーのカスタマイズ {#customizing-the-toolbar}

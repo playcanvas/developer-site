@@ -13,11 +13,11 @@ In photography and optics, [vignetting](https://en.wikipedia.org/wiki/Vignetting
 
 Here is an image without the effect:
 
-![Image without effect](/img/user-manual/graphics/posteffects/without-effects.png)
+![Image without effect](/img/user-manual/graphics/posteffects/without-effects.webp)
 
 And the same image with the effect applied:
 
-![Image with effect](/img/user-manual/graphics/posteffects/with-vignette.png)
+![Image with effect](/img/user-manual/graphics/posteffects/with-vignette.webp)
 
 The built-in vignette effect has the following attributes:
 

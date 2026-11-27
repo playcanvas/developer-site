@@ -7,7 +7,7 @@ The LayoutGroup Component enables an entity to specify the size and position of 
 
 See [Layout Groups](/user-manual/user-interface/layout-groups/) for how a layout group places its children, with example layouts.
 
-![LayoutGroup Component](/img/user-manual/editor/scenes/components/component-layoutgroup.png)
+![LayoutGroup Component](/img/user-manual/editor/scenes/components/component-layoutgroup.webp)
 
 ## Properties
 

@@ -39,7 +39,7 @@ To create a trigger volume, add a Collision component to an Entity without addin
 
 In this tutorial, a large box-shaped trigger underneath the ramp catches the falling bodies and returns them to the top.
 
-![Tutorial scene in the Editor's Physics view mode](/img/tutorials/collision/viewport-physics-mode.png)
+![Tutorial scene in the Editor's Physics view mode](/img/tutorials/collision/viewport-physics-mode.webp)
 
 Use the Editor's Physics view mode to inspect the collision and trigger volumes in the viewport.
 
@@ -49,7 +49,7 @@ A Rigid Body component makes an Entity participate in the physics simulation. It
 
 By default, adding both components creates a static box-shaped body.
 
-![Dynamic Rigid Body component](/img/user-manual/editor/scenes/components/component-rigid-body-dynamic.png)
+![Dynamic Rigid Body component](/img/user-manual/editor/scenes/components/component-rigid-body-dynamic.webp)
 
 The Rigid Body **Type** determines how the body moves:
 
@@ -69,7 +69,7 @@ Add Render, Collision, and Rigid Body components. Set the Collision type to **Bo
 
 Create an Entity for the trigger underneath the ramp.
 
-![Trigger Entity](/img/tutorials/collision/trigger-setup.png)
+![Trigger Entity](/img/tutorials/collision/trigger-setup.webp)
 
 Add a box Collision component with **Half Extents** of `20, 2, 20`, but do not add a Rigid Body component. Add a Script component and attach the following `trigger` script to listen for bodies entering the volume.
 

@@ -11,7 +11,7 @@ PlayCanvasで物理ベースレンダリングを使用する際に最良の結�
 
 画像データはLDRまたはHDR(高ダイナミックレンジ)の色空間に保存することができ、単一チャンネルで0.0〜1.0(256階調)以上の保存が可能です。HDRでは、ガンマ補正、トーンマッピング、露光などの環境要因の組み合わせにより、1.0以上の(白色と見なされます)を保存できます。これにより、より詳細な光の詳細を含めることができ、光の品質などのアーティストが望む結果を得られるようコントロールできます 。
 
-![HDR vs LDR CubeMap for Image Based Rendering](/img/user-manual/graphics/physical-rendering/ibl-hdr-ldr.jpg)
+![HDR vs LDR CubeMap for Image Based Rendering](/img/user-manual/graphics/physical-rendering/ibl-hdr-ldr.webp)
 
 Notice how bright parts in the texture are clamped using LDR.
 
@@ -35,7 +35,7 @@ CubeMapsはCGIでレンダリングしたり、写真から組み立てたり、
 
 CubeMapは6面で構成され、各面は立方体の正方形の面を表します。正方形のビューポートカメラを使用して、90度の視野で異なる90度の方向に回転させてレンダリングすることができます。
 
-![CubeMap Faces](/img/user-manual/graphics/physical-rendering/cubemap-faces.jpg)
+![CubeMap Faces](/img/user-manual/graphics/physical-rendering/cubemap-faces.webp)
 
 一般的な3Dモデリングツール、または写真と360 画像ソフトウェアを使用できます。これは線形ガンマ空間でレンダリングされるべきであり、[Lightmapping ガンマ補正セクション](/user-manual/graphics/lighting/lightmapping/#gamma-correction)で説明されている色補正を行うべきではありません。
 
@@ -54,12 +54,12 @@ CubeMapは6面で構成され、各面は立方体の正方形の面を表しま
 
 この技術は、環境マップの投影を変更して、CubeMapがその境界に対応するように空間内でボックスを指定できるようにします。最も一般的な用途は、ルームスケール環境内の表面上の反射をシミュレートすることです。
 
-![Material CubeMap Box Projection](/img/user-manual/graphics/physical-rendering/cubemap-box-projection.png)
+![Material CubeMap Box Projection](/img/user-manual/graphics/physical-rendering/cubemap-box-projection.webp)
 
 ## 例
 
 CubeMap Box Projectionを使用したシーンの[例](https://playcanv.as/p/zdkARz26/)と[プロジェクト](https://playcanvas.com/project/446587/overview/archviz-example)です。窓に映る木の床の反射と天井に映る僅かな反射や、右の壁の金属のPlayCanvasロゴに映る部屋の反射をご確認ください。これは動的なエフェクトであり、非常に現実的な反射を作成し、アーティストが部屋の環境をどのように映し出すか制御することを可能にします。
 
-[![Environment Box Projection Mapping](/img/user-manual/graphics/lighting/lightmapping/playcanvas-lightmapping-scene.jpg)](https://playcanv.as/p/zdkARz26/)
+[![Environment Box Projection Mapping](/img/user-manual/graphics/lighting/lightmapping/playcanvas-lightmapping-scene.webp)](https://playcanv.as/p/zdkARz26/)
 
 このシーンのライティングはライトマップとAOテクスチャとBox投影IBL(反射)を使用して実装されています。

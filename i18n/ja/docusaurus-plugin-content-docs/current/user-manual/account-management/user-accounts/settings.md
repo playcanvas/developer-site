@@ -5,7 +5,7 @@ description: "プロフィール画像、ユーザー名、メールアドレス
 
 アカウント設定は[playcanvas.com/account](https://playcanvas.com/account)にあります。[プロジェクトダッシュボード](/user-manual/editor/projects/dashboard/)から開くには、サイドバー下部にある自分の名前を選択し、**Account settings**を選びます。
 
-<img loading="lazy" alt="アカウントメニュー" width="254" src="/img/user-manual/account-management/user-accounts/account-menu.png" />
+<img loading="lazy" alt="アカウントメニュー" width="254" src="/img/user-manual/account-management/user-accounts/account-menu.webp" />
 
 設定は3つのタブに分かれています。
 
@@ -13,7 +13,7 @@ description: "プロフィール画像、ユーザー名、メールアドレス
 - **[Security](#security)** - パスワードとAPIトークン
 - **[Billing](#billing)** - プラン、ストレージ、支払い情報、請求書
 
-![アカウント設定](/img/user-manual/account-management/user-accounts/account-settings.png)
+![アカウント設定](/img/user-manual/account-management/user-accounts/account-settings.webp)
 
 各タブの左側にあるリストから、そのタブの各セクションに移動できます。ページ上部には次のものがあります。
 
@@ -47,7 +47,7 @@ description: "プロフィール画像、ユーザー名、メールアドレス
 
 PlayCanvasから受け取るメールを選択します。各スイッチは、切り替えるとすぐに保存されます。
 
-<img loading="lazy" alt="メール通知" width="784" src="/img/user-manual/account-management/user-accounts/email-notifications.png" />
+<img loading="lazy" alt="メール通知" width="784" src="/img/user-manual/account-management/user-accounts/email-notifications.webp" />
 
 | スイッチ | メールが届くタイミング |
 | --- | --- |
@@ -82,7 +82,7 @@ Organizationを所有している場合、**Delete account**は無効になっ�
 
 ## セキュリティタブ {#security}
 
-![セキュリティ](/img/user-manual/account-management/user-accounts/account-security.png)
+![セキュリティ](/img/user-manual/account-management/user-accounts/account-security.webp)
 
 ### パスワード {#password}
 

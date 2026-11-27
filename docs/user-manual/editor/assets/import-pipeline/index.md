@@ -13,7 +13,7 @@ When a source asset is uploaded, PlayCanvas starts an asset import task to perfo
 
 There are a variety of options available to tune the behavior of the import pipeline to suit your needs.
 
-<img loading="lazy" src="/img/user-manual/assets/import-pipeline/asset-tasks.png" width="480" />
+<img loading="lazy" src="/img/user-manual/assets/import-pipeline/asset-tasks.webp" width="480" />
 
 ### Search related assets {#search-related-assets}
 
@@ -78,7 +78,7 @@ Only available if using [Convert to GLB](#convert-to-glb) option. Setting this t
 
 If using Draco compression, remember to import the Draco WASM module into the project otherwise the models will not load.
 
-<img loading="lazy" src="/img/user-manual/assets/import-pipeline/draco-import-button.png" width="480" />
+<img loading="lazy" src="/img/user-manual/assets/import-pipeline/draco-import-button.webp" width="480" />
 
 ### Create FBX Folder {#create-fbx-folder}
 

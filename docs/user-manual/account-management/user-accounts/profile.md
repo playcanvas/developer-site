@@ -11,7 +11,7 @@ https://playcanvas.com/user/<USERNAME>
 
 To open your own, select your name at the bottom of the [Project Dashboard](/user-manual/editor/projects/dashboard/) sidebar and choose **View public profile**.
 
-![Your Profile](/img/user-manual/account-management/user-accounts/profile.png)
+![Your Profile](/img/user-manual/account-management/user-accounts/profile.webp)
 
 Your profile shows:
 

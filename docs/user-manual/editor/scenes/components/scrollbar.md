@@ -7,7 +7,7 @@ The Scrollbar Component defines a scrolling control for a [Scroll View](scrollvi
 
 See [Scrollbars](/user-manual/user-interface/scroll-views/#scrollbars) for using one with a scroll view, and [Sliders](/user-manual/user-interface/common-widgets/#sliders) for using one on its own as a slider.
 
-![Scrollbar Component](/img/user-manual/editor/scenes/components/component-scrollbar.png)
+![Scrollbar Component](/img/user-manual/editor/scenes/components/component-scrollbar.webp)
 
 ## Properties
 

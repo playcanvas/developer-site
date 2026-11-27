@@ -17,11 +17,11 @@ For each project you work on you will always have a single branch set to be your
 
 ## Creating a new branch {#creating-a-new-branch}
 
-![Create branch](/img/user-manual/editor/version-control/branches/new-branch.png)
+![Create branch](/img/user-manual/editor/version-control/branches/new-branch.webp)
 
 To create a branch open the version control panel, select the checkpoint that you wish to start the branch from and choose the "New Branch" option in the checkpoint's drop-down menu.
 
-![New branch dialog](/img/user-manual/editor/version-control/branches/new-branch-dialog.png)
+![New branch dialog](/img/user-manual/editor/version-control/branches/new-branch-dialog.webp)
 
 You will be asked to name your branch. Try to give your branch a descriptive name like `fix-player-bug` or `refactor-sound-effects`. After creating the branch you will automatically be switched to the new branch you just created.
 
@@ -55,7 +55,7 @@ To help find a branch in the current list filter, you can use the search bar at 
 
 ## Switching to a branch {#switching-to-a-branch}
 
-![Switch branch](/img/user-manual/editor/version-control/branches/switch-branch.png)
+![Switch branch](/img/user-manual/editor/version-control/branches/switch-branch.webp)
 
 To switch branch open the version control panel, select the branch you wish to switch to and choose the "Switch to this branch" option in the branch's drop-down menu.
 
@@ -63,13 +63,13 @@ The editor will reload with your current branch switched to the chosen branch.
 
 ## Closing a branch {#closing-a-branch}
 
-![Close branch](/img/user-manual/editor/version-control/branches/close-branch.png)
+![Close branch](/img/user-manual/editor/version-control/branches/close-branch.webp)
 
 If you have completed work on a branch, you can close it which will remove it from the open branches list.
 
 To close a branch, open the version control panel, select the branch you wish to close and choose the "Close this branch" option in the branch's drop-down menu. Note that you cannot close your current branch or the main branch. Switch to a different branch first if you wish to close your current branch.
 
-![Close branch dialog](/img/user-manual/editor/version-control/branches/close-branch-dialog.png)
+![Close branch dialog](/img/user-manual/editor/version-control/branches/close-branch-dialog.webp)
 
 You will be asked to confirm the closing of the branch and you have an option to create a checkpoint before closing. This is enabled by default. If you wish to discard these changes you can untick the option here.
 
@@ -94,7 +94,7 @@ Deletion of branches are only supported if the following conditions are met:
 
 To delete a branch open the version control panel, select the branch you wish to delete and choose the "Delete this branch" option in the branch's drop-down menu.
 
-![Delete a branch](/img/user-manual/editor/version-control/branches/delete-branch.png)
+![Delete a branch](/img/user-manual/editor/version-control/branches/delete-branch.webp)
 
 You will be asked to confirm the deletion of the branch by typing the name of the branch in the dialog box.
 
@@ -102,4 +102,4 @@ Deleting a branch removes its checkpoints, so they no longer count towards your 
 
 **Note, deleted branches cannot be recovered after deletion! If in doubt, please close the branch instead.**
 
-![Delete a branch warning](/img/user-manual/editor/version-control/branches/delete-branch-dialog.png)
+![Delete a branch warning](/img/user-manual/editor/version-control/branches/delete-branch-dialog.webp)

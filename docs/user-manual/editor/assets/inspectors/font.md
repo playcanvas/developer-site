@@ -15,7 +15,7 @@ Drag a `.ttf`, `.ttc`, `.otf` or `.dfont` file into the Editor. The atlas is gen
 
 <video autoPlay muted loop controls src='/video/editor-font-generation.mp4' style={{width: '100%', height: 'auto'}} />
 
-![Font import folder](/img/user-manual/assets/fonts/font-import-folder.png)
+![Font import folder](/img/user-manual/assets/fonts/font-import-folder.webp)
 
 | Asset               | Type    | What it is                                                                                       |
 | ------------------- | ------- | ------------------------------------------------------------------------------------------------ |
@@ -42,7 +42,7 @@ Engine, React and Web Components projects can generate the same kind of asset wi
 
 ## Properties
 
-![Font Asset](/img/user-manual/assets/fonts/font.png)
+![Font Asset](/img/user-manual/assets/fonts/font.webp)
 
 ### Source Files
 
@@ -87,7 +87,7 @@ Fonts imported before the Editor generated its own atlases have no JSON or textu
 
 Conversion replaces the font's data and file and cannot be undone, so it asks first:
 
-![Convert font confirmation](/img/user-manual/assets/fonts/font-convert-confirm.png)
+![Convert font confirmation](/img/user-manual/assets/fonts/font-convert-confirm.webp)
 
 Until a font is converted, it keeps the **Intensity** property under a **PROPERTIES** panel:
 

@@ -13,11 +13,11 @@ description: "レガシーの明るさ・コントラスト Script エフェク�
 
 これはエフェクトをかけていない画像です。
 
-![Image without effect](/img/user-manual/graphics/posteffects/without-effects.png)
+![Image without effect](/img/user-manual/graphics/posteffects/without-effects.webp)
 
 これがエフェクトをかけて輝度とコントラストを調整した画像です。
 
-![Image with effect](/img/user-manual/graphics/posteffects/with-brightness-contrast.png)
+![Image with effect](/img/user-manual/graphics/posteffects/with-brightness-contrast.webp)
 
 ビルトインの輝度とコントラストエフェクトは以下の様な属性値が設定されています:
 

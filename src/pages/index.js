@@ -11,7 +11,7 @@ import supersplatImage from '@site/static/img/home/supersplat.webp';
 import engineExamplesImage from '@site/static/img/home/engine-examples.webp';
 import editorTutorialsImage from '@site/static/img/home/editor-tutorials.webp';
 import reactExamplesImage from '@site/static/img/home/react-examples.webp';
-import webComponentsExamplesImage from '@site/static/img/user-manual/web-components/showcases/car-configurator.jpg';
+import webComponentsExamplesImage from '@site/static/img/user-manual/web-components/showcases/car-configurator.webp';
 
 import styles from './index.module.css';
 

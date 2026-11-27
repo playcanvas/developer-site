@@ -7,7 +7,7 @@ import StepVideo from '@site/src/components/StepVideo';
 
 エディターのビューポートは、アプリケーションを視覚的に構築する場所です。そこから「起動」ボタンを押すと、起動ページが開き、実際にアプリケーションを*実行*できます。
 
-![起動ボタン](/img/user-manual/editor/launch-page/launch-button.png)
+![起動ボタン](/img/user-manual/editor/launch-page/launch-button.webp)
 
 ## 起動 {#launching}
 

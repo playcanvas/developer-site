@@ -7,7 +7,7 @@ A **camera animation** moves the camera along a keyframed path, from a gentle tu
 
 A scene has one camera animation. If you published the splat from the Editor with an animation from its [Timeline](/user-manual/supersplat/editor/timeline), Studio opens with that animation, ready to edit.
 
-![The timeline panel, with one keyframe selected and the playhead on it](/img/user-manual/supersplat/studio/timeline-panel.png)
+![The timeline panel, with one keyframe selected and the playhead on it](/img/user-manual/supersplat/studio/timeline-panel.webp)
 
 ## The timeline panel
 

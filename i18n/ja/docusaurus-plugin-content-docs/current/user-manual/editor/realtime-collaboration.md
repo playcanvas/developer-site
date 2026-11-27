@@ -17,7 +17,7 @@ import StepVideo from '@site/src/components/StepVideo';
 
 [Viewport](../interface/viewport) の左下隅（CHAT ボタンの隣）に、プレゼンスバーがあります。
 
-![Presence Bar](/img/user-manual/editor/realtime-collaboration/presence-bar.png)
+![Presence Bar](/img/user-manual/editor/realtime-collaboration/presence-bar.webp)
 
 新しいユーザーがシーンに入ると、そのユーザーのアバターがプレゼンスバーに追加されます。同様に、Editor を閉じると、アバターはプレゼンスバーから削除されます。任意のアバターにカーソルを合わせると、関連するユーザー名が表示されます。アバターをクリックすると、そのユーザーのプロフィールページに移動します。
 
@@ -49,7 +49,7 @@ CHAT ボタンを選択すると、チャットパネルが展開され、Editor
 
 ユーザーカメラの陰影付き中央平面にマウスオーバーすると、関連するユーザー名が表示されます。
 
-![Viewport Camera Username](/img/user-manual/editor/realtime-collaboration/viewport-camera-username.png)
+![Viewport Camera Username](/img/user-manual/editor/realtime-collaboration/viewport-camera-username.webp)
 
 ## 選択インジケーター
 

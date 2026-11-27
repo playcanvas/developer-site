@@ -13,10 +13,10 @@ Fast Approximate Anti-Aliasing (FXAA) is an anti-aliasing algorithm created by N
 
 Here is an image without the effect:
 
-![Image without effect](/img/user-manual/graphics/posteffects/without-effects.png)
+![Image without effect](/img/user-manual/graphics/posteffects/without-effects.webp)
 
 And the same image with the effect applied:
 
-![Image with effect](/img/user-manual/graphics/posteffects/with-fxaa.png)
+![Image with effect](/img/user-manual/graphics/posteffects/with-fxaa.webp)
 
 Find the post-processing effect script on [GitHub](https://github.com/playcanvas/engine/blob/main/scripts/posteffects/posteffect-fxaa.js).

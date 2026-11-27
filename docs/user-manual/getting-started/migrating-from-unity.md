@@ -21,7 +21,7 @@ This guide maps what you know from Unity to PlayCanvas: the Editor's panels and 
 
 The Editor's layout is much like Unity's default layout:
 
-![The PlayCanvas Editor, with the toolbar, hierarchy, viewport, inspector and assets panel numbered 1 to 5](/img/user-manual/editor/interface/editor-interface.png)
+![The PlayCanvas Editor, with the toolbar, hierarchy, viewport, inspector and assets panel numbered 1 to 5](/img/user-manual/editor/interface/editor-interface.webp)
 
 | | PlayCanvas | Unity |
 | --- | --- | --- |

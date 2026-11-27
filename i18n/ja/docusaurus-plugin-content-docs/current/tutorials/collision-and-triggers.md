@@ -37,7 +37,7 @@ description: Rigid Body付きのコリジョン形状で物理接触を処理し
 
 このチュートリアルでは、ランプの下に大きなボックス形状のトリガーを配置し、落下した剛体をランプの上へ戻します。
 
-![EditorのPhysics表示モードで見たチュートリアルシーン](/img/tutorials/collision/viewport-physics-mode.png)
+![EditorのPhysics表示モードで見たチュートリアルシーン](/img/tutorials/collision/viewport-physics-mode.webp)
 
 EditorのPhysics表示モードを使用すると、ビューポート内でコリジョンボリュームとトリガーボリュームを確認できます。
 
@@ -47,7 +47,7 @@ Rigid Bodyコンポーネントは、エンティティを物理シミュレー�
 
 両方のコンポーネントを追加すると、デフォルトでは静的なボックス形状の剛体が作成されます。
 
-![Dynamicに設定したRigid Bodyコンポーネント](/img/user-manual/editor/scenes/components/component-rigid-body-dynamic.png)
+![Dynamicに設定したRigid Bodyコンポーネント](/img/user-manual/editor/scenes/components/component-rigid-body-dynamic.webp)
 
 Rigid Bodyの**Type**は、剛体の動き方を決定します。
 
@@ -67,7 +67,7 @@ Render、Collision、Rigid Bodyコンポーネントを追加します。Collisi
 
 ランプの下にトリガー用のエンティティを作成します。
 
-![トリガーエンティティのコンポーネント設定](/img/tutorials/collision/trigger-setup.png)
+![トリガーエンティティのコンポーネント設定](/img/tutorials/collision/trigger-setup.webp)
 
 BoxのCollisionコンポーネントを追加し、**Half Extents**を`20, 2, 20`に設定します。Rigid Bodyコンポーネントは追加しません。Scriptコンポーネントを追加し、次の`trigger`スクリプトをアタッチして、剛体がボリュームに入るイベントを監視します。
 

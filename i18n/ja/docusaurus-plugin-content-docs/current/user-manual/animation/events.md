@@ -38,7 +38,7 @@ walkTrack.events = new AnimEvents([
 | **number** | リスナーに`number`として渡す数値です。 |
 | **string** | リスナーに`string`として渡す文字列です。 |
 
-![アニメーションアセットのインスペクター。長さと名前、および2つのfoot_stepイベントがあるイベントパネルが表示されています](/img/user-manual/animation/animation-asset-with-events.png)
+![アニメーションアセットのインスペクター。長さと名前、および2つのfoot_stepイベントがあるイベントパネルが表示されています](/img/user-manual/animation/animation-asset-with-events.webp)
 
 </TabItem>
 <TabItem value="react" label="React">

@@ -55,7 +55,7 @@ PlayCanvasは、FBXファイルのインポートもサポートしており、�
 
 ## Blender
 
-![Blender Logo](/img/user-manual/assets/models/building/blender-logo.jpg)
+![Blender Logo](/img/user-manual/assets/models/building/blender-logo.webp)
 
 [Blender](https://www.blender.org/)は素晴らしいフリーの3Dモデリングツールで、PlayCanvas用の3Dアセットを作るために最適です。
 
@@ -102,7 +102,7 @@ Blenderの使い方については様々な資料がweb上にあります。私�
 
 3D Studio Maxでは、標準マテリアルを使用するか、マルチ/サブオブジェクト マテリアルを使用してください。ただし、参照しているマテリアルが標準マテリアルである必要があります。以下のスクリーンショットでハイライト表示されている箇所は、PlayCanvasにエクスポートする際に利用される設定です。
 
-![Max material editor](/img/user-manual/assets/models/building/max-material-editor.jpg)
+![Max material editor](/img/user-manual/assets/models/building/max-material-editor.webp)
 
 ### 対応しているマップスロット
 
@@ -142,11 +142,11 @@ PlayCanvasでは、エクスポート時に一部の3DS Maxのマテリアルマ
 
 Normalマップを作成する方法には異なる方法がありますが、主な2つの方法は緑成分の形式が異なります。たとえば、デフォルトでは、3DS Maxはレンガの壁のためのNormalマップが以下のように表示されることを期待します。
 
-![Normal map](/img/user-manual/assets/models/building/wall-norm.jpg)
+![Normal map](/img/user-manual/assets/models/building/wall-norm.webp)
 
 テクスチャのNormalマップの緑成分（または各NormalのY成分）を反転する必要があります。Photoshopでファイルを読み込み、緑チャンネルを選択し、<kbd>Ctrl</kbd>+<kbd>I</kbd>を押してチャンネルを反転すると、以下のようになります。
 
-![Normal map with Y component flipped](/img/user-manual/assets/models/building/wall-norm-yflip.jpg)
+![Normal map with Y component flipped](/img/user-manual/assets/models/building/wall-norm-yflip.webp)
 
 これでライティングの一貫性をPlayCanvas上で保つことができます。
 
@@ -156,7 +156,7 @@ Normalマップを作成する方法には異なる方法がありますが、�
 
 このスロットにBitmapマップを割り当てると、PlayCanvasのマテリアルでSphereマッピングが有効になります。Bitmapは次のようなものになります。
 
-![Sphere map](/img/user-manual/assets/models/building/mountains-sphere.jpg)
+![Sphere map](/img/user-manual/assets/models/building/mountains-sphere.webp)
 
 Sphereマップはコストのかからない、もっとも信頼性の低いリフレクションマッピングの手法です。多くの場合では表面に魅力的な光沢を与えるために十分です。
 
@@ -168,4 +168,4 @@ Sphereマップはコストのかからない、もっとも信頼性の低い�
 
 Mayaでは、標準的なマテリアルタイプであるlambert、blinn、およびphongを使用するべきです。以下のスクリーンショットのハイライトされた領域は、PlayCanvasへのエクスポート時に利用されるマテリアル設定を示しています。
 
-![Maya material editor](/img/user-manual/assets/models/building/maya-material-editor.jpg)
+![Maya material editor](/img/user-manual/assets/models/building/maya-material-editor.webp)

@@ -18,7 +18,7 @@ Render アセットインスペクターは、メッシュに関するメタデ�
 
 ### Meta
 
-![Render Asset Inspector - Meta](/img/user-manual/editor/assets/inspectors/asset-inspector-render-meta.png)
+![Render Asset Inspector - Meta](/img/user-manual/editor/assets/inspectors/asset-inspector-render-meta.webp)
 
 | Property | Description |
 |----------|-------------|
@@ -31,7 +31,7 @@ Render アセットインスペクターは、メッシュに関するメタデ�
 
 ### Render
 
-![Render Asset Inspector - Render](/img/user-manual/editor/assets/inspectors/asset-inspector-render-render.png)
+![Render Asset Inspector - Render](/img/user-manual/editor/assets/inspectors/asset-inspector-render-render.webp)
 
 | Property | Description |
 |----------|-------------|

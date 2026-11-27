@@ -21,7 +21,7 @@ Unityでプロジェクトを作ったことがあれば、PlayCanvasの多く�
 
 エディターのレイアウトは、Unityのデフォルトのレイアウトとよく似ています。
 
-![ツールバー、ヒエラルキー、ビューポート、インスペクター、アセットパネルに1から5の番号を付けたPlayCanvas Editor](/img/user-manual/editor/interface/editor-interface.png)
+![ツールバー、ヒエラルキー、ビューポート、インスペクター、アセットパネルに1から5の番号を付けたPlayCanvas Editor](/img/user-manual/editor/interface/editor-interface.webp)
 
 | | PlayCanvas | Unity |
 | --- | --- | --- |

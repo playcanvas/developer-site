@@ -40,7 +40,7 @@ Selecting a texture's thumbnail in the Assets panel will load it into the Inspec
 
 A texture shares the standard set of asset properties (ID, name, tags and so on). But it also has some texture-specific properties.
 
-![Texture Properties](/img/user-manual/assets/textures/texture-properties.png)
+![Texture Properties](/img/user-manual/assets/textures/texture-properties.webp)
 
 ### Texture Filtering
 
@@ -50,7 +50,7 @@ Texture filtering gives control over how the color of a texture mapped pixel is 
 
 When textures are viewed on surfaces at an oblique angle, quality can suffer and they can appear blurred. To fix this problem, you can set a value for anisotropy. See how different anisotropy values can affect the appearance of a texture:
 
-![Anisotropy](/img/user-manual/assets/textures/anisotropy.png)
+![Anisotropy](/img/user-manual/assets/textures/anisotropy.webp)
 
 Note that as anisotropy increases, the cost of sampling the texture on the GPU also increases.
 
@@ -58,7 +58,7 @@ Note that as anisotropy increases, the cost of sampling the texture on the GPU a
 
 The texture addressing properties give you control over how a texture is sampled for texture coordinates outside the range 0 to 1. See how the different modes affect the sprite below:
 
-![Addressing](/img/user-manual/assets/textures/texture-address.png)
+![Addressing](/img/user-manual/assets/textures/texture-address.webp)
 
 ## Max Texture Size
 
@@ -66,11 +66,11 @@ Different devices can support different texture sizes. Using [WebGL report](http
 
 For example, this is from a MacBook Pro 16 inch (2020) laptop with Chrome which shows support up to 16384x16384.
 
-<img loading="lazy" src="/img/user-manual/assets/textures/mac-webgl-report.png" alt="Macbook Pro WebGL report" width="600" />
+<img loading="lazy" src="/img/user-manual/assets/textures/mac-webgl-report.webp" alt="Macbook Pro WebGL report" width="600" />
 
 Whereas on a Samsung S7 mobile device, only 4096x4096 is supported.
 
-<img loading="lazy" src="/img/user-manual/assets/textures/samsung-s7-webgl-report.jpg" alt="Samsung S7 WebGL report" width="600" />
+<img loading="lazy" src="/img/user-manual/assets/textures/samsung-s7-webgl-report.webp" alt="Samsung S7 WebGL report" width="600" />
 
 If the engine attempts to utilize a texture that exceeds the max texture size reported by WebGL, it will resize it down to this maximum size at runtime. Note that this is only done for texture loaded from images (PNG, JPG, AVIF, WebP, GIF). Compressed textures cannot be resized at runtime and will simply fail to render if they are too large for the device.
 

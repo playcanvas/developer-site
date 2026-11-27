@@ -7,7 +7,7 @@ Scrollbarコンポーネントは、[Scroll View](scrollview.md)コンポーネ�
 
 スクロールビューでの使い方は[スクロールバー](/user-manual/user-interface/scroll-views/#scrollbars)を、単独でスライダーとして使う方法は[スライダー](/user-manual/user-interface/common-widgets/#sliders)を参照してください。
 
-![Scrollbar Component](/img/user-manual/editor/scenes/components/component-scrollbar.png)
+![Scrollbar Component](/img/user-manual/editor/scenes/components/component-scrollbar.webp)
 
 ## プロパティ
 

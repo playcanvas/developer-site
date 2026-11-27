@@ -127,7 +127,7 @@ layer.assignAnimation('Jump', jumpTrack);
 4. 左側の **+ PARAMETER** でパラメーターを追加します。
 5. エンティティのAnimコンポーネントを選択し、その**State Graph**としてアセットを選び、各ステートのスロットにアニメーションアセットをドラッグします。
 
-![エディターのグラフエディター。左側にSTART、ANY、END、遷移でつながったIdle、Walk、Jumpの各ステート、そしてレイヤーとパラメーターのパネルが表示されています](/img/user-manual/animation/state-graph-editor.png)
+![エディターのグラフエディター。左側にSTART、ANY、END、遷移でつながったIdle、Walk、Jumpの各ステート、そしてレイヤーとパラメーターのパネルが表示されています](/img/user-manual/animation/state-graph-editor.webp)
 
 </TabItem>
 <TabItem value="react" label="React">

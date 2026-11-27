@@ -11,19 +11,19 @@ Elementコンポーネントは、Screenコンポーネントを祖先に持つ�
 
 グループエレメントは、Elementコンポーネントのレイアウトプロパティのみを提供します。
 
-![Group Element](/img/user-manual/editor/scenes/components/component-element-group.png)
+![Group Element](/img/user-manual/editor/scenes/components/component-element-group.webp)
 
 ## イメージエレメント (Image Element) {#image-element}
 
 イメージエレメントは、テクスチャアセット、スプライトアセット、または単色を使用して画像を表示します。
 
-![Image Element](/img/user-manual/editor/scenes/components/component-element-image.png)
+![Image Element](/img/user-manual/editor/scenes/components/component-element-image.webp)
 
 ## テキストエレメント (Text Element) {#text-element}
 
 テキストエレメントは、[フォントアセット](/user-manual/editor/assets/inspectors/font/)を使用してテキスト文字列をレンダリングします。
 
-![Text Element](/img/user-manual/editor/scenes/components/component-element-text.png)
+![Text Element](/img/user-manual/editor/scenes/components/component-element-text.webp)
 
 ## 共通コンポーネントプロパティ {#common-component-properties}
 

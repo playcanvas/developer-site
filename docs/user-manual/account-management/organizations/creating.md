@@ -5,7 +5,7 @@ description: How to create a PlayCanvas Organization, transfer existing projects
 
 There are two ways to create an Organization: start a new one, or convert an existing user account into one. The Organizations you belong to are listed under **ORGANIZATIONS** in the [Project Dashboard](/user-manual/editor/projects/dashboard/#organizations) sidebar:
 
-<img loading="lazy" alt="Organizations" width="249" src="/img/user-manual/account-management/organizations/creating/dashboard-organizations.png" />
+<img loading="lazy" alt="Organizations" width="249" src="/img/user-manual/account-management/organizations/creating/dashboard-organizations.webp" />
 
 ## Create a New Organization {#create-a-new-organization}
 
@@ -14,11 +14,11 @@ You can start a new Organization from either of these places:
 - In the Project Dashboard, select **+** next to **ORGANIZATIONS**. See [Organizations](/user-manual/editor/projects/dashboard/#organizations) in the Project Dashboard docs.
 - In your [account settings](/user-manual/account-management/user-accounts/settings/), open the account switcher at the top of the page and choose **New organization**.
 
-<img loading="lazy" alt="Switch Account" width="500" src="/img/user-manual/account-management/organizations/creating/switch-account.png" />
+<img loading="lazy" alt="Switch Account" width="500" src="/img/user-manual/account-management/organizations/creating/switch-account.webp" />
 
 The account settings open the **New organization** dialog:
 
-<img loading="lazy" alt="New Organization" width="480" src="/img/user-manual/account-management/organizations/creating/new-organization.png" />
+<img loading="lazy" alt="New Organization" width="480" src="/img/user-manual/account-management/organizations/creating/new-organization.webp" />
 
 - **Name** - The Organization's name, such as your company's name.
 - **ID** - A unique ID with no spaces. It sets the address of the Organization's profile, `playcanvas.com/user/<ID>`.
@@ -41,11 +41,11 @@ Your projects are now owned by the Organization, with your user account as an ad
 
 Alternatively, you can convert an existing user account into an Organization. Log in with the account you want to convert, open the **Profile** tab of its [account settings](/user-manual/account-management/user-accounts/settings/#convert-account-to-organization), and select **Convert to organization**:
 
-<img loading="lazy" alt="Convert Organization" width="784" src="/img/user-manual/account-management/organizations/creating/convert.png" />
+<img loading="lazy" alt="Convert Organization" width="784" src="/img/user-manual/account-management/organizations/creating/convert.webp" />
 
 This opens the following dialog:
 
-<img loading="lazy" alt="Convert Popup" width="480" src="/img/user-manual/account-management/organizations/creating/convert-popup.png" />
+<img loading="lazy" alt="Convert Popup" width="480" src="/img/user-manual/account-management/organizations/creating/convert-popup.webp" />
 
 Because you can't log in *as* an Organization, converting an account means you'll no longer be able to log in with it, and all of its projects move to the Organization. You must therefore nominate another user as the new **owner**. Enter their username, select **Find**, and then select **Convert**.
 

@@ -42,7 +42,7 @@ PlayCanvas Web Components を使用して、シンプルな3Dシーンをステ�
 
 正のZ軸方向に5単位離れた位置にカメラエンティティを追加しました。デフォルトでは、カメラは負のZ軸方向を向くため、カメラは現在原点を見ています。この時点では、レンダリングされたシーンは単色の灰色（カメラのデフォルトのクリアカラー）です。
 
-![カメラのデフォルトのクリアカラーを示す単色の灰色のフレーム](/img/user-manual/web-components/building-a-scene/camera-only.jpg)
+![カメラのデフォルトのクリアカラーを示す単色の灰色のフレーム](/img/user-manual/web-components/building-a-scene/camera-only.webp)
 
 灰色の何もない空間ですが、レンダラーが動いている証拠です。
 
@@ -65,7 +65,7 @@ PlayCanvas Web Components を使用して、シンプルな3Dシーンをステ�
 
 画面の中央に暗い円が現れます。球体は確かにそこにあるのですが、シーンにライトがないため表面には光がまったく当たらず、黒いシルエットとしてレンダリングされています。
 
-![灰色の背景に黒いシルエットとして表示される、ライトのない球体](/img/user-manual/web-components/building-a-scene/unlit-sphere.jpg)
+![灰色の背景に黒いシルエットとして表示される、ライトのない球体](/img/user-manual/web-components/building-a-scene/unlit-sphere.webp)
 
 ## ライトを追加する {#adding-a-light}
 
@@ -89,7 +89,7 @@ PlayCanvas Web Components を使用して、シンプルな3Dシーンをステ�
 
 ライトは角度を付けて回転させてあり、正面から照らすよりも興味深いシェーディングが生まれます。球体が一気に生き生きとしました。
 
-![灰色の背景に浮かぶ、ライトが当たった白い球体](/img/user-manual/web-components/building-a-scene/white-sphere.jpg)
+![灰色の背景に浮かぶ、ライトが当たった白い球体](/img/user-manual/web-components/building-a-scene/white-sphere.webp)
 
 ## 色を追加する {#adding-some-color}
 
@@ -114,7 +114,7 @@ PlayCanvas Web Components を使用して、シンプルな3Dシーンをステ�
 
 ここで使っている2つの色の値は、どちらも[CSSカラー名](https://github.com/playcanvas/web-components/blob/main/src/colors.ts)です。カラー属性は16進数コードやスペース区切りの数値も受け付けます。詳しい規約は[属性](attributes.md)を参照してください。
 
-![水色の背景に浮かぶ真紅の球体](/img/user-manual/web-components/building-a-scene/colored-sphere.jpg)
+![水色の背景に浮かぶ真紅の球体](/img/user-manual/web-components/building-a-scene/colored-sphere.webp)
 
 ## シーンに地面を追加する {#grounding-the-scene}
 

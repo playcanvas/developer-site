@@ -5,7 +5,7 @@ description: 実行中の PlayCanvas アプリケーションをデバッグパ�
 
 Inspectorは、実行中のPlayCanvasアプリケーション用のデバッグパネルです。キャンバスの横にドッキングし、アプリケーションのシーン、GPUリソース、描画されたフレームを現在の状態で表示します。選択したもののプロパティは、下のビューでリアルタイムに更新されます。
 
-<img loading="lazy" alt="実行中のアプリケーションの横にドッキングしたInspectorパネル。ヒエラルキーでエンティティを選択しています" width="800" src="/img/user-manual/debugging/inspector/inspector.png" />
+<img loading="lazy" alt="実行中のアプリケーションの横にドッキングしたInspectorパネル。ヒエラルキーでエンティティを選択しています" width="800" src="/img/user-manual/debugging/inspector/inspector.webp" />
 
 次のような疑問を解決するのに役立ちます。
 
@@ -94,7 +94,7 @@ app.root.addChild(entity);
 | **Shaders** | コンパイル済みのシェーダーとそのソース。 |
 | **Physics** | 物理ワールドの剛体とジョイント、そしてワールドをシーンの上に描画するオプション。 |
 
-<img loading="lazy" alt="フォワードパスを選択し、そのレンダーターゲットをビューの上にプレビューしているFrame graphタブ" width="800" src="/img/user-manual/debugging/inspector/frame-graph.png" />
+<img loading="lazy" alt="フォワードパスを選択し、そのレンダーターゲットをビューの上にプレビューしているFrame graphタブ" width="800" src="/img/user-manual/debugging/inspector/frame-graph.webp" />
 
 ## フレームのステップ実行 {#stepping-through-a-frame}
 

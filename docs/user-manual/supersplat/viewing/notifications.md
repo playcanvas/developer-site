@@ -25,7 +25,7 @@ The gear button at the top of the panel opens your [notification settings](#noti
 
 The **Notification settings** page, at [superspl.at/settings/notifications](https://superspl.at/settings/notifications), chooses which activity you're emailed about. Open it from the gear in the Notifications panel, or from **Notification settings** in your account menu.
 
-<img loading="lazy" alt="The Notification settings page with its three Email switches" width="680" src="/img/user-manual/supersplat/viewing/notification-settings.png" />
+<img loading="lazy" alt="The Notification settings page with its three Email switches" width="680" src="/img/user-manual/supersplat/viewing/notification-settings.webp" />
 
 Under **Email**, each kind of activity has a switch:
 

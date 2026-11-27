@@ -13,23 +13,23 @@ Engine V2 changed how some parts of a scene are set up, and some of the engine's
 
 Engine V1 set gamma and tone mapping for the whole scene, in the Rendering settings. Engine V2 sets them on each camera, so every Camera component has **Tonemapping** and **Gamma** fields:
 
-<img loading="lazy" src='/img/user-manual/editor/editor-v2/gamma-tonemap.png' alt='The Tonemapping and Gamma fields on a Camera component' width='400px' />
+<img loading="lazy" src='/img/user-manual/editor/editor-v2/gamma-tonemap.webp' alt='The Tonemapping and Gamma fields on a Camera component' width='400px' />
 
 The upgrade copies the open scene's gamma and tone mapping to each camera in that scene, and the Console lists each camera whose values change. Cameras in the project's other scenes aren't changed, so open each of those scenes and check its cameras.
 
 The Viewport has its own gamma and tone mapping, which affect only how the scene looks in the Editor. Set them with **Camera Tonemapping** and **Camera Gamma** in the [Editor settings](/user-manual/editor/interface/settings/editor/):
 
-<img loading="lazy" src='/img/user-manual/editor/editor-v2/settings-editor.png' alt='The Viewport gamma and tone mapping in the Editor settings' width='400px' />
+<img loading="lazy" src='/img/user-manual/editor/editor-v2/settings-editor.webp' alt='The Viewport gamma and tone mapping in the Editor settings' width='400px' />
 
 ### sRGB Textures {#srgb-textures}
 
 Engine V2 needs to know whether each texture is sRGB. Textures that store colors, such as diffuse and emissive maps, should be sRGB for accurate color, while textures that store other data, such as normal maps, should not. The setting is in the texture asset's panel:
 
-<img loading="lazy" src='/img/user-manual/editor/editor-v2/srgb-texture.png' alt='The sRGB setting of a texture asset' width='400px' />
+<img loading="lazy" src='/img/user-manual/editor/editor-v2/srgb-texture.webp' alt='The sRGB setting of a texture asset' width='400px' />
 
 The Editor checks each texture's setting against the places it's used. When textures need attention, the status bar at the bottom of the Editor shows **N audits found**, and the Console lists each affected texture or texture atlas and where it's used:
 
-<img loading="lazy" src='/img/user-manual/editor/editor-v2/console-texture.png' alt='Console messages about the sRGB settings of textures' width='600px' />
+<img loading="lazy" src='/img/user-manual/editor/editor-v2/console-texture.webp' alt='Console messages about the sRGB settings of textures' width='600px' />
 
 - Select **N audits found**, then **Fix issues**, to fix every texture whose uses all need the same setting.
 - Resolve conflicts, where a texture's uses need different settings, one at a time. Selecting a Console message takes you to the use. To use the same image both ways, duplicate the texture so that each use has its own copy.

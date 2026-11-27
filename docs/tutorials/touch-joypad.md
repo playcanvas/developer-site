@@ -83,7 +83,7 @@ This can be changed at runtime so it's possible to add this as a user option in 
 
 ### Reading joystick values
 
-![](/img/tutorials/touchscreen-joypad-controls/joystick-deadzone-range.png)
+![](/img/tutorials/touchscreen-joypad-controls/joystick-deadzone-range.webp)
 
 The red circle is dead zone and if the nub position is within that circle, the value from the joystick will return 0 for both axes. The blue circle is the range and the nub cannot go outside that circle.
 

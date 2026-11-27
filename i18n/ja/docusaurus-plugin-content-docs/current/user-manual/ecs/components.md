@@ -63,7 +63,7 @@ app.root.addChild(lamp);
 
 エンティティを選択してインスペクターの**Add Component**をクリックするか、ヒエラルキーでエンティティを右クリックして**Add Component**を選択します。メニューではコンポーネントが役割ごとにグループ分けされ、エンティティがすでに持っているものはグレー表示になります。新しいコンポーネントはインスペクターにパネルとして表示され、プロパティはデフォルト値になっています。
 
-<img loading="lazy" alt="インスペクターパネル。エンティティの名前、タグ、位置、回転、スケールがAdd Componentボタンの上にあり、その下にオン/オフのスイッチとプロパティを持つRenderコンポーネントが表示されています" width="360" src="/img/user-manual/editor/inspector/inspector.png" />
+<img loading="lazy" alt="インスペクターパネル。エンティティの名前、タグ、位置、回転、スケールがAdd Componentボタンの上にあり、その下にオン/オフのスイッチとプロパティを持つRenderコンポーネントが表示されています" width="360" src="/img/user-manual/editor/inspector/inspector.webp" />
 
 </TabItem>
 <TabItem value="react" label="React">

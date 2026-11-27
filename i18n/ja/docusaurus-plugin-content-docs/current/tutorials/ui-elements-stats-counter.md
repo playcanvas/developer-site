@@ -38,7 +38,7 @@ UIの構造は次のようになります。
 
 Boostカウンターを開きます - 他のエンティティも同じ構成です。`stats-boost`エンティティはビューポートで次のように表示されます。
 
-![Boost](/img/tutorials/ui/stats/boost-editor.png)
+![Boost](/img/tutorials/ui/stats/boost-editor.webp)
 
 `stats-boost`のインスペクター。
 

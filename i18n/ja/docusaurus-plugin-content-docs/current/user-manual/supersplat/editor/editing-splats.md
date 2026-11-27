@@ -52,7 +52,7 @@ Scene Managerの各行はインポートしたスプラットを表し、選択�
 
 ツールバーのボタンのうち2つは、それぞれ2つのツールを持ちます：**Polygon** / **Lasso**と**Eyedropper** / **Flood**です。ボタンをクリックすると現在表示されているツールが有効になり、長押しするともう一方を選べます。ボタンは選んだツールを記憶します。キーボードショートカットは常に特定のツールを有効にします。
 
-<img loading="lazy" alt="Polygon / Lassoポップアップを開いた下ツールバー" width="688" src="/img/user-manual/supersplat/editor/bottom-toolbar.png" />
+<img loading="lazy" alt="Polygon / Lassoポップアップを開いた下ツールバー" width="688" src="/img/user-manual/supersplat/editor/bottom-toolbar.webp" />
 
 ### 選択修飾キー {#selection-modifiers}
 

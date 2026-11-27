@@ -58,7 +58,7 @@ Windows の JSON ベースのクライアントでは、`"command": "cmd"` を�
 2. Editor ツールバーの下部にある **MCP** ボタンを選択します。
 3. ポートが `52000` であることを確認し、**Connect** を選択します。
 
-<img loading="lazy" src="/img/user-manual/editor/mcp.png" alt="Editor MCP Server の接続パネル" width="400" style={{ marginBottom: '1.5rem' }} />
+<img loading="lazy" src="/img/user-manual/editor/mcp.webp" alt="Editor MCP Server の接続パネル" width="400" style={{ marginBottom: '1.5rem' }} />
 
 接続中は MCP クライアントを起動したままにします。同時にサーバーへ接続できる Editor インスタンスは 1 つだけです。プロジェクトまたはブラウザータブを変更する前に、別の Editor を切断してください。
 

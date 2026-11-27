@@ -11,20 +11,20 @@ PlayCanvas向けにアートワークを作成する際は、意図したスケ�
 
 Blenderから単位が正しくエクスポートされるようにするには、Scene Propertiesの単位システムが「metric」（メートル法）に設定されており、スケールが1.0に設定されていることを確認してください。
 
-![Blender units](/img/user-manual/assets/models/units/blender-units.png)
+![Blender units](/img/user-manual/assets/models/units/blender-units.webp)
 
 さらに、FBX形式でエクスポートする際、「Apply Scaling」が「FBX All」に設定されていることを確認してください。
 
-![Blender FBX Export](/img/user-manual/assets/models/units/blender-fbx-export.png)
+![Blender FBX Export](/img/user-manual/assets/models/units/blender-fbx-export.webp)
 
 ### Autodesk 3D Studio Max
 
 3D Studio Maxで作業単位を確認または設定するには、Units Setupダイアログを開き、System Unit Setupボタンをクリックします。
 
-![3DS Max units](/img/user-manual/assets/models/units/max-units.png)
+![3DS Max units](/img/user-manual/assets/models/units/max-units.webp)
 
 ### Autodesk Maya
 
 Mayaで作業単位を確認または設定するには、Preferencesダイアログを開きます。
 
-![Maya units](/img/user-manual/assets/models/units/maya-units.png)
+![Maya units](/img/user-manual/assets/models/units/maya-units.webp)

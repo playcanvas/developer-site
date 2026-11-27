@@ -13,11 +13,11 @@ The brightness-contrast effect allows you to modify the brightness and contrast 
 
 Here is an image without the effect:
 
-![Image without effect](/img/user-manual/graphics/posteffects/without-effects.png)
+![Image without effect](/img/user-manual/graphics/posteffects/without-effects.webp)
 
 And the same image with the effect applied and changes to brightness and contrast:
 
-![Image with effect](/img/user-manual/graphics/posteffects/with-brightness-contrast.png)
+![Image with effect](/img/user-manual/graphics/posteffects/with-brightness-contrast.webp)
 
 The built-in brightness-contrast effect has the following attributes:
 

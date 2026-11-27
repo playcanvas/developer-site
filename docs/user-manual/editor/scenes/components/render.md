@@ -5,7 +5,7 @@ description: PlayCanvas Render component draws mesh primitives or a render asset
 
 The Render Component enables an entity to render a primitive shape or a render asset.
 
-![Render Component](/img/user-manual/editor/scenes/components/component-render.png)
+![Render Component](/img/user-manual/editor/scenes/components/component-render.webp)
 
 <video autoPlay muted loop controls src='/video/editor-shadow-cascade-mask.mp4' style={{width: '100%', height: 'auto'}} />
 

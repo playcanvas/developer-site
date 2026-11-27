@@ -5,7 +5,7 @@ description: PlayCanvas の Camera Component は、投影、クリッピング�
 
 Cameraコンポーネントは、特定の視点からシーンをレンダリングするための機能を提供します。
 
-![Camera Component](/img/user-manual/editor/scenes/components/component-camera.png)
+![Camera Component](/img/user-manual/editor/scenes/components/component-camera.webp)
 
 ## プロパティ
 

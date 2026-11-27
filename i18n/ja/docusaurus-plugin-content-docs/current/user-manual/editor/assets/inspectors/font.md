@@ -15,7 +15,7 @@ Editor 2.30.0以降、アトラスはサーバー側の変換パイプライン�
 
 <video autoPlay muted loop controls src='/video/editor-font-generation.mp4' style={{width: '100%', height: 'auto'}} />
 
-![Font import folder](/img/user-manual/assets/fonts/font-import-folder.png)
+![Font import folder](/img/user-manual/assets/fonts/font-import-folder.webp)
 
 | アセット        | タイプ    | 内容                                                                                       |
 | --------------- | --------- | ------------------------------------------------------------------------------------------ |
@@ -42,7 +42,7 @@ Engine、React、Web Componentsのプロジェクトでは、[font-tools](/user-
 
 ## プロパティ
 
-![Font Asset](/img/user-manual/assets/fonts/font.png)
+![Font Asset](/img/user-manual/assets/fonts/font.webp)
 
 ### ソースファイル (Source Files)
 
@@ -87,7 +87,7 @@ Editorがアトラスを生成するようになる前にインポートされ�
 
 変換はフォントのデータとファイルを置き換えるため、取り消すことができません。そのため事前に確認が表示されます。
 
-![Convert font confirmation](/img/user-manual/assets/fonts/font-convert-confirm.png)
+![Convert font confirmation](/img/user-manual/assets/fonts/font-convert-confirm.webp)
 
 変換されるまで、フォントは **PROPERTIES** パネルに **Intensity** プロパティを保持します。
 

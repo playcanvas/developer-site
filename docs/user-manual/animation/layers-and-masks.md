@@ -39,7 +39,7 @@ Find a layer by name with `findLayer()`, or through the `layers` array.
 
 A state graph asset starts with a base layer, which cannot be deleted. Click **+ LAYER** in the layers panel of the graph editor to add another, and set its **Name**, **Default State**, **Blend Type** and **Blend Weight** there. Choose the layer to edit from the dropdown at the top right of the graph.
 
-![The layers panel of the graph editor, with a Base layer and a Shooting layer, each with a Name, Blend Weight, Blend Type and Default State, and the blend type dropdown open on Overwrite and Additive](/img/user-manual/animation/anim-layer-blend.png)
+![The layers panel of the graph editor, with a Base layer and a Shooting layer, each with a Name, Blend Weight, Blend Type and Default State, and the blend type dropdown open on Overwrite and Additive](/img/user-manual/animation/anim-layer-blend.webp)
 
 The Anim component shows a section for each layer, with a slot for each of its states.
 
@@ -124,11 +124,11 @@ Masks belong to each entity's Anim component, not to the state graph asset, so t
 
 1. Select the entity, and in the Anim component's section for a layer, click **CREATE MASK**.
 
-   ![The Anim component with a state graph that has Base and Shooting layers, each with a CREATE MASK button above its states](/img/user-manual/animation/anim-component-create-mask.png)
+   ![The Anim component with a state graph that has Base and Shooting layers, each with a CREATE MASK button above its states](/img/user-manual/animation/anim-component-create-mask.webp)
 
 2. The mask inspector shows the hierarchy that the component animates, from its **Root Bone**. Check the nodes that the layer should animate. Right-click a node and choose **Add hierarchy** or **Remove hierarchy** to check or uncheck it and everything below it at once.
 
-   ![The mask inspector for a Shooting layer, showing the bones of a character in a tree, each with a checkbox](/img/user-manual/animation/anim-mask-inspector.png)
+   ![The mask inspector for a Shooting layer, showing the bones of a character in a tree, each with a checkbox](/img/user-manual/animation/anim-mask-inspector.webp)
 
 Click **EDIT MASK** to change a mask later, and the delete button beside it to remove it.
 

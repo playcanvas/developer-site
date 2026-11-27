@@ -92,11 +92,11 @@ For more detailed information, refer to the CameraFrame [API documentation](http
 
 Start from the neutral identity LUT below — applying it to a scene produces no change — and modify it in an image editor to create your own grade:
 
-![Neutral identity LUT (256x16)](/img/user-manual/graphics/linear-workflow/lut-neutral.png)
+![Neutral identity LUT (256x16)](/img/user-manual/graphics/linear-workflow/lut-neutral.webp)
 
 An example of an aggressive modification — strong red push, with green and blue heavily reduced:
 
-![Cherry LUT example (256x16)](/img/user-manual/graphics/linear-workflow/lut-cherry.png)
+![Cherry LUT example (256x16)](/img/user-manual/graphics/linear-workflow/lut-cherry.webp)
 
 The LUT texture must be loaded with the following settings — LUTs are authored in sRGB display space and the engine relies on hardware sRGB sampling, so a misconfigured texture produces visibly wrong colors:
 
@@ -155,7 +155,7 @@ The [`camera-frame.mjs`](https://github.com/playcanvas/engine/blob/main/scripts/
 
 This integration streamlines the process of setting up complex camera effects and enhances the overall workflow within the PlayCanvas Editor.
 
-![CameraFrame Script](/img/user-manual/graphics/linear-workflow/camera-frame.png)
+![CameraFrame Script](/img/user-manual/graphics/linear-workflow/camera-frame.webp)
 
 ### Effect Scripts
 

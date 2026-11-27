@@ -13,7 +13,7 @@ GSplatアセットには3D Gaussian Splatデータが含まれています。Pla
 
 [アセットパネル](/user-manual/editor/assets/asset-panel/)でGSplatアセットを選択し、[インスペクター](/user-manual/editor/interface/inspector)で表示できます。
 
-![GSplat Asset Inspector](/img/user-manual/editor/assets/inspectors/asset-inspector-gsplat.png)
+![GSplat Asset Inspector](/img/user-manual/editor/assets/inspectors/asset-inspector-gsplat.webp)
 
 ## Properties
 

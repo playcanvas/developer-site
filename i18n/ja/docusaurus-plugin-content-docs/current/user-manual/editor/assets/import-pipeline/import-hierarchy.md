@@ -19,11 +19,11 @@ PlayCanvasでは、シーン内のエンティティ階層ごとにメッシュ�
 
 「プロジェクト設定」を開きます。
 
-<img loading="lazy" src="/img/user-manual/assets/import-pipeline/import-hierarchy/project-settings.png" width="480" />
+<img loading="lazy" src="/img/user-manual/assets/import-pipeline/import-hierarchy/project-settings.webp" width="480" />
 
 'Asset Import' までスクロールし、 'Import Hierarchy' を有効にします。
 
-<img loading="lazy" src="/img/user-manual/assets/import-pipeline/import-hierarchy/asset-tasks.png" width="360" />
+<img loading="lazy" src="/img/user-manual/assets/import-pipeline/import-hierarchy/asset-tasks.webp" width="360" />
 
 ## モデルのインポート
 
@@ -35,7 +35,7 @@ PlayCanvasでは、シーン内のエンティティ階層ごとにメッシュ�
 
 インポート時に次のアセットが作成されます。
 
-![Created Assets](/img/user-manual/assets/import-pipeline/import-hierarchy/created-assets.png)
+![Created Assets](/img/user-manual/assets/import-pipeline/import-hierarchy/created-assets.webp)
 
 | アセットタイプ | 説明 |
 |------------|-------------|

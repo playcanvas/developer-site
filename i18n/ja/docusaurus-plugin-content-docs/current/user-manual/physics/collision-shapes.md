@@ -188,7 +188,7 @@ chair.addChild(seat);
 
 親に**Type**を**Compound**にした**Collision**コンポーネントと**Rigid Body**コンポーネントを付けます。部品ごとに子エンティティを追加し、プリミティブタイプの**Collision**コンポーネントを付けて、親に対する位置と回転を設定します。
 
-![Compound shapes setup](/img/user-manual/physics/compound-shape-chair-setup.png)
+![Compound shapes setup](/img/user-manual/physics/compound-shape-chair-setup.webp)
 
 </TabItem>
 <TabItem value="react" label="React">

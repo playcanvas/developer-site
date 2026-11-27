@@ -5,7 +5,7 @@ description: PlayCanvas の Particle System Component は、発生率、寿命�
 
 Particle Systemコンポーネントは、3D空間内でパーティクルエミッターを指定します。
 
-![Particle System Component](/img/user-manual/editor/scenes/components/component-particlesystem.png)
+![Particle System Component](/img/user-manual/editor/scenes/components/component-particlesystem.webp)
 
 ## プロパティ
 

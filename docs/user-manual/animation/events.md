@@ -38,7 +38,7 @@ Select an animation asset in the Assets panel, and click **+ EVENT** in the **EV
 | **number** | A number to pass to the listeners, as `number`. |
 | **string** | A string to pass to the listeners, as `string`. |
 
-![The Inspector for an animation asset, showing its duration and name, and an events panel with two foot_step events](/img/user-manual/animation/animation-asset-with-events.png)
+![The Inspector for an animation asset, showing its duration and name, and an events panel with two foot_step events](/img/user-manual/animation/animation-asset-with-events.webp)
 
 </TabItem>
 <TabItem value="react" label="React">

@@ -70,19 +70,19 @@ There are several common parameters that are used in each endpoint:
 
 This can be found in the URL on the project overview page.
 
-![Project ID](/img/user-manual/api/project-id.png)
+![Project ID](/img/user-manual/api/project-id.webp)
 
 ### scenes {#scenes}
 
 When opening a scene in the Editor, the scene id is in the URL.
 
-![Scene ID](/img/user-manual/api/scene-id.png)
+![Scene ID](/img/user-manual/api/scene-id.webp)
 
 ### branch_id {#branch_id}
 
 This is found in the [version control](/user-manual/editor/version-control/) panel and can be selected and copied.
 
-![Branch ID](/img/user-manual/api/branch-id.png)
+![Branch ID](/img/user-manual/api/branch-id.webp)
 
 ## Response Format {#response-format}
 

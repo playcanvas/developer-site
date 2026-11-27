@@ -13,23 +13,23 @@ Engine V2では、シーンの一部の設定方法と、エンジンの一部�
 
 Engine V1では、ガンマとトーンマッピングはRendering設定でシーン全体に対して設定していました。Engine V2ではカメラごとに設定するため、すべてのCameraコンポーネントに **Tonemapping** と **Gamma** のフィールドがあります。
 
-<img loading="lazy" src='/img/user-manual/editor/editor-v2/gamma-tonemap.png' alt='CameraコンポーネントのTonemappingとGammaのフィールド' width='400px' />
+<img loading="lazy" src='/img/user-manual/editor/editor-v2/gamma-tonemap.webp' alt='CameraコンポーネントのTonemappingとGammaのフィールド' width='400px' />
 
 アップグレードでは、開いているシーンのガンマとトーンマッピングがそのシーンの各カメラにコピーされ、値が変わったカメラがConsoleに表示されます。プロジェクトのほかのシーンのカメラは変更されないので、それぞれのシーンを開いてカメラを確認してください。
 
 Viewportには独自のガンマとトーンマッピングがあり、Editorでのシーンの見え方だけに影響します。[Editor設定](/user-manual/editor/interface/settings/editor/)の **Camera Tonemapping** と **Camera Gamma** で設定します。
 
-<img loading="lazy" src='/img/user-manual/editor/editor-v2/settings-editor.png' alt='Editor設定にあるViewportのガンマとトーンマッピング' width='400px' />
+<img loading="lazy" src='/img/user-manual/editor/editor-v2/settings-editor.webp' alt='Editor設定にあるViewportのガンマとトーンマッピング' width='400px' />
 
 ### sRGBテクスチャ {#srgb-textures}
 
 Engine V2では、各テクスチャがsRGBかどうかを指定する必要があります。ディフューズマップやエミッシブマップなど色を保存するテクスチャは、正確な色のためにsRGBにします。法線マップなどそれ以外のデータを保存するテクスチャはsRGBにしません。この設定はテクスチャアセットのパネルにあります。
 
-<img loading="lazy" src='/img/user-manual/editor/editor-v2/srgb-texture.png' alt='テクスチャアセットのsRGB設定' width='400px' />
+<img loading="lazy" src='/img/user-manual/editor/editor-v2/srgb-texture.webp' alt='テクスチャアセットのsRGB設定' width='400px' />
 
 Editorは、各テクスチャの設定を、そのテクスチャが使われている場所と照らし合わせて確認します。対応が必要なテクスチャがあると、Editor下部のステータスバーに **N audits found** と表示され、影響を受けるテクスチャやテクスチャアトラスと使用場所がConsoleに表示されます。
 
-<img loading="lazy" src='/img/user-manual/editor/editor-v2/console-texture.png' alt='テクスチャのsRGB設定に関するConsoleのメッセージ' width='600px' />
+<img loading="lazy" src='/img/user-manual/editor/editor-v2/console-texture.webp' alt='テクスチャのsRGB設定に関するConsoleのメッセージ' width='600px' />
 
 - **N audits found** を選択してから **Fix issues** を選ぶと、すべての使用場所で同じ設定が必要なテクスチャが修正されます。
 - 使用場所によって必要な設定が異なる競合は、1つずつ解決します。Consoleのメッセージを選択すると、その使用場所に移動します。同じ画像を両方の用途で使うには、テクスチャを複製して、用途ごとに別のコピーを使ってください。

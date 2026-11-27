@@ -11,7 +11,7 @@ ESM Scripts do not have an explicit loading order, and should not be relied upon
 
 Generally all scripts are loaded at the beginning of your application. The loading order is a project setting. To change it, open the [Settings](../interface/settings/index.md) and expand the `SCRIPTS LOADING ORDER` panel, or click **MANAGE** next to **Loading Order** in the Inspector of a script asset.
 
-![Loading Order List](/img/user-manual/scripting/loading-order-list.jpg)
+![Loading Order List](/img/user-manual/scripting/loading-order-list.webp)
 
 The panel lists the scripts marked as `preload`, numbered in the order that they are loaded and executed in. You can click-and-drag to move individual scripts around to edit the order. Preloaded [ESM Scripts](#esm-scripts) appear in the list too, but the loading order only applies to Classic scripts.
 

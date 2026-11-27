@@ -20,7 +20,7 @@ description: 画像をインポートし、パネルで Asset を作成し、Ins
 
 PlayCanvasエディターのインターフェイスから新しいキューブマップアセットを直接作成することができます。アセットパネルの「Create Asset」メニューを使用してください。
 
-![Cubemap Creation](/img/user-manual/assets/cubemaps/cubemap-create.png)
+![Cubemap Creation](/img/user-manual/assets/cubemaps/cubemap-create.webp)
 
 これにより、新しいキューブマップアセットが作成され、画面の右側にキューブマップエディターが開きます。
 
@@ -28,7 +28,7 @@ PlayCanvasエディターのインターフェイスから新しいキューブ�
 
 キューブマップを選択して編集するには、アセットパネルで選択します。これを行う最も簡単な方法は、キューブマップフィルタを選択して選択オプションを絞り込むことです。キューブマップは十字形のサムネイルで識別されます。
 
-![Cubemap Thumbnails](/img/user-manual/assets/cubemaps/cubemap-thumbnails.png)
+![Cubemap Thumbnails](/img/user-manual/assets/cubemaps/cubemap-thumbnails.webp)
 
 キューブマップが選択されると、エディタの右側にインスペクタパネルが読み込まれます。
 
@@ -36,7 +36,7 @@ PlayCanvasエディターのインターフェイスから新しいキューブ�
 
 キューブマップが選択されたら、そのプロパティを編集できます。
 
-![Cubemap Properties](/img/user-manual/assets/cubemaps/cubemap-properties.png)
+![Cubemap Properties](/img/user-manual/assets/cubemaps/cubemap-properties.webp)
 
 ### フィルタリング (Filtering)
 
@@ -48,7 +48,7 @@ Anisotropyは、カメラのビューベクトルがテクスチャの表面と�
 
 ## テクスチャの割り当て
 
-![Cubemap Preview](/img/user-manual/assets/cubemaps/cubemap-preview.png)
+![Cubemap Preview](/img/user-manual/assets/cubemaps/cubemap-preview.webp)
 
 キューブマップのプレビューパネルでは、キューブマップの六つの面が十字の形に展開されて表示されます。展開されたダンボール箱のようなイメージです。キューブマップを構築するには、単にアセットパネルからテクスチャアセットをプレビューパネルの各面のスロットにドラッグ＆ドロップします。また、キューブマップの面のスロットを選択し、アセットパネルからTextureアセットを選択することもできます。
 
@@ -81,7 +81,7 @@ Cubemapの面は以下の条件を満たす必要があります。
 
 デフォルトのPhongと物理マテリアルにはどちらも反射プロパティがあります。Environmentプロパティを展開すると、次のようになります。
 
-![Cubemap Material](/img/user-manual/assets/cubemaps/cubemap-material.png)
+![Cubemap Material](/img/user-manual/assets/cubemaps/cubemap-material.webp)
 
 空のスロットをクリックしてキューブマップを選択するか、アセットパネルからCubemapアセットをドラッグアンドドロップしてCubemapスロットに配置することができます。
 
@@ -108,7 +108,7 @@ Cubemapの面は以下の条件を満たす必要があります。
 7. 'Reproject' ボタンを押して、キューブマップに変換します。
 8. 'Export to PNG' または 'Export to HDR' を押して、6つの個別のキューブマップフェイステクスチャをダウンロードしてPlayCanvasにアップロードする準備を整えます。
 
-![PlayCanvas Texture Tool](/img/user-manual/assets/cubemaps/playcanvas-texture-tool-convert.png)
+![PlayCanvas Texture Tool](/img/user-manual/assets/cubemaps/playcanvas-texture-tool-convert.webp)
 
 他のキューブマップへの変換を行うことができるツールには以下があります。
 

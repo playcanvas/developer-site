@@ -5,7 +5,7 @@ description: Assets パネルでフォルダを整理し、Asset をアップロ
 
 アセットパネルは、プロジェクトで利用可能なすべてのアセットを管理します。ここから、アセットの作成、アップロード、削除、検査、編集を行うことができます。
 
-![アセットパネル](/img/user-manual/editor/assets-panel.png)
+![アセットパネル](/img/user-manual/editor/assets-panel.webp)
 
 ## フォルダ階層 {#folder-hierarchy}
 
@@ -77,27 +77,27 @@ description: Assets パネルでフォルダを整理し、Asset をアップロ
 
 プロジェクト間でアセットまたはアセットの選択をコピーするには、アセットを選択して右クリックし、コンテキストメニューを表示して「Copy」を選択します。読み取り専用プロジェクトのためコンテキストメニューが利用できない場合は、代わりにホットキー <kbd>Ctrl</kbd>+<kbd>C</kbd>（macOSでは<kbd>Cmd</kbd>+<kbd>C</kbd>） を使用できます。
 
-<img loading="lazy" src="/img/user-manual/editor/assets-panel/right-click-copy.png" alt="右クリックコピーメニュー" width="500" />
+<img loading="lazy" src="/img/user-manual/editor/assets-panel/right-click-copy.webp" alt="右クリックコピーメニュー" width="500" />
 
 アセットをコピーしたいプロジェクトで、アセットパネルを右クリックし、「Paste」を選択します。代わりに <kbd>Ctrl</kbd>+<kbd>V</kbd>（macOSでは<kbd>Cmd</kbd>+<kbd>V</kbd>） ホットキーを使用できます。
 
-<img loading="lazy" src="/img/user-manual/editor/assets-panel/right-click-paste.png" alt="右クリックペーストメニュー" width="500" />
+<img loading="lazy" src="/img/user-manual/editor/assets-panel/right-click-paste.webp" alt="右クリックペーストメニュー" width="500" />
 
 アセットをコピー＆ペーストすると、そのアセットの依存関係もコピーされます。たとえば、ここには 2 つのマテリアルを参照するモデルがあり、それらは一連のテクスチャを参照しています。
 
-<img loading="lazy" src="/img/user-manual/editor/assets-panel/copy-and-paste-model-with-dependencies.png" alt="モデルの例" width="100%" />
+<img loading="lazy" src="/img/user-manual/editor/assets-panel/copy-and-paste-model-with-dependencies.webp" alt="モデルの例" width="100%" />
 
 モデルアセットだけを別のプロジェクトにコピー＆ペーストすると、それらのアセット依存関係もコピーされます。
 
-<img loading="lazy" src="/img/user-manual/editor/assets-panel/pasted-reference-assets.png" alt="ペーストされた参照アセット" width="100%" />
+<img loading="lazy" src="/img/user-manual/editor/assets-panel/pasted-reference-assets.webp" alt="ペーストされた参照アセット" width="100%" />
 
 デフォルトでは、フラットな階層としてペーストされます。フォルダ構造を維持したい場合は、コンテキストメニューを開いているときに <kbd>Shift</kbd>キーを押し続けると、「Paste (keep folders)」というオプションが表示されます。これにより、ペースト先のフォルダをルートフォルダとして使用してフォルダ構造を維持しようとします。
 
-<img loading="lazy" src="/img/user-manual/editor/assets-panel/right-click-paste-keep-folders.png" alt="右クリックペースト（フォルダ保持）メニュー" width="500" />
+<img loading="lazy" src="/img/user-manual/editor/assets-panel/right-click-paste-keep-folders.webp" alt="右クリックペースト（フォルダ保持）メニュー" width="500" />
 
 結果として、フォルダ構造が保持された以下のようになります：
 
-<img loading="lazy" src="/img/user-manual/editor/assets-panel/pasted-assets-keep-folders.png" alt="フォルダ付きでペーストされた参照アセット" width="100%" />
+<img loading="lazy" src="/img/user-manual/editor/assets-panel/pasted-assets-keep-folders.webp" alt="フォルダ付きでペーストされた参照アセット" width="100%" />
 
 再利用可能なライブラリやアセットにこの機能を使用する場合は、他のプロジェクトに簡単にコピー＆ペーストできるルートレベルのフォルダに含めることをお勧めします。これにより、プロジェクトのフォルダ構造がよりシンプルでクリーンに保たれます。
 
@@ -111,7 +111,7 @@ description: Assets パネルでフォルダを整理し、Asset をアップロ
 
 特定のシーン内でアセットがどこで使用（または参照）されているかを知ることが役立つ場合があります。エディタがアセットの参照を検出できない場合、サムネイルに小さなドットが表示されます：
 
-![未参照アセット](/img/user-manual/editor/assets-panel/unreferenced-asset.png)
+![未参照アセット](/img/user-manual/editor/assets-panel/unreferenced-asset.webp)
 
 :::warning
 
@@ -121,6 +121,6 @@ description: Assets パネルでフォルダを整理し、Asset をアップロ
 
 アセットに参照がある場合は、参照コンテンツメニュー項目から確認できます：
 
-![アセット参照](/img/user-manual/editor/assets-panel/asset-references.png)
+![アセット参照](/img/user-manual/editor/assets-panel/asset-references.webp)
 
 参照を選択すると、インスペクターパネルに読み込まれます。

@@ -19,7 +19,7 @@ PlayCanvas Editor では、JavaScript コードは Script Asset に格納され�
 3. スクリプトの作成：
     * 目的のフォルダー内（または Asset Panel のルート）で右クリックします。
     * New Asset > Script を選択します。
-    ![New Script](/img/user-manual/scripting/new-script.png)
+    ![New Script](/img/user-manual/scripting/new-script.webp)
     * ポップアップで、新しいスクリプトのファイル名を入力します。
 
 :::tip
@@ -53,7 +53,7 @@ Script Asset 自体は、Script Component を介して Entity にアタッチさ
 3. **Script Asset を Script Component に割り当てる：**
     * Script Component には編集ボックス（「+ ADD SCRIPT」というテキストが表示されています）があります。編集ボックス内をクリックしてフォーカスします。
     * ドロップダウン/検索ボックスが表示されます。スクリプトの名前を入力するか、リストを参照して選択します。
-    ![Select Script](/img/user-manual/scripting/select-script.png)
+    ![Select Script](/img/user-manual/scripting/select-script.webp)
     * 1つの Script Component に複数の Script Asset を追加できます。通常、それらのライフサイクルメソッド（initialize、update など）は「Scripts」配列に表示される順序で実行されますが、依存関係は postInitialize やイベントを使用して管理する方が適切です。
 
 :::note

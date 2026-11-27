@@ -54,7 +54,7 @@ The screen entityには、`leaderboard`スクリプトを含むScriptコンポ�
 
 Group Elementには分割された水平アンカーがあることに注意してください:
 
-![Split Anchors](/img/tutorials/ui/leaderboard/split-anchors.png)
+![Split Anchors](/img/tutorials/ui/leaderboard/split-anchors.webp)
 
 水平アンカーは等しくない（0と1です）ので、スクリーンがリサイズされると、エレメントは自動的に全体の水平領域を埋めるように拡大します。また、エッジから少し離れた小さなギャップを許容するために、水平マージンは50ピクセルに設定されています - マージンはアンカーが分割されたときにのみ設定することができます。
 

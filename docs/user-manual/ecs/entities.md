@@ -31,7 +31,7 @@ In a [script](/user-manual/scripting/), the root is `this.app.root`, and `this.e
 
 Click **+** at the top of the [Hierarchy](/user-manual/editor/interface/hierarchy/), or right-click an entity and choose **New Entity**. The menu offers an empty **Entity** and ready-made ones, such as **3D › Box** and **Light › Spot Light**, that already have the components their names say. A new entity is added as a child of the selected entity, so select its parent first. Press <kbd>Ctrl</kbd>+<kbd>E</kbd> (<kbd>Cmd</kbd>+<kbd>E</kbd> on macOS) to add an empty entity without the menu.
 
-![The Hierarchy panel, showing the Root entity at the top and nested entities below it, with the add, duplicate and delete buttons in its header](/img/user-manual/editor/hierarchy/hierarchy-panel.png)
+![The Hierarchy panel, showing the Root entity at the top and nested entities below it, with the add, duplicate and delete buttons in its header](/img/user-manual/editor/hierarchy/hierarchy-panel.webp)
 
 To create entities while the application runs, use the Engine API from a script.
 

@@ -13,11 +13,11 @@ description: レガシーの色相・彩度 Script エフェクトのコント�
 
 これはエフェクトをかけていない画像です。
 
-![Image without effect](/img/user-manual/graphics/posteffects/without-effects.png)
+![Image without effect](/img/user-manual/graphics/posteffects/without-effects.webp)
 
 これがエフェクトをかけて色調と彩度を調整した画像です:
 
-![Image with effect](/img/user-manual/graphics/posteffects/with-hue-saturation.png)
+![Image with effect](/img/user-manual/graphics/posteffects/with-hue-saturation.webp)
 
 ビルトインの色調-彩度エフェクトは以下の様な属性値が設定されています:
 

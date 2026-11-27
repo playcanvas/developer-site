@@ -22,7 +22,7 @@ The use of batching is currently not compatible with [runtime lightmaps](/user-m
 
 ## Creating Batch Groups
 
-![Creating Batch Groups](/img/user-manual/optimization/batching/batch-groups.jpg)
+![Creating Batch Groups](/img/user-manual/optimization/batching/batch-groups.webp)
 
 Batch Groups can be created from the Batch Groups section of the [scene settings panel](/user-manual/editor/interface/settings/batch-groups/). Each batch group has a number of properties that are used to give the engine hints about how to create batches from this batch group.
 
@@ -34,7 +34,7 @@ Batch Groups can be created from the Batch Groups section of the [scene settings
 
 ## Adding a component to a Batch Group
 
-![Selecting Batch Groups](/img/user-manual/optimization/batching/model-component.jpg)
+![Selecting Batch Groups](/img/user-manual/optimization/batching/model-component.webp)
 
 The Model component has a Batch Group property to assign a model into a batch group.
 
@@ -69,7 +69,7 @@ if (element.batchGroupId)
 
 ## Example - Batching a static environment
 
-![Western Scene](/img/user-manual/optimization/batching/western-scene.jpg)
+![Western Scene](/img/user-manual/optimization/batching/western-scene.webp)
 
 In this scene we have created a static environment from 7 separate model files, some of which are repeated in the scene. For example, the road tile is used in 50 entities to create the long road through the center of the scene.
 

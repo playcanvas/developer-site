@@ -18,7 +18,7 @@ Buttonコンポーネントは、2つのトランジションモードで使用�
 
 ## スプライトチェンジ (Sprite Change)・プロパティ
 
-![Sprite Change Button](/img/user-manual/editor/scenes/components/component-button-sprite-change.png)
+![Sprite Change Button](/img/user-manual/editor/scenes/components/component-button-sprite-change.webp)
 
 | プロパティ名        | 説明 |
 |-----------------|-------------|
@@ -31,7 +31,7 @@ Buttonコンポーネントは、2つのトランジションモードで使用�
 
 ## ティントプロパティ (Tint Properties)
 
-![Tint Button](/img/user-manual/editor/scenes/components/component-button-tint.png)
+![Tint Button](/img/user-manual/editor/scenes/components/component-button-tint.webp)
 
 | プロパティ名      | 説明 |
 |---------------|-------------|

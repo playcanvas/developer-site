@@ -81,7 +81,7 @@ Open your project, right click in the assets panel and click on 'Paste'
 
 ### ジョイスティック値の読み取り
 
-![](/img/tutorials/touchscreen-joypad-controls/joystick-deadzone-range.png)
+![](/img/tutorials/touchscreen-joypad-controls/joystick-deadzone-range.webp)
 
 赤い円は死角であり、ノブの位置がその円内にある場合、ジョイスティックの値は両方の軸とも0を返します。青い円は範囲で、ノブはその円の外に出ることはできません。
 

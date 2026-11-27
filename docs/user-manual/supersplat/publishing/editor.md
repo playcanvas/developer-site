@@ -25,7 +25,7 @@ To publish your splat:
 2. Select `Publish`.
 3. Fill out the options in the Publish dialog:
 
-   <img loading="lazy" alt="Publish Settings" width="400" src="/img/user-manual/supersplat/editor/publish-settings.png" />
+   <img loading="lazy" alt="Publish Settings" width="400" src="/img/user-manual/supersplat/editor/publish-settings.webp" />
 
    | Option | Description |
    |--------|-------------|

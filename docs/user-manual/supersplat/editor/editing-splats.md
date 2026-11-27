@@ -52,7 +52,7 @@ Each Scene Manager row represents an imported splat, while the selection tools a
 
 Two of the toolbar buttons hold a pair of tools: **Polygon** / **Lasso** and **Eyedropper** / **Flood**. Click the button to activate the tool it currently shows, or press and hold it to choose the other; the button then remembers your choice. The keyboard shortcuts always activate a specific tool.
 
-<img loading="lazy" alt="The bottom toolbar with the Polygon / Lasso popup open" width="688" src="/img/user-manual/supersplat/editor/bottom-toolbar.png" />
+<img loading="lazy" alt="The bottom toolbar with the Polygon / Lasso popup open" width="688" src="/img/user-manual/supersplat/editor/bottom-toolbar.webp" />
 
 ### Selection Modifiers {#selection-modifiers}
 

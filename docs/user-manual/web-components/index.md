@@ -54,37 +54,37 @@ The same tags scale from one sphere to complete, polished experiences. Each of t
 <div className="row path-cards">
   <div className="col col--4">
     <Link className="card path-card showcase-card" to="https://playcanvas.github.io/web-components/examples/#car-configurator.html">
-      <div className="card__image"><img src="/img/user-manual/web-components/showcases/car-configurator.jpg" alt="A silver sports car above a row of paint swatches" width="960" height="540" loading="lazy" /></div>
+      <div className="card__image"><img src="/img/user-manual/web-components/showcases/car-configurator.webp" alt="A silver sports car above a row of paint swatches" width="960" height="540" loading="lazy" /></div>
       <div className="card__body"><h3>Car Configurator</h3><p>Pick a paint and watch a sports car change color.</p></div>
     </Link>
   </div>
   <div className="col col--4">
     <Link className="card path-card showcase-card" to="https://playcanvas.github.io/web-components/examples/#product-viewer.html">
-      <div className="card__image"><img src="/img/user-manual/web-components/showcases/product-viewer.jpg" alt="A camera drone beside a panel with Explode all and Reset buttons" width="960" height="540" loading="lazy" /></div>
+      <div className="card__image"><img src="/img/user-manual/web-components/showcases/product-viewer.webp" alt="A camera drone beside a panel with Explode all and Reset buttons" width="960" height="540" loading="lazy" /></div>
       <div className="card__body"><h3>Product Viewer</h3><p>Hover a drone's parts to highlight them, and click to pull them out of the assembly.</p></div>
     </Link>
   </div>
   <div className="col col--4">
     <Link className="card path-card showcase-card" to="https://playcanvas.github.io/web-components/examples/#solar-system.html">
-      <div className="card__image"><img src="/img/user-manual/web-components/showcases/solar-system.jpg" alt="The Sun beside a panel of facts about it" width="960" height="540" loading="lazy" /></div>
+      <div className="card__image"><img src="/img/user-manual/web-components/showcases/solar-system.webp" alt="The Sun beside a panel of facts about it" width="960" height="540" loading="lazy" /></div>
       <div className="card__body"><h3>Solar System</h3><p>Scroll the page to travel from the Sun out past eight worlds.</p></div>
     </Link>
   </div>
   <div className="col col--4">
     <Link className="card path-card showcase-card" to="https://playcanvas.github.io/web-components/examples/#basic-splat.html">
-      <div className="card__image"><img src="/img/user-manual/web-components/showcases/basic-splat.jpg" alt="A Gaussian splat capture of a marble angel in a domed hall" width="960" height="540" loading="lazy" /></div>
+      <div className="card__image"><img src="/img/user-manual/web-components/showcases/basic-splat.webp" alt="A Gaussian splat capture of a marble angel in a domed hall" width="960" height="540" loading="lazy" /></div>
       <div className="card__body"><h3>Gaussian Splats</h3><p>Render a photoreal 3D capture with the <code>&lt;pc-gsplat&gt;</code> tag.</p></div>
     </Link>
   </div>
   <div className="col col--4">
     <Link className="card path-card showcase-card" to="https://playcanvas.github.io/web-components/examples/#third-person-controller.html">
-      <div className="card__image"><img src="/img/user-manual/web-components/showcases/third-person-controller.jpg" alt="An animated character standing in a stone courtyard under great arches" width="960" height="540" loading="lazy" /></div>
+      <div className="card__image"><img src="/img/user-manual/web-components/showcases/third-person-controller.webp" alt="An animated character standing in a stone courtyard under great arches" width="960" height="540" loading="lazy" /></div>
       <div className="card__body"><h3>Third Person Controller</h3><p>Walk, run and jump through a courtyard, with physics and blended animation.</p></div>
     </Link>
   </div>
   <div className="col col--4">
     <Link className="card path-card showcase-card" to="https://playcanvas.github.io/web-components/examples/#clock-tower.html">
-      <div className="card__image"><img src="/img/user-manual/web-components/showcases/clock-tower.jpg" alt="A lamp lighting the mechanism behind a clock face in a dusty belfry" width="960" height="540" loading="lazy" /></div>
+      <div className="card__image"><img src="/img/user-manual/web-components/showcases/clock-tower.webp" alt="A lamp lighting the mechanism behind a clock face in a dusty belfry" width="960" height="540" loading="lazy" /></div>
       <div className="card__body"><h3>Clock Tower</h3><p>A clock mechanism set to your local time, with dusty light and chimes.</p></div>
     </Link>
   </div>

@@ -79,7 +79,7 @@ cordova run ios
 
 Once the build finishes, Simulator starts and opens the app:
 
-![Master Archer in Simulator](/img/user-manual/publishing/mobile/simulator-master-archer.png)
+![Master Archer in Simulator](/img/user-manual/publishing/mobile/simulator-master-archer.webp)
 
 To run the app on an iPhone or iPad:
 
@@ -88,11 +88,11 @@ To run the app on an iPhone or iPad:
 3. In the **Signing & Capabilities** settings of your app's target, select a **Team** so that Xcode can sign the app.
 4. Select your device in the scheme menu.
 
-    ![Xcode scheme menu](/img/user-manual/publishing/mobile/xcode-scheme.png)
+    ![Xcode scheme menu](/img/user-manual/publishing/mobile/xcode-scheme.webp)
 
 5. Select **Run** to build the app, install it and open it on the device.
 
-    ![Xcode Run button](/img/user-manual/publishing/mobile/xcode-run.png)
+    ![Xcode Run button](/img/user-manual/publishing/mobile/xcode-run.webp)
 
 When you're happy with the app, upload it to [App Store Connect](https://developer.apple.com/app-store-connect/).
 
