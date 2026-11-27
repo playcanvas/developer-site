@@ -98,9 +98,11 @@ SDKはZIP形式でダウンロードされます。解凍してください: `ph
 
 **photon.min.js**をエディターのAssetsパネルにドラッグ&ドロップしてください。
 
-#### Loading Typeを「Asset」から「Before Engine」に変更
+#### Loading Typeは「Asset」のまま
 
-![Change Loading Type](/img/tutorials/multiplayer-photon/10.webp)
+![Loading Type](/img/tutorials/multiplayer-photon/10.webp)
+
+**Loading Type**は**Asset**のまま、**Preload**はチェックしたままにしてください。どちらもアップロード直後の設定です。こうすると、エンジンはどのスクリプトの`initialize`よりも前にSDKを読み込み、SDKがグローバルな`Photon`オブジェクトを定義します。**Before Engine**は選ばないでください。ESMスクリプトを使うプロジェクトでは、LauncherがBefore EngineのスクリプトをJavaScriptモジュールとして読み込むため、`Photon`がグローバルにならず、スクリプトから見つけられません。
 
 ## マルチプレイヤー実装
 
@@ -185,7 +187,7 @@ export class PhotonLoadBalancingPlayCanvas extends Script {
     region = Region['Japan, Tokyo'];
 
     initialize() {
-        // The Photon SDK must be in the project, loaded before the engine
+        // The Photon SDK must be in the project, preloaded as an asset
         if (!window.Photon) {
             console.error('Photon is not defined. Add the Photon Realtime JavaScript SDK to the project: https://developer.playcanvas.com/tutorials/real-time-multiplayer-photon/');
             return;
@@ -274,7 +276,7 @@ this.loadBalancingClient = new Photon.LoadBalancing.LoadBalancingClient( this.ws
 
 ```javascript
 initialize() {
-    // The Photon SDK must be in the project, loaded before the engine
+    // The Photon SDK must be in the project, preloaded as an asset
     if (!window.Photon) {
         console.error('Photon is not defined. Add the Photon Realtime JavaScript SDK to the project: https://developer.playcanvas.com/tutorials/real-time-multiplayer-photon/');
         return;
@@ -330,7 +332,7 @@ connectToRegionMaster を実行してロビーに接続できた場合はJoinedL
 
 ```javascript
 initialize() {
-    // The Photon SDK must be in the project, loaded before the engine
+    // The Photon SDK must be in the project, preloaded as an asset
     if (!window.Photon) {
         console.error('Photon is not defined. Add the Photon Realtime JavaScript SDK to the project: https://developer.playcanvas.com/tutorials/real-time-multiplayer-photon/');
         return;
@@ -412,7 +414,7 @@ import { Script, Entity } from 'playcanvas';
 // ...
 
 initialize() {
-    // The Photon SDK must be in the project, loaded before the engine
+    // The Photon SDK must be in the project, preloaded as an asset
     if (!window.Photon) {
         console.error('Photon is not defined. Add the Photon Realtime JavaScript SDK to the project: https://developer.playcanvas.com/tutorials/real-time-multiplayer-photon/');
         return;
@@ -662,7 +664,7 @@ export class PhotonLoadBalancingPlayCanvas extends Script {
     region = Region['Japan, Tokyo'];
 
     initialize() {
-        // The Photon SDK must be in the project, loaded before the engine
+        // The Photon SDK must be in the project, preloaded as an asset
         if (!window.Photon) {
             console.error('Photon is not defined. Add the Photon Realtime JavaScript SDK to the project: https://developer.playcanvas.com/tutorials/real-time-multiplayer-photon/');
             return;
