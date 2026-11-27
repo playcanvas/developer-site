@@ -122,11 +122,11 @@ UiController.prototype.initialize = function() {
 
 The first step is to add the Google SDK integration files which we can do by copying the folder 'Google H5 Games Ads' from the [Flappy Bird project](https://playcanvas.com/project/877568/overview/google-h5-ads-demo).
 
-<StepVideo src="/video/tutorials/google-afg/copy-afg-folder.mp4" poster="/img/tutorials/google-afg/copy-afg-folder.webp" width={1516} height={638} />
+<StepVideo src="/video/tutorials/google-afg/copy-afg-folder.mp4" poster="/img/tutorials/google-afg/copy-afg-folder.webp" width={858} height={344} label="Right-clicking the Google H5 Games Ads folder in the Flappy Bird project and selecting Copy" />
 
 And pasting into our fork of the tutorial project.
 
-<StepVideo src="/video/tutorials/google-afg/paste-afg-folder.mp4" poster="/img/tutorials/google-afg/paste-afg-folder.webp" width={858} height={344} />
+<StepVideo src="/video/tutorials/google-afg/paste-afg-folder.mp4" poster="/img/tutorials/google-afg/paste-afg-folder.webp" width={858} height={344} label="Right-clicking the Assets panel of the forked tutorial project and selecting Paste" />
 
 Let's take a look inside:
 

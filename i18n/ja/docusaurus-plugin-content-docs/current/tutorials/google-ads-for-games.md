@@ -120,11 +120,11 @@ UiController.prototype.initialize = function() {
 
 まず、Google SDKの統合ファイルを追加していきます。これは、[Flappy Birdプロジェクト](https://playcanvas.com/project/877568/overview/google-h5-ads-demo)から「Google H5 Games Ads」フォルダをコピーして、チュートリアルプロジェクトのフォークに貼り付けることで行います。
 
-<StepVideo src="/video/tutorials/google-afg/copy-afg-folder.mp4" poster="/img/tutorials/google-afg/copy-afg-folder.webp" width={1516} height={638} />
+<StepVideo src="/video/tutorials/google-afg/copy-afg-folder.mp4" poster="/img/tutorials/google-afg/copy-afg-folder.webp" width={858} height={344} label="Flappy Bird プロジェクトの Google H5 Games Ads フォルダを右クリックして Copy を選択" />
 
 そして、フォークされたチュートリアルプロジェクトに貼り付けます。
 
-<StepVideo src="/video/tutorials/google-afg/paste-afg-folder.mp4" poster="/img/tutorials/google-afg/paste-afg-folder.webp" width={858} height={344} />
+<StepVideo src="/video/tutorials/google-afg/paste-afg-folder.mp4" poster="/img/tutorials/google-afg/paste-afg-folder.webp" width={858} height={344} label="フォークしたチュートリアルプロジェクトの Assets パネルを右クリックして Paste を選択" />
 
 中身を見てみましょう。
 
