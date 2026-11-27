@@ -54,7 +54,13 @@ npm start
 
 The server listens for WebSocket connections on `ws://localhost:2567`. While it runs, the PlayCanvas project can connect to it, whether you launch the project from the Editor or play the demo at the top of this page.
 
-The first time the project connects, your browser asks whether the page may access other apps and services on this device. Select **Allow**. Browsers ask because a page on the internet is connecting to a program on your own computer. If you blocked it, select the icon at the left of the address bar, reset the site's permissions and reload the page. Safari may refuse to let a page on the internet connect to `localhost`, so use Chrome, Edge or Firefox.
+Your browser may ask whether the page can access apps and services on your device, because a page on the internet is connecting to a program on your own computer. Select **Allow**.
+
+:::note
+
+Safari may refuse to let a page on the internet connect to `localhost`. If the project can't connect, use Chrome, Edge or Firefox. If you blocked the browser's request, select the icon at the left of the address bar, reset the site's permissions and reload the page.
+
+:::
 
 To start a server of your own from scratch instead, run `npm create colyseus-app@latest ./my-server` and follow the prompts.
 
