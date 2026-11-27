@@ -4,7 +4,7 @@ description: Split the canvas into separate camera viewports by adjusting each c
 tags: [rendering, camera]
 kind: sample
 topic: Cameras
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/443666/FA3675-image-75.jpg
+thumb: /img/tutorials/multiple-viewport-rendering/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

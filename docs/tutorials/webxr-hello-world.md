@@ -4,7 +4,7 @@ description: Enter immersive VR from a minimal scene with a WebXR-ready camera r
 tags: [vr]
 kind: sample
 topic: XR
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/433339/4FCAA6-image-75.jpg
+thumb: /img/tutorials/webxr-hello-world/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

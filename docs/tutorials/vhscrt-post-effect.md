@@ -4,7 +4,7 @@ description: Stack scanlines, roll, and color bleed in a fullscreen pass to mimi
 tags: [posteffects]
 kind: sample
 topic: Shaders and Post Effects
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/373076/0WJ6Y8-image-75.jpg
+thumb: /img/tutorials/vhscrt-post-effect/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

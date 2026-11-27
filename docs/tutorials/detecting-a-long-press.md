@@ -4,7 +4,7 @@ description: Measure press duration on touch or mouse to fire actions after the 
 tags: [touch, input, mouse]
 kind: sample
 topic: Input
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/438459/3173EE-image-75.jpg
+thumb: /img/tutorials/detecting-a-long-press/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

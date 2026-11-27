@@ -4,7 +4,7 @@ description: Render planar reflections for mirrors and water by projecting the s
 tags: [rendering, shaders]
 kind: sample
 topic: Graphics
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/717166/FEA6FF-image-75.jpg
+thumb: /img/tutorials/planar-mirror-reflection/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

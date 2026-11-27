@@ -1,7 +1,7 @@
 ---
 title: 'ファーストパーソンシューター スターターキット'
 tags: [input, camera, scripts]
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/626211/62AB30-image-75.jpg
+thumb: /img/tutorials/first-person-shooter-starter-kit/thumbnail.webp
 description: ジャンプとナビゲーションで一人称操作を拡張し、FPS 風移動プロトタイプの出発点にします。
 ---
 

@@ -4,7 +4,7 @@ description: Stream huge Gaussian splat scenes with Streamed SOG so large enviro
 tags: [gaussiansplatting]
 kind: sample
 topic: Gaussian Splatting
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/1408991/3CA651-image-75.jpg
+thumb: /img/tutorials/gaussian-splat-streaming-lod/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

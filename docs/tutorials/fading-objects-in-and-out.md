@@ -4,7 +4,7 @@ description: Animate material opacity so individual models fade in and out witho
 tags: [materials]
 kind: sample
 topic: Graphics
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/436566/440B17-image-75.jpg
+thumb: /img/tutorials/fading-objects-in-and-out/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

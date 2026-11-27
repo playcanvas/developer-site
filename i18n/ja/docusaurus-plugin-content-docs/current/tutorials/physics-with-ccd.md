@@ -1,7 +1,7 @@
 ---
 title: 'CCD付き物理'
 tags: [physics]
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/447023/525467-image-75.jpg
+thumb: /img/tutorials/physics-with-ccd/thumbnail.webp
 description: Rigidbody で連続コリジョン検出を有効にし、高速な弾がステップ間で薄いコライダーをすり抜けるのを防ぎます。
 ---
 

@@ -4,7 +4,7 @@ description: Additively load another scene on top of the current one so hubs and
 tags: [loading,scenes]
 kind: sample
 topic: Assets and Scenes
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/685077/E32FB5-image-75.jpg
+thumb: /img/tutorials/additive-loading-scenes/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

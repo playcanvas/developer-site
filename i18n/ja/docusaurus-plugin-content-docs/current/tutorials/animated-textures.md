@@ -1,7 +1,7 @@
 ---
 title: アニメーションテクスチャの作成
 tags: [animation, textures]
-thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405882/831708-image-75.jpg"
+thumb: /img/tutorials/animated-textures/thumbnail.webp
 description: 毎フレームマテリアルの UV オフセットをスクロールし、流れる水やコンベアなど動く表面を表現します。
 ---
 

@@ -4,7 +4,7 @@ description: Stream HTML video frames into a dynamic texture each tick and map i
 tags: [video, textures]
 kind: sample
 topic: Graphics
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405850/WEKRBI-image-75.jpg
+thumb: /img/tutorials/video-textures/thumbnail.webp
 ---
 
 <div className="iframe-container">

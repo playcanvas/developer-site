@@ -1,7 +1,7 @@
 ---
 title: アニメーションのブレンディング
 tags: [animation]
-thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405874/A8B1FE-image-75.jpg"
+thumb: /img/tutorials/animation-blending/thumbnail.webp
 description: 旧 Model と Animation のチュートリアルです。キャラクターサイクル間の滑らかな遷移には Anim State Graph のブレンドを推奨します。
 ---
 

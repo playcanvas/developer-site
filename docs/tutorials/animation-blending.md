@@ -4,7 +4,7 @@ description: Legacy Model and Animation tutorial; prefer Anim State Graph blendi
 tags: [animation]
 kind: tutorial
 topic: Animation
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405874/A8B1FE-image-75.jpg
+thumb: /img/tutorials/animation-blending/thumbnail.webp
 ---
 
 :::warning

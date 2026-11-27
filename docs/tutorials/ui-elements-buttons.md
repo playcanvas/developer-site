@@ -4,7 +4,7 @@ description: Build clickable buttons with Element and Button components on a Scr
 tags: [ui]
 kind: tutorial
 topic: User Interface
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/501973/ED1B35-image-75.jpg
+thumb: /img/tutorials/ui-elements-buttons/thumbnail.webp
 ---
 
 import StepVideo from '@site/src/components/StepVideo';

@@ -4,7 +4,7 @@ description: Author shaders and a custom post effect that applies watercolor blu
 tags: [posteffects]
 kind: tutorial
 topic: Shaders and Post Effects
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406045/ABC61F-image-75.jpg
+thumb: /img/tutorials/custom-posteffect/thumbnail.webp
 ---
 
 :::warning[Deprecated]

@@ -1,7 +1,7 @@
 ---
 title: UI - テキストインプット
 tags: [ui]
-thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/1005906/36C2AF-image-75.jpg"
+thumb: /img/tutorials/ui-text-input/thumbnail.webp
 description: HTMLのテキスト入力をキャンバス上に重ね、OSネイティブの入力、コピー＆ペースト、IMEをPlayCanvas UIのフォーカスに連動させます。
 ---
 

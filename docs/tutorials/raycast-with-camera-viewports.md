@@ -4,7 +4,7 @@ description: Convert pointer coordinates into per-camera rays when using split v
 tags: [input, camera, physics, raycast]
 kind: sample
 topic: Physics
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/964118/E9A5F1-image-75.jpg
+thumb: /img/tutorials/raycast-with-camera-viewports/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

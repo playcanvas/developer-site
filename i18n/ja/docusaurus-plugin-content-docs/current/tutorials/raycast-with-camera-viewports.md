@@ -1,7 +1,7 @@
 ---
 title: 'カメラビューポートでのレイキャスト'
 tags: [input, camera, physics, raycast]
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/964118/E9A5F1-image-75.jpg
+thumb: /img/tutorials/raycast-with-camera-viewports/thumbnail.webp
 description: 分割ビューポートでポインタ座標をカメラごとのレイに変換し、各ペインで正しい 3D 領域にピッキングが当たるようにします。
 ---
 

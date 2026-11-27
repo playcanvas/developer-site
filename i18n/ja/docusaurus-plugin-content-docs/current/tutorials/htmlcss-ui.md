@@ -1,7 +1,7 @@
 ---
 title: 'HTML/CSS UI'
 tags: [html, ui]
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/443090/3B31E1-image-75.jpg
+thumb: /img/tutorials/htmlcss-ui/thumbnail.webp
 description: 標準の HTML と CSS でレイヤー化した HUD とメニューを構築し、WebGL キャンバス上に合成します。
 ---
 

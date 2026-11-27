@@ -4,7 +4,7 @@ description: Merge static meshes into fewer draw calls with batching to cut CPU 
 tags: [rendering]
 kind: sample
 topic: Graphics
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/520389/C1E49E-image-75.jpg
+thumb: /img/tutorials/static-batching/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

@@ -4,7 +4,7 @@ description: Raycast against PlayCanvas meshes during an AR session so taps on v
 tags: [input, ar]
 kind: sample
 topic: XR
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/884783/E2030C-image-75.jpg
+thumb: /img/tutorials/webxr-ar-raycasting-shapes/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

@@ -4,7 +4,7 @@ description: Track every active touch point and visualize multitouch gestures by
 tags: [touch, input, mobile]
 kind: sample
 topic: Input
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/437474/C0A0E1-image-75.jpg
+thumb: /img/tutorials/multitouch-input/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

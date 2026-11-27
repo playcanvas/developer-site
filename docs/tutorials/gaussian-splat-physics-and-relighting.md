@@ -4,7 +4,7 @@ description: Combine SOG splats with shadows, dynamic relighting, and physics fo
 tags: [gaussiansplatting]
 kind: sample
 topic: Gaussian Splatting
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/1358087/92BB65-image-75.jpg
+thumb: /img/tutorials/gaussian-splat-physics-and-relighting/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

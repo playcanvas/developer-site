@@ -4,7 +4,7 @@ description: Load and swap entire scene hierarchies at runtime using the documen
 tags: [loading,scenes]
 kind: sample
 topic: Assets and Scenes
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/691996/707412-image-75.jpg
+thumb: /img/tutorials/switch-full-scene/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

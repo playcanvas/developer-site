@@ -4,7 +4,7 @@ description: Subscribe to WebXR plane detection updates to visualize floor and t
 tags: [camera, ar]
 kind: sample
 topic: XR
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/782753/602922-image-75.jpg
+thumb: /img/tutorials/webxr-plane-detection/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

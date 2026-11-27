@@ -4,7 +4,7 @@ description: Pipe Web Audio analyser frequency data into a PlayCanvas script to 
 tags: [audio]
 kind: tutorial
 topic: Audio
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405891/L2JCV3-image-75.jpg
+thumb: /img/tutorials/music-visualizer/thumbnail.webp
 ---
 
 <div className="iframe-container">

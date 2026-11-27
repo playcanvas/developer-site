@@ -1,7 +1,7 @@
 ---
 title: 'アプリケーションの一時停止/再生'
 tags: [time]
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/437707/9D3648-image-75.jpg
+thumb: /img/tutorials/pauseplay-application/thumbnail.webp
 description: Application の timeScale を切り替えてゲームプレイを一時停止・再開し、物理、アニメーション、時間ベースのロジックをまとめて止めます。
 ---
 

@@ -4,7 +4,7 @@ description: Explore an interior archviz sample with dynamic reflections and bak
 tags: [vr]
 kind: sample
 topic: XR
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/345310/BKST60-image-75.jpg
+thumb: /img/tutorials/orange-room/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

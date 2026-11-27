@@ -4,7 +4,7 @@ description: Drive a sound slot volume from sampled curve data so loudness follo
 tags: [audio]
 kind: sample
 topic: Audio
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/436116/1F5514-image-75.jpg
+thumb: /img/tutorials/sound-volume-control-using-curve/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

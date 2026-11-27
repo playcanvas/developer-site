@@ -1,7 +1,7 @@
 ---
 title: '実行時のQRコード生成'
 tags: [ui, scripts]
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/1025199/3FC3F4-image-75.jpg
+thumb: /img/tutorials/create-qr-code-at-runtime/thumbnail.webp
 description: 小さなライブラリでブラウザ上でランタイムに QR コードを生成し、UI やテクスチャに表示します。
 ---
 

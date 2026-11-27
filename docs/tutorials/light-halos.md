@@ -4,7 +4,7 @@ description: Build a billboarded glowing halo plane that fades when viewed edge-
 tags: [lighting]
 kind: tutorial
 topic: Graphics
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406040/2TX0AO-image-75.jpg
+thumb: /img/tutorials/light-halos/thumbnail.webp
 ---
 
 <div className="iframe-container">

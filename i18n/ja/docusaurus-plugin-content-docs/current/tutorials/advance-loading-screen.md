@@ -1,7 +1,7 @@
 ---
 title: 'Base64 ローディング画面画像'
 tags: [loading]
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/458028/1A9054-image-75.jpg
+thumb: /img/tutorials/advance-loading-screen/thumbnail.webp
 description: Base64 画像を埋め込んでローディング画面をカスタマイズし、アプリ初期化中にブランディングやスプラッシュを表示します。
 ---
 

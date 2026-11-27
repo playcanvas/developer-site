@@ -1,7 +1,7 @@
 ---
 title: 'パスに沿ったカメラ移動'
 tags: [camera]
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/438429/66E9AF-image-75.jpg
+thumb: /img/tutorials/camera-following-a-path/thumbnail.webp
 description: ウェイポイントを通るスプライン上でカメラをアニメーションし、フライスルーやガイド付きシネマティック移動に使います。
 ---
 

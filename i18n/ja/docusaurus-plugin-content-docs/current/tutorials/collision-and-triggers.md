@@ -1,7 +1,7 @@
 ---
 title: 衝突とトリガーの処理
 tags: [collision, physics]
-thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405871/0D7E2F-image-75.jpg"
+thumb: /img/tutorials/collision-and-triggers/thumbnail.webp
 description: Rigid Body付きのコリジョン形状で物理接触を処理し、動きを妨げないトリガーボリュームを作成します。
 ---
 

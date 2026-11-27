@@ -4,7 +4,7 @@ description: View an equirectangular 360 photo inside VR with WebXR so users can
 tags: [vr]
 kind: sample
 topic: XR
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/434266/3B51C6-image-75.jpg
+thumb: /img/tutorials/webxr-360-image/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

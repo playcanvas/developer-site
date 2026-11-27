@@ -1,7 +1,7 @@
 ---
 title: オーディオエフェクト
 tags: [audio]
-thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406047/G0ZA35-image-75.jpg"
+thumb: /img/tutorials/audio-effects/thumbnail.webp
 description: PlayCanvas で Web Audio ノードをチェーンし、エンジン経由のサウンドにリバーブやフィルターなどのエフェクトを追加します。
 ---
 

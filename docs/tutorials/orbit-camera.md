@@ -4,7 +4,7 @@ description: Implement an orbit camera with mouse and touch, including scroll-wh
 tags: [input, camera]
 kind: sample
 topic: Cameras
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/438243/FDA218-image-75.jpg
+thumb: /img/tutorials/orbit-camera/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

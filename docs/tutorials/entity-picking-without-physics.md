@@ -4,7 +4,7 @@ description: Pick meshes using math ray tests instead of the physics engine to a
 tags: [input, raycast]
 kind: sample
 topic: Input
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/436809/C6979E-image-75.jpg
+thumb: /img/tutorials/entity-picking-without-physics/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

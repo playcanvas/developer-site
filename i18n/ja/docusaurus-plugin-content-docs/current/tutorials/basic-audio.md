@@ -1,7 +1,7 @@
 ---
 title: 基本的なオーディオの設定
 tags: [audio,basics]
-thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405821/V89N1G-image-75.jpg"
+thumb: /img/tutorials/basic-audio/thumbnail.webp
 description: Sound と Listener Component で、Listener Entity から見た位置に応じた定位 3D オーディオを実現します。
 ---
 

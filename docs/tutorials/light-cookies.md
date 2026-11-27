@@ -4,7 +4,7 @@ description: Apply texture or cubemap cookies to spot and omni lights to project
 tags: [lighting]
 kind: tutorial
 topic: Graphics
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/409793/19BDEF-image-75.jpg
+thumb: /img/tutorials/light-cookies/thumbnail.webp
 ---
 
 <div className="iframe-container">

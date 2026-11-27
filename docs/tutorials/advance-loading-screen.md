@@ -4,7 +4,7 @@ description: Customize the loading screen with embedded Base64 images so brandin
 tags: [loading]
 kind: sample
 topic: Assets and Scenes
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/458028/1A9054-image-75.jpg
+thumb: /img/tutorials/advance-loading-screen/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

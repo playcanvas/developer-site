@@ -4,7 +4,7 @@ description: Arrange buttons and panels with Layout Group and child layout rules
 tags: [ui]
 kind: sample
 topic: User Interface
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/553515/D4C290-image-75.jpg
+thumb: /img/tutorials/tutorial-layout-groups/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

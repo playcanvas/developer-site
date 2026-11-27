@@ -4,7 +4,7 @@ description: Implement a radial loading spinner UI with materials and animation 
 tags: [materials, ui, animation]
 kind: sample
 topic: User Interface
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/705273/8B52B3-image-75.jpg
+thumb: /img/tutorials/loading-circle-ui/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

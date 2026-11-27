@@ -4,7 +4,7 @@ description: Extend first-person controls with jumping and navigation as a start
 tags: [input, camera, scripts]
 kind: sample
 topic: Games
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/626211/62AB30-image-75.jpg
+thumb: /img/tutorials/first-person-shooter-starter-kit/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

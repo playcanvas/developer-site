@@ -4,7 +4,7 @@ description: Compose a shop screen with layout groups, buttons, sprites, and atl
 tags: [ui]
 kind: sample
 topic: User Interface
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/559492/CBFB0A-image-75.jpg
+thumb: /img/tutorials/tutorial-shop-user-interface/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

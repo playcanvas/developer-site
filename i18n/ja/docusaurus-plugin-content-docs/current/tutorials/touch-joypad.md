@@ -1,7 +1,7 @@
 ---
 title: ジョイスティック操作
 tags: [input,ui]
-thumb: "https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/1007506/2F5E56-image-75.jpg"
+thumb: /img/tutorials/touch-joypad/thumbnail.webp
 description: PlayCanvas の UI 要素でカスタマイズ可能なオンスクリーンのツインスティック風ジョイパッドを追加し、モバイルのキャラクター操作に使います。
 ---
 

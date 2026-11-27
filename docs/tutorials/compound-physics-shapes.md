@@ -4,7 +4,7 @@ description: Combine multiple collision shapes into one compound rigidbody for a
 tags: [physics]
 kind: sample
 topic: Physics
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/688146/E92618-image-75.jpg
+thumb: /img/tutorials/compound-physics-shapes/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

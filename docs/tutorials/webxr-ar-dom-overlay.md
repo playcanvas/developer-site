@@ -4,7 +4,7 @@ description: Combine WebXR AR with the DOM overlay API to place styled HTML/CSS 
 tags: [camera, ar]
 kind: sample
 topic: XR
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/747233/D92E6B-image-75.jpg
+thumb: /img/tutorials/webxr-ar-dom-overlay/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

@@ -4,7 +4,7 @@ description: Follow a controllable character with a chase camera while handling 
 tags: [input, camera, physics]
 kind: sample
 topic: Cameras
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/705595/FA7C28-image-75.jpg
+thumb: /img/tutorials/third-person-controller/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

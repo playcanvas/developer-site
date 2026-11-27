@@ -1,7 +1,7 @@
 ---
 title: 'ステンシルバッファ - 3Dマジックカード'
 tags: [rendering, culling, materials, scripts]
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/855103/3B0AC0-image-75.jpg
+thumb: /img/tutorials/stencil-buffer---3d-magic-card/thumbnail.webp
 description: Stencil テストでトランプの形をマスクし、窓から別の 3D Scene を見せ、魔法のポータルのように見せます。
 ---
 

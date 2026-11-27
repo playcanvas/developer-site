@@ -4,7 +4,7 @@ description: Load several assets after startup using PlayCanvas asset APIs inste
 tags: [loading, assets]
 kind: sample
 topic: Assets and Scenes
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/439131/AC1AEB-image-75.jpg
+thumb: /img/tutorials/load-multiple-assets-at-runtime/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

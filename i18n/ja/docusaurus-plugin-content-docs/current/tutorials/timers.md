@@ -1,7 +1,7 @@
 ---
 title: 'タイマー'
 tags: [time]
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/691984/71DABB-image-75.jpg
+thumb: /img/tutorials/timers/thumbnail.webp
 description: 遅延後にコールバックを発火するワンショットタイマーをエンジンに拡張し、time scale によるグローバル一時停止を尊重します。
 ---
 

@@ -4,7 +4,7 @@ description: Recognize double-tap gestures on touchscreens separately from singl
 tags: [touch, input]
 kind: sample
 topic: Input
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/436531/38B52B-image-75.jpg
+thumb: /img/tutorials/detecting-a-double-tap/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

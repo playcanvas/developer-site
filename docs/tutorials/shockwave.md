@@ -4,7 +4,7 @@ description: Add a radial shockwave distortion to the framebuffer with a post-ef
 tags: [posteffects]
 kind: sample
 topic: Shaders and Post Effects
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/440868/136A8D-image-75.jpg
+thumb: /img/tutorials/shockwave/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

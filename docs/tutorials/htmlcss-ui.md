@@ -4,7 +4,7 @@ description: Build layered HUDs and menus with standard HTML and CSS composited 
 tags: [html, ui]
 kind: sample
 topic: User Interface
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/443090/3B31E1-image-75.jpg
+thumb: /img/tutorials/htmlcss-ui/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

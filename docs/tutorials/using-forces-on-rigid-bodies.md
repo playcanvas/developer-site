@@ -4,7 +4,7 @@ description: Apply forces, impulses, and torques to dynamic rigidbodies and tune
 tags: [physics, collision]
 kind: tutorial
 topic: Physics
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405828/95F429-image-75.jpg
+thumb: /img/tutorials/using-forces-on-rigid-bodies/thumbnail.webp
 ---
 
 <div className='iframe-container'>

@@ -4,7 +4,7 @@ description: Run a Node.js and Socket.IO server on your own computer and keep pl
 tags: [multiplayer, networking]
 kind: tutorial
 topic: Multiplayer
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406048/507186-image-75.jpg
+thumb: /img/tutorials/real-time-multiplayer/thumbnail.webp
 ---
 
 <video autoPlay muted loop controls playsInline src="/video/real-time-multiplayer-two-windows.mp4" style={{width: '100%', height: 'auto'}} />

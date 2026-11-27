@@ -4,7 +4,7 @@ description: Find out which Entity the user clicked or touched, first with a phy
 tags: [raycast, basics, physics]
 kind: tutorial
 topic: Input
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405856/DS51PO-image-75.jpg
+thumb: /img/tutorials/entity-picking/thumbnail.webp
 ---
 
 <div className="iframe-container">

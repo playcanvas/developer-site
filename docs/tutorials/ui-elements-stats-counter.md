@@ -4,7 +4,7 @@ description: Combine plus and minus buttons with progress visuals to increment s
 tags: [ui]
 kind: tutorial
 topic: User Interface
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/501978/12B6CE-image-75.jpg
+thumb: /img/tutorials/ui-elements-stats-counter/thumbnail.webp
 ---
 
 <div className="iframe-container">

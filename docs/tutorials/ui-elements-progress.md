@@ -4,7 +4,7 @@ description: Create a fillable progress bar with nested Elements and anchors tha
 tags: [ui]
 kind: tutorial
 topic: User Interface
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/501979/49D69A-image-75.jpg
+thumb: /img/tutorials/ui-elements-progress/thumbnail.webp
 ---
 
 <div className="iframe-container">

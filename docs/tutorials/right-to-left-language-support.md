@@ -4,7 +4,7 @@ description: Adapt Element component text and layout scripts for right-to-left l
 tags: [ui, scripts]
 kind: sample
 topic: User Interface
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/764309/A62C41-image-75.jpg
+thumb: /img/tutorials/right-to-left-language-support/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

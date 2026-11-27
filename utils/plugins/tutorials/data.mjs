@@ -38,18 +38,30 @@ export const TOPICS = [
 const TUTORIALS_DIR = 'docs/tutorials';
 const PLAYS_PATH = 'utils/plugins/tutorials/plays.json';
 
+// The pages whose thumbnail is a copy of a PlayCanvas project's thumbnail, with the project and
+// the image the copy was made from. `npm run sync:tutorial-thumbs` keeps the copies up to date.
+export const THUMBS_PATH = 'utils/plugins/tutorials/thumbs.json';
+
+/**
+ * The path a page's thumbnail is served at, when the thumbnail comes from its project.
+ *
+ * @param {string} slug - The page's file name without its extension.
+ * @returns {string} The path, relative to static/.
+ */
+export function thumbnailPath(slug) {
+    return `img/tutorials/${slug}/thumbnail.webp`;
+}
+
 /**
  * Finds the PlayCanvas project a tutorial page is about: the first project the page links to,
- * or failing that the project its thumbnail belongs to.
+ * or failing that the project its thumbnail came from.
  *
  * @param {string} source - The page source.
- * @param {object} frontMatter - The page's front matter.
+ * @param {{ project: string } | undefined} thumb - The page's entry in thumbs.json, if any.
  * @returns {string | null} The project ID.
  */
-export function projectIdOf(source, frontMatter) {
-    return source.match(/playcanvas\.com\/project\/(\d+)/)?.[1] ??
-        String(frontMatter.thumb ?? '').match(/\/projects\/\d+\/(\d+)\//)?.[1] ??
-        null;
+export function projectIdOf(source, thumb) {
+    return source.match(/playcanvas\.com\/project\/(\d+)/)?.[1] ?? thumb?.project ?? null;
 }
 
 /**
@@ -63,6 +75,7 @@ export function projectIdOf(source, frontMatter) {
 export function loadTutorials(siteDir) {
     const dir = path.join(siteDir, TUTORIALS_DIR);
     const plays = JSON.parse(fs.readFileSync(path.join(siteDir, PLAYS_PATH), 'utf8'));
+    const thumbs = JSON.parse(fs.readFileSync(path.join(siteDir, THUMBS_PATH), 'utf8'));
     const tutorials = new Map();
     const problems = [];
 
@@ -85,7 +98,7 @@ export function loadTutorials(siteDir) {
             topic,
             title: String(frontMatter.title ?? slug),
             plays: plays[slug] ?? 0,
-            projectId: projectIdOf(source, frontMatter)
+            projectId: projectIdOf(source, thumbs[slug])
         });
     }
 

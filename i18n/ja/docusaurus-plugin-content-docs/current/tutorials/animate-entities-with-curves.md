@@ -1,7 +1,7 @@
 ---
 title: 'カーブを使ったエンティティのアニメーション'
 tags: [animation]
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/438191/53A10A-image-75.jpg
+thumb: /img/tutorials/animate-entities-with-curves/thumbnail.webp
 description: フルな Anim State Graph を組まずに、アニメーションカーブで Entity の動きを制御する簡単なスクリプト移動です。
 ---
 

@@ -4,7 +4,7 @@ description: Cast a physics ray from the camera through the pointer to detect wh
 tags: [input, physics, raycast]
 kind: sample
 topic: Physics
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/457922/D9DAC0-image-75.jpg
+thumb: /img/tutorials/simple-shape-raycasting/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

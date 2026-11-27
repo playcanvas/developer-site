@@ -4,7 +4,7 @@ description: Integrate Photon networking for authoritative movement, matchmaking
 tags: [multiplayer, networking]
 kind: tutorial
 topic: Multiplayer
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/926999/90AE0A-image-75.jpg
+thumb: /img/tutorials/real-time-multiplayer-photon/thumbnail.webp
 ---
 
 import StepVideo from '@site/src/components/StepVideo';

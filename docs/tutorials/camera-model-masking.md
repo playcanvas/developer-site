@@ -4,7 +4,7 @@ description: Use camera and light mask groups so specific lights and views only 
 tags: [rendering, camera]
 kind: sample
 topic: Cameras
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/436772/B47904-image-75.jpg
+thumb: /img/tutorials/camera-model-masking/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

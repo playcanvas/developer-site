@@ -4,7 +4,7 @@ description: Orbit or spin an object by mapping mouse drag deltas in screen spac
 tags: [touch, input, mouse]
 kind: sample
 topic: Input
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/442490/AD8ABB-image-75.jpg
+thumb: /img/tutorials/rotating-objects-with-mouse/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

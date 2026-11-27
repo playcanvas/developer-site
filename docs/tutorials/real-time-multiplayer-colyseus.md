@@ -4,7 +4,7 @@ description: Wire PlayCanvas to a Colyseus server for room state sync, messaging
 tags: [multiplayer, networking]
 kind: tutorial
 topic: Multiplayer
-thumb: https://avatars.githubusercontent.com/u/28384334?s=300&v=4
+thumb: /img/tutorials/real-time-multiplayer-colyseus/thumbnail.webp
 ---
 
 <div className="iframe-container">

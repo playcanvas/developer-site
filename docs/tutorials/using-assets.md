@@ -4,7 +4,7 @@ description: Find, reference, and stream assets from the registry at runtime ins
 tags: [loading, assets, basics]
 kind: tutorial
 topic: Assets and Scenes
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/406036/U2FYM6-image-75.jpg
+thumb: /img/tutorials/using-assets/thumbnail.webp
 ---
 
 <div className="iframe-container">

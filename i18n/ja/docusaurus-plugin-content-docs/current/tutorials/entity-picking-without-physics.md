@@ -1,7 +1,7 @@
 ---
 title: '物理を使わないエンティティのピッキング'
 tags: [input, raycast]
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/436809/C6979E-image-75.jpg
+thumb: /img/tutorials/entity-picking-without-physics/thumbnail.webp
 description: 物理エンジンを使わず数学的なレイテストでメッシュをピックし、公開ビルドのランタイム負荷を抑えます。
 ---
 

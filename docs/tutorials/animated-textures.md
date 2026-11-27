@@ -4,7 +4,7 @@ description: Scroll UV offsets on materials each frame to fake flowing water, co
 tags: [animation, textures]
 kind: tutorial
 topic: Graphics
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405882/831708-image-75.jpg
+thumb: /img/tutorials/animated-textures/thumbnail.webp
 ---
 
 import Tabs from '@theme/Tabs';

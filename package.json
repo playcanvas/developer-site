@@ -33,6 +33,7 @@
     "faq": "node faq.js",
     "faq-to-json": "node faq_to_json.js --dir faq --out ../editor/static/json/howdoi.json",
     "sync:tutorial-plays": "node utils/sync-tutorial-plays.mjs",
+    "sync:tutorial-thumbs": "node utils/sync-tutorial-thumbs.mjs",
     "sync:supersplat-api": "node utils/sync-supersplat-api.mjs",
     "check:web-components": "node utils/check-web-components-manifest.mjs",
     "check:i18n": "node utils/check-i18n-parity.mjs",

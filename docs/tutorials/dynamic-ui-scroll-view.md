@@ -4,7 +4,7 @@ description: Add and remove scroll view children at runtime to build lists and f
 tags: [ui, scripts]
 kind: sample
 topic: User Interface
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/734864/1DC6CB-image-75.jpg
+thumb: /img/tutorials/dynamic-ui-scroll-view/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

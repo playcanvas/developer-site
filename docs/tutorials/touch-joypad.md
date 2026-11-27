@@ -4,7 +4,7 @@ description: Add a customizable on-screen twin-stick style joypad with PlayCanva
 tags: [input,ui]
 kind: tutorial
 topic: Input
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/1007506/2F5E56-image-75.jpg
+thumb: /img/tutorials/touch-joypad/thumbnail.webp
 ---
 
 import StepVideo from '@site/src/components/StepVideo';

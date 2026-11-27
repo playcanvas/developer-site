@@ -4,7 +4,7 @@ description: Lay out screen UI inside notched and rounded device safe areas so c
 tags: [ui, scripts]
 kind: sample
 topic: User Interface
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/828118/9F85DB-image-75.jpg
+thumb: /img/tutorials/mobile-ui-safe-areas/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

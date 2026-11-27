@@ -1,7 +1,7 @@
 ---
 title: '3D Gaussian Splat 物理演算とリライティング'
 tags: [gaussiansplatting]
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/1358087/92BB65-image-75.jpg
+thumb: /img/tutorials/gaussian-splat-physics-and-relighting/thumbnail.webp
 description: SOG splat にシャドウ、動的リライティング、物理を組み合わせ、歩行可能な実世界スキャン空間にします。
 ---
 

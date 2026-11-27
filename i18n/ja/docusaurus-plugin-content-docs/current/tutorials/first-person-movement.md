@@ -2,7 +2,7 @@
 title: 一人称視点での移動方法
 description: 一人称視点のキャラクターをゼロから作ります。マウスで見回し、リジッドボディに力を加えて歩き、ジャンプします。レベルはボックスだけで作ります。
 tags: [input, camera, physics]
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/405842/JLWRE0-image-75.jpg
+thumb: /img/tutorials/first-person-movement/thumbnail.webp
 ---
 
 import StepVideo from '@site/src/components/StepVideo';

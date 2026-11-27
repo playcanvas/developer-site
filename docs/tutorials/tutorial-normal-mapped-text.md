@@ -4,7 +4,7 @@ description: Generate normal and parallax maps for dynamic text so lettering cat
 tags: [textures, rendering, materials]
 kind: sample
 topic: Graphics
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/371210/C1FNWI-image-75.jpg
+thumb: /img/tutorials/tutorial-normal-mapped-text/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

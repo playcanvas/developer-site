@@ -4,7 +4,7 @@ description: Load a single asset on demand so unused resources stay off the init
 tags: [loading, assets]
 kind: sample
 topic: Assets and Scenes
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/439122/FA68B8-image-75.jpg
+thumb: /img/tutorials/loading-an-asset-at-runtime/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';

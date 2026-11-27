@@ -4,7 +4,7 @@ description: Layer particle emitters with camera shake to sell an explosion impa
 tags: [particles, camera]
 kind: sample
 topic: Graphics
-thumb: https://s3-eu-west-1.amazonaws.com/images.playcanvas.com/projects/12/439297/80EDE5-image-75.jpg
+thumb: /img/tutorials/explosion-particle-effect/thumbnail.webp
 ---
 
 import Link from '@docusaurus/Link';
