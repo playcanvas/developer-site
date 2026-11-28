@@ -119,3 +119,7 @@ this.app
 ## イージング
 
 イージングカーブは、開始値と目標値の間で値がどのように変化するかを決めます。ライブラリには `Linear` と、`Quadratic`、`Cubic`、`Quartic`、`Quintic`、`Sine`、`Exponential`、`Circular`、`Back`、`Bounce`、`Elastic` のそれぞれの `In`、`Out`、`InOut` があり、たとえば `SineOut` や `ElasticInOut` のように使います。
+
+## その他のトゥイーンライブラリ
+
+エンジンの[Tweenサンプル](https://playcanvas.com/examples/#/animation/tween)では、別のライブラリであるサードパーティの [tween.js](https://github.com/tweenjs/tween.js) を使用しています。サンプルは tween.js を `TWEEN` グローバルとして読み込み、エンジンリポジトリにある[tweenスクリプト](https://github.com/playcanvas/engine/blob/main/scripts/animation/tween.js)がそれを動かします。このスクリプトは、トゥイーンをJSON形式のスクリプト属性として受け取り、tween.js のイージング関数を使用します。playcanvas-tween は使用していないため、このページのコードはサンプルには当てはまらず、その逆も同様です。
