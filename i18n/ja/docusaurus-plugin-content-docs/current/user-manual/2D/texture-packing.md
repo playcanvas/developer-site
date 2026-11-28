@@ -44,6 +44,19 @@ TexturePackerはダウンロードできる有料ツールで、テクスチャ�
 2. 出力ファイル -> PlayCanvasを設定します。
 3. スプライトシートを発行するをクリックして、テクスチャアトラスとJSONフレームデータを作成します。
 
+### SpriteSheet.dev (無料)
+
+([ウェブサイト](https://spritesheet.dev))
+
+SpriteSheet.devはブラウザで動作する無料のツールで、スプライト/UI画像やアニメーションGIFのフレームをテクスチャアトラスにまとめます。画像はどこにもアップロードされません。
+
+![](/img/user-manual/2D/texture-packer/spritesheet-dev-steps.webp)
+
+1. スプライト/UIイメージを追加します。
+2. Data filesでJSON (Hash)にチェックを入れたままにします。
+3. Pivot in the dataはNone (engine default)のままにし、ピボットはスプライトエディタで設定します。
+4. Download ZIPをクリックします。ZIPにはテクスチャアトラスの.pngとフレームデータの.jsonが入っています。
+
 ## スプライトエディタ内でのフレーム作成
 
 テクスチャアトラスファイルをエディタにアップロードして、[Texture Atlasアセット](/user-manual/editor/assets/inspectors/texture-atlas/)を作成したら、スプライトエディタを開きます。

@@ -44,6 +44,19 @@ Basic steps:
 2. Set Output files -> Framework as PlayCanvas.
 3. Click on Publish sprite sheet to create the texture atlas and JSON frame data.
 
+### SpriteSheet.dev (free)
+
+([Website](https://spritesheet.dev))
+
+A free browser tool that packs sprites/UI images, or the frames of an animated GIF, into a texture atlas. The images aren't uploaded anywhere.
+
+![](/img/user-manual/2D/texture-packer/spritesheet-dev-steps.webp)
+
+1. Add your sprites/UI images.
+2. Under Data files, keep JSON (Hash) checked.
+3. Leave Pivot in the data on None (engine default) and set pivots in the Sprite Editor instead.
+4. Click Download ZIP. The ZIP has the .png for the texture atlas and the .json for the frame data.
+
 ## Creating frames in Sprite Editor
 
 Once you have uploaded the texture atlas file into the Editor and created a [texture atlas asset](/user-manual/editor/assets/inspectors/texture-atlas/), open the Sprite Editor.
